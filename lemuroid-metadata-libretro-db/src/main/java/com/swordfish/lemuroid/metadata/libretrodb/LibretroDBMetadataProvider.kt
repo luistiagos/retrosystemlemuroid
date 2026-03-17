@@ -16,6 +16,74 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
     GameMetadataProvider {
     companion object {
         private val THUMB_REPLACE = Regex("[&*/:`<>?\\\\|]")
+
+        /**
+         * Maps well-known human-readable folder names (as found in ROM archives)
+         * to the system dbname used by Lemuroid. Checked against exact path segments
+         * (case-insensitive) so "nintendo" doesn't accidentally match "super nintendo".
+         */
+        private val FOLDER_ALIASES: Map<String, String> = mapOf(
+            "arcade"               to "fbneo",
+            "atari 2600"           to "atari2600",
+            "atari 7800"           to "atari7800",
+            "game boy"             to "gb",
+            "game boy advance"     to "gba",
+            "game boy color"       to "gbc",
+            "gameboy"              to "gb",
+            "gameboy advance"      to "gba",
+            "gameboy color"        to "gbc",
+            "mastersystem"         to "sms",
+            "master system"        to "sms",
+            "sega master system"   to "sms",
+            "megadrive"            to "md",
+            "mega drive"           to "md",
+            "genesis"              to "md",
+            "sega megadrive"       to "md",
+            "sega genesis"         to "md",
+            "neo geo pocket"       to "ngp",
+            "neo-geo pocket"       to "ngp",
+            "ngpc"                 to "ngc",
+            "neo geo pocket color" to "ngc",
+            "nintendo"             to "nes",
+            "nes"                  to "nes",
+            "nintendo 64"          to "n64",
+            "n64"                  to "n64",
+            "nintendo ds"          to "nds",
+            "nds"                  to "nds",
+            "playstation"          to "psx",
+            "psx"                  to "psx",
+            "ps1"                  to "psx",
+            "ps one"               to "psx",
+            "playstation portable" to "psp",
+            "psp"                  to "psp",
+            "super nintendo"       to "snes",
+            "snes"                 to "snes",
+            "super nes"            to "snes",
+            "pc engine"            to "pce",
+            "pc-engine"            to "pce",
+            "turbografx"           to "pce",
+            "turbografx-16"        to "pce",
+            "game gear"            to "gg",
+            "gamegear"             to "gg",
+            "lynx"                 to "lynx",
+            "atari lynx"           to "lynx",
+            "wonderswan"           to "ws",
+            "wonder swan"          to "ws",
+            "wonderswan color"     to "wsc",
+            "wonder swan color"    to "wsc",
+            "sega cd"              to "scd",
+            "mega cd"              to "scd",
+            "segacd"               to "scd",
+            "megacd"               to "scd",
+            "sega-cd"              to "scd",
+            "mega-cd"              to "scd",
+            "scd"                  to "scd",
+            "mame"                 to "mame2003plus",
+            "mame 2003"            to "mame2003plus",
+            "mame2003"             to "mame2003plus",
+            "mame 2003 plus"       to "mame2003plus",
+            "mame2003plus"         to "mame2003plus",
+        )
     }
 
     private val sortedSystemIds: List<String> by lazy {
@@ -101,7 +169,17 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         parent: String?,
         dbname: String,
     ): Boolean {
-        return parent?.toLowerCase(Locale.getDefault())?.contains(dbname) == true
+        val lowercasePath = parent?.toLowerCase(Locale.getDefault()) ?: return false
+        // Split into path segments and do exact segment matching.
+        // Substring matching (e.g. "path.contains(dbname)") causes false positives:
+        // "snes" contains "nes", "gba" contains "gb", "wsc" contains "ws", etc.
+        val segments = lowercasePath.split('/', '\\').toHashSet()
+        // Fast path: one of the path segments IS the dbname exactly.
+        if (segments.contains(dbname)) return true
+        // Slow path: check known human-readable folder aliases.
+        return FOLDER_ALIASES.any { (alias, mappedDbname) ->
+            mappedDbname == dbname && segments.contains(alias)
+        }
     }
 
     private suspend fun findByCRC(

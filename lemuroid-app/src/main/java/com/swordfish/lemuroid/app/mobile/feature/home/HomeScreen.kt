@@ -1,6 +1,7 @@
 package com.swordfish.lemuroid.app.mobile.feature.home
 
 import android.Manifest
+import android.net.Uri
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -8,6 +9,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,23 +17,28 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.Lifecycle
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameCard
 import com.swordfish.lemuroid.app.utils.android.ComposableLifecycle
 import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
+import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @Composable
@@ -64,11 +71,13 @@ fun HomeScreen(
         }
 
     val state = viewModel.getViewStates().collectAsState(HomeViewModel.UIState())
-    val downloadRomsState = viewModel.getDownloadRomsState().collectAsState(HomeViewModel.DownloadRomsState.Idle)
+    val downloadRomsState = viewModel.getDownloadRomsState().collectAsState(DownloadRomsState.Idle)
+    val currentDirectory = viewModel.getCurrentDirectoryFlow().collectAsState("")
     HomeScreen(
         modifier,
         state.value,
         downloadRomsState.value,
+        currentDirectory.value,
         onGameClick,
         onGameLongClick,
         onOpenCoreSelection,
@@ -81,7 +90,8 @@ fun HomeScreen(
         },
         { permissionsLauncher.launch(Manifest.permission.RECORD_AUDIO) },
         { viewModel.changeLocalStorageFolder(context) },
-        { viewModel.downloadAndExtractRoms(context) },
+        { viewModel.downloadAndExtractRoms() },
+        { viewModel.dismissDownloadDialog() },
     ) // TODO COMPOSE We need to understand what's going to happen here.
 }
 
@@ -89,7 +99,8 @@ fun HomeScreen(
 private fun HomeScreen(
     modifier: Modifier = Modifier,
     state: HomeViewModel.UIState,
-    downloadRomsState: HomeViewModel.DownloadRomsState,
+    downloadRomsState: DownloadRomsState,
+    currentDirectory: String,
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onOpenCoreSelection: () -> Unit,
@@ -97,7 +108,28 @@ private fun HomeScreen(
     onEnableMicrophoneClicked: () -> Unit,
     onSetDirectoryClicked: () -> Unit,
     onDownloadRomsClicked: () -> Unit,
+    onDismissDownloadDialog: () -> Unit,
 ) {
+    if (state.showDownloadPromptDialog) {
+        AlertDialog(
+            onDismissRequest = onDismissDownloadDialog,
+            title = { Text(stringResource(R.string.home_download_dialog_title)) },
+            text = { Text(stringResource(R.string.home_download_dialog_message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    onDismissDownloadDialog()
+                    onDownloadRomsClicked()
+                }) {
+                    Text(stringResource(R.string.home_download_dialog_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onDismissDownloadDialog) {
+                    Text(stringResource(R.string.home_download_dialog_cancel))
+                }
+            },
+        )
+    }
     Column(
         modifier =
             modifier
@@ -113,13 +145,30 @@ private fun HomeScreen(
                 onAction = onEnableNotificationsClicked,
             )
         }
-        AnimatedVisibility(state.showNoGamesCard) {
+        AnimatedVisibility(state.showDirectoryInaccessibleCard) {
+            HomeNotification(
+                titleId = R.string.home_storage_inaccessible_title,
+                messageId = R.string.home_storage_inaccessible_message,
+                actionId = R.string.home_storage_inaccessible_action,
+                onAction = onSetDirectoryClicked,
+            )
+        }
+        AnimatedVisibility(state.showNoGamesCard && !state.showDirectoryInaccessibleCard) {
+            val context = LocalContext.current
+            val dirName = remember(currentDirectory) {
+                if (currentDirectory.isNotEmpty()) {
+                    runCatching { DocumentFile.fromTreeUri(context, Uri.parse(currentDirectory))?.name }.getOrNull()
+                } else null
+            }
             HomeNotification(
                 titleId = R.string.home_empty_title,
                 messageId = R.string.home_empty_message,
                 actionId = R.string.home_empty_action,
                 onAction = onSetDirectoryClicked,
                 enabled = !state.indexInProgress,
+                extraContent = if (dirName != null) {
+                    { Text(text = dirName, style = MaterialTheme.typography.bodySmall) }
+                } else null,
             )
         }
         AnimatedVisibility(state.showNoMicrophonePermissionCard) {
@@ -138,7 +187,7 @@ private fun HomeScreen(
                 onAction = onOpenCoreSelection,
             )
         }
-        AnimatedVisibility(downloadRomsState !is HomeViewModel.DownloadRomsState.Done) {
+        AnimatedVisibility(downloadRomsState !is DownloadRomsState.Done) {
             HomeDownloadCard(state = downloadRomsState, onDownloadClicked = onDownloadRomsClicked)
         }
         HomeRow(
@@ -210,6 +259,7 @@ private fun HomeNotification(
     actionId: Int,
     enabled: Boolean = true,
     onAction: () -> Unit = { },
+    extraContent: (@Composable ColumnScope.() -> Unit)? = null,
 ) {
     ElevatedCard(
         modifier =
@@ -232,6 +282,7 @@ private fun HomeNotification(
                 text = stringResource(messageId),
                 style = MaterialTheme.typography.bodyMedium,
             )
+            extraContent?.invoke(this)
             OutlinedButton(
                 modifier = Modifier.align(Alignment.End),
                 onClick = onAction,
@@ -245,7 +296,7 @@ private fun HomeNotification(
 
 @Composable
 private fun HomeDownloadCard(
-    state: HomeViewModel.DownloadRomsState,
+    state: DownloadRomsState,
     onDownloadClicked: () -> Unit,
 ) {
     ElevatedCard(
@@ -264,7 +315,7 @@ private fun HomeDownloadCard(
                 style = MaterialTheme.typography.titleMedium,
             )
             when (state) {
-                is HomeViewModel.DownloadRomsState.Idle -> {
+                is DownloadRomsState.Idle -> {
                     Text(
                         text = stringResource(R.string.home_download_roms_message),
                         style = MaterialTheme.typography.bodyMedium,
@@ -276,7 +327,7 @@ private fun HomeDownloadCard(
                         Text(stringResource(R.string.home_download_roms_action))
                     }
                 }
-                is HomeViewModel.DownloadRomsState.Downloading -> {
+                is DownloadRomsState.Downloading -> {
                     Text(
                         text = stringResource(R.string.home_download_roms_downloading, (state.progress * 100).toInt()),
                         style = MaterialTheme.typography.bodyMedium,
@@ -286,7 +337,7 @@ private fun HomeDownloadCard(
                         modifier = Modifier.fillMaxWidth(),
                     )
                 }
-                is HomeViewModel.DownloadRomsState.Extracting -> {
+                is DownloadRomsState.Extracting -> {
                     Text(
                         text = stringResource(R.string.home_download_roms_extracting, (state.progress * 100).toInt()),
                         style = MaterialTheme.typography.bodyMedium,
@@ -296,7 +347,7 @@ private fun HomeDownloadCard(
                         modifier = Modifier.fillMaxWidth(),
                     )
                 }
-                is HomeViewModel.DownloadRomsState.Done -> {
+                is DownloadRomsState.Done -> {
                     Text(
                         text = stringResource(R.string.home_download_roms_done),
                         style = MaterialTheme.typography.bodyMedium,
@@ -308,7 +359,7 @@ private fun HomeDownloadCard(
                         Text(stringResource(R.string.home_download_roms_action_again))
                     }
                 }
-                is HomeViewModel.DownloadRomsState.Error -> {
+                is DownloadRomsState.Error -> {
                     Text(
                         text = stringResource(R.string.home_download_roms_error, state.message),
                         style = MaterialTheme.typography.bodyMedium,

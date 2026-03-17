@@ -56,7 +56,7 @@ class MainViewModel(appContext: Context, private val saveSyncManager: SaveSyncMa
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.Lazily,
-                initialValue = UiState(),
+                initialValue = UiState(operationInProgress = true),
             )
     }
 

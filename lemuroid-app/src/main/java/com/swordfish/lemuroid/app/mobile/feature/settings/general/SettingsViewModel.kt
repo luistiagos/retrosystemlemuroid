@@ -10,10 +10,13 @@ import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
+import com.swordfish.lemuroid.app.shared.roms.RomsDownloadManager
 
 class SettingsViewModel(
     context: Context,
@@ -46,6 +49,9 @@ class SettingsViewModel(
 
     val directoryScanInProgress = PendingOperationsMonitor(context).isDirectoryScanInProgress()
 
+    private val romsDownloadManager = RomsDownloadManager(context.applicationContext)
+    val downloadRomsState: Flow<DownloadRomsState> = romsDownloadManager.state
+
     val uiState =
         sharedPreferences.getString(context.getString(com.swordfish.lemuroid.lib.R.string.pref_key_extenral_folder))
             .asFlow()
@@ -55,5 +61,9 @@ class SettingsViewModel(
 
     fun changeLocalStorageFolder() {
         settingsInteractor.changeLocalStorageFolder()
+    }
+
+    fun downloadAndExtractRoms() {
+        romsDownloadManager.downloadAndExtract(viewModelScope)
     }
 }

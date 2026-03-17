@@ -1,6 +1,11 @@
 package com.swordfish.lemuroid.app.mobile.feature.settings.general
 
 import android.net.Uri
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -8,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.documentfile.provider.DocumentFile
 import androidx.navigation.NavController
 import com.swordfish.lemuroid.R
@@ -24,6 +30,7 @@ import com.swordfish.lemuroid.app.utils.android.settings.booleanPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.indexPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.intPreferenceState
 import com.swordfish.lemuroid.app.utils.android.stringListResource
+import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
 
 @Composable
 fun SettingsScreen(
@@ -46,12 +53,19 @@ fun SettingsScreen(
             .collectAsState(false)
             .value
 
+    val downloadRomsState =
+        viewModel.downloadRomsState
+            .collectAsState(DownloadRomsState.Idle)
+            .value
+
     LemuroidSettingsPage(modifier = modifier) {
         RomsSettings(
             state = state,
             onChangeFolder = { viewModel.changeLocalStorageFolder() },
             indexingInProgress = indexingInProgress,
             scanInProgress = scanInProgress,
+            downloadRomsState = downloadRomsState,
+            onDownloadRomsClicked = { viewModel.downloadAndExtractRoms() },
         )
         GeneralSettings()
         InputSettings(navController = navController)
@@ -188,6 +202,8 @@ private fun RomsSettings(
     onChangeFolder: () -> Unit,
     indexingInProgress: Boolean,
     scanInProgress: Boolean,
+    downloadRomsState: DownloadRomsState,
+    onDownloadRomsClicked: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -218,6 +234,38 @@ private fun RomsSettings(
                 title = { Text(text = stringResource(id = R.string.rescan)) },
                 onClick = { LibraryIndexScheduler.scheduleLibrarySync(context) },
                 enabled = !indexingInProgress,
+            )
+        }
+        AnimatedVisibility(downloadRomsState !is DownloadRomsState.Done) {
+            val isActive = downloadRomsState is DownloadRomsState.Downloading ||
+                downloadRomsState is DownloadRomsState.Extracting
+            val subtitleText = when (downloadRomsState) {
+                is DownloadRomsState.Idle -> stringResource(R.string.settings_download_roms_subtitle)
+                is DownloadRomsState.Downloading -> stringResource(R.string.home_download_roms_downloading, (downloadRomsState.progress * 100).toInt())
+                is DownloadRomsState.Extracting -> stringResource(R.string.home_download_roms_extracting, (downloadRomsState.progress * 100).toInt())
+                is DownloadRomsState.Done -> ""
+                is DownloadRomsState.Error -> stringResource(R.string.home_download_roms_error, downloadRomsState.message)
+            }
+            val progress = when (downloadRomsState) {
+                is DownloadRomsState.Downloading -> downloadRomsState.progress
+                is DownloadRomsState.Extracting -> downloadRomsState.progress
+                else -> 0f
+            }
+            LemuroidSettingsMenuLink(
+                title = { Text(text = stringResource(R.string.settings_download_roms_title)) },
+                subtitle = {
+                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text(subtitleText)
+                        if (isActive) {
+                            LinearProgressIndicator(
+                                progress = { progress },
+                                modifier = Modifier.fillMaxWidth(),
+                            )
+                        }
+                    }
+                },
+                enabled = !isActive,
+                onClick = onDownloadRomsClicked,
             )
         }
     }

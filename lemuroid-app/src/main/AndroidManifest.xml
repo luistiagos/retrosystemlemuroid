@@ -150,6 +150,14 @@
 
         <receiver android:name=".app.shared.library.LibraryIndexBroadcastReceiver" />
         <receiver android:name=".app.shared.library.CoreUpdateBroadcastReceiver" />
+        <receiver
+            android:name=".app.shared.library.MediaMountedReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <data android:scheme="file" />
+            </intent-filter>
+        </receiver>
 
         <provider
             android:name="androidx.startup.InitializationProvider"
