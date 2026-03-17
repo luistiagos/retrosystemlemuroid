@@ -1,7 +1,7 @@
 package com.swordfish.lemuroid.app.mobile.feature.settings.general
 
+import android.app.Activity
 import android.net.Uri
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,7 +30,9 @@ import com.swordfish.lemuroid.app.utils.android.settings.booleanPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.indexPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.intPreferenceState
 import com.swordfish.lemuroid.app.utils.android.stringListResource
+import com.swordfish.lemuroid.app.utils.settings.rememberSafePreferenceIndexSettingState
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
+import com.swordfish.lemuroid.lib.preferences.LocaleHelper
 
 @Composable
 fun SettingsScreen(
@@ -149,8 +151,22 @@ private fun InputSettings(navController: NavController) {
 
 @Composable
 private fun GeneralSettings() {
+    val context = LocalContext.current
     val hdMode = booleanPreferenceState(R.string.pref_key_hd_mode, false)
     val immersiveMode = booleanPreferenceState(R.string.pref_key_enable_immersive_mode, false)
+
+    val languageValues = LocaleHelper.ALL_VALUES
+    val languageState = rememberSafePreferenceIndexSettingState(
+        key = LocaleHelper.PREF_KEY,
+        values = languageValues,
+        defaultValue = LocaleHelper.VALUE_SYSTEM,
+        preferences = LocaleHelper.getSharedPreferences(context),
+    )
+    val languageDisplayNames = listOf(
+        stringResource(R.string.language_system),
+        stringResource(R.string.language_en),
+        stringResource(R.string.language_pt),
+    )
 
     LemuroidCardSettingsGroup(
         title = { Text(text = stringResource(id = R.string.settings_category_general)) },
@@ -192,6 +208,17 @@ private fun GeneralSettings() {
                 ),
             title = { Text(text = stringResource(id = R.string.display_filter)) },
             items = stringListResource(R.array.pref_key_shader_filter_display_names),
+        )
+        LemuroidSettingsList(
+            state = languageState,
+            title = { Text(text = stringResource(id = R.string.settings_title_language)) },
+            subtitle = { Text(text = stringResource(id = R.string.settings_description_language)) },
+            items = languageDisplayNames,
+            useSelectedValueAsSubtitle = false,
+            onItemSelected = { index, _ ->
+                LocaleHelper.setLanguage(context, languageValues[index])
+                (context as? Activity)?.recreate()
+            },
         )
     }
 }
@@ -236,37 +263,35 @@ private fun RomsSettings(
                 enabled = !indexingInProgress,
             )
         }
-        AnimatedVisibility(downloadRomsState !is DownloadRomsState.Done) {
-            val isActive = downloadRomsState is DownloadRomsState.Downloading ||
-                downloadRomsState is DownloadRomsState.Extracting
-            val subtitleText = when (downloadRomsState) {
-                is DownloadRomsState.Idle -> stringResource(R.string.settings_download_roms_subtitle)
-                is DownloadRomsState.Downloading -> stringResource(R.string.home_download_roms_downloading, (downloadRomsState.progress * 100).toInt())
-                is DownloadRomsState.Extracting -> stringResource(R.string.home_download_roms_extracting, (downloadRomsState.progress * 100).toInt())
-                is DownloadRomsState.Done -> ""
-                is DownloadRomsState.Error -> stringResource(R.string.home_download_roms_error, downloadRomsState.message)
-            }
-            val progress = when (downloadRomsState) {
-                is DownloadRomsState.Downloading -> downloadRomsState.progress
-                is DownloadRomsState.Extracting -> downloadRomsState.progress
-                else -> 0f
-            }
-            LemuroidSettingsMenuLink(
-                title = { Text(text = stringResource(R.string.settings_download_roms_title)) },
-                subtitle = {
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(subtitleText)
-                        if (isActive) {
-                            LinearProgressIndicator(
-                                progress = { progress },
-                                modifier = Modifier.fillMaxWidth(),
-                            )
-                        }
-                    }
-                },
-                enabled = !isActive,
-                onClick = onDownloadRomsClicked,
-            )
+        val isActive = downloadRomsState is DownloadRomsState.Downloading ||
+            downloadRomsState is DownloadRomsState.Extracting
+        val subtitleText = when (downloadRomsState) {
+            is DownloadRomsState.Idle -> stringResource(R.string.settings_download_roms_subtitle)
+            is DownloadRomsState.Downloading -> stringResource(R.string.home_download_roms_downloading, (downloadRomsState.progress * 100).toInt())
+            is DownloadRomsState.Extracting -> stringResource(R.string.home_download_roms_extracting, (downloadRomsState.progress * 100).toInt())
+            is DownloadRomsState.Done -> stringResource(R.string.settings_download_roms_done_subtitle)
+            is DownloadRomsState.Error -> stringResource(R.string.home_download_roms_error, downloadRomsState.message)
         }
+        val progress = when (downloadRomsState) {
+            is DownloadRomsState.Downloading -> downloadRomsState.progress
+            is DownloadRomsState.Extracting -> downloadRomsState.progress
+            else -> 0f
+        }
+        LemuroidSettingsMenuLink(
+            title = { Text(text = stringResource(R.string.settings_download_roms_title)) },
+            subtitle = {
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(subtitleText)
+                    if (isActive) {
+                        LinearProgressIndicator(
+                            progress = { progress },
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                    }
+                }
+            },
+            enabled = !isActive,
+            onClick = onDownloadRomsClicked,
+        )
     }
 }

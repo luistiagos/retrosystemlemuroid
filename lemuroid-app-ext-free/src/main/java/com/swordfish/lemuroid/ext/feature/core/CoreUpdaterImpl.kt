@@ -66,7 +66,7 @@ class CoreUpdaterImpl(
         context: Context,
         coreID: CoreID,
     ) {
-        findBundledLibrary(context, coreID) ?: downloadCoreFromGithub(coreID)
+        findBundledLibrary(context, coreID) ?: downloadCoreFromGithub(context, coreID)
     }
 
     private suspend fun retrieveAssets(
@@ -77,8 +77,17 @@ class CoreUpdaterImpl(
             .retrieveAssetsIfNeeded(api, directoriesManager, sharedPreferences)
     }
 
-    private suspend fun downloadCoreFromGithub(coreID: CoreID): File {
+    private suspend fun downloadCoreFromGithub(
+        context: Context,
+        coreID: CoreID,
+    ): File {
         Timber.i("Downloading core $coreID from github")
+
+        // Use the ABI of the app's native library directory to match the running process,
+        // NOT Build.SUPPORTED_ABIS.first() which returns the device's primary ABI.
+        // On emulators with Houdini (ARM-on-x86), the device may report x86_64 as primary
+        // but the app's native libs (and libretrodroid) are x86 or arm64.
+        val processAbi = File(context.applicationInfo.nativeLibraryDir).name
 
         val mainCoresDirectory = directoriesManager.getCoresDirectory()
         val coresDirectory =
@@ -90,6 +99,7 @@ class CoreUpdaterImpl(
         val destFile = File(coresDirectory, libFileName)
 
         if (destFile.exists()) {
+            destFile.setExecutable(true, true)
             return destFile
         }
 
@@ -100,12 +110,13 @@ class CoreUpdaterImpl(
         val uri =
             baseUri.buildUpon()
                 .appendEncodedPath("raw/$CORES_VERSION/lemuroid_core_${coreID.coreName}/src/main/jniLibs/")
-                .appendPath(Build.SUPPORTED_ABIS.first())
+                .appendPath(processAbi)
                 .appendPath(libFileName)
                 .build()
 
         try {
             downloadFile(uri, destFile)
+            destFile.setExecutable(true, true)
             return destFile
         } catch (e: Throwable) {
             destFile.safeDelete()

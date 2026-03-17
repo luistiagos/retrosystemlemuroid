@@ -13,6 +13,7 @@ import com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer
 import com.swordfish.lemuroid.app.utils.android.isMainProcess
 import com.swordfish.lemuroid.ext.feature.context.ContextHandler
 import com.swordfish.lemuroid.lib.injection.HasWorkerInjector
+import com.swordfish.lemuroid.lib.preferences.LocaleHelper
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.DaggerApplication
@@ -39,7 +40,7 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     }
 
     override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(base)
+        super.attachBaseContext(LocaleHelper.wrapContext(base))
         ContextHandler.attachBaseContext(base)
     }
 

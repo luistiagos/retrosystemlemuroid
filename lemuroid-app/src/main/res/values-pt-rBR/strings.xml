@@ -184,4 +184,30 @@
     <string name="tilt_configuration_buttons_l_r">L - R</string>
     <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
     <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+
+    <!-- Language setting -->
+    <string name="settings_title_language">Idioma</string>
+    <string name="settings_description_language">Escolha o idioma do aplicativo</string>
+    <string name="language_system">Seguir idioma do dispositivo</string>
+    <string name="language_en">English</string>
+    <string name="language_pt">Português (Brasil)</string>
+
+    <!-- Download ROMs -->
+    <string name="home_download_dialog_title">Pacote Padrão</string>
+    <string name="home_download_dialog_message">Deseja baixar e instalar o pacote padrão (~5GB)?</string>
+    <string name="home_download_dialog_confirm">Sim, Baixar</string>
+    <string name="home_download_dialog_cancel">Agora não</string>
+    <string name="home_download_roms_title">Baixar Pacote de ROMs</string>
+    <string name="home_download_roms_message">Baixe um pacote completo de ROMs (~5GB) e adicione jogos automaticamente à sua biblioteca.</string>
+    <string name="home_download_roms_action">Baixar ROMs</string>
+    <string name="home_download_roms_action_retry">Tentar novamente</string>
+    <string name="home_download_roms_action_again">Baixar novamente</string>
+    <string name="home_download_roms_downloading">Baixando… %1$d%%</string>
+    <string name="home_download_roms_extracting">Extraindo… %1$d%%</string>
+    <string name="home_download_roms_done">ROMs baixadas e extraídas com sucesso!</string>
+    <string name="home_download_roms_error">Erro: %1$s</string>
+    <string name="settings_download_roms_title">Baixar Pacote de ROMs</string>
+    <string name="settings_download_roms_subtitle">Baixe um pacote completo de ROMs (~5GB)</string>
+    <string name="settings_download_roms_done_subtitle">ROMs baixadas. Toque para baixar novamente.</string>
+
 </resources>

@@ -130,6 +130,7 @@
 
     <string name="settings_download_roms_title">Download ROMs Pack</string>
     <string name="settings_download_roms_subtitle">Download a complete ROMs pack (~5GB)</string>
+    <string name="settings_download_roms_done_subtitle">ROMs downloaded. Tap to download again.</string>
     <string name="settings_move_roms_title">Move ROMs</string>
     <string name="settings_move_roms_message">Found %1$d ROM file(s). Move them to the new location?</string>
     <string name="settings_move_roms_yes">Move</string>
@@ -261,5 +262,13 @@
     <string name="tilt_configuration_buttons_l_r">L - R</string>
     <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
     <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+
+    <!-- Language setting -->
+    <string name="settings_title_language">Language</string>
+    <string name="settings_description_language">Choose the app language</string>
+    <string name="language_system">Follow device language</string>
+    <string name="language_en">English</string>
+    <string name="language_pt">Português (Brasil)</string>
+
 
 </resources>
