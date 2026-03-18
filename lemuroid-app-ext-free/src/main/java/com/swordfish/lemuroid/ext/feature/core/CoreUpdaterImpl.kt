@@ -32,7 +32,8 @@ import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.flatMapMerge
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import timber.log.Timber
@@ -57,8 +58,13 @@ class CoreUpdaterImpl(
     ) {
         val sharedPreferences = SharedPreferencesHelper.getSharedPreferences(context.applicationContext)
         coreIDs.asFlow()
-            .onEach { retrieveAssets(it, sharedPreferences) }
-            .onEach { retrieveFile(context, it) }
+            .flatMapMerge(concurrency = 4) { coreID ->
+                flow {
+                    retrieveAssets(coreID, sharedPreferences)
+                    retrieveFile(context, coreID)
+                    emit(coreID)
+                }
+            }
             .collect()
     }
 

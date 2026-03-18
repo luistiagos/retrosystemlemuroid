@@ -26,7 +26,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -92,6 +95,7 @@ fun HomeScreen(
         { viewModel.changeLocalStorageFolder(context) },
         { viewModel.downloadAndExtractRoms() },
         { viewModel.dismissDownloadDialog() },
+        { viewModel.cancelDownload() },
     ) // TODO COMPOSE We need to understand what's going to happen here.
 }
 
@@ -109,6 +113,7 @@ private fun HomeScreen(
     onSetDirectoryClicked: () -> Unit,
     onDownloadRomsClicked: () -> Unit,
     onDismissDownloadDialog: () -> Unit,
+    onCancelDownloadClicked: () -> Unit,
 ) {
     if (state.showDownloadPromptDialog) {
         AlertDialog(
@@ -188,7 +193,11 @@ private fun HomeScreen(
             )
         }
         AnimatedVisibility(downloadRomsState !is DownloadRomsState.Done) {
-            HomeDownloadCard(state = downloadRomsState, onDownloadClicked = onDownloadRomsClicked)
+            HomeDownloadCard(
+                state = downloadRomsState,
+                onDownloadClicked = onDownloadRomsClicked,
+                onCancelClicked = onCancelDownloadClicked,
+            )
         }
         HomeRow(
             stringResource(id = R.string.recent),
@@ -298,7 +307,29 @@ private fun HomeNotification(
 private fun HomeDownloadCard(
     state: DownloadRomsState,
     onDownloadClicked: () -> Unit,
+    onCancelClicked: () -> Unit,
 ) {
+    var showCancelDialog by remember { mutableStateOf(false) }
+    if (showCancelDialog) {
+        AlertDialog(
+            onDismissRequest = { showCancelDialog = false },
+            title = { Text(stringResource(R.string.home_download_cancel_dialog_title)) },
+            text = { Text(stringResource(R.string.home_download_cancel_dialog_message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    showCancelDialog = false
+                    onCancelClicked()
+                }) {
+                    Text(stringResource(R.string.home_download_cancel_dialog_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showCancelDialog = false }) {
+                    Text(stringResource(R.string.home_download_cancel_dialog_dismiss))
+                }
+            },
+        )
+    }
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
@@ -333,9 +364,15 @@ private fun HomeDownloadCard(
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     LinearProgressIndicator(
-                        progress = state.progress,
+                        progress = { state.progress },
                         modifier = Modifier.fillMaxWidth(),
                     )
+                    OutlinedButton(
+                        modifier = Modifier.align(Alignment.End),
+                        onClick = { showCancelDialog = true },
+                    ) {
+                        Text(stringResource(R.string.home_download_roms_cancel))
+                    }
                 }
                 is DownloadRomsState.Extracting -> {
                     Text(
@@ -343,9 +380,15 @@ private fun HomeDownloadCard(
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     LinearProgressIndicator(
-                        progress = state.progress,
+                        progress = { state.progress },
                         modifier = Modifier.fillMaxWidth(),
                     )
+                    OutlinedButton(
+                        modifier = Modifier.align(Alignment.End),
+                        onClick = { showCancelDialog = true },
+                    ) {
+                        Text(stringResource(R.string.home_download_roms_cancel))
+                    }
                 }
                 is DownloadRomsState.Done -> {
                     Text(

@@ -127,10 +127,18 @@
     <string name="home_download_roms_extracting">Extracting… %1$d%%</string>
     <string name="home_download_roms_done">ROMs downloaded and extracted successfully!</string>
     <string name="home_download_roms_error">Error: %1$s</string>
+    <string name="home_download_roms_cancel">Cancel</string>
+    <string name="home_download_cancel_dialog_title">Cancel Download?</string>
+    <string name="home_download_cancel_dialog_message">This will delete all downloaded files. You will need to start from the beginning next time.</string>
+    <string name="home_download_cancel_dialog_confirm">Yes, Cancel</string>
+    <string name="home_download_cancel_dialog_dismiss">No, Keep Downloading</string>
 
     <string name="settings_download_roms_title">Download ROMs Pack</string>
     <string name="settings_download_roms_subtitle">Download a complete ROMs pack (~5GB)</string>
     <string name="settings_download_roms_done_subtitle">ROMs downloaded. Tap to download again.</string>
+
+    <string name="notification_download_roms_title">Downloading ROMs Pack</string>
+    <string name="notification_download_roms_message">Download continues in background even with screen off.</string>
     <string name="settings_move_roms_title">Move ROMs</string>
     <string name="settings_move_roms_message">Found %1$d ROM file(s). Move them to the new location?</string>
     <string name="settings_move_roms_yes">Move</string>

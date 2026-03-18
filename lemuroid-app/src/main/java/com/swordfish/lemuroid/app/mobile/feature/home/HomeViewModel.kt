@@ -90,7 +90,33 @@ class HomeViewModel(
         StorageFrameworkPickerLauncher.pickFolder(context)
     }
 
-    fun getDownloadRomsState(): Flow<DownloadRomsState> = romsDownloadManager.state
+    // True when the DB has no games at all.
+    private val noGamesFlow: Flow<Boolean> = combine(
+        favoritesGames(retrogradeDb),
+        recentGames(retrogradeDb),
+        discoveryGames(retrogradeDb),
+    ) { fav, rec, disc -> fav.isEmpty() && rec.isEmpty() && disc.isEmpty() }
+        .distinctUntilChanged()
+
+    // True while a library index operation is running (e.g. right after download completes).
+    private val indexingFlow: Flow<Boolean> = indexingInProgress(appContext).distinctUntilChanged()
+
+    // Combines WorkManager download state with DB emptiness and indexing status.
+    // When state=Done but the ROMs directory was later deleted (noGames=true and NOT
+    // currently indexing), override back to Idle so the download card/prompt reappear.
+    // The !isIndexing guard prevents a false Idle during the post-download library scan,
+    // which would otherwise flash the "Download ROMs" card and dialog right after a
+    // successful download while the scanner is still populating the DB.
+    fun getDownloadRomsState(): Flow<DownloadRomsState> = combine(
+        romsDownloadManager.state,
+        noGamesFlow,
+        indexingFlow,
+    ) { dlState, noGames, isIndexing ->
+        if (dlState is DownloadRomsState.Done && noGames && !isIndexing && !romsDownloadManager.isDownloadStarted())
+            DownloadRomsState.Idle
+        else
+            dlState
+    }
 
     @Suppress("DEPRECATION")
     fun getCurrentDirectoryFlow(): Flow<String> = callbackFlow {
@@ -102,6 +128,17 @@ class HomeViewModel(
         prefs.registerOnSharedPreferenceChangeListener(listener)
         trySend(prefs.getString(key, "") ?: "")
         awaitClose { prefs.unregisterOnSharedPreferenceChangeListener(listener) }
+    }
+
+    fun cancelDownload() {
+        // cancelDownload() deletes ~5 GB of files — must run on IO dispatcher
+        // to avoid blocking the main thread and triggering an ANR.
+        viewModelScope.launch(Dispatchers.IO) {
+            romsDownloadManager.cancelDownload()
+        }
+        // Suppress the auto-prompt dialog after cancellation so it doesn't
+        // immediately reappear.
+        downloadDialogDismissed.value = true
     }
 
     fun downloadAndExtractRoms() {
@@ -224,9 +261,17 @@ class HomeViewModel(
                     getDirectoryAccessibilityFlow(),
                     ::buildViewState,
                 ).combine(downloadDialogDismissed) { state, dismissed ->
+                    // Show dialog when there are no games, no indexing is running, and no
+                    // download is in progress. The !indexInProgress guard is critical: right
+                    // after a successful download the library scan runs and the DB is
+                    // temporarily empty — without this guard the dialog would flash.
+                    // We intentionally omit isDownloadDone(): if ROMs are later deleted and
+                    // the DB empties again (with indexInProgress=false), the dialog correctly
+                    // reappears without being blocked by the stale PREF_DOWNLOAD_DONE flag.
                     state.copy(
                         showDownloadPromptDialog = state.showNoGamesCard
-                            && !romsDownloadManager.isDownloadDone()
+                            && !state.indexInProgress
+                            && !romsDownloadManager.isDownloadStarted()
                             && !dismissed,
                     )
                 }
