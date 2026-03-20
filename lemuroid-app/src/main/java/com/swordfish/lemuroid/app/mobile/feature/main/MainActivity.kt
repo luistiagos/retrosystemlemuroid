@@ -3,11 +3,16 @@ package com.swordfish.lemuroid.app.mobile.feature.main
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
@@ -74,6 +79,7 @@ import dagger.Provides
 import de.charlex.compose.material3.HtmlText
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OptIn(DelicateCoroutinesApi::class)
@@ -115,6 +121,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         )
         super.onCreate(savedInstanceState)
 
+        requestBatteryOptimizationExemption()
+
         GlobalScope.safeLaunch {
             reviewManager.initialize(applicationContext)
         }
@@ -122,6 +130,23 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         setContent {
             val navController = rememberNavController()
             MainScreen(navController)
+        }
+    }
+
+    private fun requestBatteryOptimizationExemption() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val pm = getSystemService(POWER_SERVICE) as PowerManager
+            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+                try {
+                    startActivity(
+                        Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                            data = Uri.parse("package:$packageName")
+                        }
+                    )
+                } catch (e: android.content.ActivityNotFoundException) {
+                    // Some OEM firmware removes this activity — ignore silently.
+                }
+            }
         }
     }
 
@@ -245,7 +270,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         )
                     }
                     composable(MainRoute.SYSTEM_GAMES) { entry ->
-                        val metaSystemId = entry.arguments?.getString("metaSystemId")
+                        val metaSystemId = entry.arguments?.getString("metaSystemId") ?: return@composable
                         GamesScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
@@ -253,7 +278,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory =
                                         GamesViewModel.Factory(
                                             retrogradeDb,
-                                            MetaSystemID.valueOf(metaSystemId!!),
+                                            MetaSystemID.valueOf(metaSystemId),
                                         ),
                                 ),
                             onGameClick = onGameClick,
@@ -390,7 +415,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
         when (requestCode) {
             BaseGameActivity.REQUEST_PLAY_GAME -> {
-                GlobalScope.safeLaunch {
+                lifecycleScope.launch {
                     gameLaunchTaskHandler.handleGameFinish(
                         true,
                         this@MainActivity,

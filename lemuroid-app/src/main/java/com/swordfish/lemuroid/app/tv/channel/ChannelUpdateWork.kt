@@ -25,6 +25,8 @@ class ChannelUpdateWork(context: Context, workerParams: WorkerParameters) :
 
         try {
             channelHandler.update()
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             Timber.e(e, "Error in channel update")
         }

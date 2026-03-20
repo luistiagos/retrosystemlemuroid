@@ -9,6 +9,12 @@ class CoreUpdateBroadcastReceiver : BroadcastReceiver() {
         context: Context?,
         intent: Intent?,
     ) {
-        LibraryIndexScheduler.cancelCoreUpdate(context!!.applicationContext)
+        val ctx = context ?: return
+        val coreId = intent?.getStringExtra(EXTRA_CORE_ID)
+        LibraryIndexScheduler.scheduleCoreUpdate(ctx.applicationContext, coreId)
+    }
+
+    companion object {
+        const val EXTRA_CORE_ID = "extra_core_id"
     }
 }

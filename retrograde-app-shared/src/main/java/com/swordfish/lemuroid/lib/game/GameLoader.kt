@@ -20,7 +20,6 @@
 package com.swordfish.lemuroid.lib.game
 
 import android.content.Context
-import android.os.Build
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.core.CoreVariable
 import com.swordfish.lemuroid.lib.core.CoreVariablesManager
@@ -74,7 +73,7 @@ class GameLoader(
 
                 val system = GameSystem.findById(game.systemId)
 
-                if (!isArchitectureSupported(systemCoreConfig)) {
+                if (!isArchitectureSupported(appContext, systemCoreConfig)) {
                     throw GameLoaderException(GameLoaderError.UnsupportedArchitecture)
                 }
 
@@ -144,15 +143,21 @@ class GameLoader(
             } catch (e: GameLoaderException) {
                 Timber.e(e, "Error while preparing game")
                 throw e
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
             } catch (e: Exception) {
                 Timber.e(e, "Error while preparing game")
                 throw GameLoaderException(GameLoaderError.Generic)
             }
         }
 
-    private fun isArchitectureSupported(systemCoreConfig: SystemCoreConfig): Boolean {
+    private fun isArchitectureSupported(
+        context: Context,
+        systemCoreConfig: SystemCoreConfig,
+    ): Boolean {
         val supportedOnlyArchitectures = systemCoreConfig.supportedOnlyArchitectures ?: return true
-        return Build.SUPPORTED_ABIS.toSet().intersect(supportedOnlyArchitectures).isNotEmpty()
+        val processAbi = com.swordfish.lemuroid.lib.util.AbiUtils.getProcessAbi(context)
+        return processAbi in supportedOnlyArchitectures
     }
 
     private fun findLibrary(

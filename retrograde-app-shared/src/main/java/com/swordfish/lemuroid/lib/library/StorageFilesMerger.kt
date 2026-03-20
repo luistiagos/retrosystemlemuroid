@@ -67,7 +67,7 @@ object StorageFilesMerger {
 
                 val dataFiles = allFiles.filter { it.key.name in m3uFiles }
 
-                allFiles[m3uFile] = allFiles[m3uFile]!! +
+                allFiles[m3uFile] = (allFiles[m3uFile] ?: emptyList()) +
                     dataFiles.flatMap {
                         listOf(it.key) + it.value
                     }

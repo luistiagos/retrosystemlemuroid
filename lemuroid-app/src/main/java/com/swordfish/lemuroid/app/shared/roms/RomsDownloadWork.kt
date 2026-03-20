@@ -1,8 +1,6 @@
 package com.swordfish.lemuroid.app.shared.roms
 
 import android.content.Context
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.isActive
 import androidx.work.CoroutineWorker
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
@@ -11,22 +9,28 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.withContext
 
 class RomsDownloadWork(context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
         val notificationsManager = NotificationsManager(applicationContext)
-        setForeground(
-            createSyncForegroundInfo(
-                NotificationsManager.ROMS_DOWNLOAD_NOTIFICATION_ID,
-                notificationsManager.downloadingRomsNotification(),
-            ),
-        )
-
+        val manager = RomsDownloadManager(applicationContext)
         return try {
-            RomsDownloadManager(applicationContext).doDownload { phase, progress ->
-                setProgress(workDataOf(KEY_PHASE to phase, KEY_PROGRESS to progress))
+            setForeground(
+                createSyncForegroundInfo(
+                    NotificationsManager.ROMS_DOWNLOAD_NOTIFICATION_ID,
+                    notificationsManager.downloadingRomsNotification(),
+                ),
+            )
+            withContext(Dispatchers.IO) {
+                manager.doDownload { phase, progress ->
+                    setProgress(workDataOf(KEY_PHASE to phase, KEY_PROGRESS to progress))
+                }
             }
             Result.success()
         } catch (e: CancellationException) {
@@ -44,7 +48,9 @@ class RomsDownloadWork(context: Context, workerParams: WorkerParameters) :
             // Clear the started flag so the init-block in RomsDownloadManager does not
             // re-enqueue work on every subsequent app open after a permanent failure.
             // The user must explicitly tap "Try again" to restart.
-            RomsDownloadManager(applicationContext).clearDownloadStarted()
+            // Reuse the same instance — creating a new one here would run its init block
+            // (which calls enqueue) while PREF_DOWNLOAD_STARTED is still true.
+            manager.clearDownloadStarted()
             Result.failure(workDataOf(KEY_ERROR to msg))
         }
     }

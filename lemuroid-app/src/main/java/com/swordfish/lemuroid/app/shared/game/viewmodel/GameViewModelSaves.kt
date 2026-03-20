@@ -55,6 +55,8 @@ class GameViewModelSaves(
                     sideEffects.showToast(appContext.getString(R.string.game_toast_load_state_failed))
                 }
             }
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             val errorMessageId =
                 when (e) {
@@ -91,6 +93,8 @@ class GameViewModelSaves(
         try {
             retroGameView.waitGLEvent<GLRetroView.GLRetroEvents.FrameRendered>()
             restoreQuickSave(saveState)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             Timber.e(e, "Error while loading auto-save")
         }

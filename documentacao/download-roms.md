@@ -64,9 +64,19 @@ automaticamente, retomando de onde parou.
   `Range: bytes=<bytes_já_baixados>-<fim_do_segmento>`.
 - Após todos completarem: concatena os segmentos no `.7z` final e deleta os `.seg*`.
 
-**Retry:** até 5 tentativas por segmento com backoff linear (5s, 10s, 15s, 20s, 25s).
+**Retry:** até **30 tentativas** por segmento com **backoff exponencial + jitter**
+(4 s → 8 s → 16 s → 32 s → 60 s … capped em 60 s + até 2 s aleatório).
+Projetado para sobreviver a `SocketException: Connection reset` e
+`unexpected end of stream` frequentes em downloads de 5 GB via CloudFront CDN.
 `CancellationException` é sempre re-lançada antes do catch genérico.
-HTTP 416 → segmento já completo (não é erro). HTTP 206 → append no `.seg*`.
+Erros HTTP **4xx permanentes** (exceto 416) lançam `PermanentHttpException` e
+**falham imediatamente** sem consumir retries.
+HTTP 416 → segmento já completo (sucesso).
+HTTP 206 → append no `.seg*`.
+HTTP 200 (servidor ignorou Range) → truncate + reset do offset (anticorrupção).
+
+**Read timeout:** 90 s — se o CDN parar de enviar dados sem fechar o TCP,
+uma `IOException` é lançada após 90 s e o retry reconecta a partir do último byte.
 
 ### 4. `doDownload()` — fase de extração
 

@@ -33,7 +33,7 @@ class ShortcutsGenerator(
             return
         }
 
-        val shortcutManager = appContext.getSystemService(ShortcutManager::class.java)!!
+        val shortcutManager = appContext.getSystemService(ShortcutManager::class.java) ?: return
         val bitmap = retrieveBitmap(game)
 
         val shortcutInfo =
@@ -51,7 +51,8 @@ class ShortcutsGenerator(
         withContext(Dispatchers.IO) {
             val result =
                 runCatching {
-                    val response = thumbnailsApi.downloadThumbnail(game.coverFrontUrl!!)
+                    val coverUrl = game.coverFrontUrl ?: return@runCatching retrieveFallbackBitmap(game)
+                    val response = thumbnailsApi.downloadThumbnail(coverUrl)
                     BitmapFactory.decodeStream(response.body()).cropToSquare()
                 }
             result.getOrElse { retrieveFallbackBitmap(game) }
@@ -72,7 +73,8 @@ class ShortcutsGenerator(
             return false
         }
 
-        val shortcutManager = appContext.getSystemService(ShortcutManager::class.java)!!
+        val shortcutManager = appContext.getSystemService(ShortcutManager::class.java)
+            ?: return false
         return shortcutManager.isRequestPinShortcutSupported
     }
 

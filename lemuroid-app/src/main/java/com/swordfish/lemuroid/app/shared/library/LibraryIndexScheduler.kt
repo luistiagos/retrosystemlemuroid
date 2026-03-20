@@ -19,12 +19,19 @@ object LibraryIndexScheduler {
             .enqueue()
     }
 
-    fun scheduleCoreUpdate(applicationContext: Context) {
+    fun scheduleCoreUpdate(applicationContext: Context, coreId: String? = null) {
+        val inputData = if (coreId != null) {
+            androidx.work.workDataOf(CoreUpdateWork.KEY_CORE_ID to coreId)
+        } else {
+            androidx.work.Data.EMPTY
+        }
         WorkManager.getInstance(applicationContext)
             .beginUniqueWork(
                 CORE_UPDATE_WORK_ID,
                 ExistingWorkPolicy.APPEND_OR_REPLACE,
-                OneTimeWorkRequestBuilder<CoreUpdateWork>().build(),
+                OneTimeWorkRequestBuilder<CoreUpdateWork>()
+                    .setInputData(inputData)
+                    .build(),
             )
             .enqueue()
     }

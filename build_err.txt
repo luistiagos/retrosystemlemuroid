@@ -1,0 +1,139 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/C:/Users/luist/.gradle/wrapper/dists/gradle-8.10.2-bin/a04bxjujx95o3nb99gddekhwo/gradle-8.10.2/lib/native-platform-0.22-milestone-26.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+Reusing configuration cache.
+> Task :lemuroid-touchinput:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :lemuroid-metadata-libretro-db:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :retrograde-app-shared:preBuild UP-TO-DATE
+> Task :lemuroid-touchinput:preBuild UP-TO-DATE
+> Task :retrograde-util:preBuild UP-TO-DATE
+> Task :lemuroid-app-ext-free:preBuild UP-TO-DATE
+> Task :lemuroid-app-ext-free:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :retrograde-app-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :retrograde-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :lemuroid-app:preBuild UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:preBuild UP-TO-DATE
+> Task :lemuroid-app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :retrograde-util:preDebugBuild UP-TO-DATE
+> Task :retrograde-app-shared:preDebugBuild UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:preDebugBuild UP-TO-DATE
+> Task :lemuroid-touchinput:preDebugBuild UP-TO-DATE
+> Task :lemuroid-app-ext-free:preDebugBuild UP-TO-DATE
+> Task :lemuroid-app:preFreeDynamicDebugBuild UP-TO-DATE
+> Task :retrograde-app-shared:writeDebugAarMetadata UP-TO-DATE
+> Task :retrograde-util:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-touchinput:writeDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-app-ext-free:writeDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:writeDebugAarMetadata UP-TO-DATE
+> Task :retrograde-util:writeDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-app:generateSafeArgsFreeDynamicDebug UP-TO-DATE
+> Task :lemuroid-app-ext-free:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-app:generateFreeDynamicDebugResValues UP-TO-DATE
+> Task :lemuroid-touchinput:generateDebugResValues UP-TO-DATE
+> Task :retrograde-app-shared:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-app:generateFreeDynamicDebugBuildConfig UP-TO-DATE
+> Task :lemuroid-app:createFreeDynamicDebugCompatibleScreenManifests UP-TO-DATE
+> Task :retrograde-util:processDebugManifest UP-TO-DATE
+> Task :lemuroid-app-ext-free:processDebugManifest UP-TO-DATE
+> Task :lemuroid-touchinput:generateDebugResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:generateDebugResources UP-TO-DATE
+> Task :retrograde-util:generateDebugResources UP-TO-DATE
+> Task :lemuroid-app:generateFreeDynamicDebugResources UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:generateDebugResources UP-TO-DATE
+> Task :lemuroid-touchinput:extractDeepLinksDebug UP-TO-DATE
+> Task :lemuroid-app-ext-free:extractDeepLinksDebug UP-TO-DATE
+> Task :lemuroid-app:extractDeepLinksFreeDynamicDebug UP-TO-DATE
+> Task :retrograde-app-shared:generateDebugResources UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:extractDeepLinksDebug UP-TO-DATE
+> Task :retrograde-app-shared:processDebugManifest UP-TO-DATE
+> Task :retrograde-app-shared:extractDeepLinksDebug UP-TO-DATE
+> Task :retrograde-util:extractDeepLinksDebug UP-TO-DATE
+> Task :retrograde-util:javaPreCompileDebug UP-TO-DATE
+> Task :retrograde-app-shared:javaPreCompileDebug UP-TO-DATE
+> Task :lemuroid-touchinput:processDebugManifest UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:processDebugManifest UP-TO-DATE
+> Task :lemuroid-app-ext-free:javaPreCompileDebug UP-TO-DATE
+> Task :lemuroid-touchinput:javaPreCompileDebug UP-TO-DATE
+> Task :lemuroid-app:packageFreeDynamicDebugResources UP-TO-DATE
+> Task :retrograde-util:packageDebugResources UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:javaPreCompileDebug UP-TO-DATE
+> Task :lemuroid-touchinput:packageDebugResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:packageDebugResources UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:packageDebugResources UP-TO-DATE
+> Task :retrograde-app-shared:packageDebugResources UP-TO-DATE
+> Task :retrograde-util:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-app:checkFreeDynamicDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-app-ext-free:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-app:parseFreeDynamicDebugLocalResources UP-TO-DATE
+> Task :retrograde-util:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-touchinput:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:parseDebugLocalResources UP-TO-DATE
+> Task :retrograde-app-shared:compileDebugLibraryResources UP-TO-DATE
+> Task :retrograde-app-shared:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-touchinput:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-app:processFreeDynamicDebugMainManifest UP-TO-DATE
+> Task :lemuroid-app:processFreeDynamicDebugManifest UP-TO-DATE
+> Task :lemuroid-touchinput:generateDebugRFile UP-TO-DATE
+> Task :lemuroid-app-ext-free:generateDebugRFile UP-TO-DATE
+> Task :retrograde-util:generateDebugRFile UP-TO-DATE
+> Task :retrograde-app-shared:generateDebugRFile UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:generateDebugRFile UP-TO-DATE
+> Task :lemuroid-app:processFreeDynamicDebugManifestForPackage UP-TO-DATE
+> Task :lemuroid-app:mapFreeDynamicDebugSourceSetPaths UP-TO-DATE
+> Task :lemuroid-app:mergeFreeDynamicDebugResources UP-TO-DATE
+> Task :retrograde-util:kaptGenerateStubsDebugKotlin UP-TO-DATE
+> Task :retrograde-util:kaptDebugKotlin SKIPPED
+> Task :retrograde-util:compileDebugKotlin UP-TO-DATE
+> Task :retrograde-util:compileDebugJavaWithJavac NO-SOURCE
+> Task :retrograde-util:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lemuroid-app:processFreeDynamicDebugResources UP-TO-DATE
+> Task :lemuroid-touchinput:kaptGenerateStubsDebugKotlin UP-TO-DATE
+> Task :lemuroid-touchinput:kaptDebugKotlin UP-TO-DATE
+> Task :lemuroid-touchinput:compileDebugKotlin UP-TO-DATE
+> Task :lemuroid-touchinput:compileDebugJavaWithJavac NO-SOURCE
+> Task :lemuroid-touchinput:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :retrograde-app-shared:kaptGenerateStubsDebugKotlin UP-TO-DATE
+> Task :retrograde-app-shared:kaptDebugKotlin UP-TO-DATE
+> Task :retrograde-app-shared:compileDebugKotlin UP-TO-DATE
+> Task :retrograde-app-shared:compileDebugJavaWithJavac UP-TO-DATE
+> Task :retrograde-app-shared:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lemuroid-app-ext-free:kaptGenerateStubsDebugKotlin UP-TO-DATE
+> Task :lemuroid-app-ext-free:kaptDebugKotlin SKIPPED
+> Task :lemuroid-metadata-libretro-db:kaptGenerateStubsDebugKotlin UP-TO-DATE
+> Task :lemuroid-app-ext-free:compileDebugKotlin UP-TO-DATE
+> Task :lemuroid-app-ext-free:compileDebugJavaWithJavac NO-SOURCE
+> Task :lemuroid-app-ext-free:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:kaptDebugKotlin UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:compileDebugKotlin UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:compileDebugJavaWithJavac UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lemuroid-app:kaptGenerateStubsFreeDynamicDebugKotlin UP-TO-DATE
+> Task :lemuroid-app:kaptFreeDynamicDebugKotlin UP-TO-DATE
+
+> Task :lemuroid-app:compileFreeDynamicDebugKotlin
+e: file:///E:/projects/lemuroid/Lemuroid/lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/gamemenu/coreoptions/GameMenuCoreOptionsScreen.kt:113:42 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'java.util.ArrayList<com.swordfish.lemuroid.lib.controller.ControllerConfig>?'.
+e: file:///E:/projects/lemuroid/Lemuroid/lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/gamemenu/coreoptions/GameMenuCoreOptionsScreen.kt:114:42 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'java.util.ArrayList<com.swordfish.lemuroid.lib.controller.ControllerConfig>?'.
+
+> Task :lemuroid-app:compileFreeDynamicDebugKotlin FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':lemuroid-app:compileFreeDynamicDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 6s
+88 actionable tasks: 1 executed, 87 up-to-date
+Configuration cache entry reused.

@@ -29,6 +29,8 @@ class PPSSPPAssetsManager : CoreID.AssetsManager {
         try {
             val response = coreUpdaterApi.downloadZip(PPSSPP_ASSETS_URL.toString())
             handleSuccess(directoriesManager, response, sharedPreferences)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             getAssetsDirectory(directoriesManager).deleteRecursively()
         }

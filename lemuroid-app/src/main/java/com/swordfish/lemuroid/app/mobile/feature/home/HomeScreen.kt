@@ -156,6 +156,7 @@ private fun HomeScreen(
                 messageId = R.string.home_storage_inaccessible_message,
                 actionId = R.string.home_storage_inaccessible_action,
                 onAction = onSetDirectoryClicked,
+                enabled = downloadRomsState !is DownloadRomsState.Downloading && downloadRomsState !is DownloadRomsState.Extracting,
             )
         }
         AnimatedVisibility(state.showNoGamesCard && !state.showDirectoryInaccessibleCard) {
@@ -170,7 +171,7 @@ private fun HomeScreen(
                 messageId = R.string.home_empty_message,
                 actionId = R.string.home_empty_action,
                 onAction = onSetDirectoryClicked,
-                enabled = !state.indexInProgress,
+                enabled = !state.indexInProgress && downloadRomsState !is DownloadRomsState.Downloading && downloadRomsState !is DownloadRomsState.Extracting,
                 extraContent = if (dirName != null) {
                     { Text(text = dirName, style = MaterialTheme.typography.bodySmall) }
                 } else null,

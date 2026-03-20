@@ -41,6 +41,8 @@ class CoreUpdaterImpl(
 
         try {
             cancelPendingInstalls(installManager, installSession)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             log("Error while canceling pending installs: ${e.message}")
         }
@@ -57,12 +59,16 @@ class CoreUpdaterImpl(
 
         try {
             waitForCompletion(installSession, installManager)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             log("Error while waiting for core install: ${e.message}")
         }
 
         try {
             installAssets(context, coreIDs)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             log("Error while installing assets: ${e.message}")
         }
@@ -145,6 +151,8 @@ class CoreUpdaterImpl(
     ) {
         try {
             installManager.requestCancelInstall(sessionId)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             log("Failed to cancel pending install for session: $sessionId")
         }

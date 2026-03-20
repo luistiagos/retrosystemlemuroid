@@ -6,7 +6,6 @@ import com.swordfish.lemuroid.lib.library.SystemID
 import dagger.Lazy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.security.InvalidParameterException
 
 class CoreVariablesManager(private val sharedPreferences: Lazy<SharedPreferences>) {
     suspend fun getOptionsForCore(
@@ -40,12 +39,13 @@ class CoreVariablesManager(private val sharedPreferences: Lazy<SharedPreferences
                     .map { computeSharedPreferenceKey(it, systemID.dbname) }
 
             sharedPreferences.get().all.filter { it.key in requestedKeys }
-                .map { (key, value) ->
+                .mapNotNull { (key, value) ->
+                    if (value == null) return@mapNotNull null
                     val result =
-                        when (value!!) {
-                            is Boolean -> if (value as Boolean) "enabled" else "disabled"
-                            is String -> value as String
-                            else -> throw InvalidParameterException("Invalid setting in SharedPreferences")
+                        when (value) {
+                            is Boolean -> if (value) "enabled" else "disabled"
+                            is String -> value
+                            else -> return@mapNotNull null
                         }
                     CoreVariable(computeOriginalKey(key, systemID.dbname), result)
                 }

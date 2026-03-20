@@ -131,9 +131,7 @@ class HomeViewModel(
     }
 
     fun cancelDownload() {
-        // cancelDownload() deletes ~5 GB of files — must run on IO dispatcher
-        // to avoid blocking the main thread and triggering an ANR.
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             romsDownloadManager.cancelDownload()
         }
         // Suppress the auto-prompt dialog after cancellation so it doesn't
@@ -142,7 +140,7 @@ class HomeViewModel(
     }
 
     fun downloadAndExtractRoms() {
-        romsDownloadManager.downloadAndExtract(viewModelScope)
+        romsDownloadManager.downloadAndExtract()
     }
 
     fun dismissDownloadDialog() {

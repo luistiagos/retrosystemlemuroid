@@ -12,6 +12,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.input.ShortcutBindingUpdater
@@ -28,7 +29,7 @@ class GamePadShortcutBindingActivity : RetrogradeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        shortcutBindingUpdater = ShortcutBindingUpdater(inputDeviceManager, intent)
+        shortcutBindingUpdater = ShortcutBindingUpdater(inputDeviceManager, lifecycleScope, intent)
 
         setContent {
             AppTheme {

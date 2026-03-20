@@ -130,10 +130,10 @@ class NotificationsManager(private val applicationContext: Context) {
     }
 
     fun downloadingRomsNotification(): Notification {
-        createDefaultNotificationChannel()
+        createDownloadNotificationChannel()
 
         val builder =
-            NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
+            NotificationCompat.Builder(applicationContext, DOWNLOAD_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_lemuroid_tiny)
                 .setContentTitle(applicationContext.getString(R.string.notification_download_roms_title))
                 .setContentText(applicationContext.getString(R.string.notification_download_roms_message))
@@ -151,13 +151,34 @@ class NotificationsManager(private val applicationContext: Context) {
             val mChannel = NotificationChannel(DEFAULT_CHANNEL_ID, name, importance)
             val notificationManager =
                 ContextCompat.getSystemService(applicationContext, NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(mChannel)
+        }
+    }
 
+    // Dedicated channel for the ROM download foreground service. Uses IMPORTANCE_LOW so
+    // the notification icon appears in the status bar — required on OEM firmwares (Motorola,
+    // Xiaomi etc.) that treat IMPORTANCE_MIN as a non-persistent notification and kill the
+    // foreground service when the app is backgrounded.
+    private fun createDownloadNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = applicationContext.getString(R.string.notification_download_roms_title)
+            val mChannel = NotificationChannel(
+                DOWNLOAD_CHANNEL_ID,
+                name,
+                NotificationManager.IMPORTANCE_LOW,
+            ).apply {
+                setSound(null, null)
+                enableVibration(false)
+            }
+            val notificationManager =
+                ContextCompat.getSystemService(applicationContext, NotificationManager::class.java)
             notificationManager?.createNotificationChannel(mChannel)
         }
     }
 
     companion object {
         const val DEFAULT_CHANNEL_ID = "DEFAULT_CHANNEL_ID"
+        const val DOWNLOAD_CHANNEL_ID = "DOWNLOAD_CHANNEL_ID"
 
         const val LIBRARY_INDEXING_NOTIFICATION_ID = 1
         const val SAVE_SYNC_NOTIFICATION_ID = 2

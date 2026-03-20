@@ -43,6 +43,7 @@ class StorageProviderRegistry(context: Context, val providers: Set<StorageProvid
 
     fun getProvider(game: Game): StorageProvider {
         val uri = Uri.parse(game.fileUri)
-        return providersByScheme[uri.scheme]!!
+        return providersByScheme[uri.scheme]
+            ?: throw IllegalArgumentException("No storage provider registered for URI scheme: ${uri.scheme}")
     }
 }

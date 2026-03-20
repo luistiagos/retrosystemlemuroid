@@ -6,13 +6,16 @@ import android.view.InputDevice
 import android.view.KeyEvent
 import com.swordfish.lemuroid.R
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @OptIn(DelicateCoroutinesApi::class)
-class InputBindingUpdater(private val inputDeviceManager: InputDeviceManager, intent: Intent) {
+class InputBindingUpdater(
+    private val inputDeviceManager: InputDeviceManager,
+    private val scope: CoroutineScope,
+    intent: Intent,
+) {
     val extras = parseExtras(intent)
 
     fun getTitle(context: Context): String {
@@ -40,10 +43,8 @@ class InputBindingUpdater(private val inputDeviceManager: InputDeviceManager, in
     private fun onKeyUp(event: KeyEvent): Boolean {
         if (!isTargetedDevice(event.device)) return false
 
-        runBlocking {
-            GlobalScope.async {
-                inputDeviceManager.updateBinding(event.device, RetroKey(extras.retroKey), InputKey(event.keyCode))
-            }
+        scope.launch {
+            inputDeviceManager.updateBinding(event.device, RetroKey(extras.retroKey), InputKey(event.keyCode))
         }
 
         return true

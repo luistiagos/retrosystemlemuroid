@@ -46,6 +46,8 @@ class CoreUpdaterImpl(
     // This is the last tagged versions of cores.
     companion object {
         private const val CORES_VERSION = "1.17.0"
+        /** Tamanho mínimo em bytes para considerar um arquivo de core como válido (100 KB). */
+        private const val MIN_VALID_CORE_SIZE_BYTES = 100 * 1024L
     }
 
     private val baseUri = Uri.parse("https://github.com/Swordfish90/LemuroidCores/")
@@ -60,8 +62,14 @@ class CoreUpdaterImpl(
         coreIDs.asFlow()
             .flatMapMerge(concurrency = 4) { coreID ->
                 flow {
-                    retrieveAssets(coreID, sharedPreferences)
-                    retrieveFile(context, coreID)
+                    try {
+                        retrieveAssets(coreID, sharedPreferences)
+                        retrieveFile(context, coreID)
+                    } catch (e: kotlinx.coroutines.CancellationException) {
+                        throw e
+                    } catch (e: Throwable) {
+                        Timber.e(e, "Failed to download core $coreID: ${e.message}")
+                    }
                     emit(coreID)
                 }
             }
@@ -89,11 +97,8 @@ class CoreUpdaterImpl(
     ): File {
         Timber.i("Downloading core $coreID from github")
 
-        // Use the ABI of the app's native library directory to match the running process,
-        // NOT Build.SUPPORTED_ABIS.first() which returns the device's primary ABI.
-        // On emulators with Houdini (ARM-on-x86), the device may report x86_64 as primary
-        // but the app's native libs (and libretrodroid) are x86 or arm64.
-        val processAbi = File(context.applicationInfo.nativeLibraryDir).name
+        // Use AbiUtils para garantir o nome canônico da ABI (ex: "arm64-v8a" e não "arm64").
+        val processAbi = com.swordfish.lemuroid.lib.util.AbiUtils.getProcessAbi(context)
 
         val mainCoresDirectory = directoriesManager.getCoresDirectory()
         val coresDirectory =
@@ -104,9 +109,19 @@ class CoreUpdaterImpl(
         val libFileName = coreID.libretroFileName
         val destFile = File(coresDirectory, libFileName)
 
-        if (destFile.exists()) {
+        val isValid = destFile.exists() &&
+                destFile.length() > MIN_VALID_CORE_SIZE_BYTES &&
+                com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(destFile, processAbi)
+
+        if (isValid) {
             destFile.setExecutable(true, true)
             return destFile
+        }
+
+        // Arquivo não existe ou está corrompido/incompatível: remove e re-baixa.
+        if (destFile.exists()) {
+            Timber.w("Core file exists but is invalid or incompatible, deleting and re-downloading: $destFile")
+            destFile.safeDelete()
         }
 
         runCatching {

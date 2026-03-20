@@ -1,5 +1,6 @@
 package com.swordfish.lemuroid.common.coroutines
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -17,6 +18,8 @@ suspend fun <T> Flow<T>.safeCollect(
         .collect {
             try {
                 block(it)
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Throwable) {
                 onError(e)
             }

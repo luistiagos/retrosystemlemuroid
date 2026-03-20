@@ -64,6 +64,6 @@ class SettingsViewModel(
     }
 
     fun downloadAndExtractRoms() {
-        romsDownloadManager.downloadAndExtract(viewModelScope)
+        romsDownloadManager.downloadAndExtract()
     }
 }

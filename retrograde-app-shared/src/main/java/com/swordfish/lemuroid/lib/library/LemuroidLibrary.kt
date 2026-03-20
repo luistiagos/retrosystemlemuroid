@@ -55,6 +55,8 @@ class LemuroidLibrary(
 
         try {
             indexProviders(startedAtMs)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             Timber.e("Library indexing stopped due to exception", e)
         } finally {
@@ -285,7 +287,7 @@ class LemuroidLibrary(
             return null
         }
 
-        val gameSystem = GameSystem.findById(gameMetadata.system!!)
+        val gameSystem = GameSystem.findById(gameMetadata.system ?: return null)
 
         // If the databased matched a data file (as with bin/cue) we force link the primary filename
         val fileName =

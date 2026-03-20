@@ -33,7 +33,8 @@ class GameLaunchTaskHandler(
             BaseGameActivity.RESULT_ERROR ->
                 handleUnsuccessfulGameFinish(
                     activity,
-                    data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)!!,
+                    data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)
+                        ?: activity.getString(R.string.lemuroid_crash_disclamer),
                     null,
                 )
             BaseGameActivity.RESULT_UNEXPECTED_ERROR ->
@@ -73,7 +74,8 @@ class GameLaunchTaskHandler(
         val duration =
             data?.extras?.getLong(BaseGameActivity.PLAY_GAME_RESULT_SESSION_DURATION)
                 ?: 0L
-        val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as Game
+        val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as? Game
+            ?: return
 
         updateGamePlayedTimestamp(game)
         if (enableRatingFlow) {

@@ -16,6 +16,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okhttp3.ConnectionPool
@@ -53,7 +54,7 @@ class RomsDownloadManager(context: Context) {
          * in a way that requires re-processing existing downloads.
          * If the stored version is lower than this, the download is reset to Idle.
          */
-        private const val EXTRACTION_VERSION = 6
+        private const val EXTRACTION_VERSION = 7
         private const val PREF_EXTRACTION_VERSION = "extraction_version"
 
         /** Set to true as soon as a download is enqueued; cleared on completion or cancel. */
@@ -61,6 +62,10 @@ class RomsDownloadManager(context: Context) {
 
         /** Set to true after the .7z archive is fully downloaded; cleared on completion or cancel. */
         private const val PREF_ARCHIVE_DOWNLOADED = "archive_downloaded"
+
+        /** Last download progress (0f–1f); saved every ~2% so the progress bar restores
+         *  immediately on "Try Again" without flashing 0% while awaiting the first network byte. */
+        private const val PREF_LAST_DOWNLOAD_PROGRESS = "last_download_progress"
 
         /**
          * All valid system dbnames. Used by unwrapWrapperFolders to avoid accidentally
@@ -137,6 +142,14 @@ class RomsDownloadManager(context: Context) {
             "mame2003"             to "mame2003plus",
             "mame 2003 plus"       to "mame2003plus",
             "mame2003plus"         to "mame2003plus",
+            // 3DS — no human-readable alias was mapped before; add common variants.
+            "3ds"                  to "3ds",
+            "nintendo 3ds"         to "3ds",
+            "3ds games"            to "3ds",
+            // DOS — same situation.
+            "dos"                  to "dos",
+            "ms-dos"               to "dos",
+            "dos games"            to "dos",
         )
     }
 
@@ -171,7 +184,9 @@ class RomsDownloadManager(context: Context) {
             when {
                 info == null -> initialState
                 info.state == WorkInfo.State.ENQUEUED || info.state == WorkInfo.State.BLOCKED ->
-                    DownloadRomsState.Downloading(0f)
+                    // Show the last saved progress instead of 0% while the worker is queued,
+                    // so the bar doesn't flash back to zero on "Try Again" after an error.
+                    DownloadRomsState.Downloading(prefs.getFloat(PREF_LAST_DOWNLOAD_PROGRESS, 0f))
                 info.state == WorkInfo.State.RUNNING -> {
                     val phase = info.progress.getString(RomsDownloadWork.KEY_PHASE)
                         ?: RomsDownloadWork.PHASE_DOWNLOADING
@@ -205,26 +220,38 @@ class RomsDownloadManager(context: Context) {
         prefs.edit().putBoolean(PREF_DOWNLOAD_STARTED, false).apply()
     }
 
-    fun cancelDownload() {
+    suspend fun cancelDownload() {
         WorkManager.getInstance(appContext).cancelUniqueWork(RomsDownloadWork.UNIQUE_WORK_ID)
         // Delete all remnant files so the next download starts from scratch.
-        val romsDir = DirectoriesManager(appContext).getInternalRomsDirectory()
-        romsDir.deleteRecursively()
+        // deleteRecursively() is blocking I/O — dispatch to IO to avoid blocking the caller.
+        withContext(kotlinx.coroutines.Dispatchers.IO) {
+            DirectoriesManager(appContext).getInternalRomsDirectory().deleteRecursively()
+        }
         prefs.edit()
             .putBoolean(PREF_DOWNLOAD_STARTED, false)
             .putBoolean(PREF_ARCHIVE_DOWNLOADED, false)
             .remove(PREF_DOWNLOAD_DONE)
+            .remove(PREF_LAST_DOWNLOAD_PROGRESS)
             .apply()
         Log.d(TAG, "Download cancelled and all files deleted")
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    fun downloadAndExtract(scope: Any? = null) {
+    fun downloadAndExtract() {
         prefs.edit().putBoolean(PREF_DOWNLOAD_STARTED, true).apply()
         RomsDownloadWork.enqueue(appContext)
     }
 
     internal suspend fun doDownload(onProgress: suspend (phase: String, progress: Float) -> Unit) {
+        // Wrapper that also persists download progress every ~2% so that after an error
+        // the ENQUEUED state can show the correct position instead of 0%.
+        var lastSavedProgress = prefs.getFloat(PREF_LAST_DOWNLOAD_PROGRESS, -1f)
+        suspend fun reportProgress(phase: String, progress: Float) {
+            onProgress(phase, progress)
+            if (phase == RomsDownloadWork.PHASE_DOWNLOADING && progress - lastSavedProgress >= 0.02f) {
+                lastSavedProgress = progress
+                prefs.edit().putFloat(PREF_LAST_DOWNLOAD_PROGRESS, progress).apply()
+            }
+        }
         val romsDir = DirectoriesManager(appContext).getInternalRomsDirectory()
         romsDir.mkdirs()
         val archiveFile = File(romsDir, "roms_download.7z")
@@ -240,7 +267,7 @@ class RomsDownloadManager(context: Context) {
             romsDir.listFiles()
                 ?.filter { !it.name.startsWith(archiveFile.name) }
                 ?.forEach { it.deleteRecursively() }
-            onProgress(RomsDownloadWork.PHASE_DOWNLOADING, 1f)
+            reportProgress(RomsDownloadWork.PHASE_DOWNLOADING, 1f)
         } else {
             // Delete previously extracted content but keep any partial archive and any
             // parallel-segment temp files (.seg0, .seg1, …) so downloads can resume.
@@ -251,7 +278,7 @@ class RomsDownloadManager(context: Context) {
             val downloadUrl = "https://huggingface.co/datasets/Emuladores/sets/resolve/main/romssnesnds.7z?download=true"
             Log.d(TAG, "Starting download")
             downloadFileParallel(downloadUrl, archiveFile) { progress ->
-                onProgress(RomsDownloadWork.PHASE_DOWNLOADING, progress)
+                reportProgress(RomsDownloadWork.PHASE_DOWNLOADING, progress)
             }
             // Mark the archive as fully downloaded so that if extraction is interrupted,
             // the next run can skip straight to the extraction phase.
@@ -259,10 +286,10 @@ class RomsDownloadManager(context: Context) {
         }
 
         Log.d(TAG, "archiveFile size=${archiveFile.length()}, extracting")
-        onProgress(RomsDownloadWork.PHASE_EXTRACTING, 0f)
+        reportProgress(RomsDownloadWork.PHASE_EXTRACTING, 0f)
         try {
             extractSevenZ(archiveFile, romsDir) { progress ->
-                onProgress(RomsDownloadWork.PHASE_EXTRACTING, progress)  // suspend call OK: lambda is suspend
+                reportProgress(RomsDownloadWork.PHASE_EXTRACTING, progress)  // suspend call OK: lambda is suspend
             }
         } catch (e: CancellationException) {
             // Preserve the archive file and PREF_ARCHIVE_DOWNLOADED so the next run
@@ -292,7 +319,7 @@ class RomsDownloadManager(context: Context) {
                 val extractedFiles = romsDir.walkTopDown().filter { it.isFile }.toList()
                 extractedFiles.forEachIndexed { index, file ->
                     copyFileToSaf(file, romsDir, safTree)
-                    onProgress(RomsDownloadWork.PHASE_EXTRACTING, 0.99f + 0.01f * (index + 1) / extractedFiles.size)
+                    reportProgress(RomsDownloadWork.PHASE_EXTRACTING, 0.99f + 0.01f * (index + 1) / extractedFiles.size)
                 }
                 romsDir.deleteRecursively()
                 romsDir.mkdirs()
@@ -308,6 +335,7 @@ class RomsDownloadManager(context: Context) {
             .putBoolean(PREF_DOWNLOAD_STARTED, false)
             .putBoolean(PREF_ARCHIVE_DOWNLOADED, false)
             .putInt(PREF_EXTRACTION_VERSION, EXTRACTION_VERSION)
+            .remove(PREF_LAST_DOWNLOAD_PROGRESS)
             .apply()
         Log.d(TAG, "Download and extraction complete")
     }
@@ -466,7 +494,11 @@ class RomsDownloadManager(context: Context) {
     private fun buildHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(0, TimeUnit.SECONDS)   // 0 = no timeout (needed for large archives)
+            // 90 s read timeout: if the CDN stalls (stops sending data but keeps the TCP
+            // connection open), OkHttp will throw an IOException after this period and the
+            // retry loop will re-open a fresh ranged connection from the last written byte.
+            // 0 = no timeout would cause the download to hang forever on a stalled connection.
+            .readTimeout(90, TimeUnit.SECONDS)
             .followRedirects(true)
             .followSslRedirects(true)
             // Allow up to 8 concurrent connections to the same host so all 4 parallel
@@ -490,8 +522,21 @@ class RomsDownloadManager(context: Context) {
         return builder.build()
     }
 
+    // Thrown for HTTP 4xx (client) errors that should never be retried.
+    private class PermanentHttpException(message: String) : IOException(message)
+
+    // Returns a backoff delay in milliseconds for the given attempt number.
+    // Exponential with jitter: 4s, 8s, 16s, 32s, 60s … capped at 60 s.
+    // Fast enough to recover from a mobile network blip without hammering the server.
+    private fun retryDelayMs(attempt: Int): Long {
+        val base = (4_000L * (1L shl (attempt - 1).coerceAtMost(4)))
+        val jitter = (Math.random() * 2_000).toLong()
+        return (base + jitter).coerceAtMost(60_000L)
+    }
+
     private suspend fun downloadFile(url: String, destination: File, onProgress: suspend (Float) -> Unit) {
-        val maxRetries = 5
+        // 30 retries — enough to survive frequent connection aborts on a 5 GB mobile download.
+        val maxRetries = 30
         var attempt = 0
         while (true) {
             attempt++
@@ -510,6 +555,9 @@ class RomsDownloadManager(context: Context) {
                         onProgress(1f)
                         return
                     }
+                    // 4xx (except 416) = permanent client error — fail immediately without retrying
+                    if (response.code in 400..499)
+                        throw PermanentHttpException("Permanent HTTP ${response.code}: ${response.message}")
                     if (!response.isSuccessful) throw IOException("HTTP error ${response.code}: ${response.message}")
                     val body = response.body ?: throw IOException("Empty response body")
                     val isResume = response.code == 206
@@ -534,10 +582,12 @@ class RomsDownloadManager(context: Context) {
                 return // success
             } catch (e: CancellationException) {
                 throw e
+            } catch (e: PermanentHttpException) {
+                throw e // never retry permanent client errors
             } catch (e: Exception) {
-                Log.w(TAG, "Download attempt $attempt failed: ${e.message}")
+                Log.w(TAG, "Download attempt $attempt failed (${e.javaClass.simpleName}): ${e.message}")
                 if (attempt >= maxRetries) throw IOException("Download failed after $maxRetries attempts: ${e.message}", e)
-                val delayMs = (attempt * 5_000L).coerceAtMost(30_000L)
+                val delayMs = retryDelayMs(attempt)
                 Log.d(TAG, "Retrying in ${delayMs}ms (attempt ${attempt + 1}/$maxRetries)...")
                 delay(delayMs)
             }
@@ -605,6 +655,13 @@ class RomsDownloadManager(context: Context) {
         // Seed overall progress from any partial segment files left from a previous run.
         val totalDownloaded = AtomicLong(segments.sumOf { it.alreadyDownloaded })
 
+        // Immediately report the pre-seeded progress so the UI transitions from the
+        // saved "last known progress" straight to the real value, without going through
+        // a 0% flash while the first connection is being established on resume.
+        if (totalDownloaded.get() > 0L) {
+            onProgress((totalDownloaded.get().toFloat() / totalSize).coerceAtMost(0.99f))
+        }
+
         // Step 3: Download all segments in parallel.
         coroutineScope {
             segments.map { seg ->
@@ -624,10 +681,26 @@ class RomsDownloadManager(context: Context) {
         }
 
         // Step 4: Concatenate completed segment files into the final archive.
+        // Copy at most segSize bytes per segment — if a server returned HTTP 200 instead of
+        // 206 the segment file may contain the full remote file rather than just the range,
+        // and blindly copying all of it would produce an over-sized, corrupt archive.
         Log.d(TAG, "All $numSegments segments complete — concatenating into ${destination.name}")
         destination.parentFile?.mkdirs()
         FileOutputStream(destination).use { out ->
-            segments.forEach { seg -> seg.segFile.inputStream().use { it.copyTo(out) } }
+            segments.forEach { seg ->
+                val segSize = seg.end - seg.start + 1
+                seg.segFile.inputStream().use { input ->
+                    val buf = ByteArray(64 * 1024)
+                    var remaining = segSize
+                    while (remaining > 0) {
+                        val toRead = minOf(buf.size.toLong(), remaining).toInt()
+                        val n = input.read(buf, 0, toRead)
+                        if (n == -1) break
+                        out.write(buf, 0, n)
+                        remaining -= n
+                    }
+                }
+            }
         }
         segments.forEach { it.segFile.delete() }
         onProgress(1f)
@@ -637,7 +710,8 @@ class RomsDownloadManager(context: Context) {
     /**
      * Downloads the byte range [rangeStart]..[rangeEnd] of [url] into [segFile],
      * appending to [alreadyDownloaded] bytes already present on disk.
-     * Retries up to 5 times with linear backoff on any transient error.
+     * Retries up to 30 times with exponential backoff + jitter on transient errors.
+     * Permanent HTTP 4xx errors are re-thrown immediately without retrying.
      */
     private suspend fun downloadSegment(
         url: String,
@@ -652,7 +726,8 @@ class RomsDownloadManager(context: Context) {
             Log.d(TAG, "Segment [$rangeStart-$rangeEnd] already complete")
             return
         }
-        val maxRetries = 5
+        // 30 retries — enough to survive frequent connection aborts on a 5 GB mobile download.
+        val maxRetries = 30
         var attempt = 0
         var written = alreadyDownloaded
         while (true) {
@@ -666,12 +741,25 @@ class RomsDownloadManager(context: Context) {
             try {
                 httpClient.newCall(request).execute().use { response ->
                     Log.d(TAG, "Segment [$rangeStart-$rangeEnd]: HTTP ${response.code} (attempt $attempt, offset $from)")
-                    if (response.code == 416) {
-                        Log.d(TAG, "Segment [$rangeStart-$rangeEnd]: complete (416)")
-                        return
+                    when {
+                        response.code == 416 -> {
+                            Log.d(TAG, "Segment [$rangeStart-$rangeEnd]: complete (416)")
+                            return
+                        }
+                        // 4xx (except 416) = permanent client error — fail immediately without retrying
+                        response.code in 400..499 ->
+                            throw PermanentHttpException("Permanent HTTP ${response.code}: ${response.message}")
+                        !response.isSuccessful ->
+                            throw IOException("HTTP ${response.code}: ${response.message}")
                     }
-                    if (!response.isSuccessful) throw IOException("HTTP ${response.code}: ${response.message}")
                     val body = response.body ?: throw IOException("Empty response body")
+                    // If the server returned 200 instead of 206, it is sending full content
+                    // from byte 0 of the resource — NOT from rangeStart. Writing those bytes
+                    // here would silently corrupt this segment with misaligned data. Throw so
+                    // the retry loop re-requests the correct range without touching the file.
+                    if (response.code != 206) {
+                        throw IOException("Segment [$rangeStart-$rangeEnd]: expected 206 but got ${response.code}, retrying")
+                    }
                     FileOutputStream(segFile, written > 0).use { out ->
                         body.byteStream().use { inputStream ->
                             val buffer = ByteArray(256 * 1024)
@@ -688,11 +776,13 @@ class RomsDownloadManager(context: Context) {
                 return // success
             } catch (e: CancellationException) {
                 throw e
+            } catch (e: PermanentHttpException) {
+                throw e // never retry permanent client errors
             } catch (e: Exception) {
                 if (attempt >= maxRetries)
                     throw IOException("Segment [$rangeStart-$rangeEnd] failed after $maxRetries attempts: ${e.message}", e)
-                val delayMs = (attempt * 5_000L).coerceAtMost(30_000L)
-                Log.w(TAG, "Segment [$rangeStart-$rangeEnd] attempt $attempt failed: ${e.message}, retrying in ${delayMs}ms")
+                val delayMs = retryDelayMs(attempt)
+                Log.w(TAG, "Segment [$rangeStart-$rangeEnd] attempt $attempt failed (${e.javaClass.simpleName}: ${e.message}), retrying in ${delayMs}ms")
                 delay(delayMs)
             }
         }

@@ -9,6 +9,7 @@ class LibraryIndexBroadcastReceiver : BroadcastReceiver() {
         context: Context?,
         intent: Intent?,
     ) {
-        LibraryIndexScheduler.cancelLibrarySync(context!!.applicationContext)
+        val ctx = context ?: return
+        LibraryIndexScheduler.cancelLibrarySync(ctx.applicationContext)
     }
 }

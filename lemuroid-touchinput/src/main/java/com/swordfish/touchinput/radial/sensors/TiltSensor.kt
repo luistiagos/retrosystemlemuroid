@@ -9,12 +9,9 @@ import android.view.Surface
 import android.view.WindowManager
 import com.swordfish.lemuroid.common.kotlin.CustomDelegates
 import com.swordfish.lemuroid.common.math.linearInterpolation
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.sign
@@ -96,11 +93,8 @@ class TiltSensor(context: Context) : SensorEventListener {
         }
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     private fun sendRestPosition() {
-        GlobalScope.launch {
-            tiltEvents.emit(floatArrayOf(0f, 0f))
-        }
+        tiltEvents.value = floatArrayOf(0f, 0f)
     }
 
     private fun onNewRotationVector(rotationVector: FloatArray) {
@@ -124,9 +118,10 @@ class TiltSensor(context: Context) : SensorEventListener {
                     restMeasurements.map { it[1] }.sum() / restMeasurements.size,
                 )
         } else {
-            val x = clamp(applyDeadZone(yRotation - restOrientation!![0], deadZone) / (maxRotation))
-            val y = clamp(-applyDeadZone(xRotation - restOrientation!![1], deadZone) / (maxRotation))
-            tiltEvents.value = (floatArrayOf(x, y))
+            val rest = restOrientation ?: return
+            val x = clamp(applyDeadZone(yRotation - rest[0], deadZone) / (maxRotation))
+            val y = clamp(-applyDeadZone(xRotation - rest[1], deadZone) / (maxRotation))
+            tiltEvents.value = floatArrayOf(x, y)
         }
     }
 
@@ -144,7 +139,7 @@ class TiltSensor(context: Context) : SensorEventListener {
         x: Float,
         offset: Float,
     ): Float {
-        return sequenceOf(x, x + offset, x - offset).minByOrNull { abs(it) }!!
+        return sequenceOf(x, x + offset, x - offset).minByOrNull { abs(it) } ?: x
     }
 
     private fun applyDeadZone(

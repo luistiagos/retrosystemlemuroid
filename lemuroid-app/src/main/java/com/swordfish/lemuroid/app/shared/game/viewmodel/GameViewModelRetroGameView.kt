@@ -17,12 +17,16 @@ import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.view.disableTouchEvents
 import com.swordfish.lemuroid.lib.core.CoreVariable
 import com.swordfish.lemuroid.lib.core.CoreVariablesManager
+import android.content.Intent
+import com.swordfish.lemuroid.app.shared.library.CoreUpdateBroadcastReceiver
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.game.GameLoaderError
 import com.swordfish.lemuroid.lib.game.GameLoaderException
+import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import java.io.File
 import com.swordfish.lemuroid.lib.storage.RomFiles
 import com.swordfish.libretrodroid.GLRetroView
 import com.swordfish.libretrodroid.GLRetroViewData
@@ -33,6 +37,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
@@ -105,7 +110,9 @@ class GameViewModelRetroGameView(
 
         val enableMicrophone = systemCoreConfig.supportsMicrophone && hasMicrophonePermission
 
-        val loadingStatesFlow =
+        var coreDownloadRetried = false
+        while (true) {
+            var shouldRetry = false
             gameLoader.load(
                 applicationContext,
                 game,
@@ -113,44 +120,74 @@ class GameViewModelRetroGameView(
                 systemCoreConfig,
                 directLoad,
             )
-
-        loadingStatesFlow
-            .flowOn(Dispatchers.IO)
-            .catch {
-                val message =
-                    if (it is GameLoaderException) {
-                        getErrorMessage(it.error)
-                    } else {
-                        ""
-                    }
-                sideEffects.requestFailureFinish(message)
-            }
-            .debounce(200)
-            .collect { loadingState ->
-                gameState.value =
-                    if (loadingState is GameLoader.LoadingState.Ready) {
-                        Timber.i("Setting state to loaded")
-                        val retroViewData =
-                            buildRetroViewData(
-                                applicationContext,
-                                systemCoreConfig,
-                                loadingState.gameData,
-                                hdMode,
-                                hdModeQuality,
-                                filter,
-                                lowLatencyAudio,
-                                enableRumble,
-                                enableMicrophone,
-                                enableImmersiveMode,
-                            )
-                        GameState.Loaded(
-                            gameData = loadingState.gameData,
-                            retroViewData = retroViewData,
+                .flowOn(Dispatchers.IO)
+                .catch { e ->
+                    if (e is GameLoaderException && e.error is GameLoaderError.LoadCore && !coreDownloadRetried) {
+                        coreDownloadRetried = true
+                        gameState.value = GameState.Loading(
+                            appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_core)
                         )
+                        // Send a broadcast to the main process so it schedules the core update
+                        // via WorkManager (WorkManager is not initialized in the :game process).
+                        // Pass the specific coreID so only this core is downloaded, not all cores.
+                        applicationContext.sendBroadcast(
+                            Intent(applicationContext, CoreUpdateBroadcastReceiver::class.java)
+                                .putExtra(CoreUpdateBroadcastReceiver.EXTRA_CORE_ID, systemCoreConfig.coreID.name)
+                        )
+                        val found = waitForCoreFile(applicationContext, systemCoreConfig.coreID)
+                        if (found) {
+                            shouldRetry = true
+                        } else {
+                            // Core did not appear within the timeout — surface the error.
+                            sideEffects.requestFailureFinish(getErrorMessage(GameLoaderError.LoadCore))
+                        }
                     } else {
-                        GameState.Loading(getLoadingMessage(loadingState))
+                        val message = if (e is GameLoaderException) getErrorMessage(e.error) else ""
+                        sideEffects.requestFailureFinish(message)
                     }
+                }
+                .debounce(200)
+                .collect { loadingState ->
+                    gameState.value =
+                        if (loadingState is GameLoader.LoadingState.Ready) {
+                            Timber.i("Setting state to loaded")
+                            val retroViewData =
+                                buildRetroViewData(
+                                    applicationContext,
+                                    systemCoreConfig,
+                                    loadingState.gameData,
+                                    hdMode,
+                                    hdModeQuality,
+                                    filter,
+                                    lowLatencyAudio,
+                                    enableRumble,
+                                    enableMicrophone,
+                                    enableImmersiveMode,
+                                )
+                            GameState.Loaded(
+                                gameData = loadingState.gameData,
+                                retroViewData = retroViewData,
+                            )
+                        } else {
+                            GameState.Loading(getLoadingMessage(loadingState))
+                        }
+                }
+            if (!shouldRetry) break
+        }
+    }
+
+    // Polls for the core .so file up to 90 times (≈3 minutes) with a 2 s interval.
+    // Returns true when found, false if the time limit expires without the file appearing.
+    private suspend fun waitForCoreFile(applicationContext: Context, coreID: CoreID): Boolean {
+        val coresDir = File(applicationContext.filesDir, "cores")
+        repeat(90) {
+            val found = withContext(Dispatchers.IO) {
+                coresDir.walkBottomUp().any { it.name == coreID.libretroFileName }
             }
+            if (found) return true
+            delay(2_000L)
+        }
+        return false
     }
 
     fun createRetroView(
@@ -299,6 +336,8 @@ class GameViewModelRetroGameView(
             waitRetroGameViewInitialized()
             val options = coreVariablesManager.getOptionsForCore(system.id, systemCoreConfig)
             updateCoreVariables(options)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Exception) {
             Timber.e(e)
         }
@@ -334,12 +373,32 @@ class GameViewModelRetroGameView(
             when (errorCode) {
                 GLRetroView.ERROR_GL_NOT_COMPATIBLE -> GameLoaderError.GLIncompatible
                 GLRetroView.ERROR_LOAD_GAME -> GameLoaderError.LoadGame
-                GLRetroView.ERROR_LOAD_LIBRARY -> GameLoaderError.LoadCore
+                GLRetroView.ERROR_LOAD_LIBRARY -> {
+                    // O arquivo do core existe mas o linker falhou ao carregá-lo.
+                    // Deleta o arquivo para forçar novo download na próxima tentativa.
+                    deleteCachedCoreFile(systemCoreConfig.coreID)
+                    GameLoaderError.LoadCore
+                }
                 GLRetroView.ERROR_SERIALIZATION -> GameLoaderError.Saves
                 else -> GameLoaderError.Generic
             }
 
         sideEffects.requestFailureFinish(getErrorMessage(gameLoaderError))
+    }
+
+    /** Remove o arquivo do core dos diretórios de cache para forçar novo download. */
+    private fun deleteCachedCoreFile(coreID: CoreID) {
+        runCatching {
+            val coresDir = File(appContext.filesDir, "cores")
+            coresDir.walkBottomUp()
+                .filter { it.name == coreID.libretroFileName }
+                .forEach {
+                    Timber.w("Deleting corrupted core file: $it")
+                    it.delete()
+                }
+        }.onFailure {
+            Timber.e(it, "Failed to delete corrupted core file")
+        }
     }
 
     private fun getErrorMessage(gameError: GameLoaderError): String {

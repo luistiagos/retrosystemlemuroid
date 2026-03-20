@@ -20,7 +20,6 @@ import com.swordfish.lemuroid.common.longAnimationDuration
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -56,12 +55,15 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
 
         setContentView(R.layout.activity_loading)
         if (savedInstanceState == null) {
-            val gameId = intent.data?.pathSegments?.let { it[it.size - 1].toInt() }!!
+            val gameId = intent.data?.pathSegments?.lastOrNull()?.toIntOrNull()
+                ?: run { displayErrorMessage(); return }
 
             lifecycleScope.launch {
                 loadingState.value = true
                 try {
                     loadGame(gameId)
+                } catch (e: kotlinx.coroutines.CancellationException) {
+                    throw e
                 } catch (e: Throwable) {
                     displayErrorMessage()
                 }
@@ -124,7 +126,7 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
             BaseGameActivity.REQUEST_PLAY_GAME -> {
                 val isLeanback = data?.extras?.getBoolean(BaseGameActivity.PLAY_GAME_RESULT_LEANBACK) == true
 
-                GlobalScope.safeLaunch {
+                lifecycleScope.launch {
                     if (isLeanback) {
                         ChannelUpdateWork.enqueue(applicationContext)
                     }

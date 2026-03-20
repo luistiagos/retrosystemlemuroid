@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.tv.input
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.leanback.app.GuidedStepSupportFragment
+import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.app.shared.input.InputBindingUpdater
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.tv.shared.BaseTVActivity
@@ -17,7 +18,7 @@ class TVGamePadBindingActivity : BaseTVActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        inputBindingUpdater = InputBindingUpdater(inputDeviceManager, intent)
+        inputBindingUpdater = InputBindingUpdater(inputDeviceManager, lifecycleScope, intent)
 
         if (null == savedInstanceState) {
             val fragment =

@@ -31,6 +31,8 @@ class CacheCleanerWork(
 
         try {
             performCleaning()
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             Timber.e(e, "Error while clearing cache")
         }

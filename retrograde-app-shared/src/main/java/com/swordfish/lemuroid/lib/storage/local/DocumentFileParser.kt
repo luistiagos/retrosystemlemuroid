@@ -7,6 +7,7 @@ import com.swordfish.lemuroid.lib.storage.BaseStorageFile
 import com.swordfish.lemuroid.lib.storage.StorageFile
 import com.swordfish.lemuroid.lib.storage.scanner.SerialScanner
 import timber.log.Timber
+import java.io.IOException
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
@@ -33,6 +34,7 @@ object DocumentFileParser {
         baseStorageFile: BaseStorageFile,
     ): StorageFile {
         val inputStream = context.contentResolver.openInputStream(baseStorageFile.uri)
+            ?: throw IOException("Cannot open input stream for ${baseStorageFile.name}")
         return ZipInputStream(inputStream).use {
             val gameEntry = findGameEntry(it, baseStorageFile.size)
             if (gameEntry != null) {

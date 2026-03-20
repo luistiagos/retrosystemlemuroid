@@ -27,7 +27,7 @@ class SafeStringsSetPreferenceSettingValueState(
     val key: String,
     private val defaultValue: Set<String>,
 ) : SettingValueState<Set<String>> {
-    private var _value by mutableStateOf(preferences.safeGetStringSet(key, defaultValue)!!)
+    private var _value by mutableStateOf(preferences.safeGetStringSet(key, defaultValue) ?: defaultValue)
 
     override var value: Set<String>
         set(index) {

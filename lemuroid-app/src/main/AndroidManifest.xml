@@ -25,6 +25,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- Explicit WakeLock: keeps CPU awake during background download even on OEM devices
+         (Motorola, Samsung etc.) that may ignore the WorkManager library's merged declaration. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Allows showing a system dialog asking the user to exempt the app from battery
+         optimization. Used during ROMs download to prevent background process throttling. -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:name="com.swordfish.lemuroid.app.LemuroidApplication"

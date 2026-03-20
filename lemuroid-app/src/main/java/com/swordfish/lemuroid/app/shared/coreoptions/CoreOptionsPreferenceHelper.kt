@@ -57,7 +57,8 @@ object CoreOptionsPreferenceHelper {
 
         visibleControllers
             .forEach { (port, controllers) ->
-                val preference = buildControllerPreference(context, systemID, coreID, port, controllers!!)
+                val safeControllers = controllers ?: return@forEach
+                val preference = buildControllerPreference(context, systemID, coreID, port, safeControllers)
                 category.addPreference(preference)
             }
     }

@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
@@ -11,7 +13,6 @@ import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class GameInteractor(
@@ -45,13 +46,15 @@ class GameInteractor(
         game: Game,
         isFavorite: Boolean,
     ) {
-        GlobalScope.launch {
+        val lifecycleOwner = activity.activity() as? LifecycleOwner ?: return
+        lifecycleOwner.lifecycleScope.launch {
             retrogradeDb.gameDao().update(game.copy(isFavorite = isFavorite))
         }
     }
 
     fun onCreateShortcut(game: Game) {
-        GlobalScope.launch {
+        val lifecycleOwner = activity.activity() as? LifecycleOwner ?: return
+        lifecycleOwner.lifecycleScope.launch {
             shortcutsGenerator.pinShortcutForGame(game)
         }
     }

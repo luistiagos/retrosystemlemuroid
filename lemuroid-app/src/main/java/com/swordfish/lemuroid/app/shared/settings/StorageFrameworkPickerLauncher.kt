@@ -137,6 +137,8 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
                     dialog.setMessage(getString(R.string.settings_transferring_roms_progress, pct))
                 }
                 withContext(Dispatchers.IO) { sourceDir.deleteRecursively() }
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to move ROMs", e)
             }

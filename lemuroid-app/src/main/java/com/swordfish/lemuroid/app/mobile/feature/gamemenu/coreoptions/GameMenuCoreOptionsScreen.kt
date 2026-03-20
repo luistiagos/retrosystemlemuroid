@@ -100,9 +100,10 @@ private fun ControllersOptions(
         title = { Text(text = stringResource(R.string.core_settings_category_controllers)) },
     ) {
         visibleControllers.forEach { (port, controllerConfigs) ->
+            if (controllerConfigs == null) return@forEach
             LemuroidSettingsList(
                 title = { Text(text = context.getString(R.string.core_settings_controller, (port + 1).toString())) },
-                items = controllerConfigs!!.map { stringResource(id = it.displayName) },
+                items = controllerConfigs.map { stringResource(id = it.displayName) },
                 state =
                     indexPreferenceState(
                         ControllerConfigsManager.getSharedPreferencesId(

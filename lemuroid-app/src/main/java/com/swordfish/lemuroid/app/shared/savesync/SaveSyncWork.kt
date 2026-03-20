@@ -53,6 +53,8 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
 
         try {
             saveSyncManager.sync(coresToSync)
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Throwable) {
             Timber.e(e, "Error in saves sync")
         }
@@ -78,7 +80,7 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
         return settingsManager.autoSaveSync() && isAutoSync || isManualSync
     }
 
-    private fun displayNotification() {
+    private suspend fun displayNotification() {
         val notificationsManager = NotificationsManager(applicationContext)
 
         val foregroundInfo =
@@ -86,7 +88,7 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
                 NotificationsManager.SAVE_SYNC_NOTIFICATION_ID,
                 notificationsManager.saveSyncNotification(),
             )
-        setForegroundAsync(foregroundInfo)
+        setForeground(foregroundInfo)
     }
 
     companion object {

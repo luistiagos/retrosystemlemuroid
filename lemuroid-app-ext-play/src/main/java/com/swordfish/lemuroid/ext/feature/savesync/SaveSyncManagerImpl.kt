@@ -219,10 +219,11 @@ class SaveSyncManagerImpl(
         drive: Drive,
     ) {
         Timber.i("Remote only file detected $remoteFile")
+        val localPath = remoteFile.appProperties?.get(GDRIVE_PROPERTY_LOCAL_PATH) ?: return
         val outputFile =
             File(
                 localParentFolder,
-                remoteFile.appProperties[GDRIVE_PROPERTY_LOCAL_PATH]!!,
+                localPath,
             ).apply {
                 parentFile?.mkdirs()
             }
@@ -255,8 +256,10 @@ class SaveSyncManagerImpl(
         remoteFiles: Sequence<com.google.api.services.drive.model.File>,
     ): Map<String, com.google.api.services.drive.model.File> {
         return remoteFiles
-            .filter { it.appProperties?.get(GDRIVE_PROPERTY_LOCAL_PATH) != null }
-            .map { it.appProperties?.get(GDRIVE_PROPERTY_LOCAL_PATH)!! to it }
+            .mapNotNull { file ->
+                val localPath = file.appProperties?.get(GDRIVE_PROPERTY_LOCAL_PATH)
+                if (localPath != null) localPath to file else null
+            }
             .toMap()
     }
 

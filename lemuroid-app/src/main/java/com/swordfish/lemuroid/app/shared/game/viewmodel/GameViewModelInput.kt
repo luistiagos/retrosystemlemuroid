@@ -391,6 +391,8 @@ class GameViewModelInput(
             retroGameView.waitRetroGameViewInitialized()
             val controllers = controllerConfigsManager.getControllerConfigs(system.id, systemCoreConfig)
             controllerConfigsState.value = controllers
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Exception) {
             Timber.e(e)
         }

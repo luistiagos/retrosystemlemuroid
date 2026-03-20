@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 import java.io.File
+import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipInputStream
 
@@ -131,7 +132,8 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
         allowVirtualFiles: Boolean,
     ): RomFiles {
         val originalDocumentUri = Uri.parse(game.fileUri)
-        val originalDocument = DocumentFile.fromSingleUri(context, originalDocumentUri)!!
+        val originalDocument = DocumentFile.fromSingleUri(context, originalDocumentUri)
+            ?: throw IOException("Cannot open document for URI: $originalDocumentUri")
 
         val isZipped = originalDocument.isZipped() && originalDocument.name != game.fileName
 
@@ -161,10 +163,9 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
             return RomFiles.Standard(listOf(cacheFile))
         }
 
-        val stream =
-            ZipInputStream(
-                context.contentResolver.openInputStream(originalDocument.uri),
-            )
+        val inputStream = context.contentResolver.openInputStream(originalDocument.uri)
+            ?: throw IOException("Cannot open input stream for: ${originalDocument.uri}")
+        val stream = ZipInputStream(inputStream)
         stream.extractEntryToFile(game.fileName, cacheFile)
         return RomFiles.Standard(listOf(cacheFile))
     }
@@ -181,7 +182,8 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
     private fun getDataFileVirtual(dataFile: DataFile): RomFiles.Virtual.Entry {
         return RomFiles.Virtual.Entry(
             "$VIRTUAL_FILE_PATH/${dataFile.fileName}",
-            context.contentResolver.openFileDescriptor(Uri.parse(dataFile.fileUri), "r")!!,
+            context.contentResolver.openFileDescriptor(Uri.parse(dataFile.fileUri), "r")
+                ?: throw IOException("Cannot open file descriptor for: ${dataFile.fileUri}"),
         )
     }
 
@@ -201,7 +203,8 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
             return cacheFile
         }
 
-        val stream = context.contentResolver.openInputStream(Uri.parse(dataFile.fileUri))!!
+        val stream = context.contentResolver.openInputStream(Uri.parse(dataFile.fileUri))
+            ?: throw IOException("Cannot open input stream for: ${dataFile.fileUri}")
         stream.writeToFile(cacheFile)
         return cacheFile
     }
@@ -209,7 +212,8 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
     private fun getGameRomVirtual(game: Game): RomFiles.Virtual.Entry {
         return RomFiles.Virtual.Entry(
             "$VIRTUAL_FILE_PATH/${game.fileName}",
-            context.contentResolver.openFileDescriptor(Uri.parse(game.fileUri), "r")!!,
+            context.contentResolver.openFileDescriptor(Uri.parse(game.fileUri), "r")
+                ?: throw IOException("Cannot open file descriptor for: ${game.fileUri}"),
         )
     }
 
@@ -223,7 +227,8 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
             return cacheFile
         }
 
-        val stream = context.contentResolver.openInputStream(originalDocument.uri)!!
+        val stream = context.contentResolver.openInputStream(originalDocument.uri)
+            ?: throw IOException("Cannot open input stream for: ${originalDocument.uri}")
         stream.writeToFile(cacheFile)
         return cacheFile
     }
