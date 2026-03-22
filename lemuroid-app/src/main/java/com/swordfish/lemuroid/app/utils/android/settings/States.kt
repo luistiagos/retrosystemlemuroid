@@ -26,6 +26,17 @@ fun booleanPreferenceState(
 )
 
 @Composable
+fun booleanPreferenceState(
+    key: String,
+    default: Boolean,
+    preferences: android.content.SharedPreferences,
+) = rememberSafePreferenceBooleanSettingState(
+    key = key,
+    defaultValue = default,
+    preferences = preferences,
+)
+
+@Composable
 fun indexPreferenceState(
     id: Int,
     default: String,

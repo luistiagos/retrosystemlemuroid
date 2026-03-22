@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="local_storage">Armazenamento local</string>
+    <string name="all_files_storage">Busca no Dispositivo (Todas as pastas)</string>
+    <string name="all_files_storage_desc">Encontra ROMs em todo o armazenamento. Requer permissão total de discos.</string>
     <string name="controller_arcade_4">Padrão (4 botões)</string>
     <string name="controller_arcade_6">Padrão (6 botões)</string>
     <string name="controller_genesis_3">Padrão (3 botões)</string>

@@ -39,7 +39,14 @@ class StorageProviderRegistry(context: Context, val providers: Set<StorageProvid
     private val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     val enabledProviders: Iterable<StorageProvider>
-        get() = providers.filter { prefs.getBoolean(it.id, it.enabledByDefault) }
+        get() {
+            timber.log.Timber.d("StorageProviderRegistry: total providers injected = ${providers.size}")
+            return providers.filter { 
+                val isEnabled = prefs.getBoolean(it.id, it.enabledByDefault)
+                timber.log.Timber.d("StorageProviderRegistry: provider ${it.id} enabled? $isEnabled")
+                isEnabled
+            }
+        }
 
     fun getProvider(game: Game): StorageProvider {
         val uri = Uri.parse(game.fileUri)

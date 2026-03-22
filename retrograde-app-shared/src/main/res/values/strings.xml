@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="local_storage">Local Storage</string>
+    <string name="all_files_storage">Device Scan (All folders)</string>
+    <string name="all_files_storage_desc">Automatically find games across all storage. Requires all files access permission.</string>
 
     <string name="controller_arcade_4">Default (4 buttons)</string>
     <string name="controller_arcade_6">Default (6 buttons)</string>

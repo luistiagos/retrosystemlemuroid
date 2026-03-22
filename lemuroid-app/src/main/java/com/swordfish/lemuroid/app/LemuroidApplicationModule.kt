@@ -64,6 +64,7 @@ import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.StorageProvider
 import com.swordfish.lemuroid.lib.storage.StorageProviderRegistry
+import com.swordfish.lemuroid.lib.storage.local.AllFilesStorageProvider
 import com.swordfish.lemuroid.lib.storage.local.LocalStorageProvider
 import com.swordfish.lemuroid.lib.storage.local.StorageAccessFrameworkProvider
 import com.swordfish.lemuroid.metadata.libretrodb.LibretroDBMetadataProvider
@@ -156,6 +157,14 @@ abstract class LemuroidApplicationModule {
             context: Context,
             directoriesManager: DirectoriesManager,
         ): StorageProvider = LocalStorageProvider(context, directoriesManager)
+
+        @Provides
+        @PerApp
+        @IntoSet
+        @JvmStatic
+        fun allFilesStorageProvider(
+            context: Context,
+        ): StorageProvider = AllFilesStorageProvider(context)
 
         @Provides
         @PerApp

@@ -1,7 +1,11 @@
 package com.swordfish.lemuroid.app.mobile.feature.settings.general
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -263,6 +267,28 @@ private fun RomsSettings(
                 enabled = !indexingInProgress,
             )
         }
+        val storageProvidersPrefs = context.getSharedPreferences(com.swordfish.lemuroid.lib.storage.StorageProviderRegistry.PREF_NAME, android.content.Context.MODE_PRIVATE)
+
+        LemuroidSettingsSwitch(
+            state = booleanPreferenceState("all_files", false, storageProvidersPrefs),
+            title = { Text(text = stringResource(id = com.swordfish.lemuroid.lib.R.string.all_files_storage)) },
+            subtitle = { Text(text = stringResource(id = com.swordfish.lemuroid.lib.R.string.all_files_storage_desc)) },
+            onCheckedChange = { isChecked ->
+                if (isChecked && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (!Environment.isExternalStorageManager()) {
+                        try {
+                            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
+                                data = Uri.parse("package:${context.packageName}")
+                            }
+                            context.startActivity(intent)
+                        } catch (e: Exception) {
+                            val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                            context.startActivity(intent)
+                        }
+                    }
+                }
+            }
+        )
         val isActive = downloadRomsState is DownloadRomsState.Downloading ||
             downloadRomsState is DownloadRomsState.Extracting
         val subtitleText = when (downloadRomsState) {
