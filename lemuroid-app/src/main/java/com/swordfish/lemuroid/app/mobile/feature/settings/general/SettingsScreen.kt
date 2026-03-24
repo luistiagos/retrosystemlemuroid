@@ -289,35 +289,7 @@ private fun RomsSettings(
                 }
             }
         )
-        val isActive = downloadRomsState is DownloadRomsState.Downloading ||
-            downloadRomsState is DownloadRomsState.Extracting
-        val subtitleText = when (downloadRomsState) {
-            is DownloadRomsState.Idle -> stringResource(R.string.settings_download_roms_subtitle)
-            is DownloadRomsState.Downloading -> stringResource(R.string.home_download_roms_downloading, (downloadRomsState.progress * 100).toInt())
-            is DownloadRomsState.Extracting -> stringResource(R.string.home_download_roms_extracting, (downloadRomsState.progress * 100).toInt())
-            is DownloadRomsState.Done -> stringResource(R.string.settings_download_roms_done_subtitle)
-            is DownloadRomsState.Error -> stringResource(R.string.home_download_roms_error, downloadRomsState.message)
-        }
-        val progress = when (downloadRomsState) {
-            is DownloadRomsState.Downloading -> downloadRomsState.progress
-            is DownloadRomsState.Extracting -> downloadRomsState.progress
-            else -> 0f
-        }
-        LemuroidSettingsMenuLink(
-            title = { Text(text = stringResource(R.string.settings_download_roms_title)) },
-            subtitle = {
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text(subtitleText)
-                    if (isActive) {
-                        LinearProgressIndicator(
-                            progress = { progress },
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                    }
-                }
-            },
-            enabled = !isActive,
-            onClick = onDownloadRomsClicked,
-        )
+        // Old batch-download settings entry hidden; streaming is now the main provider.
+        // LemuroidSettingsMenuLink(title = settings_download_roms_title, ...) removed from UI.
     }
 }

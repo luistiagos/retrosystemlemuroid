@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared.coreoptions
 import android.content.Context
 import com.swordfish.lemuroid.lib.library.ExposedSetting
 import java.io.Serializable
+import java.util.Locale
 
 data class LemuroidCoreOption(
     private val exposedSetting: ExposedSetting,
@@ -18,7 +19,7 @@ data class LemuroidCoreOption(
 
     fun getEntries(context: Context): List<String> {
         if (exposedSetting.values.isEmpty()) {
-            return coreOption.optionValues.map { it.capitalize() }
+            return coreOption.optionValues.map { it.replaceFirstChar { ch -> if (ch.isLowerCase()) ch.titlecase(Locale.getDefault()) else ch.toString() } }
         }
 
         return getCorrectExposedSettings().map { context.getString(it.titleId) }

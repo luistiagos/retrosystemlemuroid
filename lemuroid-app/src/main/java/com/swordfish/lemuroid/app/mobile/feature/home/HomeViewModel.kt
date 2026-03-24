@@ -1,6 +1,7 @@
 package com.swordfish.lemuroid.app.mobile.feature.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -40,6 +41,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
 import com.swordfish.lemuroid.app.shared.roms.RomsDownloadManager
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 
 @OptIn(FlowPreview::class)
 class HomeViewModel(
@@ -78,8 +81,10 @@ class HomeViewModel(
     private val microphonePermissionEnabledState = MutableStateFlow(true)
     private val notificationsPermissionEnabledState = MutableStateFlow(true)
     private val uiStates = MutableStateFlow(UIState())
+    @SuppressLint("StaticFieldLeak") // appContext is the Application context, not Activity
     private val appCtx: Context = appContext
     private val romsDownloadManager = RomsDownloadManager(appContext)
+    private val streamingRomsManager = StreamingRomsManager(appContext)
     private val downloadDialogDismissed = MutableStateFlow(false)
 
     fun getViewStates(): Flow<UIState> {
@@ -141,6 +146,18 @@ class HomeViewModel(
 
     fun downloadAndExtractRoms() {
         romsDownloadManager.downloadAndExtract()
+    }
+
+    fun getStreamingRomsState(): Flow<StreamingRomsState> = streamingRomsManager.state
+
+    fun startStreamingDownload() {
+        streamingRomsManager.startDownload()
+    }
+
+    fun cancelStreamingDownload() {
+        viewModelScope.launch {
+            streamingRomsManager.cancelDownload()
+        }
     }
 
     fun dismissDownloadDialog() {

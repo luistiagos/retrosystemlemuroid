@@ -114,12 +114,12 @@
     <string name="home_empty_action">Select Directory</string>
 
     <string name="home_download_dialog_title">Default Package</string>
-    <string name="home_download_dialog_message">Would you like to download and install the default package (~5GB)?</string>
+    <string name="home_download_dialog_message">Would you like to download and install the default package?</string>
     <string name="home_download_dialog_confirm">Yes, Download</string>
     <string name="home_download_dialog_cancel">Not Now</string>
 
     <string name="home_download_roms_title">Download ROMs Pack</string>
-    <string name="home_download_roms_message">Download a complete ROMs pack (~5GB) and automatically add games to your library.</string>
+    <string name="home_download_roms_message">Download a complete ROMs pack and automatically add games to your library.</string>
     <string name="home_download_roms_action">Download ROMs</string>
     <string name="home_download_roms_action_retry">Try again</string>
     <string name="home_download_roms_action_again">Download again</string>
@@ -134,8 +134,14 @@
     <string name="home_download_cancel_dialog_dismiss">No, Keep Downloading</string>
 
     <string name="settings_download_roms_title">Download ROMs Pack</string>
-    <string name="settings_download_roms_subtitle">Download a complete ROMs pack (~5GB)</string>
+    <string name="settings_download_roms_subtitle">Download a complete ROMs pack</string>
     <string name="settings_download_roms_done_subtitle">ROMs downloaded. Tap to download again.</string>
+
+    <!-- Streaming ROM download (file-by-file, games available immediately) -->
+    <string name="home_streaming_roms_title">Download ROMs (Streaming)</string>
+    <string name="home_streaming_roms_message">Download ROMs one by one. Games become available to play immediately as each file is downloaded — no extraction needed.</string>
+    <string name="home_streaming_roms_action">Start Streaming Download</string>
+    <string name="home_streaming_roms_downloading">%1$d%% · %2$s files · %3$s</string>
 
     <string name="notification_download_roms_title">Downloading ROMs Pack</string>
     <string name="notification_download_roms_message">Download continues in background even with screen off.</string>

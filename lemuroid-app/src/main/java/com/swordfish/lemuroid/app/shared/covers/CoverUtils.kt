@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared.covers
 import android.content.Context
 import android.widget.ImageView
 import coil.ImageLoader
+import java.util.Locale
 import coil.disk.DiskCache
 import coil.imageLoader
 import coil.load
@@ -72,7 +73,7 @@ object CoverUtils {
             .take(3)
             .joinToString("")
             .ifBlank { game.title.first().toString() }
-            .capitalize()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
     }
 
     private fun computeColor(game: Game): Int {

@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
-import android.util.Log
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.R
@@ -21,6 +20,7 @@ import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
@@ -140,7 +140,7 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
             } catch (e: kotlinx.coroutines.CancellationException) {
                 throw e
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to move ROMs", e)
+                Timber.e(e, "Failed to move ROMs")
             }
             dialog.dismiss()
             prefs.edit().putString(prefKey, destUri.toString()).apply()

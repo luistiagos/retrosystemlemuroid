@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 import java.io.File
+import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipInputStream
 
@@ -75,12 +76,14 @@ class AllFilesStorageProvider(
 
     private fun getDataFile(dataFile: DataFile): File {
         val dataFilePath = Uri.parse(dataFile.fileUri).path
-        return File(dataFilePath!!)
+            ?: throw IOException("Cannot resolve path for data file: ${dataFile.fileUri}")
+        return File(dataFilePath)
     }
 
     private fun getGameRom(game: Game): File {
         val gamePath = Uri.parse(game.fileUri).path
-        val originalFile = File(gamePath!!)
+            ?: throw IOException("Cannot resolve path for game: ${game.fileUri}")
+        val originalFile = File(gamePath)
         if (!originalFile.isZipped() || originalFile.name == game.fileName) {
             return originalFile
         }
@@ -107,7 +110,8 @@ class AllFilesStorageProvider(
     }
 
     override fun getInputStream(uri: Uri): InputStream {
-        return File(uri.path!!).inputStream()
+        val path = uri.path ?: throw IOException("Cannot resolve path for URI: $uri")
+        return File(path).inputStream()
     }
 
     companion object {

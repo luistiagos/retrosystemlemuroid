@@ -194,11 +194,11 @@
 
     <!-- Download ROMs -->
     <string name="home_download_dialog_title">Pacote Padrão</string>
-    <string name="home_download_dialog_message">Deseja baixar e instalar o pacote padrão (~5GB)?</string>
+    <string name="home_download_dialog_message">Deseja baixar e instalar o pacote padrão?</string>
     <string name="home_download_dialog_confirm">Sim, Baixar</string>
     <string name="home_download_dialog_cancel">Agora não</string>
     <string name="home_download_roms_title">Baixar Pacote de ROMs</string>
-    <string name="home_download_roms_message">Baixe um pacote completo de ROMs (~5GB) e adicione jogos automaticamente à sua biblioteca.</string>
+    <string name="home_download_roms_message">Baixe um pacote completo de ROMs e adicione jogos automaticamente à sua biblioteca.</string>
     <string name="home_download_roms_action">Baixar ROMs</string>
     <string name="home_download_roms_action_retry">Tentar novamente</string>
     <string name="home_download_roms_action_again">Baixar novamente</string>
@@ -212,8 +212,14 @@
     <string name="home_download_cancel_dialog_confirm">Sim, Cancelar</string>
     <string name="home_download_cancel_dialog_dismiss">Não, Continuar Baixando</string>
     <string name="settings_download_roms_title">Baixar Pacote de ROMs</string>
-    <string name="settings_download_roms_subtitle">Baixe um pacote completo de ROMs (~5GB)</string>
+    <string name="settings_download_roms_subtitle">Baixe um pacote completo de ROMs</string>
     <string name="settings_download_roms_done_subtitle">ROMs baixadas. Toque para baixar novamente.</string>
+
+    <!-- Download de ROMs em streaming (arquivo por arquivo, jogos disponíveis imediatamente) -->
+    <string name="home_streaming_roms_title">Baixar ROMs (Streaming)</string>
+    <string name="home_streaming_roms_message">Baixa as ROMs uma por uma. Cada jogo fica disponível para jogar assim que o arquivo é baixado — sem extração.</string>
+    <string name="home_streaming_roms_action">Iniciar Download em Streaming</string>
+    <string name="home_streaming_roms_downloading">%1$d%% · %2$s arquivos · %3$s</string>
 
     <string name="notification_download_roms_title">Baixando Pacote de ROMs</string>
     <string name="notification_download_roms_message">Download continua em segundo plano mesmo com tela bloqueada.</string>

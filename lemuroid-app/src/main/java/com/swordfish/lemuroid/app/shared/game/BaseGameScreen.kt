@@ -46,7 +46,7 @@ fun BaseGameScreen(
 
                 val message = if (gameState is GameViewModelRetroGameView.GameState.Loading) gameState.message else null
                 AnimatedVisibility(message != null) {
-                    Text(text = message!!, color = MaterialTheme.colorScheme.onBackground)
+                    Text(text = message ?: "", color = MaterialTheme.colorScheme.onBackground)
                 }
             }
         }

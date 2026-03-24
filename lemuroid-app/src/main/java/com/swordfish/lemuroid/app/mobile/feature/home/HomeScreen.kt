@@ -42,6 +42,7 @@ import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameCard
 import com.swordfish.lemuroid.app.utils.android.ComposableLifecycle
 import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @Composable
@@ -75,11 +76,13 @@ fun HomeScreen(
 
     val state = viewModel.getViewStates().collectAsState(HomeViewModel.UIState())
     val downloadRomsState = viewModel.getDownloadRomsState().collectAsState(DownloadRomsState.Idle)
+    val streamingRomsState = viewModel.getStreamingRomsState().collectAsState(StreamingRomsState.Idle)
     val currentDirectory = viewModel.getCurrentDirectoryFlow().collectAsState("")
     HomeScreen(
         modifier,
         state.value,
         downloadRomsState.value,
+        streamingRomsState.value,
         currentDirectory.value,
         onGameClick,
         onGameLongClick,
@@ -96,6 +99,8 @@ fun HomeScreen(
         { viewModel.downloadAndExtractRoms() },
         { viewModel.dismissDownloadDialog() },
         { viewModel.cancelDownload() },
+        { viewModel.startStreamingDownload() },
+        { viewModel.cancelStreamingDownload() },
     ) // TODO COMPOSE We need to understand what's going to happen here.
 }
 
@@ -104,6 +109,7 @@ private fun HomeScreen(
     modifier: Modifier = Modifier,
     state: HomeViewModel.UIState,
     downloadRomsState: DownloadRomsState,
+    streamingRomsState: StreamingRomsState,
     currentDirectory: String,
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
@@ -114,6 +120,8 @@ private fun HomeScreen(
     onDownloadRomsClicked: () -> Unit,
     onDismissDownloadDialog: () -> Unit,
     onCancelDownloadClicked: () -> Unit,
+    onStartStreamingClicked: () -> Unit,
+    onCancelStreamingClicked: () -> Unit,
 ) {
     if (state.showDownloadPromptDialog) {
         AlertDialog(
@@ -123,7 +131,7 @@ private fun HomeScreen(
             confirmButton = {
                 TextButton(onClick = {
                     onDismissDownloadDialog()
-                    onDownloadRomsClicked()
+                    onStartStreamingClicked()
                 }) {
                     Text(stringResource(R.string.home_download_dialog_confirm))
                 }
@@ -193,11 +201,13 @@ private fun HomeScreen(
                 onAction = onOpenCoreSelection,
             )
         }
-        AnimatedVisibility(downloadRomsState !is DownloadRomsState.Done) {
-            HomeDownloadCard(
-                state = downloadRomsState,
-                onDownloadClicked = onDownloadRomsClicked,
-                onCancelClicked = onCancelDownloadClicked,
+        // Old batch-download card hidden; code kept for fallback.
+        // AnimatedVisibility(downloadRomsState !is DownloadRomsState.Done) { ... }
+        AnimatedVisibility(streamingRomsState !is StreamingRomsState.Done) {
+            HomeStreamingCard(
+                state = streamingRomsState,
+                onDownloadClicked = onStartStreamingClicked,
+                onCancelClicked = onCancelStreamingClicked,
             )
         }
         HomeRow(
@@ -404,6 +414,116 @@ private fun HomeDownloadCard(
                     }
                 }
                 is DownloadRomsState.Error -> {
+                    Text(
+                        text = stringResource(R.string.home_download_roms_error, state.message),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    OutlinedButton(
+                        modifier = Modifier.align(Alignment.End),
+                        onClick = onDownloadClicked,
+                    ) {
+                        Text(stringResource(R.string.home_download_roms_action_retry))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun HomeStreamingCard(
+    state: StreamingRomsState,
+    onDownloadClicked: () -> Unit,
+    onCancelClicked: () -> Unit,
+) {
+    var showCancelDialog by remember { mutableStateOf(false) }
+    if (showCancelDialog) {
+        AlertDialog(
+            onDismissRequest = { showCancelDialog = false },
+            title = { Text(stringResource(R.string.home_download_cancel_dialog_title)) },
+            text = { Text(stringResource(R.string.home_download_cancel_dialog_message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    showCancelDialog = false
+                    onCancelClicked()
+                }) {
+                    Text(stringResource(R.string.home_download_cancel_dialog_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showCancelDialog = false }) {
+                    Text(stringResource(R.string.home_download_cancel_dialog_dismiss))
+                }
+            },
+        )
+    }
+    ElevatedCard(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Text(
+                text = stringResource(R.string.home_streaming_roms_title),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            when (state) {
+                is StreamingRomsState.Idle -> {
+                    Text(
+                        text = stringResource(R.string.home_streaming_roms_message),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    OutlinedButton(
+                        modifier = Modifier.align(Alignment.End),
+                        onClick = onDownloadClicked,
+                    ) {
+                        Text(stringResource(R.string.home_streaming_roms_action))
+                    }
+                }
+                is StreamingRomsState.Downloading -> {
+                    val fileLabel = if (state.currentFile.isNotEmpty()) state.currentFile else "…"
+                    val countLabel = if (state.totalFiles > 0)
+                        "${state.downloadedFiles}/${state.totalFiles}"
+                    else
+                        "${state.downloadedFiles}"
+                    Text(
+                        text = stringResource(
+                            R.string.home_streaming_roms_downloading,
+                            (state.progress * 100).toInt(),
+                            countLabel,
+                            fileLabel,
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    LinearProgressIndicator(
+                        progress = { state.progress },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    OutlinedButton(
+                        modifier = Modifier.align(Alignment.End),
+                        onClick = { showCancelDialog = true },
+                    ) {
+                        Text(stringResource(R.string.home_download_roms_cancel))
+                    }
+                }
+                is StreamingRomsState.Done -> {
+                    Text(
+                        text = stringResource(R.string.home_download_roms_done),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    OutlinedButton(
+                        modifier = Modifier.align(Alignment.End),
+                        onClick = onDownloadClicked,
+                    ) {
+                        Text(stringResource(R.string.home_download_roms_action_again))
+                    }
+                }
+                is StreamingRomsState.Error -> {
                     Text(
                         text = stringResource(R.string.home_download_roms_error, state.message),
                         style = MaterialTheme.typography.bodyMedium,

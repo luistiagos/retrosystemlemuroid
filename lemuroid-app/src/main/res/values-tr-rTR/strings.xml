@@ -135,7 +135,7 @@
     <string name="tv_home_section_recents">En son</string>
     <string name="tv_home_section_systems">Sistemler</string>
     <string name="tv_home_section_settings">Ayarlar</string>
-    <string name="gamepad_binding_update_title">gamepad bağlama güncelleme başlığı</string>
+    <string name="gamepad_binding_update_title">"RetroPad %1$s" İlişkilendir</string>
     <string name="gamepad_binding_update_description">\"%1$s\" üzerinde bir tuşa basın</string>
     <string name="tv_search_results">Oyunlar</string>
     <string name="tv_game_message_missing_gamepad">Gamepad\'ler oynamak için gerekli. Lütfen birini bağlayın.</string>

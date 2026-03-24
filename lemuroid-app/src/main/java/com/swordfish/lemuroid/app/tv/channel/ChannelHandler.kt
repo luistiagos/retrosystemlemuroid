@@ -9,6 +9,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.VectorDrawable
 import android.media.tv.TvContract
 import android.net.Uri
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.tvprovider.media.tv.Channel
 import androidx.tvprovider.media.tv.ChannelLogoUtils
 import androidx.tvprovider.media.tv.PreviewProgram
@@ -77,7 +78,7 @@ class ChannelHandler(
         context: Context,
         resourceId: Int,
     ): Bitmap? {
-        val drawable = context.getDrawable(resourceId)
+        val drawable = AppCompatResources.getDrawable(context, resourceId)
         if (drawable is VectorDrawable) {
             val bitmap: Bitmap =
                 Bitmap.createBitmap(
