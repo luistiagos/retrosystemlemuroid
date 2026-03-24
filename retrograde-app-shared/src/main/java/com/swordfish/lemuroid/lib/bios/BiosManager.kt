@@ -182,6 +182,13 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "945F9DC9",
                     "nds_firmware.bin",
                 ),
+                Bios(
+                    "gba_bios.bin",
+                    "A860E8C0B6D573D191E4EC7AB1FCE4AB",
+                    "Game Boy Advance BIOS",
+                    SystemID.GBA,
+                    "81977335",
+                ),
             )
     }
 }
