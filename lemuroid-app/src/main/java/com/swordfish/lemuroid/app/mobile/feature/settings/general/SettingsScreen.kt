@@ -9,7 +9,9 @@ import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -72,6 +74,9 @@ fun SettingsScreen(
             scanInProgress = scanInProgress,
             downloadRomsState = downloadRomsState,
             onDownloadRomsClicked = { viewModel.downloadAndExtractRoms() },
+            smartStorageUsingRemovable = state.smartStorageUsingRemovable,
+            smartStorageUserOverride = state.smartStorageUserOverride,
+            smartStorageVolumes = state.smartStorageVolumes,
         )
         GeneralSettings()
         InputSettings(navController = navController)
@@ -235,6 +240,9 @@ private fun RomsSettings(
     scanInProgress: Boolean,
     downloadRomsState: DownloadRomsState,
     onDownloadRomsClicked: () -> Unit,
+    smartStorageUsingRemovable: Boolean,
+    smartStorageUserOverride: Boolean,
+    smartStorageVolumes: List<com.swordfish.lemuroid.lib.storage.SmartStoragePicker.VolumeInfo>,
 ) {
     val context = LocalContext.current
 
@@ -289,7 +297,65 @@ private fun RomsSettings(
                 }
             }
         )
+
+        // Smart storage info — only shown when the user has not selected a custom directory
+        // OR when a removable volume was auto-selected (always informative in that case).
+        SmartStorageInfoItem(
+            usingRemovable = smartStorageUsingRemovable,
+            userOverride = smartStorageUserOverride,
+            volumes = smartStorageVolumes,
+        )
+
         // Old batch-download settings entry hidden; streaming is now the main provider.
         // LemuroidSettingsMenuLink(title = settings_download_roms_title, ...) removed from UI.
+    }
+}
+
+@Composable
+private fun SmartStorageInfoItem(
+    usingRemovable: Boolean,
+    userOverride: Boolean,
+    volumes: List<com.swordfish.lemuroid.lib.storage.SmartStoragePicker.VolumeInfo>,
+) {
+    // Only show the card when there is something noteworthy to display:
+    // • a removable volume was auto-selected, OR
+    // • multiple volumes exist even if the user overrode the selection
+    val hasMultipleVolumes = volumes.size > 1
+    if (!hasMultipleVolumes && !usingRemovable) return
+
+    val subtitle = when {
+        userOverride -> stringResource(R.string.settings_smart_storage_user_override)
+        usingRemovable -> {
+            val removableVol = volumes.firstOrNull { it.isRemovable }
+            if (removableVol != null)
+                stringResource(R.string.settings_smart_storage_active_removable, removableVol.freeSpaceMB)
+            else
+                stringResource(R.string.settings_smart_storage_desc)
+        }
+        else -> {
+            val primaryVol = volumes.firstOrNull { !it.isRemovable }
+            if (primaryVol != null)
+                stringResource(R.string.settings_smart_storage_active_internal, primaryVol.freeSpaceMB)
+            else
+                stringResource(R.string.settings_smart_storage_desc)
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.settings_smart_storage_title),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary,
+        )
+        Text(
+            text = subtitle,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
     }
 }

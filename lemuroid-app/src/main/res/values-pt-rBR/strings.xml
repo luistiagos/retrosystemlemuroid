@@ -215,6 +215,13 @@
     <string name="settings_download_roms_subtitle">Baixe um pacote completo de ROMs</string>
     <string name="settings_download_roms_done_subtitle">ROMs baixadas. Toque para baixar novamente.</string>
 
+    <!-- Armazenamento inteligente -->
+    <string name="settings_smart_storage_title">Armazenamento Inteligente</string>
+    <string name="settings_smart_storage_active_removable">Selecionado automaticamente: Mídia removível (%1$d MB livres)</string>
+    <string name="settings_smart_storage_active_internal">Selecionado automaticamente: Armazenamento interno (%1$d MB livres)</string>
+    <string name="settings_smart_storage_user_override">Pasta personalizada selecionada pelo usuário</string>
+    <string name="settings_smart_storage_desc">Downloads vão para o volume com mais espaço livre. Conecte um cartão SD ou pendrive para usá-lo automaticamente.</string>
+
     <!-- Download de ROMs em streaming (arquivo por arquivo, jogos disponíveis imediatamente) -->
     <string name="home_streaming_roms_title">Baixar ROMs (Streaming)</string>
     <string name="home_streaming_roms_message">Baixa as ROMs uma por uma. Cada jogo fica disponível para jogar assim que o arquivo é baixado — sem extração.</string>

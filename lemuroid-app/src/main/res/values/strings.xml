@@ -137,6 +137,13 @@
     <string name="settings_download_roms_subtitle">Download a complete ROMs pack</string>
     <string name="settings_download_roms_done_subtitle">ROMs downloaded. Tap to download again.</string>
 
+    <!-- Smart storage selection -->
+    <string name="settings_smart_storage_title">Smart Storage</string>
+    <string name="settings_smart_storage_active_removable">Auto-selected: Removable storage (%1$d MB free)</string>
+    <string name="settings_smart_storage_active_internal">Auto-selected: Internal storage (%1$d MB free)</string>
+    <string name="settings_smart_storage_user_override">Custom folder selected by user</string>
+    <string name="settings_smart_storage_desc">Downloads go to the volume with most free space. Connect an SD card or USB drive to use it automatically.</string>
+
     <!-- Streaming ROM download (file-by-file, games available immediately) -->
     <string name="home_streaming_roms_title">Download ROMs (Streaming)</string>
     <string name="home_streaming_roms_message">Download ROMs one by one. Games become available to play immediately as each file is downloaded — no extraction needed.</string>

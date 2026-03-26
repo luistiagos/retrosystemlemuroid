@@ -35,8 +35,11 @@ class DirectoriesManager(private val appContext: Context) {
             mkdirs()
         }
 
-    fun getInternalRomsDirectory(): File =
-        File(appContext.getExternalFilesDir(null), "roms").apply {
-            mkdirs()
-        }
+    /**
+     * Returns the directory where ROMs should be stored/scanned.
+     * Uses [SmartStoragePicker] to automatically select the volume with the most free
+     * space when the user has not configured a custom directory, so that SD cards and
+     * USB drives attached to Smart TVs are preferred over limited built-in flash.
+     */
+    fun getInternalRomsDirectory(): File = SmartStoragePicker.getBestRomsDirectory(appContext)
 }

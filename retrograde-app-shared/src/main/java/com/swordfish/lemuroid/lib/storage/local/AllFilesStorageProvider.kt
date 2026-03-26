@@ -37,12 +37,24 @@ class AllFilesStorageProvider(
     override val enabledByDefault = false
 
     override fun listBaseStorageFiles(): Flow<List<BaseStorageFile>> = flow {
-        val rootDirectory = Environment.getExternalStorageDirectory()
         val supportedExtensions = GameSystem.getSupportedExtensions().map { it.removePrefix(".") }
 
-        Timber.d("AllFilesStorageProvider: Starting root scan at ${rootDirectory.absolutePath}")
-        
-        val directories = mutableListOf(rootDirectory)
+        // Build scan roots:
+        // 1. Primary external storage root (requires MANAGE_EXTERNAL_STORAGE on API 30+ for
+        //    folders outside the app-specific dir, but the user explicitly enabled this provider).
+        // 2. App-specific "roms" dirs on ALL external volumes — always readable without any
+        //    extra permission. This ensures files on SD cards / USB drives selected by
+        //    SmartStoragePicker are discovered even without MANAGE_EXTERNAL_STORAGE.
+        val primary = Environment.getExternalStorageDirectory()
+        val extraRoots = context.getExternalFilesDirs("roms")
+            .filterNotNull()
+            .filter { it.exists() && it.canRead() }
+            .filter { !it.absolutePath.startsWith(primary.absolutePath) }
+
+        val scanRoots = listOf(primary) + extraRoots
+        Timber.d("AllFilesStorageProvider: scan roots = ${scanRoots.map { it.absolutePath }}")
+
+        val directories = mutableListOf<File>().apply { addAll(scanRoots) }
 
         while (directories.isNotEmpty()) {
             val directory = directories.removeAt(0)

@@ -9,6 +9,7 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
+import com.swordfish.lemuroid.lib.storage.SmartStoragePicker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -43,6 +44,9 @@ class SettingsViewModel(
     data class State(
         val currentDirectory: String = "",
         val isSaveSyncSupported: Boolean = false,
+        val smartStorageVolumes: List<SmartStoragePicker.VolumeInfo> = emptyList(),
+        val smartStorageUsingRemovable: Boolean = false,
+        val smartStorageUserOverride: Boolean = false,
     )
 
     val indexingInProgress = PendingOperationsMonitor(context).anyLibraryOperationInProgress()
@@ -57,7 +61,18 @@ class SettingsViewModel(
             .asFlow()
             .flowOn(Dispatchers.IO)
             .stateIn(viewModelScope, SharingStarted.Lazily, "")
-            .map { State(it, saveSyncManager.isSupported()) }
+            .map { selectedFolder ->
+                val volumes = SmartStoragePicker.getVolumeInfoList(context)
+                val usingRemovable = SmartStoragePicker.isUsingRemovableStorage(context)
+                val userOverride = !selectedFolder.isNullOrEmpty()
+                State(
+                    currentDirectory = selectedFolder ?: "",
+                    isSaveSyncSupported = saveSyncManager.isSupported(),
+                    smartStorageVolumes = volumes,
+                    smartStorageUsingRemovable = usingRemovable,
+                    smartStorageUserOverride = userOverride,
+                )
+            }
 
     fun changeLocalStorageFolder() {
         settingsInteractor.changeLocalStorageFolder()
