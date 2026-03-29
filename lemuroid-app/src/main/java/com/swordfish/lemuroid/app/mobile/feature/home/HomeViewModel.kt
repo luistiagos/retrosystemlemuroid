@@ -8,6 +8,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.net.Uri
 import android.os.Build
 import androidx.core.content.ContextCompat
@@ -29,6 +33,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.combine
@@ -86,6 +91,28 @@ class HomeViewModel(
     private val romsDownloadManager = RomsDownloadManager(appContext)
     private val streamingRomsManager = StreamingRomsManager(appContext)
     private val downloadDialogDismissed = MutableStateFlow(false)
+    // Emits the mobile network label (e.g. "4G", "5G") when WiFi is lost during an active download
+    private val _mobileSwitchEvent = MutableSharedFlow<String>(extraBufferCapacity = 1)
+    val mobileSwitchEvent: Flow<String> = _mobileSwitchEvent
+
+    /** Flow that emits true while WiFi is available, false when it's lost. */
+    private fun wifiStatusFlow(): Flow<Boolean> = callbackFlow {
+        val cm = appCtx.getSystemService(ConnectivityManager::class.java)
+        if (cm == null) { trySend(true); awaitClose { }; return@callbackFlow }
+        val cb = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) { trySend(true) }
+            override fun onLost(network: Network) { trySend(false) }
+        }
+        cm.registerNetworkCallback(
+            NetworkRequest.Builder().addTransportType(NetworkCapabilities.TRANSPORT_WIFI).build(),
+            cb,
+        )
+        // emit initial WiFi state immediately
+        val initial = cm.getNetworkCapabilities(cm.activeNetwork)
+            ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+        trySend(initial)
+        awaitClose { cm.unregisterNetworkCallback(cb) }
+    }.distinctUntilChanged()
 
     fun getViewStates(): Flow<UIState> {
         return uiStates
@@ -155,9 +182,32 @@ class HomeViewModel(
     }
 
     fun cancelStreamingDownload() {
-        viewModelScope.launch {
-            streamingRomsManager.cancelDownload()
-        }
+        streamingRomsManager.cancelDownload()
+        // Suppress the auto-prompt dialog after cancellation, just like cancelDownload() does
+        // for the old download manager. Without this the dialog immediately re-shows because
+        // PREF_DOWNLOAD_STARTED is cleared to false by cancelDownload().
+        downloadDialogDismissed.value = true
+    }
+
+    fun pauseStreamingDownload() {
+        streamingRomsManager.pauseDownload()
+    }
+
+    fun resumeStreamingDownload() {
+        streamingRomsManager.resumeDownload()
+    }
+
+    private fun getMobileNetworkLabel(): String {
+        val cm = appCtx.getSystemService(ConnectivityManager::class.java) ?: return "Móvel"
+        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return "Móvel"
+        return if (caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+            when {
+                caps.linkDownstreamBandwidthKbps >= 20000 -> "5G"
+                caps.linkDownstreamBandwidthKbps >= 1000 -> "4G"
+                caps.linkDownstreamBandwidthKbps >= 200 -> "3G"
+                else -> "2G"
+            }
+        } else "Móvel"
     }
 
     fun dismissDownloadDialog() {
@@ -263,6 +313,24 @@ class HomeViewModel(
     }
 
     init {
+        // Monitor WiFi loss during an active download. When WiFi drops while wifiOnly=true,
+        // pause the download immediately (before the Worker's HTTP request fails and clears
+        // PREF_DOWNLOAD_STARTED) and notify the UI so it can offer to resume on mobile.
+        viewModelScope.launch {
+            wifiStatusFlow().collect { isWifi ->
+                if (isWifi) return@collect  // WiFi available – nothing to do
+                val wifiOnly = appCtx.getSharedPreferences(
+                    "streaming_roms_prefs", Context.MODE_PRIVATE,
+                ).getBoolean(StreamingRomsManager.PREF_WIFI_ONLY, true)
+                if (!wifiOnly) return@collect
+                if (!streamingRomsManager.isCurrentlyDownloading()) return@collect
+                // Pause first so the UI transitions to Paused state and the Worker is
+                // cancelled cleanly before any IOException has a chance to clear
+                // PREF_DOWNLOAD_STARTED and make isCurrentlyDownloading() return false.
+                streamingRomsManager.pauseDownload()
+                _mobileSwitchEvent.emit(getMobileNetworkLabel())
+            }
+        }
         viewModelScope.launch {
             val uiStatesFlow =
                 combine(
@@ -287,6 +355,7 @@ class HomeViewModel(
                         showDownloadPromptDialog = state.showNoGamesCard
                             && !state.indexInProgress
                             && !romsDownloadManager.isDownloadStarted()
+                            && !streamingRomsManager.isDownloadStarted()
                             && !dismissed,
                     )
                 }

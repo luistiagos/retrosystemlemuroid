@@ -63,10 +63,11 @@ class RomsDownloadWork(context: Context, workerParams: WorkerParameters) :
         const val PHASE_EXTRACTING = "extracting"
         const val UNIQUE_WORK_ID = "RomsDownloadWork"
 
-        fun enqueue(context: Context) {
+        fun enqueue(context: Context, replace: Boolean = false) {
+            val policy = if (replace) ExistingWorkPolicy.REPLACE else ExistingWorkPolicy.KEEP
             WorkManager.getInstance(context.applicationContext).enqueueUniqueWork(
                 UNIQUE_WORK_ID,
-                ExistingWorkPolicy.KEEP,
+                policy,
                 OneTimeWorkRequestBuilder<RomsDownloadWork>().build(),
             )
         }

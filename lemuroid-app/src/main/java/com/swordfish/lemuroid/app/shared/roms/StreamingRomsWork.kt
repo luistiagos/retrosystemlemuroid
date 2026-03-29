@@ -19,7 +19,7 @@ class StreamingRomsWork(context: Context, workerParams: WorkerParameters) :
 
     override suspend fun doWork(): Result {
         val notificationsManager = NotificationsManager(applicationContext)
-        val manager = StreamingRomsManager(applicationContext)
+        val manager = StreamingRomsManager(applicationContext, autoRestart = false)
         return try {
             setForeground(
                 createSyncForegroundInfo(
@@ -61,7 +61,7 @@ class StreamingRomsWork(context: Context, workerParams: WorkerParameters) :
         fun enqueue(context: Context) {
             WorkManager.getInstance(context.applicationContext).enqueueUniqueWork(
                 UNIQUE_WORK_ID,
-                ExistingWorkPolicy.KEEP,
+                ExistingWorkPolicy.REPLACE,
                 OneTimeWorkRequestBuilder<StreamingRomsWork>().build(),
             )
         }

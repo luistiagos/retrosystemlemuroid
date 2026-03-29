@@ -37,7 +37,13 @@ import com.swordfish.lemuroid.app.utils.android.settings.indexPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.intPreferenceState
 import com.swordfish.lemuroid.app.utils.android.stringListResource
 import com.swordfish.lemuroid.app.utils.settings.rememberSafePreferenceIndexSettingState
+import android.provider.DocumentsContract
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 import com.swordfish.lemuroid.lib.preferences.LocaleHelper
 
 @Composable
@@ -66,6 +72,11 @@ fun SettingsScreen(
             .collectAsState(DownloadRomsState.Idle)
             .value
 
+    val streamingRomsState =
+        viewModel.streamingRomsState
+            .collectAsState(StreamingRomsState.Idle)
+            .value
+
     LemuroidSettingsPage(modifier = modifier) {
         RomsSettings(
             state = state,
@@ -77,6 +88,8 @@ fun SettingsScreen(
             smartStorageUsingRemovable = state.smartStorageUsingRemovable,
             smartStorageUserOverride = state.smartStorageUserOverride,
             smartStorageVolumes = state.smartStorageVolumes,
+            streamingRomsState = streamingRomsState,
+            onRedownloadStreaming = { viewModel.redownloadStreamingRoms() },
         )
         GeneralSettings()
         InputSettings(navController = navController)
@@ -243,6 +256,8 @@ private fun RomsSettings(
     smartStorageUsingRemovable: Boolean,
     smartStorageUserOverride: Boolean,
     smartStorageVolumes: List<com.swordfish.lemuroid.lib.storage.SmartStoragePicker.VolumeInfo>,
+    streamingRomsState: StreamingRomsState,
+    onRedownloadStreaming: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -250,17 +265,43 @@ private fun RomsSettings(
     val emptyDirectory = stringResource(R.string.none)
 
     val currentDirectoryName =
-        remember(state.currentDirectory) {
-            runCatching {
-                DocumentFile.fromTreeUri(context, Uri.parse(currentDirectory))?.name
-            }.getOrNull() ?: emptyDirectory
+        remember(state.currentDirectory, state.defaultRomsDirPath) {
+            when {
+                currentDirectory.isNotEmpty() ->
+                    runCatching {
+                        val treeDocId = DocumentsContract.getTreeDocumentId(Uri.parse(currentDirectory))
+                        treeDocId.replace(Regex("^primary:"), "/sdcard/")
+                    }.getOrElse {
+                        DocumentFile.fromTreeUri(context, Uri.parse(currentDirectory))?.name ?: emptyDirectory
+                    }
+                state.defaultRomsDirPath.isNotEmpty() -> state.defaultRomsDirPath
+                else -> emptyDirectory
+            }
         }
 
     LemuroidCardSettingsGroup(title = { Text(text = stringResource(id = R.string.roms)) }) {
         LemuroidSettingsMenuLink(
             title = { Text(text = stringResource(id = R.string.directory)) },
             subtitle = { Text(text = currentDirectoryName) },
-            onClick = { onChangeFolder() },
+            action = if (currentDirectory.isNotEmpty()) {
+                {
+                    IconButton(onClick = { onChangeFolder() }, enabled = !indexingInProgress) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = stringResource(id = R.string.directory),
+                        )
+                    }
+                }
+            } else null,
+            onClick = {
+                when {
+                    currentDirectory.isNotEmpty() ->
+                        openSafFolderInFileManager(context, currentDirectory)
+                    state.defaultRomsDirPath.isNotEmpty() ->
+                        openFolderInFileManager(context, state.defaultRomsDirPath)
+                    else -> onChangeFolder()
+                }
+            },
             enabled = !indexingInProgress,
         )
         if (scanInProgress) {
@@ -304,6 +345,29 @@ private fun RomsSettings(
             usingRemovable = smartStorageUsingRemovable,
             userOverride = smartStorageUserOverride,
             volumes = smartStorageVolumes,
+        )
+
+        // Show "Download ROMs again" only when the streaming download has completed,
+        // so the user can erase and restart the download from Settings.
+        if (streamingRomsState is StreamingRomsState.Done) {
+            LemuroidSettingsMenuLink(
+                title = { Text(text = stringResource(id = R.string.settings_download_roms_title)) },
+                subtitle = { Text(text = stringResource(id = R.string.settings_download_roms_done_subtitle)) },
+                onClick = onRedownloadStreaming,
+            )
+        }
+
+        val streamingPrefs = context.getSharedPreferences(
+            "streaming_roms_prefs", android.content.Context.MODE_PRIVATE
+        )
+        LemuroidSettingsSwitch(
+            state = booleanPreferenceState(
+                com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager.PREF_WIFI_ONLY,
+                true,
+                streamingPrefs,
+            ),
+            title = { Text(text = stringResource(id = R.string.settings_wifi_only_title)) },
+            subtitle = { Text(text = stringResource(id = R.string.settings_wifi_only_subtitle)) },
         )
 
         // Old batch-download settings entry hidden; streaming is now the main provider.
@@ -357,5 +421,46 @@ private fun SmartStorageInfoItem(
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+    }
+}
+
+private fun openSafFolderInFileManager(context: android.content.Context, treeUriString: String) {
+    try {
+        val treeUri = Uri.parse(treeUriString)
+        val docUri = DocumentsContract.buildDocumentUriUsingTree(
+            treeUri,
+            DocumentsContract.getTreeDocumentId(treeUri)
+        )
+        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW).apply {
+            setDataAndType(docUri, DocumentsContract.Document.MIME_TYPE_DIR)
+            addFlags(
+                android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                    android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+            )
+        }
+        context.startActivity(intent)
+    } catch (e: Exception) {
+        android.widget.Toast.makeText(context, treeUriString, android.widget.Toast.LENGTH_LONG).show()
+    }
+}
+
+private fun openFolderInFileManager(context: android.content.Context, path: String) {
+    try {
+        val externalRoot = android.os.Environment.getExternalStorageDirectory().absolutePath
+        val relative = path.removePrefix(externalRoot).removePrefix("/")
+        val docUri = android.provider.DocumentsContract.buildDocumentUri(
+            "com.android.externalstorage.documents",
+            "primary:$relative"
+        )
+        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW).apply {
+            setDataAndType(docUri, android.provider.DocumentsContract.Document.MIME_TYPE_DIR)
+            addFlags(
+                android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                    android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+            )
+        }
+        context.startActivity(intent)
+    } catch (e: Exception) {
+        android.widget.Toast.makeText(context, path, android.widget.Toast.LENGTH_LONG).show()
     }
 }

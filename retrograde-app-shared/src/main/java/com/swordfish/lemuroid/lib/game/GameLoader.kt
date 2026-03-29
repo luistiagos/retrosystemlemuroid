@@ -164,6 +164,7 @@ class GameLoader(
         context: Context,
         coreID: CoreID,
     ): File? {
+        val processAbi = com.swordfish.lemuroid.lib.util.AbiUtils.getProcessAbi(context)
         val files =
             sequenceOf(
                 File(context.applicationInfo.nativeLibraryDir),
@@ -172,7 +173,16 @@ class GameLoader(
 
         return files
             .flatMap { it.walkBottomUp() }
-            .firstOrNull { it.name == coreID.libretroFileName }
+            .firstOrNull { file ->
+                file.name == coreID.libretroFileName &&
+                    file.length() > MIN_VALID_CORE_SIZE_BYTES &&
+                    com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(file, processAbi)
+            }
+    }
+
+    companion object {
+        /** Minimum file size (100 KB) to consider a core .so as non-corrupt. */
+        private const val MIN_VALID_CORE_SIZE_BYTES = 100 * 1024L
     }
 
     @Suppress("ArrayInDataClass")

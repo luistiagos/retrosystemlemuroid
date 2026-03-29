@@ -23,6 +23,9 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
          * (case-insensitive) so "nintendo" doesn't accidentally match "super nintendo".
          */
         private val FOLDER_ALIASES: Map<String, String> = mapOf(
+            // Short folder names used in the luisluis123/lemusets dataset
+            "a26"                  to "atari2600",
+            "a78"                  to "atari7800",
             "arcade"               to "fbneo",
             "atari 2600"           to "atari2600",
             "atari 7800"           to "atari7800",

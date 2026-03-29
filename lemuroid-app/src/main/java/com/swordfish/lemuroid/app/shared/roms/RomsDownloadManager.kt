@@ -12,9 +12,6 @@ import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.Flow
@@ -22,14 +19,13 @@ import kotlinx.coroutines.flow.map
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.apache.commons.compress.archivers.sevenz.SevenZFile
+import org.json.JSONArray
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
-import java.util.concurrent.atomic.AtomicLong
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
@@ -54,14 +50,19 @@ class RomsDownloadManager(context: Context) {
          * in a way that requires re-processing existing downloads.
          * If the stored version is lower than this, the download is reset to Idle.
          */
-        private const val EXTRACTION_VERSION = 7
+        private const val EXTRACTION_VERSION = 10
         private const val PREF_EXTRACTION_VERSION = "extraction_version"
+
+        private const val HF_DATASET_OWNER = "luisluis123"
+        private const val HF_DATASET_NAME = "lemusets"
+        private const val HF_ROMS_PATH = "roms12g"
+        private const val HF_API_BASE =
+            "https://huggingface.co/api/datasets/$HF_DATASET_OWNER/$HF_DATASET_NAME"
+        private const val HF_DOWNLOAD_BASE =
+            "https://huggingface.co/datasets/$HF_DATASET_OWNER/$HF_DATASET_NAME/resolve/main"
 
         /** Set to true as soon as a download is enqueued; cleared on completion or cancel. */
         const val PREF_DOWNLOAD_STARTED = "download_started"
-
-        /** Set to true after the .7z archive is fully downloaded; cleared on completion or cancel. */
-        private const val PREF_ARCHIVE_DOWNLOADED = "archive_downloaded"
 
         /** Last download progress (0f–1f); saved every ~2% so the progress bar restores
          *  immediately on "Try Again" without flashing 0% while awaiting the first network byte. */
@@ -83,6 +84,9 @@ class RomsDownloadManager(context: Context) {
          * Case-insensitive matching is applied at runtime.
          */
         val FOLDER_NAME_MAP = mapOf(
+            // Short folder names used in the luisluis123/lemusets dataset
+            "a26"                  to "atari2600",
+            "a78"                  to "atari7800",
             "arcade"               to "fbneo",
             "atari 2600"           to "atari2600",
             "atari 7800"           to "atari7800",
@@ -157,22 +161,27 @@ class RomsDownloadManager(context: Context) {
     private val prefs: SharedPreferences = appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val httpClient: OkHttpClient by lazy { buildHttpClient() }
 
+    private val versionOutdated: Boolean = run {
+        val storedVersion = prefs.getInt(PREF_EXTRACTION_VERSION, 0)
+        storedVersion < EXTRACTION_VERSION
+    }
+
     private val initialState: DownloadRomsState = run {
         val done = prefs.getBoolean(PREF_DOWNLOAD_DONE, false)
-        val storedVersion = prefs.getInt(PREF_EXTRACTION_VERSION, 0)
-        if (done && storedVersion >= EXTRACTION_VERSION) DownloadRomsState.Done else {
-            // Reset so the user sees the download card again and a fresh extraction runs
+        if (done && !versionOutdated) DownloadRomsState.Done else {
+            // Reset so the user sees the download card again and a fresh download runs.
             if (done) prefs.edit().putBoolean(PREF_DOWNLOAD_DONE, false).apply()
             DownloadRomsState.Idle
         }
     }
 
     init {
-        // If a download was started but never completed (app was killed mid-download or
-        // mid-extraction), automatically re-enqueue the work so it resumes from where it
-        // left off. ExistingWorkPolicy.KEEP means no duplicate if already running.
+        // If a download was started but never completed (app was killed mid-download),
+        // automatically re-enqueue the work so it resumes from where it left off.
+        // Use REPLACE when the extraction version changed to cancel any stale worker
+        // that was built with old code (e.g. after an app update without clearing data).
         if (prefs.getBoolean(PREF_DOWNLOAD_STARTED, false) && !isDownloadDone()) {
-            RomsDownloadWork.enqueue(appContext)
+            RomsDownloadWork.enqueue(appContext, replace = versionOutdated)
         }
     }
 
@@ -229,7 +238,6 @@ class RomsDownloadManager(context: Context) {
         }
         prefs.edit()
             .putBoolean(PREF_DOWNLOAD_STARTED, false)
-            .putBoolean(PREF_ARCHIVE_DOWNLOADED, false)
             .remove(PREF_DOWNLOAD_DONE)
             .remove(PREF_LAST_DOWNLOAD_PROGRESS)
             .apply()
@@ -242,8 +250,6 @@ class RomsDownloadManager(context: Context) {
     }
 
     internal suspend fun doDownload(onProgress: suspend (phase: String, progress: Float) -> Unit) {
-        // Wrapper that also persists download progress every ~2% so that after an error
-        // the ENQUEUED state can show the correct position instead of 0%.
         var lastSavedProgress = prefs.getFloat(PREF_LAST_DOWNLOAD_PROGRESS, -1f)
         suspend fun reportProgress(phase: String, progress: Float) {
             onProgress(phase, progress)
@@ -254,78 +260,91 @@ class RomsDownloadManager(context: Context) {
         }
         val romsDir = DirectoriesManager(appContext).getInternalRomsDirectory()
         romsDir.mkdirs()
-        val archiveFile = File(romsDir, "roms_download.7z")
 
-        // If the archive was already fully downloaded in a previous run (e.g. extraction was
-        // interrupted mid-way), skip the download phase entirely and go straight to extraction.
-        val archiveAlreadyDownloaded = prefs.getBoolean(PREF_ARCHIVE_DOWNLOADED, false)
-            && archiveFile.exists() && archiveFile.length() > 0
+        Timber.d("Fetching ROM file list from HuggingFace...")
+        reportProgress(RomsDownloadWork.PHASE_DOWNLOADING, 0f)
 
-        if (archiveAlreadyDownloaded) {
-            Timber.d("Archive already downloaded (${archiveFile.length()} bytes) — skipping download phase")
-            // Clean up any partially extracted directories from the previous interrupted run.
-            romsDir.listFiles()
-                ?.filter { !it.name.startsWith(archiveFile.name) }
-                ?.forEach { it.deleteRecursively() }
-            reportProgress(RomsDownloadWork.PHASE_DOWNLOADING, 1f)
-        } else {
-            // Delete previously extracted content but keep any partial archive and any
-            // parallel-segment temp files (.seg0, .seg1, …) so downloads can resume.
-            romsDir.listFiles()
-                ?.filter { !it.name.startsWith(archiveFile.name) }
-                ?.forEach { it.deleteRecursively() }
+        // ── Step 1: enumerate system folders ──────────────────────────────────
+        val systemEntries = fetchHfTree(HF_ROMS_PATH).filter { it.type == "directory" }
+        Timber.d("Found ${systemEntries.size} system folder(s): ${systemEntries.map { it.name }}")
 
-            val downloadUrl = "https://huggingface.co/datasets/Emuladores/sets/resolve/main/roms16gb.7z"
-            Timber.d("Starting download")
-            downloadFileParallel(downloadUrl, archiveFile) { progress ->
-                reportProgress(RomsDownloadWork.PHASE_DOWNLOADING, progress)
+        // ── Step 2: enumerate ROM files per system folder ─────────────────────
+        data class RomFile(val hfPath: String, val size: Long, val destFile: File)
+        data class SystemRomBatch(val dbname: String, val files: List<RomFile>)
+        val batches = mutableListOf<SystemRomBatch>()
+        for (entry in systemEntries) {
+            val folderLower = entry.name.lowercase()
+            val dbname = FOLDER_NAME_MAP[folderLower]
+                ?: if (SYSTEM_DBNAMES.contains(folderLower)) folderLower else null
+            if (dbname == null) {
+                Timber.w("Skipping unknown system folder '${entry.name}'")
+                continue
             }
-            // Mark the archive as fully downloaded so that if extraction is interrupted,
-            // the next run can skip straight to the extraction phase.
-            prefs.edit().putBoolean(PREF_ARCHIVE_DOWNLOADED, true).apply()
+            val files = fetchHfTree(entry.path).filter { it.type == "file" }
+            Timber.d("  ${entry.name} -> $dbname: ${files.size} file(s)")
+            val destDir = File(romsDir, dbname)
+            batches.add(SystemRomBatch(
+                dbname = dbname,
+                files = files.map { f -> RomFile(f.path, f.size, File(destDir, f.name)) },
+            ))
+        }
+        if (batches.all { it.files.isEmpty() }) throw IOException("No ROM files found in HuggingFace dataset")
+
+        // ── Step 3: download each file with per-system incremental library sync ───
+        val totalBytes = batches.sumOf { b -> b.files.sumOf { it.size } }.coerceAtLeast(1L)
+        // Seed from already-complete files so the progress bar resumes correctly.
+        var downloadedBytes = batches.sumOf { b ->
+            b.files.filter { it.destFile.exists() && it.destFile.length() == it.size }.sumOf { it.size }
+        }
+        reportProgress(RomsDownloadWork.PHASE_DOWNLOADING, (downloadedBytes.toFloat() / totalBytes).coerceAtMost(1f))
+
+        for (batch in batches) {
+            var anyNewFile = false
+            for (romFile in batch.files) {
+                if (romFile.destFile.exists() && romFile.destFile.length() == romFile.size) {
+                    continue // already downloaded
+                }
+                romFile.destFile.parentFile?.mkdirs()
+                val url = "$HF_DOWNLOAD_BASE/${romFile.hfPath}"
+                val bytesAtStart = downloadedBytes
+                try {
+                    downloadFile(url, romFile.destFile) { fileProgress ->
+                        val effective = bytesAtStart + (fileProgress * romFile.size).toLong()
+                        reportProgress(RomsDownloadWork.PHASE_DOWNLOADING,
+                            (effective.toFloat() / totalBytes).coerceAtMost(1f))
+                    }
+                    downloadedBytes += romFile.size
+                    anyNewFile = true
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    // Skip this file — log and continue so one bad file doesn't abort all others.
+                    Timber.e(e, "Skipping ${romFile.hfPath}: ${e.message}")
+                }
+            }
+            // Sync the library after each system so the user sees games appear incrementally,
+            // even if the overall download is interrupted before all systems complete.
+            if (anyNewFile) {
+                LibraryIndexScheduler.scheduleLibrarySync(appContext)
+            }
         }
 
-        Timber.d("archiveFile size=${archiveFile.length()}, extracting")
-        reportProgress(RomsDownloadWork.PHASE_EXTRACTING, 0f)
-        try {
-            extractSevenZ(archiveFile, romsDir) { progress ->
-                reportProgress(RomsDownloadWork.PHASE_EXTRACTING, progress)  // suspend call OK: lambda is suspend
-            }
-        } catch (e: CancellationException) {
-            // Preserve the archive file and PREF_ARCHIVE_DOWNLOADED so the next run
-            // can resume extraction without re-downloading the archive.
-            throw e
-        } catch (e: Exception) {
-            // Extraction failed (archive may be corrupt or truncated).
-            // Clear the flag and delete the archive so the next retry starts a
-            // fresh download instead of looping forever on the same bad file.
-            Timber.e(e, "Extraction failed — deleting archive to force re-download on next retry")
-            archiveFile.delete()
-            prefs.edit().putBoolean(PREF_ARCHIVE_DOWNLOADED, false).apply()
-            throw e
-        }
-
-        archiveFile.delete()
-        normalizeExtractedFolders(romsDir)
-
-        // If the user has selected a SAF directory, move extracted ROMs there
+        // ── Step 4: copy to SAF folder if the user configured one ─────────────
         val safUriStr = getLegacyPrefs().getString(
             appContext.getString(com.swordfish.lemuroid.lib.R.string.pref_key_extenral_folder), null
         )
         if (!safUriStr.isNullOrEmpty()) {
             val safTree = DocumentFile.fromTreeUri(appContext, Uri.parse(safUriStr))
             if (safTree != null && safTree.canWrite()) {
-                Timber.d("Copying extracted ROMs to SAF dir: $safUriStr")
-                val extractedFiles = romsDir.walkTopDown().filter { it.isFile }.toList()
-                extractedFiles.forEachIndexed { index, file ->
+                Timber.d("Copying ROMs to SAF dir: $safUriStr")
+                romsDir.walkTopDown().filter { it.isFile }.forEach { file ->
                     copyFileToSaf(file, romsDir, safTree)
-                    reportProgress(RomsDownloadWork.PHASE_EXTRACTING, 0.99f + 0.01f * (index + 1) / extractedFiles.size)
                 }
                 romsDir.deleteRecursively()
                 romsDir.mkdirs()
-                Timber.d("Moved ${extractedFiles.size} files to SAF directory")
+                Timber.d("ROMs moved to SAF directory")
             } else {
-                Timber.w("SAF tree not writable, ROMs left in internal storage")
+                Timber.w("SAF tree not writable — ROMs left in internal storage")
             }
         }
 
@@ -333,149 +352,15 @@ class RomsDownloadManager(context: Context) {
         prefs.edit()
             .putBoolean(PREF_DOWNLOAD_DONE, true)
             .putBoolean(PREF_DOWNLOAD_STARTED, false)
-            .putBoolean(PREF_ARCHIVE_DOWNLOADED, false)
             .putInt(PREF_EXTRACTION_VERSION, EXTRACTION_VERSION)
             .remove(PREF_LAST_DOWNLOAD_PROGRESS)
             .apply()
-        Timber.d("Download and extraction complete")
+        Timber.d("All ROMs downloaded successfully")
     }
 
     private fun getLegacyPrefs(): SharedPreferences =
         @Suppress("DEPRECATION")
         SharedPreferencesHelper.getLegacySharedPreferences(appContext)
-
-    /**
-     * Recursively renames folders anywhere under [romsDir] using [FOLDER_NAME_MAP].
-     * Also unwraps any unrecognised single-level wrapper folder (e.g. the archive
-     * may extract everything inside a root "roms/" folder whose name is not a system
-     * dbname — in that case its contents are moved up into [romsDir] directly).
-     * Handles merge conflicts when the target folder already exists.
-     */
-    private fun normalizeExtractedFolders(romsDir: File) {
-        // First pass: unwrap unrecognised wrapper folders that sit between romsDir
-        // and the actual system-named (or file-containing) content.
-        unwrapWrapperFolders(romsDir)
-
-        // Second pass: rename every system-named folder at any depth.
-        renameSystemFoldersRecursive(romsDir)
-    }
-
-    /**
-     * If [dir] contains a single subdirectory whose name is NOT in [FOLDER_NAME_MAP]
-     * (i.e. it's an archive wrapper like "roms/"), move all its contents one level up
-     * and delete it. Repeats until the outermost folder IS a system folder or has files.
-     */
-    private fun unwrapWrapperFolders(dir: File) {
-        val children = dir.listFiles() ?: return
-        val subDirs = children.filter { it.isDirectory }
-        val files = children.filter { it.isFile }
-
-        // Only unwrap when the folder contains exactly one subdir and no direct files,
-        // and that subdir's name is neither a known human-readable alias nor a system dbname.
-        // Without the dbname check, a folder already named "md" would incorrectly be unwrapped.
-        if (files.isEmpty() && subDirs.size == 1) {
-            val wrapper = subDirs[0]
-            val wrapperLower = wrapper.name.lowercase()
-            if (FOLDER_NAME_MAP[wrapperLower] == null && !SYSTEM_DBNAMES.contains(wrapperLower)) {
-                Timber.d("Unwrapping wrapper folder '${wrapper.name}' into '${dir.name}'")
-                wrapper.listFiles()?.forEach { child ->
-                    val dest = File(dir, child.name)
-                    // Use copy+delete instead of renameTo to avoid silent failures
-                    // when the destination already exists.
-                    if (!safeMoveFile(child, dest)) {
-                        Timber.w("Failed to move '${child.name}' while unwrapping wrapper")
-                    }
-                }
-                wrapper.deleteRecursively()
-                // Recurse in case there are multiple levels of wrapping
-                unwrapWrapperFolders(dir)
-            }
-        }
-    }
-
-    /** Depth-first rename of every folder whose lowercase name is in [FOLDER_NAME_MAP]. */
-    private fun renameSystemFoldersRecursive(dir: File) {
-        val children = dir.listFiles() ?: return
-        children.filter { it.isDirectory }.forEach { folder ->
-            val mapped = FOLDER_NAME_MAP[folder.name.lowercase()]
-            if (mapped != null) {
-                val target = File(dir, mapped)
-                if (target.absolutePath == folder.absolutePath) {
-                    // Already the correct name; still recurse inside
-                    renameSystemFoldersRecursive(folder)
-                    return@forEach
-                }
-                if (target.exists()) {
-                    // Merge: copy each file from source folder into target.
-                    // Use copy+delete (safeMoveFile) instead of renameTo to avoid
-                    // silent failures when a file with the same name already exists.
-                    folder.walkTopDown().filter { it.isFile }.forEach { file ->
-                        val rel = file.relativeTo(folder)
-                        val dest = File(target, rel.path)
-                        dest.parentFile?.mkdirs()
-                        if (!safeMoveFile(file, dest)) {
-                            Timber.w("Failed to merge '${file.name}' into '$mapped'")
-                        }
-                    }
-                    folder.deleteRecursively()
-                } else {
-                    // Target does not exist: simple rename is safe here.
-                    if (!folder.renameTo(target)) {
-                        Timber.w("renameTo failed for '${folder.name}' → '$mapped', falling back to copy")
-                        folder.walkTopDown().filter { it.isFile }.forEach { file ->
-                            val rel = file.relativeTo(folder)
-                            val dest = File(target, rel.path)
-                            dest.parentFile?.mkdirs()
-                            safeMoveFile(file, dest)
-                        }
-                        folder.deleteRecursively()
-                    }
-                }
-                Timber.d("Renamed folder '${folder.name}' → '$mapped'")
-                // Recurse into the now-renamed folder
-                renameSystemFoldersRecursive(target)
-            } else {
-                // Unknown folder name: recurse looking for system folders inside
-                renameSystemFoldersRecursive(folder)
-            }
-        }
-    }
-
-    /**
-     * Moves [src] to [dest] safely: if [dest] already exists it is overwritten.
-     * Handles both files and directories. Uses copy+delete as fallback when
-     * [File.renameTo] fails (e.g. cross-filesystem move on some devices).
-     * Returns true on success.
-     */
-    private fun safeMoveFile(src: File, dest: File): Boolean {
-        return try {
-            if (dest.exists()) {
-                if (dest.isDirectory) dest.deleteRecursively() else dest.delete()
-            }
-            if (src.renameTo(dest)) return true
-            // Fallback for files: copy bytes then delete source.
-            // Directories are not expected to reach this path (same-filesystem rename
-            // should always succeed), but handle gracefully just in case.
-            if (src.isDirectory) {
-                src.walkTopDown().filter { it.isFile }.forEach { file ->
-                    val rel = file.relativeTo(src)
-                    val destFile = File(dest, rel.path)
-                    destFile.parentFile?.mkdirs()
-                    file.inputStream().use { i -> destFile.outputStream().use { o -> i.copyTo(o) } }
-                }
-                src.deleteRecursively()
-            } else {
-                src.inputStream().use { input ->
-                    dest.outputStream().use { output -> input.copyTo(output) }
-                }
-                src.delete()
-            }
-            true
-        } catch (e: Exception) {
-            Timber.e(e, "safeMoveFile failed: ${src.path} → ${dest.path}")
-            false
-        }
-    }
 
     private fun copyFileToSaf(file: File, sourceRoot: File, destTree: DocumentFile) {
         val parts = file.relativeTo(sourceRoot).path.split(File.separator).filter { it.isNotEmpty() }
@@ -595,232 +480,70 @@ class RomsDownloadManager(context: Context) {
     }
 
     /**
-     * Downloads [url] to [destination] using [numSegments] parallel HTTP range requests,
-     * similar to aria2c. Falls back to single-connection [downloadFile] if the server
-     * does not report a Content-Length or does not announce byte-range support.
-     *
-     * Resume support: each segment's bytes are stored in a temporary side-car file
-     * (`destination.seg0`, `.seg1`, …) that survives process restarts. The segment
-     * files are concatenated into [destination] only after every segment finishes.
+     * Lists entries at [folderPath] in the HuggingFace dataset, handling pagination.
      */
-    private suspend fun downloadFileParallel(
-        url: String,
-        destination: File,
-        numSegments: Int = 8,
-        onProgress: suspend (Float) -> Unit,
-    ) {
-        // Step 1: HEAD request to learn Content-Length and Accept-Ranges.
-        val totalSize: Long
-        val supportsRanges: Boolean
-        try {
-            val headRequest = Request.Builder()
-                .url(url)
-                .head()
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
-                .build()
-            httpClient.newCall(headRequest).execute().use { resp ->
-                totalSize = resp.header("Content-Length")?.toLongOrNull() ?: -1L
-                supportsRanges =
-                    resp.header("Accept-Ranges")?.lowercase() == "bytes" && totalSize > 0L
-            }
-        } catch (e: CancellationException) {
-            throw e
-        } catch (e: Exception) {
-            Timber.w("HEAD request failed ($e) — falling back to single-connection download")
-            downloadFile(url, destination, onProgress)
-            return
-        }
-
-        if (!supportsRanges) {
-            Timber.d("Server does not support byte ranges — falling back to single-connection download")
-            downloadFile(url, destination, onProgress)
-            return
-        }
-
-        Timber.d("Parallel download: $numSegments connections, totalSize=$totalSize bytes")
-
-        // Step 2: Compute non-overlapping byte ranges for each segment.
-        val segmentSize = totalSize / numSegments
-        data class Segment(val index: Int, val start: Long, val end: Long) {
-            val segFile get() = File(destination.parent, "${destination.name}.seg$index")
-            val alreadyDownloaded
-                get() = if (segFile.exists()) segFile.length().coerceAtMost(end - start + 1) else 0L
-        }
-        val segments = (0 until numSegments).map { i ->
-            val start = i * segmentSize
-            val end = if (i == numSegments - 1) totalSize - 1 else (i + 1) * segmentSize - 1
-            Segment(i, start, end)
-        }
-
-        // Seed overall progress from any partial segment files left from a previous run.
-        val totalDownloaded = AtomicLong(segments.sumOf { it.alreadyDownloaded })
-
-        // Immediately report the pre-seeded progress so the UI transitions from the
-        // saved "last known progress" straight to the real value, without going through
-        // a 0% flash while the first connection is being established on resume.
-        if (totalDownloaded.get() > 0L) {
-            onProgress((totalDownloaded.get().toFloat() / totalSize).coerceAtMost(0.99f))
-        }
-
-        // Step 3: Download all segments in parallel.
-        coroutineScope {
-            segments.map { seg ->
-                async {
-                    downloadSegment(
-                        url = url,
-                        segFile = seg.segFile,
-                        rangeStart = seg.start,
-                        rangeEnd = seg.end,
-                        alreadyDownloaded = seg.alreadyDownloaded,
-                    ) { n ->
-                        val done = totalDownloaded.addAndGet(n)
-                        onProgress((done.toFloat() / totalSize).coerceAtMost(1f))
-                    }
-                }
-            }.awaitAll()
-        }
-
-        // Step 4: Concatenate completed segment files into the final archive.
-        // Copy at most segSize bytes per segment — if a server returned HTTP 200 instead of
-        // 206 the segment file may contain the full remote file rather than just the range,
-        // and blindly copying all of it would produce an over-sized, corrupt archive.
-        Timber.d("All $numSegments segments complete — concatenating into ${destination.name}")
-        destination.parentFile?.mkdirs()
-        FileOutputStream(destination).use { out ->
-            segments.forEach { seg ->
-                val segSize = seg.end - seg.start + 1
-                seg.segFile.inputStream().use { input ->
-                    val buf = ByteArray(64 * 1024)
-                    var remaining = segSize
-                    while (remaining > 0) {
-                        val toRead = minOf(buf.size.toLong(), remaining).toInt()
-                        val n = input.read(buf, 0, toRead)
-                        if (n == -1) break
-                        out.write(buf, 0, n)
-                        remaining -= n
-                    }
-                }
-            }
-        }
-        segments.forEach { it.segFile.delete() }
-        onProgress(1f)
-        Timber.d("Parallel download complete: ${destination.length()} bytes")
-    }
-
-    /**
-     * Downloads the byte range [rangeStart]..[rangeEnd] of [url] into [segFile],
-     * appending to [alreadyDownloaded] bytes already present on disk.
-     * Retries up to 30 times with exponential backoff + jitter on transient errors.
-     * Permanent HTTP 4xx errors are re-thrown immediately without retrying.
-     */
-    private suspend fun downloadSegment(
-        url: String,
-        segFile: File,
-        rangeStart: Long,
-        rangeEnd: Long,
-        alreadyDownloaded: Long,
-        onBytesWritten: suspend (Long) -> Unit,
-    ) {
-        val segTotal = rangeEnd - rangeStart + 1
-        if (alreadyDownloaded >= segTotal) {
-            Timber.d("Segment [$rangeStart-$rangeEnd] already complete")
-            return
-        }
-        // 30 retries — enough to survive frequent connection aborts on a 5 GB mobile download.
-        val maxRetries = 30
-        var attempt = 0
-        var written = alreadyDownloaded
-        while (true) {
-            attempt++
-            val from = rangeStart + written
+    private suspend fun fetchHfTree(folderPath: String): List<HfTreeEntry> {
+        // Use limit=1000 so a single page covers virtually any folder in this dataset.
+        // Without an explicit limit the HF API may truncate results to a small default
+        // (causing only the first few alphabetical entries to be returned).
+        val baseUrl = "$HF_API_BASE/tree/main/$folderPath?limit=1000"
+        val allEntries = mutableListOf<HfTreeEntry>()
+        var nextUrl: String? = baseUrl
+        var page = 0
+        while (nextUrl != null) {
+            page++
+            Timber.d("fetchHfTree('$folderPath') page=$page url=$nextUrl")
             val request = Request.Builder()
-                .url(url)
+                .url(nextUrl)
                 .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
-                .header("Range", "bytes=$from-$rangeEnd")
                 .build()
-            try {
-                httpClient.newCall(request).execute().use { response ->
-                    Timber.d("Segment [$rangeStart-$rangeEnd]: HTTP ${response.code} (attempt $attempt, offset $from)")
-                    when {
-                        response.code == 416 -> {
-                            Timber.d("Segment [$rangeStart-$rangeEnd]: complete (416)")
-                            return
-                        }
-                        // 4xx (except 416) = permanent client error — fail immediately without retrying
-                        response.code in 400..499 ->
-                            throw PermanentHttpException("Permanent HTTP ${response.code}: ${response.message}")
-                        !response.isSuccessful ->
-                            throw IOException("HTTP ${response.code}: ${response.message}")
-                    }
-                    val body = response.body ?: throw IOException("Empty response body")
-                    // If the server returned 200 instead of 206, it is sending full content
-                    // from byte 0 of the resource — NOT from rangeStart. Writing those bytes
-                    // here would silently corrupt this segment with misaligned data. Throw so
-                    // the retry loop re-requests the correct range without touching the file.
-                    if (response.code != 206) {
-                        throw IOException("Segment [$rangeStart-$rangeEnd]: expected 206 but got ${response.code}, retrying")
-                    }
-                    FileOutputStream(segFile, written > 0).use { out ->
-                        body.byteStream().use { inputStream ->
-                            val buffer = ByteArray(256 * 1024)
-                            var n: Int
-                            while (inputStream.read(buffer).also { n = it } != -1) {
-                                out.write(buffer, 0, n)
-                                written += n
-                                onBytesWritten(n.toLong())
-                            }
-                        }
-                    }
+            var resolvedNext: String? = null
+            httpClient.newCall(request).execute().use { response ->
+                if (!response.isSuccessful)
+                    throw IOException("HuggingFace API error ${response.code} for /$folderPath")
+                val body = response.body!!.string()
+                val parsed = parseHfTreeJson(body)
+                Timber.d("fetchHfTree('$folderPath') page=$page -> ${parsed.size} entries (dirs=${parsed.count { it.type=="directory" }}, files=${parsed.count { it.type=="file" }})")
+                allEntries.addAll(parsed)
+                // HuggingFace paginates with Link: <url>; rel="next"
+                response.header("Link")?.let { link ->
+                    Timber.d("fetchHfTree('$folderPath') Link header: $link")
+                    Regex("""<([^>]+)>;\s*rel="next"""").find(link)
+                        ?.groupValues?.get(1)
+                        ?.let { resolvedNext = it }
                 }
-                Timber.d("Segment [$rangeStart-$rangeEnd] complete: $written/$segTotal bytes")
-                return // success
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: PermanentHttpException) {
-                throw e // never retry permanent client errors
-            } catch (e: Exception) {
-                if (attempt >= maxRetries)
-                    throw IOException("Segment [$rangeStart-$rangeEnd] failed after $maxRetries attempts: ${e.message}", e)
-                val delayMs = retryDelayMs(attempt)
-                Timber.w("Segment [$rangeStart-$rangeEnd] attempt $attempt failed (${e.javaClass.simpleName}: ${e.message}), retrying in ${delayMs}ms")
-                delay(delayMs)
             }
+            nextUrl = resolvedNext
+        }
+        Timber.d("fetchHfTree('$folderPath') TOTAL ${allEntries.size} entries across $page page(s)")
+        return allEntries
+    }
+
+    private fun parseHfTreeJson(json: String): List<HfTreeEntry> {
+        val array = JSONArray(json)
+        return (0 until array.length()).mapNotNull { i ->
+            val obj = array.getJSONObject(i)
+            val path = obj.optString("path")
+            if (path.isEmpty()) return@mapNotNull null
+            // For LFS-tracked files the top-level "size" is the LFS pointer size (~127 bytes).
+            // The actual content size is in the nested "lfs.size" field.
+            val actualSize = obj.optJSONObject("lfs")?.optLong("size", 0L)
+                ?: obj.optLong("size", 0L)
+            HfTreeEntry(
+                type = obj.optString("type"),
+                path = path,
+                name = obj.optString("name", path.substringAfterLast("/")),
+                size = actualSize,
+            )
         }
     }
 
-    private suspend fun extractSevenZ(archiveFile: File, destDir: File, onProgress: suspend (Float) -> Unit) {
-        val canonicalDest = destDir.canonicalPath
-        Timber.d("Opening 7z: ${archiveFile.absolutePath}")
-        SevenZFile.builder().setFile(archiveFile).get().use { sevenZFile ->
-            var totalSize = 0L
-            for (entry in sevenZFile.entries) {
-                if (!entry.isDirectory) totalSize += entry.size
-            }
-            Timber.d("7z total uncompressed size: $totalSize bytes")
-            var extractedBytes = 0L
-            var entry = sevenZFile.nextEntry
-            while (entry != null) {
-                if (!entry.isDirectory) {
-                    val entryPath = entry.name.replace('\\', '/')
-                    val outFile = File(destDir, entryPath)
-                    if (!outFile.canonicalPath.startsWith(canonicalDest + File.separator)) {
-                        Timber.w("Skipping path traversal: ${entry.name}")
-                    } else {
-                        outFile.parentFile?.mkdirs()
-                        FileOutputStream(outFile).use { out ->
-                            val buf = ByteArray(32 * 1024)
-                            var n: Int
-                            while (sevenZFile.read(buf).also { n = it } != -1) {
-                                out.write(buf, 0, n)
-                                extractedBytes += n
-                                if (totalSize > 0) onProgress((extractedBytes.toFloat() / totalSize).coerceAtMost(0.99f))
-                            }
-                        }
-                    }
-                }
-                entry = sevenZFile.nextEntry
-            }
-        }
-        onProgress(1f)
-    }
+    private data class HfTreeEntry(
+        val type: String,  // "file" or "directory"
+        val path: String,  // e.g. "roms12g/gb/Tetris.gb"
+        val name: String,  // e.g. "Tetris.gb"
+        val size: Long,    // bytes (0 for directories)
+    )
+
 }
+

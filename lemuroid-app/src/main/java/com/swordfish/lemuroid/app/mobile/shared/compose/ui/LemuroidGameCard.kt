@@ -8,7 +8,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.effects.bounceClick
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
 fun LemuroidGameCard(
@@ -18,16 +18,10 @@ fun LemuroidGameCard(
     onLongClick: () -> Unit = { },
 ) {
     ElevatedCard(
-        modifier = modifier,
+        modifier = modifier.bounceClick(onClick = onClick),
     ) {
         Column(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .combinedClickable(
-                        onClick = onClick,
-                        onLongClick = onLongClick,
-                    ),
+            modifier = Modifier.fillMaxWidth(),
         ) {
             LemuroidGameImage(game = game)
             LemuroidGameTexts(game = game)

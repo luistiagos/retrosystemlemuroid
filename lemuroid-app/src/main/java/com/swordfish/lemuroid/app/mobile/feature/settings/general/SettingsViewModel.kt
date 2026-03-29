@@ -12,12 +12,15 @@ import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import com.swordfish.lemuroid.lib.storage.SmartStoragePicker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
 import com.swordfish.lemuroid.app.shared.roms.RomsDownloadManager
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 
 class SettingsViewModel(
     context: Context,
@@ -47,6 +50,7 @@ class SettingsViewModel(
         val smartStorageVolumes: List<SmartStoragePicker.VolumeInfo> = emptyList(),
         val smartStorageUsingRemovable: Boolean = false,
         val smartStorageUserOverride: Boolean = false,
+        val defaultRomsDirPath: String = "",
     )
 
     val indexingInProgress = PendingOperationsMonitor(context).anyLibraryOperationInProgress()
@@ -55,6 +59,9 @@ class SettingsViewModel(
 
     private val romsDownloadManager = RomsDownloadManager(context.applicationContext)
     val downloadRomsState: Flow<DownloadRomsState> = romsDownloadManager.state
+
+    private val streamingRomsManager = StreamingRomsManager(context.applicationContext, autoRestart = false)
+    val streamingRomsState: Flow<StreamingRomsState> = streamingRomsManager.state
 
     val uiState =
         sharedPreferences.getString(context.getString(com.swordfish.lemuroid.lib.R.string.pref_key_extenral_folder))
@@ -65,12 +72,15 @@ class SettingsViewModel(
                 val volumes = SmartStoragePicker.getVolumeInfoList(context)
                 val usingRemovable = SmartStoragePicker.isUsingRemovableStorage(context)
                 val userOverride = !selectedFolder.isNullOrEmpty()
+                val defaultRomsDir = com.swordfish.lemuroid.lib.storage.DirectoriesManager(context)
+                    .getInternalRomsDirectory()
                 State(
                     currentDirectory = selectedFolder ?: "",
                     isSaveSyncSupported = saveSyncManager.isSupported(),
                     smartStorageVolumes = volumes,
                     smartStorageUsingRemovable = usingRemovable,
                     smartStorageUserOverride = userOverride,
+                    defaultRomsDirPath = defaultRomsDir.absolutePath,
                 )
             }
 
@@ -80,5 +90,13 @@ class SettingsViewModel(
 
     fun downloadAndExtractRoms() {
         romsDownloadManager.downloadAndExtract()
+    }
+
+    /** Deletes all streaming-downloaded ROMs and restarts the download from scratch. */
+    fun redownloadStreamingRoms() {
+        viewModelScope.launch {
+            streamingRomsManager.resetForRedownload()
+            streamingRomsManager.startDownload()
+        }
     }
 }

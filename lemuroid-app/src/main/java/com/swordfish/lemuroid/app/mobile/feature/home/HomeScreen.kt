@@ -1,6 +1,8 @@
 package com.swordfish.lemuroid.app.mobile.feature.home
 
 import android.Manifest
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -11,12 +13,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridScope
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.LinearProgressIndicator
@@ -25,6 +29,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,6 +47,7 @@ import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameCard
 import com.swordfish.lemuroid.app.utils.android.ComposableLifecycle
 import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
 import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
@@ -78,6 +84,39 @@ fun HomeScreen(
     val downloadRomsState = viewModel.getDownloadRomsState().collectAsState(DownloadRomsState.Idle)
     val streamingRomsState = viewModel.getStreamingRomsState().collectAsState(StreamingRomsState.Idle)
     val currentDirectory = viewModel.getCurrentDirectoryFlow().collectAsState("")
+
+    // Collect network-switched-to-mobile events emitted by HomeViewModel
+    var showMobileSwitchDialog by remember { mutableStateOf(false) }
+    var mobileSwitchLabel by remember { mutableStateOf("") }
+    LaunchedEffect(Unit) {
+        viewModel.mobileSwitchEvent.collect { label ->
+            mobileSwitchLabel = label
+            showMobileSwitchDialog = true
+        }
+    }
+    if (showMobileSwitchDialog) {
+        AlertDialog(
+            onDismissRequest = { showMobileSwitchDialog = false },
+            title = { Text(stringResource(R.string.home_streaming_mobile_title, mobileSwitchLabel)) },
+            text = { Text(stringResource(R.string.home_streaming_mobile_message, mobileSwitchLabel)) },
+            confirmButton = {
+                // Download was already paused when WiFi dropped; "Continuar" resumes it on mobile.
+                TextButton(onClick = {
+                    showMobileSwitchDialog = false
+                    viewModel.resumeStreamingDownload()
+                }) {
+                    Text(stringResource(R.string.home_streaming_mobile_continue))
+                }
+            },
+            dismissButton = {
+                // Download is already paused; just close the dialog.
+                TextButton(onClick = { showMobileSwitchDialog = false }) {
+                    Text(stringResource(R.string.home_streaming_mobile_pause))
+                }
+            },
+        )
+    }
+
     HomeScreen(
         modifier,
         state.value,
@@ -101,6 +140,8 @@ fun HomeScreen(
         { viewModel.cancelDownload() },
         { viewModel.startStreamingDownload() },
         { viewModel.cancelStreamingDownload() },
+        { viewModel.pauseStreamingDownload() },
+        { viewModel.resumeStreamingDownload() },
     ) // TODO COMPOSE We need to understand what's going to happen here.
 }
 
@@ -122,6 +163,8 @@ private fun HomeScreen(
     onCancelDownloadClicked: () -> Unit,
     onStartStreamingClicked: () -> Unit,
     onCancelStreamingClicked: () -> Unit,
+    onPauseStreamingClicked: () -> Unit,
+    onResumeStreamingClicked: () -> Unit,
 ) {
     if (state.showDownloadPromptDialog) {
         AlertDialog(
@@ -143,87 +186,98 @@ private fun HomeScreen(
             },
         )
     }
-    Column(
-        modifier =
-            modifier
-                .verticalScroll(rememberScrollState())
-                .padding(top = 16.dp, bottom = 16.dp),
+    val sectionRecent = stringResource(id = R.string.recent)
+    val sectionFavorites = stringResource(id = R.string.favorites)
+    val sectionDiscover = stringResource(id = R.string.discover)
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 140.dp),
+        modifier = modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        AnimatedVisibility(state.showNoNotificationPermissionCard) {
-            HomeNotification(
-                titleId = R.string.home_notification_title,
-                messageId = R.string.home_notification_message,
-                actionId = R.string.home_notification_action,
-                onAction = onEnableNotificationsClicked,
-            )
-        }
-        AnimatedVisibility(state.showDirectoryInaccessibleCard) {
-            HomeNotification(
-                titleId = R.string.home_storage_inaccessible_title,
-                messageId = R.string.home_storage_inaccessible_message,
-                actionId = R.string.home_storage_inaccessible_action,
-                onAction = onSetDirectoryClicked,
-                enabled = downloadRomsState !is DownloadRomsState.Downloading && downloadRomsState !is DownloadRomsState.Extracting,
-            )
-        }
-        AnimatedVisibility(state.showNoGamesCard && !state.showDirectoryInaccessibleCard) {
-            val context = LocalContext.current
-            val dirName = remember(currentDirectory) {
-                if (currentDirectory.isNotEmpty()) {
-                    runCatching { DocumentFile.fromTreeUri(context, Uri.parse(currentDirectory))?.name }.getOrNull()
-                } else null
+        item(span = { GridItemSpan(maxLineSpan) }) {
+            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                AnimatedVisibility(state.showNoNotificationPermissionCard) {
+                    HomeNotification(
+                        titleId = R.string.home_notification_title,
+                        messageId = R.string.home_notification_message,
+                        actionId = R.string.home_notification_action,
+                        onAction = onEnableNotificationsClicked,
+                    )
+                }
+                AnimatedVisibility(state.showDirectoryInaccessibleCard) {
+                    HomeNotification(
+                        titleId = R.string.home_storage_inaccessible_title,
+                        messageId = R.string.home_storage_inaccessible_message,
+                        actionId = R.string.home_storage_inaccessible_action,
+                        onAction = onSetDirectoryClicked,
+                        enabled = downloadRomsState !is DownloadRomsState.Downloading && downloadRomsState !is DownloadRomsState.Extracting,
+                    )
+                }
+                AnimatedVisibility(state.showNoGamesCard && !state.showDirectoryInaccessibleCard) {
+                    val context = LocalContext.current
+                    val dirName = remember(currentDirectory) {
+                        if (currentDirectory.isNotEmpty()) {
+                            runCatching { DocumentFile.fromTreeUri(context, Uri.parse(currentDirectory))?.name }.getOrNull()
+                        } else null
+                    }
+                    HomeNotification(
+                        titleId = R.string.home_empty_title,
+                        messageId = R.string.home_empty_message,
+                        actionId = R.string.home_empty_action,
+                        onAction = onSetDirectoryClicked,
+                        enabled = !state.indexInProgress && downloadRomsState !is DownloadRomsState.Downloading && downloadRomsState !is DownloadRomsState.Extracting,
+                        extraContent = if (dirName != null) {
+                            { Text(text = dirName, style = MaterialTheme.typography.bodySmall) }
+                        } else null,
+                    )
+                }
+                AnimatedVisibility(state.showNoMicrophonePermissionCard) {
+                    HomeNotification(
+                        titleId = R.string.home_microphone_title,
+                        messageId = R.string.home_microphone_message,
+                        actionId = R.string.home_microphone_action,
+                        onAction = onEnableMicrophoneClicked,
+                    )
+                }
+                AnimatedVisibility(state.showDesmumeDeprecatedCard) {
+                    HomeNotification(
+                        titleId = R.string.home_notification_desmume_deprecated_title,
+                        messageId = R.string.home_notification_desmume_deprecated_message,
+                        actionId = R.string.home_notification_desmume_deprecated_action,
+                        onAction = onOpenCoreSelection,
+                    )
+                }
+                // Card is only shown while the download is not yet complete.
+                // The Done state is handled exclusively via Settings → "Baixar novamente",
+                // which calls resetForRedownload() and transitions the state back to Idle.
+                AnimatedVisibility(streamingRomsState !is StreamingRomsState.Done) {
+                    HomeStreamingCard(
+                        state = streamingRomsState,
+                        onDownloadClicked = onStartStreamingClicked,
+                        onCancelClicked = onCancelStreamingClicked,
+                        onPauseClicked = onPauseStreamingClicked,
+                        onResumeClicked = onResumeStreamingClicked,
+                    )
+                }
             }
-            HomeNotification(
-                titleId = R.string.home_empty_title,
-                messageId = R.string.home_empty_message,
-                actionId = R.string.home_empty_action,
-                onAction = onSetDirectoryClicked,
-                enabled = !state.indexInProgress && downloadRomsState !is DownloadRomsState.Downloading && downloadRomsState !is DownloadRomsState.Extracting,
-                extraContent = if (dirName != null) {
-                    { Text(text = dirName, style = MaterialTheme.typography.bodySmall) }
-                } else null,
-            )
         }
-        AnimatedVisibility(state.showNoMicrophonePermissionCard) {
-            HomeNotification(
-                titleId = R.string.home_microphone_title,
-                messageId = R.string.home_microphone_message,
-                actionId = R.string.home_microphone_action,
-                onAction = onEnableMicrophoneClicked,
-            )
-        }
-        AnimatedVisibility(state.showDesmumeDeprecatedCard) {
-            HomeNotification(
-                titleId = R.string.home_notification_desmume_deprecated_title,
-                messageId = R.string.home_notification_desmume_deprecated_message,
-                actionId = R.string.home_notification_desmume_deprecated_action,
-                onAction = onOpenCoreSelection,
-            )
-        }
-        // Old batch-download card hidden; code kept for fallback.
-        // AnimatedVisibility(downloadRomsState !is DownloadRomsState.Done) { ... }
-        AnimatedVisibility(streamingRomsState !is StreamingRomsState.Done) {
-            HomeStreamingCard(
-                state = streamingRomsState,
-                onDownloadClicked = onStartStreamingClicked,
-                onCancelClicked = onCancelStreamingClicked,
-            )
-        }
-        HomeRow(
-            stringResource(id = R.string.recent),
+
+        homeGridSection(
+            sectionRecent,
             state.recentGames,
             onGameClicked,
             onGameLongClick,
         )
-        HomeRow(
-            stringResource(id = R.string.favorites),
+        homeGridSection(
+            sectionFavorites,
             state.favoritesGames,
             onGameClicked,
             onGameLongClick,
         )
-        HomeRow(
-            stringResource(id = R.string.discover),
+        homeGridSection(
+            sectionDiscover,
             state.discoveryGames,
             onGameClicked,
             onGameLongClick,
@@ -232,43 +286,29 @@ private fun HomeScreen(
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-@Composable
-private fun HomeRow(
+private fun LazyGridScope.homeGridSection(
     title: String,
     games: List<Game>,
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
 ) {
-    if (games.isEmpty()) {
-        return
-    }
+    if (games.isEmpty()) return
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    item(span = { GridItemSpan(maxLineSpan) }) {
         Text(
             text = title,
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
         )
-        LazyRow(
-            modifier =
-                Modifier
-                    .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp),
-        ) {
-            items(games.size, key = { games[it].id }) { index ->
-                val game = games[index]
-                LemuroidGameCard(
-                    modifier =
-                        Modifier
-                            .widthIn(0.dp, 144.dp)
-                            .animateItem(),
-                    game = game,
-                    onClick = { onGameClicked(game) },
-                    onLongClick = { onGameLongClick(game) },
-                )
-            }
-        }
+    }
+
+    items(games, key = { it.id }) { game ->
+        LemuroidGameCard(
+            modifier = Modifier.fillMaxWidth().animateItem(),
+            game = game,
+            onClick = { onGameClicked(game) },
+            onLongClick = { onGameLongClick(game) },
+        )
     }
 }
 
@@ -430,29 +470,69 @@ private fun HomeDownloadCard(
     }
 }
 
+/**
+ * Returns true when the WiFi-only preference is enabled and there is no active WiFi connection.
+ * In that case the caller should prompt the user before starting/resuming a download.
+ */
+private fun isWifiNeeded(context: android.content.Context): Boolean {
+    val streamingPrefs = context.getSharedPreferences(
+        "streaming_roms_prefs", android.content.Context.MODE_PRIVATE
+    )
+    val wifiOnly = streamingPrefs.getBoolean(StreamingRomsManager.PREF_WIFI_ONLY, true)
+    if (!wifiOnly) return false
+    val cm = context.getSystemService(ConnectivityManager::class.java)
+    val isOnWifi = cm?.getNetworkCapabilities(cm.activeNetwork)
+        ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+    return !isOnWifi
+}
+
 @Composable
 private fun HomeStreamingCard(
     state: StreamingRomsState,
     onDownloadClicked: () -> Unit,
     onCancelClicked: () -> Unit,
+    onPauseClicked: () -> Unit,
+    onResumeClicked: () -> Unit,
 ) {
+    val context = LocalContext.current
     var showCancelDialog by remember { mutableStateOf(false) }
+    var wifiConfirmAction by remember { mutableStateOf<(() -> Unit)?>(null) }
     if (showCancelDialog) {
         AlertDialog(
             onDismissRequest = { showCancelDialog = false },
-            title = { Text(stringResource(R.string.home_download_cancel_dialog_title)) },
-            text = { Text(stringResource(R.string.home_download_cancel_dialog_message)) },
+            title = { Text(stringResource(R.string.home_streaming_cancel_title)) },
+            text = { Text(stringResource(R.string.home_streaming_cancel_message)) },
             confirmButton = {
                 TextButton(onClick = {
                     showCancelDialog = false
                     onCancelClicked()
                 }) {
-                    Text(stringResource(R.string.home_download_cancel_dialog_confirm))
+                    Text(stringResource(R.string.home_streaming_cancel_confirm))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showCancelDialog = false }) {
-                    Text(stringResource(R.string.home_download_cancel_dialog_dismiss))
+                    Text(stringResource(R.string.home_streaming_cancel_dismiss))
+                }
+            },
+        )
+    }
+    if (wifiConfirmAction != null) {
+        AlertDialog(
+            onDismissRequest = { wifiConfirmAction = null },
+            title = { Text(stringResource(R.string.home_streaming_nowifi_title)) },
+            text = { Text(stringResource(R.string.home_streaming_nowifi_message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    wifiConfirmAction?.invoke()
+                    wifiConfirmAction = null
+                }) {
+                    Text(stringResource(R.string.home_streaming_nowifi_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { wifiConfirmAction = null }) {
+                    Text(stringResource(R.string.home_streaming_nowifi_cancel))
                 }
             },
         )
@@ -480,7 +560,10 @@ private fun HomeStreamingCard(
                     )
                     OutlinedButton(
                         modifier = Modifier.align(Alignment.End),
-                        onClick = onDownloadClicked,
+                        onClick = {
+                            if (isWifiNeeded(context)) wifiConfirmAction = { onDownloadClicked() }
+                            else onDownloadClicked()
+                        },
                     ) {
                         Text(stringResource(R.string.home_streaming_roms_action))
                     }
@@ -504,23 +587,36 @@ private fun HomeStreamingCard(
                         progress = { state.progress },
                         modifier = Modifier.fillMaxWidth(),
                     )
-                    OutlinedButton(
+                    Row(
                         modifier = Modifier.align(Alignment.End),
-                        onClick = { showCancelDialog = true },
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Text(stringResource(R.string.home_download_roms_cancel))
+                        OutlinedButton(onClick = { showCancelDialog = true }) {
+                            Text(stringResource(R.string.home_streaming_roms_action_cancel))
+                        }
+                        OutlinedButton(onClick = onPauseClicked) {
+                            Text(stringResource(R.string.home_streaming_roms_pause))
+                        }
                     }
                 }
-                is StreamingRomsState.Done -> {
+                is StreamingRomsState.Paused -> {
                     Text(
-                        text = stringResource(R.string.home_download_roms_done),
+                        text = stringResource(R.string.home_streaming_roms_paused),
                         style = MaterialTheme.typography.bodyMedium,
                     )
-                    OutlinedButton(
+                    Row(
                         modifier = Modifier.align(Alignment.End),
-                        onClick = onDownloadClicked,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Text(stringResource(R.string.home_download_roms_action_again))
+                        OutlinedButton(onClick = { showCancelDialog = true }) {
+                            Text(stringResource(R.string.home_streaming_roms_action_cancel))
+                        }
+                        OutlinedButton(onClick = {
+                            if (isWifiNeeded(context)) wifiConfirmAction = { onResumeClicked() }
+                            else onResumeClicked()
+                        }) {
+                            Text(stringResource(R.string.home_streaming_roms_resume))
+                        }
                     }
                 }
                 is StreamingRomsState.Error -> {
@@ -535,6 +631,8 @@ private fun HomeStreamingCard(
                         Text(stringResource(R.string.home_download_roms_action_retry))
                     }
                 }
+                // Card is hidden by AnimatedVisibility when Done; no UI needed here.
+                is StreamingRomsState.Done -> {}
             }
         }
     }

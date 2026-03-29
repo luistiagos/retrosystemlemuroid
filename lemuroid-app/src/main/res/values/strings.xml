@@ -149,6 +149,28 @@
     <string name="home_streaming_roms_message">Download ROMs one by one. Games become available to play immediately as each file is downloaded — no extraction needed.</string>
     <string name="home_streaming_roms_action">Start Streaming Download</string>
     <string name="home_streaming_roms_downloading">%1$d%% · %2$s files · %3$s</string>
+    <string name="home_streaming_roms_pause">Pausar</string>
+    <string name="home_streaming_roms_resume">Continuar</string>
+    <string name="home_streaming_roms_paused">Download pausado. Os arquivos já baixados foram mantidos.</string>
+    <string name="home_streaming_roms_action_cancel">Cancelar</string>
+    <!-- Cancel dialog for streaming (files are kept) -->
+    <string name="home_streaming_cancel_title">Cancelar download?</string>
+    <string name="home_streaming_cancel_message">O download será parado. Os arquivos já baixados serão mantidos, mas você precisará iniciar o download novamente para obter todos os ROMs.</string>
+    <string name="home_streaming_cancel_confirm">Sim, cancelar</string>
+    <string name="home_streaming_cancel_dismiss">Não, manter baixando</string>
+    <!-- No WiFi warning when starting download -->
+    <string name="home_streaming_nowifi_title">Sem WiFi</string>
+    <string name="home_streaming_nowifi_message">Você não está conectado ao WiFi. Recomendamos baixar via WiFi para evitar uso excessivo de dados móveis. Deseja continuar mesmo assim?</string>
+    <string name="home_streaming_nowifi_confirm">Sim, continuar</string>
+    <string name="home_streaming_nowifi_cancel">Cancelar</string>
+    <!-- Network switched to mobile during download -->
+    <string name="home_streaming_mobile_title">Rede trocada para %1$s</string>
+    <string name="home_streaming_mobile_message">Sua conexão foi trocada para rede móvel (%1$s). Recomendamos baixar via WiFi. Deseja continuar o download na rede móvel?</string>
+    <string name="home_streaming_mobile_continue">Continuar</string>
+    <string name="home_streaming_mobile_pause">Pausar</string>
+    <!-- WiFi-only download setting -->
+    <string name="settings_wifi_only_title">Baixar somente via WiFi</string>
+    <string name="settings_wifi_only_subtitle">Avisar quando o download não estiver em WiFi</string>
 
     <string name="notification_download_roms_title">Downloading ROMs Pack</string>
     <string name="notification_download_roms_message">Download continues in background even with screen off.</string>

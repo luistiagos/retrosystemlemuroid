@@ -7,8 +7,10 @@ import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -37,6 +39,7 @@ sealed class StreamingRomsState {
         val downloadedFiles: Int = 0,
         val totalFiles: Int = 0,
     ) : StreamingRomsState()
+    object Paused : StreamingRomsState()
     object Done : StreamingRomsState()
     data class Error(val message: String) : StreamingRomsState()
 }
@@ -58,12 +61,14 @@ data class HuggingFaceFileEntry(
  * The original [RomsDownloadManager] is left untouched and can still be used as a
  * fallback by switching the download card back to it.
  */
-class StreamingRomsManager(context: Context) {
+class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
 
     companion object {
         private const val PREFS_NAME = "streaming_roms_prefs"
         const val PREF_DOWNLOAD_DONE = "streaming_download_done"
         const val PREF_DOWNLOAD_STARTED = "streaming_download_started"
+        const val PREF_PAUSED = "streaming_download_paused"
+        const val PREF_WIFI_ONLY = "wifi_only_download"
         private const val PREF_DOWNLOADED_FILES = "streaming_downloaded_files"
 
         /**
@@ -78,7 +83,7 @@ class StreamingRomsManager(context: Context) {
          * Returns a JSON array of objects with "path", "size", "type", "url".
          */
         private fun hfApiUrl(path: String = HF_ROOT_PATH): String =
-            "https://huggingface.co/api/datasets/$HF_DATASET/tree/main/$path?recursive=true"
+            "https://huggingface.co/api/datasets/$HF_DATASET/tree/main/$path?recursive=true&limit=1000"
 
         /**
          * Builds the direct download URL for a given path inside the dataset.
@@ -90,42 +95,70 @@ class StreamingRomsManager(context: Context) {
     private val appContext = context.applicationContext
     private val prefs = appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val httpClient: OkHttpClient by lazy { buildHttpClient() }
+    // Reactive pause flag — updated immediately on pause/resume so the state flow
+    // responds instantly without waiting for WorkManager to emit a new WorkInfo.
+    private val _pausedFlow = MutableStateFlow(prefs.getBoolean(PREF_PAUSED, false))
 
-    val state: Flow<StreamingRomsState> = WorkManager.getInstance(appContext)
-        .getWorkInfosForUniqueWorkFlow(StreamingRomsWork.UNIQUE_WORK_ID)
-        .map { workInfos ->
-            val info = workInfos.firstOrNull()
-            val done = prefs.getBoolean(PREF_DOWNLOAD_DONE, false)
-            when {
-                done && (info == null || info.state == WorkInfo.State.SUCCEEDED) ->
-                    StreamingRomsState.Done
-                info == null || info.state == WorkInfo.State.CANCELLED ->
-                    if (prefs.getBoolean(PREF_DOWNLOAD_STARTED, false))
-                        StreamingRomsState.Downloading(0f)
-                    else
-                        StreamingRomsState.Idle
-                info.state == WorkInfo.State.ENQUEUED || info.state == WorkInfo.State.BLOCKED ->
-                    StreamingRomsState.Downloading(
-                        progress = info.progress.getFloat(StreamingRomsWork.KEY_PROGRESS, 0f),
-                        currentFile = info.progress.getString(StreamingRomsWork.KEY_CURRENT_FILE) ?: "",
-                        downloadedFiles = info.progress.getInt(StreamingRomsWork.KEY_DOWNLOADED_FILES, 0),
-                        totalFiles = info.progress.getInt(StreamingRomsWork.KEY_TOTAL_FILES, 0),
-                    )
-                info.state == WorkInfo.State.RUNNING ->
-                    StreamingRomsState.Downloading(
-                        progress = info.progress.getFloat(StreamingRomsWork.KEY_PROGRESS, 0f),
-                        currentFile = info.progress.getString(StreamingRomsWork.KEY_CURRENT_FILE) ?: "",
-                        downloadedFiles = info.progress.getInt(StreamingRomsWork.KEY_DOWNLOADED_FILES, 0),
-                        totalFiles = info.progress.getInt(StreamingRomsWork.KEY_TOTAL_FILES, 0),
-                    )
-                info.state == WorkInfo.State.SUCCEEDED -> StreamingRomsState.Done
-                info.state == WorkInfo.State.FAILED -> {
-                    val error = info.outputData.getString(StreamingRomsWork.KEY_ERROR) ?: "Unknown error"
-                    StreamingRomsState.Error(error)
-                }
-                else -> StreamingRomsState.Idle
-            }
+    init {
+        // If a streaming download was started but never completed (app killed mid-download),
+        // automatically re-enqueue the work so it resumes from where it left off.
+        // Skip auto-restart if the download was explicitly paused by the user.
+        // autoRestart=false when called from StreamingRomsWork itself to avoid a redundant
+        // enqueue IPC call while the work is already actively running.
+        if (autoRestart
+            && prefs.getBoolean(PREF_DOWNLOAD_STARTED, false)
+            && !prefs.getBoolean(PREF_PAUSED, false)
+            && !isDownloadDone()) {
+            StreamingRomsWork.enqueue(appContext)
         }
+    }
+
+    val state: Flow<StreamingRomsState> =
+        WorkManager.getInstance(appContext)
+            .getWorkInfosForUniqueWorkFlow(StreamingRomsWork.UNIQUE_WORK_ID)
+            .combine(_pausedFlow) { workInfos, _ ->
+                val info = workInfos.firstOrNull()
+                val done = prefs.getBoolean(PREF_DOWNLOAD_DONE, false)
+                // Always read PREF_PAUSED from SharedPreferences, not from the _pausedFlow
+                // parameter. _pausedFlow only provides the reactive trigger — its value can
+                // diverge from prefs when a different StreamingRomsManager instance (e.g.
+                // SettingsViewModel) calls resetForRedownload() or resumeDownload().
+                // SharedPreferences is the single source of truth shared across all instances.
+                val paused = prefs.getBoolean(PREF_PAUSED, false)
+                when {
+                    // PREF_DOWNLOAD_DONE is only written inside doStreamingDownload() on
+                    // successful completion — it's safe to show Done immediately without
+                    // waiting for WorkManager to also emit SUCCEEDED (which can lag 1-2s,
+                    // causing a visible "Downloading → Done" flash at the end of a download).
+                    done ->
+                        StreamingRomsState.Done
+                    paused -> StreamingRomsState.Paused
+                    info == null || info.state == WorkInfo.State.CANCELLED ->
+                        if (prefs.getBoolean(PREF_DOWNLOAD_STARTED, false))
+                            StreamingRomsState.Downloading(0f)
+                        else
+                            StreamingRomsState.Idle
+                    info.state == WorkInfo.State.ENQUEUED || info.state == WorkInfo.State.BLOCKED ->
+                        StreamingRomsState.Downloading(
+                            progress = info.progress.getFloat(StreamingRomsWork.KEY_PROGRESS, 0f),
+                            currentFile = info.progress.getString(StreamingRomsWork.KEY_CURRENT_FILE) ?: "",
+                            downloadedFiles = info.progress.getInt(StreamingRomsWork.KEY_DOWNLOADED_FILES, 0),
+                            totalFiles = info.progress.getInt(StreamingRomsWork.KEY_TOTAL_FILES, 0),
+                        )
+                    info.state == WorkInfo.State.RUNNING ->
+                        StreamingRomsState.Downloading(
+                            progress = info.progress.getFloat(StreamingRomsWork.KEY_PROGRESS, 0f),
+                            currentFile = info.progress.getString(StreamingRomsWork.KEY_CURRENT_FILE) ?: "",
+                            downloadedFiles = info.progress.getInt(StreamingRomsWork.KEY_DOWNLOADED_FILES, 0),
+                            totalFiles = info.progress.getInt(StreamingRomsWork.KEY_TOTAL_FILES, 0),
+                        )
+                    info.state == WorkInfo.State.FAILED -> {
+                        val error = info.outputData.getString(StreamingRomsWork.KEY_ERROR) ?: "Unknown error"
+                        StreamingRomsState.Error(error)
+                    }
+                    else -> StreamingRomsState.Idle
+                }
+            }
 
     fun isDownloadDone(): Boolean = prefs.getBoolean(PREF_DOWNLOAD_DONE, false)
 
@@ -140,12 +173,55 @@ class StreamingRomsManager(context: Context) {
         prefs.edit().putBoolean(PREF_DOWNLOAD_STARTED, false).apply()
     }
 
-    suspend fun cancelDownload() {
+    fun cancelDownload() {
         WorkManager.getInstance(appContext).cancelUniqueWork(StreamingRomsWork.UNIQUE_WORK_ID)
         prefs.edit()
             .putBoolean(PREF_DOWNLOAD_STARTED, false)
+            .remove(PREF_PAUSED)
             .apply()
+        _pausedFlow.value = false
         Timber.d("Streaming download cancelled")
+    }
+
+    fun pauseDownload() {
+        // Write PREF_PAUSED BEFORE cancelling work so that if the app is killed
+        // between these two operations, the auto-restart in init() is still blocked.
+        prefs.edit().putBoolean(PREF_PAUSED, true).apply()
+        _pausedFlow.value = true
+        WorkManager.getInstance(appContext).cancelUniqueWork(StreamingRomsWork.UNIQUE_WORK_ID)
+        Timber.d("Streaming download paused")
+    }
+
+    fun resumeDownload() {
+        prefs.edit().putBoolean(PREF_PAUSED, false).apply()
+        _pausedFlow.value = false
+        StreamingRomsWork.enqueue(appContext)
+        Timber.d("Streaming download resumed")
+    }
+
+    fun isCurrentlyDownloading(): Boolean =
+        prefs.getBoolean(PREF_DOWNLOAD_STARTED, false) &&
+            !isDownloadDone() &&
+            !prefs.getBoolean(PREF_PAUSED, false)
+
+    /**
+     * Resets all download state and deletes any previously downloaded ROM files so the user
+     * can start a fresh download from scratch. Called from the Settings screen "Download again"
+     * option when the streaming download is in the Done state.
+     */
+    suspend fun resetForRedownload() {
+        WorkManager.getInstance(appContext).cancelUniqueWork(StreamingRomsWork.UNIQUE_WORK_ID)
+        withContext(Dispatchers.IO) {
+            DirectoriesManager(appContext).getInternalRomsDirectory().deleteRecursively()
+        }
+        prefs.edit()
+            .putBoolean(PREF_DOWNLOAD_DONE, false)
+            .putBoolean(PREF_DOWNLOAD_STARTED, false)
+            .remove(PREF_PAUSED)
+            .remove(PREF_DOWNLOADED_FILES)
+            .apply()
+        _pausedFlow.value = false
+        Timber.d("Streaming download state reset for re-download")
     }
 
     /**
@@ -161,7 +237,23 @@ class StreamingRomsManager(context: Context) {
         romsDir.mkdirs()
 
         Timber.d("Fetching file list from HuggingFace...")
-        val files = fetchFileList()
+        // Retry fetchFileList on transient network errors (e.g. UnknownHostException right after
+        // a network switch from WiFi to mobile — DNS may not be ready yet).
+        var fetchAttempt = 0
+        var fetchResult: List<HuggingFaceFileEntry>? = null
+        while (fetchResult == null) {
+            fetchAttempt++
+            try {
+                fetchResult = fetchFileList()
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: IOException) {
+                if (fetchAttempt >= 5) throw IOException("Failed to fetch file list after $fetchAttempt attempts: ${e.message}", e)
+                Timber.w("fetchFileList attempt $fetchAttempt failed: ${e.message}, retrying in ${3000L * fetchAttempt}ms")
+                delay(minOf(3000L * fetchAttempt, 15000L))
+            }
+        }
+        val files = fetchResult
         if (files.isEmpty()) throw IOException("No files found at $HF_ROOT_PATH")
 
         Timber.d("Found ${files.size} files to download")
@@ -169,9 +261,9 @@ class StreamingRomsManager(context: Context) {
         var downloadedCount = alreadyDownloaded
 
         files.forEachIndexed { index, entry ->
-            // Skip files already downloaded in a previous run
+            // Skip files already fully downloaded in a previous run
             val destFile = resolveDestinationFile(entry, romsDir)
-            if (destFile.exists() && destFile.length() > 0) {
+            if (destFile.exists() && (entry.size == 0L || destFile.length() == entry.size)) {
                 Timber.d("Skipping already downloaded: ${entry.path}")
                 if (index >= alreadyDownloaded) {
                     downloadedCount++
@@ -191,7 +283,14 @@ class StreamingRomsManager(context: Context) {
             onProgress(index.toFloat() / files.size, fileName, downloadedCount, files.size)
 
             destFile.parentFile?.mkdirs()
-            downloadFileWithResume(entry.downloadUrl, destFile)
+            try {
+                downloadFileWithResume(entry.downloadUrl, destFile)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Timber.e(e, "Skipping ${entry.path}: ${e.message}")
+                return@forEachIndexed
+            }
 
             downloadedCount++
             prefs.edit().putInt(PREF_DOWNLOADED_FILES, downloadedCount).apply()
@@ -227,21 +326,38 @@ class StreamingRomsManager(context: Context) {
     }
 
     /**
-     * Fetches the recursive file list from the HuggingFace tree API.
+     * Fetches the recursive file list from the HuggingFace tree API with pagination.
      * Returns only file entries (type == "file"), excluding directories.
+     * Uses limit=10000 to cover the entire dataset in a single page; follows
+     * Link: <url>; rel="next" headers if additional pages exist.
      */
     private fun fetchFileList(): List<HuggingFaceFileEntry> {
-        val url = hfApiUrl()
-        val request = Request.Builder()
-            .url(url)
-            .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
-            .build()
-
-        return httpClient.newCall(request).execute().use { response ->
-            if (!response.isSuccessful) throw IOException("HuggingFace API error ${response.code}: ${response.message}")
-            val body = response.body?.string() ?: throw IOException("Empty response from HuggingFace API")
-            parseFileList(body)
+        val allFiles = mutableListOf<HuggingFaceFileEntry>()
+        var nextUrl: String? = hfApiUrl()
+        var page = 0
+        while (nextUrl != null) {
+            page++
+            Timber.d("fetchFileList() page=$page url=$nextUrl")
+            val request = Request.Builder()
+                .url(nextUrl)
+                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .build()
+            var resolvedNext: String? = null
+            httpClient.newCall(request).execute().use { response ->
+                if (!response.isSuccessful) throw IOException("HuggingFace API error ${response.code}: ${response.message}")
+                val body = response.body?.string() ?: throw IOException("Empty response from HuggingFace API")
+                allFiles.addAll(parseFileList(body))
+                // Follow pagination via Link header
+                response.header("Link")?.let { link ->
+                    Regex("""<([^>]+)>;\s*rel="next"""").find(link)
+                        ?.groupValues?.get(1)
+                        ?.let { resolvedNext = it }
+                }
+            }
+            nextUrl = resolvedNext
         }
+        Timber.d("fetchFileList() TOTAL ${allFiles.size} files across $page page(s)")
+        return allFiles
     }
 
     /**
@@ -256,7 +372,10 @@ class StreamingRomsManager(context: Context) {
             val obj = array.getJSONObject(i)
             if (obj.optString("type") != "file") continue
             val path = obj.getString("path")
-            val size = obj.optLong("size", 0L)
+            // For LFS-tracked files the top-level "size" is the LFS pointer size (~127 bytes).
+            // The actual content size is in the nested "lfs.size" field.
+            val size = obj.optJSONObject("lfs")?.optLong("size", 0L)
+                ?: obj.optLong("size", 0L)
             // Prefer the "lfs" download URL if available, fall back to constructed URL
             val downloadUrl = hfDownloadUrl(path)
             result.add(HuggingFaceFileEntry(path, size, downloadUrl))
@@ -268,12 +387,14 @@ class StreamingRomsManager(context: Context) {
      * Downloads [url] to [destFile], resuming from where it left off if the file
      * already exists partially on disk.
      */
-    private fun downloadFileWithResume(url: String, destFile: File) {
-        val existingBytes = if (destFile.exists()) destFile.length() else 0L
+    private suspend fun downloadFileWithResume(url: String, destFile: File) {
         val maxRetries = 10
         var attempt = 0
         while (true) {
             attempt++
+            // Re-read the file size on every attempt so the Range header is correct even
+            // when a previous attempt wrote some bytes before failing.
+            val existingBytes = if (destFile.exists()) destFile.length() else 0L
             val request = Request.Builder()
                 .url(url)
                 .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
@@ -309,7 +430,7 @@ class StreamingRomsManager(context: Context) {
                 if (e.message?.startsWith("Permanent") == true) throw e
                 if (attempt >= maxRetries) throw IOException("Failed after $maxRetries attempts: ${e.message}", e)
                 Timber.w("Retry $attempt for ${destFile.name}: ${e.message}")
-                Thread.sleep(minOf(2000L * attempt, 10000L))
+                delay(minOf(2000L * attempt, 10000L))
             }
         }
     }

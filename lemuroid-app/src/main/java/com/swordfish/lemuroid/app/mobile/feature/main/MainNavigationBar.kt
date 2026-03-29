@@ -45,7 +45,7 @@ private fun LemuroidNavigationBar(
                         contentDescription = stringResource(destination.titleId),
                     )
                 },
-                label = { Text(stringResource(destination.titleId)) },
+                label = null,
                 selected = isSelected,
                 onClick = {
                     navController.navigate(destination.route.route) {
