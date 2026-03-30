@@ -98,9 +98,8 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
                 .setPositiveButton(getString(R.string.settings_move_roms_yes)) { _, _ ->
                     moveRomsAndFinish(romsDir, romsFiles, newValue, sharedPreferences, preferenceKey)
                 }
-                .setNegativeButton(getString(R.string.settings_move_roms_no)) { _, _ ->
-                    sharedPreferences.edit().putString(preferenceKey, newValue.toString()).apply()
-                    startLibraryIndexWork()
+                .setNegativeButton(getString(R.string.settings_move_roms_cancel_operation)) { _, _ ->
+                    // User cancelled — do not change directory, just close.
                     finish()
                 }
                 .setCancelable(false)

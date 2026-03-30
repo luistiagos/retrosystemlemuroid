@@ -2,32 +2,24 @@ package com.swordfish.lemuroid.app.mobile.feature.home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import android.net.Uri
 import android.os.Build
 import androidx.core.content.ContextCompat
-import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
-import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
 import com.swordfish.lemuroid.common.coroutines.combine
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -79,7 +71,6 @@ class HomeViewModel(
         val showNoMicrophonePermissionCard: Boolean = false,
         val showNoGamesCard: Boolean = false,
         val showDesmumeDeprecatedCard: Boolean = false,
-        val showDirectoryInaccessibleCard: Boolean = false,
         val showDownloadPromptDialog: Boolean = false,
     )
 
@@ -118,10 +109,6 @@ class HomeViewModel(
         return uiStates
     }
 
-    fun changeLocalStorageFolder(context: Context) {
-        StorageFrameworkPickerLauncher.pickFolder(context)
-    }
-
     // True when the DB has no games at all.
     private val noGamesFlow: Flow<Boolean> = combine(
         favoritesGames(retrogradeDb),
@@ -148,18 +135,6 @@ class HomeViewModel(
             DownloadRomsState.Idle
         else
             dlState
-    }
-
-    @Suppress("DEPRECATION")
-    fun getCurrentDirectoryFlow(): Flow<String> = callbackFlow {
-        val prefs = SharedPreferencesHelper.getLegacySharedPreferences(appCtx)
-        val key = appCtx.getString(com.swordfish.lemuroid.lib.R.string.pref_key_extenral_folder)
-        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
-            if (changedKey == key) trySend(prefs.getString(key, "") ?: "")
-        }
-        prefs.registerOnSharedPreferenceChangeListener(listener)
-        trySend(prefs.getString(key, "") ?: "")
-        awaitClose { prefs.unregisterOnSharedPreferenceChangeListener(listener) }
     }
 
     fun cancelDownload() {
@@ -214,50 +189,6 @@ class HomeViewModel(
         downloadDialogDismissed.value = true
     }
 
-    @Suppress("DEPRECATION")
-    private fun getDirectoryAccessibilityFlow(): Flow<Boolean> = callbackFlow {
-        val prefKey = appCtx.getString(com.swordfish.lemuroid.lib.R.string.pref_key_extenral_folder)
-        val prefs = SharedPreferencesHelper.getLegacySharedPreferences(appCtx)
-
-        suspend fun checkAndSend() {
-            val uri = prefs.getString(prefKey, "") ?: ""
-            if (uri.isEmpty()) { trySend(false); return }
-            val accessible = kotlinx.coroutines.withContext(Dispatchers.IO) {
-                runCatching {
-                    DocumentFile.fromTreeUri(appCtx, Uri.parse(uri))?.canRead() == true
-                }.getOrElse { false }
-            }
-            trySend(!accessible)
-        }
-
-        // Emit false immediately so combine doesn't block startup waiting for IO
-        trySend(false)
-
-        // Check actual accessibility in background without blocking the flow
-        launch { checkAndSend() }
-
-        val prefListener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
-            if (changedKey == prefKey) launch { checkAndSend() }
-        }
-        prefs.registerOnSharedPreferenceChangeListener(prefListener)
-
-        val mediaReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) { launch { checkAndSend() } }
-        }
-        val filter = IntentFilter().apply {
-            addAction(Intent.ACTION_MEDIA_MOUNTED)
-            addAction(Intent.ACTION_MEDIA_UNMOUNTED)
-            addAction(Intent.ACTION_MEDIA_EJECT)
-            addDataScheme("file")
-        }
-        ContextCompat.registerReceiver(appCtx, mediaReceiver, filter, ContextCompat.RECEIVER_EXPORTED)
-
-        awaitClose {
-            prefs.unregisterOnSharedPreferenceChangeListener(prefListener)
-            appCtx.unregisterReceiver(mediaReceiver)
-        }
-    }.distinctUntilChanged()
-
     fun updatePermissions(context: Context) {
         notificationsPermissionEnabledState.value = isNotificationsPermissionGranted(context)
         microphonePermissionEnabledState.value = isMicrophonePermissionGranted(context)
@@ -295,7 +226,6 @@ class HomeViewModel(
         notificationsPermissionEnabled: Boolean,
         showMicrophoneCard: Boolean,
         showDesmumeWarning: Boolean,
-        directoryInaccessible: Boolean,
     ): UIState {
         val noGames = recentGames.isEmpty() && favoritesGames.isEmpty() && discoveryGames.isEmpty()
 
@@ -308,7 +238,6 @@ class HomeViewModel(
             showNoMicrophonePermissionCard = showMicrophoneCard,
             showNoGamesCard = noGames,
             showDesmumeDeprecatedCard = showDesmumeWarning,
-            showDirectoryInaccessibleCard = directoryInaccessible,
         )
     }
 
@@ -341,7 +270,6 @@ class HomeViewModel(
                     notificationsPermissionEnabledState,
                     microphoneNotification(retrogradeDb),
                     desmumeWarningNotification(),
-                    getDirectoryAccessibilityFlow(),
                     ::buildViewState,
                 ).combine(downloadDialogDismissed) { state, dismissed ->
                     // Show dialog when there are no games, no indexing is running, and no

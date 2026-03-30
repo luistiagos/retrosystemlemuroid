@@ -40,6 +40,7 @@ import com.swordfish.lemuroid.app.utils.settings.rememberSafePreferenceIndexSett
 import android.provider.DocumentsContract
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.FolderOpen
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
@@ -283,25 +284,36 @@ private fun RomsSettings(
         LemuroidSettingsMenuLink(
             title = { Text(text = stringResource(id = R.string.directory)) },
             subtitle = { Text(text = currentDirectoryName) },
-            action = if (currentDirectory.isNotEmpty()) {
-                {
-                    IconButton(onClick = { onChangeFolder() }, enabled = !indexingInProgress) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = stringResource(id = R.string.directory),
-                        )
+            action = when {
+                currentDirectory.isNotEmpty() -> {
+                    {
+                        IconButton(
+                            onClick = { openSafFolderInFileManager(context, currentDirectory) },
+                            enabled = !indexingInProgress,
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.FolderOpen,
+                                contentDescription = stringResource(id = R.string.settings_open_folder),
+                            )
+                        }
                     }
                 }
-            } else null,
-            onClick = {
-                when {
-                    currentDirectory.isNotEmpty() ->
-                        openSafFolderInFileManager(context, currentDirectory)
-                    state.defaultRomsDirPath.isNotEmpty() ->
-                        openFolderInFileManager(context, state.defaultRomsDirPath)
-                    else -> onChangeFolder()
+                state.defaultRomsDirPath.isNotEmpty() -> {
+                    {
+                        IconButton(
+                            onClick = { openFolderInFileManager(context, state.defaultRomsDirPath) },
+                            enabled = !indexingInProgress,
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.FolderOpen,
+                                contentDescription = stringResource(id = R.string.settings_open_folder),
+                            )
+                        }
+                    }
                 }
+                else -> null
             },
+            onClick = { onChangeFolder() },
             enabled = !indexingInProgress,
         )
         if (scanInProgress) {

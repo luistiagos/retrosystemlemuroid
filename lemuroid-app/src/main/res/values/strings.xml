@@ -163,6 +163,10 @@
     <string name="home_streaming_nowifi_message">Você não está conectado ao WiFi. Recomendamos baixar via WiFi para evitar uso excessivo de dados móveis. Deseja continuar mesmo assim?</string>
     <string name="home_streaming_nowifi_confirm">Sim, continuar</string>
     <string name="home_streaming_nowifi_cancel">Cancelar</string>
+    <!-- No network available at all when starting/resuming download -->
+    <string name="home_streaming_no_network_title">Sem conexão com a internet</string>
+    <string name="home_streaming_no_network_message">Não há conexão com a internet disponível. Conecte-se ao WiFi ou habilite os dados móveis para iniciar o download.</string>
+    <string name="home_streaming_no_network_ok">OK</string>
     <!-- Network switched to mobile during download -->
     <string name="home_streaming_mobile_title">Rede trocada para %1$s</string>
     <string name="home_streaming_mobile_message">Sua conexão foi trocada para rede móvel (%1$s). Recomendamos baixar via WiFi. Deseja continuar o download na rede móvel?</string>
@@ -174,10 +178,11 @@
 
     <string name="notification_download_roms_title">Downloading ROMs Pack</string>
     <string name="notification_download_roms_message">Download continues in background even with screen off.</string>
+    <string name="settings_open_folder">Open folder</string>
     <string name="settings_move_roms_title">Move ROMs</string>
-    <string name="settings_move_roms_message">Found %1$d ROM file(s). Move them to the new location?</string>
+    <string name="settings_move_roms_message">Found %1$d ROM file(s). They will be transferred to the new location.</string>
     <string name="settings_move_roms_yes">Move</string>
-    <string name="settings_move_roms_no">Skip</string>
+    <string name="settings_move_roms_cancel_operation">Cancel</string>
     <string name="settings_transferring_roms_title">Transferring ROMs</string>
     <string name="settings_transferring_roms_progress">Transferring… %1$d%%</string>
 
@@ -226,6 +231,9 @@
     <string name="game_running_notification_message">Make sure to save your progress</string>
 
     <string name="game_loader_error_gl_incompatible">This Core requires an OpenGL ES version which is not supported by your device.</string>
+    <string name="game_rom_not_found_title">ROM file not found</string>
+    <string name="game_rom_not_found_message">The file "%1$s" was not found on your device. It may have been moved or deleted. Would you like to rescan your library?</string>
+    <string name="game_rom_not_found_rescan">Rescan</string>
     <string name="game_loader_error_load_game">Something bad happened while loading your game. Make sure the ROM is supported by Lemuroid and rescan your games.</string>
     <string name="game_loader_error_save">Something bad happened with your save file. If the issue persists, try disabling auto-save.</string>
     <string name="game_loader_error_unsupported_architecture">This Core is not supported by your device.</string>
