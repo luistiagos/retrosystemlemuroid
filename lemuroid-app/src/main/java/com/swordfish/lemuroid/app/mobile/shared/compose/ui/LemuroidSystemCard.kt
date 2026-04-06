@@ -2,11 +2,16 @@ package com.swordfish.lemuroid.app.mobile.shared.compose.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 
@@ -32,8 +37,12 @@ fun LemuroidSystemCard(
         }
 
     ElevatedCard(
-        modifier = modifier,
+        modifier = modifier.clip(RoundedCornerShape(20.dp)),
         onClick = onClick,
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 12.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.85f)
+        )
     ) {
         Column(
             modifier =

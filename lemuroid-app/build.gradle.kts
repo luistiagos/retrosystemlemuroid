@@ -96,12 +96,12 @@ android {
             isMinifyEnabled = true
             signingConfig = signingConfigs["release"]
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            resValue("string", "lemuroid_name", "Lemuroid")
+            resValue("string", "lemuroid_name", "Retro Game System")
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
-            resValue("string", "lemuroid_name", "LemuroiDebug")
+            resValue("string", "lemuroid_name", "Retro Game System Debug")
         }
     }
 

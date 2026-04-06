@@ -34,9 +34,10 @@ fun LemuroidGameImage(
         modifier =
             modifier
                 .fillMaxWidth()
-                .aspectRatio(1.0f),
+                .aspectRatio(0.75f),
         fallback = fallbackPainter,
         error = fallbackPainter,
         contentScale = ContentScale.Crop,
     )
 }
+

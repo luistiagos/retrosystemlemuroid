@@ -1,4 +1,4 @@
-# Lemuroid
+# Retro Game System
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
@@ -9,7 +9,7 @@
 
 ## Description
 
-Lemuroid is an open-source emulation project for Android based on Libretro. Its main goal is ease of use, good Android integration and a great user experience.
+Retro Game System is an open-source emulation project for Android based on Libretro. Its main goal is ease of use, good Android integration and a great user experience.
 
 It originated from a rib of [Retrograde](https://github.com/retrograde/retrograde-android), but graduated to a standalone project integrating [LibretroDroid](https://github.com/Swordfish90/LibretroDroid).
 
@@ -58,4 +58,4 @@ It originated from a rib of [Retrograde](https://github.com/retrograde/retrograd
 - HD mode
 
 ### Languages:
-You can help translate Lemuroid in your native language by going here: https://crowdin.com/project/lemuroid
+You can help translate Retro Game System in your native language by going here: https://crowdin.com/project/lemuroid
