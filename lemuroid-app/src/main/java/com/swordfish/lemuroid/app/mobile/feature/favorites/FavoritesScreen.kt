@@ -1,6 +1,5 @@
 package com.swordfish.lemuroid.app.mobile.feature.favorites
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,11 +13,11 @@ import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameCard
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FavoritesScreen(
     modifier: Modifier = Modifier,
     viewModel: FavoritesViewModel,
+    downloadedFileNames: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
 ) {
@@ -36,11 +35,11 @@ fun FavoritesScreen(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        items(games.itemCount, key = { games[it]?.id ?: it }) { index ->
+        items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
             val game = games[index] ?: return@items
             LemuroidGameCard(
-                modifier = Modifier.animateItem(),
                 game = game,
+                isDownloaded = downloadedFileNames.contains(game.fileName),
                 onClick = { onGameClick(game) },
                 onLongClick = { onGameLongClick(game) },
             )

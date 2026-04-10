@@ -60,6 +60,7 @@ import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
@@ -79,6 +80,7 @@ import de.charlex.compose.material3.HtmlText
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @OptIn(DelicateCoroutinesApi::class)
@@ -106,6 +108,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
     @Inject
     lateinit var inputDeviceManager: InputDeviceManager
+
+    @Inject
+    lateinit var romOnDemandManager: RomOnDemandManager
 
     private val reviewManager = ReviewManager()
 
@@ -172,12 +177,37 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     mutableStateOf<Game?>(null)
                 }
 
+            val selectedGameForDownload =
+                remember {
+                    mutableStateOf<Game?>(null)
+                }
+
+            val downloadedFileNames =
+                retrogradeDb.downloadedRomDao()
+                    .observeAllDownloadedFileNames()
+                    .collectAsState(initial = emptyList())
+                    .value
+                    .toHashSet()
+
             val onGameLongClick = { game: Game ->
                 selectedGameState.value = game
             }
 
+            // A game is a streaming placeholder (needs download) when its file:// URI
+            // points to a 0-byte file on disk. SAF (content://) and already-downloaded
+            // games always have content, so they play directly.
+            val isGamePlaceholder = { game: Game ->
+                val uri = Uri.parse(game.fileUri)
+                uri.scheme == "file" &&
+                    uri.path?.let { File(it).length() == 0L } == true
+            }
+
             val onGameClick = { game: Game ->
-                gameInteractor.onGamePlay(game)
+                if (!isGamePlaceholder(game)) {
+                    gameInteractor.onGamePlay(game)
+                } else {
+                    selectedGameForDownload.value = game
+                }
             }
 
             val onGameFavoriteToggle = { game: Game, isFavorite: Boolean ->
@@ -222,6 +252,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                             coresSelection,
                                         ),
                                 ),
+                            downloadedFileNames = downloadedFileNames,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
@@ -234,6 +265,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 viewModel(
                                     factory = FavoritesViewModel.Factory(retrogradeDb),
                                 ),
+                            downloadedFileNames = downloadedFileNames,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                         )
@@ -246,6 +278,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory = SearchViewModel.Factory(retrogradeDb),
                                 ),
                             searchQuery = mainUIState.searchQuery,
+                            downloadedFileNames = downloadedFileNames,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
@@ -281,6 +314,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
+                            downloadedFileNames = downloadedFileNames,
                         )
                     }
                     composable(MainRoute.SETTINGS) {
@@ -371,13 +405,41 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             MainGameContextActions(
                 selectedGameState = selectedGameState,
                 shortcutSupported = gameInteractor.supportShortcuts(),
-                onGamePlay = { gameInteractor.onGamePlay(it) },
-                onGameRestart = { gameInteractor.onGameRestart(it) },
+                isGameDownloaded = selectedGameState.value?.fileName
+                    ?.let { downloadedFileNames.contains(it) } ?: true,
+                onGamePlay = { game ->
+                    if (!isGamePlaceholder(game)) {
+                        gameInteractor.onGamePlay(game)
+                    } else {
+                        selectedGameForDownload.value = game
+                    }
+                },
+                onGameRestart = { game ->
+                    if (!isGamePlaceholder(game)) {
+                        gameInteractor.onGameRestart(game)
+                    } else {
+                        selectedGameForDownload.value = game
+                    }
+                },
                 onFavoriteToggle = { game: Game, isFavorite: Boolean ->
                     gameInteractor.onFavoriteToggle(game, isFavorite)
                 },
                 onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
+                onDeleteRom = { game ->
+                    lifecycleScope.launch {
+                        romOnDemandManager.deleteRom(game)
+                    }
+                },
             )
+
+            selectedGameForDownload.value?.let { game ->
+                RomDownloadDialog(
+                    selectedGame = game,
+                    selectedGameState = selectedGameForDownload,
+                    romOnDemandManager = romOnDemandManager,
+                    onDownloadComplete = { gameInteractor.onGamePlay(it) },
+                )
+            }
 
             if (infoDialogDisplayed.value) {
                 val message =

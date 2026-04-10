@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AppShortcut
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.PlayArrow
@@ -51,10 +52,12 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 fun MainGameContextActions(
     selectedGameState: MutableState<Game?>,
     shortcutSupported: Boolean,
+    isGameDownloaded: Boolean = true,
     onGamePlay: (Game) -> Unit,
     onGameRestart: (Game) -> Unit,
     onFavoriteToggle: (Game, Boolean) -> Unit,
     onCreateShortcut: (Game) -> Unit,
+    onDeleteRom: ((Game) -> Unit)? = null,
 ) {
     val modalSheetState = rememberModalBottomSheetState(true)
     val selectedGame = selectedGameState.value
@@ -80,6 +83,8 @@ fun MainGameContextActions(
                 onFavoriteToggle = onFavoriteToggle,
                 shortcutSupported = shortcutSupported,
                 onCreateShortcut = onCreateShortcut,
+                isGameDownloaded = isGameDownloaded,
+                onDeleteRom = onDeleteRom,
             )
         }
     }
@@ -94,6 +99,8 @@ private fun ContextActionContent(
     onFavoriteToggle: (Game, Boolean) -> Unit,
     shortcutSupported: Boolean,
     onCreateShortcut: (Game) -> Unit,
+    isGameDownloaded: Boolean = true,
+    onDeleteRom: ((Game) -> Unit)? = null,
 ) {
     Column(
         modifier =
@@ -146,6 +153,17 @@ private fun ContextActionContent(
                 icon = Icons.Default.AppShortcut,
                 onClick = {
                     onCreateShortcut(selectedGame)
+                    selectedGameState.value = null
+                },
+            )
+        }
+
+        if (isGameDownloaded && onDeleteRom != null) {
+            ContextActionEntry(
+                label = stringResource(id = R.string.game_context_menu_delete_rom),
+                icon = Icons.Default.Delete,
+                onClick = {
+                    onDeleteRom(selectedGame)
                     selectedGameState.value = null
                 },
             )

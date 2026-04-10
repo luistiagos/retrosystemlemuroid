@@ -38,7 +38,16 @@ object EmbeddedBiosInstaller {
         val systemDir = DirectoriesManager(context).getSystemDirectory()
         for (fileName in BIOS_FILES) {
             val destination = File(systemDir, fileName)
-            if (destination.exists()) continue
+            if (destination.exists()) {
+                // Check if the installed file size matches the asset — catches interrupted copies.
+                val expectedSize = runCatching {
+                    context.assets.openFd("bios/$fileName").use { it.length }
+                }.getOrElse { -1L }
+                val sizeOk = expectedSize < 0L || destination.length() == expectedSize
+                if (sizeOk && destination.length() > 0L) continue
+                // Corrupt or empty — delete and re-install
+                destination.delete()
+            }
             try {
                 context.assets.open("bios/$fileName").use { input ->
                     destination.outputStream().use { output ->

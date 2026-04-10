@@ -7,7 +7,6 @@ import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -53,6 +52,7 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
+    downloadedFileNames: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onOpenCoreSelection: () -> Unit,
@@ -119,6 +119,7 @@ fun HomeScreen(
         state.value,
         downloadRomsState.value,
         streamingRomsState.value,
+        downloadedFileNames,
         onGameClick,
         onGameLongClick,
         onOpenCoreSelection,
@@ -146,6 +147,7 @@ private fun HomeScreen(
     state: HomeViewModel.UIState,
     downloadRomsState: DownloadRomsState,
     streamingRomsState: StreamingRomsState,
+    downloadedFileNames: Set<String> = emptySet(),
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onOpenCoreSelection: () -> Unit,
@@ -233,28 +235,31 @@ private fun HomeScreen(
         homeGridSection(
             sectionRecent,
             state.recentGames,
+            downloadedFileNames,
             onGameClicked,
             onGameLongClick,
         )
         homeGridSection(
             sectionFavorites,
             state.favoritesGames,
+            downloadedFileNames,
             onGameClicked,
             onGameLongClick,
         )
         homeGridSection(
             sectionDiscover,
             state.discoveryGames,
+            downloadedFileNames,
             onGameClicked,
             onGameLongClick,
         )
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 private fun LazyGridScope.homeGridSection(
     title: String,
     games: List<Game>,
+    downloadedFileNames: Set<String>,
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
 ) {
@@ -270,8 +275,9 @@ private fun LazyGridScope.homeGridSection(
 
     items(games, key = { it.id }) { game ->
         LemuroidGameCard(
-            modifier = Modifier.fillMaxWidth().animateItem(),
+            modifier = Modifier.fillMaxWidth(),
             game = game,
+            isDownloaded = downloadedFileNames.contains(game.fileName),
             onClick = { onGameClicked(game) },
             onLongClick = { onGameLongClick(game) },
         )

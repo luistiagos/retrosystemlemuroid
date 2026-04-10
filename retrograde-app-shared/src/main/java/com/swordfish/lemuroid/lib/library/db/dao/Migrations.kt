@@ -4,6 +4,28 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 object Migrations {
+    val VERSION_9_10: Migration =
+        object : Migration(9, 10) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `downloaded_roms`(
+                        `fileName` TEXT NOT NULL,
+                        `fileSize` INTEGER NOT NULL,
+                        `downloadedAt` INTEGER NOT NULL,
+                        PRIMARY KEY(`fileName`)
+                    )
+                    """.trimIndent(),
+                )
+                database.execSQL(
+                    """
+                    CREATE UNIQUE INDEX IF NOT EXISTS `index_downloaded_roms_fileName`
+                    ON `downloaded_roms` (`fileName`)
+                    """.trimIndent(),
+                )
+            }
+        }
+
     val VERSION_8_9: Migration =
         object : Migration(8, 9) {
             override fun migrate(database: SupportSQLiteDatabase) {

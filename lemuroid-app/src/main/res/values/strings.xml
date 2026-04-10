@@ -96,6 +96,19 @@
     <string name="game_context_menu_resume">Resume</string>
     <string name="game_context_menu_restart">Restart</string>
     <string name="game_context_menu_create_shortcut">Pin to launcher</string>
+    <string name="game_context_menu_delete_rom">Delete downloaded ROM</string>
+    <string name="rom_download_dialog_title">Download ROM</string>
+    <string name="rom_download_dialog_message">This ROM is not downloaded yet. Download it now to play?</string>
+    <string name="rom_download_dialog_confirm">Download</string>
+    <string name="rom_download_dialog_cancel">Cancel</string>
+    <string name="rom_download_dialog_downloading">Downloading… %1$d%%</string>
+    <string name="rom_download_dialog_not_found">ROM not available for download.</string>
+    <string name="rom_download_dialog_error">Download failed: %1$s</string>
+    <string name="rom_download_dialog_pause">Pause</string>
+    <string name="rom_download_dialog_resume">Resume</string>
+    <string name="rom_download_dialog_paused">Download paused.</string>
+    <string name="rom_download_badge_downloaded">Downloaded</string>
+    <string name="rom_corruption_error_message">The ROM file appears to be corrupted and was removed. Tap the game again to re-download it.</string>
 
     <string name="home_notification_title">Enable notifications</string>
     <string name="home_notification_message">Retro Game System uses notifications to let you know when a game or operation is running in background.</string>
@@ -144,37 +157,37 @@
     <string name="settings_smart_storage_user_override">Custom folder selected by user</string>
     <string name="settings_smart_storage_desc">Downloads go to the volume with most free space. Connect an SD card or USB drive to use it automatically.</string>
 
-    <!-- Streaming ROM download (file-by-file, games available immediately) -->
-    <string name="home_streaming_roms_title">Download ROMs (Streaming)</string>
-    <string name="home_streaming_roms_message">Download ROMs one by one. Games become available to play immediately as each file is downloaded — no extraction needed.</string>
-    <string name="home_streaming_roms_action">Start Streaming Download</string>
+    <!-- Streaming ROM catalog download -->
+    <string name="home_streaming_roms_title">Download Catalog</string>
+    <string name="home_streaming_roms_message">Download the game catalog. Each game appears with its cover art and becomes individually downloadable with a single tap.</string>
+    <string name="home_streaming_roms_action">Download Catalog</string>
     <string name="home_streaming_roms_downloading">%1$d%% · %2$s files · %3$s</string>
-    <string name="home_streaming_roms_pause">Pausar</string>
-    <string name="home_streaming_roms_resume">Continuar</string>
-    <string name="home_streaming_roms_paused">Download pausado. Os arquivos já baixados foram mantidos.</string>
-    <string name="home_streaming_roms_action_cancel">Cancelar</string>
+    <string name="home_streaming_roms_pause">Pause</string>
+    <string name="home_streaming_roms_resume">Resume</string>
+    <string name="home_streaming_roms_paused">Download paused. Already downloaded files were kept.</string>
+    <string name="home_streaming_roms_action_cancel">Cancel</string>
     <!-- Cancel dialog for streaming (files are kept) -->
-    <string name="home_streaming_cancel_title">Cancelar download?</string>
-    <string name="home_streaming_cancel_message">O download será parado. Os arquivos já baixados serão mantidos, mas você precisará iniciar o download novamente para obter todos os ROMs.</string>
-    <string name="home_streaming_cancel_confirm">Sim, cancelar</string>
-    <string name="home_streaming_cancel_dismiss">Não, manter baixando</string>
+    <string name="home_streaming_cancel_title">Cancel Download?</string>
+    <string name="home_streaming_cancel_message">The download will be stopped. Already downloaded files will be kept, but you will need to restart the download to get all ROMs.</string>
+    <string name="home_streaming_cancel_confirm">Yes, Cancel</string>
+    <string name="home_streaming_cancel_dismiss">No, Keep Downloading</string>
     <!-- No WiFi warning when starting download -->
-    <string name="home_streaming_nowifi_title">Sem WiFi</string>
-    <string name="home_streaming_nowifi_message">Você não está conectado ao WiFi. Recomendamos baixar via WiFi para evitar uso excessivo de dados móveis. Deseja continuar mesmo assim?</string>
-    <string name="home_streaming_nowifi_confirm">Sim, continuar</string>
-    <string name="home_streaming_nowifi_cancel">Cancelar</string>
+    <string name="home_streaming_nowifi_title">No WiFi</string>
+    <string name="home_streaming_nowifi_message">You are not connected to WiFi. We recommend downloading over WiFi to avoid excessive mobile data usage. Do you want to continue anyway?</string>
+    <string name="home_streaming_nowifi_confirm">Yes, Continue</string>
+    <string name="home_streaming_nowifi_cancel">Cancel</string>
     <!-- No network available at all when starting/resuming download -->
-    <string name="home_streaming_no_network_title">Sem conexão com a internet</string>
-    <string name="home_streaming_no_network_message">Não há conexão com a internet disponível. Conecte-se ao WiFi ou habilite os dados móveis para iniciar o download.</string>
+    <string name="home_streaming_no_network_title">No Internet Connection</string>
+    <string name="home_streaming_no_network_message">No internet connection is available. Connect to WiFi or enable mobile data to start the download.</string>
     <string name="home_streaming_no_network_ok">OK</string>
     <!-- Network switched to mobile during download -->
-    <string name="home_streaming_mobile_title">Rede trocada para %1$s</string>
-    <string name="home_streaming_mobile_message">Sua conexão foi trocada para rede móvel (%1$s). Recomendamos baixar via WiFi. Deseja continuar o download na rede móvel?</string>
-    <string name="home_streaming_mobile_continue">Continuar</string>
-    <string name="home_streaming_mobile_pause">Pausar</string>
+    <string name="home_streaming_mobile_title">Network switched to %1$s</string>
+    <string name="home_streaming_mobile_message">Your connection has switched to mobile network (%1$s). We recommend downloading over WiFi. Do you want to continue the download on mobile network?</string>
+    <string name="home_streaming_mobile_continue">Continue</string>
+    <string name="home_streaming_mobile_pause">Pause</string>
     <!-- WiFi-only download setting -->
-    <string name="settings_wifi_only_title">Baixar somente via WiFi</string>
-    <string name="settings_wifi_only_subtitle">Avisar quando o download não estiver em WiFi</string>
+    <string name="settings_wifi_only_title">Download over WiFi only</string>
+    <string name="settings_wifi_only_subtitle">Warn when download is not on WiFi</string>
 
     <string name="notification_download_roms_title">Downloading ROMs Pack</string>
     <string name="notification_download_roms_message">Download continues in background even with screen off.</string>
@@ -323,5 +336,3 @@
 
 
 </resources>
-
-

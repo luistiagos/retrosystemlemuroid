@@ -245,7 +245,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                         )
                     is GameViewModelSideEffects.UiEffect.ShowToast -> displayToast(it.message)
                     is GameViewModelSideEffects.UiEffect.SuccessfulFinish -> performSuccessfulActivityFinish()
-                    is GameViewModelSideEffects.UiEffect.FailureFinish -> performErrorFinish(it.message)
+                    is GameViewModelSideEffects.UiEffect.FailureFinish -> performErrorFinish(it.message, it.isRomLoadFailure)
                     is GameViewModelSideEffects.UiEffect.SaveQuickSave -> performSaveQuickSave()
                     is GameViewModelSideEffects.UiEffect.LoadQuickSave -> performLoadQuickSave()
                     is GameViewModelSideEffects.UiEffect.ToggleFastForward -> performToggleFastForward()
@@ -318,10 +318,12 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         finishAndExitProcess()
     }
 
-    private fun performErrorFinish(message: String) {
+    private fun performErrorFinish(message: String, isRomLoadFailure: Boolean = false) {
         val resultIntent =
             Intent().apply {
                 putExtra(PLAY_GAME_RESULT_ERROR, message)
+                putExtra(PLAY_GAME_RESULT_GAME, intent.getSerializableExtra(EXTRA_GAME))
+                putExtra(PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE, isRomLoadFailure)
             }
 
         setResult(RESULT_ERROR, resultIntent)
@@ -413,6 +415,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         const val PLAY_GAME_RESULT_GAME = "PLAY_GAME_RESULT_GAME"
         const val PLAY_GAME_RESULT_LEANBACK = "PLAY_GAME_RESULT_LEANBACK"
         const val PLAY_GAME_RESULT_ERROR = "PLAY_GAME_RESULT_ERROR"
+        const val PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE = "PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE"
 
         const val RESULT_ERROR = Activity.RESULT_FIRST_USER + 2
         const val RESULT_UNEXPECTED_ERROR = Activity.RESULT_FIRST_USER + 3

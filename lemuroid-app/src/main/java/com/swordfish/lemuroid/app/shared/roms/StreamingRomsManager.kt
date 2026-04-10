@@ -7,7 +7,9 @@ import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -76,14 +78,14 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
          * All sub-folders of this path are treated as system folders.
          */
         private const val HF_DATASET = "luisluis123/lemusets"
-        private const val HF_ROOT_PATH = "roms12g"
+        private const val HF_ROOT_PATH = "roms"
 
         /**
          * HuggingFace API endpoint to list all files in a directory (recursive).
          * Returns a JSON array of objects with "path", "size", "type", "url".
          */
         private fun hfApiUrl(path: String = HF_ROOT_PATH): String =
-            "https://huggingface.co/api/datasets/$HF_DATASET/tree/main/$path?recursive=true&limit=1000"
+            "https://huggingface.co/api/datasets/$HF_DATASET/tree/main/$path?recursive=true&limit=10000"
 
         /**
          * Builds the direct download URL for a given path inside the dataset.
@@ -166,7 +168,9 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
 
     fun startDownload() {
         prefs.edit().putBoolean(PREF_DOWNLOAD_STARTED, true).apply()
-        StreamingRomsWork.enqueue(appContext)
+        // replace=true: this is an explicit new start — cancel any stale worker so the
+        // fresh run picks up the latest state (e.g. PREF_DOWNLOADED_FILES reset to 0).
+        StreamingRomsWork.enqueue(appContext, replace = true)
     }
 
     fun clearDownloadStarted() {
@@ -195,7 +199,11 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
     fun resumeDownload() {
         prefs.edit().putBoolean(PREF_PAUSED, false).apply()
         _pausedFlow.value = false
-        StreamingRomsWork.enqueue(appContext)
+        // replace=false (KEEP): pauseDownload() already cancelled the worker, so there is
+        // nothing running to protect — KEEP simply enqueues the new work normally.
+        // Using KEEP instead of REPLACE avoids a race where a rapid pause→resume sequence
+        // could cancel a freshly enqueued worker before it starts.
+        StreamingRomsWork.enqueue(appContext, replace = false)
         Timber.d("Streaming download resumed")
     }
 
@@ -225,16 +233,82 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
     }
 
     /**
+     * Reads the embedded catalog manifest from assets. Returns a list of relative paths
+     * like "arcade/acrobatm.zip", or null if the asset is not present.
+     */
+    private fun loadCatalogFromAssets(): List<String>? {
+        return try {
+            appContext.assets.open("catalog_manifest.txt").bufferedReader().useLines { seq ->
+                seq.filter { it.isNotBlank() }.toList()
+            }
+        } catch (e: IOException) {
+            Timber.w("Embedded catalog not available: ${e.message}")
+            null
+        }
+    }
+
+    /**
+     * Creates 0-byte placeholder files for every entry in the embedded catalog.
+     * No network access is required — all entries are already known at build time.
+     */
+    private suspend fun populateFromEmbeddedCatalog(
+        paths: List<String>,
+        romsDir: File,
+        onProgress: suspend (Float, String, Int, Int) -> Unit,
+    ) {
+        val total = paths.size
+        val alreadyDone = prefs.getInt(PREF_DOWNLOADED_FILES, 0)
+        var doneCount = alreadyDone
+
+        paths.forEachIndexed { index, relativePath ->
+            currentCoroutineContext().ensureActive()
+            val destFile = File(romsDir, relativePath)
+            if (!destFile.exists()) {
+                destFile.parentFile?.mkdirs()
+                destFile.createNewFile()
+                doneCount++
+                prefs.edit().putInt(PREF_DOWNLOADED_FILES, doneCount).apply()
+                if (doneCount % 500 == 0) {
+                    LibraryIndexScheduler.scheduleLibrarySync(appContext)
+                }
+            }
+            onProgress(
+                (index + 1).toFloat() / total,
+                destFile.name,
+                doneCount,
+                total,
+            )
+        }
+
+        prefs.edit()
+            .putBoolean(PREF_DOWNLOAD_DONE, true)
+            .putBoolean(PREF_DOWNLOAD_STARTED, false)
+            .remove(PREF_DOWNLOADED_FILES)
+            .apply()
+        LibraryIndexScheduler.scheduleLibrarySync(appContext)
+        Timber.d("Embedded catalog population complete: $doneCount files")
+    }
+
+    /**
      * Main work entry point called from [StreamingRomsWork].
-     * 1. Lists all files via the HuggingFace tree API.
-     * 2. Downloads each file individually.
-     * 3. After each file, triggers a library sync so games appear immediately.
+     * 1. If an embedded catalog_manifest.txt asset exists, creates 0-byte placeholder
+     *    files directly from it (no network required).
+     * 2. Otherwise, lists all files via the HuggingFace tree API and downloads them.
+     * 3. After each batch, triggers a library sync so games appear immediately.
      */
     internal suspend fun doStreamingDownload(
         onProgress: suspend (progress: Float, currentFile: String, downloaded: Int, total: Int) -> Unit,
     ) {
         val romsDir = DirectoriesManager(appContext).getInternalRomsDirectory()
         romsDir.mkdirs()
+
+        // Fast path: use the catalog embedded in the APK assets.
+        val embeddedPaths = loadCatalogFromAssets()
+        if (embeddedPaths != null) {
+            Timber.d("Using embedded catalog: ${embeddedPaths.size} entries")
+            populateFromEmbeddedCatalog(embeddedPaths, romsDir, onProgress)
+            return
+        }
 
         Timber.d("Fetching file list from HuggingFace...")
         // Retry fetchFileList on transient network errors (e.g. UnknownHostException right after
@@ -284,7 +358,13 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
 
             destFile.parentFile?.mkdirs()
             try {
-                downloadFileWithResume(entry.downloadUrl, destFile)
+                if (entry.size == 0L) {
+                    // HuggingFace catalog placeholder: 0-byte file means "ROM available for
+                    // on-demand download". Create locally without an HTTP round-trip.
+                    destFile.createNewFile()
+                } else {
+                    downloadFileWithResume(entry.downloadUrl, destFile)
+                }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
@@ -295,8 +375,12 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             downloadedCount++
             prefs.edit().putInt(PREF_DOWNLOADED_FILES, downloadedCount).apply()
 
-            // Trigger library index after each file so games appear immediately
-            LibraryIndexScheduler.scheduleLibrarySync(appContext)
+            // Trigger library index every 100 files instead of every single file.
+            // Calling scheduleLibrarySync after each of 23,000+ files floods WorkManager
+            // and causes ANRs due to main-thread contention and DB write storms.
+            if (downloadedCount % 100 == 0) {
+                LibraryIndexScheduler.scheduleLibrarySync(appContext)
+            }
 
             onProgress(
                 (index + 1).toFloat() / files.size,
@@ -311,6 +395,8 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             .putBoolean(PREF_DOWNLOAD_STARTED, false)
             .remove(PREF_DOWNLOADED_FILES)
             .apply()
+        // Final sync so all games appear after the download completes.
+        LibraryIndexScheduler.scheduleLibrarySync(appContext)
         Timber.d("Streaming download complete: $downloadedCount files")
     }
 
@@ -330,8 +416,9 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
      * Returns only file entries (type == "file"), excluding directories.
      * Uses limit=10000 to cover the entire dataset in a single page; follows
      * Link: <url>; rel="next" headers if additional pages exist.
+     * Retries on 429 (rate-limit) and transient network errors.
      */
-    private fun fetchFileList(): List<HuggingFaceFileEntry> {
+    private suspend fun fetchFileList(): List<HuggingFaceFileEntry> {
         val allFiles = mutableListOf<HuggingFaceFileEntry>()
         var nextUrl: String? = hfApiUrl()
         var page = 0
@@ -343,15 +430,40 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
                 .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
                 .build()
             var resolvedNext: String? = null
-            httpClient.newCall(request).execute().use { response ->
-                if (!response.isSuccessful) throw IOException("HuggingFace API error ${response.code}: ${response.message}")
-                val body = response.body?.string() ?: throw IOException("Empty response from HuggingFace API")
-                allFiles.addAll(parseFileList(body))
-                // Follow pagination via Link header
-                response.header("Link")?.let { link ->
-                    Regex("""<([^>]+)>;\s*rel="next"""").find(link)
-                        ?.groupValues?.get(1)
-                        ?.let { resolvedNext = it }
+            var pageAttempt = 0
+            while (true) {
+                pageAttempt++
+                try {
+                    httpClient.newCall(request).execute().use { response ->
+                        if (response.code == 429) {
+                            val retryAfterSec = response.header("Retry-After")?.toLongOrNull() ?: 60L
+                            throw IOException("429 rate limited, retry after ${retryAfterSec}s")
+                        }
+                        if (!response.isSuccessful) throw IOException("HuggingFace API error ${response.code}: ${response.message}")
+                        val body = response.body?.string() ?: throw IOException("Empty response from HuggingFace API")
+                        allFiles.addAll(parseFileList(body))
+                        // Follow pagination via Link header
+                        response.header("Link")?.let { link ->
+                            Regex("""<([^>]+)>;\s*rel="next"""").find(link)
+                                ?.groupValues?.get(1)
+                                ?.let { resolvedNext = it }
+                        }
+                    }
+                    break // page fetched successfully
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: IOException) {
+                    if (pageAttempt >= 5)
+                        throw IOException("fetchFileList() page $page failed after $pageAttempt attempts: ${e.message}", e)
+                    val rateLimitMsg = e.message ?: ""
+                    val delayMs = if (rateLimitMsg.startsWith("429 rate limited")) {
+                        val secs = Regex("retry after (\\d+)s").find(rateLimitMsg)?.groupValues?.get(1)?.toLongOrNull() ?: 60L
+                        minOf(secs * 1000L, 5 * 60_000L)
+                    } else {
+                        minOf(3000L * pageAttempt, 15_000L)
+                    }
+                    Timber.w("fetchFileList() page $page attempt $pageAttempt failed: ${e.message}, retrying in ${delayMs}ms")
+                    delay(delayMs)
                 }
             }
             nextUrl = resolvedNext
@@ -406,6 +518,10 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
                         Timber.d("File already complete (416): ${destFile.name}")
                         return
                     }
+                    if (response.code == 429) {
+                        val retryAfterSec = response.header("Retry-After")?.toLongOrNull() ?: 60L
+                        throw IOException("429 rate limited, retry after ${retryAfterSec}s")
+                    }
                     if (response.code in 400..499)
                         throw IOException("Permanent HTTP ${response.code}: ${response.message}")
                     if (!response.isSuccessful)
@@ -419,6 +535,10 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
                             var n: Int
                             while (input.read(buffer).also { n = it } != -1) {
                                 out.write(buffer, 0, n)
+                                // Cancellation checkpoint: allows pause/cancel to take effect
+                                // immediately during large-file downloads without waiting for
+                                // the entire file to finish writing.
+                                currentCoroutineContext().ensureActive()
                             }
                         }
                     }
@@ -429,8 +549,15 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             } catch (e: IOException) {
                 if (e.message?.startsWith("Permanent") == true) throw e
                 if (attempt >= maxRetries) throw IOException("Failed after $maxRetries attempts: ${e.message}", e)
-                Timber.w("Retry $attempt for ${destFile.name}: ${e.message}")
-                delay(minOf(2000L * attempt, 10000L))
+                val rateLimitMsg = e.message ?: ""
+                val delayMs = if (rateLimitMsg.startsWith("429 rate limited")) {
+                    val secs = Regex("retry after (\\d+)s").find(rateLimitMsg)?.groupValues?.get(1)?.toLongOrNull() ?: 60L
+                    minOf(secs * 1000L, 5 * 60_000L)
+                } else {
+                    minOf(2000L * attempt, 10000L)
+                }
+                Timber.w("Retry $attempt for ${destFile.name}: ${e.message}, waiting ${delayMs}ms")
+                delay(delayMs)
             }
         }
     }

@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -27,6 +26,7 @@ fun SearchScreen(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel,
     searchQuery: String,
+    downloadedFileNames: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
@@ -65,6 +65,7 @@ fun SearchScreen(
                 SearchResultsView(
                     modifier,
                     searchGames,
+                    downloadedFileNames,
                     onGameClick,
                     onGameLongClick,
                     onGameFavoriteToggle,
@@ -74,22 +75,22 @@ fun SearchScreen(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun SearchResultsView(
     modifier: Modifier,
     games: LazyPagingItems<Game>,
+    downloadedFileNames: Set<String>,
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
 ) {
     LazyColumn(modifier = modifier) {
-        items(games.itemCount, key = { games[it]?.id ?: it }) { index ->
+        items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
             val game = games[index] ?: return@items
 
             LemuroidGameListRow(
-                modifier = Modifier.animateItem(),
                 game = game,
+                isDownloaded = downloadedFileNames.contains(game.fileName),
                 onClick = { onGameClick(game) },
                 onLongClick = { onGameLongClick(game) },
                 onFavoriteToggle = { isFavorite ->

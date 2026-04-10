@@ -47,6 +47,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
     fun deleteBiosBefore(timestampMs: Long) {
         Timber.i("Pruning old bios files")
         SUPPORTED_BIOS
+            .filter { !it.isEmbedded }
             .map { File(directoriesManager.getSystemDirectory(), it.libretroFileName) }
             .filter { it.lastModified() < normalizeTimestamp(timestampMs) }
             .forEach {
@@ -110,6 +111,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "PS One 4.5 NTSC-U/C",
                     SystemID.PSX,
                     "171BDCEC",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "scph7001.bin",
@@ -117,6 +119,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "PS Original 4.1 NTSC-U/C",
                     SystemID.PSX,
                     "502224B6",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "scph5501.bin",
@@ -124,6 +127,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "PS Original 3.0 NTSC-U/C",
                     SystemID.PSX,
                     "8D8CB7E4",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "scph1001.bin",
@@ -131,6 +135,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "PS Original 2.2 NTSC-U/C",
                     SystemID.PSX,
                     "37157331",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "lynxboot.img",
@@ -138,6 +143,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Lynx Boot Image",
                     SystemID.LYNX,
                     "0D973C9D",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "bios_CD_E.bin",
@@ -145,6 +151,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Sega CD E",
                     SystemID.SEGACD,
                     "529AC15A",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "bios_CD_J.bin",
@@ -152,6 +159,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Sega CD J",
                     SystemID.SEGACD,
                     "9D2DA8F2",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "bios_CD_U.bin",
@@ -159,6 +167,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Sega CD U",
                     SystemID.SEGACD,
                     "C6D10268",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "bios7.bin",
@@ -166,6 +175,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Nintendo DS ARM7",
                     SystemID.NDS,
                     "1280F0D5",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "bios9.bin",
@@ -173,6 +183,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Nintendo DS ARM9",
                     SystemID.NDS,
                     "2AB23573",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "firmware.bin",
@@ -181,6 +192,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     SystemID.NDS,
                     "945F9DC9",
                     "nds_firmware.bin",
+                    isEmbedded = true,
                 ),
                 Bios(
                     "gba_bios.bin",
@@ -188,6 +200,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Game Boy Advance BIOS",
                     SystemID.GBA,
                     "81977335",
+                    isEmbedded = true,
                 ),
             )
     }

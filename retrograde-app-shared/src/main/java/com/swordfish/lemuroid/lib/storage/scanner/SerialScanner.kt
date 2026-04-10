@@ -338,10 +338,10 @@ object SerialScanner {
         byteArray: ByteArray,
     ): ByteArray {
         val readBytes = inputStream.read(byteArray)
-        return if (readBytes < byteArray.size) {
-            byteArray.copyOf(readBytes)
-        } else {
-            byteArray
+        return when {
+            readBytes <= 0 -> ByteArray(0)
+            readBytes < byteArray.size -> byteArray.copyOf(readBytes)
+            else -> byteArray
         }
     }
 }

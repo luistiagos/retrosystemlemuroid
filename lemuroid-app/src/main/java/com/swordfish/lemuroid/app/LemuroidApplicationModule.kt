@@ -33,6 +33,7 @@ import com.swordfish.lemuroid.app.shared.game.ExternalGameLauncherActivity
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
 import com.swordfish.lemuroid.app.shared.settings.ControllerConfigsManager
 import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
@@ -133,7 +134,7 @@ abstract class LemuroidApplicationModule {
         fun retrogradeDb(app: LemuroidApplication) =
             Room.databaseBuilder(app, RetrogradeDatabase::class.java, RetrogradeDatabase.DB_NAME)
                 .addCallback(GameSearchDao.CALLBACK)
-                .addMigrations(GameSearchDao.MIGRATION, Migrations.VERSION_8_9)
+                .addMigrations(GameSearchDao.MIGRATION, Migrations.VERSION_8_9, Migrations.VERSION_9_10)
                 .fallbackToDestructiveMigration()
                 .build()
 
@@ -336,8 +337,19 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun postGameHandler(retrogradeDatabase: RetrogradeDatabase) =
-            GameLaunchTaskHandler(ReviewManager(), retrogradeDatabase)
+        fun postGameHandler(
+            retrogradeDatabase: RetrogradeDatabase,
+            romOnDemandManager: RomOnDemandManager,
+        ) = GameLaunchTaskHandler(ReviewManager(), retrogradeDatabase, romOnDemandManager)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun romOnDemandManager(
+            context: Context,
+            retrogradeDatabase: RetrogradeDatabase,
+            directoriesManager: DirectoriesManager,
+        ) = RomOnDemandManager(context, retrogradeDatabase.downloadedRomDao(), directoriesManager)
 
         @Provides
         @PerApp

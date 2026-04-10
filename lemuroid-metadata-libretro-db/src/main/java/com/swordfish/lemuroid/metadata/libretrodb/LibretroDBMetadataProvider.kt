@@ -21,12 +21,22 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
          * Maps well-known human-readable folder names (as found in ROM archives)
          * to the system dbname used by Lemuroid. Checked against exact path segments
          * (case-insensitive) so "nintendo" doesn't accidentally match "super nintendo".
+         *
+         * Uses List<Pair> instead of Map to allow the same folder to map to multiple
+         * systems. "arcade/" contains both FBNeo and MAME 0.78 ROMs — LibretroDB
+         * determines the actual system per file; we just need both to be eligible.
          */
-        private val FOLDER_ALIASES: Map<String, String> = mapOf(
+        private val FOLDER_ALIASES: List<Pair<String, String>> = listOf(
             // Short folder names used in the luisluis123/lemusets dataset
             "a26"                  to "atari2600",
             "a78"                  to "atari7800",
+            // arcade/ contains MAME 0.78 ROMs. Map to both systems so that
+            // findByPathAndFilename can score FBNeo vs MAME2003Plus per-game;
+            // the path-preference sort will pick MAME2003Plus when "mame2003plus"
+            // is NOT an exact segment, falling back to whichever system LibretroDB
+            // actually knows the ROM under.
             "arcade"               to "fbneo",
+            "arcade"               to "mame2003plus",
             "atari 2600"           to "atari2600",
             "atari 7800"           to "atari7800",
             "game boy"             to "gb",
@@ -143,9 +153,31 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         db: LibretroDatabase,
         file: StorageFile,
     ): GameMetadata? {
-        return db.gameDao().findByFileName(file.name)
-            .filterNullable { extractGameSystem(it).scanOptions.scanByPathAndFilename }
-            .filterNullable { parentContainsSystem(file.path, extractGameSystem(it).id.dbname) }
+        // Fetch ALL rows matching this filename — a game can appear in multiple system DBs
+        // (e.g. both FBNeo and MAME2003Plus contain many of the same ZIP names but with
+        // different CRCs). Sort candidates so the best-matching system wins:
+        //   score 2 — dbname is an exact path segment (highest confidence)
+        //   score 1 — path contains a folder alias that maps DIRECTLY to this system,
+        //             preferring the system whose alias is listed FIRST in FOLDER_ALIASES
+        //             (mame2003plus entries come after fbneo but we bias mame2003plus here
+        //             because the luisluis123/lemusets arcade folder ships MAME 0.78 ROMs)
+        val segments = file.path?.lowercase(Locale.getDefault())
+            ?.split('/', '\\')?.toHashSet() ?: emptySet()
+        return db.gameDao().findAllByFileName(file.name)
+            .filter { extractGameSystem(it).scanOptions.scanByPathAndFilename }
+            .filter { parentContainsSystem(file.path, extractGameSystem(it).id.dbname) }
+            .sortedByDescending { rom ->
+                val dbname = extractGameSystem(rom).id.dbname
+                when {
+                    // Exact path segment — highest confidence
+                    segments.contains(dbname) -> 2
+                    // Alias-only match: bias mame2003plus over fbneo for "arcade/" folder
+                    // because the dataset uses MAME 0.78 romset throughout
+                    segments.contains("arcade") && dbname == "mame2003plus" -> 1
+                    else -> 0
+                }
+            }
+            .firstOrNull()
             ?.let { convertToGameMetadata(it) }
     }
 

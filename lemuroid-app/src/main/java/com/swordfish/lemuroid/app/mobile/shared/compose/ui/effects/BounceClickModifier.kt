@@ -2,10 +2,7 @@ package com.swordfish.lemuroid.app.mobile.shared.compose.ui.effects
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.waitForUpOrCancellation
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,7 +19,8 @@ fun Modifier.bounceClick(
     enabled: Boolean = true,
     hapticFeedbackEnabled: Boolean = true,
     scaleDownPercentage: Float = 0.90f,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onLongClick: (() -> Unit)? = null,
 ) = composed {
     var isPressed by remember { mutableStateOf(false) }
     val scale by animateFloatAsState(
@@ -41,26 +39,19 @@ fun Modifier.bounceClick(
             scaleX = scale
             scaleY = scale
         }
-        .pointerInput(enabled) {
+        .pointerInput(enabled, onLongClick) {
             if (!enabled) return@pointerInput
-            awaitPointerEventScope {
-                while (true) {
-                    val down = awaitFirstDown(requireUnconsumed = false)
+            detectTapGestures(
+                onPress = { _ ->
                     isPressed = true
                     if (hapticFeedbackEnabled) {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove) // Light impact
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     }
-
-                    val up = waitForUpOrCancellation()
+                    tryAwaitRelease()
                     isPressed = false
-
-                    if (up != null) {
-                        if (hapticFeedbackEnabled) {
-                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove) // Light impact on release
-                        }
-                        onClick()
-                    }
-                }
-            }
+                },
+                onTap = { onClick() },
+                onLongPress = onLongClick?.let { longClick -> { _ -> longClick() } },
+            )
         }
 }

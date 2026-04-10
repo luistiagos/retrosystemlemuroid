@@ -55,7 +55,7 @@ class RomsDownloadManager(context: Context) {
 
         private const val HF_DATASET_OWNER = "luisluis123"
         private const val HF_DATASET_NAME = "lemusets"
-        private const val HF_ROMS_PATH = "roms12g"
+        private const val HF_ROMS_PATH = "roms"
         private const val HF_API_BASE =
             "https://huggingface.co/api/datasets/$HF_DATASET_OWNER/$HF_DATASET_NAME"
         private const val HF_DOWNLOAD_BASE =
@@ -440,7 +440,12 @@ class RomsDownloadManager(context: Context) {
                         onProgress(1f)
                         return
                     }
-                    // 4xx (except 416) = permanent client error — fail immediately without retrying
+                    // 429 = rate-limited; treat as transient so the retry loop backs off
+                    if (response.code == 429) {
+                        val retryAfterSec = response.header("Retry-After")?.toLongOrNull() ?: 60L
+                        throw IOException("Rate limited (429), retry after ${retryAfterSec}s")
+                    }
+                    // 4xx (except 416, 429) = permanent client error — fail immediately without retrying
                     if (response.code in 400..499)
                         throw PermanentHttpException("Permanent HTTP ${response.code}: ${response.message}")
                     if (!response.isSuccessful) throw IOException("HTTP error ${response.code}: ${response.message}")
@@ -481,6 +486,7 @@ class RomsDownloadManager(context: Context) {
 
     /**
      * Lists entries at [folderPath] in the HuggingFace dataset, handling pagination.
+     * Retries on 429 (rate-limit) and transient network errors.
      */
     private suspend fun fetchHfTree(folderPath: String): List<HfTreeEntry> {
         // Use limit=1000 so a single page covers virtually any folder in this dataset.
@@ -498,19 +504,46 @@ class RomsDownloadManager(context: Context) {
                 .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
                 .build()
             var resolvedNext: String? = null
-            httpClient.newCall(request).execute().use { response ->
-                if (!response.isSuccessful)
-                    throw IOException("HuggingFace API error ${response.code} for /$folderPath")
-                val body = response.body!!.string()
-                val parsed = parseHfTreeJson(body)
-                Timber.d("fetchHfTree('$folderPath') page=$page -> ${parsed.size} entries (dirs=${parsed.count { it.type=="directory" }}, files=${parsed.count { it.type=="file" }})")
-                allEntries.addAll(parsed)
-                // HuggingFace paginates with Link: <url>; rel="next"
-                response.header("Link")?.let { link ->
-                    Timber.d("fetchHfTree('$folderPath') Link header: $link")
-                    Regex("""<([^>]+)>;\s*rel="next"""").find(link)
-                        ?.groupValues?.get(1)
-                        ?.let { resolvedNext = it }
+            // Retry loop for this individual page request (handles 429 / transient errors).
+            var pageAttempt = 0
+            while (true) {
+                pageAttempt++
+                try {
+                    httpClient.newCall(request).execute().use { response ->
+                        if (response.code == 429) {
+                            val retryAfterSec = response.header("Retry-After")?.toLongOrNull() ?: 60L
+                            throw IOException("429 rate limited, retry after ${retryAfterSec}s")
+                        }
+                        if (!response.isSuccessful)
+                            throw IOException("HuggingFace API error ${response.code} for /$folderPath")
+                        val body = response.body?.string()
+                            ?: throw IOException("Empty response from HuggingFace API for /$folderPath")
+                        val parsed = parseHfTreeJson(body)
+                        Timber.d("fetchHfTree('$folderPath') page=$page -> ${parsed.size} entries (dirs=${parsed.count { it.type=="directory" }}, files=${parsed.count { it.type=="file" }})")
+                        allEntries.addAll(parsed)
+                        // HuggingFace paginates with Link: <url>; rel="next"
+                        response.header("Link")?.let { link ->
+                            Timber.d("fetchHfTree('$folderPath') Link header: $link")
+                            Regex("""<([^>]+)>;\s*rel="next"""").find(link)
+                                ?.groupValues?.get(1)
+                                ?.let { resolvedNext = it }
+                        }
+                    }
+                    break // page fetched successfully
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: IOException) {
+                    if (pageAttempt >= 5)
+                        throw IOException("fetchHfTree('$folderPath') page $page failed after $pageAttempt attempts: ${e.message}", e)
+                    val rateLimitMsg = e.message ?: ""
+                    val delayMs = if (rateLimitMsg.startsWith("429 rate limited")) {
+                        val secs = Regex("retry after (\\d+)s").find(rateLimitMsg)?.groupValues?.get(1)?.toLongOrNull() ?: 60L
+                        minOf(secs * 1000L, 5 * 60_000L)
+                    } else {
+                        minOf(3000L * pageAttempt, 15_000L)
+                    }
+                    Timber.w("fetchHfTree('$folderPath') page $page attempt $pageAttempt failed: ${e.message}, retrying in ${delayMs}ms")
+                    delay(delayMs)
                 }
             }
             nextUrl = resolvedNext

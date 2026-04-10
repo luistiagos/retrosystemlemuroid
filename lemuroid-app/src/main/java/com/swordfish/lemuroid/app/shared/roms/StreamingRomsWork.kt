@@ -58,10 +58,22 @@ class StreamingRomsWork(context: Context, workerParams: WorkerParameters) :
         const val KEY_ERROR = "streaming_error"
         const val UNIQUE_WORK_ID = "StreamingRomsWork"
 
-        fun enqueue(context: Context) {
+        /**
+         * Enqueues the streaming download worker.
+         *
+         * [replace] = true  → cancel any running/enqueued instance and start fresh (use for
+         *                      explicit new starts so the worker picks up any config changes).
+         * [replace] = false → KEEP: if work is already RUNNING or ENQUEUED, leave it untouched;
+         *                      only enqueue if it is absent, CANCELLED, FAILED, or SUCCEEDED.
+         *                      Use for auto-restart on app open and for resume-after-pause so we
+         *                      never cancel an in-progress download just because the ViewModel
+         *                      was recreated (rotation, navigation, etc.).
+         */
+        fun enqueue(context: Context, replace: Boolean = false) {
+            val policy = if (replace) ExistingWorkPolicy.REPLACE else ExistingWorkPolicy.KEEP
             WorkManager.getInstance(context.applicationContext).enqueueUniqueWork(
                 UNIQUE_WORK_ID,
-                ExistingWorkPolicy.REPLACE,
+                policy,
                 OneTimeWorkRequestBuilder<StreamingRomsWork>().build(),
             )
         }

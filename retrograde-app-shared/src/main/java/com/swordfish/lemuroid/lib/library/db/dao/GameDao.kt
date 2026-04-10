@@ -61,10 +61,20 @@ interface GameDao {
     @Query("SELECT * FROM games WHERE lastPlayedAt IS NULL LIMIT :limit")
     fun selectFirstNotPlayed(limit: Int): Flow<List<Game>>
 
-    @Query("SELECT * FROM games WHERE systemId = :systemId ORDER BY title ASC, id DESC")
+    @Query("""
+        SELECT games.* FROM games
+        LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName
+        WHERE games.systemId = :systemId
+        ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.title ASC, games.id DESC
+    """)
     fun selectBySystem(systemId: String): PagingSource<Int, Game>
 
-    @Query("SELECT * FROM games WHERE systemId IN (:systemIds) ORDER BY title ASC, id DESC")
+    @Query("""
+        SELECT games.* FROM games
+        LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName
+        WHERE games.systemId IN (:systemIds)
+        ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.title ASC, games.id DESC
+    """)
     fun selectBySystems(systemIds: List<String>): PagingSource<Int, Game>
 
     @Query("SELECT DISTINCT systemId FROM games ORDER BY systemId ASC")

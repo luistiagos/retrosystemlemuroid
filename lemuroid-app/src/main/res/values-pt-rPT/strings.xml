@@ -184,4 +184,118 @@
     <string name="tilt_configuration_buttons_l_r">L - R</string>
     <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
     <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+
+    <!-- Definição de idioma -->
+    <string name="settings_title_language">Idioma</string>
+    <string name="settings_description_language">Escolha o idioma da aplicação</string>
+    <string name="language_system">Seguir idioma do dispositivo</string>
+    <string name="language_en">English</string>
+    <string name="language_pt">Português (Brasil)</string>
+
+    <!-- Pastas e transferência de ROMs -->
+    <string name="settings_open_folder">Abrir pasta</string>
+    <string name="settings_move_roms_title">Mover ROMs</string>
+    <string name="settings_move_roms_message">Encontrado(s) %1$d ficheiro(s) de ROM. Serão transferidos para o novo local.</string>
+    <string name="settings_move_roms_yes">Mover</string>
+    <string name="settings_move_roms_cancel_operation">Cancelar</string>
+    <string name="settings_transferring_roms_title">A transferir ROMs</string>
+    <string name="settings_transferring_roms_progress">A transferir… %1$d%%</string>
+
+    <!-- Contexto de jogo / download por pedido -->
+    <string name="game_context_menu_delete_rom">Eliminar ROM descarregada</string>
+    <string name="rom_download_dialog_title">Descarregar ROM</string>
+    <string name="rom_download_dialog_message">Esta ROM ainda não foi descarregada. Descarregar agora para jogar?</string>
+    <string name="rom_download_dialog_confirm">Descarregar</string>
+    <string name="rom_download_dialog_cancel">Cancelar</string>
+    <string name="rom_download_dialog_downloading">A descarregar… %1$d%%</string>
+    <string name="rom_download_dialog_not_found">ROM não disponível para descarregamento.</string>
+    <string name="rom_download_dialog_error">Falha no descarregamento: %1$s</string>
+    <string name="rom_download_dialog_pause">Pausar</string>
+    <string name="rom_download_dialog_resume">Retomar</string>
+    <string name="rom_download_dialog_paused">Descarregamento pausado.</string>
+    <string name="rom_download_badge_downloaded">Descarregado</string>
+    <string name="rom_corruption_error_message">O ficheiro ROM parece estar corrompido e foi removido. Toque no jogo novamente para o descarregar de novo.</string>
+
+    <!-- Armazenamento inacessível -->
+    <string name="home_storage_inaccessible_title">Armazenamento inacessível</string>
+    <string name="home_storage_inaccessible_message">O directório de ROMs seleccionado não pode ser acedido. Reconecte o seu dispositivo de armazenamento ou seleccione um novo directório.</string>
+    <string name="home_storage_inaccessible_action">Seleccionar Directório</string>
+
+    <!-- Diálogo de descarregamento do pacote padrão -->
+    <string name="home_download_dialog_title">Pacote Padrão</string>
+    <string name="home_download_dialog_message">Deseja descarregar e instalar o pacote padrão?</string>
+    <string name="home_download_dialog_confirm">Sim, Descarregar</string>
+    <string name="home_download_dialog_cancel">Agora não</string>
+
+    <!-- Descarregamento do pacote de ROMs -->
+    <string name="home_download_roms_title">Descarregar Pacote de ROMs</string>
+    <string name="home_download_roms_message">Descarregue um pacote completo de ROMs e adicione jogos automaticamente à sua biblioteca.</string>
+    <string name="home_download_roms_action">Descarregar ROMs</string>
+    <string name="home_download_roms_action_retry">Tentar novamente</string>
+    <string name="home_download_roms_action_again">Descarregar novamente</string>
+    <string name="home_download_roms_downloading">A descarregar… %1$d%%</string>
+    <string name="home_download_roms_extracting">A extrair… %1$d%%</string>
+    <string name="home_download_roms_done">ROMs descarregadas e extraídas com sucesso!</string>
+    <string name="home_download_roms_error">Erro: %1$s</string>
+    <string name="home_download_roms_cancel">Cancelar</string>
+    <string name="home_download_cancel_dialog_title">Cancelar Descarregamento?</string>
+    <string name="home_download_cancel_dialog_message">Isto eliminará todos os ficheiros descarregados. Terá de começar do início na próxima vez.</string>
+    <string name="home_download_cancel_dialog_confirm">Sim, Cancelar</string>
+    <string name="home_download_cancel_dialog_dismiss">Não, Continuar a Descarregar</string>
+
+    <!-- Definições de descarregamento -->
+    <string name="settings_download_roms_title">Descarregar Pacote de ROMs</string>
+    <string name="settings_download_roms_subtitle">Descarregue um pacote completo de ROMs</string>
+    <string name="settings_download_roms_done_subtitle">ROMs descarregadas. Toque para descarregar novamente.</string>
+
+    <!-- Armazenamento inteligente -->
+    <string name="settings_smart_storage_title">Armazenamento Inteligente</string>
+    <string name="settings_smart_storage_active_removable">Seleccionado automaticamente: Armazenamento removível (%1$d MB livres)</string>
+    <string name="settings_smart_storage_active_internal">Seleccionado automaticamente: Armazenamento interno (%1$d MB livres)</string>
+    <string name="settings_smart_storage_user_override">Pasta personalizada seleccionada pelo utilizador</string>
+    <string name="settings_smart_storage_desc">Os descarregamentos vão para o volume com mais espaço livre. Ligue um cartão SD ou pen USB para utilizá-lo automaticamente.</string>
+
+    <!-- Descarregamento em streaming (ficheiro a ficheiro) -->
+    <string name="home_streaming_roms_title">A descarregar Catálogo</string>
+    <string name="home_streaming_roms_message">Descarrega o catálogo de jogos. Cada jogo aparece com a capa e fica disponível para descarregamento individual com um único toque.</string>
+    <string name="home_streaming_roms_action">Descarregar Catálogo</string>
+    <string name="home_streaming_roms_downloading">%1$d%% · %2$s ficheiros · %3$s</string>
+    <string name="home_streaming_roms_pause">Pausar</string>
+    <string name="home_streaming_roms_resume">Retomar</string>
+    <string name="home_streaming_roms_paused">Descarregamento pausado. Os ficheiros já descarregados foram mantidos.</string>
+    <string name="home_streaming_roms_action_cancel">Cancelar</string>
+    <string name="home_streaming_cancel_title">Cancelar descarregamento?</string>
+    <string name="home_streaming_cancel_message">O descarregamento será parado. Os ficheiros já descarregados serão mantidos, mas terá de reiniciar o descarregamento para obter todas as ROMs.</string>
+    <string name="home_streaming_cancel_confirm">Sim, cancelar</string>
+    <string name="home_streaming_cancel_dismiss">Não, continuar a descarregar</string>
+
+    <!-- Avisos sem WiFi / sem rede -->
+    <string name="home_streaming_nowifi_title">Sem WiFi</string>
+    <string name="home_streaming_nowifi_message">Não está ligado ao WiFi. Recomendamos descarregar via WiFi para evitar uso excessivo de dados móveis. Deseja continuar mesmo assim?</string>
+    <string name="home_streaming_nowifi_confirm">Sim, continuar</string>
+    <string name="home_streaming_nowifi_cancel">Cancelar</string>
+    <string name="home_streaming_no_network_title">Sem ligação à internet</string>
+    <string name="home_streaming_no_network_message">Não existe ligação à internet disponível. Ligue-se ao WiFi ou active os dados móveis para iniciar o descarregamento.</string>
+    <string name="home_streaming_no_network_ok">OK</string>
+    <string name="home_streaming_mobile_title">Rede alterada para %1$s</string>
+    <string name="home_streaming_mobile_message">A sua ligação foi alterada para rede móvel (%1$s). Recomendamos descarregar via WiFi. Deseja continuar o descarregamento na rede móvel?</string>
+    <string name="home_streaming_mobile_continue">Continuar</string>
+    <string name="home_streaming_mobile_pause">Pausar</string>
+
+    <!-- Definição apenas WiFi -->
+    <string name="settings_wifi_only_title">Descarregar apenas via WiFi</string>
+    <string name="settings_wifi_only_subtitle">Avisar quando o descarregamento não estiver em WiFi</string>
+
+    <!-- Notificação de descarregamento -->
+    <string name="notification_download_roms_title">A descarregar Pacote de ROMs</string>
+    <string name="notification_download_roms_message">O descarregamento continua em segundo plano mesmo com o ecrã bloqueado.</string>
+
+    <!-- ROM não encontrada -->
+    <string name="game_rom_not_found_title">Ficheiro ROM não encontrado</string>
+    <string name="game_rom_not_found_message">O ficheiro \"%1$s\" não foi encontrado no seu dispositivo. Pode ter sido movido ou eliminado. Deseja reanalisar a sua biblioteca?</string>
+    <string name="game_rom_not_found_rescan">Reanalisar</string>
+
+    <!-- Permissão de notificação -->
+    <string name="game_interactor_notification_permission_required">Por favor, active as notificações em Início para continuar</string>
+
 </resources>

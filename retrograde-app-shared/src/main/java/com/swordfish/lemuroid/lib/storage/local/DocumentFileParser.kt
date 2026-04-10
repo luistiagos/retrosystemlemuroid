@@ -76,7 +76,7 @@ object DocumentFileParser {
                 ?.let { inputStream -> SerialScanner.extractInfo(baseStorageFile.name, inputStream) }
 
         val crc32 =
-            if (baseStorageFile.size < MAX_SIZE_CRC32 && diskInfo?.serial == null) {
+            if (baseStorageFile.size > 0 && baseStorageFile.size < MAX_SIZE_CRC32 && diskInfo?.serial == null) {
                 context.contentResolver.openInputStream(baseStorageFile.uri)?.calculateCrc32()
             } else {
                 null

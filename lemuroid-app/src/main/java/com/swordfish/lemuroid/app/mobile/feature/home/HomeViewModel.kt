@@ -291,7 +291,13 @@ class HomeViewModel(
             uiStatesFlow
                 .debounce(DEBOUNCE_TIME)
                 .flowOn(Dispatchers.IO)
-                .collect { uiStates.value = it }
+                .collect { state ->
+                    if (state.showDownloadPromptDialog) {
+                        startStreamingDownload()
+                        downloadDialogDismissed.value = true
+                    }
+                    uiStates.value = state.copy(showDownloadPromptDialog = false)
+                }
         }
     }
 

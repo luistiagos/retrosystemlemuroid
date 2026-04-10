@@ -9,6 +9,7 @@ data class Bios(
     val systemID: SystemID,
     val externalCRC32: String? = null,
     val externalName: String? = null,
+    val isEmbedded: Boolean = false,
 ) {
     fun displayName() = externalName ?: libretroFileName
 }

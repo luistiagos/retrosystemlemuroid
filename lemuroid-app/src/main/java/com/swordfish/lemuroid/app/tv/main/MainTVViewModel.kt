@@ -17,7 +17,7 @@ class MainTVViewModel(appContext: Context) : ViewModel() {
 
     val inProgress =
         PendingOperationsMonitor(appContext)
-            .anyOperationInProgress()
+            .anySaveOperationInProgress()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.Lazily,

@@ -31,7 +31,7 @@ class MainViewModel(appContext: Context, private val saveSyncManager: SaveSyncMa
 
     private val currentRouteFlow = MutableStateFlow(MainRoute.HOME)
     private val saveSyncEnabledFlow = MutableStateFlow(false)
-    private val operationInProgressFlow = PendingOperationsMonitor(appContext).anyOperationInProgress()
+    private val operationInProgressFlow = PendingOperationsMonitor(appContext).anySaveOperationInProgress()
     private val searchQueryFlow = MutableStateFlow("")
 
     val state = buildStateFlow()

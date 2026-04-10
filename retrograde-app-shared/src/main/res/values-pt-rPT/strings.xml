@@ -118,4 +118,8 @@
     <string name="value_handy_rot_none">0</string>
     <string name="value_handy_rot_90">90</string>
     <string name="value_handy_rot_270">270</string>
+
+    <!-- Análise de todos os ficheiros -->
+    <string name="all_files_storage">Análise do Dispositivo (Todas as pastas)</string>
+    <string name="all_files_storage_desc">Encontra jogos automaticamente em todo o armazenamento. Requer permissão de acesso a todos os ficheiros.</string>
 </resources>

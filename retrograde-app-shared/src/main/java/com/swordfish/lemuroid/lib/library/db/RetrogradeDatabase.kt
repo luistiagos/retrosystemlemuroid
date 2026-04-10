@@ -22,14 +22,16 @@ package com.swordfish.lemuroid.lib.library.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.swordfish.lemuroid.lib.library.db.dao.DataFileDao
+import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
 import com.swordfish.lemuroid.lib.library.db.dao.GameDao
 import com.swordfish.lemuroid.lib.library.db.dao.GameSearchDao
 import com.swordfish.lemuroid.lib.library.db.entity.DataFile
+import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @Database(
-    entities = [Game::class, DataFile::class],
-    version = 9,
+    entities = [Game::class, DataFile::class, DownloadedRom::class],
+    version = 10,
     exportSchema = true,
 )
 abstract class RetrogradeDatabase : RoomDatabase() {
@@ -40,6 +42,8 @@ abstract class RetrogradeDatabase : RoomDatabase() {
     abstract fun gameDao(): GameDao
 
     abstract fun dataFileDao(): DataFileDao
+
+    abstract fun downloadedRomDao(): DownloadedRomDao
 
     fun gameSearchDao() = GameSearchDao(gameSearchDaoInternal())
 

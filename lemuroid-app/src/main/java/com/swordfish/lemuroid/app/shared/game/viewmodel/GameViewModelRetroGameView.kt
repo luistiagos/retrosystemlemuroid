@@ -383,7 +383,9 @@ class GameViewModelRetroGameView(
                 else -> GameLoaderError.Generic
             }
 
-        sideEffects.requestFailureFinish(getErrorMessage(gameLoaderError))
+        val isRomLoadFailure = gameLoaderError is GameLoaderError.LoadGame ||
+            gameLoaderError is GameLoaderError.Generic
+        sideEffects.requestFailureFinish(getErrorMessage(gameLoaderError), isRomLoadFailure)
     }
 
     /** Remove o arquivo do core dos diretórios de cache para forçar novo download. */

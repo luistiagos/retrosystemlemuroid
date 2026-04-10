@@ -6,6 +6,7 @@ import android.content.Intent
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.gamecrash.GameCrashActivity
+import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.app.shared.storage.cache.CacheCleanerWork
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
@@ -16,6 +17,7 @@ import kotlinx.coroutines.delay
 class GameLaunchTaskHandler(
     private val reviewManager: ReviewManager,
     private val retrogradeDb: RetrogradeDatabase,
+    private val romOnDemandManager: RomOnDemandManager,
 ) {
     fun handleGameStart(context: Context) {
         cancelBackgroundWork(context)
@@ -30,13 +32,15 @@ class GameLaunchTaskHandler(
         rescheduleBackgroundWork(activity.applicationContext)
         when (resultCode) {
             Activity.RESULT_OK -> handleSuccessfulGameFinish(activity, enableRatingFlow, data)
-            BaseGameActivity.RESULT_ERROR ->
-                handleUnsuccessfulGameFinish(
-                    activity,
-                    data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)
-                        ?: activity.getString(R.string.lemuroid_crash_disclamer),
-                    null,
-                )
+            BaseGameActivity.RESULT_ERROR -> {
+                val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as? Game
+                val errorMessage = data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)
+                    ?: activity.getString(R.string.lemuroid_crash_disclamer)
+                val isRomLoadFailure = data?.getBooleanExtra(
+                    BaseGameActivity.PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE, false
+                ) ?: false
+                handleErrorWithCorruptionCheck(activity, game, errorMessage, isRomLoadFailure)
+            }
             BaseGameActivity.RESULT_UNEXPECTED_ERROR ->
                 handleUnsuccessfulGameFinish(
                     activity,
@@ -44,6 +48,29 @@ class GameLaunchTaskHandler(
                     data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR),
                 )
         }
+    }
+
+    private suspend fun handleErrorWithCorruptionCheck(
+        activity: Activity,
+        game: Game?,
+        errorMessage: String,
+        isRomLoadFailure: Boolean,
+    ) {
+        // Only treat as corruption if the error signal indicates the ROM file itself failed to load.
+        // Other errors (e.g. missing BIOS) are user-actionable and should be shown as-is.
+        if (game != null && isRomLoadFailure) {
+            val wasDownloaded = retrogradeDb.downloadedRomDao().isDownloaded(game.fileName)
+            if (wasDownloaded) {
+                romOnDemandManager.deleteRom(game)
+                handleUnsuccessfulGameFinish(
+                    activity,
+                    activity.getString(R.string.rom_corruption_error_message),
+                    null,
+                )
+                return
+            }
+        }
+        handleUnsuccessfulGameFinish(activity, errorMessage, null)
     }
 
     private fun cancelBackgroundWork(context: Context) {
