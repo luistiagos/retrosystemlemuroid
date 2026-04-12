@@ -32,6 +32,13 @@ object EmbeddedBiosInstaller {
         "firmware.bin",
         // Game Boy Advance (optional, improves compatibility)
         "gba_bios.bin",
+        // MSX / MSX2
+        "MSX.ROM",
+        "MSX2.ROM",
+        "MSX2EXT.ROM",
+        "MSX2P.ROM",
+        "MSX2PEXT.ROM",
+        "MSXDOS2.ROM",
     )
 
     suspend fun installIfNeeded(context: Context) = withContext(Dispatchers.IO) {

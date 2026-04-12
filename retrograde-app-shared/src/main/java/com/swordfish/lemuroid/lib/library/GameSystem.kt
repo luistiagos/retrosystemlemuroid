@@ -1296,6 +1296,62 @@ data class GameSystem(
                     uniqueExtensions = listOf("3ds"),
                     hasTouchScreen = true,
                 ),
+                GameSystem(
+                    SystemID.MSX,
+                    "Microsoft - MSX",
+                    R.string.game_system_title_msx,
+                    R.string.game_system_abbr_msx,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FMSX,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.MSX),
+                                    1 to arrayListOf(ControllerConfigs.MSX),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("fmsx_log_level", "Info"),
+                                ),
+                            requiredBIOSFiles =
+                                listOf(
+                                    "MSX.ROM",
+                                    "MSX2.ROM",
+                                    "MSX2EXT.ROM",
+                                    "MSX2P.ROM",
+                                    "MSX2PEXT.ROM",
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("mx1"),
+                    supportedExtensions = listOf("rom", "mx1", "mx2", "dsk", "fdi", "cas", "m3u"),
+                ),
+                GameSystem(
+                    SystemID.MSX2,
+                    "Microsoft - MSX2",
+                    R.string.game_system_title_msx2,
+                    R.string.game_system_abbr_msx2,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FMSX,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.MSX),
+                                    1 to arrayListOf(ControllerConfigs.MSX),
+                                ),
+                            requiredBIOSFiles =
+                                listOf(
+                                    "MSX.ROM",
+                                    "MSX2.ROM",
+                                    "MSX2EXT.ROM",
+                                    "MSX2P.ROM",
+                                    "MSX2PEXT.ROM",
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("mx2"),
+                    supportedExtensions = listOf("rom", "mx1", "mx2", "dsk", "fdi", "cas", "m3u"),
+                ),
             )
 
         private val byIdCache by lazy { mapOf(*SYSTEMS.map { it.id.dbname to it }.toTypedArray()) }

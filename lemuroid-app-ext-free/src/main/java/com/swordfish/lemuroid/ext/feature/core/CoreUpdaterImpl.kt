@@ -24,20 +24,28 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
 import com.swordfish.lemuroid.common.files.safeDelete
-import com.swordfish.lemuroid.common.kotlin.writeToFile
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import timber.log.Timber
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class CoreUpdaterImpl(
     private val directoriesManager: DirectoriesManager,
@@ -45,14 +53,21 @@ class CoreUpdaterImpl(
 ) : CoreUpdater {
     // This is the last tagged versions of cores.
     companion object {
-        private const val CORES_VERSION = "1.17.0"
+        private const val CORES_VERSION = com.swordfish.lemuroid.lib.core.CoreDownloader.CORES_VERSION
         /** Tamanho mínimo em bytes para considerar um arquivo de core como válido (100 KB). */
         private const val MIN_VALID_CORE_SIZE_BYTES = 100 * 1024L
     }
 
-    private val baseUri = Uri.parse("https://github.com/Swordfish90/LemuroidCores/")
+    private val baseUri = Uri.parse("https://raw.githubusercontent.com/luistiagos/libretrocores/")
 
     private val api = retrofit.create(CoreUpdater.CoreManagerApi::class.java)
+
+    private val httpClient: OkHttpClient = OkHttpClient.Builder()
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(120, TimeUnit.SECONDS)
+        .followRedirects(true)
+        .followSslRedirects(true)
+        .build()
 
     override suspend fun downloadCores(
         context: Context,
@@ -130,13 +145,13 @@ class CoreUpdaterImpl(
 
         val uri =
             baseUri.buildUpon()
-                .appendEncodedPath("raw/$CORES_VERSION/lemuroid_core_${coreID.coreName}/src/main/jniLibs/")
+                .appendEncodedPath("$CORES_VERSION/lemuroid_core_${coreID.coreName}/src/main/jniLibs/")
                 .appendPath(processAbi)
                 .appendPath(libFileName)
                 .build()
 
         try {
-            downloadFile(uri, destFile)
+            downloadFileWithResume(uri.toString(), destFile)
             destFile.setExecutable(true, true)
             return destFile
         } catch (e: Throwable) {
@@ -145,18 +160,50 @@ class CoreUpdaterImpl(
         }
     }
 
-    private suspend fun downloadFile(
-        uri: Uri,
-        destFile: File,
-    ) {
-        val response = api.downloadFile(uri.toString())
-
-        if (!response.isSuccessful) {
-            Timber.e("Download core response was unsuccessful")
-            throw Exception(response.errorBody()?.string() ?: "Download error")
+    private suspend fun downloadFileWithResume(url: String, destFile: File) {
+        val maxRetries = 10
+        var attempt = 0
+        while (true) {
+            attempt++
+            val existingBytes = if (destFile.exists()) destFile.length() else 0L
+            val request = Request.Builder()
+                .url(url)
+                .header("User-Agent", "LemuroidApp/1.0")
+                .apply { if (existingBytes > 0) header("Range", "bytes=$existingBytes-") }
+                .build()
+            try {
+                withContext(Dispatchers.IO) {
+                    httpClient.newCall(request).execute().use { response ->
+                        if (response.code == 416) return@withContext // file already complete
+                        if (response.code == 429) throw IOException("429 rate limited")
+                        if (response.code in 400..499) throw IOException("Permanent HTTP ${response.code}")
+                        if (!response.isSuccessful) throw IOException("HTTP ${response.code}")
+                        val isResume = response.code == 206
+                        val body = response.body ?: throw IOException("Empty response body")
+                        Timber.d("Downloading core: $destFile (resume=$isResume, offset=$existingBytes)")
+                        FileOutputStream(destFile, isResume).use { out ->
+                            body.byteStream().use { input ->
+                                val buffer = ByteArray(256 * 1024)
+                                var n: Int
+                                while (input.read(buffer).also { n = it } != -1) {
+                                    out.write(buffer, 0, n)
+                                    currentCoroutineContext().ensureActive()
+                                }
+                            }
+                        }
+                    }
+                }
+                Timber.i("Core download complete: $destFile (${destFile.length()} bytes)")
+                return // success
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: IOException) {
+                if (e.message?.startsWith("Permanent") == true) throw e
+                if (attempt >= maxRetries) throw IOException("Core download failed after $maxRetries attempts: ${e.message}", e)
+                Timber.w("Core download attempt $attempt failed: ${e.message}, retrying...")
+                delay(minOf(2000L * attempt, 10000L))
+            }
         }
-
-        response.body()?.writeToFile(destFile)
     }
 
     private suspend fun findBundledLibrary(

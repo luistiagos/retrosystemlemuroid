@@ -17,8 +17,7 @@ import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.view.disableTouchEvents
 import com.swordfish.lemuroid.lib.core.CoreVariable
 import com.swordfish.lemuroid.lib.core.CoreVariablesManager
-import android.content.Intent
-import com.swordfish.lemuroid.app.shared.library.CoreUpdateBroadcastReceiver
+import com.swordfish.lemuroid.lib.core.CoreDownloader
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.game.GameLoaderError
 import com.swordfish.lemuroid.lib.game.GameLoaderException
@@ -127,18 +126,11 @@ class GameViewModelRetroGameView(
                         gameState.value = GameState.Loading(
                             appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_core)
                         )
-                        // Send a broadcast to the main process so it schedules the core update
-                        // via WorkManager (WorkManager is not initialized in the :game process).
-                        // Pass the specific coreID so only this core is downloaded, not all cores.
-                        applicationContext.sendBroadcast(
-                            Intent(applicationContext, CoreUpdateBroadcastReceiver::class.java)
-                                .putExtra(CoreUpdateBroadcastReceiver.EXTRA_CORE_ID, systemCoreConfig.coreID.name)
-                        )
-                        val found = waitForCoreFile(applicationContext, systemCoreConfig.coreID)
-                        if (found) {
+                        try {
+                            CoreDownloader.downloadCore(applicationContext, systemCoreConfig.coreID)
                             shouldRetry = true
-                        } else {
-                            // Core did not appear within the timeout — surface the error.
+                        } catch (downloadEx: Exception) {
+                            Timber.e(downloadEx, "Direct core download failed: ${downloadEx.message}")
                             sideEffects.requestFailureFinish(getErrorMessage(GameLoaderError.LoadCore))
                         }
                     } else {
@@ -174,20 +166,6 @@ class GameViewModelRetroGameView(
                 }
             if (!shouldRetry) break
         }
-    }
-
-    // Polls for the core .so file up to 90 times (≈3 minutes) with a 2 s interval.
-    // Returns true when found, false if the time limit expires without the file appearing.
-    private suspend fun waitForCoreFile(applicationContext: Context, coreID: CoreID): Boolean {
-        val coresDir = File(applicationContext.filesDir, "cores")
-        repeat(90) {
-            val found = withContext(Dispatchers.IO) {
-                coresDir.walkBottomUp().any { it.name == coreID.libretroFileName }
-            }
-            if (found) return true
-            delay(2_000L)
-        }
-        return false
     }
 
     fun createRetroView(

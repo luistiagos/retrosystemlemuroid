@@ -215,13 +215,13 @@ class GameViewModelInput(
         supported: Array<Controller>,
         controllerConfig: ControllerConfig,
     ): Int? {
-        return supported
-            .firstOrNull { controller ->
-                sequenceOf(
-                    controller.id == controllerConfig.libretroId,
-                    controller.description == controllerConfig.libretroDescriptor,
-                ).any { it }
-            }?.id
+        val matched = supported.firstOrNull { controller ->
+            sequenceOf(
+                controller.id == controllerConfig.libretroId,
+                controller.description == controllerConfig.libretroDescriptor,
+            ).any { it }
+        }
+        return matched?.let { controllerConfig.libretroId ?: it.id }
     }
 
     override fun onCreate(owner: LifecycleOwner) {

@@ -46,8 +46,11 @@ object RomSystemMapper {
         // Arcade — server uses "fbneo" as the system name for all arcade ROMs
         // ROMs are MAME 0.78 romset → use mame2003plus core locally, but server stores them under "fbneo"
         "fbneo"        to "fbneo",       // SystemID.FBNEO dbname
-        "mame2003plus" to "fbneo",       // SystemID.MAME2003PLUS dbname (served from fbneo collection)
-        "arcade"       to "fbneo",       // HuggingFace folder alias (mame 0.78, served as fbneo on server)
+        "mame2003plus" to "mame2003plus",       // SystemID.MAME2003PLUS dbname (served from fbneo collection)
+        "arcade"       to "mame2003plus",       // HuggingFace folder alias (mame 0.78, served as fbneo on server)
+        // MSX
+        "msx"          to "msx",
+        "msx2"         to "msx",
     )
 
     /**

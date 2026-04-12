@@ -389,4 +389,19 @@ object ControllerConfigs {
                     TILT_CONFIGURATION_L_R,
                 ),
         )
+
+    val MSX =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.SMS,
+            mergeDPADAndLeftStickEvents = true,
+            libretroId = 513,
+            libretroDescriptor = "Emulated Keyboard",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
 }

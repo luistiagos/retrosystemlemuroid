@@ -111,6 +111,11 @@ enum class CoreID(
         "DosBox Pure",
         "libdosbox_pure_libretro_android.so",
     ),
+    FMSX(
+        "fmsx",
+        "fMSX",
+        "libfmsx_libretro_android.so",
+    ),
     ;
 
     companion object {

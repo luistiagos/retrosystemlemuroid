@@ -5,8 +5,8 @@ import com.swordfish.lemuroid.lib.R
 
 fun GameSystem.metaSystemID() = MetaSystemID.fromSystemID(id)
 
-/** Meta systems represents a collection of systems which appear the same to the user. It's currently
- *  only for Arcade (without separating FBNeo, MAME2000 or MAME2003). */
+/** Meta systems represents a collection of systems which appear the same to the user.
+ *  FBNeo and MAME2003Plus are shown as separate consoles. */
 enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs: List<SystemID>) {
     NES(
         R.string.game_system_title_nes,
@@ -73,10 +73,15 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_psx,
         listOf(SystemID.PSX),
     ),
-    ARCADE(
-        R.string.game_system_title_arcade,
+    FBNEO(
+        R.string.game_system_title_arcade_fbneo,
+        R.drawable.game_system_fbneo,
+        listOf(SystemID.FBNEO),
+    ),
+    MAME2003PLUS(
+        R.string.game_system_title_arcade_mame2003_plus,
         R.drawable.game_system_arcade,
-        listOf(SystemID.FBNEO, SystemID.MAME2003PLUS),
+        listOf(SystemID.MAME2003PLUS),
     ),
     ATARI7800(
         R.string.game_system_title_atari7800,
@@ -113,6 +118,11 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_3ds,
         listOf(SystemID.NINTENDO_3DS),
     ),
+    MSX(
+        R.string.game_system_title_msx,
+        R.drawable.game_system_msx,
+        listOf(SystemID.MSX, SystemID.MSX2),
+    ),
     ;
 
     fun color(): Int {
@@ -122,8 +132,8 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
     companion object {
         fun fromSystemID(systemID: SystemID): MetaSystemID {
             return when (systemID) {
-                SystemID.FBNEO -> ARCADE
-                SystemID.MAME2003PLUS -> ARCADE
+                SystemID.FBNEO -> FBNEO
+                SystemID.MAME2003PLUS -> MAME2003PLUS
                 SystemID.ATARI2600 -> ATARI2600
                 SystemID.GB -> GB
                 SystemID.GBC -> GBC
@@ -147,6 +157,8 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.WS -> WS
                 SystemID.WSC -> WS
                 SystemID.NINTENDO_3DS -> NINTENDO_3DS
+                SystemID.MSX -> MSX
+                SystemID.MSX2 -> MSX
             }
         }
     }

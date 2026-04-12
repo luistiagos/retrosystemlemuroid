@@ -47,9 +47,15 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
                 notificationsManager.installingCoresNotification(),
             )
 
+        // Attempt to show a progress notification. On Android 16+, DATA_SYNC FGS was removed:
+        // if setForeground() throws, we still want the download to proceed.
         try {
             setForeground(foregroundInfo)
+        } catch (e: Exception) {
+            Timber.w(e, "CoreUpdateWork: setForeground failed (${e.message}), continuing without notification")
+        }
 
+        try {
             // If a specific coreID was requested (e.g. triggered from the game screen),
             // only download that one core instead of all cores — much faster.
             val specificCoreId = inputData.getString(KEY_CORE_ID)

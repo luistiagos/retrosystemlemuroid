@@ -202,6 +202,48 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "81977335",
                     isEmbedded = true,
                 ),
+                Bios(
+                    "MSX.ROM",
+                    "364A1A579FE5CB8DBA54519BCFCDAC0D",
+                    "MSX BIOS",
+                    SystemID.MSX,
+                    isEmbedded = true,
+                ),
+                Bios(
+                    "MSX2.ROM",
+                    "EC3A01C91F24FBDDCBCAB0AD301BC9EF",
+                    "MSX2 BIOS",
+                    SystemID.MSX2,
+                    isEmbedded = true,
+                ),
+                Bios(
+                    "MSX2EXT.ROM",
+                    "2183C2AFF17CF4297BDB496DE78C2E8A",
+                    "MSX2 Extended BIOS",
+                    SystemID.MSX2,
+                    isEmbedded = true,
+                ),
+                Bios(
+                    "MSX2P.ROM",
+                    "847CC025FFAE665487940FF2639540E5",
+                    "MSX2+ BIOS",
+                    SystemID.MSX2,
+                    isEmbedded = true,
+                ),
+                Bios(
+                    "MSX2PEXT.ROM",
+                    "7C8243C71D8F143B2531F01AFA6A05DC",
+                    "MSX2+ Extended BIOS",
+                    SystemID.MSX2,
+                    isEmbedded = true,
+                ),
+                Bios(
+                    "MSXDOS2.ROM",
+                    "6418D091CD6907BBCF940324339E43BB",
+                    "MSX-DOS2 BIOS",
+                    SystemID.MSX,
+                    isEmbedded = true,
+                ),
             )
     }
 }

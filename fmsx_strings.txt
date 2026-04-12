@@ -1,0 +1,1602 @@
+﻿Android
+7026061
+.>|	
+__cxa_finalize
+__cxa_atexit
+__sF
+__stack_chk_fail
+__strcat_chk
+__strchr_chk
+__strcpy_chk
+__strlen_chk
+__strncpy_chk2
+__strrchr_chk
+__vsnprintf_chk
+fflush
+free
+malloc
+memcpy
+memset
+retro_api_version
+retro_cheat_reset
+retro_cheat_set
+retro_deinit
+retro_get_memory_data
+retro_get_memory_size
+retro_get_region
+retro_get_system_av_info
+retro_get_system_info
+retro_init
+retro_load_game
+retro_load_game_special
+retro_reset
+retro_run
+retro_serialize
+retro_serialize_size
+retro_set_audio_sample
+retro_set_audio_sample_batch
+retro_set_controller_port_device
+retro_set_environment
+retro_set_input_poll
+retro_set_input_state
+retro_set_video_refresh
+retro_unload_game
+retro_unserialize
+strcasecmp
+strcmp
+strcpy
+strdup
+strlen
+strncpy
+strrchr
+__memset_chk
+__vsprintf_chk
+chdir
+getcwd
+localtime
+sscanf
+strcat
+time
+retro_closedir
+retro_dirent_get_name
+retro_opendir
+retro_readdir
+stat
+strchr
+unlink
+retro_dirent_error
+retro_dirent_is_dir
+retro_opendir_include_hidden
+retro_vfs_closedir_impl
+retro_vfs_dirent_get_name_impl
+retro_vfs_dirent_is_dir_impl
+retro_vfs_opendir_impl
+retro_vfs_readdir_impl
+strftime
+retro_vfs_mkdir_impl
+retro_vfs_stat_impl
+calloc
+mbstowcs
+wcstombs
+realloc
+retro_vfs_file_close_impl
+retro_vfs_file_flush_impl
+retro_vfs_file_get_path_impl
+retro_vfs_file_open_impl
+retro_vfs_file_read_impl
+retro_vfs_file_remove_impl
+retro_vfs_file_rename_impl
+retro_vfs_file_seek_impl
+retro_vfs_file_size_impl
+retro_vfs_file_tell_impl
+retro_vfs_file_truncate_impl
+retro_vfs_file_write_impl
+vsnprintf
+memmove
+strstr
+strtoul
+__errno
+__read_chk
+abort
+close
+closedir
+fclose
+ferror
+fileno
+fopen
+fread
+fseeko
+ftello
+ftruncate
+fwrite
+lseek
+mkdir
+open
+opendir
+readdir
+remove
+rename
+retro_vfs_file_error_impl
+retro_vfs_file_seek_internal
+setvbuf
+write
+libc.so
+LIBC
+libm.so
+libstdc++.so
+libdl.so
+libretro.so
+IKY[
+space
+fmsx_video_mode
+MSX Main Memory; Auto|64KB|128KB|256KB|512KB|4MB
+fmsx_game_master
+fMSX
+Dynamic
+CARTS.SHA
+MV - CPC
+DISK.ROM not loaded; content will not start
+Custom keyboard RetroPad r3; 
+MSX Mode; MSX2+|MSX1|MSX2
+MSX Video Mode; NTSC|PAL|Dynamic
+fMSX logging; Off|Info|Debug|Spam
+256KB
+-%y%m%d-%H%M%S.
+Custom keyboard RetroPad up; 
+fmsx_mode
+Support Game Master; No|Yes
+fmsx_custom_keyboard_right
+fmsx_custom_keyboard_select
+Interlaced
+GameMaster2
+MSXDOS2.ROM
+stop
+keypad6
+minus
+Custom keyboard RetroPad r2; 
+fmsx_ym2413_core
+fmsx_custom_keyboard_a
+Konami5 8kB
+standard
+KANJI.ROM
+.sav
+.DDP
+Custom keyboard RetroPad r; 
+fmsx_log_level
+DRIVEB.DSK
+-%y%m%d-%H%M%S
+country
+dead
+keypad8
+Joystick + Emulated Keyboard
+Guess
+Never
+To/From SRAM
+Info
+Fire A
+%08X %d
+.apk
+home
+.mx2
+fmsx_hires
+Enable SCC-I 128kB MegaRAM; Yes|No
+Use autofire on SPACE; No|Yes
+Progressive
+Spam
+GMASTER2.ROM
+90003c78975d00b1e5612fd00dffabb70d616ecd
+.FDI
+comma
+.rom
+Custom keyboard RetroPad right; 
+Custom keyboard RetroPad x; 
+NTSC
+GMASTER.ROM
+1302d258c952e93666ecec12429d6d2c2f841f43
+.MGT
+capslock
+MSX Mapper Type Mode; Guess|Generic 8kB|Generic 16kB|Konami5 8kB|Konami4 8kB|ASCII 8kB|ASCII 16kB|GameMaster2|FMPAC
+Load MSXDOS2.ROM when found; No|Yes
+32KB
+.IMG
+Aley's disk backup
+keypad4
+Keyboard
+fmsx_mapper_type_mode
+192KB
+CMOS.ROM
+MSX2.ROM
+90722d413913ab18462aa741f85b820e751bb50f
+kp_plus
+Emulated Keyboard
+Simulate DiskROM disk access calls; No|Yes
+fmsx_custom_keyboard_r3
+rom|mx1|mx2|dsk|fdi|cas|m3u
+MSX2+
+ASCII 8kB
+64KB
+Stick Right
+Escape
+Arrow Left
+.SCL
+kp_multiply
+period
+Custom keyboard RetroPad a; 
+fmsx_autospace
+fmsx_font
+MSX2
+right
+escape
+fmsx_scci_megaram
+fmsx_allsprites
+fmsx_custom_keyboard_down
+down
+fmsx_custom_keyboard_up
+Arrow Down
+RS232.ROM
+MSX2EXT.ROM
+bc06bd3d6f138da8f5d38b47e459b4d1942e49e4
+.SAD
+kp_divide
+Custom keyboard RetroPad down; 
+Custom keyboard RetroPad l2; 
+fmsx_overscan
+Stick Up
+CARTA.ROM
+CARTS.CRC
+Custom keyboard RetroPad y; 
+Custom keyboard RetroPad l; 
+fmsx_custom_keyboard_b
+On close
+128KB
+Fire B
+25022c4f5cfc805e93026fd5fda781e9a1807474
+fmsx_custom_keyboard_l2
+Stick Down
+Space
+Enter
+Arrow Right
+FMPAC.ROM
+751571d21457d89e5c52c45657bfe9a617ae8e14
+.TRD
+EXTENDED CPC DSK File
+backspace
+kp_comma
+kp_period
+Show all sprites; No|Yes
+ASCII 16kB
+Auto
+Arrow Up
+MSX2PEXT.ROM
+Track-Info
+SINCLAIR
+DEFAULT.CAS
+MSX.ROM
+MSX-DISK
+7964ba4c3c27b6a32d397157fd38dd1dc2f1e543
+14403ca71d287084569e6c2f4124d2712c665219
+0123456789abcdef
+%u,%u,%u,%u,%255s
+equals
+Text font; standard|DEFAULT.FNT|ITALIC.FNT|INTERNAT.FNT|CYRILLIC.FNT|KOREAN.FNT|JAPANESE.FNT
+fmsx_custom_keyboard_l3
+Generic 16kB
+%04X-%04X
+c34a1c225d1a5fc41a998e23d1209b59b3b759bb
+f5e199a5b39bad10256d8e963f0da272ad359517
+RetroArch-%m%d-%H%M%S
+Custom keyboard RetroPad left; 
+Custom keyboard RetroPad b; 
+fmsx_custom_keyboard_r
+switched to %dHz
+DRIVEA.DSK
+3ff54468a5acf1ad44e85bdc993044aaa3165a63
+left
+Support overscan; No|Yes
+YM2413 (FM-PAC / MSX-MUSIC) core; fMSX|NukeYKT
+fmsx_simbdos
+0123456789ABCDEF
+semicolon
+Disabled cheats
+.mx1
+Custom Keyboard
+Joystick
+fmsx_ram_pages
+graph
+keypad1
+kp_minus
+Custom keyboard RetroPad select; 
+PAINTER.ROM
+insert
+keypad7
+keypad9
+leftbracket
+backslash
+Support high resolution; Off|Interlaced|Progressive
+MSX Video Memory; Auto|32KB|64KB|128KB|192KB
+Create empty disk when none loaded; No|Yes
+Generic 8kB
+StartMSX(): getcwd() failed
+MSX2P.ROM
+424320762bcbbb6081b1e186e21accf758aeb935
+enter
+.fdi
+Save disk changes; Never|Immediate|On close|To/From SRAM
+6.0 6b807c5
+MSX1
+Immediate
+keypad0
+Enabled cheat %s: %d
+.cas
+fmsx_phantom_disk
+fmsx_custom_keyboard_y
+fmsx_custom_keyboard_start
+NukeYKT
+4376342bf42334d98dbd3e35ef35460974269c58
+shift
+fmsx_custom_keyboard_left
+fmsx_custom_keyboard_x
+fmsx_custom_keyboard_l
+FMPAC
+Stick Left
+Graph
+DISK.ROM
+%13s
+select
+rightbracket
+Cassette tape rewound
+Custom keyboard RetroPad l3; 
+fmsx_flush_disk
+fmsx_custom_keyboard_r2
+SPECCY
+keypad2
+keypad3
+quote
+.m3u
+512KB
+Debug
+CARTB.ROM
+ctrl
+keypad5
+backquote
+Custom keyboard RetroPad start; 
+fmsx_vram_pages
+Ctrl
+%s%c%s
+%04X-%02X
+%40s %d
+slash
+.dsk
+fmsx_dos2
+Konami4 8kB
+DEFAULT.FNT
+cc46a737acd729b2839ecd237d38b4a63cfb16cb
+d08d4e2a8d92c01551ff012a71a1f3e57fe2d09c
+.DSK
+.zip
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+				
+	 	@
+#V<?BEQTHKN
+=DINS
+<CHMR
+Disk image created by EMULib (C)Marat Fayzullin
+         
+diskname
+	 	$	&	*	,	.	3	7	<	@	B	F	H	J	O	S	X	\	^	b	d	f	k	o	t	x	z	~	
+0 4!4"0#4$0%  $!$" #$$ % &$',(()400102430445$0 1 2$3 4$5$6 7(8,9
+Y4`0a0b4c0d4e$` a b$c d$e$f g(h,i0p4q4r0s4t0u p$q$r s$t u v$w,x(y
+1 5!5"1#5$1%! %!%"!#%$!%!&%'-())501112531455%0!1!2%3!4%5%6!7)8-9
+Y5`1a1b5c1d5e%`!a!b%c!d%e%f!g)h-i1p5q5r1s5t1u!p%q%r!s%t!u!v%w-x)y
+1 5!5"1#5$1%! %!%"!#%$!%!&%'-())501112531455%0!1!2%3!4%5%6!7)8-9
+Y5`1a1b5c1d5e
+0 4!4"0#4$0% &$',(()(*,+(,,-,.(/400102430445$6 7(8,9,:(;,<(=(>,?
+_4`0a0b4c0d4e$f g(h,i,j(k,l(m(n,o0p4q4r0s4t0u v$w,x(y(z,{(|,},~(
+1 5!5"1#5$1%!&%'-()))*-+),---.)/501112531455%6!7)8-9-:);-<)=)>-?
+H	I	J
+\	]	^
+_5`1a1b5c1d5e%f!g)h-i-j)k-l)m)n-o1p5q5r1s5t1u!v%w-x)y)z-{)|-}-~)
+1 5!5"1#5$1%!&%'-()))*-+),---.)/501112531455%6!7)8-9-:);-<)=)>-?
+H	I	J
+\	]	^
+_5`1a1b5c1d5eF
+" &!&""#&$"%"&&'.(*)&$"%"&&'.(*)&0"1"2&3"4&5&6"7*8.9"4&5&6"7*8.9
+Y&`"a"b&c"d&e&f"g*h.i"d&e&f"g*h.i"p&q&r"s&t"u"v&w.x*y&t"u"v&w.x*y
+#4'5'6#7+8/9
+Y'`#a#b'c#d'e'f#g+h/i#d'e'f#g+h/i#p'q'r#s't#u#v'w/x+y't#u#v'w/x+y
+# '!'"##'$#%#&''/(+)'$#%#&''/(+)'0#1#2'3#4'5'6#7+8/9#4'5'6#7+8/9
+Y'`#a#b'c#d'e'f#g+h/i#d'e'f#g+h/i#p'q'r#s't#u#v'w/x+y't#u#v'w/x+y
+" &!&""#&$"%"&&'.(*):*>+:,>->.:/&0"1"2&3"4&5&6"7*8.9>::;><:=:>>?
+_&`"a"b&c"d&e&f"g*h.i>j:k>l:m:n>o"p&q&r"s&t"u"v&w.x*y:z>{:|>}>~:
+#4'5'6#7+8/9?:;;?<;=;>??
+_'`#a#b'c#d'e'f#g+h/i?j;k?l;m;n?o#p'q'r#s't#u#v'w/x+y;z?{;|?}?~;
+# '!'"##'$#%#&''/(+);*?+;,?-?.;/'0#1#2'3#4'5'6#7+8/9?:;;?<;=;>??
+_'`#a#b'c#d'e'f#g+h/i?j;k?l;m;n?o#p'q'r#s't#u#v'w/x+y;z?{;|?}?~;
+						
+							
+--BB
+;;;;;;+8 
+AAAAAAAAAA
+######""""""""""""""""""""
+%%%%%%$$$$$$$$$$$$$$$$$$$$
+y.x1F
+y.x1F
+S,}@
+Sy)x
+*qh9	
+T)}@
+J@9	
+J@9	
+T?i*
+J]@9
+S)		
+@9)q
+mim8
+,]@9JEO
+hih8
+T(!@9
+@9J]@9
+jii8kil8
+@9fXfxT 
+4uB@9
+	H7S
+	(73	 7S	
+,]@9
+jbx?
+T)!@9
++]@9
+mim8
+T)!@9
+zhx6
+	_@9*
+Qiq8
+jbxa
+	@9a
+	!@9I7
+]@9C
+	(7F
+@@9e
+^@9kqD
+&@9)
+Jqh9
+ZkxL
+_8k}
+Zkxk
+Zkxk
+	@9k
+_8k}
+Zkxk
+Zkxk
+_8k}
+Zkxk
+Zkxk
+@9k}
+Zkxk
+Zkxk
+!@9k
+@9k}
+Zkxk"
+%@9k
+Zkxk&
+)@9k
+5+	@9k}
+Zkxk*
+-@9k
+5+	@9k
+Zkxk.
+1@9k
+@9k}
+Zkxk2
+5@9k
+Zkxk6
+9@9k
+@9k}
+Zkxk:
+^@9kqD
+&@9)
+Jqh9
+zlxl
+@9-	
+zlxl
+	@9N
+zlxl
+zlxl
+zlxl
+zlxl
+zlxl
+zlxl
+zhx]
+^@9JqD
+@9J]
+SI!	
+@yl:
+y`x(
+yqx)
+xQ	@9q
+yqx)
+iox;
+^@9)UD
+f@9kqD
+j@9k]
+n@9(
+&@9Jq
+@yk:
+y`x$
+yqx%
+x1	@9q
+yqx%
+yqxn
+y.x1
+y.x1
+S,}@
+Sy)x
+*qh9	
+T)}@
+J@9	
+J@9	m
+T?i*
+^@9kqD
+&@9)
+Jqh9
+ZkxL
+_8k}
+Zkxk
+Zkxk
+Zkxk
+Zkxk
+	@9k
+@9k}
+Zkxk
+	@9k
+Zkxk
+Zkxk
+zhx&
+^@9kqD
+&@9)
+Jqh9
+ZkxL
+_8k}
+Zkxk
+Zkxk
+_8k}
+Zkxk
+Zkxk
+	@9k
+_8k}
+Zkxk
+	@9k
+Zkxk
+@9k}
+Zkxk
+@9k	@
+zqx1
+Bib8_
+Rh&@9
+j&@9(y
+		@9k
+i	@9
+7_y)x
+f.9[ZN
+ZZN:
+q.9[ZN
+&@9(y
+5	7F
+Lyixk	
+*%@9	y
++ih8J	
+	Kme
+Iy(x
+%@xKE
+4i&@9	
+j&@9(y
+*%@9	y
++ih8J	
+i	@9
+6h'F
+Rh'F
+2r9(
+6h'F
+Rh'F
+TKih
+Th'F
+ji8H
+TKih
+6J'@
+6J7@
+6JG@
+6HW@
+I!	*)
+I!	*)
+6I'@
+I!	*)
+6I7@
+I!	*)
+6IG@
+I!	*)
+6HW@
++@9	/@9
+jh8I
+@9_	
+j+8)	
+4jZL
+R	129h
+	@qj
+bYl|jY
+8O!d
+N!(a
+!@1k
+(Yhx
+oJmE
+@9@	
+T({a
+T.ih8
+TOyh
+9`ip
+T1~@
+iq8?
+jz8H
++yhxJ	
+j:8lks
+q)k:8
+j:8({z
+T(kz8
+RkeE
+xi:8
+T(kz8
++kz8
+**<N
+)ij8k
+jij8
+nil8
+(ih8
+)ij8?
+Iii8
+ ih8
+Jii8_
+Jii8_
+mij8
+Iii8	
+"i(8
+T@9"
+*ih8k
+T,i(8
+*	=N
+ii8kii8
+ik8m
+Bi)8
+ik8m
+1jk8?
+hq8!
+S(Yh
+Bi)8
+(Ih8
+S(Yh
+)	@9?
+RIYi
+"i(8"i,8"i-8"i.8"i/8"i08"i18
+"i*8)
+R	i+8
+"i*8
+i,8*i+8
+jI(8
+i)8Li+8
+hih8
+k(Z+
+in8_
+jb8-
+k-J.8A
+ib8_
++ih8J	
+Iii8
+AP8)
+9kil8
++9@9J
+	)A9?=
+T	=@9
+Jih8_
+ih8K
+@90}
+i(8 
+ke@9K
+qii(8
+Sik8
+@yl}
+(ih8I
+)ih8H
+It8i
+it8)	
+r	}	
++ih8J	
++ih8
+*i(8
+SKih8
+q+	@
+9Si+8*
++9@9J
+qji(8
+	)A9?=
+B@9!
+*(y-
+=@9J
+kii8
++ih8J	
+@9)uD
+@9JuD
+@9JuD
+	@9J
+@9JuD
+@9)uD
+@9)uD
+lip8P
+aiq8
+aiq8
+kiq8
+mij8
+*	@9m
+R1nD
+.*!hD
+r!TD
+*-)@9)-@9
+RKU 9
+1`9)
+Q	1 9
+i!`9
+6@9?
+l! 9*
+@9J}D
+Q`9J
+Q 9C
+!@9J
+*(!@9
+@90%
+!Qzk
+T1	@9
+A@9 
+T1	@9
+@91&
+@9J!
+Nk	@
+Nk	@
+Nk	@
+Nk	@
+N)	@
+@mkA
+@mkA
+@m)A
+"@9	
+"@9)!
+Jii8
+@9?	
++ih8J	
+	*h~@
+*i~@
+(@9B
+H@9c
+\@9k
+T`B(
+9	9	
+ic8&
+_8(j~
+:@9jZ
+	@9a
+*	@9J
+(	@9j
+(	@9m
+@9LE@yO
+kil8
+(	@9m
+@9AM@yB
+Mih8k	
+-@!9A
+oj R!9
+(	@9J
+hih8
+4Bi)8
+4Hii8
+Hi)8
+4Hii8
+*Hi)8
+4Hii8
+JHi)8
+"*Hi)8
+@9H!H
+Aa9/
+hq8!
+*	@9Z
+jq8?
+J	@9Jy
+J	@9J
+@9j$@9
+h @9Q
+Qa9X
++ih8J	
++ih8J	
+oiv8
+5*i^
+	@9s
+T-"@9.
+.&@9Z)H
+Ra9yyj
+Lii8k	
+Niv8
+4ui,8
+4mil8
+mi,8
+4mil8
+*mi,8
+4mil8
+Jmi,8
+4hi,8
+		@9
+T-"@9.
+.&@9Q!H
+Lii8k	
+S)%y
+R)	<
+S)%y
+S)!x
+R)	<
+	@9)
+Sk!x
+Slil8
++iu8
+4Mik8
+4Mik8
+4Mik8
+,*Li+89
+@9h%H
+@9s>D
+@9)ik8
+#Qa9)
++ih8J	
+Lic8k	
+ii8J
+ii8J
+ii8J
+i)8i"@9h
+@9j&@9+
+eBa9
+ujg8
+qej58`
+qej58`
+qej58`
+qej58`
+SN	@9k
+Ts!@9y%@9t
+ky8:a
+SY'y
+ky8:a
+SY'y
+ky8:]
+SY#x
+ky8:]
+SY#x
+Tb!@9f%@9c
+hs84a
+h38A
+hs84a
+h38A
+hs84]
+h38A
+hs84]
+h38A
+jo81
+Q	@9
+Rk%y
+T,ih8
+T,ih8j
+T+ih8
+T+ih8j
+T-ih8
+**i(8
+Rk%y
+T,ih8
+T,ih8j
+T+ih8
+T+ih8j
+T-ih8
+**i(8
+Rk!x
+T,ih8
+T,ih8j
+T+ih8
+T+ih8j
+T-ih8
+**i(8
+_i(8
+i)8M}
+I+8i
+I*8-}
+I*8h
+ZKi)
+*Ghp
+JChp
+jv8(
+Kik8+h)8)
+jjv8(
+lil8lj)8)
+=,p@
+y*i89+m89?
+	y@9
+9@y)]
+@9		@9H}
+@9*	@9i}
+J!H*(
+m@9	i@9J
+@9m	@9
+*y@9+}@9,9@y7i@9)m@9J]
+@9		@9H}
+ji8?
+j(8(
+ky8h
+	kh8
+!@qA
+ji8?
+j(8H
+T){@9*
+@9+;@y)]
+!@9_
+%@9K
+T({@9)
+@9*;@y
+T({@9)
+@9*;@y
++yhxJ	
+Tjip8)
+T)jp8
+Tjip8)
+T)jp8
+Tjio8)
+T)jo8
+Tjip8)
+T)jp8
+#Cq!1
+@9:}
+6@9(
+i"A)j
+@),}
+:@9H+
+@9V5
+Tjip8)
+T)jp8
+*ik8
+ik8k
+_8n%@8
+@8k]
+R	1@9
+-@9	
+*	)@9
+-@9?
+9	}P
+*ik8
+ik8k
+#9J}
+*ik8
+ik8k
+(ij8
+Thij8J
+	@y)
+*)@9+-@9
++yhxJ	
+#	@yJ
+		@y?A
+T;+@9(/@9)
+@y?	
+T		@y?A
+)@9	-@9
+c9_Y
+c9kA
+Th=@9i
+A){9@9|5@9!
+"@9)
+&@9)
+*@9)
+.@9)
+2@9)
+6@9)
+T(1@9,5@9(
+*)@9,-@9
+@9)!
+@9)!
+R?!4k@
+@ya6@9
+@ya2@9
+4hR@y
+!4ka
+yib@9
++ih8J	
+hf@9
+jj@9h"@
++ki8L
+{ixJ	
+Jil8)
+h"@yi
+iixh
+(=H*
+@y`:
+)ij8*
+Jil8+
+S)AH*J
+Jil8
+Jil8
+@yjb@9
+Jil8(
+SJ!K*)
+)il8K
+kil8(
+Sk!J*)
+Jim8
+Jim8)
+kim8)
+)ij8
+(ih8
+(ih8h
+Jim8)
+;06G
+<06H
+)il8
+S)!J*k
+@9	?077
+@y(207
+kj@9j"@
+)ih8
+yhx)	
+hih8j
+Jil8
+SJ!I*k
+@9)(
+)im8
+h&@yi
+Jim8
+)ih8h
+hj@9k"@
+Jii8
+Lyixk	
+hb@9`
+@y`2
+ib@9
+(6j&@
+Iii8h
+ib@9*
+)im8
+Tib@9I
+(6j&@
+`R@y
+@9(ih8`
+)il8K
+hb@9
+@9hf
+@9(ih8`
+@9hj
+@9(ih8`
+hb@9
+hf@9i
+@9jb@9
+@9(ih8`
+hb@9
+@9jb@9
+hih8)
+@9(ih8`
+@9(ih8`
+=H*?=
+@9)ih8h
+@9(ih8=
+a:@9
+a>@9
+@9(ih8`
+	Ji=
+@9iii8
+Th"@
+Ti"@
+@yk"@
+@yk	
+Th"@
+4i"@
+hih8j
+hih8j
+hih8j
+hih8j
+hih8j
+)ih8h
+hih8j
+jij8
+jij8
+jij8
+jij8
+jij8
+jij8
+@9*y
+ij8j
+@9*y
+ij8j
+@9*y
+ij8j
+@9*y
+ij8j
+@9*y
+ij8j
+@9	x
+@9*y
+ij8j
+hih8j
+hih8j
+hih8j
+hih8j
+hih8j
+)ih8h
+hih8j
+jij8
+jij8i
+jij8i
+jij8i
+jij8i
+jij8i
+)ih8
+jij8
+H*JIi8
+H*JIi8
+H*JIi8
+H*JIi8
+H*JIi8
+H*JIi8
+Iii8
+H*JIi8
+Jii8i
+Jii8i
+Jii8i
+Jii8i
+Jii8i
+Jii8i
+	ia8h
+Jii8i
+Jii8
+Jii8
+Jii8
+Jii8
+Jii8
+Jii8
+	ia8h
+Jii8
+Iii8
+Hih8)
+jij8
+@9*y
+ij8j
+hih8j
+(ih8
+Lyixk	
+h"@yi
+a*@9
+a.@9
+h.@9i
+iixh
+(=H*
+h*@9i
+@y`:
+)ij8
+Jik8
+S)AH*J
+h.@9h
+h*@9h
+h.@9h
+h.@9h
+h.@9h
+@9h.
+@9h.
+@9h.
+h*@9h.
+@9h.
+@9h*
+@9h*
+@9h*
+h.@9h*
+@9h*
+@yib@9
+h.@9h
+h*@9h
+@9i.@9
+@9i*@9
+Jil8(
+SJ!K*)
+)il8K
+@9i.@9
+@9i*@9j
+kil8(
+Sk!J*)
+Jim8
+@9i.@9
+@9i*@9
+Jim8)
+@9i.@9_
+(ih8
+h.@9
+h*@9i
+h.@9V
+h*@9T
+(ih8d
+@9i.@9G
+@9i*@9D
+<06J
+@y(106
+@9I306
+)il8
+S)!J*k
+@ya6@9
+@ya2@9
+@yH*07
+)ih8
+	Ki"
++yhxJ	
+Jil8
+SJ!I*k
+@ya6@9
+@ya2@9
+@9i*
+)im8
+@ya6@9
+@ya2@9
+@9i!
+h&@yi
+Jim8
+@ya6@9
+@ya2@9
+@y`*
+@ya*@9
+@ya.@9
+@ya.@9
+@ya*@9
+@ya6@9
+@ya2@9
+@ya6@9
+@ya2@9
+ib@9
+(6j&@
+@ya6@9
+@ya2@9
+@ya6@9
+@ya2@9
+@y`2
+ib@9*
+)im8
+@ya6@9
+@ya2@9
+@y`*
+h.@9i
+h*@9i
+Jil8
+Jil8
+h*@9h
+h*@9h
+h*@9h
+@9h.
+@9h*
+@9i*@9j
+kim8)
+)ij8
+h.@9
+h*@9i
+)ih8h
+Iii8h
+Jim8)
+Iii8
+(ih8	
+@9	x
+(ih8	
+(ih8
+Iii8
+ia8	
+ia8	
+(ih8
+Lyixk	
+h"@yi
+a"@9
+a&@9
+h&@9i
+iixh
+(=H*
+h"@9i
+@y`:
+)ij8
+Jik8
+S)AH*J
+h&@9h
+h"@9h
+h&@9h
+h&@9h
+h&@9h
+@9h&
+@9h&
+@9h&
+h"@9h&
+@9h&
+@9h"
+@9h"
+@9h"
+h&@9h"
+@9h"
+@yib@9
+h&@9h
+h"@9h
+@9i&@9
+@9i"@9
+Jil8(
+SJ!K*)
+)il8K
+@9i&@9
+@9i"@9j
+kil8(
+Sk!J*)
+Jim8
+@9i&@9
+@9i"@9
+Jim8)
+@9i&@9_
+(ih8
+h&@9
+h"@9i
+h&@9V
+h"@9T
+(ih8d
+@9i&@9G
+@9i"@9D
+<06J
+@y(106
+@9I306
+)il8
+S)!J*k
+@ya6@9
+@ya2@9
+@yH*07
+)ih8
+	Ki"
++yhxJ	
+Jil8
+SJ!I*k
+@ya6@9
+@ya2@9
+@9i*
+)im8
+@ya6@9
+@ya2@9
+@9i!
+h&@yi
+Jim8
+@ya6@9
+@ya2@9
+@y`"
+@ya"@9
+@ya&@9
+@ya&@9
+@ya"@9
+@ya6@9
+@ya2@9
+@ya6@9
+@ya2@9
+ib@9
+(6j&@
+@ya6@9
+@ya2@9
+@ya6@9
+@ya2@9
+@y`2
+ib@9*
+)im8
+@ya6@9
+@ya2@9
+@y`"
+h&@9i
+h"@9i
+Jil8
+Jil8
+h"@9h
+h"@9h
+h"@9h
+@9h&
+@9h"
+@9i"@9j
+kim8)
+)ij8
+h&@9
+h"@9i
+)ih8h
+Iii8h
+Jim8)
+Iii8
+(ih8	
+@9	x
+(ih8	
+(ih8
+Iii8
+ia8	
+ia8	
++ih8J	
+Lii8k	
+Tijh8?
+Tj:@9
+Tjjh8_
+3kJ)
+Tkjh8J
+Tk:@9K
+kA@9
+SkJ)
+bJ(8hbB9(
+Lii8k	
+hi8_
+h)8L
+hi8J
+h)8=
+	hh8?
+h(85
+@9	 A9
+ @9I
+)*)	
+@9	 A9*
+$@9H
+@9	 A9J
+@9	 A9
+$A9H
+9t"A9
+!@9(
+h6@9iV
+ii8i
+4hB@
+h6@9iV
+@9jB@
+*hF@
+4	P@
+ @9H
+	4@9*
+@9	 A9*
+$@9H
+@9	 A9J
+@9	 A9
+ A9h
+	hh8?
+hh8	hi8
+6h*A
+6h*A
++ih8J	
+T@9	@@9
+@9	$
+T	H@9)
+@@9	
+	@@9
++ih8J	
+hB@9
+ThB@9	
+7hV@9I
+9hV@9)
+9i"@
+ThJ@9
+hR@9H
+6hBC
+hB@9
++ih8J	
+07hn@9
+hB@9	
+9`r@9
+9hV@9h
+	}A8t
+ 6iF
+hV@9aZ@9dF@9eJ@9i
+hV@9h
+hV@9aZ@9dF@9eJ@9i
+hV@9)
+lJ@9k
+lB@9j}
+hB@9	
+hV@9I|
+iV@9hN@9
+9(]@9	
+hV@9i
+aZ@9
+ThV@9aZ@9
+]@9 AC
+hV@9jB@9
+hV@9u
+dF@9%
+iV@9`
+iV@9h
+]@9dF@9!
+hV@9u
+hV@9
+jJ@9)
+jB@9(}
+hB@9	
+mA@9
+9mI@9
+9mY@9
+9m!@9
+9m)@9
+9q9@9
+Byky
+Sk!B*
+QD9kU
+06?E
+#*u<
+~	S6=
+07uU
+|	Sf
+vjg8
+PA9?
+PA9f
+hf8s
+tA9E
+ujg8
+tA9E
+xA9_,
+pA9=
+tA9B
+pA9e
+@90~B
+`A9!vD9
+ehp8
+E9c|
+E9c|
+E9c|
+E9c|
+1*B*
+yM1@9
+9MQ@9
+p@9l
+9	p@9i
+4	`@9?=
+9	d@9+
+h@9k
+yhN	
++ih8J	
+'@)j
+*wV%
+*`R%
+IQ%9BU%9
+Rk-4
+Rk)"
+ijh8?
+j(8?
+Khh8
+*ih8
+hi8_
+lih8
+*ih8
+*h`8
+i 8J
+kjh8Ki(8K
+TOxpx
+TQxnx.~
+*	@9
+QOIo8
+.@8(
+77K1
+@8?u
+ @9h
+j78S
+zj78
+@9	ii8
+?i(8h
+Tw~@
+Hih8(
+hi8)
+hji8)
+	I@9
+.fini_array
+.text
+.got
+.note.android.ident
+.got.plt
+.rela.plt
+.bss
+.dynstr
+.eh_frame_hdr
+.gnu.version_r
+.data.rel.ro
+.rela.dyn
+.gnu.version
+.dynsym
+.gnu.hash
+.eh_frame
+.note.gnu.build-id
+.dynamic
+.shstrtab
+.rodata
+.data
