@@ -1,6 +1,7 @@
 package com.swordfish.lemuroid.metadata.libretrodb
 
 import com.swordfish.lemuroid.common.kotlin.filterNullable
+import com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.metadata.GameMetadata
@@ -57,6 +58,57 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
             "neo-geo pocket"       to "ngp",
             "ngpc"                 to "ngc",
             "neo geo pocket color" to "ngc",
+            "neogeo"               to "neogeo",
+            "neo-geo"              to "neogeo",
+            "neo geo"              to "neogeo",
+            // Neo Geo ROMs often reside inside a generic arcade/ or fbneo/ folder;
+            // map both to neogeo so parentContainsSystem() can pass for them.
+            "arcade"               to "neogeo",
+            "fbneo"                to "neogeo",
+            // CPS-1 ROMs also reside inside arcade/ or fbneo/ folders; map to cps1.
+            "arcade"               to "cps1",
+            "fbneo"                to "cps1",
+            "cps1"                 to "cps1",
+            // CPS-2 and CPS-3 ROMs follow the same folder conventions.
+            "arcade"               to "cps2",
+            "fbneo"                to "cps2",
+            "cps2"                 to "cps2",
+            "arcade"               to "cps3",
+            "fbneo"                to "cps3",
+            "cps3"                 to "cps3",
+            // Data East ROMs also reside inside arcade/ or fbneo/ folders.
+            "arcade"               to "dataeast",
+            "fbneo"                to "dataeast",
+            "dataeast"             to "dataeast",
+            // Galaxian-hardware ROMs also reside inside arcade/ or fbneo/ folders.
+            "arcade"               to "galaxian",
+            "fbneo"                to "galaxian",
+            "galaxian"             to "galaxian",
+            // Toaplan, Taito, Psikyo, PGM, Kaneko, Cave, Technos, Seta ROMs reside in arcade/ or fbneo/ folders.
+            "arcade"               to "toaplan",
+            "fbneo"                to "toaplan",
+            "toaplan"              to "toaplan",
+            "arcade"               to "taito",
+            "fbneo"                to "taito",
+            "taito"                to "taito",
+            "arcade"               to "psikyo",
+            "fbneo"                to "psikyo",
+            "psikyo"               to "psikyo",
+            "arcade"               to "pgm",
+            "fbneo"                to "pgm",
+            "pgm"                  to "pgm",
+            "arcade"               to "kaneko",
+            "fbneo"                to "kaneko",
+            "kaneko"               to "kaneko",
+            "arcade"               to "cave",
+            "fbneo"                to "cave",
+            "cave"                 to "cave",
+            "arcade"               to "technos",
+            "fbneo"                to "technos",
+            "technos"              to "technos",
+            "arcade"               to "seta",
+            "fbneo"                to "seta",
+            "seta"                 to "seta",
             "nintendo"             to "nes",
             "nes"                  to "nes",
             "nintendo 64"          to "n64",
@@ -130,12 +182,12 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
     }
 
     private fun convertToGameMetadata(rom: LibretroRom): GameMetadata {
-        val system = GameSystem.findById(rom.system!!)
+        val system = extractGameSystem(rom)
         return GameMetadata(
             name = rom.name,
             romName = rom.romName,
             thumbnail = computeCoverUrl(system, rom.name),
-            system = rom.system,
+            system = system.id.dbname,
             developer = rom.developer,
         )
     }
@@ -156,7 +208,10 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         // Fetch ALL rows matching this filename — a game can appear in multiple system DBs
         // (e.g. both FBNeo and MAME2003Plus contain many of the same ZIP names but with
         // different CRCs). Sort candidates so the best-matching system wins:
-        //   score 2 — dbname is an exact path segment (highest confidence)
+        //   score 3 — libretro-db or a curated dedicated-system override identifies this
+        //             file as Neo Geo/CPS (highest confidence; these ROMs are reliably
+        //             identified by filename alone without needing a dedicated folder)
+        //   score 2 — dbname is an exact path segment
         //   score 1 — path contains a folder alias that maps DIRECTLY to this system,
         //             preferring the system whose alias is listed FIRST in FOLDER_ALIASES
         //             (mame2003plus entries come after fbneo but we bias mame2003plus here
@@ -169,7 +224,9 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
             .sortedByDescending { rom ->
                 val dbname = extractGameSystem(rom).id.dbname
                 when {
-                    // Exact path segment — highest confidence
+                    // Dedicated-system matches beat generic arcade folder heuristics.
+                    dbname == "neogeo" || dbname == "cps1" || dbname == "cps2" || dbname == "cps3" || dbname == "dataeast" || dbname == "galaxian" || dbname == "toaplan" || dbname == "taito" || dbname == "psikyo" || dbname == "pgm" || dbname == "kaneko" || dbname == "cave" || dbname == "technos" || dbname == "seta" -> 3
+                    // Exact path segment — high confidence
                     segments.contains(dbname) -> 2
                     // Alias-only match: bias mame2003plus over fbneo for "arcade/" folder
                     // because the dataset uses MAME 0.78 romset throughout
@@ -204,7 +261,7 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         parent: String?,
         dbname: String,
     ): Boolean {
-        val lowercasePath = parent?.toLowerCase(Locale.getDefault()) ?: return false
+        val lowercasePath = parent?.lowercase(Locale.getDefault()) ?: return false
         // Split into path segments and do exact segment matching.
         // Substring matching (e.g. "path.contains(dbname)") causes false positives:
         // "snes" contains "nes", "gba" contains "gb", "wsc" contains "ws", etc.
@@ -269,7 +326,8 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
     }
 
     private fun extractGameSystem(rom: LibretroRom): GameSystem {
-        return GameSystem.findById(rom.system!!)
+        val dedicatedSystemId = ArcadeSubSystemRoms.dedicatedSystemIdForRom(rom.romName)
+        return GameSystem.findById(dedicatedSystemId ?: rom.system!!)
     }
 
     private fun computeCoverUrl(
@@ -291,6 +349,6 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
 
         val thumbGameName = name.replace(THUMB_REPLACE, "_")
 
-        return "http://thumbnails.libretro.com/$systemName/$imageType/$thumbGameName.png"
+        return "https://thumbnails.libretro.com/$systemName/$imageType/$thumbGameName.png"
     }
 }

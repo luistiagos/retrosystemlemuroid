@@ -894,6 +894,497 @@ data class GameSystem(
                         ),
                 ),
                 GameSystem(
+                    SystemID.NEOGEO,
+                    "SNK Neo Geo",
+                    R.string.game_system_title_neogeo,
+                    R.string.game_system_abbr_neogeo,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            requiredBIOSFiles = listOf("neogeo.zip"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.CPS1,
+                    "Capcom CPS-1",
+                    R.string.game_system_title_cps1,
+                    R.string.game_system_abbr_cps1,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.CPS2,
+                    "Capcom CPS-2",
+                    R.string.game_system_title_cps2,
+                    R.string.game_system_abbr_cps2,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.CPS3,
+                    "Capcom CPS-3",
+                    R.string.game_system_title_cps3,
+                    R.string.game_system_abbr_cps3,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.DATAEAST,
+                    "Data East Arcade",
+                    R.string.game_system_title_dataeast,
+                    R.string.game_system_abbr_dataeast,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.GALAXIAN,
+                    "Galaxian Classics",
+                    R.string.game_system_title_galaxian,
+                    R.string.game_system_abbr_galaxian,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.TOAPLAN,
+                    "Toaplan Arcade",
+                    R.string.game_system_title_toaplan,
+                    R.string.game_system_abbr_toaplan,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.TAITO,
+                    "Taito Arcade",
+                    R.string.game_system_title_taito,
+                    R.string.game_system_abbr_taito,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.PSIKYO,
+                    "Psikyo Arcade",
+                    R.string.game_system_title_psikyo,
+                    R.string.game_system_abbr_psikyo,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.PGM,
+                    "PolyGame Master",
+                    R.string.game_system_title_pgm,
+                    R.string.game_system_abbr_pgm,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.KANEKO,
+                    "Kaneko Arcade",
+                    R.string.game_system_title_kaneko,
+                    R.string.game_system_abbr_kaneko,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.CAVE,
+                    "Cave Arcade",
+                    R.string.game_system_title_cave,
+                    R.string.game_system_abbr_cave,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.TECHNOS,
+                    "Technos Arcade",
+                    R.string.game_system_title_technos,
+                    R.string.game_system_abbr_technos,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
+                    SystemID.SETA,
+                    "Seta Arcade",
+                    R.string.game_system_title_seta,
+                    R.string.game_system_abbr_seta,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FBNEO,
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "fbneo-frameskip",
+                                        R.string.setting_fbneo_frameskip,
+                                    ),
+                                    ExposedSetting(
+                                        "fbneo-cpu-speed-adjust",
+                                        R.string.setting_fbneo_cpu_speed_adjust,
+                                    ),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
                     SystemID.MAME2003PLUS,
                     "MAME 2003-Plus",
                     R.string.game_system_title_arcade_mame2003_plus,
@@ -1359,7 +1850,7 @@ data class GameSystem(
             val mutableMap = mutableMapOf<String, GameSystem>()
             for (system in SYSTEMS) {
                 for (extension in system.uniqueExtensions) {
-                    mutableMap[extension.toLowerCase(Locale.US)] = system
+                    mutableMap[extension.lowercase(Locale.US)] = system
                 }
             }
             mutableMap.toMap()
@@ -1381,7 +1872,7 @@ data class GameSystem(
         }
 
         fun findByUniqueFileExtension(fileExtension: String): GameSystem? =
-            byExtensionCache[fileExtension.toLowerCase(Locale.US)]
+            byExtensionCache[fileExtension.lowercase(Locale.US)]
 
         data class ScanOptions(
             val scanByFilename: Boolean = true,

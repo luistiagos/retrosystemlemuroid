@@ -37,11 +37,14 @@ object LibraryIndexScheduler {
                 )
         } else {
             // Background: download all cores needed by the library.
+            // Delayed 2 minutes so it does not compete with app startup I/O on slow devices.
             WorkManager.getInstance(applicationContext)
                 .beginUniqueWork(
                     CORE_UPDATE_WORK_ID,
                     ExistingWorkPolicy.APPEND_OR_REPLACE,
-                    OneTimeWorkRequestBuilder<CoreUpdateWork>().build(),
+                    OneTimeWorkRequestBuilder<CoreUpdateWork>()
+                        .setInitialDelay(2, java.util.concurrent.TimeUnit.MINUTES)
+                        .build(),
                 )
                 .enqueue()
         }

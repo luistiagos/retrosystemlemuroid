@@ -55,6 +55,7 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
             Timber.w(e, "CoreUpdateWork: setForeground failed (${e.message}), continuing without notification")
         }
 
+        var hadFailure = false
         try {
             // If a specific coreID was requested (e.g. triggered from the game screen),
             // only download that one core instead of all cores — much faster.
@@ -74,11 +75,15 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
             coreUpdater.downloadCores(applicationContext, cores)
         } catch (e: CancellationException) {
             throw e
+        } catch (e: java.io.IOException) {
+            Timber.e(e, "Core update work failed with I/O exception: ${e.message}")
+            hadFailure = true
         } catch (e: Throwable) {
             Timber.e(e, "Core update work failed with exception: ${e.message}")
+            hadFailure = true
         }
 
-        return Result.success()
+        return if (hadFailure) Result.retry() else Result.success()
     }
 
     companion object {

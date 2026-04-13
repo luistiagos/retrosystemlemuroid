@@ -56,8 +56,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
             }
     }
 
-    @Deprecated("Use the suspend variant")
-    fun getBiosInfo(): BiosInfo {
+    private fun buildBiosInfo(): BiosInfo {
         val bios =
             SUPPORTED_BIOS.groupBy {
                 File(directoriesManager.getSystemDirectory(), it.libretroFileName).exists()
@@ -66,9 +65,12 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
         return BiosInfo(bios.getValue(true), bios.getValue(false))
     }
 
+    @Deprecated("Use getBiosInfoAsync()")
+    fun getBiosInfo(): BiosInfo = buildBiosInfo()
+
     suspend fun getBiosInfoAsync(): BiosInfo =
         withContext(Dispatchers.IO) {
-            getBiosInfo()
+            buildBiosInfo()
         }
 
     fun tryAddBiosAfter(
@@ -242,6 +244,14 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "6418D091CD6907BBCF940324339E43BB",
                     "MSX-DOS2 BIOS",
                     SystemID.MSX,
+                    isEmbedded = true,
+                ),
+                Bios(
+                    "neogeo.zip",
+                    "DFFB72F116D36D025068B23970A4F6DF",
+                    "Neo Geo BIOS",
+                    SystemID.FBNEO,
+                    "362E948D",
                     isEmbedded = true,
                 ),
             )

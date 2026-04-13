@@ -32,6 +32,7 @@ import com.swordfish.libretrodroid.GLRetroViewData
 import com.swordfish.libretrodroid.ImmersiveMode
 import com.swordfish.libretrodroid.Variable
 import com.swordfish.libretrodroid.VirtualFile
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -121,6 +122,7 @@ class GameViewModelRetroGameView(
             )
                 .flowOn(Dispatchers.IO)
                 .catch { e ->
+                    if (e is CancellationException) throw e
                     if (e is GameLoaderException && e.error is GameLoaderError.LoadCore && !coreDownloadRetried) {
                         coreDownloadRetried = true
                         gameState.value = GameState.Loading(
@@ -129,9 +131,12 @@ class GameViewModelRetroGameView(
                         try {
                             CoreDownloader.downloadCore(applicationContext, systemCoreConfig.coreID)
                             shouldRetry = true
+                        } catch (downloadEx: CancellationException) {
+                            throw downloadEx
                         } catch (downloadEx: Exception) {
                             Timber.e(downloadEx, "Direct core download failed: ${downloadEx.message}")
                             sideEffects.requestFailureFinish(getErrorMessage(GameLoaderError.LoadCore))
+                            shouldRetry = false
                         }
                     } else {
                         val message = if (e is GameLoaderException) getErrorMessage(e.error) else ""
@@ -233,7 +238,8 @@ class GameViewModelRetroGameView(
 
             when (val gameFiles = gameData.gameFiles) {
                 is RomFiles.Standard -> {
-                    gameFilePath = gameFiles.files.first().absolutePath
+                    gameFilePath = gameFiles.files.firstOrNull()?.absolutePath
+                        ?: throw GameLoaderException(GameLoaderError.LoadGame)
                 }
 
                 is RomFiles.Virtual -> {

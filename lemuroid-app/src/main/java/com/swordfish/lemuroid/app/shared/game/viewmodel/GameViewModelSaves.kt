@@ -160,7 +160,16 @@ class GameViewModelSaves(
     }
 
     fun loadQuickSave() {
-        loadSaveState(currentQuickSave ?: return)
-        sideEffects.showToast(appContext.getString(R.string.game_toast_quick_save_loaded))
+        val saveToLoad = currentQuickSave
+        if (saveToLoad == null) {
+            sideEffects.showToast(appContext.getString(R.string.game_toast_load_state_failed))
+            return
+        }
+        val loaded = loadSaveState(saveToLoad)
+        if (loaded) {
+            sideEffects.showToast(appContext.getString(R.string.game_toast_quick_save_loaded))
+        } else {
+            sideEffects.showToast(appContext.getString(R.string.game_toast_load_state_failed))
+        }
     }
 }

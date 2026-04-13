@@ -2,12 +2,10 @@ package com.swordfish.lemuroid.app.shared.game.viewmodel
 
 import com.swordfish.touchinput.radial.sensors.TiltConfiguration
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class GameViewModelSideEffects(private val scope: CoroutineScope) {
     sealed interface UiEffect {
@@ -37,9 +35,7 @@ class GameViewModelSideEffects(private val scope: CoroutineScope) {
 
     fun showToast(message: String) {
         scope.launch {
-            withContext(Dispatchers.Main) {
-                uiEffects.emit(UiEffect.ShowToast(message))
-            }
+            uiEffects.emit(UiEffect.ShowToast(message))
         }
     }
 
@@ -50,50 +46,37 @@ class GameViewModelSideEffects(private val scope: CoroutineScope) {
         scope.launch {
             val currentTiltConfiguration = tilt.getTiltConfiguration().firstOrNull() ?: return@launch
             val tiltConfigurations = inputs.getAllTiltConfigurations()
-
-            withContext(Dispatchers.Main) {
-                uiEffects.emit(UiEffect.ShowMenu(currentTiltConfiguration, tiltConfigurations))
-            }
+            uiEffects.emit(UiEffect.ShowMenu(currentTiltConfiguration, tiltConfigurations))
         }
     }
 
     fun loadQuickSave() {
         scope.launch {
-            withContext(Dispatchers.Main) {
-                uiEffects.emit(UiEffect.LoadQuickSave)
-            }
+            uiEffects.emit(UiEffect.LoadQuickSave)
         }
     }
 
     fun requestSuccessfulFinish() {
         scope.launch {
-            withContext(Dispatchers.Main) {
-                uiEffects.emit(UiEffect.SuccessfulFinish)
-            }
+            uiEffects.emit(UiEffect.SuccessfulFinish)
         }
     }
 
     fun requestFailureFinish(message: String, isRomLoadFailure: Boolean = false) {
         scope.launch {
-            withContext(Dispatchers.Main) {
-                uiEffects.emit(UiEffect.FailureFinish(message, isRomLoadFailure))
-            }
+            uiEffects.emit(UiEffect.FailureFinish(message, isRomLoadFailure))
         }
     }
 
     fun saveQuickSave() {
         scope.launch {
-            withContext(Dispatchers.Main) {
-                uiEffects.emit(UiEffect.SaveQuickSave)
-            }
+            uiEffects.emit(UiEffect.SaveQuickSave)
         }
     }
 
     fun toggleFastForward() {
         scope.launch {
-            withContext(Dispatchers.Main) {
-                uiEffects.emit(UiEffect.ToggleFastForward)
-            }
+            uiEffects.emit(UiEffect.ToggleFastForward)
         }
     }
 }

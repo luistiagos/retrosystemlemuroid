@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
+import com.swordfish.lemuroid.app.utils.android.isTvDevice
 import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.metaSystemID
 import kotlinx.coroutines.flow.Flow
@@ -20,10 +22,13 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
         }
     }
 
+    private val tvHiddenSystems = setOf(MetaSystemID.PSP, MetaSystemID.NINTENDO_3DS)
+
     val availableMetaSystems: Flow<List<MetaSystemInfo>> =
         retrogradeDb.gameDao()
             .selectSystemsWithCount()
             .map { systemCounts ->
+                val hideSystems = appContext.isTvDevice()
                 systemCounts.asSequence()
                     .filter { (_, count) -> count > 0 }
                     // findByIdOrNull: skips rows with system IDs not recognised by GameSystem,
@@ -31,6 +36,7 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
                     .mapNotNull { (systemId, count) ->
                         GameSystem.findByIdOrNull(systemId)?.let { it.metaSystemID() to count }
                     }
+                    .filter { (metaSystemId, _) -> !hideSystems || metaSystemId !in tvHiddenSystems }
                     .groupBy { (metaSystemId, _) -> metaSystemId }
                     .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumOf { it.second }) }
                     .sortedBy { it.getName(appContext) }

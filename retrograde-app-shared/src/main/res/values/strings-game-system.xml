@@ -46,6 +46,20 @@
     <string name="game_system_abbr_3ds">3DS</string>
     <string name="game_system_abbr_msx">MSX</string>
     <string name="game_system_abbr_msx2">MSX2</string>
+    <string name="game_system_abbr_neogeo">NeoGeo</string>
+    <string name="game_system_abbr_cps1">CPS-1</string>
+    <string name="game_system_abbr_cps2">CPS-2</string>
+    <string name="game_system_abbr_cps3">CPS-3</string>
+    <string name="game_system_abbr_dataeast">Data East</string>
+    <string name="game_system_abbr_galaxian">Galaxian</string>
+    <string name="game_system_abbr_toaplan">Toaplan</string>
+    <string name="game_system_abbr_taito">Taito</string>
+    <string name="game_system_abbr_psikyo">Psikyo</string>
+    <string name="game_system_abbr_pgm">PolyGame Master</string>
+    <string name="game_system_abbr_kaneko">Kaneko</string>
+    <string name="game_system_abbr_cave">Cave</string>
+    <string name="game_system_abbr_technos">Technos</string>
+    <string name="game_system_abbr_seta">Seta</string>
 
     <string name="game_system_title_nes">Nintendo</string>
     <string name="game_system_title_atari2600">Atari 2600</string>
@@ -74,6 +88,20 @@
     <string name="game_system_title_3ds">Nintendo 3DS (Beta)</string>
     <string name="game_system_title_msx">MSX</string>
     <string name="game_system_title_msx2">MSX2</string>
+    <string name="game_system_title_neogeo">SNK Neo Geo</string>
+    <string name="game_system_title_cps1">Capcom CPS-1</string>
+    <string name="game_system_title_cps2">Capcom CPS-2</string>
+    <string name="game_system_title_cps3">Capcom CPS-3</string>
+    <string name="game_system_title_dataeast">Data East Arcade</string>
+    <string name="game_system_title_galaxian">Galaxian Classics</string>
+    <string name="game_system_title_toaplan">Toaplan Arcade</string>
+    <string name="game_system_title_taito">Taito Arcade</string>
+    <string name="game_system_title_psikyo">Psikyo Arcade</string>
+    <string name="game_system_title_pgm">PolyGame Master</string>
+    <string name="game_system_title_kaneko">Kaneko Arcade</string>
+    <string name="game_system_title_cave">Cave Arcade</string>
+    <string name="game_system_title_technos">Technos Arcade</string>
+    <string name="game_system_title_seta">Seta Arcade</string>
 
     <string name="game_system_title_arcade">Arcade</string>
 </resources>

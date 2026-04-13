@@ -101,7 +101,12 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
     NGP(
         R.string.game_system_title_ngp,
         R.drawable.game_system_ngp,
-        listOf(SystemID.NGP, SystemID.NGC),
+        listOf(SystemID.NGP),
+    ),
+    NGC(
+        R.string.game_system_title_ngc,
+        R.drawable.game_system_ngpc,
+        listOf(SystemID.NGC),
     ),
     WS(
         R.string.game_system_title_ws,
@@ -122,6 +127,76 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.string.game_system_title_msx,
         R.drawable.game_system_msx,
         listOf(SystemID.MSX, SystemID.MSX2),
+    ),
+    NEOGEO(
+        R.string.game_system_title_neogeo,
+        R.drawable.game_system_neogeo,
+        listOf(SystemID.NEOGEO),
+    ),
+    CPS1(
+        R.string.game_system_title_cps1,
+        R.drawable.game_system_cps1,
+        listOf(SystemID.CPS1),
+    ),
+    CPS2(
+        R.string.game_system_title_cps2,
+        R.drawable.game_system_cps2,
+        listOf(SystemID.CPS2),
+    ),
+    CPS3(
+        R.string.game_system_title_cps3,
+        R.drawable.game_system_cps3,
+        listOf(SystemID.CPS3),
+    ),
+    DATAEAST(
+        R.string.game_system_title_dataeast,
+        R.drawable.game_system_dataeast,
+        listOf(SystemID.DATAEAST),
+    ),
+    GALAXIAN(
+        R.string.game_system_title_galaxian,
+        R.drawable.game_system_galaxian,
+        listOf(SystemID.GALAXIAN),
+    ),
+    TOAPLAN(
+        R.string.game_system_title_toaplan,
+        R.drawable.game_system_teoplan,
+        listOf(SystemID.TOAPLAN),
+    ),
+    TAITO(
+        R.string.game_system_title_taito,
+        R.drawable.game_system_taito,
+        listOf(SystemID.TAITO),
+    ),
+    PSIKYO(
+        R.string.game_system_title_psikyo,
+        R.drawable.game_system_psikyo,
+        listOf(SystemID.PSIKYO),
+    ),
+    PGM(
+        R.string.game_system_title_pgm,
+        R.drawable.game_system_pgm,
+        listOf(SystemID.PGM),
+    ),
+    KANEKO(
+        R.string.game_system_title_kaneko,
+        R.drawable.game_system_kaneko,
+        listOf(SystemID.KANEKO),
+    ),
+    CAVE(
+        R.string.game_system_title_cave,
+        R.drawable.game_system_cave,
+        listOf(SystemID.CAVE),
+    ),
+    TECHNOS(
+        R.string.game_system_title_technos,
+        R.drawable.game_system_technos,
+        listOf(SystemID.TECHNOS),
+    ),
+    SETA(
+        R.string.game_system_title_seta,
+        R.drawable.game_system_seta,
+        listOf(SystemID.SETA),
     ),
     ;
 
@@ -153,12 +228,26 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.ATARI7800 -> ATARI7800
                 SystemID.DOS -> DOS
                 SystemID.NGP -> NGP
-                SystemID.NGC -> NGP
+                SystemID.NGC -> NGC
                 SystemID.WS -> WS
                 SystemID.WSC -> WS
                 SystemID.NINTENDO_3DS -> NINTENDO_3DS
                 SystemID.MSX -> MSX
                 SystemID.MSX2 -> MSX
+                SystemID.NEOGEO -> NEOGEO
+                SystemID.CPS1 -> CPS1
+                SystemID.CPS2 -> CPS2
+                SystemID.CPS3 -> CPS3
+                SystemID.DATAEAST -> DATAEAST
+                SystemID.GALAXIAN -> GALAXIAN
+                SystemID.TOAPLAN -> TOAPLAN
+                SystemID.TAITO -> TAITO
+                SystemID.PSIKYO -> PSIKYO
+                SystemID.PGM -> PGM
+                SystemID.KANEKO -> KANEKO
+                SystemID.CAVE -> CAVE
+                SystemID.TECHNOS -> TECHNOS
+                SystemID.SETA -> SETA
             }
         }
     }

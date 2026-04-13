@@ -30,6 +30,7 @@ import java.io.Serializable
     indices = [
         Index("id", unique = true),
         Index("fileUri", unique = true),
+        Index("fileName"),
         Index("title"),
         Index("systemId"),
         Index("lastIndexedAt"),

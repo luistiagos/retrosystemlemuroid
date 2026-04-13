@@ -67,6 +67,20 @@ object ShaderChooser {
             SystemID.NINTENDO_3DS -> ShaderConfig.LCD
             SystemID.MSX -> ShaderConfig.CRT
             SystemID.MSX2 -> ShaderConfig.CRT
+            SystemID.NEOGEO -> ShaderConfig.CRT
+            SystemID.CPS1 -> ShaderConfig.CRT
+            SystemID.CPS2 -> ShaderConfig.CRT
+            SystemID.CPS3 -> ShaderConfig.CRT
+            SystemID.DATAEAST -> ShaderConfig.CRT
+            SystemID.GALAXIAN -> ShaderConfig.CRT
+            SystemID.TOAPLAN -> ShaderConfig.CRT
+            SystemID.TAITO -> ShaderConfig.CRT
+            SystemID.PSIKYO -> ShaderConfig.CRT
+            SystemID.PGM -> ShaderConfig.CRT
+            SystemID.KANEKO -> ShaderConfig.CRT
+            SystemID.CAVE -> ShaderConfig.CRT
+            SystemID.TECHNOS -> ShaderConfig.CRT
+            SystemID.SETA -> ShaderConfig.CRT
         }
     }
 
@@ -292,6 +306,20 @@ object ShaderChooser {
             SystemID.NINTENDO_3DS -> modern
             SystemID.MSX -> upscale8Bits
             SystemID.MSX2 -> upscale8Bits
+            SystemID.NEOGEO -> upscale32Bits
+            SystemID.CPS1 -> upscale32Bits
+            SystemID.CPS2 -> upscale32Bits
+            SystemID.CPS3 -> upscale32Bits
+            SystemID.DATAEAST -> upscale32Bits
+            SystemID.GALAXIAN -> upscale32Bits
+            SystemID.TOAPLAN -> upscale32Bits
+            SystemID.TAITO -> upscale32Bits
+            SystemID.PSIKYO -> upscale32Bits
+            SystemID.PGM -> upscale32Bits
+            SystemID.KANEKO -> upscale32Bits
+            SystemID.CAVE -> upscale32Bits
+            SystemID.TECHNOS -> upscale32Bits
+            SystemID.SETA -> upscale32Bits
         }
     }
 }

@@ -134,8 +134,21 @@ abstract class LemuroidApplicationModule {
         fun retrogradeDb(app: LemuroidApplication) =
             Room.databaseBuilder(app, RetrogradeDatabase::class.java, RetrogradeDatabase.DB_NAME)
                 .addCallback(GameSearchDao.CALLBACK)
-                .addMigrations(GameSearchDao.MIGRATION, Migrations.VERSION_8_9, Migrations.VERSION_9_10)
+                .addMigrations(
+                    GameSearchDao.MIGRATION,
+                    Migrations.VERSION_8_9,
+                    Migrations.VERSION_9_10,
+                    Migrations.VERSION_10_11,
+                    Migrations.VERSION_11_12,
+                    Migrations.VERSION_12_13,
+                    Migrations.VERSION_13_14,
+                    Migrations.VERSION_14_15,
+                    Migrations.VERSION_15_16,
+                    Migrations.VERSION_16_17,
+                    Migrations.VERSION_17_18,
+                )
                 .fallbackToDestructiveMigration()
+                .setJournalMode(androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
                 .build()
 
         @Provides

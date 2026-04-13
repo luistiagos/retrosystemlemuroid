@@ -27,6 +27,8 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -102,9 +104,11 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
     }
 
     private suspend fun waitPendingOperations() {
-        getLoadingLiveData()
-            .filter { !it }
-            .first()
+        withTimeoutOrNull(30_000L) {
+            getLoadingLiveData()
+                .filter { !it }
+                .first()
+        }
     }
 
     private fun displayErrorMessage() {

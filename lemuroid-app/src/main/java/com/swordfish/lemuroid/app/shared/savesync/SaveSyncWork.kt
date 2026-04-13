@@ -88,7 +88,13 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
                 NotificationsManager.SAVE_SYNC_NOTIFICATION_ID,
                 notificationsManager.saveSyncNotification(),
             )
-        setForeground(foregroundInfo)
+        // On Android 16+, DATA_SYNC FGS type was removed; setForeground may throw.
+        // Proceed without a notification rather than crashing.
+        try {
+            setForeground(foregroundInfo)
+        } catch (e: Exception) {
+            Timber.w(e, "SaveSyncWork: setForeground failed (${e.message}), continuing without notification")
+        }
     }
 
     companion object {

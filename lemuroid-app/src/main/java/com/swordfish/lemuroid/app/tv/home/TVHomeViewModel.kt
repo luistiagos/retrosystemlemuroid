@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
+import com.swordfish.lemuroid.app.utils.android.isTvDevice
 import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.library.metaSystemID
@@ -16,6 +18,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -25,6 +28,8 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
     companion object {
         const val CAROUSEL_MAX_ITEMS = 10
         const val DEBOUNCE_TIME = 100L
+
+        private val TV_HIDDEN_SYSTEMS = setOf(MetaSystemID.PSP, MetaSystemID.NINTENDO_3DS)
     }
 
     class Factory(
@@ -32,6 +37,7 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
         val appContext: Context,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            @Suppress("UNCHECKED_CAST")
             return TVHomeViewModel(retrogradeDb, appContext) as T
         }
     }
@@ -70,11 +76,11 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
         viewModelScope.launch {
             val uiStatesFlow =
                 combine(
-                    favoriteGames(retrogradeDb),
-                    recentGames(retrogradeDb),
-                    availableSystems(retrogradeDb, appContext),
-                    indexingInProgress(appContext),
-                    directoryScanInProgress(appContext),
+                    favoriteGames(retrogradeDb).distinctUntilChanged(),
+                    recentGames(retrogradeDb).distinctUntilChanged(),
+                    availableSystems(retrogradeDb, appContext).distinctUntilChanged(),
+                    indexingInProgress(appContext).distinctUntilChanged(),
+                    directoryScanInProgress(appContext).distinctUntilChanged(),
                     ::buildViewState,
                 )
 
@@ -97,11 +103,13 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
     ) = retrogradeDb.gameDao()
         .selectSystemsWithCount()
         .map { systemCounts ->
+            val hideSystems = appContext.isTvDevice()
             systemCounts.asSequence()
                 .filter { (_, count) -> count > 0 }
                 .map { (systemId, count) -> GameSystem.findById(systemId).metaSystemID() to count }
+                .filter { (metaSystemId, _) -> !hideSystems || metaSystemId !in TV_HIDDEN_SYSTEMS }
                 .groupBy { (metaSystemId, _) -> metaSystemId }
-                .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumBy { it.second }) }
+                .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumOf { it.second }) }
                 .sortedBy { it.getName(appContext) }
                 .toList()
         }

@@ -17,7 +17,20 @@ class MainProcessInitializer : Initializer<Unit> {
         Timber.i("Requested initialization of main process tasks")
         SaveSyncWork.enqueueAutoWork(context, 0)
         LibraryIndexScheduler.scheduleCoreUpdate(context)
-        GlobalScope.launch { EmbeddedBiosInstaller.installIfNeeded(context) }
+        // Delay BIOS installation slightly so the main UI is visible before touching the filesystem.
+        // GlobalScope is acceptable here because the Initializer has no lifecycle of its own.
+        // If the process is killed before the delay elapses the installation will be retried
+        // on the next launch since EmbeddedBiosInstaller.installIfNeeded() is idempotent.
+        GlobalScope.launch {
+            kotlinx.coroutines.delay(5_000L)
+            try {
+                EmbeddedBiosInstaller.installIfNeeded(context)
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                Timber.e(e, "MainProcessInitializer: BIOS installation failed")
+            }
+        }
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

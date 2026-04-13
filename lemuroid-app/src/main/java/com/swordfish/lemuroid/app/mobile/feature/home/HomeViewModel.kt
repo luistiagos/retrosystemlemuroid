@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -242,6 +243,18 @@ class HomeViewModel(
     }
 
     init {
+        // Auto-start the streaming catalog download the first time the app opens when no
+        // download has been done yet and the user hasn't dismissed it this session.
+        viewModelScope.launch {
+            val initialState = streamingRomsManager.state.first()
+            if (initialState is StreamingRomsState.Idle
+                && !streamingRomsManager.isDownloadDone()
+                && !downloadDialogDismissed.value
+            ) {
+                startStreamingDownload()
+                downloadDialogDismissed.value = true
+            }
+        }
         // Monitor WiFi loss during an active download. When WiFi drops while wifiOnly=true,
         // pause the download immediately (before the Worker's HTTP request fails and clears
         // PREF_DOWNLOAD_STARTED) and notify the UI so it can offer to resume on mobile.

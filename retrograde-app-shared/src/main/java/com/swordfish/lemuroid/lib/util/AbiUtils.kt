@@ -54,17 +54,27 @@ object AbiUtils {
      * Lê os primeiros 5 bytes do cabeçalho ELF para validar o Magic Number e a Classe (32/64 bits).
      */
     fun isElfCompatible(file: File, expectedAbi: String): Boolean {
-        if (!file.exists() || file.length() < 5) return false
+        if (!file.exists() || file.length() < 6) return false
         return try {
             file.inputStream().use { stream ->
-                val header = ByteArray(5)
-                if (stream.read(header) != 5) return false
+                val header = ByteArray(6)
+                if (stream.read(header) != 6) return false
 
+                // BUG 32 fix: Use and 0xFF to avoid sign-extension on bytes > 127
                 // ELF Magic: 0x7F 'E' 'L' 'F'
-                if (header[0].toInt() != 0x7F || header[1].toInt() != 0x45 ||
-                    header[2].toInt() != 0x4C || header[3].toInt() != 0x46) return false
+                if (header[0].toInt() and 0xFF != 0x7F ||
+                    header[1].toInt() and 0xFF != 0x45 ||
+                    header[2].toInt() and 0xFF != 0x4C ||
+                    header[3].toInt() and 0xFF != 0x46) return false
 
-                val elfClass = header[4].toInt() // 1 = 32-bit, 2 = 64-bit
+                val elfClass = header[4].toInt() and 0xFF // 1 = 32-bit, 2 = 64-bit
+
+                // BUG 31 fix: Check endianness (EI_DATA byte 5: 1=little-endian, 2=big-endian)
+                // ARM ABIs are always little-endian; x86 is little-endian.
+                // Accept both to be forward-compatible, but reject invalid values.
+                val elfData = header[5].toInt() and 0xFF
+                if (elfData != 1 && elfData != 2) return false
+
                 val is64BitAbi = expectedAbi.contains("64") || expectedAbi == "x86_64" || expectedAbi == "arm64-v8a"
 
                 if (is64BitAbi) elfClass == 2 else elfClass == 1

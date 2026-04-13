@@ -165,8 +165,9 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
 
         val inputStream = context.contentResolver.openInputStream(originalDocument.uri)
             ?: throw IOException("Cannot open input stream for: ${originalDocument.uri}")
-        val stream = ZipInputStream(inputStream)
-        stream.extractEntryToFile(game.fileName, cacheFile)
+        ZipInputStream(inputStream).use { stream ->
+            stream.extractEntryToFile(game.fileName, cacheFile)
+        }
         return RomFiles.Standard(listOf(cacheFile))
     }
 
@@ -174,9 +175,16 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
         game: Game,
         dataFiles: List<DataFile>,
     ): RomFiles {
-        val gameEntry = getGameRomVirtual(game)
-        val dataEntries = dataFiles.map { getDataFileVirtual(it) }
-        return RomFiles.Virtual(listOf(gameEntry) + dataEntries)
+        val entries = mutableListOf<RomFiles.Virtual.Entry>()
+        try {
+            entries.add(getGameRomVirtual(game))
+            dataFiles.forEach { entries.add(getDataFileVirtual(it)) }
+        } catch (e: Throwable) {
+            // Close all already-opened file descriptors before re-throwing
+            entries.forEach { runCatching { it.fd.close() } }
+            throw e
+        }
+        return RomFiles.Virtual(entries)
     }
 
     private fun getDataFileVirtual(dataFile: DataFile): RomFiles.Virtual.Entry {
@@ -205,7 +213,7 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
 
         val stream = context.contentResolver.openInputStream(Uri.parse(dataFile.fileUri))
             ?: throw IOException("Cannot open input stream for: ${dataFile.fileUri}")
-        stream.writeToFile(cacheFile)
+        stream.use { it.writeToFile(cacheFile) }
         return cacheFile
     }
 
@@ -229,7 +237,7 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
 
         val stream = context.contentResolver.openInputStream(originalDocument.uri)
             ?: throw IOException("Cannot open input stream for: ${originalDocument.uri}")
-        stream.writeToFile(cacheFile)
+        stream.use { it.writeToFile(cacheFile) }
         return cacheFile
     }
 

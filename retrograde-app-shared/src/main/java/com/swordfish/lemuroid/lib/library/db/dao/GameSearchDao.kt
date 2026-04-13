@@ -73,9 +73,29 @@ class GameSearchDao(private val internalDao: Internal) {
                     JOIN games ON games.id = fts_games.docid
                     WHERE fts_games MATCH ?
                 """,
-                arrayOf(query),
+                arrayOf(sanitizeFtsQuery(query)),
             ),
         )
+
+    companion object {
+        /**
+         * Sanitizes an FTS4 MATCH query to prevent SQLiteException on malformed input.
+         * Strips characters that are illegal or cause parse errors in SQLite FTS4 MATCH expressions.
+         */
+        private fun sanitizeFtsQuery(query: String): String {
+            // Remove characters that can cause FTS4 parse errors:
+            // quotes, parentheses, asterisks (wildcard only valid at end of term),
+            // hyphens/colons as operators, etc.
+            return query
+                .replace('"', ' ')
+                .replace('\'', ' ')
+                .replace('(', ' ')
+                .replace(')', ' ')
+                .replace(':', ' ')
+                .trim()
+                .ifEmpty { "\"\"" }
+        }
+    }
 
     @Dao
     interface Internal {

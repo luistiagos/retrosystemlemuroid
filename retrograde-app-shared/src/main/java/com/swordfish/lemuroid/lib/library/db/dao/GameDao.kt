@@ -34,10 +34,10 @@ interface GameDao {
     suspend fun selectById(id: Int): Game?
 
     @Query("SELECT * FROM games WHERE fileUri = :fileUri")
-    fun selectByFileUri(fileUri: String): Game?
+    suspend fun selectByFileUri(fileUri: String): Game?
 
     @Query("SELECT * FROM games WHERE lastIndexedAt < :lastIndexedAt")
-    fun selectByLastIndexedAtLessThan(lastIndexedAt: Long): List<Game>
+    suspend fun selectByLastIndexedAtLessThan(lastIndexedAt: Long): List<Game>
 
     @Query("SELECT * FROM games WHERE isFavorite = 1 ORDER BY title ASC")
     fun selectFavorites(): PagingSource<Int, Game>
@@ -84,16 +84,16 @@ interface GameDao {
     fun selectSystemsWithCount(): Flow<List<SystemCount>>
 
     @Insert
-    fun insert(games: List<Game>): List<Long>
+    suspend fun insert(games: List<Game>): List<Long>
 
     @Delete
-    fun delete(games: List<Game>)
+    suspend fun delete(games: List<Game>)
 
     @Update
     suspend fun update(game: Game)
 
     @Update
-    fun update(games: List<Game>)
+    suspend fun update(games: List<Game>)
 }
 
 data class SystemCount(val systemId: String, val count: Int)

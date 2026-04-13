@@ -16,6 +16,12 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 
 object CoverUtils {
+    /** Returns true when the device is flagged as a low-RAM device by the OS. */
+    private fun isLowRamDevice(context: Context): Boolean {
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
+        return am.isLowRamDevice
+    }
+
     fun loadCover(
         game: Game,
         imageView: ImageView?,
@@ -30,20 +36,25 @@ object CoverUtils {
     }
 
     fun buildImageLoader(applicationContext: Context): ImageLoader {
+        val lowRam = isLowRamDevice(applicationContext)
+        val memoryCacheFraction = if (lowRam) 0.08 else 0.20
+        val diskCacheFraction = if (lowRam) 0.10 else 0.20
         return ImageLoader.Builder(applicationContext)
             .diskCache(
                 DiskCache.Builder()
                     .directory(applicationContext.cacheDir.resolve("image_cache"))
-                    .maxSizePercent(0.20)
+                    .maxSizePercent(diskCacheFraction)
                     .build(),
             )
             .memoryCache {
                 MemoryCache.Builder(applicationContext)
-                    .maxSizePercent(0.20)
+                    .maxSizePercent(memoryCacheFraction)
                     .build()
             }
             .okHttpClient {
                 OkHttpClient.Builder()
+                    .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
+                    .readTimeout(15, java.util.concurrent.TimeUnit.SECONDS)
                     .addNetworkInterceptor(ThrottleFailedThumbnailsInterceptor)
                     .build()
             }

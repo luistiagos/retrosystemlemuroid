@@ -1,7 +1,9 @@
 package com.swordfish.lemuroid.app.utils.android
 
 import android.app.ActivityManager
+import android.app.UiModeManager
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Process
 import dagger.android.support.DaggerApplication
@@ -20,6 +22,12 @@ private fun retrieveProcessName(context: Context): String? {
     return manager.runningAppProcesses
         .firstOrNull { it.pid == currentPID }
         ?.processName
+}
+
+/** Returns true when the device is a TV or set-top box (queried via UiModeManager). */
+fun Context.isTvDevice(): Boolean {
+    val uiModeManager = getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+    return uiModeManager.currentModeType == Configuration.UI_MODE_TYPE_TELEVISION
 }
 
 fun Context.getGLSLVersion(): Int {

@@ -30,6 +30,7 @@ import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
@@ -69,13 +70,14 @@ class CoreUpdaterImpl(
         .followSslRedirects(true)
         .build()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun downloadCores(
         context: Context,
         coreIDs: List<CoreID>,
     ) {
         val sharedPreferences = SharedPreferencesHelper.getSharedPreferences(context.applicationContext)
         coreIDs.asFlow()
-            .flatMapMerge(concurrency = 4) { coreID ->
+            .flatMapMerge(concurrency = 2) { coreID ->
                 flow {
                     try {
                         retrieveAssets(coreID, sharedPreferences)
@@ -216,12 +218,14 @@ class CoreUpdaterImpl(
                 .firstOrNull { it.name == coreID.libretroFileName }
         }
 
-    private fun deleteOutdatedCores(
+    private suspend fun deleteOutdatedCores(
         mainCoresDirectory: File,
         applicationVersion: String,
     ) {
-        mainCoresDirectory.listFiles()
-            ?.filter { it.name != applicationVersion }
-            ?.forEach { it.deleteRecursively() }
+        withContext(Dispatchers.IO) {
+            mainCoresDirectory.listFiles()
+                ?.filter { it.name != applicationVersion }
+                ?.forEach { it.deleteRecursively() }
+        }
     }
 }

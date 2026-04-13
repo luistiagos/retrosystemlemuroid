@@ -13,6 +13,7 @@ import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.delay
+import timber.log.Timber
 
 class GameLaunchTaskHandler(
     private val reviewManager: ReviewManager,
@@ -102,7 +103,10 @@ class GameLaunchTaskHandler(
             data?.extras?.getLong(BaseGameActivity.PLAY_GAME_RESULT_SESSION_DURATION)
                 ?: 0L
         val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as? Game
-            ?: return
+            ?: run {
+                Timber.w("handleSuccessfulGameFinish: game extra is null or wrong type, skipping lastPlayedAt update")
+                return
+            }
 
         updateGamePlayedTimestamp(game)
         if (enableRatingFlow) {

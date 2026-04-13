@@ -46,6 +46,20 @@ object RomSystemMapper {
         // Arcade — server uses "fbneo" as the system name for all arcade ROMs
         // ROMs are MAME 0.78 romset → use mame2003plus core locally, but server stores them under "fbneo"
         "fbneo"        to "fbneo",       // SystemID.FBNEO dbname
+        "neogeo"       to "neogeo",      // SystemID.NEOGEO dbname
+        "cps1"         to "fbneo",        // SystemID.CPS1 dbname (served by fbneo endpoint)
+        "cps2"         to "fbneo",        // SystemID.CPS2 dbname (served by fbneo endpoint)
+        "cps3"         to "fbneo",        // SystemID.CPS3 dbname (served by fbneo endpoint)
+        "dataeast"     to "fbneo",        // SystemID.DATAEAST dbname (served by fbneo endpoint)
+        "galaxian"     to "fbneo",        // SystemID.GALAXIAN dbname (served by fbneo endpoint)
+        "toaplan"      to "fbneo",        // SystemID.TOAPLAN dbname (served by fbneo endpoint)
+        "taito"        to "fbneo",        // SystemID.TAITO dbname (served by fbneo endpoint)
+        "psikyo"       to "fbneo",        // SystemID.PSIKYO dbname (served by fbneo endpoint)
+        "pgm"          to "fbneo",        // SystemID.PGM dbname (served by fbneo endpoint)
+        "kaneko"       to "fbneo",        // SystemID.KANEKO dbname (served by fbneo endpoint)
+        "cave"         to "fbneo",        // SystemID.CAVE dbname (served by fbneo endpoint)
+        "technos"      to "fbneo",        // SystemID.TECHNOS dbname (served by fbneo endpoint)
+        "seta"         to "fbneo",        // SystemID.SETA dbname (served by fbneo endpoint)
         "mame2003plus" to "mame2003plus",       // SystemID.MAME2003PLUS dbname (served from fbneo collection)
         "arcade"       to "mame2003plus",       // HuggingFace folder alias (mame 0.78, served as fbneo on server)
         // MSX

@@ -61,7 +61,9 @@ object CoreDownloader {
 
         if (destFile.exists()) {
             Timber.w("CoreDownloader: $libFileName exists but invalid, re-downloading")
-            destFile.delete()
+            if (!destFile.delete()) {
+                Timber.e("CoreDownloader: failed to delete invalid core file: $destFile")
+            }
         }
 
         val url = "$CORES_BASE_URL$CORES_VERSION/lemuroid_core_${coreID.coreName}" +

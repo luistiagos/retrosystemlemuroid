@@ -6,18 +6,24 @@ import okhttp3.Response
 import java.io.IOException
 
 object ThrottleFailedThumbnailsInterceptor : Interceptor {
-    private val failedThumbnailsStatusCode = LruCache<String, Int>(256 * 1024)
+    private val failedThumbnailsStatusCode = LruCache<String, Int>(1024)
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestUrl = chain.request().url.toString()
-        val previousFailure = failedThumbnailsStatusCode[requestUrl]
+
+        // Atomic read: if null the key is absent, so we can proceed; if non-null, fail fast.
+        val previousFailure = synchronized(failedThumbnailsStatusCode) {
+            failedThumbnailsStatusCode[requestUrl]
+        }
         if (previousFailure != null) {
             throw IOException("Thumbnail previously failed with code: $previousFailure")
         }
 
         val response = chain.proceed(chain.request())
         if (!response.isSuccessful) {
-            failedThumbnailsStatusCode.put(chain.request().url.toString(), response.code)
+            synchronized(failedThumbnailsStatusCode) {
+                failedThumbnailsStatusCode.put(chain.request().url.toString(), response.code)
+            }
         }
 
         return response

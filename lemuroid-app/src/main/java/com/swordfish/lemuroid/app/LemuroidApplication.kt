@@ -1,11 +1,14 @@
 package com.swordfish.lemuroid.app
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
+import android.content.ComponentCallbacks2
 import android.content.Context
 import androidx.startup.AppInitializer
 import androidx.work.ListenableWorker
 import coil.ImageLoader
 import coil.ImageLoaderFactory
+import coil.imageLoader
 import com.google.android.material.color.DynamicColors
 import com.swordfish.lemuroid.app.shared.covers.CoverUtils
 import com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer
@@ -17,6 +20,7 @@ import com.swordfish.lemuroid.lib.preferences.LocaleHelper
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.DaggerApplication
+import timber.log.Timber
 import javax.inject.Inject
 
 class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderFactory {
@@ -52,5 +56,20 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
 
     override fun newImageLoader(): ImageLoader {
         return CoverUtils.buildImageLoader(applicationContext)
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        if (level >= ComponentCallbacks2.TRIM_MEMORY_MODERATE) {
+            Timber.d("onTrimMemory level=$level — clearing Coil memory cache")
+            applicationContext.imageLoader.memoryCache?.clear()
+        }
+    }
+
+    companion object {
+        fun isLowRamDevice(context: Context): Boolean {
+            val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            return am.isLowRamDevice
+        }
     }
 }

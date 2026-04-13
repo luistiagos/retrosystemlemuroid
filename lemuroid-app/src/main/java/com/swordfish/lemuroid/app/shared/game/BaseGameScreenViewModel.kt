@@ -287,6 +287,7 @@ class BaseGameScreenViewModel(
 
     fun requestFinish() {
         if (loadingState.value) return
+        loadingState.value = true
         viewModelScope.launch {
             withLoading {
                 saves.saveSRAM(game)

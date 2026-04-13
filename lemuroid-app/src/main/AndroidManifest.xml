@@ -42,6 +42,7 @@
         android:name="com.swordfish.lemuroid.app.LemuroidApplication"
         android:allowBackup="true"
         android:banner="@mipmap/ic_banner"
+        android:extractNativeLibs="true"
         android:icon="@mipmap/lemuroid_launcher"
         android:isGame="true"
         android:label="@string/lemuroid_name"

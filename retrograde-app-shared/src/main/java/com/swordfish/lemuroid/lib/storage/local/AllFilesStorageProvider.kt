@@ -54,15 +54,19 @@ class AllFilesStorageProvider(
         val scanRoots = listOf(primary) + extraRoots
         Timber.d("AllFilesStorageProvider: scan roots = ${scanRoots.map { it.absolutePath }}")
 
-        val directories = mutableListOf<File>().apply { addAll(scanRoots) }
+        // Pair<File, depth>. Depth starts at 0 for root entries.
+        val directories = ArrayDeque<Pair<File, Int>>().apply {
+            scanRoots.forEach { addLast(it to 0) }
+        }
 
         while (directories.isNotEmpty()) {
-            val directory = directories.removeAt(0)
-            
+            val (directory, depth) = directories.removeFirst()
+
             // Skip problematic or slow system folders that don't usually contain ROMs
-            if (directory.name.startsWith(".") || directory.name == "Android") {
-                continue
-            }
+            if (directory.name.startsWith(".") || directory.name == "Android") continue
+
+            // Cap scan depth to avoid traversing very deep trees (e.g. USB drives with many folders)
+            if (depth >= MAX_SCAN_DEPTH) continue
 
             val groups = directory.listFiles()
                 ?.filterNot { it.name.startsWith(".") }
@@ -71,7 +75,7 @@ class AllFilesStorageProvider(
             val newDirectories = groups[true] ?: listOf()
             val newFiles = groups[false] ?: listOf()
 
-            directories.addAll(newDirectories)
+            newDirectories.forEach { directories.addLast(it to depth + 1) }
             
             val validRoms = newFiles.filter { it.extension.lowercase() in supportedExtensions }
             
@@ -106,8 +110,9 @@ class AllFilesStorageProvider(
         }
 
         if (originalFile.isZipped()) {
-            val stream = ZipInputStream(originalFile.inputStream())
-            stream.extractEntryToFile(game.fileName, cacheFile)
+            ZipInputStream(originalFile.inputStream()).use { stream ->
+                stream.extractEntryToFile(game.fileName, cacheFile)
+            }
         }
 
         return cacheFile
@@ -128,5 +133,7 @@ class AllFilesStorageProvider(
 
     companion object {
         const val ALL_FILES_STORAGE_CACHE_SUBFOLDER = "all-files-storage-games"
+        /** Maximum directory depth to scan. Prevents runaway traversal on large storage devices. */
+        private const val MAX_SCAN_DEPTH = 8
     }
 }

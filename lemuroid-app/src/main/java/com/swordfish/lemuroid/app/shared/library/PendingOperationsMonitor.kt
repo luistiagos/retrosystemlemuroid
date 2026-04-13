@@ -19,7 +19,7 @@ class PendingOperationsMonitor(private val appContext: Context) {
     }
 
     fun anyOperationInProgress(): Flow<Boolean> {
-        return operationsInProgress(*Operation.values())
+        return operationsInProgress(*Operation.entries.toTypedArray())
     }
 
     fun anySaveOperationInProgress(): Flow<Boolean> {

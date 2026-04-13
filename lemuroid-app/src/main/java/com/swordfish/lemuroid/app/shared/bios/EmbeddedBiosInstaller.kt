@@ -39,6 +39,8 @@ object EmbeddedBiosInstaller {
         "MSX2P.ROM",
         "MSX2PEXT.ROM",
         "MSXDOS2.ROM",
+        // FBNeo / Neo Geo
+        "neogeo.zip",
     )
 
     suspend fun installIfNeeded(context: Context) = withContext(Dispatchers.IO) {

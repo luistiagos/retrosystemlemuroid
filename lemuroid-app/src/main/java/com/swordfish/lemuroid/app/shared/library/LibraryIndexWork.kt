@@ -34,7 +34,13 @@ class LibraryIndexWork(context: Context, workerParams: WorkerParameters) :
                 notificationsManager.libraryIndexingNotification(),
             )
 
-        setForeground(foregroundInfo)
+        // On Android 16+, DATA_SYNC FGS type was removed; setForeground may throw.
+        // Proceed without a notification rather than crashing.
+        try {
+            setForeground(foregroundInfo)
+        } catch (e: Exception) {
+            Timber.w(e, "LibraryIndexWork: setForeground failed (${e.message}), continuing without notification")
+        }
 
         val result =
             withContext(Dispatchers.IO) {
@@ -45,7 +51,7 @@ class LibraryIndexWork(context: Context, workerParams: WorkerParameters) :
 
         result.exceptionOrNull()?.let {
             if (it is CancellationException) throw it
-            Timber.e("Library indexing work terminated with an exception:", it)
+            Timber.e(it, "Library indexing work terminated with an exception")
         }
 
         return Result.success()

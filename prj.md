@@ -1,7 +1,7 @@
 # Lemuroid — Project Specification
 
 > **Spec-Driven Context Document** — update this file whenever you change architecture, add features, or modify data flows.  
-> Last updated: 2026-04-09
+> Last updated: 2026-04-13
 
 ---
 
@@ -37,7 +37,7 @@
 
 ---
 
-## 3. Supported Systems (26)
+## 3. Supported Systems (28)
 
 Defined in `retrograde-app-shared/.../library/SystemID.kt`:
 
@@ -59,15 +59,18 @@ Defined in `retrograde-app-shared/.../library/SystemID.kt`:
 | `ATARI7800` | `a78` | Atari 7800 |
 | `PSX` | `psx` | PlayStation 1 |
 | `FBNEO` | `fbneo` | FinalBurn Neo (arcade) |
+| `NEOGEO` | `neogeo` | SNK Neo Geo |
 | `MAME2003PLUS` | `mame2003plus` | MAME 2003-Plus (arcade) |
 | `PC_ENGINE` | `pce` | PC Engine / TurboGrafx-16 |
 | `LYNX` | `lynx` | Atari Lynx |
 | `NGP` | `ngp` | Neo Geo Pocket |
-| `NGC` | `ngc` | Neo Geo CD |
+| `NGC` | `ngc` | Neo Geo Pocket Color |
 | `WS` | `ws` | WonderSwan |
 | `WSC` | `wsc` | WonderSwan Color |
 | `DOS` | `dos` | DOS (DOSBox) |
 | `NINTENDO_3DS` | `3ds` | Nintendo 3DS (Citra) |
+| `MSX` | `msx` | MSX |
+| `MSX2` | `msx2` | MSX2 |
 
 ---
 
@@ -75,7 +78,17 @@ Defined in `retrograde-app-shared/.../library/SystemID.kt`:
 
 **Class**: `RetrogradeDatabase` (`retrograde-app-shared/.../db/RetrogradeDatabase.kt`)  
 **DB name**: `retrograde`  
-**Room version**: `10`
+**Room version**: `13`
+
+### Migration history
+
+| Migration | Change |
+|-----------|--------|
+| 8 → 9 | Add `datafiles` table |
+| 9 → 10 | Add `downloaded_roms` table |
+| 10 → 11 | Add index on `games.fileName` |
+| 11 → 12 | `games SET systemId='neogeo' WHERE systemId='fbneo'` for 103 Neo Geo ROMs (superseded by 12→13) |
+| 12 → 13 | `games SET systemId='neogeo' WHERE systemId='mame2003plus'` + `fbneo` for 103 Neo Geo filenames (ROMs were in `arcade/` folder, indexed as `mame2003plus`) |
 
 ### 4.1 `games` table — `Game.kt`
 
@@ -239,9 +252,12 @@ gg, gamegear         → gamegear
 pce, pcengine        → pcengine
 ngp                  → ngp
 ngc, neogeocd        → neogeocd
-fbneo, mame2003plus, arcade → fbneo
+fbneo                → fbneo
+neogeo               → neogeo
+mame2003plus, arcade → mame2003plus
 a26, atari2600       → atari2600
 a78, atari7800       → atari7800
+msx, msx2            → msx
 (all others map as-is: nes, snes, gba, gbc, gb, n64, psx, psp, nds, lynx, ws, wsc, dos, 3ds)
 ```
 
@@ -538,4 +554,80 @@ Dimension: cores      → bundle | dynamic
 | `SettingsManager.kt` | `lemuroid-app/.../mobile/feature/settings/SettingsManager.kt` |
 | `ControllerConfigsManager.kt` | `lemuroid-app/.../shared/settings/ControllerConfigsManager.kt` |
 | `LibraryIndexScheduler.kt` | `lemuroid-app/.../shared/library/LibraryIndexScheduler.kt` |
-| `especificacao_versao2.md` | `especificacao_versao2.md` (root) — full feature spec |
+| `LibretroDBMetadataProvider.kt` | `lemuroid-metadata-libretro-db/.../libretrodb/LibretroDBMetadataProvider.kt` |
+| `BiosManager.kt` | `retrograde-app-shared/.../bios/BiosManager.kt` |
+| `EmbeddedBiosInstaller.kt` | `lemuroid-app/.../shared/bios/EmbeddedBiosInstaller.kt` |
+| `GameSystem.kt` | `retrograde-app-shared/.../library/GameSystem.kt` |
+| `MetaSystemID.kt` | `retrograde-app-shared/.../library/MetaSystemID.kt` |
+| `ShaderChooser.kt` | `lemuroid-app/.../shared/game/ShaderChooser.kt` |
+---
+
+## 17. Embedded BIOS Files
+
+BIOS files embedded directly in the APK (`lemuroid-app/src/main/assets/bios/`) and installed automatically by `EmbeddedBiosInstaller` on first run.
+
+| File | MD5 | System | Notes |
+|------|-----|--------|-------|
+| `BIOSGBA.ROM` | — | GBA | Game Boy Advance BIOS |
+| `MSX.ROM` | `364A1A579FE81E4A940A999043A76E35` | MSX, MSX2 | MSX BIOS |
+| `MSX2.ROM` | `EC3A01C91F24FBFF838D67D460C751C7` | MSX2 | MSX2 BIOS |
+| `MSXDOS2.ROM` | `6418D091CD6907BBCF940324339E43BB` | MSX | MSX-DOS2 |
+| `neogeo.zip` | `DFFB72F116D36D025068B23970A4F6DF` (CRC32 `362E948D`) | NEOGEO (via FBNEO core) | Neo Geo system BIOS |
+
+`EmbeddedBiosInstaller` is called at app startup. It copies each file from assets into the app's system BIOS directory if not already present.
+
+---
+
+## 18. SNK Neo Geo System
+
+**Added**: 2026-04-13
+
+The NEOGEO system is a dedicated sub-system carved out of the generic FBNeo arcade collection. It uses the FBNeo core but exposes a separate system card with the SNK Neo Geo logo.
+
+### Key files changed
+
+| File | Change |
+|------|--------|
+| `SystemID.kt` | Added `NEOGEO("neogeo")` after `MSX2` |
+| `MetaSystemID.kt` | Added `NEOGEO(R.string.game_system_title_neogeo, R.drawable.game_system_neogeo, listOf(SystemID.NEOGEO))` + mapping in `fromSystemID()` |
+| `GameSystem.kt` | Added `GameSystem(SystemID.NEOGEO, ...)` using `CoreID.FBNEO`, `requiredBIOSFiles = ["neogeo.zip"]`, `scanByPathAndFilename = true`, extension `.zip` |
+| `strings-game-system.xml` | Added `game_system_title_neogeo = "SNK Neo Geo"`, `game_system_abbr_neogeo = "NeoGeo"` |
+| `ShaderChooser.kt` | `SystemID.NEOGEO → CRT` shader, `NEOGEO → upscale32Bits` |
+| `RomSystemMapper.kt` | `"neogeo" to "neogeo"` |
+| `BiosManager.kt` | `Bios("neogeo.zip", MD5, "Neo Geo BIOS", SystemID.FBNEO, isEmbedded=true)` |
+| `EmbeddedBiosInstaller.kt` | `"neogeo.zip"` added to `BIOS_FILES` |
+| `game_system_neogeo.png` | Drawable in `retrograde-app-shared/.../res/drawable/` |
+| `libretro-db.sqlite` | 103 rows changed `system='fbneo'` → `'neogeo'` |
+| `LibretroDatabase.kt` | version bumped 8 → 9 (force re-copy assets DB on upgrade) |
+
+### LibretroDBMetadataProvider scoring (for `arcade/` folder)
+
+Neo Geo ROMs reside in the `arcade/` HuggingFace folder alongside other MAME ROMs. `findByPathAndFilename` uses a scoring system:
+
+| Score | Condition |
+|-------|-----------|
+| 3 | `dbname == "neogeo"` — libretro-db explicitly tags this ROM as Neo Geo |
+| 2 | Exact path segment match (e.g. file is in a `neogeo/` folder) |
+| 1 | `arcade/` folder + `mame2003plus` system |
+| 0 | Alias-only match (fbneo, etc.) |
+
+`FOLDER_ALIASES` entries added: `"arcade" to "neogeo"`, `"fbneo" to "neogeo"` — so `parentContainsSystem()` allows neogeo candidates from within those folders.
+
+### 103 Neo Geo ROM filenames
+
+Covered by Migration 12→13 (`Migrations.kt`). Includes: Metal Slug series, King of Fighters series (kof94–kof2003), Samurai Shodown series (samsho–samsho4), Fatal Fury series, Art of Fighting series, Garou: Mark of the Wolves, and more. Full list in `Migrations.VERSION_12_13.NEOGEO_ROMS`.
+
+---
+
+## 19. MSX Systems
+
+**Added**: prior sessions (before 2026-04-09)
+
+| SystemID | DB name | Core |
+|----------|---------|------|
+| `MSX` | `msx` | `libfmsx_libretro_android.so` (fMSX) |
+| `MSX2` | `msx2` | `libfmsx_libretro_android.so` (fMSX) |
+
+**BIOS files** (all embedded): `MSX.ROM`, `MSX2.ROM`, `MSX2P.ROM`, `MSXDOS2.ROM`.  
+**RomSystemMapper**: both `msx` and `msx2` map to endpoint system `"msx"`.  
+**HuggingFace folder**: `roms/msx/`

@@ -92,8 +92,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         super.onCreate(savedInstanceState)
         setUpExceptionsHandler()
 
-        game = intent.getSerializableExtra(EXTRA_GAME) as Game
-        systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as SystemCoreConfig
+        game = intent.getSerializableExtra(EXTRA_GAME) as? Game ?: run { finish(); return }
+        systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as? SystemCoreConfig ?: run { finish(); return }
         system = GameSystem.findById(game.systemId)
 
         val viewModel by viewModels<BaseGameScreenViewModel> {
@@ -332,8 +332,9 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     private fun finishAndExitProcess() {
         onFinishTriggered()
+        val duration = animationDuration().toLong()
         GlobalScope.launch {
-            delay(animationDuration().toLong())
+            delay(duration)
             exitProcess(0)
         }
         finish()

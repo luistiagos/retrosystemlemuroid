@@ -165,16 +165,31 @@ class GameLoader(
         coreID: CoreID,
     ): File? {
         val processAbi = com.swordfish.lemuroid.lib.util.AbiUtils.getProcessAbi(context)
-        val files =
-            sequenceOf(
-                File(context.applicationInfo.nativeLibraryDir),
-                context.filesDir,
-            )
+        val libFileName = coreID.libretroFileName
 
-        return files
+        // Fast path 1: core bundled inside the APK (nativeLibraryDir)
+        val bundled = File(context.applicationInfo.nativeLibraryDir, libFileName)
+        if (bundled.exists() && bundled.length() > MIN_VALID_CORE_SIZE_BYTES &&
+            com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(bundled, processAbi)
+        ) return bundled
+
+        // Fast path 2: downloaded core at its deterministic versioned path
+        val downloaded = File(
+            context.filesDir,
+            "cores/${com.swordfish.lemuroid.lib.core.CoreDownloader.CORES_VERSION}/$libFileName",
+        )
+        if (downloaded.exists() && downloaded.length() > MIN_VALID_CORE_SIZE_BYTES &&
+            com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(downloaded, processAbi)
+        ) return downloaded
+
+        // Slow path fallback: walk filesDir for cores in non-standard locations
+        return sequenceOf(
+            File(context.applicationInfo.nativeLibraryDir),
+            context.filesDir,
+        )
             .flatMap { it.walkBottomUp() }
             .firstOrNull { file ->
-                file.name == coreID.libretroFileName &&
+                file.name == libFileName &&
                     file.length() > MIN_VALID_CORE_SIZE_BYTES &&
                     com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(file, processAbi)
             }

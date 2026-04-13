@@ -34,6 +34,9 @@ import com.swordfish.lemuroid.lib.storage.StorageProvider
 import com.swordfish.lemuroid.lib.storage.StorageProviderRegistry
 import dagger.Lazy
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
@@ -85,7 +88,7 @@ class LemuroidLibrary(
         return provider.listBaseStorageFiles()
             .flatMapConcat { StorageFilesMerger.mergeDataFiles(provider, it).asFlow() }
             .batchWithSizeAndTime(MAX_BUFFER_SIZE, MAX_TIME)
-            .flatMapMerge { processBatch(it, provider, startedAtMs, gameMetadata) }
+            .flatMapMerge(concurrency = 4) { processBatch(it, provider, startedAtMs, gameMetadata) }
     }
 
     private suspend fun processBatch(
@@ -94,19 +97,26 @@ class LemuroidLibrary(
         startedAtMs: Long,
         gameMetadata: GameMetadataProvider,
     ) = flow<Unit> {
-        val entries = batch.map { fetchEntriesFromDatabase(it) }
+        val entries = mutableListOf<ScanEntry>()
+        for (storageFile in batch) {
+            entries.add(fetchEntriesFromDatabase(storageFile))
+        }
 
         val existingEntries = entries.filterIsInstance<ScanEntry.GameFile>()
         handleExistingEntries(existingEntries, startedAtMs)
 
-        val newEntries =
+        // Parallelize metadata lookups: each call does up to 5 sequential DB queries.
+        // coroutineScope ensures all async tasks complete (or fail fast) before continuing.
+        val newEntries = coroutineScope {
             entries.filterIsInstance<ScanEntry.File>()
-                .map { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs) }
+                .map { async { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs) } }
+                .awaitAll()
+        }
 
         handleNewEntries(newEntries, startedAtMs, provider)
     }
 
-    private fun fetchEntriesFromDatabase(storageFile: GroupedStorageFiles): ScanEntry {
+    private suspend fun fetchEntriesFromDatabase(storageFile: GroupedStorageFiles): ScanEntry {
         Timber.d("Retrieving scan entry for uri: ${storageFile.primaryFile}")
         val game = retrogradedb.gameDao().selectByFileUri(storageFile.primaryFile.uri.toString())
         return buildScanEntry(storageFile, game)
@@ -123,7 +133,7 @@ class LemuroidLibrary(
         }
     }
 
-    private fun handleExistingEntries(
+    private suspend fun handleExistingEntries(
         entries: List<ScanEntry.GameFile>,
         startedAtMs: Long,
     ) {
@@ -131,7 +141,7 @@ class LemuroidLibrary(
         updateDataFiles(entries, startedAtMs)
     }
 
-    private fun updateGames(
+    private suspend fun updateGames(
         entries: List<ScanEntry.GameFile>,
         startedAtMs: Long,
     ) {
@@ -145,7 +155,7 @@ class LemuroidLibrary(
         retrogradedb.gameDao().update(updatedGames)
     }
 
-    private fun updateDataFiles(
+    private suspend fun updateDataFiles(
         entries: List<ScanEntry.GameFile>,
         startedAtMs: Long,
     ) {
@@ -174,7 +184,7 @@ class LemuroidLibrary(
         )
     }
 
-    private fun handleNewEntries(
+    private suspend fun handleNewEntries(
         entries: List<ScanEntry>,
         startedAtMs: Long,
         provider: StorageProvider,
@@ -192,7 +202,7 @@ class LemuroidLibrary(
         handleUnknownFiles(provider, unknownFiles, startedAtMs)
     }
 
-    private fun handleNewGames(
+    private suspend fun handleNewGames(
         pairs: List<ScanEntry.GameFile>,
         startedAtMs: Long,
     ) {
@@ -226,7 +236,9 @@ class LemuroidLibrary(
             val inputStream = storageFile?.uri?.let { provider.getInputStream(it) }
 
             if (storageFile != null && inputStream != null) {
-                biosManager.tryAddBiosAfter(storageFile, inputStream, startedAtMs)
+                inputStream.use {
+                    biosManager.tryAddBiosAfter(storageFile, it, startedAtMs)
+                }
             }
         }
     }
@@ -257,7 +269,7 @@ class LemuroidLibrary(
             .getOrNull()
     }
 
-    private fun cleanUp(startedAtMs: Long) {
+    private suspend fun cleanUp(startedAtMs: Long) {
         kotlin.runCatching {
             removeDeletedBios(startedAtMs)
         }
@@ -308,13 +320,13 @@ class LemuroidLibrary(
         )
     }
 
-    private fun removeDeletedDataFiles(startedAtMs: Long) {
+    private suspend fun removeDeletedDataFiles(startedAtMs: Long) {
         Timber.d("Deleting data files from db before: $startedAtMs")
         val dataFiles = retrogradedb.dataFileDao().selectByLastIndexedAtLessThan(startedAtMs)
         retrogradedb.dataFileDao().delete(dataFiles)
     }
 
-    private fun removeDeletedGames(startedAtMs: Long) {
+    private suspend fun removeDeletedGames(startedAtMs: Long) {
         Timber.d("Deleting games from db before: $startedAtMs")
         val games = retrogradedb.gameDao().selectByLastIndexedAtLessThan(startedAtMs)
         retrogradedb.gameDao().delete(games)
