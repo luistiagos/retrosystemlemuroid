@@ -110,14 +110,6 @@ class HomeViewModel(
         return uiStates
     }
 
-    // True when the DB has no games at all.
-    private val noGamesFlow: Flow<Boolean> = combine(
-        favoritesGames(retrogradeDb),
-        recentGames(retrogradeDb),
-        discoveryGames(retrogradeDb),
-    ) { fav, rec, disc -> fav.isEmpty() && rec.isEmpty() && disc.isEmpty() }
-        .distinctUntilChanged()
-
     // True while a library index operation is running (e.g. right after download completes).
     private val indexingFlow: Flow<Boolean> = indexingInProgress(appContext).distinctUntilChanged()
 
@@ -129,7 +121,7 @@ class HomeViewModel(
     // successful download while the scanner is still populating the DB.
     fun getDownloadRomsState(): Flow<DownloadRomsState> = combine(
         romsDownloadManager.state,
-        noGamesFlow,
+        uiStates.map { it.showNoGamesCard }.distinctUntilChanged(),
         indexingFlow,
     ) { dlState, noGames, isIndexing ->
         if (dlState is DownloadRomsState.Done && noGames && !isIndexing && !romsDownloadManager.isDownloadStarted())

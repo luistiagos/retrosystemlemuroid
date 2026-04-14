@@ -38,7 +38,7 @@ class RumbleManager(
         val enableRumble = settingsManager.enableRumble()
         val rumbleSupported = systemCoreConfig.rumbleSupported
 
-        if (!enableRumble && rumbleSupported) {
+        if (!enableRumble || !rumbleSupported) {
             return
         }
 

@@ -20,10 +20,14 @@ fun MetaSystemsScreen(
     navController: NavController,
     viewModel: MetaSystemsViewModel,
 ) {
-    val metaSystems = viewModel.availableMetaSystems.collectAsState(emptyList())
+    // null = still loading (Room query not yet emitted); empty list = genuinely no systems.
+    // Collecting with null avoids showing an empty screen during the brief window between
+    // composable subscription and Room's first emission on slow/cold devices.
+    val metaSystems = viewModel.availableMetaSystems.collectAsState(null)
+    val systems = metaSystems.value ?: return  // Wait silently until data arrives
     MetaSystemsScreen(
         modifier = modifier,
-        metaSystems = metaSystems.value,
+        metaSystems = systems,
         onSystemClicked = { navController.navigate("systems/${it.metaSystem.name}") },
     )
 }

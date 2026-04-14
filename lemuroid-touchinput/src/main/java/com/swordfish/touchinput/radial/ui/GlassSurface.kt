@@ -20,7 +20,12 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.ceil
 
 private object ShadowCache {
-    private val bitmapCache = mutableMapOf<String, ImageBitmap>()
+    private const val MAX_CACHE_ENTRIES = 5
+    private val bitmapCache = object : LinkedHashMap<String, ImageBitmap>(8, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, ImageBitmap>?): Boolean {
+            return size > MAX_CACHE_ENTRIES
+        }
+    }
 
     fun getOrCreate(
         width: Int,

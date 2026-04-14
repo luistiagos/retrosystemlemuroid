@@ -45,6 +45,8 @@ import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 import timber.log.Timber
 
 class LemuroidLibrary(
@@ -53,6 +55,9 @@ class LemuroidLibrary(
     private val gameMetadataProvider: Lazy<GameMetadataProvider>,
     private val biosManager: BiosManager,
 ) {
+    /** Global semaphore to bound concurrent metadata lookups across all batches. */
+    private val metadataSemaphore = Semaphore(MAX_CONCURRENT_METADATA)
+
     suspend fun indexLibrary() {
         val startedAtMs = System.currentTimeMillis()
 
@@ -105,11 +110,11 @@ class LemuroidLibrary(
         val existingEntries = entries.filterIsInstance<ScanEntry.GameFile>()
         handleExistingEntries(existingEntries, startedAtMs)
 
-        // Parallelize metadata lookups: each call does up to 5 sequential DB queries.
-        // coroutineScope ensures all async tasks complete (or fail fast) before continuing.
+        // Parallelize metadata lookups with bounded concurrency to avoid overwhelming
+        // low-RAM devices. Each call does up to 5 sequential DB queries.
         val newEntries = coroutineScope {
             entries.filterIsInstance<ScanEntry.File>()
-                .map { async { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs) } }
+                .map { async { metadataSemaphore.withPermit { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs) } } }
                 .awaitAll()
         }
 
@@ -322,14 +327,12 @@ class LemuroidLibrary(
 
     private suspend fun removeDeletedDataFiles(startedAtMs: Long) {
         Timber.d("Deleting data files from db before: $startedAtMs")
-        val dataFiles = retrogradedb.dataFileDao().selectByLastIndexedAtLessThan(startedAtMs)
-        retrogradedb.dataFileDao().delete(dataFiles)
+        retrogradedb.dataFileDao().deleteByLastIndexedAtLessThan(startedAtMs)
     }
 
     private suspend fun removeDeletedGames(startedAtMs: Long) {
         Timber.d("Deleting games from db before: $startedAtMs")
-        val games = retrogradedb.gameDao().selectByLastIndexedAtLessThan(startedAtMs)
-        retrogradedb.gameDao().delete(games)
+        retrogradedb.gameDao().deleteByLastIndexedAtLessThan(startedAtMs)
     }
 
     fun getGameFiles(
@@ -351,5 +354,6 @@ class LemuroidLibrary(
         // We batch database updates to avoid unnecessary UI updates.
         const val MAX_BUFFER_SIZE = 200
         const val MAX_TIME = 5000
+        const val MAX_CONCURRENT_METADATA = 4
     }
 }

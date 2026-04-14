@@ -2,8 +2,9 @@ package com.swordfish.lemuroid.app.mobile.shared.compose.ui.effects
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -13,8 +14,11 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
+import com.swordfish.lemuroid.app.utils.android.isTvDevice
 
+@OptIn(ExperimentalFoundationApi::class)
 fun Modifier.bounceClick(
     enabled: Boolean = true,
     hapticFeedbackEnabled: Boolean = true,
@@ -22,36 +26,47 @@ fun Modifier.bounceClick(
     onClick: () -> Unit,
     onLongClick: (() -> Unit)? = null,
 ) = composed {
-    var isPressed by remember { mutableStateOf(false) }
-    val scale by animateFloatAsState(
-        targetValue = if (isPressed) scaleDownPercentage else 1f,
-        animationSpec = spring(
-            dampingRatio = 0.5f,
-            stiffness = 500f
-        ),
-        label = "bounceAnim"
-    )
+    val isTv = LocalContext.current.isTvDevice()
 
-    val haptic = LocalHapticFeedback.current
+    if (isTv) {
+        // On TV/TV-box: simple click without animation or haptic feedback
+        this.combinedClickable(
+            enabled = enabled,
+            onClick = onClick,
+            onLongClick = onLongClick,
+        )
+    } else {
+        var isPressed by remember { mutableStateOf(false) }
+        val scale by animateFloatAsState(
+            targetValue = if (isPressed) scaleDownPercentage else 1f,
+            animationSpec = spring(
+                dampingRatio = 0.5f,
+                stiffness = 500f
+            ),
+            label = "bounceAnim"
+        )
 
-    this
-        .graphicsLayer {
-            scaleX = scale
-            scaleY = scale
-        }
-        .pointerInput(enabled, onLongClick) {
-            if (!enabled) return@pointerInput
-            detectTapGestures(
-                onPress = { _ ->
-                    isPressed = true
-                    if (hapticFeedbackEnabled) {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    }
-                    tryAwaitRelease()
-                    isPressed = false
-                },
-                onTap = { onClick() },
-                onLongPress = onLongClick?.let { longClick -> { _ -> longClick() } },
-            )
-        }
+        val haptic = LocalHapticFeedback.current
+
+        this
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
+            .pointerInput(enabled, onLongClick) {
+                if (!enabled) return@pointerInput
+                detectTapGestures(
+                    onPress = { _ ->
+                        isPressed = true
+                        if (hapticFeedbackEnabled) {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        }
+                        tryAwaitRelease()
+                        isPressed = false
+                    },
+                    onTap = { onClick() },
+                    onLongPress = onLongClick?.let { longClick -> { _ -> longClick() } },
+                )
+            }
+    }
 }

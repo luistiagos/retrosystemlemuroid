@@ -5,6 +5,7 @@ import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.storage.cache.CacheCleanerWork
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
+import timber.log.Timber
 
 class SettingsInteractor(
     private val context: Context,
@@ -25,6 +26,9 @@ class SettingsInteractor(
     private fun deleteDownloadedCores() {
         directoriesManager.getCoresDirectory()
             .listFiles()
-            ?.forEach { runCatching { it.deleteRecursively() } }
+            ?.forEach {
+                runCatching { it.deleteRecursively() }
+                    .onFailure { e -> Timber.w(e, "Failed to delete core: ${it.name}") }
+            }
     }
 }

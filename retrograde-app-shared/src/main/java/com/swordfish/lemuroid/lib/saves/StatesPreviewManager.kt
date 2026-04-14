@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
+import kotlin.math.max
 
 class StatesPreviewManager(private val directoriesManager: DirectoriesManager) {
     suspend fun getPreviewForSlot(
@@ -21,9 +22,40 @@ class StatesPreviewManager(private val directoriesManager: DirectoriesManager) {
         withContext(Dispatchers.IO) {
             val screenshotName = getSlotScreenshotName(game, index)
             val file = getPreviewFile(screenshotName, coreID.coreName)
-            val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-            ThumbnailUtils.extractThumbnail(bitmap, size, size)
+            if (!file.exists()) return@withContext null
+
+            // Phase 1: decode bounds only (zero memory allocation)
+            val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            BitmapFactory.decodeFile(file.absolutePath, options)
+            if (options.outWidth <= 0 || options.outHeight <= 0) return@withContext null
+
+            // Phase 2: calculate inSampleSize to decode close to target size
+            options.inSampleSize = calculateInSampleSize(options.outWidth, options.outHeight, size, size)
+            options.inJustDecodeBounds = false
+
+            // Phase 3: decode at reduced resolution
+            val bitmap = BitmapFactory.decodeFile(file.absolutePath, options) ?: return@withContext null
+            val thumbnail = ThumbnailUtils.extractThumbnail(bitmap, size, size)
+            if (thumbnail == null) {
+                bitmap.recycle()
+                return@withContext null
+            }
+            if (thumbnail !== bitmap) bitmap.recycle()
+            thumbnail
         }
+
+    private fun calculateInSampleSize(width: Int, height: Int, reqWidth: Int, reqHeight: Int): Int {
+        if (reqWidth <= 0 || reqHeight <= 0) return 1
+        var inSampleSize = 1
+        if (width > reqWidth || height > reqHeight) {
+            val halfWidth = width / 2
+            val halfHeight = height / 2
+            while (halfWidth / inSampleSize >= reqWidth && halfHeight / inSampleSize >= reqHeight) {
+                inSampleSize *= 2
+            }
+        }
+        return max(1, inSampleSize)
+    }
 
     suspend fun setPreviewForSlot(
         game: Game,

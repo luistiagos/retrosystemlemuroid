@@ -43,8 +43,6 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.FolderOpen
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
-import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 import com.swordfish.lemuroid.lib.preferences.LocaleHelper
 
 @Composable
@@ -68,29 +66,15 @@ fun SettingsScreen(
             .collectAsState(false)
             .value
 
-    val downloadRomsState =
-        viewModel.downloadRomsState
-            .collectAsState(DownloadRomsState.Idle)
-            .value
-
-    val streamingRomsState =
-        viewModel.streamingRomsState
-            .collectAsState(StreamingRomsState.Idle)
-            .value
-
     LemuroidSettingsPage(modifier = modifier) {
         RomsSettings(
             state = state,
             onChangeFolder = { viewModel.changeLocalStorageFolder() },
             indexingInProgress = indexingInProgress,
             scanInProgress = scanInProgress,
-            downloadRomsState = downloadRomsState,
-            onDownloadRomsClicked = { viewModel.downloadAndExtractRoms() },
             smartStorageUsingRemovable = state.smartStorageUsingRemovable,
             smartStorageUserOverride = state.smartStorageUserOverride,
             smartStorageVolumes = state.smartStorageVolumes,
-            streamingRomsState = streamingRomsState,
-            onRedownloadStreaming = { viewModel.redownloadStreamingRoms() },
         )
         GeneralSettings()
         InputSettings(navController = navController)
@@ -252,13 +236,9 @@ private fun RomsSettings(
     onChangeFolder: () -> Unit,
     indexingInProgress: Boolean,
     scanInProgress: Boolean,
-    downloadRomsState: DownloadRomsState,
-    onDownloadRomsClicked: () -> Unit,
     smartStorageUsingRemovable: Boolean,
     smartStorageUserOverride: Boolean,
     smartStorageVolumes: List<com.swordfish.lemuroid.lib.storage.SmartStoragePicker.VolumeInfo>,
-    streamingRomsState: StreamingRomsState,
-    onRedownloadStreaming: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -359,16 +339,6 @@ private fun RomsSettings(
             volumes = smartStorageVolumes,
         )
 
-        // Show "Download ROMs again" only when the streaming download has completed,
-        // so the user can erase and restart the download from Settings.
-        if (streamingRomsState is StreamingRomsState.Done) {
-            LemuroidSettingsMenuLink(
-                title = { Text(text = stringResource(id = R.string.settings_download_roms_title)) },
-                subtitle = { Text(text = stringResource(id = R.string.settings_download_roms_done_subtitle)) },
-                onClick = onRedownloadStreaming,
-            )
-        }
-
         val streamingPrefs = context.getSharedPreferences(
             "streaming_roms_prefs", android.content.Context.MODE_PRIVATE
         )
@@ -381,9 +351,6 @@ private fun RomsSettings(
             title = { Text(text = stringResource(id = R.string.settings_wifi_only_title)) },
             subtitle = { Text(text = stringResource(id = R.string.settings_wifi_only_subtitle)) },
         )
-
-        // Old batch-download settings entry hidden; streaming is now the main provider.
-        // LemuroidSettingsMenuLink(title = settings_download_roms_title, ...) removed from UI.
     }
 }
 

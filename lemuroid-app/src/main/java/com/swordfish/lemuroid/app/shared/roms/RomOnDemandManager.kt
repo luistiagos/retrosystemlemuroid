@@ -197,7 +197,7 @@ class RomOnDemandManager(
     suspend fun deleteRom(game: Game): Unit = withContext(Dispatchers.IO) {
         val destFile = resolveDestFile(game)
         if (destFile.exists()) {
-            FileOutputStream(destFile, false).close()
+            FileOutputStream(destFile, false).use { }
         }
         downloadedRomDao.deleteByFileName(game.fileName)
         LibraryIndexScheduler.scheduleLibrarySync(context)

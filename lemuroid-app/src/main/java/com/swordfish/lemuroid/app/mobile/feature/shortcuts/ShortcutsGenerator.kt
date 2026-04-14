@@ -53,7 +53,8 @@ class ShortcutsGenerator(
                 runCatching {
                     val coverUrl = game.coverFrontUrl ?: return@runCatching retrieveFallbackBitmap(game)
                     val response = thumbnailsApi.downloadThumbnail(coverUrl)
-                    BitmapFactory.decodeStream(response.body()).cropToSquare()
+                    val body = response.body() ?: return@runCatching retrieveFallbackBitmap(game)
+                    body.use { BitmapFactory.decodeStream(it).cropToSquare() }
                 }
             result.getOrElse { retrieveFallbackBitmap(game) }
         }

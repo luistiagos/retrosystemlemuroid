@@ -1,0 +1,242 @@
+﻿Reusing configuration cache.
+> Task :lemuroid-app:preBuild UP-TO-DATE
+> Task :retrograde-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :lemuroid-app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :retrograde-util:preBuild UP-TO-DATE
+> Task :lemuroid-app:preFreeBundleDebugBuild UP-TO-DATE
+> Task :retrograde-util:preDebugBuild UP-TO-DATE
+> Task :retrograde-app-shared:preBuild UP-TO-DATE
+> Task :retrograde-app-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :bundled-cores:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :bundled-cores:preBuild UP-TO-DATE
+> Task :lemuroid-app-ext-free:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :lemuroid-app-ext-free:preBuild UP-TO-DATE
+> Task :retrograde-app-shared:preDebugBuild UP-TO-DATE
+> Task :bundled-cores:preDebugBuild UP-TO-DATE
+> Task :lemuroid-touchinput:preBuild UP-TO-DATE
+> Task :lemuroid-touchinput:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :lemuroid-metadata-libretro-db:preBuild UP-TO-DATE
+> Task :lemuroid-touchinput:preDebugBuild UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :lemuroid-app:mergeFreeBundleDebugNativeDebugMetadata NO-SOURCE
+> Task :lemuroid-app-ext-free:preDebugBuild UP-TO-DATE
+> Task :lemuroid-app:generateSafeArgsFreeBundleDebug UP-TO-DATE
+> Task :lemuroid-app:generateFreeBundleDebugBuildConfig UP-TO-DATE
+> Task :retrograde-util:writeDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-touchinput:writeDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:preDebugBuild UP-TO-DATE
+> Task :retrograde-app-shared:writeDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-app-ext-free:writeDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-app-ext-free:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-app:generateFreeBundleDebugResValues UP-TO-DATE
+> Task :lemuroid-touchinput:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:writeDebugAarMetadata UP-TO-DATE
+> Task :bundled-cores:processDebugManifest UP-TO-DATE
+> Task :bundled-cores:writeDebugAarMetadata UP-TO-DATE
+> Task :bundled-cores:javaPreCompileDebug UP-TO-DATE
+> Task :lemuroid-app:createFreeBundleDebugCompatibleScreenManifests UP-TO-DATE
+> Task :bundled-cores:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-app:extractDeepLinksFreeBundleDebug UP-TO-DATE
+> Task :lemuroid-touchinput:generateDebugResources UP-TO-DATE
+> Task :retrograde-app-shared:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-app-ext-free:generateDebugResources UP-TO-DATE
+> Task :retrograde-util:generateDebugResValues UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:generateDebugResValues UP-TO-DATE
+> Task :bundled-cores:extractDeepLinksDebug UP-TO-DATE
+> Task :bundled-cores:generateDebugResources UP-TO-DATE
+> Task :lemuroid-app:generateFreeBundleDebugResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:processDebugManifest UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:processDebugManifest UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:extractDeepLinksDebug UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:generateDebugResources UP-TO-DATE
+> Task :bundled-cores:packageDebugResources UP-TO-DATE
+> Task :retrograde-app-shared:processDebugManifest UP-TO-DATE
+> Task :lemuroid-app:packageFreeBundleDebugResources UP-TO-DATE
+> Task :retrograde-app-shared:generateDebugResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:extractDeepLinksDebug UP-TO-DATE
+> Task :retrograde-util:generateDebugResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:packageDebugResources UP-TO-DATE
+> Task :bundled-cores:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-touchinput:extractDeepLinksDebug UP-TO-DATE
+> Task :lemuroid-touchinput:processDebugManifest UP-TO-DATE
+> Task :retrograde-app-shared:packageDebugResources UP-TO-DATE
+> Task :retrograde-util:extractDeepLinksDebug UP-TO-DATE
+> Task :retrograde-app-shared:extractDeepLinksDebug UP-TO-DATE
+> Task :lemuroid-app:parseFreeBundleDebugLocalResources UP-TO-DATE
+> Task :lemuroid-touchinput:packageDebugResources UP-TO-DATE
+> Task :bundled-cores:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:packageDebugResources UP-TO-DATE
+> Task :retrograde-util:processDebugManifest UP-TO-DATE
+> Task :retrograde-app-shared:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:javaPreCompileDebug UP-TO-DATE
+> Task :retrograde-util:javaPreCompileDebug UP-TO-DATE
+> Task :retrograde-util:packageDebugResources UP-TO-DATE
+> Task :retrograde-app-shared:javaPreCompileDebug UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-touchinput:javaPreCompileDebug UP-TO-DATE
+> Task :lemuroid-app-ext-free:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:compileDebugLibraryResources UP-TO-DATE
+> Task :retrograde-app-shared:parseDebugLocalResources UP-TO-DATE
+> Task :bundled-cores:generateDebugRFile UP-TO-DATE
+> Task :lemuroid-touchinput:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-touchinput:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:generateDebugRFile UP-TO-DATE
+> Task :lemuroid-app:javaPreCompileFreeBundleDebug UP-TO-DATE
+> Task :bundled-cores:compileDebugKotlin NO-SOURCE
+> Task :retrograde-app-shared:generateDebugRFile UP-TO-DATE
+> Task :lemuroid-app:mergeFreeBundleDebugShaders UP-TO-DATE
+> Task :lemuroid-touchinput:generateDebugRFile UP-TO-DATE
+> Task :bundled-cores:mergeDebugShaders UP-TO-DATE
+> Task :retrograde-util:compileDebugLibraryResources UP-TO-DATE
+> Task :lemuroid-app-ext-free:mergeDebugShaders UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:generateDebugRFile UP-TO-DATE
+> Task :retrograde-util:parseDebugLocalResources UP-TO-DATE
+> Task :lemuroid-app:compileFreeBundleDebugShaders NO-SOURCE
+> Task :lemuroid-metadata-libretro-db:javaPreCompileDebug UP-TO-DATE
+> Task :lemuroid-app:generateFreeBundleDebugAssets UP-TO-DATE
+> Task :lemuroid-app-ext-free:compileDebugShaders NO-SOURCE
+> Task :retrograde-app-shared:mergeDebugShaders UP-TO-DATE
+> Task :retrograde-util:generateDebugRFile UP-TO-DATE
+> Task :lemuroid-app-ext-free:generateDebugAssets UP-TO-DATE
+> Task :bundled-cores:compileDebugJavaWithJavac NO-SOURCE
+> Task :lemuroid-touchinput:mergeDebugShaders UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:mergeDebugShaders UP-TO-DATE
+> Task :bundled-cores:compileDebugShaders NO-SOURCE
+> Task :lemuroid-metadata-libretro-db:compileDebugShaders NO-SOURCE
+> Task :lemuroid-metadata-libretro-db:generateDebugAssets UP-TO-DATE
+> Task :retrograde-util:mergeDebugShaders UP-TO-DATE
+> Task :retrograde-util:compileDebugShaders NO-SOURCE
+> Task :lemuroid-metadata-libretro-db:packageDebugAssets UP-TO-DATE
+> Task :retrograde-util:generateDebugAssets UP-TO-DATE
+> Task :lemuroid-touchinput:compileDebugShaders NO-SOURCE
+> Task :bundled-cores:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :retrograde-util:packageDebugAssets UP-TO-DATE
+> Task :lemuroid-app-ext-free:packageDebugAssets UP-TO-DATE
+> Task :retrograde-app-shared:compileDebugShaders NO-SOURCE
+> Task :lemuroid-touchinput:generateDebugAssets UP-TO-DATE
+> Task :bundled-cores:processDebugJavaRes NO-SOURCE
+> Task :retrograde-app-shared:generateDebugAssets UP-TO-DATE
+> Task :bundled-cores:mergeDebugJniLibFolders UP-TO-DATE
+> Task :lemuroid-app-ext-free:mergeDebugJniLibFolders UP-TO-DATE
+> Task :lemuroid-touchinput:packageDebugAssets UP-TO-DATE
+> Task :bundled-cores:generateDebugAssets UP-TO-DATE
+> Task :bundled-cores:mergeDebugNativeLibs UP-TO-DATE
+> Task :bundled-cores:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:mergeDebugJniLibFolders UP-TO-DATE
+> Task :lemuroid-touchinput:mergeDebugJniLibFolders UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:mergeDebugNativeLibs NO-SOURCE
+> Task :lemuroid-app-ext-free:mergeDebugNativeLibs NO-SOURCE
+> Task :retrograde-app-shared:packageDebugAssets UP-TO-DATE
+> Task :bundled-cores:packageDebugAssets UP-TO-DATE
+> Task :lemuroid-app:mergeFreeBundleDebugJniLibFolders UP-TO-DATE
+> Task :lemuroid-app-ext-free:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :retrograde-app-shared:mergeDebugJniLibFolders UP-TO-DATE
+> Task :retrograde-util:mergeDebugJniLibFolders UP-TO-DATE
+> Task :lemuroid-app:validateSigningFreeBundleDebug UP-TO-DATE
+> Task :bundled-cores:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :retrograde-util:mergeDebugNativeLibs NO-SOURCE
+> Task :lemuroid-app:writeFreeBundleDebugAppMetadata UP-TO-DATE
+> Task :lemuroid-touchinput:mergeDebugNativeLibs NO-SOURCE
+> Task :lemuroid-app:writeFreeBundleDebugSigningConfigVersions UP-TO-DATE
+> Task :retrograde-app-shared:mergeDebugNativeLibs NO-SOURCE
+> Task :lemuroid-metadata-libretro-db:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :retrograde-app-shared:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :lemuroid-touchinput:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :retrograde-util:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :lemuroid-app:desugarFreeBundleDebugFileDependencies UP-TO-DATE
+> Task :lemuroid-app:checkFreeBundleDebugDuplicateClasses UP-TO-DATE
+> Task :lemuroid-app:mergeFreeBundleDebugAssets UP-TO-DATE
+> Task :lemuroid-app:compressFreeBundleDebugAssets UP-TO-DATE
+> Task :lemuroid-app:mergeFreeBundleDebugResources UP-TO-DATE
+> Task :lemuroid-app:checkFreeBundleDebugAarMetadata UP-TO-DATE
+> Task :lemuroid-app:mapFreeBundleDebugSourceSetPaths UP-TO-DATE
+> Task :lemuroid-app:mergeFreeBundleDebugNativeLibs UP-TO-DATE
+> Task :lemuroid-app:stripFreeBundleDebugDebugSymbols UP-TO-DATE
+> Task :lemuroid-app:processFreeBundleDebugMainManifest UP-TO-DATE
+> Task :retrograde-util:kaptGenerateStubsDebugKotlin UP-TO-DATE
+> Task :retrograde-util:kaptDebugKotlin SKIPPED
+> Task :lemuroid-app:processFreeBundleDebugManifest UP-TO-DATE
+> Task :lemuroid-app:processFreeBundleDebugManifestForPackage UP-TO-DATE
+> Task :retrograde-util:compileDebugKotlin UP-TO-DATE
+> Task :retrograde-util:compileDebugJavaWithJavac NO-SOURCE
+> Task :retrograde-util:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :retrograde-util:processDebugJavaRes UP-TO-DATE
+> Task :retrograde-util:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :lemuroid-app:processFreeBundleDebugResources UP-TO-DATE
+> Task :lemuroid-touchinput:kaptGenerateStubsDebugKotlin UP-TO-DATE
+> Task :lemuroid-app:mergeExtDexFreeBundleDebug UP-TO-DATE
+> Task :lemuroid-touchinput:kaptDebugKotlin UP-TO-DATE
+> Task :lemuroid-touchinput:compileDebugKotlin UP-TO-DATE
+> Task :lemuroid-touchinput:compileDebugJavaWithJavac NO-SOURCE
+> Task :lemuroid-touchinput:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lemuroid-touchinput:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :lemuroid-touchinput:processDebugJavaRes UP-TO-DATE
+
+> Task :retrograde-app-shared:kaptGenerateStubsDebugKotlin
+w: Kapt currently doesn't support language version 2.0+. Falling back to 1.9.
+
+> Task :retrograde-app-shared:kaptDebugKotlin
+warning: The following options were not recognized by any processor: '[room.schemaLocation, kapt.kotlin.generated]'
+
+> Task :retrograde-app-shared:compileDebugKotlin
+> Task :retrograde-app-shared:compileDebugJavaWithJavac UP-TO-DATE
+> Task :retrograde-app-shared:processDebugJavaRes UP-TO-DATE
+> Task :retrograde-app-shared:bundleLibRuntimeToJarDebug
+> Task :retrograde-app-shared:bundleLibCompileToJarDebug
+> Task :lemuroid-app-ext-free:kaptGenerateStubsDebugKotlin
+> Task :lemuroid-app-ext-free:kaptDebugKotlin SKIPPED
+> Task :lemuroid-app-ext-free:compileDebugKotlin
+> Task :lemuroid-app-ext-free:processDebugJavaRes UP-TO-DATE
+> Task :lemuroid-app-ext-free:compileDebugJavaWithJavac NO-SOURCE
+> Task :lemuroid-app-ext-free:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :lemuroid-app-ext-free:bundleLibRuntimeToJarDebug UP-TO-DATE
+
+> Task :lemuroid-metadata-libretro-db:kaptGenerateStubsDebugKotlin
+w: Kapt currently doesn't support language version 2.0+. Falling back to 1.9.
+
+> Task :lemuroid-metadata-libretro-db:kaptDebugKotlin
+[WARN] Incremental annotation processing requested, but support is disabled because the following processors are not incremental: dagger.internal.codegen.ComponentProcessor (DYNAMIC).
+
+> Task :lemuroid-metadata-libretro-db:compileDebugKotlin
+> Task :lemuroid-metadata-libretro-db:compileDebugJavaWithJavac UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:processDebugJavaRes UP-TO-DATE
+> Task :lemuroid-metadata-libretro-db:bundleLibRuntimeToJarDebug
+> Task :lemuroid-metadata-libretro-db:bundleLibCompileToJarDebug
+> Task :lemuroid-app:mergeLibDexFreeBundleDebug
+
+> Task :lemuroid-app:kaptGenerateStubsFreeBundleDebugKotlin
+w: Kapt currently doesn't support language version 2.0+. Falling back to 1.9.
+
+> Task :lemuroid-app:kaptFreeBundleDebugKotlin
+[WARN] Incremental annotation processing requested, but support is disabled because the following processors are not incremental: dagger.internal.codegen.ComponentProcessor (DYNAMIC).
+
+> Task :lemuroid-app:compileFreeBundleDebugKotlin
+
+> Task :lemuroid-app:compileFreeBundleDebugJavaWithJavac
+.\gradlew : Note: Some input files use or override a deprecated API.
+At line:1 char:1
++ .\gradlew :lemuroid-app:assembleFreeBundleDebug 2>&1 | Out-File -Enco ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Note: Some inpu...deprecated API. 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Note: Recompile with -Xlint:deprecation for details.
+Note: E:\projects\lemuroid\Lemuroid\lemuroid-app\build\generated\source\kapt\fr
+eeBundleDebug\com\swordfish\lemuroid\app\DaggerLemuroidApplicationComponent.jav
+a uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :lemuroid-app:processFreeBundleDebugJavaRes UP-TO-DATE
+> Task :lemuroid-app:mergeFreeBundleDebugJavaResource UP-TO-DATE
+> Task :lemuroid-app:dexBuilderFreeBundleDebug
+> Task :lemuroid-app:mergeFreeBundleDebugGlobalSynthetics UP-TO-DATE
+> Task :lemuroid-app:mergeProjectDexFreeBundleDebug
+> Task :lemuroid-app:packageFreeBundleDebug
+> Task :lemuroid-app:assembleFreeBundleDebug
+> Task :lemuroid-app:createFreeBundleDebugApkListingFileRedirect UP-TO-DATE
+
+BUILD SUCCESSFUL in 21m 31s
+157 actionable tasks: 20 executed, 137 up-to-date
+Configuration cache entry reused.

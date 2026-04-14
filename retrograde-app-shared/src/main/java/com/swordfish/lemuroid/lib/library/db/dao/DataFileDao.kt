@@ -14,6 +14,9 @@ interface DataFileDao {
     @Query("SELECT * FROM datafiles WHERE lastIndexedAt < :lastIndexedAt")
     suspend fun selectByLastIndexedAtLessThan(lastIndexedAt: Long): List<DataFile>
 
+    @Query("DELETE FROM datafiles WHERE lastIndexedAt < :lastIndexedAt")
+    suspend fun deleteByLastIndexedAtLessThan(lastIndexedAt: Long)
+
     @Insert
     fun insert(dataFile: DataFile)
 

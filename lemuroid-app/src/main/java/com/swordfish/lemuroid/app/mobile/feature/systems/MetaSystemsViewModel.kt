@@ -3,14 +3,17 @@ package com.swordfish.lemuroid.app.mobile.feature.systems
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.utils.android.isTvDevice
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.metaSystemID
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : ViewModel() {
     class Factory(
@@ -24,7 +27,12 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
 
     private val tvHiddenSystems = setOf(MetaSystemID.PSP, MetaSystemID.NINTENDO_3DS)
 
-    val availableMetaSystems: Flow<List<MetaSystemInfo>> =
+    // null = loading (Room query not yet emitted), emptyList = genuinely no systems.
+    // StateFlow with SharingStarted.Eagerly starts collecting immediately upon ViewModel
+    // creation — before the composable subscribes — so the first emission is ready by the
+    // time the first frame is rendered, eliminating the race condition that caused the
+    // systems screen to briefly show empty on slow/cold devices.
+    val availableMetaSystems: StateFlow<List<MetaSystemInfo>?> =
         retrogradeDb.gameDao()
             .selectSystemsWithCount()
             .map { systemCounts ->
@@ -42,4 +50,9 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
                     .sortedBy { it.getName(appContext) }
                     .toList()
             }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Eagerly,
+                initialValue = null,
+            )
 }

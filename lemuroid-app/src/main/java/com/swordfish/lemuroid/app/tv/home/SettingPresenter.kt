@@ -28,7 +28,10 @@ class SettingPresenter(private val cardSize: Int, private val cardPadding: Int) 
         return ViewHolder(cardView)
     }
 
-    override fun onUnbindViewHolder(viewHolder: Presenter.ViewHolder?) {}
+    override fun onUnbindViewHolder(viewHolder: Presenter.ViewHolder?) {
+        val vh = viewHolder as? ViewHolder ?: return
+        vh.mCardView.mainImage = null
+    }
 
     class ViewHolder(view: ImageCardView) : Presenter.ViewHolder(view) {
         val mCardView: ImageCardView = view

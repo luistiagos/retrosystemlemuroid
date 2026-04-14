@@ -53,8 +53,11 @@ class TVGamePadBindingFragment : GuidedStepSupportFragment() {
     private fun retrieveStorageRoots(): List<File> {
         return requireContext().getExternalFilesDirs(null)
             .filterNotNull()
-            .map { it.absolutePath }
-            .map { File(it.substring(0, it.indexOf("/Android/data/"))) }
+            .mapNotNull { dir ->
+                val path = dir.absolutePath
+                val idx = path.indexOf("/Android/data/")
+                if (idx >= 0) File(path.substring(0, idx)) else null
+            }
             .filter { it.exists() }
     }
 

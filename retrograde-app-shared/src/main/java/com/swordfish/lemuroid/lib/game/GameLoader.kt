@@ -160,6 +160,9 @@ class GameLoader(
         return processAbi in supportedOnlyArchitectures
     }
 
+    /** In-memory cache of core library paths to avoid repeated filesystem walks. */
+    private val corePathCache = java.util.concurrent.ConcurrentHashMap<String, String>()
+
     private fun findLibrary(
         context: Context,
         coreID: CoreID,
@@ -167,11 +170,24 @@ class GameLoader(
         val processAbi = com.swordfish.lemuroid.lib.util.AbiUtils.getProcessAbi(context)
         val libFileName = coreID.libretroFileName
 
+        // Fast path 0: check in-memory cache
+        corePathCache[libFileName]?.let { cachedPath ->
+            val cached = File(cachedPath)
+            if (cached.exists() && cached.length() > MIN_VALID_CORE_SIZE_BYTES &&
+                com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(cached, processAbi)
+            ) return cached
+            // Cached path stale — remove and continue searching
+            corePathCache.remove(libFileName)
+        }
+
         // Fast path 1: core bundled inside the APK (nativeLibraryDir)
         val bundled = File(context.applicationInfo.nativeLibraryDir, libFileName)
         if (bundled.exists() && bundled.length() > MIN_VALID_CORE_SIZE_BYTES &&
             com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(bundled, processAbi)
-        ) return bundled
+        ) {
+            corePathCache[libFileName] = bundled.absolutePath
+            return bundled
+        }
 
         // Fast path 2: downloaded core at its deterministic versioned path
         val downloaded = File(
@@ -180,10 +196,13 @@ class GameLoader(
         )
         if (downloaded.exists() && downloaded.length() > MIN_VALID_CORE_SIZE_BYTES &&
             com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(downloaded, processAbi)
-        ) return downloaded
+        ) {
+            corePathCache[libFileName] = downloaded.absolutePath
+            return downloaded
+        }
 
         // Slow path fallback: walk filesDir for cores in non-standard locations
-        return sequenceOf(
+        val found = sequenceOf(
             File(context.applicationInfo.nativeLibraryDir),
             context.filesDir,
         )
@@ -193,6 +212,11 @@ class GameLoader(
                     file.length() > MIN_VALID_CORE_SIZE_BYTES &&
                     com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(file, processAbi)
             }
+
+        if (found != null) {
+            corePathCache[libFileName] = found.absolutePath
+        }
+        return found
     }
 
     companion object {
