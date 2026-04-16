@@ -82,7 +82,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
          * cleared so populateFromEmbeddedCatalog runs again and creates the new placeholders
          * (existing files are never deleted — only missing ones are created).
          */
-        private const val CATALOG_VERSION = 3
+        private const val CATALOG_VERSION = 5
 
         /**
          * Root path inside the HuggingFace dataset repository.

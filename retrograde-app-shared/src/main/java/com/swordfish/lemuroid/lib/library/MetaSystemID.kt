@@ -116,7 +116,12 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
     WS(
         R.string.game_system_title_ws,
         R.drawable.game_system_ws,
-        listOf(SystemID.WS, SystemID.WSC),
+        listOf(SystemID.WS),
+    ),
+    WSC(
+        R.string.game_system_title_wsc,
+        R.drawable.game_system_wsc,
+        listOf(SystemID.WSC),
     ),
     DOS(
         R.string.game_system_title_dos,
@@ -241,7 +246,7 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.NGP -> NGP
                 SystemID.NGC -> NGC
                 SystemID.WS -> WS
-                SystemID.WSC -> WS
+                SystemID.WSC -> WSC
                 SystemID.NINTENDO_3DS -> NINTENDO_3DS
                 SystemID.MSX -> MSX
                 SystemID.MSX2 -> MSX2

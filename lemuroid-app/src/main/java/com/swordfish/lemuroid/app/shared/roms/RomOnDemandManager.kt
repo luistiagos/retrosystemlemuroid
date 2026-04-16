@@ -52,6 +52,8 @@ class RomOnDemandManager(
     companion object {
         private const val FIND_BY_FILE_ENDPOINT =
             "https://emuladores.pythonanywhere.com/find_by_file"
+        private const val HUGGINGFACE_BASE =
+            "https://huggingface.co/datasets/luistiagos/roms/resolve/main"
     }
 
     private val _pausedFlow = MutableStateFlow(false)
@@ -109,19 +111,19 @@ class RomOnDemandManager(
         val downloadUrl = try {
             resolveDownloadUrl(findUrl)
         } catch (e: IOException) {
-            Timber.e(e, "Lookup failed for ${game.fileName}: ${e.message}")
-            return@withContext DownloadResult.Failure(e.message ?: "Lookup error")
+            Timber.e(e, "Lookup failed for ${game.fileName}, will try HuggingFace fallback: ${e.message}")
+            null
         }
 
-        if (downloadUrl == null) {
-            Timber.d("ROM not found in catalog: ${game.fileName}")
-            return@withContext DownloadResult.NotFound(game.fileName)
+        val finalUrl = downloadUrl ?: run {
+            Timber.d("Endpoint returned no result, falling back to HuggingFace direct URL")
+            buildHuggingFaceUrl(endpointSystem, game.fileName)
         }
-        Timber.d("On-demand download URL for ${game.fileName}: $downloadUrl")
+        Timber.d("On-demand download URL for ${game.fileName}: $finalUrl")
 
         val destFile = resolveDestFile(game)
         try {
-            downloadToFile(downloadUrl, destFile, onProgress)
+            downloadToFile(finalUrl, destFile, onProgress)
         } catch (e: CancellationException) {
             // Restore 0-byte placeholder on cancellation so the game remains in the catalog.
             runCatching { FileOutputStream(destFile, false).close() }
@@ -190,6 +192,15 @@ class RomOnDemandManager(
             if (attempt < 3) delay(retryAfterMs ?: 60_000L)
         }
         throw IOException("Rate limited (429): please try again later")
+    }
+
+    /**
+     * Builds a direct HuggingFace download URL for the given system and filename.
+     * Used as a fallback when the pythonanywhere endpoint does not have the system indexed.
+     */
+    private fun buildHuggingFaceUrl(endpointSystem: String, fileName: String): String {
+        val encodedName = Uri.encode(fileName)
+        return "$HUGGINGFACE_BASE/$endpointSystem/$encodedName"
     }
 
     /**

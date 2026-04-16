@@ -1,4 +1,4 @@
-﻿3ds/100% Pascal Sensei - Kanpeki Paint Bombers (Japan).3ds
+3ds/100% Pascal Sensei - Kanpeki Paint Bombers (Japan).3ds
 3ds/12-Sai. Honto no Kimochi (Japan).3ds
 3ds/12-Sai. Koisuru Diary (Japan).3ds
 3ds/12-Sai. Torokeru Puzzle Futari no Harmony (Japan).3ds
@@ -25933,92 +25933,110 @@ ws/Yopparau Game for WonderWitch (World) (WonderWitch) (Unl).ws
 ws/Ze Sound Player + Sample Music (World) (WonderWitch) (Program) (Unl).ws
 ws/beatmania for WonderSwan (Japan).ws
 ws/otto (World) (WonderWitch) (Unl).ws
-wsc/Alchemist Marie & Elie - Futari no Atelier (Japan).zip
-wsc/Another Heaven - Memory of those Days (Japan).zip
-wsc/Arc the Lad - Kishin Fukkatsu (Japan).zip
-wsc/Battle Spirit - Digimon Frontier (Japan) (Rev 1).zip
-wsc/Blue Wing Blitz (Japan).zip
-wsc/Dark Eyes - Battle Gate (Japan).zip
-wsc/Dicing Knight. (Japan).zip
-wsc/Digimon - Anode Tamer & Cathode Tamer - Veedramon Version (Hong Kong).zip
-wsc/Digimon Adventure 02 - D1 Tamers (Japan) (Rev 1).zip
-wsc/Digimon Tamers - Battle Spirit (Japan, Korea) (En,Ja).zip
-wsc/Digimon Tamers - Brave Tamer (Japan) (Rev 1).zip
-wsc/Digimon Tamers - Digimon Medley (Japan) (Rev 1).zip
-wsc/Digital Monster - D-Project (Japan) (Rev 1).zip
-wsc/Digital Monster Card Game - Ver. WonderSwan Color (Japan) (Rev 2).zip
-wsc/Dragon Ball (Japan).zip
-wsc/Final Fantasy (Japan).zip
-wsc/Final Lap Special - GT & Formula Machine (Japan).zip
-wsc/Flash Koibito-kun (Japan).zip
-wsc/From TV Animation One Piece - Chopper no Daibouken (Japan).zip
-wsc/From TV Animation One Piece - Grand Battle Swan Colosseum (Japan).zip
-wsc/From TV Animation One Piece - Niji no Shima Densetsu (Japan).zip
-wsc/From TV Animation One Piece - Treasure Wars (Japan) (Rev 1).zip
-wsc/From TV Animation One Piece - Treasure Wars 2 - Buggy Land e Youkoso (Japan).zip
-wsc/Front Mission (Japan).zip
-wsc/Gekitou! Crash Gear Turbo - Gear Champion League (Japan).zip
-wsc/Gensou Maden Saiyuuki Retribution - Hi no Ataru Basho de (Japan) (Rev 2).zip
-wsc/Golden Axe (Japan).zip
-wsc/Gransta Chronicle (Japan).zip
-wsc/Guilty Gear Petit (Japan).zip
-wsc/GunPey EX (Japan).zip
-wsc/Hanjuku Hero - Ah, Sekai yo Hanjuku Nare...!! (Japan) (Rev 1).zip
-wsc/Hataraku Chocobo (Japan).zip
-wsc/Hunter X Hunter - Greed Island (Japan) (Rev 1).zip
-wsc/Hunter X Hunter - Michibikareshi Mono (Japan).zip
-wsc/Hunter X Hunter - Sorezore no Ketsui (Japan).zip
-wsc/Inuyasha - Fuuun Emaki (Japan).zip
-wsc/Inuyasha - Kagome no Sengoku Nikki (Japan).zip
-wsc/Judgement Silversword - Rebirth Edition (Japan) (Rev 4321).zip
-wsc/Kidou Senshi Gundam - Giren no Yabou - Tokubetsu Hen - Aoki Hoshi no Hasha (Japan).zip
-wsc/Kidou Senshi Gundam Seed (Japan).zip
-wsc/Kidou Senshi Gundam Vol. 1 - Side 7 (Japan).zip
-wsc/Kidou Senshi Gundam Vol. 2 - Jaburo (Japan).zip
-wsc/Kidou Senshi Gundam Vol. 3 - A Baoa Qu (Japan).zip
-wsc/Kinnikuman II-Sei - Choujin Seisenshi (Japan).zip
-wsc/Kinnikuman II-Sei - Dream Tag Match (Japan).zip
-wsc/Kurupara! (Japan) (Rev 1).zip
-wsc/Last Alive (Japan).zip
-wsc/Makai Toushi Sa-Ga (Japan).zip
-wsc/Meitantei Conan - Yuugure no Oujo (Japan).zip
-wsc/Memories Off - Festa (Japan).zip
-wsc/Mikeneko Holmes - Ghost Panic (Japan).zip
-wsc/Mr. Driller (Japan).zip
-wsc/Namco Super Wars (Japan).zip
-wsc/Naruto - Konoha Ninpouchou (Japan).zip
-wsc/Pocket no Naka no Doraemon (Japan).zip
-wsc/RUN=DIM - Return to Earth (Japan).zip
-wsc/Raku Jongg (Japan).zip
-wsc/Rhyme Rider Kerorican (Japan).zip
-wsc/Riviera - Yakusoku no Chi Riviera (Japan).zip
-wsc/Rockman EXE - N1 Battle (Japan) (Rev 1).zip
-wsc/Rockman EXE WS (Japan).zip
-wsc/Romancing Sa-Ga (Japan).zip
-wsc/SD Gundam - Operation U.C. (Japan).zip
-wsc/SD Gundam Eiyuu Den - Kishi Densetsu (Japan).zip
-wsc/SD Gundam G Generation - Gather Beat 2 (Japan).zip
-wsc/SD Gundam G Generation - Mono-Eye Gundams (Japan).zip
-wsc/Saint Seiya - Ougon Densetsu Hen - Perfect Edition (Japan).zip
-wsc/Senkaiden Ni - TV Animation Senkaiden Houshin Engi Yori (Japan).zip
-wsc/Shaman King - Asu e no Ishi (Japan) (Rev 1).zip
-wsc/Sorobang (Japan) (Rev 1).zip
-wsc/Star Hearts - Hoshi to Daichi no Shisha (Japan).zip
-wsc/Super Robot Taisen Compact 3 (Japan) (Rev 5).zip
-wsc/Super Robot Taisen Compact for WonderSwan Color (Japan).zip
-wsc/Terrors 2 (Japan).zip
-wsc/Tetris (Japan).zip
-wsc/Tonpuusou (Japan).zip
-wsc/Uchuu Senkan Yamato (Japan).zip
-wsc/Ultraman - Hikari no Kuni no Shisha (Japan).zip
-wsc/Wild Card (Japan).zip
-wsc/With You - Mitsumete Itai (Japan).zip
-wsc/Wizardry Scenario 1 - Proving Grounds of the Mad Overlord (Japan).zip
-wsc/Wonder Classic (Japan).zip
-wsc/X - Card of Fate (Japan).zip
-wsc/XI Little (Japan).zip
-wsc/[BIOS] WonderSwan Color Boot ROM (Japan) (En).zip
-wsc/mama Mitte (Japan) (Program).zip
+wsc/Alchemist Marie & Elie - Futari no Atelier (Japan).wsc
+wsc/Another Heaven - Memory of those Days (Japan).wsc
+wsc/Arc the Lad - Kishin Fukkatsu (Japan).wsc
+wsc/Battle Spirit - Digimon Frontier (Japan) (Rev 1).wsc
+wsc/Blue Wing Blitz (Japan).wsc
+wsc/Dark Eyes - Battle Gate (Japan).wsc
+wsc/Dicing Knight. (Japan).wsc
+wsc/Digimon - Anode Tamer & Cathode Tamer - Veedramon Version (Hong Kong).wsc
+wsc/Digimon - Anode Tamer & Cathode Tamer - Veedramon Version (Korea).wsc
+wsc/Digimon Adventure 02 - D1 Tamers (Japan) (Rev 1).wsc
+wsc/Digimon Adventure 02 - D1 Tamers (Japan).wsc
+wsc/Digimon Tamers - Battle Spirit (Japan, Korea) (En,Ja).wsc
+wsc/Digimon Tamers - Battle Spirit Ver. 1.5 (Japan).wsc
+wsc/Digimon Tamers - Brave Tamer (Japan) (Rev 1).wsc
+wsc/Digimon Tamers - Digimon Medley (Japan) (Rev 1).wsc
+wsc/Digimon Tamers - Digimon Medley (Japan).wsc
+wsc/Digital Monster - D-Project (Japan) (Rev 1).wsc
+wsc/Digital Monster - D-Project (Japan) (Rev 2).wsc
+wsc/Digital Monster - D-Project (Japan).wsc
+wsc/Digital Monster Card Game - Ver. WonderSwan Color (Japan) (Rev 2).wsc
+wsc/Digital Monster Card Game - Ver. WonderSwan Color (Japan).wsc
+wsc/Dokodemo Hamster 3 - Odekake Saffron (Japan) (Rev 2).wsc
+wsc/Dragon Ball (Japan).wsc
+wsc/Final Fantasy (Japan).wsc
+wsc/Final Fantasy II (Japan).wsc
+wsc/Final Fantasy IV (Japan).wsc
+wsc/Final Lap Special - GT & Formula Machine (Japan).wsc
+wsc/Flash Koibito-kun (Japan).wsc
+wsc/From TV Animation One Piece - Chopper no Daibouken (Japan).wsc
+wsc/From TV Animation One Piece - Grand Battle Swan Colosseum (Japan).wsc
+wsc/From TV Animation One Piece - Niji no Shima Densetsu (Japan).wsc
+wsc/From TV Animation One Piece - Treasure Wars (Japan) (Rev 1).wsc
+wsc/From TV Animation One Piece - Treasure Wars (Japan).wsc
+wsc/From TV Animation One Piece - Treasure Wars 2 - Buggy Land e Youkoso (Japan).wsc
+wsc/Front Mission (Japan).wsc
+wsc/Gekitou! Crash Gear Turbo - Gear Champion League (Japan).wsc
+wsc/Gensou Maden Saiyuuki Retribution - Hi no Ataru Basho de (Japan) (Rev 2).wsc
+wsc/Golden Axe (Japan).wsc
+wsc/Gransta Chronicle (Japan).wsc
+wsc/Guilty Gear Petit (Japan).wsc
+wsc/Guilty Gear Petit 2 (Japan).wsc
+wsc/GunPey EX (Japan).wsc
+wsc/Hanjuku Hero - Ah, Sekai yo Hanjuku Nare...!! (Japan) (Rev 1).wsc
+wsc/Hataraku Chocobo (Japan).wsc
+wsc/Hunter X Hunter - Greed Island (Japan) (Rev 1).wsc
+wsc/Hunter X Hunter - Greed Island (Japan).wsc
+wsc/Hunter X Hunter - Michibikareshi Mono (Japan).wsc
+wsc/Hunter X Hunter - Sorezore no Ketsui (Japan).wsc
+wsc/Inuyasha - Fuuun Emaki (Japan).wsc
+wsc/Inuyasha - Kagome no Sengoku Nikki (Japan).wsc
+wsc/Inuyasha - Kagome no Yume Nikki (Japan).wsc
+wsc/Judgement Silversword - Rebirth Edition (Japan) (Rev 4321).wsc
+wsc/Judgement Silversword - Rebirth Edition (Japan) (Rev 5C21).wsc
+wsc/Kidou Senshi Gundam - Giren no Yabou - Tokubetsu Hen - Aoki Hoshi no Hasha (Japan).wsc
+wsc/Kidou Senshi Gundam Seed (Japan).wsc
+wsc/Kidou Senshi Gundam Vol. 1 - Side 7 (Japan).wsc
+wsc/Kidou Senshi Gundam Vol. 2 - Jaburo (Japan).wsc
+wsc/Kidou Senshi Gundam Vol. 3 - A Baoa Qu (Japan).wsc
+wsc/Kinnikuman II-Sei - Choujin Seisenshi (Japan).wsc
+wsc/Kinnikuman II-Sei - Dream Tag Match (Japan).wsc
+wsc/Kurupara! (Japan) (Rev 1).wsc
+wsc/Last Alive (Japan).wsc
+wsc/Makai Toushi Sa-Ga (Japan).wsc
+wsc/mama Mitte (Japan) (Program).wsc
+wsc/Meitantei Conan - Yuugure no Oujo (Japan).wsc
+wsc/Memories Off - Festa (Japan).wsc
+wsc/Mikeneko Holmes - Ghost Panic (Japan).wsc
+wsc/Mr. Driller (Japan).wsc
+wsc/Namco Super Wars (Japan).wsc
+wsc/Naruto - Konoha Ninpouchou (Japan).wsc
+wsc/Pocket no Naka no Doraemon (Japan).wsc
+wsc/Raku Jongg (Japan).wsc
+wsc/Rhyme Rider Kerorican (Japan).wsc
+wsc/Riviera - Yakusoku no Chi Riviera (Japan).wsc
+wsc/Rockman EXE - N1 Battle (Japan) (Rev 1).wsc
+wsc/Rockman EXE WS (Japan).wsc
+wsc/Romancing Sa-Ga (Japan).wsc
+wsc/RUN=DIM - Return to Earth (Japan).wsc
+wsc/Saint Seiya - Ougon Densetsu Hen - Perfect Edition (Japan).wsc
+wsc/SD Gundam - Operation U.C. (Japan).wsc
+wsc/SD Gundam Eiyuu Den - Kishi Densetsu (Japan).wsc
+wsc/SD Gundam Eiyuu Den - Musha Densetsu (Japan).wsc
+wsc/SD Gundam G Generation - Gather Beat 2 (Japan).wsc
+wsc/SD Gundam G Generation - Mono-Eye Gundams (Japan).wsc
+wsc/Senkaiden Ni - TV Animation Senkaiden Houshin Engi Yori (Japan).wsc
+wsc/Shaman King - Asu e no Ishi (Japan) (Rev 1).wsc
+wsc/Shaman King - Asu e no Ishi (Japan).wsc
+wsc/Sorobang (Japan) (Rev 1).wsc
+wsc/Star Hearts - Hoshi to Daichi no Shisha - Taikenban (Japan) (Not For Sale).wsc
+wsc/Star Hearts - Hoshi to Daichi no Shisha (Japan).wsc
+wsc/Super Robot Taisen Compact 3 (Japan) (Rev 5).wsc
+wsc/Super Robot Taisen Compact 3 (Japan) (Rev 6).wsc
+wsc/Super Robot Taisen Compact for WonderSwan Color (Japan).wsc
+wsc/Terrors 2 (Japan).wsc
+wsc/Tetris (Japan).wsc
+wsc/Tonpuusou (Japan).wsc
+wsc/Uchuu Senkan Yamato (Japan).wsc
+wsc/Ultraman - Hikari no Kuni no Shisha (Japan).wsc
+wsc/Wild Card (Japan).wsc
+wsc/With You - Mitsumete Itai (Japan).wsc
+wsc/Wizardry Scenario 1 - Proving Grounds of the Mad Overlord (Japan).wsc
+wsc/Wonder Classic (Japan).wsc
+wsc/X - Card of Fate (Japan).wsc
+wsc/XI Little (Japan).wsc
 msx/10-Yard Fight (Japan) (Alt 1).rom
 msx/10-Yard Fight (Japan).rom
 msx/1942 (Japan) (Alt 1).rom

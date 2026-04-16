@@ -1,7 +1,7 @@
 # Lemuroid — Project Specification
 
 > **Spec-Driven Context Document** — update this file whenever you change architecture, add features, or modify data flows.  
-> Last updated: 2026-04-13
+> Last updated: 2026-04-16
 
 ---
 
@@ -15,7 +15,7 @@
 - **App package (debug)**: `com.swordfish.lemuroid.debug`
 - **App package (release)**: `com.swordfish.lemuroid`
 - **Build system**: Gradle Kotlin DSL (`build.gradle.kts` throughout)
-- **Build command (dev)**: `./gradlew assembleFreeDynamicDebug`
+- **Build command (dev)**: `./gradlew installFreeBundleDebug`
 
 ---
 
@@ -37,9 +37,11 @@
 
 ---
 
-## 3. Supported Systems (28)
+## 3. Supported Systems (43)
 
 Defined in `retrograde-app-shared/.../library/SystemID.kt`:
+
+### 3.1 Console & Handheld Systems (29)
 
 | SystemID enum | DB name (`id`) | System |
 |---------------|---------------|--------|
@@ -55,12 +57,10 @@ Defined in `retrograde-app-shared/.../library/SystemID.kt`:
 | `PSP` | `psp` | PlayStation Portable |
 | `NDS` | `nds` | Nintendo DS |
 | `GG` | `gg` | Sega Game Gear |
-| `ATARI2600` | `a26` | Atari 2600 |
-| `ATARI7800` | `a78` | Atari 7800 |
+| `ATARI2600` | `atari2600` | Atari 2600 |
+| `ATARI7800` | `atari7800` | Atari 7800 |
+| `ATARI5200` | `atari5200` | Atari 5200 |
 | `PSX` | `psx` | PlayStation 1 |
-| `FBNEO` | `fbneo` | FinalBurn Neo (arcade) |
-| `NEOGEO` | `neogeo` | SNK Neo Geo |
-| `MAME2003PLUS` | `mame2003plus` | MAME 2003-Plus (arcade) |
 | `PC_ENGINE` | `pce` | PC Engine / TurboGrafx-16 |
 | `LYNX` | `lynx` | Atari Lynx |
 | `NGP` | `ngp` | Neo Geo Pocket |
@@ -71,6 +71,29 @@ Defined in `retrograde-app-shared/.../library/SystemID.kt`:
 | `NINTENDO_3DS` | `3ds` | Nintendo 3DS (Citra) |
 | `MSX` | `msx` | MSX |
 | `MSX2` | `msx2` | MSX2 |
+| `NEOGEO` | `neogeo` | SNK Neo Geo |
+| `FBNEO` | `fbneo` | FinalBurn Neo (arcade genérico) |
+| `MAME2003PLUS` | `mame2003plus` | MAME 2003-Plus (arcade) |
+
+### 3.2 Arcade Board Systems (14)
+
+All use `CoreID.FBNEO` (`libfbneo_libretro_android.so`) and share the same endpoint `fbneo`.
+
+| SystemID enum | DB name (`id`) | Board / Manufacturer |
+|---------------|---------------|---------------------|
+| `CPS1` | `cps1` | Capcom CPS-1 |
+| `CPS2` | `cps2` | Capcom CPS-2 |
+| `CPS3` | `cps3` | Capcom CPS-3 |
+| `DATAEAST` | `dataeast` | Data East |
+| `GALAXIAN` | `galaxian` | Namco Galaxian |
+| `TOAPLAN` | `toaplan` | Toaplan |
+| `TAITO` | `taito` | Taito |
+| `PSIKYO` | `psikyo` | Psikyo |
+| `PGM` | `pgm` | IGS PGM |
+| `KANEKO` | `kaneko` | Kaneko |
+| `CAVE` | `cave` | Cave |
+| `TECHNOS` | `technos` | Technos Japan |
+| `SETA` | `seta` | Seta |
 
 ---
 
@@ -242,23 +265,61 @@ sealed class DownloadResult {
 
 **File**: `lemuroid-app/.../roms/RomSystemMapper.kt`
 
-Maps Lemuroid `systemId` (or HF folder alias) → pythonanywhere endpoint system name. 43 entries:
+Maps Lemuroid `systemId` (or HF folder alias) → pythonanywhere endpoint system name. Full mapping:
 
 ```
+// Atari
+atari2600, a26       → atari2600
+atari7800, a78       → atari7800
+atari5200, a52       → atari5200
+lynx                 → lynx
+
+// Nintendo
+nes                  → nes
+snes                 → snes
+gb                   → gb
+gbc                  → gbc
+gba                  → gba
+n64                  → n64
+nds                  → nds
+3ds                  → 3ds
+
+// Sega
 md, megadrive        → megadrive
 scd, megacd          → megacd
-sms, mastersystem    → mastersystem
-gg, gamegear         → gamegear
-pce, pcengine        → pcengine
+sms                  → mastersystem
+gg                   → gamegear
+
+// Sony
+psx                  → psx
+psp                  → psp
+
+// NEC
+pce                  → pcengine
+
+// SNK
 ngp                  → ngp
-ngc, neogeocd        → neogeocd
+ngc                  → neogeocd
+
+// Bandai
+ws                   → wswan
+wsc                  → wswnc
+
+// Arcade boards (all → fbneo endpoint)
 fbneo                → fbneo
 neogeo               → neogeo
+cps1, cps2, cps3     → fbneo
+dataeast, galaxian   → fbneo
+toaplan, taito       → fbneo
+psikyo, pgm          → fbneo
+kaneko, cave         → fbneo
+technos, seta        → fbneo
 mame2003plus, arcade → mame2003plus
-a26, atari2600       → atari2600
-a78, atari7800       → atari7800
-msx, msx2            → msx
-(all others map as-is: nes, snes, gba, gbc, gb, n64, psx, psp, nds, lynx, ws, wsc, dos, 3ds)
+
+// Microsoft / NEC
+dos                  → dos
+msx                  → msx
+msx2                 → msx2
 ```
 
 ---
@@ -398,6 +459,12 @@ Defined in `MainNavigationRoutes` enum:
 | `SETTINGS_CORES_SELECTION` | `settings/cores` | ❌ |
 | `SETTINGS_INPUT_DEVICES` | `settings/inputdevices` | ❌ |
 | `SETTINGS_SAVE_SYNC` | `settings/savesync` | ❌ |
+| `SETTINGS_TRANSFER` | `settings/transfer` | ❌ |
+| `SETTINGS_TRANSFER_EXPORT` | `settings/transfer/export` | ❌ (parent=TRANSFER) |
+| `SETTINGS_TRANSFER_IMPORT` | `settings/transfer/import` | ❌ (parent=TRANSFER) |
+| `SETTINGS_ROMSET` | `settings/romset` | ❌ |
+| `SETTINGS_ROMSET_EXPORT` | `settings/romset/export` | ❌ (parent=ROMSET) |
+| `SETTINGS_ROMSET_IMPORT` | `settings/romset/import` | ❌ (parent=ROMSET) |
 
 ---
 
@@ -436,27 +503,32 @@ Defined in `MainNavigationRoutes` enum:
 - Validates ELF ABI compatibility (`AbiUtils.isElfCompatible`) before installing
 - Deletes outdated cores from previous version directories
 
-**17 cores**:
+**22 cores** (defined in `CoreID.kt`):
 
-| Core lib name | Systems |
-|---------------|---------|
-| `libfbneo_libretro_android.so` | FBNeo, MAME2003Plus |
-| `libcitra_libretro_android.so` | Nintendo 3DS |
-| `libgambatte_libretro_android.so` | GB, GBC |
-| `libmgba_libretro_android.so` | GBA |
-| `libfceumm_libretro_android.so` | NES |
-| `libgenesis_plus_gx_libretro_android.so` | Genesis, SegaCD, SMS, GG |
-| `libhandy_libretro_android.so` | Lynx |
-| `libmednafen_pce_fast_libretro_android.so` | PC Engine |
-| `libmednafen_ngp_libretro_android.so` | NGP, WSC |
-| `libmednafen_wswan_libretro_android.so` | WS |
-| `libmednafen_vb_libretro_android.so` | Virtual Boy |
-| `libmelonds_libretro_android.so` | NDS |
-| `libmupen64plus_next_gles3_libretro_android.so` | N64 |
-| `libpcsx_rearmed_libretro_android.so` | PSX |
-| `libsnes9x_libretro_android.so` | SNES |
-| `libstella_libretro_android.so` | Atari 2600 |
-| `libprosystem_libretro_android.so` | Atari 7800 |
+| CoreID | Core lib name | Systems |
+|--------|---------------|---------|
+| `STELLA` | `libstella_libretro_android.so` | Atari 2600 |
+| `PROSYSTEM` | `libprosystem_libretro_android.so` | Atari 7800 |
+| `A5200` | `liba5200_libretro_android.so` | Atari 5200 |
+| `FCEUMM` | `libfceumm_libretro_android.so` | NES |
+| `SNES9X` | `libsnes9x_libretro_android.so` | SNES |
+| `GAMBATTE` | `libgambatte_libretro_android.so` | GB, GBC |
+| `MGBA` | `libmgba_libretro_android.so` | GBA |
+| `MUPEN64_PLUS_NEXT` | `libmupen64plus_next_gles3_libretro_android.so` | N64 |
+| `GENESIS_PLUS_GX` | `libgenesis_plus_gx_libretro_android.so` | Genesis, SegaCD, SMS, GG |
+| `HANDY` | `libhandy_libretro_android.so` | Lynx |
+| `MEDNAFEN_PCE_FAST` | `libmednafen_pce_fast_libretro_android.so` | PC Engine |
+| `MEDNAFEN_NGP` | `libmednafen_ngp_libretro_android.so` | NGP, NGC |
+| `MEDNAFEN_WSWAN` | `libmednafen_wswan_libretro_android.so` | WS, WSC |
+| `PCSX_REARMED` | `libpcsx_rearmed_libretro_android.so` | PSX |
+| `PPSSPP` | `libppsspp_libretro_android.so` | PSP |
+| `DESMUME` | `libdesmume_libretro_android.so` | NDS (deprecated) |
+| `MELONDS` | `libmelonds_libretro_android.so` | NDS |
+| `CITRA` | `libcitra_libretro_android.so` | Nintendo 3DS |
+| `FBNEO` | `libfbneo_libretro_android.so` | FBNeo, Neo Geo, CPS1/2/3, e todos os boards arcade |
+| `MAME2003PLUS` | `libmame2003_plus_libretro_android.so` | MAME2003Plus |
+| `DOSBOX_PURE` | `libdosbox_pure_libretro_android.so` | DOS |
+| `FMSX` | `libfmsx_libretro_android.so` | MSX, MSX2 |
 
 ---
 
@@ -560,6 +632,16 @@ Dimension: cores      → bundle | dynamic
 | `GameSystem.kt` | `retrograde-app-shared/.../library/GameSystem.kt` |
 | `MetaSystemID.kt` | `retrograde-app-shared/.../library/MetaSystemID.kt` |
 | `ShaderChooser.kt` | `lemuroid-app/.../shared/game/ShaderChooser.kt` |
+| `CoreID.kt` | `retrograde-app-shared/.../library/CoreID.kt` |
+| `HeavySystemFilter.kt` | `retrograde-app-shared/.../library/HeavySystemFilter.kt` |
+| `TransferViewModel.kt` | `lemuroid-app/.../settings/transfer/TransferViewModel.kt` |
+| `GameExportManager.kt` | `retrograde-app-shared/.../transfer/GameExportManager.kt` |
+| `GameImportManager.kt` | `retrograde-app-shared/.../transfer/GameImportManager.kt` |
+| `TransferManifest.kt` | `retrograde-app-shared/.../transfer/TransferManifest.kt` |
+| `RomsetViewModel.kt` | `lemuroid-app/.../settings/romset/RomsetViewModel.kt` |
+| `RomsetExportManager.kt` | `retrograde-app-shared/.../romset/RomsetExportManager.kt` |
+| `RomsetImportManager.kt` | `retrograde-app-shared/.../romset/RomsetImportManager.kt` |
+| `catalog_manifest.txt` | `lemuroid-app/src/main/assets/catalog_manifest.txt` |
 ---
 
 ## 17. Embedded BIOS Files
@@ -631,3 +713,207 @@ Covered by Migration 12→13 (`Migrations.kt`). Includes: Metal Slug series, Kin
 **BIOS files** (all embedded): `MSX.ROM`, `MSX2.ROM`, `MSX2P.ROM`, `MSXDOS2.ROM`.  
 **RomSystemMapper**: both `msx` and `msx2` map to endpoint system `"msx"`.  
 **HuggingFace folder**: `roms/msx/`
+
+---
+
+## 20. Transfer Games (Transferir Jogos)
+
+**Added**: 2026 sessions  
+**Access**: Settings → Transfer Games (⚙ → Transferir jogos)  
+**Routes**: `SETTINGS_TRANSFER` → `SETTINGS_TRANSFER_EXPORT` / `SETTINGS_TRANSFER_IMPORT`
+
+### Purpose
+
+Export/import selected games (ROMs + saves + states + optional APK) via SD card or USB drive for offline device-to-device transfer.
+
+### Archive Format
+
+Directory structure on external media:
+```
+lemuroid-export/
+├── manifest.json           ← metadata (version, game list, APK flag)
+├── roms/                   ← ROM files
+├── saves/                  ← SRAM saves (.srm)
+├── states/{coreName}/      ← Emulator save states
+├── state-previews/{coreName}/ ← State preview images (.png)
+└── app/                    ← Optional: lemuroid-v{version}.apk
+```
+
+### Manifest (`manifest.json`)
+
+**Class**: `TransferManifest` (`retrograde-app-shared/.../transfer/TransferManifest.kt`)
+
+```kotlin
+@Serializable
+data class TransferManifest(
+    val version: Int = 1,
+    val exportDate: Long,
+    val appVersion: String,
+    val appVersionCode: Int,
+    val includesApk: Boolean = false,
+    val apkFileName: String? = null,
+    val games: List<TransferGameEntry>,
+)
+
+@Serializable
+data class TransferGameEntry(
+    val fileName: String,
+    val title: String,
+    val systemId: String,
+    val developer: String? = null,
+    val coverFrontUrl: String? = null,
+    val isFavorite: Boolean = false,
+    val dataFiles: List<TransferDataFileEntry> = emptyList(),
+)
+```
+
+### Export Flow
+
+1. User selects games (checkbox list) + toggle "Include APK"
+2. Taps "Choose folder and export" → SAF folder picker
+3. `GameExportManager.export()`:
+   - Creates `lemuroid-export/` dir structure
+   - Copies ROMs, saves, states, state previews
+   - Optionally copies APK (`lemuroid-v{version}.apk`)
+   - Writes `manifest.json`
+4. Progress phases: `COPYING_APK → COPYING_ROMS → COPYING_SAVES → COPYING_STATES → WRITING_MANIFEST`
+
+### Import Flow
+
+1. On screen load, `GameImportManager.findManifestOnVolumes()` searches for `lemuroid-export/manifest.json` on external volumes
+2. Shows manifest info (game count, source version)
+3. User taps "Import all"
+4. `GameImportManager.import()`: copies ROMs, saves, states → triggers library re-scan
+
+### Key Classes
+
+| Class | File | Purpose |
+|-------|------|---------|
+| `TransferViewModel` | `lemuroid-app/.../settings/transfer/TransferViewModel.kt` | UI state + orchestration |
+| `GameExportManager` | `retrograde-app-shared/.../transfer/GameExportManager.kt` | Export logic |
+| `GameImportManager` | `retrograde-app-shared/.../transfer/GameImportManager.kt` | Import logic + volume discovery |
+| `TransferManifest` | `retrograde-app-shared/.../transfer/TransferManifest.kt` | Manifest data class |
+| `TransferProgress` | `retrograde-app-shared/.../transfer/TransferProgress.kt` | Progress sealed class |
+| `TransferSettingsScreen` | `lemuroid-app/.../settings/transfer/TransferSettingsScreen.kt` | Menu (Export/Import links) |
+| `TransferExportScreen` | `lemuroid-app/.../settings/transfer/TransferExportScreen.kt` | Game selection + export progress |
+| `TransferImportScreen` | `lemuroid-app/.../settings/transfer/TransferImportScreen.kt` | Import detection + progress |
+
+### Progress States
+
+```kotlin
+sealed class TransferProgress {
+    object Idle
+    data class InProgress(currentIndex, totalCount, currentGameName, phase: Phase)
+    data class Completed(gamesExported: Int)
+    data class Error(message: String)
+}
+```
+
+---
+
+## 21. ROM Set (Romset)
+
+**Added**: 2026 sessions  
+**Access**: Settings → ROM Set (⚙ → ROM Set)  
+**Routes**: `SETTINGS_ROMSET` → `SETTINGS_ROMSET_EXPORT` / `SETTINGS_ROMSET_IMPORT`
+
+### Purpose
+
+Bulk export/import **only ROM files** as a single ZIP. No saves, states, or metadata — just ROMs organized by system folder. Useful for backup and migration.
+
+### ZIP Format
+
+```
+romset-{appVersion}.zip
+├── snes/
+│   ├── game1.sfc
+│   └── game2.sfc
+├── nes/
+│   ├── game1.nes
+│   └── game2.nes
+└── ... (preserves system folder structure from roms directory)
+```
+
+### Export Flow
+
+1. UI shows estimated total size of all downloaded ROMs
+2. User taps "Choose folder and export" → SAF folder picker
+3. `RomsetExportManager.export()`:
+   - Gets downloaded ROM filenames from `downloadedRomDao` (authoritative)
+   - Falls back to filesystem walk for locally-added ROMs
+   - Creates single `romset-{version}.zip` preserving folder structure
+4. Progress phase: `COMPRESSING`
+
+### Import Flow
+
+1. `RomsetImportManager.findRomsetOnVolumes()` searches all volumes for `.zip` files at volume root
+2. Shows list of discovered ZIPs (clickable)
+3. User can also tap "Pick a ZIP file..." for manual SAF file picker
+4. `RomsetImportManager.importFromFile()`:
+   - Two passes: count entries, then extract
+   - Skips files that already exist with content (dedup)
+   - Triggers library re-scan
+5. Progress phase: `EXTRACTING`
+
+### Key Classes
+
+| Class | File | Purpose |
+|-------|------|---------|
+| `RomsetViewModel` | `lemuroid-app/.../settings/romset/RomsetViewModel.kt` | UI state + orchestration |
+| `RomsetExportManager` | `retrograde-app-shared/.../romset/RomsetExportManager.kt` | ZIP creation |
+| `RomsetImportManager` | `retrograde-app-shared/.../romset/RomsetImportManager.kt` | ZIP extraction + volume discovery |
+| `RomsetProgress` | `retrograde-app-shared/.../romset/RomsetProgress.kt` | Progress sealed class |
+| `RomsetSettingsScreen` | `lemuroid-app/.../settings/romset/RomsetSettingsScreen.kt` | Menu (Export/Import links) |
+| `RomsetExportScreen` | `lemuroid-app/.../settings/romset/RomsetExportScreen.kt` | Size estimate + export |
+| `RomsetImportScreen` | `lemuroid-app/.../settings/romset/RomsetImportScreen.kt` | ZIP list + picker + import |
+
+### Difference from Transfer Games
+
+| Feature | Transfer Games | ROM Set |
+|---------|---------------|---------|
+| **Content** | ROMs + saves + states + APK | ROMs only |
+| **Format** | Directory (`lemuroid-export/`) | Single ZIP (`romset-{v}.zip`) |
+| **Selection** | Per-game checkboxes | All downloaded |
+| **Metadata** | `manifest.json` with titles/covers | None |
+| **Use case** | Device-to-device migration | Backup/restore ROM collection |
+
+---
+
+## 22. Catalog Manifest (catalog_manifest.txt)
+
+**File**: `lemuroid-app/src/main/assets/catalog_manifest.txt`  
+**Purpose**: Embedded list of all available ROM paths, allowing the app to display the full catalog without network access on first use.
+
+### Format
+
+Newline-delimited relative paths: `{systemFolder}/{romFilename}`:
+```
+3ds/Game Title (Region).3ds
+snes/Super Mario World (USA).sfc
+wsc/Digimon Tamers (Japan).zip
+arcade/metalslug.zip
+```
+
+### Flow
+
+1. **App startup** → `StreamingRomsManager.doStreamingDownload()`
+2. **Load manifest** → `loadCatalogFromAssets()` reads `catalog_manifest.txt`
+3. **Filter** → `HeavySystemFilter.excludedCatalogPrefixes()` removes heavy systems for weak devices
+4. **Create placeholders** → `populateFromEmbeddedCatalog()` creates 0-byte files in `romsDir/{system}/{rom}`
+5. **Index** → Every 500 files triggers `LibraryIndexScheduler.sync()`
+6. **System detection** → `LibretroDBMetadataProvider.parentContainsSystem()` matches folder segment to `SystemID.dbname`
+7. **DB populated** → `games` table gets records with `systemId` derived from folder name
+8. **UI updates** → `GameDao.selectSystemsWithCount()` returns systems with count > 0
+
+### System Folder → systemId Mapping
+
+The folder name in the manifest path IS the `SystemID.dbname` (exact match by path segment):
+```
+wsc/game.zip     → systemId = "wsc"     → MetaSystemID.WSC
+snes/game.sfc    → systemId = "snes"    → MetaSystemID.SNES
+arcade/game.zip  → systemId = "mame2003plus" (via scoring heuristic)
+```
+
+### Catalog Version
+
+`StreamingRomsManager` tracks catalog version in `PREF_CATALOG_VERSION`. Bumped when manifest is updated with new systems/entries, forcing re-population even if previous download was marked done.
