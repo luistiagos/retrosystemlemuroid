@@ -143,7 +143,7 @@ class GameViewModelRetroGameView(
                         sideEffects.requestFailureFinish(message)
                     }
                 }
-                .debounce(200)
+                .debounce(50)
                 .collect { loadingState ->
                     gameState.value =
                         if (loadingState is GameLoader.LoadingState.Ready) {
@@ -257,7 +257,7 @@ class GameViewModelRetroGameView(
                     hdMode,
                     hdModeQuality,
                     screenFilter,
-                    GameSystem.findById(gameData.game.systemId),
+                    GameSystem.findByIdOrNull(gameData.game.systemId) ?: GameSystem.findById("snes"),
                 )
             preferLowLatencyAudio = lowLatencyAudio
             rumbleEventsEnabled = requestRumble

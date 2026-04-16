@@ -48,8 +48,8 @@ fun SaveSyncSettingsScreen(
                     )
                 },
                 subtitle = { Text(text = saveSyncState.configInfo) },
-                enabled = !isSyncInProgress,
-                onClick = { context.startActivity(Intent(context, saveSyncState.settingsActivity)) },
+                enabled = !isSyncInProgress && saveSyncState.settingsActivity != null,
+                onClick = { saveSyncState.settingsActivity?.let { context.startActivity(Intent(context, it)) } },
             )
             LemuroidSettingsSwitch(
                 state = booleanPreferenceState(R.string.pref_key_save_sync_enable, default = false),

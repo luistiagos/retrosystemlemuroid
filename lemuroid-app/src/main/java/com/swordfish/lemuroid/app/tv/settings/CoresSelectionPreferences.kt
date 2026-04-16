@@ -28,7 +28,7 @@ class CoresSelectionPreferences {
         preference.title = context.getString(system.titleResId)
         preference.isIconSpaceReserved = false
         preference.summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
-        preference.setDefaultValue(system.systemCoreConfigs.map { it.coreID.coreName }.first())
+        preference.setDefaultValue(system.systemCoreConfigs.map { it.coreID.coreName }.firstOrNull() ?: "")
         preference.isEnabled = system.systemCoreConfigs.size > 1
 
         preference.entries =

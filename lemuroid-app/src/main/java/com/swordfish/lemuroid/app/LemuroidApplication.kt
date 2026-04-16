@@ -20,7 +20,9 @@ import com.swordfish.lemuroid.lib.preferences.LocaleHelper
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.DaggerApplication
+import org.conscrypt.Conscrypt
 import timber.log.Timber
+import java.security.Security
 import javax.inject.Inject
 
 class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderFactory {
@@ -30,6 +32,17 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
+
+        // Install Conscrypt in background — no HTTP calls happen before the UI is visible,
+        // and each OkHttpClient also applies Conscrypt explicitly via applyConscryptTls().
+        Thread {
+            try {
+                Security.insertProviderAt(Conscrypt.newProvider(), 1)
+                Timber.d("Conscrypt provider installed")
+            } catch (e: Throwable) {
+                Timber.e(e, "Failed to install Conscrypt provider")
+            }
+        }.start()
 
         val initializeComponent =
             if (isMainProcess()) {

@@ -27,25 +27,25 @@ class TVGameMenuActivity : TVBaseSettingsActivity() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             val game =
-                intent.extras?.getSerializable(GameMenuContract.EXTRA_GAME) as Game?
+                intent.extras?.getSerializable(GameMenuContract.EXTRA_GAME) as? Game
                     ?: throw InvalidParameterException("Missing EXTRA_GAME")
 
             val core =
                 intent.extras?.getSerializable(
                     GameMenuContract.EXTRA_SYSTEM_CORE_CONFIG,
-                ) as SystemCoreConfig?
+                ) as? SystemCoreConfig
                     ?: throw InvalidParameterException("Missing EXTRA_SYSTEM_CORE_CONFIG")
 
             val options =
                 intent.extras?.getSerializable(
                     GameMenuContract.EXTRA_CORE_OPTIONS,
-                ) as Array<LemuroidCoreOption>?
+                ) as? Array<LemuroidCoreOption>
                     ?: throw InvalidParameterException("Missing EXTRA_CORE_OPTIONS")
 
             val advancedOptions =
                 intent.extras?.getSerializable(
                     GameMenuContract.EXTRA_ADVANCED_CORE_OPTIONS,
-                ) as Array<LemuroidCoreOption>?
+                ) as? Array<LemuroidCoreOption>
                     ?: throw InvalidParameterException("Missing EXTRA_ADVANCED_CORE_OPTIONS")
 
             val numDisks =

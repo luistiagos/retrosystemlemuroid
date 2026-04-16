@@ -20,6 +20,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
@@ -60,6 +61,7 @@ class RomOnDemandManager(
 
     private val httpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
+            .applyConscryptTls()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .followRedirects(true)

@@ -1532,6 +1532,23 @@ data class GameSystem(
                     supportedExtensions = listOf("bin"),
                 ),
                 GameSystem(
+                    SystemID.ATARI5200,
+                    "Atari - 5200",
+                    R.string.game_system_title_atari5200,
+                    R.string.game_system_abbr_atari5200,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.A5200,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.ATARI7800),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("a52"),
+                    supportedExtensions = listOf("rom", "bin", "car"),
+                ),
+                GameSystem(
                     SystemID.LYNX,
                     "Atari - Lynx",
                     R.string.game_system_title_lynx,

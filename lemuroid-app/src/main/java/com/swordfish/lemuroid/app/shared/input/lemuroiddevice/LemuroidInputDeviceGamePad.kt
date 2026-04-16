@@ -56,7 +56,6 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
             device.sources and InputDevice.SOURCE_GAMEPAD == InputDevice.SOURCE_GAMEPAD,
             device.supportsAllKeys(MINIMAL_SUPPORTED_KEYS),
             device.isVirtual.not(),
-            device.controllerNumber > 0,
         ).all { it }
     }
 

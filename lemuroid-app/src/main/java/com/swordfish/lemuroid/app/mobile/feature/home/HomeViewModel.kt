@@ -17,6 +17,7 @@ import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.common.coroutines.combine
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.CoreID
+import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -83,6 +84,7 @@ class HomeViewModel(
     private val romsDownloadManager = RomsDownloadManager(appContext)
     private val streamingRomsManager = StreamingRomsManager(appContext)
     private val downloadDialogDismissed = MutableStateFlow(false)
+    private val excludedDbNames = HeavySystemFilter.excludedDbNames(HeavySystemFilter.deviceTier(appContext))
     // Emits the mobile network label (e.g. "4G", "5G") when WiFi is lost during an active download
     private val _mobileSwitchEvent = MutableSharedFlow<String>(extraBufferCapacity = 1)
     val mobileSwitchEvent: Flow<String> = _mobileSwitchEvent
@@ -237,9 +239,11 @@ class HomeViewModel(
     init {
         // Auto-start the streaming catalog download the first time the app opens when no
         // download has been done yet and the user hasn't dismissed it this session.
+        // Also retry automatically if the previous attempt ended in Error (e.g. Worker
+        // failed on a prior APK version and WorkManager cached the FAILED state).
         viewModelScope.launch {
             val initialState = streamingRomsManager.state.first()
-            if (initialState is StreamingRomsState.Idle
+            if ((initialState is StreamingRomsState.Idle || initialState is StreamingRomsState.Error)
                 && !streamingRomsManager.isDownloadDone()
                 && !downloadDialogDismissed.value
             ) {
@@ -310,13 +314,16 @@ class HomeViewModel(
         PendingOperationsMonitor(appContext).anyLibraryOperationInProgress()
 
     private fun discoveryGames(retrogradeDb: RetrogradeDatabase) =
-        retrogradeDb.gameDao().selectFirstNotPlayed(CAROUSEL_MAX_ITEMS)
+        if (excludedDbNames.isNotEmpty()) retrogradeDb.gameDao().selectFirstNotPlayedExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
+        else retrogradeDb.gameDao().selectFirstNotPlayed(CAROUSEL_MAX_ITEMS)
 
     private fun recentGames(retrogradeDb: RetrogradeDatabase) =
-        retrogradeDb.gameDao().selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS)
+        if (excludedDbNames.isNotEmpty()) retrogradeDb.gameDao().selectFirstUnfavoriteRecentsExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
+        else retrogradeDb.gameDao().selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS)
 
     private fun favoritesGames(retrogradeDb: RetrogradeDatabase) =
-        retrogradeDb.gameDao().selectFirstFavorites(CAROUSEL_MAX_ITEMS)
+        if (excludedDbNames.isNotEmpty()) retrogradeDb.gameDao().selectFirstFavoritesExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
+        else retrogradeDb.gameDao().selectFirstFavorites(CAROUSEL_MAX_ITEMS)
 
     private fun dsGamesCount(retrogradeDb: RetrogradeDatabase): Flow<Int> {
         return retrogradeDb.gameDao().selectSystemsWithCount()

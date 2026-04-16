@@ -33,6 +33,10 @@
 -dontnote org.apache.harmony.xnet.provider.jsse.SSLParametersImpl
 -dontnote org.conscrypt.ConscryptEngineSocket
 
+## Conscrypt – keep the JNI and provider classes so BoringSSL works in release
+-keep class org.conscrypt.** { *; }
+-dontwarn org.conscrypt.**
+
 ## Retrofit
 -dontwarn retrofit2.Platform$Java8
 -keep,allowobfuscation,allowshrinking interface retrofit2.Call

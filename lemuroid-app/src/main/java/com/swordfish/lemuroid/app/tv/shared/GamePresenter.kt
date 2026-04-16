@@ -1,7 +1,6 @@
 package com.swordfish.lemuroid.app.tv.shared
 
 import android.graphics.Color
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.leanback.widget.ImageCardView
@@ -10,6 +9,7 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.GameContextMenuListener
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.covers.CoverUtils
+import com.swordfish.lemuroid.app.tv.shared.TVCardFocusHighlight
 import com.swordfish.lemuroid.app.utils.games.GameUtils
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
@@ -22,7 +22,7 @@ class GamePresenter(
         item: Any?,
     ) {
         if (item == null || viewHolder !is ViewHolder) return
-        val game = item as Game
+        val game = item as? Game ?: return
         viewHolder.mCardView.titleText = game.title
         viewHolder.mCardView.contentText = GameUtils.getGameSubtitle(viewHolder.mCardView.context, game)
         viewHolder.mCardView.setMainImageDimensions(cardSize, cardSize)
@@ -34,7 +34,8 @@ class GamePresenter(
         val cardView = ImageCardView(parent.context)
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
-        (cardView.findViewById<View>(androidx.leanback.R.id.content_text) as TextView).setTextColor(Color.LTGRAY)
+        cardView.findViewById<TextView>(androidx.leanback.R.id.content_text)?.setTextColor(Color.LTGRAY)
+        TVCardFocusHighlight.setupOnCard(cardView)
         return ViewHolder(cardView)
     }
 

@@ -30,6 +30,7 @@
         <item name="appBarLayoutStyle">@style/LemuroidMaterialStyle.AppBarLayoutStyle</item>
         <item name="materialCardViewStyle">?attr/materialCardViewElevatedStyle</item>
         <item name="alertDialogTheme">@style/LemuroidMaterialStyle.AlertDialogTheme</item>
+        <item name="android:windowBackground">@color/md_theme_dark_background</item>
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:navigationBarColor">?attr/colorSurface</item>
         <item name="elevationOverlayColor">?attr/colorOnSurface</item>

@@ -20,6 +20,7 @@ import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
+import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -75,7 +76,7 @@ class RomsDownloadManager(context: Context) {
         val SYSTEM_DBNAMES = setOf(
             "nes", "snes", "md", "gb", "gbc", "gba", "n64", "sms", "psp", "nds",
             "gg", "atari2600", "psx", "fbneo", "mame2003plus", "pce", "lynx",
-            "atari7800", "scd", "ngp", "ngc", "ws", "wsc", "dos", "3ds",
+            "atari7800", "atari5200", "scd", "ngp", "ngc", "ws", "wsc", "dos", "3ds", "msx", "msx2",
         )
 
         /**
@@ -87,8 +88,10 @@ class RomsDownloadManager(context: Context) {
             // Short folder names used in the luisluis123/lemusets dataset
             "a26"                  to "atari2600",
             "a78"                  to "atari7800",
+            "a52"                  to "atari5200",
             "arcade"               to "fbneo",
             "atari 2600"           to "atari2600",
+            "atari 5200"           to "atari5200",
             "atari 7800"           to "atari7800",
             "game boy"             to "gb",
             "game boy advance"     to "gba",
@@ -154,6 +157,13 @@ class RomsDownloadManager(context: Context) {
             "dos"                  to "dos",
             "ms-dos"               to "dos",
             "dos games"            to "dos",
+            // MSX / MSX2
+            "msx"                  to "msx",
+            "microsoft msx"        to "msx",
+            "msx2"                 to "msx2",
+            "msx 2"                to "msx2",
+            "microsoft msx2"       to "msx2",
+            "microsoft msx 2"      to "msx2",
         )
     }
 
@@ -378,6 +388,7 @@ class RomsDownloadManager(context: Context) {
 
     private fun buildHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
+            .applyConscryptTls()
             .connectTimeout(30, TimeUnit.SECONDS)
             // 90 s read timeout: if the CDN stalls (stops sending data but keeps the TCP
             // connection open), OkHttp will throw an IOException after this period and the

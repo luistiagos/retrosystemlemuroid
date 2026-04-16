@@ -103,7 +103,7 @@ object DocumentFileParser {
         openedInputStream: ZipInputStream,
         fileSize: Long = -1,
     ): ZipEntry? {
-        for (i in 0..MAX_CHECKED_ENTRIES) {
+        for (i in 0 until MAX_CHECKED_ENTRIES) {
             val entry = openedInputStream.nextEntry ?: break
             if (!isGameEntry(entry, fileSize)) continue
             return entry

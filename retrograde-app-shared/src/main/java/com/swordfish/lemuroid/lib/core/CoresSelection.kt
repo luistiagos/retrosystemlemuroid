@@ -97,7 +97,8 @@ class CoresSelection(
                 CoreID.MELONDS.coreName
             }
         }
-        return system.systemCoreConfigs.first().coreID.coreName
+        return system.systemCoreConfigs.firstOrNull()?.coreID?.coreName
+            ?: throw IllegalStateException("No cores configured for system: ${system.id}")
     }
 
     companion object {

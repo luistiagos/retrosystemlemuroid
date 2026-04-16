@@ -173,6 +173,7 @@ dependencies {
     implementation(deps.libs.dagger.core)
     implementation(deps.libs.kotlinxCoroutinesAndroid)
     implementation(deps.libs.okHttp3)
+    implementation(deps.libs.conscrypt)
     implementation("org.apache.commons:commons-compress:1.26.1")
     implementation("org.tukaani:xz:1.9")
     implementation(deps.libs.okio)

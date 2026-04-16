@@ -37,6 +37,8 @@
     <!-- Allows showing a system dialog asking the user to exempt the app from battery
          optimization. Used during ROMs download to prevent background process throttling. -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!-- Needed to install APK updates via PackageInstaller / ACTION_VIEW -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name="com.swordfish.lemuroid.app.LemuroidApplication"
@@ -163,6 +165,22 @@
 
         <receiver android:name=".app.shared.library.LibraryIndexBroadcastReceiver" />
         <receiver android:name=".app.shared.library.CoreUpdateBroadcastReceiver" />
+
+        <!-- Receives PackageInstaller callbacks for app self-updates -->
+        <receiver
+            android:name=".app.shared.updates.UpdateInstallReceiver"
+            android:exported="false" />
+
+        <!-- FileProvider for APK installs on Android < 7 (API < 24) -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.update_provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/update_provider_paths" />
+        </provider>
         <receiver
             android:name=".app.shared.library.MediaMountedReceiver"
             android:exported="true">

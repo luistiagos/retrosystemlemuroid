@@ -64,11 +64,10 @@ class ChannelHandler(
 
         channelId = ContentUris.parseId(channelUri)
 
-        ChannelLogoUtils.storeChannelLogo(
-            appContext,
-            channelId,
-            convertToBitmap(appContext, R.mipmap.lemuroid_tv_channel)!!,
-        )
+        val channelLogo = convertToBitmap(appContext, R.mipmap.lemuroid_tv_channel)
+        if (channelLogo != null) {
+            ChannelLogoUtils.storeChannelLogo(appContext, channelId, channelLogo)
+        }
 
         TvContractCompat.requestChannelBrowsable(appContext, channelId)
         return channelId

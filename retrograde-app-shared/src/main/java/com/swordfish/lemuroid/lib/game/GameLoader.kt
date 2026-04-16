@@ -36,6 +36,8 @@ import com.swordfish.lemuroid.lib.saves.SavesManager
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.RomFiles
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
@@ -71,7 +73,8 @@ class GameLoader(
             try {
                 emit(LoadingState.LoadingCore)
 
-                val system = GameSystem.findById(game.systemId)
+                val system = GameSystem.findByIdOrNull(game.systemId)
+                    ?: throw GameLoaderException(GameLoaderError.Generic)
 
                 if (!isArchitectureSupported(appContext, systemCoreConfig)) {
                     throw GameLoaderException(GameLoaderError.UnsupportedArchitecture)
@@ -84,23 +87,41 @@ class GameLoader(
 
                 emit(LoadingState.LoadingGame)
 
-                val missingBiosFiles = biosManager.getMissingBiosFiles(systemCoreConfig, game)
+                // Run independent I/O tasks in parallel to reduce total wall-clock time
+                // on weak devices. Only quickSaveData depends on saveRAM (timestamp), so
+                // it runs after the SRAM deferred completes.
+                val (gameFiles, saveRAM, coreVariables, systemDirectory, savesDirectory, missingBiosFiles) =
+                    coroutineScope {
+                        val deferredBios = async { biosManager.getMissingBiosFiles(systemCoreConfig, game) }
+                        val deferredGameFiles = async {
+                            val useVFS = systemCoreConfig.supportsLibretroVFS && directLoad
+                            val dataFiles = retrogradeDatabase.dataFileDao().selectDataFilesForGame(game.id)
+                            lemuroidLibrary.getGameFiles(game, dataFiles, useVFS)
+                        }
+                        val deferredSaveRAM = async {
+                            val data = savesManager.getSaveRAM(game, systemCoreConfig)
+                            desmumeMigrationHandler.resolveSaveData(game, systemCoreConfig.coreID, data)
+                        }
+                        val deferredCoreVars = async {
+                            coreVariablesManager.getOptionsForCore(system.id, systemCoreConfig)
+                        }
+                        val deferredSystemDir = async { directoriesManager.getSystemDirectory() }
+                        val deferredSavesDir = async { directoriesManager.getSavesDirectory() }
+
+                        ParallelResult(
+                            deferredGameFiles.await(),
+                            deferredSaveRAM.await(),
+                            deferredCoreVars.await(),
+                            deferredSystemDir.await(),
+                            deferredSavesDir.await(),
+                            deferredBios.await(),
+                        )
+                    }
+
                 if (missingBiosFiles.isNotEmpty()) {
                     throw GameLoaderException(GameLoaderError.MissingBiosFiles(missingBiosFiles))
                 }
 
-                val gameFiles =
-                    runCatching {
-                        val useVFS = systemCoreConfig.supportsLibretroVFS && directLoad
-                        val dataFiles = retrogradeDatabase.dataFileDao().selectDataFilesForGame(game.id)
-                        lemuroidLibrary.getGameFiles(game, dataFiles, useVFS)
-                    }.getOrElse { throw it }
-
-                val saveRAM =
-                    runCatching {
-                        val data = savesManager.getSaveRAM(game, systemCoreConfig)
-                        desmumeMigrationHandler.resolveSaveData(game, systemCoreConfig.coreID, data)
-                    }.getOrElse { throw GameLoaderException(GameLoaderError.Saves) }
                 val saveRAMData = saveRAM.data
 
                 val quickSaveData =
@@ -119,13 +140,6 @@ class GameLoader(
                         }
                     }.getOrElse { throw GameLoaderException(GameLoaderError.Saves) }
 
-                val coreVariables =
-                    coreVariablesManager.getOptionsForCore(system.id, systemCoreConfig)
-                        .toTypedArray()
-
-                val systemDirectory = directoriesManager.getSystemDirectory()
-                val savesDirectory = directoriesManager.getSavesDirectory()
-
                 emit(
                     LoadingState.Ready(
                         GameData(
@@ -134,7 +148,7 @@ class GameLoader(
                             gameFiles,
                             quickSaveData,
                             saveRAMData,
-                            coreVariables,
+                            coreVariables.toTypedArray(),
                             systemDirectory,
                             savesDirectory,
                         ),
@@ -156,27 +170,34 @@ class GameLoader(
         systemCoreConfig: SystemCoreConfig,
     ): Boolean {
         val supportedOnlyArchitectures = systemCoreConfig.supportedOnlyArchitectures ?: return true
-        val processAbi = com.swordfish.lemuroid.lib.util.AbiUtils.getProcessAbi(context)
+        val processAbi = getProcessAbi(context)
         return processAbi in supportedOnlyArchitectures
     }
 
     /** In-memory cache of core library paths to avoid repeated filesystem walks. */
     private val corePathCache = java.util.concurrent.ConcurrentHashMap<String, String>()
 
+    /** Cached ABI string so we don't re-read it on every findLibrary call. */
+    @Volatile private var cachedProcessAbi: String? = null
+
+    private fun getProcessAbi(context: Context): String {
+        cachedProcessAbi?.let { return it }
+        val abi = com.swordfish.lemuroid.lib.util.AbiUtils.getProcessAbi(context)
+        cachedProcessAbi = abi
+        return abi
+    }
+
     private fun findLibrary(
         context: Context,
         coreID: CoreID,
     ): File? {
-        val processAbi = com.swordfish.lemuroid.lib.util.AbiUtils.getProcessAbi(context)
+        val processAbi = getProcessAbi(context)
         val libFileName = coreID.libretroFileName
 
-        // Fast path 0: check in-memory cache
+        // Fast path 0: check in-memory cache — skip ELF validation (already validated once)
         corePathCache[libFileName]?.let { cachedPath ->
             val cached = File(cachedPath)
-            if (cached.exists() && cached.length() > MIN_VALID_CORE_SIZE_BYTES &&
-                com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(cached, processAbi)
-            ) return cached
-            // Cached path stale — remove and continue searching
+            if (cached.exists() && cached.length() > MIN_VALID_CORE_SIZE_BYTES) return cached
             corePathCache.remove(libFileName)
         }
 
@@ -218,6 +239,16 @@ class GameLoader(
         }
         return found
     }
+
+    /** Container for results from parallelized I/O tasks in [load]. */
+    private data class ParallelResult(
+        val gameFiles: RomFiles,
+        val saveRAM: DesmumeMigrationHandler.SaveDataResult,
+        val coreVariables: List<CoreVariable>,
+        val systemDirectory: File,
+        val savesDirectory: File,
+        val missingBiosFiles: List<String>,
+    )
 
     companion object {
         /** Minimum file size (100 KB) to consider a core .so as non-corrupt. */

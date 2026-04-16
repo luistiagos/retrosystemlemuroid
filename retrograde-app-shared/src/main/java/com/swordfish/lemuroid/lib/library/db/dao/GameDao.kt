@@ -64,6 +64,20 @@ interface GameDao {
     @Query("SELECT * FROM games WHERE lastPlayedAt IS NULL LIMIT :limit")
     fun selectFirstNotPlayed(limit: Int): Flow<List<Game>>
 
+    @Query("SELECT * FROM games WHERE lastPlayedAt IS NULL AND systemId NOT IN (:excludedSystemIds) LIMIT :limit")
+    fun selectFirstNotPlayedExcluding(limit: Int, excludedSystemIds: Set<String>): Flow<List<Game>>
+
+    @Query(
+        """
+        SELECT * FROM games WHERE lastPlayedAt IS NOT NULL AND isFavorite = 0 AND systemId NOT IN (:excludedSystemIds)
+        ORDER BY lastPlayedAt DESC LIMIT :limit
+        """,
+    )
+    fun selectFirstUnfavoriteRecentsExcluding(limit: Int, excludedSystemIds: Set<String>): Flow<List<Game>>
+
+    @Query("SELECT * FROM games WHERE isFavorite = 1 AND systemId NOT IN (:excludedSystemIds) ORDER BY lastPlayedAt DESC LIMIT :limit")
+    fun selectFirstFavoritesExcluding(limit: Int, excludedSystemIds: Set<String>): Flow<List<Game>>
+
     @Query("""
         SELECT games.* FROM games
         LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName

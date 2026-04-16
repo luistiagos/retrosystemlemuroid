@@ -24,7 +24,8 @@ class GameUtils {
             context: Context,
             game: Game,
         ): String {
-            val systemTitleResource = GameSystem.findById(game.systemId).shortTitleResId
+            val systemTitleResource = GameSystem.findByIdOrNull(game.systemId)?.shortTitleResId
+                ?: return game.systemId
             return context.getString(systemTitleResource)
         }
     }

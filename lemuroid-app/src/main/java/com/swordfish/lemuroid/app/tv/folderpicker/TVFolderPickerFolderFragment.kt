@@ -74,7 +74,7 @@ class TVFolderPickerFolderFragment : GuidedStepSupportFragment() {
                 activity?.finish()
             }
             ACTION_CANCEL -> activity?.finish()
-            else -> (activity as TVFolderPickerActivity).navigateTo(action.description.toString())
+            else -> (activity as? TVFolderPickerActivity)?.navigateTo(action.description.toString())
         }
     }
 

@@ -41,6 +41,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 import retrofit2.Retrofit
 import timber.log.Timber
 import java.io.File
@@ -64,6 +65,7 @@ class CoreUpdaterImpl(
     private val api = retrofit.create(CoreUpdater.CoreManagerApi::class.java)
 
     private val httpClient: OkHttpClient = OkHttpClient.Builder()
+        .applyConscryptTls()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(120, TimeUnit.SECONDS)
         .followRedirects(true)

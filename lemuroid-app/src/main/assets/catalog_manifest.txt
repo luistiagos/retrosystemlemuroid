@@ -1,4 +1,4 @@
-3ds/100% Pascal Sensei - Kanpeki Paint Bombers (Japan).3ds
+﻿3ds/100% Pascal Sensei - Kanpeki Paint Bombers (Japan).3ds
 3ds/12-Sai. Honto no Kimochi (Japan).3ds
 3ds/12-Sai. Koisuru Diary (Japan).3ds
 3ds/12-Sai. Torokeru Puzzle Futari no Harmony (Japan).3ds
@@ -1664,6 +1664,78 @@ a26/Zaxxon (USA).a26
 a26/Zoo Fun (USA).a26
 a26/Zoo Keeper Sounds (USA) (Proto).a26
 a26/synthcart (USA) (NTSC) (Aftermarket) (Unl).a26
+a52/Activision Decathlon, The (USA).a52
+a52/Astro Chase (USA).a52
+a52/Ballblazer (USA).a52
+a52/Beamrider (USA).a52
+a52/BerZerk (USA).a52
+a52/Blue Print (USA).a52
+a52/Bounty Bob Strikes Back! (USA).a52
+a52/Buck Rogers - Planet of Zoom (USA).a52
+a52/Carol Shaw's River Raid (USA).a52
+a52/Castle Blast (USA) (Unl).a52
+a52/Castle Crisis (USA) (Unl).a52
+a52/Centipede (USA).a52
+a52/Choplifter! (USA).a52
+a52/Congo Bongo (USA).a52
+a52/Countermeasure (USA).a52
+a52/David Crane's Pitfall II - Lost Caverns (USA).a52
+a52/Defender (USA).a52
+a52/Dig Dug (USA).a52
+a52/Dreadnaught Factor, The (USA).a52
+a52/Frogger (USA).a52
+a52/Frogger II - Threeedeep! (USA).a52
+a52/Galaxian (USA).a52
+a52/Gorf (USA).a52
+a52/Gremlins (USA).a52
+a52/Gyruss (USA).a52
+a52/H.E.R.O. (USA).a52
+a52/James Bond 007 (USA).a52
+a52/Joust (USA).a52
+a52/Jungle Hunt (USA).a52
+a52/Kaboom! (USA).a52
+a52/Kangaroo (USA).a52
+a52/Keystone Kapers (USA).a52
+a52/Koffi - Yellow Kopter (USA) (Unl).a52
+a52/K-Razy Shoot-Out (USA).a52
+a52/Mario Bros. (USA).a52
+a52/MegaMania (USA).a52
+a52/Meteorites (USA).a52
+a52/Miner 2049er Starring Bounty Bob (USA).a52
+a52/Missile Command (USA).a52
+a52/Montezuma's Revenge featuring Panama Joe (USA).a52
+a52/Moon Patrol (USA).a52
+a52/Mountain King (USA).a52
+a52/Mr. Do!'s Castle (USA).a52
+a52/Ms. Pac-Man (USA).a52
+a52/Pac-Man (USA).a52
+a52/Pengo (USA).a52
+a52/Pitfall! (USA).a52
+a52/Pole Position (USA).a52
+a52/Popeye (USA).a52
+a52/Q-bert (USA).a52
+a52/Qix (USA).a52
+a52/Quest for Quintana Roo (USA).a52
+a52/RealSports Baseball (USA).a52
+a52/RealSports Football (USA).a52
+a52/RealSports Soccer (USA).a52
+a52/RealSports Tennis (USA).a52
+a52/Rescue on Fractalus! (USA).a52
+a52/Robotron 2084 (USA).a52
+a52/Space Dungeon (USA).a52
+a52/Space Invaders (USA).a52
+a52/Space Shuttle - A Journey Into Space (USA).a52
+a52/Star Raiders (USA).a52
+a52/Star Trek - Strategic Operations Simulator (USA).a52
+a52/Star Wars - Return of the Jedi - Death Star Battle (USA).a52
+a52/Star Wars - The Arcade Game (USA).a52
+a52/Super Breakout (USA).a52
+a52/Super Cobra (USA).a52
+a52/Vanguard (USA).a52
+a52/Wizard of Wor (USA).a52
+a52/Zaxxon (USA).a52
+a52/Zenji (USA).a52
+a52/Zone Ranger (USA).a52
 a78/3D Asteroids (1987) (Atari) (Prototype) [a1].a78
 a78/Ace of Aces (1988) (Atari) (PAL).a78
 a78/Alien Brigade (1990) (Atari) (CC2 Hack).a78
@@ -12967,7 +13039,7 @@ megadrive/Flink (E).md
 megadrive/Foreman for Real (W).md
 megadrive/Forgotten Worlds (W).md
 megadrive/Formula One (U).md
-megadrive/Força Alienigena (BR).md
+megadrive/ForÃ§a Alienigena (BR).md
 megadrive/Frank Thomas Big Hurt Baseball (UE).md
 megadrive/Frogger (U).md
 megadrive/From TV Animation Slam Dunk Kyougou Makkou Taiketsu! (J).md
@@ -18941,8 +19013,8 @@ psp/Armored Core - Formula Front International (Japan) (En,Ja).iso
 psp/Army of Two - The 40th Day (Europe) (En,Fr,De,Es,It).iso
 psp/Asaki, Yumemishi (Japan).iso
 psp/Asphalt - Urban GT 2 (Europe) (En,Fr,De,Es,It).iso
-psp/Assassin's Creed - Bloodlines™ [NPUH10032].7z
-psp/BLACK★ROCK SHOOTER THE GAME [NPUH10126].7z
+psp/Assassin's Creed - Bloodlinesâ„¢ [NPUH10032].7z
+psp/BLACKâ˜…ROCK SHOOTER THE GAME [NPUH10126].7z
 psp/BRAVE STORY - NEW TRAVELER [ULUS10279].7z
 psp/BURNOUT DOMINATOR [ULES00703].7z
 psp/Ben 10 - Protector of Earth (Europe) (En,Fr,De,Es,It).iso
@@ -18976,10 +19048,10 @@ psp/Cars - Race-O-Rama [ULES01333].7z
 psp/Cloudy with a Chance of Meatballs (USA) (En,Fr,De,Es,It).iso
 psp/Coded Arms (USA).iso
 psp/Coded Arms - Contagion (USA).iso
-psp/Crash™ Tag Team Racing [ULUS10044].7z
+psp/Crashâ„¢ Tag Team Racing [ULUS10044].7z
 psp/Crazy Taxi - Fare Wars (USA) (v1.01).iso
 psp/Crimson Empire - Circumstances to Serve a Noble (Japan).iso
-psp/Crimson Gem Saga™ [ULUS10400].7z
+psp/Crimson Gem Sagaâ„¢ [ULUS10400].7z
 psp/Crisis Core Final Fantasy VII.7z
 psp/Crush (USA) (En,Fr,Es).iso
 psp/DISSIDIA FINAL FANTASY [ULUS10437].7z
@@ -19165,7 +19237,7 @@ psp/Goldene Kompass, Der (Germany).iso
 psp/Gottlieb Pinball Classics (Europe) (En,Fr,De,Es,It).iso
 psp/Gradius Collection (USA).iso
 psp/Gradius Portable (Japan).iso
-psp/Gran Turismo® [UCUS98632].7z
+psp/Gran TurismoÂ® [UCUS98632].7z
 psp/Grand Knights History (Japan).iso
 psp/Grand Theft Auto - Chinatown Wars (USA).iso
 psp/Grand Theft Auto - Liberty City Stories (USA) (En,Fr,De,Es,It) (v1.05).iso
@@ -19281,8 +19353,8 @@ psp/Hoshizora Planet - One Small Step For... (Japan).iso
 psp/Hot Brain (USA) (En,Fr,De,Es,It).iso
 psp/Hot Pixel (USA).iso
 psp/Hot Shots Golf - Open Tee 2 [UCUS98693].7z
-psp/Hot Shots Golf - Open Tee™ [UCUS98614].7z
-psp/Hot Shots Tennis - Get a Grip™ [NPUG80302].7z
+psp/Hot Shots Golf - Open Teeâ„¢ [UCUS98614].7z
+psp/Hot Shots Tennis - Get a Gripâ„¢ [NPUG80302].7z
 psp/Hot Wheels - Ultimate Racing (USA).iso
 psp/Houkago Colorful-Step - Bunkabu! (Japan).iso
 psp/Houkago Colorful-Step - Undoubu! (Japan).iso
@@ -19503,7 +19575,7 @@ psp/Little Aid Portable (Japan).iso
 psp/Little Britain - The Video Game (Europe).iso
 psp/Little Busters! Converted Edition (Japan) (Disc 1).iso
 psp/Little Witch Parfait - Kuro Neko Mahouten Monogatari (Japan).iso
-psp/LittleBigPlanet™ [UCUS98744].7z
+psp/LittleBigPlanetâ„¢ [UCUS98744].7z
 psp/LocoRoco 2 (USA) (En,Ja,Fr,De,Es,It,Nl,Pt,Sv,No,Da,Fi,Ko,Ru).iso
 psp/Lord of Apocalypse (Japan).iso
 psp/Lord of Arcana (USA).iso
@@ -19527,11 +19599,11 @@ psp/Luxury & Beauty - Lucian Bee's - Resurrection Supernova (Japan).iso
 psp/M.A.C.H. - Modified Air Combat Heroes (USA).iso
 psp/METAL SLUG Anthology [ULUS10154].7z
 psp/METAL SLUG XX [ULUS10495].7z
-psp/MONSTER HUNTER FREEDOM UNITE™ [ULES01213].7z
+psp/MONSTER HUNTER FREEDOM UNITEâ„¢ [ULES01213].7z
 psp/MONSTER HUNTER FREEDOM(TM) [ULES00318].7z
 psp/MTV Pimp My Ride (USA).iso
 psp/MTX_Mototrax_USA_PSP-pSyPSP.7z
-psp/MX vs ATV™ Reflex [ULUS10429].7z
+psp/MX vs ATVâ„¢ Reflex [ULUS10429].7z
 psp/MX vs. ATV Extreme Limite (France).iso
 psp/MX_Vs_ATV_Unleashed_On_The_Edge_USA_PSP-pSyPSP.7z
 psp/MX_Vs_ATV_Untamed_USA_PSP-pSyPSP.7z
@@ -19573,7 +19645,7 @@ psp/Major League Baseball 2K9 (USA).iso
 psp/Makai Senki Disgaea 2 Portable (Japan).iso
 psp/Makai Senki Disgaea Portable (Japan).iso
 psp/Makai Senki Disgaea Portable - Tsuushin Taisen Hajimemashita. (Japan, Korea).iso
-psp/Mana Khemia～Student Alliance～ [ULUS10408].7z
+psp/Mana Khemiaï½žStudent Allianceï½ž [ULUS10408].7z
 psp/Mana-Khemia - Gakuen no Renkinjutsushi-tachi Portable + (Japan).iso
 psp/Mana-Khemia 2 - Ochita Gakuen to Renkinjutsushi-tachi Portable+ (Japan).iso
 psp/Manhunt 2 (USA, Canada).iso
@@ -19637,7 +19709,7 @@ psp/Minna no Golf Portable (Japan).iso
 psp/Minna no Golf Portable - Coca-Cola Special Edition (Japan).iso
 psp/Minna no Shiatsu - Itami mo Tsukare mo Sukirii! (Japan).iso
 psp/Mirai Nikki - 13-Ninme no Nikki Shoyuusha (Japan).iso
-psp/ModNation™ Racers [UCUS98741].7z
+psp/ModNationâ„¢ Racers [UCUS98741].7z
 psp/Moegaku @ Portable (Japan) (En,Ja).iso
 psp/Moeru Mahjong - Moe-Jong! (Japan).iso
 psp/Momotarou Dentetsu Tag Match - Yuujou - Doryoku - Shouri no Maki! (Japan).iso
@@ -19686,7 +19758,7 @@ psp/Ore no Imouto Maker EX - Imouto to Koishiyo Portable (Japan).iso
 psp/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Portable ga Tsuzuku Wake ga Nai (Japan) (Disc 1).iso
 psp/Ore wa Shoujo Mangaka (Japan).iso
 psp/PATAPON [UCUS98711].7z
-psp/PATAPON™ 2 [NPUG98732].7z
+psp/PATAPONâ„¢ 2 [NPUG98732].7z
 psp/PC Engine Best Collection - Soldier Collection (Japan).iso
 psp/PDC World Championship Darts (USA) (En,Fr,De,Es,It,Nl).iso
 psp/PSP (PlayStation Portable) Go Bonus 3-Game DVD (USA) (En,Fr,Es).iso
@@ -19700,7 +19772,7 @@ psp/Pac-Man Rally (Europe) (En,Fr,De,Es,It) (Proto) (2007-05-01).iso
 psp/Pangya_Fantasy_Golf_USA (Black Screen Fix).7z
 psp/Parodius Portable (Japan).iso
 psp/Passport to... Barcelona (Europe) (En,Fr,De,Es,It).iso
-psp/Patapon™3 [UCUS98751].7z
+psp/Pataponâ„¢3 [UCUS98751].7z
 psp/Payout - Poker & Casino (USA).iso
 psp/Persona 2 - Batsu - Eternal Punishment (Japan).iso
 psp/Personal Utility Disc Ver. 1.0 (Korea).iso
@@ -19709,7 +19781,7 @@ psp/Petz - My Baby Hamster (Europe) (En,Fr,De,Es).iso
 psp/Petz - My Puppy Family (Europe) (En,Fr,De,Es,It).iso
 psp/Phantasy Star Portable 2 Infinity (English v2).7z
 psp/Phantasy Star Portable.7z
-psp/Phantasy Star Portable™ 2 [ULUS10529].7z
+psp/Phantasy Star Portableâ„¢ 2 [ULUS10529].7z
 psp/Phantom Brave - The Hermuda Triangle (USA).iso
 psp/Phantom Brave Portable (Japan).iso
 psp/Phase D - Souka no Shou (Japan).iso
@@ -19761,7 +19833,7 @@ psp/Real Madrid - The Game (Europe) (En,Fr,Es,It,Pt).iso
 psp/Reel Fishing - The Great Outdoors (USA).iso
 psp/Rei Chou Aniki (Japan).iso
 psp/Rengoku - The Tower of Purgatory (USA).iso
-psp/Resistance - Retribution™ [UCUS98668].7z
+psp/Resistance - Retributionâ„¢ [UCUS98668].7z
 psp/Retail Sampler No. 4 (Europe) (v1.00).iso
 psp/Ricky Ponting 2007 - Pressure Play (Australia).iso
 psp/Ridge Racers 2 (Japan, Asia).iso
@@ -19970,7 +20042,7 @@ psp/V8 Supercars Australia 2 (Australia) (En,Fr,De,Es,It).iso
 psp/V8 Supercars Australia 3 - Shootout (Australia) (En,Fr,De,Es,It).iso
 psp/VALHALLAKNIGHTS [ULUS10230].7z
 psp/VALHALLAKNIGHTS2BS [NPUH10041].7z
-psp/VALKYRIA CHRONICLES™ II [ULUS10515].7z
+psp/VALKYRIA CHRONICLESâ„¢ II [ULUS10515].7z
 psp/Valhalla Knights (USA).iso
 psp/Valhalla Knights 2 (USA).iso
 psp/Valhalla Knights 2 - Battle Stance (Japan).iso
@@ -20034,7 +20106,7 @@ psp/Winning Post 7 2010 (Japan).iso
 psp/Winning Post 7 2012 (Japan).iso
 psp/Winning Post 7 2013 (Japan).iso
 psp/Winx Club - Join the Club (USA).iso
-psp/WipEout® Pulse [UCES00465].7z
+psp/WipEoutÂ® Pulse [UCES00465].7z
 psp/Wipeout Pure [UCES00001].7z
 psp/Wizardry Empire III - Haou no Keifu (Japan).iso
 psp/World Championship Cards (USA).iso
@@ -26880,3 +26952,197 @@ msx/Zexas Limited (Japan) (Alt 1).rom
 msx/Zexas Limited (Japan) (Alt 2).rom
 msx/Zexas Limited (Japan).rom
 msx/Zoom 909 (Japan).rom
+msx2/1942 (JP).mx2
+msx2/A Ressha de Ikou MSX (JP).mx2
+msx2/AcroJet (JP).mx2
+msx2/Akumajo Dracula (JP) (Wii U Virtual Console).mx2
+msx2/Aleste (JP).mx2
+msx2/Alges no Yoku (JP).mx2
+msx2/American Soccer (JP).mx2
+msx2/Aoki Ookami to Shiroki Mejika - Genchou Hishi (JP).mx2
+msx2/Aoki Ookami to Shiroki Mejika - Genghis Khan (JP).mx2
+msx2/Arctic - Active Rail Playing (JP) (Alt).mx2
+msx2/Arctic - Active Rail Playing (JP).mx2
+msx2/Arkanoid 2 - Revenge of Doh (JP).mx2
+msx2/AshGuine - Densetsu no Seisenshi (JP).mx2
+msx2/AshGuine Story 2 - Kokuu no Gajou (JP).mx2
+msx2/AshGuine Story 3 - Fukushuu no Honoo (JP).mx2
+msx2/Bubble Bobble (JP) (Alt).mx2
+msx2/Bubble Bobble (JP).mx2
+msx2/Contra (JP) (Wii U Virtual Console).mx2
+msx2/Crimson (JP).mx2
+msx2/Daikoukai Jidai (JP).mx2
+msx2/Daisenryaku (JP).mx2
+msx2/Darwin 4078 (JP) (Alt).mx2
+msx2/Darwin 4078 (JP) (Alt-2).mx2
+msx2/Darwin 4078 (JP).mx2
+msx2/Deep Forest (JP) (Alt).mx2
+msx2/Deep Forest (JP).mx2
+msx2/Dires - Giger Loop (JP).mx2
+msx2/Double Vision (JP).mx2
+msx2/Dragon Buster (JP).mx2
+msx2/Dragon Quest (JP).mx2
+msx2/Dragon Quest 2 (JP) (Alt).mx2
+msx2/Dragon Quest 2 (JP).mx2
+msx2/Dragon Slayer 4 - Drasle Family (JP) (Alt).mx2
+msx2/Dragon Slayer 4 - Drasle Family (JP).mx2
+msx2/Dragon Slayer Jr. - Romancia (JP).mx2
+msx2/Druid (JP) (Alt).mx2
+msx2/Druid (JP).mx2
+msx2/Dynamite Bowl (JP) (Alt).mx2
+msx2/Dynamite Bowl (JP).mx2
+msx2/Elthlead (JP).mx2
+msx2/Europe Sensen (JP).mx2
+msx2/F-15 Strike Eagle (JP).mx2
+msx2/Famicle Parodic (JP).mx2
+msx2/Family Billiards (JP).mx2
+msx2/Family Boxing - MSX Title Match (JP).mx2
+msx2/Fantasy Zone 2 - The Tears of Opa-Opa (JP) (Alt).mx2
+msx2/Fantasy Zone 2 - The Tears of Opa-Opa (JP).mx2
+msx2/Final Mystery Murder Club - Satsujin Club (JP).mx2
+msx2/Fire Ball (JP).mx2
+msx2/Fleet Commander 2 - Koukon no Kaiiki (JP).mx2
+msx2/Gakuen Monogatari - High School Story (JP).mx2
+msx2/Gambler Jiko Chuushinha 2 - Jishou! Kyougou Janshi Hen (JP).mx2
+msx2/Ganbare Goemon! - Karakuri Douchuu (JP) (Wii U Virtual Console).mx2
+msx2/Garakuta (JP).mx2
+msx2/Garyuu Ou (JP) (Alt).mx2
+msx2/Garyuu Ou (JP).mx2
+msx2/Gekitotsu Pennant Race 2 (JP) (English Menu).mx2
+msx2/Gekitotsu Pennant Race 2 (JP).mx2
+msx2/Girly Block (JP).mx2
+msx2/Hacker (JP).mx2
+msx2/Hai no Majutsushi (JP).mx2
+msx2/Hal Note (JP).mx2
+msx2/Han Seimei Senki Andorogynus (JP) (Alt).mx2
+msx2/Han Seimei Senki Andorogynus (JP).mx2
+msx2/Hard Ball (JP).mx2
+msx2/Heroes of the Lance (JP).mx2
+msx2/Higemaru Makai Shima - Nanatsu no Shima Daibouken (JP).mx2
+msx2/High School! Kimengumi (JP).mx2
+msx2/Hinotori - Houou Hen (JP) (Alt).mx2
+msx2/Hinotori - Houou Hen (JP) (Alt-2).mx2
+msx2/Hinotori - Houou Hen (JP).mx2
+msx2/Hole in One Special (JP) (Alt).mx2
+msx2/Hole in One Special (JP).mx2
+msx2/Hydlide 3 - The Space Memories (JP).mx2
+msx2/Ide Yousuke Meijin no Jissen Mahjong (JP).mx2
+msx2/Ikari (JP) (Alt).mx2
+msx2/Ikari (JP).mx2
+msx2/Inemuriryuu Asada Tetsuya no A-kyuu Mahjong (JP).mx2
+msx2/Inindou - Datou Nobunaga (JP).mx2
+msx2/Ishin no Arashi (JP).mx2
+msx2/Jansei (JP) (Alt).mx2
+msx2/Jansei (JP).mx2
+msx2/Kempelen Chess (JP).mx2
+msx2/Kiki Kaikai (JP).mx2
+msx2/King Kong 2 - Yomigaeru Densetsu (JP).mx2
+msx2/Kisei (JP).mx2
+msx2/Kitahei (JP).mx2
+msx2/Koronis Rift (EU).mx2
+msx2/L Empereur (JP).mx2
+msx2/Labyrinth (JP) (Alt).mx2
+msx2/Labyrinth (JP).mx2
+msx2/Lupin Sansei - Babylon no Ougon Densetsu (JP) (Alt).mx2
+msx2/Lupin Sansei - Babylon no Ougon Densetsu (JP).mx2
+msx2/Lupin Sansei - Cagliostro no Shiro (JP) (Alt).mx2
+msx2/Lupin Sansei - Cagliostro no Shiro (JP).mx2
+msx2/Mad Rider (JP) (Alt).mx2
+msx2/Mad Rider (JP).mx2
+msx2/Maison Ikkoku - Kanketsu Hen - Sayonara, Soshite... (JP).mx2
+msx2/Maison Ikkoku - Omoide no Photograph (JP).mx2
+msx2/Malaya no Hibou (JP).mx2
+msx2/Metal Gear (EU).mx2
+msx2/Metal Gear (JP).mx2
+msx2/Metal Gear 2 - Solid Snake (JP).mx2
+msx2/Mirai (JP).mx2
+msx2/Mississippi Satsujinjiken (JP).mx2
+msx2/Moero!! Nettou Yakyuu 88 (JP).mx2
+msx2/Monmon Kaibutsu (JP).mx2
+msx2/Nekketsu Juudou (JP) (Alt).mx2
+msx2/Nekketsu Juudou (JP).mx2
+msx2/Ninja-kun - Asura no Shou (JP).mx2
+msx2/Nobunaga no Yabou - Bushou Fuuun Roku (JP).mx2
+msx2/Nobunaga no Yabou - Sengoku Gunyuuden (JP).mx2
+msx2/Nobunaga no Yabou - Zenkoku Ban (JP).mx2
+msx2/Ogre (JP) (Alt).mx2
+msx2/Ogre (JP).mx2
+msx2/Ouke no Tani - El Giza no Fuuin (JP).mx2
+msx2/Ouke no Tani - El Giza no Fuuin - Edit Contest Yuushuu Sakuhinshuu (JP).mx2
+msx2/Out Run (JP).mx2
+msx2/Pac-Mania (JP).mx2
+msx2/Pachi Pro Densetsu (JP).mx2
+msx2/Penguin-kun Wars 2 (JP) (Alt).mx2
+msx2/Penguin-kun Wars 2 (JP).mx2
+msx2/Predator (JP).mx2
+msx2/Pro Yakyuu Family Stadium - Pennant Race (JP).mx2
+msx2/Pro Yakyuu Fan - Telenet Stadium (JP).mx2
+msx2/Professional Mahjong Gokuu (JP).mx2
+msx2/Project A2 - Shijousaidai no Hyouteki (JP).mx2
+msx2/Quarth (JP) (Wii U Virtual Console).mx2
+msx2/Quarth (KR).mx2
+msx2/Quinpl (JP).mx2
+msx2/Rastan Saga (JP).mx2
+msx2/Relics (JP).mx2
+msx2/Replicart (JP).mx2
+msx2/Return of Jelda (JP).mx2
+msx2/Rick to Mick no Daibouken (JP).mx2
+msx2/Royal Blood (JP).mx2
+msx2/RWBrunildaMSX2_v1_01.mx2
+msx2/Sangokushi (JP).mx2
+msx2/Sangokushi 2 (JP).mx2
+msx2/Scramble Formation (JP).mx2
+msx2/Seikima 2 Special - Akuma no Gyakushuu (JP) (Alt).mx2
+msx2/Seikima 2 Special - Akuma no Gyakushuu (JP).mx2
+msx2/Shanghai (JP).mx2
+msx2/Shiryou Sensen - War of the Dead (JP).mx2
+msx2/Space Manbow (JP) (Wii U Virtual Console).mx2
+msx2/Star Virgin (JP) (Alt).mx2
+msx2/Star Virgin (JP).mx2
+msx2/Strategic Mars (JP).mx2
+msx2/Suikoden - Tenmei no Chikai (JP).mx2
+msx2/Super Daisenryaku (JP).mx2
+msx2/Super Load Runner (JP).mx2
+msx2/Super Rambo Special (JP).mx2
+msx2/Super Runner (JP).mx2
+msx2/Super Tritorn (JP).mx2
+msx2/Taiyou no Shinden - Asteka 2 (JP).mx2
+msx2/Tanikawa Hiroshi no Shougi Shinan 2 (JP).mx2
+msx2/Teitoku no Ketsudan (JP).mx2
+msx2/Tengoku Yoitoko (JP).mx2
+msx2/Tetris (JP).mx2
+msx2/The Cockpit (JP).mx2
+msx2/The Eidolon (EU).mx2
+msx2/The Gekitotsu Pennant Race - Pro Yakyuu (JP) (Alt).mx2
+msx2/The Gekitotsu Pennant Race - Pro Yakyuu (JP) (Alt-2).mx2
+msx2/The Gekitotsu Pennant Race - Pro Yakyuu (JP) (Alt-3).mx2
+msx2/The Gekitotsu Pennant Race - Pro Yakyuu (JP).mx2
+msx2/The Return of Ishtar (JP).mx2
+msx2/The Sword of Ianna (WR).mx2
+msx2/The Treasure of Usas (JP - EU) (En) (Alt).mx2
+msx2/The Treasure of Usas (JP - EU) (En).mx2
+msx2/Topple Zip (JP).mx2
+msx2/Treasure of the Usas (JP) (Wii U Virtual Console).mx2
+msx2/Tsurikichi Sanpei - Blue Marine Hen (JP).mx2
+msx2/Tsurikichi Sanpei - Tsuri Sennin Hen (JP).mx2
+msx2/Ultima Exodus (JP).mx2
+msx2/Urusei Yatsura - Koi no Survival Birthday (JP).mx2
+msx2/Vampire Killer (JP - EU) (En) (Alt).mx2
+msx2/Vampire Killer (JP - EU) (En) (Alt-2).mx2
+msx2/Vampire Killer (JP - EU) (En) (Alt-3).mx2
+msx2/Vampire Killer (JP - EU) (En).mx2
+msx2/Victorious Nine 2 - Koukou Yakyuu Hen (JP).mx2
+msx2/Wizardry (JP).mx2
+msx2/Woody Poco (JP) (Alt).mx2
+msx2/Woody Poco (JP).mx2
+msx2/Xevious - Fardraut Saga (JP) (Alt).mx2
+msx2/Xevious - Fardraut Saga (JP).mx2
+msx2/Yaksa (JP).mx2
+msx2/Yamamura Misa Suspense - Kyoto Ryuu no Tera Satsujinjiken (JP).mx2
+msx2/Yuurei-kun (JP).mx2
+msx2/Zanac Ex (JP) (Alt).mx2
+msx2/Zanac Ex (JP).mx2
+msx2/Zoids - Chuuou Tairiku no Tatakai (JP).mx2
+msx2/Zombie Hunter (JP).mx2
+msx2/Zukkoke Yajikita Onmitsu Douchuu (JP) (Alt).mx2
+msx2/Zukkoke Yajikita Onmitsu Douchuu (JP).mx2

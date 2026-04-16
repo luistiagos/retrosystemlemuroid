@@ -157,9 +157,9 @@ class TVHomeFragment : BrowseSupportFragment() {
 
     private fun <T> findAdapterById(id: Long): T? {
         for (i: Int in 0 until adapter.size()) {
-            val listRow = adapter.get(i) as ListRow
-            if (listRow.headerItem.id == id) {
-                return listRow.adapter as T
+            val item = adapter.get(i)
+            if (item is ListRow && item.headerItem.id == id) {
+                return item.adapter as? T
             }
         }
         return null

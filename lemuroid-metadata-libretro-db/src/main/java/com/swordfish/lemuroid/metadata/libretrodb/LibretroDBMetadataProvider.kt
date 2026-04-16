@@ -31,6 +31,9 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
             // Short folder names used in the luisluis123/lemusets dataset
             "a26"                  to "atari2600",
             "a78"                  to "atari7800",
+            "a52"                  to "atari5200",
+            "atari 5200"           to "atari5200",
+            "atari5200"            to "atari5200",
             // arcade/ contains MAME 0.78 ROMs. Map to both systems so that
             // findByPathAndFilename can score FBNeo vs MAME2003Plus per-game;
             // the path-preference sort will pick MAME2003Plus when "mame2003plus"
@@ -181,8 +184,8 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         return metadata
     }
 
-    private fun convertToGameMetadata(rom: LibretroRom): GameMetadata {
-        val system = extractGameSystem(rom)
+    private fun convertToGameMetadata(rom: LibretroRom): GameMetadata? {
+        val system = extractGameSystem(rom) ?: return null
         return GameMetadata(
             name = rom.name,
             romName = rom.romName,
@@ -197,7 +200,7 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         file: StorageFile,
     ): GameMetadata? {
         return db.gameDao().findByFileName(file.name)
-            .filterNullable { extractGameSystem(it).scanOptions.scanByFilename }
+            .filterNullable { extractGameSystem(it)?.scanOptions?.scanByFilename == true }
             ?.let { convertToGameMetadata(it) }
     }
 
@@ -219,10 +222,10 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         val segments = file.path?.lowercase(Locale.getDefault())
             ?.split('/', '\\')?.toHashSet() ?: emptySet()
         return db.gameDao().findAllByFileName(file.name)
-            .filter { extractGameSystem(it).scanOptions.scanByPathAndFilename }
-            .filter { parentContainsSystem(file.path, extractGameSystem(it).id.dbname) }
+            .filter { extractGameSystem(it)?.scanOptions?.scanByPathAndFilename == true }
+            .filter { extractGameSystem(it)?.let { sys -> parentContainsSystem(file.path, sys.id.dbname) } == true }
             .sortedByDescending { rom ->
-                val dbname = extractGameSystem(rom).id.dbname
+                val dbname = extractGameSystem(rom)?.id?.dbname ?: return@sortedByDescending 0
                 when {
                     // Dedicated-system matches beat generic arcade folder heuristics.
                     dbname == "neogeo" || dbname == "cps1" || dbname == "cps2" || dbname == "cps3" || dbname == "dataeast" || dbname == "galaxian" || dbname == "toaplan" || dbname == "taito" || dbname == "psikyo" || dbname == "pgm" || dbname == "kaneko" || dbname == "cave" || dbname == "technos" || dbname == "seta" -> 3
@@ -242,7 +245,7 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         val system =
             sortedSystemIds
                 .filter { parentContainsSystem(file.path, it) }
-                .map { GameSystem.findById(it) }
+                .mapNotNull { GameSystem.findByIdOrNull(it) }
                 .filter { it.scanOptions.scanByPathAndSupportedExtensions }
                 .firstOrNull { it.supportedExtensions.contains(file.extension) }
 
@@ -287,19 +290,19 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         file: StorageFile,
         db: LibretroDatabase,
     ): GameMetadata? {
-        if (file.serial == null) return null
-        return db.gameDao().findBySerial(file.serial!!)
+        val serial = file.serial ?: return null
+        return db.gameDao().findBySerial(serial)
             ?.let { convertToGameMetadata(it) }
     }
 
     private fun findByKnownSystem(file: StorageFile): GameMetadata? {
-        if (file.systemID == null) return null
+        val systemID = file.systemID ?: return null
 
         return GameMetadata(
             name = file.extensionlessName,
             romName = file.name,
             thumbnail = null,
-            system = file.systemID!!.dbname,
+            system = systemID.dbname,
             developer = null,
         )
     }
@@ -325,9 +328,10 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
         return result
     }
 
-    private fun extractGameSystem(rom: LibretroRom): GameSystem {
+    private fun extractGameSystem(rom: LibretroRom): GameSystem? {
         val dedicatedSystemId = ArcadeSubSystemRoms.dedicatedSystemIdForRom(rom.romName)
-        return GameSystem.findById(dedicatedSystemId ?: rom.system!!)
+        val systemId = dedicatedSystemId ?: rom.system ?: return null
+        return GameSystem.findByIdOrNull(systemId)
     }
 
     private fun computeCoverUrl(

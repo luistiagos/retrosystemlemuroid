@@ -91,6 +91,11 @@ enum class CoreID(
         "ProSystem",
         "libprosystem_libretro_android.so",
     ),
+    A5200(
+        "a5200",
+        "a5200",
+        "liba5200_libretro_android.so",
+    ),
     MEDNAFEN_NGP(
         "mednafen_ngp",
         "Mednafen NGP",

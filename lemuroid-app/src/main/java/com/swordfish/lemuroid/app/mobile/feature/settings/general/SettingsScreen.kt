@@ -50,6 +50,7 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel,
     navController: NavController,
+    onCheckUpdate: () -> Unit = {},
 ) {
     val state =
         viewModel.uiState
@@ -82,6 +83,7 @@ fun SettingsScreen(
             indexingInProgress = indexingInProgress,
             isSaveSyncSupported = state.isSaveSyncSupported,
             navController = navController,
+            onCheckUpdate = onCheckUpdate,
         )
     }
 }
@@ -91,6 +93,7 @@ private fun MiscSettings(
     indexingInProgress: Boolean,
     isSaveSyncSupported: Boolean,
     navController: NavController,
+    onCheckUpdate: () -> Unit = {},
 ) {
     LemuroidCardSettingsGroup(
         title = { Text(text = stringResource(id = R.string.settings_category_misc)) },
@@ -125,6 +128,13 @@ private fun MiscSettings(
                 Text(text = stringResource(id = R.string.settings_description_advanced_settings))
             },
             onClick = { navController.navigateToRoute(MainRoute.SETTINGS_ADVANCED) },
+        )
+        LemuroidSettingsMenuLink(
+            title = { Text(text = stringResource(id = R.string.settings_title_check_update)) },
+            subtitle = {
+                Text(text = stringResource(id = R.string.settings_description_check_update))
+            },
+            onClick = onCheckUpdate,
         )
     }
 }

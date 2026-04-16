@@ -334,5 +334,17 @@
     <string name="language_en">English</string>
     <string name="language_pt">Português (Brasil)</string>
 
+    <!-- App self-update -->
+    <string name="update_dialog_title">Atualização %1$s disponível</string>
+    <string name="update_dialog_message">Uma nova versão está disponível. Gostaria de atualizar agora? Seus saves e ROMs serão mantidos.</string>
+    <string name="update_dialog_yes">Sim, atualizar</string>
+    <string name="update_dialog_no">Agora não</string>
+    <string name="update_downloading_title">Baixando atualização…</string>
+    <string name="update_downloading_message">%1$d%% concluído</string>
+    <string name="update_no_update_title">Sem atualizações</string>
+    <string name="update_no_update_message">Não há atualizações disponíveis no momento.</string>
+    <string name="update_error_title">Erro na atualização</string>
+    <string name="settings_title_check_update">Verificar atualizações</string>
+    <string name="settings_description_check_update">Verificar se há uma nova versão disponível</string>
 
 </resources>

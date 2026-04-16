@@ -62,7 +62,8 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
         launchOnState(Lifecycle.State.RESUMED) {
             searchViewModel.searchResults
                 .collect {
-                    val gamesAdapter = (rowsAdapter.get(0) as ListRow).adapter as PagingDataAdapter<Game>
+                    val row = rowsAdapter.get(0) as? ListRow ?: return@collect
+                    val gamesAdapter = row.adapter as? PagingDataAdapter<Game> ?: return@collect
                     gamesAdapter.submitData(lifecycle, it)
                 }
         }

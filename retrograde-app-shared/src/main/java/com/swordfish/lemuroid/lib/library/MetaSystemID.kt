@@ -88,6 +88,11 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_atari7800,
         listOf(SystemID.ATARI7800),
     ),
+    ATARI5200(
+        R.string.game_system_title_atari5200,
+        R.drawable.game_system_atari5200,
+        listOf(SystemID.ATARI5200),
+    ),
     LYNX(
         R.string.game_system_title_lynx,
         R.drawable.game_system_lynx,
@@ -126,7 +131,12 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
     MSX(
         R.string.game_system_title_msx,
         R.drawable.game_system_msx,
-        listOf(SystemID.MSX, SystemID.MSX2),
+        listOf(SystemID.MSX),
+    ),
+    MSX2(
+        R.string.game_system_title_msx2,
+        R.drawable.game_system_msx2,
+        listOf(SystemID.MSX2),
     ),
     NEOGEO(
         R.string.game_system_title_neogeo,
@@ -226,6 +236,7 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.PC_ENGINE -> PC_ENGINE
                 SystemID.LYNX -> LYNX
                 SystemID.ATARI7800 -> ATARI7800
+                SystemID.ATARI5200 -> ATARI5200
                 SystemID.DOS -> DOS
                 SystemID.NGP -> NGP
                 SystemID.NGC -> NGC
@@ -233,7 +244,7 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.WSC -> WS
                 SystemID.NINTENDO_3DS -> NINTENDO_3DS
                 SystemID.MSX -> MSX
-                SystemID.MSX2 -> MSX
+                SystemID.MSX2 -> MSX2
                 SystemID.NEOGEO -> NEOGEO
                 SystemID.CPS1 -> CPS1
                 SystemID.CPS2 -> CPS2

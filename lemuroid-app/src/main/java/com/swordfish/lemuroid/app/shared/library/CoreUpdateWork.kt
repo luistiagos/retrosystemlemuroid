@@ -65,11 +65,9 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
                 listOf(CoreID.valueOf(specificCoreId))
             } else {
                 retrogradeDatabase.gameDao().selectSystems()
-                    .asFlow()
-                    .map { GameSystem.findById(it) }
+                    .mapNotNull { GameSystem.findByIdOrNull(it) }
                     .map { coresSelection.getCoreConfigForSystem(it) }
                     .map { it.coreID }
-                    .toList()
             }
 
             coreUpdater.downloadCores(applicationContext, cores)

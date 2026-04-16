@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
+import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +19,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONObject
+import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
@@ -72,6 +74,15 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
         const val PREF_PAUSED = "streaming_download_paused"
         const val PREF_WIFI_ONLY = "wifi_only_download"
         private const val PREF_DOWNLOADED_FILES = "streaming_downloaded_files"
+        private const val PREF_CATALOG_VERSION = "streaming_catalog_version"
+
+        /**
+         * Bump this whenever the embedded catalog_manifest.txt gains new systems/entries.
+         * On app start the stored version is compared; if outdated, PREF_DOWNLOAD_DONE is
+         * cleared so populateFromEmbeddedCatalog runs again and creates the new placeholders
+         * (existing files are never deleted — only missing ones are created).
+         */
+        private const val CATALOG_VERSION = 3
 
         /**
          * Root path inside the HuggingFace dataset repository.
@@ -102,6 +113,21 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
     private val _pausedFlow = MutableStateFlow(prefs.getBoolean(PREF_PAUSED, false))
 
     init {
+        // If the embedded catalog was updated (CATALOG_VERSION bumped), reset DOWNLOAD_DONE
+        // so populateFromEmbeddedCatalog runs again and creates any new placeholder files.
+        // Existing ROM files are never touched — only missing entries are created.
+        val storedCatalogVersion = prefs.getInt(PREF_CATALOG_VERSION, 1)
+        if (storedCatalogVersion < CATALOG_VERSION) {
+            prefs.edit()
+                .putInt(PREF_CATALOG_VERSION, CATALOG_VERSION)
+                .putBoolean(PREF_DOWNLOAD_DONE, false)
+                .putBoolean(PREF_DOWNLOAD_STARTED, true)
+                .apply()
+            if (autoRestart && !prefs.getBoolean(PREF_PAUSED, false)) {
+                StreamingRomsWork.enqueue(appContext)
+            }
+        }
+
         // If a streaming download was started but never completed (app killed mid-download),
         // automatically re-enqueue the work so it resumes from where it left off.
         // Skip auto-restart if the download was explicitly paused by the user.
@@ -235,11 +261,17 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
     /**
      * Reads the embedded catalog manifest from assets. Returns a list of relative paths
      * like "arcade/acrobatm.zip", or null if the asset is not present.
+     *
+     * On weak devices, entries for heavy systems (PSP, 3DS, NDS, N64, PSX, DOS, Sega CD)
+     * are excluded so their placeholder files are never created.
      */
     private fun loadCatalogFromAssets(): List<String>? {
+        val excludedPrefixes = HeavySystemFilter.excludedCatalogPrefixes(HeavySystemFilter.deviceTier(appContext))
         return try {
             appContext.assets.open("catalog_manifest.txt").bufferedReader().useLines { seq ->
-                seq.filter { it.isNotBlank() }.toList()
+                seq.filter { it.isNotBlank() }
+                    .filter { line -> excludedPrefixes.none { prefix -> line.startsWith(prefix) } }
+                    .toList()
             }
         } catch (e: IOException) {
             Timber.w("Embedded catalog not available: ${e.message}")
@@ -260,12 +292,27 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
         val alreadyDone = prefs.getInt(PREF_DOWNLOADED_FILES, 0)
         var doneCount = alreadyDone
 
+        var failCount = 0
         paths.forEachIndexed { index, relativePath ->
             currentCoroutineContext().ensureActive()
             val destFile = File(romsDir, relativePath)
             if (!destFile.exists()) {
-                destFile.parentFile?.mkdirs()
-                destFile.createNewFile()
+                try {
+                    val parent = destFile.parentFile
+                    if (parent != null && !parent.exists()) parent.mkdirs()
+                    destFile.createNewFile()
+                } catch (e: IOException) {
+                    failCount++
+                    // If too many files fail, the directory is likely broken — abort early.
+                    if (failCount >= 10) {
+                        throw IOException(
+                            "Too many file creation failures ($failCount). Last error at: ${destFile.absolutePath}",
+                            e,
+                        )
+                    }
+                    Timber.w("Skipping ${relativePath}: ${e.message}")
+                    return@forEachIndexed
+                }
                 doneCount++
                 prefs.edit().putInt(PREF_DOWNLOADED_FILES, doneCount).apply()
                 if (doneCount % 500 == 0) {
@@ -299,8 +346,19 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
     internal suspend fun doStreamingDownload(
         onProgress: suspend (progress: Float, currentFile: String, downloaded: Int, total: Int) -> Unit,
     ) {
-        val romsDir = DirectoriesManager(appContext).getInternalRomsDirectory()
+        var romsDir = DirectoriesManager(appContext).getInternalRomsDirectory()
         romsDir.mkdirs()
+
+        // Fallback: if external storage is unavailable (common on cheap TV boxes),
+        // use internal app storage so the catalog still works.
+        if (!romsDir.exists() || !romsDir.canWrite()) {
+            Timber.w("External ROMs dir not writable: ${romsDir.absolutePath}, falling back to internal storage")
+            romsDir = File(appContext.filesDir, "roms")
+            romsDir.mkdirs()
+        }
+        if (!romsDir.exists() || !romsDir.canWrite()) {
+            throw IOException("Cannot create ROMs directory: ${romsDir.absolutePath}")
+        }
 
         // Fast path: use the catalog embedded in the APK assets.
         val embeddedPaths = loadCatalogFromAssets()
@@ -564,6 +622,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
 
     private fun buildHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
+            .applyConscryptTls()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .followRedirects(true)

@@ -304,7 +304,7 @@ class LemuroidLibrary(
             return null
         }
 
-        val gameSystem = GameSystem.findById(gameMetadata.system ?: return null)
+        val gameSystem = GameSystem.findByIdOrNull(gameMetadata.system ?: return null) ?: return null
 
         // If the databased matched a data file (as with bin/cue) we force link the primary filename
         val fileName =

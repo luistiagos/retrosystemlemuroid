@@ -42,6 +42,7 @@ dependencies {
     implementation(deps.libs.dagger.android.support)
     implementation(deps.libs.okHttp3)
     implementation(deps.libs.okio)
+    implementation(deps.libs.conscrypt)
     implementation(deps.libs.retrofit)
     implementation(deps.libs.kotlin.serialization)
     implementation(deps.libs.kotlin.serializationJson)

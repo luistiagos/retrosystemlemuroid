@@ -94,7 +94,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         game = intent.getSerializableExtra(EXTRA_GAME) as? Game ?: run { finish(); return }
         systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as? SystemCoreConfig ?: run { finish(); return }
-        system = GameSystem.findById(game.systemId)
+        system = GameSystem.findByIdOrNull(game.systemId) ?: run { finish(); return }
 
         val viewModel by viewModels<BaseGameScreenViewModel> {
             BaseGameScreenViewModel.Factory(

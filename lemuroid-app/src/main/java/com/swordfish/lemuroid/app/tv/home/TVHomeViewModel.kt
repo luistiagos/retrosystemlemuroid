@@ -106,7 +106,9 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
             val hideSystems = appContext.isTvDevice()
             systemCounts.asSequence()
                 .filter { (_, count) -> count > 0 }
-                .map { (systemId, count) -> GameSystem.findById(systemId).metaSystemID() to count }
+                .mapNotNull { (systemId, count) ->
+                    GameSystem.findByIdOrNull(systemId)?.let { it.metaSystemID() to count }
+                }
                 .filter { (metaSystemId, _) -> !hideSystems || metaSystemId !in TV_HIDDEN_SYSTEMS }
                 .groupBy { (metaSystemId, _) -> metaSystemId }
                 .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumOf { it.second }) }

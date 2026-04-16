@@ -4,14 +4,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
+import com.swordfish.lemuroid.app.tv.shared.TVCardFocusHighlight
 
 class SettingPresenter(private val cardSize: Int, private val cardPadding: Int) : Presenter() {
     override fun onBindViewHolder(
         viewHolder: Presenter.ViewHolder?,
         item: Any,
     ) {
+        val viewHolder = viewHolder as? ViewHolder ?: return
         val setting = item as TVSetting
-        (viewHolder as ViewHolder).mCardView.titleText = viewHolder.view.context.resources.getString(setting.type.text)
+        viewHolder.mCardView.titleText = viewHolder.view.context.resources.getString(setting.type.text)
         viewHolder.mCardView.setMainImageDimensions(cardSize, cardSize)
         viewHolder.mCardView.mainImageView.setImageResource(setting.type.icon)
 
@@ -25,6 +27,7 @@ class SettingPresenter(private val cardSize: Int, private val cardPadding: Int) 
         val cardView = ImageCardView(parent.context)
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
+        TVCardFocusHighlight.setupOnCard(cardView)
         return ViewHolder(cardView)
     }
 

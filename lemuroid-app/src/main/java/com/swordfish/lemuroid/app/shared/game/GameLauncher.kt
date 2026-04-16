@@ -30,7 +30,7 @@ class GameLauncher(
                 showRomNotFoundDialog(activity, game)
                 return@launch
             }
-            val system = GameSystem.findById(game.systemId)
+            val system = GameSystem.findByIdOrNull(game.systemId) ?: return@launch
             val coreConfig = coresSelection.getCoreConfigForSystem(system)
             gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
             BaseGameActivity.launchGame(activity, coreConfig, game, loadSave, leanback)

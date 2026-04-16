@@ -15,6 +15,8 @@ object RomSystemMapper {
         "a26"          to "atari2600",   // HuggingFace folder alias
         "atari7800"    to "atari7800",   // SystemID.ATARI7800 dbname
         "a78"          to "atari7800",   // HuggingFace folder alias
+        "atari5200"    to "atari5200",   // SystemID.ATARI5200 dbname
+        "a52"          to "atari5200",   // HuggingFace folder alias
         "lynx"         to "lynx",
         // Nintendo
         "nes"          to "nes",
@@ -64,7 +66,7 @@ object RomSystemMapper {
         "arcade"       to "mame2003plus",       // HuggingFace folder alias (mame 0.78, served as fbneo on server)
         // MSX
         "msx"          to "msx",
-        "msx2"         to "msx",
+        "msx2"         to "msx2",
     )
 
     /**

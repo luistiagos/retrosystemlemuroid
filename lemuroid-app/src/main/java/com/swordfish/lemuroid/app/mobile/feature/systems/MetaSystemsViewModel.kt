@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.utils.android.isTvDevice
 import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.metaSystemID
@@ -27,6 +28,12 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
 
     private val tvHiddenSystems = setOf(MetaSystemID.PSP, MetaSystemID.NINTENDO_3DS)
 
+    private val deviceTier = HeavySystemFilter.deviceTier(appContext)
+    private val hiddenSystems: Set<MetaSystemID> = HeavySystemFilter.excludedSystems(deviceTier)
+        .mapNotNull { systemId ->
+            GameSystem.findByIdOrNull(systemId.dbname)?.let { it.metaSystemID() }
+        }.toSet()
+
     // null = loading (Room query not yet emitted), emptyList = genuinely no systems.
     // StateFlow with SharingStarted.Eagerly starts collecting immediately upon ViewModel
     // creation — before the composable subscribes — so the first emission is ready by the
@@ -45,6 +52,7 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
                         GameSystem.findByIdOrNull(systemId)?.let { it.metaSystemID() to count }
                     }
                     .filter { (metaSystemId, _) -> !hideSystems || metaSystemId !in tvHiddenSystems }
+                    .filter { (metaSystemId, _) -> metaSystemId !in hiddenSystems }
                     .groupBy { (metaSystemId, _) -> metaSystemId }
                     .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumOf { it.second }) }
                     .sortedBy { it.getName(appContext) }

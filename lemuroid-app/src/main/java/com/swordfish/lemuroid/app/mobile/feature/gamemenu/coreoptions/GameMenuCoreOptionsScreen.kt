@@ -65,14 +65,16 @@ private fun CoreOptions(
                 title = { Text(text = coreOption.getDisplayName(context)) },
             )
         } else {
+            val entriesValues = coreOption.getEntriesValues()
+            if (entriesValues.isEmpty()) continue
             LemuroidSettingsList(
                 title = { Text(text = coreOption.getDisplayName(context)) },
                 items = coreOption.getEntries(context),
                 state =
                     indexPreferenceState(
                         CoreVariablesManager.computeSharedPreferenceKey(coreOption.getKey(), systemID),
-                        coreOption.getEntriesValues().first(),
-                        coreOption.getEntriesValues(),
+                        entriesValues.first(),
+                        entriesValues,
                     ),
             )
         }
@@ -111,7 +113,7 @@ private fun ControllersOptions(
                             gameMenuRequest.coreConfig.coreID,
                             port,
                         ),
-                        controllerConfigs.map { it.name }.first(),
+                        controllerConfigs.map { it.name }.firstOrNull() ?: return@forEach,
                         controllerConfigs.map { it.name },
                     ),
             )
