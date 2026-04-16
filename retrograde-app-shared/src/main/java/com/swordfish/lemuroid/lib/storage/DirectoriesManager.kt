@@ -4,36 +4,49 @@ import android.content.Context
 import java.io.File
 
 class DirectoriesManager(private val appContext: Context) {
+
+    private val cachedInternalStates by lazy {
+        File(appContext.filesDir, "states").apply { mkdirs() }
+    }
+
+    private val cachedCores by lazy {
+        File(appContext.filesDir, "cores").apply { mkdirs() }
+    }
+
+    private val cachedSystem by lazy {
+        File(appContext.filesDir, "system").apply { mkdirs() }
+    }
+
+    private val externalBase by lazy { appContext.getExternalFilesDir(null) }
+
+    private val cachedStates by lazy {
+        File(externalBase, "states").apply { mkdirs() }
+    }
+
+    private val cachedStatesPreview by lazy {
+        File(externalBase, "state-previews").apply { mkdirs() }
+    }
+
+    private val cachedSaves by lazy {
+        File(externalBase, "saves").apply { mkdirs() }
+    }
+
+    private val cachedRoms by lazy {
+        SmartStoragePicker.getBestRomsDirectory(appContext)
+    }
+
     @Deprecated("Use the external states directory")
-    fun getInternalStatesDirectory(): File =
-        File(appContext.filesDir, "states").apply {
-            mkdirs()
-        }
+    fun getInternalStatesDirectory(): File = cachedInternalStates
 
-    fun getCoresDirectory(): File =
-        File(appContext.filesDir, "cores").apply {
-            mkdirs()
-        }
+    fun getCoresDirectory(): File = cachedCores
 
-    fun getSystemDirectory(): File =
-        File(appContext.filesDir, "system").apply {
-            mkdirs()
-        }
+    fun getSystemDirectory(): File = cachedSystem
 
-    fun getStatesDirectory(): File =
-        File(appContext.getExternalFilesDir(null), "states").apply {
-            mkdirs()
-        }
+    fun getStatesDirectory(): File = cachedStates
 
-    fun getStatesPreviewDirectory(): File =
-        File(appContext.getExternalFilesDir(null), "state-previews").apply {
-            mkdirs()
-        }
+    fun getStatesPreviewDirectory(): File = cachedStatesPreview
 
-    fun getSavesDirectory(): File =
-        File(appContext.getExternalFilesDir(null), "saves").apply {
-            mkdirs()
-        }
+    fun getSavesDirectory(): File = cachedSaves
 
     /**
      * Returns the directory where ROMs should be stored/scanned.
@@ -41,5 +54,5 @@ class DirectoriesManager(private val appContext: Context) {
      * space when the user has not configured a custom directory, so that SD cards and
      * USB drives attached to Smart TVs are preferred over limited built-in flash.
      */
-    fun getInternalRomsDirectory(): File = SmartStoragePicker.getBestRomsDirectory(appContext)
+    fun getInternalRomsDirectory(): File = cachedRoms
 }

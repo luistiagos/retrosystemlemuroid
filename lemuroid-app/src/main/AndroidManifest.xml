@@ -55,7 +55,8 @@
         android:theme="@style/LemuroidMaterialTheme">
         <activity
             android:name="com.swordfish.lemuroid.app.mobile.feature.main.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/LemuroidSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -115,7 +116,7 @@
         <activity
             android:name=".app.tv.main.MainTVActivity"
             android:exported="true"
-            android:theme="@style/LemuroidLeanbackTheme">
+            android:theme="@style/LemuroidTVSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />

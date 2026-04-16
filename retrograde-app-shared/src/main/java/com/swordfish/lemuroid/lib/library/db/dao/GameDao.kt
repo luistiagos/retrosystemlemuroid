@@ -94,6 +94,9 @@ interface GameDao {
     """)
     fun selectBySystems(systemIds: List<String>): PagingSource<Int, Game>
 
+    @Query("SELECT * FROM games ORDER BY title ASC")
+    suspend fun selectAll(): List<Game>
+
     @Query("SELECT DISTINCT systemId FROM games ORDER BY systemId ASC")
     suspend fun selectSystems(): List<String>
 

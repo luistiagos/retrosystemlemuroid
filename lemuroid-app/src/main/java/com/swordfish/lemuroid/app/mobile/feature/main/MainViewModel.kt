@@ -5,20 +5,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
+import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-class MainViewModel(appContext: Context, private val saveSyncManager: SaveSyncManager) : ViewModel() {
+class MainViewModel(
+    appContext: Context,
+    private val saveSyncManager: SaveSyncManager,
+    retrogradeDb: RetrogradeDatabase,
+) : ViewModel() {
     class Factory(
         private val appContext: Context,
         private val saveSyncManager: SaveSyncManager,
+        private val retrogradeDb: RetrogradeDatabase,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MainViewModel(appContext, saveSyncManager) as T
+            return MainViewModel(appContext, saveSyncManager, retrogradeDb) as T
         }
     }
 
@@ -35,6 +42,12 @@ class MainViewModel(appContext: Context, private val saveSyncManager: SaveSyncMa
     private val searchQueryFlow = MutableStateFlow("")
 
     val state = buildStateFlow()
+
+    val downloadedFileNames: StateFlow<Set<String>> =
+        retrogradeDb.downloadedRomDao()
+            .observeAllDownloadedFileNames()
+            .map { it.toHashSet() as Set<String> }
+            .stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
 
     private fun buildStateFlow(): StateFlow<UiState> {
         val combinedFlows =

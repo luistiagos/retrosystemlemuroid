@@ -97,6 +97,42 @@ enum class MainRoute(
         parent = SETTINGS,
         showBottomNavigation = false,
     ),
+    SETTINGS_TRANSFER(
+        route = "settings/transfer",
+        titleId = R.string.transfer_title,
+        parent = SETTINGS,
+        showBottomNavigation = false,
+    ),
+    SETTINGS_TRANSFER_EXPORT(
+        route = "settings/transfer/export",
+        titleId = R.string.transfer_export_title,
+        parent = SETTINGS_TRANSFER,
+        showBottomNavigation = false,
+    ),
+    SETTINGS_TRANSFER_IMPORT(
+        route = "settings/transfer/import",
+        titleId = R.string.transfer_import_title,
+        parent = SETTINGS_TRANSFER,
+        showBottomNavigation = false,
+    ),
+    SETTINGS_ROMSET(
+        route = "settings/romset",
+        titleId = R.string.romset_title,
+        parent = SETTINGS,
+        showBottomNavigation = false,
+    ),
+    SETTINGS_ROMSET_EXPORT(
+        route = "settings/romset/export",
+        titleId = R.string.romset_export_title,
+        parent = SETTINGS_ROMSET,
+        showBottomNavigation = false,
+    ),
+    SETTINGS_ROMSET_IMPORT(
+        route = "settings/romset/import",
+        titleId = R.string.romset_import_title,
+        parent = SETTINGS_ROMSET,
+        showBottomNavigation = false,
+    ),
     ;
 
     val root = root()

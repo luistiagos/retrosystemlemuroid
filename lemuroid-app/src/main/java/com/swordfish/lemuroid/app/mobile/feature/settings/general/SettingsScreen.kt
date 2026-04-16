@@ -130,6 +130,20 @@ private fun MiscSettings(
             onClick = { navController.navigateToRoute(MainRoute.SETTINGS_ADVANCED) },
         )
         LemuroidSettingsMenuLink(
+            title = { Text(text = stringResource(id = R.string.transfer_title)) },
+            subtitle = {
+                Text(text = stringResource(id = R.string.transfer_settings_description))
+            },
+            onClick = { navController.navigateToRoute(MainRoute.SETTINGS_TRANSFER) },
+        )
+        LemuroidSettingsMenuLink(
+            title = { Text(text = stringResource(id = R.string.romset_title)) },
+            subtitle = {
+                Text(text = stringResource(id = R.string.romset_settings_description))
+            },
+            onClick = { navController.navigateToRoute(MainRoute.SETTINGS_ROMSET) },
+        )
+        LemuroidSettingsMenuLink(
             title = { Text(text = stringResource(id = R.string.settings_title_check_update)) },
             subtitle = {
                 Text(text = stringResource(id = R.string.settings_description_check_update))

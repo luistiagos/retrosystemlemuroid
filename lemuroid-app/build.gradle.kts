@@ -184,6 +184,7 @@ dependencies {
     implementation(deps.libs.androidx.leanback.tvProvider)
     implementation(deps.libs.harmony)
     implementation(deps.libs.startup)
+    implementation(deps.libs.splashscreen)
     implementation(deps.libs.kotlin.serialization)
     implementation(deps.libs.kotlin.serializationJson)
 

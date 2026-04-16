@@ -69,6 +69,10 @@ import com.swordfish.lemuroid.lib.storage.StorageProviderRegistry
 import com.swordfish.lemuroid.lib.storage.local.AllFilesStorageProvider
 import com.swordfish.lemuroid.lib.storage.local.LocalStorageProvider
 import com.swordfish.lemuroid.lib.storage.local.StorageAccessFrameworkProvider
+import com.swordfish.lemuroid.lib.transfer.GameExportManager
+import com.swordfish.lemuroid.lib.transfer.GameImportManager
+import com.swordfish.lemuroid.lib.romset.RomsetExportManager
+import com.swordfish.lemuroid.lib.romset.RomsetImportManager
 import com.swordfish.lemuroid.metadata.libretrodb.LibretroDBMetadataProvider
 import com.swordfish.lemuroid.metadata.libretrodb.db.LibretroDBManager
 import dagger.Binds
@@ -132,8 +136,8 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun retrogradeDb(app: LemuroidApplication) =
-            Room.databaseBuilder(app, RetrogradeDatabase::class.java, RetrogradeDatabase.DB_NAME)
+        fun retrogradeDb(app: LemuroidApplication): RetrogradeDatabase {
+            val db = Room.databaseBuilder(app, RetrogradeDatabase::class.java, RetrogradeDatabase.DB_NAME)
                 .addCallback(GameSearchDao.CALLBACK)
                 .addMigrations(
                     GameSearchDao.MIGRATION,
@@ -151,6 +155,17 @@ abstract class LemuroidApplicationModule {
                 .fallbackToDestructiveMigration()
                 .setJournalMode(androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
                 .build()
+
+            // Pre-warm: open the SQLite file and run any pending migrations in the
+            // background so that the first UI query does not pay this cost.
+            Thread {
+                try {
+                    db.openHelper.writableDatabase
+                } catch (_: Throwable) { }
+            }.start()
+
+            return db
+        }
 
         @Provides
         @PerApp
@@ -348,6 +363,43 @@ abstract class LemuroidApplicationModule {
         @JvmStatic
         fun desmumeMigrationHandler(directoriesManager: DirectoriesManager) =
             DesmumeMigrationHandler(directoriesManager)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun gameExportManager(
+            context: Context,
+            directoriesManager: DirectoriesManager,
+            retrogradeDatabase: RetrogradeDatabase,
+        ) = GameExportManager(context, directoriesManager, retrogradeDatabase)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun gameImportManager(
+            context: Context,
+            directoriesManager: DirectoriesManager,
+            retrogradeDatabase: RetrogradeDatabase,
+            lemuroidLibrary: LemuroidLibrary,
+        ) = GameImportManager(context, directoriesManager, retrogradeDatabase, lemuroidLibrary)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun romsetExportManager(
+            context: Context,
+            directoriesManager: DirectoriesManager,
+            retrogradeDatabase: RetrogradeDatabase,
+        ) = RomsetExportManager(context, directoriesManager, retrogradeDatabase)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun romsetImportManager(
+            context: Context,
+            directoriesManager: DirectoriesManager,
+            lemuroidLibrary: LemuroidLibrary,
+        ) = RomsetImportManager(context, directoriesManager, lemuroidLibrary)
 
         @Provides
         @PerApp

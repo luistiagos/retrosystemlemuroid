@@ -12,6 +12,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -54,6 +55,16 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevi
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetExportScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetImportScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetSettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.transfer.TransferExportScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.transfer.TransferImportScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.transfer.TransferSettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.transfer.TransferViewModel
+import com.swordfish.lemuroid.lib.romset.RomsetExportManager
+import com.swordfish.lemuroid.lib.romset.RomsetImportManager
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
@@ -80,6 +91,9 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
+import com.swordfish.lemuroid.lib.transfer.GameExportManager
+import com.swordfish.lemuroid.lib.transfer.GameImportManager
+import dagger.Lazy
 import dagger.Provides
 import de.charlex.compose.material3.HtmlText
 import kotlinx.coroutines.launch
@@ -100,24 +114,36 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     lateinit var gameInteractor: GameInteractor
 
     @Inject
-    lateinit var biosManager: BiosManager
+    lateinit var biosManager: Lazy<BiosManager>
 
     @Inject
     lateinit var coresSelection: CoresSelection
 
     @Inject
-    lateinit var settingsInteractor: SettingsInteractor
+    lateinit var settingsInteractor: Lazy<SettingsInteractor>
 
     @Inject
-    lateinit var inputDeviceManager: InputDeviceManager
+    lateinit var inputDeviceManager: Lazy<InputDeviceManager>
 
     @Inject
     lateinit var romOnDemandManager: RomOnDemandManager
 
+    @Inject
+    lateinit var gameExportManager: Lazy<GameExportManager>
+
+    @Inject
+    lateinit var gameImportManager: Lazy<GameImportManager>
+
+    @Inject
+    lateinit var romsetExportManager: Lazy<RomsetExportManager>
+
+    @Inject
+    lateinit var romsetImportManager: Lazy<RomsetImportManager>
+
     private val reviewManager = ReviewManager()
 
     private val mainViewModel: MainViewModel by viewModels {
-        MainViewModel.Factory(applicationContext, saveSyncManager)
+        MainViewModel.Factory(applicationContext, saveSyncManager, retrogradeDb)
     }
 
     private val updateViewModel: AppUpdateViewModel by viewModels {
@@ -125,6 +151,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         enableEdgeToEdge(
             SystemBarStyle.dark(Color.TRANSPARENT),
             SystemBarStyle.dark(Color.TRANSPARENT),
@@ -190,11 +217,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 }
 
             val downloadedFileNames =
-                retrogradeDb.downloadedRomDao()
-                    .observeAllDownloadedFileNames()
-                    .collectAsState(initial = emptyList())
+                mainViewModel.downloadedFileNames
+                    .collectAsState()
                     .value
-                    .toHashSet()
 
             val onGameLongClick = { game: Game ->
                 selectedGameState.value = game
@@ -332,7 +357,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory =
                                         SettingsViewModel.Factory(
                                             applicationContext,
-                                            settingsInteractor,
+                                            settingsInteractor.get(),
                                             saveSyncManager,
                                             FlowSharedPreferences(
                                                 SharedPreferencesHelper.getLegacySharedPreferences(
@@ -353,7 +378,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory =
                                         AdvancedSettingsViewModel.Factory(
                                             applicationContext,
-                                            settingsInteractor,
+                                            settingsInteractor.get(),
                                         ),
                                 ),
                             navController = navController,
@@ -364,7 +389,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             modifier = Modifier.padding(padding),
                             viewModel =
                                 viewModel(
-                                    factory = BiosSettingsViewModel.Factory(biosManager),
+                                    factory = BiosSettingsViewModel.Factory(biosManager.get()),
                                 ),
                         )
                     }
@@ -389,7 +414,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory =
                                         InputDevicesSettingsViewModel.Factory(
                                             applicationContext,
-                                            inputDeviceManager,
+                                            inputDeviceManager.get(),
                                         ),
                                 ),
                         )
@@ -405,6 +430,68 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                             saveSyncManager,
                                         ),
                                 ),
+                        )
+                    }
+                    composable(MainRoute.SETTINGS_TRANSFER) {
+                        TransferSettingsScreen(
+                            modifier = Modifier.padding(padding),
+                            navController = navController,
+                        )
+                    }
+                    composable(MainRoute.SETTINGS_TRANSFER_EXPORT) {
+                        TransferExportScreen(
+                            modifier = Modifier.padding(padding),
+                            viewModel = viewModel(
+                                factory = TransferViewModel.Factory(
+                                    applicationContext,
+                                    retrogradeDb,
+                                    gameExportManager.get(),
+                                    gameImportManager.get(),
+                                ),
+                            ),
+                        )
+                    }
+                    composable(MainRoute.SETTINGS_TRANSFER_IMPORT) {
+                        TransferImportScreen(
+                            modifier = Modifier.padding(padding),
+                            viewModel = viewModel(
+                                factory = TransferViewModel.Factory(
+                                    applicationContext,
+                                    retrogradeDb,
+                                    gameExportManager.get(),
+                                    gameImportManager.get(),
+                                ),
+                            ),
+                        )
+                    }
+                    composable(MainRoute.SETTINGS_ROMSET) {
+                        RomsetSettingsScreen(
+                            modifier = Modifier.padding(padding),
+                            navController = navController,
+                        )
+                    }
+                    composable(MainRoute.SETTINGS_ROMSET_EXPORT) {
+                        RomsetExportScreen(
+                            modifier = Modifier.padding(padding),
+                            viewModel = viewModel(
+                                factory = RomsetViewModel.Factory(
+                                    applicationContext,
+                                    romsetExportManager.get(),
+                                    romsetImportManager.get(),
+                                ),
+                            ),
+                        )
+                    }
+                    composable(MainRoute.SETTINGS_ROMSET_IMPORT) {
+                        RomsetImportScreen(
+                            modifier = Modifier.padding(padding),
+                            viewModel = viewModel(
+                                factory = RomsetViewModel.Factory(
+                                    applicationContext,
+                                    romsetExportManager.get(),
+                                    romsetImportManager.get(),
+                                ),
+                            ),
                         )
                     }
                 }

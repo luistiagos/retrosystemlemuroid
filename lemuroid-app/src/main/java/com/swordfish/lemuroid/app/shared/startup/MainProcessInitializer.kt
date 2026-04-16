@@ -15,8 +15,15 @@ class MainProcessInitializer : Initializer<Unit> {
     @OptIn(DelicateCoroutinesApi::class)
     override fun create(context: Context) {
         Timber.i("Requested initialization of main process tasks")
-        SaveSyncWork.enqueueAutoWork(context, 0)
-        LibraryIndexScheduler.scheduleCoreUpdate(context)
+
+        // Move WorkManager scheduling off the main thread so the UI becomes
+        // responsive sooner — these calls resolve ContentProvider URIs and
+        // touch the database internally.
+        GlobalScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            SaveSyncWork.enqueueAutoWork(context, 0)
+            LibraryIndexScheduler.scheduleCoreUpdate(context)
+        }
+
         // Delay BIOS installation slightly so the main UI is visible before touching the filesystem.
         // GlobalScope is acceptable here because the Initializer has no lifecycle of its own.
         // If the process is killed before the delay elapses the installation will be retried

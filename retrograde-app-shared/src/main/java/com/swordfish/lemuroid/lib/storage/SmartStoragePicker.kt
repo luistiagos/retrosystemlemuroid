@@ -24,11 +24,30 @@ import java.io.File
  */
 object SmartStoragePicker {
 
+    @Volatile
+    private var cachedBestRomsDir: File? = null
+
     /**
      * Returns the [File] directory that should be used as the ROMs root.
      * The directory is created (`mkdirs`) before being returned.
+     * The result is cached after the first call to avoid repeated filesystem
+     * and StatFs queries on every access.
      */
     fun getBestRomsDirectory(context: Context): File {
+        cachedBestRomsDir?.let { return it }
+        return computeBestRomsDirectory(context).also { cachedBestRomsDir = it }
+    }
+
+    /**
+     * Clears the cached directory so the next [getBestRomsDirectory] call
+     * re-evaluates volumes. Call after the user changes their SAF folder
+     * or when storage media is mounted/unmounted.
+     */
+    fun invalidateCache() {
+        cachedBestRomsDir = null
+    }
+
+    private fun computeBestRomsDirectory(context: Context): File {
         val appContext = context.applicationContext
 
         // Rule 1: user manually selected a folder → respect their choice.

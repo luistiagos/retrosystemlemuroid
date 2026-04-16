@@ -293,4 +293,57 @@
     <!-- Notification permission -->
     <string name="game_interactor_notification_permission_required">Por favor, ative as notificações em Início para continuar</string>
 
+    <!-- Transfer (Export/Import) -->
+    <string name="transfer_title">Transferir jogos</string>
+    <string name="transfer_settings_description">Exportar ou importar jogos, saves e o app via cartão SD ou pendrive</string>
+    <string name="transfer_export_title">Exportar para SD / USB</string>
+    <string name="transfer_export_description">Copiar jogos, saves e o app para uma unidade externa</string>
+    <string name="transfer_import_title">Importar do SD / USB</string>
+    <string name="transfer_import_description">Importar jogos e saves de uma unidade externa</string>
+    <string name="transfer_include_apk">Incluir APK do aplicativo</string>
+    <string name="transfer_include_apk_description">Permite instalar o app em um dispositivo sem internet</string>
+    <string name="transfer_games_selected">%1$d de %2$d jogos selecionados</string>
+    <string name="transfer_select_all">Selecionar todos</string>
+    <string name="transfer_deselect_all">Desmarcar todos</string>
+    <string name="transfer_export_size">Tamanho estimado: %1$s</string>
+    <string name="transfer_export_button">Escolher pasta e exportar</string>
+    <string name="transfer_exporting">Exportando…</string>
+    <string name="transfer_export_completed">%1$d jogos exportados com sucesso</string>
+    <string name="transfer_export_error">Falha na exportação</string>
+    <string name="transfer_importing">Importando…</string>
+    <string name="transfer_import_found">Pacote de jogos encontrado</string>
+    <string name="transfer_import_games_count">%1$d jogos disponíveis para importar</string>
+    <string name="transfer_import_from_version">Exportado da versão %1$s do app</string>
+    <string name="transfer_import_button">Importar todos</string>
+    <string name="transfer_import_completed">%1$d jogos importados com sucesso</string>
+    <string name="transfer_import_error">Falha na importação</string>
+    <string name="transfer_import_not_found">Nenhum pacote de jogos encontrado</string>
+    <string name="transfer_import_not_found_description">Insira um cartão SD ou pendrive contendo a pasta lemuroid-export e tente novamente</string>
+
+    <!-- Romset export/import -->
+    <string name="romset_title">ROM Set</string>
+    <string name="romset_settings_description">Importar ou exportar sua coleção de ROMs em um arquivo ZIP</string>
+    <string name="romset_export_title">Exportar ROM set</string>
+    <string name="romset_export_description">Compactar todas as ROMs baixadas em um arquivo ZIP</string>
+    <string name="romset_export_description_long">Cria um arquivo romset.zip com todas as suas ROMs baixadas organizadas por pasta de sistema. Escolha uma pasta de destino no cartão SD ou pendrive.</string>
+    <string name="romset_export_size">Tamanho estimado: %1$s</string>
+    <string name="romset_export_button">Escolher pasta e exportar</string>
+    <string name="romset_exporting">Exportando ROM set…</string>
+    <string name="romset_export_completed">%1$d arquivos exportados com sucesso</string>
+    <string name="romset_export_error">Falha na exportação</string>
+    <string name="romset_import_title">Importar ROM set</string>
+    <string name="romset_import_description">Adicionar ROMs de um arquivo ZIP à sua biblioteca</string>
+    <string name="romset_import_description_long">Importa ROMs de um arquivo ZIP de romset. Arquivos já presentes na biblioteca serão ignorados. Você pode selecionar um arquivo manualmente ou deixar o app encontrar ZIPs em cartões SD e pendrives conectados.</string>
+    <string name="romset_import_found_on_media">Arquivos ZIP encontrados na mídia conectada:</string>
+    <string name="romset_import_not_found">Nenhum arquivo ZIP encontrado na mídia conectada</string>
+    <string name="romset_import_refresh">Atualizar</string>
+    <string name="romset_import_pick_file">Selecionar arquivo ZIP…</string>
+    <string name="romset_importing">Importando ROM set…</string>
+    <string name="romset_import_completed">%1$d arquivos importados com sucesso</string>
+    <string name="romset_import_error">Falha na importação</string>
+    <string name="romset_export_again">Exportar novamente</string>
+    <string name="romset_export_try_again">Tentar novamente</string>
+    <string name="romset_import_again">Importar outro</string>
+    <string name="romset_import_try_again">Tentar novamente</string>
+
 </resources>

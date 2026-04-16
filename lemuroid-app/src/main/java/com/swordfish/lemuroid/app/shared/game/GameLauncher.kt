@@ -11,7 +11,9 @@ import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class GameLauncher(
@@ -26,13 +28,14 @@ class GameLauncher(
     ) {
         val lifecycleOwner = activity as? LifecycleOwner ?: return
         lifecycleOwner.lifecycleScope.launch {
-            if (!isGameFileAvailable(activity, game)) {
+            val available = withContext(Dispatchers.IO) { isGameFileAvailable(activity, game) }
+            if (!available) {
                 showRomNotFoundDialog(activity, game)
                 return@launch
             }
             val system = GameSystem.findByIdOrNull(game.systemId) ?: return@launch
             val coreConfig = coresSelection.getCoreConfigForSystem(system)
-            gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
+            withContext(Dispatchers.IO) { gameLaunchTaskHandler.handleGameStart(activity.applicationContext) }
             BaseGameActivity.launchGame(activity, coreConfig, game, loadSave, leanback)
         }
     }
