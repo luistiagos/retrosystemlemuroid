@@ -1,0 +1,21 @@
+--------- beginning of main
+04-16 21:09:45.702 17807 17807 D StartupPerf: HomeVM first UIState: 197ms games=0+0+10
+04-16 21:10:02.042 17946 17946 D StartupPerf: HomeVM first UIState: 195ms games=0+0+10
+04-16 21:11:07.802 18238 18238 D StartupPerf: microphone: 17ms
+04-16 21:11:07.999 18238 18238 D StartupPerf: HomeVM first UIState: 214ms games=0+0+10
+04-16 21:11:08.005 18238 18238 D StartupPerf: favorites: 220ms
+04-16 21:11:08.005 18238 18238 D StartupPerf: discovery: 220ms
+04-16 21:11:08.005 18238 18238 D StartupPerf: recents: 220ms
+04-16 21:11:08.234 18238 18238 D StartupPerf: desmume: 449ms
+04-16 21:11:08.344 18238 18238 D StartupPerf: indexing: 559ms
+04-16 21:11:27.622 18381 18381 D StartupPerf: microphone: 17ms
+04-16 21:11:27.802 18381 18381 D StartupPerf: HomeVM first UIState: 197ms games=0+0+10
+04-16 21:11:27.974 18381 18381 D StartupPerf: recents: 369ms
+04-16 21:11:27.974 18381 18381 D StartupPerf: favorites: 369ms
+04-16 21:11:27.974 18381 18381 D StartupPerf: discovery: 369ms
+04-16 21:11:27.975 18381 18381 D StartupPerf: desmume: 370ms
+04-16 21:11:28.106 18381 18381 D StartupPerf: indexing: 501ms
+04-16 21:11:30.315 18381 18381 D StartupPerf: HomeVM first UIState: 2709ms games=0+0+10
+04-16 21:11:30.507 18381 18381 D StartupPerf: HomeVM first UIState: 2901ms games=0+0+10
+04-16 21:13:30.543 18381 18381 D StartupPerf: HomeVM first UIState: 122938ms games=0+0+10
+04-16 21:13:31.130 18381 18381 D StartupPerf: HomeVM first UIState: 123525ms games=0+0+10

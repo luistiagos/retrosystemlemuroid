@@ -8,10 +8,12 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,6 +22,7 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +31,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -81,6 +85,16 @@ fun HomeScreen(
     val state = viewModel.getViewStates().collectAsState(HomeViewModel.UIState())
     val downloadRomsState = viewModel.getDownloadRomsState().collectAsState(DownloadRomsState.Idle)
     val streamingRomsState = viewModel.getStreamingRomsState().collectAsState(StreamingRomsState.Idle)
+
+    // T5: log when game data is first visible in the UI (composable recomposition)
+    val hasGames = state.value.recentGames.isNotEmpty() ||
+        state.value.favoritesGames.isNotEmpty() ||
+        state.value.discoveryGames.isNotEmpty()
+    if (hasGames) {
+        SideEffect {
+            android.util.Log.d("PERF", "T5_HOMESCREEN_GAMES_VISIBLE recent=${state.value.recentGames.size} favs=${state.value.favoritesGames.size} discovery=${state.value.discoveryGames.size}")
+        }
+    }
 
     // Collect network-switched-to-mobile events emitted by HomeViewModel
     var showMobileSwitchDialog by remember { mutableStateOf(false) }
@@ -181,6 +195,12 @@ private fun HomeScreen(
             },
         )
     }
+    if (!state.isInitialLoadComplete) {
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+        return
+    }
     val sectionRecent = stringResource(id = R.string.recent)
     val sectionFavorites = stringResource(id = R.string.favorites)
     val sectionDiscover = stringResource(id = R.string.discover)
@@ -193,6 +213,9 @@ private fun HomeScreen(
     ) {
         item(span = { GridItemSpan(maxLineSpan) }) {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                AnimatedVisibility(state.userScanInProgress) {
+                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                }
                 AnimatedVisibility(state.showNoNotificationPermissionCard) {
                     HomeNotification(
                         titleId = R.string.home_notification_title,

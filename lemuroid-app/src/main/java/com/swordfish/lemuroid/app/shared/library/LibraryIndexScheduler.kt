@@ -10,11 +10,25 @@ object LibraryIndexScheduler {
     /** Separate ID for urgent single-core downloads triggered from the game screen. */
     val CORE_UPDATE_URGENT_WORK_ID: String = "${CoreUpdateWork::class.java.simpleName}_urgent"
     val LIBRARY_INDEX_WORK_ID: String = LibraryIndexWork::class.java.simpleName
+    /** Separate ID for user-triggered scans (folder change, USB mount, etc.).  */
+    val LIBRARY_INDEX_MANUAL_WORK_ID: String = "${LibraryIndexWork::class.java.simpleName}_manual"
 
+    /** Called by automated processes (downloads, streaming catalog). Progress bar NOT shown. */
     fun scheduleLibrarySync(applicationContext: Context) {
         WorkManager.getInstance(applicationContext)
             .beginUniqueWork(
                 LIBRARY_INDEX_WORK_ID,
+                ExistingWorkPolicy.APPEND_OR_REPLACE,
+                OneTimeWorkRequestBuilder<LibraryIndexWork>().build(),
+            )
+            .enqueue()
+    }
+
+    /** Called by user-triggered actions (folder change, USB/SD mount). Shows progress bar. */
+    fun scheduleManualLibrarySync(applicationContext: Context) {
+        WorkManager.getInstance(applicationContext)
+            .beginUniqueWork(
+                LIBRARY_INDEX_MANUAL_WORK_ID,
                 ExistingWorkPolicy.APPEND_OR_REPLACE,
                 OneTimeWorkRequestBuilder<LibraryIndexWork>().build(),
             )

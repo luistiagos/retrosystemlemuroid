@@ -151,6 +151,7 @@ abstract class LemuroidApplicationModule {
                     Migrations.VERSION_15_16,
                     Migrations.VERSION_16_17,
                     Migrations.VERSION_17_18,
+                    Migrations.VERSION_18_19,
                 )
                 .fallbackToDestructiveMigration()
                 .setJournalMode(androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)

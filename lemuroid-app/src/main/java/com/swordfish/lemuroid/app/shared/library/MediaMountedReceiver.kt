@@ -7,7 +7,7 @@ import android.content.Intent
 class MediaMountedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == Intent.ACTION_MEDIA_MOUNTED) {
-            LibraryIndexScheduler.scheduleLibrarySync(context.applicationContext)
+            LibraryIndexScheduler.scheduleManualLibrarySync(context.applicationContext)
         }
     }
 }

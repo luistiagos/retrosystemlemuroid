@@ -215,6 +215,25 @@ dependencies {
     kapt(deps.libs.dagger.compiler)
 }
 
+// Convenience task: installs the debug APK and then AOT-compiles it so that
+// baseline-profile-like performance can be tested without a release build.
+// Usage:  ./gradlew installFreeBundleDebugAndCompile
+android.applicationVariants.all {
+    if (buildType.isDebuggable) {
+        val variantName = name.replaceFirstChar { it.uppercase() }
+        val capturedAppId: String = applicationId
+        val capturedAdbPath: String = android.adbExecutable.absolutePath
+        tasks.register<Exec>("install${variantName}AndCompile") {
+            dependsOn("install$variantName")
+            commandLine(
+                capturedAdbPath,
+                "shell", "cmd", "package", "compile",
+                "-m", "speed", "-f", capturedAppId,
+            )
+        }
+    }
+}
+
 fun usePlayDynamicFeatures(): Boolean {
     val task = gradle.startParameter.taskRequests.toString()
     return task.contains("Play") && task.contains("Dynamic")

@@ -1,0 +1,229 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 1048576 bytes. Error detail: AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:44), pid=35624, tid=22588
+#
+# JRE version:  (17.0.18+8) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.18+8-LTS, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Xmx64m -Xms64m -Dorg.gradle.appname=gradlew org.gradle.wrapper.GradleWrapperMain -I C:\Users\luist\AppData\Local\Temp\classpath12398534414539038042.gradle kotlinLSPProjectDeps --console=plain
+
+Host: AMD Ryzen 7 4800H with Radeon Graphics         , 16 cores, 31G,  Windows 11 , 64 bit Build 26100 (10.0.26100.6725)
+Time: Fri Apr 17 00:09:40 2026 E. South America Standard Time elapsed time: 0.091252 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000235b6b22de0):  JavaThread "Unknown thread" [_thread_in_vm, id=22588, stack(0x000000c286600000,0x000000c286700000)]
+
+Stack: [0x000000c286600000,0x000000c286700000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x68c879]  (no source info available)
+V  [jvm.dll+0x845979]  (no source info available)
+V  [jvm.dll+0x8476e8]  (no source info available)
+V  [jvm.dll+0x847d73]  (no source info available)
+V  [jvm.dll+0x24cf6f]  (no source info available)
+V  [jvm.dll+0xa93f7]  (no source info available)
+V  [jvm.dll+0x2e25e6]  (no source info available)
+V  [jvm.dll+0x8186e2]  (no source info available)
+V  [jvm.dll+0x377601]  (no source info available)
+V  [jvm.dll+0x7f6d65]  (no source info available)
+V  [jvm.dll+0x3fd47b]  (no source info available)
+V  [jvm.dll+0x3ff0b1]  (no source info available)
+C  [jli.dll+0x52f0]  (no source info available)
+C  [ucrtbase.dll+0x37b0]  (no source info available)
+C  [KERNEL32.DLL+0x2e8d7]  (no source info available)
+C  [ntdll.dll+0x8c53c]  (no source info available)
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ff97af56058, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00000235b6b22de0 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=22588, stack(0x000000c286600000,0x000000c286700000)]
+
+Threads with active compile tasks:
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x0000000000000000, size: 0 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+<Empty>
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.010 Loaded shared library C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Memory protections (0 events):
+No events
+
+Nmethod flushes (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff6d0bb0000 - 0x00007ff6d0bbe000 	C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\java.exe
+0x00007ffa2c960000 - 0x00007ffa2cbc8000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffa2b790000 - 0x00007ffa2b859000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffa2a250000 - 0x00007ffa2a642000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffa2a0d0000 - 0x00007ffa2a21b000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff9fe130000 - 0x00007ff9fe148000 	C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\jli.dll
+0x00007ffa058f0000 - 0x00007ffa0590e000 	C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\VCRUNTIME140.dll
+0x00007ffa2c5f0000 - 0x00007ffa2c7b5000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffa2a220000 - 0x00007ffa2a247000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffa2b980000 - 0x00007ffa2b9ab000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffa1a6c0000 - 0x00007ffa1a953000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.6899_none_3e0efeeae32e88c1\COMCTL32.dll
+0x00007ffa2bef0000 - 0x00007ffa2bf99000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffa29ac0000 - 0x00007ffa29bed000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffa2a650000 - 0x00007ffa2a6f3000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffa2be60000 - 0x00007ffa2be8f000 	C:\WINDOWS\System32\IMM32.DLL
+0x0000000064710000 - 0x000000006471d000 	C:\Program Files (x86)\360\Total Security\safemon\SafeWrapper.dll
+0x00007ffa2b860000 - 0x00007ffa2b914000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffa2af10000 - 0x00007ffa2afb6000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffa2c7c0000 - 0x00007ffa2c8d8000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffa23a20000 - 0x00007ffa23b25000 	C:\Program Files (x86)\360\Total Security\safemon\libzdtp64.dll
+0x00007ffa2afc0000 - 0x00007ffa2b70d000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ffa29e30000 - 0x00007ffa29f9b000 	C:\WINDOWS\System32\wintypes.dll
+0x00007ffa2aa00000 - 0x00007ffa2ad7b000 	C:\WINDOWS\System32\combase.dll
+0x00007ffa2a900000 - 0x00007ffa2a962000 	C:\WINDOWS\System32\SHLWAPI.dll
+0x00007ffa295b0000 - 0x00007ffa295bb000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffa11f70000 - 0x00007ffa11f7c000 	C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\vcruntime140_1.dll
+0x00007ff9ce310000 - 0x00007ff9ce399000 	C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\msvcp140.dll
+0x00007ff97a410000 - 0x00007ff97b08a000 	C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\server\jvm.dll
+0x00007ffa2c140000 - 0x00007ffa2c1b4000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffa29920000 - 0x00007ffa2997e000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007ffa22010000 - 0x00007ffa22045000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffa29900000 - 0x00007ffa29914000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007ffa287e0000 - 0x00007ffa287fb000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffa058e0000 - 0x00007ffa058ea000 	C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\jimage.dll
+0x00007ffa1fed0000 - 0x00007ffa20112000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffa2c1e0000 - 0x00007ffa2c2b7000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ffa03150000 - 0x00007ffa0318c000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffa2a030000 - 0x00007ffa2a0c8000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ff9f16f0000 - 0x00007ff9f1716000 	C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.6899_none_3e0efeeae32e88c1;C:\Program Files (x86)\360\Total Security\safemon;C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin\server
+
+VM Arguments:
+jvm_args: -Xmx64m -Xms64m -Dorg.gradle.appname=gradlew 
+java_command: org.gradle.wrapper.GradleWrapperMain -I C:\Users\luist\AppData\Local\Temp\classpath12398534414539038042.gradle kotlinLSPProjectDeps --console=plain
+java_class_path (initial): e:\projects\lemuroid\Lemuroid\\gradle\wrapper\gradle-wrapper.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 12                                        {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 13                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 67108864                                  {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 67108864                                  {product} {command line}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 67108864                                  {product} {command line}
+    uintx NonNMethodCodeHeapSize                   = 7602480                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122027880                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122027880                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 67108864                               {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\
+CLASSPATH=e:\projects\lemuroid\Lemuroid\\gradle\wrapper\gradle-wrapper.jar
+PATH=C:\Microsoft VS Code;C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot\bin;E:\jdk-25.0.2.10-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Python\Python313\Scripts\;C:\Python\Python313\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\CMake\bin;C:\ProgramData\chocolatey\bin;C:\nodejs\;D:\WinMerge;D:\qemu\qemu-system-aarch64.exe;C:\Python\;C:\Python\Scripts\;C:\Program Files\Git\cmd;C:\Users\luist\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\luist\AppData\Local\Programs\Python\Python310\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Python\Python313\Scripts\;C:\Python\Python313\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Git\cmd;C:\Program Files\CMake\bin;C:\ProgramData\chocolatey\bin;C:\nodejs\;D:\WinMerge;D:\qemu\qemu-system-aarch64.exe;C:\Python\;C:\Python\Scripts\;;C:\Program Files\Docker\Docker\resources\bin;C:\Users\luist\AppData\Local\Microsoft\WindowsApps;C:\Microsoft VS Code\bin;C:\Users\luist\.dotnet\tools;C:\Users\luist\AppData\Roaming\npm;;c:\Users\luist\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;D:\flutter\bin;D:\flutter\bin;D:\flutter\bin;D:\flutter\bin;D:\flutter\bin;D:\flutter\bin;C:\Users\luist\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.0-full_build\bin;C:\Users\luist\AppData\Local\Microsoft\WinGet\Packages\miurahr.aqtinstall_Microsoft.Winget.Source_8wekyb3d8bbwe;C:\Users\luist\AppData\Local\Programs\Antigravity\bin;E:\cursor\resources\app\bin
+USERNAME=luist
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD
+TMP=C:\Users\luist\AppData\Local\Temp
+TEMP=C:\Users\luist\AppData\Local\Temp
+
+
+
+Periodic native trim disabled
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 26100 (10.0.26100.6725)
+OS uptime: 1 days 10:46 hours
+Hyper-V role detected
+
+CPU: total 16 (initial active 16) (16 cores per cpu, 2 threads per core) family 23 model 96 stepping 1 microcode 0x8600103, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4a, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt, hv
+Processor Information for the first 16 processors :
+  Max Mhz: 2900, Current Mhz: 2900, Mhz Limit: 2900
+
+Memory: 4k page, system-wide physical 32125M (1696M free)
+TotalPageFile size 45440M (AvailPageFile size 18M)
+current process WorkingSet (physical memory assigned to process): 13M, peak: 13M
+current process commit charge ("private bytes"): 14M, peak: 15M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.18+8-LTS) for windows-amd64 JRE (17.0.18+8-LTS), built on Jan 15 2026 18:50:45 by "MicrosoftCorporation" with MS VC++ 17.14 (VS2022)
+
+END.

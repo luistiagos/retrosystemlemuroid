@@ -4,15 +4,16 @@ import android.content.Context
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
+import com.swordfish.lemuroid.common.coroutines.debounceAfterFirst
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 
 class PendingOperationsMonitor(private val appContext: Context) {
     enum class Operation(val uniqueId: String, val isPeriodic: Boolean) {
         LIBRARY_INDEX(LibraryIndexScheduler.LIBRARY_INDEX_WORK_ID, false),
+        LIBRARY_INDEX_MANUAL(LibraryIndexScheduler.LIBRARY_INDEX_MANUAL_WORK_ID, false),
         CORE_UPDATE(LibraryIndexScheduler.CORE_UPDATE_WORK_ID, false),
         SAVES_SYNC_PERIODIC(SaveSyncWork.UNIQUE_PERIODIC_WORK_ID, true),
         SAVES_SYNC_ONE_SHOT(SaveSyncWork.UNIQUE_WORK_ID, false),
@@ -27,11 +28,15 @@ class PendingOperationsMonitor(private val appContext: Context) {
     }
 
     fun anyLibraryOperationInProgress(): Flow<Boolean> {
-        return operationsInProgress(Operation.LIBRARY_INDEX, Operation.CORE_UPDATE)
+        return operationsInProgress(Operation.LIBRARY_INDEX, Operation.LIBRARY_INDEX_MANUAL, Operation.CORE_UPDATE)
     }
 
     fun isDirectoryScanInProgress(): Flow<Boolean> {
-        return operationsInProgress(Operation.LIBRARY_INDEX)
+        return operationsInProgress(Operation.LIBRARY_INDEX, Operation.LIBRARY_INDEX_MANUAL)
+    }
+
+    fun isUserLibraryScanInProgress(): Flow<Boolean> {
+        return operationsInProgress(Operation.LIBRARY_INDEX_MANUAL)
     }
 
     @OptIn(FlowPreview::class)
@@ -41,7 +46,7 @@ class PendingOperationsMonitor(private val appContext: Context) {
             combine(operationFlows) { operationInProgress ->
                 operationInProgress.any { it }
             }
-        return result.debounce(100)
+        return result.debounceAfterFirst(100)
     }
 
     private fun operationInProgress(operation: Operation): Flow<Boolean> {

@@ -36,6 +36,9 @@ import java.io.Serializable
         Index("lastIndexedAt"),
         Index("lastPlayedAt"),
         Index("isFavorite"),
+        // Composite index for the recents home-screen query:
+        // WHERE lastPlayedAt IS NOT NULL AND isFavorite = 0 ORDER BY lastPlayedAt DESC
+        Index(value = ["isFavorite", "lastPlayedAt"], name = "index_games_isFavorite_lastPlayedAt"),
     ],
 )
 data class Game(

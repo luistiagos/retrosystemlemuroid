@@ -1,8 +1,10 @@
 package com.swordfish.lemuroid.common.coroutines
 
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
@@ -113,3 +115,15 @@ fun <T1, T2, T3, T4, T5, T6, T7, T8, R> combine(
             args[7] as T8,
         )
     }
+
+/**
+ * Like [debounce] but emits the first value immediately.
+ * Subsequent values are debounced by [timeoutMillis].
+ */
+@OptIn(FlowPreview::class)
+fun <T> Flow<T>.debounceAfterFirst(timeoutMillis: Long): Flow<T> {
+    var first = true
+    return debounce {
+        if (first) { first = false; 0L } else timeoutMillis
+    }
+}

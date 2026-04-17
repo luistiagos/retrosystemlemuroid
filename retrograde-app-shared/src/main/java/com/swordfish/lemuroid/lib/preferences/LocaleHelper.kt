@@ -14,13 +14,45 @@ object LocaleHelper {
 
     val ALL_VALUES = listOf(VALUE_SYSTEM, VALUE_EN, VALUE_PT)
 
-    fun getSharedPreferences(context: Context): SharedPreferences =
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    // SharedPreferences instance — pre-warmed via preload() so that subsequent calls
+    // on the main thread never block on disk I/O.
+    @Volatile
+    private var prefsInstance: SharedPreferences? = null
 
-    fun getLanguage(context: Context): String =
-        getSharedPreferences(context).getString(PREF_KEY, VALUE_SYSTEM) ?: VALUE_SYSTEM
+    // In-memory cache so that repeated calls during startup (Application.attachBaseContext,
+    // Activity.attachBaseContext) only hit disk once.
+    @Volatile
+    private var cachedLanguage: String? = null
+
+    /**
+     * Call once from Application.attachBaseContext() on a background thread to pre-load
+     * SharedPreferences into memory before the Activity needs them.
+     */
+    fun preload(context: Context) {
+        Thread {
+            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            prefsInstance = prefs
+            // Also populate the language cache while on the background thread.
+            cachedLanguage = prefs.getString(PREF_KEY, VALUE_SYSTEM) ?: VALUE_SYSTEM
+        }.start()
+    }
+
+    fun getSharedPreferences(context: Context): SharedPreferences {
+        prefsInstance?.let { return it }
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefsInstance = prefs
+        return prefs
+    }
+
+    fun getLanguage(context: Context): String {
+        cachedLanguage?.let { return it }
+        val lang = getSharedPreferences(context).getString(PREF_KEY, VALUE_SYSTEM) ?: VALUE_SYSTEM
+        cachedLanguage = lang
+        return lang
+    }
 
     fun setLanguage(context: Context, language: String) {
+        cachedLanguage = language
         getSharedPreferences(context).edit().putString(PREF_KEY, language).apply()
     }
 

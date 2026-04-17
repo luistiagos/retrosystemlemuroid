@@ -47,7 +47,7 @@ class MainViewModel(
         retrogradeDb.downloadedRomDao()
             .observeAllDownloadedFileNames()
             .map { it.toHashSet() as Set<String> }
-            .stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
+            .stateIn(viewModelScope, SharingStarted.Lazily, emptySet())
 
     private fun buildStateFlow(): StateFlow<UiState> {
         val combinedFlows =

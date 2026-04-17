@@ -1,0 +1,1423 @@
+--------- beginning of main
+04-16 20:51:56.752 12139 12139 D StartupPerf: Dagger inject: 43ms
+04-16 20:51:56.753 12139 12139 D StartupPerf: super.onCreate: 1ms
+04-16 20:51:56.773 12139 12139 D StartupPerf: setContent: 20ms
+04-16 20:51:57.177 12139 12139 D StartupPerf: Scaffold+bars composed: 184ms
+04-16 20:51:57.272 12139 12164 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:51:57.272 12139 12164 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:51:57.272 12139 12164 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:51:57.301 12139 12139 D StartupPerf: Scaffold+bars composed: 9ms
+04-16 20:51:57.328 12139 12139 D StartupPerf: HomeVM: RomsDownloadManager: 3ms
+04-16 20:51:57.331 12139 12139 D StartupPerf: HomeVM: StreamingRomsManager: 6ms
+04-16 20:51:57.332 12139 12139 D StartupPerf: HomeVM: HeavySystemFilter: 7ms
+04-16 20:51:57.345 12139 12139 D StartupPerf: HomeViewModel created: 21ms
+04-16 20:51:57.376 12139 12139 D StartupPerf: HomeScreen composed: 31ms
+04-16 20:51:57.569 12139 12139 D StartupPerf: Scaffold+bars composed: 277ms
+04-16 20:51:57.581 12139 12139 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:51:57.584 12139 12139 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:51:57.615 12139 12139 D StartupPerf: Scaffold+bars composed: 322ms
+04-16 20:51:57.627 12139 12139 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:51:57.630 12139 12139 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:51:57.655 12139 12139 D StartupPerf: Scaffold+bars composed: 2ms
+04-16 20:51:57.662 12139 12139 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:51:57.665 12139 12139 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:51:57.838 12139 12163 W HWUI    : Image decoding logging dropped!
+04-16 20:51:57.841 12139 12201 W HWUI    : Image decoding logging dropped!
+04-16 20:51:57.874 12139 12139 D StartupPerf: Scaffold+bars composed: 221ms
+04-16 20:51:57.894 12139 12139 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:51:57.898 12139 12139 D StartupPerf: HomeScreen composed: 4ms
+04-16 20:51:57.983 12139 12139 D StartupPerf: Scaffold+bars composed: 330ms
+04-16 20:51:57.996 12139 12139 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:51:57.999 12139 12139 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:51:58.035 12139 12139 D StartupPerf: Scaffold+bars composed: 7ms
+04-16 20:51:58.044 12139 12139 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:51:58.044 12139 12139 D StartupPerf: HomeScreen composed: 0ms
+04-16 20:51:58.143 12139 12139 D StartupPerf: Scaffold+bars composed: 115ms
+04-16 20:51:58.153 12139 12139 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:51:58.155 12139 12139 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:51:58.198 12139 12139 D StartupPerf: Scaffold+bars composed: 170ms
+04-16 20:51:58.208 12139 12139 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:51:58.210 12139 12139 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:51:58.253 12139 12139 D StartupPerf: Scaffold+bars composed: 225ms
+04-16 20:51:58.263 12139 12139 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:51:58.265 12139 12139 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:51:58.309 12139 12139 D StartupPerf: Scaffold+bars composed: 281ms
+04-16 20:51:58.318 12139 12139 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:51:58.321 12139 12139 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:51:58.367 12139 12139 D StartupPerf: Scaffold+bars composed: 338ms
+04-16 20:51:58.376 12139 12139 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:51:58.378 12139 12139 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:52:27.807 12309 12309 D StartupPerf: Dagger inject: 39ms
+04-16 20:52:27.808 12309 12309 D StartupPerf: super.onCreate: 1ms
+04-16 20:52:27.825 12309 12309 D StartupPerf: setContent: 17ms
+04-16 20:52:28.200 12309 12309 D StartupPerf: Scaffold+bars composed: 166ms
+04-16 20:52:28.288 12309 12340 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:52:28.288 12309 12340 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:52:28.288 12309 12340 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:52:28.319 12309 12309 D StartupPerf: Scaffold+bars composed: 9ms
+04-16 20:52:28.347 12309 12309 D StartupPerf: HomeVM: RomsDownloadManager: 3ms
+04-16 20:52:28.347 12309 12309 D StartupPerf: HomeVM: StreamingRomsManager: 3ms
+04-16 20:52:28.347 12309 12309 D StartupPerf: HomeVM: HeavySystemFilter: 3ms
+04-16 20:52:28.362 12309 12309 D StartupPerf: HomeViewModel created: 20ms
+04-16 20:52:28.392 12309 12309 D StartupPerf: HomeScreen composed: 30ms
+04-16 20:52:28.604 12309 12309 D StartupPerf: Scaffold+bars composed: 2ms
+04-16 20:52:28.614 12309 12309 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:52:28.618 12309 12309 D StartupPerf: HomeScreen composed: 4ms
+04-16 20:52:28.674 12309 12309 D StartupPerf: Scaffold+bars composed: 72ms
+04-16 20:52:28.695 12309 12309 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:52:28.699 12309 12309 D StartupPerf: HomeScreen composed: 4ms
+04-16 20:52:28.896 12309 12337 W HWUI    : Image decoding logging dropped!
+04-16 20:52:28.903 12309 12388 W HWUI    : Image decoding logging dropped!
+04-16 20:52:28.947 12309 12309 D StartupPerf: Scaffold+bars composed: 345ms
+04-16 20:52:28.963 12309 12309 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:52:28.967 12309 12309 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:52:29.026 12309 12309 D StartupPerf: Scaffold+bars composed: 1ms
+04-16 20:52:29.038 12309 12309 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:52:29.040 12309 12309 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:52:29.075 12309 12309 D StartupPerf: Scaffold+bars composed: 50ms
+04-16 20:52:29.085 12309 12309 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:52:29.088 12309 12309 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:52:29.180 12309 12309 D StartupPerf: Scaffold+bars composed: 155ms
+04-16 20:52:29.190 12309 12309 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:52:29.193 12309 12309 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:52:29.236 12309 12309 D StartupPerf: Scaffold+bars composed: 211ms
+04-16 20:52:29.246 12309 12309 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:52:29.248 12309 12309 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:52:29.290 12309 12309 D StartupPerf: Scaffold+bars composed: 265ms
+04-16 20:52:29.300 12309 12309 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:52:29.302 12309 12309 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:52:29.347 12309 12309 D StartupPerf: Scaffold+bars composed: 322ms
+04-16 20:52:29.357 12309 12309 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:52:29.360 12309 12309 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:53:27.189 12494 12494 D StartupPerf: Dagger inject: 40ms
+04-16 20:53:27.190 12494 12494 D StartupPerf: super.onCreate: 1ms
+04-16 20:53:27.209 12494 12494 D StartupPerf: setContent: 18ms
+04-16 20:53:27.625 12494 12494 D StartupPerf: Scaffold+bars composed: 184ms
+04-16 20:53:27.714 12494 12526 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:53:27.714 12494 12526 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:53:27.714 12494 12526 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:53:27.746 12494 12494 D StartupPerf: Scaffold+bars composed: 10ms
+04-16 20:53:27.775 12494 12494 D StartupPerf: HomeVM: RomsDownloadManager: 3ms
+04-16 20:53:27.778 12494 12494 D StartupPerf: HomeVM: StreamingRomsManager: 5ms
+04-16 20:53:27.779 12494 12494 D StartupPerf: HomeVM: HeavySystemFilter: 7ms
+04-16 20:53:27.787 12494 12494 D StartupPerf: HomeViewModel created: 16ms
+04-16 20:53:27.814 12494 12494 D StartupPerf: HomeScreen composed: 27ms
+04-16 20:53:28.079 12494 12494 D StartupPerf: Scaffold+bars composed: 343ms
+04-16 20:53:28.101 12494 12494 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:53:28.107 12494 12494 D StartupPerf: HomeScreen composed: 6ms
+04-16 20:53:28.165 12494 12494 D StartupPerf: Scaffold+bars composed: 428ms
+04-16 20:53:28.187 12494 12494 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:53:28.192 12494 12494 D StartupPerf: HomeScreen composed: 5ms
+04-16 20:53:28.225 12494 12494 D StartupPerf: Scaffold+bars composed: 2ms
+04-16 20:53:28.248 12494 12494 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:53:28.252 12494 12494 D StartupPerf: HomeScreen composed: 4ms
+04-16 20:53:28.476 12494 12525 W HWUI    : Image decoding logging dropped!
+04-16 20:53:28.477 12494 12523 W HWUI    : Image decoding logging dropped!
+04-16 20:53:28.525 12494 12494 D StartupPerf: Scaffold+bars composed: 302ms
+04-16 20:53:28.553 12494 12494 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:53:28.558 12494 12494 D StartupPerf: HomeScreen composed: 5ms
+04-16 20:53:28.684 12494 12494 D StartupPerf: Scaffold+bars composed: 461ms
+04-16 20:53:28.710 12494 12494 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:53:28.716 12494 12494 D StartupPerf: HomeScreen composed: 5ms
+04-16 20:54:08.971 12661 12661 D StartupPerf: Dagger inject: 17ms
+04-16 20:54:08.972 12661 12661 D StartupPerf: super.onCreate: 1ms
+04-16 20:54:08.976 12661 12661 D StartupPerf: setContent: 4ms
+04-16 20:54:09.239 12661 12661 D StartupPerf: Scaffold+bars composed: 146ms
+04-16 20:54:09.337 12661 12687 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:54:09.337 12661 12687 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:54:09.337 12661 12687 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:54:09.368 12661 12661 D StartupPerf: Scaffold+bars composed: 9ms
+04-16 20:54:09.391 12661 12661 D StartupPerf: HomeVM: RomsDownloadManager: 1ms
+04-16 20:54:09.391 12661 12661 D StartupPerf: HomeVM: StreamingRomsManager: 1ms
+04-16 20:54:09.393 12661 12661 D StartupPerf: HomeVM: HeavySystemFilter: 3ms
+04-16 20:54:09.403 12661 12661 D StartupPerf: HomeViewModel created: 14ms
+04-16 20:54:09.418 12661 12661 D StartupPerf: HomeScreen composed: 15ms
+04-16 20:54:09.594 12661 12661 D StartupPerf: Scaffold+bars composed: 235ms
+04-16 20:54:09.607 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:09.610 12661 12661 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:09.640 12661 12661 D StartupPerf: Scaffold+bars composed: 281ms
+04-16 20:54:09.654 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:09.657 12661 12661 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:09.784 12661 12718 W HWUI    : Image decoding logging dropped!
+04-16 20:54:09.791 12661 12716 W HWUI    : Image decoding logging dropped!
+04-16 20:54:09.818 12661 12661 D StartupPerf: Scaffold+bars composed: 459ms
+04-16 20:54:09.830 12661 12661 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:54:09.832 12661 12661 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:09.898 12661 12661 D StartupPerf: Scaffold+bars composed: 539ms
+04-16 20:54:09.910 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:09.913 12661 12661 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:09.943 12661 12661 D StartupPerf: Scaffold+bars composed: 7ms
+04-16 20:54:09.954 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:09.954 12661 12661 D StartupPerf: HomeScreen composed: 0ms
+04-16 20:54:09.996 12661 12661 D StartupPerf: Scaffold+bars composed: 60ms
+04-16 20:54:10.007 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:10.010 12661 12661 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:10.045 12661 12661 D StartupPerf: Scaffold+bars composed: 109ms
+04-16 20:54:10.057 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:10.060 12661 12661 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:10.088 12661 12661 D StartupPerf: Scaffold+bars composed: 152ms
+04-16 20:54:10.099 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:10.101 12661 12661 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:10.123 12661 12661 D StartupPerf: Scaffold+bars composed: 2ms
+04-16 20:54:10.128 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:10.128 12661 12661 D StartupPerf: HomeScreen composed: 0ms
+04-16 20:54:10.135 12661 12661 D StartupPerf: Scaffold+bars composed: 14ms
+04-16 20:54:10.146 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:10.148 12661 12661 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:10.173 12661 12661 D StartupPerf: Scaffold+bars composed: 52ms
+04-16 20:54:10.184 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:10.186 12661 12661 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:10.211 12661 12661 D StartupPerf: Scaffold+bars composed: 90ms
+04-16 20:54:10.222 12661 12661 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:10.225 12661 12661 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:27.619 30774 12773 W HWUI    : Image decoding logging dropped!
+04-16 20:54:27.663 30774 12773 W HWUI    : Image decoding logging dropped!
+04-16 20:54:27.687 30774 12773 W HWUI    : Image decoding logging dropped!
+04-16 20:54:27.716 30774 12773 W HWUI    : Image decoding logging dropped!
+04-16 20:54:27.724 30774 12773 W HWUI    : Image decoding logging dropped!
+04-16 20:54:27.733 30774 12773 W HWUI    : Image decoding logging dropped!
+04-16 20:54:31.412 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 20:54:31.461 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 20:54:31.910  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 20:54:31.938  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 20:54:31.954  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 20:54:35.008 31100 12830 W HWUI    : Image decoding logging dropped!
+04-16 20:54:35.031 31100 12830 W HWUI    : Image decoding logging dropped!
+04-16 20:54:35.051 31100 12830 W HWUI    : Image decoding logging dropped!
+04-16 20:54:35.073 31100 12830 W HWUI    : Image decoding logging dropped!
+04-16 20:54:35.091 31100 12830 W HWUI    : Image decoding logging dropped!
+04-16 20:54:35.111 31100 12830 W HWUI    : Image decoding logging dropped!
+04-16 20:54:35.123 31100 12830 W HWUI    : Image decoding logging dropped!
+04-16 20:54:35.134 31100 12830 W HWUI    : Image decoding logging dropped!
+04-16 20:54:36.498 30774 12794 W HWUI    : Image decoding logging dropped!
+04-16 20:54:36.523 30774 12794 W HWUI    : Image decoding logging dropped!
+04-16 20:54:36.537 30774 12794 W HWUI    : Image decoding logging dropped!
+04-16 20:54:36.557 30774 12794 W HWUI    : Image decoding logging dropped!
+04-16 20:54:36.577 30774 12794 W HWUI    : Image decoding logging dropped!
+04-16 20:54:36.606 30774 12794 W HWUI    : Image decoding logging dropped!
+04-16 20:54:38.479 12871 12871 D StartupPerf: Dagger inject: 17ms
+04-16 20:54:38.480 12871 12871 D StartupPerf: super.onCreate: 1ms
+04-16 20:54:38.484 12871 12871 D StartupPerf: setContent: 4ms
+04-16 20:54:38.754 12871 12871 D StartupPerf: Scaffold+bars composed: 151ms
+04-16 20:54:38.853 12871 12897 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:54:38.853 12871 12897 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:54:38.853 12871 12897 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:54:38.885 12871 12871 D StartupPerf: Scaffold+bars composed: 10ms
+04-16 20:54:38.908 12871 12871 D StartupPerf: HomeVM: RomsDownloadManager: 0ms
+04-16 20:54:38.908 12871 12871 D StartupPerf: HomeVM: StreamingRomsManager: 1ms
+04-16 20:54:38.910 12871 12871 D StartupPerf: HomeVM: HeavySystemFilter: 3ms
+04-16 20:54:38.921 12871 12871 D StartupPerf: HomeViewModel created: 14ms
+04-16 20:54:38.934 12871 12871 D StartupPerf: HomeScreen composed: 13ms
+04-16 20:54:39.112 12871 12871 D StartupPerf: Scaffold+bars composed: 237ms
+04-16 20:54:39.126 12871 12871 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:39.129 12871 12871 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:39.164 12871 12871 D StartupPerf: Scaffold+bars composed: 289ms
+04-16 20:54:39.179 12871 12871 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:39.182 12871 12871 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:39.312 12871 12933 W HWUI    : Image decoding logging dropped!
+04-16 20:54:39.318 12871 12894 W HWUI    : Image decoding logging dropped!
+04-16 20:54:39.347 12871 12871 D StartupPerf: Scaffold+bars composed: 472ms
+04-16 20:54:39.359 12871 12871 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:39.362 12871 12871 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:39.431 12871 12871 D StartupPerf: Scaffold+bars composed: 556ms
+04-16 20:54:39.443 12871 12871 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:54:39.445 12871 12871 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:39.475 12871 12871 D StartupPerf: Scaffold+bars composed: 7ms
+04-16 20:54:39.487 12871 12871 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:39.487 12871 12871 D StartupPerf: HomeScreen composed: 0ms
+04-16 20:54:39.549 12871 12871 D StartupPerf: Scaffold+bars composed: 2ms
+04-16 20:54:39.554 12871 12871 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:54:39.554 12871 12871 D StartupPerf: HomeScreen composed: 0ms
+04-16 20:54:39.569 12871 12871 D StartupPerf: Scaffold+bars composed: 22ms
+04-16 20:54:39.581 12871 12871 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:39.583 12871 12871 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:39.612 12871 12871 D StartupPerf: Scaffold+bars composed: 65ms
+04-16 20:54:39.624 12871 12871 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:39.626 12871 12871 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:39.653 12871 12871 D StartupPerf: Scaffold+bars composed: 106ms
+04-16 20:54:39.665 12871 12871 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:54:39.667 12871 12871 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:39.693 12871 12871 D StartupPerf: Scaffold+bars composed: 146ms
+04-16 20:54:39.704 12871 12871 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:39.707 12871 12871 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:39.733 12871 12871 D StartupPerf: Scaffold+bars composed: 185ms
+04-16 20:54:39.745 12871 12871 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:54:39.747 12871 12871 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:39.772 12871 12871 D StartupPerf: Scaffold+bars composed: 225ms
+04-16 20:54:39.784 12871 12871 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:39.786 12871 12871 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:43.886 12963 12963 D StartupPerf: Dagger inject: 17ms
+04-16 20:54:43.887 12963 12963 D StartupPerf: super.onCreate: 1ms
+04-16 20:54:43.892 12963 12963 D StartupPerf: setContent: 5ms
+04-16 20:54:44.165 12963 12963 D StartupPerf: Scaffold+bars composed: 152ms
+04-16 20:54:44.262 12963 12990 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:54:44.262 12963 12990 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:54:44.262 12963 12990 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:54:44.294 12963 12963 D StartupPerf: Scaffold+bars composed: 10ms
+04-16 20:54:44.317 12963 12963 D StartupPerf: HomeVM: RomsDownloadManager: 1ms
+04-16 20:54:44.319 12963 12963 D StartupPerf: HomeVM: StreamingRomsManager: 2ms
+04-16 20:54:44.320 12963 12963 D StartupPerf: HomeVM: HeavySystemFilter: 4ms
+04-16 20:54:44.330 12963 12963 D StartupPerf: HomeViewModel created: 15ms
+04-16 20:54:44.344 12963 12963 D StartupPerf: HomeScreen composed: 14ms
+04-16 20:54:44.520 12963 12963 D StartupPerf: Scaffold+bars composed: 237ms
+04-16 20:54:44.535 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:44.538 12963 12963 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:44.573 12963 12963 D StartupPerf: Scaffold+bars composed: 290ms
+04-16 20:54:44.588 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:44.591 12963 12963 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:54:44.617 12963 12963 D StartupPerf: Scaffold+bars composed: 333ms
+04-16 20:54:44.631 12963 12963 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:54:44.633 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:44.761 12963 13025 W HWUI    : Image decoding logging dropped!
+04-16 20:54:44.767 12963 13019 W HWUI    : Image decoding logging dropped!
+04-16 20:54:44.798 12963 12963 D StartupPerf: Scaffold+bars composed: 515ms
+04-16 20:54:44.811 12963 12963 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:54:44.813 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:44.882 12963 12963 D StartupPerf: Scaffold+bars composed: 599ms
+04-16 20:54:44.894 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:44.896 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:44.926 12963 12963 D StartupPerf: Scaffold+bars composed: 7ms
+04-16 20:54:44.938 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:44.938 12963 12963 D StartupPerf: HomeScreen composed: 0ms
+04-16 20:54:44.982 12963 12963 D StartupPerf: Scaffold+bars composed: 1ms
+04-16 20:54:44.987 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:44.987 12963 12963 D StartupPerf: HomeScreen composed: 0ms
+04-16 20:54:45.001 12963 12963 D StartupPerf: Scaffold+bars composed: 20ms
+04-16 20:54:45.013 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:45.015 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:45.044 12963 12963 D StartupPerf: Scaffold+bars composed: 63ms
+04-16 20:54:45.056 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:45.058 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:45.085 12963 12963 D StartupPerf: Scaffold+bars composed: 104ms
+04-16 20:54:45.096 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:45.098 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:45.124 12963 12963 D StartupPerf: Scaffold+bars composed: 143ms
+04-16 20:54:45.136 12963 12963 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:54:45.138 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:45.164 12963 12963 D StartupPerf: Scaffold+bars composed: 183ms
+04-16 20:54:45.176 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:45.178 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:45.203 12963 12963 D StartupPerf: Scaffold+bars composed: 222ms
+04-16 20:54:45.215 12963 12963 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:54:45.217 12963 12963 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:54:59.606 13079 13079 D StartupPerf: Dagger inject: 17ms
+04-16 20:54:59.607 13079 13079 D StartupPerf: super.onCreate: 1ms
+04-16 20:54:59.612 13079 13079 D StartupPerf: setContent: 5ms
+04-16 20:54:59.895 13079 13079 D StartupPerf: Scaffold+bars composed: 160ms
+04-16 20:55:00.001 13079 13105 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:55:00.001 13079 13105 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:55:00.001 13079 13105 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:55:00.031 13079 13079 D StartupPerf: Scaffold+bars composed: 10ms
+04-16 20:55:00.055 13079 13079 D StartupPerf: HomeVM: RomsDownloadManager: 1ms
+04-16 20:55:00.057 13079 13079 D StartupPerf: HomeVM: StreamingRomsManager: 2ms
+04-16 20:55:00.058 13079 13079 D StartupPerf: HomeVM: HeavySystemFilter: 4ms
+04-16 20:55:00.070 13079 13079 D StartupPerf: HomeViewModel created: 17ms
+04-16 20:55:00.084 13079 13079 D StartupPerf: HomeScreen composed: 14ms
+04-16 20:55:00.282 13079 13079 D StartupPerf: Scaffold+bars composed: 261ms
+04-16 20:55:00.296 13079 13079 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:00.299 13079 13079 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:00.333 13079 13079 D StartupPerf: Scaffold+bars composed: 312ms
+04-16 20:55:00.350 13079 13079 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:55:00.352 13079 13079 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:55:00.514 13079 13126 W HWUI    : Image decoding logging dropped!
+04-16 20:55:00.519 13079 13139 W HWUI    : Image decoding logging dropped!
+04-16 20:55:00.523 13079 13079 D StartupPerf: Scaffold+bars composed: 502ms
+04-16 20:55:00.537 13079 13079 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:00.540 13079 13079 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:00.615 13079 13079 D StartupPerf: Scaffold+bars composed: 594ms
+04-16 20:55:00.628 13079 13079 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:00.631 13079 13079 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:00.664 13079 13079 D StartupPerf: Scaffold+bars composed: 8ms
+04-16 20:55:00.677 13079 13079 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:00.678 13079 13079 D StartupPerf: HomeScreen composed: 1ms
+04-16 20:55:00.724 13079 13079 D StartupPerf: Scaffold+bars composed: 68ms
+04-16 20:55:00.736 13079 13079 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:00.739 13079 13079 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:00.780 13079 13079 D StartupPerf: Scaffold+bars composed: 124ms
+04-16 20:55:00.798 13079 13079 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:00.802 13079 13079 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:00.834 13079 13079 D StartupPerf: Scaffold+bars composed: 178ms
+04-16 20:55:00.848 13079 13079 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:55:00.850 13079 13079 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:55:00.879 13079 13079 D StartupPerf: Scaffold+bars composed: 223ms
+04-16 20:55:00.892 13079 13079 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:55:00.894 13079 13079 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:55:00.918 13079 13079 D StartupPerf: Scaffold+bars composed: 2ms
+04-16 20:55:00.923 13079 13079 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:00.924 13079 13079 D StartupPerf: HomeScreen composed: 1ms
+04-16 20:55:00.931 13079 13079 D StartupPerf: Scaffold+bars composed: 15ms
+04-16 20:55:00.943 13079 13079 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:00.946 13079 13079 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:05.549 13181 13181 D StartupPerf: Dagger inject: 16ms
+04-16 20:55:05.550 13181 13181 D StartupPerf: super.onCreate: 1ms
+04-16 20:55:05.554 13181 13181 D StartupPerf: setContent: 4ms
+04-16 20:55:05.819 13181 13181 D StartupPerf: Scaffold+bars composed: 148ms
+04-16 20:55:05.911 13181 13207 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:55:05.911 13181 13207 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:55:05.911 13181 13207 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:55:05.940 13181 13181 D StartupPerf: Scaffold+bars composed: 10ms
+04-16 20:55:05.973 13181 13181 D StartupPerf: HomeVM: RomsDownloadManager: 1ms
+04-16 20:55:05.974 13181 13181 D StartupPerf: HomeVM: StreamingRomsManager: 2ms
+04-16 20:55:05.975 13181 13181 D StartupPerf: HomeVM: HeavySystemFilter: 3ms
+04-16 20:55:05.986 13181 13181 D StartupPerf: HomeViewModel created: 16ms
+04-16 20:55:06.005 13181 13181 D StartupPerf: HomeScreen composed: 13ms
+04-16 20:55:06.180 13181 13181 D StartupPerf: Scaffold+bars composed: 250ms
+04-16 20:55:06.194 13181 13181 D StartupPerf: HomeViewModel created: 1ms
+04-16 20:55:06.196 13181 13181 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:55:06.226 13181 13181 D StartupPerf: Scaffold+bars composed: 296ms
+04-16 20:55:06.241 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.244 13181 13181 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:06.273 13181 13181 D StartupPerf: Scaffold+bars composed: 343ms
+04-16 20:55:06.289 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.292 13181 13181 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:06.424 13181 13239 W HWUI    : Image decoding logging dropped!
+04-16 20:55:06.436 13181 13240 W HWUI    : Image decoding logging dropped!
+04-16 20:55:06.460 13181 13181 D StartupPerf: Scaffold+bars composed: 529ms
+04-16 20:55:06.472 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.475 13181 13181 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:06.543 13181 13181 D StartupPerf: Scaffold+bars composed: 613ms
+04-16 20:55:06.555 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.558 13181 13181 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:55:06.588 13181 13181 D StartupPerf: Scaffold+bars composed: 7ms
+04-16 20:55:06.600 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.601 13181 13181 D StartupPerf: HomeScreen composed: 1ms
+04-16 20:55:06.654 13181 13181 D StartupPerf: Scaffold+bars composed: 73ms
+04-16 20:55:06.666 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.668 13181 13181 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:55:06.682 30774 13164 W HWUI    : Image decoding logging dropped!
+04-16 20:55:06.693 30774 13164 W HWUI    : Image decoding logging dropped!
+04-16 20:55:06.698 30774 13164 W HWUI    : Image decoding logging dropped!
+04-16 20:55:06.699 13181 13181 D StartupPerf: Scaffold+bars composed: 118ms
+04-16 20:55:06.711 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.713 13181 13181 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:55:06.717 30774 13164 W HWUI    : Image decoding logging dropped!
+04-16 20:55:06.737 13181 13181 D StartupPerf: Scaffold+bars composed: 2ms
+04-16 20:55:06.741 30774 13164 W HWUI    : Image decoding logging dropped!
+04-16 20:55:06.743 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.743 13181 13181 D StartupPerf: HomeScreen composed: 0ms
+04-16 20:55:06.746 30774 13164 W HWUI    : Image decoding logging dropped!
+04-16 20:55:06.750 13181 13181 D StartupPerf: Scaffold+bars composed: 15ms
+04-16 20:55:06.762 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.765 13181 13181 D StartupPerf: HomeScreen composed: 2ms
+04-16 20:55:06.798 13181 13181 D StartupPerf: Scaffold+bars composed: 63ms
+04-16 20:55:06.810 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.813 13181 13181 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:06.838 13181 13181 D StartupPerf: Scaffold+bars composed: 103ms
+04-16 20:55:06.850 13181 13181 D StartupPerf: HomeViewModel created: 0ms
+04-16 20:55:06.853 13181 13181 D StartupPerf: HomeScreen composed: 3ms
+04-16 20:55:38.581 30774 13289 W HWUI    : Image decoding logging dropped!
+04-16 20:55:38.635 30774 13289 W HWUI    : Image decoding logging dropped!
+04-16 20:55:38.649 30774 13289 W HWUI    : Image decoding logging dropped!
+04-16 20:55:38.691 30774 13289 W HWUI    : Image decoding logging dropped!
+04-16 20:55:38.696 30774 13289 W HWUI    : Image decoding logging dropped!
+04-16 20:55:38.704 30774 13289 W HWUI    : Image decoding logging dropped!
+04-16 20:58:43.581 30810 30842 W HWUI    : Image decoding logging dropped!
+04-16 20:58:44.754 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 20:58:44.778 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 20:58:52.084  3052  3146 W HWUI    : Image decoding logging dropped!
+04-16 20:58:52.699 13890 13917 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:58:52.700 13890 13917 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:58:52.700 13890 13917 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:58:53.223 13890 13951 W HWUI    : Image decoding logging dropped!
+04-16 20:58:53.226 13890 13950 W HWUI    : Image decoding logging dropped!
+04-16 20:58:58.741 13994 14023 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:58:58.741 13994 14023 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:58:58.741 13994 14023 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:58:59.262 13994 14090 W HWUI    : Image decoding logging dropped!
+04-16 20:58:59.268 13994 14073 W HWUI    : Image decoding logging dropped!
+04-16 20:59:04.659 14121 14148 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 20:59:04.659 14121 14148 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 20:59:04.660 14121 14148 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 20:59:05.170 14121 14187 W HWUI    : Image decoding logging dropped!
+04-16 20:59:05.176 14121 14183 W HWUI    : Image decoding logging dropped!
+04-16 21:00:06.880  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.011  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.049  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.090  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.098  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.132  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.192  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.202  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.291  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.517  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.574  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.578  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.597  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.705  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.824  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.835  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:07.863  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.025  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.063  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.100  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.114  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.127  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.140  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.192  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.334  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.342  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.419  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.425  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.459  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.494  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.521  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.563  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:08.571  7803  7823 W HWUI    : Image decoding logging dropped!
+04-16 21:00:26.090 14279 14466 W HWUI    : Image decoding logging dropped!
+04-16 21:02:11.654 25304 26737 W HWUI    : Image decoding logging dropped!
+04-16 21:02:11.677 25304 26737 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.450 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.492 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.496 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.499 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.502 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.562 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.570 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.577 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:14.583 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:22.010 14279 14365 W HWUI    : Image decoding logging dropped!
+04-16 21:02:22.578 14279 14380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:23.077  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:02:23.099  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:02:23.103  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:02:23.105  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:02:23.692  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:02:23.721  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:02:27.534 14121 14638 W HWUI    : Image decoding logging dropped!
+04-16 21:02:27.535 14121 14145 W HWUI    : Image decoding logging dropped!
+04-16 21:02:28.687 25304 26737 W HWUI    : Image decoding logging dropped!
+04-16 21:02:34.380 25304 26737 W HWUI    : Image decoding logging dropped!
+04-16 21:02:36.913 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:36.948 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:36.951 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:36.954 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:36.957 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:36.998 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:37.004 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:37.007 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:37.012 25304 25380 W HWUI    : Image decoding logging dropped!
+04-16 21:02:37.702 14758 14758 W HWUI    : Image decoding logging dropped!
+04-16 21:02:37.702 14758 14758 W HWUI    : Image decoding logging dropped!
+04-16 21:02:37.808 14758 14782 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:02:37.808 14758 14782 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:02:37.808 14758 14782 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:02:37.836 14758 14822 W HWUI    : Image decoding logging dropped!
+04-16 21:02:37.853 14758 14826 W HWUI    : Image decoding logging dropped!
+04-16 21:02:38.475 25304 26737 W HWUI    : Image decoding logging dropped!
+04-16 21:02:49.718 14887 14909 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:02:49.718 14887 14909 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:02:49.718 14887 14909 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:02:50.328 14887 14887 W HWUI    : Image decoding logging dropped!
+04-16 21:02:50.331 14887 14887 W HWUI    : Image decoding logging dropped!
+04-16 21:02:52.135 25304 26737 W HWUI    : Image decoding logging dropped!
+04-16 21:02:56.571 14121 14215 W HWUI    : Image decoding logging dropped!
+04-16 21:02:56.586 14121 14187 W HWUI    : Image decoding logging dropped!
+04-16 21:02:58.207 25304 26737 W HWUI    : Image decoding logging dropped!
+04-16 21:03:07.564 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:03:28.765 30774 15199 W HWUI    : Image decoding logging dropped!
+04-16 21:03:28.827 30774 15199 W HWUI    : Image decoding logging dropped!
+04-16 21:03:28.855 30774 15199 W HWUI    : Image decoding logging dropped!
+04-16 21:03:28.927 30774 15199 W HWUI    : Image decoding logging dropped!
+04-16 21:03:28.963 30774 15199 W HWUI    : Image decoding logging dropped!
+04-16 21:03:28.991 30774 15199 W HWUI    : Image decoding logging dropped!
+04-16 21:03:34.296 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:03:34.383 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:03:34.840  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:03:34.869  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:34.919  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:34.937  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:34.956  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:35.029  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:35.046  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:35.056  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:35.087  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:35.103  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:45.957 14279 15266 W HWUI    : Image decoding logging dropped!
+04-16 21:03:47.331 14279 15272 W HWUI    : Image decoding logging dropped!
+04-16 21:03:48.689  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:48.694  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:48.697  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:48.699  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:48.700  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:03:48.706  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:12.458 30774 15379 W HWUI    : Image decoding logging dropped!
+04-16 21:04:12.483 30774 15379 W HWUI    : Image decoding logging dropped!
+04-16 21:04:12.507 30774 15379 W HWUI    : Image decoding logging dropped!
+04-16 21:04:12.528 30774 15379 W HWUI    : Image decoding logging dropped!
+04-16 21:04:12.560 30774 15379 W HWUI    : Image decoding logging dropped!
+04-16 21:04:12.568 30774 15379 W HWUI    : Image decoding logging dropped!
+04-16 21:04:18.895 30774 15390 W HWUI    : Image decoding logging dropped!
+04-16 21:04:18.901 30774 15390 W HWUI    : Image decoding logging dropped!
+04-16 21:04:18.947 30774 15390 W HWUI    : Image decoding logging dropped!
+04-16 21:04:18.976 30774 15390 W HWUI    : Image decoding logging dropped!
+04-16 21:04:18.981 30774 15390 W HWUI    : Image decoding logging dropped!
+04-16 21:04:19.014 30774 15390 W HWUI    : Image decoding logging dropped!
+04-16 21:04:28.141 15404 15437 W HWUI    : Image decoding logging dropped!
+04-16 21:04:28.308  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:04:28.709  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:28.727  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:28.737  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:28.988  3052  3173 W HWUI    : Image decoding logging dropped!
+04-16 21:04:28.989  3052  3171 W HWUI    : Image decoding logging dropped!
+04-16 21:04:30.462 30774 15395 W HWUI    : Image decoding logging dropped!
+04-16 21:04:30.467 30774 15395 W HWUI    : Image decoding logging dropped!
+04-16 21:04:30.472 30774 15395 W HWUI    : Image decoding logging dropped!
+04-16 21:04:30.477 30774 15395 W HWUI    : Image decoding logging dropped!
+04-16 21:04:30.483 30774 15395 W HWUI    : Image decoding logging dropped!
+04-16 21:04:30.487 30774 15395 W HWUI    : Image decoding logging dropped!
+04-16 21:04:31.700  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:31.703  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:32.187  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:32.190  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:35.971 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:04:36.408  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:36.425  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:04:36.431  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:05:03.241 30774 15724 W HWUI    : Image decoding logging dropped!
+04-16 21:05:03.267 30774 15724 W HWUI    : Image decoding logging dropped!
+04-16 21:05:03.276 30774 15724 W HWUI    : Image decoding logging dropped!
+04-16 21:05:03.301 30774 15724 W HWUI    : Image decoding logging dropped!
+04-16 21:05:03.330 30774 15724 W HWUI    : Image decoding logging dropped!
+04-16 21:05:03.344 30774 15724 W HWUI    : Image decoding logging dropped!
+04-16 21:05:06.699 15738 15886 W HWUI    : Image decoding logging dropped!
+04-16 21:05:06.727 15738 15886 W HWUI    : Image decoding logging dropped!
+04-16 21:05:06.755 15738 15886 W HWUI    : Image decoding logging dropped!
+04-16 21:05:06.813 15738 15886 W HWUI    : Image decoding logging dropped!
+04-16 21:05:17.176 15738 15883 W HWUI    : Image decoding logging dropped!
+04-16 21:05:17.411  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:05:17.472  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:05:17.483  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:05:26.004 30774 16438 W HWUI    : Image decoding logging dropped!
+04-16 21:05:26.071 30774 16438 W HWUI    : Image decoding logging dropped!
+04-16 21:05:26.123 30774 16438 W HWUI    : Image decoding logging dropped!
+04-16 21:05:26.167 30774 16438 W HWUI    : Image decoding logging dropped!
+04-16 21:05:26.194 30774 16438 W HWUI    : Image decoding logging dropped!
+04-16 21:05:26.252 30774 16438 W HWUI    : Image decoding logging dropped!
+04-16 21:05:34.270 30774 16444 W HWUI    : Image decoding logging dropped!
+04-16 21:05:34.283 30774 16444 W HWUI    : Image decoding logging dropped!
+04-16 21:05:34.302 30774 16444 W HWUI    : Image decoding logging dropped!
+04-16 21:05:34.319 30774 16444 W HWUI    : Image decoding logging dropped!
+04-16 21:05:34.324 30774 16444 W HWUI    : Image decoding logging dropped!
+04-16 21:05:34.384 30774 16444 W HWUI    : Image decoding logging dropped!
+04-16 21:05:44.645 30774 16463 W HWUI    : Image decoding logging dropped!
+04-16 21:05:44.650 30774 16463 W HWUI    : Image decoding logging dropped!
+04-16 21:05:44.661 30774 16463 W HWUI    : Image decoding logging dropped!
+04-16 21:05:44.667 30774 16463 W HWUI    : Image decoding logging dropped!
+04-16 21:05:44.672 30774 16463 W HWUI    : Image decoding logging dropped!
+04-16 21:05:44.677 30774 16463 W HWUI    : Image decoding logging dropped!
+04-16 21:05:44.927 30774 16466 W HWUI    : Image decoding logging dropped!
+04-16 21:05:48.576  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:05:48.595  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:05:48.609  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:05:53.678 30774 16478 W HWUI    : Image decoding logging dropped!
+04-16 21:05:53.684 30774 16478 W HWUI    : Image decoding logging dropped!
+04-16 21:05:53.688 30774 16478 W HWUI    : Image decoding logging dropped!
+04-16 21:05:53.693 30774 16478 W HWUI    : Image decoding logging dropped!
+04-16 21:05:53.698 30774 16478 W HWUI    : Image decoding logging dropped!
+04-16 21:05:53.703 30774 16478 W HWUI    : Image decoding logging dropped!
+04-16 21:06:01.360 30774 16472 W HWUI    : Image decoding logging dropped!
+04-16 21:06:01.407 30774 16472 W HWUI    : Image decoding logging dropped!
+04-16 21:06:01.484 30774 16472 W HWUI    : Image decoding logging dropped!
+04-16 21:06:01.505 30774 16472 W HWUI    : Image decoding logging dropped!
+04-16 21:06:01.552 30774 16472 W HWUI    : Image decoding logging dropped!
+04-16 21:06:01.583 30774 16472 W HWUI    : Image decoding logging dropped!
+04-16 21:06:03.484 30774 16490 W HWUI    : Image decoding logging dropped!
+04-16 21:06:03.488 30774 16490 W HWUI    : Image decoding logging dropped!
+04-16 21:06:03.493 30774 16490 W HWUI    : Image decoding logging dropped!
+04-16 21:06:03.497 30774 16490 W HWUI    : Image decoding logging dropped!
+04-16 21:06:03.502 30774 16490 W HWUI    : Image decoding logging dropped!
+04-16 21:06:03.507 30774 16490 W HWUI    : Image decoding logging dropped!
+04-16 21:06:14.864 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:06:15.310  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:15.320  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:15.323  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.017 31100 10376 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.021 31100 10376 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.026 31100 10376 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.034 31100 10376 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.055 31100 10376 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.061 31100 10376 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.067 31100 10376 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.071 31100 10376 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.272 31100 16535 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.276 31100 16535 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.279 31100 16535 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.282 31100 16535 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.285 31100 16535 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.287 31100 16535 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.289 31100 16535 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.293 31100 16535 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.636 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.650 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.896  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.896  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.899  4650  5857 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.909  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:16.913  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.026 31100 16534 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.031 31100 16534 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.034 31100 16534 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.037 31100 16534 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.039 31100 16534 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.041 31100 16534 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.043 31100 16534 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.045 31100 16534 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.101  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.109  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.112  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.130  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.132  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.134  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.143  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.289  3052  3185 W HWUI    : Image decoding logging dropped!
+04-16 21:06:17.293  3052  3172 W HWUI    : Image decoding logging dropped!
+04-16 21:06:25.867 30774 16550 W HWUI    : Image decoding logging dropped!
+04-16 21:06:25.873 30774 16550 W HWUI    : Image decoding logging dropped!
+04-16 21:06:25.878 30774 16550 W HWUI    : Image decoding logging dropped!
+04-16 21:06:25.885 30774 16550 W HWUI    : Image decoding logging dropped!
+04-16 21:06:25.890 30774 16550 W HWUI    : Image decoding logging dropped!
+04-16 21:06:25.895 30774 16550 W HWUI    : Image decoding logging dropped!
+04-16 21:06:29.781 30774 16553 W HWUI    : Image decoding logging dropped!
+04-16 21:06:29.848 30774 16553 W HWUI    : Image decoding logging dropped!
+04-16 21:06:29.853 30774 16553 W HWUI    : Image decoding logging dropped!
+04-16 21:06:29.857 30774 16553 W HWUI    : Image decoding logging dropped!
+04-16 21:06:29.870 30774 16553 W HWUI    : Image decoding logging dropped!
+04-16 21:06:29.873 30774 16553 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.261 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.305 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.818  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.823  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.833  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.837  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.852  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.854  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.856  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.862  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.943  3052  3171 W HWUI    : Image decoding logging dropped!
+04-16 21:06:30.944  3052  3185 W HWUI    : Image decoding logging dropped!
+04-16 21:06:34.914  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:34.937  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:34.943  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:35.150  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:35.161  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:35.166  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:35.168  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:35.171  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:35.173  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:35.187  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.102  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.119  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.121  2387   519 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.122  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.139  3052 16596 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.333  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.355  3052 16596 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.363  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.368  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.385  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.388  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.391  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.400  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.478  3052  3171 W HWUI    : Image decoding logging dropped!
+04-16 21:06:41.481  3052  3180 W HWUI    : Image decoding logging dropped!
+04-16 21:07:08.936 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:07:09.106 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:07:25.021 30774 16702 W HWUI    : Image decoding logging dropped!
+04-16 21:07:25.026 30774 16702 W HWUI    : Image decoding logging dropped!
+04-16 21:07:25.030 30774 16702 W HWUI    : Image decoding logging dropped!
+04-16 21:07:25.058 30774 16702 W HWUI    : Image decoding logging dropped!
+04-16 21:07:25.063 30774 16702 W HWUI    : Image decoding logging dropped!
+04-16 21:07:25.081 30774 16702 W HWUI    : Image decoding logging dropped!
+04-16 21:07:25.929 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:07:33.173 30774 16675 W HWUI    : Image decoding logging dropped!
+04-16 21:07:33.179 30774 16675 W HWUI    : Image decoding logging dropped!
+04-16 21:07:33.193 30774 16675 W HWUI    : Image decoding logging dropped!
+04-16 21:07:33.218 30774 16675 W HWUI    : Image decoding logging dropped!
+04-16 21:07:33.254 30774 16675 W HWUI    : Image decoding logging dropped!
+04-16 21:07:33.277 30774 16675 W HWUI    : Image decoding logging dropped!
+04-16 21:07:43.232 30774 17009 W HWUI    : Image decoding logging dropped!
+04-16 21:07:43.245 30774 17009 W HWUI    : Image decoding logging dropped!
+04-16 21:07:43.251 30774 17009 W HWUI    : Image decoding logging dropped!
+04-16 21:07:43.264 30774 17009 W HWUI    : Image decoding logging dropped!
+04-16 21:07:43.269 30774 17009 W HWUI    : Image decoding logging dropped!
+04-16 21:07:43.274 30774 17009 W HWUI    : Image decoding logging dropped!
+04-16 21:07:52.682 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:07:52.781 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:07:57.958 30774 17032 W HWUI    : Image decoding logging dropped!
+04-16 21:07:57.999 30774 17032 W HWUI    : Image decoding logging dropped!
+04-16 21:07:58.024 30774 17032 W HWUI    : Image decoding logging dropped!
+04-16 21:07:58.028 30774 17032 W HWUI    : Image decoding logging dropped!
+04-16 21:07:58.046 30774 17032 W HWUI    : Image decoding logging dropped!
+04-16 21:07:58.057 30774 17032 W HWUI    : Image decoding logging dropped!
+04-16 21:08:21.272 14279 14374 W HWUI    : Image decoding logging dropped!
+04-16 21:08:22.494  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:22.505  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:22.512  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:22.515  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:22.517  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:22.520  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:31.425 30774 17122 W HWUI    : Image decoding logging dropped!
+04-16 21:08:31.463 30774 17122 W HWUI    : Image decoding logging dropped!
+04-16 21:08:31.468 30774 17122 W HWUI    : Image decoding logging dropped!
+04-16 21:08:31.473 30774 17122 W HWUI    : Image decoding logging dropped!
+04-16 21:08:31.478 30774 17122 W HWUI    : Image decoding logging dropped!
+04-16 21:08:31.483 30774 17122 W HWUI    : Image decoding logging dropped!
+04-16 21:08:39.394 30774 17140 W HWUI    : Image decoding logging dropped!
+04-16 21:08:39.402 30774 17140 W HWUI    : Image decoding logging dropped!
+04-16 21:08:39.407 30774 17140 W HWUI    : Image decoding logging dropped!
+04-16 21:08:39.411 30774 17140 W HWUI    : Image decoding logging dropped!
+04-16 21:08:39.417 30774 17140 W HWUI    : Image decoding logging dropped!
+04-16 21:08:39.423 30774 17140 W HWUI    : Image decoding logging dropped!
+04-16 21:08:42.117 30810 30839 W HWUI    : Image decoding logging dropped!
+04-16 21:08:43.235 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:08:43.268 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:08:45.631 30774 17164 W HWUI    : Image decoding logging dropped!
+04-16 21:08:45.641 30774 17164 W HWUI    : Image decoding logging dropped!
+04-16 21:08:45.723 30774 17164 W HWUI    : Image decoding logging dropped!
+04-16 21:08:45.754 30774 17164 W HWUI    : Image decoding logging dropped!
+04-16 21:08:45.786 30774 17164 W HWUI    : Image decoding logging dropped!
+04-16 21:08:45.791 30774 17164 W HWUI    : Image decoding logging dropped!
+04-16 21:08:48.278  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:08:48.760  3052  3146 W HWUI    : Image decoding logging dropped!
+04-16 21:08:50.457 17341 17435 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:08:50.457 17341 17435 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:08:50.457 17341 17435 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:08:50.934 17341 17486 W HWUI    : Image decoding logging dropped!
+04-16 21:08:50.934 17341 17485 W HWUI    : Image decoding logging dropped!
+04-16 21:08:50.934 17341 17494 W HWUI    : Image decoding logging dropped!
+04-16 21:08:50.934 17341 17432 W HWUI    : Image decoding logging dropped!
+04-16 21:08:52.794 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:08:55.134 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:08:55.341 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:08:55.422  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:08:55.477  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:55.486  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:55.809  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:08:55.819  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:09:20.816 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:09:20.989 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:09:21.504  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:09:21.530  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:09:21.554  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:09:36.524 30774 17620 W HWUI    : Image decoding logging dropped!
+04-16 21:09:36.605 30774 17620 W HWUI    : Image decoding logging dropped!
+04-16 21:09:36.636 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:09:36.674 30774 17620 W HWUI    : Image decoding logging dropped!
+04-16 21:09:36.712 30774 17620 W HWUI    : Image decoding logging dropped!
+04-16 21:09:36.736 30774 17620 W HWUI    : Image decoding logging dropped!
+04-16 21:09:36.784 30774 17620 W HWUI    : Image decoding logging dropped!
+04-16 21:09:36.931 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:09:37.446  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:09:37.454  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:09:37.459  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:09:40.318 30774 17654 W HWUI    : Image decoding logging dropped!
+04-16 21:09:40.323 30774 17654 W HWUI    : Image decoding logging dropped!
+04-16 21:09:40.327 30774 17654 W HWUI    : Image decoding logging dropped!
+04-16 21:09:40.332 30774 17654 W HWUI    : Image decoding logging dropped!
+04-16 21:09:40.345 30774 17654 W HWUI    : Image decoding logging dropped!
+04-16 21:09:40.353 30774 17654 W HWUI    : Image decoding logging dropped!
+04-16 21:09:40.544 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:09:43.636 30810 30839 W HWUI    : Image decoding logging dropped!
+04-16 21:09:43.894  3052  3146 W HWUI    : Image decoding logging dropped!
+04-16 21:09:44.489 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:09:44.547 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:09:45.429 17807 17839 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:09:45.429 17807 17839 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:09:45.429 17807 17839 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:09:45.702 17807 17807 D StartupPerf: HomeVM first UIState: 197ms games=0+0+10
+04-16 21:09:45.867 17807 17880 W HWUI    : Image decoding logging dropped!
+04-16 21:09:45.882 17807 17835 W HWUI    : Image decoding logging dropped!
+04-16 21:09:45.884 17807 17880 W HWUI    : Image decoding logging dropped!
+04-16 21:09:45.889 17807 17837 W HWUI    : Image decoding logging dropped!
+04-16 21:09:53.963 30774 17710 W HWUI    : Image decoding logging dropped!
+04-16 21:09:53.987 30774 17710 W HWUI    : Image decoding logging dropped!
+04-16 21:09:54.019 30774 17710 W HWUI    : Image decoding logging dropped!
+04-16 21:09:54.039 30774 17710 W HWUI    : Image decoding logging dropped!
+04-16 21:09:54.069 30774 17710 W HWUI    : Image decoding logging dropped!
+04-16 21:09:54.093 30774 17710 W HWUI    : Image decoding logging dropped!
+04-16 21:10:01.779 17946 18006 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:10:01.779 17946 18006 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:10:01.779 17946 18006 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:10:02.042 17946 17946 D StartupPerf: HomeVM first UIState: 195ms games=0+0+10
+04-16 21:10:02.239 17946 18059 W HWUI    : Image decoding logging dropped!
+04-16 21:10:02.239 17946 18043 W HWUI    : Image decoding logging dropped!
+04-16 21:10:02.241 17946 18046 W HWUI    : Image decoding logging dropped!
+04-16 21:10:02.242 17946 18050 W HWUI    : Image decoding logging dropped!
+04-16 21:10:03.326 30774 17901 W HWUI    : Image decoding logging dropped!
+04-16 21:10:03.331 30774 17901 W HWUI    : Image decoding logging dropped!
+04-16 21:10:03.336 30774 17901 W HWUI    : Image decoding logging dropped!
+04-16 21:10:03.340 30774 17901 W HWUI    : Image decoding logging dropped!
+04-16 21:10:03.345 30774 17901 W HWUI    : Image decoding logging dropped!
+04-16 21:10:03.349 30774 17901 W HWUI    : Image decoding logging dropped!
+04-16 21:10:37.120 30774 18087 W HWUI    : Image decoding logging dropped!
+04-16 21:10:37.129 30774 18087 W HWUI    : Image decoding logging dropped!
+04-16 21:10:37.134 30774 18087 W HWUI    : Image decoding logging dropped!
+04-16 21:10:37.142 30774 18087 W HWUI    : Image decoding logging dropped!
+04-16 21:10:37.162 30774 18087 W HWUI    : Image decoding logging dropped!
+04-16 21:10:37.167 30774 18087 W HWUI    : Image decoding logging dropped!
+04-16 21:11:05.900 30810 30837 W HWUI    : Image decoding logging dropped!
+04-16 21:11:06.193  3052  3146 W HWUI    : Image decoding logging dropped!
+04-16 21:11:06.780 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:11:06.829 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:11:07.270 30774 18146 W HWUI    : Image decoding logging dropped!
+04-16 21:11:07.369 30774 18146 W HWUI    : Image decoding logging dropped!
+04-16 21:11:07.410 30774 18146 W HWUI    : Image decoding logging dropped!
+04-16 21:11:07.438 30774 18146 W HWUI    : Image decoding logging dropped!
+04-16 21:11:07.469 30774 18146 W HWUI    : Image decoding logging dropped!
+04-16 21:11:07.493 30774 18146 W HWUI    : Image decoding logging dropped!
+04-16 21:11:07.709 18238 18278 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:11:07.709 18238 18278 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:11:07.709 18238 18278 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:11:07.802 18238 18238 D StartupPerf: microphone: 17ms
+04-16 21:11:07.999 18238 18238 D StartupPerf: HomeVM first UIState: 214ms games=0+0+10
+04-16 21:11:08.005 18238 18238 D StartupPerf: favorites: 220ms
+04-16 21:11:08.005 18238 18238 D StartupPerf: discovery: 220ms
+04-16 21:11:08.005 18238 18238 D StartupPerf: recents: 220ms
+04-16 21:11:08.150 18238 18314 W HWUI    : Image decoding logging dropped!
+04-16 21:11:08.153 18238 18310 W HWUI    : Image decoding logging dropped!
+04-16 21:11:08.161 18238 18275 W HWUI    : Image decoding logging dropped!
+04-16 21:11:08.175 18238 18275 W HWUI    : Image decoding logging dropped!
+04-16 21:11:08.234 18238 18238 D StartupPerf: desmume: 449ms
+04-16 21:11:08.344 18238 18238 D StartupPerf: indexing: 559ms
+04-16 21:11:22.523 30774 18350 W HWUI    : Image decoding logging dropped!
+04-16 21:11:22.539 30774 18350 W HWUI    : Image decoding logging dropped!
+04-16 21:11:22.548 30774 18350 W HWUI    : Image decoding logging dropped!
+04-16 21:11:22.583 30774 18350 W HWUI    : Image decoding logging dropped!
+04-16 21:11:22.612 30774 18350 W HWUI    : Image decoding logging dropped!
+04-16 21:11:22.662 30774 18350 W HWUI    : Image decoding logging dropped!
+04-16 21:11:27.537 18381 18409 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:11:27.538 18381 18409 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:11:27.538 18381 18409 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:11:27.622 18381 18381 D StartupPerf: microphone: 17ms
+04-16 21:11:27.802 18381 18381 D StartupPerf: HomeVM first UIState: 197ms games=0+0+10
+04-16 21:11:27.924 18381 18405 W HWUI    : Image decoding logging dropped!
+04-16 21:11:27.926 18381 18452 W HWUI    : Image decoding logging dropped!
+04-16 21:11:27.933 18381 18439 W HWUI    : Image decoding logging dropped!
+04-16 21:11:27.948 18381 18439 W HWUI    : Image decoding logging dropped!
+04-16 21:11:27.974 18381 18381 D StartupPerf: recents: 369ms
+04-16 21:11:27.974 18381 18381 D StartupPerf: favorites: 369ms
+04-16 21:11:27.974 18381 18381 D StartupPerf: discovery: 369ms
+04-16 21:11:27.975 18381 18381 D StartupPerf: desmume: 370ms
+04-16 21:11:28.106 18381 18381 D StartupPerf: indexing: 501ms
+04-16 21:11:30.315 18381 18381 D StartupPerf: HomeVM first UIState: 2709ms games=0+0+10
+04-16 21:11:30.507 18381 18381 D StartupPerf: HomeVM first UIState: 2901ms games=0+0+10
+04-16 21:11:32.337 30774 18382 W HWUI    : Image decoding logging dropped!
+04-16 21:11:32.403 30774 18382 W HWUI    : Image decoding logging dropped!
+04-16 21:11:32.417 30774 18382 W HWUI    : Image decoding logging dropped!
+04-16 21:11:32.438 30774 18382 W HWUI    : Image decoding logging dropped!
+04-16 21:11:32.503 30774 18382 W HWUI    : Image decoding logging dropped!
+04-16 21:11:32.524 30774 18382 W HWUI    : Image decoding logging dropped!
+04-16 21:11:48.679 30774 18477 W HWUI    : Image decoding logging dropped!
+04-16 21:11:48.693 30774 18477 W HWUI    : Image decoding logging dropped!
+04-16 21:11:48.697 30774 18477 W HWUI    : Image decoding logging dropped!
+04-16 21:11:48.707 30774 18477 W HWUI    : Image decoding logging dropped!
+04-16 21:11:48.712 30774 18477 W HWUI    : Image decoding logging dropped!
+04-16 21:11:48.716 30774 18477 W HWUI    : Image decoding logging dropped!
+04-16 21:12:01.268  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:12:01.308  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:12:01.312  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:12:01.314  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:12:01.338  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:12:01.356  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:14.723 31100 17007 W HWUI    : Image decoding logging dropped!
+04-16 21:13:14.733 31100 17007 W HWUI    : Image decoding logging dropped!
+04-16 21:13:14.757 31100 17007 W HWUI    : Image decoding logging dropped!
+04-16 21:13:14.765 31100 17007 W HWUI    : Image decoding logging dropped!
+04-16 21:13:14.772 31100 17007 W HWUI    : Image decoding logging dropped!
+04-16 21:13:14.778 31100 17007 W HWUI    : Image decoding logging dropped!
+04-16 21:13:14.782 31100 17007 W HWUI    : Image decoding logging dropped!
+04-16 21:13:14.785 31100 17007 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.069 31100 18605 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.072 31100 18605 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.074 31100 18605 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.076 31100 18605 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.078 31100 18605 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.080 31100 18605 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.081 31100 18605 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.084 31100 18605 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.235 31100 17319 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.238 31100 17319 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.240 31100 17319 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.242 31100 17319 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.244 31100 17319 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.246 31100 17319 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.248 31100 17319 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.250 31100 17319 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.258 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.285 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.749  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.783  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.788  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.806  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.809  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.812  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.835  2387   519 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.841  2387   519 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.860  3052 18613 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.874  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:15.885  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.039  3052  3181 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.045  3052  3171 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.694 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.697 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.700 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.701 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.703 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.705 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.707 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:16.708 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.384 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.410 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.693  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.708  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.717  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.921  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.933  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.938  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.955  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.960  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.964  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:24.970  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:13:25.075  3052  3181 W HWUI    : Image decoding logging dropped!
+04-16 21:13:25.076  3052  3180 W HWUI    : Image decoding logging dropped!
+04-16 21:13:30.543 18381 18381 D StartupPerf: HomeVM first UIState: 122938ms games=0+0+10
+04-16 21:13:31.130 18381 18381 D StartupPerf: HomeVM first UIState: 123525ms games=0+0+10
+04-16 21:13:36.354 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.360 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.365 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.369 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.374 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.378 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.383 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.387 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.526 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.531 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.535 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.540 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.544 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.548 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.552 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:13:36.557 31100 18601 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.280 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.285 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.289 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.293 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.297 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.301 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.305 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.309 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.487 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.491 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.496 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.500 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.504 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.507 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.511 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:14:09.515 31100 18599 W HWUI    : Image decoding logging dropped!
+04-16 21:14:38.641 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:14:38.683 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:14:38.721 30810 30838 W HWUI    : Image decoding logging dropped!
+04-16 21:14:38.981  3052  3146 W HWUI    : Image decoding logging dropped!
+04-16 21:14:40.831 18738 18842 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:14:40.831 18738 18842 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:14:40.831 18738 18842 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:14:41.619 18738 18841 W HWUI    : Image decoding logging dropped!
+04-16 21:14:41.621 18738 19023 W HWUI    : Image decoding logging dropped!
+04-16 21:14:41.623 18738 19024 W HWUI    : Image decoding logging dropped!
+04-16 21:14:41.624 18738 19028 W HWUI    : Image decoding logging dropped!
+04-16 21:15:19.788 30810 30842 W HWUI    : Image decoding logging dropped!
+04-16 21:15:19.920  3052  3146 W HWUI    : Image decoding logging dropped!
+04-16 21:15:20.513 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:15:20.556 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:15:21.427 19420 19481 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:15:21.427 19420 19481 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:15:21.427 19420 19481 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:15:21.894 19420 19477 W HWUI    : Image decoding logging dropped!
+04-16 21:15:21.894 19420 19478 W HWUI    : Image decoding logging dropped!
+04-16 21:15:21.904 19420 19479 W HWUI    : Image decoding logging dropped!
+04-16 21:15:21.919 19420 19479 W HWUI    : Image decoding logging dropped!
+04-16 21:16:08.633 14279 19612 W HWUI    : Image decoding logging dropped!
+04-16 21:16:11.036  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:16:11.080  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:16:11.086  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:16:11.093  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:16:11.099  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:16:11.106  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:16:12.909 14279 19624 W HWUI    : Image decoding logging dropped!
+04-16 21:16:31.163  3052  3146 W HWUI    : Image decoding logging dropped!
+04-16 21:16:31.530 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:16:31.561 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:16:32.597 19775 19802 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:16:32.597 19775 19802 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:16:32.597 19775 19802 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:16:32.967 19775 19798 W HWUI    : Image decoding logging dropped!
+04-16 21:16:32.967 19775 19843 W HWUI    : Image decoding logging dropped!
+04-16 21:16:32.973 19775 19837 W HWUI    : Image decoding logging dropped!
+04-16 21:16:32.986 19775 19843 W HWUI    : Image decoding logging dropped!
+04-16 21:16:39.135 30774 19884 W HWUI    : Image decoding logging dropped!
+04-16 21:16:39.143 30774 19884 W HWUI    : Image decoding logging dropped!
+04-16 21:16:39.150 30774 19884 W HWUI    : Image decoding logging dropped!
+04-16 21:16:39.159 30774 19884 W HWUI    : Image decoding logging dropped!
+04-16 21:16:39.172 30774 19884 W HWUI    : Image decoding logging dropped!
+04-16 21:16:39.184 30774 19884 W HWUI    : Image decoding logging dropped!
+04-16 21:16:48.506 19934 19966 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:16:48.506 19934 19966 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:16:48.506 19934 19966 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:16:48.870 19934 19961 W HWUI    : Image decoding logging dropped!
+04-16 21:16:48.872 19934 19960 W HWUI    : Image decoding logging dropped!
+04-16 21:16:48.882 19934 19996 W HWUI    : Image decoding logging dropped!
+04-16 21:16:48.888 19934 19960 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.135 30774 19906 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.140 30774 19906 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.153 30774 19906 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.206 30774 19906 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.210 30774 19906 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.214 30774 19906 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.350 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.921  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:16:56.963  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:16:57.015  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:16:57.045  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:17:03.096 30774 20029 W HWUI    : Image decoding logging dropped!
+04-16 21:17:03.102 30774 20029 W HWUI    : Image decoding logging dropped!
+04-16 21:17:03.147 30774 20029 W HWUI    : Image decoding logging dropped!
+04-16 21:17:03.153 30774 20029 W HWUI    : Image decoding logging dropped!
+04-16 21:17:03.167 30774 20029 W HWUI    : Image decoding logging dropped!
+04-16 21:17:03.183 30774 20029 W HWUI    : Image decoding logging dropped!
+04-16 21:17:20.949 30774 20061 W HWUI    : Image decoding logging dropped!
+04-16 21:17:21.000 30774 20061 W HWUI    : Image decoding logging dropped!
+04-16 21:17:21.044 30774 20061 W HWUI    : Image decoding logging dropped!
+04-16 21:17:21.065 30774 20061 W HWUI    : Image decoding logging dropped!
+04-16 21:17:21.077 30774 20061 W HWUI    : Image decoding logging dropped!
+04-16 21:17:21.083 30774 20061 W HWUI    : Image decoding logging dropped!
+04-16 21:18:13.282 30774 20176 W HWUI    : Image decoding logging dropped!
+04-16 21:18:13.289 30774 20176 W HWUI    : Image decoding logging dropped!
+04-16 21:18:13.297 30774 20176 W HWUI    : Image decoding logging dropped!
+04-16 21:18:13.305 30774 20176 W HWUI    : Image decoding logging dropped!
+04-16 21:18:13.345 30774 20176 W HWUI    : Image decoding logging dropped!
+04-16 21:18:13.387 30774 20176 W HWUI    : Image decoding logging dropped!
+04-16 21:18:17.383 30774 20182 W HWUI    : Image decoding logging dropped!
+04-16 21:18:17.399 30774 20182 W HWUI    : Image decoding logging dropped!
+04-16 21:18:17.445 30774 20182 W HWUI    : Image decoding logging dropped!
+04-16 21:18:17.505 30774 20182 W HWUI    : Image decoding logging dropped!
+04-16 21:18:17.546 30774 20182 W HWUI    : Image decoding logging dropped!
+04-16 21:18:17.552 30774 20182 W HWUI    : Image decoding logging dropped!
+04-16 21:18:29.993 30774 20195 W HWUI    : Image decoding logging dropped!
+04-16 21:18:29.997 30774 20195 W HWUI    : Image decoding logging dropped!
+04-16 21:18:30.018 30774 20195 W HWUI    : Image decoding logging dropped!
+04-16 21:18:30.117 30774 20195 W HWUI    : Image decoding logging dropped!
+04-16 21:18:30.133 30774 20195 W HWUI    : Image decoding logging dropped!
+04-16 21:18:30.142 30774 20195 W HWUI    : Image decoding logging dropped!
+04-16 21:18:51.906 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.069 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.597  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.617  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.622  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.643  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.656  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.663  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.672  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:18:52.683  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:23:10.166 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:24:06.693 21157 21185 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:24:06.693 21157 21185 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:24:06.693 21157 21185 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:24:07.175 21157 21183 W HWUI    : Image decoding logging dropped!
+04-16 21:24:07.177 21157 21236 W HWUI    : Image decoding logging dropped!
+04-16 21:24:07.177 21157 21240 W HWUI    : Image decoding logging dropped!
+04-16 21:24:07.186 21157 21249 W HWUI    : Image decoding logging dropped!
+04-16 21:24:28.909 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:24:28.924 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:24:28.935 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:24:28.944 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:24:28.952 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:24:28.959 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:24:28.963 21321 21361 E HWUI    : fbcNotifySbeRescue error: undefined symbol: fbcNotifySbeRescue
+04-16 21:24:28.963 21321 21361 E HWUI    : fbcNotifyHintFrame error: undefined symbol: fbcNotifyHintFrame
+04-16 21:24:28.963 21321 21361 E HWUI    : updateSbeFeatureOption error: undefined symbol: updateSbeFeatureOption
+04-16 21:24:28.971 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:24:28.984 31100 17615 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.173 31100 21317 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.180 31100 21317 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.186 31100 21317 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.192 31100 21317 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.198 31100 21317 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.203 31100 21317 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.209 31100 21317 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.214 31100 21317 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.281 21321 21357 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.282 21321 21415 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.292 21321 21398 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.305 21321 21415 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.341 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.348 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.355 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.360 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.366 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.370 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.375 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.380 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.537 31100 21324 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.543 31100 21324 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.548 31100 21324 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.554 31100 21324 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.559 31100 21324 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.563 31100 21324 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.568 31100 21324 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.574 31100 21324 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.688 31100 21306 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.694 31100 21306 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.701 31100 21306 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.706 31100 21306 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.712 31100 21306 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.717 31100 21306 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.722 31100 21306 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.727 31100 21306 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.847 31100 21338 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.853 31100 21338 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.858 31100 21338 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.862 31100 21338 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.867 31100 21338 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.874 31100 21338 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.880 31100 21338 W HWUI    : Image decoding logging dropped!
+04-16 21:24:29.887 31100 21338 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.019 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.024 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.028 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.033 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.037 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.042 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.046 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.050 31100 21320 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.231 31100 21315 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.235 31100 21315 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.238 31100 21315 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.241 31100 21315 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.244 31100 21315 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.247 31100 21315 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.250 31100 21315 W HWUI    : Image decoding logging dropped!
+04-16 21:24:30.253 31100 21315 W HWUI    : Image decoding logging dropped!
+04-16 21:25:17.224 25304 25323 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.522  8159  8296 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.921 31100 21534 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.923 31100 21534 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.932 31100 21534 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.934 31100 21534 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.937 31100 21534 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.939 31100 21534 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.940 31100 21534 W HWUI    : Image decoding logging dropped!
+04-16 21:27:26.943 31100 21534 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.012  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.053  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.059  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.630 31100 21585 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.638 31100 21585 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.652 31100 21585 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.659 31100 21585 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.680 31100 21585 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.693 31100 21585 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.703 31100 21585 W HWUI    : Image decoding logging dropped!
+04-16 21:27:27.726 31100 21585 W HWUI    : Image decoding logging dropped!
+04-16 21:27:29.701 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:27:29.745 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.003  4650  5857 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.233  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.247  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.281  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.294  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.348  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.365  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.388  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.417  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.640  3052  3173 W HWUI    : Image decoding logging dropped!
+04-16 21:27:30.643  3052  3180 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.273 31100 21586 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.295 31100 21586 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.312 31100 21586 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.328 31100 21586 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.333 31100 21586 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.349 31100 21586 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.373 31100 21586 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.410 31100 21586 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.470  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.478  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.491  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.495  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.497  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.499  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:31.505  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:33.795 30774 21520 W HWUI    : Image decoding logging dropped!
+04-16 21:27:33.935 30774 21520 W HWUI    : Image decoding logging dropped!
+04-16 21:27:33.983 30774 21520 W HWUI    : Image decoding logging dropped!
+04-16 21:27:34.116 30774 21520 W HWUI    : Image decoding logging dropped!
+04-16 21:27:34.220 30774 21520 W HWUI    : Image decoding logging dropped!
+04-16 21:27:34.261 30774 21520 W HWUI    : Image decoding logging dropped!
+04-16 21:27:44.012 30774 21599 W HWUI    : Image decoding logging dropped!
+04-16 21:27:44.039 30774 21599 W HWUI    : Image decoding logging dropped!
+04-16 21:27:44.073 30774 21599 W HWUI    : Image decoding logging dropped!
+04-16 21:27:44.129 30774 21599 W HWUI    : Image decoding logging dropped!
+04-16 21:27:44.135 30774 21599 W HWUI    : Image decoding logging dropped!
+04-16 21:27:44.140 30774 21599 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.030 30774 21652 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.034 30774 21652 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.038 30774 21652 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.042 30774 21652 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.047 30774 21652 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.052 30774 21652 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.805  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.812  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.815  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.827  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.829  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.843  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.862  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.962  3052  3173 W HWUI    : Image decoding logging dropped!
+04-16 21:27:53.964  3052  3170 W HWUI    : Image decoding logging dropped!
+04-16 21:28:25.956 30774 21758 W HWUI    : Image decoding logging dropped!
+04-16 21:28:26.053 30774 21758 W HWUI    : Image decoding logging dropped!
+04-16 21:28:26.057 30774 21758 W HWUI    : Image decoding logging dropped!
+04-16 21:28:26.074 30774 21758 W HWUI    : Image decoding logging dropped!
+04-16 21:28:26.083 30774 21758 W HWUI    : Image decoding logging dropped!
+04-16 21:28:26.093 30774 21758 W HWUI    : Image decoding logging dropped!
+04-16 21:28:36.247 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:28:36.715  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:28:36.719  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:28:36.722  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:28:51.229 30774 21779 W HWUI    : Image decoding logging dropped!
+04-16 21:28:51.238 30774 21779 W HWUI    : Image decoding logging dropped!
+04-16 21:28:51.251 30774 21779 W HWUI    : Image decoding logging dropped!
+04-16 21:28:51.255 30774 21779 W HWUI    : Image decoding logging dropped!
+04-16 21:28:51.262 30774 21779 W HWUI    : Image decoding logging dropped!
+04-16 21:28:51.271 30774 21779 W HWUI    : Image decoding logging dropped!
+04-16 21:29:13.659 30774 21823 W HWUI    : Image decoding logging dropped!
+04-16 21:29:13.696 30774 21823 W HWUI    : Image decoding logging dropped!
+04-16 21:29:13.715 30774 21823 W HWUI    : Image decoding logging dropped!
+04-16 21:29:13.806 30774 21823 W HWUI    : Image decoding logging dropped!
+04-16 21:29:13.881 30774 21823 W HWUI    : Image decoding logging dropped!
+04-16 21:29:13.885 30774 21823 W HWUI    : Image decoding logging dropped!
+04-16 21:29:14.457 31100 21861 W HWUI    : Image decoding logging dropped!
+04-16 21:29:14.479 31100 21861 W HWUI    : Image decoding logging dropped!
+04-16 21:29:14.500 31100 21861 W HWUI    : Image decoding logging dropped!
+04-16 21:29:14.521 31100 21861 W HWUI    : Image decoding logging dropped!
+04-16 21:29:14.540 31100 21861 W HWUI    : Image decoding logging dropped!
+04-16 21:29:14.544 31100 21861 W HWUI    : Image decoding logging dropped!
+04-16 21:29:14.548 31100 21861 W HWUI    : Image decoding logging dropped!
+04-16 21:29:14.552 31100 21861 W HWUI    : Image decoding logging dropped!
+04-16 21:30:38.170 30774 22210 W HWUI    : Image decoding logging dropped!
+04-16 21:30:38.175 30774 22210 W HWUI    : Image decoding logging dropped!
+04-16 21:30:38.195 30774 22210 W HWUI    : Image decoding logging dropped!
+04-16 21:30:38.201 30774 22210 W HWUI    : Image decoding logging dropped!
+04-16 21:30:38.208 30774 22210 W HWUI    : Image decoding logging dropped!
+04-16 21:30:38.256 30774 22210 W HWUI    : Image decoding logging dropped!
+04-16 21:30:52.296 30774 22234 W HWUI    : Image decoding logging dropped!
+04-16 21:30:52.362 30774 22234 W HWUI    : Image decoding logging dropped!
+04-16 21:30:52.368 30774 22234 W HWUI    : Image decoding logging dropped!
+04-16 21:30:52.382 30774 22234 W HWUI    : Image decoding logging dropped!
+04-16 21:30:52.389 30774 22234 W HWUI    : Image decoding logging dropped!
+04-16 21:30:52.405 30774 22234 W HWUI    : Image decoding logging dropped!
+04-16 21:30:55.124 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:30:55.626 30774 31420 W HWUI    : Image decoding logging dropped!
+04-16 21:30:56.145  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:30:56.185  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:30:56.207  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:30:56.223  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:30:56.325  3052  3172 W HWUI    : Image decoding logging dropped!
+04-16 21:30:56.325  3052  3185 W HWUI    : Image decoding logging dropped!
+04-16 21:31:01.995  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:31:35.396 30774 22401 W HWUI    : Image decoding logging dropped!
+04-16 21:31:35.401 30774 22401 W HWUI    : Image decoding logging dropped!
+04-16 21:31:35.413 30774 22401 W HWUI    : Image decoding logging dropped!
+04-16 21:31:35.443 30774 22401 W HWUI    : Image decoding logging dropped!
+04-16 21:31:35.470 30774 22401 W HWUI    : Image decoding logging dropped!
+04-16 21:31:35.481 30774 22401 W HWUI    : Image decoding logging dropped!
+04-16 21:31:40.711 30774 22404 W HWUI    : Image decoding logging dropped!
+04-16 21:31:40.721 30774 22404 W HWUI    : Image decoding logging dropped!
+04-16 21:31:40.725 30774 22404 W HWUI    : Image decoding logging dropped!
+04-16 21:31:40.731 30774 22404 W HWUI    : Image decoding logging dropped!
+04-16 21:31:40.747 30774 22404 W HWUI    : Image decoding logging dropped!
+04-16 21:31:40.757 30774 22404 W HWUI    : Image decoding logging dropped!
+04-16 21:31:42.669  3052  3052 W HWUI    : Image decoding logging dropped!
+04-16 21:31:42.685  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:31:42.698  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.517  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.527  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.530  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.541  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.559  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.569  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.576  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.584  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.598  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.678  3052  3172 W HWUI    : Image decoding logging dropped!
+04-16 21:32:03.679  3052  3173 W HWUI    : Image decoding logging dropped!
+04-16 21:32:05.731 31100 21850 W HWUI    : Image decoding logging dropped!
+04-16 21:32:05.740 31100 21850 W HWUI    : Image decoding logging dropped!
+04-16 21:32:05.752 31100 21850 W HWUI    : Image decoding logging dropped!
+04-16 21:32:05.764 31100 21850 W HWUI    : Image decoding logging dropped!
+04-16 21:32:05.801 31100 21850 W HWUI    : Image decoding logging dropped!
+04-16 21:32:05.805 31100 21850 W HWUI    : Image decoding logging dropped!
+04-16 21:32:05.810 31100 21850 W HWUI    : Image decoding logging dropped!
+04-16 21:32:05.815 31100 21850 W HWUI    : Image decoding logging dropped!
+04-16 21:32:06.185 31100 21858 W HWUI    : Image decoding logging dropped!
+04-16 21:32:06.206 31100 21858 W HWUI    : Image decoding logging dropped!
+04-16 21:32:06.229 31100 21858 W HWUI    : Image decoding logging dropped!
+04-16 21:32:06.271 31100 21858 W HWUI    : Image decoding logging dropped!
+04-16 21:32:06.281 31100 21858 W HWUI    : Image decoding logging dropped!
+04-16 21:32:06.325 31100 21858 W HWUI    : Image decoding logging dropped!
+04-16 21:32:06.333 31100 21858 W HWUI    : Image decoding logging dropped!
+04-16 21:32:06.349 31100 21858 W HWUI    : Image decoding logging dropped!
+04-16 21:32:16.925 30774 22493 W HWUI    : Image decoding logging dropped!
+04-16 21:32:16.929 30774 22493 W HWUI    : Image decoding logging dropped!
+04-16 21:32:16.933 30774 22493 W HWUI    : Image decoding logging dropped!
+04-16 21:32:16.939 30774 22493 W HWUI    : Image decoding logging dropped!
+04-16 21:32:16.944 30774 22493 W HWUI    : Image decoding logging dropped!
+04-16 21:32:16.948 30774 22493 W HWUI    : Image decoding logging dropped!
+04-16 21:32:34.643 30774 22526 W HWUI    : Image decoding logging dropped!
+04-16 21:32:34.647 30774 22526 W HWUI    : Image decoding logging dropped!
+04-16 21:32:34.654 30774 22526 W HWUI    : Image decoding logging dropped!
+04-16 21:32:34.661 30774 22526 W HWUI    : Image decoding logging dropped!
+04-16 21:32:34.670 30774 22526 W HWUI    : Image decoding logging dropped!
+04-16 21:32:34.684 30774 22526 W HWUI    : Image decoding logging dropped!
+04-16 21:32:55.369 30774 22546 W HWUI    : Image decoding logging dropped!
+04-16 21:32:55.393 30774 22546 W HWUI    : Image decoding logging dropped!
+04-16 21:32:55.402 30774 22546 W HWUI    : Image decoding logging dropped!
+04-16 21:32:55.411 30774 22546 W HWUI    : Image decoding logging dropped!
+04-16 21:32:55.421 30774 22546 W HWUI    : Image decoding logging dropped!
+04-16 21:32:55.425 30774 22546 W HWUI    : Image decoding logging dropped!
+04-16 21:33:09.455 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:33:09.717 31100 31378 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.237  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.242  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.250  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.256  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.270  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.272  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.275  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.284  3052  3477 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.357  3052  3172 W HWUI    : Image decoding logging dropped!
+04-16 21:33:10.361  3052  3173 W HWUI    : Image decoding logging dropped!
+04-16 21:33:25.661 14279 22613 W HWUI    : Image decoding logging dropped!
+04-16 21:33:34.495 30774 22663 W HWUI    : Image decoding logging dropped!
+04-16 21:33:34.587 30774 22663 W HWUI    : Image decoding logging dropped!
+04-16 21:33:34.591 30774 22663 W HWUI    : Image decoding logging dropped!
+04-16 21:33:34.609 30774 22663 W HWUI    : Image decoding logging dropped!
+04-16 21:33:34.613 30774 22663 W HWUI    : Image decoding logging dropped!
+04-16 21:33:34.642 30774 22663 W HWUI    : Image decoding logging dropped!
+04-16 21:33:43.432 30774 22681 W HWUI    : Image decoding logging dropped!
+04-16 21:33:43.437 30774 22681 W HWUI    : Image decoding logging dropped!
+04-16 21:33:43.441 30774 22681 W HWUI    : Image decoding logging dropped!
+04-16 21:33:43.478 30774 22681 W HWUI    : Image decoding logging dropped!
+04-16 21:33:43.557 30774 22681 W HWUI    : Image decoding logging dropped!
+04-16 21:33:43.656 30774 22681 W HWUI    : Image decoding logging dropped!
+04-16 21:33:58.298 30774 22696 W HWUI    : Image decoding logging dropped!
+04-16 21:33:58.389 30774 22696 W HWUI    : Image decoding logging dropped!
+04-16 21:33:58.500 30774 22696 W HWUI    : Image decoding logging dropped!
+04-16 21:33:58.597 30774 22696 W HWUI    : Image decoding logging dropped!
+04-16 21:33:58.648 30774 22696 W HWUI    : Image decoding logging dropped!
+04-16 21:33:58.740 30774 22696 W HWUI    : Image decoding logging dropped!
+04-16 21:34:07.359 30774 22705 W HWUI    : Image decoding logging dropped!
+04-16 21:34:07.393 30774 22705 W HWUI    : Image decoding logging dropped!
+04-16 21:34:07.454 30774 22705 W HWUI    : Image decoding logging dropped!
+04-16 21:34:07.520 30774 22705 W HWUI    : Image decoding logging dropped!
+04-16 21:34:07.553 30774 22705 W HWUI    : Image decoding logging dropped!
+04-16 21:34:07.557 30774 22705 W HWUI    : Image decoding logging dropped!

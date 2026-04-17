@@ -12,15 +12,16 @@ import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.library.metaSystemID
+import com.swordfish.lemuroid.common.coroutines.debounceAfterFirst
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 @OptIn(FlowPreview::class)
@@ -79,13 +80,13 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
                     favoriteGames(retrogradeDb).distinctUntilChanged(),
                     recentGames(retrogradeDb).distinctUntilChanged(),
                     availableSystems(retrogradeDb, appContext).distinctUntilChanged(),
-                    indexingInProgress(appContext).distinctUntilChanged(),
-                    directoryScanInProgress(appContext).distinctUntilChanged(),
+                    indexingInProgress(appContext).onStart { emit(false) }.distinctUntilChanged(),
+                    directoryScanInProgress(appContext).onStart { emit(false) }.distinctUntilChanged(),
                     ::buildViewState,
                 )
 
             uiStatesFlow
-                .debounce(DEBOUNCE_TIME)
+                .debounceAfterFirst(DEBOUNCE_TIME)
                 .flowOn(Dispatchers.IO)
                 .collect { viewStates.value = it }
         }

@@ -5,6 +5,17 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms
 
 object Migrations {
+    val VERSION_18_19: Migration =
+        object : Migration(18, 19) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Composite index to speed up the home-screen recents query:
+                // WHERE lastPlayedAt IS NOT NULL AND isFavorite = 0 ORDER BY lastPlayedAt DESC
+                database.execSQL(
+                    "CREATE INDEX IF NOT EXISTS index_games_isFavorite_lastPlayedAt ON games (isFavorite, lastPlayedAt)",
+                )
+            }
+        }
+
     val VERSION_17_18: Migration =
         object : Migration(17, 18) {
             override fun migrate(database: SupportSQLiteDatabase) {

@@ -106,39 +106,48 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
     }
 
     private val appContext = context.applicationContext
-    private val prefs = appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    // Use lazy so that SharedPreferences disk I/O is deferred until first actual use,
+    // rather than blocking the main thread during ViewModel construction.
+    private val prefs by lazy { appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
     private val httpClient: OkHttpClient by lazy { buildHttpClient() }
-    // Reactive pause flag — updated immediately on pause/resume so the state flow
-    // responds instantly without waiting for WorkManager to emit a new WorkInfo.
-    private val _pausedFlow = MutableStateFlow(prefs.getBoolean(PREF_PAUSED, false))
+    // Reactive pause flag — start with false to avoid disk I/O; the init block will
+    // set the real value from SharedPreferences on a background thread.
+    private val _pausedFlow = MutableStateFlow(false)
 
     init {
-        // If the embedded catalog was updated (CATALOG_VERSION bumped), reset DOWNLOAD_DONE
-        // so populateFromEmbeddedCatalog runs again and creates any new placeholder files.
-        // Existing ROM files are never touched — only missing entries are created.
-        val storedCatalogVersion = prefs.getInt(PREF_CATALOG_VERSION, 1)
-        if (storedCatalogVersion < CATALOG_VERSION) {
-            prefs.edit()
-                .putInt(PREF_CATALOG_VERSION, CATALOG_VERSION)
-                .putBoolean(PREF_DOWNLOAD_DONE, false)
-                .putBoolean(PREF_DOWNLOAD_STARTED, true)
-                .apply()
-            if (autoRestart && !prefs.getBoolean(PREF_PAUSED, false)) {
+        // Run catalog-version check and auto-restart logic on a background thread to avoid
+        // blocking the main thread with SharedPreferences disk I/O during ViewModel creation.
+        Thread {
+            // Populate the pause flag from SharedPreferences now that we're off the main thread.
+            _pausedFlow.value = prefs.getBoolean(PREF_PAUSED, false)
+
+            // If the embedded catalog was updated (CATALOG_VERSION bumped), reset DOWNLOAD_DONE
+            // so populateFromEmbeddedCatalog runs again and creates any new placeholder files.
+            // Existing ROM files are never touched — only missing entries are created.
+            val storedCatalogVersion = prefs.getInt(PREF_CATALOG_VERSION, 1)
+            if (storedCatalogVersion < CATALOG_VERSION) {
+                prefs.edit()
+                    .putInt(PREF_CATALOG_VERSION, CATALOG_VERSION)
+                    .putBoolean(PREF_DOWNLOAD_DONE, false)
+                    .putBoolean(PREF_DOWNLOAD_STARTED, true)
+                    .apply()
+                if (autoRestart && !prefs.getBoolean(PREF_PAUSED, false)) {
+                    StreamingRomsWork.enqueue(appContext)
+                }
+            }
+
+            // If a streaming download was started but never completed (app killed mid-download),
+            // automatically re-enqueue the work so it resumes from where it left off.
+            // Skip auto-restart if the download was explicitly paused by the user.
+            // autoRestart=false when called from StreamingRomsWork itself to avoid a redundant
+            // enqueue IPC call while the work is already actively running.
+            if (autoRestart
+                && prefs.getBoolean(PREF_DOWNLOAD_STARTED, false)
+                && !prefs.getBoolean(PREF_PAUSED, false)
+                && !isDownloadDone()) {
                 StreamingRomsWork.enqueue(appContext)
             }
-        }
-
-        // If a streaming download was started but never completed (app killed mid-download),
-        // automatically re-enqueue the work so it resumes from where it left off.
-        // Skip auto-restart if the download was explicitly paused by the user.
-        // autoRestart=false when called from StreamingRomsWork itself to avoid a redundant
-        // enqueue IPC call while the work is already actively running.
-        if (autoRestart
-            && prefs.getBoolean(PREF_DOWNLOAD_STARTED, false)
-            && !prefs.getBoolean(PREF_PAUSED, false)
-            && !isDownloadDone()) {
-            StreamingRomsWork.enqueue(appContext)
-        }
+        }.start()
     }
 
     val state: Flow<StreamingRomsState> =

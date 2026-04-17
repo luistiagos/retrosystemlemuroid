@@ -1,0 +1,144 @@
+# Baseline profile for Lemuroid startup
+# Ensures critical code paths are AOT-compiled at install time,
+# eliminating JIT compilation stalls on the first frame.
+
+# ── App entry points ──────────────────────────────────────────────
+HSPLcom/swordfish/lemuroid/app/LemuroidApplication;->**(**)**
+HSPLcom/swordfish/lemuroid/app/mobile/feature/main/MainActivity;->**(**)**
+HSPLcom/swordfish/lemuroid/app/mobile/feature/main/MainViewModel;->**(**)**
+HSPLcom/swordfish/lemuroid/app/mobile/feature/main/MainActivityKt;->**(**)**
+
+# ── Home screen composables ──────────────────────────────────────
+HSPLcom/swordfish/lemuroid/app/mobile/feature/home/HomeViewModel;->**(**)**
+HSPLcom/swordfish/lemuroid/app/mobile/feature/home/HomeScreenKt;->**(**)**
+HSPLcom/swordfish/lemuroid/app/mobile/feature/home/HomeViewModel$UIState;->**(**)**
+
+# ── Game card composables ─────────────────────────────────────────
+HSPLcom/swordfish/lemuroid/app/mobile/shared/compose/ui/LemuroidGameCardKt;->**(**)**
+HSPLcom/swordfish/lemuroid/app/mobile/shared/compose/ui/LemuroidGameImageKt;->**(**)**
+HSPLcom/swordfish/lemuroid/app/mobile/shared/compose/ui/LemuroidTextsKt;->**(**)**
+
+# ── Cover / image utilities ───────────────────────────────────────
+HSPLcom/swordfish/lemuroid/app/shared/covers/CoverUtils;->**(**)**
+HSPLcom/swordfish/lemuroid/common/drawable/TextDrawable;->**(**)**
+HSPLcom/swordfish/lemuroid/common/graphics/ColorUtils;->**(**)**
+
+# ── Data layer (Room / DB entities) ──────────────────────────────
+HSPLcom/swordfish/lemuroid/lib/library/db/entity/Game;->**(**)**
+HSPLcom/swordfish/lemuroid/lib/library/db/RetrogradeDatabase;->**(**)**
+HSPLcom/swordfish/lemuroid/lib/library/db/dao/GameDao;->**(**)**
+HSPLcom/swordfish/lemuroid/lib/library/db/**;->**(**)**
+
+# ── Flow utilities ────────────────────────────────────────────────
+HSPLcom/swordfish/lemuroid/common/coroutines/FlowUtilsKt;->**(**)**
+
+# ── Pending operations monitor ────────────────────────────────────
+HSPLcom/swordfish/lemuroid/app/shared/library/PendingOperationsMonitor;->**(**)**
+
+# ── Dagger / dependency injection ─────────────────────────────────
+HSPLcom/swordfish/lemuroid/app/shared/main/GameLaunchTaskHandler;->**(**)**
+HSPLcom/swordfish/lemuroid/app/shared/game/GameInteractor;->**(**)**
+HSPLcom/swordfish/lemuroid/app/shared/cores/CoresSelection;->**(**)**
+
+# ── ROM management ────────────────────────────────────────────────
+HSPLcom/swordfish/lemuroid/app/shared/roms/**;->**(**)**
+
+# ── Android activity shared base ──────────────────────────────────
+HSPLcom/swordfish/lemuroid/app/shared/android/RetrogradeComponentActivity;->**(**)**
+
+# ── Compose Runtime ───────────────────────────────────────────────
+HSPLandroidx/compose/runtime/ComposerImpl;->**(**)**
+HSPLandroidx/compose/runtime/ComposerKt;->**(**)**
+HSPLandroidx/compose/runtime/CompositionImpl;->**(**)**
+HSPLandroidx/compose/runtime/RecomposerImpl;->**(**)**
+HSPLandroidx/compose/runtime/Recomposer;->**(**)**
+HSPLandroidx/compose/runtime/SnapshotStateKt**;->**(**)**
+HSPLandroidx/compose/runtime/snapshots/**;->**(**)**
+HSPLandroidx/compose/runtime/internal/**;->**(**)**
+HSPLandroidx/compose/runtime/**;->**(**)**
+
+# ── Compose UI ────────────────────────────────────────────────────
+HSPLandroidx/compose/ui/platform/AndroidComposeView;->**(**)**
+HSPLandroidx/compose/ui/platform/AndroidComposeViewAccessibilityDelegateCompat;->**(**)**
+HSPLandroidx/compose/ui/platform/ComposeView;->**(**)**
+HSPLandroidx/compose/ui/node/**;->**(**)**
+HSPLandroidx/compose/ui/layout/**;->**(**)**
+HSPLandroidx/compose/ui/draw/**;->**(**)**
+HSPLandroidx/compose/ui/graphics/**;->**(**)**
+HSPLandroidx/compose/ui/input/**;->**(**)**
+HSPLandroidx/compose/ui/semantics/**;->**(**)**
+HSPLandroidx/compose/ui/Modifier**;->**(**)**
+HSPLandroidx/compose/ui/**;->**(**)**
+
+# ── Compose Foundation ────────────────────────────────────────────
+HSPLandroidx/compose/foundation/layout/**;->**(**)**
+HSPLandroidx/compose/foundation/lazy/grid/**;->**(**)**
+HSPLandroidx/compose/foundation/lazy/layout/**;->**(**)**
+HSPLandroidx/compose/foundation/lazy/**;->**(**)**
+HSPLandroidx/compose/foundation/text/**;->**(**)**
+HSPLandroidx/compose/foundation/**;->**(**)**
+
+# ── Compose Material3 ────────────────────────────────────────────
+HSPLandroidx/compose/material3/**;->**(**)**
+
+# ── Compose Animation ────────────────────────────────────────────
+HSPLandroidx/compose/animation/**;->**(**)**
+HSPLandroidx/compose/animation/core/**;->**(**)**
+
+# ── Compose Navigation ───────────────────────────────────────────
+HSPLandroidx/navigation/compose/**;->**(**)**
+HSPLandroidx/navigation/**;->**(**)**
+
+# ── Compose Activity integration ─────────────────────────────────
+HSPLandroidx/activity/compose/**;->**(**)**
+HSPLandroidx/activity/ComponentActivity;->**(**)**
+
+# ── Coil (image loading) ─────────────────────────────────────────
+HSPLcoil/**;->**(**)**
+HSPLcoil/compose/**;->**(**)**
+
+# ── Accompanist (drawable painter) ────────────────────────────────
+HSPLcom/google/accompanist/drawablepainter/**;->**(**)**
+
+# ── Lifecycle / ViewModel ─────────────────────────────────────────
+HSPLandroidx/lifecycle/ViewModel;->**(**)**
+HSPLandroidx/lifecycle/ViewModelProvider;->**(**)**
+HSPLandroidx/lifecycle/Lifecycle**;->**(**)**
+HSPLandroidx/lifecycle/**;->**(**)**
+
+# ── Room + SQLite (critical for fast first DB query) ─────────────
+HSPLandroidx/room/**;->**(**)**
+HSPLandroidx/sqlite/**;->**(**)**
+HSPLandroid/database/sqlite/SQLiteDatabase;->**(**)**
+HSPLandroid/database/sqlite/SQLiteStatement;->**(**)**
+HSPLandroid/database/sqlite/SQLiteCursor;->**(**)**
+HSPLandroid/database/sqlite/SQLiteQuery;->**(**)**
+HSPLandroid/database/sqlite/SQLiteConnectionPool;->**(**)**
+HSPLandroid/database/CursorWindow;->**(**)**
+HSPLandroid/database/AbstractWindowedCursor;->**(**)**
+
+# ── WorkManager ───────────────────────────────────────────────────
+HSPLandroidx/work/**;->**(**)**
+
+# ── Coroutines ────────────────────────────────────────────────────
+HSPLkotlinx/coroutines/**;->**(**)**
+HSPLkotlinx/coroutines/flow/**;->**(**)**
+
+# ── Dagger/Hilt ───────────────────────────────────────────────────
+HSPLdagger/**;->**(**)**
+HSPLdagger/hilt/**;->**(**)**
+
+# ── OkHttp (used by Coil) ────────────────────────────────────────
+HSPLokhttp3/**;->**(**)**
+HSPLokio/**;->**(**)**
+
+# ── Kotlin stdlib ────────────────────────────────────────────────
+HSPLkotlin/collections/**;->**(**)**
+HSPLkotlin/sequences/**;->**(**)**
+HSPLkotlin/text/**;->**(**)**
+
+# ── ProfileInstaller ─────────────────────────────────────────────
+HSPLandroidx/profileinstaller/**;->**(**)**
+
+# ── Conscrypt TLS ─────────────────────────────────────────────────
+HSPLorg/conscrypt/**;->**(**)**

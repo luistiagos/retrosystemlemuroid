@@ -32,6 +32,7 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
+        Timber.d("PERF T0_APP_ONCREATE ms=0 (baseline)")
 
         // Install Conscrypt in background — no HTTP calls happen before the UI is visible,
         // and each OkHttpClient also applies Conscrypt explicitly via applyConscryptTls().
@@ -43,6 +44,10 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
                 Timber.e(e, "Failed to install Conscrypt provider")
             }
         }.start()
+
+        // Pre-warm Coil ImageLoader on background thread so that the first AsyncImage
+        // composable doesn't trigger getCacheDir() disk I/O on the main thread (~143ms).
+        Thread { imageLoader }.start()
 
         val initializeComponent =
             if (isMainProcess()) {
@@ -57,6 +62,9 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     }
 
     override fun attachBaseContext(base: Context) {
+        // Pre-load locale SharedPreferences on a background thread so that the Activity's
+        // attachBaseContext does not block on disk I/O (~1.1s on first cold start).
+        LocaleHelper.preload(base)
         super.attachBaseContext(LocaleHelper.wrapContext(base))
         ContextHandler.attachBaseContext(base)
     }

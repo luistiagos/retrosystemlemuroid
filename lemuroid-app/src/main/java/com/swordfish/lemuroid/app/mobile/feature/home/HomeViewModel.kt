@@ -21,6 +21,7 @@ import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.common.coroutines.debounceAfterFirst
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -30,13 +31,14 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
 import com.swordfish.lemuroid.app.shared.roms.RomsDownloadManager
@@ -69,6 +71,8 @@ class HomeViewModel(
         val recentGames: List<Game> = emptyList(),
         val discoveryGames: List<Game> = emptyList(),
         val indexInProgress: Boolean = true,
+        val isInitialLoadComplete: Boolean = false,
+        val userScanInProgress: Boolean = false,
         val showNoNotificationPermissionCard: Boolean = false,
         val showNoMicrophonePermissionCard: Boolean = false,
         val showNoGamesCard: Boolean = false,
@@ -229,6 +233,7 @@ class HomeViewModel(
             recentGames = recentGames,
             discoveryGames = discoveryGames,
             indexInProgress = indexInProgress,
+            isInitialLoadComplete = true,
             showNoNotificationPermissionCard = !notificationsPermissionEnabled,
             showNoMicrophonePermissionCard = showMicrophoneCard,
             showNoGamesCard = noGames,
@@ -270,24 +275,19 @@ class HomeViewModel(
             }
         }
         viewModelScope.launch {
+            val t0 = android.os.SystemClock.elapsedRealtime()
+            android.util.Log.d("PERF", "T3_COMBINE_START")
             val uiStatesFlow =
                 combine(
-                    favoritesGames(retrogradeDb),
-                    recentGames(retrogradeDb),
-                    discoveryGames(retrogradeDb),
-                    indexingInProgress(appContext),
-                    notificationsPermissionEnabledState,
-                    microphoneNotification(retrogradeDb),
-                    desmumeWarningNotification(),
+                    favoritesGames(retrogradeDb).onEach { android.util.Log.d("PERF", "T3a_FAVORITES_EMIT count=${it.size} elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3a_FAVORITES_FLOW_SUBSCRIBED") },
+                    recentGames(retrogradeDb).onEach { android.util.Log.d("PERF", "T3b_RECENTS_EMIT count=${it.size} elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3b_RECENTS_FLOW_SUBSCRIBED") },
+                    discoveryGames(retrogradeDb).onEach { android.util.Log.d("PERF", "T3c_DISCOVERY_EMIT count=${it.size} elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3c_DISCOVERY_FLOW_SUBSCRIBED") },
+                    indexingInProgress(appContext).onStart { emit(false) }.onEach { android.util.Log.d("PERF", "T3d_INDEXING_EMIT value=$it elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3d_INDEXING_FLOW_SUBSCRIBED") },
+                    notificationsPermissionEnabledState.onEach { android.util.Log.d("PERF", "T3e_NOTIF_EMIT value=$it elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3e_NOTIF_FLOW_SUBSCRIBED") },
+                    microphoneNotification(retrogradeDb).onStart { emit(false) }.onEach { android.util.Log.d("PERF", "T3f_MICROPHONE_EMIT value=$it elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3f_MICROPHONE_FLOW_SUBSCRIBED") },
+                    desmumeWarningNotification().onStart { emit(false) }.onEach { android.util.Log.d("PERF", "T3g_DESMUME_EMIT value=$it elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3g_DESMUME_FLOW_SUBSCRIBED") },
                     ::buildViewState,
                 ).combine(downloadDialogDismissed) { state, dismissed ->
-                    // Show dialog when there are no games, no indexing is running, and no
-                    // download is in progress. The !indexInProgress guard is critical: right
-                    // after a successful download the library scan runs and the DB is
-                    // temporarily empty — without this guard the dialog would flash.
-                    // We intentionally omit isDownloadDone(): if ROMs are later deleted and
-                    // the DB empties again (with indexInProgress=false), the dialog correctly
-                    // reappears without being blocked by the stale PREF_DOWNLOAD_DONE flag.
                     state.copy(
                         showDownloadPromptDialog = state.showNoGamesCard
                             && !state.indexInProgress
@@ -295,12 +295,17 @@ class HomeViewModel(
                             && !streamingRomsManager.isDownloadStarted()
                             && !dismissed,
                     )
+                }.combine(userScanInProgress(appContext)) { state, userScan ->
+                    state.copy(userScanInProgress = userScan)
                 }
 
             uiStatesFlow
-                .debounce(DEBOUNCE_TIME)
+                .debounceAfterFirst(DEBOUNCE_TIME)
                 .flowOn(Dispatchers.IO)
                 .collect { state ->
+                    val elapsed = android.os.SystemClock.elapsedRealtime() - t0
+                    val hasGames = state.recentGames.isNotEmpty() || state.favoritesGames.isNotEmpty() || state.discoveryGames.isNotEmpty()
+                    android.util.Log.d("PERF", "T4_UISTATE_EMIT elapsed=${elapsed}ms games=${hasGames} recent=${state.recentGames.size} favs=${state.favoritesGames.size} discovery=${state.discoveryGames.size}")
                     if (state.showDownloadPromptDialog) {
                         startStreamingDownload()
                         downloadDialogDismissed.value = true
@@ -312,6 +317,9 @@ class HomeViewModel(
 
     private fun indexingInProgress(appContext: Context) =
         PendingOperationsMonitor(appContext).anyLibraryOperationInProgress()
+
+    private fun userScanInProgress(appContext: Context) =
+        PendingOperationsMonitor(appContext).isUserLibraryScanInProgress()
 
     private fun discoveryGames(retrogradeDb: RetrogradeDatabase) =
         if (excludedDbNames.isNotEmpty()) retrogradeDb.gameDao().selectFirstNotPlayedExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)

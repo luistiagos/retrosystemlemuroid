@@ -168,15 +168,19 @@ class RomsDownloadManager(context: Context) {
     }
 
     private val appContext = context.applicationContext
-    private val prefs: SharedPreferences = appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    // Use lazy so that SharedPreferences disk I/O is deferred until first actual use,
+    // rather than blocking the main thread during ViewModel construction.
+    private val prefs: SharedPreferences by lazy {
+        appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    }
     private val httpClient: OkHttpClient by lazy { buildHttpClient() }
 
-    private val versionOutdated: Boolean = run {
+    private val versionOutdated: Boolean by lazy {
         val storedVersion = prefs.getInt(PREF_EXTRACTION_VERSION, 0)
         storedVersion < EXTRACTION_VERSION
     }
 
-    private val initialState: DownloadRomsState = run {
+    private val initialState: DownloadRomsState by lazy {
         val done = prefs.getBoolean(PREF_DOWNLOAD_DONE, false)
         if (done && !versionOutdated) DownloadRomsState.Done else {
             // Reset so the user sees the download card again and a fresh download runs.
@@ -186,13 +190,13 @@ class RomsDownloadManager(context: Context) {
     }
 
     init {
-        // If a download was started but never completed (app was killed mid-download),
-        // automatically re-enqueue the work so it resumes from where it left off.
-        // Use REPLACE when the extraction version changed to cancel any stale worker
-        // that was built with old code (e.g. after an app update without clearing data).
-        if (prefs.getBoolean(PREF_DOWNLOAD_STARTED, false) && !isDownloadDone()) {
-            RomsDownloadWork.enqueue(appContext, replace = versionOutdated)
-        }
+        // Run auto-restart logic on a background thread to avoid blocking the main thread
+        // with SharedPreferences disk I/O during ViewModel creation.
+        Thread {
+            if (prefs.getBoolean(PREF_DOWNLOAD_STARTED, false) && !isDownloadDone()) {
+                RomsDownloadWork.enqueue(appContext, replace = versionOutdated)
+            }
+        }.start()
     }
 
     // State is derived from WorkManager's WorkInfo so it stays accurate even after screen lock.
