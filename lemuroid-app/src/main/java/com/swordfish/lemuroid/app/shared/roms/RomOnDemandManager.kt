@@ -53,7 +53,7 @@ class RomOnDemandManager(
         private const val FIND_BY_FILE_ENDPOINT =
             "https://emuladores.pythonanywhere.com/find_by_file"
         private const val HUGGINGFACE_BASE =
-            "https://huggingface.co/datasets/luistiagos/roms/resolve/main"
+            "https://huggingface.co/datasets/luisluis123/lemusets/resolve/main/roms"
     }
 
     private val _pausedFlow = MutableStateFlow(false)
@@ -115,9 +115,12 @@ class RomOnDemandManager(
             null
         }
 
+        // Trust the endpoint URL directly — it is the source of truth for the correct
+        // repository (PCE and other systems may be in different repos than luisluis123/lemusets).
+        // Only fall back to HuggingFace when the endpoint returns null (game not in DB).
         val finalUrl = downloadUrl ?: run {
             Timber.d("Endpoint returned no result, falling back to HuggingFace direct URL")
-            buildHuggingFaceUrl(endpointSystem, game.fileName)
+            buildHuggingFaceUrl(game)
         }
         Timber.d("On-demand download URL for ${game.fileName}: $finalUrl")
 
@@ -195,12 +198,20 @@ class RomOnDemandManager(
     }
 
     /**
-     * Builds a direct HuggingFace download URL for the given system and filename.
-     * Used as a fallback when the pythonanywhere endpoint does not have the system indexed.
+     * Performs a HEAD request to check if [url] is reachable (non-404).
+     * Returns true if the server responds with any non-404 status, or if the
+     * network request fails (assume reachable and let the real download handle it).
      */
-    private fun buildHuggingFaceUrl(endpointSystem: String, fileName: String): String {
-        val encodedName = Uri.encode(fileName)
-        return "$HUGGINGFACE_BASE/$endpointSystem/$encodedName"
+    /**
+     * Builds a direct HuggingFace download URL for the given game.
+     * Used as fallback when the endpoint returns no result (game not in DB).
+     */
+    private fun buildHuggingFaceUrl(game: Game): String {
+        val uri = Uri.parse(game.fileUri)
+        val path = uri.path ?: ""
+        val systemFolder = File(path).parentFile?.name ?: game.systemId
+        val encodedName = Uri.encode(game.fileName)
+        return "$HUGGINGFACE_BASE/$systemFolder/$encodedName"
     }
 
     /**

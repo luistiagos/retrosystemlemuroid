@@ -18,10 +18,15 @@ interface LemuroidInputDevice {
     fun getSupportedShortcuts(): List<GameShortcutType>
 }
 
+private fun InputDevice.isGamepad(): Boolean {
+    return (sources and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||
+        (sources and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK
+}
+
 fun InputDevice?.getLemuroidInputDevice(): LemuroidInputDevice {
     return when {
         this == null -> LemuroidInputDeviceUnknown
-        (sources and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD -> LemuroidInputDeviceGamePad(this)
+        isGamepad() -> LemuroidInputDeviceGamePad(this)
         (sources and InputDevice.SOURCE_KEYBOARD) == InputDevice.SOURCE_KEYBOARD -> LemuroidInputDeviceKeyboard(this)
         else -> LemuroidInputDeviceUnknown
     }

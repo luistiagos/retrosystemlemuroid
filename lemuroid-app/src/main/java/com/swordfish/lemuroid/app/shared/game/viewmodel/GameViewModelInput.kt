@@ -79,13 +79,13 @@ class GameViewModelInput(
         port: Int,
     ) {
         if (port < 0) return
-        when (event.source) {
-            InputDevice.SOURCE_JOYSTICK -> {
-                if (controllerConfigsState.value[port]?.mergeDPADAndLeftStickEvents == true) {
-                    sendMergedMotionEvents(event, port)
-                } else {
-                    sendSeparateMotionEvents(event, port)
-                }
+        val isJoystickSource = (event.source and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK ||
+            (event.source and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD
+        if (isJoystickSource) {
+            if (controllerConfigsState.value[port]?.mergeDPADAndLeftStickEvents == true) {
+                sendMergedMotionEvents(event, port)
+            } else {
+                sendSeparateMotionEvents(event, port)
             }
         }
     }

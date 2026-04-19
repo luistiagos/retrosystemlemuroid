@@ -24,12 +24,7 @@ import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.security.SecureRandom
-import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
 
 sealed class DownloadRomsState {
     object Idle : DownloadRomsState()
@@ -404,21 +399,6 @@ class RomsDownloadManager(context: Context) {
             // Allow up to 16 concurrent connections to the same host so all 8 parallel
             // segments (plus retries) never queue waiting for a free slot.
             .connectionPool(ConnectionPool(16, 5, TimeUnit.MINUTES))
-        // Only bypass SSL validation on debug builds (e.g. emulators with outdated CAs).
-        // Production builds use the default system trust store.
-        if (BuildConfig.DEBUG) {
-            val trustAll = object : X509TrustManager {
-                override fun checkClientTrusted(chain: Array<out X509Certificate>, authType: String) = Unit
-                override fun checkServerTrusted(chain: Array<out X509Certificate>, authType: String) = Unit
-                override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
-            }
-            val sslContext = SSLContext.getInstance("TLS").apply {
-                init(null, arrayOf<TrustManager>(trustAll), SecureRandom())
-            }
-            builder
-                .sslSocketFactory(sslContext.socketFactory, trustAll)
-                .hostnameVerifier { _, _ -> true }
-        }
         return builder.build()
     }
 

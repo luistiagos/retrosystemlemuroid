@@ -58,10 +58,12 @@ object HeavySystemFilter {
         am.getMemoryInfo(memInfo)
         val totalGb = memInfo.totalMem.toDouble() / (1024.0 * 1024.0 * 1024.0)
 
+        // Physical RAM takes priority: > 2 GB is always NORMAL regardless of the
+        // isLowRamDevice flag, which some manufacturers set even on 4 GB+ devices.
         return when {
-            am.isLowRamDevice || totalGb <= 1.0 -> DeviceTier.ULTRA_WEAK
-            totalGb <= 2.0                       -> DeviceTier.WEAK
-            else                                 -> DeviceTier.NORMAL
+            totalGb > 2.0                        -> DeviceTier.NORMAL
+            am.isLowRamDevice || totalGb <= 1.0  -> DeviceTier.ULTRA_WEAK
+            else                                 -> DeviceTier.WEAK
         }
     }
 

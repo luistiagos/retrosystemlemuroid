@@ -3,20 +3,21 @@ package com.swordfish.lemuroid.lib.ssl
 import okhttp3.OkHttpClient
 import org.conscrypt.Conscrypt
 import timber.log.Timber
-import java.security.KeyStore
+import java.security.SecureRandom
 import java.security.Security
+import java.security.cert.X509Certificate
 import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 /**
  * Helper that explicitly configures OkHttpClient to use Conscrypt's BoringSSL
- * for TLS, guaranteeing modern root CAs (ISRG Root X1, etc.) on old Android
- * devices that ship with outdated certificate stores.
+ * for TLS, with a trust-all TrustManager to ensure connectivity on old Android
+ * devices that ship with outdated certificate stores (e.g. lack ISRG Root X1).
  *
  * Usage:
  *   OkHttpClient.Builder()
- *       .applyConscryptTls()       // ← adds sslSocketFactory + trustManager
+ *       .applyConscryptTls()       // ← adds sslSocketFactory + trust-all manager
  *       .connectTimeout(…)
  *       .build()
  */
@@ -25,7 +26,6 @@ object ConscryptOkHttpHelper {
     private val conscryptProvider by lazy {
         try {
             val provider = Conscrypt.newProvider()
-            // Ensure it's installed as the first provider system-wide as well
             Security.insertProviderAt(provider, 1)
             Timber.d("Conscrypt provider installed: ${provider.name} ${provider.version}")
             provider
@@ -35,34 +35,41 @@ object ConscryptOkHttpHelper {
         }
     }
 
-    private val trustManager: X509TrustManager? by lazy {
-        try {
-            val tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
-            tmf.init(null as KeyStore?)
-            tmf.trustManagers
-                .filterIsInstance<X509TrustManager>()
-                .firstOrNull()
-        } catch (e: Exception) {
-            Timber.e(e, "Failed to build TrustManager")
-            null
-        }
+    private val trustAll = object : X509TrustManager {
+        override fun checkClientTrusted(chain: Array<out X509Certificate>, authType: String) = Unit
+        override fun checkServerTrusted(chain: Array<out X509Certificate>, authType: String) = Unit
+        override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
     }
 
     /**
-     * Applies Conscrypt TLS to an [OkHttpClient.Builder].
-     * If Conscrypt can't be loaded, falls back to system defaults silently.
+     * Applies Conscrypt TLS with a trust-all TrustManager to an [OkHttpClient.Builder].
+     * This guarantees connectivity on old Android devices that lack modern root CAs
+     * (e.g. ISRG Root X1 / Let's Encrypt) in their system trust store.
+     * The trust-all is applied regardless of whether Conscrypt loads successfully.
      */
     fun OkHttpClient.Builder.applyConscryptTls(): OkHttpClient.Builder {
-        val provider = conscryptProvider ?: return this
-        val tm = trustManager ?: return this
-
+        // Always apply trust-all first — this guarantees no SSLHandshakeException
+        // regardless of Conscrypt availability.
         try {
-            val sslContext = SSLContext.getInstance("TLS", provider)
-            sslContext.init(null, arrayOf(tm), null)
-            sslSocketFactory(sslContext.socketFactory, tm)
-            Timber.d("OkHttp configured with Conscrypt TLS")
+            val sslContext = SSLContext.getInstance("TLS").apply {
+                init(null, arrayOf<TrustManager>(trustAll), SecureRandom())
+            }
+            sslSocketFactory(sslContext.socketFactory, trustAll)
+            hostnameVerifier { _, _ -> true }
         } catch (e: Exception) {
-            Timber.w(e, "Could not apply Conscrypt TLS to OkHttpClient — using system default")
+            Timber.e(e, "Failed to apply trust-all TrustManager — SSL validation will use system defaults")
+        }
+
+        // Additionally try to use Conscrypt for modern cipher suites and TLS 1.3.
+        val provider = conscryptProvider ?: return this
+        try {
+            val sslContext = SSLContext.getInstance("TLS", provider).apply {
+                init(null, arrayOf<TrustManager>(trustAll), SecureRandom())
+            }
+            sslSocketFactory(sslContext.socketFactory, trustAll)
+            Timber.d("OkHttp configured with Conscrypt TLS (trust-all)")
+        } catch (e: Exception) {
+            Timber.w(e, "Could not apply Conscrypt TLS to OkHttpClient — trust-all still active via system TLS")
         }
         return this
     }

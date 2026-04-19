@@ -37,7 +37,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
@@ -275,17 +274,15 @@ class HomeViewModel(
             }
         }
         viewModelScope.launch {
-            val t0 = android.os.SystemClock.elapsedRealtime()
-            android.util.Log.d("PERF", "T3_COMBINE_START")
             val uiStatesFlow =
                 combine(
-                    favoritesGames(retrogradeDb).onEach { android.util.Log.d("PERF", "T3a_FAVORITES_EMIT count=${it.size} elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3a_FAVORITES_FLOW_SUBSCRIBED") },
-                    recentGames(retrogradeDb).onEach { android.util.Log.d("PERF", "T3b_RECENTS_EMIT count=${it.size} elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3b_RECENTS_FLOW_SUBSCRIBED") },
-                    discoveryGames(retrogradeDb).onEach { android.util.Log.d("PERF", "T3c_DISCOVERY_EMIT count=${it.size} elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3c_DISCOVERY_FLOW_SUBSCRIBED") },
-                    indexingInProgress(appContext).onStart { emit(false) }.onEach { android.util.Log.d("PERF", "T3d_INDEXING_EMIT value=$it elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3d_INDEXING_FLOW_SUBSCRIBED") },
-                    notificationsPermissionEnabledState.onEach { android.util.Log.d("PERF", "T3e_NOTIF_EMIT value=$it elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3e_NOTIF_FLOW_SUBSCRIBED") },
-                    microphoneNotification(retrogradeDb).onStart { emit(false) }.onEach { android.util.Log.d("PERF", "T3f_MICROPHONE_EMIT value=$it elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3f_MICROPHONE_FLOW_SUBSCRIBED") },
-                    desmumeWarningNotification().onStart { emit(false) }.onEach { android.util.Log.d("PERF", "T3g_DESMUME_EMIT value=$it elapsed=${android.os.SystemClock.elapsedRealtime()-t0}ms") }.also { android.util.Log.d("PERF", "T3g_DESMUME_FLOW_SUBSCRIBED") },
+                    favoritesGames(retrogradeDb),
+                    recentGames(retrogradeDb),
+                    discoveryGames(retrogradeDb),
+                    indexingInProgress(appContext).onStart { emit(false) },
+                    notificationsPermissionEnabledState,
+                    microphoneNotification(retrogradeDb).onStart { emit(false) },
+                    desmumeWarningNotification().onStart { emit(false) },
                     ::buildViewState,
                 ).combine(downloadDialogDismissed) { state, dismissed ->
                     state.copy(
@@ -303,9 +300,6 @@ class HomeViewModel(
                 .debounceAfterFirst(DEBOUNCE_TIME)
                 .flowOn(Dispatchers.IO)
                 .collect { state ->
-                    val elapsed = android.os.SystemClock.elapsedRealtime() - t0
-                    val hasGames = state.recentGames.isNotEmpty() || state.favoritesGames.isNotEmpty() || state.discoveryGames.isNotEmpty()
-                    android.util.Log.d("PERF", "T4_UISTATE_EMIT elapsed=${elapsed}ms games=${hasGames} recent=${state.recentGames.size} favs=${state.favoritesGames.size} discovery=${state.discoveryGames.size}")
                     if (state.showDownloadPromptDialog) {
                         startStreamingDownload()
                         downloadDialogDismissed.value = true

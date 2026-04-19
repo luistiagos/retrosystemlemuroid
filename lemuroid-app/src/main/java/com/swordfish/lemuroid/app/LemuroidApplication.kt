@@ -32,7 +32,6 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
-        Timber.d("PERF T0_APP_ONCREATE ms=0 (baseline)")
 
         // Install Conscrypt in background — no HTTP calls happen before the UI is visible,
         // and each OkHttpClient also applies Conscrypt explicitly via applyConscryptTls().

@@ -18,6 +18,9 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
     companion object {
         private val THUMB_REPLACE = Regex("[&*/:`<>?\\\\|]")
 
+        /** Archive extensions accepted by [findByPathAndSupportedExtension] as a fallback. */
+        private val ARCHIVE_EXTENSIONS = setOf("zip", "7z")
+
         /**
          * Maps well-known human-readable folder names (as found in ROM archives)
          * to the system dbname used by Lemuroid. Checked against exact path segments
@@ -242,12 +245,18 @@ class LibretroDBMetadataProvider(private val ovgdbManager: LibretroDBManager) :
     }
 
     private fun findByPathAndSupportedExtension(file: StorageFile): GameMetadata? {
+        // Common archive extensions. 0-byte placeholder files (from the streaming catalog)
+        // can't be unzipped, so the outer archive extension is all we have. When the file
+        // resides in a recognised system folder we treat these as valid matches, because
+        // the real ROM inside the archive will be verified at download/play time.
+        val isArchive = file.extension in ARCHIVE_EXTENSIONS
+
         val system =
             sortedSystemIds
                 .filter { parentContainsSystem(file.path, it) }
                 .mapNotNull { GameSystem.findByIdOrNull(it) }
                 .filter { it.scanOptions.scanByPathAndSupportedExtensions }
-                .firstOrNull { it.supportedExtensions.contains(file.extension) }
+                .firstOrNull { it.supportedExtensions.contains(file.extension) || isArchive }
 
         return system?.let {
             GameMetadata(

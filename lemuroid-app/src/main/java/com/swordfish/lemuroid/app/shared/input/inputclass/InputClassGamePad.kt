@@ -56,5 +56,9 @@ object InputClassGamePad : InputClass {
             KeyEvent.KEYCODE_BUTTON_16,
             KeyEvent.KEYCODE_BUTTON_MODE,
             KeyEvent.KEYCODE_BACK,
+            KeyEvent.KEYCODE_DPAD_UP,
+            KeyEvent.KEYCODE_DPAD_DOWN,
+            KeyEvent.KEYCODE_DPAD_LEFT,
+            KeyEvent.KEYCODE_DPAD_RIGHT,
         )
 }

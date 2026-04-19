@@ -163,7 +163,9 @@ object SerialScanner {
         val detectedSystem =
             MAGIC_NUMBERS
                 .firstOrNull {
-                    header.copyOfRange(it.offset, it.offset + it.numbers.size).contentEquals(it.numbers)
+                    val endIndex = it.offset + it.numbers.size
+                    endIndex <= header.size &&
+                        header.copyOfRange(it.offset, endIndex).contentEquals(it.numbers)
                 }
                 ?.systemID
 

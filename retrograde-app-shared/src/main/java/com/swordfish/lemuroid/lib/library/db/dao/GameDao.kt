@@ -39,7 +39,7 @@ interface GameDao {
     @Query("SELECT * FROM games WHERE lastIndexedAt < :lastIndexedAt")
     suspend fun selectByLastIndexedAtLessThan(lastIndexedAt: Long): List<Game>
 
-    @Query("DELETE FROM games WHERE lastIndexedAt < :lastIndexedAt")
+    @Query("DELETE FROM games WHERE lastIndexedAt < :lastIndexedAt AND fileName NOT IN (SELECT fileName FROM downloaded_roms)")
     suspend fun deleteByLastIndexedAtLessThan(lastIndexedAt: Long)
 
     @Query("SELECT * FROM games WHERE isFavorite = 1 ORDER BY title ASC")

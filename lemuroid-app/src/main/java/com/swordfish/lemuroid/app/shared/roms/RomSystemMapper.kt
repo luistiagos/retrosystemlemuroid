@@ -41,7 +41,7 @@ object RomSystemMapper {
         "pce"          to "pcengine",
         // SNK
         "ngp"          to "ngp",
-        "ngc"          to "neogeocd",
+        "ngc"          to "ngpc",
         // Bandai
         "ws"           to "wswan",
         "wsc"          to "wswanc",

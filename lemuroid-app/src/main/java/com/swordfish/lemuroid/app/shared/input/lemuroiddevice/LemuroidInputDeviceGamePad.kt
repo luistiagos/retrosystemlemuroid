@@ -52,8 +52,11 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
     override fun getSupportedShortcuts(): List<GameShortcutType> = GameShortcutType.values().toList()
 
     override fun isSupported(): Boolean {
+        val isGamepadSource =
+            (device.sources and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||
+                (device.sources and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK
         return sequenceOf(
-            device.sources and InputDevice.SOURCE_GAMEPAD == InputDevice.SOURCE_GAMEPAD,
+            isGamepadSource,
             device.supportsAllKeys(MINIMAL_SUPPORTED_KEYS),
             device.isVirtual.not(),
         ).all { it }

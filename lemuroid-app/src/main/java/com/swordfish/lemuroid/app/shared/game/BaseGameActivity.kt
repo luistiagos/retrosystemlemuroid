@@ -309,9 +309,16 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     private fun performUnexpectedErrorFinish(exception: Throwable) {
         Timber.e(exception, "Handling java exception in BaseGameActivity")
+        val triedCores = buildUpdatedTriedCores()
         val resultIntent =
             Intent().apply {
                 putExtra(PLAY_GAME_RESULT_ERROR, exception.message)
+                putExtra(PLAY_GAME_RESULT_GAME, intent.getSerializableExtra(EXTRA_GAME))
+                if (::systemCoreConfig.isInitialized) {
+                    putExtra(PLAY_GAME_RESULT_CORE_ID, systemCoreConfig.coreID.coreName)
+                }
+                putExtra(PLAY_GAME_RESULT_LEANBACK, intent.getBooleanExtra(EXTRA_LEANBACK, false))
+                putStringArrayListExtra(PLAY_GAME_RESULT_TRIED_CORES, triedCores)
             }
 
         setResult(RESULT_UNEXPECTED_ERROR, resultIntent)
@@ -319,15 +326,26 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     }
 
     private fun performErrorFinish(message: String, isRomLoadFailure: Boolean = false) {
+        val triedCores = buildUpdatedTriedCores()
         val resultIntent =
             Intent().apply {
                 putExtra(PLAY_GAME_RESULT_ERROR, message)
                 putExtra(PLAY_GAME_RESULT_GAME, intent.getSerializableExtra(EXTRA_GAME))
                 putExtra(PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE, isRomLoadFailure)
+                putExtra(PLAY_GAME_RESULT_CORE_ID, systemCoreConfig.coreID.coreName)
+                putExtra(PLAY_GAME_RESULT_LEANBACK, intent.getBooleanExtra(EXTRA_LEANBACK, false))
+                putStringArrayListExtra(PLAY_GAME_RESULT_TRIED_CORES, triedCores)
             }
 
         setResult(RESULT_ERROR, resultIntent)
         finishAndExitProcess()
+    }
+
+    private fun buildUpdatedTriedCores(): ArrayList<String> {
+        val previous = intent.getStringArrayListExtra(EXTRA_TRIED_CORES) ?: arrayListOf()
+        return ArrayList(previous).also {
+            if (::systemCoreConfig.isInitialized) it.add(systemCoreConfig.coreID.coreName)
+        }
     }
 
     private fun finishAndExitProcess() {
@@ -410,6 +428,9 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         private const val EXTRA_LOAD_SAVE = "LOAD_SAVE"
         private const val EXTRA_LEANBACK = "LEANBACK"
         private const val EXTRA_SYSTEM_CORE_CONFIG = "EXTRA_SYSTEM_CORE_CONFIG"
+        private const val EXTRA_TRIED_CORES = "EXTRA_TRIED_CORES"
+
+        const val PLAY_GAME_RESULT_TRIED_CORES = "PLAY_GAME_RESULT_TRIED_CORES"
 
         const val REQUEST_PLAY_GAME = 1001
         const val PLAY_GAME_RESULT_SESSION_DURATION = "PLAY_GAME_RESULT_SESSION_DURATION"
@@ -417,6 +438,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         const val PLAY_GAME_RESULT_LEANBACK = "PLAY_GAME_RESULT_LEANBACK"
         const val PLAY_GAME_RESULT_ERROR = "PLAY_GAME_RESULT_ERROR"
         const val PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE = "PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE"
+        const val PLAY_GAME_RESULT_CORE_ID = "PLAY_GAME_RESULT_CORE_ID"
 
         const val RESULT_ERROR = Activity.RESULT_FIRST_USER + 2
         const val RESULT_UNEXPECTED_ERROR = Activity.RESULT_FIRST_USER + 3
@@ -427,6 +449,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             game: Game,
             loadSave: Boolean,
             useLeanback: Boolean,
+            triedCores: ArrayList<String> = arrayListOf(),
         ) {
             val gameActivity =
                 if (useLeanback) {
@@ -440,6 +463,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                     putExtra(EXTRA_LOAD_SAVE, loadSave)
                     putExtra(EXTRA_LEANBACK, useLeanback)
                     putExtra(EXTRA_SYSTEM_CORE_CONFIG, systemCoreConfig)
+                    putStringArrayListExtra(EXTRA_TRIED_CORES, triedCores)
                 },
                 REQUEST_PLAY_GAME,
             )

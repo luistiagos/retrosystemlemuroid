@@ -1,7 +1,7 @@
 # Lemuroid — Project Specification
 
 > **Spec-Driven Context Document** — update this file whenever you change architecture, add features, or modify data flows.  
-> Last updated: 2026-04-16
+> Last updated: 2026-04-19
 
 ---
 
@@ -101,7 +101,7 @@ All use `CoreID.FBNEO` (`libfbneo_libretro_android.so`) and share the same endpo
 
 **Class**: `RetrogradeDatabase` (`retrograde-app-shared/.../db/RetrogradeDatabase.kt`)  
 **DB name**: `retrograde`  
-**Room version**: `13`
+**Room version**: `19`
 
 ### Migration history
 
@@ -112,6 +112,12 @@ All use `CoreID.FBNEO` (`libfbneo_libretro_android.so`) and share the same endpo
 | 10 → 11 | Add index on `games.fileName` |
 | 11 → 12 | `games SET systemId='neogeo' WHERE systemId='fbneo'` for 103 Neo Geo ROMs (superseded by 12→13) |
 | 12 → 13 | `games SET systemId='neogeo' WHERE systemId='mame2003plus'` + `fbneo` for 103 Neo Geo filenames (ROMs were in `arcade/` folder, indexed as `mame2003plus`) |
+| 13 → 14 | *(reserved — skipped in history)* |
+| 14 → 15 | *(reserved — skipped in history)* |
+| 15 → 16 | *(reserved — skipped in history)* |
+| 16 → 17 | *(reserved — skipped in history)* |
+| 17 → 18 | *(reserved — skipped in history)* |
+| 18 → 19 | `CREATE INDEX index_games_isFavorite_lastPlayedAt ON games (isFavorite, lastPlayedAt)` — composite index for `selectFirstUnfavoriteRecents` query |
 
 ### 4.1 `games` table — `Game.kt`
 
@@ -127,6 +133,19 @@ All use `CoreID.FBNEO` (`libfbneo_libretro_android.so`) and share the same endpo
 | `lastIndexedAt` | Long | epoch ms |
 | `lastPlayedAt` | Long | epoch ms |
 | `isFavorite` | Boolean | |
+
+**Indices on `games`**:
+| Index name | Columns | Unique |
+|------------|---------|--------|
+| `index_games_id` | `id` | ✅ |
+| `index_games_fileUri` | `fileUri` | ✅ |
+| `index_games_fileName` | `fileName` | ❌ |
+| `index_games_title` | `title` | ❌ |
+| `index_games_systemId` | `systemId` | ❌ |
+| `index_games_lastIndexedAt` | `lastIndexedAt` | ❌ |
+| `index_games_lastPlayedAt` | `lastPlayedAt` | ❌ |
+| `index_games_isFavorite` | `isFavorite` | ❌ |
+| `index_games_isFavorite_lastPlayedAt` | `isFavorite, lastPlayedAt` | ❌ | ← added v18→19, speeds up `selectFirstUnfavoriteRecents`
 
 No size or download-status field — download tracking is in `downloaded_roms`.
 
@@ -252,6 +271,13 @@ sealed class DownloadResult {
 }
 ```
 
+**URL resolution logic**:
+1. Call `find_by_file` endpoint → returns plain-text URL for the correct repository (source of truth).
+2. If endpoint returns a URL → use it directly. The endpoint may point to any repository (e.g. PCE ROMs are in a different repo than `luisluis123/lemusets`).
+3. If endpoint returns `null` (game not in DB, HTTP 404 or empty body) → fall back to direct HuggingFace URL via `buildHuggingFaceUrl(game)` using `luisluis123/lemusets/roms/<system>/<file>`.
+
+> ⚠️ Do NOT add a HEAD-check validation step between steps 1 and 2. The endpoint is the source of truth — discarding its URL causes 404s for systems hosted in other repos (e.g. PCE).
+
 **Key behaviors**:
 - 5 retry attempts with back-off
 - `activeCall: Call?` field — cancelled via `activeCall?.cancel()` on scope cancellation
@@ -260,6 +286,7 @@ sealed class DownloadResult {
 - On success: `downloadedRomDao.insert(DownloadedRom(...))` + `LibraryIndexScheduler.scheduleLibrarySync()`
 - `deleteRom(game)`: truncates file to 0 bytes + `downloadedRomDao.delete(fileName)`
 - `isPaused: StateFlow<Boolean>` — exposed so `RomDownloadDialog` can show Pause/Resume button state
+- `HUGGINGFACE_BASE` = `https://huggingface.co/datasets/luisluis123/lemusets/resolve/main/roms`
 
 ### 5.7 RomSystemMapper
 
@@ -299,11 +326,11 @@ pce                  → pcengine
 
 // SNK
 ngp                  → ngp
-ngc                  → neogeocd
+ngc                  → ngpc        ← (not "neogeocd")
 
 // Bandai
 ws                   → wswan
-wsc                  → wswnc
+wsc                  → wswanc
 
 // Arcade boards (all → fbneo endpoint)
 fbneo                → fbneo
@@ -422,7 +449,11 @@ REQUEST_PLAY_GAME      = 1001
 | `CacheCleanerWork` | Clears stale cache entries |
 | `ChannelUpdateWork` | Updates Android TV channel |
 
-**Scheduler**: `LibraryIndexScheduler.scheduleLibrarySync()` — called after any ROM change.
+**Scheduler**: `LibraryIndexScheduler` — two entry points:
+- `scheduleLibrarySync()` — automated triggers (streaming download, on-demand download, post-extraction). **Does NOT show progress bar in UI.**
+- `scheduleManualLibrarySync()` — user-triggered triggers (folder change via `StorageFrameworkPickerLauncher`, SD/USB mount via `MediaMountedReceiver`). **Shows progress bar in Home screen.**
+
+Both use separate WorkManager `UNIQUE_WORK_ID`s (`LibraryIndexWork` vs `LibraryIndexWork_manual`) but enqueue the same `LibraryIndexWork` worker.
 
 ### DocumentFileParser — 0-byte handling
 
@@ -478,12 +509,18 @@ Defined in `MainNavigationRoutes` enum:
 | `favoritesGames` | List of favorite games (carousel) |
 | `recentGames` | Last-played games (carousel, max 10) |
 | `discoveryGames` | Discovery/random games section |
-| `indexInProgress` | True while library scan running |
+| `indexInProgress` | True while any library operation running (scan or core update) |
+| `isInitialLoadComplete` | False until first DB result arrives — drives initial loading spinner |
+| `userScanInProgress` | True while a **user-triggered** manual scan is running — drives `LinearProgressIndicator` in Home |
 | `showNoNotificationPermissionCard` | Permission prompt card |
 | `showNoMicrophonePermissionCard` | Permission prompt card |
 | `showNoGamesCard` | "No games found" card |
 | `showDesmumeDeprecatedCard` | DesMuME deprecation warning |
 | `showDownloadPromptDialog` | Auto-prompt for ROM download |
+
+**Loading/progress UI in HomeScreen**:
+1. **Startup spinner** — `CircularProgressIndicator` shown centered while `isInitialLoadComplete == false`; disappears as soon as the first `UIState` arrives from the DB (typically <300ms with AOT).
+2. **Scan progress bar** — `LinearProgressIndicator` (indeterminate) shown at top of content while `userScanInProgress == true`. Only visible for user-triggered scans (folder change, SD card mount). Does NOT appear during automated catalog indexing.
 
 **Key flows**:
 - `getDownloadRomsState(): Flow<DownloadRomsState>` — combines `RomsDownloadManager.state` + `noGamesFlow` + `indexingFlow`. Overrides `Done→Idle` when ROMs are missing and not indexing (handles directory deletion case).
@@ -589,7 +626,9 @@ Dimension: cores      → bundle | dynamic
 
 6. **HuggingFace rate limits** — `StreamingRomsManager` uses `limit=10000` to minimize API pages. Large catalogs may require multiple pages; the `Link` header in `RomsDownloadManager` handles pagination.
 
-7. **pythonanywhere endpoint** — `emuladores.pythonanywhere.com/find_by_file` is the single lookup service for on-demand URLs. If it returns empty or 404, `RomOnDemandManager` emits `DownloadResult.NotFound`.
+7. **pythonanywhere endpoint** — `emuladores.pythonanywhere.com/find_by_file` is the single lookup service for on-demand URLs. Its response URL is used directly without any HEAD-check validation — the endpoint is the source of truth and may return URLs from different repositories depending on the system (e.g. PCE ROMs are not in `luisluis123/lemusets`). Only when the endpoint returns empty or 404 does `RomOnDemandManager` fall back to `luisluis123/lemusets` and emit `DownloadResult.NotFound` if the fallback also fails.
+
+8. **SSL on old Android (< 7.1)** — TV Boxes and old devices lack ISRG Root X1 (Let's Encrypt CA) in their system trust store. All 8 `OkHttpClient` instances call `.applyConscryptTls()` which applies a `trustAll` X509TrustManager via two independent layers (system TLS first, then Conscrypt). This is unconditional across all build types (debug and release). The permanent fix (bundling ISRG Root X1 cert) is deferred to a future release.
 
 ---
 
@@ -917,3 +956,87 @@ arcade/game.zip  → systemId = "mame2003plus" (via scoring heuristic)
 ### Catalog Version
 
 `StreamingRomsManager` tracks catalog version in `PREF_CATALOG_VERSION`. Bumped when manifest is updated with new systems/entries, forcing re-population even if previous download was marked done.
+
+---
+
+## 23. Startup Performance
+
+**Diagnosed and fixed**: 2026-04-17
+
+### Root cause of 10-second black screen (fresh install)
+
+On first cold start (fresh install, reboot), ART compiled **Room + SQLite infrastructure** just-in-time (JIT), which took **7.7 seconds** before any DB query returned results. Normal warm starts were unaffected (JIT cache already present).
+
+### Fixes applied
+
+#### 1. `baseline-prof.txt` — AOT compilation rules
+
+**File**: `lemuroid-app/src/main/baseline-prof.txt`
+
+Added Room + SQLite class patterns so ART compiles them ahead-of-time at install:
+```
+HSPLandroidx/room/**;->**(**)**
+HSPLandroidx/sqlite/**;->**(**)**
+HSPLandroid/database/sqlite/*;->**(**)**
+HSPLandroid/database/*;->**(**)**
+HSPLandroidx/room/RoomDatabase;->**(**)**
+HSPLandroidx/room/RoomDatabase$Builder;->**(**)**
+HSPLandroidx/room/InvalidationTracker;->**(**)**
+```
+
+#### 2. Composite DB index (migration 18 → 19)
+
+**`selectFirstUnfavoriteRecents`** was doing a full table scan (`WHERE isFavorite=0 AND lastPlayedAt NOT NULL ORDER BY lastPlayedAt DESC`), taking **239ms** without JIT. Added composite index `(isFavorite, lastPlayedAt)` reducing it to **<30ms**.
+
+#### 3. `installFreeBundleDebugAndCompile` Gradle task
+
+**File**: `lemuroid-app/build.gradle.kts`
+
+Custom task that installs the APK then immediately runs:
+```
+adb shell cmd package compile -m speed -f com.swordfish.lemuroid.debug
+```
+Forces AOT compilation for debug builds (equivalent to what release builds get at install time).
+
+### Measured results (after fixes)
+
+| Metric | Before (JIT cold) | After (AOT) |
+|--------|-------------------|-------------|
+| `am start -W` TotalTime | ~1400ms | **~620ms** |
+| First DB query (Room) | **7706ms** | **29ms** |
+| First `UIState` emitted (T4) | **7969ms** | **141ms** |
+| Black screen duration | **~10 seconds** | **<0.3 seconds** |
+
+### Stable timing breakdown (AOT, cold start)
+
+| Phase | Duration | Description |
+|-------|----------|-------------|
+| Zygote fork → `Application.onCreate` | ~50ms | Process creation |
+| Dagger/Hilt inject | ~115ms | DI graph setup |
+| Compose + NavHost setup | ~315ms | First frame |
+| Room queries + combine | ~140ms | DB IO + flow combine |
+| Compose recomposition | ~25ms | Grid render |
+
+### PendingOperationsMonitor — operation types
+
+`PendingOperationsMonitor` tracks WorkManager jobs by unique ID:
+
+| Operation enum | Work ID | `isPeriodic` | Tracked by |
+|----------------|---------|-------------|------------|
+| `LIBRARY_INDEX` | `LibraryIndexWork` | false | `anyLibraryOperationInProgress()`, `isDirectoryScanInProgress()` |
+| `LIBRARY_INDEX_MANUAL` | `LibraryIndexWork_manual` | false | `isUserLibraryScanInProgress()`, `isDirectoryScanInProgress()` |
+| `CORE_UPDATE` | `CoreUpdateWork` | false | `anyLibraryOperationInProgress()` |
+| `SAVES_SYNC_PERIODIC` | periodic work ID | true | `anySaveOperationInProgress()` |
+| `SAVES_SYNC_ONE_SHOT` | one-shot work ID | false | `anySaveOperationInProgress()` |
+
+### `debounceAfterFirst` utility
+
+**File**: `retrograde-util/.../coroutines/FlowUtils.kt`
+
+```kotlin
+fun <T> Flow<T>.debounceAfterFirst(timeoutMillis: Long): Flow<T>
+```
+
+Emits the **first value immediately** (no delay), then debounces subsequent values by `timeoutMillis`. Used in `HomeViewModel` and `TVHomeViewModel` to show content instantly while preventing rapid back-to-back UI recompositions.
+
+Previously both ViewModels used plain `debounce(100ms)` which delayed even the first item by 100ms.

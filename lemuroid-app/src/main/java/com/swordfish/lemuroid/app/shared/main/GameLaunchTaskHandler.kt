@@ -10,6 +10,7 @@ import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.app.shared.storage.cache.CacheCleanerWork
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.delay
@@ -40,14 +41,23 @@ class GameLaunchTaskHandler(
                 val isRomLoadFailure = data?.getBooleanExtra(
                     BaseGameActivity.PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE, false
                 ) ?: false
-                handleErrorWithCorruptionCheck(activity, game, errorMessage, isRomLoadFailure)
+                val triedCores = data?.getStringArrayListExtra(BaseGameActivity.PLAY_GAME_RESULT_TRIED_CORES) ?: arrayListOf()
+                val leanback = data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_LEANBACK, false) ?: false
+                handleErrorWithCorruptionCheck(activity, game, errorMessage, isRomLoadFailure, triedCores, leanback)
             }
-            BaseGameActivity.RESULT_UNEXPECTED_ERROR ->
-                handleUnsuccessfulGameFinish(
-                    activity,
-                    activity.getString(R.string.lemuroid_crash_disclamer),
-                    data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR),
-                )
+            BaseGameActivity.RESULT_UNEXPECTED_ERROR -> {
+                val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as? Game
+                val triedCores = data?.getStringArrayListExtra(BaseGameActivity.PLAY_GAME_RESULT_TRIED_CORES) ?: arrayListOf()
+                val leanback = data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_LEANBACK, false) ?: false
+                val errorDetail = data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)
+                if (!tryFallbackCore(activity, game, triedCores, leanback)) {
+                    handleUnsuccessfulGameFinish(
+                        activity,
+                        activity.getString(R.string.lemuroid_crash_disclamer),
+                        errorDetail,
+                    )
+                }
+            }
         }
     }
 
@@ -56,6 +66,8 @@ class GameLaunchTaskHandler(
         game: Game?,
         errorMessage: String,
         isRomLoadFailure: Boolean,
+        triedCores: ArrayList<String>,
+        leanback: Boolean,
     ) {
         // Only treat as corruption if the error signal indicates the ROM file itself failed to load.
         // Other errors (e.g. missing BIOS) are user-actionable and should be shown as-is.
@@ -71,7 +83,24 @@ class GameLaunchTaskHandler(
                 return
             }
         }
-        handleUnsuccessfulGameFinish(activity, errorMessage, null)
+        if (!tryFallbackCore(activity, game, triedCores, leanback)) {
+            handleUnsuccessfulGameFinish(activity, errorMessage, null)
+        }
+    }
+
+    private fun tryFallbackCore(
+        activity: Activity,
+        game: Game?,
+        triedCores: List<String>,
+        leanback: Boolean,
+    ): Boolean {
+        if (game == null) return false
+        val system = GameSystem.findByIdOrNull(game.systemId) ?: return false
+        val nextCore = system.systemCoreConfigs.firstOrNull { it.coreID.coreName !in triedCores }
+            ?: return false
+        Timber.i("Core fallback: tried=$triedCores, trying=${nextCore.coreID.coreName}")
+        BaseGameActivity.launchGame(activity, nextCore, game, false, leanback, ArrayList(triedCores))
+        return true
     }
 
     private fun cancelBackgroundWork(context: Context) {

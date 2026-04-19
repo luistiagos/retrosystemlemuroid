@@ -24,13 +24,7 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.security.SecureRandom
-import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
-import com.swordfish.lemuroid.BuildConfig
 
 /**
  * State for the streaming (file-by-file) ROM download provider.
@@ -81,8 +75,14 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
          * On app start the stored version is compared; if outdated, PREF_DOWNLOAD_DONE is
          * cleared so populateFromEmbeddedCatalog runs again and creates the new placeholders
          * (existing files are never deleted — only missing ones are created).
+         * Bumped 5→6: HeavySystemFilter fix means PSP is no longer excluded on ≥3GB devices;
+         * force re-population so existing installs get the missing psp/ placeholders.
+         * Bumped 6→7: SerialScanner bounds-check fix; force re-index so PSP .iso files
+         * that were silently dropped due to ArrayIndexOutOfBoundsException get indexed.
+         * Bumped 7→8: Archive extension fallback in findByPathAndSupportedExtension;
+         * force re-index so .zip/.7z files in megacd/ngp/ngc/psp folders get indexed.
          */
-        private const val CATALOG_VERSION = 5
+        private const val CATALOG_VERSION = 8
 
         /**
          * Root path inside the HuggingFace dataset repository.
@@ -124,12 +124,15 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             // If the embedded catalog was updated (CATALOG_VERSION bumped), reset DOWNLOAD_DONE
             // so populateFromEmbeddedCatalog runs again and creates any new placeholder files.
             // Existing ROM files are never touched — only missing entries are created.
+            // PREF_DOWNLOADED_FILES is also cleared so the % 500 sync trigger fires correctly
+            // for newly added systems even when most files already exist from a prior run.
             val storedCatalogVersion = prefs.getInt(PREF_CATALOG_VERSION, 1)
             if (storedCatalogVersion < CATALOG_VERSION) {
                 prefs.edit()
                     .putInt(PREF_CATALOG_VERSION, CATALOG_VERSION)
                     .putBoolean(PREF_DOWNLOAD_DONE, false)
                     .putBoolean(PREF_DOWNLOAD_STARTED, true)
+                    .remove(PREF_DOWNLOADED_FILES)
                     .apply()
                 if (autoRestart && !prefs.getBoolean(PREF_PAUSED, false)) {
                     StreamingRomsWork.enqueue(appContext)
@@ -374,6 +377,16 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
         if (embeddedPaths != null) {
             Timber.d("Using embedded catalog: ${embeddedPaths.size} entries")
             populateFromEmbeddedCatalog(embeddedPaths, romsDir, onProgress)
+            // Mark catalog as fully populated and trigger a final library scan so all games
+            // (including any that were newly added, e.g. PSP after a CATALOG_VERSION bump)
+            // are indexed into the DB.
+            prefs.edit()
+                .putBoolean(PREF_DOWNLOAD_DONE, true)
+                .putBoolean(PREF_DOWNLOAD_STARTED, false)
+                .remove(PREF_DOWNLOADED_FILES)
+                .apply()
+            LibraryIndexScheduler.scheduleLibrarySync(appContext)
+            Timber.d("Embedded catalog population complete")
             return
         }
 
@@ -636,19 +649,6 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             .readTimeout(120, TimeUnit.SECONDS)
             .followRedirects(true)
             .followSslRedirects(true)
-        if (BuildConfig.DEBUG) {
-            val trustAll = object : X509TrustManager {
-                override fun checkClientTrusted(chain: Array<out X509Certificate>, authType: String) = Unit
-                override fun checkServerTrusted(chain: Array<out X509Certificate>, authType: String) = Unit
-                override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
-            }
-            val sslContext = SSLContext.getInstance("TLS").apply {
-                init(null, arrayOf<TrustManager>(trustAll), SecureRandom())
-            }
-            builder
-                .sslSocketFactory(sslContext.socketFactory, trustAll)
-                .hostnameVerifier { _, _ -> true }
-        }
         return builder.build()
     }
 }

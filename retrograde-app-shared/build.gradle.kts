@@ -55,6 +55,9 @@ dependencies {
 }
 
 android {
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {

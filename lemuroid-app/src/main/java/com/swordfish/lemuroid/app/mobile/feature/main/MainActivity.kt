@@ -157,10 +157,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             SystemBarStyle.dark(Color.TRANSPARENT),
         )
         super.onCreate(savedInstanceState)
-        android.util.Log.d("PERF", "T1_MAIN_ONCREATE")
 
         setContent {
-            android.util.Log.d("PERF", "T2_SET_CONTENT")
             val navController = rememberNavController()
             MainScreen(navController)
         }

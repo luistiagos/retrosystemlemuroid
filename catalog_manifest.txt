@@ -1,4 +1,4 @@
-3ds/100% Pascal Sensei - Kanpeki Paint Bombers (Japan).3ds
+﻿3ds/100% Pascal Sensei - Kanpeki Paint Bombers (Japan).3ds
 3ds/12-Sai. Honto no Kimochi (Japan).3ds
 3ds/12-Sai. Koisuru Diary (Japan).3ds
 3ds/12-Sai. Torokeru Puzzle Futari no Harmony (Japan).3ds
@@ -1729,2766 +1729,6 @@ a78/Water Ski (1988) (Froggo) [o1].a78
 a78/Winter Games (1987) (Atari) [!].a78
 a78/Xenophobe (1989) (Atari) (PAL).a78
 a78/Xevious (1987) (Atari) (PAL).a78
-arcade/10yard.zip
-arcade/1941.zip
-arcade/1941j.zip
-arcade/1942.zip
-arcade/1942a.zip
-arcade/1943.zip
-arcade/1943kai.zip
-arcade/1943mii.zip
-arcade/1944.zip
-arcade/1944j.zip
-arcade/1945kiii.zip
-arcade/19xx.zip
-arcade/19xxa.zip
-arcade/19xxb.zip
-arcade/2020bb.zip
-arcade/3countb.zip
-arcade/3in1semi.zip
-arcade/3kokushi.zip
-arcade/3stooges.zip
-arcade/3wonders.zip
-arcade/4dwarrio.zip
-arcade/4enraya.zip
-arcade/4in1.zip
-arcade/4in1boot.zip
-arcade/600.zip
-arcade/64street.zip
-arcade/7toitsu.zip
-arcade/800fath.zip
-arcade/88games.zip
-arcade/8ballact.zip
-arcade/99lstwar.zip
-arcade/abcop.zip
-arcade/aburner.zip
-arcade/aburner2.zip
-arcade/aceattac.zip
-arcade/acitya.zip
-arcade/acrobatm.zip
-arcade/actfancr.zip
-arcade/ad2083.zip
-arcade/aeroboto.zip
-arcade/aerofgt.zip
-arcade/aerofgtb.zip
-arcade/afighter.zip
-arcade/agallet.zip
-arcade/agress.zip
-arcade/airass.zip
-arcade/airattck.zip
-arcade/airattcka.zip
-arcade/airbustr.zip
-arcade/airduel.zip
-arcade/airwolf.zip
-arcade/ajax.zip
-arcade/ajaxj.zip
-arcade/akatana.zip
-arcade/akiss.zip
-arcade/akkanvdr.zip
-arcade/alcon.zip
-arcade/alexkidd.zip
-arcade/alibaba.zip
-arcade/alien3.zip
-arcade/alienar.zip
-arcade/alienaru.zip
-arcade/aliencha.zip
-arcade/aliens.zip
-arcade/aliens2.zip
-arcade/aliensec.zip
-arcade/aliensyn.zip
-arcade/aligator.zip
-arcade/alphaho.zip
-arcade/alpham2.zip
-arcade/alphaone.zip
-arcade/alphaxz.zip
-arcade/alpine.zip
-arcade/alpinea.zip
-arcade/altbeast.zip
-arcade/amatelas.zip
-arcade/amazon.zip
-arcade/ambush.zip
-arcade/amidar.zip
-arcade/amigo.zip
-arcade/amspdwy.zip
-arcade/amspdwya.zip
-arcade/androdun.zip
-arcade/androidp.zip
-arcade/angelkds.zip
-arcade/anteater.zip
-arcade/aodk.zip
-arcade/aof.zip
-arcade/aof2.zip
-arcade/aof3.zip
-arcade/aponow.zip
-arcade/appoooh.zip
-arcade/aquajack.zip
-arcade/aquarium.zip
-arcade/arabfgt.zip
-arcade/arabian.zip
-arcade/arabiana.zip
-arcade/arabianm.zip
-arcade/arbalest.zip
-arcade/arcadecl.zip
-arcade/arcadian.zip
-arcade/area88.zip
-arcade/arescue.zip
-arcade/argus.zip
-arcade/arkanoid.zip
-arcade/arkarea.zip
-arcade/arkatour.zip
-arcade/arkbloc2.zip
-arcade/arknoid2.zip
-arcade/arkretrn.zip
-arcade/armedf.zip
-arcade/armorcar.zip
-arcade/armwar.zip
-arcade/armwrest.zip
-arcade/ashnojoe.zip
-arcade/ashura.zip
-arcade/aso.zip
-arcade/assault.zip
-arcade/assaultj.zip
-arcade/assaultp.zip
-arcade/astdelux.zip
-arcade/asterix.zip
-arcade/asterock.zip
-arcade/asteroid.zip
-arcade/astorm.zip
-arcade/astrofl.zip
-arcade/astyanax.zip
-arcade/asuka.zip
-arcade/asurabld.zip
-arcade/asurabus.zip
-arcade/atehate.zip
-arcade/atetris.zip
-arcade/atetrisa.zip
-arcade/athena.zip
-arcade/atlantis.zip
-arcade/atomboy.zip
-arcade/atomicp.zip
-arcade/atompunk.zip
-arcade/aurail.zip
-arcade/avengers.zip
-arcade/avengrgs.zip
-arcade/avengrgsj.zip
-arcade/avsp.zip
-arcade/avspa.zip
-arcade/avspirit.zip
-arcade/avspu.zip
-arcade/aztarac.zip
-arcade/azurian.zip
-arcade/b2b.zip
-arcade/backfire.zip
-arcade/backfirt.zip
-arcade/baddudes.zip
-arcade/badlands.zip
-arcade/bagman.zip
-arcade/bagnard.zip
-arcade/bakatono.zip
-arcade/bakubrkr.zip
-arcade/bakutotu.zip
-arcade/balcube.zip
-arcade/ballbros.zip
-arcade/baluba.zip
-arcade/banbam.zip
-arcade/bang.zip
-arcade/bangball.zip
-arcade/bangbead.zip
-arcade/bangj.zip
-arcade/bankp.zip
-arcade/baraduke.zip
-arcade/baryon.zip
-arcade/batcir.zip
-arcade/batcira.zip
-arcade/batman.zip
-arcade/batman2.zip
-arcade/batrider.zip
-arcade/batsugun.zip
-arcade/battlane.zip
-arcade/battlex.zip
-arcade/battlnts.zip
-arcade/battroad.zip
-arcade/bayroute.zip
-arcade/bbakraid.zip
-arcade/bballs.zip
-arcade/bbbxing.zip
-arcade/bbmanw.zip
-arcade/bbmanwj.zip
-arcade/bbros.zip
-arcade/bbusters.zip
-arcade/bchopper.zip
-arcade/bcrusher.zip
-arcade/bcruzm12.zip
-arcade/bcstry.zip
-arcade/beaminv.zip
-arcade/berabohm.zip
-arcade/berlwall.zip
-arcade/bermudat.zip
-arcade/berzerk.zip
-arcade/bestbest.zip
-arcade/bestri.zip
-arcade/bgaregga.zip
-arcade/bigbang.zip
-arcade/bigbucks.zip
-arcade/bigkarnk.zip
-arcade/bigprowr.zip
-arcade/bigrun.zip
-arcade/bigstrik.zip
-arcade/bigstrkb.zip
-arcade/bigtwin.zip
-arcade/bikkuric.zip
-arcade/billiard.zip
-arcade/bioatack.zip
-arcade/biomtoy.zip
-arcade/bionicc.zip
-arcade/bioship.zip
-arcade/birdiy.zip
-arcade/birdtry.zip
-arcade/bishi.zip
-arcade/bjourney.zip
-arcade/bjtwin.zip
-arcade/bkrtmaq.zip
-arcade/blackt96.zip
-arcade/bladestl.zip
-arcade/blandia.zip
-arcade/blandiap.zip
-arcade/blaster.zip
-arcade/blasto.zip
-arcade/blastoff.zip
-arcade/blazeon.zip
-arcade/blazer.zip
-arcade/blazstar.zip
-arcade/blkbustr.zip
-arcade/blkdrgon.zip
-arcade/blkheart.zip
-arcade/blkhole.zip
-arcade/blkpnthr.zip
-arcade/blktiger.zip
-arcade/blmbycar.zip
-arcade/block.zip
-arcade/blockade.zip
-arcade/blockbl.zip
-arcade/blockcar.zip
-arcade/blocken.zip
-arcade/blockgal.zip
-arcade/blockhl.zip
-arcade/blockout.zip
-arcade/bloodbro.zip
-arcade/bloodstm.zip
-arcade/bloodwar.zip
-arcade/bloxeed.zip
-arcade/blstroid.zip
-arcade/blswhstl.zip
-arcade/bluehawk.zip
-arcade/blueprnt.zip
-arcade/blzntrnd.zip
-arcade/bmaster.zip
-arcade/bnj.zip
-arcade/bnzabros.zip
-arcade/bodyslam.zip
-arcade/bogeyman.zip
-arcade/boggy84.zip
-arcade/bombbee.zip
-arcade/bombjack.zip
-arcade/bombkick.zip
-arcade/bombrman.zip
-arcade/bongo.zip
-arcade/bonkadv.zip
-arcade/bonzeadv.zip
-arcade/boogwing.zip
-arcade/boogwinga.zip
-arcade/boomrang.zip
-arcade/botanic.zip
-arcade/bottom9.zip
-arcade/bottom9n.zip
-arcade/bouldash.zip
-arcade/bounty.zip
-arcade/bowlrama.zip
-arcade/boxyboy.zip
-arcade/bradley.zip
-arcade/brain.zip
-arcade/brapboys.zip
-arcade/brdrlinb.zip
-arcade/breakers.zip
-arcade/breakrev.zip
-arcade/breywood.zip
-arcade/brival.zip
-arcade/brix.zip
-arcade/brkthru.zip
-arcade/brkthruj.zip
-arcade/brubber.zip
-arcade/bshark.zip
-arcade/bsharkj.zip
-arcade/bssoccer.zip
-arcade/bstars.zip
-arcade/bstars2.zip
-arcade/btime.zip
-arcade/btime2.zip
-arcade/btlfield.zip
-arcade/btlkroad.zip
-arcade/btoads.zip
-arcade/bubblem.zip
-arcade/bubblemj.zip
-arcade/bubbles.zip
-arcade/bubblesp.zip
-arcade/bubl2000.zip
-arcade/bublbob2.zip
-arcade/bublbobl.zip
-arcade/buccanrs.zip
-arcade/buckrog.zip
-arcade/buckrogn.zip
-arcade/bucky.zip
-arcade/buggychl.zip
-arcade/bullet.zip
-arcade/bullfgt.zip
-arcade/buraiken.zip
-arcade/burglarx.zip
-arcade/burnforc.zip
-arcade/burningf.zip
-arcade/butasan.zip
-arcade/bwcasino.zip
-arcade/bwidow.zip
-arcade/bwings.zip
-arcade/bygone.zip
-arcade/bzone.zip
-arcade/cabal.zip
-arcade/cabala.zip
-arcade/cachat.zip
-arcade/cadash.zip
-arcade/cadashf.zip
-arcade/cairblad.zip
-arcade/calibr50.zip
-arcade/calipso.zip
-arcade/calorie.zip
-arcade/cameltry.zip
-arcade/candance.zip
-arcade/cannball.zip
-arcade/cannonbp.zip
-arcade/canyon.zip
-arcade/canyonp.zip
-arcade/capbowl.zip
-arcade/capbowl2.zip
-arcade/capitol.zip
-arcade/captaven.zip
-arcade/captcomm.zip
-arcade/carjmbre.zip
-arcade/carnival.zip
-arcade/castfant.zip
-arcade/catacomb.zip
-arcade/catapult.zip
-arcade/cavelon.zip
-arcade/cavenger.zip
-arcade/cawing.zip
-arcade/cawingj.zip
-arcade/cbdash.zip
-arcade/cbnj.zip
-arcade/cbombers.zip
-arcade/cburnrub.zip
-arcade/cbuster.zip
-arcade/cbusterj.zip
-arcade/ccastles.zip
-arcade/cclimber.zip
-arcade/cclimbr2.zip
-arcade/cdiscon1.zip
-arcade/centiped.zip
-arcade/cexplore.zip
-arcade/cfghtice.zip
-arcade/cflyball.zip
-arcade/cgangpzl.zip
-arcade/cgraplop.zip
-arcade/chainrec.zip
-arcade/chaknpop.zip
-arcade/chameleo.zip
-arcade/champwr.zip
-arcade/champwrj.zip
-arcade/chanbara.zip
-arcade/changes.zip
-arcade/charlien.zip
-arcade/chasehq.zip
-arcade/chasehqj.zip
-arcade/checkman.zip
-arcade/cheekyms.zip
-arcade/cheesech.zip
-arcade/chelnov.zip
-arcade/chelnovu.zip
-arcade/chikij.zip
-arcade/chimerab.zip
-arcade/chinagat.zip
-arcade/chinatwn.zip
-arcade/chkun.zip
-arcade/chokchok.zip
-arcade/choplift.zip
-arcade/chopliftu.zip
-arcade/chopper.zip
-arcade/choppera.zip
-arcade/chqflag.zip
-arcade/chqflagj.zip
-arcade/chukatai.zip
-arcade/chwy.zip
-arcade/circusc.zip
-arcade/circusc2.zip
-arcade/cischeat.zip
-arcade/citybomb.zip
-arcade/citycon.zip
-arcade/citycona.zip
-arcade/ckong.zip
-arcade/ckongpt2.zip
-arcade/clapapa.zip
-arcade/clapapa2.zip
-arcade/clbowl.zip
-arcade/cleopatr.zip
-arcade/cloak.zip
-arcade/cloakfr.zip
-arcade/clocknch.zip
-arcade/cloud9.zip
-arcade/clshroad.zip
-arcade/cltchitr.zip
-arcade/cluckypo.zip
-arcade/cmissnx.zip
-arcade/cnightst.zip
-arcade/cninja.zip
-arcade/cobracom.zip
-arcade/colony7.zip
-arcade/colony7a.zip
-arcade/columns.zip
-arcade/combatsc.zip
-arcade/combh.zip
-arcade/commando.zip
-arcade/commandw.zip
-arcade/commsega.zip
-arcade/comotion.zip
-arcade/complexx.zip
-arcade/condor.zip
-arcade/congo.zip
-arcade/contcirc.zip
-arcade/contra.zip
-arcade/cookbib.zip
-arcade/cookbib2.zip
-arcade/cookbib3.zip
-arcade/cop01.zip
-arcade/cop01a.zip
-arcade/copsnrob.zip
-arcade/cosmccop.zip
-arcade/cosmogng.zip
-arcade/cotton.zip
-arcade/cottong.zip
-arcade/countrun.zip
-arcade/countrunb.zip
-arcade/countryc.zip
-arcade/cppicf.zip
-arcade/cprobowl.zip
-arcade/cprogolf.zip
-arcade/cptennis.zip
-arcade/crater.zip
-arcade/crazyblk.zip
-arcade/crazycop.zip
-arcade/crazyfgt.zip
-arcade/crbaloon.zip
-arcade/crimec.zip
-arcade/crimecj.zip
-arcade/crimfght.zip
-arcade/crkdown.zip
-arcade/croquis.zip
-arcade/crospang.zip
-arcade/crshrace.zip
-arcade/crswd2bl.zip
-arcade/crsword.zip
-arcade/cruisin.zip
-arcade/crush.zip
-arcade/crush2.zip
-arcade/crusherm.zip
-arcade/crzrally.zip
-arcade/csclub.zip
-arcade/cscrtry.zip
-arcade/csilver.zip
-arcade/csuperas.zip
-arcade/csweetht.zip
-arcade/cterrani.zip
-arcade/ctisland.zip
-arcade/ctomaday.zip
-arcade/ctornado.zip
-arcade/ctribe.zip
-arcade/ctribeb.zip
-arcade/ctsttape.zip
-arcade/cubybop.zip
-arcade/cuebrick.zip
-arcade/cupfinal.zip
-arcade/curvebal.zip
-arcade/cutefght.zip
-arcade/cutieq.zip
-arcade/cworld.zip
-arcade/cworld2j.zip
-arcade/cybattlr.zip
-arcade/cyberlip.zip
-arcade/cybertnk.zip
-arcade/cybots.zip
-arcade/cybotsj.zip
-arcade/cybotsu.zip
-arcade/cyvern.zip
-arcade/czeroize.zip
-arcade/dacholer.zip
-arcade/dadandrn.zip
-arcade/daimakai.zip
-arcade/daioh.zip
-arcade/dairesya.zip
-arcade/daisenpu.zip
-arcade/daitorid.zip
-arcade/dambustr.zip
-arcade/dangar.zip
-arcade/dangseed.zip
-arcade/dankuga.zip
-arcade/daraku.zip
-arcade/darius.zip
-arcade/darius2.zip
-arcade/darius2d.zip
-arcade/dariuse.zip
-arcade/dariusg.zip
-arcade/dariusgj.zip
-arcade/dariusgx.zip
-arcade/darkadv.zip
-arcade/darkedge.zip
-arcade/darkmist.zip
-arcade/darkplnt.zip
-arcade/darkseal.zip
-arcade/darktowr.zip
-arcade/darwin.zip
-arcade/dassault.zip
-arcade/dblaxle.zip
-arcade/dbldynj.zip
-arcade/dblewing.zip
-arcade/dbreed.zip
-arcade/dbz.zip
-arcade/dbz2.zip
-arcade/dbzvrvs.zip
-arcade/dcclub.zip
-arcade/dcon.zip
-arcade/dday.zip
-arcade/ddayc.zip
-arcade/ddayjlc.zip
-arcade/ddcrew.zip
-arcade/ddcrew2.zip
-arcade/ddonpach.zip
-arcade/ddp2.zip
-arcade/ddp3.zip
-arcade/ddpdfk.zip
-arcade/ddpsdoj.zip
-arcade/ddragon.zip
-arcade/ddragon2.zip
-arcade/ddragon3.zip
-arcade/ddragonb.zip
-arcade/ddream95.zip
-arcade/ddribble.zip
-arcade/ddsom.zip
-arcade/ddsoma.zip
-arcade/ddsomu.zip
-arcade/ddtod.zip
-arcade/ddtoda.zip
-arcade/ddtodur1.zip
-arcade/ddungeon.zip
-arcade/ddux.zip
-arcade/deadang.zip
-arcade/deadconx.zip
-arcade/dealer.zip
-arcade/deathbrd.zip
-arcade/deathsml.zip
-arcade/deerhunt.zip
-arcade/defcmnd.zip
-arcade/defence.zip
-arcade/defender.zip
-arcade/deltrace.zip
-arcade/deluxe5.zip
-arcade/denjinmk.zip
-arcade/depthch.zip
-arcade/deroon.zip
-arcade/desertbr.zip
-arcade/desertdn.zip
-arcade/desertwr.zip
-arcade/detatwin.zip
-arcade/devilfsg.zip
-arcade/devilfsh.zip
-arcade/devilw.zip
-arcade/devstors.zip
-arcade/dfeveron.zip
-arcade/dfkbl.zip
-arcade/dharma.zip
-arcade/diamond.zip
-arcade/dietgo.zip
-arcade/dietgoe.zip
-arcade/digdug.zip
-arcade/digdug2.zip
-arcade/digdug2o.zip
-arcade/digdugat.zip
-arcade/digger.zip
-arcade/dimahoo.zip
-arcade/dingo.zip
-arcade/dino.zip
-arcade/dinoj.zip
-arcade/dinorex.zip
-arcade/dinorexj.zip
-arcade/dirtfoxj.zip
-arcade/disco.zip
-arcade/divebomb.zip
-arcade/diverboy.zip
-arcade/djboy.zip
-arcade/dkgensan.zip
-arcade/dkong.zip
-arcade/dkong3.zip
-arcade/dkong3b.zip
-arcade/dkongjr.zip
-arcade/dkongjrb.zip
-arcade/dkongpe.zip
-arcade/dkongx.zip
-arcade/dleague.zip
-arcade/dmnfrnt.zip
-arcade/docastle.zip
-arcade/dockman.zip
-arcade/dodgeman.zip
-arcade/dogfgt.zip
-arcade/dogfgtj.zip
-arcade/dogfight.zip
-arcade/dogyuun.zip
-arcade/dokaben.zip
-arcade/dolmen.zip
-arcade/domino.zip
-arcade/dommy.zip
-arcade/dondokod.zip
-arcade/donight.zip
-arcade/donpachi.zip
-arcade/dorachan.zip
-arcade/dorodon.zip
-arcade/dorodon2.zip
-arcade/dorunrun.zip
-arcade/dotrikun.zip
-arcade/dotron.zip
-arcade/doubledr.zip
-arcade/dowild.zip
-arcade/downtown.zip
-arcade/dragnblz.zip
-arcade/dragngun.zip
-arcade/dragonsh.zip
-arcade/drakton.zip
-arcade/dreamwld.zip
-arcade/dremshpr.zip
-arcade/drgnbowl.zip
-arcade/drgnbstr.zip
-arcade/drgninja.zip
-arcade/drgnmst.zip
-arcade/drgnunit.zip
-arcade/dribling.zip
-arcade/drifto94.zip
-arcade/driftout.zip
-arcade/drivedge.zip
-arcade/driveout.zip
-arcade/drivfrcp.zip
-arcade/drmicro.zip
-arcade/drtomy.zip
-arcade/drtoppel.zip
-arcade/dsaber.zip
-arcade/dsmbl.zip
-arcade/dsoccr94.zip
-arcade/dspirit.zip
-arcade/dstlk.zip
-arcade/dstlka.zip
-arcade/dstlku.zip
-arcade/dumpmtmt.zip
-arcade/dungeonm.zip
-arcade/dunkshot.zip
-arcade/dyger.zip
-arcade/dygera.zip
-arcade/dynablst.zip
-arcade/dynagear.zip
-arcade/dynduke.zip
-arcade/dynwar.zip
-arcade/eagle.zip
-arcade/eaglshot.zip
-arcade/earthjkr.zip
-arcade/ecofghtr.zip
-arcade/edf.zip
-arcade/edrandy.zip
-arcade/edrandy1.zip
-arcade/eeekk.zip
-arcade/efdt.zip
-arcade/egghunt.zip
-arcade/eggor.zip
-arcade/eggs.zip
-arcade/eightfrc.zip
-arcade/eightman.zip
-arcade/elecyoyo.zip
-arcade/elevator.zip
-arcade/elevatorb.zip
-arcade/elim2.zip
-arcade/elim2a.zip
-arcade/elvact2u.zip
-arcade/elvactr.zip
-arcade/elvactrj.zip
-arcade/emeralda.zip
-arcade/empcity.zip
-arcade/endurobl.zip
-arcade/enduror.zip
-arcade/enforce.zip
-arcade/eprom.zip
-arcade/esb.zip
-arcade/esckids.zip
-arcade/esckidsj.zip
-arcade/espgal.zip
-arcade/espgal2.zip
-arcade/espial.zip
-arcade/esprade.zip
-arcade/espradej.zip
-arcade/eswat.zip
-arcade/eswatbl.zip
-arcade/eto.zip
-arcade/euroch92.zip
-arcade/evilston.zip
-arcade/excthour.zip
-arcade/exctleag.zip
-arcade/exedexes.zip
-arcade/exodus.zip
-arcade/explbrkr.zip
-arcade/exprraid.zip
-arcade/extdwnhl.zip
-arcade/exterm.zip
-arcade/extrmatn.zip
-arcade/exvania.zip
-arcade/exzisus.zip
-arcade/eyes.zip
-arcade/eyes2.zip
-arcade/f1dream.zip
-arcade/f1dreamb.zip
-arcade/f1en.zip
-arcade/f1gp.zip
-arcade/f1gp2.zip
-arcade/f1gpstar.zip
-arcade/f1gpstr2.zip
-arcade/f1lap.zip
-arcade/fa.zip
-arcade/faceoff.zip
-arcade/falcon.zip
-arcade/fantasia.zip
-arcade/fantastc.zip
-arcade/fantasyu.zip
-arcade/fantazia.zip
-arcade/fantland.zip
-arcade/fantsia2.zip
-arcade/fantsy95.zip
-arcade/fantzn2.zip
-arcade/fantzn2x.zip
-arcade/fantzone.zip
-arcade/farwest.zip
-arcade/fastfred.zip
-arcade/fastlane.zip
-arcade/fatfursp.zip
-arcade/fatfury1.zip
-arcade/fatfury2.zip
-arcade/fatfury3.zip
-arcade/fball.zip
-arcade/fbfrenzy.zip
-arcade/feversos.zip
-arcade/ffantasy.zip
-arcade/ffight.zip
-arcade/fghtatck.zip
-arcade/fghtbskt.zip
-arcade/fghthist.zip
-arcade/fghthista.zip
-arcade/fhawk.zip
-arcade/fhawkj.zip
-arcade/fightfev.zip
-arcade/fightrol.zip
-arcade/finalap2.zip
-arcade/finalap3.zip
-arcade/finalb.zip
-arcade/finalbj.zip
-arcade/finalizr.zip
-arcade/finallap.zip
-arcade/finalttr.zip
-arcade/finehour.zip
-arcade/firebarr.zip
-arcade/firebatl.zip
-arcade/firebeas.zip
-arcade/fireshrk.zip
-arcade/firetrap.zip
-arcade/firetrapbl.zip
-arcade/fitegolf.zip
-arcade/fitter.zip
-arcade/fixeight.zip
-arcade/fjbuster.zip
-arcade/flagrall.zip
-arcade/flashgal.zip
-arcade/flicky.zip
-arcade/flipjack.zip
-arcade/flipshot.zip
-arcade/flkatck.zip
-arcade/flower.zip
-arcade/flstory.zip
-arcade/flstoryj.zip
-arcade/flyboy.zip
-arcade/flyboyb.zip
-arcade/flytiger.zip
-arcade/fncywld.zip
-arcade/fnkyfish.zip
-arcade/foodf.zip
-arcade/footchmp.zip
-arcade/forgottn.zip
-arcade/formatz.zip
-arcade/fourtrax.zip
-arcade/fpoint.zip
-arcade/freekick.zip
-arcade/freeze.zip
-arcade/frenzy.zip
-arcade/friskyt.zip
-arcade/friskyta.zip
-arcade/frogger.zip
-arcade/frogs.zip
-arcade/frontlin.zip
-arcade/fround.zip
-arcade/froundl.zip
-arcade/fshark.zip
-arcade/fsharkbt.zip
-arcade/fspiderb.zip
-arcade/fstarfrc.zip
-arcade/fullthrl.zip
-arcade/funkybee.zip
-arcade/funkyjet.zip
-arcade/funnymou.zip
-arcade/funybubl.zip
-arcade/futari15.zip
-arcade/futaribl.zip
-arcade/futspy.zip
-arcade/ga2.zip
-arcade/ga2j.zip
-arcade/gaia.zip
-arcade/gaialast.zip
-arcade/gaiapols.zip
-arcade/gaiden.zip
-arcade/galaga.zip
-arcade/galaga3.zip
-arcade/galaga88.zip
-arcade/galagamf.zip
-arcade/galap1.zip
-arcade/galap4.zip
-arcade/galapx.zip
-arcade/galaxian.zip
-arcade/galaxyfg.zip
-arcade/galaxygn.zip
-arcade/galhustl.zip
-arcade/galivan.zip
-arcade/galivan2.zip
-arcade/gallag.zip
-arcade/gallop.zip
-arcade/galmedes.zip
-arcade/galpani4.zip
-arcade/galpanic.zip
-arcade/galpanis.zip
-arcade/galpans2.zip
-arcade/galspnbl.zip
-arcade/galturbo.zip
-arcade/gametngk.zip
-arcade/ganbare.zip
-arcade/gangwars.zip
-arcade/ganryu.zip
-arcade/gaplus.zip
-arcade/gaplusa.zip
-arcade/gardia.zip
-arcade/gardiab.zip
-arcade/garogun.zip
-arcade/garou.zip
-arcade/garuka.zip
-arcade/garyoret.zip
-arcade/gatedoom.zip
-arcade/gaunt2.zip
-arcade/gaunt22p.zip
-arcade/gauntlet.zip
-arcade/gauntlet2p.zip
-arcade/gberet.zip
-arcade/gberetb.zip
-arcade/gblchmp.zip
-arcade/gbusters.zip
-arcade/gdfs.zip
-arcade/geebee.zip
-arcade/geebeeg.zip
-arcade/gekiridn.zip
-arcade/gemini.zip
-arcade/genix.zip
-arcade/genpeitd.zip
-arcade/gensitou.zip
-arcade/geostorm.zip
-arcade/gfire2.zip
-arcade/gforce2.zip
-arcade/gground.zip
-arcade/ghostb.zip
-arcade/ghostb3.zip
-arcade/ghostlop.zip
-arcade/ghouls.zip
-arcade/ghoulsu.zip
-arcade/ghox.zip
-arcade/ghunter.zip
-arcade/gigandes.zip
-arcade/gigas.zip
-arcade/gigasb.zip
-arcade/gigasm2b.zip
-arcade/gigawing.zip
-arcade/gijoe.zip
-arcade/ginganin.zip
-arcade/ginkun.zip
-arcade/gladiatr.zip
-arcade/glass.zip
-arcade/gloc.zip
-arcade/gmahou.zip
-arcade/gmgalax.zip
-arcade/gnbarich.zip
-arcade/gng.zip
-arcade/gnga.zip
-arcade/goalx3.zip
-arcade/godzilla.zip
-arcade/gogomile.zip
-arcade/goindol.zip
-arcade/goindolj.zip
-arcade/goldmedl.zip
-arcade/goldnaxe.zip
-arcade/gollygho.zip
-arcade/gondo.zip
-arcade/gorkans.zip
-arcade/gotcha.zip
-arcade/gowcaizr.zip
-arcade/gpilots.zip
-arcade/gprider.zip
-arcade/gradius.zip
-arcade/gradius2.zip
-arcade/gradius3.zip
-arcade/grainbow.zip
-arcade/grasspin.zip
-arcade/gratia.zip
-arcade/gravitar.zip
-arcade/grdian.zip
-arcade/grdians.zip
-arcade/grdnstrm.zip
-arcade/grindstm.zip
-arcade/grndtour.zip
-arcade/grobda.zip
-arcade/grobda2.zip
-arcade/groundfx.zip
-arcade/growl.zip
-arcade/gryzor.zip
-arcade/gseeker.zip
-arcade/gseekerj.zip
-arcade/gstream.zip
-arcade/gstrik2.zip
-arcade/gt2k.zip
-arcade/gt3d.zip
-arcade/gt97.zip
-arcade/gt98.zip
-arcade/gt99.zip
-arcade/gtclassc.zip
-arcade/gteikoku.zip
-arcade/gtmr.zip
-arcade/gtmr2.zip
-arcade/gtmre.zip
-arcade/gtmrusa.zip
-arcade/guiness.zip
-arcade/gulfstrm.zip
-arcade/gulfwar2.zip
-arcade/gumbo.zip
-arcade/gunbird.zip
-arcade/gunbird2.zip
-arcade/gunbirdj.zip
-arcade/gunbustr.zip
-arcade/gundamex.zip
-arcade/gundhara.zip
-arcade/gundl94.zip
-arcade/gunforc2.zip
-arcade/gunforce.zip
-arcade/gunfront.zip
-arcade/gunhohki.zip
-arcade/gunlock.zip
-arcade/gunmast.zip
-arcade/gunnail.zip
-arcade/gunsmoke.zip
-arcade/gururin.zip
-arcade/gussun.zip
-arcade/gutangtn.zip
-arcade/gutsn.zip
-arcade/guwange.zip
-arcade/guzzler.zip
-arcade/gwar.zip
-arcade/gwara.zip
-arcade/gwarj.zip
-arcade/gwarrior.zip
-arcade/gyrodine.zip
-arcade/gyruss.zip
-arcade/hachamf.zip
-arcade/hachamfb.zip
-arcade/hachoo.zip
-arcade/hal21.zip
-arcade/hal21j.zip
-arcade/hamaway.zip
-arcade/hangly.zip
-arcade/hangon.zip
-arcade/hangonjr.zip
-arcade/hangzo.zip
-arcade/harddunk.zip
-arcade/hardhea2.zip
-arcade/hardhead.zip
-arcade/hardyard.zip
-arcade/hasamu.zip
-arcade/hatena.zip
-arcade/hatris.zip
-arcade/hayaosi1.zip
-arcade/hbarrel.zip
-arcade/hbarrelu.zip
-arcade/hcastle.zip
-arcade/hcrash.zip
-arcade/hcrashc.zip
-arcade/headon.zip
-arcade/headon2.zip
-arcade/heatbrl.zip
-arcade/heberpop.zip
-arcade/hedpanic.zip
-arcade/heiankyo.zip
-arcade/hellfire.zip
-arcade/herbiedk.zip
-arcade/hero.zip
-arcade/herodk.zip
-arcade/hexa.zip
-arcade/hexion.zip
-arcade/hgkairak.zip
-arcade/hharry.zip
-arcade/hidnctch.zip
-arcade/higemaru.zip
-arcade/hiimpact.zip
-arcade/hippodrm.zip
-arcade/hishouza.zip
-arcade/hitice.zip
-arcade/hoccer.zip
-arcade/hoccer2.zip
-arcade/holeland.zip
-arcade/holo.zip
-arcade/homo.zip
-arcade/hook.zip
-arcade/hookj.zip
-arcade/hoops96.zip
-arcade/hopmappy.zip
-arcade/hopprobo.zip
-arcade/horekid.zip
-arcade/horekidb.zip
-arcade/horizon.zip
-arcade/horshoes.zip
-arcade/hotchase.zip
-arcade/hotdebut.zip
-arcade/hotdogst.zip
-arcade/hotgmck.zip
-arcade/hotgmck3.zip
-arcade/hotmind.zip
-arcade/hotpinbl.zip
-arcade/hotrod.zip
-arcade/hotshock.zip
-arcade/hpolym84.zip
-arcade/hpuncher.zip
-arcade/hsf2.zip
-arcade/hsf2a.zip
-arcade/htchctch.zip
-arcade/hthero.zip
-arcade/hthero93.zip
-arcade/hthero95.zip
-arcade/hunchbak.zip
-arcade/hustle.zip
-arcade/hustler.zip
-arcade/hustlerb.zip
-arcade/hvymetal.zip
-arcade/hvysmsh.zip
-arcade/hvysmsha.zip
-arcade/hvyunit.zip
-arcade/hwchamp.zip
-arcade/hwrace.zip
-arcade/hydra.zip
-arcade/hydrap.zip
-arcade/hyperpac.zip
-arcade/hyperspt.zip
-arcade/hyprduel.zip
-arcade/hypreac2.zip
-arcade/hypreact.zip
-arcade/hyprolym.zip
-arcade/hypsptsp.zip
-arcade/ibara.zip
-arcade/ibarablk.zip
-arcade/iganinju.zip
-arcade/igmo.zip
-arcade/ikari.zip
-arcade/ikari3.zip
-arcade/ikarijp.zip
-arcade/ikki.zip
-arcade/imago.zip
-arcade/imgfight.zip
-arcade/imsorry.zip
-arcade/imsorryj.zip
-arcade/insector.zip
-arcade/insectx.zip
-arcade/intcup94.zip
-arcade/inthunt.zip
-arcade/inthuntu.zip
-arcade/intrepid.zip
-arcade/inufuku.zip
-arcade/invaders.zip
-arcade/invds.zip
-arcade/invho2.zip
-arcade/invinco.zip
-arcade/inyourfa.zip
-arcade/iqblock.zip
-arcade/ironclad.zip
-arcade/ironhors.zip
-arcade/irrmaze.zip
-arcade/itaten.zip
-arcade/ixion.zip
-arcade/jack.zip
-arcade/jack2.zip
-arcade/jackal.zip
-arcade/jackalj.zip
-arcade/jailbrek.zip
-arcade/janjans1.zip
-arcade/janshin.zip
-arcade/jchan.zip
-arcade/jchan2.zip
-arcade/jcross.zip
-arcade/jdreddp.zip
-arcade/jedi.zip
-arcade/jigkmgri.zip
-arcade/jin.zip
-arcade/jitsupro.zip
-arcade/jjack.zip
-arcade/jjparad2.zip
-arcade/jjparads.zip
-arcade/jjsquawk.zip
-arcade/jleague.zip
-arcade/jockeygp.zip
-arcade/joemac.zip
-arcade/joemacr.zip
-arcade/joemacra.zip
-arcade/joinem.zip
-arcade/jojo.zip
-arcade/jojoba.zip
-arcade/jojobane.zip
-arcade/jojoj.zip
-arcade/jollyjgr.zip
-arcade/journey.zip
-arcade/joust.zip
-arcade/joustr.zip
-arcade/joyfulr.zip
-arcade/joyjoy.zip
-arcade/joyman.zip
-arcade/jpark.zip
-arcade/jpopnics.zip
-arcade/jrpacman.zip
-arcade/jsk.zip
-arcade/jumpbug.zip
-arcade/jumpbugb.zip
-arcade/jumpcoas.zip
-arcade/jumping.zip
-arcade/jumpkids.zip
-arcade/jumpkun.zip
-arcade/jumppop.zip
-arcade/jumpshot.zip
-arcade/jungleh.zip
-arcade/junglek.zip
-arcade/jungler.zip
-arcade/junofrst.zip
-arcade/kabukikl.zip
-arcade/kabukiz.zip
-arcade/kageki.zip
-arcade/kaiserkn.zip
-arcade/kaitei.zip
-arcade/kaiteids.zip
-arcade/kaitein.zip
-arcade/kamenrid.zip
-arcade/kamikcab.zip
-arcade/kangaroo.zip
-arcade/karatblz.zip
-arcade/karatevs.zip
-arcade/karatour.zip
-arcade/karianx.zip
-arcade/karnov.zip
-arcade/karnovr.zip
-arcade/kazan.zip
-arcade/kbash.zip
-arcade/kbash2.zip
-arcade/kchamp.zip
-arcade/kchampvs.zip
-arcade/keithlcy.zip
-arcade/kengo.zip
-arcade/keroppi.zip
-arcade/ket.zip
-arcade/kick.zip
-arcade/kickboy.zip
-arcade/kicker.zip
-arcade/kickgoal.zip
-arcade/kicknrun.zip
-arcade/kickoff.zip
-arcade/kickridr.zip
-arcade/kidniki.zip
-arcade/kikcubic.zip
-arcade/kikikai.zip
-arcade/kikstart.zip
-arcade/killbld.zip
-arcade/killbldp.zip
-arcade/kingball.zip
-arcade/kingdmgp.zip
-arcade/kingofb.zip
-arcade/kinst.zip
-arcade/kinst2.zip
-arcade/kirameki.zip
-arcade/kirarast.zip
-arcade/kittenk.zip
-arcade/kiwame.zip
-arcade/kizuna.zip
-arcade/klax.zip
-arcade/knckhead.zip
-arcade/kncljoe.zip
-arcade/kncljoea.zip
-arcade/knights.zip
-arcade/knightsu.zip
-arcade/knockout.zip
-arcade/kod.zip
-arcade/kodb.zip
-arcade/kof10th.zip
-arcade/kof2000.zip
-arcade/kof2000n.zip
-arcade/kof2001.zip
-arcade/kof2002.zip
-arcade/kof2003.zip
-arcade/kof94.zip
-arcade/kof95.zip
-arcade/kof95a.zip
-arcade/kof96.zip
-arcade/kof97.zip
-arcade/kof98.zip
-arcade/kof99.zip
-arcade/kof99e.zip
-arcade/koikois2.zip
-arcade/konami88.zip
-arcade/konamigt.zip
-arcade/kong.zip
-arcade/korosuke.zip
-arcade/koshien.zip
-arcade/kotm.zip
-arcade/kotm2.zip
-arcade/kotmh.zip
-arcade/kov.zip
-arcade/kov2.zip
-arcade/kov2p.zip
-arcade/kovplus.zip
-arcade/kovsh.zip
-arcade/kovshp.zip
-arcade/kovytzy.zip
-arcade/kozure.zip
-arcade/kram.zip
-arcade/kram2.zip
-arcade/kroozr.zip
-arcade/krull.zip
-arcade/krzybowl.zip
-arcade/ksayakyu.zip
-arcade/ktiger.zip
-arcade/ktiger2.zip
-arcade/kuhga.zip
-arcade/kungfub.zip
-arcade/kungfum.zip
-arcade/kungfut.zip
-arcade/kuniokun.zip
-arcade/kurikint.zip
-arcade/kyros.zip
-arcade/kyrosj.zip
-arcade/kyukaidk.zip
-arcade/kyustrkr.zip
-arcade/labyrunr.zip
-arcade/ladybug.zip
-arcade/ladybugb.zip
-arcade/ladykill.zip
-arcade/ladymstr.zip
-arcade/landbrk.zip
-arcade/landmakr.zip
-arcade/lasso.zip
-arcade/lastblad.zip
-arcade/lastbld2.zip
-arcade/lastday.zip
-arcade/lastdaya.zip
-arcade/lastduel.zip
-arcade/lastfort.zip
-arcade/lasthope.zip
-arcade/lastkm.zip
-arcade/lastmisn.zip
-arcade/lastsurv.zip
-arcade/lbowling.zip
-arcade/ldrun.zip
-arcade/ldrun2.zip
-arcade/ldrun3.zip
-arcade/ldrun4.zip
-arcade/ldruna.zip
-arcade/leaguemn.zip
-arcade/leds2011.zip
-arcade/ledstorm.zip
-arcade/legend.zip
-arcade/legendos.zip
-arcade/legion.zip
-arcade/legionna.zip
-arcade/legofair.zip
-arcade/lemmings.zip
-arcade/lethalen.zip
-arcade/lethalth.zip
-arcade/levers.zip
-arcade/lghost.zip
-arcade/lgtnfght.zip
-arcade/liberate.zip
-arcade/liblrabl.zip
-arcade/lifefrce.zip
-arcade/lightbr.zip
-arcade/liquidk.zip
-arcade/liquidku.zip
-arcade/lizwiz.zip
-arcade/lkage.zip
-arcade/lkageb.zip
-arcade/llander.zip
-arcade/llander1.zip
-arcade/lnc.zip
-arcade/lockonph.zip
-arcade/locomotn.zip
-arcade/loderndf.zip
-arcade/loffire.zip
-arcade/logicpr2.zip
-arcade/logicpro.zip
-arcade/loht.zip
-arcade/lomakai.zip
-arcade/looper.zip
-arcade/lordgun.zip
-arcade/lordofk.zip
-arcade/losttomb.zip
-arcade/lostwrld.zip
-arcade/lotlot.zip
-arcade/lottofun.zip
-arcade/loverboy.zip
-arcade/lresort.zip
-arcade/lsasquad.zip
-arcade/ltswords.zip
-arcade/luckywld.zip
-arcade/lunarba1.zip
-arcade/lvgirl94.zip
-arcade/lwings.zip
-arcade/lwings2.zip
-arcade/m660.zip
-arcade/m660b.zip
-arcade/machbrkr.zip
-arcade/machomou.zip
-arcade/macross.zip
-arcade/macross2.zip
-arcade/macrossp.zip
-arcade/madcrash.zip
-arcade/maddonna.zip
-arcade/madgear.zip
-arcade/madgearj.zip
-arcade/madmotor.zip
-arcade/madshark.zip
-arcade/magdrop.zip
-arcade/magdrop2.zip
-arcade/magdrop3.zip
-arcade/magdropp.zip
-arcade/magicbub.zip
-arcade/magix.zip
-arcade/maglord.zip
-arcade/maglordh.zip
-arcade/magmax.zip
-arcade/mahmajn.zip
-arcade/mahmajn2.zip
-arcade/mahoudai.zip
-arcade/mahretsu.zip
-arcade/mainevt.zip
-arcade/mainevt2p.zip
-arcade/mainevto.zip
-arcade/mainsnk.zip
-arcade/majtitl2.zip
-arcade/majtitle.zip
-arcade/majuu.zip
-arcade/makaiden.zip
-arcade/makaimur.zip
-arcade/maketrax.zip
-arcade/makyosen.zip
-arcade/mangchi.zip
-arcade/manhatan.zip
-arcade/maniach.zip
-arcade/maniach2.zip
-arcade/maniacsp.zip
-arcade/maniacsq.zip
-arcade/manybloc.zip
-arcade/mappy.zip
-arcade/mappyj.zip
-arcade/marineb.zip
-arcade/mariner.zip
-arcade/mario.zip
-arcade/markham.zip
-arcade/mars.zip
-arcade/martmast.zip
-arcade/marukin.zip
-arcade/marukodq.zip
-arcade/marvins.zip
-arcade/marvland.zip
-arcade/masao.zip
-arcade/mastboyo.zip
-arcade/masterw.zip
-arcade/mastkin.zip
-arcade/matchit.zip
-arcade/matmania.zip
-arcade/matrim.zip
-arcade/maxrpm.zip
-arcade/mayday.zip
-arcade/maydaya.zip
-arcade/mazinger.zip
-arcade/mbomberj.zip
-arcade/mbombrd.zip
-arcade/mbombrdj.zip
-arcade/mbrush.zip
-arcade/mcatadv.zip
-arcade/mcatadvj.zip
-arcade/mchampdx.zip
-arcade/mchampdxa.zip
-arcade/mechatt.zip
-arcade/megablst.zip
-arcade/megadon.zip
-arcade/megaforc.zip
-arcade/megaman.zip
-arcade/megaman2.zip
-arcade/megazone.zip
-arcade/meikyuh.zip
-arcade/meosism.zip
-arcade/mercs.zip
-arcade/mercsj.zip
-arcade/mercsu.zip
-arcade/merlinmm.zip
-arcade/metafox.zip
-arcade/metalb.zip
-arcade/metalbj.zip
-arcade/metamrph.zip
-arcade/metlclsh.zip
-arcade/metlfrzr.zip
-arcade/metlhawk.zip
-arcade/metlsavr.zip
-arcade/metmqstr.zip
-arcade/metrocrs.zip
-arcade/mexico86.zip
-arcade/mgakuen.zip
-arcade/mgakuen2.zip
-arcade/mgcrystl.zip
-arcade/mhavoc.zip
-arcade/mhavoc2.zip
-arcade/mhavocrv.zip
-arcade/mia.zip
-arcade/mia2.zip
-arcade/midres.zip
-arcade/midresj.zip
-arcade/miexchng.zip
-arcade/mightguy.zip
-arcade/mikie.zip
-arcade/mikiehs.zip
-arcade/mikiej.zip
-arcade/milliped.zip
-arcade/mimonkey.zip
-arcade/mimonsco.zip
-arcade/minasan.zip
-arcade/minefld.zip
-arcade/mineswpr.zip
-arcade/minivadr.zip
-arcade/mirax.zip
-arcade/mirninja.zip
-arcade/missb2.zip
-arcade/missile.zip
-arcade/missw96.zip
-arcade/mizubaku.zip
-arcade/mj4simai.zip
-arcade/mjkjidai.zip
-arcade/mjleague.zip
-arcade/mjnquest.zip
-arcade/mk.zip
-arcade/mk2.zip
-arcade/mk2chal.zip
-arcade/mk3.zip
-arcade/mkla1.zip
-arcade/mmagic.zip
-arcade/mmatrix.zip
-arcade/mmaulers.zip
-arcade/mmaze.zip
-arcade/mmonkey.zip
-arcade/mmpork.zip
-arcade/mnchmobl.zip
-arcade/mnight.zip
-arcade/moegonta.zip
-arcade/mofflott.zip
-arcade/moguchan.zip
-arcade/mogura.zip
-arcade/mole.zip
-arcade/momoko.zip
-arcade/moomesa.zip
-arcade/moonal2.zip
-arcade/moonal2b.zip
-arcade/moonaln.zip
-arcade/mooncrst.zip
-arcade/moonqsr.zip
-arcade/moonwar.zip
-arcade/moremore.zip
-arcade/moremorp.zip
-arcade/mosaic.zip
-arcade/mosaica.zip
-arcade/motorace.zip
-arcade/motos.zip
-arcade/mouser.zip
-arcade/mouserc.zip
-arcade/mpang.zip
-arcade/mpatrol.zip
-arcade/mpatrolw.zip
-arcade/mplanets.zip
-arcade/mrdo.zip
-arcade/mrdu.zip
-arcade/mrflea.zip
-arcade/mrgoemon.zip
-arcade/mrheli.zip
-arcade/mrjong.zip
-arcade/mrkougar.zip
-arcade/mrlo.zip
-arcade/mrtnt.zip
-arcade/mrviking.zip
-arcade/mschamp.zip
-arcade/msgogo.zip
-arcade/msgundam.zip
-arcade/msh.zip
-arcade/msha.zip
-arcade/mshuttle.zip
-arcade/mshvsf.zip
-arcade/mshvsfa.zip
-arcade/msisaac.zip
-arcade/mslider.zip
-arcade/mslug.zip
-arcade/mslug2.zip
-arcade/mslug3.zip
-arcade/mslug4.zip
-arcade/mslug5.zip
-arcade/mslugx.zip
-arcade/mspacmab.zip
-arcade/mspacman.zip
-arcade/mspacmat.zip
-arcade/mspacmnf.zip
-arcade/mspacpls.zip
-arcade/mstadium.zip
-arcade/mstworld.zip
-arcade/msword.zip
-arcade/mswordj.zip
-arcade/mswordr1.zip
-arcade/mswordu.zip
-arcade/mtlchamp.zip
-arcade/mtwins.zip
-arcade/mugsmash.zip
-arcade/multchmp.zip
-arcade/mushisam.zip
-arcade/musicbal.zip
-arcade/mustache.zip
-arcade/mustang.zip
-arcade/mustangb.zip
-arcade/mutantf.zip
-arcade/mutnat.zip
-arcade/mvp.zip
-arcade/mvsc.zip
-arcade/mvsca.zip
-arcade/mvscu.zip
-arcade/mwalk.zip
-arcade/mwarr.zip
-arcade/mx5000.zip
-arcade/myangel.zip
-arcade/myangel2.zip
-arcade/myhero.zip
-arcade/myqbert.zip
-arcade/mysticri.zip
-arcade/mystston.zip
-arcade/mystwarr.zip
-arcade/nam1975.zip
-arcade/naname.zip
-arcade/narc.zip
-arcade/nastar.zip
-arcade/nastarw.zip
-arcade/natodef.zip
-arcade/naughtyb.zip
-arcade/navarone.zip
-arcade/nbahangt.zip
-arcade/nbajam.zip
-arcade/nbajamte.zip
-arcade/nbbatman.zip
-arcade/ncombat.zip
-arcade/ncommand.zip
-arcade/nebulbee.zip
-arcade/nebulray.zip
-arcade/nemesis.zip
-arcade/nemo.zip
-arcade/nemoj.zip
-arcade/neobattl.zip
-arcade/neobombe.zip
-arcade/neocup98.zip
-arcade/neodrift.zip
-arcade/neogeo.zip
-arcade/neomrdo.zip
-arcade/netwars.zip
-arcade/newfant.zip
-arcade/newpuc2.zip
-arcade/newpuc2b.zip
-arcade/newpuckx.zip
-arcade/news.zip
-arcade/newsin7.zip
-arcade/nibbler.zip
-arcade/nightstr.zip
-arcade/ninjak.zip
-arcade/ninjakd2.zip
-arcade/ninjakj.zip
-arcade/ninjakun.zip
-arcade/ninjamas.zip
-arcade/ninjaw.zip
-arcade/ninjemak.zip
-arcade/nitd.zip
-arcade/nitedrvr.zip
-arcade/nitrobal.zip
-arcade/nmaster.zip
-arcade/nmg5.zip
-arcade/nmouse.zip
-arcade/nmouseb.zip
-arcade/nob.zip
-arcade/nost.zip
-arcade/nostj.zip
-arcade/nouryoku.zip
-arcade/nova2001.zip
-arcade/nprinces.zip
-arcade/nrallyx.zip
-arcade/nslasher.zip
-arcade/nslasherj.zip
-arcade/nslashers.zip
-arcade/nspirit.zip
-arcade/nspiritj.zip
-arcade/numanath.zip
-arcade/nunchaku.zip
-arcade/nwarr.zip
-arcade/nyanpani.zip
-arcade/offtwall.zip
-arcade/ohmygod.zip
-arcade/oisipuzl.zip
-arcade/olds.zip
-arcade/oldsplus.zip
-arcade/olibochu.zip
-arcade/omega.zip
-arcade/omegaf.zip
-arcade/omegafs.zip
-arcade/omegrace.zip
-arcade/oneshot.zip
-arcade/onna34ro.zip
-arcade/opaopa.zip
-arcade/openice.zip
-arcade/opwolf.zip
-arcade/opwolf3.zip
-arcade/opwolfb.zip
-arcade/orbitron.zip
-arcade/orbs.zip
-arcade/ordyne.zip
-arcade/orlegend.zip
-arcade/orunners.zip
-arcade/oscar.zip
-arcade/oscarj1.zip
-arcade/osman.zip
-arcade/othunder.zip
-arcade/outfxies.zip
-arcade/outrun.zip
-arcade/outrunb.zip
-arcade/outzone.zip
-arcade/outzonea.zip
-arcade/overtop.zip
-arcade/ozmawars.zip
-arcade/ozon1.zip
-arcade/p47.zip
-arcade/p47aces.zip
-arcade/p47j.zip
-arcade/pacgal.zip
-arcade/packbang.zip
-arcade/pacland.zip
-arcade/pacman.zip
-arcade/pacmanf.zip
-arcade/pacmania.zip
-arcade/pacnchmp.zip
-arcade/pacnpal.zip
-arcade/pacnpal2.zip
-arcade/pacplus.zip
-arcade/paddle2.zip
-arcade/paddlema.zip
-arcade/paintrlr.zip
-arcade/pairs.zip
-arcade/palamed.zip
-arcade/pandoras.zip
-arcade/pang.zip
-arcade/pang3.zip
-arcade/pang3j.zip
-arcade/pangb.zip
-arcade/pangpang.zip
-arcade/pangpoms.zip
-arcade/panicbom.zip
-arcade/panicstr.zip
-arcade/parodius.zip
-arcade/pass.zip
-arcade/passsht.zip
-arcade/patapata.zip
-arcade/pbaction.zip
-arcade/pballoon.zip
-arcade/pbancho.zip
-arcade/pbillrd.zip
-arcade/pbobbl2n.zip
-arcade/pbobble.zip
-arcade/pbobble2.zip
-arcade/pbobble3.zip
-arcade/pbobble4.zip
-arcade/pbobblen.zip
-arcade/pdrift.zip
-arcade/peekaboo.zip
-arcade/penbros.zip
-arcade/pengadvb.zip
-arcade/pengo.zip
-arcade/pengo2.zip
-arcade/penta.zip
-arcade/percuss.zip
-arcade/perfrman.zip
-arcade/pestplce.zip
-arcade/pettanp.zip
-arcade/pfghtj.zip
-arcade/pgalvip.zip
-arcade/pgear.zip
-arcade/pgoal.zip
-arcade/phantasm.zip
-arcade/phelios.zip
-arcade/phoenix.zip
-arcade/photoy2k.zip
-arcade/phozon.zip
-arcade/pickin.zip
-arcade/pinbo.zip
-arcade/pingpong.zip
-arcade/pinkswts.zip
-arcade/pipedrm.zip
-arcade/pipedrmj.zip
-arcade/pipibibs.zip
-arcade/piranha.zip
-arcade/pirates.zip
-arcade/piratpet.zip
-arcade/pisces.zip
-arcade/piscesb.zip
-arcade/pistoldm.zip
-arcade/pitapat.zip
-arcade/pitfall2.zip
-arcade/pitfight.zip
-arcade/pitnrun.zip
-arcade/pkladies.zip
-arcade/pkscram.zip
-arcade/pktgaldx.zip
-arcade/pkunwar.zip
-arcade/pkunwarj.zip
-arcade/plegends.zip
-arcade/pleiadbl.zip
-arcade/pleiads.zip
-arcade/plgirls.zip
-arcade/plgirls2.zip
-arcade/plotting.zip
-arcade/plumppop.zip
-arcade/plusalph.zip
-arcade/pnickj.zip
-arcade/pnyaa.zip
-arcade/poitto.zip
-arcade/pokonyan.zip
-arcade/pollux.zip
-arcade/polluxa.zip
-arcade/pompingw.zip
-arcade/ponpoko.zip
-arcade/ponpokov.zip
-arcade/pootan.zip
-arcade/pooyan.zip
-arcade/pooyans.zip
-arcade/popbingo.zip
-arcade/popbounc.zip
-arcade/popeye.zip
-arcade/popeyebl.zip
-arcade/popflame.zip
-arcade/popnpop.zip
-arcade/popnpopj.zip
-arcade/popper.zip
-arcade/popspops.zip
-arcade/porky.zip
-arcade/poundfor.zip
-arcade/pow.zip
-arcade/powerdrv.zip
-arcade/powerins.zip
-arcade/powj.zip
-arcade/ppmast93.zip
-arcade/pprobe.zip
-arcade/prehisle.zip
-arcade/preisle2.zip
-arcade/primella.zip
-arcade/prmtmfgt.zip
-arcade/progear.zip
-arcade/progearj.zip
-arcade/progolf.zip
-arcade/progress.zip
-arcade/promutrv.zip
-arcade/psoldier.zip
-arcade/pspikes.zip
-arcade/pspikes2.zip
-arcade/pspikesk.zip
-arcade/psurge.zip
-arcade/psychic5.zip
-arcade/psychos.zip
-arcade/psychosj.zip
-arcade/ptblank.zip
-arcade/pturn.zip
-arcade/puchicar.zip
-arcade/puckman.zip
-arcade/pulirula.zip
-arcade/pulsar.zip
-arcade/pulstar.zip
-arcade/punchout.zip
-arcade/punisher.zip
-arcade/punkshot.zip
-arcade/punkshot2.zip
-arcade/pururun.zip
-arcade/pushman.zip
-arcade/puyo.zip
-arcade/puyopuy2.zip
-arcade/puzlclub.zip
-arcade/puzlstar.zip
-arcade/puzzldpr.zip
-arcade/puzzledp.zip
-arcade/puzzli.zip
-arcade/puzzli2.zip
-arcade/puzzloop.zip
-arcade/puzznic.zip
-arcade/pwheelsj.zip
-arcade/pwrgoal.zip
-arcade/pwrinst2.zip
-arcade/pyros.zip
-arcade/pzlbowl.zip
-arcade/pzlbreak.zip
-arcade/pzloop2.zip
-arcade/pzloop2j.zip
-arcade/qad.zip
-arcade/qbert.zip
-arcade/qbertqub.zip
-arcade/qcrayon.zip
-arcade/qcrayon2.zip
-arcade/qgakumon.zip
-arcade/qgh.zip
-arcade/qix.zip
-arcade/qix2.zip
-arcade/qixa.zip
-arcade/qjinsei.zip
-arcade/qndream.zip
-arcade/qrouka.zip
-arcade/qsangoku.zip
-arcade/qsww.zip
-arcade/qtheater.zip
-arcade/qtono1.zip
-arcade/qtorimon.zip
-arcade/quantum.zip
-arcade/quantum1.zip
-arcade/quartet.zip
-arcade/quartet2.zip
-arcade/quarth.zip
-arcade/quester.zip
-arcade/quiz18k.zip
-arcade/quizdai2.zip
-arcade/quizdais.zip
-arcade/quizf1.zip
-arcade/quizhq.zip
-arcade/quizhuhu.zip
-arcade/quizkof.zip
-arcade/quizmeku.zip
-arcade/quizmoon.zip
-arcade/quiztou.zip
-arcade/qzchikyu.zip
-arcade/qzkklgy2.zip
-arcade/qzkklogy.zip
-arcade/qzquest.zip
-arcade/qzshowby.zip
-arcade/rabbit.zip
-arcade/rabiolep.zip
-arcade/rachero.zip
-arcade/racingb.zip
-arcade/rackemup.zip
-arcade/racknrol.zip
-arcade/radarscp.zip
-arcade/radm.zip
-arcade/radr.zip
-arcade/radrad.zip
-arcade/raflesia.zip
-arcade/ragnagrd.zip
-arcade/ragtime.zip
-arcade/raiden.zip
-arcade/raiden2.zip
-arcade/raidena.zip
-arcade/raidendx.zip
-arcade/raiders5.zip
-arcade/raiga.zip
-arcade/raimais.zip
-arcade/rallybik.zip
-arcade/rallyx.zip
-arcade/rambo3.zip
-arcade/rampage.zip
-arcade/rampage2.zip
-arcade/rampart.zip
-arcade/rampart2p.zip
-arcade/raphero.zip
-arcade/rastan.zip
-arcade/rastsag2.zip
-arcade/rastsaga.zip
-arcade/rayforce.zip
-arcade/razmataz.zip
-arcade/rbff1.zip
-arcade/rbff2.zip
-arcade/rbffspec.zip
-arcade/rbisland.zip
-arcade/rbislande.zip
-arcade/rbtapper.zip
-arcade/rchase.zip
-arcade/rdaction.zip
-arcade/reactor.zip
-arcade/reaktor.zip
-arcade/recalh.zip
-arcade/recordbr.zip
-arcade/redbaron.zip
-arcade/redearth.zip
-arcade/redhawk.zip
-arcade/redrobin.zip
-arcade/redufo.zip
-arcade/regulus.zip
-arcade/reguluso.zip
-arcade/relief.zip
-arcade/relief2.zip
-arcade/renegade.zip
-arcade/repulse.zip
-arcade/rescue.zip
-arcade/retofinv.zip
-arcade/revngr84.zip
-arcade/revx.zip
-arcade/rezon.zip
-arcade/rf2.zip
-arcade/ridhero.zip
-arcade/ridingf.zip
-arcade/ridleofp.zip
-arcade/ringdest.zip
-arcade/ringfgt.zip
-arcade/ringking.zip
-arcade/ringohja.zip
-arcade/ringrage.zip
-arcade/riot.zip
-arcade/riotcity.zip
-arcade/riskchal.zip
-arcade/rjammer.zip
-arcade/rmpgwt.zip
-arcade/rmpgwt11.zip
-arcade/roadf.zip
-arcade/roadf2.zip
-arcade/roboarmy.zip
-arcade/robocop.zip
-arcade/robocop2.zip
-arcade/robocopb.zip
-arcade/robokid.zip
-arcade/robokidj.zip
-arcade/robotron.zip
-arcade/robowres.zip
-arcade/rockclim.zip
-arcade/rockduck.zip
-arcade/rockn.zip
-arcade/rockn2.zip
-arcade/rockn3.zip
-arcade/rockn4.zip
-arcade/rockrage.zip
-arcade/rocktris.zip
-arcade/rocktrv2.zip
-arcade/rocnrope.zip
-arcade/rodland.zip
-arcade/rohga.zip
-arcade/roishtar.zip
-arcade/rolcrush.zip
-arcade/rollace.zip
-arcade/rollerg.zip
-arcade/rollergj.zip
-arcade/rompers.zip
-arcade/romperso.zip
-arcade/rotd.zip
-arcade/roundup.zip
-arcade/route16.zip
-arcade/route16a.zip
-arcade/routex.zip
-arcade/rpatrol.zip
-arcade/rpatrolb.zip
-arcade/rpunch.zip
-arcade/rshark.zip
-arcade/rthun2.zip
-arcade/rthun2j.zip
-arcade/rthunder.zip
-arcade/rtype.zip
-arcade/rtype2.zip
-arcade/rtype2j.zip
-arcade/rtypeleo.zip
-arcade/rugrats.zip
-arcade/rumba.zip
-arcade/runark.zip
-arcade/rundeep.zip
-arcade/rushatck.zip
-arcade/rushcrsh.zip
-arcade/rygar.zip
-arcade/rygar2.zip
-arcade/rygarj.zip
-arcade/ryorioh.zip
-arcade/ryouran.zip
-arcade/ryujin.zip
-arcade/ryukendn.zip
-arcade/ryukyu.zip
-arcade/s1945.zip
-arcade/s1945ii.zip
-arcade/s1945iii.zip
-arcade/s1945p.zip
-arcade/sabotenb.zip
-arcade/sadari.zip
-arcade/safari.zip
-arcade/safarir.zip
-arcade/sailormn.zip
-arcade/saiyugou.zip
-arcade/salamand.zip
-arcade/samesame.zip
-arcade/samsh5fe.zip
-arcade/samsh5sp.zip
-arcade/samsho.zip
-arcade/samsho2.zip
-arcade/samsho3.zip
-arcade/samsho4.zip
-arcade/samsho5.zip
-arcade/samurai.zip
-arcade/samuraia.zip
-arcade/sandscrp.zip
-arcade/sarge.zip
-arcade/sarukani.zip
-arcade/sasuke.zip
-arcade/satansat.zip
-arcade/saturnzi.zip
-arcade/sauro.zip
-arcade/savagere.zip
-arcade/savgbees.zip
-arcade/sbagman.zip
-arcade/sbasebal.zip
-arcade/sbasketb.zip
-arcade/sbbros.zip
-arcade/sbishi.zip
-arcade/sbishik.zip
-arcade/sbm.zip
-arcade/sbomber.zip
-arcade/scessjoe.zip
-arcade/scfinals.zip
-arcade/schmeisr.zip
-arcade/sci.zip
-arcade/scia.zip
-arcade/scion.zip
-arcade/scionc.zip
-arcade/scobra.zip
-arcade/scobrab.zip
-arcade/scontra.zip
-arcade/scontraj.zip
-arcade/scorpion.zip
-arcade/scotrsht.zip
-arcade/scramble.zip
-arcade/scregg.zip
-arcade/screwloo.zip
-arcade/scross.zip
-arcade/scudhamm.zip
-arcade/sdfight.zip
-arcade/sdgndmps.zip
-arcade/sdi.zip
-arcade/sdodgeb.zip
-arcade/sdungeon.zip
-arcade/searchar.zip
-arcade/seawolft.zip
-arcade/secretag.zip
-arcade/sectionz.zip
-arcade/sectrzon.zip
-arcade/seganinj.zip
-arcade/seicross.zip
-arcade/selfeena.zip
-arcade/semibase.zip
-arcade/sengekis.zip
-arcade/sengoku.zip
-arcade/sengoku2.zip
-arcade/sengoku3.zip
-arcade/senjyo.zip
-arcade/senknow.zip
-arcade/sf.zip
-arcade/sf2.zip
-arcade/sf2ce.zip
-arcade/sf2hf.zip
-arcade/sf2koryu.zip
-arcade/sfa.zip
-arcade/sfa2.zip
-arcade/sfa3.zip
-arcade/sfiii.zip
-arcade/sfiii2.zip
-arcade/sfiii2n.zip
-arcade/sfiii3.zip
-arcade/sfiiin.zip
-arcade/sformula.zip
-arcade/sfposeid.zip
-arcade/sftm.zip
-arcade/sftm110.zip
-arcade/sfx.zip
-arcade/sfz2a.zip
-arcade/sfz2al.zip
-arcade/sfz3a.zip
-arcade/sfza.zip
-arcade/sfzch.zip
-arcade/sgemf.zip
-arcade/sgemfa.zip
-arcade/sgladiat.zip
-arcade/sgmast.zip
-arcade/sgunner.zip
-arcade/sgunner2.zip
-arcade/shackled.zip
-arcade/shadfrce.zip
-arcade/shadowld.zip
-arcade/shadoww.zip
-arcade/shadowwa.zip
-arcade/shangha3.zip
-arcade/shangon.zip
-arcade/sharkatt.zip
-arcade/sharrier.zip
-arcade/shdancbl.zip
-arcade/shdancer.zip
-arcade/shimpact.zip
-arcade/shinobi.zip
-arcade/shippumd.zip
-arcade/shisen.zip
-arcade/shisen2.zip
-arcade/shocking.zip
-arcade/shocktr2.zip
-arcade/shocktro.zip
-arcade/shogwarr.zip
-arcade/shollow.zip
-arcade/shollow2.zip
-arcade/shootbul.zip
-arcade/shootout.zip
-arcade/shtrider.zip
-arcade/shufshot.zip
-arcade/shuuz.zip
-arcade/shuuz2.zip
-arcade/sichuan2.zip
-arcade/sidearms.zip
-arcade/sidepckt.zip
-arcade/silentd.zip
-arcade/silentdj.zip
-arcade/silkroad.zip
-arcade/silkworm.zip
-arcade/silvland.zip
-arcade/silvmil.zip
-arcade/simpsons.zip
-arcade/simpsons2p.zip
-arcade/sinistar.zip
-arcade/sinvasn.zip
-arcade/sisv.zip
-arcade/skingame.zip
-arcade/skullfng.zip
-arcade/skullxbo.zip
-arcade/skyadvnt.zip
-arcade/skyalert.zip
-arcade/skyarmy.zip
-arcade/skybase.zip
-arcade/skyfox.zip
-arcade/skykid.zip
-arcade/skykidd.zip
-arcade/skykiddx.zip
-arcade/skylancr.zip
-arcade/skyraidr.zip
-arcade/skyrobo.zip
-arcade/skyshark.zip
-arcade/skyskipr.zip
-arcade/skysmash.zip
-arcade/skysoldr.zip
-arcade/skywolf.zip
-arcade/slammast.zip
-arcade/slapfigh.zip
-arcade/slapshot.zip
-arcade/slapshtr.zip
-arcade/slipstrm.zip
-arcade/slither.zip
-arcade/slyspy.zip
-arcade/slyspy2.zip
-arcade/smashtv.zip
-arcade/smbomb.zip
-arcade/smgp.zip
-arcade/smooncrs.zip
-arcade/snapjack.zip
-arcade/snapper.zip
-arcade/sngkace.zip
-arcade/snowboar.zip
-arcade/snowbro2.zip
-arcade/snowbro3.zip
-arcade/snowbros.zip
-arcade/socbrawl.zip
-arcade/sokonuke.zip
-arcade/solarfox.zip
-arcade/soldam.zip
-arcade/soldamj.zip
-arcade/soldivid.zip
-arcade/solfigtr.zip
-arcade/solomon.zip
-arcade/solrwarr.zip
-arcade/sonic.zip
-arcade/sonicbom.zip
-arcade/sonicfgt.zip
-arcade/sonicp.zip
-arcade/sonicwi.zip
-arcade/sonicwi2.zip
-arcade/sonicwi3.zip
-arcade/sonofphx.zip
-arcade/sonson.zip
-arcade/sonsonj.zip
-arcade/sos.zip
-arcade/sotsugyo.zip
-arcade/soukobdx.zip
-arcade/spacduel.zip
-arcade/spacebrd.zip
-arcade/spacecho.zip
-arcade/spacecr.zip
-arcade/spacedem.zip
-arcade/spacedx.zip
-arcade/spacedxj.zip
-arcade/spacefb.zip
-arcade/spacegun.zip
-arcade/spaceplt.zip
-arcade/spaceskr.zip
-arcade/spacetrk.zip
-arcade/spacfury.zip
-arcade/spang.zip
-arcade/sparkman.zip
-arcade/sparkz.zip
-arcade/spartanx.zip
-arcade/spatter.zip
-arcade/spcinv95.zip
-arcade/spcpostn.zip
-arcade/spdball.zip
-arcade/spdcoin.zip
-arcade/spdodgeb.zip
-arcade/speakres.zip
-arcade/spec2k.zip
-arcade/speedbal.zip
-arcade/speedspn.zip
-arcade/spelunk2.zip
-arcade/spelunkr.zip
-arcade/spf2t.zip
-arcade/spf2xj.zip
-arcade/spidman.zip
-arcade/spinlbrk.zip
-arcade/spinmast.zip
-arcade/splat.zip
-arcade/splatter.zip
-arcade/spnchout.zip
-arcade/sprcros2.zip
-arcade/springer.zip
-arcade/spy.zip
-arcade/spyhunt.zip
-arcade/spyhunt2.zip
-arcade/spyu.zip
-arcade/sqbert.zip
-arcade/squaitsa.zip
-arcade/squash.zip
-arcade/sraider.zip
-arcade/sranger.zip
-arcade/srdarwin.zip
-arcade/srdmissn.zip
-arcade/srmp4.zip
-arcade/srmp7.zip
-arcade/srumbler.zip
-arcade/ssanchan.zip
-arcade/sscandal.zip
-arcade/ssf2.zip
-arcade/ssf2a.zip
-arcade/ssf2t.zip
-arcade/ssf2ta.zip
-arcade/ssf2tb.zip
-arcade/ssf2xj.zip
-arcade/sshangha.zip
-arcade/ssi.zip
-arcade/ssideki.zip
-arcade/ssideki2.zip
-arcade/ssideki3.zip
-arcade/ssideki4.zip
-arcade/ssmissin.zip
-arcade/ssoldier.zip
-arcade/ssozumo.zip
-arcade/sspacaho.zip
-arcade/sspaceat.zip
-arcade/ssriders.zip
-arcade/ssridersabd.zip
-arcade/ssridersubc.zip
-arcade/ssrj.zip
-arcade/sstingry.zip
-arcade/sstrangr.zip
-arcade/sstriker.zip
-arcade/stadhero.zip
-arcade/stadhr96.zip
-arcade/stagger1.zip
-arcade/stakwin.zip
-arcade/stakwin2.zip
-arcade/starfigh.zip
-arcade/starforc.zip
-arcade/stargate.zip
-arcade/stargrds.zip
-arcade/starjack.zip
-arcade/startrek.zip
-arcade/startrks.zip
-arcade/starwars.zip
-arcade/stdragon.zip
-arcade/stfight.zip
-arcade/stg.zip
-arcade/stinger.zip
-arcade/stinger2.zip
-arcade/stlforce.zip
-arcade/stmblade.zip
-arcade/stoneage.zip
-arcade/stonebal.zip
-arcade/storming.zip
-arcade/strahl.zip
-arcade/stratgys.zip
-arcade/stratgyx.zip
-arcade/stratof.zip
-arcade/stratvox.zip
-arcade/streakng.zip
-arcade/streetsm.zip
-arcade/strhoop.zip
-arcade/strider.zip
-arcade/striderj.zip
-arcade/strkfgtr.zip
-arcade/strkforc.zip
-arcade/strnskil.zip
-arcade/strvmstr.zip
-arcade/sub.zip
-arcade/subhunt.zip
-arcade/subroc3d.zip
-arcade/sucasino.zip
-arcade/supbtime.zip
-arcade/supduck.zip
-arcade/superbon.zip
-arcade/superchs.zip
-arcade/superg.zip
-arcade/superman.zip
-arcade/superpac.zip
-arcade/superspy.zip
-arcade/superten.zip
-arcade/superx.zip
-arcade/superxm.zip
-arcade/suprglob.zip
-arcade/suprleag.zip
-arcade/suprloco.zip
-arcade/suprmous.zip
-arcade/suprridr.zip
-arcade/suprtrio.zip
-arcade/suratk.zip
-arcade/survarts.zip
-arcade/suzuk8h2.zip
-arcade/suzuka8h.zip
-arcade/svc.zip
-arcade/svcboot.zip
-arcade/svf.zip
-arcade/svg.zip
-arcade/svolley.zip
-arcade/svolleyk.zip
-arcade/svolly91.zip
-arcade/svs.zip
-arcade/swarm.zip
-arcade/swat.zip
-arcade/swatpolc.zip
-arcade/swcourt.zip
-arcade/swimmer.zip
-arcade/sws.zip
-arcade/sws92.zip
-arcade/sws92g.zip
-arcade/sws93.zip
-arcade/sws95.zip
-arcade/sws96.zip
-arcade/sws97.zip
-arcade/sxevious.zip
-arcade/sxyreact.zip
-arcade/syvalion.zip
-arcade/szaxxon.zip
-arcade/tacscan.zip
-arcade/tactcian.zip
-arcade/tagteam.zip
-arcade/tail2nos.zip
-arcade/tangtang.zip
-arcade/tankbust.zip
-arcade/tankfrce.zip
-arcade/taotaido.zip
-arcade/tapper.zip
-arcade/targeth.zip
-arcade/tattass.zip
-arcade/tattassa.zip
-arcade/tazmani2.zip
-arcade/tazmania.zip
-arcade/tbowl.zip
-arcade/tceptor.zip
-arcade/tceptor2.zip
-arcade/tcobra2.zip
-arcade/tdfever.zip
-arcade/tdfever2.zip
-arcade/tdragon.zip
-arcade/tdragon2.zip
-arcade/teddybb.zip
-arcade/teddybbo.zip
-arcade/tekipaki.zip
-arcade/teljan.zip
-arcade/tempest.zip
-arcade/tempest1.zip
-arcade/temptube.zip
-arcade/tengai.zip
-arcade/term2.zip
-arcade/term2la1.zip
-arcade/terracre.zip
-arcade/terraf.zip
-arcade/tetrbx.zip
-arcade/tetris.zip
-arcade/tetrisp.zip
-arcade/tetrisp2.zip
-arcade/tetrisse.zip
-arcade/tetrsark.zip
-arcade/tgm2.zip
-arcade/tgm2p.zip
-arcade/tharrier.zip
-arcade/thedeep.zip
-arcade/theend.zip
-arcade/theends.zip
-arcade/theglad.zip
-arcade/theglob.zip
-arcade/thehustl.zip
-arcade/thepit.zip
-arcade/theroes.zip
-arcade/thetogyu.zip
-arcade/thief.zip
-arcade/thndblst.zip
-arcade/thndrbld.zip
-arcade/thndrx2.zip
-arcade/thndrx2a.zip
-arcade/thndzone.zip
-arcade/thoop.zip
-arcade/thoop2.zip
-arcade/thunderj.zip
-arcade/thunderl.zip
-arcade/thunderx.zip
-arcade/thundfox.zip
-arcade/tigerh.zip
-arcade/tigerhb1.zip
-arcade/tigeroad.zip
-arcade/timber.zip
-arcade/timefgtr.zip
-arcade/timekill.zip
-arcade/timelimt.zip
-arcade/timeplt.zip
-arcade/timescan.zip
-arcade/timesold.zip
-arcade/timetunl.zip
-arcade/tinklpit.zip
-arcade/tinstar.zip
-arcade/tiptop.zip
-arcade/titlef.zip
-arcade/tkdensho.zip
-arcade/tknight.zip
-arcade/tmht.zip
-arcade/tmnt.zip
-arcade/tmnt2.zip
-arcade/tmnt22pu.zip
-arcade/tmnt2pj.zip
-arcade/tmnt2po.zip
-arcade/tndrcade.zip
-arcade/tnextspc.zip
-arcade/tnk3.zip
-arcade/tnzs.zip
-arcade/todruaga.zip
-arcade/toki.zip
-arcade/tokia.zip
-arcade/tokio.zip
-arcade/tokiob.zip
-arcade/tokisens.zip
-arcade/toobin.zip
-arcade/toobin1.zip
-arcade/topgunbl.zip
-arcade/tophuntr.zip
-arcade/toppyrap.zip
-arcade/topsecrt.zip
-arcade/topspeed.zip
-arcade/toramich.zip
-arcade/toride2g.zip
-arcade/toryumon.zip
-arcade/totc.zip
-arcade/totcarn.zip
-arcade/totcarnp.zip
-arcade/toto.zip
-arcade/touchgo.zip
-arcade/toutrun.zip
-arcade/toypop.zip
-arcade/tp84.zip
-arcade/tp84a.zip
-arcade/tpgolf.zip
-arcade/trackfld.zip
-arcade/trally.zip
-arcade/tranqgun.zip
-arcade/transfrm.zip
-arcade/travrusa.zip
-arcade/trckydoc.zip
-arcade/treahunt.zip
-arcade/tricktrp.zip
-arcade/trigon.zip
-arcade/triothep.zip
-arcade/triplep.zip
-arcade/triplfun.zip
-arcade/tripool.zip
-arcade/tripoola.zip
-arcade/troangel.zip
-arcade/trog.zip
-arcade/trojan.zip
-arcade/trojanj.zip
-arcade/tron.zip
-arcade/tron2.zip
-arcade/trophyh.zip
-arcade/trstar.zip
-arcade/trstarj.zip
-arcade/truxton.zip
-arcade/truxton2.zip
-arcade/trvmstr.zip
-arcade/tsamurai.zip
-arcade/tshingen.zip
-arcade/tshingena.zip
-arcade/tst_galx.zip
-arcade/ttmahjng.zip
-arcade/tturf.zip
-arcade/tturfu.zip
-arcade/tubeit.zip
-arcade/tubep.zip
-arcade/tumblep.zip
-arcade/turbo.zip
-arcade/turboa.zip
-arcade/turbofrc.zip
-arcade/turfmast.zip
-arcade/turkhunt.zip
-arcade/turpin.zip
-arcade/turtles.zip
-arcade/turtship.zip
-arcade/tutankhm.zip
-arcade/twcup90.zip
-arcade/twinactn.zip
-arcade/twinadv.zip
-arcade/twinbee.zip
-arcade/twinbrat.zip
-arcade/twincobr.zip
-arcade/twineag2.zip
-arcade/twineagl.zip
-arcade/twinfalc.zip
-arcade/twinhawk.zip
-arcade/twinkle.zip
-arcade/twinqix.zip
-arcade/twinspri.zip
-arcade/twocrude.zip
-arcade/twotiger.zip
-arcade/typhoon.zip
-arcade/uballoon.zip
-arcade/uccops.zip
-arcade/uccopsar.zip
-arcade/uccopsj.zip
-arcade/uecology.zip
-arcade/ufosensi.zip
-arcade/ultennis.zip
-arcade/ultracin.zip
-arcade/ultraman.zip
-arcade/ultrax.zip
-arcade/umanclub.zip
-arcade/umk3.zip
-arcade/unclepoo.zip
-arcade/undrfire.zip
-arcade/uniwars.zip
-arcade/unsquad.zip
-arcade/uopoko.zip
-arcade/upndown.zip
-arcade/upndownu.zip
-arcade/usclssic.zip
-arcade/usg185.zip
-arcade/usg32.zip
-arcade/usg82.zip
-arcade/usg83x.zip
-arcade/utoukond.zip
-arcade/valkyrie.zip
-arcade/valtric.zip
-arcade/vamphalf.zip
-arcade/vampj.zip
-arcade/vandyke.zip
-arcade/vangrd2.zip
-arcade/vanguard.zip
-arcade/vanvan.zip
-arcade/vaportra.zip
-arcade/varth.zip
-arcade/vasara.zip
-arcade/vasara2.zip
-arcade/vasara2a.zip
-arcade/vastar.zip
-arcade/vastar2.zip
-arcade/vautour.zip
-arcade/vball.zip
-arcade/vball2pj.zip
-arcade/vblokbrk.zip
-arcade/vendetta.zip
-arcade/vendetta2pu.zip
-arcade/vendetta2pw.zip
-arcade/venus.zip
-arcade/vfive.zip
-arcade/vhunt2.zip
-arcade/vhuntj.zip
-arcade/victroad.zip
-arcade/viewpoin.zip
-arcade/vigilant.zip
-arcade/vimana.zip
-arcade/vindctr2.zip
-arcade/vindictr.zip
-arcade/viofight.zip
-arcade/viostorm.zip
-arcade/vmetal.zip
-arcade/volfied.zip
-arcade/volfiedj.zip
-arcade/vpool.zip
-arcade/vsav.zip
-arcade/vsav2.zip
-arcade/vsava.zip
-arcade/vsgongf.zip
-arcade/vshoot.zip
-arcade/vulcan.zip
-arcade/vulgus.zip
-arcade/wacko.zip
-arcade/wakuwak7.zip
-arcade/wallc.zip
-arcade/wanted.zip
-arcade/wardner.zip
-arcade/wardnerj.zip
-arcade/warofbug.zip
-arcade/warpwarp.zip
-arcade/warriorb.zip
-arcade/waterski.zip
-arcade/watrball.zip
-arcade/wb3.zip
-arcade/wbdeluxe.zip
-arcade/wbml.zip
-arcade/wbmlb.zip
-arcade/wboy.zip
-arcade/wboy2.zip
-arcade/wcbowl.zip
-arcade/wcbowldx.zip
-arcade/wcvol95.zip
-arcade/wcvol95x.zip
-arcade/wecleman.zip
-arcade/welltris.zip
-arcade/weststry.zip
-arcade/wexpress.zip
-arcade/wh1.zip
-arcade/wh2.zip
-arcade/wh2j.zip
-arcade/wheelrun.zip
-arcade/whizz.zip
-arcade/whp.zip
-arcade/wildfang.zip
-arcade/willow.zip
-arcade/willowj.zip
-arcade/wilytowr.zip
-arcade/wingforc.zip
-arcade/wintbob.zip
-arcade/wiping.zip
-arcade/wits.zip
-arcade/wiz.zip
-arcade/wizdfire.zip
-arcade/wizt.zip
-arcade/wjammers.zip
-arcade/wldcourt.zip
-arcade/wlstar.zip
-arcade/wmatch.zip
-arcade/wndrmomo.zip
-arcade/wndrplnt.zip
-arcade/wof.zip
-arcade/wofa.zip
-arcade/wofch.zip
-arcade/wonder3.zip
-arcade/wondl96.zip
-arcade/woodpeck.zip
-arcade/worldwar.zip
-arcade/wownfant.zip
-arcade/wpksoc.zip
-arcade/wrally.zip
-arcade/wrally2.zip
-arcade/wrallya.zip
-arcade/wrestwar.zip
-arcade/wrofaero.zip
-arcade/ws.zip
-arcade/ws89.zip
-arcade/ws90.zip
-arcade/wschamp.zip
-arcade/wwallyj.zip
-arcade/wwestern.zip
-arcade/wwfmania.zip
-arcade/wwfsstar.zip
-arcade/wwfwfest.zip
-arcade/wwjgtin.zip
-arcade/wyvernf0.zip
-arcade/xday2.zip
-arcade/xevious.zip
-arcade/xexex.zip
-arcade/xmcota.zip
-arcade/xmcotaa.zip
-arcade/xmen.zip
-arcade/xmen2pa.zip
-arcade/xmen2pu.zip
-arcade/xmultipl.zip
-arcade/xmvsf.zip
-arcade/xmvsfa.zip
-arcade/xorworld.zip
-arcade/xsleena.zip
-arcade/xsleenab.zip
-arcade/xxmissio.zip
-arcade/xybots.zip
-arcade/xybots0.zip
-arcade/xyonix.zip
-arcade/yamagchi.zip
-arcade/yamato.zip
-arcade/yamato2.zip
-arcade/yanchamr.zip
-arcade/yankeedo.zip
-arcade/yesnoj.zip
-arcade/yiear.zip
-arcade/yiear2.zip
-arcade/youjyudn.zip
-arcade/youma.zip
-arcade/yuyugogo.zip
-arcade/zaryavos.zip
-arcade/zarzon.zip
-arcade/zaviga.zip
-arcade/zavigaj.zip
-arcade/zaxxon.zip
-arcade/zaxxon2.zip
-arcade/zaxxonb.zip
-arcade/zedblade.zip
-arcade/zektor.zip
-arcade/zeropnt.zip
-arcade/zeropnt2.zip
-arcade/zeropnta.zip
-arcade/zeroteam.zip
-arcade/zerotime.zip
-arcade/zerowing.zip
-arcade/zerozone.zip
-arcade/zigzagb.zip
-arcade/zingzip.zip
-arcade/zintrckb.zip
-arcade/zoar.zip
-arcade/zodiack.zip
-arcade/zombraid.zip
-arcade/zookeep.zip
-arcade/zookeep2.zip
-arcade/zupapa.zip
-arcade/zzyzzyxx.zip
 fbneo/10yard.zip
 fbneo/1941.zip
 fbneo/1942.zip
@@ -12833,7 +10073,6 @@ megadrive/Flink (E).md
 megadrive/Foreman for Real (W).md
 megadrive/Forgotten Worlds (W).md
 megadrive/Formula One (U).md
-megadrive/Força Alienigena (BR).md
 megadrive/Frank Thomas Big Hurt Baseball (UE).md
 megadrive/Frogger (U).md
 megadrive/From TV Animation Slam Dunk Kyougou Makkou Taiketsu! (J).md
@@ -18797,7 +16036,6 @@ pce/Yo, Bro (USA).pce
 pce/Zero 4 Champ (Japan).pce
 psp/2010 FIFA World Cup South Africa (USA) (En,Es).iso
 psp/24-ji no Kane to Cinderella - Halloween Wedding (Japan).iso
-psp/ACE COMBAT JOINT ASSAULT [ULUS10511].7z
 psp/Akatsuki no Goei Trinity (Japan) (Disc 1).iso
 psp/Arcana Famiglia - La Storia della Arcana Famiglia (Japan).iso
 psp/Arcana Famiglia - Vascello Phantasma no Majutsushi (Japan).iso
@@ -18807,28 +16045,13 @@ psp/Armored Core - Formula Front International (Japan) (En,Ja).iso
 psp/Army of Two - The 40th Day (Europe) (En,Fr,De,Es,It).iso
 psp/Asaki, Yumemishi (Japan).iso
 psp/Asphalt - Urban GT 2 (Europe) (En,Fr,De,Es,It).iso
-psp/Assassin's Creed - Bloodlines™ [NPUH10032].7z
-psp/BLACK★ROCK SHOOTER THE GAME [NPUH10126].7z
-psp/BRAVE STORY - NEW TRAVELER [ULUS10279].7z
-psp/BURNOUT DOMINATOR [ULES00703].7z
 psp/Ben 10 - Protector of Earth (Europe) (En,Fr,De,Es,It).iso
 psp/Black Rock Shooter - The Game (Japan).iso
 psp/Black Wolves Saga - Last Hope (Japan).iso
-psp/BladeDancer [ULUS10124].7z
 psp/BlazBlue - Calamity Trigger (USA) (En,Ja,Zh,Ko).iso
 psp/BlazBlue - Calamity Trigger Portable (Japan).iso
-psp/Bleach - Heat the Soul (Japan).zip
-psp/Bleach - Heat the Soul 2 (Japan).zip
-psp/Bleach - Heat the Soul 3 (Japan).zip
-psp/Bleach - Heat the Soul 4 (Japan).zip
-psp/Bleach - Heat the Soul 5 (Japan).zip
-psp/Bleach - Heat the Soul 6 (Asia).zip
-psp/Bleach - Heat the Soul 7 (Japan).zip
-psp/Bleach - Soul Carnival (Japan).zip
-psp/Bleach - Soul Carnival 2 (Japan).zip
 psp/Bliss Island (Europe) (En,Fr,De,Es,It).iso
 psp/Brandish - The Dark Revenant (Japan).iso
-psp/Burnout Legends [ULUS10025].7z
 psp/Buzz! Master Quiz (Europe) (En,Pl).iso
 psp/Buzz! Quem e o Genio Portugues (Europe) (Pt,Ru).iso
 psp/Buzz! Quiz World (Europe) (En,Pl).iso
@@ -18838,27 +16061,18 @@ psp/Cabela's North American Adventures (USA).iso
 psp/Cake Mania - Baker's Challenge (USA).iso
 psp/Cardinal Arc - Konton no Fuusatsu (Japan).iso
 psp/Carnage Heart EXA (Japan).iso
-psp/Cars - Race-O-Rama [ULES01333].7z
 psp/Cloudy with a Chance of Meatballs (USA) (En,Fr,De,Es,It).iso
 psp/Coded Arms (USA).iso
 psp/Coded Arms - Contagion (USA).iso
-psp/Crash™ Tag Team Racing [ULUS10044].7z
 psp/Crazy Taxi - Fare Wars (USA) (v1.01).iso
 psp/Crimson Empire - Circumstances to Serve a Noble (Japan).iso
-psp/Crimson Gem Saga™ [ULUS10400].7z
-psp/Crisis Core Final Fantasy VII.7z
 psp/Crush (USA) (En,Fr,Es).iso
-psp/DISSIDIA FINAL FANTASY [ULUS10437].7z
-psp/DISSIDIA duodecim FINAL FANTASY [ULUS10566].7z
-psp/DISSIDIA duodecim prologus FINAL FANTASY [NPUH10110].7z
 psp/Dai-2-ji Super Robot Taisen Z Saisei-hen (Japan).iso
 psp/Dante's Inferno (Italy).iso
 psp/Disney Pirates of the Caribbean - At World's End (USA).iso
 psp/Disney-Pixar Ratatouille (Europe).iso
 psp/Disney-Pixar Up (Europe) (Fr,Nl).iso
-psp/Dot Hack Link (English patched v1.0.2).7z
 psp/Dragoneer's Aria (USA).iso
-psp/Driver 76 [ULUS10235].7z
 psp/Eiyuu Densetsu - Zero no Kiseki (Japan).iso
 psp/Eiyuu Densetsu Gagharv Trilogy - Akai Shizuku (Japan).iso
 psp/Eiyuu Densetsu Gagharv Trilogy - Umi no Oriuta (Japan).iso
@@ -18908,7 +16122,6 @@ psp/FIFA Soccer 10 (USA) (En,Es).iso
 psp/FIFA Soccer 11 (USA) (En,Es) (v1.00).iso
 psp/FIFA Soccer 12 (USA) (En,Es).iso
 psp/FIFA Soccer 13 (USA) (En,Es).iso
-psp/FIFA Street 2 (USA).7z
 psp/FIFA World Cup Deutsch Taikai 2006 (Japan).iso
 psp/FIFA World Cup Germany 2006 (USA).iso
 psp/Fading Shadows (USA) (En,Fr,De,Es,It,Nl,Ru).iso
@@ -18920,12 +16133,9 @@ psp/Family Guy - Video Game! (USA).iso
 psp/Fantasy Golf Pangya Portable (Japan).iso
 psp/Fast and the Furious, The (USA).iso
 psp/Fat Princess - Fistful of Cake (USA).iso
-psp/Fate Extra CCC (English v1.0).7z
-psp/Fate Extra Perfect Patch+.7z
 psp/Fate-Extra (USA).iso
 psp/Fate-Tiger Colosseum (Japan).iso
 psp/Fate-Tiger Colosseum Upper (Japan).iso
-psp/Fateunlimited codes [NPUH10009].7z
 psp/Fight Night Round 3 (USA).iso
 psp/Final Armada (Europe) (En,Fr,De,Es,It).iso
 psp/Final Fantasy (Japan, Asia) (En,Ja).iso
@@ -18963,10 +16173,8 @@ psp/Freak Out - Extreme Freeride (Europe) (En,Fr,De,Es,It).iso
 psp/Free Running (Europe) (En,Fr,De,Es,It).iso
 psp/Frogger - Helmet Chaos (USA).iso
 psp/Frontier Gate (Japan).iso
-psp/Frontier Gate Boost Plus.7z
 psp/Fukufuku no Shima (Japan).iso
 psp/Full Auto 2 - Battlelines (USA).iso
-psp/FullMetal Alchemist - Brotherhood (Europe).7z
 psp/Fushigi Yuugi - Genbu Kaiden Gaiden - Kagami no Miko (Japan).iso
 psp/Fushigi no Dungeon - Fuurai no Shiren 3 Portable (Japan).iso
 psp/Fushigi no Dungeon - Fuurai no Shiren 4 Plus - Kami no Hitomi to Akuma no Heso (Japan).iso
@@ -18991,7 +16199,6 @@ psp/Generation of Chaos (USA).iso
 psp/Generation of Chaos 6 (Japan).iso
 psp/Genroh (Japan).iso
 psp/Gensan (Europe) (En,Fr,De,Es,It).iso
-psp/Genso Suikoden Tsumugareshi Hyakunen no Toki (English v1.0.2).7z
 psp/Gensou Suikoden I & II (Japan) (v2.00).iso
 psp/Geronimo Stilton - Return to the Kingdom of Fantasy - The Videogame (Europe) (En,Fr,Es,It,Nl,Pt,El).iso
 psp/Geronimo Stilton in the Kingdom of Fantasy (Europe) (En,Fr,Es,It,Nl,Pt).iso
@@ -19031,7 +16238,6 @@ psp/Goldene Kompass, Der (Germany).iso
 psp/Gottlieb Pinball Classics (Europe) (En,Fr,De,Es,It).iso
 psp/Gradius Collection (USA).iso
 psp/Gradius Portable (Japan).iso
-psp/Gran Turismo® [UCUS98632].7z
 psp/Grand Knights History (Japan).iso
 psp/Grand Theft Auto - Chinatown Wars (USA).iso
 psp/Grand Theft Auto - Liberty City Stories (USA) (En,Fr,De,Es,It) (v1.05).iso
@@ -19045,7 +16251,6 @@ psp/GripShift (USA).iso
 psp/Grisaia no Kajitsu - Le Fruit de la Grisaia (Japan) (Disc 1).iso
 psp/Grisaia no Meikyuu - Le Labyrinthe de la Grisaia (Japan).iso
 psp/Grisaia no Rakuen - Le Eden de la Grisaia (Japan).iso
-psp/Growlanser - Wayfarer of Time [ULUS10593].7z
 psp/Growlanser IV - Over Reloaded (Japan).iso
 psp/Guilty Gear Judgment (USA).iso
 psp/Guilty Gear XX Accent Core Plus (USA).iso
@@ -19104,8 +16309,6 @@ psp/Harvest Moon - Boy & Girl (USA).iso
 psp/Harvest Moon - Hero of Leaf Valley (USA).iso
 psp/Harvey Birdman - Attorney at Law (USA).iso
 psp/Hatsukare Ren'ai Debut Sengen! (Japan).iso
-psp/Hatsune Miku Project Diva 2nd English Patched!!Hatsune Miku Project Diva Extend English Patched.7z
-psp/Hatsune Miku Project Diva English Patched.7z
 psp/Hayarigami 2 Portable - Keishichou Kaii Jiken File (Japan).iso
 psp/Hayarigami 3 - Keishichou Kaii Jiken File (Japan).iso
 psp/Hayarigami Portable - Keishichou Kaii Jiken File (Japan).iso
@@ -19121,7 +16324,6 @@ psp/Hentai Ouji to Warawanai Neko. (Japan).iso
 psp/Heroes Phantasia (Japan).iso
 psp/Heroes' VS (Japan).iso
 psp/Herr der Ringe, Der - Taktiken (Germany).iso
-psp/Hexyz Force [ULUS10506].7z
 psp/Hg Hydrium (Japan).iso
 psp/Higanjima (Japan).iso
 psp/Higurashi Daybreak Portable (Japan).iso
@@ -19146,9 +16348,6 @@ psp/Hoshiiro no Okurimono Portable (Japan).iso
 psp/Hoshizora Planet - One Small Step For... (Japan).iso
 psp/Hot Brain (USA) (En,Fr,De,Es,It).iso
 psp/Hot Pixel (USA).iso
-psp/Hot Shots Golf - Open Tee 2 [UCUS98693].7z
-psp/Hot Shots Golf - Open Tee™ [UCUS98614].7z
-psp/Hot Shots Tennis - Get a Grip™ [NPUG80302].7z
 psp/Hot Wheels - Ultimate Racing (USA).iso
 psp/Houkago Colorful-Step - Bunkabu! (Japan).iso
 psp/Houkago Colorful-Step - Undoubu! (Japan).iso
@@ -19239,7 +16438,6 @@ psp/Juujigen Rippoutai Sypher Portable (Japan).iso
 psp/Juusei to Diamond (Japan).iso
 psp/Juuza Engi - Engetsu Sangokuden (Japan).iso
 psp/Juuza Engi - Engetsu Sangokuden 2 (Japan).iso
-psp/K-On! Houkago Live!! HD Ver. (English 4-1-23).7z
 psp/Kaeru Batake de Tsukamaete Natsu - Chigira Sansen! Portable (Japan).iso
 psp/Kaeru Batake de Tsukamaete Portable (Japan).iso
 psp/Kaitou Apricot Portable (Japan).iso
@@ -19369,7 +16567,6 @@ psp/Little Aid Portable (Japan).iso
 psp/Little Britain - The Video Game (Europe).iso
 psp/Little Busters! Converted Edition (Japan) (Disc 1).iso
 psp/Little Witch Parfait - Kuro Neko Mahouten Monogatari (Japan).iso
-psp/LittleBigPlanet™ [UCUS98744].7z
 psp/LocoRoco 2 (USA) (En,Ja,Fr,De,Es,It,Nl,Pt,Sv,No,Da,Fi,Ko,Ru).iso
 psp/Lord of Apocalypse (Japan).iso
 psp/Lord of Arcana (USA).iso
@@ -19391,16 +16588,8 @@ psp/Luxury & Beauty - Lucian Bee's - Evil Violet (Japan).iso
 psp/Luxury & Beauty - Lucian Bee's - Justice Yellow (Japan).iso
 psp/Luxury & Beauty - Lucian Bee's - Resurrection Supernova (Japan).iso
 psp/M.A.C.H. - Modified Air Combat Heroes (USA).iso
-psp/METAL SLUG Anthology [ULUS10154].7z
-psp/METAL SLUG XX [ULUS10495].7z
-psp/MONSTER HUNTER FREEDOM UNITE™ [ULES01213].7z
-psp/MONSTER HUNTER FREEDOM(TM) [ULES00318].7z
 psp/MTV Pimp My Ride (USA).iso
-psp/MTX_Mototrax_USA_PSP-pSyPSP.7z
-psp/MX vs ATV™ Reflex [ULUS10429].7z
 psp/MX vs. ATV Extreme Limite (France).iso
-psp/MX_Vs_ATV_Unleashed_On_The_Edge_USA_PSP-pSyPSP.7z
-psp/MX_Vs_ATV_Untamed_USA_PSP-pSyPSP.7z
 psp/Machi - Unmei no Kousaten Tokubetsu-hen (Japan).iso
 psp/Macross - Triangle Frontier (Japan).iso
 psp/Macross Ace Frontier (Japan) (v1.02).iso
@@ -19439,7 +16628,6 @@ psp/Major League Baseball 2K9 (USA).iso
 psp/Makai Senki Disgaea 2 Portable (Japan).iso
 psp/Makai Senki Disgaea Portable (Japan).iso
 psp/Makai Senki Disgaea Portable - Tsuushin Taisen Hajimemashita. (Japan, Korea).iso
-psp/Mana Khemia～Student Alliance～ [ULUS10408].7z
 psp/Mana-Khemia - Gakuen no Renkinjutsushi-tachi Portable + (Japan).iso
 psp/Mana-Khemia 2 - Ochita Gakuen to Renkinjutsushi-tachi Portable+ (Japan).iso
 psp/Manhunt 2 (USA, Canada).iso
@@ -19492,9 +16680,7 @@ psp/Metal Gear Solid - Portable Ops Plus (USA).iso
 psp/Miami Vice - The Game (USA).iso
 psp/Michael Jackson - The Experience (USA) (En,Fr,De,Es,It,Pl,Ru).iso
 psp/Micro Machines V4 (USA).iso
-psp/Midnight Club 3 - DUB Edition [ULUS10021].7z
 psp/Military History - Commander - Europe at War (Europe) (En,Fr,De,Es,It).iso
-psp/Mimana Iyar Chronicle [ULUS10492].7z
 psp/Mind Quiz - Exercise Your Brain (USA).iso
 psp/Minna de Dokusho - Keitai Shousetsu Desuu (Japan).iso
 psp/Minna de Dokusho - Meisaku & Suiri & Kaidan & Bungaku (Japan).iso
@@ -19503,20 +16689,16 @@ psp/Minna no Golf Portable (Japan).iso
 psp/Minna no Golf Portable - Coca-Cola Special Edition (Japan).iso
 psp/Minna no Shiatsu - Itami mo Tsukare mo Sukirii! (Japan).iso
 psp/Mirai Nikki - 13-Ninme no Nikki Shoyuusha (Japan).iso
-psp/ModNation™ Racers [UCUS98741].7z
 psp/Moegaku @ Portable (Japan) (En,Ja).iso
 psp/Moeru Mahjong - Moe-Jong! (Japan).iso
 psp/Momotarou Dentetsu Tag Match - Yuujou - Doryoku - Shouri no Maki! (Japan).iso
-psp/Monster Hunter 3rd HD ver (English v5).7z
 psp/Monster Hunter Portable (Japan).iso
 psp/Mother Goose no Himitsu no Yakata - Blue Label (Japan).iso
 psp/MotoGP (USA).iso
-psp/MotorStorm - Arctic Edge.7z
 psp/Musou Orochi (Japan, Korea).iso
 psp/My Spanish Coach (USA).iso
 psp/MyStylist (Japan).iso
 psp/N Plus (USA).iso
-psp/NARUTO SHIPPUDEN - Ultimate Ninja Impact [ULUS10582].7z
 psp/NBA (USA).iso
 psp/NBA 07 (USA).iso
 psp/NFL Street 3 (USA).iso
@@ -19551,8 +16733,6 @@ psp/Ore no Dungeon - Desire and Adventurous Spirit (Japan).iso
 psp/Ore no Imouto Maker EX - Imouto to Koishiyo Portable (Japan).iso
 psp/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Portable ga Tsuzuku Wake ga Nai (Japan) (Disc 1).iso
 psp/Ore wa Shoujo Mangaka (Japan).iso
-psp/PATAPON [UCUS98711].7z
-psp/PATAPON™ 2 [NPUG98732].7z
 psp/PC Engine Best Collection - Soldier Collection (Japan).iso
 psp/PDC World Championship Darts (USA) (En,Fr,De,Es,It,Nl).iso
 psp/PSP (PlayStation Portable) Go Bonus 3-Game DVD (USA) (En,Fr,Es).iso
@@ -19563,19 +16743,14 @@ psp/PSP System Software Update Disc Ver. 3.11 (Japan).iso
 psp/PSP Update Disc 1.00 (Japan).iso
 psp/PaRappa the Rapper (USA).iso
 psp/Pac-Man Rally (Europe) (En,Fr,De,Es,It) (Proto) (2007-05-01).iso
-psp/Pangya_Fantasy_Golf_USA (Black Screen Fix).7z
 psp/Parodius Portable (Japan).iso
 psp/Passport to... Barcelona (Europe) (En,Fr,De,Es,It).iso
-psp/Patapon™3 [UCUS98751].7z
 psp/Payout - Poker & Casino (USA).iso
 psp/Persona 2 - Batsu - Eternal Punishment (Japan).iso
 psp/Personal Utility Disc Ver. 1.0 (Korea).iso
 psp/Peter Jackson's King Kong - The Official Game of the Movie (USA) (En,Fr,Es).iso
 psp/Petz - My Baby Hamster (Europe) (En,Fr,De,Es).iso
 psp/Petz - My Puppy Family (Europe) (En,Fr,De,Es,It).iso
-psp/Phantasy Star Portable 2 Infinity (English v2).7z
-psp/Phantasy Star Portable.7z
-psp/Phantasy Star Portable™ 2 [ULUS10529].7z
 psp/Phantom Brave - The Hermuda Triangle (USA).iso
 psp/Phantom Brave Portable (Japan).iso
 psp/Phase D - Souka no Shou (Japan).iso
@@ -19605,16 +16780,7 @@ psp/Power Smash - New Generation (Japan, Asia).iso
 psp/Power Stone Collection (USA).iso
 psp/Pro Cycling Season 2008 - Le Tour de France (Europe) (En,Fr,De,Es,It,Nl).iso
 psp/Pro Cycling Season 2010 - Le Tour de France (Europe) (En,Fr,De,Es,It,Nl).iso
-psp/Pro Evolution Soccer 2011 [ULUS10554].7z
-psp/Pro Evolution Soccer 2014 [ULUS10654].7z
 psp/Pro Yakyuu Spirits 2010 (Japan).iso
-psp/Pro_Evolution_Soccer_2008_EUR_PSP-ACCiDENT.7z
-psp/Pro_Evolution_Soccer_2009_EUR_PSP-pSyPSP.7z
-psp/Pro_Evolution_Soccer_2010_EUR_MULTi4_PSP-BAHAMUT.7z
-psp/Pro_Evolution_Soccer_2012_EUR_PSP-ZER0.7z
-psp/Pro_Evolution_Soccer_2013_EUR_PSP-BAHAMUT.7z
-psp/Pro_Evolution_Soccer_5_EUR_MULTI5_PSP-pSyPSP.7z
-psp/Pro_Evolution_Soccer_6_PROPER_EUR_MULTI5_PSP-LIGHTFORCE.7z
 psp/Puyo Pop Fever (Europe).iso
 psp/Puyo Puyo Fever (Japan) (En,Ja).iso
 psp/Puzzle Bobble Pocket (Japan).iso
@@ -19627,22 +16793,15 @@ psp/Real Madrid - The Game (Europe) (En,Fr,Es,It,Pt).iso
 psp/Reel Fishing - The Great Outdoors (USA).iso
 psp/Rei Chou Aniki (Japan).iso
 psp/Rengoku - The Tower of Purgatory (USA).iso
-psp/Resistance - Retribution™ [UCUS98668].7z
 psp/Retail Sampler No. 4 (Europe) (v1.00).iso
 psp/Ricky Ponting 2007 - Pressure Play (Australia).iso
 psp/Ridge Racers 2 (Japan, Asia).iso
-psp/Ridge_Racer_2_EUR_PSP-pSyPSP.7z
-psp/Rock Band Unplugged.7z
 psp/Romeo vs. Juliet (Japan).iso
 psp/Rupupu Cube - Lup Salad Portable ...Matatabi (Japan).iso
 psp/SBK-07 - Superbike World Championship (Europe) (En,Fr,De,Es,It).iso
 psp/SCEJ PSP Browser (Japan) (UTST-99261).iso
 psp/SD Gundam GGeneration Overworld (Japan) (v1.01).iso
-psp/SOCOM - U.S. Navy SEALs Fireteam Bravo 2 [UCUS80171].7z
-psp/SOCOM - U.S. Navy SEALs Fireteam Bravo 3 [UCUS98716].7z
-psp/SOCOM - U.S. Navy SEALs Fireteam Bravo [UCUS98615].7z
 psp/SOCOM - U.S. Navy SEALs Portable (Japan) (En,Ja).iso
-psp/SOCOM U.S. Navy SEALs - Tactical Strike [NPUG80220].7z
 psp/SSX on Tour Portable (Japan).iso
 psp/Sakaagari Hurricane Portable (Japan).iso
 psp/Sakura Taisen 1 & 2 (Japan, Asia).iso
@@ -19674,8 +16833,6 @@ psp/Shinki Gensou - SSII Unlimited Side (Japan, Asia).iso
 psp/Shinobido - Tales of the Ninja (Europe) (En,Fr,De,Es,It).iso
 psp/Shougi ga Tsuyokunaru - Gekisashi - Jouseki Doujou (Japan).iso
 psp/Shutokou Battle (Japan).iso
-psp/Silent Hill - Shattered Memories.7z
-psp/Silent Hill Origins.7z
 psp/Silhwang Powerful Pro Yagu 2010 (Korea).iso
 psp/Silverfall (Europe) (En,Fr,De,Es).iso
 psp/Simple 2000 Series Portable!! Vol. 2 - The Shougi (Japan).iso
@@ -19701,8 +16858,6 @@ psp/Spelling Challenges and More! (USA).iso
 psp/Spider-Man - Friend or Foe (USA).iso
 psp/Split-Second - Velocity (Europe) (En,Fr,De,Es,It,Ru).iso
 psp/Stacked with Daniel Negreanu (USA).iso
-psp/Star Ocean - First Departure.7z
-psp/Star Ocean Second Evolution USA.7z
 psp/Star Soldier (Japan) (En,Ja).iso
 psp/Star Wars - Battlefront II (USA).iso
 psp/Starry Sky - After Summer Portable (Japan).iso
@@ -19715,7 +16870,6 @@ psp/Sto-Mani - Strobe-Mania (Japan).iso
 psp/Street Cricket Champions 2 (India).iso
 psp/Street Fighter Zero 3 Double Upper (Japan).iso
 psp/Sudoku (Japan).iso
-psp/Summon Night 5 [NPUH10198].7z
 psp/Super Fruit Fall (Europe) (En,Fr,De,Es,It).iso
 psp/Super Hind (Europe) (En,Fr,De,Es,It,Fi).iso
 psp/Super Pocket Tennis (Europe).iso
@@ -19744,7 +16898,6 @@ psp/Tenchu 4 Plus (Japan).iso
 psp/Tengai Makyou - Daiyon no Mokushiroku (Japan).iso
 psp/Tenshin Ranman - Happy Go Lucky!! (Japan).iso
 psp/Test Drive Unlimited (USA).iso
-psp/The_3rd_Birthday_PSP-VENOM.7z
 psp/Thrillville (USA).iso
 psp/Thrillville - Off the Rails (USA).iso
 psp/Tiandi Zhi Men (Asia).iso
@@ -19834,13 +16987,9 @@ psp/Uta no Prince-sama - Sweet Serenade (Japan).iso
 psp/Utawarerumono Portable (Japan, Asia).iso
 psp/V8 Supercars Australia 2 (Australia) (En,Fr,De,Es,It).iso
 psp/V8 Supercars Australia 3 - Shootout (Australia) (En,Fr,De,Es,It).iso
-psp/VALHALLAKNIGHTS [ULUS10230].7z
-psp/VALHALLAKNIGHTS2BS [NPUH10041].7z
-psp/VALKYRIA CHRONICLES™ II [ULUS10515].7z
 psp/Valhalla Knights (USA).iso
 psp/Valhalla Knights 2 (USA).iso
 psp/Valhalla Knights 2 - Battle Stance (Japan).iso
-psp/Valkyrie_Profile_Lenneth_USA_PSP-ARTiSAN.7z
 psp/Vampire Chronicle - The Chaos Tower (Japan) (En,Ja).iso
 psp/Vantage Master Portable (Japan).iso
 psp/Venus & Braves - Majo to Megami to Horobi no Yogen (Japan, Asia).iso
@@ -19856,7 +17005,6 @@ psp/VitaminXtoZ (Japan).iso
 psp/VitaminZ - Graduation (Japan).iso
 psp/VitaminZ Revolution (Japan).iso
 psp/Vulcanus - Seek & Destroy (Japan).iso
-psp/WILDARMS XF [ULUS10339].7z
 psp/WRC - FIA World Rally Championship (USA).iso
 psp/WTF - Work Time Fun (USA).iso
 psp/WWE All Stars (USA).iso
@@ -19900,8 +17048,6 @@ psp/Winning Post 7 2010 (Japan).iso
 psp/Winning Post 7 2012 (Japan).iso
 psp/Winning Post 7 2013 (Japan).iso
 psp/Winx Club - Join the Club (USA).iso
-psp/WipEout® Pulse [UCES00465].7z
-psp/Wipeout Pure [UCES00001].7z
 psp/Wizardry Empire III - Haou no Keifu (Japan).iso
 psp/World Championship Cards (USA).iso
 psp/World Championship Poker 2 featuring Howard Lederer (USA).iso
@@ -19975,22 +17121,13 @@ psp/Zhuo Hou La - Hou Zi Ai Zuo Zhan (Asia).iso
 psp/Zill O'll Infinite Plus (Japan).iso
 psp/Zwei!! (Japan).iso
 psp/unENDing Bloody Call (Japan).iso
-psx/.gitattributes
 psx/007 - The World Is Not Enough (USA).chd
 psx/007 - Tomorrow Never Dies (USA).chd
-psx/007 Racing (USA).chd
 psx/10101 - Will the Starship (Japan).chd
-psx/10th Anniversary Memorial Save Data (Japan) (Disc 1) (PlayStation Taiou).chd
-psx/16 Tales 1 (USA).chd
-psx/16 Tales 2 (USA).chd
-psx/16 Tales 3 (USA).chd
-psx/16 Tales 4 (USA).chd
-psx/1Xtreme (USA).chd
 psx/2002 FIFA World Cup (USA) (En,Es).chd
 psx/2Xtreme (USA).chd
 psx/360 Three Sixty (Europe) (En,Fr,De,Es,It,Sv).chd
 psx/3D Baseball (USA).chd
-psx/3D Lemmings (USA).chd
 psx/3Xtreme (USA).chd
 psx/3x3 Eyes - Kyuusei Koushu (Japan) (Disc 1).chd
 psx/3x3 Eyes - Tenrinou Genmu (Japan) (Disc 1).chd
@@ -20037,7 +17174,6 @@ psx/Air Hockey (USA).chd
 psx/Air Management '96 (Japan).chd
 psx/AirGrave (Japan).chd
 psx/Aironauts (Europe) (En,Fr,De).chd
-psx/Akagawa Jirou - Yasoukyoku (Japan) (Shokai Genteiban).chd
 psx/Akazu no Ma (Japan).chd
 psx/Akuji the Heartless (USA).chd
 psx/Alex Ferguson's Player Manager 2002 (Europe).chd
@@ -20054,17 +17190,14 @@ psx/All Star Racing 2 (USA).chd
 psx/All Star Soccer (Europe) (En,Fr,De,It).chd
 psx/All Star Tennis '99 (Europe) (En,Fr,De,Es,It).chd
 psx/All Star Watersports (Europe).chd
-psx/All-Star Baseball 97 featuring Frank Thomas (USA).chd
 psx/All-Star Slammin' D-Ball (USA).chd
 psx/Allied General (USA).chd
 psx/Alone in the Dark - One-Eyed Jack's Revenge (USA).chd
 psx/Alone in the Dark - The New Nightmare (USA) (Disc 1).chd
 psx/Alundra (USA) (Rev 1).chd
 psx/Alundra 2 - A New Legend Begins (USA).chd
-psx/Amazing Virtual Sea-Monkeys, The (USA) (En,Es).chd
 psx/America Oudan Ultra Quiz (Japan) (Fukkokuban).chd
 psx/American Pool (USA).chd
-psx/Analog Controller Service Disc (Revised) (USA).chd
 psx/Anastasia (Europe) (En,Fr,De,Nl).chd
 psx/Andretti Racing (USA).chd
 psx/Angel Blade - Neo Tokyo Guardians (Japan).chd
@@ -20080,7 +17213,6 @@ psx/Anna Kournikova's Smash Court Tennis (Europe) (Rev 1).chd
 psx/Another Memories (Japan).chd
 psx/Another Mind (Japan).chd
 psx/Ape Escape (USA).chd
-psx/Apocalypse (USA).chd
 psx/Aqua GT (Europe) (En,Fr,De,Es,It,Nl).chd
 psx/Aquanaut no Kyuujitsu - Memories of Summer 1996 (Japan).chd
 psx/Aquanaut no Kyuujitsu 2 (Japan).chd
@@ -20119,7 +17251,6 @@ psx/Army Men 3D (USA).chd
 psx/Art Camion - Geijutsuden (Japan).chd
 psx/Art Camion - Sugorokuden (Japan).chd
 psx/Arthur! Ready to Race (USA).chd
-psx/Asciiware Training CD (USA).chd
 psx/Asonde AIUEO (Japan).chd
 psx/Asonde Kazu Suuji (Japan).chd
 psx/Assault - Retribution (USA).chd
@@ -20169,7 +17300,6 @@ psx/Barbie - Gotta Have Games (USA).chd
 psx/Barbie - Race & Ride (USA).chd
 psx/Barbie - Super Sports (USA).chd
 psx/Bardysh - Kromeford no Juunin (Japan).chd
-psx/Baroque - Yuganda Mousou (Japan) (Genteiban).chd
 psx/Baroque Syndrome (Japan).chd
 psx/Baseball Navigator (Japan).chd
 psx/Bases Loaded '96 - Double Header (USA).chd
@@ -20202,9 +17332,6 @@ psx/Beatmania Append Club Mix (Japan).chd
 psx/Beatmania Best Hits (Japan) (Rev 1).chd
 psx/Beatmania featuring Dreams Come True (Japan).chd
 psx/Bedlam (Europe) (En,Fr,De,Es,It,Nl).chd
-psx/Beltlogger 9 (Japan) (Shokai Genteiban).chd
-psx/Best of PlayStation Underground Year One, The (USA).chd
-psx/Beyblade (USA).chd
 psx/Beyond the Beyond (USA).chd
 psx/Big Air (USA).chd
 psx/Big Bass Fishing (USA).chd
@@ -20215,8 +17342,6 @@ psx/Big Ol' Bass 2 (USA).chd
 psx/Big Strike Bowling (USA).chd
 psx/Billiards (USA).chd
 psx/Bio F.R.E.A.K.S. (USA).chd
-psx/Bio Hazard (Japan) (Sample 1996-01-31).chd
-psx/Biohazard 2 (Japan) (Trial Edition).chd
 psx/Bishi Bashi Special (Europe).chd
 psx/Bishi Bashi Special 2 (Japan).chd
 psx/Bishi Bashi Special 3 - Step Champ (Japan).chd
@@ -20224,11 +17349,8 @@ psx/Bishoujo Senshi Sailor Moon SuperS - Shin Shuyaku Soudatsusen (Japan) (Shoka
 psx/Black Bass with Blue Marlin (USA).chd
 psx/Black Dawn (USA).chd
 psx/Black Matrix 00 (Japan) (Disc 1).chd
-psx/Black-Matrix 00 (Japan) (Disc 1) (Shokai Genteiban).chd
-psx/Blade (USA).chd
 psx/Blam! Machinehead (Europe).chd
 psx/Blast Chamber (USA).chd
-psx/Blast Lacrosse (USA) (Alt).chd
 psx/Blast Radius (USA).chd
 psx/Blaster Master - Blasting Again (USA).chd
 psx/Blasto (USA).chd
@@ -20240,13 +17362,10 @@ psx/Block Kuzushi - Deden no Gyakushuu (Japan).chd
 psx/Block Kuzushi - Kowashite Help! (Japan).chd
 psx/Block Kuzushi 2 (Japan).chd
 psx/Block Wars (Japan).chd
-psx/Blockbuster Presents - GameShark Top 50 - Summer Fall 2001 (USA) (Unl).chd
 psx/Blockids (USA).chd
 psx/Blood Lines (Europe) (En,Fr,De,Es,It).chd
 psx/Blood Omen - Legacy of Kain (USA).chd
-psx/Bloody Roar (USA).chd
 psx/Bloody Roar 2 - Bringer of the New Age (Europe).chd
-psx/Bloody Roar II (USA).chd
 psx/Blue Breaker - Egao no Yakusoku (Japan).chd
 psx/Blue's Clues - Blue's Big Musical (USA).chd
 psx/Board Game - Top Shop (USA).chd
@@ -20272,9 +17391,6 @@ psx/Boxer's Road (Japan) (Rev 1).chd
 psx/Boxing (USA).chd
 psx/Boys Be... (Japan).chd
 psx/Brahma Force (Europe).chd
-psx/Brahma Force - The Assault on Beltlogger 9 (USA).chd
-psx/BrainDead 13 (USA) (Disc 1).chd
-psx/Bratz - Dress Up, Get Down and Be a Bratz Superstar! (USA) (En,Fr,Es).chd
 psx/Brave Fencer Musashi (USA).chd
 psx/Brave Prove (Japan).chd
 psx/Brave Saga 2 (Japan) (Disc 1).chd
@@ -20283,8 +17399,6 @@ psx/Bravo Air Race (USA).chd
 psx/Break Point (Europe) (En,Fr).chd
 psx/Break Thru! (Japan).chd
 psx/Break Volley (Japan).chd
-psx/Breaker Pro Version 1.1 (USA) (Unl).chd
-psx/Breakout (USA).chd
 psx/Breath of Fire III (USA).chd
 psx/Breath of Fire IV (USA).chd
 psx/Breed Master (Japan).chd
@@ -20292,11 +17406,7 @@ psx/Breeding Stud - Bokujou de Aimashou (Japan).chd
 psx/Breeding Stud 2 (Japan).chd
 psx/Brian Lara Cricket (Europe).chd
 psx/Brigandine - Grand Edition (Japan) (Disc 1).chd
-psx/Brigandine - The Legend of Forsena (USA).chd
 psx/Brightis (Japan).chd
-psx/Broken Helix (USA) (Rev 1).chd
-psx/Broken Sword - The Shadow of the Templars (USA).chd
-psx/Broken Sword II - The Smoking Mirror (USA).chd
 psx/Brunswick Circuit Pro Bowling (USA).chd
 psx/Brunswick Circuit Pro Bowling 2 (USA).chd
 psx/Buckle Up! (Japan).chd
@@ -20312,13 +17422,10 @@ psx/Bushido Blade (USA).chd
 psx/Bushido Blade 2 (USA).chd
 psx/Bust A Groove (USA).chd
 psx/Bust A Groove 2 (USA).chd
-psx/Bust A Move (Japan) (Disc 1) (Genteiban).chd
 psx/Bust-A-Groove (Europe) (En,Fr,De,Es,It).chd
-psx/Bust-A-Move '99 (USA).chd
 psx/Bust-A-Move 2 - Arcade Edition (USA).chd
 psx/Bust-A-Move 3 DX (Europe).chd
 psx/Bust-A-Move 4 (USA).chd
-psx/Buster Bros. Collection (USA).chd
 psx/Buttsubushi (Europe, Australia).chd
 psx/C - The Contra Adventure (USA).chd
 psx/C-12 - Final Resistance (USA).chd
@@ -20328,16 +17435,9 @@ psx/CART World Series (USA).chd
 psx/CRW - Counter Revolution War (Japan).chd
 psx/CT Special Forces (Europe) (En,Fr,De,Es,It,Nl).chd
 psx/CT Special Forces 3 - Bioterror (Europe) (En,Fr,De,Es,It,Nl).chd
-psx/CTR - Crash Team Racing (USA).chd
 psx/Cabela's Big Game Hunter - Ultimate Challenge (USA).chd
 psx/Cabela's Ultimate Deer Hunt - Open Season (USA).chd
 psx/Cadillac (Japan).chd
-psx/Caesars Palace (USA).chd
-psx/Caesars Palace 2000 - Millennium Gold Edition (USA).chd
-psx/Caesars Palace II (USA).chd
-psx/Calamity 1 - The Natural World (USA).chd
-psx/Calamity 2 - People and Traditions (USA).chd
-psx/Calamity 3 - Around the World (USA).chd
 psx/Calcolo! (Japan).chd
 psx/Cali's Geo Tools (USA).chd
 psx/California Surfing (Europe).chd
@@ -20347,7 +17447,6 @@ psx/Captain Commando (Japan).chd
 psx/Captain Love!! (Japan) (Major Wave).chd
 psx/Captain Tsubasa - Aratanaru Densetsu Joshou (Japan).chd
 psx/Captain Tsubasa J - Get in the Tomorrow (Japan).chd
-psx/Card Captor Sakura - Clowcard Magic (Japan) (Genteiban).chd
 psx/Card Games (USA).chd
 psx/Cardinal Syn (USA).chd
 psx/Carmageddon (Europe) (En,Fr,Es,It).chd
@@ -20359,7 +17458,6 @@ psx/Casper - Friends Around the World (USA).chd
 psx/Castlevania - Symphony of the Night (USA).chd
 psx/Castlevania Chronicles (USA).chd
 psx/Castrol Honda Superbike Racing (USA).chd
-psx/Cat in the Hat, The (USA).chd
 psx/Catan - Die erste Insel (Germany).chd
 psx/Center Shiken Trial - Eigo no Tetsujin (Japan).chd
 psx/Centipede (USA).chd
@@ -20397,7 +17495,6 @@ psx/Chou Hatsumei Boy Kanipan - Hirameki Wonderland (Japan).chd
 psx/Choujin Gakuen - Gowcaizer (Japan).chd
 psx/Chris Kamara's Street Soccer (Europe).chd
 psx/Chronicles of the Sword (USA) (Disc 1).chd
-psx/Chronicles of the Sword (USA) (Disc 2).chd.aria2
 psx/Chrono Cross (USA) (Disc 1).chd
 psx/Chrono Trigger (Japan).chd
 psx/Cindy's Caribbean Holiday (Europe).chd
@@ -20419,14 +17516,8 @@ psx/Clock Tower - The First Fear (Japan).chd
 psx/Clock Tower II - The Struggle Within (USA).chd
 psx/ClockWerx (Japan).chd
 psx/Cocktail Harmony (Japan).chd
-psx/Code Breaker (USA) (Unl).chd
-psx/Code Breaker Version 2 (USA) (Unl).chd
-psx/Code Breaker Version 3 (USA) (Unl).chd
-psx/Codebreaker D.J. (USA) (Unl).chd
 psx/Codename - Tenka (USA) (Rev 1).chd
-psx/Codename - Tenka (USA) (Rev 1).chd.aria2
 psx/Colin McRae Rally (USA).chd
-psx/Colin McRae Rally 2.0 (USA) (En,Fr,Es).chd
 psx/College Slam (USA).chd
 psx/Colony Wars (USA) (Disc 1).chd
 psx/Colony Wars - Red Sun (USA).chd
@@ -20438,8 +17529,6 @@ psx/Combat Choro Q (Japan).chd
 psx/Command & Conquer (USA) (Disc 1) (GDI).chd
 psx/Command & Conquer - Alerte Rouge (France) (Disc 1) (Allies).chd
 psx/Command & Conquer - Alerte Rouge - Mission Tesla (France) (Disc 1) (Allies).chd
-psx/Command & Conquer - Red Alert (USA) (Disc 1) (Allies).chd
-psx/Command & Conquer - Red Alert - Retaliation (USA) (Disc 1) (Allies).chd
 psx/Community Pom (Japan).chd
 psx/Community Pom - Omoide o Dakishimete (Japan).chd
 psx/Constructor (Europe) (En,Fr,De,Es).chd
@@ -20483,14 +17572,11 @@ psx/Croket! Kindan no Kinka Box! (Japan).chd
 psx/Cross Romance - Koi to Mahjong to Hanafuda to (Japan).chd
 psx/Cross Tantei Monogatari (Japan) (Disc 1).chd
 psx/Crossroad Crisis (USA).chd
-psx/Crow, The - City of Angels (USA).chd
 psx/Crusader - No Remorse (USA).chd
-psx/Crusader - No Remorse (USA).chd.aria2
 psx/Crusaders of Might and Magic (USA).chd
 psx/Crypt Killer (USA).chd
 psx/Cu-On-Pa (Japan).chd
 psx/Cubix Robots for Everyone - Race 'n Robots (USA).chd
-psx/Cubix Robots for Everyone - Race 'n Robots (USA).chd.aria2
 psx/Culdcept - Expansion (Japan).chd
 psx/Culdcept - Expansion Plus (Japan).chd
 psx/Curiosity Kills the Cat Koukishin wa Neko o Korosu ka (Japan).chd
@@ -20504,15 +17590,12 @@ psx/Cyberia (USA).chd
 psx/Cybernetic Empire (Japan) (Disc 1).chd
 psx/Cyberwar (Japan) (Disc 1).chd
 psx/D (USA) (Disc 1).chd
-psx/DBZ - Dead Ball Zone (USA) (En,Fr,De,Es,It).chd
-psx/DSP Music Revelation (USA, Europe) (Unl).chd
 psx/DX Monopoly (Japan).chd
 psx/DX Okuman Chouja Game - The Money Battle (Japan).chd
 psx/DX Okuman Chouja Game II - The Money Battle (Japan).chd
 psx/DX Shachou Game (Japan).chd
 psx/Daikoukai Jidai Gaiden (Japan) (Rev 1).chd
 psx/Daikoukai Jidai II (Japan).chd
-psx/Daikoukai Jidai IV - Porto Estado (Japan) (Shokai Genteiban).chd
 psx/Daisenryaku - Master Combat (Japan).chd
 psx/Daisenryaku - Player's Spirit (Japan) (Rev 1).chd
 psx/Dakar '97 (Japan).chd
@@ -20521,7 +17604,6 @@ psx/DamDam Stompland (Japan) (Taikenban).chd
 psx/Dance - UK eXtra TraX (UK).chd
 psx/Dance Dance Revolution (USA).chd
 psx/Dance Dance Revolution - Best Hits (Japan).chd
-psx/Dance Dance Revolution - Disney Mix (USA).chd
 psx/Dance Dance Revolution - Extra Mix (Japan).chd
 psx/Dance Dance Revolution Konamix (USA).chd
 psx/Dance Europe (Europe) (Fr,De,Es,It,Nl,Pt).chd
@@ -20557,74 +17639,12 @@ psx/Debut 21 (Japan).chd
 psx/Deception III - Dark Delusion (USA).chd
 psx/Deep Freeze (Japan).chd
 psx/Defcon 5 (Europe).chd
-psx/Defcon 5 - Peace Has a Price... (USA).chd
 psx/Dekiru! Game Center (Japan).chd
 psx/Delta Force Urban Warfare (USA) (En,Fr,Es).chd
-psx/Dengeki PlayStation D (Japan).chd
-psx/Dengeki PlayStation D - Konami Fanbook (Japan).chd
-psx/Dengeki PlayStation D10 (Japan).chd
-psx/Dengeki PlayStation D11 (Japan).chd
-psx/Dengeki PlayStation D12 (Japan).chd
-psx/Dengeki PlayStation D13 (Japan).chd
-psx/Dengeki PlayStation D14 (Japan).chd
-psx/Dengeki PlayStation D15 (Japan).chd
-psx/Dengeki PlayStation D16 (Japan).chd
-psx/Dengeki PlayStation D17 (Japan).chd
-psx/Dengeki PlayStation D18 (Japan).chd
-psx/Dengeki PlayStation D19 (Japan).chd
-psx/Dengeki PlayStation D2 (Japan).chd
-psx/Dengeki PlayStation D20 (Japan).chd
-psx/Dengeki PlayStation D21 (Japan).chd
-psx/Dengeki PlayStation D21 SCE Special (Japan).chd
-psx/Dengeki PlayStation D22 (Japan).chd
-psx/Dengeki PlayStation D23 (Japan).chd
-psx/Dengeki PlayStation D24 (Japan).chd
-psx/Dengeki PlayStation D25 (Japan).chd
-psx/Dengeki PlayStation D26 (Japan).chd
-psx/Dengeki PlayStation D27 (Japan).chd
-psx/Dengeki PlayStation D28 (Japan).chd
-psx/Dengeki PlayStation D29 (Japan).chd
-psx/Dengeki PlayStation D3 (Japan).chd
-psx/Dengeki PlayStation D30 (Japan).chd
-psx/Dengeki PlayStation D31 (Japan).chd
-psx/Dengeki PlayStation D32 (Japan).chd
-psx/Dengeki PlayStation D33 (Japan).chd
-psx/Dengeki PlayStation D34 (Japan).chd
-psx/Dengeki PlayStation D35 (Japan).chd
-psx/Dengeki PlayStation D36 (Japan).chd
-psx/Dengeki PlayStation D37 (Japan).chd
-psx/Dengeki PlayStation D38 (Japan).chd
-psx/Dengeki PlayStation D39 (Japan).chd
-psx/Dengeki PlayStation D4 (Japan).chd
-psx/Dengeki PlayStation D41 (Japan).chd
-psx/Dengeki PlayStation D42 (Japan).chd
-psx/Dengeki PlayStation D43 (Japan).chd
-psx/Dengeki PlayStation D44 (Japan).chd
-psx/Dengeki PlayStation D45 (Japan).chd
-psx/Dengeki PlayStation D5 (Japan).chd
-psx/Dengeki PlayStation D6 (Japan).chd
-psx/Dengeki PlayStation D7 (Japan).chd
-psx/Dengeki PlayStation D8 (Japan).chd
-psx/Dengeki PlayStation D9 (Japan).chd
 psx/Densha de Go! (Japan) (PlayStation the Best).chd
 psx/Densha de Go! 2 (Japan) (Rev 1).chd
 psx/Derby Jockey 2001 (Japan).chd
 psx/Derby Jockey R (Japan).chd
-psx/Derby Stallion Magazine 2000 (Japan).chd
-psx/Derby Stallion Magazine 2000 Vol. 2 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Soushuu-hen (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 1 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 10 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 11 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 12 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 2 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 3 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 4 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 5 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 6 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 7 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 8 (Japan).chd
-psx/Derby Stallion Magazine Furoku CD-ROM Vol. 9 (Japan).chd
 psx/Descent (USA).chd
 psx/Descent Maximum (USA).chd
 psx/Deserted Island (Japan).chd
@@ -20636,7 +17656,6 @@ psx/Destructo 2 (Europe).chd
 psx/Detana Twinbee Yahoo! Deluxe Pack (Japan).chd
 psx/Detective Barbie - The Mystery Cruise (USA).chd
 psx/Detective Mouse (Europe) (En,Fr,De).chd
-psx/Deuce (USA) (Proto).chd
 psx/Devicereign (Japan).chd
 psx/Devil Dice (USA).chd
 psx/Dexter's Laboratory - Mandark's Lab (USA).chd
@@ -20647,7 +17666,6 @@ psx/Die Hard Trilogy (USA) (Rev 1).chd
 psx/Die Hard Trilogy 2 - Viva Las Vegas (USA).chd
 psx/Digcro - Digital Number Crossword (Japan).chd
 psx/Digical League (Japan).chd
-psx/Digimon - Digital Card Battle (USA).chd
 psx/Digimon Rumble Arena (USA).chd
 psx/Digimon World (USA).chd
 psx/Digimon World 2 (USA).chd
@@ -20659,15 +17677,9 @@ psx/Dino Crisis 2 (USA).chd
 psx/Dinomaster Party (Europe) (En,Fr,De,Es,It,Nl).chd
 psx/Dinosaurs (Europe) (En,Fr,De).chd
 psx/Dioramos (Japan).chd
-psx/Dirt Jockey - Heavy Equipment Operator (USA).chd
 psx/Discworld II - Mortality Bytes! (USA).chd
 psx/Discworld Noir (Europe) (En,Es,It).chd
-psx/Disney Presents Tigger's Honey Hunt (USA) (Rerelease).chd
-psx/Disney's 101 Dalmatians II - Patch's London Adventure (USA).chd
 psx/Disney's 102 Dalmatians - Puppies to the Rescue (USA).chd
-psx/Disney's Aladdin in Nasira's Revenge (USA).chd
-psx/Disney's Atlantis - The Lost Empire (USA).chd
-psx/Disney's Dinosaur (USA).chd
 psx/Disney's Donald Duck - Goin' Quackers (USA).chd
 psx/Disney's Tarzan (USA) (Rerelease).chd
 psx/Disney's The Emperor's New Groove (USA).chd
@@ -20675,26 +17687,18 @@ psx/Disney's The Lion King - Simba's Mighty Adventure (USA).chd
 psx/Disney's The Little Mermaid II (USA).chd
 psx/Disney's Tigger's Honey Hunt (Europe).chd
 psx/Disney's Treasure Planet (USA).chd
-psx/Disney-Pixar A Bug's Life (USA).chd
 psx/Disney-Pixar A Bug's Life - Atelier de Jeux (France).chd
 psx/Disney-Pixar Buzz Lightyear of Star Command (USA).chd
-psx/Disney-Pixar Monsters, Inc. - Scream Team (USA).chd
-psx/Disney-Pixar Toy Story 2 - Buzz Lightyear to the Rescue! (USA) (Rev 1).chd
 psx/Disney-Pixar Toy Story 2 - Buzz l'Eclair a la Rescousse! (France).chd
 psx/Disney-Pixar Toy Story Racer (USA).chd
-psx/Disruptor (USA).chd
 psx/Diver's Dream (Europe) (En,Fr,De).chd
-psx/Divide, The - Enemies Within (USA).chd
 psx/DoDonPachi (Japan) (Rev 1).chd
 psx/Dodgem Arena (Europe).chd
-psx/Dog Master, The (Japan) (Shokai Genteiban).chd
 psx/Doki Doki On Air (Japan).chd
 psx/Doki Doki On Air 2 (Japan).chd
-psx/Doki Doki Pretty League (Japan) (Shokai Genteiban).chd
 psx/Doki Doki Pretty League - Lovely Star (Japan).chd
 psx/Doki Doki Pretty League - Nekketsu Otome Seishunki (Japan) (Disc 1).chd
 psx/DonPachi (Japan) (Cyclone's Best).chd
-psx/Doom (USA) (Rev 1).chd
 psx/Doraemon 2 - SOS! Otogi no Kuni (Japan).chd
 psx/Doraemon 3 - Makai no Dungeon (Japan).chd
 psx/Dosukoi Densetsu (Japan).chd
@@ -20705,33 +17709,23 @@ psx/Doukyuusei 2 (Japan) (Extra Box).chd
 psx/Doukyuusei Mahjong (Japan) (Best Wing 2800).chd
 psx/Downhill Snow (Japan).chd
 psx/Dracula - Resurrection (France) (Disc 1).chd
-psx/Dracula - The Last Sanctuary (USA) (Disc 1).chd
 psx/Dracula 2 - Le Dernier Sanctuaire (France) (Disc 1).chd
 psx/Dragon Ball GT - Final Bout (USA).chd
 psx/Dragon Ball Z - Idainaru Dragon Ball Densetsu (Japan).chd
 psx/Dragon Ball Z - Ultimate Battle 22 (USA).chd
 psx/Dragon Drive - Tactics Break (Japan).chd
 psx/Dragon Knight 4 (Japan).chd
-psx/Dragon Seeds (USA).chd
-psx/Dragon Tales - Dragonseek (USA).chd
 psx/Dragon Valor (USA) (Disc 1).chd
-psx/Dragon Warrior VII (USA) (Disc 1).chd
 psx/DragonHeart - Fire & Steel (USA).chd
 psx/Dream Generation - Koi ka Shigoto ka!... (Japan).chd
 psx/Driver (Europe).chd
-psx/Driver - You Are the Wheelman (USA) (Rev 1).chd
-psx/Driver 2 (USA) (Disc 1) (Rev 1).chd
 psx/Driver 2 - Back on the Streets (Europe) (Disc 1) (Rev 1).chd
 psx/Druid - Yami e no Tsuisekisha (Japan).chd
 psx/Ducati World - Racing Challenge (USA).chd
 psx/Duke Nukem (Europe).chd
 psx/Duke Nukem - Land of the Babes (USA).chd
 psx/Duke Nukem - Time to Kill (USA).chd
-psx/Duke Nukem - Total Meltdown (USA).chd
-psx/Dukes of Hazzard II, The - Daisy Dukes It Out (USA).chd
-psx/Dukes of Hazzard, The - Racing for Home (USA) (Rev 1).chd
 psx/Dune (Spain).chd
-psx/Dune 2000 (USA).chd
 psx/Dungeon Creator (Japan) (Disc 1).chd
 psx/Dynamite Soccer 2000 (Japan).chd
 psx/Dynamite Soccer 2002 (Japan).chd
@@ -20758,7 +17752,6 @@ psx/Eggs of Steel - Charlie's Eggcellent Adventure (USA).chd
 psx/Egypt II - The Heliopolis Prophecy (Europe).chd
 psx/Ehrgeiz - God Bless the Ring (USA).chd
 psx/Eikan wa Kimi ni 4 (Japan).chd
-psx/Einhaender (USA).chd
 psx/Eisei Meijin (Japan) (Rev 1).chd
 psx/Eisei Meijin II (Japan).chd
 psx/Elan (Japan).chd
@@ -20796,7 +17789,6 @@ psx/Evil Dead - Hail to the King (USA) (Disc 1).chd
 psx/Evil Zone (USA).chd
 psx/Evo's Space Adventures (Europe) (En,Fr,De,Es,It).chd
 psx/Exalegiuse (Japan).chd
-psx/Excalibur 2555 A.D. (USA).chd
 psx/Exector (Japan).chd
 psx/Exodus Guilty (Japan).chd
 psx/Expendable (USA).chd
@@ -20809,10 +17801,8 @@ psx/Extreme Go-Kart Racing (USA).chd
 psx/Extreme Pinball (USA).chd
 psx/Extreme Power (Japan).chd
 psx/Extreme Snow Break (Europe).chd
-psx/F1 2000 (USA) (En,Fr,Es).chd
 psx/F1 Championship Season 2000 (USA).chd
 psx/F1 Racing Championship (USA) (En,Fr).chd
-psx/F1 World Grand Prix (USA).chd
 psx/F1 World Grand Prix - 1999 Season (USA) (En,Fr,De,Es,It).chd
 psx/FEDA 2 - White Surge the Platoon (Japan).chd
 psx/FIFA - Road to World Cup 98 (USA) (En,Fr,De,Es,Nl,Sv).chd
@@ -20838,26 +17828,6 @@ psx/Family Feud (USA).chd
 psx/Family Game Pack (USA).chd
 psx/Family Games Compendium (Europe) (Disc 1).chd
 psx/Family Igo 2 (Japan).chd
-psx/Famitsu Wave 10gatsu-gou Vol. 15 (Japan).chd
-psx/Famitsu Wave 11gatsu-gou Vol. 16 (Japan).chd
-psx/Famitsu Wave 11gatsu-gou Vol. 4 (Japan).chd
-psx/Famitsu Wave 12gatsu-gou Vol. 17 (Japan).chd
-psx/Famitsu Wave 12gatsu-gou Vol. 5 (Japan).chd
-psx/Famitsu Wave 1gatsu-gou Vol. 18 (Japan).chd
-psx/Famitsu Wave 1gatsu-gou Vol. 6 (Japan).chd
-psx/Famitsu Wave 2gatsu-gou Vol. 19 (Japan).chd
-psx/Famitsu Wave 2gatsu-gou Vol. 7 (Japan).chd
-psx/Famitsu Wave 3gatsu-gou Vol. 20 (Japan).chd
-psx/Famitsu Wave 3gatsu-gou Vol. 8 (Japan).chd
-psx/Famitsu Wave 4gatsu-gou Vol. 9 (Japan).chd
-psx/Famitsu Wave 5gatsu-gou Vol. 10 (Japan).chd
-psx/Famitsu Wave 6gatsu-gou Vol. 11 (Japan).chd
-psx/Famitsu Wave 7gatsu-gou Vol. 12 (Japan).chd
-psx/Famitsu Wave 8gatsu-gou Vol. 13 (Japan).chd
-psx/Famitsu Wave 9gatsu-gou Vol. 14 (Japan).chd
-psx/Famitsu Wave Soukan-gou Vol. 1 (Japan).chd
-psx/Famitsu Wave Soukan-gou Vol. 2 (Japan).chd
-psx/Famitsu Wave Soukan-gou Vol. 3 (Japan).chd
 psx/Fantastic Fortune (Japan).chd
 psx/Fantastic Four (USA).chd
 psx/Fantastic Night Dreams - Cotton Original (Japan).chd
@@ -20870,7 +17840,6 @@ psx/Fear Effect 2 - Retro Helix (USA) (Disc 1) (Rev 1).chd
 psx/Felony 11-79 (USA).chd
 psx/Fighter Maker (USA).chd
 psx/Fighting Eyes (Japan).chd
-psx/Fighting Force (USA) (Rev 1) (EDC).chd
 psx/Fighting Force 2 (USA).chd
 psx/Fighting Illusion - K-1 GP 2000 (Japan).chd
 psx/Fighting Illusion V - K-1 Grand Prix '99 (Japan).chd
@@ -20917,7 +17886,6 @@ psx/Formula One 2001 (Europe) (En,Fi).chd
 psx/Formula One 99 (USA) (En,Fr,Es).chd
 psx/Formula One Arcade (Europe) (En,Fr,De,Es,It).chd
 psx/Forsaken (USA).chd
-psx/Fox Hunt (USA) (Disc 1).chd
 psx/Fox Junction (Japan).chd
 psx/Frank Thomas Big Hurt Baseball (USA).chd
 psx/Free Talk Studio - Mari no Kimamana Oshaberi (Japan).chd
@@ -20926,13 +17894,11 @@ psx/Freestyle Scooter (Europe).chd
 psx/Frenzy! (Europe).chd
 psx/Frogger (USA).chd
 psx/Frogger 2 - Swampy's Revenge (USA).chd
-psx/From Software 1998 Summer Preview Movies (Japan).chd
 psx/From TV Animation One Piece - Grand Battle! 2 (Japan).chd
 psx/Front Mission 1st (Japan).chd
 psx/Front Mission 2 (Japan) (Front Mission History).chd
 psx/Front Mission 3 (USA).chd
 psx/Front Mission Alternative (Japan).chd
-psx/Fun! Fun! Pingu - Youkoso! Nankyoku e (Japan) (Shokai Suuryou Genteiban).chd
 psx/Furimukeba Tonari ni (Japan).chd
 psx/Fushigi Deka (Japan).chd
 psx/Fushigi no Kuni no Angelique (Japan).chd
@@ -20941,7 +17907,6 @@ psx/Fuuraiki (Japan).chd
 psx/Fuuun Gokuu Ninden (Japan).chd
 psx/G-Police (USA) (Disc 1).chd
 psx/G-Police - Weapons of Justice (USA).chd
-psx/GI Jockey (Japan) (Shokai Genteiban).chd
 psx/GP Challenge (Europe) (En,Fr,De,It).chd
 psx/Gadget - Past as Future (Japan) (Disc 1).chd
 psx/Gakkou no Kowai Uwasa - Hanako-san ga Kita!! (Japan).chd
@@ -20959,17 +17924,14 @@ psx/Gallop Racer 2000 (Japan).chd
 psx/Game Nihonshi - Kakumeiji Oda Nobunaga (Japan).chd
 psx/Game no Tatsujin (Japan) (Rev 1).chd
 psx/Game no Tatsujin 2 (Japan).chd
-psx/Game of Life, The (USA).chd
 psx/Gamera 2000 (Japan) (En,Ja).chd
 psx/Ganbare Goemon - Uchuu Kaizoku Akogingu (Japan) (Rev 1).chd
-psx/Ganbare Morikawa-kun 2-gou (Japan) (Genteiban).chd
 psx/Gangway Monsters (Japan).chd
 psx/Ganso Family Mahjong (Japan).chd
 psx/Ganso Family Mahjong 2 (Japan).chd
 psx/Gate Keepers (Japan) (Disc 1).chd
 psx/Gauntlet Legends (USA).chd
 psx/Gear Fighter Dendoh (Japan).chd
-psx/Gekioh - Shooting King (USA).chd
 psx/Gekisou Tomarunner (Japan).chd
 psx/Gekitou! Crush Gear Turbo (Japan).chd
 psx/Genghis Khan - Aoki Ookami to Shiroki Mejika IV (Japan).chd
@@ -20993,7 +17955,6 @@ psx/Godzilla - Trading Battle (Japan).chd
 psx/Goiken Muyou II (Japan) (En,Ja).chd
 psx/Gokujou Parodius da! Deluxe Pack (Japan).chd
 psx/Gokuu Densetsu - Magic Beast Warriors (Japan).chd
-psx/Gold and Glory - The Road to El Dorado (USA).chd
 psx/Golden Nugget (USA) (Disc 1).chd
 psx/Goldie (Europe) (En,Fr,De,Nl).chd
 psx/Goo! Goo! Soundy (Japan).chd
@@ -21002,20 +17963,15 @@ psx/Gotouchi Hello Kitty Sugoroku Monogatari (Japan).chd
 psx/Gourmet Action Game - Manpuku!! Nabe Kazoku (Japan).chd
 psx/Gradius Deluxe Pack (Japan).chd
 psx/Gradius Gaiden (Japan) (Rev 1).chd
-psx/Gran Turismo (USA) (Rev 1).chd
-psx/Gran Turismo 2 (USA) (Simulation Mode).chd
-psx/Gran Turismo 2 - Music at the Speed of Sound - The Album (USA) (Bonus PlayStation Disc).chd
 psx/Grand Slam (USA).chd
 psx/Grand Theft Auto (USA).chd
 psx/Grand Theft Auto - Mission Pack 1 - London 1969 (USA).chd
 psx/Grand Theft Auto 2 (USA).chd
 psx/Grande Fratello - Il Gioco (Italy).chd
 psx/Grandia (USA) (Disc 1).chd
-psx/Granstream Saga, The (USA).chd
 psx/Great Hits (Japan) (Taikenban).chd
 psx/Grid Runner (USA).chd
 psx/Grille Logic (Japan).chd
-psx/Grinch, The (USA) (En,Fr,Es).chd
 psx/Grind Session (USA).chd
 psx/Gritz - The Pyramid Adventure (Japan).chd
 psx/Groove Adventure Rave - Mikan no Hiseki (Japan).chd
@@ -21059,8 +18015,6 @@ psx/Hardcore 4x4 (Europe) (En,Fr,De).chd
 psx/Harlem Beat - You're the One (Japan).chd
 psx/Harmful Park (Japan).chd
 psx/Harry Potter and the Chamber of Secrets (USA) (En,Fr,Es).chd
-psx/Harry Potter and the Sorcerer's Stone (USA) (En,Fr,Es).chd
-psx/Haru no Buru Buru Taikenban (Japan).chd
 psx/Harukanaru Toki no Naka de (Japan) (Premium Box).chd
 psx/Harukaze Sentai V-Force (Japan) (Disc 1).chd
 psx/Harvest Moon - Back to Nature (USA).chd
@@ -21068,9 +18022,7 @@ psx/Hashiriya - Ookami-tachi no Densetsu (Japan).chd
 psx/Hatsukoi Valentine (Japan).chd
 psx/Hatsukoi Valentine Special (Japan).chd
 psx/Haunted Junction - Seitokai Badge wo Oe! (Japan).chd
-psx/Head to Toe 1 (USA).chd
 psx/Head to Toe 2 (USA).chd
-psx/Head to Toe 3 (USA).chd
 psx/Head to Toe 4 (USA).chd
 psx/Heart of Darkness (USA) (Disc 1).chd
 psx/Hebereke Station Popoitto (Japan).chd
@@ -21079,7 +18031,6 @@ psx/Heiwa Parlor! Pro - Dolphin Ring Special (Japan).chd
 psx/Heiwa Parlor! Pro - Inakappe Taishou Special (Japan).chd
 psx/Heiwa Parlor! Pro - Western Special (Japan).chd
 psx/Hellboy - Asylum Seeker (USA).chd
-psx/Hello Kitty - Cube Frenzy (USA).chd
 psx/Hello Kitty - White Present (Japan).chd
 psx/Herc's Adventures (USA).chd
 psx/Hermie Hopperhead - Scrap Panic (Japan).chd
@@ -21123,20 +18074,16 @@ psx/Honkaku Igo (Japan).chd
 psx/Honkaku Mahjong - Tetsuman Special (Japan) (Rev 1).chd
 psx/Honkaku Yonin Uchi Pro Mahjong - Mahjong Ou (Japan).chd
 psx/Honoo no Ryourinin - Cooking Fighter Hao (Japan).chd
-psx/Hooters - Road Trip (USA).chd
 psx/Hoshi de Hakken!! Tamagotchi (Japan).chd
 psx/Hoshi no Mahoroba (Japan).chd
 psx/Hoshi no Oka Gakuen Monogatari - Gakuensai (Japan).chd
 psx/Hoshigami - Ruining Blue Earth (USA).chd
 psx/Hot Shot (Europe).chd
-psx/Hot Shots Golf (USA).chd
-psx/Hot Shots Golf 2 (USA).chd
 psx/Hot Wheels - Extreme Racing (USA).chd
 psx/Hot Wheels - Turbo Racing (USA).chd
 psx/Houma Hunter Lime with Paint Maker (Japan).chd
 psx/Hugo (Europe) (Nl,Pt).chd
 psx/Hugo - Black Diamond Fever (Europe) (En,Sv,Fi).chd
-psx/Hugo - The Evil Mirror (USA) (En,Es).chd
 psx/Hugo - The Quest for the Sunstones (Europe) (En,Fr,De,Es,It,Pt,Sv,No,Da,Fi).chd
 psx/Hugo 2 (Europe).chd
 psx/Hunter x Hunter - Maboroshi no Greed Island (Japan).chd
@@ -21146,53 +18093,9 @@ psx/Hybrid (Europe).chd
 psx/Hydro Thunder (USA).chd
 psx/Hyper Crazy Climber (Japan).chd
 psx/Hyper Formation Soccer (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 1 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 10 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 11 (Japan) (Disc 1).chd
-psx/Hyper PlayStation Re-mix 1998 No. 12 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 2 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 3 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 4 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 5 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 6 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 7 (Japan) (Disc 1).chd
-psx/Hyper PlayStation Re-mix 1998 No. 7 (Japan) (Disc 1).chd.aria2
-psx/Hyper PlayStation Re-mix 1998 No. 8 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 9 (Japan).chd
-psx/Hyper PlayStation Re-mix 1998 No. 9 (Japan).chd.aria2
-psx/Hyper PlayStation Re-mix 1999 No. 1 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 1 (Japan).chd.aria2
-psx/Hyper PlayStation Re-mix 1999 No. 10 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 11 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 11 (Japan).chd.aria2
-psx/Hyper PlayStation Re-mix 1999 No. 12 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 2 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 3 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 3 (Japan).chd.aria2
-psx/Hyper PlayStation Re-mix 1999 No. 4 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 5 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 6 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 7 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 8 (Japan).chd
-psx/Hyper PlayStation Re-mix 1999 No. 9 (Japan) (Disc 1).chd
-psx/Hyper PlayStation Re-mix 2000 No. 1 (Japan).chd
-psx/Hyper PlayStation Re-mix 2000 No. 2 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 1 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 10 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 11 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 12 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 2 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 3 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 4 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 5 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 6 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 7 (Japan) (Disc 1).chd
-psx/Hyper PlayStation Re-mix No. 8 (Japan).chd
-psx/Hyper PlayStation Re-mix No. 9 (Japan).chd
 psx/Hyper Securities 2 (Japan).chd
 psx/Hyper Tennis - Final Match (Europe).chd
 psx/Hyper Value 2800 - Hanafuda (Japan).chd
-psx/I.Q - Intelligent Qube (USA).chd
 psx/IHRA Drag Racing (USA).chd
 psx/ISS Pro Evolution (USA).chd
 psx/ISS Pro Evolution 2 (Europe) (En,Fr,De).chd
@@ -21208,20 +18111,12 @@ psx/In the Hunt (USA).chd
 psx/Inagawa Junji - Kyoufu no Yashiki (Japan).chd
 psx/Inagawa Junji - Mayonaka no Taxi (Japan).chd
 psx/Incredible Crisis (USA).chd
-psx/Incredible Hulk, The - The Pantheon Saga (USA).chd
 psx/Independence Day (USA).chd
 psx/Indy 500 (Europe).chd
 psx/Infestation (Europe) (En,Fr,De,Es,It,Nl).chd
 psx/Initial D (Japan).chd
 psx/Inspector Gadget - Gadget's Crazy Maze (USA) (En,Fr,De,Es,It,Nl).chd
 psx/Intellivision Classic Games (USA).chd
-psx/Interactive CD Sampler Disc Vol. 11 (USA).chd
-psx/Interactive CD Sampler Disc Vol. 9 (USA) (SCUS-94295).chd
-psx/Interactive CD Sampler Disc Volume 4 (USA).chd
-psx/Interactive CD Sampler Disc Volume 7 (USA) (Rev 1).chd
-psx/Interactive CD Sampler Pack Volume 2 (USA).chd
-psx/Interactive CD Sampler Pack Volume One (USA) (SCUS-94956).chd
-psx/Interactive CD Sampler Pack Volume Three (USA).chd
 psx/International Cricket Captain 2000 (Europe).chd
 psx/International Cricket Captain 2002 (Europe).chd
 psx/International Moto X (Europe) (En,Fr,De,Es,It,Nl).chd
@@ -21233,7 +18128,6 @@ psx/International Track & Field (USA).chd
 psx/International Track & Field 2000 (USA).chd
 psx/Inuyasha - A Feudal Fairy Tale (USA) (Rev 1).chd
 psx/Invasion (Europe) (En,Fr,De,Es,It,Nl).chd
-psx/Invasion from Beyond (USA).chd
 psx/Ippatsu Gyakuten - Gamble King Densetsu (Japan).chd
 psx/Irem Arcade Classics (Japan).chd
 psx/Iron Man & X-O Manowar in Heavy Metal (USA).chd
@@ -21242,14 +18136,10 @@ psx/Irritating Stick (USA).chd
 psx/Ishin no Arashi (Japan).chd
 psx/Ishin no Arashi - Bakumatsu Shishiden (Japan).chd
 psx/Itadaki Street - Gorgeous King (Japan) (Rev 1).chd
-psx/Italian Job, The (USA).chd
 psx/Iznogoud (Europe) (En,Fr,De,It,Nl).chd
 psx/J's Racin' (Japan).chd
 psx/JGTC - All Japan Grand Touring Car Championship (Japan).chd
-psx/Jackie Chan Stuntmaster (USA).chd
 psx/Jade Cocoon - Story of the Tamamayu (USA).chd
-psx/Jampack Vol. 1 (USA).chd
-psx/Jampack Vol. 2 (USA).chd
 psx/Jang Jang Koi Shimashow Separate 1 - Jang Jang Shimashow (Japan).chd
 psx/Jang Jang Koi Shimashow Separate 2 - Koi Koi Shimashow (Japan).chd
 psx/Janhai Yuugi '99 - Tanuki no Kawazanyou (Japan).chd
@@ -21257,19 +18147,16 @@ psx/Jarrett & Labonte Stock Car Racing (USA).chd
 psx/Jeff Wayne's La Guerre des Mondes (France).chd
 psx/Jellyfish - The Healing Friend (Japan).chd
 psx/Jeopardy! (USA).chd
-psx/Jeopardy! 2nd Edition (USA).chd
 psx/Jeremy McGrath Supercross 2000 (USA).chd
 psx/Jeremy McGrath Supercross 98 (USA).chd
 psx/Jersey Devil (USA).chd
 psx/Jet Ace (Europe).chd
 psx/Jet Moto (USA).chd
 psx/Jet Moto 2 (USA).chd
-psx/Jet Moto 2 - Championship Edition (USA).chd
 psx/Jet Moto 3 (USA).chd
 psx/Jet de Go! Let's Go by Airliner (Japan) (JAL Kinai Hanbai Gentei).chd
 psx/Jetracer (Europe) (En,Fr,De).chd
 psx/Jigoku Sensei Nube (Japan).chd
-psx/Jigsaw Madness (USA).chd
 psx/Jigsaw World (Japan) (Honkakuha de 1300).chd
 psx/Jikkyou Golf Master 2000 (Japan) (Rev 1).chd
 psx/Jikkyou Oshaberi Parodius - Forever with Me (Japan).chd
@@ -21287,8 +18174,6 @@ psx/Jikkyou Powerful Pro Yakyuu 2001 (Japan).chd
 psx/Jikkyou Powerful Pro Yakyuu 2001 - Ketteiban (Japan).chd
 psx/Jikkyou Powerful Pro Yakyuu 2002 - Haru (Japan).chd
 psx/Jikuu Tantei DD - Maboroshi no Lorelei (Japan) (Disc 1) (Rev 1).chd
-psx/Jim Henson's Bear in the Big Blue House (USA).chd
-psx/Jimmy Johnson's VR Football '98 (USA).chd
 psx/Jimmy White's 2 - Cueball (USA).chd
 psx/Jingle Cats - Love-Para Daisakusen no Maki (Japan) (Taikenban).chd
 psx/Jinx (Europe) (En,Fr,De,Es,It).chd
@@ -21306,15 +18191,8 @@ psx/Jungle Park (Japan).chd
 psx/Jupiter Strike (USA).chd
 psx/K-1 Grand Prix (USA).chd
 psx/K-1 Revenge (USA).chd
-psx/K-1 The Arena Fighters (USA).chd
-psx/K9.5 1 - Live in Airedale (USA).chd
-psx/K9.5 2 - We Are the Dogs! (USA).chd
-psx/K9.5 3 - WebTunes (USA).chd
-psx/K9.5 4 - The Tail-Wag Tour (USA).chd
-psx/K9.5 5 - The Howlywood Premiere (USA).chd
 psx/KISS Pinball (USA).chd
 psx/KKND Krossfire (Europe).chd
-psx/Kagayaku Kisetsu e (Japan) (Disc 1) (Shokai Genteiban).chd
 psx/Kagero - Deception II (USA).chd
 psx/Kaijuu Senki (Japan).chd
 psx/Kaikan Phrase - Datenshi Kourin (Japan).chd
@@ -21325,21 +18203,13 @@ psx/Kamen Rider (Japan).chd
 psx/Kamen Rider Agito (Japan).chd
 psx/Kamen Rider Kuuga (Japan).chd
 psx/Kamen Rider V3 (Japan).chd
-psx/Karat PS PS2-you Pro Action Replay CDX2 Sampler (Japan) (Unl).chd
-psx/Karat PS PS2-you Pro Action Replay CDX2 Taikenban (Japan) (Unl).chd
-psx/Karat PS-PS2-you Catalog & Taikenban (Japan) (Unl).chd
-psx/Karat PS1-you Pro Action Replay CDX3 (Japan) (Unl).chd
 psx/Kart Challenge (Europe) (En,Fr,De,It).chd
 psx/Kartia - The Word of Fate (USA).chd
-psx/Kasei Monogatari (Japan) (Genteiban).chd
 psx/Kattobi Tune (Japan).chd
-psx/KazMania 1 - Trail of Gems (USA).chd
-psx/KazMania 2 - Chaos in KazMania (USA) (Rev 1).chd
 psx/Kaze no Oka Kouen Nite (Japan).chd
 psx/Keiba Eight '99 Haru Natsu (Japan).chd
 psx/Keitai Eddy (Japan).chd
 psx/Kekkon - Marriage (Japan).chd
-psx/Kensei - Sacred Fist (USA).chd
 psx/Kero Kero King (Japan).chd
 psx/Khamrai (Japan).chd
 psx/Kick Off World (Europe) (En,Fr).chd
@@ -21360,8 +18230,6 @@ psx/Kindaichi Shounen no Jikenbo - Jigoku Yuuen Satsujin Jiken (Japan) (Disc 1).
 psx/King of Bowling (Japan).chd
 psx/King of Bowling 2 (Europe).chd
 psx/King of Bowling 3 (Europe).chd
-psx/King of Fighters '95, The (USA).chd
-psx/King of Fighters '99, The (USA).chd
 psx/King of Parlor (Japan).chd
 psx/King of Parlor 2 (Japan).chd
 psx/King of Producer (Japan).chd
@@ -21391,11 +18259,9 @@ psx/Koudelka (USA) (Disc 1).chd
 psx/Kouryuu Sangoku Engi (Japan).chd
 psx/Kouryuuki (Japan).chd
 psx/Kowloon's Gate (Special Disc) (Japan).chd
-psx/Kowloon's Gate - Kowloon Fuusuiden (Japan, Asia) (Disc 1) (Byakko) (Shokai Genteiban).chd
 psx/Krazy Ivan (USA).chd
 psx/Kumitate Battle Kuttu Ketto (Japan).chd
 psx/Kuon no Kizuna (Japan).chd
-psx/Kurashi Iki! Iki! PlayStation Welcome Disc (Japan).chd
 psx/Kuro no Juusan (Japan).chd
 psx/Kuro no Ken - Blade of the Darkness (Japan).chd
 psx/Kuroi Hitomi no Noir - Cielgris Fantasm (Japan).chd
@@ -21421,7 +18287,6 @@ psx/LNF Stars 2001 (France).chd
 psx/Lagnacure (Japan) (Artdink Best Choice).chd
 psx/Lagnacure Legend (Japan).chd
 psx/Lake Masters (Japan).chd
-psx/Lalala PlayStation Trial Disc - 1998 Summer (Japan).chd
 psx/Langrisser I & II (Japan) (Shokai Gentei Special Package).chd
 psx/Largo Winch - Commando SAR (USA).chd
 psx/Las Vegas Dream 2 (Japan).chd
@@ -21430,7 +18295,6 @@ psx/Leading Jockey '99 (Japan).chd
 psx/Leading Jockey Highbred (Japan).chd
 psx/Legacy of Kain - Soul Reaver (USA).chd
 psx/Legend (Europe).chd
-psx/Legend of Dragoon, The (USA) (Disc 1).chd
 psx/Legend of Legaia (USA).chd
 psx/Legend of Mana (USA).chd
 psx/Legend of Mulan (Europe) (En,Fr,De).chd
@@ -21472,7 +18336,6 @@ psx/Lunar 2 - Eternal Blue Complete (USA) (Disc 1).chd
 psx/Lunar Wing - Toki o Koeta Seisen (Japan).chd
 psx/Lunatic Dawn - Odyssey (Japan).chd
 psx/Lunatic Dawn III (Japan).chd
-psx/M&M's - Shell Shocked (USA).chd
 psx/MDK (USA).chd
 psx/MLB 2000 (USA).chd
 psx/MLB 2001 (USA).chd
@@ -21484,11 +18347,9 @@ psx/MLB 98 (USA).chd
 psx/MLB 99 (USA).chd
 psx/MLB Pennant Race (USA).chd
 psx/MTB Dirt Cross (Japan).chd
-psx/MTV Celebrity Deathmatch (USA).chd
 psx/MTV Music Generator (USA).chd
 psx/MTV Sports - Pure Ride (USA).chd
 psx/MTV Sports - Snowboarding (USA).chd
-psx/Machine Head (USA).chd
 psx/Machine Hunter (USA).chd
 psx/Macross Digital Mission VF-X (Japan) (Rev 1).chd
 psx/Macross Plus - Game Edition (Japan).chd
@@ -21521,15 +18382,12 @@ psx/Mahjong Youchien Tamago Gumi 2 - Taikai e Ikou! (Japan).chd
 psx/Mahjong de Asobo (Japan).chd
 psx/Mahou Shoujo Fancy CoCo (Japan).chd
 psx/Majokko Daisakusen - Little Witching Mischiefs (Japan).chd
-psx/Maniac Moons (USA) (Proto).chd
 psx/Marble Master (USA).chd
 psx/Marby Baby Story (Japan).chd
-psx/March Madness '98 (USA).chd
 psx/Maria - Kimitachi ga Umareta Wake (Japan) (Disc 1).chd
 psx/Maria 2 - Jutai Kokuchi no Nazo (Japan) (Disc 1).chd
 psx/Marionette Company (Japan).chd
 psx/Marionette Company 2 Chu! (Japan) (Major Wave).chd
-psx/Marl Jong!! (Japan) (Genteiban).chd
 psx/Mars Moose Cosmic Quest 1 - City Sights (USA).chd
 psx/Mars Moose Cosmic Quest 2 - Fairy Tale Island (USA).chd
 psx/Mars Moose Cosmic Quest 3 - Race Through France (USA).chd
@@ -21544,25 +18402,18 @@ psx/Masumon Kids - The Another World of the Master of Monsters (Japan) (Major Wa
 psx/Mat Hoffman's Pro BMX (USA).chd
 psx/Math Gallery - Collection 1 (USA).chd
 psx/Math Gallery - Collection 2 (USA).chd
-psx/Math on the Move! 1 - Addition-Subtraction Advanced (USA).chd
-psx/Math on the Move! 1 - Addition-Subtraction Intermediate (USA).chd
-psx/Math on the Move! 2 - Multiplication-Division Advanced (USA).chd
-psx/Math on the Move! 2 - Multiplication-Division Intermediate (USA).chd
 psx/Mawatte Mucho! (Japan).chd
 psx/Max Surfing 2nd (Japan).chd
 psx/MaxRacer (Japan).chd
 psx/Maximum Force (USA).chd
 psx/Maze Heroes - Meikyuu Densetsu (Japan).chd
-psx/MechWarrior 2 - 31st Century Combat - Arcade Combat Edition (USA).chd
 psx/Medal of Honor (USA).chd
 psx/Medal of Honor - Resistance (France).chd
-psx/Medal of Honor - Underground (USA).chd
 psx/Medarot R (Japan).chd
 psx/Medarot R - Parts Collection (Japan).chd
 psx/MediEvil (USA).chd
 psx/MediEvil II (USA).chd
 psx/Mega Man Legends (USA).chd
-psx/Mega Man X6 (USA) (Rev 1).chd
 psx/Megaman - Battle & Chase (Europe).chd
 psx/Megatudo 2096 (Japan).chd
 psx/Meguri Aishite (Japan).chd
@@ -21578,11 +18429,9 @@ psx/Merriment Carrying Caravan (Japan).chd
 psx/Meru Purana (Japan).chd
 psx/Metal Angel 3 (Japan) (Disc 1).chd
 psx/Metal Gear Solid (USA) (Disc 1) (Rev 1).chd
-psx/Metal Gear Solid (USA) (Disc 2).chd.aria2
 psx/Metal Gear Solid - Integral (Japan, Asia) (Disc 3) (VR-Disc).chd
 psx/Metal Gear Solid - Special Missions (Europe) (En,Fr,De,Es,It).chd
 psx/Metal Gear Solid - VR Missions (USA).chd
-psx/Metal Gear Solid - VR Missions (USA).chd.aria2
 psx/Metal Jacket (Japan).chd
 psx/Metal Slug - Super Vehicle-001 (Japan, Asia).chd
 psx/Metal Slug X (USA).chd
@@ -21611,16 +18460,6 @@ psx/Minton Keibu no Sousa File - Doukeshi Satsujin Jiken (Japan).chd
 psx/Miracle Jim no Bassing Beat (Japan).chd
 psx/Miracle Space Race (USA).chd
 psx/Miracle World - Fushigi no Kuni no IQ Meiro (Japan).chd
-psx/MiruMiru PlayStation Vol. 28 (Japan).chd
-psx/MiruMiru PlayStation Vol. 29 (Japan).chd
-psx/MiruMiru PlayStation Vol. 29 (Japan).chd.aria2
-psx/MiruMiru PlayStation Vol. 31 (Japan).chd
-psx/MiruMiru PlayStation Vol. 34 (Japan).chd
-psx/MiruMiru PlayStation Vol. 4 (Japan) (Disc 3).chd
-psx/MiruMiru PlayStation Vol. 42 (Japan).chd
-psx/MiruMiru PlayStation Vol. 43 (Japan).chd
-psx/Misa no Mahou Monogatari (Japan) (Disc 1) (Shokai Genteiban).chd
-psx/Misadventures of Tron Bonne, The (USA).chd
 psx/Miss Spider's Tea Party (USA).chd
 psx/Missile Command (USA).chd
 psx/Mission - Impossible (USA) (En,Fr,Es).chd
@@ -21669,7 +18508,6 @@ psx/Mortal Kombat Mythologies - Sub-Zero (USA).chd
 psx/Mortal Kombat Trilogy (USA) (Rev 1).chd
 psx/Moses - Prince of Egypt (Europe) (En,Fr,De,Nl).chd
 psx/Moto Racer (USA).chd
-psx/Moto Racer (USA).chd.aria2
 psx/Moto Racer 2 (USA).chd
 psx/Moto Racer World Tour (USA).chd
 psx/Motocross Mania (USA).chd
@@ -21681,7 +18519,6 @@ psx/Motorhead (USA).chd
 psx/Motto! Nyan to Wonderful 2 (Japan).chd
 psx/Mouja (Japan) (Honkakuha de 1300).chd
 psx/Mouri Motonari - Chikai no Sanshi (Japan).chd
-psx/Mr. Driller (USA).chd
 psx/Mr. Prospector - Horiate-kun (Japan).chd
 psx/Muppet Monster Adventure (USA).chd
 psx/Murakoshi Seikai no Bakuchou SeaBass Fishing (Japan) (Disc 1).chd
@@ -21693,7 +18530,6 @@ psx/My Home Dream (Japan).chd
 psx/Myst (USA).chd
 psx/N Gauge Unten Kibun Game - Gatan Goton (Japan).chd
 psx/N-Gen Racing (USA).chd
-psx/N2O - Nitrous Oxide (USA).chd
 psx/NASCAR 2000 (USA).chd
 psx/NASCAR 2001 (USA).chd
 psx/NASCAR 98 (USA).chd
@@ -21712,7 +18548,6 @@ psx/NBA Jam Extreme (USA).chd
 psx/NBA Live 2000 (USA).chd
 psx/NBA Live 2001 (USA).chd
 psx/NBA Live 2002 (USA).chd
-psx/NBA Live 2003 (USA).chd
 psx/NBA Live 96 (USA).chd
 psx/NBA Live 97 (USA).chd
 psx/NBA Live 98 (USA).chd
@@ -21768,7 +18603,6 @@ psx/NHL 98 (USA).chd
 psx/NHL 99 (USA).chd
 psx/NHL Blades of Steel 2000 (USA).chd
 psx/NHL Breakaway 98 (USA).chd
-psx/NHL Championship 2000 (USA).chd
 psx/NHL Face Off '97 (USA).chd
 psx/NHL Face Off (USA).chd
 psx/NHL FaceOff 2000 (USA).chd
@@ -21787,10 +18621,6 @@ psx/Nagano Winter Olympics '98 (USA).chd
 psx/Nage Libre - Rasen no Soukoku (Japan).chd
 psx/Najavu no Daibouken - My Favorite Namjatown (Japan).chd
 psx/Namco Museum Encore (Japan) (Shokai Gentei Special Box) (Rev 1).chd
-psx/Namco Museum Vol. 1 (USA) (Rev 1).chd
-psx/Namco Museum Vol. 2 (USA).chd
-psx/Namco Museum Vol. 3 (USA).chd
-psx/Namco Museum Vol. 4 (USA).chd
 psx/Namco Soccer Prime Goal (Europe).chd
 psx/Namco Tennis Smash Court (Europe).chd
 psx/Nanatsu no Hikan (Japan) (Disc 1).chd
@@ -21816,11 +18646,7 @@ psx/Nessa no Hoshi (Japan) (Disc 1).chd
 psx/Netz Magazine - Altezza (Japan).chd
 psx/Neues (Japan).chd
 psx/Newman Haas Racing (USA).chd
-psx/Next King - Koi no Sennen Oukoku (Japan) (Genteiban).chd
 psx/Nice Cats (Europe) (En,Fr,De,Nl).chd
-psx/Nickelodeon Rugrats - Totally Angelica (USA).chd
-psx/Nickelodeon Rugrats in Paris - The Movie (USA).chd
-psx/Nickelodeon SpongeBob SquarePants - SuperSponge (USA).chd
 psx/Nicktoons Racing (USA).chd
 psx/Night Head - The Labyrinth (Japan).chd
 psx/Night Raid (Japan).chd
@@ -21835,16 +18661,13 @@ psx/Ninja Jajamaru-kun - Onigiri Ninpouchou (Japan).chd
 psx/Ninku (Japan).chd
 psx/Nishijin Pachinko Tengoku EX (Japan).chd
 psx/Nishijin Pachinko Tettei Kouryaku - CR Hanaman Sokuhou & CR Obake Land (Japan).chd
-psx/No Fear Downhill Mountain Bike Racing (USA).chd
 psx/No Fear Downhill Mountain Biking (Europe) (En,Fr,De,Es,It,Sv).chd
-psx/No One Can Stop Mr. Domino (USA).chd
 psx/Nobunaga no Yabou - Haouden (Japan).chd
 psx/Nobunaga no Yabou - Reppuuden (Japan).chd
 psx/Nobunaga no Yabou - Returns (Japan).chd
 psx/Nobunaga no Yabou - Shouseiroku (Japan) (Rev 1).chd
 psx/Noddy's Magic Adventure (Europe) (En,Fr).chd
 psx/Noon (Japan).chd
-psx/Norse by Norsewest - The Return of the Lost Vikings (USA).chd
 psx/Not Treasure Hunter (Japan).chd
 psx/Novastorm (USA) (Disc 1).chd
 psx/Novels - Game Center Arashi R (Japan).chd
@@ -21879,18 +18702,10 @@ psx/Oumagatoki 2 (Japan).chd
 psx/Out Live - Be Eliminate Yesterday (Japan).chd
 psx/Over Drivin' - Skyline Memorial (Japan).chd
 psx/OverBlood 2 (Europe) (Disc 1) (Rev 1).chd
-psx/P.K.'s Place 2 - Hoopo at Sea! (USA).chd
-psx/P.K.'s Place 3 - Carlos at the Races! (USA).chd
-psx/P.K.'s Place 4 - Daphne and the Seventh Wonder (USA).chd
 psx/PAQA (Japan).chd
 psx/PD Ultraman Invader (Japan).chd
 psx/PGA European Tour Golf (Europe) (En,De).chd
-psx/PGA Tour 96 (USA).chd
-psx/PGA Tour 97 (USA).chd
-psx/PGA Tour 98 (USA).chd
 psx/PO'ed (USA).chd
-psx/PS One Winter 03 Kiosk Version 1.21 (USA).chd
-psx/PS-X-Change Version 2.0 (USA) (Unl).chd
 psx/PaRappa the Rapper (USA) (En,Fr,De,Es,It).chd
 psx/Paca Paca Passion (Japan).chd
 psx/Paca Paca Passion 2 (Japan).chd
@@ -21937,7 +18752,6 @@ psx/Panzer General (USA).chd
 psx/Pao Leeming Kanshuu - Fuusui Nyuumon (Japan).chd
 psx/Paradise Casino (Europe).chd
 psx/Parasite Eve (USA) (Disc 1).chd
-psx/Parasite Eve II (USA) (Disc 1).chd
 psx/Paris-Marseille Racing (France).chd
 psx/Paris-Marseille Racing II (France).chd
 psx/Parlor Station (Japan) (Reprint).chd
@@ -21954,7 +18768,6 @@ psx/Parlor! Pro Special - CR Harenchi Gakuen & CR Toukon (Japan).chd
 psx/Paro Wars (Japan).chd
 psx/Parodius (Europe).chd
 psx/Pastel Muses (Japan).chd
-psx/Patlabor - The Game - Taikenban Ver. 1.0 (Japan).chd
 psx/Patriotic Pinball (USA).chd
 psx/Peak Performance (USA).chd
 psx/Pebble Beach no Hatou Plus (Japan).chd
@@ -21963,14 +18776,11 @@ psx/Pepsiman (Japan).chd
 psx/Perfect Assassin (Europe) (En,Fr,De,Es,It).chd
 psx/Perfect Golf 2 (Japan).chd
 psx/Perfect Performer - The Yellow Monkey (Japan).chd
-psx/Perfect Weapon (USA).chd
 psx/Persona (USA).chd
-psx/Persona 2 - Batsu - Eternal Punishment (Japan) (Disc 2) (Sumaru TV Special Preview Disc).chd
 psx/Persona 2 - Eternal Punishment (USA) (Bonus Disc).chd
 psx/Pet Pet Pet (Japan).chd
 psx/Pet in TV (Europe).chd
 psx/Peter Jacobsen's Golden Tee Golf (USA).chd
-psx/Peter Pan in Disney's Return to Never Land (USA).chd
 psx/Philosoma (USA).chd
 psx/Phix - The Adventure (USA).chd
 psx/Photo Genic (Japan) (Genteiban).chd
@@ -21988,42 +18798,6 @@ psx/Planet Laika (Japan).chd
 psx/Planet of the Apes (USA).chd
 psx/Play de Oboeru Chuugaku Eitango Deruderu 1200 (Japan) (Shotenban).chd
 psx/Play de Oboeru Eijukugo Deruderu 750 (Japan).chd
-psx/Play with the Teletubbies (USA).chd
-psx/Play-Pre PlayStation Soukan Junbi-gou (Japan).chd
-psx/Play-Pre Plus 001 - 1999 October (Japan) (Disc 1).chd
-psx/Play-Pre Plus 002 - 1999 December (Japan) (Disc 1).chd
-psx/Play-Pre Plus 003 - 2000 February (Japan).chd
-psx/Play-Pre Plus 004 - 2000 June (Japan) (Disc 1).chd
-psx/Play-Pre Plus 005 - 2000 August (Japan).chd
-psx/Play-Pre Plus 005 - 2000 August (Japan).chd.aria2
-psx/Play-Pre Plus 006 - 2000 October (Japan).chd
-psx/Play-Pre Plus 007 - 2000 December (Japan).chd
-psx/Play-Pre Vol. 1 (Japan).chd
-psx/Play-Pre Vol. 10 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 11 (Japan).chd
-psx/Play-Pre Vol. 12 (Japan).chd
-psx/Play-Pre Vol. 13 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 14 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 15 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 16 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 17 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 18 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 19 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 2 (Japan).chd
-psx/Play-Pre Vol. 3 (Japan).chd
-psx/Play-Pre Vol. 4 (Japan).chd
-psx/Play-Pre Vol. 5 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 6 (Japan) (Disc 1).chd
-psx/Play-Pre Vol. 7 (Japan).chd
-psx/Play-Pre Vol. 8 (Japan).chd
-psx/Play-Pre Vol. 9 (Japan) (Disc 1).chd
-psx/PlayStation Official Catalog CD-ROM (Japan).chd
-psx/PlayStation Picks (USA) (SCUS-94960).chd
-psx/PlayStation Programmer Tool - Runtime Library Version 2.6 (Japan) (En,Ja).chd
-psx/PlayStation Programmer Tool - Runtime Library Version 3.0 (Japan) (En,Ja).chd
-psx/PlayStation Programmer Tool - Runtime Library Version 3.3 (Japan) (En,Ja).chd
-psx/PlayStation Underground 3.1 (USA) (Disc 1).chd
-psx/PlayStation Underground 3.2 (USA) (Disc 1).chd
 psx/Player Manager (Europe) (En,Fr,De,Es,It,Sv,No).chd
 psx/Player Manager 2000 (Europe).chd
 psx/Player Manager Ninety Nine (Europe).chd
@@ -22047,7 +18821,6 @@ psx/Policenauts (Japan) (Disc 1).chd
 psx/Pong - The Next Level (USA).chd
 psx/Pool Academy (Europe) (En,Fr,De).chd
 psx/Pool Hustler (USA).chd
-psx/Pool Hustler (USA).chd.aria2
 psx/Pool Shark (Europe).chd
 psx/Pop n' Pop (Europe).chd
 psx/Pop'n Music (Japan).chd
@@ -22103,7 +18876,6 @@ psx/Professional Underground League of Pain (USA).chd
 psx/Project - Horned Owl (USA).chd
 psx/Project Gaiaray (Japan, Asia).chd
 psx/Project Overkill (USA).chd
-psx/Project Overkill (USA).chd.aria2__temp
 psx/Project V6 (Japan).chd
 psx/Proof Club (Japan).chd
 psx/Psybadek (USA).chd
@@ -22128,24 +18900,17 @@ psx/Puzzle Star Sweep (USA).chd
 psx/Puzznic (USA).chd
 psx/Q-bert (USA).chd
 psx/Qix Neo (USA).chd
-psx/Quaddle Family Mysteries, The 1 - The Case of the Scarce Scarab - Lobby & Kitchen (USA).chd
-psx/Quaddle Family Mysteries, The 2 - The Case of the Scarce Scarab - Garden (USA).chd
-psx/Quaddle Family Mysteries, The 3 - The Case of the Scarce Scarab - Parlor & Family Room (USA).chd
 psx/Quake II (USA).chd
 psx/Quantum Gate I - Akumu no Joshou (Japan).chd
 psx/Quiz Show (Italy) (Disc 1).chd
-psx/R (Japan) (Disc 1) (Shokai Genteiban).chd
 psx/R-C Stunt Copter (USA).chd
 psx/R-Type Delta (USA).chd
 psx/R-Types (USA).chd
-psx/R4 - Ridge Racer Type 4 (USA).chd
 psx/RC Helicopter (USA).chd
 psx/RC Revenge (USA).chd
 psx/RC de Go! (USA).chd
-psx/RMJ - The Mystery Hospital - Second Attack Sample CD-ROM (Japan).chd
 psx/RPG Maker (USA).chd
 psx/Race Drivin' a Go! Go! (Japan) (Rev 1).chd
-psx/RaceMaster - Gran Turismo Edition (USA) (Unl).chd
 psx/Racing (USA) (En,Fr,Es).chd
 psx/Racing Lagoon (Japan, Asia).chd
 psx/Racingroovy VS (Japan).chd
@@ -22153,7 +18918,6 @@ psx/Radikal Bikers (Europe) (En,Fr,De,Es,It).chd
 psx/Rage Racer (USA).chd
 psx/Rageball (USA).chd
 psx/Raiden DX (Japan) (Major Wave).chd
-psx/Raiden Project, The (USA).chd
 psx/Railroad Tycoon II (USA).chd
 psx/Rakugaki Showtime (Japan).chd
 psx/Rally Cross (USA).chd
@@ -22169,14 +18933,10 @@ psx/Rapid Reload (Europe).chd
 psx/Rascal (USA).chd
 psx/Rascal Racers (USA).chd
 psx/Rat Attack! (USA).chd
-psx/Ray Tracers (USA).chd
 psx/RayCrisis (Europe).chd
-psx/RayCrisis - Series Termination (USA).chd
 psx/RayStorm (USA).chd
 psx/Rayman (USA) (Playable Game Preview).chd
-psx/Rayman (USA).chd.aria2
 psx/Rayman 2 - The Great Escape (USA) (En,Fr,Es).chd
-psx/Rayman 2 - The Great Escape (USA) (En,Fr,Es).chd.aria2
 psx/Rayman Brain Games (USA).chd
 psx/Rayman Junior (Europe) (Fr,De,Es,It).chd
 psx/Rayman Junior - Level 1 (Europe) (En,Fr,De,Es,It).chd
@@ -22185,7 +18945,6 @@ psx/Rayman Junior - Level 3 (Europe) (En,Fr,Es,It).chd
 psx/Rayman Rush (USA).chd
 psx/Razor Freestyle Scooter (USA).chd
 psx/Razor Racing (USA).chd
-psx/Razor Racing (USA).chd.aria2
 psx/Re-Loaded (Europe) (En,Fr,De).chd
 psx/Re-Volt (USA).chd
 psx/ReBoot (USA).chd
@@ -22207,23 +18966,19 @@ psx/Rescue Heroes - Molten Menace (USA).chd
 psx/Rescue Shot (Europe) (En,Fr,De,Es,It).chd
 psx/Resident Evil (USA).chd
 psx/Resident Evil - Director's Cut (USA).chd
-psx/Resident Evil - Director's Cut - Dual Shock Ver. (USA).chd
 psx/Resident Evil - Survivor (USA).chd
 psx/Resident Evil 2 (USA) (Disc 1).chd
-psx/Resident Evil 2 - Dual Shock Ver. (USA) (Disc 1).chd
 psx/Resident Evil 3 - Nemesis (USA).chd
 psx/Restaurant Dream (Japan).chd
 psx/Retro Force (Europe) (En,Fr,De,Es,It).chd
 psx/Return Fire (USA).chd
 psx/Return to Zork (Japan) (Disc 1).chd
 psx/Reverthion (Japan).chd
-psx/Revolution X - Music Is the Weapon (USA).chd
 psx/Rhapsody - A Musical Adventure (USA).chd
 psx/Rhythm 'N' Face (Japan).chd
 psx/Ridegear Guybrave (Japan) (Taikenban).chd
 psx/Ridegear Guybrave II (Japan) (Disc 1).chd
 psx/Ridge Racer (USA).chd
-psx/Ridge Racer Bonus Turbo Mode Disc (USA).chd
 psx/Ridge Racer Revolution (USA).chd
 psx/Ridge Racer Type 4 (Europe) (En,Fr,De,Es,It).chd
 psx/Ring of Sias (Japan).chd
@@ -22240,13 +18995,11 @@ psx/Road & Track Presents - The Need for Speed (USA).chd
 psx/Road Rash (USA).chd
 psx/Road Rash - Jailbreak (USA).chd
 psx/Road Rash 3D (USA).chd
-psx/Road Writer (USA).chd
 psx/Roadsters (USA).chd
 psx/Robbit mon Dieu (Japan).chd
 psx/Robin Hood - The Siege (Europe).chd
 psx/Robin Lloyd no Bouken (Japan).chd
 psx/Robo Pit (USA).chd
-psx/Robo Pit (USA).chd.aria2
 psx/Robo Pit 2 (USA).chd
 psx/Robo-Pit 2 (Japan, Asia).chd
 psx/Robocod - James Pond II (Europe) (En,Fr,De,Es,It).chd
@@ -22256,19 +19009,16 @@ psx/Robots - Video Alchemy (Japan).chd
 psx/Rock 'Em Sock 'Em Robots Arena (USA).chd
 psx/Rockman (Japan).chd
 psx/Rogue Trip - Vacation 2012 (USA).chd
-psx/Rogue Trip - Vacation 2012 (USA).chd.aria2
 psx/Roland Garros French Open 2001 (Europe) (En,Fr,De,Es,It).chd
 psx/Roll Away (USA).chd
 psx/Rollcage (USA).chd
 psx/Rollcage Stage II (USA).chd
 psx/Romance of the Three Kingdoms IV - Wall of Fire (USA).chd
 psx/Romance of the Three Kingdoms VI - Awakening of the Dragon (USA).chd
-psx/Romance wa Tsurugi no Kagayaki II - Gin no Niji o Sagashite (Japan) (Disc 1) (Shokai Genteiban).chd
 psx/Ronaldo V-Football (Europe) (De,Es,It,Pt).chd
 psx/Ronin Blade (Europe) (En,Fr,De).chd
 psx/Roommate - Inoue Ryoko (Japan).chd
 psx/Rosco McQueen Firefighter Extreme (USA).chd
-psx/Roswell Conspiracies - Aliens, Myths & Legends (USA).chd
 psx/Rox (Europe).chd
 psx/Runabout 2 (USA).chd
 psx/Running High (Japan).chd
@@ -22280,9 +19030,6 @@ psx/SD Gundam - G Generation - F.I.F (Japan).chd
 psx/SD Gundam - Over Galaxian (Japan).chd
 psx/SaGa Frontier (USA).chd
 psx/SaGa Frontier 2 (USA).chd
-psx/SaGa Frontier 2 (USA).chd.aria2
-psx/Saban's Power Rangers - Lightspeed Rescue (USA).chd
-psx/Saber Marionette J - Battle Sabers (Japan) (Shokai Genteiban).chd
 psx/Saibara Rieko no Mahjong Toriatama Kikou (Japan).chd
 psx/Saikyou Ginsei Chess (Japan).chd
 psx/Saishuu Densha (Japan).chd
@@ -22316,15 +19063,9 @@ psx/Schnappi - Das kleine Krokodil - 3 Fun-Games (Germany).chd
 psx/Science Is Elementary 1 (USA).chd
 psx/Science Is Elementary 2 (USA).chd
 psx/Science Is Elementary 3 (USA).chd
-psx/Science Is Elementary 3 (USA).chd.aria2
-psx/Scooby-Doo! Night of 100 Frights (USA) (Proto).chd
 psx/Scrabble (USA).chd
-psx/Sea-Doo Hydro Cross (USA).chd
 psx/SeaBass Fishing (Japan).chd
 psx/Seabass Fishing 2 (Japan).chd
-psx/Secret of Googol 1a, The - Reshaping Googol - The Submarine (USA).chd
-psx/Secret of Googol 1b, The - Reshaping Googol - The Tower (USA).chd
-psx/Secret of Googol 2a, The - Reshaping Googol - The Castle (USA).chd
 psx/Segare Ijiri (Japan).chd
 psx/Seikai no Monshou (Japan).chd
 psx/Seirei Shoukan - Princess of Darkness (Japan).chd
@@ -22347,7 +19088,6 @@ psx/Serial Experiments Lain (Japan) (Disc 1).chd
 psx/Sesame Street - Elmo's Letter Adventure (USA).chd
 psx/Sesame Street - Elmo's Number Journey (USA).chd
 psx/Sesame Street Sports (USA).chd
-psx/Setup Utility for DTL-H1500 (Version 1.1) (Japan) (En,Ja).chd
 psx/Sexy Parodius (Japan).chd
 psx/Shadow Gunner - The Robot Wars (Europe) (En,Fr,De,Es,It).chd
 psx/Shadow Madness (USA) (Disc 1).chd
@@ -22369,7 +19109,6 @@ psx/Shin Megami Tensei (Japan).chd
 psx/Shin Megami Tensei - Devil Children - Kuro no Sho, Aka no Sho (Japan).chd
 psx/Shin Megami Tensei II (Japan).chd
 psx/Shin Megami Tensei If... (Japan) (SLPM-87153).chd
-psx/Shin Nihon Pro Wrestling - Toukon Retsuden 3 (Japan) (Antonio Inoki Intai Kinen Genteiban).chd
 psx/Shin SD Sengokuden - Kidou Musha Taisen (Japan).chd
 psx/Shin Sedai Robot Senki - Brave Saga (Japan) (Brave Charge Box).chd
 psx/Shin Super Robot Taisen (Japan).chd
@@ -22390,11 +19129,8 @@ psx/Silent Hill (USA).chd
 psx/Silhouette Mirage (USA).chd
 psx/Silhouette Stories (Japan).chd
 psx/Silverload (USA).chd
-psx/Silverload (USA).chd.aria2__temp
 psx/Sim Theme Park (USA).chd
 psx/SimCity 2000 (USA).chd
-psx/SimTheme Park (USA).chd
-psx/Simpsons Wrestling, The (USA).chd
 psx/Simulation Pro Yakyuu '99 (Japan).chd
 psx/Simulation Zoo (Japan).chd
 psx/Sister Princess (Japan) (Disc 1) (Shokai Genteiban).chd
@@ -22402,8 +19138,6 @@ psx/Sister Princess - Pure Stories (Japan).chd
 psx/Sister Princess 2 (Japan) (Disc 1) (Shokai Genteiban).chd
 psx/Sister Princess 2 - Premium Fan Disc (Japan) (Disc A).chd
 psx/Sitting Ducks (Europe) (En,Fr,De,Es,It,Nl).chd
-psx/Skeleton Warriors (USA).chd
-psx/Skeleton Warriors (USA).chd.aria2
 psx/Ski Air Mix (Europe).chd
 psx/Skullmonkeys (USA).chd
 psx/Sky Sports Football Quiz (Europe).chd
@@ -22416,7 +19150,6 @@ psx/Slayers Royal (Japan).chd
 psx/Slayers Royal 2 (Japan).chd
 psx/Slayers Wonderful (Japan).chd
 psx/Sled Storm (USA).chd
-psx/Slim Jim (USA).chd
 psx/Slime Shiyou! (Japan).chd
 psx/Slot! Pro 4 - Tairyou Special (Japan).chd
 psx/Slot! Pro 5 - Naniwa Sakura Fubuki & Shimauta (Japan).chd
@@ -22425,7 +19158,6 @@ psx/Slotter Mania 9 (Japan).chd
 psx/Small Soldiers (USA).chd
 psx/Smash Court 3 (Japan).chd
 psx/Smurf Racer! (USA) (En,Fr,Es).chd
-psx/Smurfs, The (USA) (En,Fr,Es).chd
 psx/Snatcher (Japan).chd
 psx/Sno Pokeler (Japan).chd
 psx/SnoCross Championship Racing (USA).chd
@@ -22439,7 +19171,6 @@ psx/Solid Link - Dungeon Side (Japan).chd
 psx/Solid Link - Tower Side (Japan).chd
 psx/Sonata (Japan) (Disc 1).chd
 psx/Sonic Wings Special (Europe).chd
-psx/Sony Music Entertainment - PlayStation Title Digest (Japan).chd
 psx/Sorcerer's Maze (USA).chd
 psx/Sotsugyou - Crossworld (Japan).chd
 psx/Sotsugyou II - Neo Generation (Japan).chd
@@ -22462,7 +19193,6 @@ psx/South Park (USA).chd
 psx/South Park - Chef's Luv Shack (USA).chd
 psx/South Park Rally (USA).chd
 psx/Southern All Stars - Space MOSA Space Museum of Southern Art (Japan) (Disc 1) (Museum).chd
-psx/Soviet Strike (USA) (Rev 1).chd
 psx/Space Adventure Cobra - The Shooting (Japan).chd
 psx/Space Debris (Europe).chd
 psx/Space Griffon VF-9 (USA).chd
@@ -22471,10 +19201,8 @@ psx/Space Invaders (USA).chd
 psx/Space Invaders 2000 (Japan).chd
 psx/Space Jam (USA).chd
 psx/Space Rider (Europe).chd
-psx/Space Shot (USA).chd
 psx/Spawn - The Eternal (USA).chd
 psx/Spec Ops - Airborne Commando (USA).chd
-psx/Spec Ops - Covert Assault (USA).chd
 psx/Spec Ops - Ranger Elite (USA).chd
 psx/Spec Ops - Stealth Patrol (USA).chd
 psx/Spectral Blade (Japan).chd
@@ -22492,31 +19220,19 @@ psx/Spider-Man 2 - Enter - Electro (USA) (Rev 1).chd
 psx/Spin Jam (USA).chd
 psx/Sports Car GT (USA).chd
 psx/Sports Superbike (Europe) (En,Fr,De,It).chd
-psx/Sports Superbike 2 (USA).chd
 psx/Spot Goes to Hollywood (USA).chd
 psx/Spriggan - Lunar Verse (Japan).chd
-psx/Spyro - Year of the Dragon (USA) (Rev 1).chd
 psx/Spyro 2 - Ripto's Rage! (USA).chd
-psx/Spyro 2 - Ripto's Rage! + Crash Team Racing (USA).chd
 psx/Spyro the Dragon (USA).chd
-psx/Square's Preview (Japan).chd
-psx/Square's Preview 2 (Japan).chd
-psx/Square's Preview 3 (Japan).chd
-psx/Square's Preview 5 (Japan, Asia).chd
-psx/Square's Preview Extra - FF VII Sample & SIGGRAPH '95 Works (Japan).chd
-psx/Square's Preview Vol. 4 (Japan, Asia).chd
-psx/Squaresoft on PlayStation 1998 Collector's CD Vol. 1 (USA).chd
 psx/Stahlfeder - Tekkou Hikuudan (Japan).chd
 psx/Standby Say You! (Japan).chd
 psx/Star Fighter (USA).chd
 psx/Star Ixiom (Europe).chd
 psx/Star Monja (Japan).chd
 psx/Star Ocean - The Second Story (USA) (Disc 1).chd
-psx/Star Sweep (USA).chd
 psx/Star Trek - Invasion (USA).chd
 psx/Star Wars - Dark Forces (USA).chd
 psx/Star Wars - Episode I - Jedi Power Battles (USA).chd
-psx/Star Wars - Episode I - The Phantom Menace (USA) (Rev 1).chd
 psx/Star Wars - Rebel Assault II - The Hidden Empire (USA) (Disc 1).chd
 psx/StarFighter 3000 (Europe) (En,Fr,De,Es,It).chd
 psx/Starblade Alpha (USA).chd
@@ -22532,22 +19248,12 @@ psx/Story Lane Theater 2 (USA).chd
 psx/Story Lane Theater 3 (USA).chd
 psx/Story Lane Theater 4 (USA).chd
 psx/Story Lane Theater 5 (USA).chd
-psx/Str.at.e.s. 1 - Match-A-Batch (USA).chd
-psx/Str.at.e.s. 2 - Matchamania! (USA).chd
-psx/Str.at.e.s. 3 - Title This! Title That! (USA).chd
-psx/Str.at.e.s. 4 - Titlerama! (USA).chd
-psx/Str.at.e.s. 5 - Parallel Lives! (USA).chd
-psx/Str.at.e.s. 6 - Analogy-ology! (USA).chd
-psx/Str.at.e.s. 7 - Riddle Roundup! (USA).chd
-psx/Str.at.e.s. 8 - Riddle Wrangler! (USA).chd
 psx/Stray Sheep - The Adventure of Poe & Merry (Japan).chd
 psx/Streak Hoverboard Racing (USA).chd
 psx/Street Fighter - The Movie (USA).chd
 psx/Street Fighter Alpha - Warriors' Dreams (USA).chd
-psx/Street Fighter Alpha 2 (USA) (Rev 1).chd
 psx/Street Fighter Alpha 3 (USA).chd
 psx/Street Fighter Collection (USA) (Disc 1) (Rev 1).chd
-psx/Street Fighter Collection (USA) (Disc 2) (Rev 1).chd.aria2
 psx/Street Fighter Collection 2 (USA).chd
 psx/Street Fighter EX Plus Alpha (USA).chd
 psx/Street Fighter II Movie (Japan) (Disc 1).chd
@@ -22555,12 +19261,9 @@ psx/Street Racer (USA).chd
 psx/Street Racquetball (USA).chd
 psx/Street Scooters (Europe) (En,Fr,De,Es,It).chd
 psx/Street Sk8er (USA).chd
-psx/Street Sk8er 2 (USA).chd
 psx/Street Skater 2 (Europe) (En,Fr,De).chd
 psx/Stressless Lesson - Les Les (Japan).chd
-psx/Strider (USA).chd
 psx/Strider 2 (USA).chd
-psx/Strike Point (USA).chd
 psx/Striker 96 (USA).chd
 psx/Striker Pro 2000 (USA).chd
 psx/Strikers 1945 (USA).chd
@@ -22584,8 +19287,6 @@ psx/Super Bubble Pop (USA).chd
 psx/Super Dropzone - Intergalactic Rescue Mission (Europe).chd
 psx/Super Football Champ (Europe).chd
 psx/Super Hero Sakusen (Japan).chd
-psx/Super Hero Sakusen - Diedal no Yabou (Japan) (Genteiban).chd
-psx/Super Hero Sakusen - Diedal no Yabou (Japan) (Genteiban).chd.aria2
 psx/Super Live Stadium (Japan).chd
 psx/Super Match Soccer (Europe) (En,Fr,De,Es,It).chd
 psx/Super Price Series - Billiards (Japan).chd
@@ -22595,9 +19296,7 @@ psx/Super Price Series - Mahjong (Japan).chd
 psx/Super Price Series - Paipai (Japan).chd
 psx/Super Price Series - Reversi (Japan).chd
 psx/Super Puzzle Fighter II Turbo (USA).chd
-psx/Super Robot Shooting (Japan) (Genteiban).chd
 psx/Super Robot Taisen Alpha Gaiden (Japan) (Premium Edition).chd
-psx/Super Robot Taisen Alpha Gaiden (Japan) (Shokai Genteiban).chd.aria2
 psx/Super Shot Soccer (USA).chd
 psx/Super Tokusatsu Taisen 2001 (Japan).chd
 psx/SuperCross Circuit (USA).chd
@@ -22620,7 +19319,6 @@ psx/SuperLite Gold Series - Minna no Mahjong (Japan).chd
 psx/SuperLite Gold Series - Minna no Othello (Japan).chd
 psx/SuperLite Gold Series - Otenami Haiken (Japan).chd
 psx/Superbike Masters (Europe).chd
-psx/Superstar Dance Club - 1 Hits!!! (USA).chd
 psx/Surf Riders (USA).chd
 psx/Susume! Kaizoku (Japan).chd
 psx/Susume! Taisen Puzzle-dama (Japan).chd
@@ -22634,7 +19332,6 @@ psx/Syphon Filter 2 (USA) (Disc 1).chd
 psx/Syphon Filter 3 (USA).chd
 psx/T kara Hajimaru Monogatari (Japan).chd
 psx/T'ai Fu - Wrath of the Tiger (USA).chd
-psx/T.R.A.G. - Mission of Mercy (USA).chd
 psx/TFX - Tactical Fighter eXperiment (Japan).chd
 psx/TIZ - Tokyo Insect Zoo (Japan).chd
 psx/TNN Motor Sports HardCore 4X4 (USA).chd
@@ -22642,7 +19339,6 @@ psx/TOCA Championship Racing (USA) (En,Es).chd
 psx/TRL - The Rail Loaders (Japan).chd
 psx/Tactical Armor Custom Gasaraki (Japan).chd
 psx/Tactics Ogre - Let Us Cling Together (Japan).chd
-psx/Taiho Shichau zo - You're Under Arrest (Japan) (Disc 1) (Shokai Genteiban).chd
 psx/Taiho Shichauzo - You're Under Arrest (Japan) (Disc 1) (Shokai Genteiban).chd
 psx/Taikou Risshiden II (Japan) (Rev 1).chd
 psx/Taikou Risshiden III (Japan) (Rev 1).chd
@@ -22651,7 +19347,6 @@ psx/Taikyoku Igo - Shinzui Gosennin - Nigou (Japan).chd
 psx/Tail Concerto (USA).chd
 psx/Tail of the Sun (USA).chd
 psx/Tales of Destiny (USA).chd
-psx/Tales of Destiny II (USA) (Disc 1).chd
 psx/Tales of Eternia (Japan) (Disc 1) (Premium Box).chd
 psx/Tales of Phantasia (Japan).chd
 psx/Tall - Infinity (USA).chd
@@ -22665,21 +19360,10 @@ psx/Taregoro - Tarepanda no Iru Nichijou (Japan).chd
 psx/Tatsunoko Fight (Japan).chd
 psx/Taxi 2 (France) (En,Fr).chd
 psx/Team Buddies (USA).chd
-psx/Team Losi RC Racer (USA).chd
-psx/Tech PlayStation 97-10 (Japan).chd
-psx/Tech PlayStation 97-4 (Japan).chd
-psx/Tech PlayStation 97-5 (Japan).chd
-psx/Tech PlayStation 97-6 (Japan).chd
-psx/Tech PlayStation 97-6 (Japan).chd.aria2
-psx/Tech PlayStation 97-7 (Japan).chd
-psx/Tech PlayStation 97-8 (Japan).chd
-psx/Tech PlayStation 97-9 (Japan).chd
-psx/Tech PlayStation Vol. 1 (Japan).chd
 psx/Techno BB (Japan).chd
 psx/TechnoMage - Return of Eternity (Europe).chd
 psx/Tecmo Stackers (USA).chd
 psx/Tecmo Super Bowl (USA).chd
-psx/Tecmo World Golf - Japan (USA).chd
 psx/Tecmo's Deception - Invitation to Darkness (USA).chd
 psx/Teitoku no Ketsudan II (Japan).chd
 psx/Teitoku no Ketsudan III (Japan).chd
@@ -22693,7 +19377,6 @@ psx/Tenchu - Stealth Assassins (USA) (Rev 1).chd
 psx/Tenchu 2 - Birth of the Stealth Assassins (USA).chd
 psx/Tenga Seiha (Japan).chd
 psx/Tenka Touitsu (Japan) (Rev 1).chd
-psx/Tenkuu no Escaflowne (Japan) (Genteiban).chd
 psx/Tennis (USA).chd
 psx/Tenshi Doumei (Japan).chd
 psx/Tenshi na Konamaiki (Japan).chd
@@ -22717,17 +19400,9 @@ psx/This Is Football 2 (Europe).chd
 psx/Thoroughbred Breeder - Sekai Seiha-hen (Japan).chd
 psx/Thoroughbred Breeder II Plus (Japan).chd
 psx/Thousand Arms (USA) (Disc 1).chd
-psx/Thousand Arms (USA) (Disc 2).chd.aria2
-psx/Thrasher - Skate and Destroy (USA).chd
-psx/Thrasher - Skate and Destroy (USA).chd.aria2__temp
 psx/Threads of Fate (USA).chd
-psx/Three Decoders 1, The - Riddle of the Ring (USA).chd
-psx/Three Decoders 2, The - Key to the Carousel (USA).chd
-psx/Three Stooges, The (USA).chd
-psx/Thunder Force V - Perfect System (USA).chd
 psx/Thunder Truck Rally (USA).chd
 psx/Thunderhawk II (Japan).chd
-psx/Thunderstrike 2 (USA).chd
 psx/Tiger Woods 99 PGA Tour Golf (USA) (Rev 1).chd
 psx/Tiger Woods PGA Tour 2000 (USA).chd
 psx/Tiger Woods PGA Tour Golf (USA).chd
@@ -22735,30 +19410,19 @@ psx/Tigershark (USA).chd
 psx/Tilk - Aoi Umi kara Kita Shoujo (Japan).chd
 psx/Tilt! (Europe) (En,Fr,De).chd
 psx/Time Bokan Series - Bokan to Ippatsu! Doronboo (Japan) (Taikenban).chd
-psx/Time Commando (USA).chd
 psx/Time Crisis (USA).chd
 psx/Time Crisis - Project Titan (USA).chd
 psx/Time Gal & Ninja Hayate (Japan) (En,Ja) (Disc 1) (Time Gal).chd
 psx/Timeless Jade Trade (USA).chd
-psx/Timeless Math 1 - Maya, Search and Rescue (USA).chd
-psx/Timeless Math 2 - Maya, Observatory (USA).chd
-psx/Timeless Math 3 - Maya, King Jaguar's Village (USA).chd
-psx/Timeless Math 4 - Lunar Base (USA).chd
-psx/Timeless Math 5 - Space Flight Rescue (USA).chd
-psx/Timeless Math 6 - Brainswarm (USA).chd
-psx/Timeless Math 7 - Rover Recovery (USA).chd
 psx/Tintin - Destination Adventure (Europe) (En,Fr,De,Es,It,Nl,Pt).chd
 psx/Tiny Bullets (Japan).chd
 psx/Tiny Tank (USA).chd
 psx/Tiny Toon Adventures - Buster and the Beanstalk (Europe) (En,Es,Pt).chd
 psx/Tiny Toon Adventures - Plucky's Big Adventure (USA).chd
-psx/Tiny Toon Adventures - The Great Beanstalk (USA).chd
-psx/Tiny Toon Adventures - Toonenstein - Dare to Scare! (USA).chd
 psx/Tiny Toon Adventures - Toonenstein - Le Chateau hante (France).chd
 psx/Titan Wars (Europe).chd
 psx/ToPoLo (Japan).chd
 psx/Tobal 2 (Japan) (Rev 1).chd
-psx/Tobal No. 1 (USA).chd
 psx/Tokimeki Memorial - Forever with You (Japan) (PlayStation the Best).chd
 psx/Tokimeki Memorial - Taisen Tokkaedama (Japan).chd
 psx/Tokimeki Memorial 2 (Japan) (Disc 1) (Rev 1).chd
@@ -22779,21 +19443,18 @@ psx/Tom Clancy's Rainbow Six - Rogue Spear (USA).chd
 psx/Tom and Jerry in House Trap (USA).chd
 psx/Tomb Raider (USA) (Rev 1).chd
 psx/Tomb Raider - The Last Revelation (USA) (Rev 1).chd
-psx/Tomb Raider Chronicles (USA) (Rev 1).chd
 psx/Tomb Raider II - Starring Lara Croft (USA) (Rev 1).chd
 psx/Tomb Raider III - Adventures of Lara Croft (USA) (Rev 1).chd
 psx/Tomba! (USA).chd
 psx/Tomba! 2 - The Evil Swine Return (USA).chd
 psx/Tomika Town o Tsukurou! (Japan).chd
 psx/Tonka Space Station (USA).chd
-psx/Tony Hawk's Pro Skater (USA).chd
 psx/Tony Hawk's Pro Skater 2 (USA).chd
 psx/Tony Hawk's Pro Skater 3 (USA).chd
 psx/Tony Hawk's Pro Skater 4 (USA).chd
 psx/Tony Hawk's Skateboarding (Europe).chd
 psx/Tonzura-kun (Japan).chd
 psx/Top Gun - Fire at Will! (USA).chd
-psx/Top Shop (USA).chd
 psx/Tora! Tora! Tora! (Japan).chd
 psx/Total Eclipse Turbo (USA).chd
 psx/Touge Max 2 (Japan).chd
@@ -22804,7 +19465,6 @@ psx/Tower Dream 2 (Japan).chd
 psx/Toyota Netz Racing (Japan).chd
 psx/Toys (Europe) (En,Fr,De).chd
 psx/Toys Dream (Japan).chd
-psx/Toys R Us - Interactive CD Sampler Disc (USA).chd
 psx/Transport Tycoon (Europe) (En,Fr,De,Es,It).chd
 psx/Trash It (Europe) (En,Fr,De,Es,It).chd
 psx/Treasure Gear (Japan).chd
@@ -22896,12 +19556,10 @@ psx/Voice Idol Collection - Pool Bar Story (Japan) (Disc 1).chd
 psx/Voice Paradice Excella (Japan) (Disc 1).chd
 psx/Volfoss (Japan).chd
 psx/Vs. (USA).chd
-psx/WCW Backstage Assault (USA).chd
 psx/WCW Mayhem (USA).chd
 psx/WCW Nitro (USA).chd
 psx/WCW-nWo Thunder (USA).chd
 psx/WRC - FIA World Rally Championship Arcade (Europe) (En,Fr,De,Es,It,Nl,Pt,Sv,No,Da,Fi).chd
-psx/WTC World Touring Car Championship (Japan).chd
 psx/WWF Attitude (USA).chd
 psx/WWF In Your House (USA) (Rev 1).chd
 psx/WWF SmackDown! (USA).chd
@@ -22929,12 +19587,8 @@ psx/Warhawk - The Red Mercury Missions (USA).chd
 psx/Warm Up! (Europe) (En,Fr,De,Es,It,Pt).chd
 psx/Warpath - Jurassic Park (USA).chd
 psx/Warriors of Might and Magic (USA).chd
-psx/Warriors of Might and Magic (USA).chd.aria2__temp
 psx/Warzone 2100 (USA).chd
-psx/Water Summer (Japan) (Shokai Genteiban).chd
 psx/Wayne Gretzky's 3D Hockey '98 (USA).chd
-psx/Weakest Link, The (USA) (Rev 1).chd
-psx/Weekly the PlayStation Limited No. 1 (Japan).chd
 psx/Welcome House (Japan).chd
 psx/Welcome House 2 - Keaton and His Uncle (Japan).chd
 psx/Weltorv Estleia (Japan).chd
@@ -22950,12 +19604,9 @@ psx/Who Wants to Be a Millionaire - 3rd Edition (USA).chd
 psx/Who Wants to Be a Millionaire - Junior (Europe).chd
 psx/Wild 9 (USA).chd
 psx/Wild Arms (USA).chd
-psx/Wild Arms - 2nd Ignition (Japan) (Disc 1).chd
 psx/Wild Arms 2 (USA) (Disc 1).chd
 psx/Wild Boater (Japan).chd
 psx/Wild Rapids (Europe).chd
-psx/Wild Thornberrys, The - Animal Adventures (USA).chd
-psx/Wildroid 9 (Japan).chd
 psx/Williams Arcade's Greatest Hits (USA).chd
 psx/Wing Commander III - Heart of the Tiger (USA) (Disc 1).chd
 psx/Wing Commander IV - The Price of Freedom (USA) (Disc 1).chd
@@ -22974,60 +19625,35 @@ psx/WipEout (USA).chd
 psx/WipEout 3 (USA).chd
 psx/WipEout 3 - Special Edition (Europe) (En,Fr,De,Es,It).chd
 psx/Wipeout XL (USA).chd
-psx/Witch of Salzburg, The (Japan).chd
 psx/Wizard's Harmony (Japan).chd
 psx/Wizard's Harmony 2 (Japan, Asia).chd
 psx/Wizard's Harmony R (Japan).chd
 psx/Wizardry - Dimguil (Japan) (Rev 1).chd
 psx/Wizardry - Llylgamyn Saga (Japan) (En,Ja).chd
 psx/Wizardry - New Age of Llylgamyn (Japan) (En,Ja).chd
-psx/Wizardry Empire - Inishie no Oujo (Japan).chd
-psx/Wizardry Empire II - Oujo no Isan (Japan).chd
-psx/Wizardry VII - Guardia no Houju (Japan).chd
 psx/Wolf Fang - Kuuga 2001 (Japan).chd
 psx/Wolkenkratzer - Shinpan no Tou (Japan).chd
-psx/Wonder Trek (Japan).chd
 psx/Woody Woodpecker Racing (USA).chd
-psx/Woody Woodpecker no Go! Go! Racing (Japan).chd
 psx/World Championship Snooker (Europe) (En,Fr,De).chd
 psx/World Cup 98 (USA).chd
-psx/World Cup Golf - In Hyatt Dorado Beach (Japan).chd
 psx/World Cup Golf - Professional Edition (USA).chd
 psx/World Destruction League - Thunder Tanks (USA).chd
 psx/World Destruction League - WarJetz (USA).chd
-psx/World Greatest Hits Series Vol. 1 - Pro Pinball - Big Race USA (Japan).chd
-psx/World Greatest Hits Series Vol. 2 - Pipe Dreams 3D (Japan).chd
-psx/World Greatest Hits Series Vol. 3 - Speedball 2100 (Japan).chd
-psx/World Greatest Hits Series Vol. 4 - Tom Clancy's Rainbow Six (Japan).chd
-psx/World Greatest Hits Series Vol. 5 - Tyco R-C - Assault with a Battery (Japan).chd
 psx/World League Basketball (Europe).chd
 psx/World League Soccer '98 (Europe) (En,Es,It).chd
-psx/World League Soccer (Japan).chd
-psx/World Never Island (Japan).chd
-psx/World Neverland - Olerud Oukoku Monogatari (Japan).chd
-psx/World Neverland 2 - Pluto Kyouwakoku Monogatari (Japan).chd
 psx/World Pro Tennis '98 (Japan).chd
-psx/World Soccer Jikkyou Winning Eleven 2000 - U-23 Medal e no Chousen (Japan).chd
-psx/World Soccer Jikkyou Winning Eleven 3 - Final Ver. (Japan).chd
 psx/World Soccer Jikkyou Winning Eleven 3 - World Cup France '98 (Japan) (Rev 1).chd
-psx/World Soccer Jikkyou Winning Eleven 4 (Japan).chd
-psx/World Soccer Winning Eleven '97 (Japan).chd
-psx/World Soccer Winning Eleven (Japan).chd
-psx/World Soccer Winning Eleven 2002 (Japan).chd
 psx/World Stadium 2 (Japan).chd
 psx/World Stadium 3 (Japan).chd
 psx/World Stadium 4 (Japan).chd
 psx/World Stadium 5 (Japan).chd
 psx/World Stadium EX (Japan) (Rev 1).chd
 psx/World Tennis Stars (Europe).chd
-psx/World Tour Conductor - Sekai Yume Kikou (Japan).chd
-psx/World of Dragon Warrior - Torneko - The Last Hope (USA).chd
 psx/World's Scariest Police Chases (USA).chd
 psx/Worms (USA).chd
 psx/Worms Armageddon (USA).chd
 psx/Worms Pinball (Europe) (En,Fr,De,Es,It).chd
 psx/Worms World Party (USA) (En,Fr,De,Es,It,Nl,Sv,Da).chd
-psx/Wreckin Crew - Drive Dangerously (USA) (En,Es).chd
 psx/Write Away 1 (USA).chd
 psx/Write Away 10 (USA).chd
 psx/Write Away 2 (USA).chd
@@ -23039,22 +19665,13 @@ psx/Write Away 7 (USA).chd
 psx/Write Away 8 (USA).chd
 psx/Write Away 9 (USA).chd
 psx/Wu-Tang - Shaolin Style (USA).chd
-psx/X Games Pro Boarder (Japan).chd
 psx/X'treme Roller (Europe) (En,Fr,De,Es,It,Pt).chd
 psx/X-Bladez - Inline Skater (USA).chd
-psx/X-COM - Michinaru Shinryakusha (Japan).chd
 psx/X-COM - Terror from the Deep (Europe) (En,Fr,De,Es,It).chd
 psx/X-COM - UFO Defense (USA).chd
-psx/X-Files, The (USA) (Disc 1).chd
 psx/X-Men - Children of the Atom (USA).chd
 psx/X-Men - Mutant Academy (USA).chd
 psx/X-Men - Mutant Academy 2 (USA).chd
-psx/X-Men vs. Street Fighter - EX Edition (Japan).chd
-psx/X.Racing (Japan).chd
-psx/X2 - No Relief (Japan).chd
-psx/XI [sai] (Japan) (En,Ja).chd
-psx/XI [sai] Jumbo (Japan).chd
-psx/XI [sai] Super Play Collection - XI wa Futatabi Nagerareta - Special CD-ROM (Japan).chd
 psx/XS Airboat Racing (USA).chd
 psx/XS Junior League Dodgeball (USA).chd
 psx/XS Junior League Football (USA).chd
@@ -23064,88 +19681,43 @@ psx/Xena - Warrior Princess (USA).chd
 psx/Xenocracy - The Ultimate Solar War (Europe).chd
 psx/Xenogears (USA) (Disc 1).chd
 psx/Xevious 3D-G+ (USA).chd
-psx/Xploder CD9000 Version 1 (USA) (Unl).chd
 psx/Yagami Hiroki no Game-Taste - Munasawagi no Yokan (Japan).chd
 psx/Yakiniku Bugyou (Japan).chd
-psx/Yakitori Musume - Sugoude Hanjouki (Japan).chd
 psx/Yaku - Yuujou Dangi (Japan).chd
 psx/Yaku Tsuu - Noroi no Game (Japan).chd
 psx/Yamagata Digital Museum (Japan) (Disc 1) (Spring).chd
 psx/Yamasa Digi Guide - Faust (Japan).chd
 psx/Yamasa Digi Guide - Hyper Rush (Japan).chd
-psx/Yamasa Digi Guide - M771 (Japan).chd
 psx/Yamasa Digi Guide - New Pulsar R (Japan).chd
-psx/Yamasa Digi Guide - Umekagetsu R (Japan).chd
 psx/Yamasa Digi Selection (Japan) (DX).chd
 psx/Yamasa Digi Selection 2 (Japan).chd
 psx/Yamasa Digi World - Tetra Master (Japan).chd
 psx/Yamifuku Natsu - Teito Monogatari Futatabi (Japan).chd
-psx/Yaoi Jun'ichi Gokuhi Project - UFO o Oe!! (Japan).chd
-psx/Yarudora Series Vol. 1 - Double Cast (Japan) (Disc 1).chd
-psx/Yarudora Series Vol. 2 - Kisetsu o Dakishimete (Japan) (Disc 1).chd
-psx/Yarudora Series Vol. 3 - Sampaguita (Japan) (Disc 1).chd
-psx/Yarudora Series Vol. 4 - Yukiwari no Hana (Japan) (Disc 1).chd
 psx/Yeh Yeh Tennis (Europe) (En,Fr,De).chd
 psx/Yellow Brick Road (Japan).chd
-psx/Yellow Monkey, The - Trancemission VJ Remix (Japan).chd
 psx/Yetisports Deluxe (Europe) (En,Fr,De,Es,It).chd
 psx/Yetisports World Tour (Europe) (En,Fr,De,Es,It).chd
 psx/YoYo's Puzzle Park (Europe).chd
-psx/Yoi Ko to Yoi Otona no. PlayStation Taikenban Vol. 1 (Japan).chd
-psx/Yoi Ko to Yoi Otona no. PlayStation Taikenban Vol. 2 (Japan).chd
 psx/Yoshimoto Mahjong Club Deluxe (Japan).chd
-psx/Yoshimoto Muchicco Dai-kessen - Minami no Umi no Gorongo-tou (Japan).chd
-psx/Yoshimura Shougi (Japan).chd
 psx/You Don't Know Jack (USA) (Disc 1).chd
 psx/You Don't Know Jack - Mock 2 (USA).chd
-psx/Youchien Gaiden - Karei naru Casino Club - Double Draw (Japan).chd
 psx/Youkai Hana Asobi (Japan).chd
 psx/Yu-Gi-Oh! Forbidden Memories (USA).chd
 psx/Yu-Gi-Oh! Monster Capsule Breed & Battle (Japan).chd
-psx/Yu-Gi-Oh! Shin Duel Monsters - Fuuin Sareshi Kioku (Japan) (Genteiban).chd
 psx/Yukinko Burning (Japan).chd
 psx/Yume Iroiro (Japan).chd
-psx/Yume no Tsubasa (Japan).chd
 psx/Yusha - Heaven's Gate (Europe).chd
-psx/Yutona Eiyuu Senki - TearRingSaga (Japan).chd
-psx/Yuugen Gaisha Chikyuu Boueitai (Japan).chd
-psx/Yuukyuu Gensoukyoku (Japan).chd
-psx/Yuukyuu Gensoukyoku 2nd Album (Japan).chd
-psx/Yuukyuu Gensoukyoku 3 - Perpetual Blue (Japan).chd
-psx/Yuukyuu Gensoukyoku 3 - Perpetual Blue - Visual Collection (Japan).chd
-psx/Yuukyuu Gensoukyoku Ensemble (Japan).chd
-psx/Yuukyuu Gensoukyoku Ensemble 2 (Japan).chd
-psx/Yuukyuu Kumikyoku - All Star Project (Japan).chd
 psx/Yuukyuu no Eden - The Eternal Eden (Japan) (Rev 1).chd
 psx/Yuusha-ou GaoGaiGar - Blockaded Numbers (Japan).chd
-psx/Yuuwaku Office Ren'aika (Japan).chd
-psx/Yuuyami Doori Tankentai (Japan).chd
 psx/Z (Europe).chd
-psx/ZXE-D - Legend of Plasmatlite (Japan).chd
 psx/Zanac x Zanac (Japan).chd
-psx/Zap! Snowboarding Trix '98 (Japan).chd
-psx/Zap! Snowboarding Trix (Japan) (Fukyuuban 1500).chd
-psx/Zeiramzone (Japan).chd
 psx/Zeitgeist (Japan).chd
-psx/Zen Nihon GT Senshuken Kai (Japan).chd
-psx/Zen Nihon GT Senshuken Max Rev. (Japan) (Disc 1).chd
-psx/Zen Nihon Joshi Pro Wrestling - Joou Densetsu - Yume no Taikousen (Japan).chd
-psx/Zen Nihon Pro Wres - Ouja no Tamashii (Japan).chd
-psx/Zen Super Robot Taisen Denshi Daihyakka (Japan) (Disc 1).chd
 psx/Zera-chan Puzzle - Pitatto Pair (Japan).chd
 psx/Zero Divide (USA).chd
-psx/Zero Divide 2 - The Secret Wish (Japan).chd
-psx/Zero Pilot - Gin'yoku no Senshi (Japan).chd
 psx/Zero4 Champ DooZy-J (Japan).chd
 psx/Zeus - Carnage Heart Second (Japan) (Taikenban).chd
-psx/Zeus II - Carnage Heart (Japan).chd
-psx/ZigZagBall (Japan).chd
 psx/Zill O'll (Japan) (Rev 1).chd
-psx/Zipangu-jima - Unmei wa Saikoro ga Kimeru! (Japan).chd
 psx/Zoboomafoo - Leapin' Lemurs! (USA).chd
-psx/Zoids - Battle Card Game - Seihou Tairiku Senki (Japan).chd
-psx/Zoids - Teikoku vs Kyouwakoku - Meka Seitai no Idenshi (Japan).chd
-psx/Zoids 2 - Heric Kyouwakoku vs. Guylos Teikoku (Japan).chd
 psx/Zoku Gussun Oyoyo (Japan).chd
 psx/Zoku Hatsukoi Monogatari - Shuugaku Ryokou (Japan) (Disc 1).chd
 psx/Zoku Mikagura Shoujo Tanteidan - Kanketsuhen (Japan) (Disc 1).chd
@@ -25727,89 +22299,3 @@ ws/Yopparau Game for WonderWitch (World) (WonderWitch) (Unl).ws
 ws/Ze Sound Player + Sample Music (World) (WonderWitch) (Program) (Unl).ws
 ws/beatmania for WonderSwan (Japan).ws
 ws/otto (World) (WonderWitch) (Unl).ws
-wsc/Alchemist Marie & Elie - Futari no Atelier (Japan).zip
-wsc/Another Heaven - Memory of those Days (Japan).zip
-wsc/Arc the Lad - Kishin Fukkatsu (Japan).zip
-wsc/Battle Spirit - Digimon Frontier (Japan) (Rev 1).zip
-wsc/Blue Wing Blitz (Japan).zip
-wsc/Dark Eyes - Battle Gate (Japan).zip
-wsc/Dicing Knight. (Japan).zip
-wsc/Digimon - Anode Tamer & Cathode Tamer - Veedramon Version (Hong Kong).zip
-wsc/Digimon Adventure 02 - D1 Tamers (Japan) (Rev 1).zip
-wsc/Digimon Tamers - Battle Spirit (Japan, Korea) (En,Ja).zip
-wsc/Digimon Tamers - Brave Tamer (Japan) (Rev 1).zip
-wsc/Digimon Tamers - Digimon Medley (Japan) (Rev 1).zip
-wsc/Digital Monster - D-Project (Japan) (Rev 1).zip
-wsc/Digital Monster Card Game - Ver. WonderSwan Color (Japan) (Rev 2).zip
-wsc/Dragon Ball (Japan).zip
-wsc/Final Fantasy (Japan).zip
-wsc/Final Lap Special - GT & Formula Machine (Japan).zip
-wsc/Flash Koibito-kun (Japan).zip
-wsc/From TV Animation One Piece - Chopper no Daibouken (Japan).zip
-wsc/From TV Animation One Piece - Grand Battle Swan Colosseum (Japan).zip
-wsc/From TV Animation One Piece - Niji no Shima Densetsu (Japan).zip
-wsc/From TV Animation One Piece - Treasure Wars (Japan) (Rev 1).zip
-wsc/From TV Animation One Piece - Treasure Wars 2 - Buggy Land e Youkoso (Japan).zip
-wsc/Front Mission (Japan).zip
-wsc/Gekitou! Crash Gear Turbo - Gear Champion League (Japan).zip
-wsc/Gensou Maden Saiyuuki Retribution - Hi no Ataru Basho de (Japan) (Rev 2).zip
-wsc/Golden Axe (Japan).zip
-wsc/Gransta Chronicle (Japan).zip
-wsc/Guilty Gear Petit (Japan).zip
-wsc/GunPey EX (Japan).zip
-wsc/Hanjuku Hero - Ah, Sekai yo Hanjuku Nare...!! (Japan) (Rev 1).zip
-wsc/Hataraku Chocobo (Japan).zip
-wsc/Hunter X Hunter - Greed Island (Japan) (Rev 1).zip
-wsc/Hunter X Hunter - Michibikareshi Mono (Japan).zip
-wsc/Hunter X Hunter - Sorezore no Ketsui (Japan).zip
-wsc/Inuyasha - Fuuun Emaki (Japan).zip
-wsc/Inuyasha - Kagome no Sengoku Nikki (Japan).zip
-wsc/Judgement Silversword - Rebirth Edition (Japan) (Rev 4321).zip
-wsc/Kidou Senshi Gundam - Giren no Yabou - Tokubetsu Hen - Aoki Hoshi no Hasha (Japan).zip
-wsc/Kidou Senshi Gundam Seed (Japan).zip
-wsc/Kidou Senshi Gundam Vol. 1 - Side 7 (Japan).zip
-wsc/Kidou Senshi Gundam Vol. 2 - Jaburo (Japan).zip
-wsc/Kidou Senshi Gundam Vol. 3 - A Baoa Qu (Japan).zip
-wsc/Kinnikuman II-Sei - Choujin Seisenshi (Japan).zip
-wsc/Kinnikuman II-Sei - Dream Tag Match (Japan).zip
-wsc/Kurupara! (Japan) (Rev 1).zip
-wsc/Last Alive (Japan).zip
-wsc/Makai Toushi Sa-Ga (Japan).zip
-wsc/Meitantei Conan - Yuugure no Oujo (Japan).zip
-wsc/Memories Off - Festa (Japan).zip
-wsc/Mikeneko Holmes - Ghost Panic (Japan).zip
-wsc/Mr. Driller (Japan).zip
-wsc/Namco Super Wars (Japan).zip
-wsc/Naruto - Konoha Ninpouchou (Japan).zip
-wsc/Pocket no Naka no Doraemon (Japan).zip
-wsc/RUN=DIM - Return to Earth (Japan).zip
-wsc/Raku Jongg (Japan).zip
-wsc/Rhyme Rider Kerorican (Japan).zip
-wsc/Riviera - Yakusoku no Chi Riviera (Japan).zip
-wsc/Rockman EXE - N1 Battle (Japan) (Rev 1).zip
-wsc/Rockman EXE WS (Japan).zip
-wsc/Romancing Sa-Ga (Japan).zip
-wsc/SD Gundam - Operation U.C. (Japan).zip
-wsc/SD Gundam Eiyuu Den - Kishi Densetsu (Japan).zip
-wsc/SD Gundam G Generation - Gather Beat 2 (Japan).zip
-wsc/SD Gundam G Generation - Mono-Eye Gundams (Japan).zip
-wsc/Saint Seiya - Ougon Densetsu Hen - Perfect Edition (Japan).zip
-wsc/Senkaiden Ni - TV Animation Senkaiden Houshin Engi Yori (Japan).zip
-wsc/Shaman King - Asu e no Ishi (Japan) (Rev 1).zip
-wsc/Sorobang (Japan) (Rev 1).zip
-wsc/Star Hearts - Hoshi to Daichi no Shisha (Japan).zip
-wsc/Super Robot Taisen Compact 3 (Japan) (Rev 5).zip
-wsc/Super Robot Taisen Compact for WonderSwan Color (Japan).zip
-wsc/Terrors 2 (Japan).zip
-wsc/Tetris (Japan).zip
-wsc/Tonpuusou (Japan).zip
-wsc/Uchuu Senkan Yamato (Japan).zip
-wsc/Ultraman - Hikari no Kuni no Shisha (Japan).zip
-wsc/Wild Card (Japan).zip
-wsc/With You - Mitsumete Itai (Japan).zip
-wsc/Wizardry Scenario 1 - Proving Grounds of the Mad Overlord (Japan).zip
-wsc/Wonder Classic (Japan).zip
-wsc/X - Card of Fate (Japan).zip
-wsc/XI Little (Japan).zip
-wsc/[BIOS] WonderSwan Color Boot ROM (Japan) (En).zip
-wsc/mama Mitte (Japan) (Program).zip

@@ -31,7 +31,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -85,16 +84,6 @@ fun HomeScreen(
     val state = viewModel.getViewStates().collectAsState(HomeViewModel.UIState())
     val downloadRomsState = viewModel.getDownloadRomsState().collectAsState(DownloadRomsState.Idle)
     val streamingRomsState = viewModel.getStreamingRomsState().collectAsState(StreamingRomsState.Idle)
-
-    // T5: log when game data is first visible in the UI (composable recomposition)
-    val hasGames = state.value.recentGames.isNotEmpty() ||
-        state.value.favoritesGames.isNotEmpty() ||
-        state.value.discoveryGames.isNotEmpty()
-    if (hasGames) {
-        SideEffect {
-            android.util.Log.d("PERF", "T5_HOMESCREEN_GAMES_VISIBLE recent=${state.value.recentGames.size} favs=${state.value.favoritesGames.size} discovery=${state.value.discoveryGames.size}")
-        }
-    }
 
     // Collect network-switched-to-mobile events emitted by HomeViewModel
     var showMobileSwitchDialog by remember { mutableStateOf(false) }
