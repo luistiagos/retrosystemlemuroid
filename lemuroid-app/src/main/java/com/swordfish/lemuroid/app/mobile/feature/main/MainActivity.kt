@@ -53,6 +53,8 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.PortAssignmentScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.PortAssignmentViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetExportScreen
@@ -409,6 +411,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     composable(MainRoute.SETTINGS_INPUT_DEVICES) {
                         InputDevicesSettingsScreen(
                             modifier = Modifier.padding(padding),
+                            navController = navController,
                             viewModel =
                                 viewModel(
                                     factory =
@@ -416,6 +419,17 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                             applicationContext,
                                             inputDeviceManager.get(),
                                         ),
+                                ),
+                        )
+                    }
+                    composable(MainRoute.SETTINGS_PORT_ASSIGNMENT) {
+                        PortAssignmentScreen(
+                            modifier = Modifier.padding(padding),
+                            viewModel =
+                                viewModel(
+                                    factory = PortAssignmentViewModel.Factory(
+                                        inputDeviceManager.get(),
+                                    ),
                                 ),
                         )
                     }

@@ -180,7 +180,11 @@ class GameViewModelInput(
         keyCode: Int,
         event: KeyEvent,
     ): Boolean {
-        if (InputKey(keyCode) in event.device.getInputClass().getInputKeys()) {
+        val inputClass = event.device.getInputClass()
+        val inputKeys = inputClass.getInputKeys()
+        val inKeys = InputKey(keyCode) in inputKeys
+        android.util.Log.d("INPUT_DIAG", "sendKeyEvent keyCode=$keyCode deviceId=${event.device?.id} deviceName=${event.device?.name} sources=${event.device?.sources} inputClass=${inputClass::class.simpleName} inKeys=$inKeys")
+        if (inKeys) {
             scope.launch {
                 keyEventsFlow.emit(event)
             }
@@ -304,6 +308,7 @@ class GameViewModelInput(
                 val (device, action, keyCode) = event
                 val port = ports(device)
                 val bindKeyCode = bindings(device)[InputKey(keyCode)]?.keyCode ?: keyCode
+                android.util.Log.d("INPUT_DIAG", "keysFlow deviceId=${device?.id} deviceName=${device?.name} keyCode=$keyCode bindKeyCode=$bindKeyCode port=$port action=$action")
 
                 if (port == 0) {
                     if (bindKeyCode == KeyEvent.KEYCODE_BUTTON_MODE && action == KeyEvent.ACTION_DOWN) {

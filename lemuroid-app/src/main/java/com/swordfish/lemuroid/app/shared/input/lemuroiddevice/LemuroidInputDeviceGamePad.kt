@@ -90,8 +90,7 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
         private val MINIMAL_KEYS_DEFAULT_ENABLED =
             MINIMAL_SUPPORTED_KEYS +
                 inputKeysOf(
-                    KeyEvent.KEYCODE_BUTTON_START,
-                    KeyEvent.KEYCODE_BUTTON_SELECT,
+                    KeyEvent.KEYCODE_BUTTON_START
                 )
 
         private val CUSTOMIZABLE_KEYS: List<RetroKey> =

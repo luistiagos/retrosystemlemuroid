@@ -3,6 +3,8 @@
     android:installLocation="auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-sdk tools:overrideLibrary="gg.padkit.lib" />
+
     <uses-feature
         android:name="android.software.leanback"
         android:required="false" />

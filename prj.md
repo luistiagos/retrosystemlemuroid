@@ -529,6 +529,33 @@ Defined in `MainNavigationRoutes` enum:
 
 ---
 
+## 11.1 System Games Screen (`GamesScreen.kt`)
+
+**File**: `lemuroid-app/.../mobile/feature/games/GamesScreen.kt`  
+**Route**: `SYSTEM_GAMES` (`systems/{metaSystemId}`)  
+**Purpose**: Exibe a lista paginada de jogos de um sistema específico.
+
+### Ordenação da lista
+
+Os jogos são ordenados pelo `GameDao` com `ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC`, garantindo que ROMs baixados apareçam **no topo** da lista.
+
+### Scroll automático ao retornar do jogo
+
+Ao sair de um jogo (a `BaseGameActivity` termina e o app retoma o `MainActivity`), o `GamesScreen` volta ao topo automaticamente.
+
+**Mecanismo**:
+- `listState = rememberLazyListState()` — estado do `LazyColumn`
+- `coroutineScope = rememberCoroutineScope()` — escopo para chamadas suspend
+- `DisposableEffect(lifecycleOwner)` com um `LifecycleEventObserver` que observa `Lifecycle.Event.ON_RESUME`
+- No `ON_RESUME`: `coroutineScope.launch { listState.scrollToItem(0) }`
+- O observer é removido no `onDispose` do `DisposableEffect`
+
+**Regra Compose**: todos os `remember*` são declarados **antes** do `if (games.itemCount == 0) { return }` para não violar a regra de que `remember` não pode ocorrer após return condicional.
+
+**Por quê importa**: após baixar um jogo via on-demand e jogar, o usuário retorna ao `GamesScreen` já rolado para o topo, onde o jogo baixado aparece em destaque (posição 1 na lista).
+
+---
+
 ## 12. Emulation Cores
 
 **Version**: `1.17.0`  
@@ -1040,3 +1067,175 @@ fun <T> Flow<T>.debounceAfterFirst(timeoutMillis: Long): Flow<T>
 Emits the **first value immediately** (no delay), then debounces subsequent values by `timeoutMillis`. Used in `HomeViewModel` and `TVHomeViewModel` to show content instantly while preventing rapid back-to-back UI recompositions.
 
 Previously both ViewModels used plain `debounce(100ms)` which delayed even the first item by 100ms.
+
+---
+
+## 24. PS4 Controller Fix (TV Box — MXQ Pro)
+
+**Diagnosed and fixed**: 2026-04-20
+
+### Symptom
+
+Sony DualShock 4 (PS4) controller worked correctly in menus but produced no response inside games on the MXQ Pro TV Box.
+
+### Root Cause
+
+The MXQ Pro TV Box exposes its IR remote as an input device named **`sunxi-ir-uinput`** with `sources = 0x301` (`SOURCE_KEYBOARD | SOURCE_DPAD | SOURCE_GAMEPAD`). Because it declares `SOURCE_GAMEPAD`, it passed Lemuroid's `isSupported()` filter and was registered as a gamepad.
+
+Port mapping in `getGamePadsPortMapperObservable()` sorts devices by `controllerNumber` and assigns ports by index. With `sunxi-ir-uinput.controllerNumber = 0`, the IR remote always sorted first and occupied **port 0 (player 1)**. The PS4 controller (`controllerNumber = 1`) was pushed to **port 1 (player 2)**. The libretro core received all PS4 button events on port 1 while player 1 had no physical controller — the game did not respond.
+
+```
+sunxi-ir-uinput  controllerNumber=0 → index 0 → port 0  (player 1)
+Sony PS4         controllerNumber=1 → index 1 → port 1  (player 2)
+→ game only responds to player 1 → no input registered
+```
+
+Evidence captured from `INPUT_DIAG` diagnostic logs:
+```
+registered gamepad id=1  name=sunxi-ir-uinput  sources=769  controllerNumber=0
+registered gamepad id=47 name=Sony Interactive Entertainment Wireless Controller controllerNumber=1
+keysFlow deviceId=47 ... port=1 action=0   ← ALL PS4 events on port 1
+```
+
+### Fix
+
+Two changes were made:
+
+#### 1. Blacklist `sunxi-ir-uinput` — `InputDeviceManager.kt`
+
+**File**: `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/input/InputDeviceManager.kt`
+
+Added `"sunxi-ir-uinput"` to `BLACKLISTED_DEVICES`:
+
+```kotlin
+private val BLACKLISTED_DEVICES =
+    setOf(
+        "virtual-search",
+        "sunxi-ir-uinput",   // ← MXQ Pro IR remote falsely declares SOURCE_GAMEPAD
+    )
+```
+
+With the IR remote excluded, the PS4 controller takes index 0 → port 0 → player 1, and the emulator responds normally.
+
+#### 2. Priority-based gamepad sorting — `InputDeviceManager.kt`
+
+Added a `gamepadPriority()` member extension function and changed `getAllGamePads()` to sort by priority descending, then `controllerNumber` as tiebreaker. This ensures real joysticks always occupy the lowest port slots regardless of TV box kernel ordering:
+
+```kotlin
+// Score 3: SOURCE_JOYSTICK + has motion ranges  → PS4, Xbox, GameSir, etc.
+// Score 2: SOURCE_JOYSTICK only                 → rare, but still a real controller
+// Score 1: has motion ranges (hat axes, etc.)   → D-pad-only gamepads
+// Score 0: no joystick source, no axes          → TV remotes masquerading as gamepads
+private fun InputDevice.gamepadPriority(): Int {
+    var score = 0
+    if ((sources and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK) score += 2
+    if (motionRanges.isNotEmpty()) score += 1
+    return score
+}
+```
+
+This works generically across all TV boxes — no dependency on device names.
+
+#### 2. `dispatchKeyEvent` override — `BaseGameActivity.kt`
+
+**File**: `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt`
+
+Added an override that intercepts `SOURCE_GAMEPAD` / `SOURCE_JOYSTICK` key events before Jetpack Compose navigation can consume them:
+
+```kotlin
+override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+    val isGamepad = (event.source and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||
+        (event.source and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK
+    if (isGamepad) {
+        val handled = when (event.action) {
+            KeyEvent.ACTION_DOWN -> onKeyDown(event.keyCode, event)
+            KeyEvent.ACTION_UP -> onKeyUp(event.keyCode, event)
+            else -> false
+        }
+        if (handled) return true
+    }
+    return super.dispatchKeyEvent(event)
+}
+```
+
+### Files Modified
+
+| File | Change |
+|------|--------|
+| `lemuroid-app/.../input/InputDeviceManager.kt` | Added `"sunxi-ir-uinput"` to `BLACKLISTED_DEVICES`; added `gamepadPriority()` member extension; changed sort order to `compareByDescending { gamepadPriority() }.thenBy { controllerNumber }` |
+| `lemuroid-app/.../shared/game/BaseGameActivity.kt` | Added `dispatchKeyEvent` override for gamepad events |
+
+### Notes
+
+- `BLACKLISTED_DEVICES` is a last-resort mechanism for devices that wrongly declare gamepad sources. The comment in the source code explains this intent.
+- The `dispatchKeyEvent` fix is a defensive measure against Compose consuming gamepad events; the blacklist fix is the primary solution.
+- This issue is specific to Android TV Boxes that expose IR remotes as input devices with `SOURCE_GAMEPAD`. Other devices are unaffected.
+
+---
+
+## 25. Port Assignment (Atribuição de Portas)
+
+**Added**: 2026-04-21
+
+### Purpose
+
+Allows the user to manually define which physical controller occupies each player slot (port 0 = Player 1, port 1 = Player 2, etc.). This is useful when the automatic priority ordering does not match the user's preference, or when playing multiplayer with two controllers of different types.
+
+### Access
+
+Settings → External devices → General → **Port assignment**
+
+(`SETTINGS_INPUT_DEVICES` → `SETTINGS_PORT_ASSIGNMENT`)
+
+### Automatic Priority (when no manual order is saved)
+
+`getAllGamePads()` sorts by `gamepadPriority()` descending, then `controllerNumber` as tiebreaker:
+
+| Score | Criteria | Example devices |
+|-------|----------|----------------|
+| 3 | `SOURCE_JOYSTICK` + has motion ranges | PS4, Xbox, GameSir, 8BitDo |
+| 2 | `SOURCE_JOYSTICK` only | Rare |
+| 1 | Has motion ranges, no `SOURCE_JOYSTICK` | D-pad-only gamepads |
+| 0 | Neither | TV IR remotes masquerading as gamepads |
+
+### Manual Order (Port Assignment Screen)
+
+When the user saves a custom order, `getGamePadsPortMapperObservable()` uses `combine` to merge the enabled inputs flow with the saved order flow. Devices are placed in the order the user defined; any newly connected device not in the saved order is appended at the end.
+
+**UI**: List of currently connected controllers with Player N labels and ↑/↓ arrow buttons. "Reset to automatic" clears the saved order and restores priority-based sorting.
+
+### Architecture
+
+**Data storage**: Single `pref_key_port_order` key in `SharedPreferences`, JSON-serialized as `PortOrder(descriptors: List<String>)` where each entry is `InputDevice.descriptor` (a hardware-level stable ID, survives reconnections).
+
+**Reactive flow**: `getGamePadsPortMapperObservable()` combines two flows:
+```
+getEnabledInputsObservable() ─┐
+                               combine → portMappings: Map<Int, Int> → (InputDevice?) -> Int?
+getPortOrderFlow()            ─┘
+```
+
+**Key files**:
+
+| File | Role |
+|------|------|
+| `lemuroid-app/.../input/InputDeviceManager.kt` | `getPortOrderFlow()`, `savePortOrder()`, updated `getGamePadsPortMapperObservable()`, `gamepadPriority()` |
+| `lemuroid-app/.../settings/inputdevices/PortAssignmentViewModel.kt` | UI state, `moveUp()`, `moveDown()`, `resetOrder()` |
+| `lemuroid-app/.../settings/inputdevices/PortAssignmentScreen.kt` | Composable list with ↑/↓ buttons per device |
+| `lemuroid-app/.../settings/inputdevices/InputDevicesSettingsScreen.kt` | Added "Port assignment" menu link in General group |
+| `lemuroid-app/.../feature/main/MainNavigationRoutes.kt` | `SETTINGS_PORT_ASSIGNMENT` route |
+| `lemuroid-app/.../feature/main/MainActivity.kt` | Composable wiring for new route |
+| `lemuroid-app/src/main/res/values/strings.xml` | 6 new English strings |
+| `lemuroid-app/src/main/res/values-pt-rBR/strings.xml` | 6 new Portuguese (BR) strings |
+
+### Strings
+
+| Key | EN | PT-BR |
+|-----|----|-------|
+| `settings_gamepad_title_port_assignment` | Port assignment | Atribuição de portas |
+| `settings_gamepad_subtitle_port_assignment` | Assign controllers to player slots | Definir qual controle é o jogador 1, 2, etc. |
+| `settings_port_assignment_group_title` | Controllers (drag to reorder) | Controles (use as setas para reordenar) |
+| `settings_port_assignment_player` | Player %1$d | Jogador %1$d |
+| `settings_port_assignment_reset` | Reset to automatic | Restaurar automático |
+| `settings_port_assignment_reset_subtitle` | Priority: analog joysticks first, TV remotes last | Prioridade: joysticks analógicos primeiro, controles de TV por último |
+| `settings_port_assignment_no_devices` | No controllers connected... | Nenhum controle conectado... |

@@ -23,9 +23,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onSubscription
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.PairSerializer
 import kotlinx.serialization.json.Json
+
+@Serializable
+private data class PortOrder(val descriptors: List<String> = emptyList())
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class InputDeviceManager(
@@ -56,12 +60,37 @@ class InputDeviceManager(
     }
 
     fun getGamePadsPortMapperObservable(): Flow<(InputDevice?) -> Int?> {
-        return getEnabledInputsObservable().map { gamePads ->
-            val portMappings =
+        return combine(getEnabledInputsObservable(), getPortOrderFlow()) { gamePads, portOrder ->
+            val sorted = if (portOrder.isEmpty()) {
                 gamePads
-                    .mapIndexed { index, inputDevice -> inputDevice.id to index }
-                    .toMap()
-            return@map { inputDevice -> portMappings[inputDevice?.id] }
+            } else {
+                val portOrderSet = portOrder.toSet()
+                val ordered = portOrder.mapNotNull { desc -> gamePads.find { it.descriptor == desc } }
+                val remaining = gamePads.filter { d -> d.descriptor !in portOrderSet }
+                ordered + remaining
+            }
+            val portMappings = sorted.mapIndexed { index, inputDevice -> inputDevice.id to index }.toMap()
+            sorted.forEach { d ->
+                android.util.Log.d("INPUT_DIAG", "registered gamepad id=${d.id} name=${d.name} port=${portMappings[d.id]} descriptor=${d.descriptor}")
+            }
+            val mapper: (InputDevice?) -> Int? = { portMappings[it?.id] }
+            mapper
+        }
+    }
+
+    fun getPortOrderFlow(): Flow<List<String>> {
+        return flowSharedPreferences.getString(PORT_ORDER_PREFERENCE_KEY)
+            .asFlow()
+            .map { pref ->
+                if (pref.isNullOrEmpty()) emptyList()
+                else runCatching { Json.decodeFromString(PortOrder.serializer(), pref).descriptors }.getOrDefault(emptyList())
+            }
+            .flowOn(Dispatchers.IO)
+    }
+
+    suspend fun savePortOrder(descriptors: List<String>) = withContext(Dispatchers.IO) {
+        sharedPreferences.edit(commit = true) {
+            putString(PORT_ORDER_PREFERENCE_KEY, Json.encodeToString(PortOrder.serializer(), PortOrder(descriptors)))
         }
     }
 
@@ -237,8 +266,23 @@ class InputDeviceManager(
                 .filterNotNull()
                 .filter { it.getLemuroidInputDevice().isSupported() }
                 .filter { it.name !in BLACKLISTED_DEVICES }
-                .sortedBy { it.controllerNumber }
+                .sortedWith(
+                    compareByDescending<InputDevice> { it.gamepadPriority() }
+                        .thenBy { it.controllerNumber },
+                )
         }.getOrNull() ?: listOf()
+    }
+
+    // Scores a device so that real joysticks always occupy the lowest port slots.
+    // Score 3: SOURCE_JOYSTICK + has motion ranges  → PS4, Xbox, GameSir, etc.
+    // Score 2: SOURCE_JOYSTICK only                 → rare, but still a real controller
+    // Score 1: has motion ranges (hat axes, etc.)   → D-pad-only gamepads
+    // Score 0: no joystick source, no axes          → TV remotes masquerading as gamepads
+    private fun InputDevice.gamepadPriority(): Int {
+        var score = 0
+        if ((sources and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK) score += 2
+        if (motionRanges.isNotEmpty()) score += 1
+        return score
     }
 
     private data class DeviceStatus(val device: InputDevice, val enabled: Boolean)
@@ -246,6 +290,7 @@ class InputDeviceManager(
     companion object {
         private const val GAME_PAD_BINDING_PREFERENCE_BASE_KEY = "pref_key_gamepad_binding_key"
         private const val GAME_PAD_ENABLED_PREFERENCE_BASE_KEY = "pref_key_gamepad_enabled"
+        private const val PORT_ORDER_PREFERENCE_KEY = "pref_key_port_order"
 
         private val bindingsMapSerializer = MapSerializer(InputKey.serializer(), RetroKey.serializer())
         private val bindingsComboSerializer = PairSerializer(InputKey.serializer(), InputKey.serializer())
@@ -257,6 +302,7 @@ class InputDeviceManager(
         private val BLACKLISTED_DEVICES =
             setOf(
                 "virtual-search",
+                "sunxi-ir-uinput",
             )
 
         fun computeEnabledGamePadPreference(inputDevice: InputDevice) =

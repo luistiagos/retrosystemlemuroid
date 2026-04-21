@@ -91,6 +91,12 @@ enum class MainRoute(
         parent = SETTINGS,
         showBottomNavigation = false,
     ),
+    SETTINGS_PORT_ASSIGNMENT(
+        route = "settings/portassignment",
+        titleId = R.string.settings_gamepad_title_port_assignment,
+        parent = SETTINGS_INPUT_DEVICES,
+        showBottomNavigation = false,
+    ),
     SETTINGS_SAVE_SYNC(
         route = "settings/savesync",
         titleId = R.string.settings_title_save_sync,

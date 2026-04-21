@@ -48,6 +48,13 @@
     <string name="settings_gamepad_category_general">Geral</string>
     <string name="settings_gamepad_title_reset_bindings">Redefinir ligações</string>
     <string name="settings_gamepad_title_game_menu">Menu</string>
+    <string name="settings_gamepad_title_port_assignment">Atribuição de portas</string>
+    <string name="settings_gamepad_subtitle_port_assignment">Definir qual controle é o jogador 1, 2, etc.</string>
+    <string name="settings_port_assignment_group_title">Controles (use as setas para reordenar)</string>
+    <string name="settings_port_assignment_player">Jogador %1$d</string>
+    <string name="settings_port_assignment_reset">Restaurar automático</string>
+    <string name="settings_port_assignment_reset_subtitle">Prioridade: joysticks analógicos primeiro, controles de TV por último</string>
+    <string name="settings_port_assignment_no_devices">Nenhum controle conectado. Conecte um controle e volte a esta tela.</string>
     <string name="settings_title_open_cores_selection">Alterar Núcleos</string>
     <string name="settings_description_open_cores_selection">Selecione qual núcleo está associado ao sistema</string>
     <string name="settings_core_selection_ds_info">O DeSmuME está obsoleto e será removido em breve. Salvar dentro do jogo, em seguida, mudar para melonDS: economizadores no jogo são carregados automaticamente, mas salvar estados ficam no núcleo que os criou.</string>

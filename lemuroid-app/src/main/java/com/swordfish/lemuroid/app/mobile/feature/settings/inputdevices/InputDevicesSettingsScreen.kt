@@ -11,6 +11,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
+import com.swordfish.lemuroid.app.mobile.feature.main.MainRoute
+import com.swordfish.lemuroid.app.mobile.feature.main.navigateToRoute
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.input.GamePadBindingActivity
 import com.swordfish.lemuroid.app.mobile.feature.input.GamePadShortcutBindingActivity
@@ -29,6 +32,7 @@ import com.swordfish.lemuroid.app.utils.android.settings.booleanPreferenceState
 fun InputDevicesSettingsScreen(
     modifier: Modifier = Modifier,
     viewModel: InputDevicesSettingsViewModel,
+    navController: NavController,
 ) {
     val state =
         viewModel.uiState
@@ -40,7 +44,7 @@ fun InputDevicesSettingsScreen(
         state.bindings.forEach { (device, bindings) ->
             DeviceBindingCategory(device, bindings)
         }
-        GeneralOptionsCategory(viewModel)
+        GeneralOptionsCategory(viewModel, navController)
     }
 }
 
@@ -109,8 +113,16 @@ private fun EnabledDeviceCategory(state: InputDevicesSettingsViewModel.State) {
 }
 
 @Composable
-private fun GeneralOptionsCategory(viewModel: InputDevicesSettingsViewModel) {
+private fun GeneralOptionsCategory(
+    viewModel: InputDevicesSettingsViewModel,
+    navController: NavController,
+) {
     LemuroidCardSettingsGroup(title = { Text(text = stringResource(R.string.settings_gamepad_category_general)) }) {
+        LemuroidSettingsMenuLink(
+            title = { Text(text = stringResource(R.string.settings_gamepad_title_port_assignment)) },
+            subtitle = { Text(text = stringResource(R.string.settings_gamepad_subtitle_port_assignment)) },
+            onClick = { navController.navigateToRoute(MainRoute.SETTINGS_PORT_ASSIGNMENT) },
+        )
         LemuroidSettingsMenuLink(
             title = { Text(text = stringResource(R.string.settings_gamepad_title_reset_bindings)) },
             onClick = { viewModel.resetAllBindings() },

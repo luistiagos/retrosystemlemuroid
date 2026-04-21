@@ -265,6 +265,20 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         baseGameScreenViewModel.toggleFastForward()
     }
 
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        val isGamepad = (event.source and android.view.InputDevice.SOURCE_GAMEPAD) == android.view.InputDevice.SOURCE_GAMEPAD ||
+            (event.source and android.view.InputDevice.SOURCE_JOYSTICK) == android.view.InputDevice.SOURCE_JOYSTICK
+        if (isGamepad) {
+            val handled = when (event.action) {
+                KeyEvent.ACTION_DOWN -> onKeyDown(event.keyCode, event)
+                KeyEvent.ACTION_UP -> onKeyUp(event.keyCode, event)
+                else -> false
+            }
+            if (handled) return true
+        }
+        return super.dispatchKeyEvent(event)
+    }
+
     override fun onGenericMotionEvent(event: MotionEvent): Boolean {
         val handled = baseGameScreenViewModel.sendMotionEvent(event)
         if (handled) {
