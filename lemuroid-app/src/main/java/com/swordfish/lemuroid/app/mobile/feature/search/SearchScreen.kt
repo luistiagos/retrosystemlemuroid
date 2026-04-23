@@ -26,6 +26,7 @@ fun SearchScreen(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel,
     searchQuery: String,
+    systemIds: List<String>? = null,
     downloadedFileNames: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
@@ -41,6 +42,10 @@ fun SearchScreen(
 
     LaunchedEffect(key1 = searchQuery) {
         viewModel.queryString.value = searchQuery
+    }
+
+    LaunchedEffect(key1 = systemIds) {
+        viewModel.setSystemIds(systemIds)
     }
 
     AnimatedContent(

@@ -1,7 +1,7 @@
 # Lemuroid — Project Specification
 
 > **Spec-Driven Context Document** — update this file whenever you change architecture, add features, or modify data flows.  
-> Last updated: 2026-04-19
+> Last updated: 2026-04-23
 
 ---
 
@@ -698,6 +698,107 @@ Dimension: cores      → bundle | dynamic
 | `GameSystem.kt` | `retrograde-app-shared/.../library/GameSystem.kt` |
 | `MetaSystemID.kt` | `retrograde-app-shared/.../library/MetaSystemID.kt` |
 | `ShaderChooser.kt` | `lemuroid-app/.../shared/game/ShaderChooser.kt` |
+| `GameSearchDao.kt` | `retrograde-app-shared/.../db/dao/GameSearchDao.kt` |
+| `SearchViewModel.kt` | `lemuroid-app/.../mobile/feature/search/SearchViewModel.kt` |
+| `SearchScreen.kt` | `lemuroid-app/.../mobile/feature/search/SearchScreen.kt` |
+| `MainViewModel.kt` | `lemuroid-app/.../mobile/feature/main/MainViewModel.kt` |
+
+---
+
+## 17. Search
+
+**Architecture**: FTS4 virtual table `fts_games` (SQLite) — indexed on the `title` column of the `games` table.
+
+```sql
+CREATE VIRTUAL TABLE fts_games USING FTS4(
+  tokenize=unicode61 "remove_diacritics=1",
+  content="games",
+  title
+);
+```
+
+Triggers (`games_ai`, `games_au`, `games_bu`, `games_bd`) keep `fts_games` in sync with the `games` table.
+
+### 17.1 FTS4 Prefix Matching
+
+**File**: `GameSearchDao.kt` — `sanitizeFtsQuery(query: String): String`
+
+Raw FTS4 MATCH requires exact token matches by default. To support partial queries (e.g. "Samurai Sho" matching "Samurai Shodown"), `sanitizeFtsQuery` appends `*` to each token:
+
+```kotlin
+private fun sanitizeFtsQuery(query: String): String {
+    val sanitized = query
+        .replace('"', ' ').replace('\'', ' ')
+        .replace('(', ' ').replace(')', ' ')
+        .replace(':', ' ').replace('*', ' ')
+        .trim()
+    if (sanitized.isEmpty()) return "\"\""
+    return sanitized.split("\\s+".toRegex())
+        .filter { it.isNotEmpty() }
+        .joinToString(" ") { "$it*" }
+}
+```
+
+Example: `"Samurai Sho"` → `"Samurai* Sho*"` → matches "Samurai Shodown".
+
+### 17.2 System-Context-Aware Search
+
+**Behaviour**: when the user navigates into a specific system (`SYSTEM_GAMES`) and then taps the Search tab, results are filtered to that system's games only. When the user navigates to Home, Favorites, or Systems before searching, results span all systems.
+
+**Data flow**:
+
+```
+User navigates to SYSTEM_GAMES/{metaSystemId}
+  ↓
+LaunchedEffect(metaSystemId) → mainViewModel.setCurrentMetaSystem(metaSystemId)
+
+User taps Search tab
+  ↓
+LaunchedEffect(currentRoute) → if route ≠ SEARCH && ≠ SYSTEM_GAMES → setCurrentMetaSystem(null)
+
+MainViewModel.buildStateFlow()
+  combines currentMetaSystemIdFlow → UiState.currentSystemIds: List<String>?
+  = MetaSystemID.valueOf(id).systemIDs.map { it.dbname }
+  or null if no system context
+
+SearchScreen receives systemIds
+  ↓
+LaunchedEffect(key1 = systemIds) → viewModel.setSystemIds(systemIds)
+
+SearchViewModel.searchResults
+  combine(queryString.debounce(400ms), systemIdsFlow)
+  → retrogradeDb.gameSearchDao().search(query, systemIds)
+```
+
+**SQL filter** (in `GameSearchDao.search`):
+
+```kotlin
+fun search(query: String, systemIds: List<String>? = null): PagingSource<Int, Game> {
+    return if (systemIds != null && systemIds.isNotEmpty()) {
+        // "AND games.systemId IN (?, ?, ...)" — parameterized, no injection risk
+        internalDao.rawSearch(SimpleSQLiteQuery(
+            "SELECT games.* FROM fts_games JOIN games ON games.id = fts_games.docid WHERE fts_games MATCH ? AND games.systemId IN ($placeholders)",
+            arrayOf(matchArg, *systemIds.toTypedArray())
+        ))
+    } else {
+        internalDao.rawSearch(SimpleSQLiteQuery(
+            "SELECT games.* FROM fts_games JOIN games ON games.id = fts_games.docid WHERE fts_games MATCH ?",
+            arrayOf(matchArg)
+        ))
+    }
+}
+```
+
+**Lifecycle of system context**:
+
+| Navigation event | `currentSystemIds` |
+|------------------|--------------------|
+| Enter `SYSTEM_GAMES/{id}` | `MetaSystemID.valueOf(id).systemIDs.map { it.dbname }` |
+| Tap Search tab (holding system context) | unchanged (SEARCH route does not clear) |
+| Navigate to HOME / FAVORITES / SYSTEMS / SETTINGS | `null` (cleared) |
+| Navigate back to `SYSTEM_GAMES` | re-set by `LaunchedEffect(metaSystemId)` |
+
+**Example** — inside FBNeo system: `systemIds = listOf("fbneo")`. Inside Genesis system: `systemIds = listOf("md", "scd")` (Genesis + SegaCD share `MetaSystemID.GENESIS`).
 | `CoreID.kt` | `retrograde-app-shared/.../library/CoreID.kt` |
 | `HeavySystemFilter.kt` | `retrograde-app-shared/.../library/HeavySystemFilter.kt` |
 | `TransferViewModel.kt` | `lemuroid-app/.../settings/transfer/TransferViewModel.kt` |

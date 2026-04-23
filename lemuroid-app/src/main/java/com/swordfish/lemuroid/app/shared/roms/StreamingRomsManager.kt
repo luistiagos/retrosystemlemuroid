@@ -82,7 +82,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
          * Bumped 7→8: Archive extension fallback in findByPathAndSupportedExtension;
          * force re-index so .zip/.7z files in megacd/ngp/ngc/psp folders get indexed.
          */
-        private const val CATALOG_VERSION = 8
+        private const val CATALOG_VERSION = 9
 
         /**
          * Root path inside the HuggingFace dataset repository.

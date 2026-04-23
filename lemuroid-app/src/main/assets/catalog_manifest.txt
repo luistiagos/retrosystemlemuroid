@@ -2549,7 +2549,6 @@ fbneo/jockeygp.zip
 fbneo/joemacr.zip
 fbneo/joinem.zip
 fbneo/jojo.zip
-fbneo/jojoba.zip
 fbneo/jojobane.zip
 fbneo/jojoj.zip
 fbneo/jollyjgr.zip
@@ -15949,7 +15948,6 @@ ngc/Biomotor Unitron (US - EU).ngc
 ngc/Bust-A-Move Pocket (US).ngc
 ngc/Cool Boarders Pocket (JP - EU).ngc
 ngc/Cool Cool Jam (JP).ngc
-ngc/Crush Roller (World) (En,Ja).zip
 ngc/Dark Arms - Beast Buster 1999 (WR).ngc
 ngc/Delta Warp (JP).ngc
 ngc/Densetsu no Ogre Battle Gaiden - Zenobia no Ouji (JP).ngc
@@ -15966,13 +15964,11 @@ ngc/Fatal Fury F-Contact - Pocket Fighting Series (WR).ngc
 ngc/Ganbare Neo Poke-kun (Kari) (JP).ngc
 ngc/Infinity Cure (JP).ngc
 ngc/Kikou Seiki Unitron - Sono Tsuide. Hikari Umareru Chi Yori. (JP).ngc
-ngc/King of Fighters R-2 - Pocket Fighting Series (World) (En,Ja).zip
 ngc/King of Fighters, The - Battle de Paradise (JP).ngc
 ngc/Koi Koi Mahjong (JP) (v08).ngc
 ngc/Last Blade, The - Beyond the Destiny (US - EU).ngc
 ngc/Magical Drop Pocket (US - EU).ngc
 ngc/Memories Off - Pure (JP).ngc
-ngc/Metal Slug - 1st Mission (World) (En,Ja).zip
 ngc/Mezase! Kanji Ou (JP).ngc
 ngc/Mizuki Shigeru no Youkai Shashinkan (JP).ngc
 ngc/Neo 21 - Pocket Casino Series (WR).ngc
@@ -15982,7 +15978,6 @@ ngc/Neo Derby Champ Daiyosou (JP).ngc
 ngc/Neo Dragons Wild - Real Casino Series (WR) (v11).ngc
 ngc/Neo Mystery Bonus - Pocket Casino Series (WR).ngc
 ngc/Neo Poke Pro Yakyuu (JP) (v1F).ngc
-ngc/Neo Turf Masters (World) (En,Ja).zip
 ngc/NeoGeo Cup 98 Plus Color - Pocket Sports Series (WR).ngc
 ngc/Nige-ron-pa (JP).ngc
 ngc/Oekaki Puzzle (JP).ngc
@@ -15997,12 +15992,10 @@ ngc/Party Mail (JP).ngc
 ngc/Picture Puzzle (EU).ngc
 ngc/Pocket Love - if (JP).ngc
 ngc/Pocket Reversi (EU) (v03).ngc
-ngc/Pocket Tennis Color - Pocket Sports Series (World) (En,Ja).zip
 ngc/Puyo Pop (US) (v06).ngc
 ngc/Puzzle Bobble Mini (EU).ngc
 ngc/Puzzle Link (US - EU).ngc
 ngc/Renketsu Puzzle Tsunagete Pon! Color (JP).ngc
-ngc/Rockman - Battle & Fighters (Japan).zip
 ngc/SNK Gals Fighters (US - EU).ngc
 ngc/SNK vs. Capcom - Card Fighters 2 - Expand Edition (JP).ngc
 ngc/SNK vs. Capcom - Card Fighters Clash - Capcom Version (US - EU).ngc
@@ -16012,29 +16005,18 @@ ngc/Samurai Shodown! 2 - Pocket Fighting Series (WR).ngc
 ngc/Shanghai Mini (WR).ngc
 ngc/Shinki Sekai Evolution - Hateshinai Dungeon (JP).ngc
 ngc/Shougi no Tatsujin Color (JP).ngc
-ngc/Sonic The Hedgehog - Pocket Adventure (World).zip
 ngc/Soreike!! Hanafuda Doujou (JP).ngc
 ngc/Super Real Mahjong - Premium Collection (JP).ngc
 ngc/Tsunagete Pon! 2 (JP).ngc
 ngp/Baseball Stars - Pocket Sports Series (Japan, Europe) (En,Ja).ngp
-ngp/Bust-A-Move Pocket (USA).zip
-ngp/Crush Roller (World) (En,Ja).zip
 ngp/King of Fighters R-1 - Pocket Fighting Series (Japan, Europe) (En,Ja).ngp
-ngp/Last Blade, The - Beyond the Destiny (Europe).zip
-ngp/Magical Drop Pocket (USA, Europe).zip
 ngp/Melon-chan no Seichou Nikki (Japan).ngp
-ngp/Metal Slug - 1st Mission (World) (En,Ja).zip
 ngp/Neo Cherry Master - Real Casino Series (Japan) (En,Ja).ngp
-ngp/Neo Turf Masters (World) (En,Ja).zip
 ngp/NeoGeo Cup '98 (Japan, Europe) (En,Ja).ngp
 ngp/Pocket Tennis - Pocket Sports Series (Japan, Europe) (En,Ja).ngp
 ngp/Renketsu Puzzle Tsunagete Pon! (Japan).ngp
-ngp/Rockman - Battle & Fighters (Japan).zip
-ngp/SNK Gals' Fighters (USA, Europe).zip
-ngp/SNK vs. Capcom - Card Fighters' Clash - Capcom Version (USA, Europe).zip
 ngp/Samurai Shodown! - Pocket Fighting Series (Japan, Europe) (En,Ja).ngp
 ngp/Shougi no Tatsujin (Japan).ngp
-ngp/Sonic The Hedgehog - Pocket Adventure (World).zip
 pce/1943 Kai (Japan).pce
 pce/Aero Blasters (USA).pce
 pce/After Burner II (Japan).pce

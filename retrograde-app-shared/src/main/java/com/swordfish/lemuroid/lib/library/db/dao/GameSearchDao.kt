@@ -64,36 +64,59 @@ class GameSearchDao(private val internalDao: Internal) {
         }
     }
 
-    fun search(query: String): PagingSource<Int, Game> =
-        internalDao.rawSearch(
-            SimpleSQLiteQuery(
-                """
-                SELECT games.*
-                    FROM fts_games
-                    JOIN games ON games.id = fts_games.docid
-                    WHERE fts_games MATCH ?
-                """,
-                arrayOf(sanitizeFtsQuery(query)),
-            ),
-        )
+    fun search(query: String, systemIds: List<String>? = null): PagingSource<Int, Game> {
+        val matchArg = sanitizeFtsQuery(query)
+        return if (systemIds != null && systemIds.isNotEmpty()) {
+            val placeholders = systemIds.joinToString(",") { "?" }
+            internalDao.rawSearch(
+                SimpleSQLiteQuery(
+                    """
+                    SELECT games.*
+                        FROM fts_games
+                        JOIN games ON games.id = fts_games.docid
+                        WHERE fts_games MATCH ?
+                        AND games.systemId IN ($placeholders)
+                    """,
+                    arrayOf(matchArg, *systemIds.toTypedArray()),
+                ),
+            )
+        } else {
+            internalDao.rawSearch(
+                SimpleSQLiteQuery(
+                    """
+                    SELECT games.*
+                        FROM fts_games
+                        JOIN games ON games.id = fts_games.docid
+                        WHERE fts_games MATCH ?
+                    """,
+                    arrayOf(matchArg),
+                ),
+            )
+        }
+    }
 
     companion object {
         /**
          * Sanitizes an FTS4 MATCH query to prevent SQLiteException on malformed input.
          * Strips characters that are illegal or cause parse errors in SQLite FTS4 MATCH expressions.
+         * Appends '*' to each term to enable prefix matching (e.g. "Samurai Sho" matches "Samurai Shodown").
          */
         private fun sanitizeFtsQuery(query: String): String {
             // Remove characters that can cause FTS4 parse errors:
-            // quotes, parentheses, asterisks (wildcard only valid at end of term),
-            // hyphens/colons as operators, etc.
-            return query
+            // quotes, parentheses, hyphens/colons as operators, etc.
+            val sanitized = query
                 .replace('"', ' ')
                 .replace('\'', ' ')
                 .replace('(', ' ')
                 .replace(')', ' ')
                 .replace(':', ' ')
+                .replace('*', ' ')
                 .trim()
-                .ifEmpty { "\"\"" }
+            if (sanitized.isEmpty()) return "\"\""
+            // Append '*' to each word for prefix matching
+            return sanitized.split("\\s+".toRegex())
+                .filter { it.isNotEmpty() }
+                .joinToString(" ") { "$it*" }
         }
     }
 

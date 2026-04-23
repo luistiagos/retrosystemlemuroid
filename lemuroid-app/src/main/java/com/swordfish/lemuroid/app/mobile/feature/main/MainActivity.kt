@@ -206,6 +206,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
             LaunchedEffect(currentRoute) {
                 mainViewModel.changeRoute(currentRoute)
+                if (currentRoute != MainRoute.SEARCH && currentRoute != MainRoute.SYSTEM_GAMES) {
+                    mainViewModel.setCurrentMetaSystem(null)
+                }
             }
 
             val selectedGameState =
@@ -312,6 +315,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory = SearchViewModel.Factory(retrogradeDb),
                                 ),
                             searchQuery = mainUIState.searchQuery,
+                            systemIds = mainUIState.currentSystemIds,
                             downloadedFileNames = downloadedFileNames,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
@@ -335,6 +339,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     }
                     composable(MainRoute.SYSTEM_GAMES) { entry ->
                         val metaSystemId = entry.arguments?.getString("metaSystemId") ?: return@composable
+                        LaunchedEffect(metaSystemId) {
+                            mainViewModel.setCurrentMetaSystem(metaSystemId)
+                        }
                         GamesScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =

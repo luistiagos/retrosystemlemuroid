@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
+import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,9 +35,11 @@ class MainViewModel(
         val saveSyncEnabled: Boolean = false,
         val displaySearch: Boolean = false,
         val searchQuery: String = "",
+        val currentSystemIds: List<String>? = null,
     )
 
     private val currentRouteFlow = MutableStateFlow(MainRoute.HOME)
+    private val currentMetaSystemIdFlow = MutableStateFlow<String?>(null)
     private val saveSyncEnabledFlow = MutableStateFlow(false)
     private val operationInProgressFlow = PendingOperationsMonitor(appContext).anySaveOperationInProgress()
     private val searchQueryFlow = MutableStateFlow("")
@@ -56,12 +59,18 @@ class MainViewModel(
                 saveSyncEnabledFlow,
                 operationInProgressFlow,
                 searchQueryFlow,
-            ) { currentRoute, saveSyncEnabled, operationInProgress, searchQuery ->
+                currentMetaSystemIdFlow,
+            ) { currentRoute, saveSyncEnabled, operationInProgress, searchQuery, metaSystemId ->
+                val systemIds = metaSystemId
+                    ?.let { runCatching { MetaSystemID.valueOf(it) }.getOrNull() }
+                    ?.systemIDs
+                    ?.map { it.dbname }
                 UiState(
                     operationInProgress = operationInProgress,
                     saveSyncEnabled = saveSyncEnabled,
                     displaySearch = currentRoute == MainRoute.SEARCH,
                     searchQuery = searchQuery,
+                    currentSystemIds = systemIds,
                 )
             }
 
@@ -82,5 +91,9 @@ class MainViewModel(
 
     fun changeQueryString(newSearchQuery: String) {
         searchQueryFlow.value = newSearchQuery
+    }
+
+    fun setCurrentMetaSystem(metaSystemId: String?) {
+        currentMetaSystemIdFlow.value = metaSystemId
     }
 }

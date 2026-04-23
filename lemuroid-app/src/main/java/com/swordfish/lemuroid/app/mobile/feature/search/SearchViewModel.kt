@@ -12,6 +12,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
@@ -28,15 +29,22 @@ class SearchViewModel(private val retrogradeDb: RetrogradeDatabase) : ViewModel(
     }
 
     val queryString = MutableStateFlow("")
+    private val systemIdsFlow = MutableStateFlow<List<String>?>(null)
+
+    fun setSystemIds(ids: List<String>?) {
+        systemIdsFlow.value = ids
+    }
 
     enum class UIState { Idle, Loading, Ready }
 
     val searchResults =
-        queryString
-            .debounce(400.milliseconds)
-            .flatMapLatest {
+        combine(
+            queryString.debounce(400.milliseconds),
+            systemIdsFlow,
+        ) { query, systemIds -> query to systemIds }
+            .flatMapLatest { (query, systemIds) ->
                 buildFlowPaging(20, viewModelScope) {
-                    retrogradeDb.gameSearchDao().search(it)
+                    retrogradeDb.gameSearchDao().search(query, systemIds)
                 }
             }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), PagingData.empty())
