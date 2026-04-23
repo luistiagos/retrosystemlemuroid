@@ -1,4 +1,4 @@
 [submodule "lemuroid-cores"]
 	path = lemuroid-cores
 	url = e:\\projects\\lemuroid\\LibretroCores
-	branch = master
+	branch = main
