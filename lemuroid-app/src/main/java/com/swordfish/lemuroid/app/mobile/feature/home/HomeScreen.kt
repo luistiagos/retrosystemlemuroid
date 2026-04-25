@@ -449,6 +449,12 @@ private fun HomeDownloadCard(
                         Text(stringResource(R.string.home_download_roms_action_retry))
                     }
                 }
+                is DownloadRomsState.OutOfSpace -> {
+                    Text(
+                        text = stringResource(R.string.home_download_roms_out_of_space),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
             }
         }
     }

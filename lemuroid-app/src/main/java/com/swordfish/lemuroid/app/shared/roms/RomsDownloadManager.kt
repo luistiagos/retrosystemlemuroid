@@ -32,6 +32,7 @@ sealed class DownloadRomsState {
     data class Extracting(val progress: Float) : DownloadRomsState()
     object Done : DownloadRomsState()
     data class Error(val message: String) : DownloadRomsState()
+    object OutOfSpace : DownloadRomsState()
 }
 
 class RomsDownloadManager(context: Context) {
@@ -216,8 +217,13 @@ class RomsDownloadManager(context: Context) {
                 }
                 info.state == WorkInfo.State.SUCCEEDED -> DownloadRomsState.Done
                 info.state == WorkInfo.State.FAILED -> {
-                    val error = info.outputData.getString(RomsDownloadWork.KEY_ERROR) ?: "Unknown error"
-                    DownloadRomsState.Error(error)
+                    val isOutOfSpace = info.outputData.getBoolean(RomsDownloadWork.KEY_OUT_OF_SPACE, false)
+                    if (isOutOfSpace) {
+                        DownloadRomsState.OutOfSpace
+                    } else {
+                        val error = info.outputData.getString(RomsDownloadWork.KEY_ERROR) ?: "Unknown error"
+                        DownloadRomsState.Error(error)
+                    }
                 }
                 else -> initialState
             }

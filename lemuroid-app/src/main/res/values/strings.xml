@@ -147,6 +147,7 @@
     <string name="home_download_roms_extracting">Extracting… %1$d%%</string>
     <string name="home_download_roms_done">ROMs downloaded and extracted successfully!</string>
     <string name="home_download_roms_error">Error: %1$s</string>
+    <string name="home_download_roms_out_of_space">Not enough storage space on the device. Please free up space and try again.</string>
     <string name="home_download_roms_cancel">Cancel</string>
     <string name="home_download_cancel_dialog_title">Cancel Download?</string>
     <string name="home_download_cancel_dialog_message">This will delete all downloaded files. You will need to start from the beginning next time.</string>

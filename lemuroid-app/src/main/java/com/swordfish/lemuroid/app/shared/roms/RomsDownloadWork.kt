@@ -51,7 +51,8 @@ class RomsDownloadWork(context: Context, workerParams: WorkerParameters) :
             // Reuse the same instance — creating a new one here would run its init block
             // (which calls enqueue) while PREF_DOWNLOAD_STARTED is still true.
             manager.clearDownloadStarted()
-            Result.failure(workDataOf(KEY_ERROR to msg))
+            val isOutOfSpace = isOutOfSpaceError(e)
+            Result.failure(workDataOf(KEY_ERROR to msg, KEY_OUT_OF_SPACE to isOutOfSpace))
         }
     }
 
@@ -59,9 +60,24 @@ class RomsDownloadWork(context: Context, workerParams: WorkerParameters) :
         const val KEY_PHASE = "phase"
         const val KEY_PROGRESS = "progress"
         const val KEY_ERROR = "error"
+        const val KEY_OUT_OF_SPACE = "out_of_space"
         const val PHASE_DOWNLOADING = "downloading"
         const val PHASE_EXTRACTING = "extracting"
         const val UNIQUE_WORK_ID = "RomsDownloadWork"
+
+        /** Returns true if any cause in the chain indicates a "no space left on device" error. */
+        private fun isOutOfSpaceError(t: Throwable): Boolean {
+            var current: Throwable? = t
+            while (current != null) {
+                val msg = current.message ?: ""
+                if (msg.contains("ENOSPC", ignoreCase = true) ||
+                    msg.contains("No space left on device", ignoreCase = true) ||
+                    msg.contains("no space left", ignoreCase = true)
+                ) return true
+                current = current.cause
+            }
+            return false
+        }
 
         fun enqueue(context: Context, replace: Boolean = false) {
             val policy = if (replace) ExistingWorkPolicy.REPLACE else ExistingWorkPolicy.KEEP

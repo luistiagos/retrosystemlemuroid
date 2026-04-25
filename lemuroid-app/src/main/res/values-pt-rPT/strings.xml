@@ -237,6 +237,7 @@
     <string name="home_download_roms_extracting">A extrair… %1$d%%</string>
     <string name="home_download_roms_done">ROMs descarregadas e extraídas com sucesso!</string>
     <string name="home_download_roms_error">Erro: %1$s</string>
+    <string name="home_download_roms_out_of_space">Espaço de armazenamento insuficiente no dispositivo. Liberte espaço e tente novamente.</string>
     <string name="home_download_roms_cancel">Cancelar</string>
     <string name="home_download_cancel_dialog_title">Cancelar Descarregamento?</string>
     <string name="home_download_cancel_dialog_message">Isto eliminará todos os ficheiros descarregados. Terá de começar do início na próxima vez.</string>
