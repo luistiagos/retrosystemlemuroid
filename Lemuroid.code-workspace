@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../../romsrepository"
+		},
+		{
+			"path": "../../../fetchimagers"
 		}
 	],
 	"settings": {
@@ -20,6 +23,7 @@
 				"approve": true,
 				"matchCommandLine": true
 			}
-		}
+		},
+		"java.configuration.updateBuildConfiguration": "interactive"
 	}
 }

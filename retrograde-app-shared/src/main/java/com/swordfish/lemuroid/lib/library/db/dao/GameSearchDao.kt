@@ -76,6 +76,7 @@ class GameSearchDao(private val internalDao: Internal) {
                         JOIN games ON games.id = fts_games.docid
                         WHERE fts_games MATCH ?
                         AND games.systemId IN ($placeholders)
+                        LIMIT 100
                     """,
                     arrayOf(matchArg, *systemIds.toTypedArray()),
                 ),
@@ -88,6 +89,7 @@ class GameSearchDao(private val internalDao: Internal) {
                         FROM fts_games
                         JOIN games ON games.id = fts_games.docid
                         WHERE fts_games MATCH ?
+                        LIMIT 100
                     """,
                     arrayOf(matchArg),
                 ),

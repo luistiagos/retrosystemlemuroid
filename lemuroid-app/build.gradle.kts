@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -8,11 +10,28 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+fun readLocalProperty(key: String): String {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (!localPropertiesFile.exists()) return ""
+
+    val properties = Properties()
+    localPropertiesFile.inputStream().use { properties.load(it) }
+    return properties.getProperty(key, "")
+}
+
+fun escapeBuildConfigValue(value: String): String =
+    value.replace("\\", "\\\\").replace("\"", "\\\"")
+
 android {
     defaultConfig {
         versionCode = 231
         versionName = "1.17.0" // Always remember to update Cores Tag!
         applicationId = "com.swordfish.lemuroid"
+
+        val archiveEmail = readLocalProperty("archive.email")
+        val archivePassword = readLocalProperty("archive.password")
+        buildConfigField("String", "ARCHIVE_EMAIL", "\"${escapeBuildConfigValue(archiveEmail)}\"")
+        buildConfigField("String", "ARCHIVE_PASSWORD", "\"${escapeBuildConfigValue(archivePassword)}\"")
     }
     flavorDimensions += listOf("opensource", "cores")
 

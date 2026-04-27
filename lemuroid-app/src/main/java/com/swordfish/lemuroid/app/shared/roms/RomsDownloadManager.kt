@@ -17,6 +17,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okhttp3.ConnectionPool
+import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
@@ -170,6 +171,16 @@ class RomsDownloadManager(context: Context) {
         appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
     private val httpClient: OkHttpClient by lazy { buildHttpClient() }
+
+    private val archiveAuthHeader by lazy {
+        val email = BuildConfig.ARCHIVE_EMAIL
+        val password = BuildConfig.ARCHIVE_PASSWORD
+        if (email.isBlank() || password.isBlank()) {
+            null
+        } else {
+            Credentials.basic(email, password)
+        }
+    }
 
     private val versionOutdated: Boolean by lazy {
         val storedVersion = prefs.getInt(PREF_EXTRACTION_VERSION, 0)
@@ -402,11 +413,28 @@ class RomsDownloadManager(context: Context) {
             .readTimeout(90, TimeUnit.SECONDS)
             .followRedirects(true)
             .followSslRedirects(true)
+            .authenticator { _, response ->
+                val host = response.request.url.host
+                if (!isArchiveHost(host)) {
+                    null
+                } else if (archiveAuthHeader.isNullOrBlank()) {
+                    null
+                } else if (response.request.header("Authorization") != null) {
+                    null
+                } else {
+                    response.request.newBuilder()
+                        .header("Authorization", archiveAuthHeader!!)
+                        .build()
+                }
+            }
             // Allow up to 16 concurrent connections to the same host so all 8 parallel
             // segments (plus retries) never queue waiting for a free slot.
             .connectionPool(ConnectionPool(16, 5, TimeUnit.MINUTES))
         return builder.build()
     }
+
+    private fun isArchiveHost(host: String): Boolean =
+        host == "archive.org" || host.endsWith(".archive.org")
 
     // Thrown for HTTP 4xx (client) errors that should never be retried.
     private class PermanentHttpException(message: String) : IOException(message)
@@ -427,11 +455,22 @@ class RomsDownloadManager(context: Context) {
         while (true) {
             attempt++
             val existingBytes = if (destination.exists()) destination.length() else 0L
-            val request = Request.Builder()
+            val requestBuilder = Request.Builder()
                 .url(url)
                 .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
-                .apply { if (existingBytes > 0) header("Range", "bytes=$existingBytes-") }
-                .build()
+                .apply {
+                    if (existingBytes > 0) {
+                        header("Range", "bytes=$existingBytes-")
+                    }
+                }
+
+            val parsedUrl = Uri.parse(url)
+            val useArchiveAuth = isArchiveHost(parsedUrl.host ?: "") && !archiveAuthHeader.isNullOrBlank()
+            if (useArchiveAuth) {
+                requestBuilder.header("Authorization", archiveAuthHeader!!)
+            }
+
+            val request = requestBuilder.build()
             try {
                 httpClient.newCall(request).execute().use { response ->
                     Timber.d("HTTP ${response.code} for $url (attempt $attempt, offset $existingBytes)")

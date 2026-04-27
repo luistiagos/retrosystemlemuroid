@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.swordfish.lemuroid.R
@@ -33,7 +34,7 @@ fun SearchScreen(
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
     onResetSearchQuery: () -> Unit,
 ) {
-    val searchState = viewModel.searchState.collectAsState(SearchViewModel.UIState.Idle)
+    val isSearchPending = viewModel.isSearchPending.collectAsState(false)
     val searchGames = viewModel.searchResults.collectAsLazyPagingItems()
 
     LaunchedEffect(Unit) {
@@ -48,8 +49,20 @@ fun SearchScreen(
         viewModel.setSystemIds(systemIds)
     }
 
+    // State is derived entirely from real signals — no fixed timers:
+    //  • searchQuery empty          → Idle   (prompt the user to type)
+    //  • debounce pending OR paging → Loading (show spinner)
+    //  • paging done, 0 items       → shown as Ready (empty-results message)
+    //  • paging done, N items       → shown as Ready (results list)
+    val isPageLoading = searchGames.loadState.refresh is LoadState.Loading
+    val displayState = when {
+        searchQuery.isEmpty() -> SearchViewModel.UIState.Idle
+        isSearchPending.value || isPageLoading -> SearchViewModel.UIState.Loading
+        else -> SearchViewModel.UIState.Ready
+    }
+
     AnimatedContent(
-        targetState = searchState.value,
+        targetState = displayState,
         label = "SearchContent",
         transitionSpec = { fadeIn() togetherWith fadeOut() },
     ) { state ->

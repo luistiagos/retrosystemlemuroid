@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.app.shared.roms
 
 import android.content.Context
 import android.net.Uri
+import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
 import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
@@ -18,6 +19,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import okhttp3.Call
+import okhttp3.Cookie
+import okhttp3.CookieJar
+import okhttp3.FormBody
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
@@ -26,6 +31,9 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+
+/** Thrown for HTTP 4xx errors that should not be retried (permanent client errors). */
+class PermanentHttpException(message: String) : IOException(message)
 
 /**
  * Handles on-demand downloading of a single ROM.
@@ -56,6 +64,9 @@ class RomOnDemandManager(
             "https://huggingface.co/datasets/luisluis123/lemusets/resolve/main/roms"
     }
 
+    private val archiveCookieJar = ArchiveCookieJar()
+    @Volatile private var archiveSessionReady = false
+
     private val _pausedFlow = MutableStateFlow(false)
     val isPaused: StateFlow<Boolean> = _pausedFlow.asStateFlow()
 
@@ -68,8 +79,51 @@ class RomOnDemandManager(
             .readTimeout(120, TimeUnit.SECONDS)
             .followRedirects(true)
             .followSslRedirects(true)
+            .cookieJar(archiveCookieJar)
             .build()
     }
+
+    /**
+     * Logs in to archive.org via the account login endpoint and stores session cookies
+     * in [archiveCookieJar]. The CDN (dn*.archive.org) validates these same cookies
+     * on redirect, so Basic auth is not needed.
+     */
+    private suspend fun ensureArchiveSession() {
+        if (archiveSessionReady) return
+        val email = BuildConfig.ARCHIVE_EMAIL
+        val password = BuildConfig.ARCHIVE_PASSWORD
+        if (email.isBlank() || password.isBlank()) return
+        try {
+            val body = FormBody.Builder()
+                .add("username", email)
+                .add("password", password)
+                .add("remember", "CHECKED")
+                .add("referer", "https://archive.org/")
+                .add("login", "Log in")
+                .add("submit_by_js", "true")
+                .build()
+            val request = Request.Builder()
+                .url("https://archive.org/account/login")
+                .post(body)
+                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("Referer", "https://archive.org/")
+                .build()
+            httpClient.newCall(request).execute().use { response ->
+                Timber.d("Archive.org login: HTTP ${response.code}")
+                if (response.code in 200..399) {
+                    archiveSessionReady = true
+                    Timber.d("Archive.org session ready")
+                } else {
+                    Timber.w("Archive.org login failed: ${response.code}")
+                }
+            }
+        } catch (e: IOException) {
+            Timber.w("Archive.org login error: ${e.message}")
+        }
+    }
+
+    private fun isArchiveHost(host: String): Boolean =
+        host == "archive.org" || host.endsWith(".archive.org")
 
     fun pauseDownload() {
         _pausedFlow.value = true
@@ -238,6 +292,9 @@ class RomOnDemandManager(
 
     private suspend fun downloadToFile(url: String, destFile: File, onProgress: (Float) -> Unit) {
         val maxAttempts = 5
+        val parsedUrl = Uri.parse(url)
+        val isArchive = isArchiveHost(parsedUrl.host ?: "")
+        if (isArchive) ensureArchiveSession()
         for (attempt in 1..maxAttempts) {
             val request = Request.Builder()
                 .url(url)
@@ -256,6 +313,16 @@ class RomOnDemandManager(
                             retryAfterMs = minOf(retryAfterSec * 1000L, 5 * 60_000L)
                             Timber.w("downloadToFile 429, attempt $attempt/$maxAttempts, retry after ${retryAfterSec}s")
                         }
+                        response.code in 401..403 -> {
+                            // 401/403 from CDN after auth attempt = permanently inaccessible
+                            // (the archive.org collection may be access-restricted for this account).
+                            // Reset session so next download attempt re-auths, then fail immediately
+                            // without retrying — retries won't help for access-denied responses.
+                            archiveSessionReady = false
+                            throw PermanentHttpException("HTTP ${response.code}: ROM source inaccessível (coleção restrita)")
+                        }
+                        response.code in 400..499 ->
+                            throw PermanentHttpException("HTTP ${response.code}: ${response.message}")
                         !response.isSuccessful -> throw IOException("HTTP ${response.code}: ${response.message}")
                         else -> {
                             val body = response.body ?: throw IOException("Empty response body")
@@ -288,16 +355,17 @@ class RomOnDemandManager(
                 }
             } catch (e: CancellationException) {
                 throw e
+            } catch (e: PermanentHttpException) {
+                Timber.e("downloadToFile permanent HTTP error (not retrying): ${e.message}")
+                throw e
             } catch (e: IOException) {
-                // Retry on network failures (connection drop, timeout, bad HTTP status other than 429).
-                // Without this catch, any transient network error causes immediate failure even though
-                // the loop was designed to retry.
                 Timber.w("downloadToFile attempt $attempt/$maxAttempts failed: ${e.message}")
                 if (attempt >= maxAttempts) throw IOException("Download failed after $maxAttempts attempts: ${e.message}", e)
+                // Re-login before the next attempt if session was invalidated by a 401
+                if (isArchive && !archiveSessionReady) ensureArchiveSession()
                 val ioDelayMs = minOf(5_000L * attempt, 30_000L)
                 Timber.d("Retrying downloadToFile in ${ioDelayMs}ms")
                 delay(ioDelayMs)
-                // `continue` skips the 429-specific delay code below and goes to the next attempt.
                 continue
             } finally {
                 activeCall = null
@@ -308,6 +376,24 @@ class RomOnDemandManager(
             delay(retryAfterMs ?: 60_000L)
         }
         throw IOException("Rate limited (429). Aguarde e tente novamente.")
+    }
+
+    /** Minimal in-memory cookie jar that stores cookies keyed by "domain|name". */
+    private class ArchiveCookieJar : CookieJar {
+        private val lock = Any()
+        private val store = LinkedHashMap<String, Cookie>()
+
+        override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+            synchronized(lock) {
+                cookies.forEach { store["${it.domain}|${it.name}"] = it }
+            }
+        }
+
+        override fun loadForRequest(url: HttpUrl): List<Cookie> {
+            synchronized(lock) {
+                return store.values.filter { it.matches(url) }
+            }
+        }
     }
 }
 
