@@ -55,6 +55,8 @@ import com.swordfish.lemuroid.lib.library.LemuroidLibrary
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.dao.GameSearchDao
 import com.swordfish.lemuroid.lib.library.db.dao.Migrations
+import com.swordfish.lemuroid.lib.library.catalog.CatalogCoverProvider
+import com.swordfish.lemuroid.lib.library.metadata.CatalogFallbackMetadataProvider
 import com.swordfish.lemuroid.lib.library.metadata.GameMetadataProvider
 import com.swordfish.lemuroid.lib.migration.DesmumeMigrationHandler
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
@@ -171,8 +173,14 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun gameMetadataProvider(libretroDBManager: LibretroDBManager): GameMetadataProvider =
-            LibretroDBMetadataProvider(libretroDBManager)
+        fun gameMetadataProvider(
+            context: Context,
+            libretroDBManager: LibretroDBManager,
+        ): GameMetadataProvider {
+            val base = LibretroDBMetadataProvider(libretroDBManager)
+            val catalog = CatalogCoverProvider(context)
+            return CatalogFallbackMetadataProvider(base, catalog)
+        }
 
         @Provides
         @PerApp

@@ -79,10 +79,13 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
          * force re-population so existing installs get the missing psp/ placeholders.
          * Bumped 6→7: SerialScanner bounds-check fix; force re-index so PSP .iso files
          * that were silently dropped due to ArrayIndexOutOfBoundsException get indexed.
-         * Bumped 7→8: Archive extension fallback in findByPathAndSupportedExtension;
+         * Bumped 8→9: Archive extension fallback in findByPathAndSupportedExtension;
          * force re-index so .zip/.7z files in megacd/ngp/ngc/psp folders get indexed.
+         * Bumped 9→10: Fix catalog placeholder creation — the manifest format is "path|url"
+         * but the path was being used with the "|url" suffix, making all filenames invalid
+         * on Android (pipe is illegal). Force re-population so valid 0-byte files are created.
          */
-        private const val CATALOG_VERSION = 9
+        private const val CATALOG_VERSION = 10
 
         /**
          * Root path inside the HuggingFace dataset repository.
@@ -283,6 +286,11 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             appContext.assets.open("catalog_manifest.txt").bufferedReader().useLines { seq ->
                 seq.filter { it.isNotBlank() }
                     .filter { line -> excludedPrefixes.none { prefix -> line.startsWith(prefix) } }
+                    // The manifest format is "path|imageUrl". Extract only the file path so
+                    // that placeholder files are created with valid names (the pipe character
+                    // is illegal in Android file names and the URL is not needed here).
+                    .map { line -> line.substringBefore('|') }
+                    .filter { it.isNotBlank() }
                     .toList()
             }
         } catch (e: IOException) {
