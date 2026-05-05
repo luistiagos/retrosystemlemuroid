@@ -20859,7 +20859,7 @@ snes/King of the Monsters 2 (US).sfc|https://db.hfsplay.fr/files/2018/10/06/3735
 snes/King of the Monsters 2 - Next Thing (JP).sfc|https://db.hfsplay.fr/files/2018/10/06/37358325-42e6-4c51-b3fe-cfaffeb9173c.png
 snes/Kingyo Chuuihou! - Tobidase! Game Gakuen (JP).sfc|https://db.hfsplay.fr/files/2019/11/16/b018557a-0e6c-4ce3-9191-b38bad16c2e4_FoAh5tE.png
 snes/Kinnikuman - Dirty Challenger (JP).sfc|https://db.hfsplay.fr/files/2019/09/08/706e780f-5f1e-42bd-a140-7d4ee847a7b7_eJtSBzh.png
-snes/Kirby Bowl (JP) (Switch Online - VC).sfc|
+snes/Kirby Bowl (JP) (Switch Online - VC).sfc|https://images.igdb.com/igdb/image/upload/t_cover_big/cobytm.jpg
 snes/Kirby Super Star (US).sfc|https://db.hfsplay.fr/files/2019/09/08/0d32ed0f-9c08-4207-83e9-b963819e24fc_8K2IZT2.jpg
 snes/Kirby no Kirakira Kids (JP).sfc|https://db.hfsplay.fr/files/2019/09/08/0d32ed0f-9c08-4207-83e9-b963819e24fc_8K2IZT2.jpg
 snes/Kirbys Avalanche (US).sfc|https://images.igdb.com/igdb/image/upload/t_cover_big/co7pmf.jpg

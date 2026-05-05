@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "../../../fetchimagers"
+		},
+		{
+			"path": "../../play2/ARMSX2"
 		}
 	],
 	"settings": {

@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep *)",
+      "Bash(xargs head *)",
+      "Bash(mkdir -p \"E:/projects/play2/ARMSX2/app/src/main/assets/bios\")",
+      "Bash(cp \"E:/projects/play2/ARMSX2/bios/SCPH-90001_BIOS_V18_USA_230.bin\" \"E:/projects/play2/ARMSX2/app/src/main/assets/bios/SCPH-90001_BIOS_V18_USA_230.bin\")",
+      "Bash(cp \"E:/projects/play2/ARMSX2/catalog_manifest_ps2.txt\" \"E:/projects/play2/ARMSX2/app/src/main/assets/catalog_manifest_ps2.txt\")",
+      "Bash(python -c \"import json; d=json.load\\(open\\('e:/projects/lemuroid/Lemuroid/mnemonico_map.json'\\)\\); print\\({k:v for k,v in d.items\\(\\) if 'ps2' in k.lower\\(\\) or 'ps2' in str\\(v\\).lower\\(\\)}\\)\")",
+      "Bash(curl -s -X POST \"https://emuladores.pythonanywhere.com/api/catalog/manifest\" -H \"Content-Type: application/json\" -d '{\"mnemonicos\":[{\"name\":\"ps2\",\"infos\":[\"cover2d_url\",\"cover2d\",\"image_url\",\"thumbnail_url\"]}],\"group_by_mnemonic\":false,\"check_links\":false}')",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); entries=d.get\\('entries',[]\\); print\\(f'Total entries: {len\\(entries\\)}'\\); [print\\(e.get\\('manifest_path',''\\),e.get\\('cover2d_url',''\\)\\) for e in entries[:3]]\")",
+      "Bash(python generate_catalog_manifest_cover2d.py --manifest-input E:/projects/play2/ARMSX2/app/src/main/assets/catalog_manifest_ps2.txt --mnemonicos ps2 --output E:/projects/play2/ARMSX2/app/src/main/assets/catalog_manifest_ps2.txt --batch-size 1 --timeout 120 --retries 2)",
+      "Bash(curl -s \"https://emuladores.pythonanywhere.com/\")",
+      "Bash(curl -s \"https://emuladores.pythonanywhere.com/api/\")",
+      "Bash(curl -s \"https://emuladores.pythonanywhere.com/find_by_file?path=007%20-%20Agent%20Under%20Fire%20\\(USA\\).chd&source_id=1&system=ps2\")",
+      "Bash(curl -s \"https://db.hfsplay.fr/api/roms/?search=007+Agent+Under+Fire&system=PS2\")",
+      "Bash(curl -s \"https://db.hfsplay.fr/roms/?search=agent+under+fire\")",
+      "Bash(python -c \"import sys; d=sys.stdin.read\\(\\); print\\(d[:500]\\)\")",
+      "Bash(curl -s \"https://db.hfsplay.fr/api/roms/?search=007+Agent+Under+Fire&system=PS2&format=json\" -H \"Accept: application/json\")",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d,indent=2\\)[:1000]\\)\")",
+      "Bash(curl -s \"https://db.hfsplay.fr/api/v1/roms/?q=007+Agent+Under+Fire&system=ps2\" -H \"Accept: application/json\")",
+      "Bash(curl -s \"https://db.hfsplay.fr/api/games/?search=Baroque&format=json\" -H \"Accept: application/json\")",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d,indent=2\\)[:500]\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(python generate_ps2_covers.py --sql backup_emuladores_20260409_221923.sql --manifest E:/projects/play2/ARMSX2/app/src/main/assets/catalog_manifest_ps2.txt --output E:/projects/play2/ARMSX2/app/src/main/assets/catalog_manifest_ps2.txt)",
+      "Bash(grep \"|$\\\\|^[^|]*$\" \"E:/projects/play2/ARMSX2/app/src/main/assets/catalog_manifest_ps2.txt\")",
+      "Bash(curl -I \"https://db.hfsplay.fr/files/2020/06/27/007_-_NightFire_USA_Europe_EnFrDe_IFuSLm7.png\")",
+      "Bash(curl -v \"https://db.hfsplay.fr/files/2020/06/27/007_-_NightFire_USA_Europe_EnFrDe_IFuSLm7.png\")",
+      "Bash(python3 -c ' *)",
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"E:\\\\projects\\\\play2\\\\ARMSX2\\\\app\\\\src\\\\main\\\\assets\\\\catalog_manifest_ps2.txt\"\\) | Select-Object -First 10; $bytes | ForEach-Object { \"{0:X2}\" -f $_ })"
+    ],
+    "additionalDirectories": [
+      "E:\\projects\\play2\\ARMSX2\\app\\src\\main\\res\\layout",
+      "E:\\projects\\play2\\ARMSX2\\app\\src\\main\\res\\drawable",
+      "E:\\projects\\play2\\ARMSX2\\app\\src\\main\\res\\menu",
+      "E:\\projects\\play2\\ARMSX2\\app\\src\\main"
+    ]
+  }
+}

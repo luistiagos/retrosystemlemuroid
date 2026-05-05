@@ -14,6 +14,7 @@
   "n64": "n64",
   "psx": "psx",
   "psp": "psp",
+  "ps2": "ps2",
   "arcade": "mame",
   "nds": "nds",
   "pce": "pcengine",
@@ -22,6 +23,6 @@
   "ws": "wswan",
   "wsc": "wswanc",
   "3ds": "3ds",
-  "fbneo":"fbneo",
+  "fbneo": "fbneo",
   "mame2003Plus": "mame2003Plus"
 }
