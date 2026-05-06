@@ -41,14 +41,13 @@ if ($apkFile) {
     Write-Host "  $($apkFile.FullName)" -ForegroundColor White
     Write-Host "  Tamanho: $([math]::Round($apkFile.Length / 1MB, 2)) MB" -ForegroundColor White
 
-    if ($OutputDir -ne "") {
-        if (-not (Test-Path $OutputDir)) {
-            New-Item -ItemType Directory -Path $OutputDir | Out-Null
-        }
-        $dest = Join-Path $OutputDir $apkFile.Name
-        Copy-Item -Path $apkFile.FullName -Destination $dest -Force
-        Write-Host "  Copiado para: $dest" -ForegroundColor Cyan
-    }
+    # Copy with stable name to dist/
+    $distDir = if ($OutputDir -ne "") { $OutputDir } else { Join-Path $repoRoot "dist" }
+    if (-not (Test-Path $distDir)) { New-Item -ItemType Directory -Path $distDir | Out-Null }
+    $stableApkName = "retro-game-system.apk"
+    $destApk = Join-Path $distDir $stableApkName
+    Copy-Item -Path $apkFile.FullName -Destination $destApk -Force
+    Write-Host "  Copiado para: $destApk" -ForegroundColor Cyan
 } else {
     Write-Host "`n[AVISO] APK nao encontrado em $apkDir" -ForegroundColor Yellow
 }
@@ -59,7 +58,7 @@ if ($Install) {
         Write-Host "[AVISO] ADB nao encontrado no PATH. Nao foi possivel instalar." -ForegroundColor Yellow
     } elseif ($apkFile) {
         Write-Host "`nInstalando APK no dispositivo..." -ForegroundColor Yellow
-        & adb install -r $apkFile.FullName
+        & adb install -r $destApk
         if ($LASTEXITCODE -eq 0) {
             Write-Host "[SUCESSO] APK instalado!" -ForegroundColor Green
         } else {

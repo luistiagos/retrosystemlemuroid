@@ -30,7 +30,8 @@ if (-not $apkFile) {
     throw "Nenhum APK foi encontrado em $apkOutputDir"
 }
 
-$distApkPath = Join-Path $distDir $apkFile.Name
+$desiredApkName = "retro-game-system.apk"
+$distApkPath = Join-Path $distDir $desiredApkName
 Copy-Item -Path $apkFile.FullName -Destination $distApkPath -Force
 
 Write-Host "APK gerado em: $distApkPath"
