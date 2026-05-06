@@ -107,6 +107,7 @@ android {
             keyAlias = "lemuroid"
             storePassword = "lemuroid"
             keyPassword = "lemuroid"
+            enableV3Signing = true
         }
     }
 
