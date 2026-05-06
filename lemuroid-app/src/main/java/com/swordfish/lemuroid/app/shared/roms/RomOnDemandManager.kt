@@ -202,7 +202,7 @@ class RomOnDemandManager(
             ),
         )
 
-        LibraryIndexScheduler.scheduleLibrarySync(context)
+        LibraryIndexScheduler.triggerCatalogQuickLoad(context)
 
         Timber.d("ROM downloaded successfully: ${game.fileName} ($downloadedSize bytes)")
         DownloadResult.Success
@@ -278,7 +278,7 @@ class RomOnDemandManager(
             FileOutputStream(destFile, false).use { }
         }
         downloadedRomDao.deleteByFileName(game.fileName)
-        LibraryIndexScheduler.scheduleLibrarySync(context)
+        LibraryIndexScheduler.triggerCatalogQuickLoad(context)
     }
 
     private fun resolveDestFile(game: Game): File {

@@ -4,8 +4,31 @@ import android.content.Context
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.swordfish.lemuroid.app.LemuroidApplication
+import timber.log.Timber
 
 object LibraryIndexScheduler {
+
+    /**
+     * Catalog-aware fast path: inserts new games from `catalog_manifest.txt`
+     * into the DB without running the LibretroDB scan. Used after catalog
+     * downloads (RomsDownloadManager, StreamingRomsManager, RomOnDemandManager)
+     * since the files match the manifest 1:1 — no metadata inference needed.
+     *
+     * For ROMs the user adds outside the catalog (folder picker, SD/USB mount,
+     * settings rescan) keep using [scheduleLibrarySync] / [scheduleManualLibrarySync]
+     * — those go through LibretroDB so unknown files get proper system detection.
+     */
+    suspend fun triggerCatalogQuickLoad(applicationContext: Context) {
+        try {
+            val app = applicationContext.applicationContext as? LemuroidApplication
+                ?: return
+            app.manifestQuickLoader.load()
+        } catch (e: Throwable) {
+            Timber.e(e, "triggerCatalogQuickLoad failed")
+        }
+    }
+
     val CORE_UPDATE_WORK_ID: String = CoreUpdateWork::class.java.simpleName
     /** Separate ID for urgent single-core downloads triggered from the game screen. */
     val CORE_UPDATE_URGENT_WORK_ID: String = "${CoreUpdateWork::class.java.simpleName}_urgent"

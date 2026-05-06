@@ -26,6 +26,13 @@ class CatalogCoverProvider(private val context: Context) {
         return coverMap["$systemId/$fileName"]
     }
 
+    /**
+     * Returns the entire manifest map keyed by "systemId/fileName".
+     * Used by ManifestQuickLoader to build the local catalog without scanning every ROM
+     * through the full LibretroDB metadata pipeline.
+     */
+    fun getAllEntries(): Map<String, String> = coverMap
+
     private fun loadFromAssets(): Map<String, String> {
         val map = mutableMapOf<String, String>()
         try {

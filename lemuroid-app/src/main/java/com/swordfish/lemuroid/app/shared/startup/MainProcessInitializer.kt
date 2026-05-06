@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared.startup
 import android.content.Context
 import androidx.startup.Initializer
 import androidx.work.WorkManagerInitializer
+import com.swordfish.lemuroid.app.LemuroidApplication
 import com.swordfish.lemuroid.app.shared.bios.EmbeddedBiosInstaller
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
@@ -15,6 +16,19 @@ class MainProcessInitializer : Initializer<Unit> {
     @OptIn(DelicateCoroutinesApi::class)
     override fun create(context: Context) {
         Timber.i("Requested initialization of main process tasks")
+
+        // Manifest-first catalog load: read catalog_manifest.txt, walk the ROMs
+        // dir, and insert any games not yet in the DB. This is the only step
+        // required to make catalog downloads visible — no LibretroDB scan.
+        // LibraryIndexWork is reserved for manual ROM imports / folder pickers.
+        GlobalScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            try {
+                val app = context.applicationContext as? LemuroidApplication
+                app?.manifestQuickLoader?.load()
+            } catch (e: Throwable) {
+                Timber.e(e, "MainProcessInitializer: manifest quick load failed")
+            }
+        }
 
         // Move WorkManager scheduling off the main thread so the UI becomes
         // responsive sooner — these calls resolve ContentProvider URIs and

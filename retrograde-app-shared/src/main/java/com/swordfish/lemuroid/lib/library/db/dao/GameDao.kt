@@ -23,6 +23,7 @@ import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -105,6 +106,14 @@ interface GameDao {
 
     @Insert
     suspend fun insert(games: List<Game>): List<Long>
+
+    /**
+     * Inserts only games whose [Game.fileUri] is not already present in the DB.
+     * Used by [ManifestQuickLoader] so the fast manifest-based load does NOT overwrite
+     * games that were previously enriched by the LibretroDB scan (manual import path).
+     */
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertIfNotExists(games: List<Game>): List<Long>
 
     @Delete
     suspend fun delete(games: List<Game>)

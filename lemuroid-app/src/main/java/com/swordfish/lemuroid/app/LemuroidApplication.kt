@@ -16,6 +16,7 @@ import com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer
 import com.swordfish.lemuroid.app.utils.android.isMainProcess
 import com.swordfish.lemuroid.ext.feature.context.ContextHandler
 import com.swordfish.lemuroid.lib.injection.HasWorkerInjector
+import com.swordfish.lemuroid.lib.library.catalog.ManifestQuickLoader
 import com.swordfish.lemuroid.lib.preferences.LocaleHelper
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -28,6 +29,9 @@ import javax.inject.Inject
 class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderFactory {
     @Inject
     lateinit var workerInjector: DispatchingAndroidInjector<ListenableWorker>
+
+    @Inject
+    lateinit var manifestQuickLoader: ManifestQuickLoader
 
     @SuppressLint("CheckResult")
     override fun onCreate() {

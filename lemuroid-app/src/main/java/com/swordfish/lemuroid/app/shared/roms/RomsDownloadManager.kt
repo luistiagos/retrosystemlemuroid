@@ -351,7 +351,7 @@ class RomsDownloadManager(context: Context) {
             // Sync the library after each system so the user sees games appear incrementally,
             // even if the overall download is interrupted before all systems complete.
             if (anyNewFile) {
-                LibraryIndexScheduler.scheduleLibrarySync(appContext)
+                LibraryIndexScheduler.triggerCatalogQuickLoad(appContext)
             }
         }
 
@@ -374,7 +374,7 @@ class RomsDownloadManager(context: Context) {
             }
         }
 
-        LibraryIndexScheduler.scheduleLibrarySync(appContext)
+        LibraryIndexScheduler.triggerCatalogQuickLoad(appContext)
         prefs.edit()
             .putBoolean(PREF_DOWNLOAD_DONE, true)
             .putBoolean(PREF_DOWNLOAD_STARTED, false)

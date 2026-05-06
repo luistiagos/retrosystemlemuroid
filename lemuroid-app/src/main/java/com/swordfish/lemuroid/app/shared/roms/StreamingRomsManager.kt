@@ -336,7 +336,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
                 doneCount++
                 prefs.edit().putInt(PREF_DOWNLOADED_FILES, doneCount).apply()
                 if (doneCount % 500 == 0) {
-                    LibraryIndexScheduler.scheduleLibrarySync(appContext)
+                    LibraryIndexScheduler.triggerCatalogQuickLoad(appContext)
                 }
             }
             onProgress(
@@ -352,7 +352,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             .putBoolean(PREF_DOWNLOAD_STARTED, false)
             .remove(PREF_DOWNLOADED_FILES)
             .apply()
-        LibraryIndexScheduler.scheduleLibrarySync(appContext)
+        LibraryIndexScheduler.triggerCatalogQuickLoad(appContext)
         Timber.d("Embedded catalog population complete: $doneCount files")
     }
 
@@ -393,7 +393,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
                 .putBoolean(PREF_DOWNLOAD_STARTED, false)
                 .remove(PREF_DOWNLOADED_FILES)
                 .apply()
-            LibraryIndexScheduler.scheduleLibrarySync(appContext)
+            LibraryIndexScheduler.triggerCatalogQuickLoad(appContext)
             Timber.d("Embedded catalog population complete")
             return
         }
@@ -467,7 +467,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             // Calling scheduleLibrarySync after each of 23,000+ files floods WorkManager
             // and causes ANRs due to main-thread contention and DB write storms.
             if (downloadedCount % 100 == 0) {
-                LibraryIndexScheduler.scheduleLibrarySync(appContext)
+                LibraryIndexScheduler.triggerCatalogQuickLoad(appContext)
             }
 
             onProgress(
@@ -484,7 +484,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             .remove(PREF_DOWNLOADED_FILES)
             .apply()
         // Final sync so all games appear after the download completes.
-        LibraryIndexScheduler.scheduleLibrarySync(appContext)
+        LibraryIndexScheduler.triggerCatalogQuickLoad(appContext)
         Timber.d("Streaming download complete: $downloadedCount files")
     }
 
