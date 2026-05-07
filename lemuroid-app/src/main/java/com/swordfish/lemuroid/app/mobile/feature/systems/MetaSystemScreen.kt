@@ -1,12 +1,15 @@
 package com.swordfish.lemuroid.app.mobile.feature.systems
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -20,11 +23,14 @@ fun MetaSystemsScreen(
     navController: NavController,
     viewModel: MetaSystemsViewModel,
 ) {
-    // null = still loading (Room query not yet emitted); empty list = genuinely no systems.
-    // Collecting with null avoids showing an empty screen during the brief window between
-    // composable subscription and Room's first emission on slow/cold devices.
     val metaSystems = viewModel.availableMetaSystems.collectAsState(null)
-    val systems = metaSystems.value ?: return  // Wait silently until data arrives
+    val systems = metaSystems.value
+    if (systems == null) {
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+        return
+    }
     MetaSystemsScreen(
         modifier = modifier,
         metaSystems = systems,

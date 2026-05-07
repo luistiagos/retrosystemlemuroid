@@ -16,6 +16,7 @@ import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.common.coroutines.combine
 import com.swordfish.lemuroid.lib.core.CoresSelection
+import com.swordfish.lemuroid.lib.library.catalog.ManifestQuickLoader
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.SystemID
@@ -294,6 +295,14 @@ class HomeViewModel(
                     )
                 }.combine(userScanInProgress(appContext)) { state, userScan ->
                     state.copy(userScanInProgress = userScan)
+                }.combine(ManifestQuickLoader.catalogReady) { state, ready ->
+                    // Keep spinner (isInitialLoadComplete=false) until the catalog has been
+                    // inserted into the DB. Skip the wait if the DB already has games so
+                    // subsequent launches don't show a spinner unnecessarily.
+                    val hasGames = state.recentGames.isNotEmpty() ||
+                        state.favoritesGames.isNotEmpty() ||
+                        state.discoveryGames.isNotEmpty()
+                    if (ready || hasGames) state else state.copy(isInitialLoadComplete = false)
                 }
 
             uiStatesFlow

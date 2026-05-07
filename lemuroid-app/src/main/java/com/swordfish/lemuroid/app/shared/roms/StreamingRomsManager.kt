@@ -106,6 +106,25 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
          */
         fun hfDownloadUrl(path: String): String =
             "https://huggingface.co/datasets/$HF_DATASET/resolve/main/$path?download=true"
+
+        /**
+         * Called by [ManifestQuickLoader] after it has populated placeholders and DB rows
+         * directly from `catalog_manifest.txt`. Marks the streaming catalog as complete so
+         * the "Baixando Catálogo" card never appears and auto-start is suppressed.
+         *
+         * Also writes [CATALOG_VERSION] so the version-check init block does not re-trigger
+         * the streaming download on the next app open.
+         */
+        fun markCatalogPopulated(context: Context) {
+            context.applicationContext
+                .getSharedPreferences(PREFS_NAME, android.content.Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean(PREF_DOWNLOAD_DONE, true)
+                .putBoolean(PREF_DOWNLOAD_STARTED, false)
+                .putBoolean(PREF_PAUSED, false)
+                .putInt(PREF_CATALOG_VERSION, CATALOG_VERSION)
+                .apply()
+        }
     }
 
     private val appContext = context.applicationContext

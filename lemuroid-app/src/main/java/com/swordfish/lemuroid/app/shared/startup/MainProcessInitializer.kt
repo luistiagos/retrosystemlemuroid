@@ -3,9 +3,12 @@ package com.swordfish.lemuroid.app.shared.startup
 import android.content.Context
 import androidx.startup.Initializer
 import androidx.work.WorkManagerInitializer
+import androidx.work.WorkManager
 import com.swordfish.lemuroid.app.LemuroidApplication
 import com.swordfish.lemuroid.app.shared.bios.EmbeddedBiosInstaller
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsWork
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -17,11 +20,20 @@ class MainProcessInitializer : Initializer<Unit> {
     override fun create(context: Context) {
         Timber.i("Requested initialization of main process tasks")
 
-        // Manifest-first catalog load: read catalog_manifest.txt, walk the ROMs
-        // dir, and insert any games not yet in the DB. This is the only step
-        // required to make catalog downloads visible — no LibretroDB scan.
-        // LibraryIndexWork is reserved for manual ROM imports / folder pickers.
+        // Mark catalog as populated SYNCHRONOUSLY so StreamingRomsManager.init's
+        // background Thread sees PREF_CATALOG_VERSION == CATALOG_VERSION and
+        // PREF_DOWNLOAD_DONE == true before it can reset them and enqueue
+        // StreamingRomsWork. SharedPreferences.apply() updates the in-memory cache
+        // immediately, so all subsequent reads in this process see the new values
+        // even before the async disk flush completes.
+        StreamingRomsManager.markCatalogPopulated(context)
+        WorkManager.getInstance(context).cancelUniqueWork(StreamingRomsWork.UNIQUE_WORK_ID)
+
+        // DB insertion and placeholder creation — idempotent, safe every startup.
+        // A small delay ensures Application.onCreate() + Dagger injection complete
+        // before we try to access manifestQuickLoader (which is @Inject lateinit var).
         GlobalScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            kotlinx.coroutines.delay(500L)
             try {
                 val app = context.applicationContext as? LemuroidApplication
                 app?.manifestQuickLoader?.load()
