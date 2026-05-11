@@ -75,7 +75,7 @@ class ManifestQuickLoader(
         var placeholdersCreated = 0
         val games = mutableListOf<Game>()
 
-        for ((key, coverUrl) in manifest) {
+        for ((key, entry) in manifest) {
             val slash = key.indexOf('/')
             if (slash < 0) continue
             val rawSystemId = key.substring(0, slash)
@@ -99,13 +99,15 @@ class ManifestQuickLoader(
                 }
             }
 
+            val title = entry.title?.takeIf { it.isNotBlank() } ?: fileName.substringBeforeLast(".")
+
             games += Game(
                 fileName = fileName,
                 fileUri = file.toUri().toString(),
-                title = fileName.substringBeforeLast("."),
+                title = title,
                 systemId = systemId,
                 developer = null,
-                coverFrontUrl = coverUrl,
+                coverFrontUrl = entry.coverUrl,
                 lastIndexedAt = now,
             )
         }

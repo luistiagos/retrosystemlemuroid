@@ -29,6 +29,8 @@ fun LemuroidGameImage(
     val imageRequest = remember(game.coverFrontUrl, context) {
         ImageRequest.Builder(context)
             .data(game.coverFrontUrl)
+            .crossfade(true)
+            .size(400)
             .build()
     }
 

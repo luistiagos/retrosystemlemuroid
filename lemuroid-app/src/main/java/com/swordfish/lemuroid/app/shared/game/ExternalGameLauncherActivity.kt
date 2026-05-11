@@ -83,6 +83,7 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
             .debounce(longAnimationDuration().toLong())
             .collect {
                 findViewById<View>(R.id.progressBar).isVisible = it
+                findViewById<View>(R.id.loading_text).isVisible = it
             }
     }
 

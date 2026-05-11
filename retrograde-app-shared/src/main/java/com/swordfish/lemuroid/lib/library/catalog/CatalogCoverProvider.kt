@@ -5,25 +5,24 @@ import java.io.IOException
 
 /**
  * Reads the embedded catalog_manifest.txt from assets and exposes a fast
- * lookup for cover URLs by [systemId/fileName].
+ * lookup for cover URLs and titles by [systemId/fileName].
  *
  * The manifest lines follow the format:
- *     system/file-name.ext|https://...
+ *     system/file-name.ext|title|https://...
  */
 class CatalogCoverProvider(private val context: Context) {
 
+    data class ManifestEntry(val title: String?, val coverUrl: String?)
+
     /** Lazy so the disk read is deferred until first actual lookup. */
-    private val coverMap: Map<String, String> by lazy { loadFromAssets() }
+    private val entryMap: Map<String, ManifestEntry> by lazy { loadFromAssets() }
 
     /**
      * Returns the cover URL for the given [systemId] and [fileName], or null
      * if the catalog contains no entry for that combination.
-     *
-     * @param systemId the system dbname, e.g. "snes", "gba", etc.
-     * @param fileName the exact ROM file name, e.g. "Super Mario World (USA).sfc"
      */
     fun getCoverUrl(systemId: String, fileName: String): String? {
-        return coverMap["$systemId/$fileName"]
+        return entryMap["$systemId/$fileName"]?.coverUrl
     }
 
     /**
@@ -31,19 +30,19 @@ class CatalogCoverProvider(private val context: Context) {
      * Used by ManifestQuickLoader to build the local catalog without scanning every ROM
      * through the full LibretroDB metadata pipeline.
      */
-    fun getAllEntries(): Map<String, String> = coverMap
+    fun getAllEntries(): Map<String, ManifestEntry> = entryMap
 
-    private fun loadFromAssets(): Map<String, String> {
-        val map = mutableMapOf<String, String>()
+    private fun loadFromAssets(): Map<String, ManifestEntry> {
+        val map = mutableMapOf<String, ManifestEntry>()
         try {
             context.assets.open("catalog_manifest.txt").bufferedReader().useLines { lines ->
                 lines.filter { it.isNotBlank() }
                     .forEach { line ->
-                        val path = line.substringBefore('|')
-                        val url = line.substringAfter('|', "")
-                        if (path.isNotBlank() && url.isNotBlank()) {
-                            map[path] = url
-                        }
+                        val parts = line.split('|')
+                        val path = parts.getOrNull(0)?.takeIf { it.isNotBlank() } ?: return@forEach
+                        val title = parts.getOrNull(1)?.takeIf { it.isNotBlank() }
+                        val coverUrl = parts.getOrNull(2)?.takeIf { it.isNotBlank() }
+                        map[path] = ManifestEntry(title = title, coverUrl = coverUrl)
                     }
             }
         } catch (e: IOException) {

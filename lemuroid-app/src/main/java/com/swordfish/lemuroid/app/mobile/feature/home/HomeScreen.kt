@@ -186,7 +186,16 @@ private fun HomeScreen(
     }
     if (!state.isInitialLoadComplete) {
         Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                CircularProgressIndicator()
+                Text(
+                    text = stringResource(id = R.string.loading_preparing_environment),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
         }
         return
     }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_home">Início</string>
     <string name="title_search">Buscar</string>
@@ -117,6 +117,7 @@
     <string name="game_menu_change_disk_disk">Disco %1$s</string>
     <string name="game_menu_tilt_sensor">Inclinar sensor</string>
     <string name="game_loading_preparing_game">Preparando o jogo…</string>
+    <string name="loading_preparing_environment">Preparando o ambiente…</string>
     <string name="game_toast_settings_button_using_gamepad">Controle detectado. Acesse o menu de configurações com %1$s.</string>
     <string name="game_toast_load_state_failed">Não é possível carregar este estado</string>
     <string name="game_toast_quick_save_loaded">Carregamento rápido</string>
