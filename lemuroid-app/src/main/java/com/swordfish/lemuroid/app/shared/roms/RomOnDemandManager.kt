@@ -363,6 +363,9 @@ class RomOnDemandManager(
                 Timber.e("downloadToFile permanent HTTP error (not retrying): ${e.message}")
                 throw e
             } catch (e: IOException) {
+                // OkHttp throws IOException when call.cancel() is called — treat it as cancellation
+                // so the retry loop does not restart a download the user explicitly stopped.
+                if (call.isCanceled()) throw CancellationException("Download cancelled by user", e)
                 Timber.w("downloadToFile attempt $attempt/$maxAttempts failed: ${e.message}")
                 if (attempt >= maxAttempts) throw IOException("Download failed after $maxAttempts attempts: ${e.message}", e)
                 // Re-login before the next attempt if session was invalidated by a 401
