@@ -263,6 +263,27 @@
     <string name="rom_download_badge_downloaded">Baixado</string>
     <string name="rom_corruption_error_message">O arquivo ROM parece estar corrompido e foi removido. Toque no jogo novamente para baixá-lo de novo.</string>
 
+    <!-- Fila de Salvamento -->
+    <string name="save_queue_title">Salvamentos</string>
+    <string name="save_queue_empty">Nenhum salvamento ainda</string>
+    <string name="save_queue_waiting">Aguardando…</string>
+    <string name="save_queue_saving">Salvando…</string>
+    <string name="save_queue_saving_progress">Salvando… %1$d%%</string>
+    <string name="save_queue_paused">Pausado</string>
+    <string name="save_queue_done">Salvo</string>
+    <string name="save_queue_error">Erro</string>
+    <string name="save_queue_badge">✓ Salvo</string>
+    <string name="save_action_save">Salvar</string>
+    <string name="save_action_pause">Pausar</string>
+    <string name="save_action_resume">Retomar</string>
+    <string name="save_action_cancel">Cancelar</string>
+    <string name="save_confirm_message">Adicionar à fila de salvamento?</string>
+    <string name="save_queue_indicator_active">Salvando… %1$d%%</string>
+    <string name="download_complete_title">Download Concluído</string>
+    <string name="download_complete_message">"%1$s" está pronto. Jogar agora?</string>
+    <string name="download_complete_play">Jogar</string>
+    <string name="download_complete_later">Agora não</string>
+
     <!-- Storage inaccessible -->
     <string name="home_storage_inaccessible_title">Armazenamento inacessível</string>
     <string name="home_storage_inaccessible_message">O diretório de ROMs selecionado não pode ser acessado. Reconecte seu dispositivo de armazenamento ou selecione um novo diretório.</string>

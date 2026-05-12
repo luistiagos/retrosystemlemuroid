@@ -192,7 +192,9 @@ class RomOnDemandManager(
 
         val downloadedSize = destFile.length()
         if (downloadedSize == 0L) {
-            return@withContext DownloadResult.NotFound(game.fileName)
+            Timber.w("Download completed but file is empty: ${game.fileName} (url=$finalUrl)")
+            runCatching { FileOutputStream(destFile, false).close() }
+            return@withContext DownloadResult.Failure("Arquivo vazio recebido do servidor. O arquivo pode não estar disponível na hospedagem.")
         }
 
         downloadedRomDao.insert(
@@ -327,6 +329,7 @@ class RomOnDemandManager(
                         else -> {
                             val body = response.body ?: throw IOException("Empty response body")
                             val contentLength = body.contentLength()
+                            Timber.d("downloadToFile HTTP ${response.code} contentLength=$contentLength url=$url")
 
                             destFile.parentFile?.mkdirs()
                             var bytesWritten = 0L
@@ -348,6 +351,7 @@ class RomOnDemandManager(
                                     }
                                 }
                             }
+                            Timber.d("downloadToFile complete: bytesWritten=$bytesWritten contentLength=$contentLength")
                             onProgress(1f)
                             return // success
                         }

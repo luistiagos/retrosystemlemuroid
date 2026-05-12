@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
@@ -18,8 +19,11 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.CloudSync
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.BottomAppBarDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -54,6 +58,9 @@ fun MainTopBar(
     onHelpPressed: () -> Unit,
     onUpdateQueryString: (String) -> Unit,
     mainUIState: MainViewModel.UiState,
+    hasSaveQueueActive: Boolean = false,
+    saveQueueProgress: Float = 0f,
+    onOpenSaveQueue: () -> Unit = {},
 ) {
     Column {
         LemuroidTopAppBar(
@@ -62,10 +69,20 @@ fun MainTopBar(
             mainUIState = mainUIState,
             onHelpPressed = onHelpPressed,
             onUpdateQueryString = onUpdateQueryString,
+            hasSaveQueueActive = hasSaveQueueActive,
+            saveQueueProgress = saveQueueProgress,
+            onOpenSaveQueue = onOpenSaveQueue,
         )
 
         AnimatedVisibility(mainUIState.operationInProgress) {
             LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+        }
+
+        AnimatedVisibility(hasSaveQueueActive && !mainUIState.operationInProgress) {
+            LinearProgressIndicator(
+                progress = { saveQueueProgress },
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
     }
 }
@@ -78,6 +95,9 @@ fun LemuroidTopAppBar(
     mainUIState: MainViewModel.UiState,
     onHelpPressed: () -> Unit,
     onUpdateQueryString: (String) -> Unit,
+    hasSaveQueueActive: Boolean = false,
+    saveQueueProgress: Float = 0f,
+    onOpenSaveQueue: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val topBarColor = BottomAppBarDefaults.containerColor
@@ -120,6 +140,9 @@ fun LemuroidTopAppBar(
                 saveSyncEnabled = mainUIState.saveSyncEnabled,
                 onHelpPressed = onHelpPressed,
                 operationsInProgress = mainUIState.operationInProgress,
+                hasSaveQueueActive = hasSaveQueueActive,
+                saveQueueProgress = saveQueueProgress,
+                onOpenSaveQueue = onOpenSaveQueue,
             )
         },
     )
@@ -133,8 +156,29 @@ fun LemuroidTopBarActions(
     saveSyncEnabled: Boolean,
     operationsInProgress: Boolean,
     onHelpPressed: () -> Unit,
+    hasSaveQueueActive: Boolean = false,
+    saveQueueProgress: Float = 0f,
+    onOpenSaveQueue: () -> Unit = {},
 ) {
     Row {
+        if (hasSaveQueueActive) {
+            IconButton(onClick = onOpenSaveQueue) {
+                BadgedBox(
+                    badge = {
+                        CircularProgressIndicator(
+                            progress = { saveQueueProgress },
+                            modifier = Modifier.size(10.dp),
+                            strokeWidth = 2.dp,
+                        )
+                    },
+                ) {
+                    Icon(
+                        Icons.Default.Download,
+                        contentDescription = stringResource(R.string.save_queue_title),
+                    )
+                }
+            }
+        }
         IconButton(
             onClick = { onHelpPressed() },
         ) {

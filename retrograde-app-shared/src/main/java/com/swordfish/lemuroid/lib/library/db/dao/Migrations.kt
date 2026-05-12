@@ -5,6 +5,31 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms
 
 object Migrations {
+    val VERSION_19_20: Migration =
+        object : Migration(19, 20) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `save_queue`(
+                        `fileName` TEXT NOT NULL,
+                        `gameId` INTEGER NOT NULL,
+                        `gameTitle` TEXT NOT NULL,
+                        `gameCoverUrl` TEXT,
+                        `gameFileUri` TEXT NOT NULL,
+                        `systemId` TEXT NOT NULL,
+                        `state` TEXT NOT NULL,
+                        `addedAt` INTEGER NOT NULL,
+                        `position` INTEGER NOT NULL,
+                        PRIMARY KEY(`fileName`)
+                    )
+                    """.trimIndent(),
+                )
+                database.execSQL(
+                    "CREATE UNIQUE INDEX IF NOT EXISTS `index_save_queue_fileName` ON `save_queue` (`fileName`)",
+                )
+            }
+        }
+
     val VERSION_18_19: Migration =
         object : Migration(18, 19) {
             override fun migrate(database: SupportSQLiteDatabase) {

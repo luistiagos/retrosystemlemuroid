@@ -25,13 +25,15 @@ import com.swordfish.lemuroid.lib.library.db.dao.DataFileDao
 import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
 import com.swordfish.lemuroid.lib.library.db.dao.GameDao
 import com.swordfish.lemuroid.lib.library.db.dao.GameSearchDao
+import com.swordfish.lemuroid.lib.library.db.dao.SaveQueueDao
 import com.swordfish.lemuroid.lib.library.db.entity.DataFile
 import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.lib.library.db.entity.SaveQueueItem
 
 @Database(
-    entities = [Game::class, DataFile::class, DownloadedRom::class],
-    version = 19,
+    entities = [Game::class, DataFile::class, DownloadedRom::class, SaveQueueItem::class],
+    version = 20,
     exportSchema = true,
 )
 abstract class RetrogradeDatabase : RoomDatabase() {
@@ -44,6 +46,8 @@ abstract class RetrogradeDatabase : RoomDatabase() {
     abstract fun dataFileDao(): DataFileDao
 
     abstract fun downloadedRomDao(): DownloadedRomDao
+
+    abstract fun saveQueueDao(): SaveQueueDao
 
     fun gameSearchDao() = GameSearchDao(gameSearchDaoInternal())
 

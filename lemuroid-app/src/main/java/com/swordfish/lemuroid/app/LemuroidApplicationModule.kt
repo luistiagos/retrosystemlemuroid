@@ -35,6 +35,7 @@ import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
+import com.swordfish.lemuroid.app.shared.roms.SaveQueueManager
 import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
 import com.swordfish.lemuroid.app.shared.settings.ControllerConfigsManager
 import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
@@ -155,6 +156,7 @@ abstract class LemuroidApplicationModule {
                     Migrations.VERSION_16_17,
                     Migrations.VERSION_17_18,
                     Migrations.VERSION_18_19,
+                    Migrations.VERSION_19_20,
                 )
                 .fallbackToDestructiveMigration()
                 .setJournalMode(androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
@@ -440,6 +442,19 @@ abstract class LemuroidApplicationModule {
             retrogradeDatabase: RetrogradeDatabase,
             directoriesManager: DirectoriesManager,
         ) = RomOnDemandManager(context, retrogradeDatabase.downloadedRomDao(), directoriesManager)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun saveQueueManager(
+            context: Context,
+            retrogradeDatabase: RetrogradeDatabase,
+            romOnDemandManager: RomOnDemandManager,
+        ) = SaveQueueManager(
+            context,
+            retrogradeDatabase.saveQueueDao(),
+            romOnDemandManager,
+        )
 
         @Provides
         @PerApp

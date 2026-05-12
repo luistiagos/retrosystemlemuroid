@@ -21,9 +21,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -78,6 +80,7 @@ import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
+import com.swordfish.lemuroid.app.shared.roms.SaveQueueManager
 import com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
@@ -131,6 +134,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     lateinit var romOnDemandManager: RomOnDemandManager
 
     @Inject
+    lateinit var saveQueueManager: SaveQueueManager
+
+    @Inject
     lateinit var gameExportManager: Lazy<GameExportManager>
 
     @Inject
@@ -150,6 +156,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
     private val updateViewModel: AppUpdateViewModel by viewModels {
         AppUpdateViewModel.Factory(applicationContext)
+    }
+
+    private val saveQueueViewModel: SaveQueueViewModel by viewModels {
+        SaveQueueViewModel.Factory(saveQueueManager)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -216,10 +226,16 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     mutableStateOf<Game?>(null)
                 }
 
-            val selectedGameForDownload =
-                remember {
-                    mutableStateOf<Game?>(null)
+            val saveQueueModalVisible = remember { mutableStateOf(false) }
+            val hasSaveQueueActive by saveQueueViewModel.hasActiveOrQueued.collectAsState()
+            val saveQueueProgress by saveQueueViewModel.activeProgress.collectAsState()
+
+            val playAfterDownload = remember { mutableStateOf<Game?>(null) }
+            LaunchedEffect(Unit) {
+                saveQueueViewModel.justCompleted.collect { game ->
+                    playAfterDownload.value = game
                 }
+            }
 
             val downloadedFileNames =
                 mainViewModel.downloadedFileNames
@@ -239,11 +255,14 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     uri.path?.let { File(it).length() == 0L } == true
             }
 
-            val onGameClick = { game: Game ->
+            val onGameClick: (Game) -> Unit = { game: Game ->
                 if (!isGamePlaceholder(game)) {
                     gameInteractor.onGamePlay(game)
                 } else {
-                    selectedGameForDownload.value = game
+                    lifecycleScope.launch {
+                        saveQueueManager.enqueue(game)
+                        saveQueueModalVisible.value = true
+                    }
                 }
             }
 
@@ -268,6 +287,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         onHelpPressed = onHelpPressed,
                         mainUIState = mainUIState,
                         onUpdateQueryString = { mainViewModel.changeQueryString(it) },
+                        hasSaveQueueActive = hasSaveQueueActive,
+                        saveQueueProgress = saveQueueProgress,
+                        onOpenSaveQueue = { saveQueueModalVisible.value = true },
                     )
                 },
                 bottomBar = { MainNavigationBar(currentRoute, navController) },
@@ -527,14 +549,20 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     if (!isGamePlaceholder(game)) {
                         gameInteractor.onGamePlay(game)
                     } else {
-                        selectedGameForDownload.value = game
+                        lifecycleScope.launch {
+                            saveQueueManager.enqueue(game)
+                            saveQueueModalVisible.value = true
+                        }
                     }
                 },
                 onGameRestart = { game ->
                     if (!isGamePlaceholder(game)) {
                         gameInteractor.onGameRestart(game)
                     } else {
-                        selectedGameForDownload.value = game
+                        lifecycleScope.launch {
+                            saveQueueManager.enqueue(game)
+                            saveQueueModalVisible.value = true
+                        }
                     }
                 },
                 onFavoriteToggle = { game: Game, isFavorite: Boolean ->
@@ -548,12 +576,33 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 },
             )
 
-            selectedGameForDownload.value?.let { game ->
-                RomDownloadDialog(
-                    selectedGame = game,
-                    selectedGameState = selectedGameForDownload,
-                    romOnDemandManager = romOnDemandManager,
-                    onDownloadComplete = { gameInteractor.onGamePlay(it) },
+            if (saveQueueModalVisible.value) {
+                SaveQueueModal(
+                    viewModel = saveQueueViewModel,
+                    onDismiss = { saveQueueModalVisible.value = false },
+                )
+            }
+
+            playAfterDownload.value?.let { game ->
+                AlertDialog(
+                    onDismissRequest = { playAfterDownload.value = null },
+                    title = { Text(stringResource(R.string.download_complete_title)) },
+                    text = { Text(stringResource(R.string.download_complete_message, game.title)) },
+                    confirmButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            playAfterDownload.value = null
+                            gameInteractor.onGamePlay(game)
+                        }) {
+                            Text(stringResource(R.string.download_complete_play))
+                        }
+                    },
+                    dismissButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            playAfterDownload.value = null
+                        }) {
+                            Text(stringResource(R.string.download_complete_later))
+                        }
+                    },
                 )
             }
 

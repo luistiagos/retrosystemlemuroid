@@ -117,6 +117,27 @@
     <string name="rom_download_badge_downloaded">Downloaded</string>
     <string name="rom_corruption_error_message">The ROM file appears to be corrupted and was removed. Tap the game again to re-download it.</string>
 
+    <!-- Save Queue -->
+    <string name="save_queue_title">Saves</string>
+    <string name="save_queue_empty">No saves yet</string>
+    <string name="save_queue_waiting">Waiting…</string>
+    <string name="save_queue_saving">Saving…</string>
+    <string name="save_queue_saving_progress">Saving… %1$d%%</string>
+    <string name="save_queue_paused">Paused</string>
+    <string name="save_queue_done">Saved</string>
+    <string name="save_queue_error">Error</string>
+    <string name="save_queue_badge">✓ Saved</string>
+    <string name="save_action_save">Save</string>
+    <string name="save_action_pause">Pause</string>
+    <string name="save_action_resume">Resume</string>
+    <string name="save_action_cancel">Cancel</string>
+    <string name="save_confirm_message">Add to save queue?</string>
+    <string name="save_queue_indicator_active">Saving… %1$d%%</string>
+    <string name="download_complete_title">Download Complete</string>
+    <string name="download_complete_message">"%1$s" is ready. Play now?</string>
+    <string name="download_complete_play">Play</string>
+    <string name="download_complete_later">Later</string>
+
     <string name="home_notification_title">Enable notifications</string>
     <string name="home_notification_message">Retro Game System uses notifications to let you know when a game or operation is running in background.</string>
     <string name="home_notification_action">Enable</string>
