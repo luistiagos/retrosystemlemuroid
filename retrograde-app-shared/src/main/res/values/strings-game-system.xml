@@ -61,7 +61,6 @@
     <string name="game_system_abbr_cave">Cave</string>
     <string name="game_system_abbr_technos">Technos</string>
     <string name="game_system_abbr_seta">Seta</string>
-
     <string name="game_system_title_nes">Nintendo</string>
     <string name="game_system_title_atari2600">Atari 2600</string>
     <string name="game_system_title_snes">Super Nintendo</string>
@@ -86,8 +85,8 @@
     <string name="game_system_title_ngc">Neo Geo Pocket Color</string>
     <string name="game_system_title_ws">WonderSwan</string>
     <string name="game_system_title_wsc">WonderSwan Color</string>
-    <string name="game_system_title_dos">DOS (Beta)</string>
-    <string name="game_system_title_3ds">Nintendo 3DS (Beta)</string>
+    <string name="game_system_title_dos">DOS</string>
+    <string name="game_system_title_3ds">Nintendo 3DS</string>
     <string name="game_system_title_msx">MSX</string>
     <string name="game_system_title_msx2">MSX2</string>
     <string name="game_system_title_neogeo">SNK Neo Geo</string>
@@ -104,6 +103,5 @@
     <string name="game_system_title_cave">Cave Arcade</string>
     <string name="game_system_title_technos">Technos Arcade</string>
     <string name="game_system_title_seta">Seta Arcade</string>
-
     <string name="game_system_title_arcade">Arcade</string>
 </resources>

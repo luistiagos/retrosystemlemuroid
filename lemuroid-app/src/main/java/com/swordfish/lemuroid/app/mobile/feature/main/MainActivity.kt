@@ -181,6 +181,15 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         }
         updateViewModel.checkOnStartup()
         requestBatteryOptimizationExemption()
+        requestNotificationPermissionOnStartup()
+    }
+
+    private fun requestNotificationPermissionOnStartup() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 0)
+            }
+        }
     }
 
     private fun requestBatteryOptimizationExemption() {
@@ -230,6 +239,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             val hasSaveQueueActive by saveQueueViewModel.hasActiveOrQueued.collectAsState()
             val saveQueueProgress by saveQueueViewModel.activeProgress.collectAsState()
 
+            val pendingDownloadGame = remember { mutableStateOf<Game?>(null) }
+
             val playAfterDownload = remember { mutableStateOf<Game?>(null) }
             LaunchedEffect(Unit) {
                 saveQueueViewModel.justCompleted.collect { game ->
@@ -259,10 +270,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 if (!isGamePlaceholder(game)) {
                     gameInteractor.onGamePlay(game)
                 } else {
-                    lifecycleScope.launch {
-                        saveQueueManager.enqueue(game)
-                        saveQueueModalVisible.value = true
-                    }
+                    pendingDownloadGame.value = game
                 }
             }
 
@@ -575,6 +583,32 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     }
                 },
             )
+
+            pendingDownloadGame.value?.let { game ->
+                AlertDialog(
+                    onDismissRequest = { pendingDownloadGame.value = null },
+                    title = { Text(stringResource(R.string.save_confirm_title)) },
+                    text = { Text(stringResource(R.string.save_confirm_message, game.title)) },
+                    confirmButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            pendingDownloadGame.value = null
+                            lifecycleScope.launch {
+                                saveQueueManager.enqueue(game)
+                                saveQueueModalVisible.value = true
+                            }
+                        }) {
+                            Text(stringResource(R.string.save_action_save))
+                        }
+                    },
+                    dismissButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            pendingDownloadGame.value = null
+                        }) {
+                            Text(stringResource(R.string.save_action_cancel))
+                        }
+                    },
+                )
+            }
 
             if (saveQueueModalVisible.value) {
                 SaveQueueModal(

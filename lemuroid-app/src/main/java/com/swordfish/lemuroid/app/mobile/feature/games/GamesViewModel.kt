@@ -11,9 +11,18 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
+
+/**
+ * Sort order for the per-system game catalog list.
+ *
+ * - [POPULARITY] — default; sorts by [Game.popularityIndex] DESC so the most-played/known
+ *   titles appear first. Downloaded ROMs are always pinned above non-downloaded ones.
+ * - [ALPHABETICAL] — sorts by title ASC (legacy behavior, user-selectable via the list header).
+ */
+enum class GameSortOrder { POPULARITY, ALPHABETICAL }
 
 class GamesViewModel(
     private val retrogradeDb: RetrogradeDatabase,
@@ -29,17 +38,31 @@ class GamesViewModel(
     }
 
     private val metaSystemId = MutableStateFlow(initialMetaSystem)
+    val sortOrder = MutableStateFlow(GameSortOrder.POPULARITY)
+
+    fun setSortOrder(order: GameSortOrder) {
+        sortOrder.value = order
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val games: Flow<PagingData<Game>> =
-        metaSystemId
-            .map { metaSystem -> metaSystem.systemIDs }
-            .map { systemIds -> systemIds.map { it.dbname } }
-            .flatMapLatest {
-                when (it.size) {
+        combine(metaSystemId, sortOrder) { meta, sort -> meta to sort }
+            .flatMapLatest { (metaSystem, sort) ->
+                val systemIds = metaSystem.systemIDs.map { it.dbname }
+                when (systemIds.size) {
                     0 -> emptyFlow()
-                    1 -> buildFlowPaging(20, viewModelScope) { retrogradeDb.gameDao().selectBySystem(it.first()) }
-                    else -> buildFlowPaging(20, viewModelScope) { retrogradeDb.gameDao().selectBySystems(it) }
+                    1 -> buildFlowPaging(40, viewModelScope) {
+                        if (sort == GameSortOrder.POPULARITY)
+                            retrogradeDb.gameDao().selectBySystemSortedByPopularity(systemIds.first())
+                        else
+                            retrogradeDb.gameDao().selectBySystem(systemIds.first())
+                    }
+                    else -> buildFlowPaging(40, viewModelScope) {
+                        if (sort == GameSortOrder.POPULARITY)
+                            retrogradeDb.gameDao().selectBySystemsSortedByPopularity(systemIds)
+                        else
+                            retrogradeDb.gameDao().selectBySystems(systemIds)
+                    }
                 }
             }
 }

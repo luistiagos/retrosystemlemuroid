@@ -13,6 +13,11 @@ if (-not (Test-Path $gradleWrapper)) {
     throw "Gradle wrapper nao encontrado em $gradleWrapper"
 }
 
+# Redireciona o cache do Gradle para E: pois C: pode estar sem espaco livre.
+# GRADLE_USER_HOME afeta cache de builds, daemons e dependencias baixadas.
+$env:GRADLE_USER_HOME = "E:\.gradle"
+New-Item -ItemType Directory -Path $env:GRADLE_USER_HOME -Force | Out-Null
+
 New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 
 Write-Host "Executando $Task..."

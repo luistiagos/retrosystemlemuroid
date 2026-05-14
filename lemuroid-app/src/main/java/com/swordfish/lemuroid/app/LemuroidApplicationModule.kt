@@ -157,6 +157,8 @@ abstract class LemuroidApplicationModule {
                     Migrations.VERSION_17_18,
                     Migrations.VERSION_18_19,
                     Migrations.VERSION_19_20,
+                    Migrations.VERSION_20_21,
+                    Migrations.VERSION_21_22,
                 )
                 .fallbackToDestructiveMigration()
                 .setJournalMode(androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
@@ -193,10 +195,11 @@ abstract class LemuroidApplicationModule {
         @PerApp
         @JvmStatic
         fun manifestQuickLoader(
+            context: Context,
             directoriesManager: DirectoriesManager,
             catalogCoverProvider: CatalogCoverProvider,
             db: RetrogradeDatabase,
-        ) = ManifestQuickLoader(directoriesManager, catalogCoverProvider, db)
+        ) = ManifestQuickLoader(context, directoriesManager, catalogCoverProvider, db)
 
         @Provides
         @PerApp

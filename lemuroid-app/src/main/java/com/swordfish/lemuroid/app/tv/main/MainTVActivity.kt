@@ -20,8 +20,10 @@ import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.tv.channel.ChannelUpdateWork
 import com.swordfish.lemuroid.app.tv.favorites.TVFavoritesFragment
+import com.swordfish.lemuroid.app.tv.game.TVRomDownloadDialog
 import com.swordfish.lemuroid.app.tv.games.TVGamesFragment
 import com.swordfish.lemuroid.app.tv.home.TVHomeFragment
 import com.swordfish.lemuroid.app.tv.search.TVSearchFragment
@@ -29,7 +31,6 @@ import com.swordfish.lemuroid.app.tv.shared.BaseTVActivity
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
-import com.swordfish.lemuroid.common.coroutines.safeLaunch
 import kotlinx.coroutines.launch
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerFragment
@@ -130,7 +131,17 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                 retrogradeDb: RetrogradeDatabase,
                 shortcutsGenerator: ShortcutsGenerator,
                 gameLauncher: GameLauncher,
-            ) = GameInteractor(activity, retrogradeDb, true, shortcutsGenerator, gameLauncher)
+                romOnDemandManager: RomOnDemandManager,
+            ) = GameInteractor(
+                activity,
+                retrogradeDb,
+                true,
+                shortcutsGenerator,
+                gameLauncher,
+                onPlaceholderGame = { game, onComplete ->
+                    TVRomDownloadDialog(activity, romOnDemandManager).show(game, onComplete)
+                },
+            )
         }
     }
 }

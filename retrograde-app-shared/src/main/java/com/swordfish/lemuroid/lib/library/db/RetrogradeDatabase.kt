@@ -33,7 +33,7 @@ import com.swordfish.lemuroid.lib.library.db.entity.SaveQueueItem
 
 @Database(
     entities = [Game::class, DataFile::class, DownloadedRom::class, SaveQueueItem::class],
-    version = 20,
+    version = 22,
     exportSchema = true,
 )
 abstract class RetrogradeDatabase : RoomDatabase() {

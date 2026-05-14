@@ -7,6 +7,8 @@
     <string name="recent">Recents</string>
     <string name="favorites">Favorites</string>
     <string name="discover">Discover</string>
+    <string name="sort_popularity">Popularidade</string>
+    <string name="sort_alphabetical">A-Z</string>
     <string name="rescan">Rescan</string>
     <string name="stop">Stop</string>
     <string name="none">None</string>
@@ -131,7 +133,8 @@
     <string name="save_action_pause">Pause</string>
     <string name="save_action_resume">Resume</string>
     <string name="save_action_cancel">Cancel</string>
-    <string name="save_confirm_message">Add to save queue?</string>
+    <string name="save_confirm_title">Save ROM?</string>
+    <string name="save_confirm_message">Would you like to save "%1$s" to your device?</string>
     <string name="save_queue_indicator_active">Saving… %1$d%%</string>
     <string name="download_complete_title">Download Complete</string>
     <string name="download_complete_message">"%1$s" is ready. Play now?</string>

@@ -5,10 +5,32 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms
 
 object Migrations {
+    val VERSION_21_22: Migration =
+        object : Migration(21, 22) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                // Composite: per-system catalog sorted by popularity
+                db.execSQL(
+                    "CREATE INDEX IF NOT EXISTS index_games_systemId_popularityIndex ON games (systemId, popularityIndex)"
+                )
+                // Composite: favorites sorted by title
+                db.execSQL(
+                    "CREATE INDEX IF NOT EXISTS index_games_isFavorite_title ON games (isFavorite, title)"
+                )
+            }
+        }
+
+    val VERSION_20_21: Migration =
+        object : Migration(20, 21) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE games ADD COLUMN popularityIndex INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_games_popularityIndex ON games (popularityIndex)")
+            }
+        }
+
     val VERSION_19_20: Migration =
         object : Migration(19, 20) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
                     """
                     CREATE TABLE IF NOT EXISTS `save_queue`(
                         `fileName` TEXT NOT NULL,
@@ -24,7 +46,7 @@ object Migrations {
                     )
                     """.trimIndent(),
                 )
-                database.execSQL(
+                db.execSQL(
                     "CREATE UNIQUE INDEX IF NOT EXISTS `index_save_queue_fileName` ON `save_queue` (`fileName`)",
                 )
             }
@@ -32,10 +54,10 @@ object Migrations {
 
     val VERSION_18_19: Migration =
         object : Migration(18, 19) {
-            override fun migrate(database: SupportSQLiteDatabase) {
+            override fun migrate(db: SupportSQLiteDatabase) {
                 // Composite index to speed up the home-screen recents query:
                 // WHERE lastPlayedAt IS NOT NULL AND isFavorite = 0 ORDER BY lastPlayedAt DESC
-                database.execSQL(
+                db.execSQL(
                     "CREATE INDEX IF NOT EXISTS index_games_isFavorite_lastPlayedAt ON games (isFavorite, lastPlayedAt)",
                 )
             }
@@ -43,28 +65,28 @@ object Migrations {
 
     val VERSION_17_18: Migration =
         object : Migration(17, 18) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                reclassify(database, "toaplan", ArcadeSubSystemRoms.TOAPLAN_ROMS)
-                reclassify(database, "taito",   ArcadeSubSystemRoms.TAITO_ROMS)
-                reclassify(database, "psikyo",  ArcadeSubSystemRoms.PSIKYO_ROMS)
-                reclassify(database, "pgm",     ArcadeSubSystemRoms.PGM_ROMS)
-                reclassify(database, "kaneko",  ArcadeSubSystemRoms.KANEKO_ROMS)
-                reclassify(database, "cave",    ArcadeSubSystemRoms.CAVE_ROMS)
-                reclassify(database, "technos", ArcadeSubSystemRoms.TECHNOS_ROMS)
-                reclassify(database, "seta",    ArcadeSubSystemRoms.SETA_ROMS)
+            override fun migrate(db: SupportSQLiteDatabase) {
+                reclassify(db, "toaplan", ArcadeSubSystemRoms.TOAPLAN_ROMS)
+                reclassify(db, "taito",   ArcadeSubSystemRoms.TAITO_ROMS)
+                reclassify(db, "psikyo",  ArcadeSubSystemRoms.PSIKYO_ROMS)
+                reclassify(db, "pgm",     ArcadeSubSystemRoms.PGM_ROMS)
+                reclassify(db, "kaneko",  ArcadeSubSystemRoms.KANEKO_ROMS)
+                reclassify(db, "cave",    ArcadeSubSystemRoms.CAVE_ROMS)
+                reclassify(db, "technos", ArcadeSubSystemRoms.TECHNOS_ROMS)
+                reclassify(db, "seta",    ArcadeSubSystemRoms.SETA_ROMS)
             }
 
             private fun reclassify(
-                database: SupportSQLiteDatabase,
+                db: SupportSQLiteDatabase,
                 systemId: String,
                 roms: Set<String>,
             ) {
                 val placeholders = roms.joinToString(",") { "?" }
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='$systemId' WHERE systemId='mame2003plus' AND fileName IN ($placeholders)",
                     roms.toTypedArray(),
                 )
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='$systemId' WHERE systemId='fbneo' AND fileName IN ($placeholders)",
                     roms.toTypedArray(),
                 )
@@ -73,21 +95,21 @@ object Migrations {
 
     val VERSION_16_17: Migration =
         object : Migration(16, 17) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                reclassify(database, "galaxian", ArcadeSubSystemRoms.GALAXIAN_ROMS)
+            override fun migrate(db: SupportSQLiteDatabase) {
+                reclassify(db, "galaxian", ArcadeSubSystemRoms.GALAXIAN_ROMS)
             }
 
             private fun reclassify(
-                database: SupportSQLiteDatabase,
+                db: SupportSQLiteDatabase,
                 systemId: String,
                 roms: Set<String>,
             ) {
                 val placeholders = roms.joinToString(",") { "?" }
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='$systemId' WHERE systemId='mame2003plus' AND fileName IN ($placeholders)",
                     roms.toTypedArray(),
                 )
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='$systemId' WHERE systemId='fbneo' AND fileName IN ($placeholders)",
                     roms.toTypedArray(),
                 )
@@ -96,21 +118,21 @@ object Migrations {
 
     val VERSION_15_16: Migration =
         object : Migration(15, 16) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                reclassify(database, "dataeast", ArcadeSubSystemRoms.DATAEAST_ROMS)
+            override fun migrate(db: SupportSQLiteDatabase) {
+                reclassify(db, "dataeast", ArcadeSubSystemRoms.DATAEAST_ROMS)
             }
 
             private fun reclassify(
-                database: SupportSQLiteDatabase,
+                db: SupportSQLiteDatabase,
                 systemId: String,
                 roms: Set<String>,
             ) {
                 val placeholders = roms.joinToString(",") { "?" }
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='$systemId' WHERE systemId='mame2003plus' AND fileName IN ($placeholders)",
                     roms.toTypedArray(),
                 )
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='$systemId' WHERE systemId='fbneo' AND fileName IN ($placeholders)",
                     roms.toTypedArray(),
                 )
@@ -119,22 +141,22 @@ object Migrations {
 
     val VERSION_14_15: Migration =
         object : Migration(14, 15) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                reclassify(database, "cps2", ArcadeSubSystemRoms.CPS2_ROMS)
-                reclassify(database, "cps3", ArcadeSubSystemRoms.CPS3_ROMS)
+            override fun migrate(db: SupportSQLiteDatabase) {
+                reclassify(db, "cps2", ArcadeSubSystemRoms.CPS2_ROMS)
+                reclassify(db, "cps3", ArcadeSubSystemRoms.CPS3_ROMS)
             }
 
             private fun reclassify(
-                database: SupportSQLiteDatabase,
+                db: SupportSQLiteDatabase,
                 systemId: String,
                 roms: Set<String>,
             ) {
                 val placeholders = roms.joinToString(",") { "?" }
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='$systemId' WHERE systemId='mame2003plus' AND fileName IN ($placeholders)",
                     roms.toTypedArray(),
                 )
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='$systemId' WHERE systemId='fbneo' AND fileName IN ($placeholders)",
                     roms.toTypedArray(),
                 )
@@ -169,13 +191,13 @@ object Migrations {
                 "willow.zip","willowj.zip",
             )
 
-            override fun migrate(database: SupportSQLiteDatabase) {
+            override fun migrate(db: SupportSQLiteDatabase) {
                 val placeholders = CPS1_ROMS.joinToString(",") { "?" }
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='cps1' WHERE systemId='mame2003plus' AND fileName IN ($placeholders)",
                     CPS1_ROMS.toTypedArray(),
                 )
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='cps1' WHERE systemId='fbneo' AND fileName IN ($placeholders)",
                     CPS1_ROMS.toTypedArray(),
                 )
@@ -209,14 +231,14 @@ object Migrations {
                 "wakuwak7.zip","wjammers.zip","zedblade.zip","zintrckb.zip","zupapa.zip",
             )
 
-            override fun migrate(database: SupportSQLiteDatabase) {
+            override fun migrate(db: SupportSQLiteDatabase) {
                 val placeholders = NEOGEO_ROMS.joinToString(",") { "?" }
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='neogeo' WHERE systemId='mame2003plus' AND fileName IN ($placeholders)",
                     NEOGEO_ROMS.toTypedArray(),
                 )
                 // Also catch any that were in the fbneo bucket (fbneo/ folder users)
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='neogeo' WHERE systemId='fbneo' AND fileName IN ($placeholders)",
                     NEOGEO_ROMS.toTypedArray(),
                 )
@@ -250,9 +272,9 @@ object Migrations {
                 "wakuwak7.zip","wjammers.zip","zedblade.zip","zintrckb.zip","zupapa.zip",
             )
 
-            override fun migrate(database: SupportSQLiteDatabase) {
+            override fun migrate(db: SupportSQLiteDatabase) {
                 val placeholders = NEOGEO_ROMS.joinToString(",") { "?" }
-                database.execSQL(
+                db.execSQL(
                     "UPDATE games SET systemId='neogeo' WHERE systemId='fbneo' AND fileName IN ($placeholders)",
                     NEOGEO_ROMS.toTypedArray(),
                 )
@@ -261,8 +283,8 @@ object Migrations {
 
     val VERSION_10_11: Migration =
         object : Migration(10, 11) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
                     """
                     CREATE INDEX IF NOT EXISTS `index_games_fileName`
                     ON `games` (`fileName`)
@@ -273,8 +295,8 @@ object Migrations {
 
     val VERSION_9_10: Migration =
         object : Migration(9, 10) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
                     """
                     CREATE TABLE IF NOT EXISTS `downloaded_roms`(
                         `fileName` TEXT NOT NULL,
@@ -284,7 +306,7 @@ object Migrations {
                     )
                     """.trimIndent(),
                 )
-                database.execSQL(
+                db.execSQL(
                     """
                     CREATE UNIQUE INDEX IF NOT EXISTS `index_downloaded_roms_fileName`
                     ON `downloaded_roms` (`fileName`)
@@ -295,8 +317,8 @@ object Migrations {
 
     val VERSION_8_9: Migration =
         object : Migration(8, 9) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
                     """
                     CREATE TABLE IF NOT EXISTS `datafiles`(
                         `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -309,25 +331,25 @@ object Migrations {
                     """.trimIndent(),
                 )
 
-                database.execSQL(
+                db.execSQL(
                     """
                     CREATE UNIQUE INDEX IF NOT EXISTS `index_datafiles_id` ON `datafiles` (`id`)
                     """.trimIndent(),
                 )
 
-                database.execSQL(
+                db.execSQL(
                     """
                     CREATE INDEX IF NOT EXISTS `index_datafiles_fileUri` ON `datafiles` (`fileUri`)
                     """.trimIndent(),
                 )
 
-                database.execSQL(
+                db.execSQL(
                     """
                     CREATE INDEX IF NOT EXISTS `index_datafiles_gameId` ON `datafiles` (`gameId`)
                     """.trimIndent(),
                 )
 
-                database.execSQL(
+                db.execSQL(
                     """
                     CREATE INDEX IF NOT EXISTS `index_datafiles_lastIndexedAt` ON `datafiles` (`lastIndexedAt`)
                     """.trimIndent(),

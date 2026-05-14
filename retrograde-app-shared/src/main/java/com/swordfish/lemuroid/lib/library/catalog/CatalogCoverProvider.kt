@@ -4,15 +4,21 @@ import android.content.Context
 import java.io.IOException
 
 /**
- * Reads the embedded catalog_manifest.txt from assets and exposes a fast
- * lookup for cover URLs and titles by [systemId/fileName].
+ * Reads the embedded `assets/catalog_manifest.txt` and exposes fast lookups
+ * for cover URLs, titles, and popularity indexes by `"systemId/fileName"` key.
  *
- * The manifest lines follow the format:
- *     system/file-name.ext|title|https://...
+ * Manifest line format (pipe-delimited, 4 fields):
+ * ```
+ * system/filename.ext|title|https://cover-url.png|popularityIndex
+ * ```
+ * - **field 1** – `system/filename` path key
+ * - **field 2** – optional display title (empty → derived from filename)
+ * - **field 3** – cover image URL (IGDB or libretro-thumbnails)
+ * - **field 4** – popularity index (positive integer; higher = more popular; 0 = no data)
  */
 class CatalogCoverProvider(private val context: Context) {
 
-    data class ManifestEntry(val title: String?, val coverUrl: String?)
+    data class ManifestEntry(val title: String?, val coverUrl: String?, val popularityIndex: Int = 0)
 
     /** Lazy so the disk read is deferred until first actual lookup. */
     private val entryMap: Map<String, ManifestEntry> by lazy { loadFromAssets() }
@@ -42,7 +48,8 @@ class CatalogCoverProvider(private val context: Context) {
                         val path = parts.getOrNull(0)?.takeIf { it.isNotBlank() } ?: return@forEach
                         val title = parts.getOrNull(1)?.takeIf { it.isNotBlank() }
                         val coverUrl = parts.getOrNull(2)?.takeIf { it.isNotBlank() }
-                        map[path] = ManifestEntry(title = title, coverUrl = coverUrl)
+                        val popularityIndex = parts.getOrNull(3)?.toIntOrNull() ?: 0
+                        map[path] = ManifestEntry(title = title, coverUrl = coverUrl, popularityIndex = popularityIndex)
                     }
             }
         } catch (e: IOException) {

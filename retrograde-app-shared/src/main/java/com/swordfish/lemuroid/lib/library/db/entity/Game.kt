@@ -36,9 +36,13 @@ import java.io.Serializable
         Index("lastIndexedAt"),
         Index("lastPlayedAt"),
         Index("isFavorite"),
-        // Composite index for the recents home-screen query:
-        // WHERE lastPlayedAt IS NOT NULL AND isFavorite = 0 ORDER BY lastPlayedAt DESC
+        Index("popularityIndex"),
+        // Composite: recents query — WHERE isFavorite = 0 ORDER BY lastPlayedAt DESC
         Index(value = ["isFavorite", "lastPlayedAt"], name = "index_games_isFavorite_lastPlayedAt"),
+        // Composite: per-system catalog sorted by popularity — WHERE systemId = ? ORDER BY popularityIndex DESC
+        Index(value = ["systemId", "popularityIndex"], name = "index_games_systemId_popularityIndex"),
+        // Composite: favorites sorted by title — WHERE isFavorite = 1 ORDER BY title ASC
+        Index(value = ["isFavorite", "title"], name = "index_games_isFavorite_title"),
     ],
 )
 data class Game(
@@ -53,6 +57,7 @@ data class Game(
     val lastIndexedAt: Long,
     val lastPlayedAt: Long? = null,
     val isFavorite: Boolean = false,
+    val popularityIndex: Int = 0,
 ) : Serializable {
     companion object {
         val DIFF_CALLBACK =

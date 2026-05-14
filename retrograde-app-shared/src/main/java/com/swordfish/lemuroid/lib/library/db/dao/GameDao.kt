@@ -95,6 +95,42 @@ interface GameDao {
     """)
     fun selectBySystems(systemIds: List<String>): PagingSource<Int, Game>
 
+    @Query("""
+        SELECT games.* FROM games
+        LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName
+        WHERE games.systemId = :systemId
+        ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC
+    """)
+    fun selectBySystemSortedByPopularity(systemId: String): PagingSource<Int, Game>
+
+    @Query("""
+        SELECT games.* FROM games
+        LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName
+        WHERE games.systemId IN (:systemIds)
+        ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC
+    """)
+    fun selectBySystemsSortedByPopularity(systemIds: List<String>): PagingSource<Int, Game>
+
+    @Query("""
+        SELECT * FROM games
+        WHERE coverFrontUrl IS NOT NULL AND popularityIndex > 0
+        AND systemId NOT IN (:excludedSystemIds)
+        ORDER BY popularityIndex DESC
+        LIMIT :limit
+    """)
+    fun selectTopPopularWithCoversExcluding(limit: Int, excludedSystemIds: Set<String>): Flow<List<Game>>
+
+    @Query("""
+        SELECT * FROM games
+        WHERE coverFrontUrl IS NOT NULL AND popularityIndex > 0
+        ORDER BY popularityIndex DESC
+        LIMIT :limit
+    """)
+    fun selectTopPopularWithCovers(limit: Int): Flow<List<Game>>
+
+    @Query("UPDATE games SET popularityIndex = :popularityIndex WHERE fileUri = :fileUri")
+    suspend fun updatePopularityIndex(fileUri: String, popularityIndex: Int)
+
     @Query("SELECT * FROM games ORDER BY title ASC")
     suspend fun selectAll(): List<Game>
 

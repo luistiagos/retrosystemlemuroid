@@ -9,7 +9,9 @@ import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Cookie
@@ -63,6 +66,8 @@ class RomOnDemandManager(
         private const val HUGGINGFACE_BASE =
             "https://huggingface.co/datasets/luisluis123/lemusets/resolve/main/roms"
     }
+
+    private val backgroundScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val archiveCookieJar = ArchiveCookieJar()
     @Volatile private var archiveSessionReady = false
@@ -204,7 +209,9 @@ class RomOnDemandManager(
             ),
         )
 
-        LibraryIndexScheduler.triggerCatalogQuickLoad(context)
+        // Fire-and-forget: catalog refresh doesn't need to complete before the
+        // "play now?" dialog appears — launching it async avoids blocking the result.
+        backgroundScope.launch { LibraryIndexScheduler.triggerCatalogQuickLoad(context) }
 
         Timber.d("ROM downloaded successfully: ${game.fileName} ($downloadedSize bytes)")
         DownloadResult.Success
@@ -332,6 +339,21 @@ class RomOnDemandManager(
                             Timber.d("downloadToFile HTTP ${response.code} contentLength=$contentLength url=$url")
 
                             destFile.parentFile?.mkdirs()
+
+                            // Pre-check: if server reports file size, verify available space now
+                            // to fail fast with a clear message rather than erroring mid-write.
+                            if (contentLength > 0) {
+                                val available = destFile.parentFile?.usableSpace ?: Long.MAX_VALUE
+                                if (available < contentLength) {
+                                    val needMb = contentLength / (1024 * 1024)
+                                    val freeMb = available / (1024 * 1024)
+                                    throw PermanentHttpException(
+                                        "Espaço insuficiente no dispositivo. " +
+                                            "Necessário: ${needMb} MB, disponível: ${freeMb} MB.",
+                                    )
+                                }
+                            }
+
                             var bytesWritten = 0L
 
                             FileOutputStream(destFile, false).use { out ->
@@ -360,12 +382,16 @@ class RomOnDemandManager(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: PermanentHttpException) {
-                Timber.e("downloadToFile permanent HTTP error (not retrying): ${e.message}")
+                Timber.e("downloadToFile permanent error (not retrying): ${e.message}")
                 throw e
             } catch (e: IOException) {
                 // OkHttp throws IOException when call.cancel() is called — treat it as cancellation
                 // so the retry loop does not restart a download the user explicitly stopped.
                 if (call.isCanceled()) throw CancellationException("Download cancelled by user", e)
+                // Disk full (ENOSPC) is a permanent condition — retrying will not help.
+                if (isNoSpaceError(e)) {
+                    throw PermanentHttpException("Espaço insuficiente no dispositivo para salvar a ROM.")
+                }
                 Timber.w("downloadToFile attempt $attempt/$maxAttempts failed: ${e.message}")
                 if (attempt >= maxAttempts) throw IOException("Download failed after $maxAttempts attempts: ${e.message}", e)
                 // Re-login before the next attempt if session was invalidated by a 401
@@ -383,6 +409,18 @@ class RomOnDemandManager(
             delay(retryAfterMs ?: 60_000L)
         }
         throw IOException("Rate limited (429). Aguarde e tente novamente.")
+    }
+
+    private fun isNoSpaceError(e: IOException): Boolean {
+        var t: Throwable? = e
+        while (t != null) {
+            val msg = t.message ?: ""
+            if (msg.contains("ENOSPC", ignoreCase = true) ||
+                msg.contains("No space left", ignoreCase = true)
+            ) return true
+            t = t.cause
+        }
+        return false
     }
 
     /** Minimal in-memory cookie jar that stores cookies keyed by "domain|name". */

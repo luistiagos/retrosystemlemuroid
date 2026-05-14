@@ -108,9 +108,9 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             "https://huggingface.co/datasets/$HF_DATASET/resolve/main/$path?download=true"
 
         /**
-         * Called by [ManifestQuickLoader] after it has populated placeholders and DB rows
-         * directly from `catalog_manifest.txt`. Marks the streaming catalog as complete so
-         * the "Baixando Catálogo" card never appears and auto-start is suppressed.
+         * Called on startup to mark the catalog as already populated from
+         * `catalog_manifest.txt`. Prevents the "Baixando Catálogo" card from appearing
+         * and suppresses auto-start of the streaming download.
          *
          * Also writes [CATALOG_VERSION] so the version-check init block does not re-trigger
          * the streaming download on the next app open.

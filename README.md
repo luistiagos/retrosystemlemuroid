@@ -56,6 +56,9 @@ It originated from a rib of [Retrograde](https://github.com/retrograde/retrograd
 - Customizable touch controls (size and position)
 - Cloud save sync
 - HD mode
+- **Catalog sorted by popularity by default** — each system's game list opens sorted by popularity index; a header lets users switch between Popularity and A-Z at any time
+- **Discover section with popular games** — the home screen "Discover" section shows popular games that have cover art, one randomly picked per system from the top-10 most popular, respecting device RAM constraints (heavy systems like PSP/3DS are hidden on low-end devices)
+- **On-demand ROM download** — tap any catalog placeholder to download a single ROM on demand, with pause/resume and reliable cancel
 
 ### Languages:
 You can help translate Retro Game System in your native language by going here: https://crowdin.com/project/lemuroid

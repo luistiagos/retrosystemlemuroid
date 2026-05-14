@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -34,7 +33,6 @@ fun SearchScreen(
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
     onResetSearchQuery: () -> Unit,
 ) {
-    val isSearchPending = viewModel.isSearchPending.collectAsState(false)
     val searchGames = viewModel.searchResults.collectAsLazyPagingItems()
 
     LaunchedEffect(Unit) {
@@ -49,15 +47,14 @@ fun SearchScreen(
         viewModel.setSystemIds(systemIds)
     }
 
-    // State is derived entirely from real signals — no fixed timers:
-    //  • searchQuery empty          → Idle   (prompt the user to type)
-    //  • debounce pending OR paging → Loading (show spinner)
-    //  • paging done, 0 items       → shown as Ready (empty-results message)
-    //  • paging done, N items       → shown as Ready (results list)
+    // State is derived from query length and paging state:
+    //  • fewer than 3 chars → Idle   (prompt the user to keep typing)
+    //  • paging loading     → Loading (show spinner)
+    //  • paging done        → Ready  (results or empty message)
     val isPageLoading = searchGames.loadState.refresh is LoadState.Loading
     val displayState = when {
-        searchQuery.isEmpty() -> SearchViewModel.UIState.Idle
-        isSearchPending.value || isPageLoading -> SearchViewModel.UIState.Loading
+        searchQuery.length < 3 -> SearchViewModel.UIState.Idle
+        isPageLoading -> SearchViewModel.UIState.Loading
         else -> SearchViewModel.UIState.Ready
     }
 
@@ -103,7 +100,7 @@ private fun SearchResultsView(
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
 ) {
     LazyColumn(modifier = modifier) {
-        items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
+        items(games.itemCount, key = { games[it]?.id ?: it }) { index ->
             val game = games[index] ?: return@items
 
             LemuroidGameListRow(

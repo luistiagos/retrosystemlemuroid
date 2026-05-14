@@ -54,6 +54,10 @@ class HomeViewModel(
     companion object {
         const val CAROUSEL_MAX_ITEMS = 10
         const val DEBOUNCE_TIME = 100L
+        // Pool of top popular games queried from DB; grouped per system so each system
+        // can contribute at most DISCOVER_TOP_PER_SYSTEM candidates to Discover.
+        private const val DISCOVER_POOL_SIZE = 300
+        private const val DISCOVER_TOP_PER_SYSTEM = 10
     }
 
     class Factory(
@@ -324,9 +328,39 @@ class HomeViewModel(
     private fun userScanInProgress(appContext: Context) =
         PendingOperationsMonitor(appContext).isUserLibraryScanInProgress()
 
-    private fun discoveryGames(retrogradeDb: RetrogradeDatabase) =
-        if (excludedDbNames.isNotEmpty()) retrogradeDb.gameDao().selectFirstNotPlayedExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
-        else retrogradeDb.gameDao().selectFirstNotPlayed(CAROUSEL_MAX_ITEMS)
+    /**
+     * Builds the "Descubra" (Discover) game list for the home screen.
+     *
+     * Algorithm:
+     * 1. Queries up to [DISCOVER_POOL_SIZE] games that have a cover image and a non-zero
+     *    popularity index, ordered by popularity DESC. Systems excluded by the device's RAM
+     *    tier ([HeavySystemFilter]) are filtered out at query time.
+     * 2. Groups the pool by [Game.systemId].
+     * 3. From each system's group, takes the top [DISCOVER_TOP_PER_SYSTEM] most popular games
+     *    and picks one at random — ensuring variety across systems.
+     * 4. Shuffles the selected representatives and caps the result at [CAROUSEL_MAX_ITEMS].
+     *
+     * The result is a diverse, randomised selection of well-known games that always have
+     * artwork, and never includes systems the current device cannot run.
+     */
+    private fun discoveryGames(retrogradeDb: RetrogradeDatabase): Flow<List<Game>> {
+        val candidatesFlow = if (excludedDbNames.isNotEmpty())
+            retrogradeDb.gameDao().selectTopPopularWithCoversExcluding(DISCOVER_POOL_SIZE, excludedDbNames)
+        else
+            retrogradeDb.gameDao().selectTopPopularWithCovers(DISCOVER_POOL_SIZE)
+
+        return candidatesFlow.map { games ->
+            // Games arrive sorted by popularityIndex DESC from the query.
+            // Group by system, take the top-DISCOVER_TOP_PER_SYSTEM candidates for each,
+            // randomly pick one representative per system, then shuffle and cap.
+            games
+                .groupBy { it.systemId }
+                .values
+                .mapNotNull { systemGames -> systemGames.take(DISCOVER_TOP_PER_SYSTEM).randomOrNull() }
+                .shuffled()
+                .take(CAROUSEL_MAX_ITEMS)
+        }
+    }
 
     private fun recentGames(retrogradeDb: RetrogradeDatabase) =
         if (excludedDbNames.isNotEmpty()) retrogradeDb.gameDao().selectFirstUnfavoriteRecentsExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)

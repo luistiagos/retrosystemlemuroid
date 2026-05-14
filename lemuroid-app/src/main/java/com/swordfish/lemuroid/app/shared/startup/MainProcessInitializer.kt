@@ -29,11 +29,11 @@ class MainProcessInitializer : Initializer<Unit> {
         StreamingRomsManager.markCatalogPopulated(context)
         WorkManager.getInstance(context).cancelUniqueWork(StreamingRomsWork.UNIQUE_WORK_ID)
 
-        // DB insertion and placeholder creation — idempotent, safe every startup.
-        // A small delay ensures Application.onCreate() + Dagger injection complete
-        // before we try to access manifestQuickLoader (which is @Inject lateinit var).
+        // DB insertion from catalog manifest — skips via SharedPreferences if the same
+        // app version was already loaded. A small delay ensures Application.onCreate()
+        // + Dagger injection complete before we try to access manifestQuickLoader.
         GlobalScope.launch(kotlinx.coroutines.Dispatchers.IO) {
-            kotlinx.coroutines.delay(500L)
+            kotlinx.coroutines.delay(50L)
             try {
                 val app = context.applicationContext as? LemuroidApplication
                 app?.manifestQuickLoader?.load()

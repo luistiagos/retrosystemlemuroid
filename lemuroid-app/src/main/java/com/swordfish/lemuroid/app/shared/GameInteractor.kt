@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.app.shared
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -14,6 +15,7 @@ import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.launch
+import java.io.File
 
 class GameInteractor(
     private val activity: BusyActivity,
@@ -21,6 +23,7 @@ class GameInteractor(
     private val useLeanback: Boolean,
     private val shortcutsGenerator: ShortcutsGenerator,
     private val gameLauncher: GameLauncher,
+    private val onPlaceholderGame: ((Game, () -> Unit) -> Unit)? = null,
 ) {
     fun onGamePlay(game: Game) {
         if (!ensureNotBusy()) {
@@ -29,7 +32,19 @@ class GameInteractor(
         if (!ensureNotificationsPermissionAvailable()) {
             return
         }
+        val placeholderHandler = onPlaceholderGame
+        if (placeholderHandler != null && isGamePlaceholder(game)) {
+            placeholderHandler(game) {
+                gameLauncher.launchGameAsync(activity.activity(), game, true, useLeanback)
+            }
+            return
+        }
         gameLauncher.launchGameAsync(activity.activity(), game, true, useLeanback)
+    }
+
+    private fun isGamePlaceholder(game: Game): Boolean {
+        val uri = Uri.parse(game.fileUri)
+        return uri.scheme == "file" && uri.path?.let { File(it).length() == 0L } == true
     }
 
     fun onGameRestart(game: Game) {
