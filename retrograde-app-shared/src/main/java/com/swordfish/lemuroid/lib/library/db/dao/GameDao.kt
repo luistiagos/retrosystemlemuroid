@@ -194,6 +194,23 @@ interface GameDao {
     @Query("SELECT * FROM games ORDER BY title ASC")
     suspend fun selectAll(): List<Game>
 
+    /** Total row count — used by [ManifestQuickLoader] to detect a fully populated catalog. */
+    @Query("SELECT COUNT(*) FROM games")
+    suspend fun countAll(): Int
+
+    /**
+     * One-shot rewrite of the sentinel `fileUri` values that the build-time PrebuiltDbGenerator
+     * wrote into the prebuilt asset. Replaces `file:///lemuroid_prebuilt/<...>` with the actual
+     * `<romsDirUri>/<...>` so the rest of the app (downloads, indexing, etc.) sees a normal
+     * file:// URI. Runs on first launch after the prebuilt DB is copied into place.
+     */
+    @Query("""
+        UPDATE games
+        SET fileUri = :realPrefix || SUBSTR(fileUri, LENGTH(:sentinelPrefix) + 1)
+        WHERE fileUri LIKE :sentinelPrefix || '%'
+    """)
+    suspend fun rewritePrebuiltUris(sentinelPrefix: String, realPrefix: String): Int
+
     @Query("SELECT DISTINCT systemId FROM games ORDER BY systemId ASC")
     suspend fun selectSystems(): List<String>
 

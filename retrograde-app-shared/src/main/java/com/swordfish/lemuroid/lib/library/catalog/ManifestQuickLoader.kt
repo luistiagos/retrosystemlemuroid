@@ -68,6 +68,10 @@ class ManifestQuickLoader(
             "megadrive" to "md",
             "megacd" to "scd",
         )
+
+        // Sentinel prefix written by the build-time PrebuiltDbGenerator (buildSrc).
+        // ManifestQuickLoader rewrites these into real file:// URIs on first launch.
+        private const val PREBUILT_URI_PREFIX = "file:///lemuroid_prebuilt"
     }
 
     /**
@@ -80,6 +84,20 @@ class ManifestQuickLoader(
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val appVersion = currentAppVersion()
         val loadedSchema = prefs.getInt(KEY_LOADED_MANIFEST_SCHEMA, -1)
+
+        // Rewrite sentinel URIs (no-op unless the prebuilt asset was used). Wrapped in try/catch
+        // because any failure here (DAO missing, schema mismatch, etc.) must NOT crash the boot
+        // sequence — the catalog can still be rebuilt by the load path below.
+        try {
+            val romsDir = directoriesManager.getInternalRomsDirectory()
+            val realPrefix = romsDir.toUri().toString().trimEnd('/')
+            val rewritten = database.gameDao().rewritePrebuiltUris(PREBUILT_URI_PREFIX, realPrefix)
+            if (rewritten > 0) {
+                Timber.i("ManifestQuickLoader: rewrote $rewritten prebuilt URIs to $realPrefix")
+            }
+        } catch (t: Throwable) {
+            Timber.e(t, "ManifestQuickLoader: prebuilt URI rewrite failed (continuing)")
+        }
 
         // Skip only when both the app version and the manifest schema match what's already
         // loaded. Bumping MANIFEST_SCHEMA_VERSION forces a single reload across all users
@@ -97,9 +115,31 @@ class ManifestQuickLoader(
             return@withContext LoadResult(0)
         }
 
-        val romsDir = directoriesManager.getInternalRomsDirectory()
+        // Fast path: if the DB is already fully populated (prebuilt asset path, or a prior
+        // successful load), skip the INSERT OR IGNORE + per-row UPDATE pass entirely. Wrapped
+        // in try/catch so a DAO/schema failure doesn't block the full-load fallback below.
+        val existingCount = try {
+            database.gameDao().countAll()
+        } catch (t: Throwable) {
+            Timber.e(t, "ManifestQuickLoader: countAll failed; assuming empty")
+            0
+        }
+        val expectedSize = manifest.size
+        if (existingCount >= expectedSize - expectedSize / 10) {
+            prefs.edit()
+                .putInt(KEY_LOADED_APP_VERSION, appVersion)
+                .putInt(KEY_LOADED_MANIFEST_SCHEMA, MANIFEST_SCHEMA_VERSION)
+                .apply()
+            Timber.i(
+                "ManifestQuickLoader: fast-skip (DB has $existingCount/${expectedSize} games)",
+            )
+            _catalogReady.value = true
+            return@withContext LoadResult(0)
+        }
+
         val now = System.currentTimeMillis()
         val games = mutableListOf<Game>()
+        val romsDir = directoriesManager.getInternalRomsDirectory()
 
         for ((key, entry) in manifest) {
             val slash = key.indexOf('/')

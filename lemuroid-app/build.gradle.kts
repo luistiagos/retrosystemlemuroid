@@ -1,3 +1,4 @@
+import com.swordfish.lemuroid.builder.PrebuiltDbGenerator
 import java.util.Properties
 
 plugins {
@@ -257,4 +258,60 @@ android.applicationVariants.all {
 fun usePlayDynamicFeatures(): Boolean {
     val task = gradle.startParameter.taskRequests.toString()
     return task.contains("Play") && task.contains("Dynamic")
+}
+
+// ── Prebuilt DB generation ───────────────────────────────────────────────────
+// Generates `assets/retrograde-prebuilt.db` from catalog_manifest.txt at build time,
+// using the Room schema (schemas/23.json) as the source of truth for DDL + identityHash.
+// The app uses Room.databaseBuilder(...).createFromAsset() on first launch to copy this
+// into place instead of running 29k+ INSERTs through Room — eliminates the "preparando
+// ambiente" wait on fresh installs.
+
+val prebuiltDbOutputDir = layout.buildDirectory.dir("generated/prebuiltDb")
+val prebuiltDbFile = prebuiltDbOutputDir.map { it.file("retrograde-prebuilt.db") }
+
+val generatePrebuiltDb = tasks.register("generatePrebuiltDb") {
+    val schemaJson = rootProject.file(
+        "retrograde-app-shared/schemas/com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase/23.json",
+    )
+    val manifestFile = project.file("src/main/assets/catalog_manifest.txt")
+    val outputFile = prebuiltDbFile.get().asFile
+
+    inputs.file(schemaJson)
+    inputs.file(manifestFile)
+    inputs.files(rootProject.fileTree("buildSrc/src/main/kotlin"))
+    outputs.file(outputFile)
+
+    doLast {
+        PrebuiltDbGenerator.generate(
+            schemaJsonFile = schemaJson,
+            manifestFile = manifestFile,
+            outputDbFile = outputFile,
+        )
+    }
+}
+
+android {
+    sourceSets {
+        getByName("main") {
+            assets.srcDirs("src/main/assets", prebuiltDbOutputDir)
+        }
+    }
+}
+
+// Any task that reads the assets directory (mergeAssets, packageRelease, lintAnalyze*, etc.)
+// must run after generatePrebuiltDb. Naming patterns cover assets, lint, and bundle tasks
+// across all flavor/build-type variants.
+afterEvaluate {
+    tasks.matching { task ->
+        val n = task.name
+        n.contains("Assets", ignoreCase = true) ||
+            n.startsWith("lint", ignoreCase = true) ||
+            n.startsWith("package", ignoreCase = true) ||
+            n.startsWith("bundle", ignoreCase = true)
+    }.configureEach {
+        if (name != generatePrebuiltDb.name) {
+            dependsOn(generatePrebuiltDb)
+        }
+    }
 }

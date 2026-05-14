@@ -89,6 +89,7 @@ import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
+import timber.log.Timber
 import java.io.InputStream
 import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
@@ -141,23 +142,71 @@ abstract class LemuroidApplicationModule {
         @PerApp
         @JvmStatic
         fun retrogradeDb(app: LemuroidApplication): RetrogradeDatabase {
-            // PRAGMA tuning: takes advantage of the catalog being effectively read-mostly.
-            // - synchronous=NORMAL: trades durability of unflushed writes for ~2x faster commits;
-            //   safe with WAL mode (no risk of DB corruption, only the last uncommitted txn could be lost).
-            // - cache_size=-32000: 32 MB of page cache in RAM (negative = KB).
-            // - mmap_size=256MB: enables memory-mapped I/O; SQLite reads hot pages directly from mmap
-            //   without copying through the page cache. Lazy, only touches RAM as pages are accessed.
-            // - temp_store=MEMORY: keeps temp tables and intermediate sort buffers in RAM.
+            Timber.i("retrogradeDb: provider entered")
+
             val tuningCallback = object : androidx.room.RoomDatabase.Callback() {
                 override fun onOpen(db: androidx.sqlite.db.SupportSQLiteDatabase) {
-                    db.execSQL("PRAGMA synchronous = NORMAL")
-                    db.execSQL("PRAGMA cache_size = -32000")
-                    db.execSQL("PRAGMA mmap_size = 268435456")
-                    db.execSQL("PRAGMA temp_store = MEMORY")
+                    Timber.i("Room onOpen — applying PRAGMA tuning")
+                    // Android's SupportSQLiteDatabase.execSQL rejects statements that return
+                    // a result row (PRAGMA … = value returns the new value on some Android
+                    // versions). Use query() and discard the cursor — that's the supported
+                    // path for parameterised PRAGMAs.
+                    listOf(
+                        "PRAGMA synchronous = NORMAL",
+                        "PRAGMA cache_size = -32000",
+                        "PRAGMA mmap_size = 268435456",
+                        "PRAGMA temp_store = MEMORY",
+                    ).forEach { pragma ->
+                        try {
+                            db.query(pragma).use { /* discard cursor */ }
+                        } catch (t: Throwable) {
+                            Timber.w(t, "PRAGMA failed (non-fatal): $pragma")
+                        }
+                    }
+                }
+
+                override fun onCreate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    Timber.i("Room onCreate — DB created via asset or fresh init")
                 }
             }
 
-            val db = Room.databaseBuilder(app, RetrogradeDatabase::class.java, RetrogradeDatabase.DB_NAME)
+            // Try with the prebuilt asset first. If anything goes wrong (asset corrupt, identity
+            // mismatch surviving the build-time validator, etc.) fall back to the classic builder
+            // so the app at least boots and ManifestQuickLoader rebuilds the catalog.
+            //
+            // The actual schema/asset validation happens lazily on the first `writableDatabase`
+            // call — `build()` itself is cheap. So we return the DB instance synchronously, and
+            // a background pre-warm thread triggers the real open. If that pre-warm fails the
+            // exception is logged, and the next foreground query carries the real crash to
+            // logcat with a usable stack.
+            Timber.i("retrogradeDb: building Room with createFromAsset")
+            val instance = buildRoomBuilder(app, tuningCallback, useAsset = true).build()
+
+            Thread {
+                val startedAt = System.currentTimeMillis()
+                try {
+                    instance.openHelper.writableDatabase
+                    Timber.i(
+                        "Room DB pre-warm OK in ${System.currentTimeMillis() - startedAt} ms",
+                    )
+                } catch (t: Throwable) {
+                    Timber.e(t, "Room DB pre-warm FAILED — see stack above for the real cause")
+                }
+            }.start()
+
+            return instance
+        }
+
+        private fun buildRoomBuilder(
+            app: LemuroidApplication,
+            tuningCallback: androidx.room.RoomDatabase.Callback,
+            useAsset: Boolean,
+        ): androidx.room.RoomDatabase.Builder<RetrogradeDatabase> {
+            val builder = Room.databaseBuilder(
+                app,
+                RetrogradeDatabase::class.java,
+                RetrogradeDatabase.DB_NAME,
+            )
                 .addCallback(GameSearchDao.CALLBACK)
                 .addCallback(tuningCallback)
                 .addMigrations(
@@ -180,17 +229,10 @@ abstract class LemuroidApplicationModule {
                 )
                 .fallbackToDestructiveMigration()
                 .setJournalMode(androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
-                .build()
-
-            // Pre-warm: open the SQLite file and run any pending migrations in the
-            // background so that the first UI query does not pay this cost.
-            Thread {
-                try {
-                    db.openHelper.writableDatabase
-                } catch (_: Throwable) { }
-            }.start()
-
-            return db
+            if (useAsset) {
+                builder.createFromAsset("retrograde-prebuilt.db")
+            }
+            return builder
         }
 
         @Provides

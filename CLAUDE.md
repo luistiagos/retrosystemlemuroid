@@ -48,6 +48,8 @@ Aplicado no `onOpen` da `RoomDatabase.Callback` em `LemuroidApplicationModule.re
 | `mmap_size` | 256 MB | Memory-mapped I/O — SQLite lê páginas direto do mmap, sem cópia. Lazy. |
 | `temp_store` | MEMORY | Temp tables e sort buffers em RAM. |
 
+> ⚠️ **Pitfall crítico (Android 14+)**: `SupportSQLiteDatabase.execSQL("PRAGMA … = valor")` lança `SQLiteException: Queries can be performed using SQLiteDatabase query or rawQuery methods only.` em API 34+. Várias PRAGMAs (`synchronous`, `cache_size`, `mmap_size`, `temp_store`, ...) retornam o novo valor como resultset após o set, e `execSQL` rejeita statements com resultset. **Sempre use `db.query("PRAGMA …").use { /* discard cursor */ }`** dentro de try/catch — uma exception em `onOpen` propaga até `getWritableDatabase` e crasha o app antes da MainActivity.
+
 ---
 
 ## Catálogo de Jogos (`catalog_manifest.txt`)
@@ -77,10 +79,56 @@ Isso elimina toda a lógica de agrupamento em runtime: o app só lê o campo e m
 
 1. **`CatalogCoverProvider`** — lê e parseia `catalog_manifest.txt` em `Map<String, ManifestEntry>` (lazy, uma vez por processo).
 2. **`ManifestQuickLoader.load()`** — roda no startup via `MainProcessInitializer` (50 ms após a app iniciar):
+   - **URI rewrite**: substitui o prefixo sentinela `file:///lemuroid_prebuilt` pelo `romsDir` real em uma única SQL UPDATE (~100ms). No-op se o DB não veio do asset.
+   - **Fast-path**: se `gameDao().countAll() >= manifest.size * 0.9`, marca prefs e pula tudo. Caso típico em devices que abriram com o asset pre-built ou já rodaram o load antes.
    - **Skip por versão+schema**: só pula se o `versionCode` do app E o `MANIFEST_SCHEMA_VERSION` salvos batem com os atuais. Bumpar `MANIFEST_SCHEMA_VERSION` força um reload one-time em todos os usuários (usado quando o formato do manifest muda).
    - `INSERT OR IGNORE` de todos os `Game` no banco (não sobrescreve dados enriquecidos pelo LibretroDB).
    - **Batch UPDATE de `popularityIndex` + `isRepresentative`** via `updateManifestFields()` em transação para jogos que já existiam (sincroniza mudanças no manifest após app update / schema bump).
    - Salva `versionCode` e `MANIFEST_SCHEMA_VERSION` em SharedPreferences.
+
+### Prebuilt DB Asset (`retrograde-prebuilt.db`)
+
+Para eliminar a tela "preparando ambiente" no primeiro startup pós-instalação (~5-15s), o APK contém um SQLite pre-populado em `assets/retrograde-prebuilt.db` com todos os ~29k games + FTS index já indexado.
+
+**Geração no build (Gradle task `generatePrebuiltDb`):**
+
+1. Lê `schemas/23.json` (Room schema source of truth) para obter:
+   - `identityHash` (Room valida isso na abertura — se não bater, falha)
+   - DDL exato de cada `@Entity` (tables + indices)
+2. Lê `catalog_manifest.txt` (5 campos)
+3. Cria SQLite via sqlite-jdbc (Kotlin, sem dependência Android)
+4. Aplica schema das entities + FTS4 (CREATE VIRTUAL TABLE + triggers)
+5. Cria `room_master_table` com `id=42, identity_hash=<do JSON>`
+6. Bulk INSERT de todos os games com `fileUri = "file:///lemuroid_prebuilt/<systemId>/<fileName>"` (placeholder — o app reescreve no primeiro boot)
+7. Bulk populate `INSERT INTO fts_games SELECT id, title FROM games` (1 statement em vez de 29k inserts com tokenization individual)
+8. Cria trigger `games_ai` DEPOIS dos inserts (para que futuros inserts no Android disparem normalmente)
+9. **Build-time validation**: re-verifica que `user_version`, `identity_hash`, contagens de `games` e `fts_games`, tabelas e triggers existem. Falha o build se algo divergir.
+
+**Implementação:** [PrebuiltDbGenerator.kt](buildSrc/src/main/kotlin/PrebuiltDbGenerator.kt) + registro em [lemuroid-app/build.gradle.kts](lemuroid-app/build.gradle.kts) na task `generatePrebuiltDb` (dep de `mergeAssets` e `packageAssets` via `androidComponents.onVariants`).
+
+**Runtime:**
+
+- `Room.databaseBuilder(...).createFromAsset("retrograde-prebuilt.db")` em [LemuroidApplicationModule.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/LemuroidApplicationModule.kt). Room só consulta o asset quando o DB on-disk ainda não existe.
+- **Helper `buildRoomBuilder(useAsset)`**: encapsula a configuração do Room — flip de flag permite buildar versão "sem asset" para diagnóstico.
+- **Pre-warm em background Thread** após `build()`: força o `openHelper.writableDatabase` para que a primeira query foreground não pague o custo de copy + validation. Exceções aqui são logadas via Timber mas não derrubam o app.
+- **URI rewrite** acontece no início do `ManifestQuickLoader.load()`: `UPDATE games SET fileUri = :realPrefix || SUBSTR(fileUri, LENGTH(:sentinel) + 1) WHERE fileUri LIKE :sentinel || '%'`. Wrapped em try/catch defensivo.
+
+**Custo:** APK debug = 54MB, release (R8) = 29MB. O DB pre-built bruto é 17.6MB, mas comprime bem dentro do APK.
+
+**Resultado medido:** `Room DB pre-warm OK in 400 ms` (vs. 5-15s do load via INSERT antes). Home abre direto com seção "Descubra" populada — tela "preparando ambiente" eliminada.
+
+### Pitfalls do `createFromAsset` — Lições Aprendidas
+
+Bugs descobertos durante a implementação que causaram crash no primeiro boot. **Resolvidos** mas registrados aqui para evitar regressão:
+
+1. **`Callback.onCreate` ainda dispara quando Room copia o asset** — Room trata o DB recém-copiado como "criado" e chama todos os `RoomDatabase.Callback.onCreate()` registrados. O `GameSearchDao.CALLBACK.onCreate` chamava `MIGRATION.migrate(db)` que executava `CREATE VIRTUAL TABLE fts_games USING FTS4(...)` sem `IF NOT EXISTS`. Como o asset já contém `fts_games`, SQLite lançava `table fts_games already exists` → crash.
+   - **Fix em [GameSearchDao.kt](retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/db/dao/GameSearchDao.kt):** guard verificando `sqlite_master` antes de chamar a migration + `CREATE … IF NOT EXISTS` em todos os DDLs da migration.
+   - **Regra geral:** qualquer DDL dentro de `RoomDatabase.Callback.onCreate` DEVE ser idempotente.
+
+2. **`db.execSQL("PRAGMA … = valor")` quebra em Android 14+** — ver nota na seção "Tuning PRAGMA" acima.
+   - **Fix:** trocar `db.execSQL` por `db.query(...).use { }` para todas as PRAGMAs no `onOpen` callback.
+
+3. **`fileUri` sentinela vs. real** — o build não conhece o `romsDir` do device, então o asset usa `file:///lemuroid_prebuilt/<systemId>/<fileName>`. Sem rewrite, lookups por fileUri quebrariam. Solução: uma única SQL UPDATE no boot (~100ms para 30k rows). Idempotente: roda toda vez mas só afeta rows que ainda têm o prefixo sentinela.
 
 ### `MANIFEST_SCHEMA_VERSION`
 
@@ -355,3 +403,44 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 - Queries Room paginadas retornam `PagingSource<Int, Game>`; queries de lista retornam `Flow<List<Game>>`.
 - Migrações sempre em `Migrations.kt`, registradas em `LemuroidApplicationModule.kt`.
 - `PermanentHttpException` sinaliza erros HTTP não-retriáveis (4xx exceto 429); capturado em `downloadToFile` antes do bloco geral de `IOException`.
+
+---
+
+## Pitfalls de Android / Room
+
+Bugs reais que crasharam o app em produção. Cada um inclui o sintoma, a causa raiz, e a regra a seguir para não regredir.
+
+### 1. PRAGMA + `db.execSQL` em Android 14+
+
+**Sintoma:** `SQLiteException: unknown error (code 0 SQLITE_OK): Queries can be performed using SQLiteDatabase query or rawQuery methods only.` lançada em `RoomDatabase.Callback.onOpen`, propagando pelo `getWritableDatabase` e crashando o app antes da MainActivity.
+
+**Causa:** Em API 34+, `SupportSQLiteDatabase.execSQL` rejeita statements que retornam resultset. Várias PRAGMAs (`synchronous = NORMAL`, `cache_size`, `mmap_size`, `temp_store`, ...) retornam o novo valor após o set.
+
+**Regra:** PRAGMAs com `= valor` **sempre** via `db.query(pragma).use { }`, dentro de try/catch para não derrubar o boot. Nunca via `execSQL`.
+
+### 2. `Callback.onCreate` dispara após `createFromAsset`
+
+**Sintoma:** Crash no primeiro boot pós-instalação com `SQLITE_ERROR: table fts_games already exists`.
+
+**Causa:** Room considera o DB resultante de `createFromAsset` como "criado" e invoca todos os `RoomDatabase.Callback.onCreate()`. Se algum callback contém DDL não-idempotente (`CREATE VIRTUAL TABLE`, `CREATE TRIGGER`, etc.) e o asset já tem esses objetos, o SQLite lança erro.
+
+**Regra:** DDL dentro de `Callback.onCreate` **sempre** com `IF NOT EXISTS`. Ou guard verificando `sqlite_master` antes:
+```kotlin
+val exists = db.query("SELECT 1 FROM sqlite_master WHERE name = 'foo' LIMIT 1")
+    .use { it.moveToFirst() }
+if (!exists) { ... }
+```
+
+### 3. `fileUri` no asset pre-built
+
+**Sintoma:** ROMs do catálogo ficariam apontando para `file:///lemuroid_prebuilt/...` (URI inválida no device).
+
+**Causa:** O build-time generator não conhece o `romsDir` real do device (varia por package, debug suffix, etc.). Usa um prefixo sentinela.
+
+**Regra:** No primeiro boot, `ManifestQuickLoader.load()` faz uma SQL UPDATE única substituindo o prefixo sentinela pelo prefixo real (~100ms para 30k rows). Idempotente: roda toda vez mas só afeta rows ainda com o prefixo sentinela.
+
+### 4. `validation` build-time é crítica para `createFromAsset`
+
+**Sintoma:** Sem validação, qualquer mismatch entre o schema do asset e o que Room espera resulta em crash no runtime (RoomOpenHelper rejects identityHash mismatch, schema drift, etc).
+
+**Regra:** O `PrebuiltDbGenerator` (em buildSrc) re-abre o DB gerado e valida `user_version`, `identity_hash`, contagens, tabelas e triggers. Se algo divergir do esperado, a Gradle task falha. Nunca empacote um asset que não passou pela validação.
