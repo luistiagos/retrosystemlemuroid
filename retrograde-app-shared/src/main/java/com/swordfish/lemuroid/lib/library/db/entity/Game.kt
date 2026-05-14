@@ -43,6 +43,11 @@ import java.io.Serializable
         Index(value = ["systemId", "popularityIndex"], name = "index_games_systemId_popularityIndex"),
         // Composite: favorites sorted by title — WHERE isFavorite = 1 ORDER BY title ASC
         Index(value = ["isFavorite", "title"], name = "index_games_isFavorite_title"),
+        // Composite: grouped catalog (one rep per title) — WHERE systemId = ? AND isRepresentative = 1
+        Index(
+            value = ["systemId", "isRepresentative", "popularityIndex"],
+            name = "index_games_systemId_isRepresentative_popularityIndex",
+        ),
     ],
 )
 data class Game(
@@ -58,6 +63,10 @@ data class Game(
     val lastPlayedAt: Long? = null,
     val isFavorite: Boolean = false,
     val popularityIndex: Int = 0,
+    // Pre-computed flag from catalog_manifest.txt (5th field).
+    // True for the chosen representative of each (systemId, title) group; false for variants.
+    // Manually-imported ROMs (not in the manifest) default to true so they appear individually.
+    val isRepresentative: Boolean = true,
 ) : Serializable {
     companion object {
         val DIFF_CALLBACK =

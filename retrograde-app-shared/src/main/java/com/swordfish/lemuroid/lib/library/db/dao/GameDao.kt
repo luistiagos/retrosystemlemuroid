@@ -111,6 +111,58 @@ interface GameDao {
     """)
     fun selectBySystemsSortedByPopularity(systemIds: List<String>): PagingSource<Int, Game>
 
+    // ── Grouped queries (one representative per title) ────────────────────────
+    // The representative is pre-computed in catalog_manifest.txt (5th field) and persisted
+    // as Game.isRepresentative. Filter is now a trivial WHERE clause; the
+    // (systemId, isRepresentative, popularityIndex) composite index makes these queries
+    // O(log n) instead of the previous correlated-subquery scan.
+
+    @Query("""
+        SELECT g.* FROM games g
+        LEFT JOIN downloaded_roms dr ON g.fileName = dr.fileName
+        WHERE g.systemId = :systemId AND g.isRepresentative = 1
+        ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC
+    """)
+    fun selectGroupedBySystemSortedByPopularity(systemId: String): PagingSource<Int, Game>
+
+    @Query("""
+        SELECT g.* FROM games g
+        LEFT JOIN downloaded_roms dr ON g.fileName = dr.fileName
+        WHERE g.systemId IN (:systemIds) AND g.isRepresentative = 1
+        ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC
+    """)
+    fun selectGroupedBySystemsSortedByPopularity(systemIds: List<String>): PagingSource<Int, Game>
+
+    @Query("""
+        SELECT g.* FROM games g
+        LEFT JOIN downloaded_roms dr ON g.fileName = dr.fileName
+        WHERE g.systemId = :systemId AND g.isRepresentative = 1
+        ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC
+    """)
+    fun selectGroupedBySystem(systemId: String): PagingSource<Int, Game>
+
+    @Query("""
+        SELECT g.* FROM games g
+        LEFT JOIN downloaded_roms dr ON g.fileName = dr.fileName
+        WHERE g.systemId IN (:systemIds) AND g.isRepresentative = 1
+        ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC
+    """)
+    fun selectGroupedBySystems(systemIds: List<String>): PagingSource<Int, Game>
+
+    // All variants (same title + systemId) — used by GameVariantsModal
+    @Query("SELECT * FROM games WHERE systemId = :systemId AND title = :title ORDER BY fileName ASC")
+    fun selectVariantsByTitle(systemId: String, title: String): Flow<List<Game>>
+
+    // Composite keys "systemId/title" for all titles that have more than one ROM variant.
+    // Used to decide whether tapping a game should open the variants modal.
+    @Query("""
+        SELECT systemId || '/' || title
+        FROM games
+        GROUP BY systemId, title
+        HAVING COUNT(*) > 1
+    """)
+    fun selectAllCompositeKeysWithVariants(): Flow<List<String>>
+
     @Query("""
         SELECT * FROM games
         WHERE coverFrontUrl IS NOT NULL AND popularityIndex > 0
@@ -128,8 +180,16 @@ interface GameDao {
     """)
     fun selectTopPopularWithCovers(limit: Int): Flow<List<Game>>
 
-    @Query("UPDATE games SET popularityIndex = :popularityIndex WHERE fileUri = :fileUri")
-    suspend fun updatePopularityIndex(fileUri: String, popularityIndex: Int)
+    /**
+     * Refreshes the catalog-derived fields for an already-existing row. Called by
+     * [ManifestQuickLoader] after an app update so that changes to `popularityIndex`
+     * or `isRepresentative` in `catalog_manifest.txt` are picked up without re-inserting.
+     */
+    @Query("""
+        UPDATE games SET popularityIndex = :popularityIndex, isRepresentative = :isRepresentative
+        WHERE fileUri = :fileUri
+    """)
+    suspend fun updateManifestFields(fileUri: String, popularityIndex: Int, isRepresentative: Boolean)
 
     @Query("SELECT * FROM games ORDER BY title ASC")
     suspend fun selectAll(): List<Game>

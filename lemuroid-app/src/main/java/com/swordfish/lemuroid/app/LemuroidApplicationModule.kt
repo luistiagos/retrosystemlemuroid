@@ -141,8 +141,25 @@ abstract class LemuroidApplicationModule {
         @PerApp
         @JvmStatic
         fun retrogradeDb(app: LemuroidApplication): RetrogradeDatabase {
+            // PRAGMA tuning: takes advantage of the catalog being effectively read-mostly.
+            // - synchronous=NORMAL: trades durability of unflushed writes for ~2x faster commits;
+            //   safe with WAL mode (no risk of DB corruption, only the last uncommitted txn could be lost).
+            // - cache_size=-32000: 32 MB of page cache in RAM (negative = KB).
+            // - mmap_size=256MB: enables memory-mapped I/O; SQLite reads hot pages directly from mmap
+            //   without copying through the page cache. Lazy, only touches RAM as pages are accessed.
+            // - temp_store=MEMORY: keeps temp tables and intermediate sort buffers in RAM.
+            val tuningCallback = object : androidx.room.RoomDatabase.Callback() {
+                override fun onOpen(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    db.execSQL("PRAGMA synchronous = NORMAL")
+                    db.execSQL("PRAGMA cache_size = -32000")
+                    db.execSQL("PRAGMA mmap_size = 268435456")
+                    db.execSQL("PRAGMA temp_store = MEMORY")
+                }
+            }
+
             val db = Room.databaseBuilder(app, RetrogradeDatabase::class.java, RetrogradeDatabase.DB_NAME)
                 .addCallback(GameSearchDao.CALLBACK)
+                .addCallback(tuningCallback)
                 .addMigrations(
                     GameSearchDao.MIGRATION,
                     Migrations.VERSION_8_9,
@@ -159,6 +176,7 @@ abstract class LemuroidApplicationModule {
                     Migrations.VERSION_19_20,
                     Migrations.VERSION_20_21,
                     Migrations.VERSION_21_22,
+                    Migrations.VERSION_22_23,
                 )
                 .fallbackToDestructiveMigration()
                 .setJournalMode(androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)

@@ -241,6 +241,19 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
             val pendingDownloadGame = remember { mutableStateOf<Game?>(null) }
 
+            // Game selected to show variant-picker modal (has multiple ROMs with same title).
+            val pendingVariantsGame = remember { mutableStateOf<Game?>(null) }
+            val variantGames = remember { mutableStateOf<List<Game>>(emptyList()) }
+            LaunchedEffect(pendingVariantsGame.value) {
+                val game = pendingVariantsGame.value ?: run {
+                    variantGames.value = emptyList()
+                    return@LaunchedEffect
+                }
+                retrogradeDb.gameDao()
+                    .selectVariantsByTitle(game.systemId, game.title)
+                    .collect { variantGames.value = it }
+            }
+
             val playAfterDownload = remember { mutableStateOf<Game?>(null) }
             LaunchedEffect(Unit) {
                 saveQueueViewModel.justCompleted.collect { game ->
@@ -250,6 +263,11 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
             val downloadedFileNames =
                 mainViewModel.downloadedFileNames
+                    .collectAsState()
+                    .value
+
+            val titlesWithVariants =
+                mainViewModel.titlesWithVariants
                     .collectAsState()
                     .value
 
@@ -267,10 +285,17 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             }
 
             val onGameClick: (Game) -> Unit = { game: Game ->
-                if (!isGamePlaceholder(game)) {
-                    gameInteractor.onGamePlay(game)
-                } else {
-                    pendingDownloadGame.value = game
+                val variantKey = "${game.systemId}/${game.title}"
+                when {
+                    variantKey in titlesWithVariants -> {
+                        pendingVariantsGame.value = game
+                    }
+                    !isGamePlaceholder(game) -> {
+                        gameInteractor.onGamePlay(game)
+                    }
+                    else -> {
+                        pendingDownloadGame.value = game
+                    }
                 }
             }
 
@@ -386,6 +411,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
                             downloadedFileNames = downloadedFileNames,
+                            titlesWithVariants = titlesWithVariants,
                         )
                     }
                     composable(MainRoute.SETTINGS) {
@@ -614,6 +640,23 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 SaveQueueModal(
                     viewModel = saveQueueViewModel,
                     onDismiss = { saveQueueModalVisible.value = false },
+                )
+            }
+
+            pendingVariantsGame.value?.let { game ->
+                GameVariantsModal(
+                    game = game,
+                    variants = variantGames.value,
+                    downloadedFileNames = downloadedFileNames,
+                    onDismiss = { pendingVariantsGame.value = null },
+                    onVariantSelected = { variant ->
+                        pendingVariantsGame.value = null
+                        if (!isGamePlaceholder(variant)) {
+                            gameInteractor.onGamePlay(variant)
+                        } else {
+                            pendingDownloadGame.value = variant
+                        }
+                    },
                 )
             }
 

@@ -117,6 +117,8 @@
     <string name="rom_download_dialog_resume">Resume</string>
     <string name="rom_download_dialog_paused">Download paused.</string>
     <string name="rom_download_badge_downloaded">Downloaded</string>
+    <string name="variants_badge">Multiple versions available</string>
+    <string name="variants_subtitle">%1$d versions available — choose one to play or download</string>
     <string name="rom_corruption_error_message">The ROM file appears to be corrupted and was removed. Tap the game again to re-download it.</string>
 
     <!-- Save Queue -->

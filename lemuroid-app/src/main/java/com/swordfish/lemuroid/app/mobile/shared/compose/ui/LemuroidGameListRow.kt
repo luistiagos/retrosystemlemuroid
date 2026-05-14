@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +29,7 @@ fun LemuroidGameListRow(
     modifier: Modifier = Modifier,
     game: Game,
     isDownloaded: Boolean = false,
+    hasVariants: Boolean = false,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     onFavoriteToggle: (Boolean) -> Unit,
@@ -65,6 +67,17 @@ fun LemuroidGameListRow(
                         .padding(start = 8.dp),
                 game = game,
             )
+            if (hasVariants) {
+                Icon(
+                    imageVector = Icons.Default.ContentCopy,
+                    contentDescription = stringResource(R.string.variants_badge),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .size(20.dp)
+                        .align(Alignment.CenterVertically)
+                        .padding(end = 4.dp),
+                )
+            }
             if (isDownloaded) {
                 Icon(
                     imageVector = Icons.Default.Download,

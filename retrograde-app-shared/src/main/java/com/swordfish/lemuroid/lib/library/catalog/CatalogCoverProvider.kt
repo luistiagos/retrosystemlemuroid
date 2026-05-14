@@ -7,18 +7,26 @@ import java.io.IOException
  * Reads the embedded `assets/catalog_manifest.txt` and exposes fast lookups
  * for cover URLs, titles, and popularity indexes by `"systemId/fileName"` key.
  *
- * Manifest line format (pipe-delimited, 4 fields):
+ * Manifest line format (pipe-delimited, 5 fields; field 5 optional, defaults to 1):
  * ```
- * system/filename.ext|title|https://cover-url.png|popularityIndex
+ * system/filename.ext|title|https://cover-url.png|popularityIndex|isRepresentative
  * ```
  * - **field 1** – `system/filename` path key
  * - **field 2** – optional display title (empty → derived from filename)
  * - **field 3** – cover image URL (IGDB or libretro-thumbnails)
  * - **field 4** – popularity index (positive integer; higher = more popular; 0 = no data)
+ * - **field 5** – isRepresentative flag (`1` = chosen rep of its (systemId, title) group;
+ *                 `0` = variant hidden from the catalog. Default `1` when field is absent
+ *                 so older manifests still work.)
  */
 class CatalogCoverProvider(private val context: Context) {
 
-    data class ManifestEntry(val title: String?, val coverUrl: String?, val popularityIndex: Int = 0)
+    data class ManifestEntry(
+        val title: String?,
+        val coverUrl: String?,
+        val popularityIndex: Int = 0,
+        val isRepresentative: Boolean = true,
+    )
 
     /** Lazy so the disk read is deferred until first actual lookup. */
     private val entryMap: Map<String, ManifestEntry> by lazy { loadFromAssets() }
@@ -49,7 +57,15 @@ class CatalogCoverProvider(private val context: Context) {
                         val title = parts.getOrNull(1)?.takeIf { it.isNotBlank() }
                         val coverUrl = parts.getOrNull(2)?.takeIf { it.isNotBlank() }
                         val popularityIndex = parts.getOrNull(3)?.toIntOrNull() ?: 0
-                        map[path] = ManifestEntry(title = title, coverUrl = coverUrl, popularityIndex = popularityIndex)
+                        // Field 5: default to true (representative) when absent so older
+                        // manifests behave as if every entry is its own group.
+                        val isRepresentative = parts.getOrNull(4)?.trim()?.let { it != "0" } ?: true
+                        map[path] = ManifestEntry(
+                            title = title,
+                            coverUrl = coverUrl,
+                            popularityIndex = popularityIndex,
+                            isRepresentative = isRepresentative,
+                        )
                     }
             }
         } catch (e: IOException) {

@@ -51,6 +51,13 @@ class ManifestQuickLoader(
 
         private const val PREFS_NAME = "manifest_loader_prefs"
         private const val KEY_LOADED_APP_VERSION = "loaded_app_version"
+        private const val KEY_LOADED_MANIFEST_SCHEMA = "loaded_manifest_schema"
+
+        // Bump whenever catalog_manifest.txt gains/loses columns or changes semantics
+        // so a one-time reload runs on the next launch (regardless of app version).
+        //   v1 — 4 fields: path | title | coverUrl | popularityIndex
+        //   v2 — 5 fields: + isRepresentative (catalog grouping flag)
+        private const val MANIFEST_SCHEMA_VERSION = 2
 
         // catalog_manifest.txt uses abbreviated folder names that differ from
         // Lemuroid's SystemID.dbname. Map them so DB rows carry the correct systemId.
@@ -72,8 +79,14 @@ class ManifestQuickLoader(
     suspend fun load(): LoadResult = withContext(Dispatchers.IO) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val appVersion = currentAppVersion()
+        val loadedSchema = prefs.getInt(KEY_LOADED_MANIFEST_SCHEMA, -1)
 
-        if (prefs.getInt(KEY_LOADED_APP_VERSION, -1) == appVersion) {
+        // Skip only when both the app version and the manifest schema match what's already
+        // loaded. Bumping MANIFEST_SCHEMA_VERSION forces a single reload across all users
+        // so new manifest fields (e.g. isRepresentative in v2) flow into the DB.
+        if (prefs.getInt(KEY_LOADED_APP_VERSION, -1) == appVersion &&
+            loadedSchema == MANIFEST_SCHEMA_VERSION
+        ) {
             _catalogReady.value = true
             return@withContext LoadResult(0)
         }
@@ -109,26 +122,35 @@ class ManifestQuickLoader(
                 coverFrontUrl = entry.coverUrl,
                 lastIndexedAt = now,
                 popularityIndex = entry.popularityIndex,
+                isRepresentative = entry.isRepresentative,
             )
         }
 
         val ids = database.gameDao().insertIfNotExists(games)
         val inserted = ids.count { it != -1L }
 
-        // For rows that already existed (INSERT OR IGNORE skipped them), update
-        // popularityIndex so it reflects the current manifest after an app update.
-        val existingWithPopularity = games.zip(ids)
-            .filter { (game, id) -> id == -1L && game.popularityIndex > 0 }
+        // For rows that already existed (INSERT OR IGNORE skipped them), refresh the
+        // manifest-derived fields (popularityIndex, isRepresentative) so changes to the
+        // catalog between app versions are picked up.
+        val existingGames = games.zip(ids)
+            .filter { (_, id) -> id == -1L }
             .map { (game, _) -> game }
-        if (existingWithPopularity.isNotEmpty()) {
+        if (existingGames.isNotEmpty()) {
             database.withTransaction {
-                for (game in existingWithPopularity) {
-                    database.gameDao().updatePopularityIndex(game.fileUri, game.popularityIndex)
+                for (game in existingGames) {
+                    database.gameDao().updateManifestFields(
+                        fileUri = game.fileUri,
+                        popularityIndex = game.popularityIndex,
+                        isRepresentative = game.isRepresentative,
+                    )
                 }
             }
         }
 
-        prefs.edit().putInt(KEY_LOADED_APP_VERSION, appVersion).apply()
+        prefs.edit()
+            .putInt(KEY_LOADED_APP_VERSION, appVersion)
+            .putInt(KEY_LOADED_MANIFEST_SCHEMA, MANIFEST_SCHEMA_VERSION)
+            .apply()
         Timber.i("ManifestQuickLoader: inserted=$inserted total=${games.size}")
         _catalogReady.value = true
         LoadResult(inserted)

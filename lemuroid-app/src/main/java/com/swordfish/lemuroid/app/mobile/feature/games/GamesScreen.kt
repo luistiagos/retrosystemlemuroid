@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
@@ -33,6 +34,7 @@ fun GamesScreen(
     modifier: Modifier = Modifier,
     viewModel: GamesViewModel,
     downloadedFileNames: Set<String> = emptySet(),
+    titlesWithVariants: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
@@ -55,7 +57,8 @@ fun GamesScreen(
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
 
-    if (games.itemCount == 0) {
+    val isLoading = games.loadState.refresh is LoadState.Loading
+    if (!isLoading && games.itemCount == 0) {
         LemuroidEmptyView()
         return
     }
@@ -70,10 +73,12 @@ fun GamesScreen(
 
         items(games.itemCount, key = { games[it]?.id ?: it }) { index ->
             val game = games[index] ?: return@items
+            val variantKey = "${game.systemId}/${game.title}"
 
             LemuroidGameListRow(
                 game = game,
                 isDownloaded = downloadedFileNames.contains(game.fileName),
+                hasVariants = variantKey in titlesWithVariants,
                 onClick = { onGameClick(game) },
                 onLongClick = { onGameLongClick(game) },
                 onFavoriteToggle = { isFavorite -> onGameFavoriteToggle(game, isFavorite) },

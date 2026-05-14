@@ -51,17 +51,17 @@ class GamesViewModel(
                 val systemIds = metaSystem.systemIDs.map { it.dbname }
                 when (systemIds.size) {
                     0 -> emptyFlow()
-                    1 -> buildFlowPaging(40, viewModelScope) {
+                    1 -> buildFlowPaging(20, viewModelScope) {
                         if (sort == GameSortOrder.POPULARITY)
-                            retrogradeDb.gameDao().selectBySystemSortedByPopularity(systemIds.first())
+                            retrogradeDb.gameDao().selectGroupedBySystemSortedByPopularity(systemIds.first())
                         else
-                            retrogradeDb.gameDao().selectBySystem(systemIds.first())
+                            retrogradeDb.gameDao().selectGroupedBySystem(systemIds.first())
                     }
-                    else -> buildFlowPaging(40, viewModelScope) {
+                    else -> buildFlowPaging(20, viewModelScope) {
                         if (sort == GameSortOrder.POPULARITY)
-                            retrogradeDb.gameDao().selectBySystemsSortedByPopularity(systemIds)
+                            retrogradeDb.gameDao().selectGroupedBySystemsSortedByPopularity(systemIds)
                         else
-                            retrogradeDb.gameDao().selectBySystems(systemIds)
+                            retrogradeDb.gameDao().selectGroupedBySystems(systemIds)
                     }
                 }
             }

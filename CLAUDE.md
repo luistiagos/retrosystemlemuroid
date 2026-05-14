@@ -16,7 +16,7 @@ Emulador Android multi-sistema baseado em Libretro. Este arquivo documenta a arq
 
 ## Banco de Dados (Room)
 
-**Versão atual: 21**
+**Versão atual: 23**
 
 Entidade principal: `Game` — representa um jogo no catálogo (ROM local ou placeholder 0-byte para download sob demanda).
 
@@ -28,11 +28,25 @@ Entidade principal: `Game` — representa um jogo no catálogo (ROM local ou pla
 | 18→19 | Índice composto `(isFavorite, lastPlayedAt)` na tabela `games` |
 | **19→20** | **Tabela `save_queue`** (fila de downloads persistente) |
 | **20→21** | **Coluna `popularityIndex INTEGER NOT NULL DEFAULT 0` + índice em `games`** |
+| **21→22** | **Índices compostos `(systemId, popularityIndex)` e `(isFavorite, title)`** |
+| **22→23** | **Coluna `isRepresentative INTEGER NOT NULL DEFAULT 1` + índice composto `(systemId, isRepresentative, popularityIndex)`** |
 
 Migrações em: [Migrations.kt](retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/db/dao/Migrations.kt)
 Registro em: [LemuroidApplicationModule.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/LemuroidApplicationModule.kt)
 
-> **Nota Room**: o arquivo `schemas/…/21.json` é gerado automaticamente pelo kapt no primeiro build após adicionar a nova versão. Nunca editar schemas manualmente.
+> **Nota Room**: o arquivo `schemas/…/23.json` é gerado automaticamente pelo kapt no primeiro build após adicionar a nova versão. Nunca editar schemas manualmente.
+
+### Tuning PRAGMA do SQLite
+
+Aplicado no `onOpen` da `RoomDatabase.Callback` em `LemuroidApplicationModule.retrogradeDb()`:
+
+| PRAGMA | Valor | Por quê |
+|--------|-------|---------|
+| `journal_mode` | WAL | Reads concorrentes + writes sem bloquear leitores (configurado via `setJournalMode`). |
+| `synchronous` | NORMAL | ~2x writes mais rápidos; com WAL não há risco de corrupção, só de perder a última transação não-flushed. |
+| `cache_size` | -32000 (32 MB) | Page cache em RAM para reduzir I/O em queries repetidas. |
+| `mmap_size` | 256 MB | Memory-mapped I/O — SQLite lê páginas direto do mmap, sem cópia. Lazy. |
+| `temp_store` | MEMORY | Temp tables e sort buffers em RAM. |
 
 ---
 
@@ -41,20 +55,41 @@ Registro em: [LemuroidApplicationModule.kt](lemuroid-app/src/main/java/com/sword
 Arquivo de assets com uma linha por jogo, formato pipe-delimitado:
 
 ```
-system/filename.ext|título|https://cover-url.png|popularityIndex
+system/filename.ext|título|https://cover-url.png|popularityIndex|isRepresentative
 ```
 
 - **Campo 4 (`popularityIndex`)**: inteiro positivo. Valores maiores = mais popular. `0` significa sem dados de popularidade. Varia tipicamente de 1 a ~1000.
+- **Campo 5 (`isRepresentative`)**: `1` se este ROM é o representante do seu grupo `(systemId, title-limpo)`; `0` se é variante escondida do catálogo. Default `1` quando ausente (compatibilidade com manifests antigos).
 - Sistemas usam aliases no manifest (`a26` → `atari2600`, `megadrive` → `md`, etc.) — ver `MANIFEST_ALIAS` em [ManifestQuickLoader.kt](retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/catalog/ManifestQuickLoader.kt).
+
+### Geração do Campo 5 (`isRepresentative`)
+
+Computado **offline** pelo script Python `E:\fetchimagers\cleantitles\clean_titles.py`:
+
+1. Limpa os títulos (remove `(USA)`, `(Rev 1)`, `[!]`, etc.)
+2. Agrupa por `(systemId, título-limpo)`
+3. Para cada grupo: escolhe a variante de maior `popularityIndex` (tiebreak: menor `fileName` ASC) — recebe `1`. Demais variantes recebem `0`.
+4. Grava o novo manifest com 5º campo.
+
+Isso elimina toda a lógica de agrupamento em runtime: o app só lê o campo e marca a coluna `isRepresentative` no DB.
 
 ### Pipeline de Carga
 
 1. **`CatalogCoverProvider`** — lê e parseia `catalog_manifest.txt` em `Map<String, ManifestEntry>` (lazy, uma vez por processo).
-2. **`ManifestQuickLoader.load()`** — roda no startup via `MainProcessInitializer` (500 ms após a app iniciar):
-   - **Skip por versão**: se o `versionCode` do app já foi salvo em SharedPreferences (`manifest_loader_prefs`), define `catalogReady = true` imediatamente e retorna. Isso torna todos os lançamentos pós-instalação instantâneos.
+2. **`ManifestQuickLoader.load()`** — roda no startup via `MainProcessInitializer` (50 ms após a app iniciar):
+   - **Skip por versão+schema**: só pula se o `versionCode` do app E o `MANIFEST_SCHEMA_VERSION` salvos batem com os atuais. Bumpar `MANIFEST_SCHEMA_VERSION` força um reload one-time em todos os usuários (usado quando o formato do manifest muda).
    - `INSERT OR IGNORE` de todos os `Game` no banco (não sobrescreve dados enriquecidos pelo LibretroDB).
-   - **Batch UPDATE de `popularityIndex`** em transação para jogos que já existiam (útil em atualizações do app).
-   - Salva o `versionCode` atual em SharedPreferences para habilitar o skip nos próximos lançamentos.
+   - **Batch UPDATE de `popularityIndex` + `isRepresentative`** via `updateManifestFields()` em transação para jogos que já existiam (sincroniza mudanças no manifest após app update / schema bump).
+   - Salva `versionCode` e `MANIFEST_SCHEMA_VERSION` em SharedPreferences.
+
+### `MANIFEST_SCHEMA_VERSION`
+
+Constante em `ManifestQuickLoader` que tracking de versão do **formato** do manifest, independente do `versionCode` do app:
+
+| Versão | Mudança |
+|--------|---------|
+| v1 | 4 campos: `path \| title \| coverUrl \| popularityIndex` |
+| v2 | + 5º campo `isRepresentative` (agrupamento pré-computado) |
 
 > **Sem placeholders em disco**: o check `isGamePlaceholder` em `GameInteractor` usa `File.length() == 0L`, que retorna `0` para arquivos **inexistentes** (comportamento garantido pela JVM). Portanto não é necessário criar arquivos 0-byte — o diálogo de download é disparado corretamente sem eles.
 
@@ -81,12 +116,90 @@ enum class GameSortOrder { POPULARITY, ALPHABETICAL }
 
 ### Queries SQL (GameDao)
 
+> **Nota**: O `GamesViewModel` usa as queries **agrupadas** (`selectGrouped*`) desde que a feature de variantes foi implementada. As queries originais abaixo permanecem no DAO mas não são mais chamadas pelo catálogo por sistema.
+
 | Método | Ordenação |
 |--------|-----------|
 | `selectBySystemSortedByPopularity(systemId)` | downloaded DESC, popularityIndex DESC, title ASC |
 | `selectBySystemsSortedByPopularity(systemIds)` | idem, multi-sistema |
 | `selectBySystem(systemId)` | downloaded DESC, title ASC (legado / A-Z) |
 | `selectBySystems(systemIds)` | idem, multi-sistema |
+
+---
+
+## Feature: Agrupamento de Variantes (Grupos de ROMs)
+
+**Arquivos envolvidos:**
+- [GameDao.kt](retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/db/dao/GameDao.kt)
+- [GamesViewModel.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/games/GamesViewModel.kt)
+- [GamesScreen.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/games/GamesScreen.kt)
+- [LemuroidGameListRow.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/shared/compose/ui/LemuroidGameListRow.kt)
+- [MainViewModel.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/main/MainViewModel.kt)
+- [MainActivity.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/main/MainActivity.kt)
+- [GameVariantsModal.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/main/GameVariantsModal.kt)
+
+### Comportamento
+
+Jogos com o mesmo `title` no mesmo `systemId` são agrupados — apenas **um representante por título** aparece na lista do catálogo. O representante é **pré-computado offline** pelo script Python e marcado no `catalog_manifest.txt` (campo 5 = `1`); as variantes recebem `0`.
+
+- **Badge**: ícone `ContentCopy` (20 dp) na linha indica que há múltiplas variantes.
+- **Tap**: abre `GameVariantsModal` (BottomSheet) listando todos os ROMs do grupo pelo `fileName` sem extensão, com a cover do jogo representante.
+- **Escolha de variante**: se já baixada → `gameInteractor.onGamePlay(variant)` direto; se placeholder → `pendingDownloadGame = variant` (AlertDialog de confirmação → enqueue → SaveQueueModal).
+
+### Chave Composta
+
+`"systemId/title"` — garante que "Tetris" no NES e "Tetris" no Game Boy são grupos independentes.
+
+### Coluna `isRepresentative`
+
+Coluna `INTEGER NOT NULL DEFAULT 1` na tabela `games`. Populada a partir do 5º campo do manifest.
+
+- **`true` (1)**: aparece no catálogo agrupado.
+- **`false` (0)**: variante escondida — ainda existe no DB e aparece no `GameVariantsModal`, mas o `selectGrouped*` filtra fora.
+
+ROMs importadas manualmente (via LibretroDB scan) não passam pelo manifest e recebem `true` por default no construtor de `Game` — então aparecem individualmente, como sempre.
+
+### Queries SQL (GameDao) — Agrupadas
+
+Antes do `isRepresentative`, as queries agrupadas usavam subquery correlacionada com `MAX(popularityIndex * 10000000 - id)` — esse caminho era O(n²) no pior caso e foi identificado como gargalo crítico em devices weak. Substituído por um filtro trivial `WHERE isRepresentative = 1`, otimizado pelo índice composto `(systemId, isRepresentative, popularityIndex)`.
+
+| Método | Descrição |
+|--------|-----------|
+| `selectGroupedBySystemSortedByPopularity(systemId)` | `WHERE systemId=? AND isRepresentative=1`, ordem: downloaded DESC, popularityIndex DESC, title ASC |
+| `selectGroupedBySystemsSortedByPopularity(systemIds)` | idem, multi-sistema |
+| `selectGroupedBySystem(systemId)` | `WHERE systemId=? AND isRepresentative=1`, ordem: downloaded DESC, title ASC |
+| `selectGroupedBySystems(systemIds)` | idem, multi-sistema |
+| `selectVariantsByTitle(systemId, title)` | Todos os ROMs do grupo — usado pelo modal |
+| `selectAllCompositeKeysWithVariants()` | Chaves `"systemId/title"` com `COUNT(*) > 1` — alimenta o badge |
+
+### `titlesWithVariants` no MainViewModel
+
+```kotlin
+val titlesWithVariants: StateFlow<Set<String>> =
+    retrogradeDb.gameDao()
+        .selectAllCompositeKeysWithVariants()
+        .map { it.toHashSet() as Set<String> }
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptySet())
+```
+
+Mantido no `MainViewModel` (não no `GamesViewModel`) para que o `onGameClick` da `MainActivity` sirva a **todas** as telas (Home, Favoritos, Busca, Sistemas) sem acoplamento por tela.
+
+### Roteamento do Tap (`onGameClick`)
+
+```kotlin
+val variantKey = "${game.systemId}/${game.title}"
+when {
+    variantKey in titlesWithVariants -> pendingVariantsGame.value = game
+    !isGamePlaceholder(game)        -> gameInteractor.onGamePlay(game)
+    else                            -> pendingDownloadGame.value = game
+}
+```
+
+### Comportamentos Conhecidos
+
+- O badge `ContentCopy` só é exibido na tela de catálogo por sistema (`GamesScreen`). Em Favoritos e Busca o badge não aparece, mas o tap abre o modal corretamente.
+- Long-press em um jogo agrupado abre o menu de contexto agindo sobre o **representante** — não navega pelo modal de variantes.
+- Script Python de limpeza de títulos: `E:\fetchimagers\cleantitles\clean_titles.py` gera `catalog_manifest_clean.txt` com títulos sem região/Rev/Disc/data, ordenados alfabeticamente por sistema, e adiciona o 5º campo `isRepresentative` (1=rep, 0=variante).
 
 ---
 

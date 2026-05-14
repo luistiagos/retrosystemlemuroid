@@ -52,6 +52,15 @@ class MainViewModel(
             .map { it.toHashSet() as Set<String> }
             .stateIn(viewModelScope, SharingStarted.Lazily, emptySet())
 
+    // Composite keys "systemId/title" for titles that have more than one ROM variant.
+    // Collected once here so every screen's onGameClick can decide whether to show the
+    // variants modal without per-screen ViewModel coupling.
+    val titlesWithVariants: StateFlow<Set<String>> =
+        retrogradeDb.gameDao()
+            .selectAllCompositeKeysWithVariants()
+            .map { it.toHashSet() as Set<String> }
+            .stateIn(viewModelScope, SharingStarted.Lazily, emptySet())
+
     private fun buildStateFlow(): StateFlow<UiState> {
         val combinedFlows =
             combine(

@@ -26,12 +26,11 @@ fun LemuroidGameImage(
     val fallbackPainter = rememberDrawablePainter(drawable = fallbackDrawable)
 
     val context = LocalContext.current
-    val targetSize = minOf(context.resources.displayMetrics.widthPixels / 3, 500)
-    val imageRequest = remember(game.coverFrontUrl, targetSize) {
+    val imageRequest = remember(game.coverFrontUrl) {
         ImageRequest.Builder(context)
             .data(game.coverFrontUrl)
             .crossfade(true)
-            .size(targetSize)
+            .size(400)
             .build()
     }
 

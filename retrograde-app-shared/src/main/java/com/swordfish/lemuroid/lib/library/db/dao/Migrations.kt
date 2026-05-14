@@ -5,6 +5,24 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms
 
 object Migrations {
+    val VERSION_22_23: Migration =
+        object : Migration(22, 23) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                // Pre-computed representative flag — comes from catalog_manifest.txt (5th field).
+                // Default 1 so existing rows (and manually-imported ROMs) appear individually until
+                // the next ManifestQuickLoader run rewrites the flag for catalog entries.
+                db.execSQL(
+                    "ALTER TABLE games ADD COLUMN isRepresentative INTEGER NOT NULL DEFAULT 1"
+                )
+                // Composite index that lets the grouped-catalog queries scan only representatives
+                // for a given system, already sorted by popularity.
+                db.execSQL(
+                    "CREATE INDEX IF NOT EXISTS index_games_systemId_isRepresentative_popularityIndex " +
+                        "ON games (systemId, isRepresentative, popularityIndex)"
+                )
+            }
+        }
+
     val VERSION_21_22: Migration =
         object : Migration(21, 22) {
             override fun migrate(db: SupportSQLiteDatabase) {
