@@ -57,7 +57,8 @@ class ManifestQuickLoader(
         // so a one-time reload runs on the next launch (regardless of app version).
         //   v1 — 4 fields: path | title | coverUrl | popularityIndex
         //   v2 — 5 fields: + isRepresentative (catalog grouping flag)
-        private const val MANIFEST_SCHEMA_VERSION = 2
+        //   v3 — megacd (scd) system added to catalog
+        private const val MANIFEST_SCHEMA_VERSION = 3
 
         // catalog_manifest.txt uses abbreviated folder names that differ from
         // Lemuroid's SystemID.dbname. Map them so DB rows carry the correct systemId.
@@ -125,7 +126,7 @@ class ManifestQuickLoader(
             0
         }
         val expectedSize = manifest.size
-        if (existingCount >= expectedSize - expectedSize / 10) {
+        if (existingCount >= expectedSize - expectedSize / 50) {
             prefs.edit()
                 .putInt(KEY_LOADED_APP_VERSION, appVersion)
                 .putInt(KEY_LOADED_MANIFEST_SCHEMA, MANIFEST_SCHEMA_VERSION)
