@@ -39,6 +39,10 @@ class SaveQueueViewModel(
         .map { list -> list.firstOrNull { it.state == SaveQueueState.SAVING }?.progress ?: 0f }
         .stateIn(viewModelScope, SharingStarted.Lazily, 0f)
 
+    val hasErrors: StateFlow<Boolean> = saveQueueManager.entries
+        .map { list -> list.any { it.state == SaveQueueState.ERROR } }
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     fun pauseActive() = saveQueueManager.pauseActive()
 
     fun resumeActive() = saveQueueManager.resumeActive()
@@ -46,4 +50,8 @@ class SaveQueueViewModel(
     fun cancel(fileName: String) {
         viewModelScope.launch { saveQueueManager.cancelItem(fileName) }
     }
+
+    fun dismissError(fileName: String) = saveQueueManager.dismissError(fileName)
+
+    fun clearErrors() = saveQueueManager.clearErrors()
 }

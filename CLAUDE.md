@@ -62,7 +62,7 @@ system/filename.ext|título|https://cover-url.png|popularityIndex|isRepresentati
 
 - **Campo 4 (`popularityIndex`)**: inteiro positivo. Valores maiores = mais popular. `0` significa sem dados de popularidade. Varia tipicamente de 1 a ~1000.
 - **Campo 5 (`isRepresentative`)**: `1` se este ROM é o representante do seu grupo `(systemId, title-limpo)`; `0` se é variante escondida do catálogo. Default `1` quando ausente (compatibilidade com manifests antigos).
-- Sistemas usam aliases no manifest (`a26` → `atari2600`, `megadrive` → `md`, etc.) — ver `MANIFEST_ALIAS` em [ManifestQuickLoader.kt](retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/catalog/ManifestQuickLoader.kt).
+- Sistemas usam aliases no manifest (`a26` → `atari2600`, `megadrive` → `md`, `colecovision` → `coleco`, `virtualboy` → `vb`, etc.). O mapa folder→dbname vive em **`assets/manifest_alias.json`** — fonte única lida tanto pelo `ManifestQuickLoader.loadManifestAlias()` (runtime) quanto pelo `PrebuiltDbGenerator` (build-time). Nunca duplicar como constante Kotlin: a duplicação já causou um bug de drift (Coleco/VB sumiram da lista por o prebuilt-db gravar `systemId` sem alias).
 
 ### Geração do Campo 5 (`isRepresentative`)
 

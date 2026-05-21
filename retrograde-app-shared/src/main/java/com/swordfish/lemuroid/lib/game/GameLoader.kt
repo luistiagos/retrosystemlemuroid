@@ -251,8 +251,8 @@ class GameLoader(
     )
 
     companion object {
-        /** Minimum file size (100 KB) to consider a core .so as non-corrupt. */
-        private const val MIN_VALID_CORE_SIZE_BYTES = 100 * 1024L
+        /** Minimum file size (10 KB) to consider a core .so as non-corrupt. Small cores like Potator are ~37 KB. */
+        private const val MIN_VALID_CORE_SIZE_BYTES = 10 * 1024L
     }
 
     @Suppress("ArrayInDataClass")

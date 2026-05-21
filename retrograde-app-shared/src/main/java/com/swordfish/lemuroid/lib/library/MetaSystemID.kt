@@ -218,6 +218,66 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_seta,
         listOf(SystemID.SETA),
     ),
+    SG_1000(
+        R.string.game_system_title_sg1000,
+        R.drawable.game_system_sg1000,
+        listOf(SystemID.SG_1000),
+    ),
+    SC_3000(
+        R.string.game_system_title_sc3000,
+        R.drawable.game_system_sc3000,
+        listOf(SystemID.SC_3000),
+    ),
+    COLECOVISION(
+        R.string.game_system_title_coleco,
+        R.drawable.game_system_coleco,
+        listOf(SystemID.COLECOVISION),
+    ),
+    PC_ENGINE_CD(
+        R.string.game_system_title_pcecd,
+        R.drawable.game_system_pcecd,
+        listOf(SystemID.PC_ENGINE_CD),
+    ),
+    VIRTUAL_BOY(
+        R.string.game_system_title_vb,
+        R.drawable.game_system_vb,
+        listOf(SystemID.VIRTUAL_BOY),
+    ),
+    COMMODORE_64(
+        R.string.game_system_title_c64,
+        R.drawable.game_system_c64,
+        listOf(SystemID.COMMODORE_64),
+    ),
+    ZX_SPECTRUM(
+        R.string.game_system_title_zxspectrum,
+        R.drawable.game_system_zxspectrum,
+        listOf(SystemID.ZX_SPECTRUM),
+    ),
+    AMSTRAD_CPC(
+        R.string.game_system_title_amstradcpc,
+        R.drawable.game_system_amstradcpc,
+        listOf(SystemID.AMSTRAD_CPC),
+    ),
+    VECTREX(
+        R.string.game_system_title_vectrex,
+        R.drawable.game_system_vectrex,
+        listOf(SystemID.VECTREX),
+    ),
+    INTELLIVISION(
+        R.string.game_system_title_intellivision,
+        R.drawable.game_system_intellivision,
+        listOf(SystemID.INTELLIVISION),
+    ),
+    POKEMON_MINI(
+        R.string.game_system_title_pokemini,
+        R.drawable.game_system_pokemini,
+        listOf(SystemID.POKEMON_MINI),
+    ),
+    SUPERVISION(
+        R.string.game_system_title_supervision,
+        R.drawable.game_system_supervision,
+        listOf(SystemID.SUPERVISION),
+    ),
     ;
 
     fun color(): Int {
@@ -269,6 +329,18 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.CAVE -> CAVE
                 SystemID.TECHNOS -> TECHNOS
                 SystemID.SETA -> SETA
+                SystemID.SG_1000 -> SG_1000
+                SystemID.SC_3000 -> SC_3000
+                SystemID.COLECOVISION -> COLECOVISION
+                SystemID.PC_ENGINE_CD -> PC_ENGINE_CD
+                SystemID.VIRTUAL_BOY -> VIRTUAL_BOY
+                SystemID.COMMODORE_64 -> COMMODORE_64
+                SystemID.ZX_SPECTRUM -> ZX_SPECTRUM
+                SystemID.AMSTRAD_CPC -> AMSTRAD_CPC
+                SystemID.VECTREX -> VECTREX
+                SystemID.INTELLIVISION -> INTELLIVISION
+                SystemID.POKEMON_MINI -> POKEMON_MINI
+                SystemID.SUPERVISION -> SUPERVISION
             }
         }
     }

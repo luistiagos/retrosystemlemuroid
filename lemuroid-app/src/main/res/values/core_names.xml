@@ -21,4 +21,12 @@
     <string name="core_name_mednafen_wswan" translatable="false">mednafen_wswan</string>
     <string name="core_name_citra" translatable="false">citra</string>
     <string name="core_name_fmsx" translatable="false">fmsx</string>
+    <string name="core_name_mednafen_vb" translatable="false">mednafen_vb</string>
+    <string name="core_name_vice_x64sc" translatable="false">vice_x64sc</string>
+    <string name="core_name_fuse" translatable="false">fuse</string>
+    <string name="core_name_cap32" translatable="false">cap32</string>
+    <string name="core_name_vecx" translatable="false">vecx</string>
+    <string name="core_name_freeintv" translatable="false">freeintv</string>
+    <string name="core_name_pokemini" translatable="false">pokemini</string>
+    <string name="core_name_potator" translatable="false">potator</string>
 </resources>

@@ -130,6 +130,23 @@ class SaveQueueManager(
     fun isQueued(fileName: String): Boolean =
         _entries.value.any { it.fileName == fileName }
 
+    /**
+     * Removes a single entry that is in ERROR state. Errored items have already been
+     * deleted from the DB; this just dismisses them from the in-memory list.
+     */
+    fun dismissError(fileName: String) {
+        _entries.update { list ->
+            list.filterNot { it.fileName == fileName && it.state == SaveQueueState.ERROR }
+        }
+    }
+
+    /**
+     * Removes all entries in ERROR state from the list.
+     */
+    fun clearErrors() {
+        _entries.update { list -> list.filterNot { it.state == SaveQueueState.ERROR } }
+    }
+
     // ──────────────────────────────────────────────────────────────
     // Internal helpers
     // ──────────────────────────────────────────────────────────────

@@ -17,6 +17,7 @@ import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.view.disableTouchEvents
 import com.swordfish.lemuroid.lib.core.CoreVariable
 import com.swordfish.lemuroid.lib.core.CoreVariablesManager
+import com.swordfish.lemuroid.lib.bios.BiosDownloader
 import com.swordfish.lemuroid.lib.core.CoreDownloader
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.game.GameLoaderError
@@ -111,6 +112,7 @@ class GameViewModelRetroGameView(
         val enableMicrophone = systemCoreConfig.supportsMicrophone && hasMicrophonePermission
 
         var coreDownloadRetried = false
+        var biosDownloadRetried = false
         while (true) {
             var shouldRetry = false
             gameLoader.load(
@@ -136,6 +138,22 @@ class GameViewModelRetroGameView(
                         } catch (downloadEx: Exception) {
                             Timber.e(downloadEx, "Direct core download failed: ${downloadEx.message}")
                             sideEffects.requestFailureFinish(getErrorMessage(GameLoaderError.LoadCore))
+                            shouldRetry = false
+                        }
+                    } else if (e is GameLoaderException && e.error is GameLoaderError.MissingBiosFiles && !biosDownloadRetried) {
+                        biosDownloadRetried = true
+                        gameState.value = GameState.Loading(
+                            appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_bios)
+                        )
+                        val biosError = e.error as GameLoaderError.MissingBiosFiles
+                        try {
+                            BiosDownloader.downloadMissing(applicationContext, biosError.missingFiles)
+                            shouldRetry = true
+                        } catch (downloadEx: CancellationException) {
+                            throw downloadEx
+                        } catch (downloadEx: Exception) {
+                            Timber.e(downloadEx, "BIOS download failed: ${downloadEx.message}")
+                            sideEffects.requestFailureFinish(getErrorMessage(e.error))
                             shouldRetry = false
                         }
                     } else {

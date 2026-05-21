@@ -121,6 +121,46 @@ enum class CoreID(
         "fMSX",
         "libfmsx_libretro_android.so",
     ),
+    MEDNAFEN_VB(
+        "mednafen_vb",
+        "Beetle VB",
+        "libmednafen_vb_libretro_android.so",
+    ),
+    VICE_X64SC(
+        "vice_x64sc",
+        "VICE x64sc",
+        "libvice_x64sc_libretro_android.so",
+    ),
+    FUSE(
+        "fuse",
+        "Fuse",
+        "libfuse_libretro_android.so",
+    ),
+    CAP32(
+        "cap32",
+        "Caprice32",
+        "libcap32_libretro_android.so",
+    ),
+    VECX(
+        "vecx",
+        "vecx",
+        "libvecx_libretro_android.so",
+    ),
+    FREEINTV(
+        "freeintv",
+        "FreeIntv",
+        "libfreeintv_libretro_android.so",
+    ),
+    POKEMINI(
+        "pokemini",
+        "PokeMini",
+        "libpokemini_libretro_android.so",
+    ),
+    POTATOR(
+        "potator",
+        "Potator",
+        "libpotator_libretro_android.so",
+    ),
     ;
 
     companion object {

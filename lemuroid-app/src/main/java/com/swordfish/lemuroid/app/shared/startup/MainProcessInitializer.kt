@@ -5,7 +5,6 @@ import androidx.startup.Initializer
 import androidx.work.WorkManagerInitializer
 import androidx.work.WorkManager
 import com.swordfish.lemuroid.app.LemuroidApplication
-import com.swordfish.lemuroid.app.shared.bios.EmbeddedBiosInstaller
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
 import com.swordfish.lemuroid.app.shared.roms.StreamingRomsWork
@@ -50,20 +49,6 @@ class MainProcessInitializer : Initializer<Unit> {
             LibraryIndexScheduler.scheduleCoreUpdate(context)
         }
 
-        // Delay BIOS installation slightly so the main UI is visible before touching the filesystem.
-        // GlobalScope is acceptable here because the Initializer has no lifecycle of its own.
-        // If the process is killed before the delay elapses the installation will be retried
-        // on the next launch since EmbeddedBiosInstaller.installIfNeeded() is idempotent.
-        GlobalScope.launch {
-            kotlinx.coroutines.delay(5_000L)
-            try {
-                EmbeddedBiosInstaller.installIfNeeded(context)
-            } catch (e: kotlinx.coroutines.CancellationException) {
-                throw e
-            } catch (e: Throwable) {
-                Timber.e(e, "MainProcessInitializer: BIOS installation failed")
-            }
-        }
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

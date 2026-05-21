@@ -1817,10 +1817,6 @@ data class GameSystem(
                                     0 to arrayListOf(ControllerConfigs.MSX),
                                     1 to arrayListOf(ControllerConfigs.MSX),
                                 ),
-                            defaultSettings =
-                                listOf(
-                                    CoreVariable("fmsx_log_level", "Info"),
-                                ),
                             requiredBIOSFiles =
                                 listOf(
                                     "MSX.ROM",
@@ -1859,6 +1855,231 @@ data class GameSystem(
                     ),
                     uniqueExtensions = listOf("mx2"),
                     supportedExtensions = listOf("rom", "mx1", "mx2", "dsk", "fdi", "cas", "m3u"),
+                ),
+                GameSystem(
+                    SystemID.SG_1000,
+                    "Sega - SG-1000",
+                    R.string.game_system_title_sg1000,
+                    R.string.game_system_abbr_sg1000,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.GENESIS_PLUS_GX,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.SMS),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("sg"),
+                ),
+                GameSystem(
+                    SystemID.SC_3000,
+                    "Sega - SC-3000",
+                    R.string.game_system_title_sc3000,
+                    R.string.game_system_abbr_sc3000,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.GENESIS_PLUS_GX,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.SMS),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("sc"),
+                ),
+                GameSystem(
+                    SystemID.COLECOVISION,
+                    "Coleco - ColecoVision",
+                    R.string.game_system_title_coleco,
+                    R.string.game_system_abbr_coleco,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.GENESIS_PLUS_GX,
+                            requiredBIOSFiles = listOf("coleco.rom"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.SMS),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("col"),
+                    supportedExtensions = listOf("col", "bin", "rom"),
+                ),
+                GameSystem(
+                    SystemID.PC_ENGINE_CD,
+                    "NEC - PC Engine CD - TurboGrafx-CD",
+                    R.string.game_system_title_pcecd,
+                    R.string.game_system_abbr_pcecd,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.MEDNAFEN_PCE_FAST,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.PCE),
+                                ),
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                            scanBySimilarSerial = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("cue", "chd", "iso"),
+                ),
+                GameSystem(
+                    SystemID.VIRTUAL_BOY,
+                    "Nintendo - Virtual Boy",
+                    R.string.game_system_title_vb,
+                    R.string.game_system_abbr_vb,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.MEDNAFEN_VB,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.VIRTUAL_BOY),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("vb", "vboy"),
+                ),
+                GameSystem(
+                    SystemID.COMMODORE_64,
+                    "Commodore - 64",
+                    R.string.game_system_title_c64,
+                    R.string.game_system_abbr_c64,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.VICE_X64SC,
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("vice_joyport", "2"),
+                                    CoreVariable("vice_mapper_l3", "TOGGLE_VKBD"),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.C64),
+                                ),
+                            statesSupported = false,
+                        ),
+                    ),
+                    uniqueExtensions = listOf("d64"),
+                    supportedExtensions = listOf("d64", "t64", "prg", "p00", "crt", "tap", "nib"),
+                ),
+                GameSystem(
+                    SystemID.ZX_SPECTRUM,
+                    "Sinclair - ZX Spectrum",
+                    R.string.game_system_title_zxspectrum,
+                    R.string.game_system_abbr_zxspectrum,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FUSE,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.NES),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("z80", "tzx"),
+                    supportedExtensions = listOf("z80", "tzx", "tap", "sna", "scl", "trd"),
+                ),
+                GameSystem(
+                    SystemID.AMSTRAD_CPC,
+                    "Amstrad - CPC",
+                    R.string.game_system_title_amstradcpc,
+                    R.string.game_system_abbr_amstradcpc,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.CAP32,
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("cap32_retrojoy0", "joystick_port1"),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.AMSTRAD_CPC),
+                                ),
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("dsk", "sna", "cpr", "tap"),
+                ),
+                GameSystem(
+                    SystemID.VECTREX,
+                    "GCE - Vectrex",
+                    R.string.game_system_title_vectrex,
+                    R.string.game_system_abbr_vectrex,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.VECX,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.VECTREX),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("vec"),
+                    supportedExtensions = listOf("vec", "bin", "gam"),
+                ),
+                GameSystem(
+                    SystemID.INTELLIVISION,
+                    "Mattel - Intellivision",
+                    R.string.game_system_title_intellivision,
+                    R.string.game_system_abbr_intellivision,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FREEINTV,
+                            requiredBIOSFiles = listOf("exec.bin", "grom.bin"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.INTELLIVISION),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("int"),
+                    supportedExtensions = listOf("int", "bin", "rom"),
+                ),
+                GameSystem(
+                    SystemID.POKEMON_MINI,
+                    "Nintendo - Pokemon Mini",
+                    R.string.game_system_title_pokemini,
+                    R.string.game_system_abbr_pokemini,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.POKEMINI,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.POKEMON_MINI),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("min"),
+                ),
+                GameSystem(
+                    SystemID.SUPERVISION,
+                    "Watara - Supervision",
+                    R.string.game_system_title_supervision,
+                    R.string.game_system_abbr_supervision,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.POTATOR,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.GB),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("sv"),
+                    supportedExtensions = listOf("sv", "bin"),
                 ),
             )
 

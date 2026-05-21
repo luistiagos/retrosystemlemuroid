@@ -58,17 +58,50 @@ class ManifestQuickLoader(
         //   v1 — 4 fields: path | title | coverUrl | popularityIndex
         //   v2 — 5 fields: + isRepresentative (catalog grouping flag)
         //   v3 — megacd (scd) system added to catalog
-        private const val MANIFEST_SCHEMA_VERSION = 3
+        //   v4 — sg1000/colecovision/virtualboy/c64/zxspectrum/amstradcpc/vectrex/intellivision/pokemini/supervision added
+        //   v5 — title cleanup for new systems (filename-derived instead of bad IGDB fuzzy match)
+        //   v6 — isRepresentative corrected for sg1000/pokemini/msx2 (all had only 1 rep due to empty titles in input)
+        //          also fixed malformed fused line (Zukkoke/007 James Bond Alt); fast-skip bug fix in loader
+        private const val MANIFEST_SCHEMA_VERSION = 6
 
         // catalog_manifest.txt uses abbreviated folder names that differ from
-        // Lemuroid's SystemID.dbname. Map them so DB rows carry the correct systemId.
-        private val MANIFEST_ALIAS = mapOf(
-            "a26" to "atari2600",
-            "a78" to "atari7800",
-            "mame2003Plus" to "mame2003plus",
-            "megadrive" to "md",
-            "megacd" to "scd",
-        )
+        // Lemuroid's SystemID.dbname. The mapping (manifest folder → dbname) lives in
+        // assets/manifest_alias.json — the single source of truth shared with the
+        // build-time PrebuiltDbGenerator (buildSrc), which reads the same file from disk.
+        // Kept as a file rather than a Kotlin constant because buildSrc cannot depend
+        // on Android modules; duplicating it as a constant caused a drift bug.
+        private const val MANIFEST_ALIAS_ASSET = "manifest_alias.json"
+
+        @Volatile private var cachedManifestAlias: Map<String, String>? = null
+
+        /**
+         * Loads the manifest folder → dbname alias map from [MANIFEST_ALIAS_ASSET].
+         * Cached after first read. Also consumed by `RomSystemMapper` to translate
+         * dbname → manifest folder when looking up systems in mnemonico_map.json.
+         */
+        fun loadManifestAlias(context: Context): Map<String, String> {
+            cachedManifestAlias?.let { return it }
+            return synchronized(this) {
+                cachedManifestAlias ?: run {
+                    val parsed = try {
+                        val json = context.assets.open(MANIFEST_ALIAS_ASSET)
+                            .bufferedReader().use { it.readText() }
+                        val obj = org.json.JSONObject(json)
+                        buildMap {
+                            val keys = obj.keys()
+                            while (keys.hasNext()) {
+                                val k = keys.next()
+                                put(k, obj.getString(k))
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Timber.e(e, "Failed to load $MANIFEST_ALIAS_ASSET")
+                        emptyMap()
+                    }
+                    parsed.also { cachedManifestAlias = it }
+                }
+            }
+        }
 
         // Sentinel prefix written by the build-time PrebuiltDbGenerator (buildSrc).
         // ManifestQuickLoader rewrites these into real file:// URIs on first launch.
@@ -117,8 +150,10 @@ class ManifestQuickLoader(
         }
 
         // Fast path: if the DB is already fully populated (prebuilt asset path, or a prior
-        // successful load), skip the INSERT OR IGNORE + per-row UPDATE pass entirely. Wrapped
-        // in try/catch so a DAO/schema failure doesn't block the full-load fallback below.
+        // successful load) AND the manifest schema is already up-to-date, skip the
+        // INSERT OR IGNORE + per-row UPDATE pass entirely. We must NOT fast-skip when the
+        // schema version changed, because that means manifest fields (title, isRepresentative,
+        // popularityIndex) may have been updated and existing rows need to be refreshed.
         val existingCount = try {
             database.gameDao().countAll()
         } catch (t: Throwable) {
@@ -126,7 +161,7 @@ class ManifestQuickLoader(
             0
         }
         val expectedSize = manifest.size
-        if (existingCount >= expectedSize - expectedSize / 50) {
+        if (existingCount >= expectedSize - expectedSize / 50 && loadedSchema == MANIFEST_SCHEMA_VERSION) {
             prefs.edit()
                 .putInt(KEY_LOADED_APP_VERSION, appVersion)
                 .putInt(KEY_LOADED_MANIFEST_SCHEMA, MANIFEST_SCHEMA_VERSION)
@@ -141,12 +176,13 @@ class ManifestQuickLoader(
         val now = System.currentTimeMillis()
         val games = mutableListOf<Game>()
         val romsDir = directoriesManager.getInternalRomsDirectory()
+        val manifestAlias = loadManifestAlias(context)
 
         for ((key, entry) in manifest) {
             val slash = key.indexOf('/')
             if (slash < 0) continue
             val rawSystemId = key.substring(0, slash)
-            val systemId = MANIFEST_ALIAS[rawSystemId] ?: rawSystemId
+            val systemId = manifestAlias[rawSystemId] ?: rawSystemId
             val fileName = key.substring(slash + 1)
 
             if (GameSystem.findByIdOrNull(systemId) == null) continue
@@ -179,8 +215,9 @@ class ManifestQuickLoader(
         if (existingGames.isNotEmpty()) {
             database.withTransaction {
                 for (game in existingGames) {
-                    database.gameDao().updateManifestFields(
+                    database.gameDao().updateManifestFieldsWithTitle(
                         fileUri = game.fileUri,
+                        title = game.title,
                         popularityIndex = game.popularityIndex,
                         isRepresentative = game.isRepresentative,
                     )

@@ -27,7 +27,7 @@ object CoreDownloader {
 
     const val CORES_VERSION = "1.17.0"
     private const val CORES_BASE_URL = "https://raw.githubusercontent.com/luistiagos/libretrocores/"
-    private const val MIN_VALID_CORE_SIZE = 100 * 1024L
+    private const val MIN_VALID_CORE_SIZE = 10 * 1024L
 
     private val httpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()

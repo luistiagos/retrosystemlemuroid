@@ -6,8 +6,14 @@ import com.swordfish.touchinput.radial.layouts.Arcade4Left
 import com.swordfish.touchinput.radial.layouts.Arcade4Right
 import com.swordfish.touchinput.radial.layouts.Arcade6Left
 import com.swordfish.touchinput.radial.layouts.Arcade6Right
+import com.swordfish.touchinput.radial.layouts.AmstradCPCLeft
+import com.swordfish.touchinput.radial.layouts.AmstradCPCRight
+import com.swordfish.touchinput.radial.layouts.IntellivisionLeft
+import com.swordfish.touchinput.radial.layouts.IntellivisionRight
 import com.swordfish.touchinput.radial.layouts.Atari2600Left
 import com.swordfish.touchinput.radial.layouts.Atari2600Right
+import com.swordfish.touchinput.radial.layouts.C64Left
+import com.swordfish.touchinput.radial.layouts.C64Right
 import com.swordfish.touchinput.radial.layouts.Atari7800Left
 import com.swordfish.touchinput.radial.layouts.Atari7800Right
 import com.swordfish.touchinput.radial.layouts.DOSLeft
@@ -38,6 +44,10 @@ import com.swordfish.touchinput.radial.layouts.Nintendo3DSLeft
 import com.swordfish.touchinput.radial.layouts.Nintendo3DSRight
 import com.swordfish.touchinput.radial.layouts.PCELeft
 import com.swordfish.touchinput.radial.layouts.PCERight
+import com.swordfish.touchinput.radial.layouts.PokemonMiniLeft
+import com.swordfish.touchinput.radial.layouts.PokemonMiniRight
+import com.swordfish.touchinput.radial.layouts.VirtualBoyLeft
+import com.swordfish.touchinput.radial.layouts.VirtualBoyRight
 import com.swordfish.touchinput.radial.layouts.PSPLeft
 import com.swordfish.touchinput.radial.layouts.PSPRight
 import com.swordfish.touchinput.radial.layouts.PSXDualShockLeft
@@ -80,6 +90,11 @@ enum class TouchControllerID {
     WS_LANDSCAPE,
     WS_PORTRAIT,
     NINTENDO_3DS,
+    VIRTUAL_BOY,
+    POKEMON_MINI,
+    C64,
+    AMSTRAD_CPC,
+    INTELLIVISION,
     ;
 
     class Config(
@@ -244,6 +259,36 @@ enum class TouchControllerID {
                     Config(
                         { modifier, settings -> Nintendo3DSLeft(modifier, settings) },
                         { modifier, settings -> Nintendo3DSRight(modifier, settings) },
+                    )
+
+                VIRTUAL_BOY ->
+                    Config(
+                        { modifier, settings -> VirtualBoyLeft(modifier, settings) },
+                        { modifier, settings -> VirtualBoyRight(modifier, settings) },
+                    )
+
+                POKEMON_MINI ->
+                    Config(
+                        { modifier, settings -> PokemonMiniLeft(modifier, settings) },
+                        { modifier, settings -> PokemonMiniRight(modifier, settings) },
+                    )
+
+                C64 ->
+                    Config(
+                        { modifier, settings -> C64Left(modifier, settings) },
+                        { modifier, settings -> C64Right(modifier, settings) },
+                    )
+
+                AMSTRAD_CPC ->
+                    Config(
+                        { modifier, settings -> AmstradCPCLeft(modifier, settings) },
+                        { modifier, settings -> AmstradCPCRight(modifier, settings) },
+                    )
+
+                INTELLIVISION ->
+                    Config(
+                        { modifier, settings -> IntellivisionLeft(modifier, settings) },
+                        { modifier, settings -> IntellivisionRight(modifier, settings) },
                     )
             }
         }

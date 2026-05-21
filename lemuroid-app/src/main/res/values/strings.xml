@@ -130,6 +130,7 @@
     <string name="save_queue_paused">Paused</string>
     <string name="save_queue_done">Saved</string>
     <string name="save_queue_error">Error</string>
+    <string name="save_queue_clear_errors">Clear errors</string>
     <string name="save_queue_badge">✓ Saved</string>
     <string name="save_action_save">Save</string>
     <string name="save_action_pause">Pause</string>

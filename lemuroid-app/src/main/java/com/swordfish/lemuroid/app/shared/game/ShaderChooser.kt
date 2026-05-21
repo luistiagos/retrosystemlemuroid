@@ -82,6 +82,18 @@ object ShaderChooser {
             SystemID.CAVE -> ShaderConfig.CRT
             SystemID.TECHNOS -> ShaderConfig.CRT
             SystemID.SETA -> ShaderConfig.CRT
+            SystemID.SG_1000 -> ShaderConfig.CRT
+            SystemID.SC_3000 -> ShaderConfig.CRT
+            SystemID.COLECOVISION -> ShaderConfig.CRT
+            SystemID.PC_ENGINE_CD -> ShaderConfig.CRT
+            SystemID.VIRTUAL_BOY -> ShaderConfig.LCD
+            SystemID.COMMODORE_64 -> ShaderConfig.CRT
+            SystemID.ZX_SPECTRUM -> ShaderConfig.CRT
+            SystemID.AMSTRAD_CPC -> ShaderConfig.CRT
+            SystemID.VECTREX -> ShaderConfig.CRT
+            SystemID.INTELLIVISION -> ShaderConfig.CRT
+            SystemID.POKEMON_MINI -> ShaderConfig.LCD
+            SystemID.SUPERVISION -> ShaderConfig.LCD
         }
     }
 
@@ -322,6 +334,18 @@ object ShaderChooser {
             SystemID.CAVE -> upscale32Bits
             SystemID.TECHNOS -> upscale32Bits
             SystemID.SETA -> upscale32Bits
+            SystemID.SG_1000 -> upscale8Bits
+            SystemID.SC_3000 -> upscale8Bits
+            SystemID.COLECOVISION -> upscale8Bits
+            SystemID.PC_ENGINE_CD -> upscale16Bits
+            SystemID.VIRTUAL_BOY -> modern
+            SystemID.COMMODORE_64 -> upscale8Bits
+            SystemID.ZX_SPECTRUM -> upscale8Bits
+            SystemID.AMSTRAD_CPC -> upscale8Bits
+            SystemID.VECTREX -> upscale8Bits
+            SystemID.INTELLIVISION -> upscale8Bits
+            SystemID.POKEMON_MINI -> upscale8BitsMobile
+            SystemID.SUPERVISION -> upscale8BitsMobile
         }
     }
 }

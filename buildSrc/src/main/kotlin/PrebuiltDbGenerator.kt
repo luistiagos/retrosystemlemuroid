@@ -36,16 +36,26 @@ import java.sql.DriverManager
 object PrebuiltDbGenerator {
 
     /**
-     * Same alias map as ManifestQuickLoader.MANIFEST_ALIAS. Kept in sync manually because
-     * buildSrc cannot depend on Android modules.
+     * Asset file holding the manifest folder → dbname alias map. Single source of truth,
+     * shared with ManifestQuickLoader (which reads the same file from Android assets at
+     * runtime). buildSrc cannot depend on Android modules, so both sides read the file
+     * rather than duplicating a Kotlin constant.
      */
-    private val MANIFEST_ALIAS = mapOf(
-        "a26" to "atari2600",
-        "a78" to "atari7800",
-        "mame2003Plus" to "mame2003plus",
-        "megadrive" to "md",
-        "megacd" to "scd",
-    )
+    private const val MANIFEST_ALIAS_ASSET = "manifest_alias.json"
+
+    /** Loads the manifest folder → dbname alias map from the JSON next to the manifest. */
+    private fun loadManifestAlias(manifestFile: File): Map<String, String> {
+        val aliasFile = File(manifestFile.parentFile, MANIFEST_ALIAS_ASSET)
+        require(aliasFile.exists()) {
+            "$MANIFEST_ALIAS_ASSET not found next to the manifest at ${aliasFile.absolutePath}"
+        }
+        val obj = JSONObject(aliasFile.readText())
+        return buildMap {
+            for (key in obj.keys()) {
+                put(key, obj.getString(key))
+            }
+        }
+    }
 
     /**
      * URI prefix used for placeholder ROM paths in the prebuilt DB. ManifestQuickLoader rewrites
@@ -86,7 +96,8 @@ object PrebuiltDbGenerator {
             createFtsTableAndUpdateDeleteTriggers(conn)
             createRoomMasterTable(conn, identityHash)
 
-            val games = parseManifest(manifestFile)
+            val manifestAlias = loadManifestAlias(manifestFile)
+            val games = parseManifest(manifestFile, manifestAlias)
             insertGamesBulk(conn, games)
 
             populateFtsBulk(conn)
@@ -217,7 +228,7 @@ object PrebuiltDbGenerator {
         val isRepresentative: Boolean,
     )
 
-    private fun parseManifest(file: File): List<GameRow> {
+    private fun parseManifest(file: File, manifestAlias: Map<String, String>): List<GameRow> {
         val games = mutableListOf<GameRow>()
         val now = System.currentTimeMillis()
         // Track collisions on (systemId/fileName) so we don't violate the UNIQUE index on
@@ -236,7 +247,7 @@ object PrebuiltDbGenerator {
                 if (slash < 0) continue
 
                 val rawSystemId = path.substring(0, slash)
-                val systemId = MANIFEST_ALIAS[rawSystemId] ?: rawSystemId
+                val systemId = manifestAlias[rawSystemId] ?: rawSystemId
                 val fileName = path.substring(slash + 1)
                 val canonicalPath = "$systemId/$fileName"
                 if (!seenPaths.add(canonicalPath)) continue

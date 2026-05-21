@@ -191,6 +191,25 @@ interface GameDao {
     """)
     suspend fun updateManifestFields(fileUri: String, popularityIndex: Int, isRepresentative: Boolean)
 
+    /**
+     * Updates manifest-derived fields including [title]. Called on manifest schema bumps
+     * (MANIFEST_SCHEMA_VERSION) when titles need to be re-synced — e.g., to wipe bad
+     * fuzzy-match enrichments and replace with clean filename-derived titles.
+     */
+    @Query("""
+        UPDATE games SET
+            title = :title,
+            popularityIndex = :popularityIndex,
+            isRepresentative = :isRepresentative
+        WHERE fileUri = :fileUri
+    """)
+    suspend fun updateManifestFieldsWithTitle(
+        fileUri: String,
+        title: String,
+        popularityIndex: Int,
+        isRepresentative: Boolean,
+    )
+
     @Query("SELECT * FROM games ORDER BY title ASC")
     suspend fun selectAll(): List<Game>
 

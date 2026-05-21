@@ -48,7 +48,15 @@ if (usePlayDynamicFeatures()) {
         ":lemuroid_core_snes9x",
         ":lemuroid_core_stella",
         ":lemuroid_core_citra",
-        ":lemuroid_core_fmsx"
+        ":lemuroid_core_fmsx",
+        ":lemuroid_core_mednafen_vb",
+        ":lemuroid_core_vice_x64sc",
+        ":lemuroid_core_fuse",
+        ":lemuroid_core_cap32",
+        ":lemuroid_core_vecx",
+        ":lemuroid_core_freeintv",
+        ":lemuroid_core_pokemini",
+        ":lemuroid_core_potator"
     )
 
     project(":lemuroid_core_gambatte").projectDir = File("lemuroid-cores/lemuroid_core_gambatte")
@@ -72,4 +80,12 @@ if (usePlayDynamicFeatures()) {
     project(":lemuroid_core_dosbox_pure").projectDir = File("lemuroid-cores/lemuroid_core_dosbox_pure")
     project(":lemuroid_core_citra").projectDir = File("lemuroid-cores/lemuroid_core_citra")
     project(":lemuroid_core_fmsx").projectDir = File("lemuroid-cores/lemuroid_core_fmsx")
+    project(":lemuroid_core_mednafen_vb").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_vb")
+    project(":lemuroid_core_vice_x64sc").projectDir = File("lemuroid-cores/lemuroid_core_vice_x64sc")
+    project(":lemuroid_core_fuse").projectDir = File("lemuroid-cores/lemuroid_core_fuse")
+    project(":lemuroid_core_cap32").projectDir = File("lemuroid-cores/lemuroid_core_cap32")
+    project(":lemuroid_core_vecx").projectDir = File("lemuroid-cores/lemuroid_core_vecx")
+    project(":lemuroid_core_freeintv").projectDir = File("lemuroid-cores/lemuroid_core_freeintv")
+    project(":lemuroid_core_pokemini").projectDir = File("lemuroid-cores/lemuroid_core_pokemini")
+    project(":lemuroid_core_potator").projectDir = File("lemuroid-cores/lemuroid_core_potator")
 }

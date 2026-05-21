@@ -272,6 +272,7 @@
     <string name="save_queue_paused">Pausado</string>
     <string name="save_queue_done">Salvo</string>
     <string name="save_queue_error">Erro</string>
+    <string name="save_queue_clear_errors">Limpar erros</string>
     <string name="save_queue_badge">✓ Salvo</string>
     <string name="save_action_save">Salvar</string>
     <string name="save_action_pause">Pausar</string>

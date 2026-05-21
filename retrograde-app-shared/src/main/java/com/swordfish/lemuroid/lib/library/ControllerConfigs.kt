@@ -396,8 +396,86 @@ object ControllerConfigs {
             R.string.controller_default,
             TouchControllerID.SMS,
             mergeDPADAndLeftStickEvents = true,
-            libretroId = 513,
-            libretroDescriptor = "Emulated Keyboard",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val VIRTUAL_BOY =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.VIRTUAL_BOY,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_L_R,
+                ),
+        )
+
+    val POKEMON_MINI =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.POKEMON_MINI,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val C64 =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.C64,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val AMSTRAD_CPC =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.AMSTRAD_CPC,
+            mergeDPADAndLeftStickEvents = true,
+            libretroDescriptor = "Amstrad Joystick",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val VECTREX =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.SNES,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val INTELLIVISION =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.INTELLIVISION,
+            mergeDPADAndLeftStickEvents = true,
             tiltConfigurations =
                 listOf(
                     TILT_CONFIGURATION_DISABLED,

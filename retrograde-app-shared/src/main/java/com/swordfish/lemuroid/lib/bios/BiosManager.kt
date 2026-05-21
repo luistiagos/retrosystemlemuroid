@@ -47,7 +47,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
     fun deleteBiosBefore(timestampMs: Long) {
         Timber.i("Pruning old bios files")
         SUPPORTED_BIOS
-            .filter { !it.isEmbedded }
             .map { File(directoriesManager.getSystemDirectory(), it.libretroFileName) }
             .filter { it.lastModified() < normalizeTimestamp(timestampMs) }
             .forEach {
@@ -105,7 +104,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
     data class BiosInfo(val detected: List<Bios>, val notDetected: List<Bios>)
 
     companion object {
-        private val SUPPORTED_BIOS =
+        val SUPPORTED_BIOS =
             listOf(
                 Bios(
                     "scph101.bin",
@@ -113,7 +112,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "PS One 4.5 NTSC-U/C",
                     SystemID.PSX,
                     "171BDCEC",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "scph7001.bin",
@@ -121,7 +119,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "PS Original 4.1 NTSC-U/C",
                     SystemID.PSX,
                     "502224B6",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "scph5501.bin",
@@ -129,7 +126,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "PS Original 3.0 NTSC-U/C",
                     SystemID.PSX,
                     "8D8CB7E4",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "scph1001.bin",
@@ -137,7 +133,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "PS Original 2.2 NTSC-U/C",
                     SystemID.PSX,
                     "37157331",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "lynxboot.img",
@@ -145,7 +140,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Lynx Boot Image",
                     SystemID.LYNX,
                     "0D973C9D",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "bios_CD_E.bin",
@@ -153,7 +147,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Sega CD E",
                     SystemID.SEGACD,
                     "529AC15A",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "bios_CD_J.bin",
@@ -161,7 +154,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Sega CD J",
                     SystemID.SEGACD,
                     "9D2DA8F2",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "bios_CD_U.bin",
@@ -169,7 +161,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Sega CD U",
                     SystemID.SEGACD,
                     "C6D10268",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "bios7.bin",
@@ -177,7 +168,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Nintendo DS ARM7",
                     SystemID.NDS,
                     "1280F0D5",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "bios9.bin",
@@ -185,7 +175,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Nintendo DS ARM9",
                     SystemID.NDS,
                     "2AB23573",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "firmware.bin",
@@ -194,7 +183,6 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     SystemID.NDS,
                     "945F9DC9",
                     "nds_firmware.bin",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "gba_bios.bin",
@@ -202,49 +190,42 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Game Boy Advance BIOS",
                     SystemID.GBA,
                     "81977335",
-                    isEmbedded = true,
                 ),
                 Bios(
                     "MSX.ROM",
                     "364A1A579FE5CB8DBA54519BCFCDAC0D",
                     "MSX BIOS",
                     SystemID.MSX,
-                    isEmbedded = true,
                 ),
                 Bios(
                     "MSX2.ROM",
                     "EC3A01C91F24FBDDCBCAB0AD301BC9EF",
                     "MSX2 BIOS",
                     SystemID.MSX2,
-                    isEmbedded = true,
                 ),
                 Bios(
                     "MSX2EXT.ROM",
                     "2183C2AFF17CF4297BDB496DE78C2E8A",
                     "MSX2 Extended BIOS",
                     SystemID.MSX2,
-                    isEmbedded = true,
                 ),
                 Bios(
                     "MSX2P.ROM",
                     "847CC025FFAE665487940FF2639540E5",
                     "MSX2+ BIOS",
                     SystemID.MSX2,
-                    isEmbedded = true,
                 ),
                 Bios(
                     "MSX2PEXT.ROM",
                     "7C8243C71D8F143B2531F01AFA6A05DC",
                     "MSX2+ Extended BIOS",
                     SystemID.MSX2,
-                    isEmbedded = true,
                 ),
                 Bios(
                     "MSXDOS2.ROM",
                     "6418D091CD6907BBCF940324339E43BB",
                     "MSX-DOS2 BIOS",
                     SystemID.MSX,
-                    isEmbedded = true,
                 ),
                 Bios(
                     "neogeo.zip",
@@ -252,8 +233,31 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Neo Geo BIOS",
                     SystemID.FBNEO,
                     "362E948D",
-                    isEmbedded = true,
+                ),
+                Bios(
+                    "coleco.rom",
+                    "2C66F5911E5B42B8EBE113403548EEE7",
+                    "ColecoVision BIOS",
+                    SystemID.COLECOVISION,
+                    "3AA93EF3",
+                ),
+                Bios(
+                    "exec.bin",
+                    "62E761035CB657903761800F4437B8AF",
+                    "Intellivision EXEC ROM",
+                    SystemID.INTELLIVISION,
+                    "CBCE86F7",
+                ),
+                Bios(
+                    "grom.bin",
+                    "0CD5946C6473E42E8E4C2137785E427F",
+                    "Intellivision GROM",
+                    SystemID.INTELLIVISION,
+                    "683A4158",
                 ),
             )
+
+        fun biosEntryFor(fileName: String): Bios? =
+            SUPPORTED_BIOS.firstOrNull { it.libretroFileName == fileName }
     }
 }

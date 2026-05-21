@@ -24,6 +24,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -48,17 +49,30 @@ fun SaveQueueModal(
     onDismiss: () -> Unit,
 ) {
     val entries by viewModel.entries.collectAsState()
+    val hasErrors by viewModel.hasErrors.collectAsState()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
     ) {
-        Text(
-            text = stringResource(R.string.save_queue_title),
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = stringResource(R.string.save_queue_title),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.weight(1f),
+            )
+            if (hasErrors) {
+                TextButton(onClick = { viewModel.clearErrors() }) {
+                    Text(stringResource(R.string.save_queue_clear_errors))
+                }
+            }
+        }
         HorizontalDivider()
 
         if (entries.isEmpty()) {
@@ -83,7 +97,13 @@ fun SaveQueueModal(
                         entry = entry,
                         onPause = { viewModel.pauseActive() },
                         onResume = { viewModel.resumeActive() },
-                        onCancel = { viewModel.cancel(entry.fileName) },
+                        onCancel = {
+                            if (entry.state == SaveQueueState.ERROR) {
+                                viewModel.dismissError(entry.fileName)
+                            } else {
+                                viewModel.cancel(entry.fileName)
+                            }
+                        },
                     )
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
@@ -154,7 +174,7 @@ private fun SaveQueueItemRow(
                 else -> {}
             }
 
-            if (entry.state != SaveQueueState.SAVED && entry.state != SaveQueueState.ERROR) {
+            if (entry.state != SaveQueueState.SAVED) {
                 IconButton(onClick = onCancel) {
                     Icon(Icons.Default.Clear, contentDescription = stringResource(R.string.save_action_cancel))
                 }

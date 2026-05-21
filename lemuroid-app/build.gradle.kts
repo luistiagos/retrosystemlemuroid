@@ -275,10 +275,12 @@ val generatePrebuiltDb = tasks.register("generatePrebuiltDb") {
         "retrograde-app-shared/schemas/com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase/23.json",
     )
     val manifestFile = project.file("src/main/assets/catalog_manifest.txt")
+    val manifestAliasFile = project.file("src/main/assets/manifest_alias.json")
     val outputFile = prebuiltDbFile.get().asFile
 
     inputs.file(schemaJson)
     inputs.file(manifestFile)
+    inputs.file(manifestAliasFile)
     inputs.files(rootProject.fileTree("buildSrc/src/main/kotlin"))
     outputs.file(outputFile)
 

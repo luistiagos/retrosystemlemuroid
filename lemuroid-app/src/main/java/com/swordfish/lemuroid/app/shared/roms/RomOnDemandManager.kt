@@ -63,8 +63,6 @@ class RomOnDemandManager(
     companion object {
         private const val FIND_BY_FILE_ENDPOINT =
             "https://emuladores.pythonanywhere.com/find_by_file"
-        private const val HUGGINGFACE_BASE =
-            "https://huggingface.co/datasets/luisluis123/lemusets/resolve/main/roms"
     }
 
     private val backgroundScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -157,7 +155,7 @@ class RomOnDemandManager(
         // Reset pause for each new download.
         _pausedFlow.value = false
 
-        val endpointSystem = RomSystemMapper.toEndpointSystem(game.systemId)
+        val endpointSystem = RomSystemMapper.toEndpointSystem(context, game.systemId)
         if (endpointSystem == null) {
             Timber.w("No endpoint mapping for systemId=${game.systemId}")
             return@withContext DownloadResult.NotFound(game.fileName)
@@ -167,19 +165,16 @@ class RomOnDemandManager(
             "?path=${Uri.encode(game.fileName)}&source_id=1&system=${Uri.encode(endpointSystem)}"
         Timber.d("On-demand lookup: $findUrl")
 
-        val downloadUrl = try {
+        val finalUrl = try {
             resolveDownloadUrl(findUrl)
         } catch (e: IOException) {
-            Timber.e(e, "Lookup failed for ${game.fileName}, will try HuggingFace fallback: ${e.message}")
-            null
+            Timber.e(e, "Lookup failed for ${game.fileName}: ${e.message}")
+            return@withContext DownloadResult.Failure(e.message ?: "Lookup network error")
         }
 
-        // Trust the endpoint URL directly — it is the source of truth for the correct
-        // repository (PCE and other systems may be in different repos than luisluis123/lemusets).
-        // Only fall back to HuggingFace when the endpoint returns null (game not in DB).
-        val finalUrl = downloadUrl ?: run {
-            Timber.d("Endpoint returned no result, falling back to HuggingFace direct URL")
-            buildHuggingFaceUrl(game)
+        if (finalUrl.isNullOrBlank()) {
+            Timber.w("Endpoint returned no URL for ${game.fileName} (system=$endpointSystem)")
+            return@withContext DownloadResult.NotFound(game.fileName)
         }
         Timber.d("On-demand download URL for ${game.fileName}: $finalUrl")
 
@@ -258,23 +253,6 @@ class RomOnDemandManager(
             if (attempt < 3) delay(retryAfterMs ?: 60_000L)
         }
         throw IOException("Rate limited (429): please try again later")
-    }
-
-    /**
-     * Performs a HEAD request to check if [url] is reachable (non-404).
-     * Returns true if the server responds with any non-404 status, or if the
-     * network request fails (assume reachable and let the real download handle it).
-     */
-    /**
-     * Builds a direct HuggingFace download URL for the given game.
-     * Used as fallback when the endpoint returns no result (game not in DB).
-     */
-    private fun buildHuggingFaceUrl(game: Game): String {
-        val uri = Uri.parse(game.fileUri)
-        val path = uri.path ?: ""
-        val systemFolder = File(path).parentFile?.name ?: game.systemId
-        val encodedName = Uri.encode(game.fileName)
-        return "$HUGGINGFACE_BASE/$systemFolder/$encodedName"
     }
 
     /**
