@@ -1,0 +1,10 @@
+{
+  "a26": "atari2600",
+  "a78": "atari7800",
+  "mame2003Plus": "mame2003plus",
+  "megadrive": "md",
+  "megacd": "scd",
+  "colecovision": "coleco",
+  "virtualboy": "vb",
+  "pcenginecd": "pcecd"
+}
