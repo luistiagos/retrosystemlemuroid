@@ -161,6 +161,11 @@ enum class CoreID(
         "Potator",
         "libpotator_libretro_android.so",
     ),
+    GEARCOLECO(
+        "gearcoleco",
+        "GearColeco",
+        "libgearcoleco_libretro_android.so",
+    ),
     ;
 
     companion object {

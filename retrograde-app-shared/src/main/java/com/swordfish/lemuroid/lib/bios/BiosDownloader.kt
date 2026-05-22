@@ -51,7 +51,17 @@ object BiosDownloader {
         val url = "$BASE_URL/$fileName"
 
         Timber.i("BiosDownloader: downloading $fileName")
-        downloadWithResume(url, destFile)
+        // Ensure any partial/corrupt file is removed if the download fails for any reason,
+        // so that getMissingBiosFiles() correctly identifies it as missing on the next launch.
+        var downloadSucceeded = false
+        try {
+            downloadWithResume(url, destFile)
+            downloadSucceeded = true
+        } finally {
+            if (!downloadSucceeded) {
+                destFile.delete()
+            }
+        }
 
         val expectedMd5 = BiosManager.biosEntryFor(fileName)?.md5
         if (expectedMd5 != null) {

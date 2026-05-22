@@ -1895,7 +1895,7 @@ data class GameSystem(
                     R.string.game_system_abbr_coleco,
                     listOf(
                         SystemCoreConfig(
-                            CoreID.GENESIS_PLUS_GX,
+                            CoreID.GEARCOLECO,
                             requiredBIOSFiles = listOf("coleco.rom"),
                             controllerConfigs =
                                 hashMapOf(
