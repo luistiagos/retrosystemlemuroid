@@ -115,13 +115,16 @@ fun SecondaryButtonMenuPlaceholder(settings: TouchControllerSettingsManager.Sett
 
 context(PadKitScope, LayoutRadialSecondaryDialsScope)
 @Composable
-fun SecondaryButtonKeyboard(settings: TouchControllerSettingsManager.Settings) {
+fun SecondaryButtonKeyboard(
+    settings: TouchControllerSettingsManager.Settings,
+    keyCode: Int = KeyEvent.KEYCODE_BUTTON_THUMBL,
+) {
     LemuroidControlButton(
         modifier =
             Modifier.radialPosition(
                 -120f - 2f * settings.rotation * TouchControllerSettingsManager.MAX_ROTATION,
             ),
-        id = Id.Key(KeyEvent.KEYCODE_BUTTON_THUMBL),
+        id = Id.Key(keyCode),
         icon = R.drawable.button_keyboard,
     )
 }

@@ -1997,6 +1997,8 @@ data class GameSystem(
                             defaultSettings =
                                 listOf(
                                     CoreVariable("cap32_retrojoy0", "joystick_port1"),
+                                    // SELECT + START toggles the virtual keyboard overlay
+                                    CoreVariable("cap32_combokey", "select"),
                                 ),
                             controllerConfigs =
                                 hashMapOf(
