@@ -166,6 +166,16 @@ enum class CoreID(
         "GearColeco",
         "libgearcoleco_libretro_android.so",
     ),
+    FLYCAST(
+        "flycast",
+        "Flycast",
+        "libflycast_libretro_android.so",
+    ),
+    OPERA(
+        "opera",
+        "Opera",
+        "opera_libretro_android.so",
+    ),
     ;
 
     companion object {

@@ -61,6 +61,8 @@ android {
                 ":lemuroid_core_stella",
                 ":lemuroid_core_citra",
                 ":lemuroid_core_gearcoleco",
+                ":lemuroid_core_flycast",
+                ":lemuroid_core_opera",
             ),
         )
     }

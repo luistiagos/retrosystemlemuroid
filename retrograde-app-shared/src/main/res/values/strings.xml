@@ -143,4 +143,22 @@
     <string name="value_handy_rot_90">90</string>
     <string name="value_handy_rot_270">270</string>
 
+    <!-- Flycast (Dreamcast) settings -->
+    <string name="setting_flycast_internal_resolution">Internal Resolution</string>
+    <string name="value_flycast_resolution_native">Native (640x480)</string>
+    <string name="value_flycast_resolution_2x">2x (1280x960)</string>
+    <string name="value_flycast_resolution_3x">3x (1920x1440)</string>
+    <string name="value_flycast_resolution_4x">4x (2560x1920)</string>
+
+    <!-- Dreamcast controller -->
+    <string name="controller_dreamcast">Dreamcast</string>
+
+    <!-- Opera (3DO) settings -->
+    <string name="setting_opera_cpu_overclock">CPU Speed</string>
+    <string name="value_opera_cpu_overclock_1x">1x — Native (12.5 MHz)</string>
+    <string name="value_opera_cpu_overclock_1_5x">1.5x (18.75 MHz)</string>
+    <string name="value_opera_cpu_overclock_2x">2x (25 MHz)</string>
+    <!-- 3DO controller -->
+    <string name="controller_3do">3DO</string>
+
 </resources>

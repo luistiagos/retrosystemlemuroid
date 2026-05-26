@@ -30,4 +30,6 @@
     <string name="core_name_pokemini" translatable="false">pokemini</string>
     <string name="core_name_potator" translatable="false">potator</string>
     <string name="core_name_gearcoleco" translatable="false">gearcoleco</string>
+    <string name="core_name_flycast" translatable="false">flycast</string>
+    <string name="core_name_opera" translatable="false">opera</string>
 </resources>

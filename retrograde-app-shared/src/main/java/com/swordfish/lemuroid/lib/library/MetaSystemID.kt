@@ -278,6 +278,16 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_supervision,
         listOf(SystemID.SUPERVISION),
     ),
+    DREAMCAST(
+        R.string.game_system_title_dc,
+        R.drawable.game_system_dc,
+        listOf(SystemID.DREAMCAST),
+    ),
+    THREE_DO(
+        R.string.game_system_title_3do,
+        R.drawable.game_system_3do,
+        listOf(SystemID.THREE_DO),
+    ),
     ;
 
     fun color(): Int {
@@ -341,6 +351,8 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.INTELLIVISION -> INTELLIVISION
                 SystemID.POKEMON_MINI -> POKEMON_MINI
                 SystemID.SUPERVISION -> SUPERVISION
+                SystemID.DREAMCAST -> DREAMCAST
+                SystemID.THREE_DO -> THREE_DO
             }
         }
     }

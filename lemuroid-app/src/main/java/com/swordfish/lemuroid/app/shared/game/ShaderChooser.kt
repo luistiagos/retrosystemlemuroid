@@ -94,6 +94,8 @@ object ShaderChooser {
             SystemID.INTELLIVISION -> ShaderConfig.CRT
             SystemID.POKEMON_MINI -> ShaderConfig.LCD
             SystemID.SUPERVISION -> ShaderConfig.LCD
+            SystemID.DREAMCAST -> ShaderConfig.Default
+            SystemID.THREE_DO -> ShaderConfig.Default
         }
     }
 
@@ -346,6 +348,8 @@ object ShaderChooser {
             SystemID.INTELLIVISION -> upscale8Bits
             SystemID.POKEMON_MINI -> upscale8BitsMobile
             SystemID.SUPERVISION -> upscale8BitsMobile
+            SystemID.DREAMCAST -> modern
+            SystemID.THREE_DO -> modern
         }
     }
 }

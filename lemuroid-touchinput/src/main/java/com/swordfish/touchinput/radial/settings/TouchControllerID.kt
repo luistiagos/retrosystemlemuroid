@@ -8,6 +8,10 @@ import com.swordfish.touchinput.radial.layouts.Arcade6Left
 import com.swordfish.touchinput.radial.layouts.Arcade6Right
 import com.swordfish.touchinput.radial.layouts.AmstradCPCLeft
 import com.swordfish.touchinput.radial.layouts.AmstradCPCRight
+import com.swordfish.touchinput.radial.layouts.DreamcastLeft
+import com.swordfish.touchinput.radial.layouts.DreamcastRight
+import com.swordfish.touchinput.radial.layouts.ThreeDOLeft
+import com.swordfish.touchinput.radial.layouts.ThreeDORight
 import com.swordfish.touchinput.radial.layouts.IntellivisionLeft
 import com.swordfish.touchinput.radial.layouts.IntellivisionRight
 import com.swordfish.touchinput.radial.layouts.Atari2600Left
@@ -95,6 +99,8 @@ enum class TouchControllerID {
     C64,
     AMSTRAD_CPC,
     INTELLIVISION,
+    DREAMCAST,
+    THREE_DO,
     ;
 
     class Config(
@@ -289,6 +295,18 @@ enum class TouchControllerID {
                     Config(
                         { modifier, settings -> IntellivisionLeft(modifier, settings) },
                         { modifier, settings -> IntellivisionRight(modifier, settings) },
+                    )
+
+                DREAMCAST ->
+                    Config(
+                        { modifier, settings -> DreamcastLeft(modifier, settings) },
+                        { modifier, settings -> DreamcastRight(modifier, settings) },
+                    )
+
+                THREE_DO ->
+                    Config(
+                        { modifier, settings -> ThreeDOLeft(modifier, settings) },
+                        { modifier, settings -> ThreeDORight(modifier, settings) },
                     )
             }
         }

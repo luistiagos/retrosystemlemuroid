@@ -482,4 +482,33 @@ object ControllerConfigs {
                     TILT_CONFIGURATION_CROSS,
                 ),
         )
+
+    val DREAMCAST =
+        ControllerConfig(
+            "default",
+            R.string.controller_dreamcast,
+            TouchControllerID.DREAMCAST,
+            allowTouchRotation = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_ANALOG_LEFT,
+                    TILT_CONFIGURATION_L2_R2,
+                ),
+        )
+
+    val THREE_DO =
+        ControllerConfig(
+            "default",
+            R.string.controller_3do,
+            TouchControllerID.THREE_DO,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_L_R,
+                ),
+        )
 }

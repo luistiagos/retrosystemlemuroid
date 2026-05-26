@@ -31,6 +31,8 @@ object HeavySystemFilter {
         SystemID.PSX,          // PCSX-ReARMed – moderate
         SystemID.DOS,          // DOSBox Pure – moderate
         SystemID.SEGACD,       // Genesis Plus GX CD – moderate
+        SystemID.DREAMCAST,    // Flycast – moderate-heavy
+        SystemID.THREE_DO,     // Opera – moderate-heavy
     )
 
     /** All systems that may be excluded on some device tier. */

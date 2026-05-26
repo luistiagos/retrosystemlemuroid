@@ -1,0 +1,71 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <!-- 3DO logo: stylised "3DO" text mark -->
+    <!-- Outer rounded rectangle body -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="
+          M10,30
+          Q10,20 20,20
+          L80,20
+          Q90,20 90,30
+          L90,70
+          Q90,80 80,80
+          L20,80
+          Q10,80 10,70
+          Z"/>
+    <!-- White "3" numeral -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="
+          M24,35
+          L36,35
+          Q42,35 42,41
+          Q42,47 36,47
+          L30,47
+          L36,47
+          Q42,47 42,53
+          Q42,60 36,60
+          L24,60
+          L24,55
+          L36,55
+          Q37,55 37,53
+          Q37,51 36,51
+          L28,51
+          L28,43
+          L36,43
+          Q37,43 37,41
+          Q37,39 36,39
+          L24,39
+          Z"/>
+    <!-- White "D" letter -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="
+          M46,35
+          L56,35
+          Q68,35 68,47.5
+          Q68,60 56,60
+          L46,60
+          Z
+          M51,40
+          L51,55
+          L56,55
+          Q63,55 63,47.5
+          Q63,40 56,40
+          Z"/>
+    <!-- White "O" letter -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="
+          M70,47.5
+          A12,12.5 0 1,1 70,47.4
+          Z
+          M70,42
+          A7,7.5 0 1,0 70,41.9
+          Z"
+        android:fillType="evenOdd"/>
+</vector>

@@ -82,6 +82,8 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
         Timber.i("Importing bios file: $bios")
 
         val biosFile = File(directoriesManager.getSystemDirectory(), bios.libretroFileName)
+        // Create parent directory if needed (e.g. dc/ for Dreamcast BIOS)
+        biosFile.parentFile?.mkdirs()
         if (biosFile.exists() && biosFile.setLastModified(normalizeTimestamp(timestampMs))) {
             Timber.d("Bios file already present. Updated last modification date.")
         } else {
@@ -254,6 +256,32 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Intellivision GROM",
                     SystemID.INTELLIVISION,
                     "683A4158",
+                ),
+                // 3DO BIOS (Opera) — file goes in system/ root (panafz1.bin)
+                Bios(
+                    "panafz1.bin",
+                    "F47264DD47FE30F73AB3C010015C155B",
+                    "3DO BIOS (Panasonic FZ-1)",
+                    SystemID.THREE_DO,
+                    "C8C8FF89",
+                    "panafz1.bin",
+                ),
+                // Dreamcast BIOS (Flycast) — files go in system/dc/ subfolder
+                Bios(
+                    "dc/dc_boot.bin",
+                    "E10C53C2F8B90BAB96EAD2D368858623",
+                    "Dreamcast BIOS (World)",
+                    SystemID.DREAMCAST,
+                    "89F2B1A1",
+                    "dc_boot.bin",
+                ),
+                Bios(
+                    "dc/dc_flash.bin",
+                    "0A93F7940C455905BEA6E392DFDE92A4",
+                    "Dreamcast Flash ROM",
+                    SystemID.DREAMCAST,
+                    "C611B498",
+                    "dc_flash.bin",
                 ),
             )
 

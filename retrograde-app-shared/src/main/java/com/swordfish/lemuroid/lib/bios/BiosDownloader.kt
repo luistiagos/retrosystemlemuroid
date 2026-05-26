@@ -50,6 +50,9 @@ object BiosDownloader {
         val destFile = File(systemDir, fileName)
         val url = "$BASE_URL/$fileName"
 
+        // Create parent directory if needed (e.g. dc/ for Dreamcast BIOS)
+        destFile.parentFile?.mkdirs()
+
         Timber.i("BiosDownloader: downloading $fileName")
         // Ensure any partial/corrupt file is removed if the download fails for any reason,
         // so that getMissingBiosFiles() correctly identifies it as missing on the next launch.

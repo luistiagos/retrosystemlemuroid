@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+  <!-- Dreamcast swirl logo — simplified stylised spiral -->
+  <!-- Outer ring -->
+  <path
+      android:fillColor="#FF6600"
+      android:pathData="
+        M50,5
+        A45,45 0 1,1 49.99,5
+        Z
+        M50,12
+        A38,38 0 1,0 50.01,12
+        Z"
+      android:fillType="evenOdd"/>
+  <!-- Inner spiral arms (simplified) -->
+  <path
+      android:fillColor="#FF6600"
+      android:pathData="
+        M50,25
+        C65,25 75,35 75,50
+        C75,60 68,68 58,71
+        L54,65
+        C61,62 68,57 68,50
+        C68,39 60,32 50,32
+        Z"/>
+  <path
+      android:fillColor="#FF6600"
+      android:pathData="
+        M50,75
+        C35,75 25,65 25,50
+        C25,40 32,32 42,29
+        L46,35
+        C39,38 32,43 32,50
+        C32,61 40,68 50,68
+        Z"/>
+</vector>

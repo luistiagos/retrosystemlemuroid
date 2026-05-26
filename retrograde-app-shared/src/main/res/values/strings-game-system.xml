@@ -128,4 +128,8 @@
     <string name="game_system_title_pokemini">Pokemon Mini</string>
     <string name="game_system_abbr_supervision">Supervision</string>
     <string name="game_system_title_supervision">Supervision</string>
+    <string name="game_system_abbr_dc">DC</string>
+    <string name="game_system_title_dc">Sega Dreamcast</string>
+    <string name="game_system_abbr_3do">3DO</string>
+    <string name="game_system_title_3do">3DO Interactive Multiplayer</string>
 </resources>

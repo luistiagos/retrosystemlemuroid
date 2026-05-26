@@ -57,7 +57,9 @@ if (usePlayDynamicFeatures()) {
         ":lemuroid_core_freeintv",
         ":lemuroid_core_pokemini",
         ":lemuroid_core_potator",
-        ":lemuroid_core_gearcoleco"
+        ":lemuroid_core_gearcoleco",
+        ":lemuroid_core_flycast",
+        ":lemuroid_core_opera"
     )
 
     project(":lemuroid_core_gambatte").projectDir = File("lemuroid-cores/lemuroid_core_gambatte")
@@ -90,4 +92,6 @@ if (usePlayDynamicFeatures()) {
     project(":lemuroid_core_pokemini").projectDir = File("lemuroid-cores/lemuroid_core_pokemini")
     project(":lemuroid_core_potator").projectDir = File("lemuroid-cores/lemuroid_core_potator")
     project(":lemuroid_core_gearcoleco").projectDir = File("lemuroid-cores/lemuroid_core_gearcoleco")
+    project(":lemuroid_core_flycast").projectDir = File("lemuroid-cores/lemuroid_core_flycast")
+    project(":lemuroid_core_opera").projectDir = File("lemuroid-cores/lemuroid_core_opera")
 }

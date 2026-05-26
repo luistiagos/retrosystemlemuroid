@@ -55,4 +55,6 @@ enum class SystemID(val dbname: String) {
     INTELLIVISION("intellivision"),
     POKEMON_MINI("pokemini"),
     SUPERVISION("supervision"),
+    DREAMCAST("dc"),
+    THREE_DO("3do"),
 }

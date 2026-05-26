@@ -35,5 +35,7 @@
   "intellivision": "intellivision",
   "pokemini": "pokemini",
   "supervision": "supervision",
-  "pcenginecd": "pcenginecd"
+  "pcenginecd": "pcenginecd",
+  "dc": "dreamcast",
+  "3do": "3do"
 }

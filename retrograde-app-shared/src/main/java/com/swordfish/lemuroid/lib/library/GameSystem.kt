@@ -2083,6 +2083,135 @@ data class GameSystem(
                     uniqueExtensions = listOf("sv"),
                     supportedExtensions = listOf("sv", "bin"),
                 ),
+                GameSystem(
+                    SystemID.DREAMCAST,
+                    "Sega - Dreamcast",
+                    R.string.game_system_title_dc,
+                    R.string.game_system_abbr_dc,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FLYCAST,
+                            requiredBIOSFiles = listOf("dc/dc_boot.bin"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to
+                                        arrayListOf(
+                                            ControllerConfigs.DREAMCAST,
+                                        ),
+                                    1 to
+                                        arrayListOf(
+                                            ControllerConfigs.DREAMCAST,
+                                        ),
+                                    2 to
+                                        arrayListOf(
+                                            ControllerConfigs.DREAMCAST,
+                                        ),
+                                    3 to
+                                        arrayListOf(
+                                            ControllerConfigs.DREAMCAST,
+                                        ),
+                                ),
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "flycast_internal_resolution",
+                                        R.string.setting_flycast_internal_resolution,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "640x480",
+                                                R.string.value_flycast_resolution_native,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "1280x960",
+                                                R.string.value_flycast_resolution_2x,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "1920x1440",
+                                                R.string.value_flycast_resolution_3x,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "2560x1920",
+                                                R.string.value_flycast_resolution_4x,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("flycast_internal_resolution", "1280x960"),
+                                    CoreVariable("flycast_anisotropic_filtering", "4"),
+                                    CoreVariable("flycast_enable_dsp", "disabled"),
+                                ),
+                            rumbleSupported = true,
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("chd", "gdi", "cdi", "cue", "iso"),
+                    hasMultiDiskSupport = false,
+                ),
+                GameSystem(
+                    SystemID.THREE_DO,
+                    "The 3DO Company - 3DO",
+                    R.string.game_system_title_3do,
+                    R.string.game_system_abbr_3do,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.OPERA,
+                            requiredBIOSFiles = listOf("panafz1.bin"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.THREE_DO),
+                                    1 to arrayListOf(ControllerConfigs.THREE_DO),
+                                ),
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "opera_cpu_overclock",
+                                        R.string.setting_opera_cpu_overclock,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "1.0x (12.5Mhz)",
+                                                R.string.value_opera_cpu_overclock_1x,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "1.5x (18.75Mhz)",
+                                                R.string.value_opera_cpu_overclock_1_5x,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "2.0x (25Mhz)",
+                                                R.string.value_opera_cpu_overclock_2x,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("opera_cpu_overclock", "1.0x (12.5Mhz)"),
+                                    CoreVariable("opera_vdlp_pixel_format", "RGB565"),
+                                    CoreVariable("opera_high_resolution", "disabled"),
+                                ),
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("iso", "chd", "cue", "bin"),
+                    hasMultiDiskSupport = false,
+                ),
             )
 
         private val byIdCache by lazy { mapOf(*SYSTEMS.map { it.id.dbname to it }.toTypedArray()) }
