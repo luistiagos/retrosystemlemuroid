@@ -2154,7 +2154,7 @@ data class GameSystem(
                             scanByPathAndSupportedExtensions = true,
                         ),
                     uniqueExtensions = listOf(),
-                    supportedExtensions = listOf("chd", "gdi", "cdi", "cue", "iso"),
+                    supportedExtensions = listOf("chd", "gdi", "cdi", "cue", "iso", "zip"),
                     hasMultiDiskSupport = false,
                 ),
                 GameSystem(

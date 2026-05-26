@@ -218,7 +218,10 @@ class SaveQueueManager(
                                 else it
                             }
                         }
-                        _justCompleted.tryEmit(buildGame(next))
+                        // Use result.game instead of buildGame(next) so that multi-disc
+                        // zip extractions (which update fileUri/fileName in the DB) are
+                        // reflected in the game passed to the "play now?" prompt.
+                        _justCompleted.tryEmit(result.game)
                         // Remove SAVED entry after a short display delay on main thread.
                         scope.launch {
                             kotlinx.coroutines.delay(3_000)

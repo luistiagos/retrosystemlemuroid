@@ -5,9 +5,11 @@ import android.net.Uri
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
+import com.swordfish.lemuroid.lib.library.db.dao.GameDao
 import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
+import com.swordfish.lemuroid.lib.storage.local.GameCacheUtils
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +36,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import java.util.zip.ZipFile
 
 /** Thrown for HTTP 4xx errors that should not be retried (permanent client errors). */
 class PermanentHttpException(message: String) : IOException(message)
@@ -52,10 +55,14 @@ class PermanentHttpException(message: String) : IOException(message)
 class RomOnDemandManager(
     private val context: Context,
     private val downloadedRomDao: DownloadedRomDao,
+    private val gameDao: GameDao,
     private val directoriesManager: DirectoriesManager,
 ) {
     sealed class DownloadResult {
-        object Success : DownloadResult()
+        /** The download (and any post-download extraction) succeeded.
+         *  [game] is the final Game record — its [Game.fileUri] and [Game.fileName]
+         *  may differ from the original if the zip was extracted to a disc-image. */
+        data class Success(val game: Game) : DownloadResult()
         data class NotFound(val fileName: String) : DownloadResult()
         data class Failure(val message: String) : DownloadResult()
     }
@@ -197,10 +204,15 @@ class RomOnDemandManager(
             return@withContext DownloadResult.Failure("Arquivo vazio recebido do servidor. O arquivo pode não estar disponível na hospedagem.")
         }
 
+        // For multi-file disc-image zips (Dreamcast CUE+BIN, etc.): extract all
+        // entries to a sibling directory, update the game record to point at the
+        // .cue/.gdi entry, and delete the zip to reclaim space.
+        val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
+
         downloadedRomDao.insert(
             DownloadedRom(
-                fileName = game.fileName,
-                fileSize = downloadedSize,
+                fileName = finalGame.fileName,
+                fileSize = finalFile.length(),
             ),
         )
 
@@ -208,8 +220,8 @@ class RomOnDemandManager(
         // "play now?" dialog appears — launching it async avoids blocking the result.
         backgroundScope.launch { LibraryIndexScheduler.triggerCatalogQuickLoad(context) }
 
-        Timber.d("ROM downloaded successfully: ${game.fileName} ($downloadedSize bytes)")
-        DownloadResult.Success
+        Timber.d("ROM downloaded successfully: ${finalGame.fileName} (${finalFile.length()} bytes)")
+        DownloadResult.Success(finalGame)
     }
 
     /**
@@ -256,16 +268,102 @@ class RomOnDemandManager(
     }
 
     /**
-     * Deletes the downloaded ROM (replacing it with a 0-byte placeholder) and removes
-     * the [DownloadedRom] record from the database.
+     * Deletes the downloaded ROM and removes the [DownloadedRom] record from the database.
+     *
+     * For single-file ROMs the file is truncated to a 0-byte placeholder so it
+     * remains visible in the catalog.  For multi-disc extractions (CUE+BIN sets
+     * stored in a per-game subdirectory) the entire directory is deleted; the
+     * game's [Game.fileUri] points to the non-existent .cue file, which
+     * [com.swordfish.lemuroid.lib.library.GameInteractor.isGamePlaceholder] treats
+     * as a placeholder (File.length() returns 0 for missing files on the JVM).
      */
     suspend fun deleteRom(game: Game): Unit = withContext(Dispatchers.IO) {
         val destFile = resolveDestFile(game)
         if (destFile.exists()) {
-            FileOutputStream(destFile, false).use { }
+            val systemDir = File(directoriesManager.getInternalRomsDirectory(), game.systemId)
+            val parentDir = destFile.parentFile
+            if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
+                // Multi-disc extraction directory — delete the whole folder so all
+                // track files are removed and not just the .cue sheet.
+                parentDir.deleteRecursively()
+                Timber.d("deleteRom: removed extraction dir ${parentDir.name}")
+            } else {
+                // Single-file ROM — truncate to 0-byte placeholder.
+                FileOutputStream(destFile, false).use { }
+            }
         }
         downloadedRomDao.deleteByFileName(game.fileName)
         LibraryIndexScheduler.triggerCatalogQuickLoad(context)
+    }
+
+    /**
+     * If [zipFile] is a zip containing a disc-image entry (.cue / .gdi / .iso / .chd),
+     * extracts all its entries into a sibling directory named after the zip stem,
+     * deletes the zip, and updates the [Game] record in the database so that
+     * [Game.fileUri] and [Game.fileName] point to the main disc-image file.
+     *
+     * Returns `(updatedGame, mainFile)` on successful extraction, or
+     * `(originalGame, zipFile)` unchanged when the zip is not a multi-disc set
+     * (e.g. arcade ROMs that have no .cue/.gdi entry) or on any I/O error.
+     */
+    private suspend fun extractMultiDiscZipIfNeeded(
+        game: Game,
+        zipFile: File,
+    ): Pair<Game, File> {
+        if (zipFile.extension.lowercase() != "zip") return game to zipFile
+
+        return withContext(Dispatchers.IO) {
+            try {
+                ZipFile(zipFile).use { zf ->
+                    val entries = zf.entries().toList()
+
+                    // Check if the zip contains a disc-image entry — if not, return as-is
+                    // (arcade ROMs should be passed directly to the core as a zip).
+                    val hasDiscEntry = entries.any {
+                        it.name.substringAfterLast('.').lowercase() in
+                            GameCacheUtils.DISC_IMAGE_EXTENSIONS
+                    }
+                    if (!hasDiscEntry) return@withContext game to zipFile
+
+                    // Extract all files into dc/GameTitle/ (sibling of the zip).
+                    val extractDir = File(zipFile.parentFile, zipFile.nameWithoutExtension)
+                    extractDir.mkdirs()
+
+                    entries.filter { !it.isDirectory }.forEach { entry ->
+                        // Flatten any subdirectory structure inside the zip.
+                        val destEntry = File(extractDir, File(entry.name).name)
+                        if (!destEntry.exists() || destEntry.length() == 0L) {
+                            destEntry.outputStream().use { out ->
+                                zf.getInputStream(entry).use { it.copyTo(out) }
+                            }
+                        }
+                    }
+
+                    val mainFile = GameCacheUtils.findMainDiscFile(extractDir)
+                        ?: return@withContext game to zipFile  // shouldn't happen, but be safe
+
+                    // Delete the zip to reclaim space — the extracted files are permanent.
+                    zipFile.delete()
+
+                    // Update the DB record so the game's fileUri points to the .cue/.gdi.
+                    val newFileUri = Uri.fromFile(mainFile).toString()
+                    val updatedGame = game.copy(
+                        fileUri = newFileUri,
+                        fileName = mainFile.name,
+                    )
+                    gameDao.update(updatedGame)
+
+                    Timber.d(
+                        "extractMultiDiscZip: ${zipFile.name} -> ${mainFile.name} " +
+                            "(${entries.size} entries in ${extractDir.name}/)",
+                    )
+                    updatedGame to mainFile
+                }
+            } catch (e: Exception) {
+                Timber.e(e, "extractMultiDiscZip: failed for ${zipFile.name}, keeping zip as-is")
+                game to zipFile
+            }
+        }
     }
 
     private fun resolveDestFile(game: Game): File {

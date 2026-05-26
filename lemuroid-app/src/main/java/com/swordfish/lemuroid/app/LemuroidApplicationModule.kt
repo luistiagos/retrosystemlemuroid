@@ -504,7 +504,7 @@ abstract class LemuroidApplicationModule {
             context: Context,
             retrogradeDatabase: RetrogradeDatabase,
             directoriesManager: DirectoriesManager,
-        ) = RomOnDemandManager(context, retrogradeDatabase.downloadedRomDao(), directoriesManager)
+        ) = RomOnDemandManager(context, retrogradeDatabase.downloadedRomDao(), retrogradeDatabase.gameDao(), directoriesManager)
 
         @Provides
         @PerApp
