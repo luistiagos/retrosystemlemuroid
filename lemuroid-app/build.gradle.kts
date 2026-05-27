@@ -230,10 +230,11 @@ dependencies {
     implementation(deps.libs.composeSettings.diskStorage)
     implementation(deps.libs.composeSettings.memoryStorage)
 
-    implementation(deps.libs.libretrodroid)
-
-    // Uncomment this when using a local aar file.
-    // implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+    // Patched LibretroDroid AAR local (path em deps.libs.libretrodroid). Inclui fallback
+    // EGLConfigChooser para Smart TVs cujo driver não satisfaz a config EGL padrão do GLSurfaceView.
+    implementation(files(rootProject.file(deps.libs.libretrodroid)))
+    // Transitive deps do POM original do JitPack que precisamos declarar manualmente.
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${deps.versions.lifecycle}")
 
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)

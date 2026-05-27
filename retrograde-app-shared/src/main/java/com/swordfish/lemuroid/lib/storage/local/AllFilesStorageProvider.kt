@@ -100,22 +100,30 @@ class AllFilesStorageProvider(
         val gamePath = Uri.parse(game.fileUri).path
             ?: throw IOException("Cannot resolve path for game: ${game.fileUri}")
         val originalFile = File(gamePath)
-        if (!originalFile.isZipped() || originalFile.name == game.fileName) {
+        if (!originalFile.isZipped()) {
             return originalFile
         }
 
-        val cacheFile = GameCacheUtils.getCacheFileForGame(ALL_FILES_STORAGE_CACHE_SUBFOLDER, context, game)
-        if (cacheFile.exists()) {
+        val entryName = resolveZipEntryName(originalFile, game) ?: return originalFile
+        val cacheFile = GameCacheUtils.getCacheFileForGame(
+            ALL_FILES_STORAGE_CACHE_SUBFOLDER, context, game, fileName = File(entryName).name,
+        )
+        if (cacheFile.exists() && cacheFile.length() > 0L) {
             return cacheFile
         }
 
-        if (originalFile.isZipped()) {
-            ZipInputStream(originalFile.inputStream()).use { stream ->
-                stream.extractEntryToFile(game.fileName, cacheFile)
-            }
+        ZipInputStream(originalFile.inputStream()).use { stream ->
+            stream.extractEntryToFile(entryName, cacheFile)
         }
-
         return cacheFile
+    }
+
+    private fun resolveZipEntryName(originalFile: File, game: Game): String? {
+        if (originalFile.name != game.fileName) return game.fileName
+        val system = GameSystem.findByIdOrNull(game.systemId) ?: return null
+        val supportedExts = system.supportedExtensions.map { it.lowercase() }
+        if ("zip" in supportedExts) return null
+        return GameCacheUtils.findInnerRomEntry(originalFile, supportedExts)
     }
 
     override fun getGameRomFiles(

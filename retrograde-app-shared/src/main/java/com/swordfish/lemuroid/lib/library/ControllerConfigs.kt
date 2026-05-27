@@ -504,6 +504,12 @@ object ControllerConfigs {
             R.string.controller_3do,
             TouchControllerID.THREE_DO,
             mergeDPADAndLeftStickEvents = true,
+            // Opera defaults every port to RETRO_DEVICE_NONE and skips input processing
+            // until setControllerType is called. Matching the descriptor that Opera
+            // registers via SET_CONTROLLER_INFO forces GameViewModelInput.updateControllers()
+            // to invoke setControllerType(port, RETRO_DEVICE_JOYPAD), enabling input on
+            // the port. Opera registers this descriptor literally as "3DO Joypad".
+            libretroDescriptor = "3DO Joypad",
             tiltConfigurations =
                 listOf(
                     TILT_CONFIGURATION_DISABLED,

@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
@@ -159,8 +160,27 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     private fun setUpExceptionsHandler() {
         Thread.setDefaultUncaughtExceptionHandler { thread, exception ->
-            performUnexpectedErrorFinish(exception)
+            if (isEglIncompatibilityException(exception)) {
+                Timber.e(exception, "EGL incompatibility detected on this device")
+                performErrorFinish(getString(R.string.game_loader_error_gl_incompatible))
+            } else {
+                performUnexpectedErrorFinish(exception)
+            }
         }
+    }
+
+    private fun isEglIncompatibilityException(exception: Throwable): Boolean {
+        var current: Throwable? = exception
+        while (current != null) {
+            val message = current.message ?: ""
+            val isEglFailure = current is IllegalArgumentException &&
+                (message.contains("eglChooseConfig", ignoreCase = true) ||
+                    message.contains("egl/ChooseConfig", ignoreCase = true) ||
+                    (message.contains("EGL", ignoreCase = false) && message.contains("config", ignoreCase = true)))
+            if (isEglFailure) return true
+            current = current.cause
+        }
+        return false
     }
 
     private fun transformExposedSetting(

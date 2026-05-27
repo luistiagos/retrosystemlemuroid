@@ -169,8 +169,12 @@ object deps {
         const val composeHtmlText          = "de.charlex.compose.material3:material3-html-text:2.0.0-beta01"
         const val collectionsImmutable     = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.8"
         const val padkit                   = "io.github.swordfish90:padkit:${versions.padkit}"
-        const val libretrodroid            = "com.github.Swordfish90:LibretroDroid:${versions.libretrodroid}-patched"
-//        const val libretrodroid            = "com.swordfish:libretrodroid:unspecified"
+        // Local patched LibretroDroid AAR (fallback EGLConfigChooser para Smart TVs com EGL strict).
+        // O arquivo vive em <rootProject>/libs/libretrodroid-patched.aar e é referenciado no
+        // build.gradle.kts da lemuroid-app via files(rootProject.file(...)).
+        // Para voltar ao JitPack temporariamente, descomente a linha JitPack abaixo.
+        const val libretrodroid            = "libs/libretrodroid-patched.aar"
+//        const val libretrodroid            = "com.github.Swordfish90:LibretroDroid:${versions.libretrodroid}-patched"
     }
 
     object plugins {

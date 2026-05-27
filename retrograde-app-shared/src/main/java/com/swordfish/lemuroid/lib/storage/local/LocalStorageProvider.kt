@@ -26,6 +26,7 @@ import androidx.leanback.preference.LeanbackPreferenceFragment
 import com.swordfish.lemuroid.common.kotlin.extractEntryToFile
 import com.swordfish.lemuroid.common.kotlin.isZipped
 import com.swordfish.lemuroid.lib.R
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.DataFile
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
@@ -99,22 +100,45 @@ class LocalStorageProvider(
         val gamePath = Uri.parse(game.fileUri).path
             ?: throw IOException("Cannot resolve path for game: ${game.fileUri}")
         val originalFile = File(gamePath)
-        if (!originalFile.isZipped() || originalFile.name == game.fileName) {
+        if (!originalFile.isZipped()) {
             return originalFile
         }
 
-        val cacheFile = GameCacheUtils.getCacheFileForGame(LOCAL_STORAGE_CACHE_SUBFOLDER, context, game)
-        if (cacheFile.exists()) {
+        val entryName = resolveZipEntryName(originalFile, game) ?: return originalFile
+        val cacheFile = GameCacheUtils.getCacheFileForGame(
+            LOCAL_STORAGE_CACHE_SUBFOLDER, context, game, fileName = File(entryName).name,
+        )
+        if (cacheFile.exists() && cacheFile.length() > 0L) {
             return cacheFile
         }
 
-        if (originalFile.isZipped()) {
-            ZipInputStream(originalFile.inputStream()).use { stream ->
-                stream.extractEntryToFile(game.fileName, cacheFile)
-            }
+        ZipInputStream(originalFile.inputStream()).use { stream ->
+            stream.extractEntryToFile(entryName, cacheFile)
         }
-
         return cacheFile
+    }
+
+    /**
+     * Decides which entry inside a zip [originalFile] should be extracted before
+     * handing the ROM to the core. Returns null when no extraction is needed
+     * (arcade-style zips that the core loads natively).
+     *
+     * Cases:
+     *  - The storage scanner already resolved the inner entry name into
+     *    [Game.fileName] (e.g. "Game.min" from a "Game.zip"): extract that entry.
+     *  - The game came from the manifest with [Game.fileName] still ending in .zip
+     *    and the system's libretro core does not declare "zip" as a supported
+     *    extension (PokéMini, Vectrex, C64, ...): find the first inner entry whose
+     *    extension matches the system's [GameSystem.supportedExtensions].
+     *  - Arcade cores (FBNeo, MAME) declare "zip" as supported: return null so the
+     *    raw zip is passed through.
+     */
+    private fun resolveZipEntryName(originalFile: File, game: Game): String? {
+        if (originalFile.name != game.fileName) return game.fileName
+        val system = GameSystem.findByIdOrNull(game.systemId) ?: return null
+        val supportedExts = system.supportedExtensions.map { it.lowercase() }
+        if ("zip" in supportedExts) return null
+        return GameCacheUtils.findInnerRomEntry(originalFile, supportedExts)
     }
 
     override fun getGameRomFiles(

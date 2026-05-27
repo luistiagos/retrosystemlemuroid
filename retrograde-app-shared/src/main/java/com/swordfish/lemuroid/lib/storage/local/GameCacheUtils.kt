@@ -1,9 +1,11 @@
 package com.swordfish.lemuroid.lib.storage.local
 
 import android.content.Context
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.DataFile
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import java.io.File
+import java.util.zip.ZipFile
 
 object GameCacheUtils {
 
@@ -35,6 +37,30 @@ object GameCacheUtils {
         }
         return null
     }
+    /**
+     * Finds the first non-directory entry inside [zipFile] whose extension is
+     * declared in the system's [GameSystem.supportedExtensions]. Returns the
+     * entry name (path inside the zip), or null if no matching entry exists.
+     *
+     * Used to extract single-ROM zips for cores that cannot read zip archives
+     * directly (e.g. PokéMini, Vectrex, C64). The matching entry is later passed
+     * to [com.swordfish.lemuroid.common.kotlin.extractEntryToFile] for extraction.
+     */
+    fun findInnerRomEntry(
+        zipFile: File,
+        supportedExtensions: Collection<String>,
+    ): String? {
+        if (supportedExtensions.isEmpty()) return null
+        val exts = supportedExtensions.map { it.lowercase() }.toSet()
+        return ZipFile(zipFile).use { zf ->
+            zf.entries().asSequence()
+                .firstOrNull { entry ->
+                    !entry.isDirectory && entry.name.substringAfterLast('.', "").lowercase() in exts
+                }
+                ?.name
+        }
+    }
+
     fun getDataFileForGame(
         folderName: String,
         context: Context,
@@ -49,9 +75,10 @@ object GameCacheUtils {
         folderName: String,
         context: Context,
         game: Game,
+        fileName: String = game.fileName,
     ): File {
         val gamesCacheDir = getCacheDirForGame(folderName, game, context)
-        return File(gamesCacheDir, game.fileName)
+        return File(gamesCacheDir, fileName)
     }
 
     private fun getCacheDirForGame(
