@@ -33,9 +33,9 @@ class RomsetExportManager(
             val romsBaseDir = directoriesManager.getInternalRomsDirectory()
 
             // Primary: collect files via DB records (downloadedRomDao is authoritative)
-            val downloadedNames = retrogradeDatabase.downloadedRomDao().getAllDownloadedFileNames().toSet()
+            val downloadedKeys = retrogradeDatabase.downloadedRomDao().getAllDownloadedKeys().toSet()
             val dbFiles = retrogradeDatabase.gameDao().selectAll()
-                .filter { it.fileName in downloadedNames }
+                .filter { it.downloadKey in downloadedKeys }
                 .mapNotNull { game ->
                     Uri.parse(game.fileUri).path?.let { File(it) }
                         ?.takeIf { it.isFile && it.length() > 0 }
@@ -93,9 +93,9 @@ class RomsetExportManager(
     }
 
     suspend fun calculateExportSize(): Long = withContext(Dispatchers.IO) {
-        val downloadedNames = retrogradeDatabase.downloadedRomDao().getAllDownloadedFileNames().toSet()
+        val downloadedKeys = retrogradeDatabase.downloadedRomDao().getAllDownloadedKeys().toSet()
         val dbSize = retrogradeDatabase.gameDao().selectAll()
-            .filter { it.fileName in downloadedNames }
+            .filter { it.downloadKey in downloadedKeys }
             .sumOf { game ->
                 Uri.parse(game.fileUri).path?.let { File(it) }
                     ?.takeIf { it.isFile && it.length() > 0 }?.length() ?: 0L

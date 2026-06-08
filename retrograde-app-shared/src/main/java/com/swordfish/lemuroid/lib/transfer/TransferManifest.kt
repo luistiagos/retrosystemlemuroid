@@ -15,7 +15,7 @@ data class TransferManifest(
     companion object {
         const val CURRENT_VERSION = 1
         const val MANIFEST_FILE_NAME = "manifest.json"
-        const val EXPORT_DIR_NAME = "lemuroid-export"
+        const val EXPORT_DIR_NAME = "retro-game-system-export"
         const val ROMS_DIR = "roms"
         const val SAVES_DIR = "saves"
         const val STATES_DIR = "states"

@@ -121,9 +121,9 @@ class AllFilesStorageProvider(
     private fun resolveZipEntryName(originalFile: File, game: Game): String? {
         if (originalFile.name != game.fileName) return game.fileName
         val system = GameSystem.findByIdOrNull(game.systemId) ?: return null
-        val supportedExts = system.supportedExtensions.map { it.lowercase() }
-        if ("zip" in supportedExts) return null
-        return GameCacheUtils.findInnerRomEntry(originalFile, supportedExts)
+        val innerExts = GameCacheUtils.getInnerRomExtensions(system)
+        if (innerExts.isEmpty()) return null
+        return GameCacheUtils.findInnerRomEntry(originalFile, innerExts)
     }
 
     override fun getGameRomFiles(

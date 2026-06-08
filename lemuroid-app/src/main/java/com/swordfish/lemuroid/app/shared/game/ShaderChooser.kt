@@ -19,6 +19,8 @@ object ShaderChooser {
         Timber.i(
             "Choosing shader for this config: screenFilter= $screenFilter hdMode=$hdMode hdModeQuality=$requestedHdModeQuality",
         )
+        if (system.id == SystemID.VECTREX) return ShaderConfig.Default
+
         val hdModeQuality =
             if (context.getGLSLVersion() >= 3) {
                 requestedHdModeQuality
@@ -90,12 +92,28 @@ object ShaderChooser {
             SystemID.COMMODORE_64 -> ShaderConfig.CRT
             SystemID.ZX_SPECTRUM -> ShaderConfig.CRT
             SystemID.AMSTRAD_CPC -> ShaderConfig.CRT
-            SystemID.VECTREX -> ShaderConfig.CRT
+            SystemID.VECTREX -> ShaderConfig.Default
             SystemID.INTELLIVISION -> ShaderConfig.CRT
             SystemID.POKEMON_MINI -> ShaderConfig.LCD
             SystemID.SUPERVISION -> ShaderConfig.LCD
             SystemID.DREAMCAST -> ShaderConfig.Default
             SystemID.THREE_DO -> ShaderConfig.Default
+            SystemID.PICO_8 -> ShaderConfig.Sharp
+            SystemID.VIRCON32 -> ShaderConfig.Default
+            SystemID.SEGA_32X -> ShaderConfig.CRT
+            SystemID.FDS -> ShaderConfig.CRT
+            SystemID.ATARI800 -> ShaderConfig.CRT
+            SystemID.AMSTRAD_GX4000 -> ShaderConfig.CRT
+            SystemID.MEGADUCK -> ShaderConfig.LCD
+            SystemID.CHANNEL_F -> ShaderConfig.CRT
+            SystemID.UZEBOX -> ShaderConfig.CRT
+            SystemID.LOWRES_NX -> ShaderConfig.Sharp
+            SystemID.ARDUBOY -> ShaderConfig.Sharp
+            SystemID.GAMECUBE -> ShaderConfig.Default
+            SystemID.SATURN -> ShaderConfig.CRT
+            SystemID.JAGUAR -> ShaderConfig.CRT
+            SystemID.ODYSSEY2 -> ShaderConfig.CRT
+            SystemID.NEOCD -> ShaderConfig.CRT
         }
     }
 
@@ -301,6 +319,7 @@ object ShaderChooser {
             SystemID.GENESIS -> upscale16Bits
             SystemID.SEGACD -> upscale16Bits
             SystemID.NES -> upscale8Bits
+            SystemID.FDS -> upscale8Bits
             SystemID.SNES -> upscale16Bits
             SystemID.FBNEO -> upscale32Bits
             SystemID.SMS -> upscale8Bits
@@ -344,12 +363,27 @@ object ShaderChooser {
             SystemID.COMMODORE_64 -> upscale8Bits
             SystemID.ZX_SPECTRUM -> upscale8Bits
             SystemID.AMSTRAD_CPC -> upscale8Bits
-            SystemID.VECTREX -> upscale8Bits
+            SystemID.VECTREX -> modern
             SystemID.INTELLIVISION -> upscale8Bits
             SystemID.POKEMON_MINI -> upscale8BitsMobile
             SystemID.SUPERVISION -> upscale8BitsMobile
             SystemID.DREAMCAST -> modern
             SystemID.THREE_DO -> modern
+            SystemID.PICO_8 -> modern
+            SystemID.VIRCON32 -> modern
+            SystemID.SEGA_32X -> upscale16Bits
+            SystemID.ATARI800 -> upscale8Bits
+            SystemID.AMSTRAD_GX4000 -> upscale8Bits
+            SystemID.MEGADUCK -> upscale8BitsMobile
+            SystemID.CHANNEL_F -> upscale8Bits
+            SystemID.UZEBOX -> upscale8Bits
+            SystemID.LOWRES_NX -> upscale8Bits
+            SystemID.ARDUBOY -> upscale8BitsMobile
+            SystemID.GAMECUBE -> modern
+            SystemID.SATURN -> upscale32Bits
+            SystemID.JAGUAR -> upscale32Bits
+            SystemID.ODYSSEY2 -> upscale8Bits
+            SystemID.NEOCD -> upscale32Bits
         }
     }
 }

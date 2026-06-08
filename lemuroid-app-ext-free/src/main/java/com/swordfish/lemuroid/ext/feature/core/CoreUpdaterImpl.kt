@@ -172,7 +172,7 @@ class CoreUpdaterImpl(
             val existingBytes = if (destFile.exists()) destFile.length() else 0L
             val request = Request.Builder()
                 .url(url)
-                .header("User-Agent", "LemuroidApp/1.0")
+                .header("User-Agent", "RetroGameSystem/1.0")
                 .apply { if (existingBytes > 0) header("Range", "bytes=$existingBytes-") }
                 .build()
             try {

@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <!-- GameCube — isometric cube in the console's signature indigo -->
+    <!-- Top face (lightest) -->
+    <path
+        android:fillColor="#8367C7"
+        android:pathData="M50,18 L82,36 L50,54 L18,36 Z" />
+    <!-- Left face (mid) -->
+    <path
+        android:fillColor="#5E45A0"
+        android:pathData="M18,36 L50,54 L50,90 L18,72 Z" />
+    <!-- Right face (dark) -->
+    <path
+        android:fillColor="#46327A"
+        android:pathData="M82,36 L50,54 L50,90 L82,72 Z" />
+</vector>

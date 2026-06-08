@@ -31,5 +31,20 @@
     <string name="core_name_potator" translatable="false">potator</string>
     <string name="core_name_gearcoleco" translatable="false">gearcoleco</string>
     <string name="core_name_flycast" translatable="false">flycast</string>
+    <string name="core_name_a5200" translatable="false">a5200</string>
     <string name="core_name_opera" translatable="false">opera</string>
+    <string name="core_name_fake08" translatable="false">fake08</string>
+    <string name="core_name_vircon32" translatable="false">vircon32</string>
+    <string name="core_name_picodrive" translatable="false">picodrive</string>
+    <string name="core_name_atari800" translatable="false">atari800</string>
+    <string name="core_name_sameduck" translatable="false">sameduck</string>
+    <string name="core_name_freechaf" translatable="false">freechaf</string>
+    <string name="core_name_uzem" translatable="false">uzem</string>
+    <string name="core_name_lowresnx" translatable="false">lowresnx</string>
+    <string name="core_name_arduous" translatable="false">arduous</string>
+    <string name="core_name_dolphin" translatable="false">dolphin</string>
+    <string name="core_name_yabasanshiro" translatable="false">yabasanshiro</string>
+    <string name="core_name_virtualjaguar" translatable="false">virtualjaguar</string>
+    <string name="core_name_o2em" translatable="false">o2em</string>
+    <string name="core_name_neocd" translatable="false">neocd</string>
 </resources>

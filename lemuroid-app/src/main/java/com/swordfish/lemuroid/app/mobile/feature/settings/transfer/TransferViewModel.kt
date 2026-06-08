@@ -84,11 +84,11 @@ class TransferViewModel(
                 // downloadedRomDao is the authoritative source for on-demand downloaded games.
                 // We also accept file:// URIs with actual content (locally added ROMs)
                 // and any content:// SAF URI (user-managed storage).
-                val downloadedFileNames = retrogradeDatabase.downloadedRomDao()
-                    .getAllDownloadedFileNames().toSet()
+                val downloadedGameKeys = retrogradeDatabase.downloadedRomDao()
+                    .getAllDownloadedKeys().toSet()
                 retrogradeDatabase.gameDao().selectAll()
                     .filter { game ->
-                        if (game.fileName in downloadedFileNames) return@filter true
+                        if (game.downloadKey in downloadedGameKeys) return@filter true
                         val uri = Uri.parse(game.fileUri)
                         when (uri.scheme) {
                             "file" -> uri.path?.let {

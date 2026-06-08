@@ -5,6 +5,39 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms
 
 object Migrations {
+    val VERSION_23_24: Migration =
+        object : Migration(23, 24) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `downloaded_roms_new`(
+                        `systemId` TEXT NOT NULL,
+                        `fileName` TEXT NOT NULL,
+                        `fileSize` INTEGER NOT NULL,
+                        `downloadedAt` INTEGER NOT NULL,
+                        PRIMARY KEY(`systemId`, `fileName`)
+                    )
+                    """.trimIndent(),
+                )
+                db.execSQL(
+                    """
+                    INSERT OR REPLACE INTO downloaded_roms_new(systemId, fileName, fileSize, downloadedAt)
+                    SELECT g.systemId, dr.fileName, dr.fileSize, dr.downloadedAt
+                    FROM downloaded_roms dr
+                    INNER JOIN games g ON g.fileName = dr.fileName
+                    INNER JOIN (
+                        SELECT fileName
+                        FROM games
+                        GROUP BY fileName
+                        HAVING COUNT(DISTINCT systemId) = 1
+                    ) unique_names ON unique_names.fileName = dr.fileName
+                    """.trimIndent(),
+                )
+                db.execSQL("DROP TABLE downloaded_roms")
+                db.execSQL("ALTER TABLE downloaded_roms_new RENAME TO downloaded_roms")
+            }
+        }
+
     val VERSION_22_23: Migration =
         object : Migration(22, 23) {
             override fun migrate(db: SupportSQLiteDatabase) {

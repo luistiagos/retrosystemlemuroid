@@ -37,11 +37,11 @@ if (-not $LaunchAfterInstall) {
 }
 
 if ($LaunchAfterInstall) {
-    Write-Host "Iniciando o Lemuroid..." -ForegroundColor Yellow
+    Write-Host "Iniciando o Retro Game System..." -ForegroundColor Yellow
     # Tenta usar o ADB do PATH
     $adbInPath = Get-Command adb -ErrorAction SilentlyContinue
     if ($adbInPath) {
-        & adb shell monkey -p com.swordfish.lemuroid.debug -c android.intent.category.LAUNCHER 1 | Out-Null
+        & adb shell monkey -p app.retrogamesystem.debug -c android.intent.category.LAUNCHER 1 | Out-Null
         if ($LASTEXITCODE -eq 0) {
             Write-Host "Aplicativo iniciado!" -ForegroundColor Green
         } else {

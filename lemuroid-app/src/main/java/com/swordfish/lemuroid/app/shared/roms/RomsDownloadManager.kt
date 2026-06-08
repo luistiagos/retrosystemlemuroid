@@ -457,7 +457,7 @@ class RomsDownloadManager(context: Context) {
             val existingBytes = if (destination.exists()) destination.length() else 0L
             val requestBuilder = Request.Builder()
                 .url(url)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .apply {
                     if (existingBytes > 0) {
                         header("Range", "bytes=$existingBytes-")
@@ -541,7 +541,7 @@ class RomsDownloadManager(context: Context) {
             Timber.d("fetchHfTree('$folderPath') page=$page url=$nextUrl")
             val request = Request.Builder()
                 .url(nextUrl)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .build()
             var resolvedNext: String? = null
             // Retry loop for this individual page request (handles 429 / transient errors).

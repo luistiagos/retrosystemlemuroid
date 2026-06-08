@@ -34,6 +34,7 @@ import com.swordfish.lemuroid.lib.core.CoreVariablesManager
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.library.ExposedSetting
 import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.saves.SavesManager
@@ -88,6 +89,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     private lateinit var baseGameScreenViewModel: BaseGameScreenViewModel
 
     private val startGameTime = System.currentTimeMillis()
+    private var fdsCurrentSideIndex = 0
+    private var fdsDiskInserted = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -210,17 +213,31 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             systemCoreConfig.exposedAdvancedSettings
                 .mapNotNull { transformExposedSetting(it, coreOptions) }
 
+        val retroGameView = baseGameScreenViewModel.retroGameView.retroGameView
+        val availableDisks = retroGameView?.getAvailableDisks() ?: 0
+        val fdsSideCount = baseGameScreenViewModel.retroGameView.fdsSideCount ?: 0
+        val menuDisks = if (game.systemId == SystemID.FDS.dbname) {
+            maxOf(availableDisks, fdsSideCount, 2)
+        } else {
+            availableDisks
+        }
+        val currentDisk = if (game.systemId == SystemID.FDS.dbname) {
+            fdsCurrentSideIndex
+        } else {
+            retroGameView?.getCurrentDisk() ?: 0
+        }.coerceIn(0, maxOf(menuDisks - 1, 0))
+
         val intent =
             Intent(this, getDialogClass()).apply {
                 this.putExtra(GameMenuContract.EXTRA_CORE_OPTIONS, options.toTypedArray())
                 this.putExtra(GameMenuContract.EXTRA_ADVANCED_CORE_OPTIONS, advancedOptions.toTypedArray())
                 this.putExtra(
                     GameMenuContract.EXTRA_CURRENT_DISK,
-                    baseGameScreenViewModel.retroGameView.retroGameView?.getCurrentDisk() ?: 0,
+                    currentDisk,
                 )
                 this.putExtra(
                     GameMenuContract.EXTRA_DISKS,
-                    baseGameScreenViewModel.retroGameView.retroGameView?.getAvailableDisks() ?: 0,
+                    menuDisks,
                 )
                 this.putExtra(GameMenuContract.EXTRA_GAME, game)
                 this.putExtra(GameMenuContract.EXTRA_SYSTEM_CORE_CONFIG, systemCoreConfig)
@@ -423,7 +440,13 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             }
             if (data?.hasExtra(GameMenuContract.RESULT_CHANGE_DISK) == true) {
                 val index = data.getIntExtra(GameMenuContract.RESULT_CHANGE_DISK, 0)
-                baseGameScreenViewModel.retroGameView.retroGameView?.changeDisk(index)
+                if (game.systemId == SystemID.FDS.dbname) {
+                    lifecycleScope.launch {
+                        changeFdsSide(index)
+                    }
+                } else {
+                    baseGameScreenViewModel.retroGameView.retroGameView?.changeDisk(index)
+                }
             }
             if (data?.hasExtra(GameMenuContract.RESULT_ENABLE_AUDIO) == true) {
                 baseGameScreenViewModel.retroGameView.retroGameView?.apply {
@@ -455,8 +478,44 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         }
     }
 
+    private suspend fun changeFdsSide(index: Int) {
+        val retroGameView = baseGameScreenViewModel.retroGameView.retroGameView ?: return
+        val sideCount = maxOf(baseGameScreenViewModel.retroGameView.fdsSideCount ?: 0, 2)
+        val targetSide = index.coerceIn(0, sideCount - 1)
+
+        Timber.i(
+            "FDS side change request: target=$targetSide current=$fdsCurrentSideIndex sides=$sideCount inserted=$fdsDiskInserted",
+        )
+
+        if (fdsDiskInserted) {
+            pulseRetroButton(KeyEvent.KEYCODE_BUTTON_R1)
+            fdsDiskInserted = false
+        }
+
+        val steps = (targetSide - fdsCurrentSideIndex + sideCount) % sideCount
+        repeat(steps) {
+            pulseRetroButton(KeyEvent.KEYCODE_BUTTON_L1)
+            fdsCurrentSideIndex = (fdsCurrentSideIndex + 1) % sideCount
+        }
+
+        pulseRetroButton(KeyEvent.KEYCODE_BUTTON_R1)
+        fdsDiskInserted = true
+    }
+
+    private suspend fun pulseRetroButton(keyCode: Int) {
+        val retroGameView = baseGameScreenViewModel.retroGameView.retroGameView ?: return
+        retroGameView.sendKeyEvent(KeyEvent.ACTION_DOWN, keyCode, FDS_CONTROL_PORT)
+        delay(FDS_BUTTON_PULSE_MS)
+        retroGameView.sendKeyEvent(KeyEvent.ACTION_UP, keyCode, FDS_CONTROL_PORT)
+        delay(FDS_BUTTON_GAP_MS)
+    }
+
     companion object {
         const val DIALOG_REQUEST = 100
+
+        private const val FDS_CONTROL_PORT = 0
+        private const val FDS_BUTTON_PULSE_MS = 80L
+        private const val FDS_BUTTON_GAP_MS = 120L
 
         private const val EXTRA_GAME = "GAME"
         private const val EXTRA_LOAD_SAVE = "LOAD_SAVE"

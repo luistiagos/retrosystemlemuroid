@@ -36,6 +36,7 @@
     <string name="game_system_abbr_arcade_fbneo">FBNeo</string>
     <string name="game_system_abbr_arcade_mame2003_plus">MAME2003</string>
     <string name="game_system_abbr_atari5200">A52</string>
+    <string name="game_system_abbr_atari800">A800</string>
     <string name="game_system_abbr_atari7800">A78</string>
     <string name="game_system_abbr_lynx">Lynx</string>
     <string name="game_system_abbr_pce">PCE</string>
@@ -78,6 +79,7 @@
     <string name="game_system_title_arcade_fbneo">FBNeo</string>
     <string name="game_system_title_arcade_mame2003_plus">MAME2003 Plus</string>
     <string name="game_system_title_atari5200">Atari 5200</string>
+    <string name="game_system_title_atari800">Atari 800</string>
     <string name="game_system_title_atari7800">Atari 7800</string>
     <string name="game_system_title_lynx">Atari Lynx</string>
     <string name="game_system_title_pce">PCEngine</string>
@@ -120,6 +122,18 @@
     <string name="game_system_title_zxspectrum">ZX Spectrum</string>
     <string name="game_system_abbr_amstradcpc">CPC</string>
     <string name="game_system_title_amstradcpc">Amstrad CPC</string>
+    <string name="game_system_abbr_gx4000">GX4000</string>
+    <string name="game_system_title_gx4000">Amstrad GX4000</string>
+    <string name="game_system_abbr_megaduck">Mega Duck</string>
+    <string name="game_system_title_megaduck">Mega Duck</string>
+    <string name="game_system_abbr_channelf">Channel F</string>
+    <string name="game_system_title_channelf">Fairchild Channel F</string>
+    <string name="game_system_abbr_uzebox">Uzebox</string>
+    <string name="game_system_title_uzebox">Uzebox</string>
+    <string name="game_system_abbr_lowresnx">LowRes NX</string>
+    <string name="game_system_title_lowresnx">LowRes NX</string>
+    <string name="game_system_abbr_arduboy">Arduboy</string>
+    <string name="game_system_title_arduboy">Arduboy</string>
     <string name="game_system_abbr_vectrex">Vectrex</string>
     <string name="game_system_title_vectrex">Vectrex</string>
     <string name="game_system_abbr_intellivision">Intellivision</string>
@@ -132,4 +146,22 @@
     <string name="game_system_title_dc">Sega Dreamcast</string>
     <string name="game_system_abbr_3do">3DO</string>
     <string name="game_system_title_3do">3DO Interactive Multiplayer</string>
+    <string name="game_system_abbr_pico8">PICO-8</string>
+    <string name="game_system_title_pico8">PICO-8</string>
+    <string name="game_system_abbr_vircon32">V32</string>
+    <string name="game_system_title_vircon32">Vircon32</string>
+    <string name="game_system_abbr_sega32x">32X</string>
+    <string name="game_system_title_sega32x">Sega 32X</string>
+    <string name="game_system_abbr_fds">FDS</string>
+    <string name="game_system_title_fds">Famicom Disk System</string>
+    <string name="game_system_abbr_gc">GC</string>
+    <string name="game_system_title_gc">Nintendo GameCube</string>
+    <string name="game_system_abbr_saturn">Saturn</string>
+    <string name="game_system_title_saturn">Sega Saturn</string>
+    <string name="game_system_abbr_jaguar">Jaguar</string>
+    <string name="game_system_title_jaguar">Atari Jaguar</string>
+    <string name="game_system_abbr_odyssey2">Odyssey 2</string>
+    <string name="game_system_title_odyssey2">Magnavox Odyssey 2</string>
+    <string name="game_system_abbr_neocd">Neo Geo CD</string>
+    <string name="game_system_title_neocd">Neo Geo CD</string>
 </resources>

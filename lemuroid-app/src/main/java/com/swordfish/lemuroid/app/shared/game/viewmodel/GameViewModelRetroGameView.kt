@@ -24,6 +24,7 @@ import com.swordfish.lemuroid.lib.game.GameLoaderError
 import com.swordfish.lemuroid.lib.game.GameLoaderException
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import java.io.File
@@ -79,6 +80,8 @@ class GameViewModelRetroGameView(
 
     private val retroGameViewFlow = MutableStateFlow<GLRetroView?>(null)
     var retroGameView: GLRetroView? by MutableStateProperty(retroGameViewFlow)
+    var fdsSideCount: Int? = null
+        private set
 
     fun getGameState(): Flow<GameState> {
         return gameState.debounce(200)
@@ -93,6 +96,7 @@ class GameViewModelRetroGameView(
     ) {
         val currentState = gameState.value
         if (currentState != GameState.Uninitialized) return
+        fdsSideCount = null
 
         val autoSaveEnabled = settingsManager.autoSave()
         val filter = settingsManager.screenFilter()
@@ -256,8 +260,14 @@ class GameViewModelRetroGameView(
 
             when (val gameFiles = gameData.gameFiles) {
                 is RomFiles.Standard -> {
-                    gameFilePath = gameFiles.files.firstOrNull()?.absolutePath
+                    val gameFile = gameFiles.files.firstOrNull()
                         ?: throw GameLoaderException(GameLoaderError.LoadGame)
+                    gameFilePath = gameFile.absolutePath
+                    fdsSideCount = if (gameData.game.systemId == SystemID.FDS.dbname) {
+                        countFdsSides(gameFile)
+                    } else {
+                        null
+                    }
                 }
 
                 is RomFiles.Virtual -> {
@@ -283,6 +293,30 @@ class GameViewModelRetroGameView(
             enableMicrophone = requestMicrophone
             immersiveMode = buildImmersiveModeConfiguration(enableImmersiveMode)
         }
+    }
+
+    private fun countFdsSides(file: File): Int? {
+        if (!file.isFile) return null
+
+        val length = file.length()
+        if (length < FDS_BYTES_PER_SIDE) return null
+
+        val header = ByteArray(FDS_HEADER_SIZE)
+        val bytesRead = file.inputStream().use { it.read(header) }
+        val hasHeader = bytesRead == FDS_HEADER_SIZE &&
+            header[0] == 'F'.code.toByte() &&
+            header[1] == 'D'.code.toByte() &&
+            header[2] == 'S'.code.toByte() &&
+            header[3] == 0x1a.toByte()
+
+        val sides = if (hasHeader) {
+            val headerSides = header[4].toInt() and 0xff
+            if (headerSides > 0) headerSides else ((length - FDS_HEADER_SIZE) / FDS_BYTES_PER_SIDE).toInt()
+        } else {
+            (length / FDS_BYTES_PER_SIDE).toInt()
+        }
+
+        return sides.coerceIn(1, FDS_MAX_SIDES)
     }
 
     private fun buildImmersiveModeConfiguration(enableImmersiveMode: Boolean): ImmersiveMode? {
@@ -432,5 +466,11 @@ class GameViewModelRetroGameView(
             }
 
         return message
+    }
+
+    companion object {
+        private const val FDS_BYTES_PER_SIDE = 65_500L
+        private const val FDS_HEADER_SIZE = 16
+        private const val FDS_MAX_SIDES = 8
     }
 }

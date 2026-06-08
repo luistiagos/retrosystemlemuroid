@@ -13,6 +13,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
 import java.io.InputStream
+import java.security.MessageDigest
 
 class BiosManager(private val directoriesManager: DirectoriesManager) {
     private val crcLookup = SUPPORTED_BIOS.associateByNotNull { it.externalCRC32 }
@@ -40,8 +41,9 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
 
         Timber.d("Required regional files for game: $requiredRegionalFiles")
 
+        val systemDirectory = directoriesManager.getSystemDirectory()
         return (coreConfig.requiredBIOSFiles + requiredRegionalFiles)
-            .filter { !File(directoriesManager.getSystemDirectory(), it).exists() }
+            .filter { !isBiosFileAvailable(systemDirectory, it) }
     }
 
     fun deleteBiosBefore(timestampMs: Long) {
@@ -56,9 +58,10 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
     }
 
     private fun buildBiosInfo(): BiosInfo {
+        val systemDirectory = directoriesManager.getSystemDirectory()
         val bios =
             SUPPORTED_BIOS.groupBy {
-                File(directoriesManager.getSystemDirectory(), it.libretroFileName).exists()
+                isBiosFileAvailable(systemDirectory, it.libretroFileName)
             }.withDefault { listOf() }
 
         return BiosInfo(bios.getValue(true), bios.getValue(false))
@@ -99,6 +102,36 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
 
     private fun findByName(storageFile: StorageFile): Bios? {
         return nameLookup[storageFile.name]
+    }
+
+    private fun isBiosFileAvailable(systemDirectory: File, fileName: String): Boolean {
+        val biosFile = File(systemDirectory, fileName)
+        if (!biosFile.exists()) return false
+
+        val expectedMd5 = biosEntryFor(fileName)?.md5 ?: return true
+        val actualMd5 = runCatching { md5Hex(biosFile) }
+            .onFailure { Timber.w(it, "Failed to calculate BIOS MD5: ${biosFile.path}") }
+            .getOrNull()
+
+        if (actualMd5 == null || !actualMd5.equals(expectedMd5, ignoreCase = true)) {
+            Timber.w("Invalid BIOS file: ${biosFile.path} expected=$expectedMd5 actual=$actualMd5")
+            biosFile.safeDelete()
+            return false
+        }
+
+        return true
+    }
+
+    private fun md5Hex(file: File): String {
+        val digest = MessageDigest.getInstance("MD5")
+        file.inputStream().use { input ->
+            val buffer = ByteArray(256 * 1024)
+            var bytesRead: Int
+            while (input.read(buffer).also { bytesRead = it } != -1) {
+                digest.update(buffer, 0, bytesRead)
+            }
+        }
+        return digest.digest().joinToString("") { "%02X".format(it) }
     }
 
     private fun normalizeTimestamp(timestamp: Long) = (timestamp / 1000) * 1000
@@ -180,11 +213,10 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                 ),
                 Bios(
                     "firmware.bin",
-                    "E45033D9B0FA6B0DE071292BBA7C9D13",
+                    "3C704824663CE26B6A1ED4D85238AE5B",
                     "Nintendo DS Firmware",
                     SystemID.NDS,
-                    "945F9DC9",
-                    "nds_firmware.bin",
+                    "13046805",
                 ),
                 Bios(
                     "gba_bios.bin",
@@ -282,6 +314,63 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     SystemID.DREAMCAST,
                     "C611B498",
                     "dc_flash.bin",
+                ),
+                // Famicom Disk System BIOS (FCEUmm)
+                Bios(
+                    "disksys.rom",
+                    "CA30B50F880EB660A320674ED365EF7A",
+                    "Famicom Disk System BIOS",
+                    SystemID.FDS,
+                    "5E607DCF",
+                ),
+                // Fairchild Channel F BIOS (FreeChaF) — files go in system/ root.
+                // MD5/CRC32 computed from the files hosted on the HuggingFace dataset;
+                // CRC32s match the canonical MAME "channelf" romset.
+                Bios(
+                    "sl31253.bin",
+                    "AC9804D4C0E9D07E33472E3726ED15C3",
+                    "Fairchild Channel F BIOS (PSU 1)",
+                    SystemID.CHANNEL_F,
+                    "04694ED9",
+                ),
+                Bios(
+                    "sl31254.bin",
+                    "DA98F4BB3242AB80D76629021BB27585",
+                    "Fairchild Channel F BIOS (PSU 2)",
+                    SystemID.CHANNEL_F,
+                    "9C047BA3",
+                ),
+                // Sega Saturn BIOS (YabaSanshiro) — file goes in system/ root as saturn_bios.bin.
+                // MD5/CRC32 computed from the file hosted on the HuggingFace dataset.
+                Bios(
+                    "saturn_bios.bin",
+                    "AF5828FDFF51384F99B3C4926BE27762",
+                    "Sega Saturn BIOS",
+                    SystemID.SATURN,
+                    "2ABA43C2",
+                    "saturn_bios.bin",
+                ),
+                // Magnavox Odyssey2 BIOS (O2EM) — file in system/ root as o2rom.bin (G7000 model).
+                // MD5/CRC32 computed from the file hosted on the HuggingFace dataset.
+                Bios(
+                    "o2rom.bin",
+                    "562D5EBF9E030A40D6FABFC2F33139FD",
+                    "Magnavox Odyssey2 BIOS (G7000)",
+                    SystemID.ODYSSEY2,
+                    "8016A315",
+                    "o2rom.bin",
+                ),
+                // Neo Geo CD BIOS (NeoCD) — goes in system/neocd/. The Universe BIOS 3.2 is
+                // region-free and auto-patched by the core. MD5/CRC32 computed from the file
+                // hosted on the HuggingFace dataset (under the neocd/ subfolder). Both the
+                // local path and the HF path carry the neocd/ prefix, so externalName matches.
+                Bios(
+                    "neocd/uni-bioscd.rom",
+                    "08CA8B2DBA6662E8024F9E789711C6FC",
+                    "Neo Geo CD BIOS (Universe BIOS 3.2)",
+                    SystemID.NEOCD,
+                    "FF3ABC59",
+                    "neocd/uni-bioscd.rom",
                 ),
             )
 

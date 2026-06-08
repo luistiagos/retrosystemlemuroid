@@ -126,19 +126,18 @@ class LocalStorageProvider(
      * Cases:
      *  - The storage scanner already resolved the inner entry name into
      *    [Game.fileName] (e.g. "Game.min" from a "Game.zip"): extract that entry.
-     *  - The game came from the manifest with [Game.fileName] still ending in .zip
-     *    and the system's libretro core does not declare "zip" as a supported
-     *    extension (PokéMini, Vectrex, C64, ...): find the first inner entry whose
-     *    extension matches the system's [GameSystem.supportedExtensions].
+    *  - The game came from the manifest with [Game.fileName] still ending in .zip:
+    *    find the first inner entry whose extension matches the system's ROM
+    *    extensions. This covers systems whose dumps use generic .bin/.rom names.
      *  - Arcade cores (FBNeo, MAME) declare "zip" as supported: return null so the
      *    raw zip is passed through.
      */
     private fun resolveZipEntryName(originalFile: File, game: Game): String? {
         if (originalFile.name != game.fileName) return game.fileName
         val system = GameSystem.findByIdOrNull(game.systemId) ?: return null
-        val supportedExts = system.supportedExtensions.map { it.lowercase() }
-        if ("zip" in supportedExts) return null
-        return GameCacheUtils.findInnerRomEntry(originalFile, supportedExts)
+        val innerExts = GameCacheUtils.getInnerRomExtensions(system)
+        if (innerExts.isEmpty()) return null
+        return GameCacheUtils.findInnerRomEntry(originalFile, innerExts)
     }
 
     override fun getGameRomFiles(

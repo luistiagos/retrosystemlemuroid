@@ -8,14 +8,34 @@ import com.swordfish.touchinput.radial.layouts.Arcade6Left
 import com.swordfish.touchinput.radial.layouts.Arcade6Right
 import com.swordfish.touchinput.radial.layouts.AmstradCPCLeft
 import com.swordfish.touchinput.radial.layouts.AmstradCPCRight
+import com.swordfish.touchinput.radial.layouts.AmstradGX4000Left
+import com.swordfish.touchinput.radial.layouts.AmstradGX4000Right
+import com.swordfish.touchinput.radial.layouts.ChannelFLeft
+import com.swordfish.touchinput.radial.layouts.ChannelFRight
 import com.swordfish.touchinput.radial.layouts.DreamcastLeft
 import com.swordfish.touchinput.radial.layouts.DreamcastRight
+import com.swordfish.touchinput.radial.layouts.GameCubeLeft
+import com.swordfish.touchinput.radial.layouts.GameCubeRight
+import com.swordfish.touchinput.radial.layouts.SaturnLeft
+import com.swordfish.touchinput.radial.layouts.SaturnRight
+import com.swordfish.touchinput.radial.layouts.JaguarLeft
+import com.swordfish.touchinput.radial.layouts.JaguarRight
+import com.swordfish.touchinput.radial.layouts.Odyssey2Left
+import com.swordfish.touchinput.radial.layouts.Odyssey2Right
+import com.swordfish.touchinput.radial.layouts.Genesis6Left
+import com.swordfish.touchinput.radial.layouts.Genesis6Right
 import com.swordfish.touchinput.radial.layouts.ThreeDOLeft
 import com.swordfish.touchinput.radial.layouts.ThreeDORight
+import com.swordfish.touchinput.radial.layouts.Pico8Left
+import com.swordfish.touchinput.radial.layouts.Pico8Right
+import com.swordfish.touchinput.radial.layouts.Vircon32Left
+import com.swordfish.touchinput.radial.layouts.Vircon32Right
 import com.swordfish.touchinput.radial.layouts.IntellivisionLeft
 import com.swordfish.touchinput.radial.layouts.IntellivisionRight
 import com.swordfish.touchinput.radial.layouts.Atari2600Left
 import com.swordfish.touchinput.radial.layouts.Atari2600Right
+import com.swordfish.touchinput.radial.layouts.Atari800Left
+import com.swordfish.touchinput.radial.layouts.Atari800Right
 import com.swordfish.touchinput.radial.layouts.C64Left
 import com.swordfish.touchinput.radial.layouts.C64Right
 import com.swordfish.touchinput.radial.layouts.Atari7800Left
@@ -101,6 +121,17 @@ enum class TouchControllerID {
     INTELLIVISION,
     DREAMCAST,
     THREE_DO,
+    PICO_8,
+    VIRCON32,
+    SEGA_32X,
+    FDS,
+    ATARI800,
+    AMSTRAD_GX4000,
+    CHANNEL_F,
+    GAMECUBE,
+    SATURN,
+    JAGUAR,
+    ODYSSEY2,
     ;
 
     class Config(
@@ -307,6 +338,72 @@ enum class TouchControllerID {
                     Config(
                         { modifier, settings -> ThreeDOLeft(modifier, settings) },
                         { modifier, settings -> ThreeDORight(modifier, settings) },
+                    )
+
+                PICO_8 ->
+                    Config(
+                        { modifier, settings -> Pico8Left(modifier, settings) },
+                        { modifier, settings -> Pico8Right(modifier, settings) },
+                    )
+
+                VIRCON32 ->
+                    Config(
+                        { modifier, settings -> Vircon32Left(modifier, settings) },
+                        { modifier, settings -> Vircon32Right(modifier, settings) },
+                    )
+
+                SEGA_32X ->
+                    Config(
+                        { modifier, settings -> Genesis6Left(modifier, settings) },
+                        { modifier, settings -> Genesis6Right(modifier, settings) },
+                    )
+
+                FDS ->
+                    Config(
+                        { modifier, settings -> NESLeft(modifier, settings) },
+                        { modifier, settings -> NESRight(modifier, settings) },
+                    )
+
+                ATARI800 ->
+                    Config(
+                        { modifier, settings -> Atari800Left(modifier, settings) },
+                        { modifier, settings -> Atari800Right(modifier, settings) },
+                    )
+
+                AMSTRAD_GX4000 ->
+                    Config(
+                        { modifier, settings -> AmstradGX4000Left(modifier, settings) },
+                        { modifier, settings -> AmstradGX4000Right(modifier, settings) },
+                    )
+
+                CHANNEL_F ->
+                    Config(
+                        { modifier, settings -> ChannelFLeft(modifier, settings) },
+                        { modifier, settings -> ChannelFRight(modifier, settings) },
+                    )
+
+                GAMECUBE ->
+                    Config(
+                        { modifier, settings -> GameCubeLeft(modifier, settings) },
+                        { modifier, settings -> GameCubeRight(modifier, settings) },
+                    )
+
+                SATURN ->
+                    Config(
+                        { modifier, settings -> SaturnLeft(modifier, settings) },
+                        { modifier, settings -> SaturnRight(modifier, settings) },
+                    )
+
+                JAGUAR ->
+                    Config(
+                        { modifier, settings -> JaguarLeft(modifier, settings) },
+                        { modifier, settings -> JaguarRight(modifier, settings) },
+                    )
+
+                ODYSSEY2 ->
+                    Config(
+                        { modifier, settings -> Odyssey2Left(modifier, settings) },
+                        { modifier, settings -> Odyssey2Right(modifier, settings) },
                     )
             }
         }

@@ -17,7 +17,7 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 fun FavoritesScreen(
     modifier: Modifier = Modifier,
     viewModel: FavoritesViewModel,
-    downloadedFileNames: Set<String> = emptySet(),
+    downloadedGameKeys: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
 ) {
@@ -39,7 +39,7 @@ fun FavoritesScreen(
             val game = games[index] ?: return@items
             LemuroidGameCard(
                 game = game,
-                isDownloaded = downloadedFileNames.contains(game.fileName),
+                isDownloaded = downloadedGameKeys.contains(game.downloadKey),
                 onClick = { onGameClick(game) },
                 onLongClick = { onGameLongClick(game) },
             )

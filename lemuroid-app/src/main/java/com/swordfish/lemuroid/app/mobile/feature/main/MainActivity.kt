@@ -14,12 +14,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.res.stringResource
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -81,8 +84,8 @@ import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.roms.SaveQueueManager
-import com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
+import com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.android.RetrogradeComponentActivity
@@ -261,8 +264,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 }
             }
 
-            val downloadedFileNames =
-                mainViewModel.downloadedFileNames
+            val downloadedGameKeys =
+                mainViewModel.downloadedGameKeys
                     .collectAsState()
                     .value
 
@@ -344,7 +347,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                             coresSelection,
                                         ),
                                 ),
-                            downloadedFileNames = downloadedFileNames,
+                            downloadedGameKeys = downloadedGameKeys,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
@@ -357,7 +360,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 viewModel(
                                     factory = FavoritesViewModel.Factory(retrogradeDb),
                                 ),
-                            downloadedFileNames = downloadedFileNames,
+                            downloadedGameKeys = downloadedGameKeys,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                         )
@@ -371,7 +374,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 ),
                             searchQuery = mainUIState.searchQuery,
                             systemIds = mainUIState.currentSystemIds,
-                            downloadedFileNames = downloadedFileNames,
+                            downloadedGameKeys = downloadedGameKeys,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
@@ -410,7 +413,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
-                            downloadedFileNames = downloadedFileNames,
+                            downloadedGameKeys = downloadedGameKeys,
                             titlesWithVariants = titlesWithVariants,
                         )
                     }
@@ -432,7 +435,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                         ),
                                 ),
                             navController = navController,
-                            onCheckUpdate = { updateViewModel.checkManually() },
+                                onCheckUpdate = { updateViewModel.checkManually() },
                         )
                     }
                     composable(MainRoute.SETTINGS_ADVANCED) {
@@ -577,8 +580,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             MainGameContextActions(
                 selectedGameState = selectedGameState,
                 shortcutSupported = gameInteractor.supportShortcuts(),
-                isGameDownloaded = selectedGameState.value?.fileName
-                    ?.let { downloadedFileNames.contains(it) } ?: true,
+                isGameDownloaded = selectedGameState.value
+                    ?.let { downloadedGameKeys.contains(it.downloadKey) } ?: true,
                 onGamePlay = { game ->
                     if (!isGamePlaceholder(game)) {
                         gameInteractor.onGamePlay(game)
@@ -647,7 +650,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 GameVariantsModal(
                     game = game,
                     variants = variantGames.value,
-                    downloadedFileNames = downloadedFileNames,
+                    downloadedGameKeys = downloadedGameKeys,
                     onDismiss = { pendingVariantsGame.value = null },
                     onVariantSelected = { variant ->
                         pendingVariantsGame.value = null
@@ -683,6 +686,96 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 )
             }
 
+            when (val updateState = updateViewModel.state.collectAsState().value) {
+                is AppUpdateViewModel.State.UpdateAvailable -> {
+                    AlertDialog(
+                        onDismissRequest = { updateViewModel.dismissUpdate() },
+                        title = {
+                            Text(stringResource(R.string.update_dialog_title, updateState.info.versionName))
+                        },
+                        text = {
+                            Text(stringResource(R.string.update_dialog_message))
+                        },
+                        confirmButton = {
+                            androidx.compose.material3.TextButton(
+                                onClick = { updateViewModel.startUpdate(updateState.info) },
+                            ) {
+                                Text(stringResource(R.string.update_dialog_yes))
+                            }
+                        },
+                        dismissButton = {
+                            androidx.compose.material3.TextButton(
+                                onClick = { updateViewModel.dismissUpdate() },
+                            ) {
+                                Text(stringResource(R.string.update_dialog_no))
+                            }
+                        },
+                    )
+                }
+                is AppUpdateViewModel.State.Downloading -> {
+                    AlertDialog(
+                        onDismissRequest = {},
+                        title = {
+                            Text(stringResource(R.string.update_downloading_title))
+                        },
+                        text = {
+                            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text(
+                                    stringResource(
+                                        R.string.update_downloading_message,
+                                        (updateState.progress * 100).toInt(),
+                                    ),
+                                )
+                                LinearProgressIndicator(
+                                    progress = { updateState.progress },
+                                    modifier = Modifier.fillMaxWidth(),
+                                )
+                            }
+                        },
+                        confirmButton = {},
+                    )
+                }
+                AppUpdateViewModel.State.NoUpdate -> {
+                    AlertDialog(
+                        onDismissRequest = { updateViewModel.resetState() },
+                        title = {
+                            Text(stringResource(R.string.update_no_update_title))
+                        },
+                        text = {
+                            Text(stringResource(R.string.update_no_update_message))
+                        },
+                        confirmButton = {
+                            androidx.compose.material3.TextButton(
+                                onClick = { updateViewModel.resetState() },
+                            ) {
+                                Text(stringResource(R.string.ok))
+                            }
+                        },
+                    )
+                }
+                is AppUpdateViewModel.State.Error -> {
+                    AlertDialog(
+                        onDismissRequest = { updateViewModel.resetState() },
+                        title = {
+                            Text(stringResource(R.string.update_error_title))
+                        },
+                        text = {
+                            Text(updateState.message)
+                        },
+                        confirmButton = {
+                            androidx.compose.material3.TextButton(
+                                onClick = { updateViewModel.resetState() },
+                            ) {
+                                Text(stringResource(R.string.ok))
+                            }
+                        },
+                    )
+                }
+                AppUpdateViewModel.State.Checking,
+                AppUpdateViewModel.State.Idle,
+                AppUpdateViewModel.State.Installing -> Unit
+            }
+
             if (infoDialogDisplayed.value) {
                 val message =
                     remember {
@@ -701,113 +794,6 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 )
             }
 
-            // ── App-update dialogs ────────────────────────────────────────────
-            val updateState = updateViewModel.state.collectAsState().value
-            when (val s = updateState) {
-                is AppUpdateViewModel.State.UpdateAvailable -> {
-                    AlertDialog(
-                        onDismissRequest = { updateViewModel.dismissUpdate() },
-                        title = {
-                            androidx.compose.material3.Text(
-                                stringResource(R.string.update_dialog_title, s.info.versionName)
-                            )
-                        },
-                        text = {
-                            androidx.compose.material3.Text(
-                                stringResource(R.string.update_dialog_message)
-                            )
-                        },
-                        confirmButton = {
-                            androidx.compose.material3.TextButton(
-                                onClick = { updateViewModel.startUpdate(s.info) }
-                            ) {
-                                androidx.compose.material3.Text(
-                                    stringResource(R.string.update_dialog_yes)
-                                )
-                            }
-                        },
-                        dismissButton = {
-                            androidx.compose.material3.TextButton(
-                                onClick = { updateViewModel.dismissUpdate() }
-                            ) {
-                                androidx.compose.material3.Text(
-                                    stringResource(R.string.update_dialog_no)
-                                )
-                            }
-                        },
-                    )
-                }
-                is AppUpdateViewModel.State.Downloading -> {
-                    AlertDialog(
-                        onDismissRequest = {},
-                        title = {
-                            androidx.compose.material3.Text(
-                                stringResource(R.string.update_downloading_title)
-                            )
-                        },
-                        text = {
-                            androidx.compose.foundation.layout.Column(
-                                verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(8.dp)
-                            ) {
-                                androidx.compose.material3.Text(
-                                    stringResource(
-                                        R.string.update_downloading_message,
-                                        (s.progress * 100).toInt()
-                                    )
-                                )
-                                androidx.compose.material3.LinearProgressIndicator(
-                                    progress = { s.progress },
-                                    modifier = Modifier.fillMaxWidth(),
-                                )
-                            }
-                        },
-                        confirmButton = {},
-                    )
-                }
-                is AppUpdateViewModel.State.NoUpdate -> {
-                    AlertDialog(
-                        onDismissRequest = { updateViewModel.resetState() },
-                        title = {
-                            androidx.compose.material3.Text(
-                                stringResource(R.string.update_no_update_title)
-                            )
-                        },
-                        text = {
-                            androidx.compose.material3.Text(
-                                stringResource(R.string.update_no_update_message)
-                            )
-                        },
-                        confirmButton = {
-                            androidx.compose.material3.TextButton(
-                                onClick = { updateViewModel.resetState() }
-                            ) {
-                                androidx.compose.material3.Text(stringResource(R.string.ok))
-                            }
-                        },
-                    )
-                }
-                is AppUpdateViewModel.State.Error -> {
-                    AlertDialog(
-                        onDismissRequest = { updateViewModel.resetState() },
-                        title = {
-                            androidx.compose.material3.Text(
-                                stringResource(R.string.update_error_title)
-                            )
-                        },
-                        text = {
-                            androidx.compose.material3.Text(s.message)
-                        },
-                        confirmButton = {
-                            androidx.compose.material3.TextButton(
-                                onClick = { updateViewModel.resetState() }
-                            ) {
-                                androidx.compose.material3.Text(stringResource(R.string.ok))
-                            }
-                        },
-                    )
-                }
-                else -> {}
-            }
         }
     }
 

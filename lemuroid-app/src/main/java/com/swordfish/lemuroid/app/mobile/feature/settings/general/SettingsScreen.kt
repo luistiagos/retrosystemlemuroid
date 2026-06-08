@@ -93,7 +93,7 @@ private fun MiscSettings(
     indexingInProgress: Boolean,
     isSaveSyncSupported: Boolean,
     navController: NavController,
-    onCheckUpdate: () -> Unit = {},
+    onCheckUpdate: () -> Unit,
 ) {
     LemuroidCardSettingsGroup(
         title = { Text(text = stringResource(id = R.string.settings_category_misc)) },

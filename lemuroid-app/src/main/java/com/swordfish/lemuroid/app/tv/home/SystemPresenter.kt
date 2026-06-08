@@ -9,23 +9,28 @@ import androidx.leanback.widget.Presenter
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.tv.shared.TVCardFocusHighlight
+import com.swordfish.lemuroid.lib.library.SystemLogoResolver
 
 class SystemPresenter(private val cardSize: Int, private val cardPadding: Int) : Presenter() {
     override fun onBindViewHolder(
         viewHolder: Presenter.ViewHolder?,
         item: Any,
     ) {
-        val viewHolder = viewHolder as? ViewHolder ?: return
+        val holder = viewHolder as? ViewHolder ?: return
         val systemInfo = item as? MetaSystemInfo ?: return
-        val context = viewHolder.view.context
+        val context = holder.view.context
 
-        viewHolder.mCardView.titleText = context.resources.getString(systemInfo.metaSystem.titleResId)
-        viewHolder.mCardView.contentText = context.getString(R.string.system_grid_details, systemInfo.count.toString())
-        viewHolder.mCardView.setMainImageDimensions(cardSize, cardSize)
-        viewHolder.mCardView.mainImageView.setImageResource(systemInfo.metaSystem.imageResId)
-        viewHolder.mCardView.mainImageView.setPadding(cardPadding, cardPadding, cardPadding, cardPadding)
-        viewHolder.mCardView.setMainImageScaleType(ImageView.ScaleType.FIT_CENTER)
-        viewHolder.mCardView.mainImageView.setBackgroundColor(systemInfo.metaSystem.color())
+        holder.mCardView.titleText = context.resources.getString(systemInfo.metaSystem.titleResId)
+        holder.mCardView.contentText = context.getString(R.string.system_grid_details, systemInfo.count.toString())
+        holder.mCardView.setMainImageDimensions(cardSize, cardSize)
+        holder.mCardView.mainImageView.setImageResource(
+            SystemLogoResolver.resolve(systemInfo.metaSystem, hovered = holder.mCardView.hasFocus())
+        )
+        holder.mCardView.mainImageView.setPadding(cardPadding, cardPadding, cardPadding, cardPadding)
+        holder.mCardView.setMainImageScaleType(ImageView.ScaleType.FIT_CENTER)
+        holder.mCardView.mainImageView.setBackgroundColor(systemInfo.metaSystem.color())
+
+        holder.mCardView.tag = systemInfo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): Presenter.ViewHolder {
@@ -33,7 +38,12 @@ class SystemPresenter(private val cardSize: Int, private val cardPadding: Int) :
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
         cardView.findViewById<TextView>(androidx.leanback.R.id.content_text)?.setTextColor(Color.LTGRAY)
-        TVCardFocusHighlight.setupOnCard(cardView)
+        TVCardFocusHighlight.setupOnCard(cardView) { hasFocus ->
+            val systemInfo = cardView.tag as? MetaSystemInfo ?: return@setupOnCard
+            cardView.mainImageView.setImageResource(
+                SystemLogoResolver.resolve(systemInfo.metaSystem, hovered = hasFocus)
+            )
+        }
         return ViewHolder(cardView)
     }
 

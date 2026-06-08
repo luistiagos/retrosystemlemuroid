@@ -14,6 +14,7 @@ import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.shared.library.CoreUpdateBroadcastReceiver
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexBroadcastReceiver
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.app.mobile.feature.main.MainActivity
 
 class NotificationsManager(private val applicationContext: Context) {
     fun gameRunningNotification(game: Game?): Notification {
@@ -125,6 +126,55 @@ class NotificationsManager(private val applicationContext: Context) {
                 .setContentText(applicationContext.getString(R.string.save_sync_notification_message))
                 .setProgress(100, 0, true)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
+
+        return builder.build()
+    }
+
+    /**
+     * Notification for the on-demand ROM download queue (SaveQueueManager).
+     * Shows the current game being downloaded with a deterministic progress bar.
+     *
+     * @param gameTitle  Title of the ROM being downloaded, or null when the queue is
+     *                   starting up and no item is active yet.
+     * @param progress   Download progress in [0.0, 1.0]. Ignored when gameTitle is null.
+     * @param queuedCount Number of items still waiting in QUEUED state (excluding the active one).
+     */
+    fun romQueueNotification(gameTitle: String?, progress: Float, queuedCount: Int): Notification {
+        createDownloadNotificationChannel()
+
+        val mainIntent = Intent(applicationContext, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        val contentIntent = PendingIntent.getActivity(
+            applicationContext, 0, mainIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+
+        val title = gameTitle
+            ?: applicationContext.getString(R.string.notification_rom_queue_title)
+        val progressPct = (progress * 100).toInt()
+        val text = when {
+            gameTitle != null && queuedCount > 0 ->
+                applicationContext.getString(R.string.notification_rom_queue_more, queuedCount)
+            gameTitle != null ->
+                applicationContext.getString(R.string.notification_rom_queue_downloading, progressPct)
+            else ->
+                applicationContext.getString(R.string.notification_rom_queue_waiting)
+        }
+
+        val builder = NotificationCompat.Builder(applicationContext, DOWNLOAD_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_lemuroid_tiny)
+            .setContentTitle(title)
+            .setContentText(text)
+            .setOngoing(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setContentIntent(contentIntent)
+
+        if (gameTitle != null && progress > 0f) {
+            builder.setProgress(100, progressPct, false)
+        } else {
+            builder.setProgress(100, 0, true)
+        }
 
         return builder.build()
     }

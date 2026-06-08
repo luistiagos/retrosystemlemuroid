@@ -46,9 +46,9 @@ class MainViewModel(
 
     val state = buildStateFlow()
 
-    val downloadedFileNames: StateFlow<Set<String>> =
+    val downloadedGameKeys: StateFlow<Set<String>> =
         retrogradeDb.downloadedRomDao()
-            .observeAllDownloadedFileNames()
+            .observeAllDownloadedKeys()
             .map { it.toHashSet() as Set<String> }
             .stateIn(viewModelScope, SharingStarted.Lazily, emptySet())
 

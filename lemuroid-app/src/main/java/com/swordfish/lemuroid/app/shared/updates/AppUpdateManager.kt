@@ -19,33 +19,17 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-/**
- * Manages app self-updates.
- *
- * Version metadata is fetched from [VERSION_ENDPOINT]:
- *   GET → { "versionCode": 232, "versionName": "1.18.0", "apkUrl": "https://…" }
- *
- * The APK is downloaded to cacheDir/updates/lemuroid-update.apk and installed via
- * PackageInstaller (API 21+). On API 31+ the install is silent; on older APIs the
- * system shows its standard install prompt.
- *
- * ROMs, saves and states live in getExternalFilesDir — they are untouched by an
- * install-replace operation.
- */
 class AppUpdateManager(private val context: Context) {
 
     data class UpdateInfo(
         val versionCode: Int,
         val versionName: String,
         val apkUrl: String,
+        val channel: String,
     )
 
     companion object {
-        /**
-         * JSON endpoint that returns the latest version manifest.
-         * Expected response: {"versionCode":232,"versionName":"1.18.0","apkUrl":"https://…"}
-         */
-        const val VERSION_ENDPOINT = "https://emuladores.pythonanywhere.com/app_version"
+        val VERSION_ENDPOINT: String = BuildConfig.APP_UPDATE_ENDPOINT
     }
 
     private val httpClient: OkHttpClient by lazy {
@@ -57,68 +41,68 @@ class AppUpdateManager(private val context: Context) {
             .build()
     }
 
-    /**
-     * Fetches version metadata from [VERSION_ENDPOINT].
-     * Returns [UpdateInfo] when a newer version exists, null when already up-to-date or on error.
-     */
     suspend fun checkForUpdate(): UpdateInfo? = withContext(Dispatchers.IO) {
-        try {
-            val info = fetchVersionInfo() ?: return@withContext null
-            if (info.versionCode <= BuildConfig.VERSION_CODE) {
-                Timber.d("App up-to-date (current=${BuildConfig.VERSION_CODE}, remote=${info.versionCode})")
-                null
-            } else {
-                Timber.d("Update available: ${info.versionName} (code=${info.versionCode})")
-                info
-            }
-        } catch (e: Exception) {
-            Timber.w(e, "Update check failed: ${e.message}")
+        val info = fetchVersionInfo()
+        if (info.versionCode <= BuildConfig.VERSION_CODE) {
+            Timber.d(
+                "App up-to-date " +
+                    "(channel=${BuildConfig.APP_UPDATE_CHANNEL}, current=${BuildConfig.VERSION_CODE}, remote=${info.versionCode})",
+            )
             null
+        } else {
+            Timber.d("Update available: ${info.versionName} (channel=${info.channel}, code=${info.versionCode})")
+            info
         }
     }
 
-    /**
-     * Downloads the APK for [info] and triggers system installation.
-     * Reports overall progress 0.0–1.0 via [onProgress].
-     */
-    suspend fun downloadAndInstall(info: UpdateInfo, onProgress: (Float) -> Unit) =
-        withContext(Dispatchers.IO) {
-            val destFile = File(context.cacheDir, "updates/lemuroid-update.apk")
-            destFile.parentFile?.mkdirs()
+    suspend fun downloadAndInstall(
+        info: UpdateInfo,
+        onProgress: (Float) -> Unit,
+    ) = withContext(Dispatchers.IO) {
+        val destFile = File(context.cacheDir, "updates/lemuroid-update.apk")
+        destFile.parentFile?.mkdirs()
 
-            Timber.d("Downloading update ${info.versionName} from ${info.apkUrl}")
-            downloadApk(info.apkUrl, destFile, onProgress)
-            Timber.d("APK ready: ${destFile.absolutePath} (${destFile.length()} bytes)")
+        Timber.d("Downloading update ${info.versionName} from ${info.apkUrl}")
+        downloadApk(info.apkUrl, destFile, onProgress)
+        Timber.d("APK ready: ${destFile.absolutePath} (${destFile.length()} bytes)")
 
-            installApk(destFile)
-        }
+        installApk(destFile)
+    }
 
-    // ── Private helpers ───────────────────────────────────────────────────────
-
-    private fun fetchVersionInfo(): UpdateInfo? {
+    private fun fetchVersionInfo(): UpdateInfo {
         val request = Request.Builder()
             .url(VERSION_ENDPOINT)
-            .header("User-Agent", "LemuroidApp/${BuildConfig.VERSION_NAME}")
+            .header("User-Agent", "LemuroidApp/${BuildConfig.VERSION_NAME} (${BuildConfig.APP_UPDATE_CHANNEL})")
             .build()
         httpClient.newCall(request).execute().use { response ->
             if (!response.isSuccessful) {
-                Timber.w("Version check HTTP ${response.code}")
-                return null
+                throw IOException("Version check failed: HTTP ${response.code}")
             }
-            val body = response.body?.string() ?: return null
+            val body = response.body?.string() ?: throw IOException("Version check failed: empty response body")
             val json = JSONObject(body)
+            val channel = json.optString("channel", BuildConfig.APP_UPDATE_CHANNEL)
+            if (!channel.equals(BuildConfig.APP_UPDATE_CHANNEL, ignoreCase = true)) {
+                throw IOException(
+                    "Update channel mismatch: expected ${BuildConfig.APP_UPDATE_CHANNEL}, got $channel",
+                )
+            }
             return UpdateInfo(
                 versionCode = json.getInt("versionCode"),
                 versionName = json.getString("versionName"),
                 apkUrl = json.getString("apkUrl"),
+                channel = channel,
             )
         }
     }
 
-    private fun downloadApk(url: String, dest: File, onProgress: (Float) -> Unit) {
+    private fun downloadApk(
+        url: String,
+        dest: File,
+        onProgress: (Float) -> Unit,
+    ) {
         val request = Request.Builder()
             .url(url)
-            .header("User-Agent", "LemuroidApp/${BuildConfig.VERSION_NAME}")
+            .header("User-Agent", "LemuroidApp/${BuildConfig.VERSION_NAME} (${BuildConfig.APP_UPDATE_CHANNEL})")
             .build()
         httpClient.newCall(request).execute().use { response ->
             if (!response.isSuccessful) throw IOException("HTTP ${response.code}: ${response.message}")
@@ -127,11 +111,11 @@ class AppUpdateManager(private val context: Context) {
             var downloaded = 0L
             FileOutputStream(dest, false).use { out ->
                 body.byteStream().use { input ->
-                    val buf = ByteArray(256 * 1024)
-                    var n: Int
-                    while (input.read(buf).also { n = it } != -1) {
-                        out.write(buf, 0, n)
-                        downloaded += n
+                    val buffer = ByteArray(256 * 1024)
+                    var bytesRead: Int
+                    while (input.read(buffer).also { bytesRead = it } != -1) {
+                        out.write(buffer, 0, bytesRead)
+                        downloaded += bytesRead
                         onProgress((downloaded.toFloat() / total).coerceAtMost(1f))
                     }
                 }
@@ -156,10 +140,10 @@ class AppUpdateManager(private val context: Context) {
         val sessionId = installer.createSession(params)
         val session = installer.openSession(sessionId)
         try {
-            apkFile.inputStream().use { src ->
-                session.openWrite("lemuroid.apk", 0, apkFile.length()).use { dst ->
-                    src.copyTo(dst)
-                    session.fsync(dst)
+            apkFile.inputStream().use { source ->
+                session.openWrite("lemuroid.apk", 0, apkFile.length()).use { target ->
+                    source.copyTo(target)
+                    session.fsync(target)
                 }
             }
             val callbackIntent = Intent(context, UpdateInstallReceiver::class.java)

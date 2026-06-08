@@ -61,6 +61,13 @@ object GameCacheUtils {
         }
     }
 
+    fun getInnerRomExtensions(system: GameSystem): List<String> {
+        return (system.uniqueExtensions + system.supportedExtensions)
+            .map { it.lowercase() }
+            .filterNot { it == "zip" }
+            .distinct()
+    }
+
     fun getDataFileForGame(
         folderName: String,
         context: Context,

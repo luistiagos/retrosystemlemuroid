@@ -2,7 +2,12 @@ param(
     [string]$Task = ":lemuroid-app:assembleFreeBundleRelease",
     [switch]$Debug,                # alias rápido para assembleFreeBundleDebug
     [switch]$SkipPrebuiltCheck,    # pula validação dos pré-requisitos do prebuilt DB
-    [switch]$Install               # instala via ADB no fim
+    [switch]$Install,              # instala via ADB no fim
+    [string]$CatalogChannel = "default",
+    [string]$CatalogManifest = "",
+    [string]$AppUpdateChannel = "",
+    [string]$AppUpdateEndpoint = "",
+    [string]$CatalogApplicationIdSuffix = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -14,8 +19,18 @@ $distDir = Join-Path $repoRoot "dist"
 
 # Caminhos consumidos pela Gradle task `generatePrebuiltDb` (buildSrc/PrebuiltDbGenerator.kt).
 # Se algum faltar, o build falha tarde dentro do Gradle com erro pouco amigável — validamos cedo.
-$catalogManifest = Join-Path $repoRoot "lemuroid-app\src\main\assets\catalog_manifest.txt"
-$roomSchemaJson  = Join-Path $repoRoot "retrograde-app-shared\schemas\com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase\23.json"
+$catalogManifest = if ([string]::IsNullOrWhiteSpace($CatalogManifest)) {
+    Join-Path $repoRoot "lemuroid-app\src\main\assets\catalog_manifest.txt"
+} elseif ([System.IO.Path]::IsPathRooted($CatalogManifest)) {
+    $CatalogManifest
+} else {
+    Join-Path $repoRoot $CatalogManifest
+}
+$roomSchemaJson  = Join-Path $repoRoot "retrograde-app-shared\schemas\com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase\24.json"
+
+if ([string]::IsNullOrWhiteSpace($AppUpdateChannel)) {
+    $AppUpdateChannel = $CatalogChannel
+}
 
 if ($Debug) {
     $Task = ":lemuroid-app:assembleFreeBundleDebug"
@@ -24,11 +39,6 @@ if ($Debug) {
 if (-not (Test-Path $gradleWrapper)) {
     throw "Gradle wrapper nao encontrado em $gradleWrapper"
 }
-
-# Redireciona o cache do Gradle para E: pois C: pode estar sem espaco livre.
-# GRADLE_USER_HOME afeta cache de builds, daemons e dependencias baixadas.
-$env:GRADLE_USER_HOME = "E:\.gradle"
-New-Item -ItemType Directory -Path $env:GRADLE_USER_HOME -Force | Out-Null
 
 New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 
@@ -47,19 +57,41 @@ if (-not $SkipPrebuiltCheck) {
     Write-Host "  catalog_manifest.txt: $manifestLines linhas ($manifestSizeMb MB)"
 
     if (-not (Test-Path $roomSchemaJson)) {
-        Write-Warning "schemas/23.json ausente em $roomSchemaJson"
+        Write-Warning "schemas/24.json ausente em $roomSchemaJson"
         Write-Warning "  isso normalmente significa que o kapt ainda nao gerou. Rode um build basico primeiro:"
         Write-Warning "    .\gradlew.bat :retrograde-app-shared:kaptDebugKotlin"
-        throw "Pre-requisito faltando: schemas/23.json"
+        throw "Pre-requisito faltando: schemas/24.json"
     }
     $schemaIdentityHash = (Select-String -Path $roomSchemaJson -Pattern '"identityHash":\s*"([a-f0-9]+)"' |
         Select-Object -First 1).Matches.Groups[1].Value
-    Write-Host "  schemas/23.json identityHash: $schemaIdentityHash"
+    Write-Host "  schemas/24.json identityHash: $schemaIdentityHash"
 }
 
 Write-Host ""
 Write-Host "Executando $Task..."
-& $gradleWrapper $Task
+$gradleArgs = @(
+    $Task,
+    "-PcatalogChannel=$CatalogChannel",
+    "-PappUpdateChannel=$AppUpdateChannel",
+    "-PcatalogManifest=$catalogManifest"
+)
+if (-not [string]::IsNullOrWhiteSpace($AppUpdateEndpoint)) {
+    $gradleArgs += "-PappUpdateEndpoint=$AppUpdateEndpoint"
+}
+if (-not [string]::IsNullOrWhiteSpace($CatalogApplicationIdSuffix)) {
+    $gradleArgs += "-PcatalogApplicationIdSuffix=$CatalogApplicationIdSuffix"
+}
+
+Write-Host "  catalogChannel: $CatalogChannel"
+Write-Host "  appUpdateChannel: $AppUpdateChannel"
+Write-Host "  catalogManifest: $catalogManifest"
+if (-not [string]::IsNullOrWhiteSpace($AppUpdateEndpoint)) {
+    Write-Host "  appUpdateEndpoint: $AppUpdateEndpoint"
+}
+if (-not [string]::IsNullOrWhiteSpace($CatalogApplicationIdSuffix)) {
+    Write-Host "  applicationId suffix: $CatalogApplicationIdSuffix"
+}
+& $gradleWrapper @gradleArgs
 
 if ($LASTEXITCODE -ne 0) {
     throw "Build falhou com codigo $LASTEXITCODE"
@@ -101,7 +133,12 @@ if (-not $SkipPrebuiltCheck) {
 }
 
 # ── Copia para dist/ ────────────────────────────────────────────────────────
-$desiredApkName = "retro-game-system.apk"
+$safeChannelName = $CatalogChannel -replace '[^A-Za-z0-9_-]', '_'
+$desiredApkName = if ($safeChannelName -eq "default") {
+    "retro-game-system.apk"
+} else {
+    "retro-game-system-$safeChannelName.apk"
+}
 $distApkPath = Join-Path $distDir $desiredApkName
 Copy-Item -Path $apkFile.FullName -Destination $distApkPath -Force
 
@@ -124,7 +161,7 @@ if ($Install) {
         # Reinstall preservando dados (sem uninstall). Use -r para sobrescrever.
         & $adb install -r $distApkPath
         if ($LASTEXITCODE -ne 0) {
-            Write-Warning "Falha ao instalar. Talvez precise: adb uninstall com.swordfish.lemuroid (ou .debug)"
+            Write-Warning "Falha ao instalar. Talvez seja necessario remover uma instalacao anterior antes de tentar novamente."
         }
     }
 }

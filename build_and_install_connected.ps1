@@ -1,7 +1,7 @@
 param(
     [string]$Task = ":lemuroid-app:assembleFreeBundleDebug",
     [string]$Serial = "",
-    [string]$PackageName = "com.swordfish.lemuroid.debug",
+    [string]$PackageName = "app.retrogamesystem.debug",
     [switch]$LaunchAfterInstall
 )
 

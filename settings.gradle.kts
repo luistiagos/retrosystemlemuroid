@@ -28,6 +28,7 @@ fun usePlayDynamicFeatures(): Boolean {
 
 if (usePlayDynamicFeatures()) {
     include(
+        ":lemuroid_core_a5200",
         ":lemuroid_core_desmume",
         ":lemuroid_core_dosbox_pure",
         ":lemuroid_core_fbneo",
@@ -59,39 +60,36 @@ if (usePlayDynamicFeatures()) {
         ":lemuroid_core_potator",
         ":lemuroid_core_gearcoleco",
         ":lemuroid_core_flycast",
-        ":lemuroid_core_opera"
+        ":lemuroid_core_opera",
+        ":lemuroid_core_fake08",
+        ":lemuroid_core_vircon32",
+        ":lemuroid_core_picodrive",
+        ":lemuroid_core_atari800",
+        ":lemuroid_core_sameduck",
+        ":lemuroid_core_freechaf",
+        ":lemuroid_core_uzem",
+        ":lemuroid_core_lowresnx",
+        ":lemuroid_core_arduous",
+        ":lemuroid_core_dolphin",
+        ":lemuroid_core_yabasanshiro",
+        ":lemuroid_core_virtualjaguar",
+        ":lemuroid_core_o2em",
+        ":lemuroid_core_neocd"
     )
 
-    project(":lemuroid_core_gambatte").projectDir = File("lemuroid-cores/lemuroid_core_gambatte")
-    project(":lemuroid_core_desmume").projectDir = File("lemuroid-cores/lemuroid_core_desmume")
-    project(":lemuroid_core_melonds").projectDir = File("lemuroid-cores/lemuroid_core_melonds")
-    project(":lemuroid_core_fbneo").projectDir = File("lemuroid-cores/lemuroid_core_fbneo")
-    project(":lemuroid_core_fceumm").projectDir = File("lemuroid-cores/lemuroid_core_fceumm")
-    project(":lemuroid_core_genesis_plus_gx").projectDir = File("lemuroid-cores/lemuroid_core_genesis_plus_gx")
-    project(":lemuroid_core_mame2003_plus").projectDir = File("lemuroid-cores/lemuroid_core_mame2003_plus")
-    project(":lemuroid_core_mgba").projectDir = File("lemuroid-cores/lemuroid_core_mgba")
-    project(":lemuroid_core_mupen64plus_next_gles3").projectDir = File("lemuroid-cores/lemuroid_core_mupen64plus_next_gles3")
-    project(":lemuroid_core_pcsx_rearmed").projectDir = File("lemuroid-cores/lemuroid_core_pcsx_rearmed")
-    project(":lemuroid_core_ppsspp").projectDir = File("lemuroid-cores/lemuroid_core_ppsspp")
-    project(":lemuroid_core_snes9x").projectDir = File("lemuroid-cores/lemuroid_core_snes9x")
-    project(":lemuroid_core_stella").projectDir = File("lemuroid-cores/lemuroid_core_stella")
-    project(":lemuroid_core_handy").projectDir = File("lemuroid-cores/lemuroid_core_handy")
-    project(":lemuroid_core_prosystem").projectDir = File("lemuroid-cores/lemuroid_core_prosystem")
-    project(":lemuroid_core_mednafen_pce_fast").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_pce_fast")
-    project(":lemuroid_core_mednafen_ngp").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_ngp")
-    project(":lemuroid_core_mednafen_wswan").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_wswan")
-    project(":lemuroid_core_dosbox_pure").projectDir = File("lemuroid-cores/lemuroid_core_dosbox_pure")
-    project(":lemuroid_core_citra").projectDir = File("lemuroid-cores/lemuroid_core_citra")
-    project(":lemuroid_core_fmsx").projectDir = File("lemuroid-cores/lemuroid_core_fmsx")
-    project(":lemuroid_core_mednafen_vb").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_vb")
-    project(":lemuroid_core_vice_x64sc").projectDir = File("lemuroid-cores/lemuroid_core_vice_x64sc")
-    project(":lemuroid_core_fuse").projectDir = File("lemuroid-cores/lemuroid_core_fuse")
-    project(":lemuroid_core_cap32").projectDir = File("lemuroid-cores/lemuroid_core_cap32")
-    project(":lemuroid_core_vecx").projectDir = File("lemuroid-cores/lemuroid_core_vecx")
-    project(":lemuroid_core_freeintv").projectDir = File("lemuroid-cores/lemuroid_core_freeintv")
-    project(":lemuroid_core_pokemini").projectDir = File("lemuroid-cores/lemuroid_core_pokemini")
-    project(":lemuroid_core_potator").projectDir = File("lemuroid-cores/lemuroid_core_potator")
-    project(":lemuroid_core_gearcoleco").projectDir = File("lemuroid-cores/lemuroid_core_gearcoleco")
-    project(":lemuroid_core_flycast").projectDir = File("lemuroid-cores/lemuroid_core_flycast")
     project(":lemuroid_core_opera").projectDir = File("lemuroid-cores/lemuroid_core_opera")
+    project(":lemuroid_core_fake08").projectDir = File("lemuroid-cores/lemuroid_core_fake08")
+    project(":lemuroid_core_vircon32").projectDir = File("lemuroid-cores/lemuroid_core_vircon32")
+    project(":lemuroid_core_picodrive").projectDir = File("lemuroid-cores/lemuroid_core_picodrive")
+    project(":lemuroid_core_atari800").projectDir = File("lemuroid-cores/lemuroid_core_atari800")
+    project(":lemuroid_core_sameduck").projectDir = File("lemuroid-cores/lemuroid_core_sameduck")
+    project(":lemuroid_core_freechaf").projectDir = File("lemuroid-cores/lemuroid_core_freechaf")
+    project(":lemuroid_core_uzem").projectDir = File("lemuroid-cores/lemuroid_core_uzem")
+    project(":lemuroid_core_lowresnx").projectDir = File("lemuroid-cores/lemuroid_core_lowresnx")
+    project(":lemuroid_core_arduous").projectDir = File("lemuroid-cores/lemuroid_core_arduous")
+    project(":lemuroid_core_dolphin").projectDir = File("lemuroid-cores/lemuroid_core_dolphin")
+    project(":lemuroid_core_yabasanshiro").projectDir = File("lemuroid-cores/lemuroid_core_yabasanshiro")
+    project(":lemuroid_core_virtualjaguar").projectDir = File("lemuroid-cores/lemuroid_core_virtualjaguar")
+    project(":lemuroid_core_o2em").projectDir = File("lemuroid-cores/lemuroid_core_o2em")
+    project(":lemuroid_core_neocd").projectDir = File("lemuroid-cores/lemuroid_core_neocd")
 }

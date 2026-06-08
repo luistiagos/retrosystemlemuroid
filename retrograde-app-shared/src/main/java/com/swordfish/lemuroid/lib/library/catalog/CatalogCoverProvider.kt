@@ -4,7 +4,7 @@ import android.content.Context
 import java.io.IOException
 
 /**
- * Reads the embedded `assets/catalog_manifest.txt` and exposes fast lookups
+ * Reads the embedded catalog manifest asset and exposes fast lookups
  * for cover URLs, titles, and popularity indexes by `"systemId/fileName"` key.
  *
  * Manifest line format (pipe-delimited, 5 fields; field 5 optional, defaults to 1):
@@ -19,7 +19,14 @@ import java.io.IOException
  *                 `0` = variant hidden from the catalog. Default `1` when field is absent
  *                 so older manifests still work.)
  */
-class CatalogCoverProvider(private val context: Context) {
+class CatalogCoverProvider(
+    private val context: Context,
+    private val manifestAssetName: String = DEFAULT_MANIFEST_ASSET,
+) {
+
+    companion object {
+        const val DEFAULT_MANIFEST_ASSET = "catalog_manifest.txt"
+    }
 
     data class ManifestEntry(
         val title: String?,
@@ -49,7 +56,7 @@ class CatalogCoverProvider(private val context: Context) {
     private fun loadFromAssets(): Map<String, ManifestEntry> {
         val map = mutableMapOf<String, ManifestEntry>()
         try {
-            context.assets.open("catalog_manifest.txt").bufferedReader().useLines { lines ->
+            context.assets.open(manifestAssetName).bufferedReader().useLines { lines ->
                 lines.filter { it.isNotBlank() }
                     .forEach { line ->
                         val parts = line.split('|')

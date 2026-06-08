@@ -115,7 +115,7 @@ class RomOnDemandManager(
             val request = Request.Builder()
                 .url("https://archive.org/account/login")
                 .post(body)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .header("Referer", "https://archive.org/")
                 .build()
             httpClient.newCall(request).execute().use { response ->
@@ -211,6 +211,7 @@ class RomOnDemandManager(
 
         downloadedRomDao.insert(
             DownloadedRom(
+                systemId = finalGame.systemId,
                 fileName = finalGame.fileName,
                 fileSize = finalFile.length(),
             ),
@@ -234,7 +235,7 @@ class RomOnDemandManager(
         for (attempt in 1..3) {
             val request = Request.Builder()
                 .url(findUrl)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .build()
             var retryAfterMs: Long? = null
             try {
@@ -292,8 +293,16 @@ class RomOnDemandManager(
                 FileOutputStream(destFile, false).use { }
             }
         }
-        downloadedRomDao.deleteByFileName(game.fileName)
+        downloadedRomDao.delete(game.systemId, game.fileName)
         LibraryIndexScheduler.triggerCatalogQuickLoad(context)
+    }
+
+    fun isManagedRom(game: Game): Boolean {
+        return runCatching {
+            val romsDir = directoriesManager.getInternalRomsDirectory().canonicalFile
+            val destFile = resolveDestFile(game).canonicalFile
+            destFile.path == romsDir.path || destFile.path.startsWith(romsDir.path + File.separator)
+        }.getOrDefault(false)
     }
 
     /**
@@ -379,11 +388,12 @@ class RomOnDemandManager(
         val maxAttempts = 5
         val parsedUrl = Uri.parse(url)
         val isArchive = isArchiveHost(parsedUrl.host ?: "")
+        val partialFile = File(destFile.parentFile, "${destFile.name}.download")
         if (isArchive) ensureArchiveSession()
         for (attempt in 1..maxAttempts) {
             val request = Request.Builder()
                 .url(url)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .build()
 
             val call = httpClient.newCall(request)
@@ -415,6 +425,9 @@ class RomOnDemandManager(
                             Timber.d("downloadToFile HTTP ${response.code} contentLength=$contentLength url=$url")
 
                             destFile.parentFile?.mkdirs()
+                            if (partialFile.exists() && !partialFile.delete()) {
+                                throw IOException("Cannot clear previous partial download: ${partialFile.name}")
+                            }
 
                             // Pre-check: if server reports file size, verify available space now
                             // to fail fast with a clear message rather than erroring mid-write.
@@ -432,7 +445,7 @@ class RomOnDemandManager(
 
                             var bytesWritten = 0L
 
-                            FileOutputStream(destFile, false).use { out ->
+                            FileOutputStream(partialFile, false).use { out ->
                                 body.byteStream().use { input ->
                                     val buffer = ByteArray(256 * 1024)
                                     var n: Int
@@ -449,6 +462,17 @@ class RomOnDemandManager(
                                     }
                                 }
                             }
+                            if (contentLength > 0 && bytesWritten != contentLength) {
+                                throw IOException(
+                                    "Download incompleto: esperado $contentLength bytes, recebido $bytesWritten bytes",
+                                )
+                            }
+                            if (destFile.exists() && !destFile.delete()) {
+                                throw IOException("Cannot replace existing ROM: ${destFile.name}")
+                            }
+                            if (!partialFile.renameTo(destFile)) {
+                                throw IOException("Cannot finalize download: ${destFile.name}")
+                            }
                             Timber.d("downloadToFile complete: bytesWritten=$bytesWritten contentLength=$contentLength")
                             onProgress(1f)
                             return // success
@@ -456,11 +480,14 @@ class RomOnDemandManager(
                     }
                 }
             } catch (e: CancellationException) {
+                partialFile.delete()
                 throw e
             } catch (e: PermanentHttpException) {
+                partialFile.delete()
                 Timber.e("downloadToFile permanent error (not retrying): ${e.message}")
                 throw e
             } catch (e: IOException) {
+                partialFile.delete()
                 // OkHttp throws IOException when call.cancel() is called — treat it as cancellation
                 // so the retry loop does not restart a download the user explicitly stopped.
                 if (call.isCanceled()) throw CancellationException("Download cancelled by user", e)

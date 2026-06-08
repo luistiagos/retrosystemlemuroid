@@ -22,6 +22,7 @@ package com.swordfish.lemuroid.app
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity
@@ -34,6 +35,7 @@ import com.swordfish.lemuroid.app.shared.game.ExternalGameLauncherActivity
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService
 import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.roms.SaveQueueManager
 import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
@@ -131,6 +133,9 @@ abstract class LemuroidApplicationModule {
     @ContributesAndroidInjector(modules = [GamePadShortcutBindingActivity.Module::class])
     abstract fun gamepadShortcutBindingActivity(): GamePadShortcutBindingActivity
 
+    @ContributesAndroidInjector
+    abstract fun downloadForegroundService(): DownloadForegroundService
+
     @Module
     companion object {
         @Provides
@@ -226,6 +231,7 @@ abstract class LemuroidApplicationModule {
                     Migrations.VERSION_20_21,
                     Migrations.VERSION_21_22,
                     Migrations.VERSION_22_23,
+                    Migrations.VERSION_23_24,
                 )
                 .fallbackToDestructiveMigration()
                 .setJournalMode(androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
@@ -238,7 +244,8 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun catalogCoverProvider(context: Context): CatalogCoverProvider = CatalogCoverProvider(context)
+        fun catalogCoverProvider(context: Context): CatalogCoverProvider =
+            CatalogCoverProvider(context, BuildConfig.CATALOG_MANIFEST_ASSET)
 
         @Provides
         @PerApp

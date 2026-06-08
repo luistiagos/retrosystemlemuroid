@@ -81,6 +81,49 @@ Resposta esperada:
 
 A comparação é feita por `versionCode` (inteiro). O download é iniciado apenas quando `versionCode remoto > BuildConfig.VERSION_CODE`.
 
+### Canais de catálogo/update
+
+Builds distintos podem ter catálogos e fluxos de atualização separados sem criar novas flavors Gradle. O build aceita propriedades:
+
+Documentação operacional completa: [`canais-catalogo-update.md`](canais-catalogo-update.md).
+
+| Propriedade | Padrão | Uso |
+|---|---|---|
+| `catalogChannel` | `default` | Identifica a edição/catálogo do APK. |
+| `catalogManifest` | `lemuroid-app/src/main/assets/catalog_manifest.txt` | Manifest alternativo usado para gerar o `retrograde-prebuilt.db` e empacotado como asset. |
+| `appUpdateChannel` | valor de `catalogChannel` | Canal consultado pelo update. |
+| `appUpdateBaseUrl` | `https://emuladores.pythonanywhere.com/app_version` | Base usada para montar endpoint por canal. |
+| `appUpdateEndpoint` | base ou `base/<channel>` | Endpoint exato, caso precise sobrescrever. |
+| `catalogApplicationIdSuffix` | vazio | Sufixo opcional para instalar edições lado a lado, ex.: `.ps2`. |
+
+Exemplo:
+
+```powershell
+.\gradlew.bat :lemuroid-app:assembleFreeBundleRelease `
+  -PcatalogChannel=ps2 `
+  -PcatalogManifest=..\..\fetchimagers\catalog_manifest_ps2.txt `
+  -PcatalogApplicationIdSuffix=.ps2
+```
+
+Esse APK lê o catálogo alternativo, gera o DB prebuilt a partir dele e consulta:
+
+```
+GET https://emuladores.pythonanywhere.com/app_version/ps2
+```
+
+Resposta recomendada para canal:
+
+```json
+{
+  "channel": "ps2",
+  "versionCode": 232,
+  "versionName": "1.18.0-ps2",
+  "apkUrl": "https://emuladores.pythonanywhere.com/static/apks/retro-game-system-ps2-v1.18.0.apk"
+}
+```
+
+Se `channel` vier no JSON e for diferente de `BuildConfig.APP_UPDATE_CHANNEL`, o app recusa o update para evitar trocar uma edição por outra acidentalmente.
+
 ---
 
 ## Instalação por Android Version

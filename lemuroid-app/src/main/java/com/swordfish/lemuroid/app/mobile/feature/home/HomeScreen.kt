@@ -55,7 +55,7 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
-    downloadedFileNames: Set<String> = emptySet(),
+    downloadedGameKeys: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onOpenCoreSelection: () -> Unit,
@@ -122,7 +122,7 @@ fun HomeScreen(
         state.value,
         downloadRomsState.value,
         streamingRomsState.value,
-        downloadedFileNames,
+        downloadedGameKeys,
         onGameClick,
         onGameLongClick,
         onOpenCoreSelection,
@@ -150,7 +150,7 @@ private fun HomeScreen(
     state: HomeViewModel.UIState,
     downloadRomsState: DownloadRomsState,
     streamingRomsState: StreamingRomsState,
-    downloadedFileNames: Set<String> = emptySet(),
+    downloadedGameKeys: Set<String> = emptySet(),
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onOpenCoreSelection: () -> Unit,
@@ -256,21 +256,21 @@ private fun HomeScreen(
         homeGridSection(
             sectionRecent,
             state.recentGames,
-            downloadedFileNames,
+            downloadedGameKeys,
             onGameClicked,
             onGameLongClick,
         )
         homeGridSection(
             sectionFavorites,
             state.favoritesGames,
-            downloadedFileNames,
+            downloadedGameKeys,
             onGameClicked,
             onGameLongClick,
         )
         homeGridSection(
             sectionDiscover,
             state.discoveryGames,
-            downloadedFileNames,
+            downloadedGameKeys,
             onGameClicked,
             onGameLongClick,
         )
@@ -280,7 +280,7 @@ private fun HomeScreen(
 private fun LazyGridScope.homeGridSection(
     title: String,
     games: List<Game>,
-    downloadedFileNames: Set<String>,
+    downloadedGameKeys: Set<String>,
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
 ) {
@@ -298,7 +298,7 @@ private fun LazyGridScope.homeGridSection(
         LemuroidGameCard(
             modifier = Modifier.fillMaxWidth(),
             game = game,
-            isDownloaded = downloadedFileNames.contains(game.fileName),
+            isDownloaded = downloadedGameKeys.contains(game.downloadKey),
             onClick = { onGameClicked(game) },
             onLongClick = { onGameLongClick(game) },
         )

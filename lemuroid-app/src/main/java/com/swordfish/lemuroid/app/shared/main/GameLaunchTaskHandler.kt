@@ -72,8 +72,8 @@ class GameLaunchTaskHandler(
         // Only treat as corruption if the error signal indicates the ROM file itself failed to load.
         // Other errors (e.g. missing BIOS) are user-actionable and should be shown as-is.
         if (game != null && isRomLoadFailure) {
-            val wasDownloaded = retrogradeDb.downloadedRomDao().isDownloaded(game.fileName)
-            if (wasDownloaded) {
+            val wasDownloaded = retrogradeDb.downloadedRomDao().isDownloaded(game.systemId, game.fileName)
+            if (wasDownloaded || romOnDemandManager.isManagedRom(game)) {
                 romOnDemandManager.deleteRom(game)
                 handleUnsuccessfulGameFinish(
                     activity,

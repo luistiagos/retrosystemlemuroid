@@ -179,6 +179,7 @@ class SaveQueueManager(
 
     private fun ensureProcessorRunning() {
         if (processorJob?.isActive == true) return
+        DownloadForegroundService.start(appContext)
         processorJob = scope.launch(Dispatchers.IO) { processQueue() }
     }
 

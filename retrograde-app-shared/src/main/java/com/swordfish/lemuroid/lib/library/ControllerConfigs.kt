@@ -457,6 +457,107 @@ object ControllerConfigs {
                 ),
         )
 
+    val AMSTRAD_GX4000 =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.AMSTRAD_GX4000,
+            mergeDPADAndLeftStickEvents = true,
+            // The GX4000 is a cartridge console built on the Amstrad CPC Plus hardware, so
+            // cap32 registers its joystick controller with the same descriptor as the CPC,
+            // "Amstrad Joystick". Matching it forces setControllerType(port, RETRO_DEVICE_JOYPAD)
+            // so the two fire buttons + d-pad work (same mechanism as Amstrad CPC / 3DO).
+            libretroDescriptor = "Amstrad Joystick",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val ARDUBOY =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            // The Arduboy has only a d-pad and two buttons (A, B), so it reuses the Game Boy
+            // touch layout (same pattern as Mega Duck). arduous maps the Arduboy A button to
+            // RetroPad A and B to RetroPad B, and defaults its port to RETRO_DEVICE_JOYPAD.
+            TouchControllerID.GB,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val LOWRES_NX =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            // LowRes NX is a fantasy console with NES-style controls (d-pad, two action buttons,
+            // Start, Select), so it reuses the NES touch layout. Button 1 -> RetroPad A,
+            // Button 2 -> RetroPad B. The core defaults its port to RETRO_DEVICE_JOYPAD.
+            TouchControllerID.NES,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val UZEBOX =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            // The Uzebox uses standard SNES controllers; uzem maps the RetroPad directly to the
+            // SNES gamepad, so it reuses the SNES touch layout (same pattern as VECTREX->SNES).
+            // uzem defaults its port to RETRO_DEVICE_JOYPAD, so no libretroDescriptor is needed.
+            TouchControllerID.SNES,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_L_R,
+                ),
+        )
+
+    val CHANNEL_F =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            // FreeChaF does NOT call SET_CONTROLLER_INFO and processes RETRO_DEVICE_JOYPAD by
+            // default, so no libretroDescriptor override is required. Button mapping (from the
+            // core's retro_input_descriptor): B=push/fire, A=rotate right, Y=rotate left,
+            // X=pull, SELECT=swap controllers, START=toggle console/controller input.
+            TouchControllerID.CHANNEL_F,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val MEGADUCK =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            // The Mega Duck is a Game Boy clone with identical controls (d-pad, A, B, Start,
+            // Select), so it reuses the Game Boy touch layout (same pattern as MSX->SMS).
+            // SameDuck (SameBoy-based) defaults its port to RETRO_DEVICE_JOYPAD, so no
+            // libretroDescriptor override is needed.
+            TouchControllerID.GB,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
     val VECTREX =
         ControllerConfig(
             "default",
@@ -515,6 +616,162 @@ object ControllerConfigs {
                     TILT_CONFIGURATION_DISABLED,
                     TILT_CONFIGURATION_CROSS,
                     TILT_CONFIGURATION_L_R,
+                ),
+        )
+
+    val PICO_8 =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.PICO_8,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val VIRCON32 =
+        ControllerConfig(
+            "default",
+            R.string.controller_vircon32,
+            TouchControllerID.VIRCON32,
+            mergeDPADAndLeftStickEvents = true,
+            libretroDescriptor = "Vircon32 Gamepad",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_L_R,
+                ),
+        )
+
+    val SEGA_32X =
+        ControllerConfig(
+            "default_6",
+            R.string.controller_sega32x,
+            TouchControllerID.SEGA_32X,
+            mergeDPADAndLeftStickEvents = true,
+            libretroDescriptor = "MD Joypad 6 Button",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val FDS =
+        ControllerConfig(
+            "default",
+            R.string.controller_fds,
+            TouchControllerID.FDS,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val ATARI800 =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.ATARI800,
+            mergeDPADAndLeftStickEvents = true,
+            // The atari800 core registers the JOYPAD-subclass joystick via
+            // SET_CONTROLLER_INFO literally as "ATARI Joystick". Matching it forces
+            // setControllerType(port, RETRO_DEVICE_ATARI_JOYSTICK) so joystick input
+            // is processed (same mechanism as 3DO/Amstrad).
+            libretroDescriptor = "ATARI Joystick",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val GAMECUBE =
+        ControllerConfig(
+            "default",
+            R.string.controller_gc,
+            TouchControllerID.GAMECUBE,
+            allowTouchRotation = true,
+            // Dolphin registers the GameCube pad via SET_CONTROLLER_INFO literally as
+            // "GameCube Controller" (RETRO_DEVICE_JOYPAD). Matching it forces
+            // setControllerType(port, RETRO_DEVICE_JOYPAD) so input is processed.
+            libretroDescriptor = "GameCube Controller",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_ANALOG_LEFT,
+                    TILT_CONFIGURATION_L2_R2,
+                ),
+        )
+
+    val SATURN =
+        ControllerConfig(
+            "default",
+            R.string.controller_saturn,
+            TouchControllerID.SATURN,
+            mergeDPADAndLeftStickEvents = true,
+            // YabaSanshiro registers the digital Saturn pad via SET_CONTROLLER_INFO
+            // literally as "Saturn Pad" (RETRO_DEVICE_JOYPAD). Matching it forces
+            // setControllerType(port, RETRO_DEVICE_JOYPAD) so input is processed.
+            libretroDescriptor = "Saturn Pad",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_L2_R2,
+                ),
+        )
+
+    val JAGUAR =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.JAGUAR,
+            mergeDPADAndLeftStickEvents = true,
+            // Virtual Jaguar does NOT call SET_CONTROLLER_INFO and processes
+            // RETRO_DEVICE_JOYPAD by default, so no libretroDescriptor override is needed.
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val ODYSSEY2 =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.ODYSSEY2,
+            mergeDPADAndLeftStickEvents = true,
+            // O2EM does NOT call SET_CONTROLLER_INFO and processes RETRO_DEVICE_JOYPAD
+            // by default, so no libretroDescriptor override is needed.
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val NEOCD =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            // Neo Geo CD uses the standard 4-button Neo Geo pad, so it reuses the Arcade
+            // 4-button touch layout (same as FBNeo Neo Geo). NeoCD processes
+            // RETRO_DEVICE_JOYPAD by default, so no libretroDescriptor override is needed.
+            TouchControllerID.ARCADE_4,
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
                 ),
         )
 }

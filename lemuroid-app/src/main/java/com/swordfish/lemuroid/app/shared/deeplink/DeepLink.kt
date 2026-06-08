@@ -6,15 +6,17 @@ import android.net.Uri
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 object DeepLink {
+    private const val SCHEME = "retrogamesystem"
+
     fun openLeanbackUri(appContext: Context): Uri {
-        return Uri.parse("lemuroid://${appContext.packageName}/open-leanback")
+        return Uri.parse("$SCHEME://${appContext.packageName}/open-leanback")
     }
 
     private fun uriForGame(
         appContext: Context,
         game: Game,
     ): Uri {
-        return Uri.parse("lemuroid://${appContext.packageName}/play-game/id/${game.id}")
+        return Uri.parse("$SCHEME://${appContext.packageName}/play-game/id/${game.id}")
     }
 
     fun launchIntentForGame(

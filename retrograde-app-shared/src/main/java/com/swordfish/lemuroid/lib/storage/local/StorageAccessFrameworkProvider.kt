@@ -9,6 +9,7 @@ import com.swordfish.lemuroid.common.kotlin.extractEntryToFile
 import com.swordfish.lemuroid.common.kotlin.isZipped
 import com.swordfish.lemuroid.common.kotlin.writeToFile
 import com.swordfish.lemuroid.lib.R
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.DataFile
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
@@ -135,10 +136,10 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
         val originalDocument = DocumentFile.fromSingleUri(context, originalDocumentUri)
             ?: throw IOException("Cannot open document for URI: $originalDocumentUri")
 
-        val isZipped = originalDocument.isZipped() && originalDocument.name != game.fileName
+        val zipEntryName = if (originalDocument.isZipped()) resolveZipEntryName(originalDocument, game) else null
 
         return when {
-            isZipped && dataFiles.isEmpty() -> getGameRomFilesZipped(game, originalDocument)
+            zipEntryName != null && dataFiles.isEmpty() -> getGameRomFilesZipped(game, originalDocument, zipEntryName)
             allowVirtualFiles -> getGameRomFilesVirtual(game, dataFiles)
             else -> getGameRomFilesStandard(game, dataFiles, originalDocument)
         }
@@ -157,18 +158,49 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
     private fun getGameRomFilesZipped(
         game: Game,
         originalDocument: DocumentFile,
+        entryName: String,
     ): RomFiles {
-        val cacheFile = GameCacheUtils.getCacheFileForGame(SAF_CACHE_SUBFOLDER, context, game)
-        if (cacheFile.exists()) {
+        val cacheFile = GameCacheUtils.getCacheFileForGame(
+            SAF_CACHE_SUBFOLDER, context, game, fileName = File(entryName).name,
+        )
+        if (cacheFile.exists() && cacheFile.length() > 0L) {
             return RomFiles.Standard(listOf(cacheFile))
         }
 
         val inputStream = context.contentResolver.openInputStream(originalDocument.uri)
             ?: throw IOException("Cannot open input stream for: ${originalDocument.uri}")
         ZipInputStream(inputStream).use { stream ->
-            stream.extractEntryToFile(game.fileName, cacheFile)
+            stream.extractEntryToFile(entryName, cacheFile)
         }
         return RomFiles.Standard(listOf(cacheFile))
+    }
+
+    private fun resolveZipEntryName(originalDocument: DocumentFile, game: Game): String? {
+        val documentName = originalDocument.name
+        if (documentName != null && documentName != game.fileName) return game.fileName
+        val system = GameSystem.findByIdOrNull(game.systemId) ?: return null
+        val innerExts = GameCacheUtils.getInnerRomExtensions(system)
+        if (innerExts.isEmpty()) return null
+        return findInnerRomEntry(originalDocument, innerExts)
+    }
+
+    private fun findInnerRomEntry(
+        originalDocument: DocumentFile,
+        supportedExtensions: Collection<String>,
+    ): String? {
+        val exts = supportedExtensions.map { it.lowercase() }.toSet()
+        val inputStream = context.contentResolver.openInputStream(originalDocument.uri)
+            ?: throw IOException("Cannot open input stream for: ${originalDocument.uri}")
+        ZipInputStream(inputStream).use { stream ->
+            var entry = stream.nextEntry
+            while (entry != null) {
+                if (!entry.isDirectory && entry.name.substringAfterLast('.', "").lowercase() in exts) {
+                    return entry.name
+                }
+                entry = stream.nextEntry
+            }
+        }
+        return null
     }
 
     private fun getGameRomFilesVirtual(

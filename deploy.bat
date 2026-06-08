@@ -23,8 +23,8 @@ echo.
 :: Opcional: Iniciar o aplicativo apos o deploy
 set /p START_APP="Deseja iniciar o aplicativo agora? (s/n): "
 if /i "%START_APP%"=="s" (
-    echo Iniciando o Lemuroid...
-    adb shell monkey -p com.swordfish.lemuroid.debug -c android.intent.category.LAUNCHER 1 >nul 2>&1
+    echo Iniciando o Retro Game System...
+    adb shell monkey -p app.retrogamesystem.debug -c android.intent.category.LAUNCHER 1 >nul 2>&1
     if %errorlevel% neq 0 (
         echo Nao foi possivel iniciar o app automaticamente. Certifique-se de que o ADB esta no PATH.
     ) else (

@@ -6,11 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageInstaller
 import timber.log.Timber
 
-/**
- * Receives PackageInstaller callbacks after the APK install session completes.
- * On API < 31 the session may need the user to confirm via a system activity —
- * this receiver starts that confirmation activity automatically.
- */
 class UpdateInstallReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val status = intent.getIntExtra(PackageInstaller.EXTRA_STATUS, -1)

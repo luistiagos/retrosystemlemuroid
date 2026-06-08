@@ -48,7 +48,8 @@ object BiosDownloader {
 
     private suspend fun downloadSingle(fileName: String, systemDir: File) {
         val destFile = File(systemDir, fileName)
-        val url = "$BASE_URL/$fileName"
+        val remoteFileName = BiosManager.biosEntryFor(fileName)?.externalName ?: fileName
+        val url = "$BASE_URL/$remoteFileName"
 
         // Create parent directory if needed (e.g. dc/ for Dreamcast BIOS)
         destFile.parentFile?.mkdirs()
@@ -86,7 +87,7 @@ object BiosDownloader {
             val existingBytes = if (destFile.exists()) destFile.length() else 0L
             val request = Request.Builder()
                 .url(url)
-                .header("User-Agent", "LemuroidApp/1.0")
+                .header("User-Agent", "RetroGameSystem/1.0")
                 .apply { if (existingBytes > 0) header("Range", "bytes=$existingBytes-") }
                 .build()
             try {

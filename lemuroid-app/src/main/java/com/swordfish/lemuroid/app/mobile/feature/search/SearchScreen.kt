@@ -27,7 +27,7 @@ fun SearchScreen(
     viewModel: SearchViewModel,
     searchQuery: String,
     systemIds: List<String>? = null,
-    downloadedFileNames: Set<String> = emptySet(),
+    downloadedGameKeys: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
@@ -80,7 +80,7 @@ fun SearchScreen(
                 SearchResultsView(
                     modifier,
                     searchGames,
-                    downloadedFileNames,
+                    downloadedGameKeys,
                     onGameClick,
                     onGameLongClick,
                     onGameFavoriteToggle,
@@ -94,7 +94,7 @@ fun SearchScreen(
 private fun SearchResultsView(
     modifier: Modifier,
     games: LazyPagingItems<Game>,
-    downloadedFileNames: Set<String>,
+    downloadedGameKeys: Set<String>,
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
@@ -105,7 +105,7 @@ private fun SearchResultsView(
 
             LemuroidGameListRow(
                 game = game,
-                isDownloaded = downloadedFileNames.contains(game.fileName),
+                isDownloaded = downloadedGameKeys.contains(game.downloadKey),
                 onClick = { onGameClick(game) },
                 onLongClick = { onGameLongClick(game) },
                 onFavoriteToggle = { isFavorite ->

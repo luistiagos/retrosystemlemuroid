@@ -23,11 +23,49 @@ fun readLocalProperty(key: String): String {
 fun escapeBuildConfigValue(value: String): String =
     value.replace("\\", "\\\\").replace("\"", "\\\"")
 
+fun readGradleProperty(key: String): String? =
+    providers.gradleProperty(key).orNull?.trim()?.takeIf { it.isNotEmpty() }
+
+fun sanitizeFileToken(value: String): String =
+    value.replace(Regex("[^A-Za-z0-9_.-]"), "_")
+
+fun appUpdateEndpointForChannel(baseUrl: String, channel: String): String {
+    if (channel == "default") return baseUrl
+    return "${baseUrl.trimEnd('/')}/$channel"
+}
+
+fun normalizeApplicationIdSuffix(value: String?): String {
+    val suffix = value?.trim()?.takeIf { it.isNotEmpty() } ?: return ""
+    return if (suffix.startsWith(".")) suffix else ".$suffix"
+}
+
+val catalogChannel = readGradleProperty("catalogChannel") ?: "default"
+val appUpdateChannel = readGradleProperty("appUpdateChannel") ?: catalogChannel
+val appUpdateBaseUrl = readGradleProperty("appUpdateBaseUrl")
+    ?: "https://emuladores.pythonanywhere.com/app_version"
+val appUpdateEndpoint = readGradleProperty("appUpdateEndpoint")
+    ?: appUpdateEndpointForChannel(appUpdateBaseUrl, appUpdateChannel)
+val catalogManifestOverride = readGradleProperty("catalogManifest")
+val catalogManifestFile = catalogManifestOverride
+    ?.let { rootProject.file(it) }
+    ?: project.file("src/main/assets/catalog_manifest.txt")
+val catalogManifestAssetName = if (catalogManifestOverride == null) {
+    "catalog_manifest.txt"
+} else {
+    "catalog_manifest_${sanitizeFileToken(catalogChannel)}.txt"
+}
+val catalogApplicationIdSuffix = normalizeApplicationIdSuffix(readGradleProperty("catalogApplicationIdSuffix"))
+
 android {
     defaultConfig {
         versionCode = 231
         versionName = "1.17.0" // Always remember to update Cores Tag!
-        applicationId = "com.swordfish.lemuroid"
+        applicationId = "app.retrogamesystem$catalogApplicationIdSuffix"
+
+        buildConfigField("String", "CATALOG_CHANNEL", "\"${escapeBuildConfigValue(catalogChannel)}\"")
+        buildConfigField("String", "CATALOG_MANIFEST_ASSET", "\"${escapeBuildConfigValue(catalogManifestAssetName)}\"")
+        buildConfigField("String", "APP_UPDATE_CHANNEL", "\"${escapeBuildConfigValue(appUpdateChannel)}\"")
+        buildConfigField("String", "APP_UPDATE_ENDPOINT", "\"${escapeBuildConfigValue(appUpdateEndpoint)}\"")
 
         val archiveEmail = readLocalProperty("archive.email")
         val archivePassword = readLocalProperty("archive.password")
@@ -40,6 +78,7 @@ android {
         println("Building Google Play version. Bundling dynamic features.")
         dynamicFeatures.addAll(
             setOf(
+                ":lemuroid_core_a5200",
                 ":lemuroid_core_desmume",
                 ":lemuroid_core_dosbox_pure",
                 ":lemuroid_core_fbneo",
@@ -63,6 +102,20 @@ android {
                 ":lemuroid_core_gearcoleco",
                 ":lemuroid_core_flycast",
                 ":lemuroid_core_opera",
+                ":lemuroid_core_fake08",
+                ":lemuroid_core_vircon32",
+                ":lemuroid_core_picodrive",
+                ":lemuroid_core_atari800",
+                ":lemuroid_core_sameduck",
+                ":lemuroid_core_freechaf",
+                ":lemuroid_core_uzem",
+                ":lemuroid_core_lowresnx",
+                ":lemuroid_core_arduous",
+                ":lemuroid_core_dolphin",
+                ":lemuroid_core_yabasanshiro",
+                ":lemuroid_core_virtualjaguar",
+                ":lemuroid_core_o2em",
+                ":lemuroid_core_neocd",
             ),
         )
     }
@@ -147,6 +200,12 @@ android {
         jvmTarget = "17"
     }
     namespace = "com.swordfish.lemuroid"
+}
+
+androidComponents {
+    beforeVariants(selector().withFlavor("opensource" to "play")) { variantBuilder ->
+        variantBuilder.enable = false
+    }
 }
 
 dependencies {
@@ -266,20 +325,53 @@ fun usePlayDynamicFeatures(): Boolean {
 
 // ── Prebuilt DB generation ───────────────────────────────────────────────────
 // Generates `assets/retrograde-prebuilt.db` from catalog_manifest.txt at build time,
-// using the Room schema (schemas/23.json) as the source of truth for DDL + identityHash.
+// using the Room schema (schemas/24.json) as the source of truth for DDL + identityHash.
 // The app uses Room.databaseBuilder(...).createFromAsset() on first launch to copy this
 // into place instead of running 29k+ INSERTs through Room — eliminates the "preparando
 // ambiente" wait on fresh installs.
 
 val prebuiltDbOutputDir = layout.buildDirectory.dir("generated/prebuiltDb")
 val prebuiltDbFile = prebuiltDbOutputDir.map { it.file("retrograde-prebuilt.db") }
+val generatedCatalogRootDir = layout.buildDirectory.dir("generated/catalogManifest")
+val generatedCatalogAssetsDir = generatedCatalogRootDir.map { it.dir("assets") }
+val generatedCatalogPrebuiltDir = generatedCatalogRootDir.map { it.dir("prebuilt") }
+
+val prepareCatalogManifestAsset = tasks.register<Copy>("prepareCatalogManifestAsset") {
+    onlyIf { catalogManifestOverride != null }
+    val manifestAliasFile = project.file("src/main/assets/manifest_alias.json")
+
+    into(generatedCatalogRootDir)
+    from(catalogManifestFile) {
+        into("assets")
+        rename { catalogManifestAssetName }
+    }
+    from(catalogManifestFile) {
+        into("prebuilt")
+        rename { catalogManifestAssetName }
+    }
+    from(manifestAliasFile) {
+        into("prebuilt")
+    }
+}
 
 val generatePrebuiltDb = tasks.register("generatePrebuiltDb") {
+    if (catalogManifestOverride != null) {
+        dependsOn(prepareCatalogManifestAsset)
+    }
+
     val schemaJson = rootProject.file(
-        "retrograde-app-shared/schemas/com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase/23.json",
+        "retrograde-app-shared/schemas/com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase/24.json",
     )
-    val manifestFile = project.file("src/main/assets/catalog_manifest.txt")
-    val manifestAliasFile = project.file("src/main/assets/manifest_alias.json")
+    val manifestFile = if (catalogManifestOverride == null) {
+        catalogManifestFile
+    } else {
+        generatedCatalogPrebuiltDir.get().file(catalogManifestAssetName).asFile
+    }
+    val manifestAliasFile = if (catalogManifestOverride == null) {
+        project.file("src/main/assets/manifest_alias.json")
+    } else {
+        generatedCatalogPrebuiltDir.get().file("manifest_alias.json").asFile
+    }
     val outputFile = prebuiltDbFile.get().asFile
 
     inputs.file(schemaJson)
@@ -301,6 +393,9 @@ android {
     sourceSets {
         getByName("main") {
             assets.srcDirs("src/main/assets", prebuiltDbOutputDir)
+            if (catalogManifestOverride != null) {
+                assets.srcDir(generatedCatalogAssetsDir)
+            }
         }
     }
 }
@@ -318,6 +413,9 @@ afterEvaluate {
     }.configureEach {
         if (name != generatePrebuiltDb.name) {
             dependsOn(generatePrebuiltDb)
+        }
+        if (catalogManifestOverride != null && name != prepareCatalogManifestAsset.name) {
+            dependsOn(prepareCatalogManifestAsset)
         }
     }
 }

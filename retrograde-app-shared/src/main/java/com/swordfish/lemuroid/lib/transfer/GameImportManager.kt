@@ -28,7 +28,7 @@ class GameImportManager(
     fun findManifestOnVolumes(): File? {
         val volumes = context.getExternalFilesDirs(null).filterNotNull()
         for (volume in volumes) {
-            // Check in parent directories to find lemuroid-export at the volume root
+            // Check parent directories to find the export folder at the volume root.
             var dir: File? = volume
             while (dir != null && dir.absolutePath.contains("Android")) {
                 dir = dir.parentFile

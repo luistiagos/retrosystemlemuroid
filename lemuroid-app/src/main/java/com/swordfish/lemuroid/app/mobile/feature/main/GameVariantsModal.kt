@@ -40,7 +40,7 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 fun GameVariantsModal(
     game: Game,
     variants: List<Game>,
-    downloadedFileNames: Set<String>,
+    downloadedGameKeys: Set<String>,
     onDismiss: () -> Unit,
     onVariantSelected: (Game) -> Unit,
 ) {
@@ -70,7 +70,7 @@ fun GameVariantsModal(
                 VariantRow(
                     variant = variant,
                     coverUrl = game.coverFrontUrl,
-                    isDownloaded = downloadedFileNames.contains(variant.fileName),
+                    isDownloaded = downloadedGameKeys.contains(variant.downloadKey),
                     onClick = {
                         onDismiss()
                         onVariantSelected(variant)

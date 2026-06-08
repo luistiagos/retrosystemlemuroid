@@ -1,0 +1,24 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <!-- Magnavox Odyssey² — console with screen above a membrane keyboard -->
+    <path
+        android:fillColor="#3A2E28"
+        android:pathData="M12,14 L88,14 L88,86 L12,86 Z" />
+    <!-- Screen -->
+    <path
+        android:fillColor="#1E406B"
+        android:pathData="M22,22 L78,22 L78,50 L22,50 Z" />
+    <!-- Keyboard panel -->
+    <path
+        android:fillColor="#C9BCA8"
+        android:pathData="M20,58 L80,58 L80,80 L20,80 Z" />
+    <!-- Key dividers -->
+    <path
+        android:strokeColor="#3A2E28"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:pathData="M20,69 L80,69 M32,58 L32,80 M44,58 L44,80 M56,58 L56,80 M68,58 L68,80" />
+</vector>

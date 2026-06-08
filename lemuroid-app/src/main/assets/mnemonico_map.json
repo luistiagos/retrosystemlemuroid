@@ -1,5 +1,6 @@
 {
   "a26": "atari2600",
+  "a52": "atari5200",
   "a78": "atari7800",
   "lynx": "lynx",
   "nes": "nes",
@@ -37,5 +38,21 @@
   "supervision": "supervision",
   "pcenginecd": "pcenginecd",
   "dc": "dreamcast",
-  "3do": "3do"
+  "3do": "3do",
+  "pico8": "pico8",
+  "vircon32": "vircon32",
+  "sega32x": "sega32x",
+  "fds": "fds",
+  "atari800": "atari800",
+  "gx4000": "gx4000",
+  "megaduck": "megaduck",
+  "channelf": "channelf",
+  "uzebox": "uzebox",
+  "lowresnx": "lowresnx",
+  "arduboy": "arduboy",
+  "gc": "gamecube",
+  "saturn": "saturn",
+  "jaguar": "jaguar",
+  "odyssey2": "odyssey2",
+  "neocd": "neocd"
 }

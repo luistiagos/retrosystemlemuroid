@@ -288,6 +288,86 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_3do,
         listOf(SystemID.THREE_DO),
     ),
+    PICO_8(
+        R.string.game_system_title_pico8,
+        R.drawable.game_system_pico8,
+        listOf(SystemID.PICO_8),
+    ),
+    VIRCON32(
+        R.string.game_system_title_vircon32,
+        R.drawable.game_system_vircon32,
+        listOf(SystemID.VIRCON32),
+    ),
+    SEGA_32X(
+        R.string.game_system_title_sega32x,
+        R.drawable.game_system_sega32x,
+        listOf(SystemID.SEGA_32X),
+    ),
+    FDS(
+        R.string.game_system_title_fds,
+        R.drawable.game_system_fds,
+        listOf(SystemID.FDS),
+    ),
+    ATARI800(
+        R.string.game_system_title_atari800,
+        R.drawable.game_system_atari800,
+        listOf(SystemID.ATARI800),
+    ),
+    AMSTRAD_GX4000(
+        R.string.game_system_title_gx4000,
+        R.drawable.game_system_gx4000,
+        listOf(SystemID.AMSTRAD_GX4000),
+    ),
+    MEGADUCK(
+        R.string.game_system_title_megaduck,
+        R.drawable.game_system_megaduck,
+        listOf(SystemID.MEGADUCK),
+    ),
+    CHANNEL_F(
+        R.string.game_system_title_channelf,
+        R.drawable.game_system_channelf,
+        listOf(SystemID.CHANNEL_F),
+    ),
+    UZEBOX(
+        R.string.game_system_title_uzebox,
+        R.drawable.game_system_uzebox,
+        listOf(SystemID.UZEBOX),
+    ),
+    LOWRES_NX(
+        R.string.game_system_title_lowresnx,
+        R.drawable.game_system_lowresnx,
+        listOf(SystemID.LOWRES_NX),
+    ),
+    ARDUBOY(
+        R.string.game_system_title_arduboy,
+        R.drawable.game_system_arduboy,
+        listOf(SystemID.ARDUBOY),
+    ),
+    GAMECUBE(
+        R.string.game_system_title_gc,
+        R.drawable.game_system_gc,
+        listOf(SystemID.GAMECUBE),
+    ),
+    SATURN(
+        R.string.game_system_title_saturn,
+        R.drawable.game_system_saturn,
+        listOf(SystemID.SATURN),
+    ),
+    JAGUAR(
+        R.string.game_system_title_jaguar,
+        R.drawable.game_system_jaguar,
+        listOf(SystemID.JAGUAR),
+    ),
+    ODYSSEY2(
+        R.string.game_system_title_odyssey2,
+        R.drawable.game_system_odyssey2,
+        listOf(SystemID.ODYSSEY2),
+    ),
+    NEOCD(
+        R.string.game_system_title_neocd,
+        R.drawable.game_system_neocd,
+        listOf(SystemID.NEOCD),
+    ),
     ;
 
     fun color(): Int {
@@ -353,6 +433,22 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.SUPERVISION -> SUPERVISION
                 SystemID.DREAMCAST -> DREAMCAST
                 SystemID.THREE_DO -> THREE_DO
+                SystemID.PICO_8 -> PICO_8
+                SystemID.VIRCON32 -> VIRCON32
+                SystemID.SEGA_32X -> SEGA_32X
+                SystemID.FDS -> FDS
+                SystemID.ATARI800 -> ATARI800
+                SystemID.AMSTRAD_GX4000 -> AMSTRAD_GX4000
+                SystemID.MEGADUCK -> MEGADUCK
+                SystemID.CHANNEL_F -> CHANNEL_F
+                SystemID.UZEBOX -> UZEBOX
+                SystemID.LOWRES_NX -> LOWRES_NX
+                SystemID.ARDUBOY -> ARDUBOY
+                SystemID.GAMECUBE -> GAMECUBE
+                SystemID.SATURN -> SATURN
+                SystemID.JAGUAR -> JAGUAR
+                SystemID.ODYSSEY2 -> ODYSSEY2
+                SystemID.NEOCD -> NEOCD
             }
         }
     }

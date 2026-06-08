@@ -1,6 +1,7 @@
 package com.swordfish.lemuroid.lib.library.catalog
 
 import android.content.Context
+import android.net.Uri
 import android.os.Build
 import androidx.core.net.toUri
 import com.swordfish.lemuroid.lib.library.GameSystem
@@ -8,12 +9,12 @@ import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import androidx.room.withTransaction
+import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.io.File
 
 /**
  * Populates the game catalog directly from `assets/catalog_manifest.txt` without
@@ -62,7 +63,17 @@ class ManifestQuickLoader(
         //   v5 — title cleanup for new systems (filename-derived instead of bad IGDB fuzzy match)
         //   v6 — isRepresentative corrected for sg1000/pokemini/msx2 (all had only 1 rep due to empty titles in input)
         //          also fixed malformed fused line (Zukkoke/007 James Bond Alt); fast-skip bug fix in loader
-        private const val MANIFEST_SCHEMA_VERSION = 6
+        //   v7 — fixed malformed 3do/Dreamcast boundary line (Zhadnost/Broadband Passport)
+        //   v8 — fixed vircon32 entries: double path (vircon32/vircon32/) → vircon32/ + added pipe metadata
+        //   v9 — re-run v8 cleanup for devices that ran v8 before cleanup code existed
+        //   v10  sega32x (456 games) added to catalog_manifest.txt
+        //   v11  fds (Famicom Disk System, 268 games) added; FDS system registered in GameSystem
+        //   v12  gc (Nintendo GameCube, 1086 games) added; GAMECUBE system + Dolphin core registered
+        //   v13  saturn (Sega Saturn) added; SATURN system + YabaSanshiro core registered
+        //   v14  jaguar (Atari Jaguar) added; JAGUAR system + Virtual Jaguar core registered
+        //   v15  odyssey2 (Magnavox Odyssey2) added; ODYSSEY2 system + O2EM core registered
+        //   v16  neocd (SNK Neo Geo CD) added; NEOCD system + NeoCD core registered
+        private const val MANIFEST_SCHEMA_VERSION = 16
 
         // catalog_manifest.txt uses abbreviated folder names that differ from
         // Lemuroid's SystemID.dbname. The mapping (manifest folder → dbname) lives in
@@ -131,6 +142,28 @@ class ManifestQuickLoader(
             }
         } catch (t: Throwable) {
             Timber.e(t, "ManifestQuickLoader: prebuilt URI rewrite failed (continuing)")
+        }
+
+        // v8 one-time cleanup: vircon32 manifest had double path (vircon32/vircon32/file.zip)
+        // which caused fileName = "vircon32/file.zip" in DB. Delete those stale entries so
+        // the correct ones (fileName = "file.zip") can be inserted below. Also migrate any
+        // already-downloaded files from the wrong nested directory to the correct flat path.
+        if (loadedSchema < 9) {
+            try {
+                val romsDir = directoriesManager.getInternalRomsDirectory()
+                val wrongEntries = database.gameDao().selectBySystemWithNestedPath("vircon32")
+                for (game in wrongEntries) {
+                    val oldFile = Uri.parse(game.fileUri).path?.let { File(it) } ?: continue
+                    if (oldFile.exists() && oldFile.length() > 0L) {
+                        val newFile = File(File(romsDir, "vircon32"), File(game.fileName).name)
+                        runCatching { oldFile.renameTo(newFile) }
+                    }
+                }
+                val deleted = database.gameDao().deleteBySystemWithNestedPath("vircon32")
+                Timber.i("ManifestQuickLoader: v8 cleanup removed $deleted stale vircon32 entries")
+            } catch (t: Throwable) {
+                Timber.e(t, "ManifestQuickLoader: v8 cleanup failed (continuing)")
+            }
         }
 
         // Skip only when both the app version and the manifest schema match what's already

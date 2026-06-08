@@ -21,6 +21,7 @@ import com.swordfish.lemuroid.app.shared.GameMenuContract
 import com.swordfish.lemuroid.app.utils.android.settings.LemuroidSettingsList
 import com.swordfish.lemuroid.app.utils.android.settings.LemuroidSettingsMenuLink
 import com.swordfish.lemuroid.app.utils.android.settings.LemuroidSettingsSwitch
+import com.swordfish.lemuroid.lib.library.SystemID
 import kotlin.reflect.KFunction1
 
 @Composable
@@ -111,9 +112,16 @@ fun GameMenuHomeScreen(
         }
 
         if (gameMenuRequest.numDisks > 1) {
+            val diskItems = (1..gameMenuRequest.numDisks).map {
+                if (gameMenuRequest.game.systemId == SystemID.FDS.dbname) {
+                    stringResource(R.string.game_menu_change_disk_side, it)
+                } else {
+                    stringResource(R.string.game_menu_change_disk_disk, it)
+                }
+            }
             LemuroidSettingsList(
                 title = { Text(text = stringResource(id = R.string.game_menu_change_disk_button)) },
-                items = (1..gameMenuRequest.numDisks).map { stringResource(R.string.game_menu_change_disk_disk, it) },
+                items = diskItems,
                 useSelectedValueAsSubtitle = false,
                 icon = {
                     Icon(

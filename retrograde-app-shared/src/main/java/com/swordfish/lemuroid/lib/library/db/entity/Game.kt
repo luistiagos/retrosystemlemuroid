@@ -68,6 +68,9 @@ data class Game(
     // Manually-imported ROMs (not in the manifest) default to true so they appear individually.
     val isRepresentative: Boolean = true,
 ) : Serializable {
+    val downloadKey: String
+        get() = "$systemId/$fileName"
+
     companion object {
         val DIFF_CALLBACK =
             object : DiffUtil.ItemCallback<Game>() {

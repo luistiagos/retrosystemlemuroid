@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 fun GamesScreen(
     modifier: Modifier = Modifier,
     viewModel: GamesViewModel,
-    downloadedFileNames: Set<String> = emptySet(),
+    downloadedGameKeys: Set<String> = emptySet(),
     titlesWithVariants: Set<String> = emptySet(),
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
@@ -77,7 +77,7 @@ fun GamesScreen(
 
             LemuroidGameListRow(
                 game = game,
-                isDownloaded = downloadedFileNames.contains(game.fileName),
+                isDownloaded = downloadedGameKeys.contains(game.downloadKey),
                 hasVariants = variantKey in titlesWithVariants,
                 onClick = { onGameClick(game) },
                 onLongClick = { onGameLongClick(game) },

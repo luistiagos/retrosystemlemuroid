@@ -11,6 +11,7 @@
     <string name="controller_genesis_6">Default (6 buttons)</string>
 
     <string name="controller_default">Default</string>
+    <string name="controller_fds">Famicom Disk System</string>
     <string name="controller_dualshock">DualShock</string>
     <string name="controller_standard">Standard</string>
     <string name="controller_landscape">Landscape</string>
@@ -153,6 +154,12 @@
     <!-- Dreamcast controller -->
     <string name="controller_dreamcast">Dreamcast</string>
 
+    <!-- Vircon32 controller -->
+    <string name="controller_vircon32">Vircon32</string>
+
+    <!-- Sega 32X controller -->
+    <string name="controller_sega32x">Default (6 buttons)</string>
+
     <!-- Opera (3DO) settings -->
     <string name="setting_opera_cpu_overclock">CPU Speed</string>
     <string name="value_opera_cpu_overclock_1x">1x — Native (12.5 MHz)</string>
@@ -160,5 +167,11 @@
     <string name="value_opera_cpu_overclock_2x">2x (25 MHz)</string>
     <!-- 3DO controller -->
     <string name="controller_3do">3DO</string>
+
+    <!-- GameCube controller -->
+    <string name="controller_gc">GameCube</string>
+
+    <!-- Sega Saturn controller -->
+    <string name="controller_saturn">Sega Saturn</string>
 
 </resources>

@@ -226,6 +226,10 @@
 
     <string name="notification_download_roms_title">Downloading ROMs Pack</string>
     <string name="notification_download_roms_message">Download continues in background even with screen off.</string>
+    <string name="notification_rom_queue_title">Downloading ROM…</string>
+    <string name="notification_rom_queue_downloading">Downloading… %1$d%%</string>
+    <string name="notification_rom_queue_more">+ %1$d more in queue</string>
+    <string name="notification_rom_queue_waiting">Waiting to start…</string>
     <string name="settings_open_folder">Open folder</string>
     <string name="settings_move_roms_title">Move ROMs</string>
     <string name="settings_move_roms_message">Found %1$d ROM file(s). They will be transferred to the new location.</string>
@@ -249,6 +253,7 @@
     <string name="game_menu_mute_audio">Mute</string>
     <string name="game_menu_fast_forward">Fast-Forward</string>
     <string name="game_menu_change_disk_disk">Disk %1$s</string>
+    <string name="game_menu_change_disk_side">Side %1$s</string>
     <string name="game_menu_tilt_sensor">Tilt Sensor</string>
 
     <string name="game_loading_preparing_game">Preparing game…</string>
@@ -371,17 +376,17 @@
     <string name="language_pt">Português (Brasil)</string>
 
     <!-- App self-update -->
-    <string name="update_dialog_title">Atualização %1$s disponível</string>
-    <string name="update_dialog_message">Uma nova versão está disponível. Gostaria de atualizar agora? Seus saves e ROMs serão mantidos.</string>
-    <string name="update_dialog_yes">Sim, atualizar</string>
-    <string name="update_dialog_no">Agora não</string>
-    <string name="update_downloading_title">Baixando atualização…</string>
-    <string name="update_downloading_message">%1$d%% concluído</string>
-    <string name="update_no_update_title">Sem atualizações</string>
-    <string name="update_no_update_message">Não há atualizações disponíveis no momento.</string>
-    <string name="update_error_title">Erro na atualização</string>
-    <string name="settings_title_check_update">Verificar atualizações</string>
-    <string name="settings_description_check_update">Verificar se há uma nova versão disponível</string>
+    <string name="update_dialog_title">Update %1$s available</string>
+    <string name="update_dialog_message">A new version is available. Update now? Your saves and ROMs will be kept.</string>
+    <string name="update_dialog_yes">Update</string>
+    <string name="update_dialog_no">Not now</string>
+    <string name="update_downloading_title">Downloading update…</string>
+    <string name="update_downloading_message">%1$d%% complete</string>
+    <string name="update_no_update_title">No updates</string>
+    <string name="update_no_update_message">No updates are available right now.</string>
+    <string name="update_error_title">Update error</string>
+    <string name="settings_title_check_update">Check for updates</string>
+    <string name="settings_description_check_update">Check whether a new app version is available</string>
 
     <!-- Transfer (Export/Import) -->
     <string name="transfer_title">Transfer games</string>
@@ -408,7 +413,7 @@
     <string name="transfer_import_completed">%1$d games imported successfully</string>
     <string name="transfer_import_error">Import failed</string>
     <string name="transfer_import_not_found">No game package found</string>
-    <string name="transfer_import_not_found_description">Insert an SD card or USB drive containing a lemuroid-export folder and try again</string>
+    <string name="transfer_import_not_found_description">Insert an SD card or USB drive containing a retro-game-system-export folder and try again</string>
 
     <!-- Romset export/import -->
     <string name="romset_title">ROM Set</string>

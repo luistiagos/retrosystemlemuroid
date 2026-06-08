@@ -11,6 +11,8 @@ import com.swordfish.lemuroid.app.shared.settings.HapticFeedbackMode
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
 import com.swordfish.lemuroid.lib.controller.ControllerConfig
+import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.libretrodroid.GLRetroView
 import com.swordfish.libretrodroid.GLRetroView.Companion.MOTION_SOURCE_ANALOG_LEFT
 import com.swordfish.libretrodroid.GLRetroView.Companion.MOTION_SOURCE_ANALOG_RIGHT
@@ -36,6 +38,7 @@ import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class GameViewModelTouchControls(
+    private val system: GameSystem,
     private val settingsManager: SettingsManager,
     private val touchControllerSettingsManager: TouchControllerSettingsManager,
     private val retroGameView: GameViewModelRetroGameView,
@@ -51,6 +54,7 @@ class GameViewModelTouchControls(
     private val hapticFeedbackMode = MutableStateFlow(HapticFeedbackMode.NONE)
 
     private var loadingMenuJob: Job? = null
+    private var channelFConsoleInput = false
 
     override fun onCreate(owner: LifecycleOwner) {
         owner.launchOnState(Lifecycle.State.CREATED) {
@@ -169,8 +173,58 @@ class GameViewModelTouchControls(
     }
 
     private fun handleVirtualInputButton(event: InputEvent.Button) {
+        if (system.id == SystemID.CHANNEL_F && event.id == KeyEvent.KEYCODE_BUTTON_START) {
+            if (event.pressed) {
+                scope.launch { pressChannelFConsoleStart() }
+            }
+            return
+        }
+
         val action = if (event.pressed) KeyEvent.ACTION_DOWN else KeyEvent.ACTION_UP
-        retroGameView.retroGameView?.sendKeyEvent(action, event.id)
+        sendVirtualKeyEvent(action, event.id)
+    }
+
+    private suspend fun pressChannelFConsoleStart() {
+        if (!channelFConsoleInput) {
+            pulseRetroButton(KeyEvent.KEYCODE_BUTTON_START)
+            channelFConsoleInput = true
+        }
+        pulseRetroButton(KeyEvent.KEYCODE_BUTTON_B)
+        pulseRetroButton(KeyEvent.KEYCODE_BUTTON_START)
+        channelFConsoleInput = false
+    }
+
+    private suspend fun pulseRetroButton(keyCode: Int) {
+        val retroView = retroGameView.retroGameView ?: return
+        retroView.sendKeyEvent(KeyEvent.ACTION_DOWN, keyCode, CHANNEL_F_PORT)
+        delay(CHANNEL_F_BUTTON_PULSE_MS)
+        retroView.sendKeyEvent(KeyEvent.ACTION_UP, keyCode, CHANNEL_F_PORT)
+        delay(CHANNEL_F_BUTTON_GAP_MS)
+    }
+
+    private fun sendVirtualKeyEvent(
+        action: Int,
+        keyCode: Int,
+    ) {
+        val retroView = retroGameView.retroGameView ?: return
+        if (system.id == SystemID.CHANNEL_F) {
+            retroView.sendKeyEvent(action, keyCode, CHANNEL_F_PORT)
+        } else {
+            retroView.sendKeyEvent(action, keyCode)
+        }
+    }
+
+    private fun sendVirtualMotionEvent(
+        source: Int,
+        xAxis: Float,
+        yAxis: Float,
+    ) {
+        val retroView = retroGameView.retroGameView ?: return
+        if (system.id == SystemID.CHANNEL_F) {
+            retroView.sendMotionEvent(source, xAxis, yAxis, CHANNEL_F_PORT)
+        } else {
+            retroView.sendMotionEvent(source, xAxis, yAxis)
+        }
     }
 
     private fun handleVirtualInputDirection(
@@ -180,11 +234,11 @@ class GameViewModelTouchControls(
     ) {
         when (id) {
             ComposeTouchLayouts.MOTION_SOURCE_DPAD -> {
-                retroGameView.retroGameView?.sendMotionEvent(GLRetroView.MOTION_SOURCE_DPAD, xAxis, yAxis)
+                sendVirtualMotionEvent(GLRetroView.MOTION_SOURCE_DPAD, xAxis, yAxis)
             }
 
             ComposeTouchLayouts.MOTION_SOURCE_LEFT_STICK -> {
-                retroGameView.retroGameView?.sendMotionEvent(
+                sendVirtualMotionEvent(
                     MOTION_SOURCE_ANALOG_LEFT,
                     xAxis,
                     yAxis,
@@ -192,7 +246,7 @@ class GameViewModelTouchControls(
             }
 
             ComposeTouchLayouts.MOTION_SOURCE_RIGHT_STICK -> {
-                retroGameView.retroGameView?.sendMotionEvent(
+                sendVirtualMotionEvent(
                     MOTION_SOURCE_ANALOG_RIGHT,
                     xAxis,
                     yAxis,
@@ -200,16 +254,16 @@ class GameViewModelTouchControls(
             }
 
             ComposeTouchLayouts.MOTION_SOURCE_DPAD_AND_LEFT_STICK -> {
-                retroGameView.retroGameView?.sendMotionEvent(
+                sendVirtualMotionEvent(
                     MOTION_SOURCE_ANALOG_LEFT,
                     xAxis,
                     yAxis,
                 )
-                retroGameView.retroGameView?.sendMotionEvent(MOTION_SOURCE_DPAD, xAxis, yAxis)
+                sendVirtualMotionEvent(MOTION_SOURCE_DPAD, xAxis, yAxis)
             }
 
             ComposeTouchLayouts.MOTION_SOURCE_RIGHT_DPAD -> {
-                retroGameView.retroGameView?.sendMotionEvent(
+                sendVirtualMotionEvent(
                     MOTION_SOURCE_ANALOG_RIGHT,
                     xAxis,
                     yAxis,
@@ -220,5 +274,8 @@ class GameViewModelTouchControls(
 
     companion object {
         const val MENU_LOADING_ANIMATION_MILLIS = 500
+        private const val CHANNEL_F_PORT = 0
+        private const val CHANNEL_F_BUTTON_PULSE_MS = 80L
+        private const val CHANNEL_F_BUTTON_GAP_MS = 120L
     }
 }

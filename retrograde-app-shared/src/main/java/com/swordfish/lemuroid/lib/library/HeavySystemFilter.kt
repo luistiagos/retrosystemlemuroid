@@ -22,6 +22,7 @@ object HeavySystemFilter {
     private val VERY_HEAVY_SYSTEMS: Set<SystemID> = setOf(
         SystemID.PSP,          // PPSSPP – very demanding
         SystemID.NINTENDO_3DS, // Citra – very demanding
+        SystemID.GAMECUBE,     // Dolphin – very demanding
     )
 
     // ── Moderate / moderate-heavy — additionally excluded on ≤ 1 GB ─────────
@@ -33,6 +34,7 @@ object HeavySystemFilter {
         SystemID.SEGACD,       // Genesis Plus GX CD – moderate
         SystemID.DREAMCAST,    // Flycast – moderate-heavy
         SystemID.THREE_DO,     // Opera – moderate-heavy
+        SystemID.SATURN,       // YabaSanshiro – moderate-heavy
     )
 
     /** All systems that may be excluded on some device tier. */

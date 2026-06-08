@@ -40,7 +40,14 @@ interface GameDao {
     @Query("SELECT * FROM games WHERE lastIndexedAt < :lastIndexedAt")
     suspend fun selectByLastIndexedAtLessThan(lastIndexedAt: Long): List<Game>
 
-    @Query("DELETE FROM games WHERE lastIndexedAt < :lastIndexedAt AND fileName NOT IN (SELECT fileName FROM downloaded_roms)")
+    @Query("""
+        DELETE FROM games
+        WHERE lastIndexedAt < :lastIndexedAt
+        AND NOT EXISTS (
+            SELECT 1 FROM downloaded_roms dr
+            WHERE dr.systemId = games.systemId AND dr.fileName = games.fileName
+        )
+    """)
     suspend fun deleteByLastIndexedAtLessThan(lastIndexedAt: Long)
 
     @Query("SELECT * FROM games WHERE isFavorite = 1 ORDER BY title ASC")
@@ -81,7 +88,7 @@ interface GameDao {
 
     @Query("""
         SELECT games.* FROM games
-        LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName
+        LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId = :systemId
         ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.title ASC, games.id DESC
     """)
@@ -89,7 +96,7 @@ interface GameDao {
 
     @Query("""
         SELECT games.* FROM games
-        LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName
+        LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId IN (:systemIds)
         ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.title ASC, games.id DESC
     """)
@@ -97,7 +104,7 @@ interface GameDao {
 
     @Query("""
         SELECT games.* FROM games
-        LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName
+        LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId = :systemId
         ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC
     """)
@@ -105,7 +112,7 @@ interface GameDao {
 
     @Query("""
         SELECT games.* FROM games
-        LEFT JOIN downloaded_roms ON games.fileName = downloaded_roms.fileName
+        LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId IN (:systemIds)
         ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC
     """)
@@ -119,7 +126,7 @@ interface GameDao {
 
     @Query("""
         SELECT g.* FROM games g
-        LEFT JOIN downloaded_roms dr ON g.fileName = dr.fileName
+        LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId = :systemId AND g.isRepresentative = 1
         ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC
     """)
@@ -127,7 +134,7 @@ interface GameDao {
 
     @Query("""
         SELECT g.* FROM games g
-        LEFT JOIN downloaded_roms dr ON g.fileName = dr.fileName
+        LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId IN (:systemIds) AND g.isRepresentative = 1
         ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC
     """)
@@ -135,7 +142,7 @@ interface GameDao {
 
     @Query("""
         SELECT g.* FROM games g
-        LEFT JOIN downloaded_roms dr ON g.fileName = dr.fileName
+        LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId = :systemId AND g.isRepresentative = 1
         ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC
     """)
@@ -143,7 +150,7 @@ interface GameDao {
 
     @Query("""
         SELECT g.* FROM games g
-        LEFT JOIN downloaded_roms dr ON g.fileName = dr.fileName
+        LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId IN (:systemIds) AND g.isRepresentative = 1
         ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC
     """)
@@ -249,6 +256,12 @@ interface GameDao {
 
     @Delete
     suspend fun delete(games: List<Game>)
+
+    @Query("SELECT * FROM games WHERE systemId = :systemId AND fileName LIKE '%/%'")
+    suspend fun selectBySystemWithNestedPath(systemId: String): List<Game>
+
+    @Query("DELETE FROM games WHERE systemId = :systemId AND fileName LIKE '%/%'")
+    suspend fun deleteBySystemWithNestedPath(systemId: String): Int
 
     @Update
     suspend fun update(game: Game)

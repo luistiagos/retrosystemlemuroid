@@ -2,7 +2,7 @@
  * PrebuiltDbGenerator.kt
  *
  * Builds the `retrograde-prebuilt.db` SQLite asset embedded in the APK, mirroring the
- * schema that Room generates at runtime (version 23 — see schemas/23.json) and pre-populating
+ * schema that Room generates at runtime and pre-populating
  * the `games` and `fts_games` tables from `catalog_manifest.txt`.
  *
  * On first launch, the Android app uses `Room.databaseBuilder(...).createFromAsset(...)` to
@@ -10,12 +10,12 @@
  * eliminates the "preparando ambiente" wait on fresh installs.
  *
  * The generated DB carries:
- *   • `room_master_table` with the exact identity_hash from schemas/23.json
+ *   • `room_master_table` with the exact identity_hash from the Room schema JSON
  *     (Room refuses to open a DB whose hash doesn't match the one its annotation processor
  *     produced for the same @Database class.)
- *   • all entity tables and indices from schemas/23.json (Game, DataFile, DownloadedRom, SaveQueueItem)
+ *   • all entity tables and indices from the Room schema JSON (Game, DataFile, DownloadedRom, SaveQueueItem)
  *   • the FTS4 virtual table + triggers that GameSearchDao defines manually
- *   • `user_version = 23` so Room treats the DB as already migrated
+ *   • `user_version` from the Room schema JSON so Room treats the DB as already migrated
  *
  * Sentinel fileUri: rows are inserted with `fileUri = "file:///lemuroid_prebuilt/<systemId>/<fileName>"`.
  * The app rewrites these to real `file://<romsDir>/...` URIs in a single SQL UPDATE on first boot
@@ -69,7 +69,7 @@ object PrebuiltDbGenerator {
         outputDbFile: File,
     ) {
         require(schemaJsonFile.exists()) {
-            "schemas/23.json not found at $schemaJsonFile — build the app once so kapt generates it."
+            "Room schema JSON not found at $schemaJsonFile — build the app once so kapt generates it."
         }
         require(manifestFile.exists()) { "catalog_manifest.txt not found at $manifestFile" }
 

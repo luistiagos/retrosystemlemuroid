@@ -51,7 +51,7 @@
     <string name="settings_bios_category_detected">Знайдено</string>
     <string name="settings_bios_category_not_detected">Підтримується</string>
     <string name="settings_title_reset_settings">Відновлення заводських налаштувань</string>
-    <string name="settings_description_reset_settings">Скинути Лемуроїд до заводських налаштувань</string>
+    <string name="settings_description_reset_settings">Скинути Retro Game System до заводських налаштувань</string>
     <string name="settings_title_advanced_settings">Додаткові параметри</string>
     <string name="settings_description_advanced_settings">Показати додаткові налаштування</string>
     <string name="settings_title_low_latency_audio">Надавати перевагу звуку з низькою затримкою</string>
@@ -63,7 +63,7 @@
     <string name="settings_title_enable_device_rumble">Вібрація пристрою</string>
     <string name="settings_description_enable_device_rumble">Якщо контролер не під\'єднаний, замість нього вібрує пристрій</string>
     <string name="reset_settings_warning_message_title">Ви впевнені?</string>
-    <string name="reset_settings_warning_message_description">Це скине Лемуроїд до заводських налаштувань. Збереження та Стани будуть збережені.</string>
+    <string name="reset_settings_warning_message_description">Це скине Retro Game System до заводських налаштувань. Збереження та Стани будуть збережені.</string>
     <string name="settings_title_save_sync">Зберігати в хмарі</string>
     <string name="settings_description_save_sync">Резервне копіювання і синхронізація збереження в хмарі</string>
     <string name="settings_save_sync_refresh">Ручна синхронізація</string>
@@ -87,7 +87,7 @@
     <string name="home_microphone_message">Ігри для Nintendo DS можуть використовувати мікрофон для надання деяких функцій.</string>
     <string name="home_microphone_action">Увімкнути</string>
     <string name="home_empty_title">Виберіть каталог ROM</string>
-    <string name="home_empty_message">Лемуроїд повинен сканувати каталог, що містить ROM файли.\nЦе може зайняти до декількох хвилин.</string>
+    <string name="home_empty_message">Retro Game System повинен сканувати каталог, що містить ROM файли.\nЦе може зайняти до декількох хвилин.</string>
     <string name="home_empty_action">Виберіть каталог</string>
     <string name="home_notification_desmume_deprecated_title">DSmuME незабаром вийшло на пенсію</string>
     <string name="home_notification_desmume_deprecated_message">Заощаджуйте в грі, перемикайтесь на melonDS, і ваш прогрес буде перенесений. Економна держава, яка залишиться прив\'язаною до DeSmuME.</string>
@@ -124,13 +124,13 @@
     <string name="game_running_notification_title_alternative">Гра працює</string>
     <string name="game_running_notification_message">Переконайтеся, що ви зберегли свій прогрес</string>
     <string name="game_loader_error_gl_incompatible">Це ядро потребує версію OpenGL ES яка не підтримується вашим пристроєм.</string>
-    <string name="game_loader_error_load_game">Трапилось щось погане під час завантаження вашої гри. Переконайтеся, що прошивка підтримується Лемуроїд і перескануйте ваші ігри.</string>
+    <string name="game_loader_error_load_game">Трапилось щось погане під час завантаження вашої гри. Переконайтеся, що прошивка підтримується Retro Game System і перескануйте ваші ігри.</string>
     <string name="game_loader_error_save">Щось пішло не так при збереженні файлу. Якщо проблема не зникне, спробуйте вимкнути автозбереження.</string>
     <string name="game_loader_error_unsupported_architecture">Це ядро не підтримується вашим пристроєм.</string>
     <string name="game_loader_error_generic">Щось погане трапилося. Спробуйте наступне:\n
         \n\u2022 Вимкнути автозбереження і повторно запустити гру
         \n\u2022 В налаштуваннях Android очистити кеш програми
-        \n\u2022 В налаштуваннях Лемуроїд виконати Скидання до заводських налаштувань
+        \n\u2022 В налаштуваннях Retro Game System виконати Скидання до заводських налаштувань
         \n\nЯкщо нічого з переліченого не допомогло, може бути що ця гра/ядро не підтримується на вашому приладі.
     </string>
     <string name="game_loader_error_missing_bios">Схоже, що у вас відсутній необхідний BIOS, помістіть його у папку з вашими ROM-ами і повторно проскануйте. Необхідні файли: %1$s</string>
@@ -157,17 +157,17 @@
     <string name="game_interactory_busy">Дочекайтеся завершення операції</string>
     <string name="mobile_settings_help">Допомога</string>
     <string name="mobile_settings_support">Підтримка</string>
-    <string name="lemuroid_help_content"><![CDATA[        <b>&#8226;Як я використовую Лемуроїд?</b><br/>
+    <string name="lemuroid_help_content"><![CDATA[        <b>&#8226;Як я використовую Retro Game System?</b><br/>
         Скопіюйте всі файли ROM в каталог на вашому пристрої і виберіть його в Retro Game System. Цей каталог може містити підкаталоги. Після того, як сканування завершиться, ви повинні побачити свої ігри.<br/><br/>,        <b>&#8226;Чому не виявлено моїх ігор?</b><br/>
         Якщо ваші ігри стиснуті, спробуйте розпакувати їх. Якщо це не спрацює, спробуйте покласти прошивки в окремі каталоги, одну для кожної системи з такими іменами: $SYSTEMS.
     ]]></string>
     <string name="lemuroid_crash_disclamer">Схоже що ядро Libretro отримала неочікувану помилку. Якщо помилка залишається, спробуйте зробити наступне:\n
         \n\u2022 Вимкнути автозбереження і повторно запустити гру
         \n\u2022 В налаштуваннях Android очистити кеш програми
-        \n\u2022 В налаштуваннях Лемуроїд виконати Скидання до заводських налаштувань
+        \n\u2022 В налаштуваннях Retro Game System виконати Скидання до заводських налаштувань
         \n\nЯкщо нічого з переліченого не допомогло, може бути що ця гра/ядро не підтримується на вашому приладі.
     </string>
-    <string name="error_message_incompatible_state">Цей стан збереження несумісний з поточною версією ядра. Будь ласка, завантажте останню версію в грі, або використовуйте попередню версію Лемуроїд.</string>
+    <string name="error_message_incompatible_state">Цей стан збереження несумісний з поточною версією ядра. Будь ласка, завантажте останню версію в грі, або використовуйте попередню версію Retro Game System.</string>
     <string name="shader_filter_names_auto">Автоматично</string>
     <string name="shader_filter_names_sharp">Різко</string>
     <string name="shader_filter_names_smooth">Згладжений</string>

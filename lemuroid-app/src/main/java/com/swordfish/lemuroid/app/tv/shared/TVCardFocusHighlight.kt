@@ -1,10 +1,10 @@
 package com.swordfish.lemuroid.app.tv.shared
 
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.leanback.widget.ImageCardView
-import com.swordfish.lemuroid.R
 
 /**
  * Adds a prominent colored border around [ImageCardView] cards when they receive
@@ -15,10 +15,13 @@ object TVCardFocusHighlight {
 
     private const val BORDER_WIDTH_DP = 3
 
-    fun setupOnCard(cardView: ImageCardView) {
+    fun setupOnCard(cardView: ImageCardView, onFocusChanged: ((Boolean) -> Unit)? = null) {
         val density = cardView.resources.displayMetrics.density
         val borderPx = (BORDER_WIDTH_DP * density).toInt()
-        val focusColor = ContextCompat.getColor(cardView.context, R.color.main_color)
+        val colorResId = cardView.resources.getIdentifier("main_color", "color", cardView.context.packageName)
+        val focusColor =
+            if (colorResId != 0) ContextCompat.getColor(cardView.context, colorResId)
+            else Color.parseColor("#FF9800")
 
         cardView.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
@@ -30,6 +33,8 @@ object TVCardFocusHighlight {
             } else {
                 v.foreground = null
             }
+
+            onFocusChanged?.invoke(hasFocus)
         }
     }
 }

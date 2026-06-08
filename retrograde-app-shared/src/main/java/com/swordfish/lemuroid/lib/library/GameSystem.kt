@@ -123,6 +123,25 @@ data class GameSystem(
                     uniqueExtensions = listOf("nes"),
                 ),
                 GameSystem(
+                    SystemID.FDS,
+                    "Nintendo - Family Computer Disk System",
+                    R.string.game_system_title_fds,
+                    R.string.game_system_abbr_fds,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FCEUMM,
+                            requiredBIOSFiles = listOf("disksys.rom"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.FDS),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf("fds"),
+                    supportedExtensions = listOf("fds", "zip"),
+                    hasMultiDiskSupport = true,
+                ),
+                GameSystem(
                     SystemID.SNES,
                     "Nintendo - Super Nintendo Entertainment System",
                     R.string.game_system_title_snes,
@@ -1421,6 +1440,7 @@ data class GameSystem(
                     listOf(
                         SystemCoreConfig(
                             CoreID.DESMUME,
+                            requiredBIOSFiles = listOf("bios7.bin", "bios9.bin", "firmware.bin"),
                             exposedSettings =
                                 listOf(
                                     ExposedSetting(
@@ -1455,6 +1475,7 @@ data class GameSystem(
                         ),
                         SystemCoreConfig(
                             CoreID.MELONDS,
+                            requiredBIOSFiles = listOf("bios7.bin", "bios9.bin", "firmware.bin"),
                             exposedSettings =
                                 listOf(
                                     ExposedSetting(
@@ -2027,6 +2048,13 @@ data class GameSystem(
                                 hashMapOf(
                                     0 to arrayListOf(ControllerConfigs.VECTREX),
                                 ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("vecx_use_hw", "Hardware"),
+                                    CoreVariable("vecx_scale_x", "0.845"),
+                                    CoreVariable("vecx_scale_y", "0.845"),
+                                    CoreVariable("vecx_shift_y", "-0.035"),
+                                ),
                         ),
                     ),
                     uniqueExtensions = listOf("vec"),
@@ -2091,7 +2119,7 @@ data class GameSystem(
                     listOf(
                         SystemCoreConfig(
                             CoreID.FLYCAST,
-                            requiredBIOSFiles = listOf("dc/dc_boot.bin"),
+                            requiredBIOSFiles = listOf("dc/dc_boot.bin", "dc/dc_flash.bin"),
                             controllerConfigs =
                                 hashMapOf(
                                     0 to
@@ -2114,7 +2142,7 @@ data class GameSystem(
                             exposedSettings =
                                 listOf(
                                     ExposedSetting(
-                                        "flycast_internal_resolution",
+                                        "reicast_internal_resolution",
                                         R.string.setting_flycast_internal_resolution,
                                         arrayListOf(
                                             ExposedSetting.Value(
@@ -2138,9 +2166,15 @@ data class GameSystem(
                                 ),
                             defaultSettings =
                                 listOf(
-                                    CoreVariable("flycast_internal_resolution", "1280x960"),
-                                    CoreVariable("flycast_anisotropic_filtering", "4"),
-                                    CoreVariable("flycast_enable_dsp", "disabled"),
+                                    CoreVariable("reicast_internal_resolution", "640x480"),
+                                    CoreVariable("reicast_anisotropic_filtering", "4"),
+                                    // HLE BIOS (REIOS): o setup de memória/boot é feito em C++ pelo
+                                    // Flycast em vez de executar o dc_boot.bin real. Com o core
+                                    // patchado (nvmem off / memória segura), testando se o caminho
+                                    // REIOS evita a escrita de boot que crasha no caminho do BIOS real.
+                                    CoreVariable("reicast_hle_bios", "enabled"),
+                                    CoreVariable("reicast_enable_dsp", "disabled"),
+                                    CoreVariable("reicast_threaded_rendering", "disabled"),
                                 ),
                             rumbleSupported = true,
                             statesSupported = true,
@@ -2157,6 +2191,7 @@ data class GameSystem(
                     supportedExtensions = listOf("chd", "gdi", "cdi", "cue", "iso", "zip"),
                     hasMultiDiskSupport = false,
                 ),
+
                 GameSystem(
                     SystemID.THREE_DO,
                     "The 3DO Company - 3DO",
@@ -2210,6 +2245,422 @@ data class GameSystem(
                         ),
                     uniqueExtensions = listOf(),
                     supportedExtensions = listOf("iso", "chd", "cue", "bin"),
+                    hasMultiDiskSupport = false,
+                ),
+
+                GameSystem(
+                    SystemID.PICO_8,
+                    "Lexaloffle PICO-8",
+                    R.string.game_system_title_pico8,
+                    R.string.game_system_abbr_pico8,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FAKE_08,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.PICO_8),
+                                    1 to arrayListOf(ControllerConfigs.PICO_8),
+                                ),
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("p8", "png"),
+                    hasMultiDiskSupport = false,
+                ),
+
+                GameSystem(
+                    SystemID.VIRCON32,
+                    "Vircon32",
+                    R.string.game_system_title_vircon32,
+                    R.string.game_system_abbr_vircon32,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.VIRCON32,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.VIRCON32),
+                                    1 to arrayListOf(ControllerConfigs.VIRCON32),
+                                    2 to arrayListOf(ControllerConfigs.VIRCON32),
+                                    3 to arrayListOf(ControllerConfigs.VIRCON32),
+                                ),
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf("v32"),
+                    supportedExtensions = listOf("v32"),
+                    hasMultiDiskSupport = false,
+                ),
+
+                GameSystem(
+                    SystemID.SEGA_32X,
+                    "Sega - 32X",
+                    R.string.game_system_title_sega32x,
+                    R.string.game_system_abbr_sega32x,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.PICODRIVE,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.SEGA_32X),
+                                    1 to arrayListOf(ControllerConfigs.SEGA_32X),
+                                ),
+                            statesSupported = true,
+                            rumbleSupported = false,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf("32x"),
+                    supportedExtensions = listOf("32x", "bin", "md", "smd", "zip"),
+                    hasMultiDiskSupport = false,
+                ),
+                GameSystem(
+                    SystemID.ATARI800,
+                    "Atari - 8-bit",
+                    R.string.game_system_title_atari800,
+                    R.string.game_system_abbr_atari800,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.ATARI800,
+                            // The atari800 core ships the built-in Altirra OS/BASIC, so no
+                            // real BIOS ROMs are required to boot.
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.ATARI800),
+                                    1 to arrayListOf(ControllerConfigs.ATARI800),
+                                ),
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions =
+                        listOf("atr", "xex", "xfd", "atx", "dcm", "cas", "car", "rom", "bin", "com"),
+                    hasMultiDiskSupport = false,
+                ),
+                GameSystem(
+                    SystemID.AMSTRAD_GX4000,
+                    "Amstrad - GX4000",
+                    R.string.game_system_title_gx4000,
+                    R.string.game_system_abbr_gx4000,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.CAP32,
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("cap32_model", "6128+ (experimental)"),
+                                    CoreVariable("cap32_gfx_colors", "24bit"),
+                                    // Map the d-pad to joystick port 1 (the GX4000 had a single joystick port).
+                                    CoreVariable("cap32_retrojoy0", "joystick_port1"),
+                                ),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.AMSTRAD_GX4000),
+                                ),
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("cpr"),
+                ),
+                GameSystem(
+                    SystemID.MEGADUCK,
+                    "Mega Duck",
+                    R.string.game_system_title_megaduck,
+                    R.string.game_system_abbr_megaduck,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.SAMEDUCK,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.MEGADUCK),
+                                ),
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    // Mega Duck dumps use the generic ".bin" (or ".zip" in the catalog); neither
+                    // is a unique extension, so path-based scanning (folder "megaduck/") resolves
+                    // them. ".zip" is auto-extracted by the game loader before reaching the core.
+                    supportedExtensions = listOf("bin", "zip"),
+                ),
+                GameSystem(
+                    SystemID.CHANNEL_F,
+                    "Fairchild - Channel F",
+                    R.string.game_system_title_channelf,
+                    R.string.game_system_abbr_channelf,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FREECHAF,
+                            // FreeChaF cannot boot any game without the two PSU BIOS ROMs.
+                            requiredBIOSFiles = listOf("sl31253.bin", "sl31254.bin"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.CHANNEL_F),
+                                    1 to arrayListOf(ControllerConfigs.CHANNEL_F),
+                                ),
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = true,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    // ".chf" is the distinctive Channel F extension (safe as unique);
+                    // ".bin"/".rom" are generic, and the catalog ships ".zip" — all resolved via
+                    // the "channelf/" folder. ".zip" is auto-extracted before reaching the core.
+                    uniqueExtensions = listOf("chf"),
+                    supportedExtensions = listOf("chf", "bin", "rom", "zip"),
+                ),
+                GameSystem(
+                    SystemID.UZEBOX,
+                    "Uzebox",
+                    R.string.game_system_title_uzebox,
+                    R.string.game_system_abbr_uzebox,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.UZEM,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.UZEBOX),
+                                    1 to arrayListOf(ControllerConfigs.UZEBOX),
+                                ),
+                        ),
+                    ),
+                    // ".uze" is the dedicated Uzebox ROM extension (safe as unique).
+                    uniqueExtensions = listOf("uze"),
+                ),
+                GameSystem(
+                    SystemID.LOWRES_NX,
+                    "LowRes NX",
+                    R.string.game_system_title_lowresnx,
+                    R.string.game_system_abbr_lowresnx,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.LOWRESNX,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.LOWRES_NX),
+                                ),
+                        ),
+                    ),
+                    // ".nx" is the dedicated LowRes NX ROM extension (safe as unique).
+                    uniqueExtensions = listOf("nx"),
+                ),
+                GameSystem(
+                    SystemID.ARDUBOY,
+                    "Arduboy",
+                    R.string.game_system_title_arduboy,
+                    R.string.game_system_abbr_arduboy,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.ARDUOUS,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.ARDUBOY),
+                                ),
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = true,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    // ".arduboy" (packaged) is distinctive (safe as unique); ".hex" (raw) is
+                    // generic so it's resolved via the "arduboy/" folder path scan.
+                    uniqueExtensions = listOf("arduboy"),
+                    supportedExtensions = listOf("arduboy", "hex"),
+                ),
+                GameSystem(
+                    SystemID.GAMECUBE,
+                    "Nintendo - GameCube",
+                    R.string.game_system_title_gc,
+                    R.string.game_system_abbr_gc,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.DOLPHIN,
+                            // Dolphin boots GameCube titles with an HLE IPL, so no BIOS file
+                            // is required (unlike Dreamcast/3DO).
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.GAMECUBE),
+                                    1 to arrayListOf(ControllerConfigs.GAMECUBE),
+                                    2 to arrayListOf(ControllerConfigs.GAMECUBE),
+                                    3 to arrayListOf(ControllerConfigs.GAMECUBE),
+                                ),
+                            rumbleSupported = true,
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions =
+                        listOf("iso", "gcm", "gcz", "rvz", "ciso", "tgc", "wbfs", "dol", "elf"),
+                    hasMultiDiskSupport = false,
+                ),
+                GameSystem(
+                    SystemID.SATURN,
+                    "Sega - Saturn",
+                    R.string.game_system_title_saturn,
+                    R.string.game_system_abbr_saturn,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.YABASANSHIRO,
+                            // YabaSanshiro declares a single non-optional firmware,
+                            // saturn_bios.bin (in system/ root). Auto-downloaded from the
+                            // HuggingFace BIOS dataset (see BiosManager.SUPPORTED_BIOS).
+                            requiredBIOSFiles = listOf("saturn_bios.bin"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.SATURN),
+                                    1 to arrayListOf(ControllerConfigs.SATURN),
+                                ),
+                            rumbleSupported = false,
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("cue", "iso", "chd", "ccd", "mds"),
+                    hasMultiDiskSupport = false,
+                ),
+                GameSystem(
+                    SystemID.JAGUAR,
+                    "Atari - Jaguar",
+                    R.string.game_system_title_jaguar,
+                    R.string.game_system_abbr_jaguar,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.VIRTUALJAGUAR,
+                            // Virtual Jaguar boots most titles with its built-in HLE BIOS,
+                            // so no external BIOS file is required.
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.JAGUAR),
+                                    1 to arrayListOf(ControllerConfigs.JAGUAR),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = true,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    // ".j64" and ".jag" are Jaguar-specific (safe as unique); the generic
+                    // extensions are resolved via the "jaguar/" folder path scan.
+                    uniqueExtensions = listOf("j64", "jag"),
+                    supportedExtensions = listOf("j64", "jag", "rom", "abs", "cof", "bin", "prg"),
+                ),
+                GameSystem(
+                    SystemID.ODYSSEY2,
+                    "Magnavox - Odyssey2",
+                    R.string.game_system_title_odyssey2,
+                    R.string.game_system_abbr_odyssey2,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.O2EM,
+                            // O2EM requires the console BIOS; o2rom.bin (G7000) is the default.
+                            // Auto-downloaded from the HuggingFace BIOS dataset.
+                            requiredBIOSFiles = listOf("o2rom.bin"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.ODYSSEY2),
+                                    1 to arrayListOf(ControllerConfigs.ODYSSEY2),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    // ".bin" is generic, so Odyssey2 ROMs are resolved via the "odyssey2/"
+                    // folder path scan rather than by unique extension.
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("bin"),
+                ),
+                GameSystem(
+                    SystemID.NEOCD,
+                    "SNK - Neo Geo CD",
+                    R.string.game_system_title_neocd,
+                    R.string.game_system_abbr_neocd,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.NEOCD,
+                            // NeoCD auto-detects BIOS files in system/neocd/; with a single
+                            // BIOS present it always uses it (index 0). The Universe BIOS 3.2
+                            // is region-free + auto-patched. Auto-downloaded from HuggingFace.
+                            requiredBIOSFiles = listOf("neocd/uni-bioscd.rom"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.NEOCD),
+                                    1 to arrayListOf(ControllerConfigs.NEOCD),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("cue", "chd"),
                     hasMultiDiskSupport = false,
                 ),
             )

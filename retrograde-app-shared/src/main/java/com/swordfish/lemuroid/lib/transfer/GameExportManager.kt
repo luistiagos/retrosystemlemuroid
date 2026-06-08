@@ -124,7 +124,7 @@ class GameExportManager(
         return runCatching {
             val apkSource = File(context.applicationInfo.sourceDir)
             val versionName = getAppVersionName()
-            val fileName = "lemuroid-v$versionName.apk"
+            val fileName = "retro-game-system-v$versionName.apk"
             val apkDir = File(exportRoot, TransferManifest.APK_DIR).apply { mkdirs() }
             apkSource.copyTo(File(apkDir, fileName), overwrite = true)
             fileName

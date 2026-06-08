@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared.roms
 import android.content.Context
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
@@ -302,7 +303,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
     private fun loadCatalogFromAssets(): List<String>? {
         val excludedPrefixes = HeavySystemFilter.excludedCatalogPrefixes(HeavySystemFilter.deviceTier(appContext))
         return try {
-            appContext.assets.open("catalog_manifest.txt").bufferedReader().useLines { seq ->
+            appContext.assets.open(BuildConfig.CATALOG_MANIFEST_ASSET).bufferedReader().useLines { seq ->
                 seq.filter { it.isNotBlank() }
                     .filter { line -> excludedPrefixes.none { prefix -> line.startsWith(prefix) } }
                     // The manifest format is "path|imageUrl". Extract only the file path so
@@ -534,7 +535,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             Timber.d("fetchFileList() page=$page url=$nextUrl")
             val request = Request.Builder()
                 .url(nextUrl)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .build()
             var resolvedNext: String? = null
             var pageAttempt = 0
@@ -616,7 +617,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
             val existingBytes = if (destFile.exists()) destFile.length() else 0L
             val request = Request.Builder()
                 .url(url)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .apply { if (existingBytes > 0) header("Range", "bytes=$existingBytes-") }
                 .build()
             try {

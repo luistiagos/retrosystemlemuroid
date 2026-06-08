@@ -543,7 +543,7 @@ class RomsDownloadManager(context: Context) {
             val existingBytes = if (destination.exists()) destination.length() else 0L
             val request = Request.Builder()
                 .url(url)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .apply { if (existingBytes > 0) header("Range", "bytes=$existingBytes-") }
                 .build()
             try {
@@ -616,7 +616,7 @@ class RomsDownloadManager(context: Context) {
             val headRequest = Request.Builder()
                 .url(url)
                 .head()
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .build()
             httpClient.newCall(headRequest).execute().use { resp ->
                 totalSize = resp.header("Content-Length")?.toLongOrNull() ?: -1L
@@ -735,7 +735,7 @@ class RomsDownloadManager(context: Context) {
             val from = rangeStart + written
             val request = Request.Builder()
                 .url(url)
-                .header("User-Agent", "Mozilla/5.0 (Android) LemuroidApp/1.0")
+                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
                 .header("Range", "bytes=$from-$rangeEnd")
                 .build()
             try {
