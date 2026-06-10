@@ -116,6 +116,10 @@ android {
                 ":lemuroid_core_virtualjaguar",
                 ":lemuroid_core_o2em",
                 ":lemuroid_core_neocd",
+                ":lemuroid_core_puae",
+                ":lemuroid_core_mednafen_pcfx",
+                ":lemuroid_core_gw",
+                ":lemuroid_core_hatari",
             ),
         )
     }

@@ -268,6 +268,32 @@ enum class CoreID(
         // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
         "neocd_libretro_android.so",
     ),
+    PUAE(
+        "puae",
+        "PUAE",
+        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
+        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
+        "puae_libretro_android.so",
+    ),
+    MEDNAFEN_PCFX(
+        "mednafen_pcfx",
+        "Beetle PC-FX",
+        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
+        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
+        "mednafen_pcfx_libretro_android.so",
+    ),
+    GW(
+        "gw",
+        "Game & Watch",
+        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix.
+        "gw_libretro_android.so",
+    ),
+    HATARI(
+        "hatari",
+        "Hatari",
+        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix.
+        "hatari_libretro_android.so",
+    ),
     ;
 
     companion object {

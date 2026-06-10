@@ -114,6 +114,13 @@ object ShaderChooser {
             SystemID.JAGUAR -> ShaderConfig.CRT
             SystemID.ODYSSEY2 -> ShaderConfig.CRT
             SystemID.NEOCD -> ShaderConfig.CRT
+            SystemID.AMIGA -> ShaderConfig.CRT
+            SystemID.AMIGA_1200 -> ShaderConfig.CRT
+            SystemID.AMIGA_CD32 -> ShaderConfig.CRT
+            SystemID.AMIGA_CDTV -> ShaderConfig.CRT
+            SystemID.PCFX -> ShaderConfig.CRT
+            SystemID.GAME_WATCH -> ShaderConfig.LCD
+            SystemID.ATARI_ST -> ShaderConfig.CRT
         }
     }
 
@@ -384,6 +391,13 @@ object ShaderChooser {
             SystemID.JAGUAR -> upscale32Bits
             SystemID.ODYSSEY2 -> upscale8Bits
             SystemID.NEOCD -> upscale32Bits
+            SystemID.AMIGA -> upscale16Bits
+            SystemID.AMIGA_1200 -> upscale16Bits
+            SystemID.AMIGA_CD32 -> upscale16Bits
+            SystemID.AMIGA_CDTV -> upscale16Bits
+            SystemID.PCFX -> upscale32Bits
+            SystemID.GAME_WATCH -> upscale8BitsMobile
+            SystemID.ATARI_ST -> upscale16Bits
         }
     }
 }

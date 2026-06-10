@@ -8,6 +8,33 @@
 
 ## 0. Entradas que você precisa coletar do usuário antes de começar
 
+### 0.0. Verificação obrigatória — o sistema já existe?
+
+Antes de tudo, **abra `retrograde-app-shared/src/main/java/.../SystemID.kt`** e confirme que o `<dbname>` desejado **NÃO** está na lista. Este projeto já tem **~80+ sistemas** implementados — sugerir um já existente é um erro frequente.
+
+Sistemas já presentes — **lista completa de `SystemID.kt`** (78 sistemas, atualizado jun/2026):
+
+| Categoria | `SystemID` → `dbname` |
+|-----------|----------------------|
+| **Nintendo** | `NES`→`nes`, `SNES`→`snes`, `GB`→`gb`, `GBC`→`gbc`, `GBA`→`gba`, `N64`→`n64`, `FDS`→`fds`, `VIRTUAL_BOY`→`vb`, `NDS`→`nds`, `NINTENDO_3DS`→`3ds`, `GAMECUBE`→`gc`, `POKEMON_MINI`→`pokemini`, `GAME_WATCH`→`gw` |
+| **Sega** | `GENESIS`→`md`, `SMS`→`sms`, `GG`→`gg`, `SEGACD`→`scd`, `SEGA_32X`→`sega32x`, `SATURN`→`saturn`, `DREAMCAST`→`dc`, `SG_1000`→`sg1000`, `SC_3000`→`sc3000` |
+| **Sony** | `PSX`→`psx`, `PSP`→`psp` |
+| **Atari** | `ATARI2600`→`atari2600`, `ATARI5200`→`atari5200`, `ATARI7800`→`atari7800`, `ATARI800`→`atari800`, `LYNX`→`lynx`, `JAGUAR`→`jaguar` |
+| **NEC** | `PC_ENGINE`→`pce`, `PC_ENGINE_CD`→`pcecd`, `PCFX`→`pcfx` |
+| **SNK** | `NGP`→`ngp`, `NGC`→`ngc`, `NEOGEO`→`neogeo`, `NEOCD`→`neocd` |
+| **Commodore / Amiga** | `COMMODORE_64`→`c64`, `AMIGA`→`amiga`, `AMIGA_1200`→`amiga1200`, `AMIGA_CD32`→`amigacd32`, `AMIGA_CDTV`→`amigacdtv` |
+| **Computadores** | `MSX`→`msx`, `MSX2`→`msx2`, `ZX_SPECTRUM`→`zxspectrum`, `AMSTRAD_CPC`→`amstradcpc`, `AMSTRAD_GX4000`→`gx4000`, `DOS`→`dos` |
+| **Outros consoles** | `THREE_DO`→`3do`, `ODYSSEY2`→`odyssey2`, `COLECOVISION`→`coleco`, `INTELLIVISION`→`intellivision`, `VECTREX`→`vectrex`, `SUPERVISION`→`supervision`, `MEGADUCK`→`megaduck`, `CHANNEL_F`→`channelf` |
+| **Portáteis** | `WS`→`ws`, `WSC`→`wsc` |
+| **Arcade** | `FBNEO`→`fbneo`, `MAME2003PLUS`→`mame2003plus`, `CPS1`→`cps1`, `CPS2`→`cps2`, `CPS3`→`cps3`, `DATAEAST`→`dataeast`, `GALAXIAN`→`galaxian`, `TOAPLAN`→`toaplan`, `TAITO`→`taito`, `PSIKYO`→`psikyo`, `PGM`→`pgm`, `KANEKO`→`kaneko`, `CAVE`→`cave`, `TECHNOS`→`technos`, `SETA`→`seta` |
+| **Fantasy / Indie** | `PICO_8`→`pico8`, `VIRCON32`→`vircon32`, `LOWRES_NX`→`lowresnx`, `ARDUBOY`→`arduboy`, `UZEBOX`→`uzebox` |
+
+**Só continue depois de confirmar que o sistema NÃO está em `SystemID.kt`.**
+
+---
+
+### 0.1. Variáveis necessárias
+
 Pergunte ao usuário (ou receba via prompt do task) e confirme **antes de tocar em qualquer arquivo**:
 
 | Variável | Exemplo | Onde será usado |
@@ -52,6 +79,12 @@ file <path>/<libretroFileName>
 # Se vier "ASCII text" ou tamanho < 10KB, o arquivo é um stub e PRECISA ser substituído.
 ```
 
+> **Cores conhecidos SEM o prefixo `lib`** (atualizado jun/2026):  
+> `opera`, `picodrive`, `atari800`, `sameduck`, `freechaf`, `uzem`, `lowresnx`, `arduous`,  
+> `dolphin`, `yabasanshiro`, `virtualjaguar`, `o2em`, `neocd`, `puae`, `mednafen_pcfx`, `gw`  
+>  
+> Para qualquer outro core, verifique o nome real do arquivo dentro do `.zip` antes de preencher `libretroFileName` em `CoreID.kt`.
+
 ---
 
 ## 2. Visão geral dos arquivos que serão editados
@@ -82,6 +115,7 @@ Você vai editar/criar **estes arquivos** (na ordem). Não pule nenhum:
 | 20 | `lemuroid-cores/lemuroid_core_<coreName>/src/main/AndroidManifest.xml` | **Criar** manifest |
 | 21 | `lemuroid-cores/lemuroid_core_<coreName>/src/main/jniLibs/<abi>/<libretroFileName>` | **Copiar** os 4 `.so` |
 | 22 | `lemuroid-cores/bundled-cores/src/main/jniLibs/<abi>/<libretroFileName>` | **Copiar** os 4 `.so` (variante bundle) |
+| 23 | `retrograde-app-shared/.../catalog/ManifestQuickLoader.kt` | **Bumpar `MANIFEST_SCHEMA_VERSION`** (obrigatório se adicionar entradas no catálogo) |
 
 ---
 
@@ -428,6 +462,33 @@ Cada porta deve apontar para o mesmo `ControllerConfigs.<SystemIdEnum>`.
 
 Estes são opcionais. Veja como sistemas similares fazem (procure `exposedSettings = listOf(` no arquivo). Se for o seu primeiro sistema, **deixe vazio** — o usuário pode adicionar depois.
 
+### 9.4. Padrão multi-variante (um core, múltiplos modelos de hardware)
+
+Quando um sistema tem modelos de hardware distintos (ex.: Amiga 500, Amiga 1200, Amiga CD32) servidos pelo **mesmo core** e `.so`, crie **um `SystemID` e `GameSystem` por modelo**, mas compartilhe o `CoreID`, módulo e `.so`. A diferença entre eles é apenas `defaultSettings`:
+
+```kotlin
+// Sistema base — tem uniqueExtensions; os outros usam só folder-scan para não colidir
+GameSystem(
+    SystemID.AMIGA,
+    ...
+    listOf(SystemCoreConfig(CoreID.PUAE,
+        defaultSettings = listOf(CoreVariable("puae_model", "auto")), ...)),
+    uniqueExtensions = listOf("adf"),
+    supportedExtensions = listOf("adf", "hdf"),
+),
+// Variante — sem uniqueExtensions
+GameSystem(
+    SystemID.AMIGA_1200,
+    ...
+    listOf(SystemCoreConfig(CoreID.PUAE,
+        defaultSettings = listOf(CoreVariable("puae_model", "A1200")), ...)),
+    uniqueExtensions = listOf(),
+    supportedExtensions = listOf("adf", "hdf"),
+),
+```
+
+Vantagens: um único módulo (`:lemuroid_core_puae`) com os `.so` serve todos; não duplicar jniLibs.
+
 ---
 
 ## 10. Passo 8 — `TouchControllerID.kt`
@@ -612,9 +673,32 @@ Estão em `lemuroid-touchinput/src/main/java/com/swordfish/touchinput/radial/lay
 
 Veja `Dreamcast.kt` ou `PSXDualShock.kt`. O `ThreeDOLeft` por exemplo **não tem** analog porque o controle original do 3DO não tinha. Para sistemas com analog, adicione `SecondaryAnalogLeft()` em `ThreeDOLeft` e `SecondaryAnalogRight()` em `ThreeDORight` se também tiver analog direito.
 
-### 11.5. Para sistemas com 2 face buttons (Atari 2600/7800)
+### 11.5. Para sistemas com 2 face buttons (Atari 2600/7800, Game & Watch)
 
 Veja `Atari7800.kt` — passa só 2 ids no `LemuroidControlFaceButtons`.
+
+Para botões com rótulos de letras simples (A, B, C, I, II...) não é necessário criar drawables: use o parâmetro `label` diretamente:
+
+```kotlin
+Id.Key(KeyEvent.KEYCODE_BUTTON_A) to {
+    LemuroidButtonForeground(pressed = it, label = "A")   // texto direto, sem drawable
+},
+Id.Key(KeyEvent.KEYCODE_BUTTON_B) to {
+    LemuroidButtonForeground(pressed = it, label = "B")
+},
+```
+
+Só crie drawables XML (`<prefix>_button_x.xml`) quando precisar de símbolos especiais (triângulo, círculo, cruz, quadrado do PlayStation, setas coloridas).
+
+Para layouts com 2 botões no dial de face buttons, adicione `includeComposite = false` para desabilitar o botão composto (que seria um terceiro botão implícito):
+
+```kotlin
+LemuroidControlFaceButtons(
+    ids = persistentListOf(...),
+    includeComposite = false,   // omita se tiver 3+ botões
+    ...
+)
+```
 
 ### 11.6. Para sistemas com 4 face buttons (SNES, PSX, Dreamcast)
 
@@ -706,6 +790,12 @@ Exemplo:
 ```
 
 A `abbr` é mostrada em listas compactas, o `title` em telas detalhe.
+
+> ⚠️ **XML e o caractere `&`:** se o nome do sistema contém `&`, use `&amp;` — XML literal é inválido e vai travar a compilação:
+> ```xml
+> <!-- ERRADO -->   <string name="game_system_title_gw">Nintendo Game & Watch</string>
+> <!-- CORRETO -->  <string name="game_system_title_gw">Nintendo Game &amp; Watch</string>
+> ```
 
 ---
 
@@ -801,7 +891,29 @@ Exemplo:
 }
 ```
 
-A chave é o `<dbname>` do `SystemID`. O valor é o nome usado por endpoints externos. Quando o sistema interno e o externo são iguais, repita: `"saturn": "saturn"`.
+A chave é o `<dbname>` do `SystemID`. O valor é o `name` exato na tabela MNEMONICO do endpoint `emuladores.pythonanywhere.com` — **NÃO assuma que é igual ao `<dbname>`**.
+
+> ⚠️ **PITFALL CRÍTICO:** se o valor não existir na tabela MNEMONICO, o catálogo aparece normalmente mas **tocar num jogo não dispara o download** (falha silenciosa sem mensagem de erro visível ao usuário).
+>
+> Bug histórico: `"amiga": "amiga"` (errado) → `"amiga": "amiga500"` (correto). A tabela divide Amiga em `amiga500`/`amiga1200`/`amigacd32`/`amigacdtv`.
+>
+> **Como verificar:** confirme o `name` exato com o usuário antes de commitar. Se em dúvida, use o `<dbname>` mesmo (pior caso: download falha, sistema aparece no catálogo).
+
+Exemplos de mapeamentos confirmados:
+
+```json
+{
+  "dc":        "dreamcast",
+  "3do":       "3do",
+  "saturn":    "saturn",
+  "gc":        "gamecube",
+  "amiga":     "amiga500",
+  "amiga1200": "amiga1200",
+  "amigacd32": "amigacd32",
+  "amigacdtv": "amigacdtv",
+  "gw":        "gw"
+}
+```
 
 ---
 
@@ -945,6 +1057,29 @@ O `bundled-cores/build.gradle.kts` tem uma task `materializeNativeLibs` que faz 
 
 ---
 
+## 24.5. Passo 23 — Bumpar `MANIFEST_SCHEMA_VERSION` *(obrigatório se adicionar entradas no catálogo)*
+
+> **Por que é obrigatório?** Em instalações existentes o `ManifestQuickLoader` pula a carga inteira quando o schema já foi processado. Sem o bump, as novas ROMs do manifest **nunca são inseridas** — o sistema não aparece para usuários com o app já instalado. Foi exatamente o bug "GameCube não aparecia".
+
+Abra `retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/catalog/ManifestQuickLoader.kt`.
+
+Incremente `MANIFEST_SCHEMA_VERSION` em +1 e registre no histórico inline:
+
+```kotlin
+// Bump when new catalog entries are added for new systems.
+// v12  gc           v13  saturn      v14  jaguar
+// v15  odyssey2     v16  neocd       v17  amiga
+// v18  amiga vars   v19  pcfx        v20  gw
+// v<N+1>  <dbname> (<NomeFriendly>)
+const val MANIFEST_SCHEMA_VERSION = <N+1>
+```
+
+O bump deve acontecer no **mesmo commit** em que as linhas `<dbname>/...` são adicionadas ao `catalog_manifest.txt`.
+
+**Instalações novas** (app recém-instalado) usam o prebuilt DB asset e não dependem do bump — o `PrebuiltDbGenerator` reage automaticamente à mudança no `catalog_manifest.txt`.
+
+---
+
 ## 25. Build e validação
 
 Execute em ordem (no Windows use PowerShell ou bash via Git Bash). Use `--no-daemon --max-workers=1` para evitar OOM em máquinas com pouca RAM:
@@ -964,7 +1099,7 @@ Espere `BUILD SUCCESSFUL`. Se falhar:
 ### 25.2. Compilar o touch input e app
 
 ```bash
-GRADLE_OPTS="-Xmx1536m -XX:MaxMetaspaceSize=512m" ./gradlew --no-daemon --max-workers=1 :lemuroid-touchinput:compileDebugKotlin :lemuroid-app:compilePlayDynamicDebugKotlin
+GRADLE_OPTS="-Xmx1536m -XX:MaxMetaspaceSize=512m" ./gradlew --no-daemon --max-workers=1 :lemuroid-touchinput:compileDebugKotlin :lemuroid-app:compileFreeBundleDebugKotlin
 ```
 
 Se falhar:
@@ -975,10 +1110,19 @@ Se falhar:
 ### 25.3. Build completo
 
 ```bash
-GRADLE_OPTS="-Xmx1536m -XX:MaxMetaspaceSize=512m" ./gradlew --no-daemon --max-workers=1 :lemuroid-app:assemblePlayDynamicDebug
+GRADLE_OPTS="-Xmx1536m -XX:MaxMetaspaceSize=512m" ./gradlew --no-daemon --max-workers=1 :lemuroid-app:assembleFreeBundleDebug
 ```
 
 Espere `BUILD SUCCESSFUL`. Se falhar com erro de dynamic feature, revisar passos 17, 18, 19, 20.
+
+> **Nota:** as variantes `play*` (`assemblePlayDynamicDebug`) estão **desabilitadas** neste checkout — a task não existe e o Gradle retorna "Task not found". Use sempre `:lemuroid-app:assembleFreeBundleDebug` ou `build_apk.ps1 -Debug`.
+
+Após o build, verifique que o `.so` do core está no APK:
+
+```bash
+unzip -l app/build/outputs/apk/freeBundle/debug/*.apk | grep <coreName>
+# Espera 4 linhas (uma por ABI)
+```
 
 ---
 
@@ -1009,8 +1153,11 @@ Confirme item por item antes de declarar pronto:
 - [ ] `lemuroid-cores/lemuroid_core_<coreName>/src/main/AndroidManifest.xml` criado
 - [ ] **4 `.so` files** (arm64-v8a, armeabi-v7a, x86, x86_64) em `lemuroid_core_<coreName>/src/main/jniLibs/`
 - [ ] **Mesmos 4 `.so` files** também em `bundled-cores/src/main/jniLibs/`
+- [ ] `MANIFEST_SCHEMA_VERSION` incrementado em `ManifestQuickLoader.kt` (se adicionou entradas no catálogo)
+- [ ] `mnemonico_map.json` — valor confirmado contra tabela MNEMONICO do endpoint (não assumido igual ao dbname)
 - [ ] Build `:retrograde-app-shared:compileDebugKotlin` passa
-- [ ] Build `:lemuroid-app:assemblePlayDynamicDebug` passa
+- [ ] Build `:lemuroid-app:assembleFreeBundleDebug` passa (usar esta task — `assemblePlayDynamicDebug` **não existe** neste checkout)
+- [ ] APK contém o `.so` do core: `unzip -l <apk> | grep <coreName>` retorna 4 linhas
 - [ ] Testar no device (instalar APK, abrir jogo do sistema, verificar que touch responde, verificar joystick físico responde)
 
 ---
@@ -1051,6 +1198,37 @@ Cores que **já se sabe** ter esse comportamento:
 
 A variant `freeBundle` usa só os `.so` em `bundled-cores`. Se você esqueceu o passo 22, o core simplesmente não estará no APK. Faça `:lemuroid-app:assembleFreeBundleDebug` para testar essa variant.
 
+### 27.7. Sistema não aparece para usuários com app já instalado
+
+**Causa:** `MANIFEST_SCHEMA_VERSION` não foi incrementado. O loader detecta que o schema já foi processado e pula a carga inteira — os novos jogos nunca entram no banco em updates.  
+**Solução:** incremente `MANIFEST_SCHEMA_VERSION` em `ManifestQuickLoader.kt` (Passo 23). O bump força um reload one-time em todos os usuários existentes.
+
+### 27.8. Download on-demand falha silenciosamente (toque num jogo não dispara download)
+
+**Causa:** o valor em `mnemonico_map.json` não existe como `name` na tabela MNEMONICO do endpoint. O catálogo aparece normalmente, mas ao tocar num placeholder o `RomOnDemandManager` não consegue localizar o arquivo e falha sem mensagem visível.  
+**Diagnóstico:** cheque os logs do `RomSystemMapper` / `RomOnDemandManager` e confirme o `name` exato contra a tabela MNEMONICO. Ver Passo 16.
+
+### 27.9. Build falha com "There is not enough space on the disk"
+
+**Causa:** C: do Windows está cheio; o Gradle escreve temp/cache no C: por padrão.  
+**Fix:** use `build_apk.ps1 -Debug` (já configura `-Djava.io.tmpdir=E:/gradle_tmp`). Ou manualmente no PowerShell:
+```powershell
+$env:GRADLE_OPTS = "-Xmx1536m -XX:MaxMetaspaceSize=512m -Djava.io.tmpdir=E:/gradle_tmp"
+```
+
+### 27.10. Build falha com "invalid character" ou erro de resource em XML
+
+**Causa:** `&` literal em strings XML. Sistemas com `&` no nome (ex.: "Game & Watch") precisam de `&amp;` em `strings-game-system.xml`:
+
+```xml
+<!-- ERRADO: causa erro de compilação -->
+<string name="game_system_title_gw">Nintendo Game & Watch</string>
+<!-- CORRETO: -->
+<string name="game_system_title_gw">Nintendo Game &amp; Watch</string>
+```
+
+A abreviação também: `G&amp;W` (não `G&W`).
+
 ---
 
 ## 28. O que **não** fazer
@@ -1061,6 +1239,8 @@ A variant `freeBundle` usa só os `.so` em `bundled-cores`. Se você esqueceu o 
 - ❌ **Não** modifique `Migrations.kt`. Adicionar sistemas **não requer** migração do banco — `SystemID` é só uma enum, jogos são identificados por `systemId` (string) no DB.
 - ❌ **Não** crie PNG para ícones de sistema. Use vector drawable XML.
 - ❌ **Não** edite `catalog_manifest.txt`. Entradas no catálogo são geradas offline pelo script Python e só fazem sentido se você tiver covers + popularity para o sistema.
+- ❌ **Não** use a task `assemblePlayDynamicDebug` — ela não existe neste checkout (variantes `play` estão desabilitadas via `beforeVariants`). Use `:lemuroid-app:assembleFreeBundleDebug`.
+- ❌ **Não** use sintaxe bash (`tail -n X`, `&&`, `head -n X`) em PowerShell — use os equivalentes: `Select-Object -Last X`, `; if ($?) { ... }`, `Select-Object -First X`.
 
 ---
 

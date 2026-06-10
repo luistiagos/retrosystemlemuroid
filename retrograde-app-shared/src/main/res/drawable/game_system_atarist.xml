@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+  <!-- Background: Atari ST beige/grey tone -->
+  <path
+      android:fillColor="#B0A090"
+      android:pathData="M10,10 L90,10 L90,90 L10,90 Z"/>
+  <!-- "ST" label -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M22,38 L22,62 L28,62 L28,53 L36,53 L36,62 L42,62 L42,38 L36,38 L36,47 L28,47 L28,38 Z"/>
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M48,38 L48,44 L55,44 L55,62 L61,62 L61,44 L68,44 L68,38 Z"/>
+</vector>

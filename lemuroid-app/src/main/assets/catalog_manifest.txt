@@ -56122,3 +56122,2227 @@ jaguar/Worms (World) (Aftermarket) (Unl).zip|Worms|https://images.igdb.com/igdb/
 jaguar/Zero 5 (World) (Aftermarket) (Unl).zip|Zero 5|https://images.igdb.com/igdb/image/upload/t_cover_big/cob2al.jpg|0
 jaguar/Zool 2 (World).zip|Zool 2|https://images.igdb.com/igdb/image/upload/t_cover_big/co8t9t.jpg|8
 jaguar/Zoop (USA, Europe).zip|Zoop|https://images.igdb.com/igdb/image/upload/t_cover_big/co2dip.jpg|8
+odyssey2/4 en 1 Ligne (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/4%20en%201%20Ligne%20%28France%29.png|0
+odyssey2/4 in 1 Row (Europe).zip|4 in 1 Row|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/4%20in%201%20Row%20%28Europe%29.png|0
+odyssey2/Alien Invaders - Plus (USA, Europe).zip|Alien Invaders Plus|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Alien%20Invaders%20-%20Plus%20%28USA%2C%20Europe%29.png|0
+odyssey2/Alpine Skiing (USA, Europe).zip|Alpine Skiing|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Alpine%20Skiing%20%28USA%2C%20Europe%29.png|0
+odyssey2/Armored Encounter + Sub Chase (USA, Europe).zip|Armored Encounter! / Sub Chase!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Armored%20Encounter%20%2B%20Sub%20Chase%20%28USA%2C%20Europe%29.png|0
+odyssey2/Atlantis (USA, Europe).zip|Atlantis|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Atlantis%20%28USA%2C%20Europe%29.png|17
+odyssey2/Attack of the Timelord (USA).zip|Attack of the Timelord!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Attack%20of%20the%20Timelord%20%28USA%29.png|0
+odyssey2/Baseball (USA, Europe).zip|Baseball|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Baseball%20%28USA%2C%20Europe%29.png|0
+odyssey2/Billard Electrique (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Billard%20Electrique%20%28France%29.png|0
+odyssey2/Billiard Americain (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Billiard%20Americain%20%28France%29.png|0
+odyssey2/Blackjack (France).zip|Blackjack|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Blackjack%20%28France%29.png|0
+odyssey2/Blobbers, The (Europe).zip|Blobbers|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Blobbers%2C%20The%20%28Europe%29.png|0
+odyssey2/Blockout + Breakdown (USA, Europe).zip|Blockout! / Breakdown!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Blockout%20%2B%20Breakdown%20%28USA%2C%20Europe%29.png|0
+odyssey2/Bombardeio Submarino + Tiro ao Alvo (Brazil).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Bombardeio%20Submarino%20%2B%20Tiro%20ao%20Alvo%20%28Brazil%29.png|0
+odyssey2/Bowling + Basketball (USA, Europe).zip|Bowling! / Basketball!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Bowling%20%2B%20Basketball%20%28USA%2C%20Europe%29.png|0
+odyssey2/Buraco Negro (Brazil).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Buraco%20Negro%20%28Brazil%29.png|0
+odyssey2/Casino Slot Machine (USA, Europe).zip|Casino Slot Machine|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Casino%20Slot%20Machine%20%28USA%2C%20Europe%29.png|0
+odyssey2/Catch the Ball + Noughts and Crosses (Europe).zip|Catch the Ball / Noughts and Crosses|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Catch%20the%20Ball%20%2B%20Noughts%20and%20Crosses%20%28Europe%29.png|0
+odyssey2/Chat et Souris (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Chat%20et%20Souris%20%28France%29.png|0
+odyssey2/Chess (Europe).zip|Chess++|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Chess%20%28Europe%29.png|0
+odyssey2/Chinese Logic (Europe).zip|Chinese Logic|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Chinese%20Logic%20%28Europe%29.png|0
+odyssey2/Clay Pigeon (Brazil).zip|Clay Pigeon|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Clay%20Pigeon%20%28Brazil%29.png|0
+odyssey2/Comando Noturno (Brazil).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Comando%20Noturno%20%28Brazil%29.png|0
+odyssey2/Computer Golf (USA).zip|Computer Golf|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Computer%20Golf%20%28USA%29.png|0
+odyssey2/Computer Intro (USA).zip|Computer Intro!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Computer%20Intro%20%28USA%29.png|0
+odyssey2/Computer Programmer (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Computer%20Programmer%20%28Europe%29.png|0
+odyssey2/Conflit Cosmique (Canada).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Conflit%20Cosmique%20%28Canada%29.png|0
+odyssey2/Conquest of the World (USA, Europe).zip|Conquest of the World|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Conquest%20of%20the%20World%20%28USA%2C%20Europe%29.png|0
+odyssey2/Cosmic Conflict (Europe) (Alt 1).zip|Cosmic Conflict|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Cosmic%20Conflict%20%28Europe%29%20%28Alt%201%29.png|0
+odyssey2/Cosmic Conflict (Europe).zip|Cosmic Conflict|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Cosmic%20Conflict%20%28Europe%29.png|0
+odyssey2/Cosmic Conflict (USA).zip|Cosmic Conflict|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Cosmic%20Conflict%20%28USA%29.png|0
+odyssey2/Course de Voitures + Autodrome + Cryptogramme (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Course%20de%20Voitures%20%2B%20Autodrome%20%2B%20Cryptogramme%20%28France%29.png|0
+odyssey2/Depth Charge + Marksman (Europe).zip|Marksman / Depth charge|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Depth%20Charge%20%2B%20Marksman%20%28Europe%29.png|0
+odyssey2/Desafio Chines (Brazil).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Desafio%20Chines%20%28Brazil%29.png|0
+odyssey2/Dynasty (USA).zip|Dynasty|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Dynasty%20%28USA%29.png|0
+odyssey2/Electronic Table Soccer (USA, Europe).zip|Electronic Table Soccer|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Electronic%20Table%20Soccer%20%28USA%2C%20Europe%29.png|0
+odyssey2/Football (USA, Europe).zip|Football|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Football%20%28USA%2C%20Europe%29.png|0
+odyssey2/Football Electronique + Hockey Electronique (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Football%20Electronique%20%2B%20Hockey%20Electronique%20%28France%29.png|0
+odyssey2/Freedom Fighters (USA, Europe).zip|Freedom Fighters|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Freedom%20Fighters%20%28USA%2C%20Europe%29.png|129
+odyssey2/Frogger (Brazil).zip|Frogger|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Frogger%20%28Brazil%29.png|32
+odyssey2/Frogger (Europe).zip|Frogger|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Frogger%20%28Europe%29.png|32
+odyssey2/Golf (Europe).zip|Golf+|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Golf%20%28Europe%29.png|0
+odyssey2/Great Wall Street Fortune Hunt, The (USA, Europe).zip|Great Wall Street Fortune Hunt|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Great%20Wall%20Street%20Fortune%20Hunt%2C%20The%20%28USA%2C%20Europe%29.png|0
+odyssey2/Guerre Laser (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Guerre%20Laser%20%28France%29.png|0
+odyssey2/Gunfighter (Europe).zip|Gunfighter|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Gunfighter%20%28Europe%29.png|0
+odyssey2/Hockey + Soccer (USA, Europe).zip|Hockey! / Soccer!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Hockey%20%2B%20Soccer%20%28USA%2C%20Europe%29.png|0
+odyssey2/I've Got Your Number (USA, Europe).zip|I've Got Your Number|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/I%27ve%20Got%20Your%20Number%20%28USA%2C%20Europe%29.png|0
+odyssey2/Interpol (Europe) (Proto).zip|Interpol|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Interpol%20%28Europe%29%20%28Proto%29.png|0
+odyssey2/Invaders from Hyperspace (USA).zip|Invaders from Hyperspace!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Invaders%20from%20Hyperspace%20%28USA%29.png|0
+odyssey2/Jeu de Quilles + Basketball (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Jeu%20de%20Quilles%20%2B%20Basketball%20%28France%29.png|0
+odyssey2/Jumping Acrobats (Europe) (Alt 1).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Jumping%20Acrobats%20%28Europe%29%20%28Alt%201%29.png|0
+odyssey2/Jumping Acrobats (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Jumping%20Acrobats%20%28Europe%29.png|0
+odyssey2/K.C. Munchkin (USA).zip|K.C. Munchkin!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/K.C.%20Munchkin%20%28USA%29.png|7
+odyssey2/K.C.'s Krazy Chase (USA, Europe).zip|K.C.'s Krazy Chase!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/K.C.%27s%20Krazy%20Chase%20%28USA%2C%20Europe%29.png|0
+odyssey2/Keyboard Creations (USA).zip|Keyboard Creations!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Keyboard%20Creations%20%28USA%29.png|0
+odyssey2/Killer Bees (USA).zip|Killer Bees!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Killer%20Bees%20%28USA%29.png|0
+odyssey2/Kinder im Verkehr 1 (Germany).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Kinder%20im%20Verkehr%201%20%28Germany%29.png|0
+odyssey2/La Quete des Anneaux (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/La%20Quete%20des%20Anneaux%20%28France%29.png|0
+odyssey2/Labyrinth Game, A + Supermind (Europe).zip|A Labyrinth Game / Supermind|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Labyrinth%20Game%2C%20A%20%2B%20Supermind%20%28Europe%29.png|0
+odyssey2/Las Vegas (France).zip|Las Vegas|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Las%20Vegas%20%28France%29.png|0
+odyssey2/Las Vegas Blackjack (USA, Europe).zip|Las Vegas Blackjack!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Las%20Vegas%20Blackjack%20%28USA%2C%20Europe%29.png|0
+odyssey2/Laser War (Europe).zip|Laser War|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Laser%20War%20%28Europe%29.png|0
+odyssey2/Loony Balloon (Europe) (Proto).zip|Loony Balloon|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Loony%20Balloon%20%28Europe%29%20%28Proto%29.png|0
+odyssey2/Martian Threat (Europe) (Proto) (Alt 1).zip|Martian Threat|https://images.igdb.com/igdb/image/upload/t_cover_big/co1jzf.jpg|0
+odyssey2/Martian Threat (Europe) (Proto).zip|Martian Threat|https://images.igdb.com/igdb/image/upload/t_cover_big/co1jzf.jpg|0
+odyssey2/Matchmaker + Logix + Buzzword (USA).zip|Matchmaker! / Logix! / Buzzword!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Matchmaker%20%2B%20Logix%20%2B%20Buzzword%20%28USA%29.png|0
+odyssey2/Math-A-Magic + Echo (USA, Europe).zip|Math-A-Magic! / Echo!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Math-A-Magic%20%2B%20Echo%20%28USA%2C%20Europe%29.png|0
+odyssey2/Mathematicien + Echo (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Mathematicien%20%2B%20Echo%20%28France%29.png|0
+odyssey2/Mission Impossible (Brazil) (Proto).zip|Mission: Impossible|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Mission%20Impossible%20%28Brazil%29%20%28Proto%29.png|32
+odyssey2/Monkeyshines (USA, Europe).zip|Monkeyshines|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Monkeyshines%20%28USA%2C%20Europe%29.png|0
+odyssey2/Morse (Europe).zip|Morse|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Morse%20%28Europe%29.png|0
+odyssey2/Morse (France).zip|Morse|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Morse%20%28France%29.png|0
+odyssey2/Mousing Cat, The (Europe).zip|The Mousing Cat|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Mousing%20Cat%2C%20The%20%28Europe%29.png|0
+odyssey2/Munchkin (Europe).zip|Munchkin: Quacked Quest|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Munchkin%20%28Europe%29.png|2
+odyssey2/Mur Magique, Le (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Mur%20Magique%2C%20Le%20%28France%29.png|0
+odyssey2/Musician (Europe).zip|Musician|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Musician%20%28Europe%29.png|0
+odyssey2/Neutron Star (Europe) (Proto).zip|Neutron Star|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Neutron%20Star%20%28Europe%29%20%28Proto%29.png|0
+odyssey2/Newscaster (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Newscaster%20%28Europe%29.png|0
+odyssey2/Nightfighter (Europe) (Proto).zip|Nightfighter|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Nightfighter%20%28Europe%29%20%28Proto%29.png|0
+odyssey2/Nightmare (Europe).zip|Nightmare|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Nightmare%20%28Europe%29.png|0
+odyssey2/Nimble Numbers Ned (USA).zip|Nimble Numbers Ned|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Nimble%20Numbers%20Ned%20%28USA%29.png|0
+odyssey2/O Malabarista + Jogo da Velha (Brazil).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/O%20Malabarista%20%2B%20Jogo%20da%20Velha%20%28Brazil%29.png|0
+odyssey2/O Segredo do Farao (Brazil).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/O%20Segredo%20do%20Farao%20%28Brazil%29.png|0
+odyssey2/Out of this World + Helicopter Rescue (USA).zip|Out of This World! / Helicopter Rescue!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Out%20of%20this%20World%20%2B%20Helicopter%20Rescue%20%28USA%29.png|0
+odyssey2/P.T. Barnum's Acrobats (USA).zip|P.T. Barnum's Acrobats|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/P.T.%20Barnum%27s%20Acrobats%20%28USA%29.png|0
+odyssey2/Pachinko (USA, Europe).zip|Pachinko|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Pachinko%20%28USA%2C%20Europe%29.png|0
+odyssey2/Pairs + Space Rendezvous + Logic (Europe).zip|Pairs / Space Rendezvous / Logic|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Pairs%20%2B%20Space%20Rendezvous%20%2B%20Logic%20%28Europe%29.png|0
+odyssey2/Pick Axe Pete (USA, Europe).zip|Pick Axe Pete!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Pick%20Axe%20Pete%20%28USA%2C%20Europe%29.png|0
+odyssey2/Pinball (USA) (Proto).zip|Pinball!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Pinball%20%28USA%29%20%28Proto%29.png|0
+odyssey2/Playtag (Europe) (Proto).zip|Play Tag|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Playtag%20%28Europe%29%20%28Proto%29.png|0
+odyssey2/Pocket Billiards (USA, Europe).zip|Pocket Billiards!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Pocket%20Billiards%20%28USA%2C%20Europe%29.png|0
+odyssey2/Popeye (Brazil).zip|Popeye|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Popeye%20%28Brazil%29.png|0
+odyssey2/Popeye (Europe).zip|Popeye|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Popeye%20%28Europe%29.png|0
+odyssey2/Power Lords (USA) (Alt 1).zip|Power Lords|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Power%20Lords%20%28USA%29%20%28Alt%201%29.png|0
+odyssey2/Power Lords (USA).zip|Power Lords|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Power%20Lords%20%28USA%29.png|0
+odyssey2/Prendre l'Argent et Fuir (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Prendre%20l%27Argent%20et%20Fuir%20%28France%29.png|0
+odyssey2/Q-Bert (Europe).zip|Q*bert|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Q-Bert%20%28Europe%29.png|0
+odyssey2/Quest for the Rings (USA, Europe).zip|The Quest for the Rings|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Quest%20for%20the%20Rings%20%28USA%2C%20Europe%29.png|0
+odyssey2/Red Baron (Europe) (Proto) (Alt 1).zip|Red Baron|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Red%20Baron%20%28Europe%29%20%28Proto%29%20%28Alt%201%29.png|20
+odyssey2/Red Baron (Europe) (Proto).zip|Red Baron|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Red%20Baron%20%28Europe%29%20%28Proto%29.png|20
+odyssey2/Robot City (Europe) (Proto).zip|Robot City|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Robot%20City%20%28Europe%29%20%28Proto%29.png|0
+odyssey2/Samurai (Europe).zip|Samurai Riot|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Samurai%20%28Europe%29.png|1
+odyssey2/Satellite Attack (Europe).zip|Satellite Attack|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Satellite%20Attack%20%28Europe%29.png|0
+odyssey2/Secret of the Pharaohs (Europe).zip|Secret of the Pharaohs|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Secret%20of%20the%20Pharaohs%20%28Europe%29.png|0
+odyssey2/Shark Hunter (Europe) (Proto).zip|Shark Hunter|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Shark%20Hunter%20%28Europe%29%20%28Proto%29.png|0
+odyssey2/Showdown in 2100 A.D. (USA).zip|Showdown in 2100 A.D.|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Showdown%20in%202100%20A.D.%20%28USA%29.png|0
+odyssey2/Sid the Spellbinder (USA).zip|SID the Spellbinder|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Sid%20the%20Spellbinder%20%28USA%29.png|0
+odyssey2/Skiing (France).zip|Skiing|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Skiing%20%28France%29.png|6
+odyssey2/Smithereens (USA).zip|Smithereens!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Smithereens%20%28USA%29.png|0
+odyssey2/Speedway + Spin-out + Crypto-logic (USA, Europe).zip|Speedway! / Spin-Out! / Crypto-Logic!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Speedway%20%2B%20Spin-out%20%2B%20Crypto-logic%20%28USA%2C%20Europe%29.png|0
+odyssey2/Spider-Man (Europe) (Proto) (Alt 1).zip|Spider-Man|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Spider-Man%20%28Europe%29%20%28Proto%29%20%28Alt%201%29.png|299
+odyssey2/Spider-Man (Europe) (Proto).zip|Spider-Man|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Spider-Man%20%28Europe%29%20%28Proto%29.png|299
+odyssey2/Stone Sling (Europe).zip|20 Stone sling|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Stone%20Sling%20%28Europe%29.png|0
+odyssey2/Super Bee (Brazil).zip|Super Bee|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Super%20Bee%20%28Brazil%29.png|0
+odyssey2/Super Bee (Europe).zip|Super Bee|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Super%20Bee%20%28Europe%29.png|0
+odyssey2/Super Cobra (Brazil).zip|Super Cobra|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Super%20Cobra%20%28Brazil%29.png|7
+odyssey2/Super Cobra (Europe).zip|Super Cobra|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Super%20Cobra%20%28Europe%29.png|7
+odyssey2/Take the Money and Run (USA, Europe).zip|Take the Money and Run!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Take%20the%20Money%20and%20Run%20%28USA%2C%20Europe%29.png|0
+odyssey2/Thunderball (USA, Europe).zip|Thunderball!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Thunderball%20%28USA%2C%20Europe%29.png|0
+odyssey2/Turtles (Europe).zip|Turtles|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Turtles%20%28Europe%29.png|0
+odyssey2/Turtles (USA).zip|Turtles|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Turtles%20%28USA%29.png|0
+odyssey2/Tutankham (Europe) (Proto).zip|Tutankham|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Tutankham%20%28Europe%29%20%28Proto%29.png|7
+odyssey2/Type & Tell (USA).zip|Type & Tell|https://images.igdb.com/igdb/image/upload/t_cover_big/co23hf.jpg|0
+odyssey2/UFO (USA).zip|UFO!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/UFO%20%28USA%29.png|0
+odyssey2/Verkehrsspiele 1 (Germany).zip|Verkehrsspiele 1|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Verkehrsspiele%201%20%28Germany%29.png|0
+odyssey2/Verkehrsspiele 2 (Germany).zip|Verkehrsspiele 2|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Verkehrsspiele%202%20%28Germany%29.png|0
+odyssey2/Volleyball (USA, Europe).zip|Volleyball|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Volleyball%20%28USA%2C%20Europe%29.png|10
+odyssey2/Volleyball Electronique (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Volleyball%20Electronique%20%28France%29.png|0
+odyssey2/Wall Street (Brazil).zip|Wall Street|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/Wall%20Street%20%28Brazil%29.png|0
+odyssey2/War of Nerves (USA, Europe).zip|War of Nerves!|https://raw.githubusercontent.com/libretro-thumbnails/Magnavox_-_Odyssey2/master/Named_Boxarts/War%20of%20Nerves%20%28USA%2C%20Europe%29.png|0
+neocd/2020 Super Baseball (Japan) (En,Ja).zip|Super Baseball 2020|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/2020%20Super%20Baseball%20%28Japan%29%20%28En%2CJa%29.png|8
+neocd/ADK World (Japan).zip|ADK World|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/ADK%20World%20%28Japan%29.png|0
+neocd/Art of Fighting - Ryuuko no Ken Gaiden ~ The Path of the Warrior - Art of Fighting 3 (Japan, USA) (En,Ja,Es,Pt).zip|Art of Fighting 3: The Path of The Warrior|https://images.igdb.com/igdb/image/upload/t_cover_big/co1zh4.jpg|16
+neocd/ASO II - The Last Guardian ~ Alpha Mission II (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/ASO%20II%20-%20The%20Last%20Guardian%20~%20Alpha%20Mission%20II%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Bakumatsu Roman - Gekka no Kenshi ~ The Last Blade (Japan) (En,Ja,Es,Pt).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Bakumatsu%20Roman%20-%20Gekka%20no%20Kenshi%20~%20The%20Last%20Blade%20%28Japan%29%20%28En%2CJa%2CEs%2CPt%29.png|0
+neocd/Bakumatsu Roman Daini Maku - Gekka no Kenshi - Tsuki ni Saku Hana, Chiri Yuku Hana ~ The Last Blade 2 (Japan) (En,Ja,Es,Pt).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Bakumatsu%20Roman%20Daini%20Maku%20-%20Gekka%20no%20Kenshi%20-%20Tsuki%20ni%20Saku%20Hana%2C%20Chiri%20Yuku%20Hana%20~%20The%20Last%20Blade%202%20%28Japan%29%20%28En%2CJa%2CEs%2CPt%29.png|0
+neocd/Baseball Stars 2 (Japan) (En,Ja).zip|Baseball Stars 2|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Baseball%20Stars%202%20%28Japan%29%20%28En%2CJa%29.png|8
+neocd/Baseball Stars Professional (Japan) (En,Ja).zip|Baseball Stars Professional|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Baseball%20Stars%20Professional%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Big Tournament Golf ~ Neo Turf Masters (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Big%20Tournament%20Golf%20~%20Neo%20Turf%20Masters%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Breakers (Japan) (En,Ja).zip|Breakers|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Breakers%20%28Japan%29%20%28En%2CJa%29.png|7
+neocd/Burning Fight (Japan) (En,Ja).zip|Burning Fight|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Burning%20Fight%20%28Japan%29%20%28En%2CJa%29.png|10
+neocd/Choujin Gakuen - Gowcaizer (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Choujin%20Gakuen%20-%20Gowcaizer%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Crossed Swords (Japan).zip|Crossed Swords|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Crossed%20Swords%20%28Japan%29.png|7
+neocd/Crossed Swords II (Japan) (En,Ja).zip|Crossed Swords II|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Crossed%20Swords%20II%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Cyber-Lip (Japan) (En,Ja).zip|Cyber-Lip|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Cyber-Lip%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Double Dragon (Japan) (En,Ja) (Rev 1).zip|Double Dragon|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Double%20Dragon%20%28Japan%29%20%28En%2CJa%29%20%28Rev%201%29.png|10
+neocd/Double Dragon (USA) (En,Ja).zip|Double Dragon|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Double%20Dragon%20%28USA%29%20%28En%2CJa%29.png|10
+neocd/Dunk Dream ~ Street Slam ~ Street Hoop (Japan, USA).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Dunk%20Dream%20~%20Street%20Slam%20~%20Street%20Hoop%20%28Japan%2C%20USA%29.png|0
+neocd/Far East of Eden - Tengai Makyou Shinden ~ Far East of Eden - Kabuki Klash (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Far%20East%20of%20Eden%20-%20Tengai%20Makyou%20Shinden%20~%20Far%20East%20of%20Eden%20-%20Kabuki%20Klash%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Fighter's History Dynamite ~ Karnov's Revenge (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Fighter%27s%20History%20Dynamite%20~%20Karnov%27s%20Revenge%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Fire Suplex ~ 3 Count Bout (Japan, USA) (En,Ja).zip|3 Count Bout|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Fire%20Suplex%20~%203%20Count%20Bout%20%28Japan%2C%20USA%29%20%28En%2CJa%29.png|13
+neocd/Flying Power Disc ~ Windjammers (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Flying%20Power%20Disc%20~%20Windjammers%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Football Frenzy (Japan) (En,Ja).zip|Football Frenzy|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Football%20Frenzy%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Futsal - 5 on 5 Mini Soccer ~ PleasureGoal - 5 on 5 Mini Soccer (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Futsal%20-%205%20on%205%20Mini%20Soccer%20~%20PleasureGoal%20-%205%20on%205%20Mini%20Soccer%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Fuuun Mokushiroku - Kakutou Sousei ~ Savage Reign (Japan) (En,Ja,Es,Pt).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Fuuun%20Mokushiroku%20-%20Kakutou%20Sousei%20~%20Savage%20Reign%20%28Japan%29%20%28En%2CJa%2CEs%2CPt%29.png|0
+neocd/Fuuun Mokushiroku - Kakutou Sousei ~ Savage Reign (USA) (En,Ja,Es,Pt) (Rev 1).zip|||0
+neocd/Galaxy Fight - Universal Warriors (Japan) (En,Ja,Es).zip|Galaxy Fight: Universal Warriors|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Galaxy%20Fight%20-%20Universal%20Warriors%20%28Japan%29%20%28En%2CJa%2CEs%29.png|5
+neocd/Garou Densetsu - Shukumei no Tatakai ~ Fatal Fury - King of Fighters (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Garou%20Densetsu%20-%20Shukumei%20no%20Tatakai%20~%20Fatal%20Fury%20-%20King%20of%20Fighters%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Garou Densetsu 2 ~ Fatal Fury 2 (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Garou%20Densetsu%202%20~%20Fatal%20Fury%202%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Garou Densetsu 3 - Road to the Final Victory ~ Fatal Fury 3 - Road to the Final Victory (Japan) (En,Ja,Es,Pt).zip|Fatal Fury 3: Road to the Final Victory|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Garou%20Densetsu%203%20-%20Road%20to%20the%20Final%20Victory%20~%20Fatal%20Fury%203%20-%20Road%20to%20the%20Final%20Victory%20%28Japan%29%20%28En%2CJa%2CEs%2CPt%29.png|22
+neocd/Garou Densetsu 3 - Road to the Final Victory ~ Fatal Fury 3 - Road to the Final Victory (Japan, USA) (En,Ja,Es,Pt) (Rev 1).zip|Fatal Fury 3: Road to the Final Victory|https://images.igdb.com/igdb/image/upload/t_cover_big/co4hhf.jpg|22
+neocd/Garou Densetsu 3 - Road to the Final Victory ~ Fatal Fury 3 - Road to the Final Victory (USA) (En,Ja,Es,Pt) (Rev 3).zip|Fatal Fury 3: Road to the Final Victory|https://images.igdb.com/igdb/image/upload/t_cover_big/co4hhf.jpg|22
+neocd/Garou Densetsu Special ~ Fatal Fury Special (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Garou%20Densetsu%20Special%20~%20Fatal%20Fury%20Special%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Garou Densetsu Special ~ Fatal Fury Special (Japan, USA) (En,Ja) (Rev 1).zip|||0
+neocd/Ghost Pilots (Japan).zip|Ghost Pilots|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Ghost%20Pilots%20%28Japan%29.png|0
+neocd/Idol Mahjong - Final Romance 2 (Japan).zip|Idol-Mahjong Final Romance 2|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Idol%20Mahjong%20-%20Final%20Romance%202%20%28Japan%29.png|0
+neocd/Janshin Densetsu - Quest of Jongmaster (Japan).zip|Janshin Densetsu: Quest of Jongmaster|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Janshin%20Densetsu%20-%20Quest%20of%20Jongmaster%20%28Japan%29.png|0
+neocd/Joy Joy Kid ~ Puzzled (Japan) (En,Ja).zip|||0
+neocd/King of Fighters '94, The (Japan) (En,Ja).zip|The King of Fighters '94|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/King%20of%20Fighters%20%2794%2C%20The%20%28Japan%29%20%28En%2CJa%29.png|42
+neocd/King of Fighters '94, The (Japan, USA) (En,Ja) (Rev 1).zip|The King of Fighters '94|https://images.igdb.com/igdb/image/upload/t_cover_big/co23d2.jpg|42
+neocd/King of Fighters '95, The (Japan) (En,Ja) (Rev 1).zip|King of Fighters '95, The: Special Item Box|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/King%20of%20Fighters%20%2795%2C%20The%20%28Japan%29%20%28En%2CJa%29%20%28Rev%201%29.png|0
+neocd/King of Fighters '95, The (Japan, USA) (En,Ja).zip|King of Fighters '95, The: Special Item Box|https://images.igdb.com/igdb/image/upload/t_cover_big/co5wvn.jpg|0
+neocd/King of Fighters '96 NeoGeo Collection, The (Japan).zip|||0
+neocd/King of Fighters '96, The (Japan, USA) (En,Ja).zip|The King of Fighters '96|https://images.igdb.com/igdb/image/upload/t_cover_big/co23d3.jpg|49
+neocd/King of Fighters '97, The (Japan) (En,Ja).zip|The King of Fighters '97|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/King%20of%20Fighters%20%2797%2C%20The%20%28Japan%29%20%28En%2CJa%29.png|69
+neocd/King of Fighters '98, The - Dream Match Never Ends ~ The King of Fighters '98 - The Slugfest (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/King%20of%20Fighters%20%2798%2C%20The%20-%20Dream%20Match%20Never%20Ends%20~%20The%20King%20of%20Fighters%20%2798%20-%20The%20Slugfest%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/King of Fighters '99, The ~ The King of Fighters '99 - Millennium Battle (Japan, USA) (En,Ja,Es,Pt).zip|The King of Fighters '99: Millennium Battle|https://images.igdb.com/igdb/image/upload/t_cover_big/co23d4.jpg|44
+neocd/Last Resort (Japan) (En,Ja).zip|Last Resort|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Last%20Resort%20%28Japan%29%20%28En%2CJa%29.png|9
+neocd/League Bowling (Japan) (En,Ja).zip|League Bowling|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/League%20Bowling%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Magical Drop 2 (Japan) (En,Ja).zip|Magical Drop II|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Magical%20Drop%202%20%28Japan%29%20%28En%2CJa%29.png|11
+neocd/Magician Lord (Japan) (En,Ja).zip|Magician Lord|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Magician%20Lord%20%28Japan%29%20%28En%2CJa%29.png|11
+neocd/Mahjong-kyou Retsuden - Nishi Nihon-hen (Japan).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Mahjong-kyou%20Retsuden%20-%20Nishi%20Nihon-hen%20%28Japan%29.png|0
+neocd/Metal Slug (Japan) (En,Ja).zip|Metal Slug|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Metal%20Slug%20%28Japan%29%20%28En%2CJa%29.png|278
+neocd/Metal Slug 2 (Japan, USA) (En,Ja).zip|Metal Slug 2|https://images.igdb.com/igdb/image/upload/t_cover_big/co24zi.jpg|178
+neocd/Mutation Nation (Japan) (En,Ja).zip|Mutation Nation|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Mutation%20Nation%20%28Japan%29%20%28En%2CJa%29.png|10
+neocd/Nam-1975 (Japan) (En,Ja).zip|Nam-1975|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Nam-1975%20%28Japan%29%20%28En%2CJa%29.png|7
+neocd/Neo-Geo CD Special (Japan).zip|Neo Geo CD Special|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Neo-Geo%20CD%20Special%20%28Japan%29.png|0
+neocd/Next Thing, The - King of the Monsters 2 (Japan, USA) (En,Ja).zip|King of the Monsters 2|https://images.igdb.com/igdb/image/upload/t_cover_big/co3b7k.jpg|11
+neocd/Ninja Combat (Japan) (En,Ja).zip|Ninja Combat|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Ninja%20Combat%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Ninja Commando (Japan) (En,Ja).zip|Ninja Commando|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Ninja%20Commando%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Ninja Master's - Haou Ninpou Chou (Japan) (En,Ja).zip|Ninja Master's: Haou Ninpou-ko|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Ninja%20Master%27s%20-%20Haou%20Ninpou%20Chou%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Power Spikes II (Japan) (En,Ja).zip|Power Spikes II|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Power%20Spikes%20II%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Pulstar (Japan).zip|Pulstar|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Pulstar%20%28Japan%29.png|8
+neocd/Puzzle Bobble ~ Bust-a-Move (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Puzzle%20Bobble%20~%20Bust-a-Move%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Quiz King of Fighters (Japan).zip|Quiz King of Fighters|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Quiz%20King%20of%20Fighters%20%28Japan%29.png|0
+neocd/Raguy ~ Blue's Journey (Japan) (En,Ja).zip|Blue's Journey|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Raguy%20~%20Blue%27s%20Journey%20%28Japan%29%20%28En%2CJa%29.png|8
+neocd/Rally Chase (Japan) (En,Ja).zip|Rally Chase|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Rally%20Chase%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/RB2 - The Newcomers - Real Bout Garou Densetsu 2 ~ RB2 - The Newcomers - Real Bout Fatal Fury 2 (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/RB2%20-%20The%20Newcomers%20-%20Real%20Bout%20Garou%20Densetsu%202%20~%20RB2%20-%20The%20Newcomers%20-%20Real%20Bout%20Fatal%20Fury%202%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Real Bout Garou Densetsu Special ~ Real Bout Fatal Fury Special (Japan, USA) (En,Ja,Es,Pt).zip|Real Bout Fatal Fury Special|https://images.igdb.com/igdb/image/upload/t_cover_big/co1w2o.jpg|20
+neocd/Real Bout Garou Densetsu ~ Real Bout Fatal Fury (Japan, USA) (En,Ja,Es,Pt).zip|Real Bout Fatal Fury|https://images.igdb.com/igdb/image/upload/t_cover_big/co7568.jpg|19
+neocd/Riding Hero (Japan) (En,Ja).zip|Riding Hero|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Riding%20Hero%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Robo Army (Japan) (En,Ja).zip|Robo Army|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Robo%20Army%20%28Japan%29%20%28En%2CJa%29.png|7
+neocd/Ryuuko no Ken 2 ~ Art of Fighting 2 (Japan) (En,Ja,Es).zip|Art of Fighting 2|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Ryuuko%20no%20Ken%202%20~%20Art%20of%20Fighting%202%20%28Japan%29%20%28En%2CJa%2CEs%29.png|27
+neocd/Ryuuko no Ken ~ Art of Fighting (Japan, USA) (En,Ja,Es).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Ryuuko%20no%20Ken%20~%20Art%20of%20Fighting%20%28Japan%2C%20USA%29%20%28En%2CJa%2CEs%29.png|0
+neocd/Samurai Spirits - Amakusa Kourin ~ Samurai Shodown IV - Amakusa's Revenge (Japan) (En,Ja,Es,Pt).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Samurai%20Spirits%20-%20Amakusa%20Kourin%20~%20Samurai%20Shodown%20IV%20-%20Amakusa%27s%20Revenge%20%28Japan%29%20%28En%2CJa%2CEs%2CPt%29.png|0
+neocd/Samurai Spirits - Zankurou Musouken ~ Samurai Shodown III (Japan, USA) (En,Ja,Es,Pt).zip|||0
+neocd/Samurai Spirits ~ Samurai Shodown (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Samurai%20Spirits%20~%20Samurai%20Shodown%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Shin Samurai Spirits - Haoumaru Jigokuhen ~ Samurai Shodown II (Japan, USA) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Shin%20Samurai%20Spirits%20-%20Haoumaru%20Jigokuhen%20~%20Samurai%20Shodown%20II%20%28Japan%2C%20USA%29%20%28En%2CJa%29.png|0
+neocd/Shinouken ~ Ragnagard (Japan) (En,Ja,Es).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Shinouken%20~%20Ragnagard%20%28Japan%29%20%28En%2CJa%2CEs%29.png|0
+neocd/Shinsetsu Samurai Spirits - Bushidou Retsuden (Japan).zip|Shinsetsu Samurai Spirits: Bushido Retsuden|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Shinsetsu%20Samurai%20Spirits%20-%20Bushidou%20Retsuden%20%28Japan%29.png|0
+neocd/Shougi no Tatsujin - Master of Syougi (Japan).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Shougi%20no%20Tatsujin%20-%20Master%20of%20Syougi%20%28Japan%29.png|0
+neocd/Soccer Brawl (Japan).zip|Soccer Brawl|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Soccer%20Brawl%20%28Japan%29.png|0
+neocd/Sonic Wings 2 ~ Aero Fighters 2 (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Sonic%20Wings%202%20~%20Aero%20Fighters%202%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Sonic Wings 3 ~ Aero Fighters 3 (Japan) (En,Ja).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Sonic%20Wings%203%20~%20Aero%20Fighters%203%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Stakes Winner - GI Kanzen Seiha e no Michi (Japan).zip||https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Stakes%20Winner%20-%20GI%20Kanzen%20Seiha%20e%20no%20Michi%20%28Japan%29.png|0
+neocd/Super Sidekicks - Tokuten-ou (Japan) (En,Ja).zip|Super Sidekicks|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Super%20Sidekicks%20-%20Tokuten-ou%20%28Japan%29%20%28En%2CJa%29.png|12
+neocd/Super Spy, The (Japan) (En,Ja).zip|The Super Spy|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Super%20Spy%2C%20The%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Tokuten-ou 2 ~ Super Sidekicks 2 - The World Championship (Japan) (En,Ja,Es).zip|Super Sidekicks 2: The World Championship|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Tokuten-ou%202%20~%20Super%20Sidekicks%202%20-%20The%20World%20Championship%20%28Japan%29%20%28En%2CJa%2CEs%29.png|0
+neocd/Tokuten-ou 3 - Eikou e no Chousen ~ Super Sidekicks 3 - The Next Glory (Japan, USA) (En,Ja,Fr,Es,It,Pt).zip|||0
+neocd/Top Hunter - Roddy & Cathy (Japan) (En,Ja).zip|Top Hunter: Roddy & Cathy|https://images.igdb.com/igdb/image/upload/t_cover_big/co85ly.jpg|0
+neocd/Top Player's Golf (Japan) (En,Ja).zip|Top Player's Golf|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Top%20Player%27s%20Golf%20%28Japan%29%20%28En%2CJa%29.png|0
+neocd/Treasure of the Caribbean (France) (En,Ja) (Unl).zip|Treasure of the Caribbean|https://images.igdb.com/igdb/image/upload/t_cover_big/e1kvgrxthsm55ntzeekx.jpg|0
+neocd/Tsuukai Gangan Koushinkyoku ~ Aggressors of Dark Kombat (Japan, USA) (En,Ja).zip|||0
+neocd/Viewpoint (Japan).zip|Viewpoint|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/Viewpoint%20%28Japan%29.png|8
+neocd/World Heroes (Japan) (En,Ja).zip|World Heroes|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/World%20Heroes%20%28Japan%29%20%28En%2CJa%29.png|23
+neocd/World Heroes 2 (Japan) (En,Ja).zip|World Heroes 2|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/World%20Heroes%202%20%28Japan%29%20%28En%2CJa%29.png|11
+neocd/World Heroes 2 Jet (Japan) (En,Ja).zip|World Heroes 2 Jet|https://raw.githubusercontent.com/libretro-thumbnails/SNK_-_Neo_Geo_CD/master/Named_Boxarts/World%20Heroes%202%20Jet%20%28Japan%29%20%28En%2CJa%29.png|4
+neocd/World Heroes Perfect (Japan, USA) (En,Ja).zip|World Heroes Perfect|https://images.igdb.com/igdb/image/upload/t_cover_big/co3h6o.jpg|10
+amiga500/1000 Miglia.adf|||0
+amiga500/1000cc Turbo.adf|||0
+amiga500/1497 - Five Years After.adf|||0
+amiga500/1943 - The Battle of Midway.adf|||0
+amiga500/1st Division Manager.adf|||0
+amiga500/3001 - O'Connors Fight.adf|||0
+amiga500/3D Galax.adf|||0
+amiga500/3D Pool.adf|||0
+amiga500/3D World Boxing.adf|||0
+amiga500/3D World Tennis.adf|||0
+amiga500/4-Get-It.adf|||0
+amiga500/4-Way Lynx.adf|||0
+amiga500/4th & Inches.adf|||0
+amiga500/4x4 Off-Road Racing.adf|||0
+amiga500/5th Gear.adf|||0
+amiga500/688 Attack Sub.adf|||0
+amiga500/7 Colors.adf|||0
+amiga500/9 Lives.adf|||0
+amiga500/A320 Airbus.adf|||0
+amiga500/Aaargh!.adf|||0
+amiga500/Above Top Secret.adf|||0
+amiga500/Abu Simbel Profanation.adf|||0
+amiga500/Abyss.adf|||0
+amiga500/ABZoo.adf|||0
+amiga500/Accordion.adf|||0
+amiga500/Ace the Space-Case.adf|||0
+amiga500/Action Fighter.adf|||0
+amiga500/Addams Family, The.adf|||0
+amiga500/Adrenalynn.adf|||0
+amiga500/ADS - Advanced Destroyer Simulator.adf|||0
+amiga500/Advanced Ski Simulator.adf|||0
+amiga500/Advantage Tennis.adf|||0
+amiga500/Adventures of Quik & Silva, The.adf|||0
+amiga500/Adventures of Robin Hood, The.adf|||0
+amiga500/After Burner (Sega).adf|||0
+amiga500/After the War.adf|||0
+amiga500/Airball.adf|||0
+amiga500/Airborne Ranger.adf|||0
+amiga500/Alfred Chicken.adf|||0
+amiga500/Alien Bash.adf|||0
+amiga500/Alien Breed (Intro).adf|||0
+amiga500/Alien Fish Finger.adf|||0
+amiga500/Alien Storm.adf|||0
+amiga500/Alien Syndrome.adf|||0
+amiga500/Alpha Waves.adf|||0
+amiga500/Alpha-1.adf|||0
+amiga500/Amazed.adf|||0
+amiga500/Amegas.adf|||0
+amiga500/American History Adventure.adf|||0
+amiga500/American Tag-Team Wrestling.adf|||0
+amiga500/Amiga Karate.adf|||0
+amiga500/Amiga Poker.adf|||0
+amiga500/AmigaSingleRomsA-ZReuploadByGhostware_archive.torrent|||0
+amiga500/AmigaSingleRomsA-ZReuploadByGhostware_files.xml|||0
+amiga500/AmigaSingleRomsA-ZReuploadByGhostware_meta.sqlite|||0
+amiga500/AmigaSingleRomsA-ZReuploadByGhostware_meta.xml|||0
+amiga500/AmigaSingleRomsA-ZReuploadByGhostware_reviews.xml|||0
+amiga500/Anarchy.adf|||0
+amiga500/Ancient Games.adf|||0
+amiga500/Animal Kingdom.adf|||0
+amiga500/Answer Back - Junior Quiz.adf|||0
+amiga500/Answer Back - Senior Quiz.adf|||0
+amiga500/Antago.adf|||0
+amiga500/Apache.adf|||0
+amiga500/Apprentice.adf|||0
+amiga500/Aquatic Games, The - Starring James Pond and the Aquabats.adf|||0
+amiga500/Arazmax.adf|||0
+amiga500/Arazok's Tomb.adf|||0
+amiga500/Arcade Fruit Machine.adf|||0
+amiga500/Arcade Pool (OCS & AGA).adf|||0
+amiga500/Archer Maclean's Pool.adf|||0
+amiga500/Arena 2000.adf|||0
+amiga500/Arkanoid - Revenge of Doh.adf|||0
+amiga500/Arkanoid.adf|||0
+amiga500/Armada.adf|||0
+amiga500/Armageddon Man, The.adf|||0
+amiga500/Arnhem - The 'Market Garden' Operation.adf|||0
+amiga500/Arnie.adf|||0
+amiga500/Arthur - The Quest for Excalibur.adf|||0
+amiga500/Ask Me Another.adf|||0
+amiga500/ATF II - Advanced Tactical Fighter II.adf|||0
+amiga500/Atomino.adf|||0
+amiga500/Atomix.adf|||0
+amiga500/Austerlitz.adf|||0
+amiga500/Aventures de Moktar, Les.adf|||0
+amiga500/Axel's Magic Hammer.adf|||0
+amiga500/Baal.adf|||0
+amiga500/Baby Bug.adf|||0
+amiga500/Baby Jo in 'Going Home'.adf|||0
+amiga500/Back to the Future Part II.adf|||0
+amiga500/Backgammon Royale.adf|||0
+amiga500/Backgammon.adf|||0
+amiga500/Backlash.adf|||0
+amiga500/Backstage.adf|||0
+amiga500/Bad Dudes vs. Dragon Ninja.adf|||0
+amiga500/Bad Vibes.adf|||0
+amiga500/Badlands Pete.adf|||0
+amiga500/BadLands.adf|||0
+amiga500/Bagitman.adf|||0
+amiga500/Bahnhof.adf|||0
+amiga500/Balance of Power - The 1990 Edition.adf|||0
+amiga500/Ball Game, The.adf|||0
+amiga500/Ball Raider II.adf|||0
+amiga500/Ball Raider.adf|||0
+amiga500/Ballistix.adf|||0
+amiga500/Balloonacy.adf|||0
+amiga500/Balls.adf|||0
+amiga500/Ballyhoo.adf|||0
+amiga500/Bambinours Solves a Jig Saw.adf|||0
+amiga500/Bangboo.adf|||0
+amiga500/Bank Buster.adf|||0
+amiga500/Barbarian - The Ultimate Warrior.adf|||0
+amiga500/Barbarian.adf|||0
+amiga500/Barney Mouse.adf|||0
+amiga500/Base Jumpers.adf|||0
+amiga500/Batman - The Caped Crusader.adf|||0
+amiga500/Battle Chess.adf|||0
+amiga500/Battle for the Ashes.adf|||0
+amiga500/Battle Squadron - The Destruction of the Barrax Empire!.adf|||0
+amiga500/Battlemaster.adf|||0
+amiga500/Battleships.adf|||0
+amiga500/BattleTech - The Crescent Hawk's Inception.adf|||0
+amiga500/Beach Volley.adf|||0
+amiga500/Beam.adf|||0
+amiga500/Better Dead Than Alien!.adf|||0
+amiga500/Beyond the Ice Palace.adf|||0
+amiga500/Beyond Zork - The Coconut of Quendor.adf|||0
+amiga500/Bi-Fi - Snackzone.adf|||0
+amiga500/Bi-Fi II - Action in Hollywood.adf|||0
+amiga500/Big Nose - The Caveman.adf|||0
+amiga500/Bill & Ted's Excellent Adventure.adf|||0
+amiga500/Billiards II Simulator.adf|||0
+amiga500/Billiards Simulator.adf|||0
+amiga500/Bio Challenge.adf|||0
+amiga500/Bionic Commando.adf|||0
+amiga500/Birds N' Bees.adf|||0
+amiga500/Black Cauldron, The.adf|||0
+amiga500/Black Hornet.adf|||0
+amiga500/Black Lamp.adf|||0
+amiga500/Black Shadow.adf|||0
+amiga500/Black Tiger.adf|||0
+amiga500/Blackjack Academy.adf|||0
+amiga500/Blade Warrior.adf|||0
+amiga500/Blades of Steel.adf|||0
+amiga500/Blasteris.adf|||0
+amiga500/Blinky's Scary School.adf|||0
+amiga500/Block Shock - The Last Chance.adf|||0
+amiga500/Blockhead II.adf|||0
+amiga500/Blockhead.adf|||0
+amiga500/Bloodwych - The Extended Levels.adf|||0
+amiga500/Bloodwych.adf|||0
+amiga500/Blue Angel 69.adf|||0
+amiga500/Blue Angels - Formation Flight Simulation.adf|||0
+amiga500/Blue Boy.adf|||0
+amiga500/Blueberry.adf|||0
+amiga500/Blues Brothers, The.adf|||0
+amiga500/BMX Simulator.adf|||0
+amiga500/BoBo - Stir Crazy.adf|||0
+amiga500/Bomb Fusion.adf|||0
+amiga500/Bomb Jack.adf|||0
+amiga500/Bomb'X.adf|||0
+amiga500/Bomber 2000.adf|||0
+amiga500/Bombuzal.adf|||0
+amiga500/Bonanza Bros..adf|||0
+amiga500/Booly.adf|||0
+amiga500/Boondar (AGA).adf|||0
+amiga500/Borrowed Time.adf|||0
+amiga500/Boston Bomb Club.adf|||0
+amiga500/Botics.adf|||0
+amiga500/Bouncing Balls.adf|||0
+amiga500/Bouncing Bill.adf|||0
+amiga500/Boxing Masters.adf|||0
+amiga500/Brain Artifice.adf|||0
+amiga500/Brain Man.adf|||0
+amiga500/Brands Hatch.adf|||0
+amiga500/Brataccas.adf|||0
+amiga500/Brides of Dracula.adf|||0
+amiga500/Bridge 6.0.adf|||0
+amiga500/Bridge Player 2000 with Tutor.adf|||0
+amiga500/Bubble +.adf|||0
+amiga500/Bubble Bobble.adf|||0
+amiga500/Bubble Dizzy.adf|||0
+amiga500/Bubble Ghost.adf|||0
+amiga500/Bug Bash.adf|||0
+amiga500/Bug Bomber.adf|||0
+amiga500/Buggy Boy.adf|||0
+amiga500/Build It! - Das Bauhaus.adf|||0
+amiga500/BuilderLand - The Story of Melba.adf|||0
+amiga500/Bully's Sporting Darts.adf|||0
+amiga500/Bumpy's Arcade Fantasy.adf|||0
+amiga500/Bundesliga Manager.adf|||0
+amiga500/Bunny Bricks.adf|||0
+amiga500/Bush Buck - A Global Treasure Hunt.adf|||0
+amiga500/Bush Buck - Eine Weltweite Schatzsuche.adf|||0
+amiga500/Byte Man.adf|||0
+amiga500/C.Y.A.D. - A Game of Influence.adf|||0
+amiga500/Cabal.adf|||0
+amiga500/Cabaret Asteroids.adf|||0
+amiga500/Caesar.adf|||0
+amiga500/Calendar Quiz.adf|||0
+amiga500/Cap'n Carnage.adf|||0
+amiga500/Capone.adf|||0
+amiga500/Captain Blood.adf|||0
+amiga500/Captain Dynamo.adf|||0
+amiga500/Captain Planet and the Planeteers.adf|||0
+amiga500/Captive.adf|||0
+amiga500/Carcharodon - White Sharks.adf|||0
+amiga500/Cardiaxx (Electronic Zoo).adf|||0
+amiga500/Cardinal of the Kremlin, The.adf|||0
+amiga500/Carlos.adf|||0
+amiga500/Carnage.adf|||0
+amiga500/Carrier Command.adf|||0
+amiga500/CarVup - The Final Frontier.adf|||0
+amiga500/CarVup.adf|||0
+amiga500/Casino Roulette.adf|||0
+amiga500/Casino.adf|||0
+amiga500/Castle Master.adf|||0
+amiga500/Castlevania.adf|||0
+amiga500/Castors Juniors dans la Foret, Les.adf|||0
+amiga500/Catch'em.adf|||0
+amiga500/Cave Maze.adf|||0
+amiga500/Cave Runner.adf|||0
+amiga500/Century.adf|||0
+amiga500/Challenge of the Matrix, The.adf|||0
+amiga500/Chamonix Challenge.adf|||0
+amiga500/Champ, The.adf|||0
+amiga500/Champion Driver.adf|||0
+amiga500/Championship Cricket.adf|||0
+amiga500/Championship Golf.adf|||0
+amiga500/Championship of Europe.adf|||0
+amiga500/Chariots of Wrath.adf|||0
+amiga500/Charlie Chimp.adf|||0
+amiga500/Charly (Dragonware).adf|||0
+amiga500/Charon 5.adf|||0
+amiga500/Chase H.Q..adf|||0
+amiga500/Chase.adf|||0
+amiga500/Checkmate.adf|||0
+amiga500/Chess Player 2150.adf|||0
+amiga500/Chessmaster 2000, The.adf|||0
+amiga500/Chip's Challenge.adf|||0
+amiga500/Chronicles of Omega, The.adf|||0
+amiga500/Chubby Gristle.adf|||0
+amiga500/Chuck Yeager's Advanced FlightTrainer 2.0.adf|||0
+amiga500/Chuckie Egg II.adf|||0
+amiga500/Cisco Heat.adf|||0
+amiga500/City Defence.adf|||0
+amiga500/CJ's Elephant Antics.adf|||0
+amiga500/Classic Arcadia & Baby Arcadia.adf|||0
+amiga500/Classic Board Games.adf|||0
+amiga500/Classic Invaders.adf|||0
+amiga500/Clever & Smart.adf|||0
+amiga500/Cliffhanger.adf|||0
+amiga500/Clik Clak.adf|||0
+amiga500/Clown-o-Mania.adf|||0
+amiga500/Clu Clu Land.adf|||0
+amiga500/Clue - Master Detective.adf|||0
+amiga500/Cluedo - Master Detective.adf|||0
+amiga500/Clystron.adf|||0
+amiga500/Cogan's Run.adf|||0
+amiga500/Cohort - Fighting for Rome.adf|||0
+amiga500/Cohort II - Fighting for Rome.adf|||0
+amiga500/Coloris.adf|||0
+amiga500/Colossus Bridge X.adf|||0
+amiga500/Colossus Chess X.adf|||0
+amiga500/Commando.adf|||0
+amiga500/Computer Scrabble Deluxe.adf|||0
+amiga500/Computer Third Reich.adf|||0
+amiga500/Conflict - Europe.adf|||0
+amiga500/Conqueror.adf|||0
+amiga500/Continental Circus.adf|||0
+amiga500/Corporate Raiders.adf|||0
+amiga500/Corruption.adf|||0
+amiga500/Corsarios.adf|||0
+amiga500/Corx.adf|||0
+amiga500/Cosmostruction - A Space Game of Skill and Strategy.adf|||0
+amiga500/Craps Academy.adf|||0
+amiga500/Crash Garrett.adf|||0
+amiga500/Crash Landing.adf|||0
+amiga500/Crazy Cars II.adf|||0
+amiga500/Crazy Cars.adf|||0
+amiga500/Crazy Cones.adf|||0
+amiga500/Crazy Shot.adf|||0
+amiga500/Crazy Sue Goes On.adf|||0
+amiga500/Crazy Sue.adf|||0
+amiga500/Cribbage King & Gin King.adf|||0
+amiga500/Cricket Amiga.adf|||0
+amiga500/Cricket Masters.adf|||0
+amiga500/Crime City.adf|||0
+amiga500/Crime Does Not Pay.adf|||0
+amiga500/Crime Time.adf|||0
+amiga500/Crimson Crown.adf|||0
+amiga500/Cross Out the Intruder.adf|||0
+amiga500/CrossCheck - Eishockey Action.adf|||0
+amiga500/Cruncher Factory.adf|||0
+amiga500/Crystal Hammer '93 Edition.adf|||0
+amiga500/Crystal Hammer.adf|||0
+amiga500/Crystal Palace.adf|||0
+amiga500/Crystal Quest.adf|||0
+amiga500/Crystals of Arborea.adf|||0
+amiga500/Cube-X.adf|||0
+amiga500/Cubix.adf|||0
+amiga500/Cubulus.adf|||0
+amiga500/Curse of RA, The.adf|||0
+amiga500/Cyber Cop.adf|||0
+amiga500/Cyber Kick.adf|||0
+amiga500/Cyberball - Football in the 21st Century.adf|||0
+amiga500/Cyberblast.adf|||0
+amiga500/Cybercon III.adf|||0
+amiga500/Cybergammon.adf|||0
+amiga500/Cybernauts.adf|||0
+amiga500/Cybernetix - The First Battle.adf|||0
+amiga500/Cybernoid II - The Revenge.adf|||0
+amiga500/Cyberpunks.adf|||0
+amiga500/Cycles, The - International Grand Prix Racing.adf|||0
+amiga500/Daily Double Horse Racing.adf|||0
+amiga500/Dames Simulator.adf|||0
+amiga500/Damocles - Mercenary II.adf|||0
+amiga500/Danger Castle.adf|||0
+amiga500/Dangerous Streets.adf|||0
+amiga500/Darius +.adf|||0
+amiga500/Dark Century.adf|||0
+amiga500/Dark Fusion.adf|||0
+amiga500/Dark Side.adf|||0
+amiga500/Darkman.adf|||0
+amiga500/Darts 501.adf|||0
+amiga500/Datastorm.adf|||0
+amiga500/Days of Thunder.adf|||0
+amiga500/Deadline.adf|||0
+amiga500/Death Trap.adf|||0
+amiga500/Deep Space.adf|||0
+amiga500/Defender II.adf|||0
+amiga500/Defender.adf|||0
+amiga500/Defenders of the Earth.adf|||0
+amiga500/Deflektor.adf|||0
+amiga500/Deja Vu - A Nightmare Comes True!!.adf|||0
+amiga500/Deja Vu II - Lost in Las Vegas!!.adf|||0
+amiga500/Delta Run.adf|||0
+amiga500/Deluxe Galaga.adf|||0
+amiga500/Denaris.adf|||0
+amiga500/Denver Presente - Je Decouvre les Formes.adf|||0
+amiga500/Designasaurus.adf|||0
+amiga500/Diablo.adf|||0
+amiga500/Diego Maradona's World Football Manager.adf|||0
+amiga500/Dimo's Quest.adf|||0
+amiga500/Dingsda.adf|||0
+amiga500/Dinosaur Detective Agency.adf|||0
+amiga500/Discover U.S. History and Geography.adf|||0
+amiga500/Distant Armies - A Playing History of Chess.adf|||0
+amiga500/Ditris.adf|||0
+amiga500/Dizzy - Prince of the Yolkfolk.adf|||0
+amiga500/Dizzy Dice.adf|||0
+amiga500/Domination.adf|||0
+amiga500/Donald's Alphabet Chase.adf|||0
+amiga500/Donkey Kong.adf|||0
+amiga500/Doodlebug - Bug-Bash 2.adf|||0
+amiga500/Doofus.adf|||0
+amiga500/Double Dragon II - The Revenge.adf|||0
+amiga500/Double Dragon.adf|||0
+amiga500/Downhill Challenge.adf|||0
+amiga500/Dr. Fruit.adf|||0
+amiga500/Dr. Mario.adf|||0
+amiga500/Dr. Plummet's House of Flux.adf|||0
+amiga500/Drachen von Laas, Die.adf|||0
+amiga500/Drachensteine.adf|||0
+amiga500/Dragon Cave.adf|||0
+amiga500/Dragon Tiles (AGA).adf|||0
+amiga500/Dragon Tiles.adf|||0
+amiga500/Dribbling - Calcio Serie A 1992-93.adf|||0
+amiga500/Driller.adf|||0
+amiga500/Drip.adf|||0
+amiga500/Drivin' Force.adf|||0
+amiga500/Drol.adf|||0
+amiga500/Drsna Cesta.adf|||0
+amiga500/Dugger.adf|||0
+amiga500/Dungeon Master (Psygnosis).adf|||0
+amiga500/Dungeon Master.adf|||0
+amiga500/Dungeons, Amethysts, Alchemists 'n' Everythin'.adf|||0
+amiga500/Dylan Dog 01 - La Regina delle Tenebre.adf|||0
+amiga500/Dyna Blaster.adf|||0
+amiga500/Dynamite Dick.adf|||0
+amiga500/Dynamite Dux.adf|||0
+amiga500/Dynatech.adf|||0
+amiga500/Dyter-07.adf|||0
+amiga500/E-Motion.adf|||0
+amiga500/E.T.'s Rugby League.adf|||0
+amiga500/Easy and Fun - Four in One.adf|||0
+amiga500/EbonStar.adf|||0
+amiga500/ECO.adf|||0
+amiga500/Edd the Duck 2 - Back with a Quack!.adf|||0
+amiga500/Edd the Duck!.adf|||0
+amiga500/Eddie Edwards Super Ski.adf|||0
+amiga500/Elf (MicroValue).adf|||0
+amiga500/Elite.adf|||0
+amiga500/Emerald Mine.adf|||0
+amiga500/Emlyn Hughes Arcade Quiz.adf|||0
+amiga500/Emlyn Hughes International Soccer.adf|||0
+amiga500/Emmanuelle.adf|||0
+amiga500/Emperor of the Mines.adf|||0
+amiga500/Empire Soccer 94.adf|||0
+amiga500/Enchanted Land.adf|||0
+amiga500/Enchanter.adf|||0
+amiga500/Encounter.adf|||0
+amiga500/Energie-Manager.adf|||0
+amiga500/Enigma Device, The.adf|||0
+amiga500/Enlightenment - Druid II.adf|||0
+amiga500/Enterprise.adf|||0
+amiga500/Equality.adf|||0
+amiga500/Erik.adf|||0
+amiga500/Escape from Colditz.adf|||0
+amiga500/Escape from Tharkan.adf|||0
+amiga500/Escape from the Planet of the Robot Monsters.adf|||0
+amiga500/Eskimo Games.adf|||0
+amiga500/European Football Champ.adf|||0
+amiga500/European Soccer Challenge.adf|||0
+amiga500/Excalibur.adf|||0
+amiga500/Excellent Card Games.adf|||0
+amiga500/Exile.adf|||0
+amiga500/Exolon.adf|||0
+amiga500/Explorer.adf|||0
+amiga500/Extase.adf|||0
+amiga500/Extasy.adf|||0
+amiga500/Exxon.adf|||0
+amiga500/Eye of Horus.adf|||0
+amiga500/F1 - World Championship Edition.adf|||0
+amiga500/F1 G.P. Circuits.adf|||0
+amiga500/F1 Tornado.adf|||0
+amiga500/F1-Racer.adf|||0
+amiga500/F1.adf|||0
+amiga500/FA-18 Interceptor.adf|||0
+amiga500/Face-Off - Ice Hockey.adf|||0
+amiga500/Faery Tale Adventure, The.adf|||0
+amiga500/Fallen Angel.adf|||0
+amiga500/Falling Down.adf|||0
+amiga500/Familien Duell.adf|||0
+amiga500/Famous Five, The - Five on a Treasure Island.adf|||0
+amiga500/Fantasy World Dizzy.adf|||0
+amiga500/Fast Break.adf|||0
+amiga500/Fast Eddie's Pool and Billiards.adf|||0
+amiga500/Fast Food.adf|||0
+amiga500/Fast Freddie.adf|||0
+amiga500/Fast Lane! - The Spice Engineering Challenge.adf|||0
+amiga500/FC Manager.adf|||0
+amiga500/Femme Fatale v2.0.adf|||0
+amiga500/Femme Fatale.adf|||0
+amiga500/Fetiche Maya, Le.adf|||0
+amiga500/Feud.adf|||0
+amiga500/Feudal Lords.adf|||0
+amiga500/Fighting Soccer.adf|||0
+amiga500/Final Assault.adf|||0
+amiga500/Final Battle, The.adf|||0
+amiga500/Final Blow.adf|||0
+amiga500/Final Command.adf|||0
+amiga500/Final Conflict, The.adf|||0
+amiga500/Final Mission, The.adf|||0
+amiga500/Fire & Forget II - The Death Convoy.adf|||0
+amiga500/Fire & Forget.adf|||0
+amiga500/Fire and Brimstone.adf|||0
+amiga500/Fire Power.adf|||0
+amiga500/Fire!.adf|||0
+amiga500/Fireball.adf|||0
+amiga500/Firehawk.adf|||0
+amiga500/Firestar.adf|||0
+amiga500/FireZone.adf|||0
+amiga500/First Contact.adf|||0
+amiga500/First Letters - For Under 5's.adf|||0
+amiga500/First Letters and Words.adf|||0
+amiga500/First Person Pinball.adf|||0
+amiga500/First Shapes.adf|||0
+amiga500/Fish!.adf|||0
+amiga500/Fist Fighter.adf|||0
+amiga500/Fleet Med.adf|||0
+amiga500/Flight Path 737.adf|||0
+amiga500/Flight Simulator II.adf|||0
+amiga500/Flimbo's Quest.adf|||0
+amiga500/Flintstones, The.adf|||0
+amiga500/Flippit.adf|||0
+amiga500/Flood.adf|||0
+amiga500/Flotte.adf|||0
+amiga500/Flowers of Crystal.adf|||0
+amiga500/Fly Fighter.adf|||0
+amiga500/Flying Shark.adf|||0
+amiga500/Football Champ.adf|||0
+amiga500/Football Club Manager.adf|||0
+amiga500/Football Crazy.adf|||0
+amiga500/Football Director II (CDS).adf|||0
+amiga500/Football Director II (D & H Games).adf|||0
+amiga500/Football Manager - World Cup Edition.adf|||0
+amiga500/Football Manager.adf|||0
+amiga500/Football Masters.adf|||0
+amiga500/Football Tactician.adf|||0
+amiga500/Footballer of the Year 2.adf|||0
+amiga500/FootMan.adf|||0
+amiga500/For President.adf|||0
+amiga500/Formula 1 3D.adf|||0
+amiga500/Formula 1 Grand Prix.adf|||0
+amiga500/Formula One Challenge.adf|||0
+amiga500/Fort Apache.adf|||0
+amiga500/Fortress Underground.adf|||0
+amiga500/Foundation's Waste.adf|||0
+amiga500/Franco Baresi World Cup Kick Off.adf|||0
+amiga500/Frankenstein.adf|||0
+amiga500/Frantic Freddie.adf|||0
+amiga500/Freak Out.adf|||0
+amiga500/Friday Night Pool.adf|||0
+amiga500/Frontline.adf|||0
+amiga500/Fruit Machine.adf|||0
+amiga500/Fruitmania.adf|||0
+amiga500/Fugger.adf|||0
+amiga500/Full Metal Planete.adf|||0
+amiga500/Fun School 2 - For the 6-8 Year Olds.adf|||0
+amiga500/Fun School 2 - For the Over-8s.adf|||0
+amiga500/Fun School 2 - For the Under-6s.adf|||0
+amiga500/Fun School 3 - For the Under-5s.adf|||0
+amiga500/Fussballmanager Gessellschaftsspeil.adf|||0
+amiga500/Future Basketball.adf|||0
+amiga500/Future Bike Simulator.adf|||0
+amiga500/Future Classics Collection.adf|||0
+amiga500/Future Sport.adf|||0
+amiga500/G.P. Tennis Manager.adf|||0
+amiga500/Galactic Conqueror.adf|||0
+amiga500/Galactic Empire.adf|||0
+amiga500/Galactic Invasion.adf|||0
+amiga500/Galaga '92.adf|||0
+amiga500/Galaxy Fight - The Incredible Space Flight.adf|||0
+amiga500/Galaxy Force II.adf|||0
+amiga500/Gamble Mania.adf|||0
+amiga500/Game of Harmony, The.adf|||0
+amiga500/Game of Life, The.adf|||0
+amiga500/Game Set Match.adf|||0
+amiga500/Gamma Zone.adf|||0
+amiga500/Ganymed.adf|||0
+amiga500/Gardener.adf|||0
+amiga500/Garfield - Big, Fat, Hairy Deal.adf|||0
+amiga500/Garfield - Winter's Tail.adf|||0
+amiga500/Gary Lineker's Hot-Shot!.adf|||0
+amiga500/Gauntlet II.adf|||0
+amiga500/Gazza II.adf|||0
+amiga500/Gazza's Super Soccer.adf|||0
+amiga500/GBA Championship Basketball - Two-on-Two.adf|||0
+amiga500/Gee Bee Air Rally.adf|||0
+amiga500/Geisha.adf|||0
+amiga500/Gem'X.adf|||0
+amiga500/Gemini Wing.adf|||0
+amiga500/Germ Crazy.adf|||0
+amiga500/Gettysburg - The Turning Point.adf|||0
+amiga500/GFL Championship Football.adf|||0
+amiga500/Ghosts 'N' Goblins.adf|||0
+amiga500/Ghouls 'N Ghosts.adf|||0
+amiga500/Giddy II - Hero in an Egg Shell.adf|||0
+amiga500/Giganoid.adf|||0
+amiga500/Gilbert - Escape from Drill.adf|||0
+amiga500/Gladiators.adf|||0
+amiga500/Global Trek & Evil Dawn.adf|||0
+amiga500/Gluecksrad.adf|||0
+amiga500/Gnome Alone.adf|||0
+amiga500/Gnome Ranger.adf|||0
+amiga500/Gnome.adf|||0
+amiga500/Go Player.adf|||0
+amiga500/Gold of the Americas - The Conquest of the New World.adf|||0
+amiga500/Gold of the Realm.adf|||0
+amiga500/Golden Axe.adf|||0
+amiga500/Golden Oldies - Volume 1.adf|||0
+amiga500/Golden Path.adf|||0
+amiga500/Golden Pyramid, The.adf|||0
+amiga500/Goldrunner II.adf|||0
+amiga500/Goldrunner.adf|||0
+amiga500/Gotcha.adf|||0
+amiga500/Graeme Souness Soccer Manager.adf|||0
+amiga500/Graeme Souness Vector Soccer.adf|||0
+amiga500/Graffiti Man.adf|||0
+amiga500/Graham Gooch World Class Cricket.adf|||0
+amiga500/Grand Ouvert 2.adf|||0
+amiga500/Grand Ouvert.adf|||0
+amiga500/Grand Prix Circuit.adf|||0
+amiga500/Grand Slam.adf|||0
+amiga500/Granny's Garden.adf|||0
+amiga500/Gravity-Force.adf|||0
+amiga500/Gravity.adf|||0
+amiga500/Great Courts.adf|||0
+amiga500/Great Giana Sisters, The.adf|||0
+amiga500/Great States II.adf|||0
+amiga500/Greg Norman's Ultimate Golf - Shark Attack.adf|||0
+amiga500/Grey Slayer.adf|||0
+amiga500/Grimblood.adf|||0
+amiga500/Grossmeister.adf|||0
+amiga500/Guild of Thieves, The.adf|||0
+amiga500/Guldkorn Expressen.adf|||0
+amiga500/Gunship.adf|||0
+amiga500/Gunshoot.adf|||0
+amiga500/H.A.T.E. - Hostile All Terrain Encounter.adf|||0
+amiga500/Halley Project, The - A Mission in Our Solar System.adf|||0
+amiga500/Hammer Boy!.adf|||0
+amiga500/Hammerfist.adf|||0
+amiga500/Hanse.adf|||0
+amiga500/Happy Monster.adf|||0
+amiga500/Harald Hardtand - Kampen om de Rene Taender.adf|||0
+amiga500/Hard Drivin' II - Drive Harder.adf|||0
+amiga500/Hard Drivin'.adf|||0
+amiga500/HardBall II.adf|||0
+amiga500/HardBall!.adf|||0
+amiga500/Harley-Davidson - The Road to Sturgis.adf|||0
+amiga500/Harricana - Raid International Motoneige - Quebec-Canada 90.adf|||0
+amiga500/Harry's Balloons (AGA).adf|||0
+amiga500/Haus, Das.adf|||0
+amiga500/Head Over Heels.adf|||0
+amiga500/Heat Wave - Offshore Superboat Racing.adf|||0
+amiga500/Heavy Metal.adf|||0
+amiga500/Helicopter Mission.adf|||0
+amiga500/Hell Raiser.adf|||0
+amiga500/Hellbent.adf|||0
+amiga500/Hellfire Attack.adf|||0
+amiga500/Hellraider.adf|||0
+amiga500/Hellrun Machine, The.adf|||0
+amiga500/Helter Skelter.adf|||0
+amiga500/HeroQuest.adf|||0
+amiga500/High Steel.adf|||0
+amiga500/Hill Street Blues.adf|||0
+amiga500/Hilt - Against the Hoardes.adf|||0
+amiga500/Hirnriss.adf|||0
+amiga500/Hockey Pista.adf|||0
+amiga500/Hoi Remix (AGA).adf|||0
+amiga500/Holiday Lemmings 1993.adf|||0
+amiga500/Holiday Lemmings 1994.adf|||0
+amiga500/Hollywood Hijinx.adf|||0
+amiga500/Hollywood Poker.adf|||0
+amiga500/Holo Squash.adf|||0
+amiga500/Hong Kong Phooey.adf|||0
+amiga500/Hostages.adf|||0
+amiga500/Hotel Detective.adf|||0
+amiga500/Hoyle's Official Book of Games Volume 2 - Solitaire.adf|||0
+amiga500/Huckleberry Hound in Hollywood Capers.adf|||0
+amiga500/Hudson Hawk.adf|||0
+amiga500/Human Killing Machine.adf|||0
+amiga500/Hunt for Red October, The - The Movie.adf|||0
+amiga500/Hunt for Red October, The.adf|||0
+amiga500/Hunter Killer.adf|||0
+amiga500/Hunter.adf|||0
+amiga500/Hurricane Commando.adf|||0
+amiga500/Hybris.adf|||0
+amiga500/Hyperdome.adf|||0
+amiga500/Hyperforce & Artificial Dreams.adf|||0
+amiga500/Hyperion.adf|||0
+amiga500/I Play 3-D Soccer.adf|||0
+amiga500/Iceball.adf|||0
+amiga500/Icerunner.adf|||0
+amiga500/IK+.adf|||0
+amiga500/Ikari Warriors.adf|||0
+amiga500/Ilyad.adf|||0
+amiga500/Imagems.adf|||0
+amiga500/Impossamole.adf|||0
+amiga500/Impossible Mission II.adf|||0
+amiga500/In the Beginning.adf|||0
+amiga500/Indiana Jones and the Fate of Atlantis - The Action Game.adf|||0
+amiga500/Indiana Jones and the Last Crusade - The Action Game.adf|||0
+amiga500/Indiana Jones and the Temple of Doom.adf|||0
+amiga500/Indianapolis 500 - The Simulation.adf|||0
+amiga500/Indigo.adf|||0
+amiga500/Indy Heat.adf|||0
+amiga500/Inertia Drive.adf|||0
+amiga500/Infestation.adf|||0
+amiga500/Infidel.adf|||0
+amiga500/Insanity Fight.adf|||0
+amiga500/Insector Hecti in the Inter Change.adf|||0
+amiga500/Insects in Space.adf|||0
+amiga500/International 3D Tennis.adf|||0
+amiga500/International Championship Athletics.adf|||0
+amiga500/International Ninja Rabbits.adf|||0
+amiga500/International Soccer (Zeppelin Platinum).adf|||0
+amiga500/International Soccer Challenge.adf|||0
+amiga500/International Tennis.adf|||0
+amiga500/Interphase.adf|||0
+amiga500/InvaderCraft.adf|||0
+amiga500/Iron Hand.adf|||0
+amiga500/Iron Trackers.adf|||0
+amiga500/Ishido - The Way of Stones.adf|||0
+amiga500/Italia 1990.adf|||0
+amiga500/Italy '90 Soccer.adf|||0
+amiga500/Italy 1990 - Winners Edition.adf|||0
+amiga500/Italy 1990.adf|||0
+amiga500/Ivan 'Ironman' Stewart's Super Off Road.adf|||0
+amiga500/Ivanhoe.adf|||0
+amiga500/Jahangir Khan's World Championship Squash.adf|||0
+amiga500/Jail Break.adf|||0
+amiga500/James Pond - Underwater Agent.adf|||0
+amiga500/James Pond 2 - Codename RoboCod (AGA).adf|||0
+amiga500/James Pond 2 - Codename RoboCod.adf|||0
+amiga500/Jet Set Willy 3.adf|||0
+amiga500/Jet Set Willy II.adf|||0
+amiga500/Jet.adf|||0
+amiga500/Jigsaw! - The Ultimate Electronic Puzzle.adf|||0
+amiga500/Jimmy White's 'Whirlwind' Snooker.adf|||0
+amiga500/Jocky Wilson's Compendium of Darts.adf|||0
+amiga500/Jocky Wilson's Darts Challenge.adf|||0
+amiga500/Joe Blade 2.adf|||0
+amiga500/Joe Blade.adf|||0
+amiga500/John Barnes European Football.adf|||0
+amiga500/John Lowe's Ultimate Darts.adf|||0
+amiga500/Joker-Poker.adf|||0
+amiga500/Journey - The Quest Begins.adf|||0
+amiga500/Judge Dredd.adf|||0
+amiga500/Jump Em.adf|||0
+amiga500/Jump Jet.adf|||0
+amiga500/Jumping Jack'Son.adf|||0
+amiga500/Jumpman Junior.adf|||0
+amiga500/Jumpman.adf|||0
+amiga500/Jungle Boy.adf|||0
+amiga500/Jungle Jim.adf|||0
+amiga500/Jupiter's Masterdrive.adf|||0
+amiga500/Kalas Puffs Expressen.adf|||0
+amiga500/Kamikaze.adf|||0
+amiga500/Kampfgruppe.adf|||0
+amiga500/Karamalz Cup - Eis Hockey.adf|||0
+amiga500/Karate Kid Part II, The.adf|||0
+amiga500/Karate Master.adf|||0
+amiga500/Karting Grand Prix.adf|||0
+amiga500/Kelly X.adf|||0
+amiga500/Kengi.adf|||0
+amiga500/Kennedy Approach.adf|||0
+amiga500/Kenny Dalglish Soccer Match.adf|||0
+amiga500/Keyboard Cadet.adf|||0
+amiga500/Keys to Maramon, The.adf|||0
+amiga500/Kick Off 2.adf|||0
+amiga500/Kick Off.adf|||0
+amiga500/KickIt - A Day for the Laiban.adf|||0
+amiga500/Kid Gloves.adf|||0
+amiga500/Kids Type.adf|||0
+amiga500/Kikstart II.adf|||0
+amiga500/Kikugi.adf|||0
+amiga500/Killerball.adf|||0
+amiga500/Killing Machine.adf|||0
+amiga500/Kinderama.adf|||0
+amiga500/King's Quest - Quest for the Crown.adf|||0
+amiga500/King's Quest II - Romancing the Throne.adf|||0
+amiga500/King's Quest III - To Heir is Human.adf|||0
+amiga500/Kingdoms of Germany.adf|||0
+amiga500/Kiro's Quest.adf|||0
+amiga500/Klax.adf|||0
+amiga500/Knight Orc.adf|||0
+amiga500/Kreuz As 'Poker'.adf|||0
+amiga500/Krusty's Fun House.adf|||0
+amiga500/Krymini.adf|||0
+amiga500/Krypton Egg.adf|||0
+amiga500/Kwasimodo.adf|||0
+amiga500/Lancaster.adf|||0
+amiga500/Lancelot.adf|||0
+amiga500/Landsitz von Mortville, Der.adf|||0
+amiga500/Laser Squad.adf|||0
+amiga500/Lasermania 2.adf|||0
+amiga500/Last Battle.adf|||0
+amiga500/Last Inca, The.adf|||0
+amiga500/Leader Board.adf|||0
+amiga500/League Challenge.adf|||0
+amiga500/Leeds United Champions!.adf|||0
+amiga500/Legend of Djel.adf|||0
+amiga500/Legend of Lothian.adf|||0
+amiga500/Legend of the Sword.adf|||0
+amiga500/Leisure Suit Larry - In the Land of the Lounge Lizards.adf|||0
+amiga500/Leonardo.adf|||0
+amiga500/Let's Spell at Home.adf|||0
+amiga500/Let's Spell Out and About.adf|||0
+amiga500/Lethal Formula.adf|||0
+amiga500/Lettrix.adf|||0
+amiga500/Licence to Kill.adf|||0
+amiga500/Light Corridor, The.adf|||0
+amiga500/Limes & Napoleon.adf|||0
+amiga500/Lin Wu's Challenge.adf|||0
+amiga500/Line of Fire.adf|||0
+amiga500/Lingo.adf|||0
+amiga500/Liquid Kids.adf|||0
+amiga500/Little Computer People.adf|||0
+amiga500/Little Wizards.adf|||0
+amiga500/Live and Let Die - The Computer Game.adf|||0
+amiga500/Liverpool - The Computer Game.adf|||0
+amiga500/Living Jigsaw.adf|||0
+amiga500/Llamatron - 2112.adf|||0
+amiga500/Locomotion (Byte Back).adf|||0
+amiga500/Locomotion (Kingsoft).adf|||0
+amiga500/LodeRunner.adf|||0
+amiga500/Long Lance.adf|||0
+amiga500/Loopz.adf|||0
+amiga500/Lords of War.adf|||0
+amiga500/Lost Dutchman Mine.adf|||0
+amiga500/Lotus Esprit Turbo Challenge.adf|||0
+amiga500/Lotus Turbo Challenge 2.adf|||0
+amiga500/Lunar-C.adf|||0
+amiga500/Lupo Alberto - The Videogame.adf|||0
+amiga500/Lurking Horror, The.adf|||0
+amiga500/M1 Tank Platoon.adf|||0
+amiga500/Mach 3.adf|||0
+amiga500/Mad Professor Mariarti.adf|||0
+amiga500/Mafdet and the Book of the Dead.adf|||0
+amiga500/Magic Boy.adf|||0
+amiga500/Magic Coins.adf|||0
+amiga500/Magic Garden, The.adf|||0
+amiga500/Magic Johnson's Basketball.adf|||0
+amiga500/Magic Lines.adf|||0
+amiga500/Magic Marble.adf|||0
+amiga500/Magic Pockets.adf|||0
+amiga500/Magicland Dizzy.adf|||0
+amiga500/Major Motion.adf|||0
+amiga500/Malta Storm.adf|||0
+amiga500/Manager.adf|||0
+amiga500/Manchester United Europe.adf|||0
+amiga500/Manoir de Mortvielle, Le.adf|||0
+amiga500/Marathon.adf|||0
+amiga500/Marble Madness.adf|||0
+amiga500/Marble Rescue.adf|||0
+amiga500/Maria's Christmas Box.adf|||0
+amiga500/Masterblazer.adf|||0
+amiga500/MasterType.adf|||0
+amiga500/Match Pairs.adf|||0
+amiga500/Match-It.adf|||0
+amiga500/Math Blaster Plus!.adf|||0
+amiga500/Math Wizard.adf|||0
+amiga500/Math-A-Magician.adf|||0
+amiga500/Maths Dragons.adf|||0
+amiga500/Maths Monkey.adf|||0
+amiga500/Matrix Marauders.adf|||0
+amiga500/Matrix.adf|||0
+amiga500/Mau-Mau.adf|||0
+amiga500/Mavis Beacon Teaches Typing.adf|||0
+amiga500/Mayday Squad Heroes.adf|||0
+amiga500/Mean 18 - Ultimate Golf.adf|||0
+amiga500/Mean Machine.adf|||0
+amiga500/Medal Winner.adf|||0
+amiga500/Medieval Warriors.adf|||0
+amiga500/Mega Motion.adf|||0
+amiga500/Mega Phoenix.adf|||0
+amiga500/Megaroids.adf|||0
+amiga500/MegArts Hockey.adf|||0
+amiga500/Menace.adf|||0
+amiga500/Mercenary - Escape from Targ & The Second City.adf|||0
+amiga500/Mercenary III - The Dion Crisis.adf|||0
+amiga500/Mercs.adf|||0
+amiga500/Merv the Merciless.adf|||0
+amiga500/Metagalactic Llamas - Battle at the Edge of Time.adf|||0
+amiga500/Metal Law.adf|||0
+amiga500/Metal Mutant.adf|||0
+amiga500/Meteors.adf|||0
+amiga500/MF Tanks.adf|||0
+amiga500/Mickey's Memory Challenge.adf|||0
+amiga500/Micro Machines.adf|||0
+amiga500/Microbattle.adf|||0
+amiga500/Microbes.adf|||0
+amiga500/MicroProse Soccer.adf|||0
+amiga500/Midnight Resistance.adf|||0
+amiga500/Midwinter.adf|||0
+amiga500/MiG-29 Fulcrum.adf|||0
+amiga500/MiG-29 Soviet Fighter.adf|||0
+amiga500/Millennium 2.2.adf|||0
+amiga500/Mind Force.adf|||0
+amiga500/Mind Walker.adf|||0
+amiga500/Mindbender.adf|||0
+amiga500/Mindbreaker.adf|||0
+amiga500/Mindfighter.adf|||0
+amiga500/Mindroll.adf|||0
+amiga500/Mindshadow.adf|||0
+amiga500/Mini Golf Plus.adf|||0
+amiga500/Minos.adf|||0
+amiga500/Mirror Magic.adf|||0
+amiga500/Mission - Con-Bat.adf|||0
+amiga500/Mission Elevator.adf|||0
+amiga500/Moebius - The Orb of Celestial Harmony.adf|||0
+amiga500/Money Cascade Professional Fruit Machine.adf|||0
+amiga500/Money-Player Professional.adf|||0
+amiga500/Monster Business.adf|||0
+amiga500/Monty Python's Flying Circus.adf|||0
+amiga500/Moon Blaster.adf|||0
+amiga500/Moonbase - Lunar Colony Simulator.adf|||0
+amiga500/Moonfall.adf|||0
+amiga500/Moonmist.adf|||0
+amiga500/Morton Strikes Back.adf|||0
+amiga500/Mortville Manor.adf|||0
+amiga500/Motor Massacre.adf|||0
+amiga500/Mouse Trap.adf|||0
+amiga500/Mover.adf|||0
+amiga500/Moving.adf|||0
+amiga500/Mr Do! Run Run.adf|||0
+amiga500/Mr. Heli.adf|||0
+amiga500/Multi Player Soccer Manager.adf|||0
+amiga500/Multi Zocker.adf|||0
+amiga500/Multi-Player Yahtzee.adf|||0
+amiga500/Murder.adf|||0
+amiga500/Murders in Venice.adf|||0
+amiga500/Muzzy.adf|||0
+amiga500/My Funny Maze.adf|||0
+amiga500/Mysterious Worlds.adf|||0
+amiga500/Mystical.adf|||0
+amiga500/Myth.adf|||0
+amiga500/Napolean I.adf|||0
+amiga500/Narc.adf|||0
+amiga500/Nations of the World - Australia.adf|||0
+amiga500/Nations of the World - Canada.adf|||0
+amiga500/Naughty Ones (AGA).adf|||0
+amiga500/Naughty Ones.adf|||0
+amiga500/Navy Seals.adf|||0
+amiga500/Nebula - The Wars of Uropa.adf|||0
+amiga500/Nebulus.adf|||0
+amiga500/Necronom.adf|||0
+amiga500/Neighbours.adf|||0
+amiga500/Netherworld.adf|||0
+amiga500/Neuromancer.adf|||0
+amiga500/Neuronics.adf|||0
+amiga500/Never Mind.adf|||0
+amiga500/New Zealand Story, The.adf|||0
+amiga500/Nicky Boom.adf|||0
+amiga500/Nigel Mansell's Grand Prix.adf|||0
+amiga500/Night Hunter.adf|||0
+amiga500/Night Shift.adf|||0
+amiga500/Night Walk.adf|||0
+amiga500/Nightdawn.adf|||0
+amiga500/Ninja Mission.adf|||0
+amiga500/Ninja Spirit.adf|||0
+amiga500/Nipper versus the Kats.adf|||0
+amiga500/Nitro Boost Challenge.adf|||0
+amiga500/No Exit.adf|||0
+amiga500/No Second Prize.adf|||0
+amiga500/Nord and Bert Couldn't Make Head or Tail of It.adf|||0
+amiga500/North & South.adf|||0
+amiga500/Nucleus.adf|||0
+amiga500/O.B.Y. I.adf|||0
+amiga500/Oath, The.adf|||0
+amiga500/Oberon 69.adf|||0
+amiga500/Obliterator.adf|||0
+amiga500/Obstickle.adf|||0
+amiga500/Official Everton FC Intelligensia, The.adf|||0
+amiga500/Ogre.adf|||0
+amiga500/Oh No! More Lemmings.adf|||0
+amiga500/Oliver & Company.adf|||0
+amiga500/Omar Sharif's Bridge.adf|||0
+amiga500/Omega.adf|||0
+amiga500/Onslaught.adf|||0
+amiga500/Oo-Topos.adf|||0
+amiga500/Ooze - Creepy Nites.adf|||0
+amiga500/Operation - Cleanstreets.adf|||0
+amiga500/Operation Com-bat.adf|||0
+amiga500/Operation Harrier.adf|||0
+amiga500/Operation Jupiter.adf|||0
+amiga500/Operation Neptune.adf|||0
+amiga500/Operation Overlord - The Invasion of Europe.adf|||0
+amiga500/Oriental Games.adf|||0
+amiga500/Osiris.adf|||0
+amiga500/OsWALD of the Ice Floes.adf|||0
+amiga500/Out Run (U.S. Gold).adf|||0
+amiga500/Outzone.adf|||0
+amiga500/Overlander (Elite).adf|||0
+amiga500/Overlord (Virgin Mastertronic).adf|||0
+amiga500/Overrun! - A Tactical Game of Modern Land Warfare.adf|||0
+amiga500/Oxxonian.adf|||0
+amiga500/Oxyd Magnum!.adf|||0
+amiga500/Oxyd.adf|||0
+amiga500/P.O.W..adf|||0
+amiga500/P.P. Hammer and His Pneumatic Weapon.adf|||0
+amiga500/P47 Thunderbolt.adf|||0
+amiga500/Pac-Land.adf|||0
+amiga500/Pac-Mania.adf|||0
+amiga500/Pacboy & Shooting Star.adf|||0
+amiga500/Paint It.adf|||0
+amiga500/Pandora.adf|||0
+amiga500/Pang.adf|||0
+amiga500/Paperboy 2.adf|||0
+amiga500/Paperboy.adf|||0
+amiga500/Paradox Effect II, The.adf|||0
+amiga500/Paradox Effect, The.adf|||0
+amiga500/Paradox.adf|||0
+amiga500/Paradroid 90.adf|||0
+amiga500/Paragliding.adf|||0
+amiga500/Paramax.adf|||0
+amiga500/Parasite.adf|||0
+amiga500/Parasol Stars - Rainbow Islands 2.adf|||0
+amiga500/Paris Dakar 1990.adf|||0
+amiga500/Paris Dakar.adf|||0
+amiga500/Passing Shot.adf|||0
+amiga500/Patience I.adf|||0
+amiga500/Patience II.adf|||0
+amiga500/Penthouse Hot Numbers.adf|||0
+amiga500/Pepsi - All Over the World.adf|||0
+amiga500/Persecutors.adf|||0
+amiga500/Peter Beardsley's International Football.adf|||0
+amiga500/Peter Pan (Fr).adf|||0
+amiga500/Peter Schmeichel Soccer.adf|||0
+amiga500/Phalanx.adf|||0
+amiga500/Phantasie III - The Wrath of Nikademus.adf|||0
+amiga500/Phantasie.adf|||0
+amiga500/Phantom Fighter.adf|||0
+amiga500/Pharoah's Curse.adf|||0
+amiga500/Phobia.adf|||0
+amiga500/Pick Out.adf|||0
+amiga500/Pick'n Pile.adf|||0
+amiga500/Pictionary.adf|||0
+amiga500/Piece 'n' Space.adf|||0
+amiga500/Pinball I.Q..adf|||0
+amiga500/Pink Panther.adf|||0
+amiga500/Pioneer Plague, The.adf|||0
+amiga500/Pipe Dream.adf|||0
+amiga500/Pipe Mania.adf|||0
+amiga500/Pipe Master II.adf|||0
+amiga500/Pipe Panic.adf|||0
+amiga500/Pipe Rider.adf|||0
+amiga500/Pipeline (Softworx).adf|||0
+amiga500/Pixie & Dixie.adf|||0
+amiga500/Planetfall.adf|||0
+amiga500/Platoon.adf|||0
+amiga500/Player Manager.adf|||0
+amiga500/Plexu.adf|||0
+amiga500/Plotting.adf|||0
+amiga500/Plundered Hearts.adf|||0
+amiga500/Plutos.adf|||0
+amiga500/Pocket Rockets.adf|||0
+amiga500/Police Quest - In Pursuit of the Death Angel.adf|||0
+amiga500/Pool (Kingsoft).adf|||0
+amiga500/Pool (Mastertronic).adf|||0
+amiga500/Pop-Up.adf|||0
+amiga500/Popeye 2.adf|||0
+amiga500/Populous II - Trials of the Olympian Gods.adf|||0
+amiga500/Populous.adf|||0
+amiga500/Ports of Call.adf|||0
+amiga500/Postman Pat 3 - To the Rescue!.adf|||0
+amiga500/Postman Pat.adf|||0
+amiga500/Power Pac.adf|||0
+amiga500/Power Pinball.adf|||0
+amiga500/Power Roller.adf|||0
+amiga500/Power Walls.adf|||0
+amiga500/Power, The.adf|||0
+amiga500/Powerboat USA - Offshore Superboat Racing.adf|||0
+amiga500/Powerdrome.adf|||0
+amiga500/PowerMonger.adf|||0
+amiga500/Powerplay - Le Jeu des Dieux.adf|||0
+amiga500/Powerplay - The Game of the Gods.adf|||0
+amiga500/Powerstyx.adf|||0
+amiga500/Prehistorik.adf|||0
+amiga500/Preis ist Heiss, Der.adf|||0
+amiga500/President is Missing, The.adf|||0
+amiga500/Prime Time.adf|||0
+amiga500/Prince of Persia.adf|||0
+amiga500/Prince.adf|||0
+amiga500/Prison.adf|||0
+amiga500/Pro PowerBoat Simulator.adf|||0
+amiga500/Pro Tennis Simulator.adf|||0
+amiga500/Pro Tennis Tour 2.adf|||0
+amiga500/Pro Tennis Tour.adf|||0
+amiga500/ProFlight.adf|||0
+amiga500/Project 1.adf|||0
+amiga500/Projectyle.adf|||0
+amiga500/ProSoccer 2190.adf|||0
+amiga500/Protector (16 Blitz Mastertronic).adf|||0
+amiga500/Psycho Squares Deluxe.adf|||0
+amiga500/Psycho.adf|||0
+amiga500/Pub Trivia Simulator.adf|||0
+amiga500/Puffy's Saga.adf|||0
+amiga500/Punisher, The.adf|||0
+amiga500/Punkt Punkt Punkt.adf|||0
+amiga500/Purple Saturn Day.adf|||0
+amiga500/Pursuit to Earth, The.adf|||0
+amiga500/Puzzle Storybook, The.adf|||0
+amiga500/Puzznic.adf|||0
+amiga500/Q-Bic.adf|||0
+amiga500/Qattro.adf|||0
+amiga500/QBall.adf|||0
+amiga500/Qix.adf|||0
+amiga500/Quadrel.adf|||0
+amiga500/Quadrix.adf|||0
+amiga500/Quantox.adf|||0
+amiga500/Quartz.adf|||0
+amiga500/Quest of Agravain, The.adf|||0
+amiga500/Question of Sport, A.adf|||0
+amiga500/Quicksilver Pinball.adf|||0
+amiga500/Qwak.adf|||0
+amiga500/R-Type II.adf|||0
+amiga500/R-Type.adf|||0
+amiga500/Rad van Fortuin.adf|||0
+amiga500/Radio Controlled Racer.adf|||0
+amiga500/Raffles.adf|||0
+amiga500/Rage (Scorpius).adf|||0
+amiga500/Rainbow Islands.adf|||0
+amiga500/Rally Cross Challenge.adf|||0
+amiga500/Rallye Master.adf|||0
+amiga500/Rambo III.adf|||0
+amiga500/Rampart.adf|||0
+amiga500/Rasende Reporter, Der.adf|||0
+amiga500/RasterBike.adf|||0
+amiga500/Reach for the Stars - Conquest of the Galaxy - Third Edition.adf|||0
+amiga500/Read & Rhyme.adf|||0
+amiga500/Real Genius.adf|||0
+amiga500/Realm of the Trolls.adf|||0
+amiga500/Realm of the Warlock.adf|||0
+amiga500/Reasoning with Trolls.adf|||0
+amiga500/Rebel Charge at Chickamauga.adf|||0
+amiga500/Rebellion.adf|||0
+amiga500/Red Lightning.adf|||0
+amiga500/Reel Fish'n.adf|||0
+amiga500/Renaissance.adf|||0
+amiga500/Renegade.adf|||0
+amiga500/Rescue 2.adf|||0
+amiga500/Rescue.adf|||0
+amiga500/Retee!.adf|||0
+amiga500/Return to Genesis.adf|||0
+amiga500/Revelation!.adf|||0
+amiga500/Revenge of the Mutant Camels.adf|||0
+amiga500/Reverse.adf|||0
+amiga500/Reversi.adf|||0
+amiga500/Rick Dangerous 2.5.adf|||0
+amiga500/Rick Dangerous 2.adf|||0
+amiga500/Rick Dangerous.adf|||0
+amiga500/Rings of Medusa (De).adf|||0
+amiga500/Rings of Medusa.adf|||0
+amiga500/Ringside Boxing.adf|||0
+amiga500/Rise of the West.adf|||0
+amiga500/Risk - The World Conquest Game.adf|||0
+amiga500/Riskant!.adf|||0
+amiga500/Road Blasters.adf|||0
+amiga500/Road Raider.adf|||0
+amiga500/Roadwar 2000.adf|||0
+amiga500/Roadwar Europa.adf|||0
+amiga500/Roadwars.adf|||0
+amiga500/Robbeary.adf|||0
+amiga500/Robin Heed.adf|||0
+amiga500/Robin Hood - Legend Quest.adf|||0
+amiga500/Robin Smith's International Cricket.adf|||0
+amiga500/Robocop.adf|||0
+amiga500/Robot Reader - Chicken Little.adf|||0
+amiga500/Robotnic.adf|||0
+amiga500/Rock Star Ate My Hamster.adf|||0
+amiga500/Rock'n Roll.adf|||0
+amiga500/Rocket Attack.adf|||0
+amiga500/Rockford - The Arcade Game.adf|||0
+amiga500/Rocky.adf|||0
+amiga500/Rod-Land.adf|||0
+amiga500/Roll-out.adf|||0
+amiga500/RollerBall.adf|||0
+amiga500/Rollerpede.adf|||0
+amiga500/Rolling Stones.adf|||0
+amiga500/Rolling Thunder.adf|||0
+amiga500/Rorke's Drift.adf|||0
+amiga500/Roton.adf|||0
+amiga500/Roue de la Fortune, La.adf|||0
+amiga500/Roulette-Royal.adf|||0
+amiga500/Round the Bend! - Doc Croc's Outrageous Adventures!.adf|||0
+amiga500/Roundabout.adf|||0
+amiga500/Rugby - The World Cup.adf|||0
+amiga500/Rugby Coach.adf|||0
+amiga500/Rugby League Coach.adf|||0
+amiga500/RVF Honda.adf|||0
+amiga500/S.D.I. - Now the Odds are Even.adf|||0
+amiga500/S.T.A.G..adf|||0
+amiga500/Saint & Greavsie.adf|||0
+amiga500/Saint Dragon.adf|||0
+amiga500/Santa Paravia and Fiumaccio.adf|||0
+amiga500/Santa's Xmas Caper.adf|||0
+amiga500/Sarakon.adf|||0
+amiga500/Sargon III.adf|||0
+amiga500/SAS Combat Simulator.adf|||0
+amiga500/Sat.1 Bingo.adf|||0
+amiga500/Scapeghost.adf|||0
+amiga500/Scorched Tanks.adf|||0
+amiga500/Scorpio.adf|||0
+amiga500/Scorpion.adf|||0
+amiga500/Scrabble.adf|||0
+amiga500/Scramble Spirits.adf|||0
+amiga500/Scrolling Walls.adf|||0
+amiga500/SeaHaven Towers.adf|||0
+amiga500/Seastalker.adf|||0
+amiga500/Seconds Out.adf|||0
+amiga500/Sensible World of Moon Soccer.adf|||0
+amiga500/Senso.adf|||0
+amiga500/Sentinel, The & Sentry, The.adf|||0
+amiga500/Serie.adf|||0
+amiga500/Seven Gates of Jambala, The.adf|||0
+amiga500/Sextimates.adf|||0
+amiga500/Sexy Droids.adf|||0
+amiga500/Seymour Goes to Hollywood.adf|||0
+amiga500/Shadow Dancer.adf|||0
+amiga500/Shadowgate.adf|||0
+amiga500/Shanghai.adf|||0
+amiga500/Shapes.adf|||0
+amiga500/Sharkey's Moll.adf|||0
+amiga500/Shepherd, The.adf|||0
+amiga500/Sherlock - The Riddle of the Crown Jewels.adf|||0
+amiga500/Shiftrix.adf|||0
+amiga500/Shinobi.adf|||0
+amiga500/ShockWave.adf|||0
+amiga500/Shuffle Pix.adf|||0
+amiga500/Shuffle.adf|||0
+amiga500/Shufflepuck Cafe.adf|||0
+amiga500/Side Arms.adf|||0
+amiga500/SideWinder II.adf|||0
+amiga500/SideWinder.adf|||0
+amiga500/Silent Service - The Submarine Simulation.adf|||0
+amiga500/Silkworm.adf|||0
+amiga500/Silver Eagle.adf|||0
+amiga500/Silver Star.adf|||0
+amiga500/SimCity.adf|||0
+amiga500/Simpsons, The - Bart vs. The World.adf|||0
+amiga500/Simulman 01 - Simulman.adf|||0
+amiga500/Sink or Swim.adf|||0
+amiga500/Sir Fred - The Legend.adf|||0
+amiga500/Sirius 7.adf|||0
+amiga500/Skidoo.adf|||0
+amiga500/Skidz.adf|||0
+amiga500/Skrull.adf|||0
+amiga500/Skweek.adf|||0
+amiga500/Skyblaster.adf|||0
+amiga500/SkyChase.adf|||0
+amiga500/Skyfox II - The Cygnus Conflict.adf|||0
+amiga500/Skyfox.adf|||0
+amiga500/Slackskin & Flint.adf|||0
+amiga500/Slam Raid.adf|||0
+amiga500/Slayer.adf|||0
+amiga500/Slaygon.adf|||0
+amiga500/Slider.adf|||0
+amiga500/Sliders.adf|||0
+amiga500/Sliding.adf|||0
+amiga500/Smash the Beast.adf|||0
+amiga500/Smash.adf|||0
+amiga500/Smus.adf|||0
+amiga500/Snakes and Ladders.adf|||0
+amiga500/Snare.adf|||0
+amiga500/Sneech.adf|||0
+amiga500/Snoball in Hell.adf|||0
+amiga500/Snow Strike.adf|||0
+amiga500/Soccer King.adf|||0
+amiga500/Soccer Manager Plus.adf|||0
+amiga500/Soccer Pinball.adf|||0
+amiga500/Soccer Rivals.adf|||0
+amiga500/Soccer Supremo.adf|||0
+amiga500/Soeldner.adf|||0
+amiga500/Soko.adf|||0
+amiga500/Sol Negro.adf|||0
+amiga500/Soldier 2000.adf|||0
+amiga500/Soldier of Light.adf|||0
+amiga500/Solitaire Royale.adf|||0
+amiga500/Sonic Boom.adf|||0
+amiga500/Sony Game.adf|||0
+amiga500/Sooty & Sweep.adf|||0
+amiga500/Sophelie.adf|||0
+amiga500/Sorcerer Lord.adf|||0
+amiga500/Sorcerer.adf|||0
+amiga500/Sorceror's Apprentice.adf|||0
+amiga500/Sorcery +.adf|||0
+amiga500/Sorefist.adf|||0
+amiga500/Space Assault.adf|||0
+amiga500/Space Bomber 2.adf|||0
+amiga500/Space Bomber 3.adf|||0
+amiga500/Space Bomber.adf|||0
+amiga500/Space Conquest - A Galactic Odyssey.adf|||0
+amiga500/Space Day.adf|||0
+amiga500/Space Dunk.adf|||0
+amiga500/Space Fight.adf|||0
+amiga500/Space Harrier II.adf|||0
+amiga500/Space Harrier.adf|||0
+amiga500/Space Knight.adf|||0
+amiga500/Space Quest - The Sarien Encounter.adf|||0
+amiga500/Space Quest II - Vohaul's Revenge.adf|||0
+amiga500/Space Ranger.adf|||0
+amiga500/Space Rogue.adf|||0
+amiga500/Space Station.adf|||0
+amiga500/Spatial Hyperdrive.adf|||0
+amiga500/Speed.adf|||0
+amiga500/Speedball 2 - Brutal Deluxe.adf|||0
+amiga500/Speedball.adf|||0
+amiga500/Speedboat Assassins.adf|||0
+amiga500/Speedrunner.adf|||0
+amiga500/Spell Book.adf|||0
+amiga500/Spellbound Dizzy & Dizzy Panic.adf|||0
+amiga500/Spellbreaker.adf|||0
+amiga500/Spherical.adf|||0
+amiga500/Spiderman - Il ritorno di Hobgoblin.adf|||0
+amiga500/Spiderman 2 - ...e ora, Carnage!.adf|||0
+amiga500/Spiderman 3 - Destino Incrociato!.adf|||0
+amiga500/Spidertronic.adf|||0
+amiga500/Spike in Transylvania.adf|||0
+amiga500/Spindizzy Worlds.adf|||0
+amiga500/Spinworld.adf|||0
+amiga500/Spitting Image.adf|||0
+amiga500/Spy vs Spy II - The Island Caper.adf|||0
+amiga500/Spy vs Spy III - Arctic Antics.adf|||0
+amiga500/Spy vs Spy.adf|||0
+amiga500/Spy Who Loved Me, The.adf|||0
+amiga500/Squarestone.adf|||0
+amiga500/Stable Masters II.adf|||0
+amiga500/Stable Masters III.adf|||0
+amiga500/Stable Masters.adf|||0
+amiga500/Stack Up.adf|||0
+amiga500/Stalingrad.adf|||0
+amiga500/Star Breaker.adf|||0
+amiga500/Star Goose!.adf|||0
+amiga500/Star Trash.adf|||0
+amiga500/Star Wars - Return of the Jedi.adf|||0
+amiga500/Star Wars - The Empire Strikes Back.adf|||0
+amiga500/Star Wars.adf|||0
+amiga500/Star-blaze.adf|||0
+amiga500/Starcross.adf|||0
+amiga500/Starflight.adf|||0
+amiga500/Starglider 2.adf|||0
+amiga500/Starians.adf|||0
+amiga500/Starways.adf|||0
+amiga500/Stationfall.adf|||0
+amiga500/Statix.adf|||0
+amiga500/Steel.adf|||0
+amiga500/Steg the Slug.adf|||0
+amiga500/Stellaryrx.adf|||0
+amiga500/Sternsiedler.adf|||0
+amiga500/Stone Age.adf|||0
+amiga500/Storm Across Europe - The War in Europe - 1939-45.adf|||0
+amiga500/Storm Master.adf|||0
+amiga500/Stormlord.adf|||0
+amiga500/Stormtrooper.adf|||0
+amiga500/Stratego.adf|||0
+amiga500/Street Fighter.adf|||0
+amiga500/Street Gang.adf|||0
+amiga500/Street Sports Basketball.adf|||0
+amiga500/Stres.adf|||0
+amiga500/Strider II.adf|||0
+amiga500/Strider.adf|||0
+amiga500/Strike Force Harrier.adf|||0
+amiga500/Strikefleet.adf|||0
+amiga500/Striker.adf|||0
+amiga500/Strikes -N- Spares Professional.adf|||0
+amiga500/Strikes -N- Spares.adf|||0
+amiga500/Strip Poker II+.adf|||0
+amiga500/Strip Poker.adf|||0
+amiga500/Struggle.adf|||0
+amiga500/Stunt Car Racer.adf|||0
+amiga500/Sub Battle Simulator.adf|||0
+amiga500/Sub Rally.adf|||0
+amiga500/Subbuteo - The Computer Game.adf|||0
+amiga500/Subtrade - Return to Irata.adf|||0
+amiga500/Suburban Commando.adf|||0
+amiga500/Suicide Mission.adf|||0
+amiga500/Summer Camp.adf|||0
+amiga500/Summer Games II.adf|||0
+amiga500/Summer Games.adf|||0
+amiga500/Summer Olympiad.adf|||0
+amiga500/Sun Crosswords, The - Vol. 1 & 2.adf|||0
+amiga500/Sun Crosswords, The - Vol. 3 & 4.adf|||0
+amiga500/Sunny Spells.adf|||0
+amiga500/Supaplex.adf|||0
+amiga500/Super Bob Dylan.adf|||0
+amiga500/Super C.adf|||0
+amiga500/Super Grand Prix.adf|||0
+amiga500/Super Grid Runner.adf|||0
+amiga500/Super Hang-On.adf|||0
+amiga500/Super Huey.adf|||0
+amiga500/Super League Manager.adf|||0
+amiga500/Super Loopz (AGA).adf|||0
+amiga500/Super OsWALD.adf|||0
+amiga500/Super Seymour Saves the Planet.adf|||0
+amiga500/Super Tennis Champs.adf|||0
+amiga500/Super Tetris.adf|||0
+amiga500/Super Wonderboy in Monsterland.adf|||0
+amiga500/Surgeon, The.adf|||0
+amiga500/Suspect.adf|||0
+amiga500/Suspended.adf|||0
+amiga500/Swap.adf|||0
+amiga500/Switchblade II.adf|||0
+amiga500/Switchblade.adf|||0
+amiga500/SWIV.adf|||0
+amiga500/Sword & The Rose, The.adf|||0
+amiga500/T Tec Maze.adf|||0
+amiga500/T-Bird.adf|||0
+amiga500/Taekwondo.adf|||0
+amiga500/Take-em-Out.adf|||0
+amiga500/Tanglewood.adf|||0
+amiga500/Tangram.adf|||0
+amiga500/Tank Attack (CDS).adf|||0
+amiga500/Tanx.adf|||0
+amiga500/Taran im Abenteuerland.adf|||0
+amiga500/Task Force.adf|||0
+amiga500/Tass Times in Tonetown.adf|||0
+amiga500/Team Yankee.adf|||0
+amiga500/Tearaway Thomas.adf|||0
+amiga500/Tee Off!.adf|||0
+amiga500/Teenage Mutant Hero Turtles - The Coin-op!.adf|||0
+amiga500/Teenage Mutant Hero Turtles.adf|||0
+amiga500/Teenage Queen.adf|||0
+amiga500/TeleEpic II.adf|||0
+amiga500/TeleEpic.adf|||0
+amiga500/TeleGames.adf|||0
+amiga500/Telekommando II, Das.adf|||0
+amiga500/Telekommando!, Das.adf|||0
+amiga500/Teller, The.adf|||0
+amiga500/Temple of Apshai Trilogy.adf|||0
+amiga500/Tennis Cup.adf|||0
+amiga500/Teo.adf|||0
+amiga500/Terramex.adf|||0
+amiga500/Terran Envoy.adf|||0
+amiga500/Terror Liner.adf|||0
+amiga500/Terrorpods.adf|||0
+amiga500/Terry's Big Adventure.adf|||0
+amiga500/Test Drive II - The Duel.adf|||0
+amiga500/Test Drive.adf|||0
+amiga500/Tetris (Mirrorsoft).adf|||0
+amiga500/Tetris (Spectrum HoloByte).adf|||0
+amiga500/Tex 01 - Mefisto.adf|||0
+amiga500/Th!nk Cross.adf|||0
+amiga500/Theme Park Mystery - Variations on a Theme.adf|||0
+amiga500/Thexder.adf|||0
+amiga500/Think Twice.adf|||0
+amiga500/Think!.adf|||0
+amiga500/Thomas the Tank Engine 2.adf|||0
+amiga500/Thomas the Tank Engine.adf|||0
+amiga500/Thromulus - The Enemy Within.adf|||0
+amiga500/Thunder Burner.adf|||0
+amiga500/ThunderCats.adf|||0
+amiga500/Tic Tac Toe.adf|||0
+amiga500/Tie-Break.adf|||0
+amiga500/Time and Magik - The Trilogy.adf|||0
+amiga500/Time Lock.adf|||0
+amiga500/Time Machine.adf|||0
+amiga500/Time Runners 01 - Gateways in Time.adf|||0
+amiga500/Time Scanner.adf|||0
+amiga500/Times Crosswords, The - Vol. 1 & 2.adf|||0
+amiga500/Times Crosswords, The - Vol. 3 & 4.adf|||0
+amiga500/Times of Lore.adf|||0
+amiga500/Tintin on the Moon.adf|||0
+amiga500/Tischtennis.adf|||0
+amiga500/Titan.adf|||0
+amiga500/Titano.adf|||0
+amiga500/To the Rhine - The Allied Advance in the West.adf|||0
+amiga500/Toki.adf|||0
+amiga500/Tommy Gun.adf|||0
+amiga500/Tony & Friends in Kellogg's Land.adf|||0
+amiga500/Toobin'.adf|||0
+amiga500/Top Cat.adf|||0
+amiga500/Torch 2081.adf|||0
+amiga500/Tornado Ground Attack.adf|||0
+amiga500/Total Eclipse.adf|||0
+amiga500/Tots Time.adf|||0
+amiga500/Tower of Babel.adf|||0
+amiga500/Toyota Celica GT Rally.adf|||0
+amiga500/Tracers.adf|||0
+amiga500/Track Suit Manager.adf|||0
+amiga500/Traders.adf|||0
+amiga500/Trained Assassin.adf|||0
+amiga500/Transworld.adf|||0
+amiga500/Transylvania.adf|||0
+amiga500/Trax.adf|||0
+amiga500/Treasure Island Dizzy.adf|||0
+amiga500/Treasure Trap.adf|||0
+amiga500/Treble Champions.adf|||0
+amiga500/Trex Warrior - 22nd Century Gladiator.adf|||0
+amiga500/TrianGO.adf|||0
+amiga500/Tricky-Quiky-Games - Die Suche nach den Verschollenen Seiten.adf|||0
+amiga500/Trinity.adf|||0
+amiga500/Tripple-X.adf|||0
+amiga500/Trivia Game Show.adf|||0
+amiga500/Trivia Trove.adf|||0
+amiga500/Trivial Pursuit - A New Beginning.adf|||0
+amiga500/Trivial Pursuit.adf|||0
+amiga500/Trois Petits Cochons s'Amusent, Les.adf|||0
+amiga500/Tron 5000.adf|||0
+amiga500/Trump Castle.adf|||0
+amiga500/Tunnels of Armageddon.adf|||0
+amiga500/Turbo Cup.adf|||0
+amiga500/Turbo Out Run.adf|||0
+amiga500/Turbo.adf|||0
+amiga500/Turn It II.adf|||0
+amiga500/Turn It.adf|||0
+amiga500/Turn n' Burn.adf|||0
+amiga500/Turrican 3.adf|||0
+amiga500/Turrican.adf|||0
+amiga500/Twin Turbos.adf|||0
+amiga500/Twintris.adf|||0
+amiga500/TwinWorld - Land of Vision.adf|||0
+amiga500/Two of a Kind.adf|||0
+amiga500/Two to One.adf|||0
+amiga500/Two-Up.adf|||0
+amiga500/Twylyte.adf|||0
+amiga500/Typhoon of Steel.adf|||0
+amiga500/Typhoon Thompson in Search for the Sea Child.adf|||0
+amiga500/Typhoon.adf|||0
+amiga500/U.N. Squadron.adf|||0
+amiga500/Ugh!.adf|||0
+amiga500/Ultima III - Exodus.adf|||0
+amiga500/Ultimate Quiz, The.adf|||0
+amiga500/Under Pressure.adf|||0
+amiga500/Uninvited.adf|||0
+amiga500/Universal Monsters & Superhero.adf|||0
+amiga500/Universal Warrior.adf|||0
+amiga500/Unsensible Soccer.adf|||0
+amiga500/Vader.adf|||0
+amiga500/Valhalla and the Lord of Action.adf|||0
+amiga500/Vaxine.adf|||0
+amiga500/Vector Championship Run.adf|||0
+amiga500/Vegas Gambler.adf|||0
+amiga500/Vermeer.adf|||0
+amiga500/Veteran.adf|||0
+amiga500/Victor Loomes - Das Spiel.adf|||0
+amiga500/Victory Road.adf|||0
+amiga500/Victory.adf|||0
+amiga500/Video Vegas.adf|||0
+amiga500/Vigilante.adf|||0
+amiga500/Vikings - Fields of Conquest - Kingdoms of England II.adf|||0
+amiga500/Vindex.adf|||0
+amiga500/Vindicators.adf|||0
+amiga500/Violator.adf|||0
+amiga500/Virus.adf|||0
+amiga500/Vixen.adf|||0
+amiga500/Volleyball Simulator.adf|||0
+amiga500/Voodoo Nightmare.adf|||0
+amiga500/Vortex.adf|||0
+amiga500/Voyager.adf|||0
+amiga500/Vroom.adf|||0
+amiga500/Vulcan.adf|||0
+amiga500/Vyper.adf|||0
+amiga500/Vyrus.adf|||0
+amiga500/Wacky Darts.adf|||0
+amiga500/Wall Street Wizard.adf|||0
+amiga500/Wall$treet.adf|||0
+amiga500/Walls.adf|||0
+amiga500/Wanderer, The.adf|||0
+amiga500/Wanted.adf|||0
+amiga500/War Machine.adf|||0
+amiga500/War Zone (Core).adf|||0
+amiga500/War Zone (Paradox).adf|||0
+amiga500/War.adf|||0
+amiga500/Warhead.adf|||0
+amiga500/Warlock the Avenger.adf|||0
+amiga500/Warlock's Quest.adf|||0
+amiga500/Warlock.adf|||0
+amiga500/Warp.adf|||0
+amiga500/Waterloo.adf|||0
+amiga500/Way of the Little Dragon, The.adf|||0
+amiga500/Wayne Gretzky Hockey.adf|||0
+amiga500/Web of Terror.adf|||0
+amiga500/Weird Dreams.adf|||0
+amiga500/Welltris.adf|||0
+amiga500/Werner Flaschbier.adf|||0
+amiga500/What Is It Where Is It Vol. 1.adf|||0
+amiga500/Wheelie.adf|||0
+amiga500/Where in the World is Carmen Sandiego.adf|||0
+amiga500/White Death - Battle for Velikiye Luki, November 1942.adf|||0
+amiga500/Wibble World Giddy - Wibble Mania!.adf|||0
+amiga500/Wicked.adf|||0
+amiga500/Willow.adf|||0
+amiga500/Window Wizard.adf|||0
+amiga500/Windwalker.adf|||0
+amiga500/Wings of Fury.adf|||0
+amiga500/Winnie the Pooh in the Hundred Acre Wood.adf|||0
+amiga500/Winning Post.adf|||0
+amiga500/Winter Games.adf|||0
+amiga500/Winter Supersports 92.adf|||0
+amiga500/Winzer.adf|||0
+amiga500/Wiraz.adf|||0
+amiga500/Wishbringer - The Magick Stone of Dreams.adf|||0
+amiga500/Wisielec.adf|||0
+amiga500/Wizards Castle.adf|||0
+amiga500/Wizball.adf|||0
+amiga500/Wizmo.adf|||0
+amiga500/World Championship Boxing Manager.adf|||0
+amiga500/World Class Rugby - Five Nations Edition.adf|||0
+amiga500/World Class Rugby.adf|||0
+amiga500/World Cricket.adf|||0
+amiga500/World Cup - All Time Greats.adf|||0
+amiga500/World Cup 90.adf|||0
+amiga500/World Games.adf|||0
+amiga500/World Rugby.adf|||0
+amiga500/World Soccer.adf|||0
+amiga500/World Tour - Australia.adf|||0
+amiga500/World Tour Golf.adf|||0
+amiga500/Worlds at War.adf|||0
+amiga500/Wrath of Gwendor.adf|||0
+amiga500/Wreckers.adf|||0
+amiga500/X-IT-50 - The Quest for the Meaning of Life.adf|||0
+amiga500/X-Ploit.adf|||0
+amiga500/X-Swap - Booming Edition (AGA).adf|||0
+amiga500/Xenex.adf|||0
+amiga500/Xenon.adf|||0
+amiga500/XR 35 Fighter Mission.adf|||0
+amiga500/Xybots.adf|||0
+amiga500/Yogi's Big Clean Up.adf|||0
+amiga500/Yogi's Great Escape.adf|||0
+amiga500/Yuppi's Revenge.adf|||0
+amiga500/Zack!.adf|||0
+amiga500/Zany Golf.adf|||0
+amiga500/Zardoz.adf|||0
+amiga500/Zargon.adf|||0
+amiga500/Zaxxon.adf|||0
+amiga500/Zeewolf 2 - Wild Justice.adf|||0
+amiga500/Zeewolf.adf|||0
+amiga500/Zero Gravity.adf|||0
+amiga500/Zeron.adf|||0
+amiga500/Zitrax.adf|||0
+amiga500/Zock Out.adf|||0
+amiga500/Zombi.adf|||0
+amiga500/Zombie Apocalypse.adf|||0
+amiga500/Zork - The Undiscovered Underground.adf|||0
+amiga500/Zork I - The Great Underground Empire.adf|||0
+amiga500/Zork II - The Wizard of Frobozz.adf|||0
+amiga500/Zork III - The Dungeon Master.adf|||0
+amiga500/Zyconix.adf|||0
+amiga500/Zzzep.adf|||0
+amiga1200/1869 (AGA).zip|1869|https://images.igdb.com/igdb/image/upload/t_cover_big/co737f.jpg|0
+amiga1200/Action Cat (AGA).zip|Action Cat||0
+amiga1200/Aladdin (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Aladdin.png|0
+amiga1200/Alfred Chicken (AGA).zip|Alfred Chicken|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Alfred%20Chicken.png|0
+amiga1200/Alien Breed - Tower Assault (OCS & AGA).zip|Alien Breed: Tower Assault|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Alien%20Breed%20-%20Tower%20Assault.png|4
+amiga1200/All New World of Lemmings (AGA).zip|All New World of Lemmings|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/All%20New%20World%20of%20Lemmings.png|0
+amiga1200/Arcade Pool (OCS & AGA).zip|Arcade Pool|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Arcade%20Pool.png|0
+amiga1200/Banshee (AGA).zip|Banshee|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Banshee.png|5
+amiga1200/Body Blows (AGA).zip|Body Blows|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Body%20Blows.png|0
+amiga1200/Body Blows Galactic (AGA).zip|Body Blows Galactic|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Body%20Blows%20Galactic.png|0
+amiga1200/Bograts - The Puzzling Misadventure (AGA).zip|Bograts: The Puzzling Misadventure|https://images.igdb.com/igdb/image/upload/t_cover_big/co50kg.jpg|0
+amiga1200/Boondar (AGA).zip|||0
+amiga1200/Breathless (AGA).zip|Breathless|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Breathless.png|0
+amiga1200/Brian the Lion (AGA).zip|Brian the Lion|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Brian%20the%20Lion.png|0
+amiga1200/Brutal Football - Deluxe Edition (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Brutal%20Football%20-%20Deluxe%20Edition.png|0
+amiga1200/Burning Rubber (AGA).zip|Burning Rubber|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Burning%20Rubber.png|0
+amiga1200/Burntime (AGA).zip|Burntime|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Burntime.png|0
+amiga1200/Chaos Engine 2, The (AGA).zip|The Chaos Engine 2|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Chaos%20Engine%202%2C%20The.png|0
+amiga1200/Charlie J Cool (AGA).zip|||0
+amiga1200/Christoph Kolumbus (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Christoph%20Kolumbus.png|0
+amiga1200/Civilization (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Civilization.png|0
+amiga1200/Clue!, The (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Clue%21%2C%20The.png|0
+amiga1200/D-Generation (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/D-Generation.png|0
+amiga1200/Dangerous Streets (AGA).zip|Dangerous Streets|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Dangerous%20Streets.png|0
+amiga1200/Death Mask (ECS & AGA).zip|Death Mask|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Death%20Mask.png|0
+amiga1200/Detroit (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Detroit.png|0
+amiga1200/Diggers (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Diggers.png|0
+amiga1200/Donk! - The Samurai Duck! (OCS & AGA).zip|Donk!: The Samurai Duck!|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Donk%21%20-%20The%20Samurai%20Duck%21.png|0
+amiga1200/Dragon Tiles (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Dragon%20Tiles.png|0
+amiga1200/Dynatech (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Dynatech.png|0
+amiga1200/Exile (AGA).zip|Exile|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Exile.png|0
+amiga1200/Fantasy Flyer (OCS & AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Fantasy%20Flyer.png|0
+amiga1200/Fatman - The Caped Consumer (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Fatman%20-%20The%20Caped%20Consumer.png|0
+amiga1200/Fears (AGA).zip|Fears|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Fears.png|0
+amiga1200/Fields of Glory (AGA).zip|Fields of Glory|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Fields%20of%20Glory.png|0
+amiga1200/Fightin' Spirit (AGA).zip|Fightin' Spirit|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Fightin%27%20Spirit.png|0
+amiga1200/Football Glory (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Football%20Glory.png|0
+amiga1200/Fussball Total (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Fussball%20Total.png|0
+amiga1200/Gloom Deluxe(AGA).zip|Gloom Deluxe|https://images.igdb.com/igdb/image/upload/t_cover_big/co898f.jpg|0
+amiga1200/Guardian (AGA).zip|Guardian|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Guardian.png|0
+amiga1200/Hanse - Die Expedition (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Hanse%20-%20Die%20Expedition.png|0
+amiga1200/Harry's Balloons (AGA).zip|||0
+amiga1200/Heimdall 2 - Into the Hall of Worlds (AGA).zip|Heimdall 2: Into the Hall of Worlds|https://images.igdb.com/igdb/image/upload/t_cover_big/co6ylv.jpg|0
+amiga1200/High Seas Trader (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/High%20Seas%20Trader.png|0
+amiga1200/Hilt - Against the Hoardes.zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Hilt%20-%20Against%20the%20Hoardes.png|0
+amiga1200/Hoi Remix (AGA).zip|||0
+amiga1200/Impossible Mission 2025 - The Special Edition (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Impossible%20Mission%202025%20-%20The%20Special%20Edition.png|0
+amiga1200/International Open Golf Championship (AGA).zip|||0
+amiga1200/Ishar - Legend of the Fortress (AGA).zip|Ishar: Legend of the Fortress|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Ishar%20-%20Legend%20of%20the%20Fortress.png|0
+amiga1200/Ishar 2 - Messengers of Doom (AGA).zip|Ishar 2: Messengers of Doom|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Ishar%202%20-%20Messengers%20of%20Doom.png|7
+amiga1200/Ishar 3 - The Seven Gates of Infinity (AGA).zip|Ishar 3: The Seven Gates of Infinity|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Ishar%203%20-%20The%20Seven%20Gates%20of%20Infinity.png|5
+amiga1200/James Pond 2 - Codename RoboCod (AGA).zip|James Pond 2: Codename - RoboCod|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/James%20Pond%20II%20-%20Codename%20RoboCod.png|33
+amiga1200/James Pond 3 - Operation Starfish (AGA).zip|James Pond 3: Operation Starfish|https://images.igdb.com/igdb/image/upload/t_cover_big/co84wr.jpg|6
+amiga1200/Jetstrike (AGA).zip|Jetstrike|https://images.igdb.com/igdb/image/upload/t_cover_big/neuruvqohvt7kjtshfk5.jpg|0
+amiga1200/Jungle Strike (AGA).zip|Jungle Strike|https://images.igdb.com/igdb/image/upload/t_cover_big/co5muv.jpg|33
+amiga1200/Leading Lap MPV (AGA).zip|||0
+amiga1200/Legends (AGA).zip|Legends|https://images.igdb.com/igdb/image/upload/t_cover_big/co458c.jpg|0
+amiga1200/Liberation - Captive II (OCS & AGA).zip|Liberation: Captive II|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Liberation%20-%20Captive%20II.png|0
+amiga1200/Lords of the Realm (AGA).zip|Lords of the Realm|https://images.igdb.com/igdb/image/upload/t_cover_big/co8i2q.jpg|6
+amiga1200/Marvin's Marvellous Adventure (AGA).zip|Marvin's Marvellous Adventure|https://images.igdb.com/igdb/image/upload/t_cover_big/kl8t8psjbeh2tripi3z8.jpg|0
+amiga1200/Monster (AGA).zip|||0
+amiga1200/Morph (AGA).zip|Morph|https://images.igdb.com/igdb/image/upload/t_cover_big/v07zuspmocy5hos9t8a3.jpg|0
+amiga1200/Motorola Invaders 2 (AGA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Motorola%20Invaders%202.png|0
+amiga1200/Naughty Ones (AGA).zip|Naughty Ones|https://images.igdb.com/igdb/image/upload/t_cover_big/co2eny.jpg|0
+amiga1200/Nigel Mansell's World Championship (AGA).zip|Nigel Mansell's World Championship|https://images.igdb.com/igdb/image/upload/t_cover_big/co6amh.jpg|9
+amiga1200/Oscar (AGA).zip|Oscar|https://images.igdb.com/igdb/image/upload/t_cover_big/co3jht.jpg|6
+amiga1200/Overkill (AGA).zip|Overkill|https://images.igdb.com/igdb/image/upload/t_cover_big/co1sc9.jpg|0
+amiga1200/Penguins (AGA).zip|||0
+amiga1200/PGA European Tour (AGA).zip|PGA European Tour|https://images.igdb.com/igdb/image/upload/t_cover_big/co5p0o.jpg|0
+amiga1200/Pierre le Chef is... Out to Lunch (AGA).zip|Pierre le Chef is... Out to Lunch|https://images.igdb.com/igdb/image/upload/t_cover_big/co6yf4.jpg|3
+amiga1200/Pinball Illusions (AGA).zip|Pinball Illusions|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Pinball%20Illusions.png|0
+amiga1200/Pinball Mania (AGA).zip|Pinball Mania|https://images.igdb.com/igdb/image/upload/t_cover_big/co6tpy.jpg|0
+amiga1200/Pinball Prelude (AGA).zip|Pinball Prelude|https://images.igdb.com/igdb/image/upload/t_cover_big/co6zo5.jpg|0
+amiga1200/Prawo Krwi (AGA).zip|||0
+amiga1200/Quasar Wars (AGA).zip|||0
+amiga1200/Quik the Thunder Rabbit (OCS & AGA).zip|Quik: The Thunder Rabbit|https://images.igdb.com/igdb/image/upload/t_cover_big/co5x48.jpg|0
+amiga1200/Rally Championships (AGA).zip|Rally Championships|https://images.igdb.com/igdb/image/upload/t_cover_big/co3d67.jpg|0
+amiga1200/Rise of the Robots (AGA).zip|Rise of the Robots|https://images.igdb.com/igdb/image/upload/t_cover_big/co2wbc.jpg|11
+amiga1200/Roadkill (AGA).zip|Roadkill|https://images.igdb.com/igdb/image/upload/t_cover_big/co8hel.jpg|0
+amiga1200/Roketz (AGA).zip|Roketz|https://images.igdb.com/igdb/image/upload/t_cover_big/co3uqy.jpg|0
+amiga1200/Ryder Cup - Johnnie Walker (AGA).zip|Ryder Cup: Johnnie Walker|https://images.igdb.com/igdb/image/upload/t_cover_big/co7kff.jpg|0
+amiga1200/Sabre Team (AGA).zip|Sabre Team|https://images.igdb.com/igdb/image/upload/t_cover_big/co3vtp.jpg|0
+amiga1200/Second Samurai (AGA).zip|Second Samurai|https://images.igdb.com/igdb/image/upload/t_cover_big/co2geo.jpg|0
+amiga1200/Shadow Fighter (AGA).zip|Shadow Fighter|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Shadow%20Fighter.png|0
+amiga1200/Simon the Sorcerer (AGA).zip|Simon the Sorcerer|https://images.igdb.com/igdb/image/upload/t_cover_big/cob3gz.jpg|56
+amiga1200/SkidMarks (OCS & AGA).zip|Skidmarks|https://images.igdb.com/igdb/image/upload/t_cover_big/co8hq3.jpg|0
+amiga1200/Slam Tilt - The Pinball Game (AGA).zip|||0
+amiga1200/Sleepwalker (AGA).zip|Sleepwalker|https://images.igdb.com/igdb/image/upload/t_cover_big/co8hqe.jpg|0
+amiga1200/Soccer Kid (AGA).zip|Soccer Kid|https://images.igdb.com/igdb/image/upload/t_cover_big/co1p6w.jpg|9
+amiga1200/Speris Legacy, The (AGA).zip|The Speris Legacy|https://images.igdb.com/igdb/image/upload/t_cover_big/co853b.jpg|0
+amiga1200/Strip Pot (AGA).zip|||0
+amiga1200/Subwar 2050 (AGA).zip|Subwar 2050|https://images.igdb.com/igdb/image/upload/t_cover_big/co24uo.jpg|0
+amiga1200/Super League Manager (AGA).zip|Super League Manager|https://images.igdb.com/igdb/image/upload/t_cover_big/co8hht.jpg|0
+amiga1200/Super Loopz (AGA).zip|||0
+amiga1200/Super SkidMarks (OCS & AGA).zip|Super Skidmarks|https://images.igdb.com/igdb/image/upload/t_cover_big/co3jmr.jpg|5
+amiga1200/Super Stardust (AGA).zip|Super Stardust|https://images.igdb.com/igdb/image/upload/t_cover_big/co1p8l.jpg|0
+amiga1200/TaeKwonDo Master (AGA).zip|||0
+amiga1200/Teresa - House Guest (AGA).zip|||0
+amiga1200/Thomas the Tank Engine and Friends Pinball (AGA).zip|Thomas the Tank Engine & Friends Pinball|https://images.igdb.com/igdb/image/upload/t_cover_big/co6w5m.jpg|0
+amiga1200/Tin Toy Adventure in the House of Fun (AGA).zip|||0
+amiga1200/Top Gear 2 (AGA).zip|Top Gear 2|https://images.igdb.com/igdb/image/upload/t_cover_big/co63nw.jpg|25
+amiga1200/Tower of Souls (AGA).zip|||0
+amiga1200/Transarctica (AGA).zip|Transarctica|https://images.igdb.com/igdb/image/upload/t_cover_big/co29m7.jpg|0
+amiga1200/Trolls (AGA).zip|Trolls|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_Amiga/master/Named_Boxarts/Trolls.png|0
+amiga1200/Tube Warriors (AGA).zip|Tube Warriors|https://images.igdb.com/igdb/image/upload/t_cover_big/co4c0s.jpg|0
+amiga1200/Tubular Worlds (AGA).zip|Tubular Worlds|https://images.igdb.com/igdb/image/upload/t_cover_big/co2iwh.jpg|0
+amiga1200/UFO - Enemy Unknown (AGA).zip|||0
+amiga1200/Uridium 2 (OCS & AGA).zip|Uridium 2|https://images.igdb.com/igdb/image/upload/t_cover_big/co85bw.jpg|0
+amiga1200/Wacus the Detective (ECS & AGA).zip|||0
+amiga1200/Watchtower (AGA).zip|Watchtower|https://images.igdb.com/igdb/image/upload/t_cover_big/zh84o5mk21dlinw72cjb.jpg|0
+amiga1200/Wheelspin (AGA).zip|||0
+amiga1200/When Two Worlds War (AGA).zip|When Two Worlds War|https://images.igdb.com/igdb/image/upload/t_cover_big/co8h5l.jpg|0
+amiga1200/Whizz (AGA).zip|Whizz|https://images.igdb.com/igdb/image/upload/t_cover_big/co3b7d.jpg|0
+amiga1200/Wingnuts (AGA).zip|||0
+amiga1200/Winter Olympics (OCS & AGA).zip|Winter Olympic Games|https://images.igdb.com/igdb/image/upload/t_cover_big/coaf7h.jpg|0
+amiga1200/Worms - The Director's Cut (AGA).zip|Worms: The Director's Cut|https://images.igdb.com/igdb/image/upload/t_cover_big/co8qah.jpg|0
+amiga1200/X-Swap - Booming Edition (AGA).zip|||0
+amiga1200/XP8 (AGA).zip|||0
+amiga1200/XTreme Racing (AGA).zip|||0
+amigacdtv/17 Bit - Collection for Amiga CDTV (Europe) (Disc A) (The Early Classics).zip|||0
+amigacdtv/17 Bit - Collection for Amiga CDTV (Europe) (Disc B) (The Latest Batch) (Rev 1).zip|||0
+amigacdtv/17 Bit - Collection for Amiga CDTV (Europe) (Disc B) (The Latest Batch).zip|||0
+amigacdtv/17 Bit - Continuation Disc (Europe).zip|||0
+amigacdtv/Advanced Military Systems (Europe).zip|||0
+amigacdtv/Almathera Clipart & Fonts CD, The (Europe).zip|||0
+amigacdtv/Almathera Photo Library CD, The (Europe).zip|||0
+amigacdtv/American Heritage - Illustrated Encyclopedic Dictionary - 1991a Edition (USA).zip|||0
+amigacdtv/AMOS PD (UK).zip|||0
+amigacdtv/Barney Bear Goes to School (USA).zip|||0
+amigacdtv/Battlestorm (Europe).zip|||0
+amigacdtv/Bun for Barney, A (USA).zip|||0
+amigacdtv/Case of the Cautious Condor, The (Europe).zip|||0
+amigacdtv/CD Remix Version II (Europe).zip|||0
+amigacdtv/CDPD 1 (Europe) (CD32 Compatible).zip|||0
+amigacdtv/CDPD 1 (Europe).zip|||0
+amigacdtv/CDPD 2 (Europe).zip|||0
+amigacdtv/CDPD 3 (Europe).zip|||0
+amigacdtv/Cinderella - The Original Fairy Tale (USA) (En,Fr,De,Es,It).zip|||0
+amigacdtv/Classic Board Games (Europe) (En,Ja,Fr,De,Es,It).zip|||0
+amigacdtv/Curse of RA, The (Germany).zip|||0
+amigacdtv/Defender of the Crown (Europe).zip|||0
+amigacdtv/Defender of the Crown II (Europe).zip|||0
+amigacdtv/Defender of the Crown II (USA) (En,Fr,De,Es,It).zip|||0
+amigacdtv/Deutschland Kompakt (Germany).zip|||0
+amigacdtv/Fantastic Voyage (USA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Fantastic%20Voyage%20%28USA%29.png|0
+amigacdtv/Games & Goodies (UK).zip|||0
+amigacdtv/Garden Fax - Fruits, Vegetables & Herbs (USA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Garden%20Fax%20-%20Fruits%2C%20Vegetables%20%26%20Herbs%20%28USA%29.png|0
+amigacdtv/Garden Fax - Garden Plants (USA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Garden%20Fax%20-%20Garden%20Plants%20%28USA%29.png|0
+amigacdtv/Garden Fax - Indoor Plants (USA).zip|||0
+amigacdtv/Garden Fax - Trees, Shrubs, Roses & Conifers (USA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Garden%20Fax%20-%20Trees%2C%20Shrubs%2C%20Roses%20%26%20Conifers%20%28USA%29.png|0
+amigacdtv/Hutchinson Encyclopedia, The (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Hutchinson%20Encyclopedia%2C%20The%20%28Europe%29.png|0
+amigacdtv/Illustrated Works of Shakespeare (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Illustrated%20Works%20of%20Shakespeare%20%28Europe%29.png|0
+amigacdtv/Insight Dinosaurs (Europe).zip|||0
+amigacdtv/Insight Technology (Europe).zip|||0
+amigacdtv/Language TV - English (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Language%20TV%20-%20English%20%28France%29.png|0
+amigacdtv/Lemmings (Europe).zip|Lemmings|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Lemmings%20%28Europe%29.png|164
+amigacdtv/Log!cal (Europe).zip|Log!cal|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Log%21cal%20%28Europe%29.png|0
+amigacdtv/Mud Puddle (USA) (En,Fr,De,Es,It).zip|||0
+amigacdtv/New Basics Electronic Cookbook, The - 1991a Edition (USA).zip|||0
+amigacdtv/Now That's What I Call Games (UK).zip|||0
+amigacdtv/Pandora's CD (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Pandora%27s%20CD%20%28Europe%29.png|0
+amigacdtv/Prehistorik (Europe).zip|Prehistorik|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Prehistorik%20%28Europe%29.png|25
+amigacdtv/Psycho Killer (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Psycho%20Killer%20%28Europe%29.png|0
+amigacdtv/Raffles (Sweden).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Raffles%20%28Sweden%29.png|0
+amigacdtv/SimCity (Europe) (En,Fr,De,Es,It).zip|SimCity|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/SimCity%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|144
+amigacdtv/Snoopy - The Case of the Missing Blanket (Sweden).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Snoopy%20-%20The%20Case%20of%20the%20Missing%20Blanket%20%28Sweden%29.png|0
+amigacdtv/Team Yankee (Europe).zip|Team Yankee|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Team%20Yankee%20%28Europe%29.png|0
+amigacdtv/Time Table of History - Business, Politics & Media - 1991a Edition (USA).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Time%20Table%20of%20History%20-%20Business%2C%20Politics%20%26%20Media%20-%201991a%20Edition%20%28USA%29.png|0
+amigacdtv/Town with No Name (Europe) (En,Fr,De,Es,It,Da).zip|||0
+amigacdtv/Trivial Pursuit - The CDTV Edition (Europe) (Disc 1).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Trivial%20Pursuit%20-%20The%20CDTV%20Edition%20%28Europe%29%20%28Disc%201%29.png|0
+amigacdtv/Trivial Pursuit - The CDTV Edition (Europe) (Disc 2).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Trivial%20Pursuit%20-%20The%20CDTV%20Edition%20%28Europe%29%20%28Disc%202%29.png|0
+amigacdtv/Turrican (Germany).zip|Turrican|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Turrican%20%28Germany%29.png|29
+amigacdtv/Turrican II - The Final Fight (Germany).zip|Turrican II: The Final Fight|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Turrican%20II%20-%20The%20Final%20Fight%20%28Germany%29.png|17
+amigacdtv/Welcome to CDTV Multimedia (USA).zip|||0
+amigacdtv/Will Bridge Vol. 1 - Initiation aux Encheres - Practice (France).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Will%20Bridge%20Vol.%201%20-%20Initiation%20aux%20Encheres%20-%20Practice%20%28France%29.png|0
+amigacdtv/World Vista (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/World%20Vista%20%28Europe%29.png|0
+amigacdtv/Xenon 2 - Megablast (Europe) (En,Fr,De,It).zip|Xenon 2: Megablast|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CDTV/master/Named_Boxarts/Xenon%202%20-%20Megablast%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|23
+amigacd32/Akira (Europe).zip|Akira|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Akira%20%28Europe%29.png|0
+amigacd32/Alfred Chicken (Europe).zip|Alfred Chicken|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Alfred%20Chicken%20%28Europe%29.png|0
+amigacd32/Alien Breed - Tower Assault (Europe).zip|Alien Breed: Tower Assault|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Alien%20Breed%20-%20Tower%20Assault%20%28Europe%29.png|4
+amigacd32/Alien Breed 3D (Europe).zip|Alien Breed 3D|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Alien%20Breed%203D%20%28Europe%29.png|0
+amigacd32/Alien Breed Special Edition & Qwak (Europe) (En,Fr,De,It,Da).zip|Alien Breed Special Edition / Qwak|https://images.igdb.com/igdb/image/upload/t_cover_big/co8i6b.jpg|0
+amigacd32/Amiga CD32 Magazine - Spring 1994 (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Amiga%20CD32%20Magazine%20-%20Spring%201994%20%28Europe%29.png|0
+amigacd32/Amiga CD32 Magazine - Winter 1994 (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Amiga%20CD32%20Magazine%20-%20Winter%201994%20%28Europe%29.png|0
+amigacd32/Amiga Power Techno Nation - Game Massive - The Essential CD32 Collection Volume 1 (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Amiga%20Power%20Techno%20Nation%20-%20Game%20Massive%20-%20The%20Essential%20CD32%20Collection%20Volume%201%20%28Europe%29.png|0
+amigacd32/Amiga Workbench 3.0 (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Amiga%20Workbench%203.0%20%28Europe%29.png|0
+amigacd32/Arabian Nights (Europe) (En,Fr,De,It).zip|Arabian Nights|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Arabian%20Nights%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Arcade Pool (Europe) (En,Fr,De,It) (Alt).zip|Arcade Pool|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Arcade%20Pool%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29%20%28Alt%29.png|0
+amigacd32/Arcade Pool (Europe) (En,Fr,De,It).zip|Arcade Pool|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Arcade%20Pool%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Assassins - Ultimate Games Compact Disc (Europe) (v2.0).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Assassins%20-%20Ultimate%20Games%20Compact%20Disc%20%28Europe%29%20%28v2.0%29.png|0
+amigacd32/ATR - All Terrain Racing (Europe).zip|ATR: All Terrain Racing|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/ATR%20-%20All%20Terrain%20Racing%20%28Europe%29.png|0
+amigacd32/Banshee (Europe) (En,Fr,De,Da).zip|Banshee|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Banshee%20%28Europe%29%20%28En%2CFr%2CDe%2CDa%29.png|5
+amigacd32/Base Jumpers (Europe).zip|Base Jumpers|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Base%20Jumpers%20%28Europe%29.png|0
+amigacd32/Battle Chess (Europe).zip|Battle Chess|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Battle%20Chess%20%28Europe%29.png|61
+amigacd32/Battletoads (Europe).zip|Battletoads|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Battletoads%20%28Europe%29.png|148
+amigacd32/Beavers (Europe).zip|Beavers|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Beavers%20%28Europe%29.png|0
+amigacd32/Beneath a Steel Sky (Europe) (En,Fr,De,It).zip|Beneath a Steel Sky|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Beneath%20a%20Steel%20Sky%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|108
+amigacd32/Benefactor (Europe).zip|Benefactor|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Benefactor%20%28Europe%29.png|0
+amigacd32/Big 6, The (Europe).zip|The Big 6|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Big%206%2C%20The%20%28Europe%29.png|0
+amigacd32/Black Viper (Europe) (En,De,It).zip|Black Viper|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Black%20Viper%20%28Europe%29%20%28En%2CDe%2CIt%29.png|0
+amigacd32/Brian the Lion (Europe) (En,Fr,De,It) (Gameplay CD-ROM).zip|Brian the Lion|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Brian%20the%20Lion%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29%20%28Gameplay%20CD-ROM%29.png|0
+amigacd32/Brutal Football (Europe).zip|Brutal Sports Football|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Brutal%20Football%20%28Europe%29.png|0
+amigacd32/Bubba 'n' Stix (Europe).zip|Bubba 'n' Stix|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Bubba%20%27n%27%20Stix%20%28Europe%29.png|8
+amigacd32/Bubble and Squeak (Europe).zip|Bubble and Squeak|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Bubble%20and%20Squeak%20%28Europe%29.png|0
+amigacd32/Bump 'n' Burn (Europe).zip|Bump 'N' Burn|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Bump%20%27n%27%20Burn%20%28Europe%29.png|0
+amigacd32/Cannon Fodder (Europe).zip|Cannon Fodder|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Cannon%20Fodder%20%28Europe%29.png|64
+amigacd32/Castles II - Siege & Conquest (Europe).zip|Castles II: Siege & Conquest|https://images.igdb.com/igdb/image/upload/t_cover_big/co2723.jpg|2
+amigacd32/CD Exchange - Volume 1 (UK).zip|CD Exchange Volume 1|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/CD%20Exchange%20-%20Volume%201%20%28UK%29.png|0
+amigacd32/CD Micro French (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/CD%20Micro%20French%20%28Europe%29.png|0
+amigacd32/Chambers of Shaolin (Europe).zip|Chambers of Shaolin|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Chambers%20of%20Shaolin%20%28Europe%29.png|6
+amigacd32/Chaos Engine, The (Europe) (En,Fr,De,It).zip|The Chaos Engine 2|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Chaos%20Engine%2C%20The%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Chaos Engine, The (Europe) (Spectacular Voyage).zip|The Chaos Engine 2|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Chaos%20Engine%2C%20The%20%28Europe%29%20%28Spectacular%20Voyage%29.png|0
+amigacd32/Chuck Rock (Europe).zip|Chuck Rock|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Chuck%20Rock%20%28Europe%29.png|23
+amigacd32/Chuck Rock II - Son of Chuck (Europe).zip|Chuck Rock II: Son of Chuck|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Chuck%20Rock%20II%20-%20Son%20of%20Chuck%20%28Europe%29.png|11
+amigacd32/Classic Lotus Trilogy, The (Europe).zip|The Classic Lotus Trilogy|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Classic%20Lotus%20Trilogy%2C%20The%20%28Europe%29.png|0
+amigacd32/Clockwiser (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Clockwiser%20%28Europe%29.png|0
+amigacd32/Clou!, Der (Germany).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Clou%21%2C%20Der%20%28Germany%29.png|0
+amigacd32/Communicator (Germany) (En,De).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Communicator%20%28Germany%29%20%28En%2CDe%29.png|0
+amigacd32/D-Generation (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/D-Generation%20%28Europe%29.png|0
+amigacd32/Dangerous Streets & Wing Commander (Europe) (En,Fr,De,It).zip|Dangerous Streets / Wing Commander|https://images.igdb.com/igdb/image/upload/t_cover_big/rw1gyqusyofzebzfxkqs.jpg|0
+amigacd32/Dangerous Streets (Europe) (En,Fr,De,It).zip|Dangerous Streets|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Dangerous%20Streets%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Darkseed (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Darkseed%20%28Europe%29.png|0
+amigacd32/Death Mask (Europe) (En,Fr,De,It).zip|Death Mask|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Death%20Mask%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Deep Core (Europe) (v1.00).zip|Deep Core|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Deep%20Core%20%28Europe%29%20%28v1.00%29.png|0
+amigacd32/Deep Core (Europe) (v1.01).zip|Deep Core|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Deep%20Core%20%28Europe%29%20%28v1.01%29.png|0
+amigacd32/Dennis (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Dennis%20%28Europe%29.png|0
+amigacd32/Diggers & Oscar (Europe) (Rev 1) (Alt).zip|Diggers & Oscar|https://images.igdb.com/igdb/image/upload/t_cover_big/co7l6e.jpg|0
+amigacd32/Diggers & Oscar (Europe) (Rev 1).zip|Diggers & Oscar|https://images.igdb.com/igdb/image/upload/t_cover_big/co7l6e.jpg|0
+amigacd32/Diggers & Oscar (Europe).zip|Diggers & Oscar|https://images.igdb.com/igdb/image/upload/t_cover_big/co7l6e.jpg|0
+amigacd32/Disposable Hero (Europe).zip|Disposable Hero|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Disposable%20Hero%20%28Europe%29.png|0
+amigacd32/Donk! The Samurai Duck! (Europe).zip|Donk!: The Samurai Duck!|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Donk%21%20The%20Samurai%20Duck%21%20%28Europe%29.png|0
+amigacd32/Dragonstone (Europe) (En,Fr,De).zip|Dragonstone|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Dragonstone%20%28Europe%29%20%28En%2CFr%2CDe%29.png|0
+amigacd32/Emerald Mines (Europe).zip|Emerald Mine|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Emerald%20Mines%20%28Europe%29.png|0
+amigacd32/Exile (Europe).zip|Exile|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Exile%20%28Europe%29.png|0
+amigacd32/Fears (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Fears%20%28Europe%29.png|0
+amigacd32/Fields of Glory (Europe) (En,Fr,De).zip|Fields of Glory|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Fields%20of%20Glory%20%28Europe%29%20%28En%2CFr%2CDe%29.png|0
+amigacd32/Fightin' Spirit (Europe) (En,De,It).zip|Fightin' Spirit|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Fightin%27%20Spirit%20%28Europe%29%20%28En%2CDe%2CIt%29.png|0
+amigacd32/Fire & Ice - The Daring Adventures of Cool Coyote (Europe) (En,Fr,De,It).zip|Fire & Ice: The Daring Adventures of Cool Coyote|https://images.igdb.com/igdb/image/upload/t_cover_big/co4yfc.jpg|0
+amigacd32/Fire Force (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Fire%20Force%20%28Europe%29.png|0
+amigacd32/Flink (Europe).zip|Flink|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Flink%20%28Europe%29.png|5
+amigacd32/Fly Harder (Europe).zip|Fly Harder|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Fly%20Harder%20%28Europe%29.png|0
+amigacd32/Frontier - Elite II (Europe).zip|Frontier: Elite II|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Frontier%20-%20Elite%20II%20%28Europe%29.png|18
+amigacd32/Fury of the Furries (Europe).zip|Fury of the Furries|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Fury%20of%20the%20Furries%20%28Europe%29.png|0
+amigacd32/Gamers' Delight (Europe) (En,De).zip|Gamers' Delight|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Gamers%27%20Delight%20%28Europe%29%20%28En%2CDe%29.png|0
+amigacd32/Global Effect (Europe).zip|Global Effect|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Global%20Effect%20%28Europe%29.png|0
+amigacd32/Gloom (Europe).zip|Gloom|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Gloom%20%28Europe%29.png|0
+amigacd32/Grandslam Gamer Gold Collection (Europe).zip|Grandslam Gamer Gold Collection|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Grandslam%20Gamer%20Gold%20Collection%20%28Europe%29.png|0
+amigacd32/Guardian (Europe) (Alt).zip|Guardian|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Guardian%20%28Europe%29%20%28Alt%29.png|0
+amigacd32/Guardian (Europe).zip|Guardian|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Guardian%20%28Europe%29.png|0
+amigacd32/Guinness Disc of Records, The - Second Edition (UK).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Guinness%20Disc%20of%20Records%2C%20The%20-%20Second%20Edition%20%28UK%29.png|0
+amigacd32/Gulp! (Europe) (En,Fr,De,Es,It).zip|Gulp!|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Gulp%21%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0
+amigacd32/Gunship 2000 (Europe).zip|Gunship 2000|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Gunship%202000%20%28Europe%29.png|5
+amigacd32/Heimdall 2 - Into the Hall of Worlds (Europe).zip|Heimdall 2: Into the Hall of Worlds|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Heimdall%202%20-%20Into%20the%20Hall%20of%20Worlds%20%28Europe%29.png|0
+amigacd32/HeroQuest II - Legacy of Sorasil (Europe) (En,Fr,De).zip|HeroQuest II: Legacy of Sorasil|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/HeroQuest%20II%20-%20Legacy%20of%20Sorasil%20%28Europe%29%20%28En%2CFr%2CDe%29.png|0
+amigacd32/Humans (Europe) (En,Fr,De,Es,It).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Humans%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0
+amigacd32/Humans 3 - Evolution - Lost in Time... (Europe).zip|Humans 3: Evolution - Lost in Time|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Humans%203%20-%20Evolution%20-%20Lost%20in%20Time...%20%28Europe%29.png|0
+amigacd32/Impossible Mission 2025 - The Special Edition (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Impossible%20Mission%202025%20-%20The%20Special%20Edition%20%28Europe%29.png|0
+amigacd32/International Karate + (Europe).zip|International Karate +|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/International%20Karate%20%2B%20%28Europe%29.png|33
+amigacd32/International Sensible Soccer - World Champions (Europe) (En,Fr,De,It).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/International%20Sensible%20Soccer%20-%20World%20Champions%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/James Pond 2 - Robocod (Europe).zip|James Pond 2: Codename - RoboCod|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/James%20Pond%202%20-%20Robocod%20%28Europe%29.png|33
+amigacd32/James Pond 3 - Operation Starfi5h (Europe) (Kixx).zip|James Pond 3: Operation Starfish|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/James%20Pond%203%20-%20Operation%20Starfi5h%20%28Europe%29%20%28Kixx%29.png|6
+amigacd32/James Pond 3 - Operation Starfi5h (Europe).zip|James Pond 3: Operation Starfish|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/James%20Pond%203%20-%20Operation%20Starfi5h%20%28Europe%29.png|6
+amigacd32/Jetstrike CD32 (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Jetstrike%20CD32%20%28Europe%29.png|0
+amigacd32/Jim Power in Mutant Planet (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Jim%20Power%20in%20Mutant%20Planet%20%28Europe%29.png|0
+amigacd32/John Barnes European Football (Europe) (En,Fr,De,Es,It).zip|John Barnes European Football|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/John%20Barnes%20European%20Football%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0
+amigacd32/Jungle Strike - The Sequel to Desert Strike (Europe).zip|Jungle Strike|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Jungle%20Strike%20-%20The%20Sequel%20to%20Desert%20Strike%20%28Europe%29.png|33
+amigacd32/Karaoke - Julsanger I (Sweden).zip|||0
+amigacd32/Kid Chaos (Europe).zip|Kid Chaos|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Kid%20Chaos%20%28Europe%29.png|0
+amigacd32/Kingpin - Arcade Sports Bowling (Europe) (En,Fr,De,It).zip|Kingpin: Arcade Sports Bowling|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Kingpin%20-%20Arcade%20Sports%20Bowling%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Labyrinth of Time, The (Europe).zip|The Labyrinth of Time|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Labyrinth%20of%20Time%2C%20The%20%28Europe%29.png|0
+amigacd32/Lamborghini - American Challenge (Europe).zip|Lamborghini: American Challenge|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Lamborghini%20-%20American%20Challenge%20%28Europe%29.png|7
+amigacd32/Last Ninja 3 (Europe).zip|Last Ninja 3|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Last%20Ninja%203%20%28Europe%29.png|7
+amigacd32/Legends (Europe) (En,Fr,De).zip|Legends|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Legends%20%28Europe%29%20%28En%2CFr%2CDe%29.png|0
+amigacd32/Liberation - Captive II (Europe) (Rev 1).zip|Liberation: Captive II|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Liberation%20-%20Captive%20II%20%28Europe%29%20%28Rev%201%29.png|0
+amigacd32/Liberation - Captive II (Europe) (Rev 2).zip|Liberation: Captive II|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Liberation%20-%20Captive%20II%20%28Europe%29%20%28Rev%202%29.png|0
+amigacd32/Liberation - Captive II (Europe) (Rev 3).zip|Liberation: Captive II|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Liberation%20-%20Captive%20II%20%28Europe%29%20%28Rev%203%29.png|0
+amigacd32/Liberation - Captive II (Europe).zip|Liberation: Captive II|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Liberation%20-%20Captive%20II%20%28Europe%29.png|0
+amigacd32/Litil Divil (Europe).zip|Litil Divil|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Litil%20Divil%20%28Europe%29.png|0
+amigacd32/Lost Vikings, The (Europe).zip|The Lost Vikings|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Lost%20Vikings%2C%20The%20%28Europe%29.png|0
+amigacd32/Magic Island (Czech).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Magic%20Island%20%28Czech%29.png|0
+amigacd32/Manchester United - Premier League Champions (Europe) (En,Fr,De,It) (Rev 1).zip|Manchester United Premier League Champions|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Manchester%20United%20-%20Premier%20League%20Champions%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29%20%28Rev%201%29.png|0
+amigacd32/Manchester United - Premier League Champions (Europe) (En,Fr,De,It).zip|Manchester United Premier League Champions|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Manchester%20United%20-%20Premier%20League%20Champions%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Marvin's Marvellous Adventure (Europe) (En,Fr,De,Es,It).zip|Marvin's Marvellous Adventure|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Marvin%27s%20Marvellous%20Adventure%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0
+amigacd32/Mean Arenas (Europe).zip|Mean Arenas|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Mean%20Arenas%20%28Europe%29.png|0
+amigacd32/Microcosm (Europe) (Alt).zip|Microcosm|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Microcosm%20%28Europe%29%20%28Alt%29.png|0
+amigacd32/Microcosm (Europe).zip|Microcosm|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Microcosm%20%28Europe%29.png|0
+amigacd32/Morph (Europe).zip|Morph|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Morph%20%28Europe%29.png|0
+amigacd32/Myth - History in the Making (Europe).zip|Myth: History in the Making|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Myth%20-%20History%20in%20the%20Making%20%28Europe%29.png|5
+amigacd32/Naughty Ones (Europe).zip|Naughty Ones|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Naughty%20Ones%20%28Europe%29.png|0
+amigacd32/Nick Faldos Championship Golf (Europe).zip|Nick Faldo's Championship Golf|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Nick%20Faldos%20Championship%20Golf%20%28Europe%29.png|0
+amigacd32/Nigel Mansell's World Championship (Europe) (Alt).zip|Nigel Mansell's World Championship|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Nigel%20Mansell%27s%20World%20Championship%20%28Europe%29%20%28Alt%29.png|9
+amigacd32/Nigel Mansell's World Championship (Europe).zip|Nigel Mansell's World Championship|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Nigel%20Mansell%27s%20World%20Championship%20%28Europe%29.png|9
+amigacd32/Overkill & Lunar-C (Europe).zip|Overkill & Lunar - C|https://images.igdb.com/igdb/image/upload/t_cover_big/o5miiojrwlhmcsmsji1t.jpg|0
+amigacd32/PGA European Tour (Europe).zip|PGA European Tour|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/PGA%20European%20Tour%20%28Europe%29.png|0
+amigacd32/Pierre Le Chef Is ... Out to Lunch (Europe).zip|Pierre le Chef is... Out to Lunch|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Pierre%20Le%20Chef%20Is%20...%20Out%20to%20Lunch%20%28Europe%29.png|3
+amigacd32/Pinball Fantasies (Europe).zip|Pinball Fantasies|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Pinball%20Fantasies%20%28Europe%29.png|20
+amigacd32/Pinball Illusions (Europe).zip|Pinball Illusions|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Pinball%20Illusions%20%28Europe%29.png|0
+amigacd32/Pirates! Gold (Europe) (En,De).zip|Pirates! Gold|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Pirates%21%20Gold%20%28Europe%29%20%28En%2CDe%29.png|16
+amigacd32/Power Drive (Europe) (En,Fr,De,Es,It).zip|Power Drive|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Power%20Drive%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0
+amigacd32/Power-Games (Europe) (En,De).zip|Power-Games|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Power-Games%20%28Europe%29%20%28En%2CDe%29.png|0
+amigacd32/Premiere (Europe).zip|Premiere|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Premiere%20%28Europe%29.png|0
+amigacd32/Prey - An Alien Encounter (Europe).zip|Prey: An Alien Encounter|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Prey%20-%20An%20Alien%20Encounter%20%28Europe%29.png|0
+amigacd32/Project-X & F17 Challenge (Europe) (En,Fr,De,It,Da) (v2.0).zip|Project-X Special Edition & F17 Challenge|https://images.igdb.com/igdb/image/upload/t_cover_big/cgwzjfywbukod0lypzhm.jpg|0
+amigacd32/Project-X & F17 Challenge (Europe) (En,Fr,De,It,Da).zip|Project-X Special Edition & F17 Challenge|https://images.igdb.com/igdb/image/upload/t_cover_big/cgwzjfywbukod0lypzhm.jpg|0
+amigacd32/Project-X & Ultimate Body Blows (Europe).zip|||0
+amigacd32/Projekt - Lila (Germany) (Rev 1).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Projekt%20-%20Lila%20%28Germany%29%20%28Rev%201%29.png|0
+amigacd32/Projekt - Lila (Germany).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Projekt%20-%20Lila%20%28Germany%29.png|0
+amigacd32/Quik the Thunder Rabbit (Europe).zip|Quik: The Thunder Rabbit|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Quik%20the%20Thunder%20Rabbit%20%28Europe%29.png|0
+amigacd32/Rise of the Robots (Europe).zip|Rise of the Robots|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Rise%20of%20the%20Robots%20%28Europe%29.png|11
+amigacd32/Roadkill (Europe) (Alt).zip|Roadkill|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Roadkill%20%28Europe%29%20%28Alt%29.png|0
+amigacd32/Roadkill (Europe).zip|Roadkill|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Roadkill%20%28Europe%29.png|0
+amigacd32/Ryder Cup - Johnnie Walker (Europe).zip|Ryder Cup: Johnnie Walker|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Ryder%20Cup%20-%20Johnnie%20Walker%20%28Europe%29.png|0
+amigacd32/Sabre Team (Europe) (En,Fr,De,Es,It).zip|Sabre Team|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Sabre%20Team%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0
+amigacd32/Seek and Destroy (Europe).zip|Seek & Destroy|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Seek%20and%20Destroy%20%28Europe%29.png|0
+amigacd32/Sensible Soccer - European Champions (Europe) (En,Fr,De,It).zip|Sensible Soccer: European Champions - 92/93 Edition|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Sensible%20Soccer%20-%20European%20Champions%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Seven Gates of Jambala, The (Europe).zip|The Seven Gates of Jambala|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Seven%20Gates%20of%20Jambala%2C%20The%20%28Europe%29.png|0
+amigacd32/Shadow Fighter (Europe).zip|Shadow Fighter|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Shadow%20Fighter%20%28Europe%29.png|0
+amigacd32/Sheer Delight (USA, Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Sheer%20Delight%20%28USA%2C%20Europe%29.png|0
+amigacd32/Simon the Sorcerer (Europe).zip|Simon the Sorcerer|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Simon%20the%20Sorcerer%20%28Europe%29.png|56
+amigacd32/Skeleton Krew (Europe).zip|Skeleton Krew|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Skeleton%20Krew%20%28Europe%29.png|0
+amigacd32/Sleepwalker (Europe).zip|Sleepwalker|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Sleepwalker%20%28Europe%29.png|0
+amigacd32/Soccer Kid (Europe) (En,Fr,De,Es,It).zip|Soccer Kid|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Soccer%20Kid%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|9
+amigacd32/Speedball 2 (Europe).zip|Speedball 2: Brutal Deluxe|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Speedball%202%20%28Europe%29.png|24
+amigacd32/Speris Legacy, The (Europe).zip|The Speris Legacy|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Speris%20Legacy%2C%20The%20%28Europe%29.png|0
+amigacd32/Sports - Football (USA).zip|Brutal Sports Football|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Sports%20-%20Football%20%28USA%29.png|0
+amigacd32/Striker (Europe).zip|Striker|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Striker%20%28Europe%29.png|0
+amigacd32/Strip Pot (Europe).zip|Strip Pot|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Strip%20Pot%20%28Europe%29.png|0
+amigacd32/Subwar 2050 (Europe) (En,Fr,De).zip|Subwar 2050|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Subwar%202050%20%28Europe%29%20%28En%2CFr%2CDe%29.png|0
+amigacd32/Summer Olympix (Europe).zip|Summer Olympix|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Summer%20Olympix%20%28Europe%29.png|0
+amigacd32/Super Methane Bros. (Europe) (Alt).zip|Super Methane Bros|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Super%20Methane%20Bros.%20%28Europe%29%20%28Alt%29.png|0
+amigacd32/Super Methane Bros. (Europe).zip|Super Methane Bros|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Super%20Methane%20Bros.%20%28Europe%29.png|0
+amigacd32/Super Putty (Europe).zip|Super Putty|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Super%20Putty%20%28Europe%29.png|0
+amigacd32/Super Skidmarks (Europe) (Alt).zip|Super Skidmarks|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Super%20Skidmarks%20%28Europe%29%20%28Alt%29.png|5
+amigacd32/Super Skidmarks (Europe).zip|Super Skidmarks|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Super%20Skidmarks%20%28Europe%29.png|5
+amigacd32/Super Stardust (Europe).zip|Super Stardust|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Super%20Stardust%20%28Europe%29.png|0
+amigacd32/Super Street Fighter II Turbo (Europe).zip|Super Street Fighter II Turbo|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Super%20Street%20Fighter%20II%20Turbo%20%28Europe%29.png|71
+amigacd32/Superfrog (Europe).zip|Superfrog|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Superfrog%20%28Europe%29.png|9
+amigacd32/Surf Ninjas (Europe).zip|Surf Ninjas|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Surf%20Ninjas%20%28Europe%29.png|0
+amigacd32/Syndicate (Europe) (En,Fr,It).zip|Syndicate|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Syndicate%20%28Europe%29%20%28En%2CFr%2CIt%29.png|0
+amigacd32/Theme Park (Europe) (En,Fr,De,It).zip|Theme Park|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Theme%20Park%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|108
+amigacd32/Top Gear 2 (Europe).zip|Top Gear 2|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Top%20Gear%202%20%28Europe%29.png|25
+amigacd32/Total Carnage (Europe).zip|Total Carnage|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Total%20Carnage%20%28Europe%29.png|10
+amigacd32/Trivial Pursuit - The CD32 Edition (Europe).zip|Trivial Pursuit: The CD32 Edition|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Trivial%20Pursuit%20-%20The%20CD32%20Edition%20%28Europe%29.png|0
+amigacd32/Trolls (Europe).zip|Trolls|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Trolls%20%28Europe%29.png|0
+amigacd32/UFO - Enemy Unknown (Europe) (En,Fr,De).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/UFO%20-%20Enemy%20Unknown%20%28Europe%29%20%28En%2CFr%2CDe%29.png|0
+amigacd32/Ultimate Body Blows (Europe).zip|Ultimate Body Blows|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Ultimate%20Body%20Blows%20%28Europe%29.png|0
+amigacd32/Universe (Europe) (En,Fr,De,It).zip|Universe|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Universe%20%28Europe%29%20%28En%2CFr%2CDe%2CIt%29.png|0
+amigacd32/Video Creator (Europe).zip||https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Video%20Creator%20%28Europe%29.png|0
+amigacd32/Vital Light (Europe) (Alt).zip|Vital Light|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Vital%20Light%20%28Europe%29%20%28Alt%29.png|0
+amigacd32/Vital Light (Europe).zip|Vital Light|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Vital%20Light%20%28Europe%29.png|0
+amigacd32/Wembley International Soccer (Europe).zip|Wembley International Soccer|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Wembley%20International%20Soccer%20%28Europe%29.png|0
+amigacd32/Whale's Voyage (Europe) (Rev 1).zip|Whale's Voyage|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Whale%27s%20Voyage%20%28Europe%29%20%28Rev%201%29.png|0
+amigacd32/Whale's Voyage (Europe).zip|Whale's Voyage|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Whale%27s%20Voyage%20%28Europe%29.png|0
+amigacd32/Whale's Voyage (Germany).zip|Whale's Voyage|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Whale%27s%20Voyage%20%28Germany%29.png|0
+amigacd32/Wild Cup Soccer (Europe).zip|Wild Cup Soccer|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Wild%20Cup%20Soccer%20%28Europe%29.png|0
+amigacd32/Worms (Europe) (En,Fr,De).zip|Worms|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Worms%20%28Europe%29%20%28En%2CFr%2CDe%29.png|208
+amigacd32/Zool - Ninja of the Nth Dimension (Europe).zip|Zool: Ninja of the Nth Dimension|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Zool%20-%20Ninja%20of%20the%20Nth%20Dimension%20%28Europe%29.png|32
+amigacd32/Zool 2 (Europe) (Alt).zip|Zool 2|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Zool%202%20%28Europe%29%20%28Alt%29.png|8
+amigacd32/Zool 2 (Europe).zip|Zool 2|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_CD32/master/Named_Boxarts/Zool%202%20%28Europe%29.png|8
+gameandwatch/Armor Battle (Mattel Electronics).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Armor%20Battle%20%28Mattel%20Electronics%29.png|0
+gameandwatch/Banana (VTech, Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Banana%20%28VTech%2C%20Time%20_%20Fun%29.png|0
+gameandwatch/Baseball (VTech, Explorer Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Baseball%20%28VTech%2C%20Explorer%20Time%20_%20Fun%29.png|0
+gameandwatch/Bomb Fight (VTech, Mini Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Bomb%20Fight%20%28VTech%2C%20Mini%20Time%20_%20Fun%29.png|0
+gameandwatch/Chicky Woggy (VTech, Arcade Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Chicky%20Woggy%20%28VTech%2C%20Arcade%20Time%20_%20Fun%29.png|0
+gameandwatch/Condor (VTech, Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Condor%20%28VTech%2C%20Time%20_%20Fun%29.png|0
+gameandwatch/Crazy Chewy (VTech, Electronic Tini-Arcade).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Crazy%20Chewy%20%28VTech%2C%20Electronic%20Tini-Arcade%29.png|0
+gameandwatch/Defendo (VTech, Explorer Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Defendo%20%28VTech%2C%20Explorer%20Time%20_%20Fun%29.png|0
+gameandwatch/Donkey Kong (Coleco).mgw|Donkey Kong|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Donkey%20Kong%20%28Coleco%29.png|7
+gameandwatch/Donkey Kong (Nintendo, Multi Screen).mgw|Donkey Kong|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Donkey%20Kong%20%28Nintendo%2C%20Multi%20Screen%29.png|7
+gameandwatch/Donkey Kong Circus (Nintendo, Panorama Screen).mgw|Donkey Kong Circus|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Donkey%20Kong%20Circus%20%28Nintendo%2C%20Panorama%20Screen%29.png|0
+gameandwatch/Donkey Kong Jr. (Nintendo, Panorama Screen).mgw|Donkey Kong Jr.|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Donkey%20Kong%20Jr.%20%28Nintendo%2C%20Panorama%20Screen%29.png|4
+gameandwatch/Donkey Kong Jr. (Nintendo, Table Top).mgw|Donkey Kong Jr.|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Donkey%20Kong%20Jr.%20%28Nintendo%2C%20Table%20Top%29.png|4
+gameandwatch/Dungeons & Dragons Computer Fantasy Game (Mattel Electronics, Arcade Action Series).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Dungeons%20_%20Dragons%20Computer%20Fantasy%20Game%20%28Mattel%20Electronics%2C%20Arcade%20Action%20Series%29.png|0
+gameandwatch/Egg (Nintendo, Wide Screen).mgw|Egg|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Egg%20%28Nintendo%2C%20Wide%20Screen%29.png|0
+gameandwatch/Engine Room (VTech, Explorer Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Engine%20Room%20%28VTech%2C%20Explorer%20Time%20_%20Fun%29.png|0
+gameandwatch/Escape (VTech, Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Escape%20%28VTech%2C%20Time%20_%20Fun%29.png|0
+gameandwatch/Explorers of Space (Elektronika).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Explorers%20of%20Space%20%28Elektronika%29.png|0
+gameandwatch/Fowling (Elektronika).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Fowling%20%28Elektronika%29.png|0
+gameandwatch/Frog Boaster (Elektronika).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Frog%20Boaster%20%28Elektronika%29.png|0
+gameandwatch/Galaxy II (Epoch).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Galaxy%20II%20%28Epoch%29.png|0
+gameandwatch/Grab Man (unknown manufacturer, Game & Time).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Grab%20Man%20%28unknown%20manufacturer%2C%20Game%20_%20Time%29.png|0
+gameandwatch/Hippo Teeth (VTech, Sporty Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Hippo%20Teeth%20%28VTech%2C%20Sporty%20Time%20_%20Fun%29.png|0
+gameandwatch/Las Vegas (Bandai, LCD Game Digital).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Las%20Vegas%20%28Bandai%2C%20LCD%20Game%20Digital%29.png|0
+gameandwatch/Lifeboat (Nintendo, Multi Screen).mgw|Lifeboat|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Lifeboat%20%28Nintendo%2C%20Multi%20Screen%29.png|0
+gameandwatch/Mario Bros. (Nintendo, Multi Screen).mgw|Mario Bros.|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Mario%20Bros.%20%28Nintendo%2C%20Multi%20Screen%29.png|0
+gameandwatch/Mickey Mouse (Nintendo, Panorama Screen).mgw|Mickey Mouse|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Mickey%20Mouse%20%28Nintendo%2C%20Panorama%20Screen%29.png|0
+gameandwatch/Monkey (VTech, Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Monkey%20%28VTech%2C%20Time%20_%20Fun%29.png|0
+gameandwatch/Monkey Jump (VTech, Arcade Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Monkey%20Jump%20%28VTech%2C%20Arcade%20Time%20_%20Fun%29.png|0
+gameandwatch/Motor Cross (Queentex).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Motor%20Cross%20%28Queentex%29.png|0
+gameandwatch/Pac Man (Tomytronic).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Pac%20Man%20%28Tomytronic%29.png|0
+gameandwatch/Pancake (VTech, Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Pancake%20%28VTech%2C%20Time%20_%20Fun%29.png|0
+gameandwatch/Parachute (Nintendo, Wide Screen).mgw|Parachute|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Parachute%20%28Nintendo%2C%20Wide%20Screen%29.png|0
+gameandwatch/Pirate (VTech, Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Pirate%20%28VTech%2C%20Time%20_%20Fun%29.png|0
+gameandwatch/Roller Coaster (VTech, Explorer Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Roller%20Coaster%20%28VTech%2C%20Explorer%20Time%20_%20Fun%29.png|0
+gameandwatch/Safari (VTech, Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Safari%20%28VTech%2C%20Time%20_%20Fun%29.png|0
+gameandwatch/Sleep Walker (VTech, Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Sleep%20Walker%20%28VTech%2C%20Time%20_%20Fun%29.png|0
+gameandwatch/Snoopy (Nintendo, Panorama Screen).mgw|Snoopy|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Snoopy%20%28Nintendo%2C%20Panorama%20Screen%29.png|0
+gameandwatch/Snoopy Tennis (Nintendo, Wide Screen).mgw|Snoopy Tennis|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Snoopy%20Tennis%20%28Nintendo%2C%20Wide%20Screen%29.png|0
+gameandwatch/Sub Chase (Mattel Electronics).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Sub%20Chase%20%28Mattel%20Electronics%29.png|0
+gameandwatch/Tennis Menace (VTech, Sporty Time & Fun).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Tennis%20Menace%20%28VTech%2C%20Sporty%20Time%20_%20Fun%29.png|0
+gameandwatch/Towering Rescue (Gakken, LCD Card Game).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Towering%20Rescue%20%28Gakken%2C%20LCD%20Card%20Game%29.png|0
+gameandwatch/Tron (Tomytronic).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Tron%20%28Tomytronic%29.png|0
+gameandwatch/Turtle Bridge (Nintendo, Wide Screen).mgw|Turtle Bridge|https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Turtle%20Bridge%20%28Nintendo%2C%20Wide%20Screen%29.png|0
+gameandwatch/Wild Man Jump (VTech, Electronic Tini-Arcade).mgw||https://raw.githubusercontent.com/libretro-thumbnails/Handheld_Electronic_Game/master/Named_Boxarts/Wild%20Man%20Jump%20%28VTech%2C%20Electronic%20Tini-Arcade%29.png|0

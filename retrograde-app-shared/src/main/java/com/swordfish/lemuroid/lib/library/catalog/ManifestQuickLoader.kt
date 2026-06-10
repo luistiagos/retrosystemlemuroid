@@ -73,7 +73,12 @@ class ManifestQuickLoader(
         //   v14  jaguar (Atari Jaguar) added; JAGUAR system + Virtual Jaguar core registered
         //   v15  odyssey2 (Magnavox Odyssey2) added; ODYSSEY2 system + O2EM core registered
         //   v16  neocd (SNK Neo Geo CD) added; NEOCD system + NeoCD core registered
-        private const val MANIFEST_SCHEMA_VERSION = 16
+        //   v17  amiga (Commodore Amiga) added; AMIGA system + PUAE core registered
+        //   v18  amiga1200/amigacd32/amigacdtv added (PUAE model variants of the Amiga)
+        //   v19  pcfx (NEC PC-FX) added; PCFX system + Beetle PC-FX core registered
+        //   v20  gw (Nintendo Game & Watch) added
+        //   v21  atarist (Atari ST) added; ATARI_ST system + Hatari core registered
+        private const val MANIFEST_SCHEMA_VERSION = 21
 
         // catalog_manifest.txt uses abbreviated folder names that differ from
         // Lemuroid's SystemID.dbname. The mapping (manifest folder → dbname) lives in

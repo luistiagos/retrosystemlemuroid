@@ -372,6 +372,61 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "FF3ABC59",
                     "neocd/uni-bioscd.rom",
                 ),
+                // Commodore Amiga Kickstart ROMs (PUAE) — files in system/ root.
+                // PUAE picks the matching Kickstart per emulated model. MD5/CRC32 computed
+                // from the files hosted on the HuggingFace dataset.
+                Bios(
+                    "kick34005.A500",
+                    "82A21C1890CAE844B3DF741F2762D48D",
+                    "Amiga Kickstart v1.3 (A500/A2000/CDTV)",
+                    SystemID.AMIGA,
+                    "C4F0F55F",
+                    "kick34005.A500",
+                ),
+                Bios(
+                    "kick40068.A1200",
+                    "646773759326FBAC3B2311FD8C8793EE",
+                    "Amiga Kickstart v3.1 (A1200)",
+                    SystemID.AMIGA,
+                    "1483A091",
+                    "kick40068.A1200",
+                ),
+                // Amiga CD32 — Kickstart 3.1 + extended (CD) ROM, both in system/ root.
+                Bios(
+                    "kick40060.CD32",
+                    "5F8924D013DD57A89CF349F4CDEDC6B1",
+                    "Amiga CD32 Kickstart v3.1",
+                    SystemID.AMIGA_CD32,
+                    "1E62D4A5",
+                    "kick40060.CD32",
+                ),
+                Bios(
+                    "kick40060.CD32.ext",
+                    "BB72565701B1B6FAECE07D68EA5DA639",
+                    "Amiga CD32 extended ROM",
+                    SystemID.AMIGA_CD32,
+                    "87746BE2",
+                    "kick40060.CD32.ext",
+                ),
+                // Amiga CDTV — extended (CD) ROM; pairs with the A500 KS 1.3 (kick34005.A500).
+                Bios(
+                    "kick34005.CDTV",
+                    "89DA1838A24460E4B93F4F0C5D92D48D",
+                    "Amiga CDTV extended ROM",
+                    SystemID.AMIGA_CDTV,
+                    "42BAA124",
+                    "kick34005.CDTV",
+                ),
+                // NEC PC-FX BIOS (Beetle PC-FX) — file in system/ root as pcfx.rom.
+                // MD5/CRC32 computed from the file hosted on the HuggingFace dataset.
+                Bios(
+                    "pcfx.rom",
+                    "08E36EDBEA28A017F79F8D4F7FF9B6D7",
+                    "NEC PC-FX BIOS",
+                    SystemID.PCFX,
+                    "76FFB97A",
+                    "pcfx.rom",
+                ),
             )
 
         fun biosEntryFor(fileName: String): Bios? =

@@ -74,7 +74,11 @@ if (usePlayDynamicFeatures()) {
         ":lemuroid_core_yabasanshiro",
         ":lemuroid_core_virtualjaguar",
         ":lemuroid_core_o2em",
-        ":lemuroid_core_neocd"
+        ":lemuroid_core_neocd",
+        ":lemuroid_core_puae",
+        ":lemuroid_core_mednafen_pcfx",
+        ":lemuroid_core_gw",
+        ":lemuroid_core_hatari"
     )
 
     project(":lemuroid_core_opera").projectDir = File("lemuroid-cores/lemuroid_core_opera")
@@ -92,4 +96,8 @@ if (usePlayDynamicFeatures()) {
     project(":lemuroid_core_virtualjaguar").projectDir = File("lemuroid-cores/lemuroid_core_virtualjaguar")
     project(":lemuroid_core_o2em").projectDir = File("lemuroid-cores/lemuroid_core_o2em")
     project(":lemuroid_core_neocd").projectDir = File("lemuroid-cores/lemuroid_core_neocd")
+    project(":lemuroid_core_puae").projectDir = File("lemuroid-cores/lemuroid_core_puae")
+    project(":lemuroid_core_mednafen_pcfx").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_pcfx")
+    project(":lemuroid_core_gw").projectDir = File("lemuroid-cores/lemuroid_core_gw")
+    project(":lemuroid_core_hatari").projectDir = File("lemuroid-cores/lemuroid_core_hatari")
 }

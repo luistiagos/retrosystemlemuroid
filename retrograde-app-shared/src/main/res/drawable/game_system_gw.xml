@@ -1,0 +1,38 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+  <!-- Red background card -->
+  <path
+      android:fillColor="#C62828"
+      android:pathData="M10,10 L90,10 L90,90 L10,90 Z"/>
+  <!-- Screen rectangle (grey) -->
+  <path
+      android:fillColor="#ECEFF1"
+      android:pathData="M25,20 L75,20 L75,55 L25,55 Z"/>
+  <!-- Screen inner (dark LCD) -->
+  <path
+      android:fillColor="#37474F"
+      android:pathData="M28,23 L72,23 L72,52 L28,52 Z"/>
+  <!-- D-pad horizontal bar -->
+  <path
+      android:fillColor="#ECEFF1"
+      android:pathData="M18,67 L36,67 L36,73 L18,73 Z"/>
+  <!-- D-pad vertical bar -->
+  <path
+      android:fillColor="#ECEFF1"
+      android:pathData="M24,61 L30,61 L30,79 L24,79 Z"/>
+  <!-- Button A (red circle) -->
+  <path
+      android:fillColor="#FFEB3B"
+      android:pathData="M64,70 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0"/>
+  <!-- Button B (yellow circle) -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M79,65 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0"/>
+  <!-- Nintendo label (white) -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M38,59 L62,59 L62,63 L38,63 Z"/>
+</vector>

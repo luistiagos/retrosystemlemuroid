@@ -18,6 +18,71 @@ object GameCacheUtils {
     val DISC_IMAGE_EXTENSIONS = setOf("cue", "gdi", "iso", "chd")
 
     /**
+     * Floppy-disk image extensions. A zip holding two or more of these is a
+     * multi-disk set (e.g. an Amiga game spread across several .adf files) that
+     * must be turned into an .m3u so the core exposes in-game disk swapping
+     * instead of loading only the first disk.
+     */
+    val FLOPPY_DISK_EXTENSIONS = setOf("adf", "adz", "dms", "ipf", "fdi")
+
+    /**
+     * If [zipFile] contains two or more floppy-disk images, extracts all of them
+     * into a per-game cache directory, writes a sibling `.m3u` playlist (sorted by
+     * name so "Disk 1" boots first) and returns that `.m3u`. The core (PUAE) reads
+     * the `.m3u`, resolves the disks relative to it, and registers every disk with
+     * its disk-control interface — which is what makes Lemuroid's "Change Disk"
+     * option appear. Returns null when [zipFile] is not a multi-floppy set, so the
+     * caller falls back to its normal single-entry handling.
+     */
+    fun extractMultiFloppyM3u(
+        folderName: String,
+        context: Context,
+        game: Game,
+        zipFile: File,
+    ): File? {
+        val floppyEntryNames =
+            ZipFile(zipFile).use { zf ->
+                zf.entries().asSequence()
+                    .filter {
+                        !it.isDirectory &&
+                            it.name.substringAfterLast('.', "").lowercase() in FLOPPY_DISK_EXTENSIONS
+                    }
+                    .map { it.name }
+                    .toList()
+            }
+        if (floppyEntryNames.size < 2) return null
+
+        val baseName = zipFile.nameWithoutExtension
+        val outDir = File(getCacheDirForGame(folderName, game, context), baseName)
+        outDir.mkdirs()
+
+        ZipFile(zipFile).use { zf ->
+            floppyEntryNames.forEach { entryName ->
+                // Flatten any internal directory structure.
+                val dest = File(outDir, File(entryName).name)
+                if (!dest.exists() || dest.length() == 0L) {
+                    zf.getInputStream(zf.getEntry(entryName)).use { input ->
+                        dest.outputStream().use { input.copyTo(it) }
+                    }
+                }
+            }
+        }
+
+        val disks =
+            outDir.listFiles()
+                ?.filter { it.isFile && it.extension.lowercase() in FLOPPY_DISK_EXTENSIONS }
+                ?.sortedBy { it.name.lowercase() }
+                ?: return null
+        if (disks.size < 2) return null
+
+        val m3u = File(outDir, "$baseName.m3u")
+        if (!m3u.exists() || m3u.length() == 0L) {
+            m3u.writeText(disks.joinToString(separator = "\n") { it.name } + "\n")
+        }
+        return m3u
+    }
+
+    /**
      * Priority order for selecting the main playable file inside an extracted
      * multi-disc directory.  .cue and .gdi are the preferred entry points;
      * .iso and .chd are single-file formats that work without a companion sheet.

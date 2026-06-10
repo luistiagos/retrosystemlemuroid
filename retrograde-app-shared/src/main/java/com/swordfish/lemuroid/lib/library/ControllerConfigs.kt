@@ -774,4 +774,81 @@ object ControllerConfigs {
                     TILT_CONFIGURATION_CROSS,
                 ),
         )
+
+    val PCFX =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.PCFX,
+            mergeDPADAndLeftStickEvents = true,
+            // Beetle PC-FX registers the pad via SET_CONTROLLER_INFO literally as
+            // "PCFX Joypad" (RETRO_DEVICE_JOYPAD). Matching it forces
+            // setControllerType(port, RETRO_DEVICE_JOYPAD) so input is processed.
+            libretroDescriptor = "PCFX Joypad",
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_L_R,
+                ),
+        )
+
+    val AMIGA =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.AMIGA,
+            // PUAE initialises every port to RETRO_DEVICE_NONE (retro_devices[] = {0}) and gates
+            // BOTH the digital joystick (is_retropad) AND the RetroPad hotkeys — including the
+            // default Select -> TOGGLE_VKBD that brings up the virtual keyboard — on the port
+            // device being a recognised PUAE pad (libretro-mapper.c is_retropad + the hotkey
+            // loop). Without an explicit setControllerType the port stays NONE, so only the
+            // un-gated analog->mouse path (puae_analogmouse="both") responds: that is the
+            // "only the stick works, buttons/keyboard dead" bug on Amiga/1200/CDTV/CD32.
+            // We match PUAE's "RetroPad" descriptor (RETRO_DEVICE_PUAE_JOYPAD) rather than
+            // "Automatic" (RETRO_DEVICE_JOYPAD == 1): id 1 is the libretro DEFAULT device, which
+            // the frontend may treat as a no-op and never forward to the core, leaving the port
+            // at NONE. "RetroPad" is a distinct subclass id, so setControllerType always takes
+            // effect, and is_retropad() returns true unconditionally for it. This enables the
+            // joystick + fire buttons and the Select-toggled virtual keyboard.
+            libretroDescriptor = "RetroPad",
+            allowTouchRotation = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                    TILT_CONFIGURATION_ANALOG_LEFT,
+                    TILT_CONFIGURATION_L_R,
+                ),
+        )
+
+    val ATARI_ST =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.ATARI_ST,
+            mergeDPADAndLeftStickEvents = true,
+            // Hatari does NOT call SET_CONTROLLER_INFO and defaults to RETRO_DEVICE_JOYPAD,
+            // so no libretroDescriptor override is needed.
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
+
+    val GAME_WATCH =
+        ControllerConfig(
+            "default",
+            R.string.controller_default,
+            TouchControllerID.GAME_WATCH,
+            // gw core does NOT call SET_CONTROLLER_INFO and defaults to RETRO_DEVICE_JOYPAD,
+            // so no libretroDescriptor override is needed.
+            mergeDPADAndLeftStickEvents = true,
+            tiltConfigurations =
+                listOf(
+                    TILT_CONFIGURATION_DISABLED,
+                    TILT_CONFIGURATION_CROSS,
+                ),
+        )
 }

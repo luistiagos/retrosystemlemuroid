@@ -35,6 +35,12 @@ object HeavySystemFilter {
         SystemID.DREAMCAST,    // Flycast – moderate-heavy
         SystemID.THREE_DO,     // Opera – moderate-heavy
         SystemID.SATURN,       // YabaSanshiro – moderate-heavy
+        SystemID.AMIGA,        // PUAE – moderate
+        SystemID.AMIGA_1200,   // PUAE (AGA) – moderate
+        SystemID.AMIGA_CD32,   // PUAE (CD32) – moderate
+        SystemID.AMIGA_CDTV,   // PUAE (CDTV) – moderate
+        SystemID.PCFX,         // Beetle PC-FX – moderate
+        SystemID.ATARI_ST,     // Hatari – moderate (68000-based computer)
     )
 
     /** All systems that may be excluded on some device tier. */

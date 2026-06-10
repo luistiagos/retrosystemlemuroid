@@ -164,4 +164,18 @@
     <string name="game_system_title_odyssey2">Magnavox Odyssey 2</string>
     <string name="game_system_abbr_neocd">Neo Geo CD</string>
     <string name="game_system_title_neocd">Neo Geo CD</string>
+    <string name="game_system_abbr_amiga">Amiga</string>
+    <string name="game_system_title_amiga">Commodore Amiga</string>
+    <string name="game_system_abbr_amiga1200">Amiga 1200</string>
+    <string name="game_system_title_amiga1200">Commodore Amiga 1200</string>
+    <string name="game_system_abbr_amigacd32">CD32</string>
+    <string name="game_system_title_amigacd32">Amiga CD32</string>
+    <string name="game_system_abbr_amigacdtv">CDTV</string>
+    <string name="game_system_title_amigacdtv">Commodore CDTV</string>
+    <string name="game_system_abbr_pcfx">PC-FX</string>
+    <string name="game_system_title_pcfx">NEC PC-FX</string>
+    <string name="game_system_abbr_gw">G&amp;W</string>
+    <string name="game_system_title_gw">Nintendo Game &amp; Watch</string>
+    <string name="game_system_abbr_atarist">Atari ST</string>
+    <string name="game_system_title_atarist">Atari ST</string>
 </resources>

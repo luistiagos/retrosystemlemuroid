@@ -73,4 +73,11 @@ enum class SystemID(val dbname: String) {
     JAGUAR("jaguar"),
     ODYSSEY2("odyssey2"),
     NEOCD("neocd"),
+    AMIGA("amiga"),
+    AMIGA_1200("amiga1200"),
+    AMIGA_CD32("amigacd32"),
+    AMIGA_CDTV("amigacdtv"),
+    PCFX("pcfx"),
+    GAME_WATCH("gw"),
+    ATARI_ST("atarist"),
 }

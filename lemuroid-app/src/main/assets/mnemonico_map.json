@@ -54,5 +54,12 @@
   "saturn": "saturn",
   "jaguar": "jaguar",
   "odyssey2": "odyssey2",
-  "neocd": "neocd"
+  "neocd": "neocd",
+  "amiga": "amiga500",
+  "amiga1200": "amiga1200",
+  "amigacd32": "amigacd32",
+  "amigacdtv": "amigacdtv",
+  "pcfx": "pcfx",
+  "gw": "gw",
+  "atarist": "atarist"
 }

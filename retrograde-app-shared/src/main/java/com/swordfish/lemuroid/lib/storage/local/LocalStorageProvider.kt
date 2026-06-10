@@ -104,6 +104,13 @@ class LocalStorageProvider(
             return originalFile
         }
 
+        // Multi-disk floppy sets (e.g. Amiga games with several .adf in one zip):
+        // extract every disk and build an .m3u so the core exposes disk swapping
+        // instead of loading only the first disk. No-op for single-disk / non-floppy
+        // zips, which fall through to the regular single-entry extraction below.
+        GameCacheUtils.extractMultiFloppyM3u(LOCAL_STORAGE_CACHE_SUBFOLDER, context, game, originalFile)
+            ?.let { return it }
+
         val entryName = resolveZipEntryName(originalFile, game) ?: return originalFile
         val cacheFile = GameCacheUtils.getCacheFileForGame(
             LOCAL_STORAGE_CACHE_SUBFOLDER, context, game, fileName = File(entryName).name,

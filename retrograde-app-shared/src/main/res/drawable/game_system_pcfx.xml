@@ -3,26 +3,20 @@
     android:height="100dp"
     android:viewportWidth="100"
     android:viewportHeight="100">
-    <!-- Neo Geo CD — gold compact disc on dark -->
+    <!-- NEC PC-FX — teal compact disc on dark (CD-based console) -->
     <path
-        android:fillColor="#161618"
+        android:fillColor="#15171B"
         android:pathData="M12,12 L88,12 L88,88 L12,88 Z" />
     <!-- Disc body -->
     <path
-        android:fillColor="#E0A92A"
+        android:fillColor="#2AA9A0"
         android:pathData="M20,50 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0 Z" />
     <!-- Inner sheen ring -->
     <path
-        android:fillColor="#F2CE63"
+        android:fillColor="#67CFC7"
         android:pathData="M33,50 a17,17 0 1,0 34,0 a17,17 0 1,0 -34,0 Z" />
     <!-- Center hub -->
     <path
-        android:fillColor="#161618"
+        android:fillColor="#15171B"
         android:pathData="M42,50 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 Z" />
-    <!-- Neo Geo red accent slash -->
-    <path
-        android:strokeColor="#C8161D"
-        android:strokeWidth="4"
-        android:fillColor="#00000000"
-        android:pathData="M30,30 L46,42" />
 </vector>

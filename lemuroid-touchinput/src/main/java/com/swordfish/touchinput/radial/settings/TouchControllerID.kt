@@ -22,6 +22,14 @@ import com.swordfish.touchinput.radial.layouts.JaguarLeft
 import com.swordfish.touchinput.radial.layouts.JaguarRight
 import com.swordfish.touchinput.radial.layouts.Odyssey2Left
 import com.swordfish.touchinput.radial.layouts.Odyssey2Right
+import com.swordfish.touchinput.radial.layouts.AmigaLeft
+import com.swordfish.touchinput.radial.layouts.AmigaRight
+import com.swordfish.touchinput.radial.layouts.AtariSTLeft
+import com.swordfish.touchinput.radial.layouts.AtariSTRight
+import com.swordfish.touchinput.radial.layouts.PCFXLeft
+import com.swordfish.touchinput.radial.layouts.PCFXRight
+import com.swordfish.touchinput.radial.layouts.GameWatchLeft
+import com.swordfish.touchinput.radial.layouts.GameWatchRight
 import com.swordfish.touchinput.radial.layouts.Genesis6Left
 import com.swordfish.touchinput.radial.layouts.Genesis6Right
 import com.swordfish.touchinput.radial.layouts.ThreeDOLeft
@@ -132,6 +140,10 @@ enum class TouchControllerID {
     SATURN,
     JAGUAR,
     ODYSSEY2,
+    AMIGA,
+    PCFX,
+    GAME_WATCH,
+    ATARI_ST,
     ;
 
     class Config(
@@ -404,6 +416,30 @@ enum class TouchControllerID {
                     Config(
                         { modifier, settings -> Odyssey2Left(modifier, settings) },
                         { modifier, settings -> Odyssey2Right(modifier, settings) },
+                    )
+
+                AMIGA ->
+                    Config(
+                        { modifier, settings -> AmigaLeft(modifier, settings) },
+                        { modifier, settings -> AmigaRight(modifier, settings) },
+                    )
+
+                PCFX ->
+                    Config(
+                        { modifier, settings -> PCFXLeft(modifier, settings) },
+                        { modifier, settings -> PCFXRight(modifier, settings) },
+                    )
+
+                GAME_WATCH ->
+                    Config(
+                        { modifier, settings -> GameWatchLeft(modifier, settings) },
+                        { modifier, settings -> GameWatchRight(modifier, settings) },
+                    )
+
+                ATARI_ST ->
+                    Config(
+                        { modifier, settings -> AtariSTLeft(modifier, settings) },
+                        { modifier, settings -> AtariSTRight(modifier, settings) },
                     )
             }
         }

@@ -47,4 +47,8 @@
     <string name="core_name_virtualjaguar" translatable="false">virtualjaguar</string>
     <string name="core_name_o2em" translatable="false">o2em</string>
     <string name="core_name_neocd" translatable="false">neocd</string>
+    <string name="core_name_puae" translatable="false">puae</string>
+    <string name="core_name_mednafen_pcfx" translatable="false">mednafen_pcfx</string>
+    <string name="core_name_gw" translatable="false">gw</string>
+    <string name="core_name_hatari" translatable="false">hatari</string>
 </resources>

@@ -2663,6 +2663,242 @@ data class GameSystem(
                     supportedExtensions = listOf("cue", "chd"),
                     hasMultiDiskSupport = false,
                 ),
+                GameSystem(
+                    SystemID.AMIGA,
+                    "Commodore - Amiga",
+                    R.string.game_system_title_amiga,
+                    R.string.game_system_abbr_amiga,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.PUAE,
+                            // PUAE needs a Kickstart ROM in system/. Both A500 (KS 1.3) and
+                            // A1200 (KS 3.1) are required so OCS/ECS and AGA titles both run.
+                            // Auto-downloaded from the HuggingFace BIOS dataset.
+                            requiredBIOSFiles = listOf("kick34005.A500", "kick40068.A1200"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.AMIGA),
+                                    1 to arrayListOf(ControllerConfigs.AMIGA),
+                                ),
+                            // Analog sticks drive the Amiga mouse; map their press (L3/R3) to the
+                            // mouse buttons so mouse-driven intros/cracktros and point-and-click
+                            // games (e.g. Workbench, Simon the Sorcerer) are usable from touch.
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("puae_mapper_l3", "MOUSE_LEFT_BUTTON"),
+                                    CoreVariable("puae_mapper_r3", "MOUSE_RIGHT_BUTTON"),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = true,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    // Amiga-specific extensions are safe as unique; .m3u handles multi-floppy sets.
+                    uniqueExtensions =
+                        listOf("adf", "adz", "dms", "fdi", "ipf", "hdf", "hdz", "uae", "lha", "rp9"),
+                    supportedExtensions =
+                        listOf(
+                            "adf", "adz", "dms", "fdi", "ipf", "hdf", "hdz", "uae", "lha", "rp9",
+                            "cue", "ccd", "iso", "chd", "m3u",
+                        ),
+                    hasMultiDiskSupport = true,
+                ),
+                // Amiga 1200 (AGA) — same PUAE core, forced to the A1200 model. Shares the
+                // Amiga touch layout. Unique extensions stay on the base "amiga" system;
+                // these model-specific systems are folder-scanned (amiga1200/, etc.).
+                GameSystem(
+                    SystemID.AMIGA_1200,
+                    "Commodore - Amiga",
+                    R.string.game_system_title_amiga1200,
+                    R.string.game_system_abbr_amiga1200,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.PUAE,
+                            requiredBIOSFiles = listOf("kick40068.A1200"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.AMIGA),
+                                    1 to arrayListOf(ControllerConfigs.AMIGA),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("puae_model", "A1200"),
+                                    CoreVariable("puae_mapper_l3", "MOUSE_LEFT_BUTTON"),
+                                    CoreVariable("puae_mapper_r3", "MOUSE_RIGHT_BUTTON"),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions =
+                        listOf(
+                            "adf", "adz", "dms", "fdi", "ipf", "hdf", "hdz", "uae", "lha", "rp9",
+                            "cue", "ccd", "iso", "chd", "m3u",
+                        ),
+                    hasMultiDiskSupport = true,
+                ),
+                // Amiga CD32 — PUAE forced to the CD32 model (CD-based console gamepad).
+                GameSystem(
+                    SystemID.AMIGA_CD32,
+                    "Commodore - CD32",
+                    R.string.game_system_title_amigacd32,
+                    R.string.game_system_abbr_amigacd32,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.PUAE,
+                            requiredBIOSFiles = listOf("kick40060.CD32", "kick40060.CD32.ext"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.AMIGA),
+                                    1 to arrayListOf(ControllerConfigs.AMIGA),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("puae_model", "CD32"),
+                                    CoreVariable("puae_mapper_l3", "MOUSE_LEFT_BUTTON"),
+                                    CoreVariable("puae_mapper_r3", "MOUSE_RIGHT_BUTTON"),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("cue", "ccd", "nrg", "mds", "iso", "chd", "m3u"),
+                    hasMultiDiskSupport = false,
+                ),
+                // Amiga CDTV — PUAE forced to the CDTV model (CD-based, A500-class).
+                GameSystem(
+                    SystemID.AMIGA_CDTV,
+                    "Commodore - CDTV",
+                    R.string.game_system_title_amigacdtv,
+                    R.string.game_system_abbr_amigacdtv,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.PUAE,
+                            requiredBIOSFiles = listOf("kick34005.A500", "kick34005.CDTV"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.AMIGA),
+                                    1 to arrayListOf(ControllerConfigs.AMIGA),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("puae_model", "CDTV"),
+                                    CoreVariable("puae_mapper_l3", "MOUSE_LEFT_BUTTON"),
+                                    CoreVariable("puae_mapper_r3", "MOUSE_RIGHT_BUTTON"),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("cue", "ccd", "nrg", "mds", "iso", "chd", "m3u"),
+                    hasMultiDiskSupport = false,
+                ),
+                GameSystem(
+                    SystemID.PCFX,
+                    "NEC - PC-FX",
+                    R.string.game_system_title_pcfx,
+                    R.string.game_system_abbr_pcfx,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.MEDNAFEN_PCFX,
+                            // Beetle PC-FX requires the console BIOS (pcfx.rom) in system/ root.
+                            // Auto-downloaded from the HuggingFace BIOS dataset.
+                            requiredBIOSFiles = listOf("pcfx.rom"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.PCFX),
+                                    1 to arrayListOf(ControllerConfigs.PCFX),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("cue", "ccd", "toc", "chd"),
+                    hasMultiDiskSupport = false,
+                ),
+                GameSystem(
+                    SystemID.ATARI_ST,
+                    "Atari - ST",
+                    R.string.game_system_title_atarist,
+                    R.string.game_system_abbr_atarist,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.HATARI,
+                            // Hatari ships built-in EmuTOS; real TOS ROMs are optional.
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.ATARI_ST),
+                                    1 to arrayListOf(ControllerConfigs.ATARI_ST),
+                                ),
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("st", "msa", "stx", "dim", "ipf", "m3u", "zip"),
+                    hasMultiDiskSupport = true,
+                ),
+
+                GameSystem(
+                    SystemID.GAME_WATCH,
+                    "Nintendo - Game & Watch",
+                    R.string.game_system_title_gw,
+                    R.string.game_system_abbr_gw,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.GW,
+                            // gw core includes all game data in the .mgw ROM; no external BIOS needed.
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.GAME_WATCH),
+                                ),
+                            statesSupported = true,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = true,
+                            scanByPathAndSupportedExtensions = true,
+                        ),
+                    // ".mgw" is the Game & Watch ROM format — safe as unique extension.
+                    uniqueExtensions = listOf("mgw"),
+                    supportedExtensions = listOf("mgw"),
+                ),
             )
 
         private val byIdCache by lazy { mapOf(*SYSTEMS.map { it.id.dbname to it }.toTypedArray()) }

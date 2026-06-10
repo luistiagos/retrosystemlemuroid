@@ -1,0 +1,24 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <!-- Commodore Amiga — the "Boing Ball" (red/white checkered ball) -->
+    <path
+        android:fillColor="#141418"
+        android:pathData="M12,12 L88,12 L88,88 L12,88 Z" />
+    <!-- Ball -->
+    <path
+        android:fillColor="#D62828"
+        android:pathData="M20,50 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0 Z" />
+    <!-- White grid (suggests the checkered surface) -->
+    <path
+        android:strokeColor="#F5F5F5"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M50,20 L50,80 M38,23 L38,77 M62,23 L62,77 M22,50 L78,50 M26,36 L74,36 M26,64 L74,64" />
+    <!-- Highlight -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,39 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0 Z" />
+</vector>

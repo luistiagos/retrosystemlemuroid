@@ -368,6 +368,41 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_neocd,
         listOf(SystemID.NEOCD),
     ),
+    AMIGA(
+        R.string.game_system_title_amiga,
+        R.drawable.game_system_amiga,
+        listOf(SystemID.AMIGA),
+    ),
+    AMIGA_1200(
+        R.string.game_system_title_amiga1200,
+        R.drawable.game_system_amiga,
+        listOf(SystemID.AMIGA_1200),
+    ),
+    AMIGA_CD32(
+        R.string.game_system_title_amigacd32,
+        R.drawable.game_system_amiga,
+        listOf(SystemID.AMIGA_CD32),
+    ),
+    AMIGA_CDTV(
+        R.string.game_system_title_amigacdtv,
+        R.drawable.game_system_amiga,
+        listOf(SystemID.AMIGA_CDTV),
+    ),
+    PCFX(
+        R.string.game_system_title_pcfx,
+        R.drawable.game_system_pcfx,
+        listOf(SystemID.PCFX),
+    ),
+    GAME_WATCH(
+        R.string.game_system_title_gw,
+        R.drawable.game_system_gw,
+        listOf(SystemID.GAME_WATCH),
+    ),
+    ATARI_ST(
+        R.string.game_system_title_atarist,
+        R.drawable.game_system_atarist,
+        listOf(SystemID.ATARI_ST),
+    ),
     ;
 
     fun color(): Int {
@@ -449,6 +484,13 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.JAGUAR -> JAGUAR
                 SystemID.ODYSSEY2 -> ODYSSEY2
                 SystemID.NEOCD -> NEOCD
+                SystemID.AMIGA -> AMIGA
+                SystemID.AMIGA_1200 -> AMIGA_1200
+                SystemID.AMIGA_CD32 -> AMIGA_CD32
+                SystemID.AMIGA_CDTV -> AMIGA_CDTV
+                SystemID.PCFX -> PCFX
+                SystemID.GAME_WATCH -> GAME_WATCH
+                SystemID.ATARI_ST -> ATARI_ST
             }
         }
     }

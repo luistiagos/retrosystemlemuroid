@@ -42,6 +42,11 @@ if (-not (Test-Path $gradleWrapper)) {
 
 New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 
+# Temp do Gradle no E:: o C: vive ~100% cheio e o Gradle escreve temp grande
+# (AAPT2/resource link/packaging) no java.io.tmpdir, que gradle.properties aponta
+# para E:/gradle_tmp. Garante que o diretorio exista (senao o Gradle falha cedo).
+New-Item -ItemType Directory -Path "E:\gradle_tmp" -Force | Out-Null
+
 # ── Pré-requisitos do prebuilt DB ───────────────────────────────────────────
 # A task generatePrebuiltDb (registrada em lemuroid-app/build.gradle.kts) gera
 # `assets/retrograde-prebuilt.db` durante o build a partir do manifest + schema.
