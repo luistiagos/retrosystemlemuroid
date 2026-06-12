@@ -19,3 +19,15 @@ local.properties
 release.jks
 
 carbon.zip
+
+# JVM crash dumps
+hs_err_pid*.log
+replay_pid*.log
+*.hprof
+.kotlin/errors/
+
+# Build artifacts / temporários que não devem ser commitados
+*.apk
+*.aab
+*.chd
+*.db
