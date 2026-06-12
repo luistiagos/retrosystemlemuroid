@@ -48,7 +48,7 @@ class RomsDownloadManager(context: Context) {
          * in a way that requires re-processing existing downloads.
          * If the stored version is lower than this, the download is reset to Idle.
          */
-        private const val EXTRACTION_VERSION = 10
+        private const val EXTRACTION_VERSION = 11
         private const val PREF_EXTRACTION_VERSION = "extraction_version"
 
         private const val HF_DATASET_OWNER = "luisluis123"
@@ -74,6 +74,7 @@ class RomsDownloadManager(context: Context) {
             "nes", "snes", "md", "gb", "gbc", "gba", "n64", "sms", "psp", "nds",
             "gg", "atari2600", "psx", "fbneo", "mame2003plus", "pce", "lynx",
             "atari7800", "atari5200", "scd", "ngp", "ngc", "ws", "wsc", "dos", "3ds", "msx", "msx2",
+            "neocd",
         )
 
         /**
@@ -161,6 +162,12 @@ class RomsDownloadManager(context: Context) {
             "msx 2"                to "msx2",
             "microsoft msx2"       to "msx2",
             "microsoft msx 2"      to "msx2",
+            // Neo Geo CD
+            "neocd"                to "neocd",
+            "neo geo cd"           to "neocd",
+            "neo-geo cd"           to "neocd",
+            "neogeo cd"            to "neocd",
+            "neogeocd"             to "neocd",
         )
     }
 

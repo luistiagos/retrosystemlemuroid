@@ -62,6 +62,9 @@ object SystemLogoResolver {
             MetaSystemID.POKEMON_MINI -> R.drawable.game_system_pokemini_hover
             MetaSystemID.SUPERVISION -> R.drawable.game_system_supervision_hover
             MetaSystemID.DREAMCAST -> R.drawable.game_system_dc_hover
+            MetaSystemID.AMIGA_1200 -> R.drawable.game_system_amiga1200_hover
+            MetaSystemID.AMIGA_CD32 -> R.drawable.game_system_amigacd32_hover
+            MetaSystemID.AMIGA_CDTV -> R.drawable.game_system_amigacdtv_hover
             MetaSystemID.THREE_DO -> R.drawable.game_system_3do_hover
             MetaSystemID.PICO_8 -> R.drawable.game_system_pico8_hover
             MetaSystemID.VIRCON32 -> R.drawable.game_system_vircon32_hover

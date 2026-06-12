@@ -62,7 +62,7 @@ fun RomDownloadDialog(
         }
 
         downloadState = when (result) {
-            is RomOnDemandManager.DownloadResult.Success -> DownloadState.Done
+            is RomOnDemandManager.DownloadResult.Success -> DownloadState.Done(result.game)
             is RomOnDemandManager.DownloadResult.NotFound -> DownloadState.NotFound
             is RomOnDemandManager.DownloadResult.Failure -> DownloadState.Error(result.message)
         }
@@ -70,9 +70,10 @@ fun RomDownloadDialog(
 
     // Auto-launch game on successful download.
     LaunchedEffect(downloadState) {
-        if (downloadState is DownloadState.Done) {
+        val state = downloadState
+        if (state is DownloadState.Done) {
             selectedGameState.value = null
-            onDownloadComplete(selectedGame)
+            onDownloadComplete(state.game)
         }
     }
 
@@ -201,7 +202,7 @@ fun RomDownloadDialog(
 private sealed class DownloadState {
     object Idle : DownloadState()
     object Downloading : DownloadState()
-    object Done : DownloadState()
+    data class Done(val game: Game) : DownloadState()
     object NotFound : DownloadState()
     data class Error(val message: String) : DownloadState()
 }

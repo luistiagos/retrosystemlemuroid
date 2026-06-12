@@ -306,6 +306,35 @@ class RomOnDemandManager(
     }
 
     /**
+     * Ensures managed catalog ZIPs that contain disc images are converted to their
+     * playable entry point before launch. This covers ROMs downloaded by the bulk
+     * downloader, which writes the ZIP directly and therefore bypasses the normal
+     * on-demand extraction path.
+     */
+    suspend fun prepareGameForLaunch(game: Game): Game = withContext(Dispatchers.IO) {
+        val destFile = resolveDestFile(game)
+        if (!destFile.exists() ||
+            destFile.length() == 0L ||
+            destFile.extension.lowercase() != "zip" ||
+            !isManagedRom(game)
+        ) {
+            return@withContext game
+        }
+
+        val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
+        if (finalGame != game) {
+            downloadedRomDao.insert(
+                DownloadedRom(
+                    systemId = finalGame.systemId,
+                    fileName = finalGame.fileName,
+                    fileSize = finalFile.length(),
+                ),
+            )
+        }
+        finalGame
+    }
+
+    /**
      * If [zipFile] is a zip containing a disc-image entry (.cue / .gdi / .iso / .chd),
      * extracts all its entries into a sibling directory named after the zip stem,
      * deletes the zip, and updates the [Game] record in the database so that

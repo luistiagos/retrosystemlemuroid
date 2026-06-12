@@ -375,17 +375,17 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
     ),
     AMIGA_1200(
         R.string.game_system_title_amiga1200,
-        R.drawable.game_system_amiga,
+        R.drawable.game_system_amiga1200,
         listOf(SystemID.AMIGA_1200),
     ),
     AMIGA_CD32(
         R.string.game_system_title_amigacd32,
-        R.drawable.game_system_amiga,
+        R.drawable.game_system_amigacd32,
         listOf(SystemID.AMIGA_CD32),
     ),
     AMIGA_CDTV(
         R.string.game_system_title_amigacdtv,
-        R.drawable.game_system_amiga,
+        R.drawable.game_system_amigacdtv,
         listOf(SystemID.AMIGA_CDTV),
     ),
     PCFX(

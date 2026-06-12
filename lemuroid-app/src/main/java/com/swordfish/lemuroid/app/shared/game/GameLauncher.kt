@@ -28,15 +28,18 @@ class GameLauncher(
     ) {
         val lifecycleOwner = activity as? LifecycleOwner ?: return
         lifecycleOwner.lifecycleScope.launch {
-            val available = withContext(Dispatchers.IO) { isGameFileAvailable(activity, game) }
+            val launchGame = withContext(Dispatchers.IO) {
+                gameLaunchTaskHandler.prepareGameForLaunch(game)
+            }
+            val available = withContext(Dispatchers.IO) { isGameFileAvailable(activity, launchGame) }
             if (!available) {
-                showRomNotFoundDialog(activity, game)
+                showRomNotFoundDialog(activity, launchGame)
                 return@launch
             }
-            val system = GameSystem.findByIdOrNull(game.systemId) ?: return@launch
+            val system = GameSystem.findByIdOrNull(launchGame.systemId) ?: return@launch
             val coreConfig = coresSelection.getCoreConfigForSystem(system)
             withContext(Dispatchers.IO) { gameLaunchTaskHandler.handleGameStart(activity.applicationContext) }
-            BaseGameActivity.launchGame(activity, coreConfig, game, loadSave, leanback)
+            BaseGameActivity.launchGame(activity, coreConfig, launchGame, loadSave, leanback)
         }
     }
 

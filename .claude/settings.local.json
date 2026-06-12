@@ -27,7 +27,12 @@
       "Bash(curl -I \"https://db.hfsplay.fr/files/2020/06/27/007_-_NightFire_USA_Europe_EnFrDe_IFuSLm7.png\")",
       "Bash(curl -v \"https://db.hfsplay.fr/files/2020/06/27/007_-_NightFire_USA_Europe_EnFrDe_IFuSLm7.png\")",
       "Bash(python3 -c ' *)",
-      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"E:\\\\projects\\\\play2\\\\ARMSX2\\\\app\\\\src\\\\main\\\\assets\\\\catalog_manifest_ps2.txt\"\\) | Select-Object -First 10; $bytes | ForEach-Object { \"{0:X2}\" -f $_ })"
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"E:\\\\projects\\\\play2\\\\ARMSX2\\\\app\\\\src\\\\main\\\\assets\\\\catalog_manifest_ps2.txt\"\\) | Select-Object -First 10; $bytes | ForEach-Object { \"{0:X2}\" -f $_ })",
+      "Bash(rm -rf '/c/$Recycle.Bin/*')",
+      "Bash(rm -rf /c/Windows/Temp/*)",
+      "Bash(rm -rf \"C:/Users/luist/AppData/Local/Temp/\"*.tmp)",
+      "Bash(rm -rf \"C:/Users/luist/AppData/Local/Temp/\"chrome_*)",
+      "Bash(.\\\\gradlew.bat :lemuroid-app:assembleFreeBundleRelease --no-daemon)"
     ],
     "additionalDirectories": [
       "E:\\projects\\play2\\ARMSX2\\app\\src\\main\\res\\layout",

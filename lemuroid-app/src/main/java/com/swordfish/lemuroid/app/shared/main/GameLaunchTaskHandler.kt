@@ -25,6 +25,9 @@ class GameLaunchTaskHandler(
         cancelBackgroundWork(context)
     }
 
+    suspend fun prepareGameForLaunch(game: Game): Game =
+        romOnDemandManager.prepareGameForLaunch(game)
+
     suspend fun handleGameFinish(
         enableRatingFlow: Boolean,
         activity: Activity,

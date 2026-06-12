@@ -2645,6 +2645,22 @@ data class GameSystem(
                             // BIOS present it always uses it (index 0). The Universe BIOS 3.2
                             // is region-free + auto-patched. Auto-downloaded from HuggingFace.
                             requiredBIOSFiles = listOf("neocd/uni-bioscd.rom"),
+                            // On-device testing showed NeoCD never boots ANY game on this build:
+                            // the BIOS loads and renders its CD dashboard, the core opens and reads
+                            // the data track, but the game never starts — identical across every
+                            // game, every disc format (cue+bin / chd) and both BIOSes (Universe and
+                            // stock CDZ). The only non-standard knobs are this core's two speed
+                            // hacks, both reporting "On" (the libretro neocd defaults are Off, and
+                            // the docs warn "some games may not work properly"). NeoCD exposes no
+                            // user-facing settings, so both are forced Off here to rule the speed
+                            // hacks in or out as the cause. If this fixes booting, loadskip (the
+                            // safe, purely cosmetic "skip loading screens" option) can be turned
+                            // back On for faster loads.
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("neocd_cdspeedhack", "Off"),
+                                    CoreVariable("neocd_loadskip", "Off"),
+                                ),
                             controllerConfigs =
                                 hashMapOf(
                                     0 to arrayListOf(ControllerConfigs.NEOCD),

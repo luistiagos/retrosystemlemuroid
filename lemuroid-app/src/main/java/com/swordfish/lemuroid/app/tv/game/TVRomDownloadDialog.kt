@@ -15,7 +15,7 @@ class TVRomDownloadDialog(
     private val activity: FragmentActivity,
     private val romOnDemandManager: RomOnDemandManager,
 ) {
-    fun show(game: Game, onComplete: () -> Unit) {
+    fun show(game: Game, onComplete: (Game) -> Unit) {
         AlertDialog.Builder(activity)
             .setTitle(R.string.rom_download_dialog_title)
             .setMessage(
@@ -28,7 +28,7 @@ class TVRomDownloadDialog(
             .show()
     }
 
-    private fun startDownload(game: Game, onComplete: () -> Unit) {
+    private fun startDownload(game: Game, onComplete: (Game) -> Unit) {
         val density = activity.resources.displayMetrics.density
         val padding = (24 * density).toInt()
 
@@ -82,7 +82,7 @@ class TVRomDownloadDialog(
             if (dialog.isShowing) dialog.dismiss()
 
             when (result) {
-                is RomOnDemandManager.DownloadResult.Success -> onComplete()
+                is RomOnDemandManager.DownloadResult.Success -> onComplete(result.game)
                 is RomOnDemandManager.DownloadResult.NotFound -> showError(
                     activity.getString(R.string.rom_download_dialog_not_found),
                 )

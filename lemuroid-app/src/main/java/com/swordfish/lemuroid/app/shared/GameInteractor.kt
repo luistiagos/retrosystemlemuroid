@@ -23,7 +23,7 @@ class GameInteractor(
     private val useLeanback: Boolean,
     private val shortcutsGenerator: ShortcutsGenerator,
     private val gameLauncher: GameLauncher,
-    private val onPlaceholderGame: ((Game, () -> Unit) -> Unit)? = null,
+    private val onPlaceholderGame: ((Game, (Game) -> Unit) -> Unit)? = null,
 ) {
     fun onGamePlay(game: Game) {
         if (!ensureNotBusy()) {
@@ -34,8 +34,8 @@ class GameInteractor(
         }
         val placeholderHandler = onPlaceholderGame
         if (placeholderHandler != null && isGamePlaceholder(game)) {
-            placeholderHandler(game) {
-                gameLauncher.launchGameAsync(activity.activity(), game, true, useLeanback)
+            placeholderHandler(game) { downloadedGame ->
+                gameLauncher.launchGameAsync(activity.activity(), downloadedGame, true, useLeanback)
             }
             return
         }
