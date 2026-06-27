@@ -17,6 +17,35 @@ $gradleWrapper = Join-Path $repoRoot "gradlew.bat"
 $apkOutputDir = Join-Path $repoRoot "lemuroid-app\build\outputs\apk"
 $distDir = Join-Path $repoRoot "dist"
 
+function Resolve-JavaHome {
+    # gradlew.bat needs JAVA_HOME (or java in PATH) to bootstrap *before* it reads
+    # gradle.properties, so org.gradle.java.home alone is not enough. Resolve it here.
+    # 1) Already set in environment
+    if (-not [string]::IsNullOrWhiteSpace($env:JAVA_HOME) -and (Test-Path (Join-Path $env:JAVA_HOME "bin\java.exe"))) {
+        return $env:JAVA_HOME
+    }
+    # 2) org.gradle.java.home in gradle.properties
+    $gradlePropsPath = Join-Path $repoRoot "gradle.properties"
+    if (Test-Path $gradlePropsPath) {
+        foreach ($line in Get-Content $gradlePropsPath) {
+            if ($line -match "^\s*org\.gradle\.java\.home\s*=\s*(.+)$") {
+                # Java .properties escapes backslashes and ':'; unescape the common cases.
+                $jh = $matches[1].Trim() -replace '\\\\', '\' -replace '\\:', ':'
+                if (Test-Path (Join-Path $jh "bin\java.exe")) { return $jh }
+            }
+        }
+    }
+    # 3) Android Studio bundled JBR (common locations)
+    foreach ($c in @("C:\Android\Android Studio\jbr", "C:\Program Files\Android\Android Studio\jbr")) {
+        if (Test-Path (Join-Path $c "bin\java.exe")) { return $c }
+    }
+    # 4) java.exe already in PATH
+    $javaCmd = Get-Command java -ErrorAction SilentlyContinue
+    if ($javaCmd) { return Split-Path -Parent (Split-Path -Parent $javaCmd.Source) }
+
+    throw "Java nao encontrado. Defina JAVA_HOME ou configure org.gradle.java.home em gradle.properties."
+}
+
 # Caminhos consumidos pela Gradle task `generatePrebuiltDb` (buildSrc/PrebuiltDbGenerator.kt).
 # Se algum faltar, o build falha tarde dentro do Gradle com erro pouco amigável — validamos cedo.
 $catalogManifest = if ([string]::IsNullOrWhiteSpace($CatalogManifest)) {
@@ -73,6 +102,13 @@ if (-not $SkipPrebuiltCheck) {
 }
 
 Write-Host ""
+# Ensure JAVA_HOME is set so gradlew.bat can bootstrap before reading gradle.properties.
+$resolvedJavaHome = Resolve-JavaHome
+if ($env:JAVA_HOME -ne $resolvedJavaHome) {
+    Write-Host "Definindo JAVA_HOME: $resolvedJavaHome"
+    $env:JAVA_HOME = $resolvedJavaHome
+}
+
 Write-Host "Executando $Task..."
 $gradleArgs = @(
     $Task,

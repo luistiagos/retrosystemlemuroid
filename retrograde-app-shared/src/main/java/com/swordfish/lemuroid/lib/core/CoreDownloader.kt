@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit
  */
 object CoreDownloader {
 
-    const val CORES_VERSION = "1.18.0"
+    const val CORES_VERSION = "1.19.0"
     private const val CORES_BASE_URL = "https://raw.githubusercontent.com/luistiagos/libretrocores/"
     private const val MIN_VALID_CORE_SIZE = 10 * 1024L
 

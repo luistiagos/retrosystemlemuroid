@@ -1,8 +1,8 @@
 package com.swordfish.lemuroid.app.shared.game
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.net.Uri
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.R

@@ -100,7 +100,11 @@ private fun SearchResultsView(
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
 ) {
     LazyColumn(modifier = modifier) {
-        items(games.itemCount, key = { games[it]?.id ?: it }) { index ->
+        // Collision-safe keys: prefix loaded-item ids and placeholder indices into
+        // distinct namespaces so a game id can never equal a placeholder's index
+        // (which would crash LazyColumn with a duplicate-key error). Matches
+        // FavoritesScreen's pattern and pairs with the new Paging maxSize.
+        items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
             val game = games[index] ?: return@items
 
             LemuroidGameListRow(

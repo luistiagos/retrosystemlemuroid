@@ -1,6 +1,6 @@
 package com.swordfish.lemuroid.app.tv.game
 
-import androidx.appcompat.app.AlertDialog
+import android.app.AlertDialog
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView

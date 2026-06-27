@@ -4,6 +4,7 @@ import android.content.Context
 import com.swordfish.lemuroid.app.shared.settings.HDModeQuality
 import com.swordfish.lemuroid.app.utils.android.getGLSLVersion
 import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.libretrodroid.ShaderConfig
 import timber.log.Timber
@@ -35,7 +36,16 @@ object ShaderChooser {
                     "lcd" -> ShaderConfig.LCD
                     "smooth" -> ShaderConfig.Default
                     "sharp" -> ShaderConfig.Sharp
-                    else -> getDefaultShaderForSystem(system)
+                    // "auto" (default): the per-system default uses CRT for many systems,
+                    // which is expensive on TV-box GPUs and causes frame drops. On weak
+                    // devices fall back to the cheap pass-through Sharp shader. Explicit
+                    // user filter choices and HD mode above are always respected.
+                    else ->
+                        if (HeavySystemFilter.isWeakDevice(context)) {
+                            ShaderConfig.Sharp
+                        } else {
+                            getDefaultShaderForSystem(system)
+                        }
                 }
         }
     }

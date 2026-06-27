@@ -51,6 +51,42 @@ function Unescape-LocalPropertiesValue {
     return $sb.ToString()
 }
 
+function Resolve-JavaHome {
+    # 1) Already set in environment
+    if (-not [string]::IsNullOrWhiteSpace($env:JAVA_HOME) -and (Test-Path (Join-Path $env:JAVA_HOME "bin\java.exe"))) {
+        return $env:JAVA_HOME
+    }
+
+    # 2) org.gradle.java.home in gradle.properties
+    $gradlePropsPath = Join-Path $repoRoot "gradle.properties"
+    $javaHomeRaw = Get-LocalProperty -FilePath $gradlePropsPath -Key "org.gradle.java.home"
+    if (-not [string]::IsNullOrWhiteSpace($javaHomeRaw)) {
+        $javaHome = Unescape-LocalPropertiesValue -Value $javaHomeRaw
+        if (Test-Path (Join-Path $javaHome "bin\java.exe")) {
+            return $javaHome
+        }
+    }
+
+    # 3) Android Studio bundled JBR (common locations)
+    $candidates = @(
+        "C:\Android\Android Studio\jbr",
+        "C:\Program Files\Android\Android Studio\jbr"
+    )
+    foreach ($c in $candidates) {
+        if (Test-Path (Join-Path $c "bin\java.exe")) {
+            return $c
+        }
+    }
+
+    # 4) java.exe in PATH
+    $javaCmd = Get-Command java -ErrorAction SilentlyContinue
+    if ($javaCmd) {
+        return Split-Path -Parent (Split-Path -Parent $javaCmd.Source)
+    }
+
+    throw "Java nao encontrado. Defina JAVA_HOME ou configure org.gradle.java.home em gradle.properties."
+}
+
 function Resolve-AdbPath {
     # 1) PATH
     $adbInPath = Get-Command adb -ErrorAction SilentlyContinue
@@ -140,6 +176,14 @@ $selectedSerial = if ([string]::IsNullOrWhiteSpace($Serial)) { $devices[0] } els
 $adbArgs = @("-s", $selectedSerial)
 
 Write-Host "Dispositivo selecionado: $selectedSerial"
+
+# Ensure JAVA_HOME is set so gradlew.bat can bootstrap before reading gradle.properties
+$resolvedJavaHome = Resolve-JavaHome
+if ($env:JAVA_HOME -ne $resolvedJavaHome) {
+    Write-Host "Definindo JAVA_HOME: $resolvedJavaHome"
+    $env:JAVA_HOME = $resolvedJavaHome
+}
+
 Write-Host "Executando build: $Task"
 & $gradleWrapper $Task
 if ($LASTEXITCODE -ne 0) {

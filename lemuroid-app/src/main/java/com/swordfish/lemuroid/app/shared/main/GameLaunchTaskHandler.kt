@@ -10,16 +10,20 @@ import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.app.shared.storage.cache.CacheCleanerWork
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
+import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class GameLaunchTaskHandler(
     private val reviewManager: ReviewManager,
     private val retrogradeDb: RetrogradeDatabase,
     private val romOnDemandManager: RomOnDemandManager,
+    private val biosManager: BiosManager,
 ) {
     fun handleGameStart(context: Context) {
         cancelBackgroundWork(context)
@@ -75,6 +79,26 @@ class GameLaunchTaskHandler(
         // Only treat as corruption if the error signal indicates the ROM file itself failed to load.
         // Other errors (e.g. missing BIOS) are user-actionable and should be shown as-is.
         if (game != null && isRomLoadFailure) {
+            // A "ROM load failed" signal can actually be a missing BIOS that the core only
+            // discovers after loading (e.g. Sega CD / 32X-CD disc images). Never delete a
+            // downloaded ROM in that case — surface the BIOS error so the user can provide it
+            // and keep the ROM. Only genuine load failures fall through to corruption handling.
+            val missingBios = withContext(Dispatchers.IO) {
+                GameSystem.findByIdOrNull(game.systemId)
+                    ?.systemCoreConfigs
+                    ?.flatMap { biosManager.getMissingBiosFiles(it, game) }
+                    ?.distinct()
+                    .orEmpty()
+            }
+            if (missingBios.isNotEmpty()) {
+                Timber.w("Load failed for ${game.fileName} but BIOS is missing $missingBios — keeping ROM")
+                handleUnsuccessfulGameFinish(
+                    activity,
+                    activity.getString(R.string.game_loader_error_missing_bios, missingBios.joinToString(", ")),
+                    null,
+                )
+                return
+            }
             val wasDownloaded = retrogradeDb.downloadedRomDao().isDownloaded(game.systemId, game.fileName)
             if (wasDownloaded || romOnDemandManager.isManagedRom(game)) {
                 romOnDemandManager.deleteRom(game)

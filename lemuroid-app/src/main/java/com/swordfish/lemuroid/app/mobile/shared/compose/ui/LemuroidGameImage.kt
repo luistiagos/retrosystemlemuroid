@@ -26,11 +26,14 @@ fun LemuroidGameImage(
     val fallbackPainter = rememberDrawablePainter(drawable = fallbackDrawable)
 
     val context = LocalContext.current
-    val imageRequest = remember(game.coverFrontUrl) {
+    // On weak devices decode covers smaller (less bitmap memory per item) and skip the
+    // crossfade (no second bitmap held during the animation). Computed once per device.
+    val lowRam = remember { CoverUtils.isLowRamDevice(context) }
+    val imageRequest = remember(game.coverFrontUrl, lowRam) {
         ImageRequest.Builder(context)
             .data(game.coverFrontUrl)
-            .crossfade(true)
-            .size(400)
+            .crossfade(!lowRam)
+            .size(if (lowRam) 256 else 400)
             .build()
     }
 

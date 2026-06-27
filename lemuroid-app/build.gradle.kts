@@ -164,10 +164,14 @@ android {
         }
 
         maybeCreate("release").apply {
-            storeFile = file("$rootDir/release.jks")
-            keyAlias = "lemuroid"
-            storePassword = "lemuroid"
-            keyPassword = "lemuroid"
+            // Release is signed with the debug keystore on purpose: there is no separate
+            // release.jks in this repo, and the release package id (app.retrogamesystem)
+            // differs from debug (.debug suffix), so there is no update-signature conflict.
+            // Swap back to a dedicated release.jks here if a distribution key is introduced.
+            storeFile = file("$rootDir/debug.keystore")
+            keyAlias = "androiddebugkey"
+            storePassword = "android"
+            keyPassword = "android"
             enableV3Signing = true
         }
     }

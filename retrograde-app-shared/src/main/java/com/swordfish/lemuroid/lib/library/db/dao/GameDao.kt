@@ -106,7 +106,7 @@ interface GameDao {
         SELECT games.* FROM games
         LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId = :systemId
-        ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC
+        ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC, games.id ASC
     """)
     fun selectBySystemSortedByPopularity(systemId: String): PagingSource<Int, Game>
 
@@ -114,7 +114,7 @@ interface GameDao {
         SELECT games.* FROM games
         LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId IN (:systemIds)
-        ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC
+        ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC, games.id ASC
     """)
     fun selectBySystemsSortedByPopularity(systemIds: List<String>): PagingSource<Int, Game>
 
@@ -128,7 +128,7 @@ interface GameDao {
         SELECT g.* FROM games g
         LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId = :systemId AND g.isRepresentative = 1
-        ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC
+        ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC, g.id ASC
     """)
     fun selectGroupedBySystemSortedByPopularity(systemId: String): PagingSource<Int, Game>
 
@@ -136,7 +136,7 @@ interface GameDao {
         SELECT g.* FROM games g
         LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId IN (:systemIds) AND g.isRepresentative = 1
-        ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC
+        ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC, g.id ASC
     """)
     fun selectGroupedBySystemsSortedByPopularity(systemIds: List<String>): PagingSource<Int, Game>
 
@@ -144,7 +144,7 @@ interface GameDao {
         SELECT g.* FROM games g
         LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId = :systemId AND g.isRepresentative = 1
-        ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC
+        ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC, g.id ASC
     """)
     fun selectGroupedBySystem(systemId: String): PagingSource<Int, Game>
 
@@ -152,7 +152,7 @@ interface GameDao {
         SELECT g.* FROM games g
         LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId IN (:systemIds) AND g.isRepresentative = 1
-        ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC
+        ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC, g.id ASC
     """)
     fun selectGroupedBySystems(systemIds: List<String>): PagingSource<Int, Game>
 

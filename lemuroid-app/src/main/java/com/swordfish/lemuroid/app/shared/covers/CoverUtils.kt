@@ -11,16 +11,23 @@ import coil.memory.MemoryCache
 import coil.request.CachePolicy
 import com.swordfish.lemuroid.common.drawable.TextDrawable
 import com.swordfish.lemuroid.common.graphics.ColorUtils
+import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 
 object CoverUtils {
-    /** Returns true when the device is flagged as a low-RAM device by the OS. */
-    private fun isLowRamDevice(context: Context): Boolean {
+    /**
+     * Returns true when the device should use reduced image-memory settings.
+     * Combines the OS low-RAM flag with the physical-RAM tier, because many
+     * 1–2 GB TV boxes never set isLowRamDevice. Public so cover Composables can
+     * pick smaller decode sizes / skip crossfade on the same criterion.
+     */
+    fun isLowRamDevice(context: Context): Boolean {
         val am = context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
-        return am.isLowRamDevice
+        return am.isLowRamDevice ||
+            HeavySystemFilter.deviceTier(context) != HeavySystemFilter.DeviceTier.NORMAL
     }
 
     fun loadCover(
@@ -40,7 +47,14 @@ object CoverUtils {
         val lowRam = isLowRamDevice(applicationContext)
         val memoryCacheFraction = if (lowRam) 0.08 else 0.20
         val diskCacheFraction = if (lowRam) 0.10 else 0.20
-        return ImageLoader.Builder(applicationContext)
+        val builder = ImageLoader.Builder(applicationContext)
+        if (lowRam) {
+            // Covers are opaque artwork — RGB_565 halves bitmap memory with no
+            // visible quality loss at card sizes, cutting OOM risk on TV boxes.
+            builder.bitmapConfig(android.graphics.Bitmap.Config.RGB_565)
+            builder.allowRgb565(true)
+        }
+        return builder
             .diskCache(
                 DiskCache.Builder()
                     .directory(applicationContext.cacheDir.resolve("image_cache"))
@@ -60,7 +74,10 @@ object CoverUtils {
                     .addNetworkInterceptor(ThrottleFailedThumbnailsInterceptor)
                     .build()
             }
-            .crossfade(true)
+            // Crossfade keeps two bitmaps alive during the animation and alpha-blends every
+            // item entering the screen — a GPU + memory cost felt when scrolling on TV boxes.
+            // Disable it on weak devices; it's purely cosmetic.
+            .crossfade(!lowRam)
             .interceptorDispatcher(Dispatchers.IO)
             .diskCachePolicy(CachePolicy.ENABLED)
             .memoryCachePolicy(CachePolicy.ENABLED)

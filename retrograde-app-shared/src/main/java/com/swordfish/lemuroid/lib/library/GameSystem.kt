@@ -2322,6 +2322,18 @@ data class GameSystem(
                             statesSupported = true,
                             rumbleSupported = false,
                             skipDuplicateFrames = false,
+                            // The sega32x catalog mixes real 32X cartridges with Sega CD / 32X-CD
+                            // disc images (.chd). PicoDrive needs the Mega-CD BIOS to boot any CD
+                            // image (same BIOS files as the SEGACD system). Declaring them here lets
+                            // the existing auto-BIOS download fetch them; cartridge games simply
+                            // ignore the BIOS. Without this, CD images fail with "Missing BIOS",
+                            // which the launcher misreports as a corrupted ROM.
+                            regionalBIOSFiles =
+                                mapOf(
+                                    "Europe" to "bios_CD_E.bin",
+                                    "Japan" to "bios_CD_J.bin",
+                                    "USA" to "bios_CD_U.bin",
+                                ),
                         ),
                     ),
                     scanOptions =
@@ -2331,8 +2343,8 @@ data class GameSystem(
                             scanByPathAndSupportedExtensions = true,
                         ),
                     uniqueExtensions = listOf("32x"),
-                    supportedExtensions = listOf("32x", "bin", "md", "smd", "zip"),
-                    hasMultiDiskSupport = false,
+                    supportedExtensions = listOf("32x", "bin", "md", "smd", "zip", "chd", "cue", "iso"),
+                    hasMultiDiskSupport = true,
                 ),
                 GameSystem(
                     SystemID.ATARI800,

@@ -44,6 +44,28 @@ Android, incluindo o `ActivityResultLauncher`, `DocumentFile` APIs e a tela de c
 
 ---
 
+### [`performance-dispositivos-fracos.md`](performance-dispositivos-fracos.md)
+**Performance e memória em dispositivos fracos (TV box / Smart TV) — fonte única**
+
+Conjunto completo de otimizações de performance/memória para aparelhos de 1–2 GB com ~57
+sistemas / ~58 mil entradas no catálogo. Cobre:
+- **Infraestrutura existente:** banco pré-construído em build-time (`PrebuiltDbGenerator` +
+  `createFromAsset`), fast-skip do loader, PRAGMA tuning, WAL, pre-warm, `HeavySystemFilter`.
+- **Correções 2026-06-13:** `maxSize` na paginação, chaves anti-colisão no Compose, covers em
+  RGB_565 + detecção de low-RAM por tier, trim/pre-warm isolado por processo + `onLowMemory`,
+  shader `Sharp` em device fraco, `largeHeap`.
+- O que foi deliberadamente **não** aplicado e por quê.
+
+---
+
+### [`performance-oportunidades.md`](performance-oportunidades.md)
+**Análise de oportunidades adicionais de performance (TV box / Smart TV)**
+
+Nova análise sobre a versão atual: oportunidades priorizadas (impacto × risco) para reduzir
+ainda mais memória/GPU/startup em aparelhos fracos, além do que já está implementado.
+
+---
+
 ### [`correcoes-2026-03-16.md`](correcoes-2026-03-16.md)
 **Correções — primeira rodada (2026-03-16)**
 

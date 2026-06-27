@@ -54,6 +54,7 @@ import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerApp
+import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.LemuroidLibrary
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.dao.GameSearchDao
@@ -149,18 +150,43 @@ abstract class LemuroidApplicationModule {
         fun retrogradeDb(app: LemuroidApplication): RetrogradeDatabase {
             Timber.i("retrogradeDb: provider entered")
 
+            // Scale the SQLite memory PRAGMAs by device tier. The defaults (32 MB page
+            // cache + 256 MB mmap) are too aggressive on weak devices: the page cache is
+            // committed RAM that competes with the UI/emulator on 1 GB boxes, and minSdk 21
+            // means 32-bit processes (armeabi-v7a TV boxes) where a 256 MB mmap can fail or
+            // fragment the limited address space. The DB is prebuilt and read-mostly, so a
+            // smaller cache only costs a little extra read I/O.
+            val deviceTier = HeavySystemFilter.deviceTier(app)
+            val cacheSizePragma = when (deviceTier) {
+                HeavySystemFilter.DeviceTier.NORMAL -> "PRAGMA cache_size = -32000" // 32 MB
+                HeavySystemFilter.DeviceTier.WEAK -> "PRAGMA cache_size = -8000"    // 8 MB
+                HeavySystemFilter.DeviceTier.ULTRA_WEAK -> "PRAGMA cache_size = -4000" // 4 MB
+            }
+            val mmapPragma = when (deviceTier) {
+                HeavySystemFilter.DeviceTier.NORMAL -> "PRAGMA mmap_size = 268435456" // 256 MB
+                HeavySystemFilter.DeviceTier.WEAK -> "PRAGMA mmap_size = 67108864"     // 64 MB
+                HeavySystemFilter.DeviceTier.ULTRA_WEAK -> "PRAGMA mmap_size = 0"      // off
+            }
+            // temp_store = MEMORY keeps query temporaries in RAM (fine on roomy devices);
+            // fall back to the default (file-backed) on the tightest tier.
+            val tempStorePragma = if (deviceTier == HeavySystemFilter.DeviceTier.ULTRA_WEAK) {
+                "PRAGMA temp_store = DEFAULT"
+            } else {
+                "PRAGMA temp_store = MEMORY"
+            }
+
             val tuningCallback = object : androidx.room.RoomDatabase.Callback() {
                 override fun onOpen(db: androidx.sqlite.db.SupportSQLiteDatabase) {
-                    Timber.i("Room onOpen — applying PRAGMA tuning")
+                    Timber.i("Room onOpen — applying PRAGMA tuning (tier=$deviceTier)")
                     // Android's SupportSQLiteDatabase.execSQL rejects statements that return
                     // a result row (PRAGMA … = value returns the new value on some Android
                     // versions). Use query() and discard the cursor — that's the supported
                     // path for parameterised PRAGMAs.
                     listOf(
                         "PRAGMA synchronous = NORMAL",
-                        "PRAGMA cache_size = -32000",
-                        "PRAGMA mmap_size = 268435456",
-                        "PRAGMA temp_store = MEMORY",
+                        cacheSizePragma,
+                        mmapPragma,
+                        tempStorePragma,
                     ).forEach { pragma ->
                         try {
                             db.query(pragma).use { /* discard cursor */ }
@@ -502,7 +528,8 @@ abstract class LemuroidApplicationModule {
         fun postGameHandler(
             retrogradeDatabase: RetrogradeDatabase,
             romOnDemandManager: RomOnDemandManager,
-        ) = GameLaunchTaskHandler(ReviewManager(), retrogradeDatabase, romOnDemandManager)
+            biosManager: BiosManager,
+        ) = GameLaunchTaskHandler(ReviewManager(), retrogradeDatabase, romOnDemandManager, biosManager)
 
         @Provides
         @PerApp

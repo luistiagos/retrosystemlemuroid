@@ -50,7 +50,11 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
 
         // Pre-warm Coil ImageLoader on background thread so that the first AsyncImage
         // composable doesn't trigger getCacheDir() disk I/O on the main thread (~143ms).
-        Thread { imageLoader }.start()
+        // Only in the main (UI) process — the :game process never shows cover art and
+        // must keep every spare MB for the emulator core on weak devices.
+        if (isMainProcess()) {
+            Thread { imageLoader }.start()
+        }
 
         val initializeComponent =
             if (isMainProcess()) {
@@ -84,10 +88,30 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
 
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
-        if (level >= ComponentCallbacks2.TRIM_MEMORY_MODERATE) {
-            Timber.d("onTrimMemory level=$level — clearing Coil memory cache")
-            applicationContext.imageLoader.memoryCache?.clear()
+        // Only the main (UI) process has an image cache to trim. Touching
+        // applicationContext.imageLoader in the :game process would lazily *build* an
+        // ImageLoader just to clear it — wasteful exactly when memory is scarce.
+        if (!isMainProcess()) return
+        when {
+            // App went to background — drop the whole image memory cache; it can be
+            // rebuilt from the disk cache cheaply when the user returns.
+            level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN -> {
+                Timber.d("onTrimMemory level=$level — UI hidden, clearing Coil memory cache")
+                applicationContext.imageLoader.memoryCache?.clear()
+            }
+            // Foreground but the system is reclaiming memory. Trim proactively so we
+            // free RAM before the LMK kills us (the main cause of crashes on TV boxes).
+            level >= ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW -> {
+                Timber.d("onTrimMemory level=$level — running low, clearing Coil memory cache")
+                applicationContext.imageLoader.memoryCache?.clear()
+            }
         }
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        if (!isMainProcess()) return
+        applicationContext.imageLoader.memoryCache?.clear()
     }
 
     companion object {
