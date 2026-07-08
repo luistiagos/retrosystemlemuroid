@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.app.shared.roms
 
 import android.content.Context
 import android.net.Uri
+import com.swordfish.lemuroid.lib.library.db.dao.GameDao
 import com.swordfish.lemuroid.lib.library.db.dao.SaveQueueDao
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.library.db.entity.SaveQueueItem
@@ -45,6 +46,7 @@ data class SaveQueueEntry(
 class SaveQueueManager(
     context: Context,
     private val saveQueueDao: SaveQueueDao,
+    private val gameDao: GameDao,
     private val romOnDemandManager: RomOnDemandManager,
 ) {
     private val appContext = context.applicationContext
@@ -274,14 +276,26 @@ class SaveQueueManager(
         }
     }
 
-    private fun buildGame(entry: SaveQueueEntry): Game = Game(
-        id = entry.gameId,
-        fileName = entry.fileName,
-        fileUri = entry.fileUri,
-        title = entry.title,
-        systemId = entry.systemId,
-        developer = null,
-        coverFrontUrl = null,
-        lastIndexedAt = 0L,
-    )
+    /**
+     * Resolves the authoritative [Game] row for a queue entry.
+     *
+     * IMPORTANT: return the real DB row (by id) — never a partial reconstruction. This object
+     * flows through the whole download → multi-disc extraction → play path, and downstream code
+     * persists it back via `game.copy(...).update(...)` (extractMultiDiscZipIfNeeded and
+     * GameLaunchTaskHandler.updateGamePlayedTimestamp). Any field missing here would be written
+     * back as null/default, wiping the row's coverFrontUrl, popularityIndex, isRepresentative,
+     * favorite flag, etc. The fallback (row deleted mid-flight) preserves at least the cover.
+     */
+    private suspend fun buildGame(entry: SaveQueueEntry): Game =
+        gameDao.selectById(entry.gameId)
+            ?: Game(
+                id = entry.gameId,
+                fileName = entry.fileName,
+                fileUri = entry.fileUri,
+                title = entry.title,
+                systemId = entry.systemId,
+                developer = null,
+                coverFrontUrl = entry.coverUrl,
+                lastIndexedAt = 0L,
+            )
 }

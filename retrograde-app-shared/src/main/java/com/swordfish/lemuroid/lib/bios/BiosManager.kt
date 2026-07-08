@@ -3,6 +3,8 @@ package com.swordfish.lemuroid.lib.bios
 import com.swordfish.lemuroid.common.files.safeDelete
 import com.swordfish.lemuroid.common.kotlin.associateByNotNull
 import com.swordfish.lemuroid.common.kotlin.writeToFile
+import com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms
+import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -41,8 +43,20 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
 
         Timber.d("Required regional files for game: $requiredRegionalFiles")
 
+        // Per-game BIOS: some FBNeo romsets (Neo Geo, PGM, ...) need a shared arcade BIOS
+        // regardless of which SystemID they were catalogued under. This covers Neo Geo games
+        // that still resolve to the generic SystemID.FBNEO (legacy catalog rows, manual scans)
+        // so the on-demand BIOS download fires for them too, not only for SystemID.NEOGEO.
+        val perGameBiosFiles =
+            if (coreConfig.coreID == CoreID.FBNEO) {
+                ArcadeSubSystemRoms.requiredBiosForRom(game.fileName)
+            } else {
+                emptyList()
+            }
+
         val systemDirectory = directoriesManager.getSystemDirectory()
-        return (coreConfig.requiredBIOSFiles + requiredRegionalFiles)
+        return (coreConfig.requiredBIOSFiles + requiredRegionalFiles + perGameBiosFiles)
+            .distinct()
             .filter { !isBiosFileAvailable(systemDirectory, it) }
     }
 
@@ -220,7 +234,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                 ),
                 Bios(
                     "gba_bios.bin",
-                    "A860E8C0B6D573D191E4EC7AB1FCE4AB",
+                    "A860E8C0B6D573D191E4EC7DB1B1E4F6",
                     "Game Boy Advance BIOS",
                     SystemID.GBA,
                     "81977335",
@@ -263,10 +277,18 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                 ),
                 Bios(
                     "neogeo.zip",
-                    "DFFB72F116D36D025068B23970A4F6DF",
+                    "DEAFC7F11273D660392F4BBC97D9308E",
                     "Neo Geo BIOS",
                     SystemID.FBNEO,
-                    "362E948D",
+                    "3B5D3421",
+                ),
+                // PGM (IGS PolyGame Master) shared BIOS, required by FBNeo for kov, martmast, etc.
+                Bios(
+                    "pgm.zip",
+                    "87CC944EEF4C671AA2629A8BA48A08E0",
+                    "PGM (PolyGame Master) BIOS",
+                    SystemID.PGM,
+                    "BF3DD2EF",
                 ),
                 Bios(
                     "coleco.rom",
@@ -305,7 +327,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Dreamcast BIOS (World)",
                     SystemID.DREAMCAST,
                     "89F2B1A1",
-                    "dc_boot.bin",
+                    "dc/dc_boot.bin",
                 ),
                 Bios(
                     "dc/dc_flash.bin",
@@ -313,7 +335,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "Dreamcast Flash ROM",
                     SystemID.DREAMCAST,
                     "C611B498",
-                    "dc_flash.bin",
+                    "dc/dc_flash.bin",
                 ),
                 // Famicom Disk System BIOS (FCEUmm)
                 Bios(

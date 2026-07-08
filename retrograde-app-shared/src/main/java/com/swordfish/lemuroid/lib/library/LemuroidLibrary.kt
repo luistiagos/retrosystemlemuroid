@@ -19,6 +19,7 @@
 
 package com.swordfish.lemuroid.lib.library
 
+import androidx.core.net.toUri
 import com.swordfish.lemuroid.common.coroutines.batchWithSizeAndTime
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
@@ -30,6 +31,7 @@ import com.swordfish.lemuroid.lib.storage.BaseStorageFile
 import com.swordfish.lemuroid.lib.storage.GroupedStorageFiles
 import com.swordfish.lemuroid.lib.storage.RomFiles
 import com.swordfish.lemuroid.lib.storage.StorageFile
+import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.StorageProvider
 import com.swordfish.lemuroid.lib.storage.StorageProviderRegistry
 import dagger.Lazy
@@ -54,9 +56,21 @@ class LemuroidLibrary(
     private val storageProviderRegistry: Lazy<StorageProviderRegistry>,
     private val gameMetadataProvider: Lazy<GameMetadataProvider>,
     private val biosManager: BiosManager,
+    private val directoriesManager: DirectoriesManager,
 ) {
     /** Global semaphore to bound concurrent metadata lookups across all batches. */
     private val metadataSemaphore = Semaphore(MAX_CONCURRENT_METADATA)
+
+    /**
+     * URI prefix of the app-managed ROMs directory (where the catalog placeholders and downloaded
+     * ROMs live). Games under this prefix are never deleted by the scan cleanup. Computed once and
+     * cached; falls back to "" on failure, which makes the cleanup guard protect every row.
+     */
+    private val romsUriPrefix: String by lazy {
+        runCatching {
+            directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
+        }.getOrDefault("")
+    }
 
     suspend fun indexLibrary() {
         val startedAtMs = System.currentTimeMillis()
@@ -332,7 +346,10 @@ class LemuroidLibrary(
 
     private suspend fun removeDeletedGames(startedAtMs: Long) {
         Timber.d("Deleting games from db before: $startedAtMs")
-        retrogradedb.gameDao().deleteByLastIndexedAtLessThan(startedAtMs)
+        // Guard the whole catalog (placeholders + downloads live under the ROMs dir) and any rows
+        // still carrying the prebuilt sentinel prefix. Only user-imported ROMs outside the ROMs dir
+        // that vanished from disk are pruned. See GameDao.deleteByLastIndexedAtLessThan.
+        retrogradedb.gameDao().deleteByLastIndexedAtLessThan(startedAtMs, romsUriPrefix, PREBUILT_URI_PREFIX)
     }
 
     fun getGameFiles(
@@ -355,5 +372,10 @@ class LemuroidLibrary(
         const val MAX_BUFFER_SIZE = 200
         const val MAX_TIME = 5000
         const val MAX_CONCURRENT_METADATA = 4
+
+        // Sentinel fileUri prefix written by the build-time PrebuiltDbGenerator, before the app
+        // rewrites it to the real ROMs dir on first boot. Kept in sync with
+        // ManifestQuickLoader.PREBUILT_URI_PREFIX / PrebuiltDbGenerator.PREBUILT_URI_PREFIX.
+        private const val PREBUILT_URI_PREFIX = "file:///lemuroid_prebuilt"
     }
 }

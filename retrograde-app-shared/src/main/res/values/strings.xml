@@ -150,6 +150,8 @@
     <string name="value_flycast_resolution_2x">2x (1280x960)</string>
     <string name="value_flycast_resolution_3x">3x (1920x1440)</string>
     <string name="value_flycast_resolution_4x">4x (2560x1920)</string>
+    <string name="setting_reicast_force_wince">Force Windows CE mode (full MMU)</string>
+    <string name="setting_reicast_emulate_framebuffer">Full framebuffer emulation</string>
 
     <!-- Dreamcast controller -->
     <string name="controller_dreamcast">Dreamcast</string>

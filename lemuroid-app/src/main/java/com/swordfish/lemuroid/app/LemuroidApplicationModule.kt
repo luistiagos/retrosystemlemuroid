@@ -333,7 +333,8 @@ abstract class LemuroidApplicationModule {
             storageProviderRegistry: Lazy<StorageProviderRegistry>,
             gameMetadataProvider: Lazy<GameMetadataProvider>,
             biosManager: BiosManager,
-        ) = LemuroidLibrary(db, storageProviderRegistry, gameMetadataProvider, biosManager)
+            directoriesManager: DirectoriesManager,
+        ) = LemuroidLibrary(db, storageProviderRegistry, gameMetadataProvider, biosManager, directoriesManager)
 
         @Provides
         @PerApp
@@ -550,6 +551,7 @@ abstract class LemuroidApplicationModule {
         ) = SaveQueueManager(
             context,
             retrogradeDatabase.saveQueueDao(),
+            retrogradeDatabase.gameDao(),
             romOnDemandManager,
         )
 

@@ -2164,17 +2164,29 @@ data class GameSystem(
                                         ),
                                     ),
                                 ),
+                            exposedAdvancedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "reicast_force_wince",
+                                        R.string.setting_reicast_force_wince,
+                                    ),
+                                    ExposedSetting(
+                                        "reicast_emulate_framebuffer",
+                                        R.string.setting_reicast_emulate_framebuffer,
+                                    ),
+                                ),
                             defaultSettings =
                                 listOf(
                                     CoreVariable("reicast_internal_resolution", "640x480"),
                                     CoreVariable("reicast_anisotropic_filtering", "4"),
-                                    // HLE BIOS (REIOS): o setup de memória/boot é feito em C++ pelo
-                                    // Flycast em vez de executar o dc_boot.bin real. Com o core
-                                    // patchado (nvmem off / memória segura), testando se o caminho
-                                    // REIOS evita a escrita de boot que crasha no caminho do BIOS real.
-                                    CoreVariable("reicast_hle_bios", "enabled"),
+                                    CoreVariable("reicast_hle_bios", "disabled"),
+                                    // VGA (default do core) deixa tela preta após a licença SEGA
+                                    // em jogos sem suporte a cabo VGA (GTA2, Unreal Tournament,
+                                    // SF Rush 2049...). TV (RGB) funciona com todos.
+                                    CoreVariable("reicast_cable_type", "TV (RGB)"),
+                                    CoreVariable("reicast_broadcast", "Default"),
                                     CoreVariable("reicast_enable_dsp", "disabled"),
-                                    CoreVariable("reicast_threaded_rendering", "disabled"),
+                                    CoreVariable("reicast_threaded_rendering", "enabled"),
                                 ),
                             rumbleSupported = true,
                             statesSupported = true,

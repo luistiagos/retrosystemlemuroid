@@ -4,6 +4,22 @@ Emulador Android multi-sistema baseado em Libretro. Este arquivo documenta a arq
 
 ---
 
+## Workflow de Documentação (obrigatório)
+
+Roteamento por prefixo do pedido do usuário. Cada item vira **um arquivo Markdown** na pasta indicada.
+
+| Prefixo | Onde documentar | Ciclo de vida |
+|---------|-----------------|---------------|
+| `[BUG]` | `documentacao/bugs/open/` ao **iniciar**; mover para `documentacao/bugs/done/` ao **resolver** | criar em `open` no começo da investigação; ao terminar a correção, mover o arquivo para `done` (atualizando Status) |
+| `[FEATURE]` | `documentacao/funcionalidades/` | documentar a funcionalidade implementada |
+| `[BACKLOG]` | `documentacao/backlogs/` | registrar a ideia/tarefa para o futuro |
+
+- Nome de arquivo: `YYYY-MM-DD-slug-curto.md` (ex.: `2026-07-01-catalogo-some-scan-biblioteca.md`).
+- Bugs seguem o formato dos arquivos existentes em `bugs/done/`: título com prefixo `[BUG]`, e blocos **Data / Status / Severidade / Branch**, depois **Sintoma / Causa-raiz / Correção / Validação / Lição**.
+- "Mover para done" = mover fisicamente o `.md` de `bugs/open/` para `bugs/done/` (não duplicar).
+
+---
+
 ## Estrutura do Projeto
 
 | Módulo | Responsabilidade |
@@ -444,3 +460,21 @@ if (!exists) { ... }
 **Sintoma:** Sem validação, qualquer mismatch entre o schema do asset e o que Room espera resulta em crash no runtime (RoomOpenHelper rejects identityHash mismatch, schema drift, etc).
 
 **Regra:** O `PrebuiltDbGenerator` (em buildSrc) re-abre o DB gerado e valida `user_version`, `identity_hash`, contagens, tabelas e triggers. Se algo divergir do esperado, a Gradle task falha. Nunca empacote um asset que não passou pela validação.
+
+### 5. Scan de biblioteca apaga o catálogo (games placeholder somem, sobra só o baixado)
+
+**Sintoma:** Após algum tempo, todos os jogos **não-baixados** desaparecem do catálogo; sobram apenas os que foram baixados.
+
+**Causa:** `LemuroidLibrary.indexLibrary()` (rodado pela `LibraryIndexWork`) faz um scan do filesystem: para cada arquivo **presente no disco** atualiza `lastIndexedAt`; no `cleanUp()` chama `removeDeletedGames()` → `deleteByLastIndexedAtLessThan(startedAtMs)`, que **apaga todo game cujo `lastIndexedAt` não foi renovado** (interpretado como "arquivo removido do disco"). Mas neste fork os games do catálogo são **placeholders só-no-DB, sem arquivo em disco** (ver "Sem placeholders em disco"). O scan nunca os encontra → `lastIndexedAt` fica antigo → são apagados. O guard `NOT EXISTS downloaded_roms` (fix parcial anterior) só protege os baixados — por isso sobram apenas eles.
+
+**Gatilho:** `MediaMountedReceiver` em `ACTION_MEDIA_MOUNTED` (remontagem de storage) chama `scheduleManualLibrarySync`; também qualquer rescan de settings / troca de pasta. Daí o "após um certo período de tempo".
+
+**Regra:** O scan deve ser **aditivo + metadata-refresh** para o catálogo, nunca destrutivo. `deleteByLastIndexedAtLessThan` recebe `romsPrefix` (URI da pasta de ROMs gerenciada) e `sentinelPrefix` (`file:///lemuroid_prebuilt`) e **nunca** apaga games sob esses prefixos — todo o catálogo + downloads vivem sob `romsPrefix`. Só ROMs importadas pelo usuário fora da pasta gerenciada (pasta externa / SAF) que sumiram do disco são removidas. Comparação por `SUBSTR` (não `LIKE`, para não quebrar com `_`/`%` no path); prefixo vazio protege tudo. Prefixo passado por `LemuroidLibrary.romsUriPrefix` (via `DirectoriesManager`).
+
+### 6. Core Flycast (Dreamcast) exige patch de `libandroid.so` no DT_NEEDED
+
+**Sintoma:** Todo jogo de Dreamcast crasha com SIGSEGV ~1–2 s após o boot.
+
+**Causa:** O `.so` do buildbot libretro não linka `libandroid.so`; o símbolo weak `ASharedMemory_create` fica nulo → fallback `open("/dev/ashmem")` → EACCES com targetSdk ≥ 29 (o app usa 35) → fastmem desliga (`[VMEM] ... errno 13` no logcat) → o caminho fallback do dynarec trunca o pointer tag (`0xb4…`) do Android 11+ → SIGSEGV.
+
+**Regra:** Ao atualizar o core Flycast do buildbot, **sempre rodar `python patch_flycast_libandroid.py`** (raiz do repo, requer `pip install lief`) antes de buildar. Detalhes em `documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.

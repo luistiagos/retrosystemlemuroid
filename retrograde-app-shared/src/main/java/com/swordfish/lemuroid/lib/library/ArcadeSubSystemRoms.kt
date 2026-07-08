@@ -3,6 +3,205 @@ package com.swordfish.lemuroid.lib.library
 import java.util.Locale
 
 object ArcadeSubSystemRoms {
+    // SNK Neo Geo (MVS/AES) romsets. These require the neogeo.zip BIOS, so it is
+    // critical they resolve to SystemID.NEOGEO (the only FBNeo system that declares
+    // the BIOS) rather than the generic SystemID.FBNEO. Includes titles that were
+    // historically misfiled under Technos (doubledr, matrim) / Data East (karnovr).
+    val NEOGEO_ROMS: Set<String> =
+        setOf(
+            "2020bb.zip",
+            "3countb.zip",
+            "alpham2.zip",
+            "androdun.zip",
+            "aodk.zip",
+            "aof.zip",
+            "aof2.zip",
+            "aof3.zip",
+            "bakatono.zip",
+            "bangbead.zip",
+            "bjourney.zip",
+            "blazstar.zip",
+            "breakers.zip",
+            "breakrev.zip",
+            "bstars.zip",
+            "bstars2.zip",
+            "burningf.zip",
+            "crswd2bl.zip",
+            "crsword.zip",
+            "ctomaday.zip",
+            "cyberlip.zip",
+            "diggerma.zip",
+            "doubledr.zip",
+            "eightman.zip",
+            "fatfursp.zip",
+            "fatfury1.zip",
+            "fatfury2.zip",
+            "fatfury3.zip",
+            "fbfrenzy.zip",
+            "fightfev.zip",
+            "flipshot.zip",
+            "galaxyfg.zip",
+            "ganryu.zip",
+            "garou.zip",
+            "ghostlop.zip",
+            "goalx3.zip",
+            "gowcaizr.zip",
+            "gpilots.zip",
+            "gururin.zip",
+            "ironclad.zip",
+            "irrmaze.zip",
+            "janshin.zip",
+            "jockeygp.zip",
+            "joyjoy.zip",
+            "kabukikl.zip",
+            "karnovr.zip",
+            "kizuna.zip",
+            "kof2000.zip",
+            "kof2001.zip",
+            "kof2002.zip",
+            "kof2003.zip",
+            "kof94.zip",
+            "kof95.zip",
+            "kof96.zip",
+            "kof97.zip",
+            "kof98.zip",
+            "kof99.zip",
+            "kotm.zip",
+            "kotm2.zip",
+            "lastblad.zip",
+            "lastbld2.zip",
+            "lbowling.zip",
+            "legendos.zip",
+            "lresort.zip",
+            "magdrop2.zip",
+            "magdrop3.zip",
+            "maglord.zip",
+            "mahretsu.zip",
+            "marukodq.zip",
+            "matrim.zip",
+            "miexchng.zip",
+            "minasan.zip",
+            "moshougi.zip",
+            "mslug.zip",
+            "mslug2.zip",
+            "mslug3.zip",
+            "mslug4.zip",
+            "mslug5.zip",
+            "mslugx.zip",
+            "mutnat.zip",
+            "nam1975.zip",
+            "ncombat.zip",
+            "ncommand.zip",
+            "neobombe.zip",
+            "neocup98.zip",
+            "neodrift.zip",
+            "neogeo.zip",
+            "neomrdo.zip",
+            "ninjamas.zip",
+            "nitd.zip",
+            "overtop.zip",
+            "panicbom.zip",
+            "pbobbl2n.zip",
+            "pbobblen.zip",
+            "pgoal.zip",
+            "pnyaa.zip",
+            "popbounc.zip",
+            "preisle2.zip",
+            "pspikes2.zip",
+            "pulstar.zip",
+            "puzzldpr.zip",
+            "puzzledp.zip",
+            "quizdai2.zip",
+            "quizdais.zip",
+            "quizkof.zip",
+            "ragnagrd.zip",
+            "rbff1.zip",
+            "rbff2.zip",
+            "rbffspec.zip",
+            "ridhero.zip",
+            "roboarmy.zip",
+            "rotd.zip",
+            "s1945p.zip",
+            "samsho.zip",
+            "samsho2.zip",
+            "samsho3.zip",
+            "samsho4.zip",
+            "samsho5.zip",
+            "samsho5s.zip",
+            "savagere.zip",
+            "sdodgeb.zip",
+            "sengoku.zip",
+            "sengoku2.zip",
+            "sengoku3.zip",
+            "shocktr2.zip",
+            "shocktro.zip",
+            "socbrawl.zip",
+            "sonicwi2.zip",
+            "sonicwi3.zip",
+            "spinmast.zip",
+            "ssideki.zip",
+            "ssideki2.zip",
+            "ssideki3.zip",
+            "ssideki4.zip",
+            "stakwin.zip",
+            "stakwin2.zip",
+            "strhoop.zip",
+            "superspy.zip",
+            "svc.zip",
+            "tophuntr.zip",
+            "tpgolf.zip",
+            "trally.zip",
+            "turfmast.zip",
+            "twinspri.zip",
+            "tws96.zip",
+            "viewpoin.zip",
+            "wakuwak7.zip",
+            "wh1.zip",
+            "wh2.zip",
+            "wh2j.zip",
+            "whp.zip",
+            "wjammers.zip",
+            "zedblade.zip",
+            "zintrckb.zip",
+            "zupapa.zip",
+        )
+
+    val CPS1_ROMS: Set<String> =
+        setOf(
+            "1941.zip",
+            "1941r1.zip",
+            "3wonders.zip",
+            "captcomm.zip",
+            "cawing.zip",
+            "dino.zip",
+            "dynwar.zip",
+            "ffight.zip",
+            "ffightu.zip",
+            "forgottn.zip",
+            "ghouls.zip",
+            "ghoulsu.zip",
+            "knights.zip",
+            "kod.zip",
+            "mbombrd.zip",
+            "megaman.zip",
+            "mercs.zip",
+            "msword.zip",
+            "mtwins.zip",
+            "nemo.zip",
+            "punisher.zip",
+            "qad.zip",
+            "sf2.zip",
+            "sf2ce.zip",
+            "sf2hf.zip",
+            "sf2t.zip",
+            "slammast.zip",
+            "strider.zip",
+            "unsquad.zip",
+            "varth.zip",
+            "willow.zip",
+            "wof.zip",
+        )
+
     val CPS2_ROMS: Set<String> =
         setOf(
             "1944.zip",
@@ -118,7 +317,6 @@ object ArcadeSubSystemRoms {
             "hbarrel.zip",
             "hbarrelu.zip",
             "karnov.zip",
-            "karnovr.zip",
             "midres.zip",
             "nitrobal.zip",
             "nslasher.zip",
@@ -326,9 +524,7 @@ object ArcadeSubSystemRoms {
         setOf(
             "blockout.zip",
             "cbuster.zip",
-            "doubledr.zip",
             "matmania.zip",
-            "matrim.zip",
             "renegade.zip",
             "wwfsstar.zip",
             "wwfwfest.zip",
@@ -355,10 +551,30 @@ object ArcadeSubSystemRoms {
             "zingzip.zip",
         )
 
+    /**
+     * BIOS files a specific FBNeo romset needs at runtime, independent of the SystemID it was
+     * catalogued under. Neo Geo games need neogeo.zip even when they fall under the generic
+     * SystemID.FBNEO (legacy catalog rows / manual scans). Consumed by
+     * [com.swordfish.lemuroid.lib.bios.BiosManager.getMissingBiosFiles] so the on-demand BIOS
+     * download fires per-game.
+     *
+     * PGM (kov, martmast, ...) needs the shared pgm.zip BIOS, same idea.
+     */
+    fun requiredBiosForRom(romName: String?): List<String> {
+        val normalized = romName?.lowercase(Locale.ROOT) ?: return emptyList()
+        return when (normalized) {
+            in NEOGEO_ROMS -> listOf("neogeo.zip")
+            in PGM_ROMS -> listOf("pgm.zip")
+            else -> emptyList()
+        }
+    }
+
     fun dedicatedSystemIdForRom(romName: String?): String? {
         val normalized = romName?.lowercase(Locale.ROOT) ?: return null
 
         return when {
+            normalized in NEOGEO_ROMS -> SystemID.NEOGEO.dbname
+            normalized in CPS1_ROMS -> SystemID.CPS1.dbname
             normalized in CPS2_ROMS -> SystemID.CPS2.dbname
             normalized in CPS3_ROMS -> SystemID.CPS3.dbname
             normalized in DATAEAST_ROMS -> SystemID.DATAEAST.dbname

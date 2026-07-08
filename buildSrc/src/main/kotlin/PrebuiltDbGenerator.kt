@@ -304,6 +304,12 @@ object PrebuiltDbGenerator {
         conn.createStatement().use {
             it.execute("INSERT INTO fts_games(docid, title) SELECT id, title FROM games")
         }
+        // Merge the freshly-built index into a single segment so the shipped DB starts optimal
+        // for MATCH queries. Runtime keeps it that way via GameSearchDao.optimize after the
+        // heavy manifest writes (URI rewrite / field refresh) that would otherwise fragment it.
+        conn.createStatement().use {
+            it.execute("INSERT INTO fts_games(fts_games) VALUES('optimize')")
+        }
     }
 
     /**

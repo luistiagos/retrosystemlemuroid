@@ -10,6 +10,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -47,14 +49,18 @@ fun SearchScreen(
         viewModel.setSystemIds(systemIds)
     }
 
-    // State is derived from query length and paging state:
-    //  • fewer than 3 chars → Idle   (prompt the user to keep typing)
-    //  • paging loading     → Loading (show spinner)
-    //  • paging done        → Ready  (results or empty message)
+    // State is derived from query length, the debounce, and paging state:
+    //  • fewer than 3 chars      → Idle    (prompt the user to keep typing)
+    //  • debounce still pending  → Loading (keep spinner while typing settles)
+    //  • paging loading          → Loading (show spinner)
+    //  • paging done             → Ready   (results or empty message)
+    // isSearchPending covers the debounce window so we never flash a false
+    // "no results" state between a keystroke and the query firing.
+    val isSearchPending by viewModel.isSearchPending.collectAsState()
     val isPageLoading = searchGames.loadState.refresh is LoadState.Loading
     val displayState = when {
         searchQuery.length < 3 -> SearchViewModel.UIState.Idle
-        isPageLoading -> SearchViewModel.UIState.Loading
+        isSearchPending || isPageLoading -> SearchViewModel.UIState.Loading
         else -> SearchViewModel.UIState.Ready
     }
 

@@ -40,15 +40,37 @@ interface GameDao {
     @Query("SELECT * FROM games WHERE lastIndexedAt < :lastIndexedAt")
     suspend fun selectByLastIndexedAtLessThan(lastIndexedAt: Long): List<Game>
 
+    /**
+     * Cleanup after a filesystem scan: removes games whose `lastIndexedAt` was not refreshed by
+     * the current scan (i.e. their file is no longer on disk).
+     *
+     * CRITICAL: catalog games are DB-only placeholders with no file on disk, so a filesystem scan
+     * never refreshes their `lastIndexedAt`. Without the guards below the scan would delete the
+     * entire browsable catalog, leaving only downloaded ROMs. We therefore NEVER delete:
+     *   - games under the app-managed ROMs directory ([romsPrefix]) — the whole catalog + downloads;
+     *   - games still carrying the prebuilt sentinel prefix ([sentinelPrefix]) — not yet URI-rewritten;
+     *   - games registered in `downloaded_roms`.
+     * Only genuinely user-imported ROMs living outside the ROMs dir (external folder / SAF) that
+     * disappeared from disk are pruned — preserving the legacy folder-scan cleanup.
+     *
+     * Prefix matching uses SUBSTR (not LIKE) so `_`/`%` in the path can't cause mismatches. If a
+     * prefix is empty the corresponding guard protects every row (safe: nothing gets deleted).
+     */
     @Query("""
         DELETE FROM games
         WHERE lastIndexedAt < :lastIndexedAt
+        AND SUBSTR(fileUri, 1, LENGTH(:romsPrefix)) <> :romsPrefix
+        AND SUBSTR(fileUri, 1, LENGTH(:sentinelPrefix)) <> :sentinelPrefix
         AND NOT EXISTS (
             SELECT 1 FROM downloaded_roms dr
             WHERE dr.systemId = games.systemId AND dr.fileName = games.fileName
         )
     """)
-    suspend fun deleteByLastIndexedAtLessThan(lastIndexedAt: Long)
+    suspend fun deleteByLastIndexedAtLessThan(
+        lastIndexedAt: Long,
+        romsPrefix: String,
+        sentinelPrefix: String,
+    )
 
     @Query("SELECT * FROM games WHERE isFavorite = 1 ORDER BY title ASC")
     fun selectFavorites(): PagingSource<Int, Game>
@@ -256,6 +278,15 @@ interface GameDao {
 
     @Delete
     suspend fun delete(games: List<Game>)
+
+    /**
+     * One-time removal of catalog titles confirmed broken on a given system (e.g. Dreamcast
+     * games that hang at boot in the Flycast core). Called by [ManifestQuickLoader] on a
+     * schema bump; the same titles are removed from catalog_manifest.txt so fresh installs
+     * never see them. FTS rows are cleaned up by the games_bd trigger.
+     */
+    @Query("DELETE FROM games WHERE systemId = :systemId AND title IN (:titles)")
+    suspend fun deleteBySystemAndTitles(systemId: String, titles: List<String>): Int
 
     @Query("SELECT * FROM games WHERE systemId = :systemId AND fileName LIKE '%/%'")
     suspend fun selectBySystemWithNestedPath(systemId: String): List<Game>

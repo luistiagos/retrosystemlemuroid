@@ -1,7 +1,15 @@
 # Backlog: Dreamcast funcional via motor Flycast standalone (embutido)
 
-**Status:** backlog (a fazer em outro momento)
-**Sistema:** Dreamcast (atualmente não funciona — crasha no boot)
+> **⚠️ OBSOLETO (2026-07-07):** o Dreamcast passou a funcionar pelo caminho
+> libretro normal. A causa-raiz de toda a cadeia de crashes abaixo era o `.so`
+> do buildbot sem `libandroid.so` no DT_NEEDED (→ `/dev/ashmem` EACCES com
+> targetSdk 35 → fastmem off → fallback do dynarec quebrado). Fix: patch de ELF
+> via `patch_flycast_libandroid.py`. Detalhes em
+> `documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.
+> Este plano de embutir o standalone NÃO é mais necessário.
+
+**Status:** obsoleto (superado pelo fix do core libretro)
+**Sistema:** Dreamcast (funcionando desde 2026-07-07)
 **Objetivo:** fazer o Dreamcast rodar de fato no Lemuroid embutindo o motor **standalone** do Flycast (`flyinghead/flycast`) como módulo/processo separado, no lugar de tentar consertar o caminho libretro.
 
 ---

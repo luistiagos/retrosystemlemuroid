@@ -1,6 +1,7 @@
 package com.swordfish.lemuroid.lib.library.catalog
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
 import androidx.core.net.toUri
@@ -53,6 +54,15 @@ class ManifestQuickLoader(
         private const val PREFS_NAME = "manifest_loader_prefs"
         private const val KEY_LOADED_APP_VERSION = "loaded_app_version"
         private const val KEY_LOADED_MANIFEST_SCHEMA = "loaded_manifest_schema"
+        private const val KEY_FTS_OPTIMIZED = "fts_optimized_version"
+
+        // Bump to force a one-time FTS index defragmentation (GameSearchDao.optimize) across
+        // all installs. Independent of MANIFEST_SCHEMA_VERSION / app version. Needed because
+        // the bulk UPDATEs below (sentinel-URI rewrite, manifest-field refresh) fire the FTS
+        // delete/insert triggers on every touched row and fragment the index into many
+        // segments, making search (MATCH) progressively slower. v1 — first cleanup pass for
+        // installs already fragmented by the first-boot URI rewrite.
+        private const val FTS_MAINTENANCE_VERSION = 1
 
         // Bump whenever catalog_manifest.txt gains/loses columns or changes semantics
         // so a one-time reload runs on the next launch (regardless of app version).
@@ -78,7 +88,21 @@ class ManifestQuickLoader(
         //   v19  pcfx (NEC PC-FX) added; PCFX system + Beetle PC-FX core registered
         //   v20  gw (Nintendo Game & Watch) added
         //   v21  atarist (Atari ST) added; ATARI_ST system + Hatari core registered
-        private const val MANIFEST_SCHEMA_VERSION = 21
+        //   v22  dc (Sega Dreamcast, 1425 games) re-added — see bug fix
+        //          documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md
+        //   v23  dc broken titles removed (GTA2, RE3, Soul Reaver, Worms Armageddon — hang at
+        //          boot in the Flycast core; see bugs/open/2026-07-08-dreamcast-subset-jogos-
+        //          travam-9fps.md). Manifest lines dropped + one-time DB delete below.
+        private const val MANIFEST_SCHEMA_VERSION = 23
+
+        // Titles removed in v23 — deleted from existing installs' DBs (search/FTS shows any
+        // row in `games`, so hiding requires actual deletion, not isRepresentative=0).
+        private val DC_BROKEN_TITLES = listOf(
+            "Grand Theft Auto 2",
+            "Resident Evil 3: Nemesis",
+            "Legacy of Kain: Soul Reaver",
+            "Worms Armageddon",
+        )
 
         // catalog_manifest.txt uses abbreviated folder names that differ from
         // Lemuroid's SystemID.dbname. The mapping (manifest folder → dbname) lives in
@@ -171,13 +195,30 @@ class ManifestQuickLoader(
             }
         }
 
+        // v23 one-time cleanup: remove Dreamcast titles confirmed broken in the Flycast core
+        // (hang at boot). The manifest no longer carries them (fresh installs are clean); this
+        // deletes the rows already present in existing installs so they vanish from the
+        // catalog AND from search (FTS rows drop via the games_bd trigger).
+        if (loadedSchema < 23) {
+            try {
+                val deleted = database.gameDao().deleteBySystemAndTitles("dc", DC_BROKEN_TITLES)
+                Timber.i("ManifestQuickLoader: v23 cleanup removed $deleted broken dc games")
+            } catch (t: Throwable) {
+                Timber.e(t, "ManifestQuickLoader: v23 cleanup failed (continuing)")
+            }
+        }
+
         // Skip only when both the app version and the manifest schema match what's already
         // loaded. Bumping MANIFEST_SCHEMA_VERSION forces a single reload across all users
         // so new manifest fields (e.g. isRepresentative in v2) flow into the DB.
         if (prefs.getInt(KEY_LOADED_APP_VERSION, -1) == appVersion &&
             loadedSchema == MANIFEST_SCHEMA_VERSION
         ) {
+            // Common every-boot path. Signal readiness first so Home isn't gated on the
+            // (one-time) FTS defrag below, which cleans up installs fragmented by a past
+            // first-boot URI rewrite from before this maintenance existed.
             _catalogReady.value = true
+            maybeOptimizeFtsIndex(prefs)
             return@withContext LoadResult(0)
         }
 
@@ -208,6 +249,7 @@ class ManifestQuickLoader(
                 "ManifestQuickLoader: fast-skip (DB has $existingCount/${expectedSize} games)",
             )
             _catalogReady.value = true
+            maybeOptimizeFtsIndex(prefs)
             return@withContext LoadResult(0)
         }
 
@@ -269,7 +311,32 @@ class ManifestQuickLoader(
             .apply()
         Timber.i("ManifestQuickLoader: inserted=$inserted total=${games.size}")
         _catalogReady.value = true
+        // This path just ran the sentinel-URI rewrite and/or the manifest-field refresh, both
+        // of which fragment the FTS index — defrag unconditionally to keep search fast. After
+        // _catalogReady so Home isn't gated on it.
+        optimizeFtsIndex(prefs)
         LoadResult(inserted)
+    }
+
+    /**
+     * Runs the FTS defrag only if it hasn't been done for the current FTS_MAINTENANCE_VERSION.
+     * Used on the fast-return / fast-skip paths so already-fragmented installs get cleaned up
+     * exactly once without paying the (small) optimize cost on every boot.
+     */
+    private fun maybeOptimizeFtsIndex(prefs: SharedPreferences) {
+        if (prefs.getInt(KEY_FTS_OPTIMIZED, -1) == FTS_MAINTENANCE_VERSION) return
+        optimizeFtsIndex(prefs)
+    }
+
+    /** Merges the FTS4 index segments into one (see GameSearchDao.optimize) and records it. */
+    private fun optimizeFtsIndex(prefs: SharedPreferences) {
+        try {
+            database.gameSearchDao().optimize(database.openHelper.writableDatabase)
+            prefs.edit().putInt(KEY_FTS_OPTIMIZED, FTS_MAINTENANCE_VERSION).apply()
+            Timber.i("ManifestQuickLoader: FTS index optimized (defragmented)")
+        } catch (t: Throwable) {
+            Timber.e(t, "ManifestQuickLoader: FTS optimize failed (continuing)")
+        }
     }
 
     @Suppress("DEPRECATION")

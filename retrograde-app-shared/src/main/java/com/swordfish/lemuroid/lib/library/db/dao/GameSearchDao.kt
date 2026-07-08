@@ -75,6 +75,22 @@ class GameSearchDao(private val internalDao: Internal) {
         }
     }
 
+    /**
+     * Merges the FTS4 index segments back into a single segment ("defragmentation").
+     *
+     * Every UPDATE to `games` fires the `games_bu`/`games_au` triggers, which delete and
+     * reinsert that row's FTS posting — regardless of whether `title` actually changed.
+     * Bulk writes leave the index scattered across many small segments and each MATCH must
+     * merge-scan all of them, so search gets slower as catalog churn accumulates (the
+     * first-boot URI rewrite alone re-touches ~30k rows). The two biggest offenders:
+     * `ManifestQuickLoader`'s sentinel-URI rewrite and its manifest-field refresh on schema
+     * bumps. `optimize` collapses the segments back to one, restoring MATCH speed. Cheap and
+     * safe to run off the UI thread; effectively a no-op if the index is already optimal.
+     */
+    fun optimize(db: SupportSQLiteDatabase) {
+        db.execSQL("INSERT INTO fts_games(fts_games) VALUES('optimize')")
+    }
+
     fun search(query: String, systemIds: List<String>? = null): PagingSource<Int, Game> {
         val matchArg = sanitizeFtsQuery(query)
         return if (systemIds != null && systemIds.isNotEmpty()) {
