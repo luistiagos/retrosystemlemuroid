@@ -31,3 +31,11 @@ replay_pid*.log
 *.aab
 *.chd
 *.db
+
+# Logs de build/diagnóstico (nunca versionar — inflam o diff e escondem regressões)
+*.log
+logcat*.txt
+perf_*.txt
+startup_*.txt
+pkgs*.txt
+*_logs.txt
