@@ -937,6 +937,18 @@ data class GameSystem(
                                     0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
                                 ),
                         ),
+                        SystemCoreConfig(
+                            CoreID.MAME2003PLUS,
+                            requiredBIOSFiles = listOf("neogeo.zip"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to
+                                        arrayListOf(
+                                            ControllerConfigs.MAME_2003_4,
+                                            ControllerConfigs.MAME_2003_6,
+                                        ),
+                                ),
+                        ),
                     ),
                     uniqueExtensions = listOf(),
                     supportedExtensions = listOf("zip"),

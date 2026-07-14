@@ -108,13 +108,14 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
         val biosFile = File(systemDirectory, fileName)
         if (!biosFile.exists()) return false
 
-        val expectedMd5 = biosEntryFor(fileName)?.md5 ?: return true
+        val expectedMd5s = biosEntryFor(fileName)?.md5?.split(",") ?: return true
         val actualMd5 = runCatching { md5Hex(biosFile) }
             .onFailure { Timber.w(it, "Failed to calculate BIOS MD5: ${biosFile.path}") }
             .getOrNull()
 
-        if (actualMd5 == null || !actualMd5.equals(expectedMd5, ignoreCase = true)) {
-            Timber.w("Invalid BIOS file: ${biosFile.path} expected=$expectedMd5 actual=$actualMd5")
+        val isValid = actualMd5 != null && expectedMd5s.any { it.equals(actualMd5, ignoreCase = true) }
+        if (!isValid) {
+            Timber.w("Invalid BIOS file: ${biosFile.path} expected=$expectedMd5s actual=$actualMd5")
             biosFile.safeDelete()
             return false
         }
@@ -263,7 +264,7 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                 ),
                 Bios(
                     "neogeo.zip",
-                    "DFFB72F116D36D025068B23970A4F6DF",
+                    "872DEA2E508FB1332E0FD4D5F9A2D15A,DFFB72F116D36D025068B23970A4F6DF",
                     "Neo Geo BIOS",
                     SystemID.FBNEO,
                     "362E948D",

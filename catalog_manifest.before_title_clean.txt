@@ -7688,7 +7688,6 @@ fbneo/neobombe.zip|Neo Bomberman|https://adb.arcadeitalia.net/?mame=neobombe&typ
 fbneo/neodrift.zip|Neo Drift Out - New Technology|https://adb.arcadeitalia.net/?mame=neodrift&type=title&resize=0|0|1
 fbneo/neomrdo.zip|Neo Mr. Do!|https://adb.arcadeitalia.net/?mame=neomrdo&type=title&resize=0|0|1
 fbneo/turfmast.zip|Neo Turf Masters / Big Tournament Golf|https://adb.arcadeitalia.net/?mame=turfmast&type=title&resize=0|0|1
-fbneo/neogeo.zip|Neo-Geo MV-6F|https://adb.arcadeitalia.net/?mame=neogeo&type=title&resize=0|0|1
 fbneo/netwars.zip|Net Wars|https://adb.arcadeitalia.net/?mame=netwars&type=title&resize=0|0|1
 fbneo/3in1semi.zip|New HyperMan|https://adb.arcadeitalia.net/?mame=3in1semi&type=title&resize=0|0|1
 fbneo/nrallyx.zip|New Rally X|https://adb.arcadeitalia.net/?mame=nrallyx&type=title&resize=0|0|1

@@ -49,6 +49,24 @@ class MainProcessInitializer : Initializer<Unit> {
             LibraryIndexScheduler.scheduleCoreUpdate(context)
         }
 
+        // Delete any 0-byte neogeo.zip files from the ROMs folder to avoid emulators failing
+        // because of empty placeholders overriding the system BIOS.
+        GlobalScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            try {
+                val romsDir = com.swordfish.lemuroid.lib.storage.DirectoriesManager(context).getInternalRomsDirectory()
+                if (romsDir.exists() && romsDir.isDirectory) {
+                    romsDir.walkBottomUp()
+                        .filter { it.name.equals("neogeo.zip", ignoreCase = true) && it.isFile && it.length() == 0L }
+                        .forEach {
+                            Timber.i("Deleting 0-byte placeholder BIOS file to prevent core load failure: ${it.path}")
+                            it.delete()
+                        }
+                }
+            } catch (e: Exception) {
+                Timber.e(e, "Failed to clean up 0-byte neogeo.zip placeholders")
+            }
+        }
+
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

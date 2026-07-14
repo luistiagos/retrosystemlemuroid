@@ -2780,7 +2780,6 @@ fbneo/nemo.zip|https://db.hfsplay.fr/files/2018/10/06/14198025-9cd5-47ae-8a74-77
 fbneo/neobattl.zip|https://huggingface.co/datasets/luistiagos/medias/resolve/main/fburn/images/neobattl.png
 fbneo/neobombe.zip|https://db.hfsplay.fr/files/2019/06/14/e9370b36-2b36-4d63-ae61-ef46da93f71d.png
 fbneo/neodrift.zip|https://db.hfsplay.fr/files/2021/12/20/neodrift_back_jap_Av2LFLm.jpg
-fbneo/neogeo.zip|https://db.hfsplay.fr/files/2020/02/15/NeoGeo_Battle_Coliseum_XHLl4ER.png
 fbneo/neomrdo.zip|https://db.hfsplay.fr/files/2021/01/13/neomrdo_XTT9OPt.jpg
 fbneo/netwars.zip|https://db.hfsplay.fr/files/2019/09/30/554056a5-a4d6-474f-8d98-55776b9a31b3_GxPccLO.jpg
 fbneo/newsin7.zip|https://huggingface.co/datasets/luistiagos/medias/resolve/main/fburn/images/newsin7.png

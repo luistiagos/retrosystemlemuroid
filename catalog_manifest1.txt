@@ -2780,7 +2780,6 @@ fbneo/nemo.zip
 fbneo/neobattl.zip
 fbneo/neobombe.zip
 fbneo/neodrift.zip
-fbneo/neogeo.zip
 fbneo/neomrdo.zip
 fbneo/netwars.zip
 fbneo/newsin7.zip
