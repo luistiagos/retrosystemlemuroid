@@ -1,0 +1,14 @@
+# Copie para build.properties (fora do git) e preencha os valores reais.
+# Usado por build-and-upload.ps1.
+
+# HuggingFace (upload versionado)
+HF_TOKEN=hf_YOUR_TOKEN_HERE
+HF_REPO=luisluis123/versions
+
+# R2 / Cloudflare (upload de distribuicao, sem versao)
+# Se omitido, o script tenta E:\projects\GODSend\r2-config.json (mesmo bucket "versions").
+R2_ACCESS_KEY_ID=YOUR_ACCESS_KEY_ID
+R2_SECRET_ACCESS_KEY=YOUR_SECRET_ACCESS_KEY
+R2_ENDPOINT=https://YOUR_ACCOUNT_ID.r2.cloudflarestorage.com
+R2_BUCKET=versions
+R2_PUBLIC_URL=https://dl.digitalstoregames.com

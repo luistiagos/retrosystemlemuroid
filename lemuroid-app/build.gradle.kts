@@ -158,6 +158,17 @@ android {
         }
     }
 
+    splits {
+        abi {
+            // Um APK por ABI: corta o APK universal de ~356 MB (4 ABIs) que estourava
+            // o armazenamento de Smart TVs com pouca ROM na instalacao.
+            isEnable = true
+            reset()
+            include("arm64-v8a", "armeabi-v7a")
+            isUniversalApk = false
+        }
+    }
+
     signingConfigs {
         maybeCreate("debug").apply {
             storeFile = file("$rootDir/debug.keystore")

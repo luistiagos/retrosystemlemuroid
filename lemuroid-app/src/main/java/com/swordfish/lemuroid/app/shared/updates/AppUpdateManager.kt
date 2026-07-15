@@ -86,10 +86,19 @@ class AppUpdateManager(private val context: Context) {
                     "Update channel mismatch: expected ${BuildConfig.APP_UPDATE_CHANNEL}, got $channel",
                 )
             }
+            // Splits por ABI: "apkUrls" mapeia ABI -> URL. SUPPORTED_ABIS vem em ordem
+            // de preferencia do device (arm64 antes de armv7). Fallback no "apkUrl"
+            // legado para servidores que ainda publicam um APK unico.
+            val apkUrls = json.optJSONObject("apkUrls")
+            val abiApkUrl = apkUrls?.let { urls ->
+                Build.SUPPORTED_ABIS.firstNotNullOfOrNull { abi ->
+                    urls.optString(abi).takeIf { it.isNotEmpty() }
+                }
+            }
             return UpdateInfo(
                 versionCode = json.getInt("versionCode"),
                 versionName = json.getString("versionName"),
-                apkUrl = json.getString("apkUrl"),
+                apkUrl = abiApkUrl ?: json.getString("apkUrl"),
                 channel = channel,
             )
         }
