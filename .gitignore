@@ -17,6 +17,8 @@ project.properties
 .externalNativeBuild
 local.properties
 release.jks
+build.properties
+r2-config.json
 
 carbon.zip
 

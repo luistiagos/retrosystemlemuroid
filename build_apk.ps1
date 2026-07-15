@@ -13,6 +13,9 @@ param(
 $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+# gradlew.bat usa o CWD como raiz do build — fixa no repo para o script
+# funcionar quando invocado de qualquer diretorio.
+Set-Location -Path $repoRoot
 $gradleWrapper = Join-Path $repoRoot "gradlew.bat"
 $apkOutputDir = Join-Path $repoRoot "lemuroid-app\build\outputs\apk"
 $distDir = Join-Path $repoRoot "dist"
@@ -138,53 +141,74 @@ if ($LASTEXITCODE -ne 0) {
     throw "Build falhou com codigo $LASTEXITCODE"
 }
 
-# ── Localiza o APK gerado ───────────────────────────────────────────────────
-$apkFile = Get-ChildItem -Path $apkOutputDir -Recurse -Filter "*.apk" |
-    Sort-Object LastWriteTimeUtc -Descending |
-    Select-Object -First 1
+# ── Localiza os APKs gerados (splits por ABI) ───────────────────────────────
+# Busca no diretorio da variante buildada (nunca "o APK mais recente" recursivo:
+# foi assim que uma build debug ja acabou distribuida em dist\).
+$isRelease = $Task -match '(?i)release'
+$variantDir = Join-Path $apkOutputDir $(if ($isRelease) { "freeBundle\release" } else { "freeBundle\debug" })
+$apkFiles = @(Get-ChildItem -Path $variantDir -Filter "*.apk" -ErrorAction SilentlyContinue)
 
-if (-not $apkFile) {
-    throw "Nenhum APK foi encontrado em $apkOutputDir"
+if ($apkFiles.Count -eq 0) {
+    throw "Nenhum APK foi encontrado em $variantDir"
 }
 
-$apkSizeMb = [math]::Round($apkFile.Length / 1MB, 2)
 Write-Host ""
-Write-Host "APK gerado: $($apkFile.FullName) ($apkSizeMb MB)"
+foreach ($apk in $apkFiles) {
+    $apkSizeMb = [math]::Round($apk.Length / 1MB, 2)
+    Write-Host "APK gerado: $($apk.FullName) ($apkSizeMb MB)"
+}
 
-# ── Confirma que o prebuilt DB foi empacotado dentro do APK ─────────────────
+# ── Confirma que o prebuilt DB foi empacotado dentro de cada APK ────────────
 # Isso protege contra dependsOn mal configurada na task generatePrebuiltDb —
 # se o asset nao estiver no APK, a "tela preparando ambiente" volta no primeiro boot.
 if (-not $SkipPrebuiltCheck) {
     # PowerShell 5.1 nao carrega System.IO.Compression.FileSystem por padrao.
     Add-Type -AssemblyName System.IO.Compression.FileSystem
-    $apkAsZip = [System.IO.Compression.ZipFile]::OpenRead($apkFile.FullName)
-    try {
-        $prebuiltEntry = $apkAsZip.Entries | Where-Object { $_.FullName -eq "assets/retrograde-prebuilt.db" } | Select-Object -First 1
-        if ($prebuiltEntry) {
-            $prebuiltMb = [math]::Round($prebuiltEntry.Length / 1MB, 2)
-            $prebuiltCompressedMb = [math]::Round($prebuiltEntry.CompressedLength / 1MB, 2)
-            Write-Host "  assets/retrograde-prebuilt.db presente: $prebuiltMb MB ($prebuiltCompressedMb MB comprimido)"
-        } else {
-            Write-Warning "  assets/retrograde-prebuilt.db AUSENTE no APK!"
-            Write-Warning "  isso indica problema no wire-up de generatePrebuiltDb -> mergeAssets em lemuroid-app/build.gradle.kts"
+    foreach ($apk in $apkFiles) {
+        $apkAsZip = [System.IO.Compression.ZipFile]::OpenRead($apk.FullName)
+        try {
+            $prebuiltEntry = $apkAsZip.Entries | Where-Object { $_.FullName -eq "assets/retrograde-prebuilt.db" } | Select-Object -First 1
+            if ($prebuiltEntry) {
+                $prebuiltMb = [math]::Round($prebuiltEntry.Length / 1MB, 2)
+                $prebuiltCompressedMb = [math]::Round($prebuiltEntry.CompressedLength / 1MB, 2)
+                Write-Host "  $($apk.Name): assets/retrograde-prebuilt.db presente: $prebuiltMb MB ($prebuiltCompressedMb MB comprimido)"
+            } else {
+                Write-Warning "  $($apk.Name): assets/retrograde-prebuilt.db AUSENTE no APK!"
+                Write-Warning "  isso indica problema no wire-up de generatePrebuiltDb -> mergeAssets em lemuroid-app/build.gradle.kts"
+            }
+        } finally {
+            $apkAsZip.Dispose()
         }
-    } finally {
-        $apkAsZip.Dispose()
     }
 }
 
-# ── Copia para dist/ ────────────────────────────────────────────────────────
-$safeChannelName = $CatalogChannel -replace '[^A-Za-z0-9_-]', '_'
-$desiredApkName = if ($safeChannelName -eq "default") {
-    "retro-game-system.apk"
-} else {
-    "retro-game-system-$safeChannelName.apk"
-}
-$distApkPath = Join-Path $distDir $desiredApkName
-Copy-Item -Path $apkFile.FullName -Destination $distApkPath -Force
+# Mapa ABI -> sufixo amigavel dos artefatos em dist\.
+$abiMap = [ordered]@{ "arm64-v8a" = "arm64"; "armeabi-v7a" = "armv7" }
 
-Write-Host ""
-Write-Host "APK final: $distApkPath"
+# ── Copia para dist/ — SOMENTE builds release ───────────────────────────────
+# dist\ e o diretorio de distribuicao; build debug nunca pode sobrescrever os
+# artefatos (ja aconteceu: dist\retro-game-system.apk ficou com a build debug).
+if (-not $isRelease) {
+    Write-Warning "Build DEBUG: artefatos NAO copiados para dist\ (dist\ e reservado a builds release)."
+} else {
+    $safeChannelName = $CatalogChannel -replace '[^A-Za-z0-9_-]', '_'
+    Write-Host ""
+    foreach ($abi in $abiMap.Keys) {
+        $apk = $apkFiles | Where-Object { $_.Name -match [regex]::Escape($abi) } | Select-Object -First 1
+        if (-not $apk) {
+            Write-Warning "Split $abi nao encontrado em $variantDir"
+            continue
+        }
+        $desiredApkName = if ($safeChannelName -eq "default") {
+            "retro-game-system-$($abiMap[$abi]).apk"
+        } else {
+            "retro-game-system-$safeChannelName-$($abiMap[$abi]).apk"
+        }
+        $distApkPath = Join-Path $distDir $desiredApkName
+        Copy-Item -Path $apk.FullName -Destination $distApkPath -Force
+        Write-Host "APK final: $distApkPath"
+    }
+}
 
 # ── Instalacao opcional via ADB ─────────────────────────────────────────────
 if ($Install) {
@@ -197,12 +221,22 @@ if ($Install) {
     if (-not $adb) {
         Write-Warning "ADB nao encontrado. Pulando instalacao."
     } else {
+        # Com splits por ABI, escolhe o APK compativel com o device conectado.
+        # Instala direto do diretorio da variante (funciona para debug tambem).
+        $deviceAbi = (& $adb shell getprop ro.product.cpu.abi).Trim()
         Write-Host ""
-        Write-Host "Instalando via ADB..."
-        # Reinstall preservando dados (sem uninstall). Use -r para sobrescrever.
-        & $adb install -r $distApkPath
-        if ($LASTEXITCODE -ne 0) {
-            Write-Warning "Falha ao instalar. Talvez seja necessario remover uma instalacao anterior antes de tentar novamente."
+        Write-Host "ABI do device: $deviceAbi"
+        $targetAbi = if ($abiMap.Contains($deviceAbi)) { $deviceAbi } else { "armeabi-v7a" }
+        $apkToInstall = $apkFiles | Where-Object { $_.Name -match [regex]::Escape($targetAbi) } | Select-Object -First 1
+        if (-not $apkToInstall) {
+            Write-Warning "Nenhum APK do split $targetAbi encontrado. Pulando instalacao."
+        } else {
+            Write-Host "Instalando via ADB: $($apkToInstall.Name)..."
+            # Reinstall preservando dados (sem uninstall). Use -r para sobrescrever.
+            & $adb install -r $apkToInstall.FullName
+            if ($LASTEXITCODE -ne 0) {
+                Write-Warning "Falha ao instalar. Talvez seja necessario remover uma instalacao anterior antes de tentar novamente."
+            }
         }
     }
 }
