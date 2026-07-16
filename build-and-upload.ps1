@@ -185,26 +185,36 @@ if (-not $SkipHF) {
     Print-Step "PASSO 2/3: Upload para HuggingFace (SKIPPED)"
 }
 
+# ─── CONFIG R2 (resolvida sempre — usada tambem pra gerar o JSON do
+# app_version mesmo com -SkipR2, ja que so entao sabemos o publicBaseUrl) ──
+$usingGodsendFallback = $false
+if ($Script:R2_ACCESS_KEY_ID -and $Script:R2_SECRET_ACCESS_KEY -and $Script:R2_ENDPOINT -and $Script:R2_BUCKET) {
+    $cfg = [PSCustomObject]@{
+        accessKeyId     = $Script:R2_ACCESS_KEY_ID
+        secretAccessKey = $Script:R2_SECRET_ACCESS_KEY
+        endpoint        = $Script:R2_ENDPOINT
+        bucket          = $Script:R2_BUCKET
+        publicBaseUrl   = if ($Script:R2_PUBLIC_URL) { $Script:R2_PUBLIC_URL } else { "" }
+    }
+} elseif (Test-Path -LiteralPath $LOCAL_R2_CONFIG) {
+    $cfg = Get-Content -LiteralPath $LOCAL_R2_CONFIG -Raw -Encoding UTF8 | ConvertFrom-Json
+} elseif (Test-Path -LiteralPath $GODSEND_R2_CONFIG) {
+    $cfg = Get-Content -LiteralPath $GODSEND_R2_CONFIG -Raw -Encoding UTF8 | ConvertFrom-Json
+    $usingGodsendFallback = $true
+} else {
+    $cfg = $null
+}
+
 # ─── STEP 3: R2 UPLOAD (distribuicao, sem versao) ──
 if (-not $SkipR2) {
     Print-Step "PASSO 3/3: Upload para R2 (distribuicao)"
 
-    if ($Script:R2_ACCESS_KEY_ID -and $Script:R2_SECRET_ACCESS_KEY -and $Script:R2_ENDPOINT -and $Script:R2_BUCKET) {
-        $cfg = [PSCustomObject]@{
-            accessKeyId     = $Script:R2_ACCESS_KEY_ID
-            secretAccessKey = $Script:R2_SECRET_ACCESS_KEY
-            endpoint        = $Script:R2_ENDPOINT
-            bucket          = $Script:R2_BUCKET
-            publicBaseUrl   = if ($Script:R2_PUBLIC_URL) { $Script:R2_PUBLIC_URL } else { "" }
-        }
-    } elseif (Test-Path -LiteralPath $LOCAL_R2_CONFIG) {
-        $cfg = Get-Content -LiteralPath $LOCAL_R2_CONFIG -Raw -Encoding UTF8 | ConvertFrom-Json
-    } elseif (Test-Path -LiteralPath $GODSEND_R2_CONFIG) {
+    if (-not $cfg) {
+        throw "Credenciais R2 nao encontradas. Defina R2_* no build.properties, crie r2-config.json (veja r2-config.example.json), ou garanta que $GODSEND_R2_CONFIG existe."
+    }
+    if ($usingGodsendFallback) {
         Write-Host "Sem R2_* local: usando credenciais do GODSend (mesmo bucket 'versions')." -ForegroundColor Yellow
         Write-Host "  $GODSEND_R2_CONFIG" -ForegroundColor Yellow
-        $cfg = Get-Content -LiteralPath $GODSEND_R2_CONFIG -Raw -Encoding UTF8 | ConvertFrom-Json
-    } else {
-        throw "Credenciais R2 nao encontradas. Defina R2_* no build.properties, crie r2-config.json (veja r2-config.example.json), ou garanta que $GODSEND_R2_CONFIG existe."
     }
 
     foreach ($field in @('accessKeyId', 'secretAccessKey', 'endpoint', 'bucket')) {
@@ -276,18 +286,16 @@ if (-not $SkipHF) {
 }
 
 $r2PublicUrls = @{}
-if (-not $SkipR2) {
-    Write-Host ""
-    Write-Host "R2 (distribuicao):" -ForegroundColor Cyan
-    if ($cfg.publicBaseUrl) {
-        $base = $cfg.publicBaseUrl.TrimEnd('/')
-        foreach ($abi in $AbiMap.Keys) {
-            $r2PublicUrls[$abi] = "$base/$R2_FOLDER/retro-game-system-$($AbiMap[$abi]).apk"
-            Write-Host "  $($DeviceLabel[$abi]): $($r2PublicUrls[$abi])" -ForegroundColor Cyan
-        }
-    } else {
-        Write-Host "  (defina publicBaseUrl / R2_PUBLIC_URL para ver as URLs)" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "R2 (distribuicao):" -ForegroundColor Cyan
+if ($cfg.publicBaseUrl) {
+    $base = $cfg.publicBaseUrl.TrimEnd('/')
+    foreach ($abi in $AbiMap.Keys) {
+        $r2PublicUrls[$abi] = "$base/$R2_FOLDER/retro-game-system-$($AbiMap[$abi]).apk"
+        Write-Host "  $($DeviceLabel[$abi]): $($r2PublicUrls[$abi])" -ForegroundColor Cyan
     }
+} else {
+    Write-Host "  (defina publicBaseUrl / R2_PUBLIC_URL para ver as URLs)" -ForegroundColor Yellow
 }
 
 # ─── JSON app_version ───────────────────────────────

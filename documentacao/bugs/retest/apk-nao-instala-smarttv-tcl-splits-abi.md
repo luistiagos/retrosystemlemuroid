@@ -76,35 +76,35 @@ do servidor** (seção abaixo) e a validação em device físico.
   JSON pronto do `app_version` (usa `$cfg.publicBaseUrl` / `R2_PUBLIC_URL`
   para montar as URLs — sem isso, imprime aviso pedindo para configurar).
 
-## Bloqueio atual — falta domínio público no R2
+## R2 público — resolvido (2026-07-15)
 
-O endpoint `https://emuladores.pythonanywhere.com/app_version` retorna
-**404** (JSON nunca foi publicado) e o bucket R2 `versions` não tem acesso
-público habilitado ainda (`R2_PUBLIC_URL` vazio no `build.properties`;
-`dl.digitalstoregames.com` não resolve). Decisão: usar URLs do R2 público
-(nomes estáveis, egress grátis) em vez das URLs versionadas do HuggingFace.
+O bucket `versions` já tem domínio público custom: `https://versions.digitalstoregames.com`
+(mapeado no Cloudflare, não é o `dl.digitalstoregames.com` cogitado antes).
+Verificado com `curl -I` nas duas URLs: HTTP 200, `Content-Length` batendo
+exatamente com os bytes locais (110.995.731 / 94.641.603). `R2_PUBLIC_URL`
+preenchido em `build.properties` (arquivo local, gitignored).
 
-## Passo manual pendente (servidor)
+Corrigido também um bug no `build-and-upload.ps1`: a resolução de `$cfg`
+(credenciais + `publicBaseUrl`) estava presa dentro do bloco `if (-not $SkipR2)`,
+então rodar com `-SkipR2` (reimprimir o resumo sem re-upload) nunca gerava o
+JSON. Agora `$cfg` é resolvido sempre, e só a chamada de upload em si
+(`rclone copy` + verificação) fica condicionada a `-SkipR2`.
 
-1. **Cloudflare**: habilitar acesso público ao bucket `versions` (subdomínio
-   `r2.dev` ou domínio custom) e preencher `R2_PUBLIC_URL=<url>` em
-   `build.properties`.
-2. Rodar `.\build-and-upload.ps1` (ou `-SkipBuild -SkipHF -SkipR2` se só
-   quiser reimprimir o resumo com APKs já enviados) e copiar o JSON impresso
-   no resumo final.
-3. Publicar esse JSON na rota `/app_version` do pythonanywhere (código do
-   servidor não está neste repo).
+**Falta só o passo manual do servidor**: publicar o JSON abaixo (gerado por
+`.\build-and-upload.ps1 -SkipBuild -SkipHF -SkipR2`) na rota `/app_version`
+do pythonanywhere (código do servidor não está neste repo) — hoje o endpoint
+retorna 404.
 
 ```json
 {
-  "versionCode": 231,
-  "versionName": "1.17.0",
-  "channel": "default",
-  "apkUrl": "https://.../retro-game-system-arm64.apk",
-  "apkUrls": {
-    "arm64-v8a": "https://.../retro-game-system-arm64.apk",
-    "armeabi-v7a": "https://.../retro-game-system-armv7.apk"
-  }
+    "versionCode": 231,
+    "versionName": "1.17.0",
+    "channel": "default",
+    "apkUrl": "https://versions.digitalstoregames.com/RetroGameSystem/retro-game-system-arm64.apk",
+    "apkUrls": {
+        "arm64-v8a": "https://versions.digitalstoregames.com/RetroGameSystem/retro-game-system-arm64.apk",
+        "armeabi-v7a": "https://versions.digitalstoregames.com/RetroGameSystem/retro-game-system-armv7.apk"
+    }
 }
 ```
 
@@ -118,7 +118,9 @@ público habilitado ainda (`R2_PUBLIC_URL` vazio no `build.properties`;
 2. ✅ `.\build_apk.ps1 -Debug` → `dist\` intocado (warning no console).
 3. ⬜ **TV TCL**: desinstalar o app debug atual (libera ~530 MB), sideload do
    `retro-game-system-armv7.apk` via pendrive, abrir um jogo leve (smoke test do
-   core armv7).
+   core armv7). **Este é o teste que valida a causa raiz #2 do bug** — os
+   demais itens já foram confirmados por código/script.
 4. ⬜ Celular arm64: instalar `retro-game-system-arm64.apk`, abrir um jogo.
-5. ⬜ Updater: após publicar JSON+APKs no servidor (passo manual acima), checar
-   update nos dois devices.
+5. ⬜ Updater: publicar o JSON acima na rota `/app_version` do servidor e
+   checar update nos dois devices (opcional para fechar o bug — é sobre o
+   auto-updater, não sobre o sideload manual que o bug relata).
