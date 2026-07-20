@@ -303,9 +303,15 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        val isGamepad = (event.source and android.view.InputDevice.SOURCE_GAMEPAD) == android.view.InputDevice.SOURCE_GAMEPAD ||
+        val sourceIsGamepad = (event.source and android.view.InputDevice.SOURCE_GAMEPAD) == android.view.InputDevice.SOURCE_GAMEPAD ||
             (event.source and android.view.InputDevice.SOURCE_JOYSTICK) == android.view.InputDevice.SOURCE_JOYSTICK
-        if (isGamepad) {
+        // Clones enviam D-pad/START pela interface de teclado do mesmo HID composto:
+        // o source do EVENTO é KEYBOARD, mas o DEVICE tem source de joystick/gamepad.
+        val deviceIsGamepad = event.device?.let {
+            (it.sources and android.view.InputDevice.SOURCE_GAMEPAD) == android.view.InputDevice.SOURCE_GAMEPAD ||
+                (it.sources and android.view.InputDevice.SOURCE_JOYSTICK) == android.view.InputDevice.SOURCE_JOYSTICK
+        } ?: false
+        if (sourceIsGamepad || deviceIsGamepad) {
             val handled = when (event.action) {
                 KeyEvent.ACTION_DOWN -> onKeyDown(event.keyCode, event)
                 KeyEvent.ACTION_UP -> onKeyUp(event.keyCode, event)
