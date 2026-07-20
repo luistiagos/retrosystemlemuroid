@@ -259,6 +259,18 @@ interface GameDao {
     """)
     suspend fun rewritePrebuiltUris(sentinelPrefix: String, realPrefix: String): Int
 
+    /**
+     * v24 arcade reclassification: re-points a game that moved out of the generic `fbneo` system
+     * into a dedicated sub-system (neogeo, cps1, ...). OR IGNORE guards the UNIQUE(systemId,
+     * fileName) index in case a row already exists under [newSystem] (then this is a no-op and
+     * [deleteFbneoByFileName] removes the stale fbneo row).
+     */
+    @Query("UPDATE OR IGNORE games SET systemId = :newSystem, fileUri = :newUri WHERE systemId = 'fbneo' AND fileName = :fileName")
+    suspend fun reassignArcadeSystem(fileName: String, newSystem: String, newUri: String): Int
+
+    @Query("DELETE FROM games WHERE systemId = 'fbneo' AND fileName = :fileName")
+    suspend fun deleteFbneoByFileName(fileName: String): Int
+
     @Query("SELECT DISTINCT systemId FROM games ORDER BY systemId ASC")
     suspend fun selectSystems(): List<String>
 

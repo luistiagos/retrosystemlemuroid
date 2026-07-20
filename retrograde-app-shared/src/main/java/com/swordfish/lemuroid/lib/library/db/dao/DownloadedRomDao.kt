@@ -16,6 +16,10 @@ interface DownloadedRomDao {
     @Query("DELETE FROM downloaded_roms WHERE systemId = :systemId AND fileName = :fileName")
     suspend fun delete(systemId: String, fileName: String)
 
+    /** v24 arcade reclassification: move a downloaded ROM's record from fbneo to its sub-system. */
+    @Query("UPDATE OR IGNORE downloaded_roms SET systemId = :newSystem WHERE systemId = 'fbneo' AND fileName = :fileName")
+    suspend fun reassignSystem(fileName: String, newSystem: String)
+
     @Query("SELECT EXISTS(SELECT 1 FROM downloaded_roms WHERE systemId = :systemId AND fileName = :fileName)")
     suspend fun isDownloaded(systemId: String, fileName: String): Boolean
 

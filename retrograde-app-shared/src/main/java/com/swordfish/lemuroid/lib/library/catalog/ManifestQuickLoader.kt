@@ -93,7 +93,17 @@ class ManifestQuickLoader(
         //   v23  dc broken titles removed (GTA2, RE3, Soul Reaver, Worms Armageddon — hang at
         //          boot in the Flycast core; see bugs/open/2026-07-08-dreamcast-subset-jogos-
         //          travam-9fps.md). Manifest lines dropped + one-time DB delete below.
-        private const val MANIFEST_SCHEMA_VERSION = 23
+        //   v24  arcade reclassification: ~400 games moved from fbneo/ to dedicated sub-systems
+        //          (neogeo, cps1, cps2, cps3, dataeast, galaxian, toaplan, taito, psikyo, pgm,
+        //          kaneko, cave, technos, seta). One-time DB re-point below so existing installs
+        //          show the new systems. See documentacao/bugs/2026-07-01-neogeo-bios-fbneo-kof2002.md
+        private const val MANIFEST_SCHEMA_VERSION = 24
+
+        // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
+        private val ARCADE_SUBSYSTEMS = setOf(
+            "neogeo", "cps1", "cps2", "cps3", "dataeast", "galaxian", "toaplan",
+            "taito", "psikyo", "pgm", "kaneko", "cave", "technos", "seta",
+        )
 
         // Titles removed in v23 — deleted from existing installs' DBs (search/FTS shows any
         // row in `games`, so hiding requires actual deletion, not isRepresentative=0).
@@ -205,6 +215,43 @@ class ManifestQuickLoader(
                 Timber.i("ManifestQuickLoader: v23 cleanup removed $deleted broken dc games")
             } catch (t: Throwable) {
                 Timber.e(t, "ManifestQuickLoader: v23 cleanup failed (continuing)")
+            }
+        }
+
+        // v24 one-time migration: arcade games were reclassified from the generic `fbneo` system
+        // into dedicated sub-systems (neogeo, cps1, ...). Fresh installs get the correct systemId
+        // from the prebuilt DB, but existing installs keep the on-disk DB (Room.createFromAsset
+        // only copies when absent), so those games stay under `fbneo` and the new systems never
+        // appear in the catalog. Re-point the stale rows here (and move any already-downloaded ROM
+        // file so it isn't orphaned). Best-effort — never crash the boot sequence.
+        if (loadedSchema < 24) {
+            try {
+                val romsDir = directoriesManager.getInternalRomsDirectory()
+                val manifestAlias = loadManifestAlias(context)
+                val reclassified = catalogCoverProvider.getAllEntries().keys.mapNotNull { key ->
+                    val slash = key.indexOf('/')
+                    if (slash < 0) return@mapNotNull null
+                    val sys = manifestAlias[key.substring(0, slash)] ?: key.substring(0, slash)
+                    if (sys in ARCADE_SUBSYSTEMS) key.substring(slash + 1) to sys else null
+                }
+                database.withTransaction {
+                    for ((fileName, newSystem) in reclassified) {
+                        // Preserve a downloaded ROM: move roms/fbneo/<f> → roms/<newSystem>/<f>.
+                        val oldFile = File(File(romsDir, "fbneo"), fileName)
+                        if (oldFile.exists() && oldFile.length() > 0L) {
+                            val newFile = File(File(romsDir, newSystem), fileName)
+                            newFile.parentFile?.mkdirs()
+                            if (!newFile.exists()) runCatching { oldFile.renameTo(newFile) }
+                        }
+                        val newUri = File(File(romsDir, newSystem), fileName).toUri().toString()
+                        database.gameDao().reassignArcadeSystem(fileName, newSystem, newUri)
+                        database.gameDao().deleteFbneoByFileName(fileName)
+                        database.downloadedRomDao().reassignSystem(fileName, newSystem)
+                    }
+                }
+                Timber.i("ManifestQuickLoader: v24 reclassified ${reclassified.size} arcade games")
+            } catch (t: Throwable) {
+                Timber.e(t, "ManifestQuickLoader: v24 arcade reclassification failed (continuing)")
             }
         }
 

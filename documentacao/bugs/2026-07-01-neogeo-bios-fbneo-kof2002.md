@@ -1,7 +1,7 @@
 # [BUG] KOF 2002 (e todo Neo Geo) mostra "FBNeo Error: romset missing" — BIOS neogeo.zip
 
 **Data:** 2026-07-01
-**Status:** CORRIGIDO (instalação limpa) — migração de instalações existentes PENDENTE de decisão
+**Status:** CORRIGIDO — inclui migração v24 para instalações existentes (in-place)
 **Severidade:** ALTA — todos os jogos Neo Geo eram injogáveis
 **Branch:** version9
 
@@ -138,18 +138,31 @@ O destino local do download continua usando o `systemId` real (`roms/<systemId>/
 com o `fileUri`. Validado contra o endpoint `find_by_file` (HTTP 200 → URL correta) para kof2002
 (neogeo), sf2 (cps1), kov (pgm), mvsc (cps2), donpachi (cave).
 
+### 6. Sistemas reclassificados sumiam do catálogo em instalações existentes (migração v24)
+
+**Sintoma:** após rebuild+reinstalação, os novos sistemas (neogeo, cps1, cps2, …) **não apareciam
+no catálogo**.
+
+**Causa:** `Room.databaseBuilder().createFromAsset()` só copia o prebuilt DB quando o arquivo do DB
+**não existe** no device. Reinstalar por cima (`adb install -r` / Android Studio Run / update da
+Play Store) **preserva** o DB antigo → os jogos continuavam com `systemId=fbneo` → as queries de
+sistema (`selectSystemsWithCount` → `MetaSystemsViewModel`) não viam neogeo/cps1/etc. O prebuilt DB
+empacotado estava correto (validado: neogeo 102, cps1 29, …), mas só instalação limpa o copia.
+
+**Correção — migração one-time v24** em [ManifestQuickLoader](../../retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/catalog/ManifestQuickLoader.kt):
+`MANIFEST_SCHEMA_VERSION` 23 → **24**; no bloco `loadedSchema < 24`, para cada romset que o manifest
+agora classifica num sub-sistema de arcade, re-aponta a linha `(fbneo, <rom>)` do DB para
+`(<sistema>, <rom>)` — `UPDATE OR IGNORE` de `systemId`+`fileUri` (`reassignArcadeSystem`) +
+`deleteFbneoByFileName` (remove sobra/duplicata) — e **move** eventual ROM já baixada de
+`roms/fbneo/<rom>` para `roms/<sistema>/<rom>`, atualizando `downloaded_roms`. Idempotente e
+best-effort (nunca derruba o boot); no-op em instalação limpa (jogos já vêm no sistema certo).
+Métodos novos em [GameDao](../../retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/db/dao/GameDao.kt)
+e [DownloadedRomDao](../../retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/db/dao/DownloadedRomDao.kt).
+
+Nota: agora `reinstalar por cima` já resolve. Para o **teste imediato** também vale desinstalar/limpar
+dados (instalação limpa copia o prebuilt DB direto).
+
 ## Pendências / caveats
 
-1. **BIOS no repositório HuggingFace** — a correção depende de `neogeo.zip` existir em
-   `huggingface.co/datasets/luistiagos/bios` com MD5 `DFFB72F116D36D025068B23970A4F6DF` e conteúdo
-   FBNeo-compatível (contendo `sp-s3.sp1`, `sm1.sm1`, `sfix.sfix`, `000-lo.lo`, etc.). **Confirmar.**
-
-2. **Migração de instalações existentes (in-place upgrade)** — NÃO implementada. O prebuilt DB
-   regenerado no build corrige **instalações limpas / clear-data**. Em upgrades in-place, o
-   `ManifestQuickLoader` faz `INSERT OR IGNORE` com UNIQUE em `(systemId, fileName)`: a linha antiga
-   `(fbneo, kof2002.zip)` não colide com a nova `(neogeo, kof2002.zip)` → geraria **linha duplicada**
-   (o KOF 2002 apareceria em FBNeo e em Neo Geo), com a antiga ainda quebrada. Para corrigir
-   upgrades in-place seria preciso, no padrão do cleanup de `vircon32` (v8) em `ManifestQuickLoader`:
-   - bump de `MANIFEST_SCHEMA_VERSION`;
-   - one-time: deletar as linhas `fbneo/` cujos romsets foram reclassificados **e** mover eventuais
-     ROMs já baixadas de `roms/fbneo/<rom>.zip` para `roms/<novosistema>/<rom>.zip`.
+1. **BIOS no repositório HuggingFace** — resolvido: `neogeo.zip` e `pgm.zip` validados no repo
+   (ver seção 4). Testar em device se o `pgm.zip` (4 arquivos) basta pro FBNeo.
