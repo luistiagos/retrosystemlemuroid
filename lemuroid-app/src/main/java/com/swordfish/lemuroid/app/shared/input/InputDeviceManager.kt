@@ -264,8 +264,18 @@ class InputDeviceManager(
             InputDevice.getDeviceIds()
                 .map { InputDevice.getDevice(it) }
                 .filterNotNull()
-                .filter { it.getLemuroidInputDevice().isSupported() }
-                .filter { it.name !in BLACKLISTED_DEVICES }
+                .filter { device ->
+                    val supported = device.getLemuroidInputDevice().isSupported()
+                    val blacklisted = device.name in BLACKLISTED_DEVICES
+                    if (!supported || blacklisted) {
+                        android.util.Log.d(
+                            "INPUT_DIAG",
+                            "rejected device name=${device.name} sources=${device.sources} " +
+                                "isVirtual=${device.isVirtual} supported=$supported blacklisted=$blacklisted",
+                        )
+                    }
+                    supported && !blacklisted
+                }
                 .sortedWith(
                     compareByDescending<InputDevice> { it.gamepadPriority() }
                         .thenBy { it.controllerNumber },
