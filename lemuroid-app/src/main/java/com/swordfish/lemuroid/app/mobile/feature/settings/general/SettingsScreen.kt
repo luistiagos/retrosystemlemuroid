@@ -208,6 +208,11 @@ private fun GeneralSettings() {
             subtitle = { Text(text = stringResource(id = R.string.settings_description_enable_autosave)) },
         )
         LemuroidSettingsSwitch(
+            state = booleanPreferenceState(R.string.pref_key_catalog_layout_grid, true),
+            title = { Text(text = stringResource(id = R.string.settings_title_catalog_layout_grid)) },
+            subtitle = { Text(text = stringResource(id = R.string.settings_description_catalog_layout_grid)) },
+        )
+        LemuroidSettingsSwitch(
             state = immersiveMode,
             title = { Text(text = stringResource(id = R.string.settings_title_immersive_mode)) },
             subtitle = { Text(text = stringResource(id = R.string.settings_description_immersive_mode)) },

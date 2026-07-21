@@ -1,11 +1,16 @@
 package com.swordfish.lemuroid.app.mobile.feature.games
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text
@@ -25,7 +30,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameGridItem
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameListRow
+import com.swordfish.lemuroid.app.utils.android.settings.booleanPreferenceState
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.launch
 
@@ -41,21 +48,13 @@ fun GamesScreen(
 ) {
     val games = viewModel.games.collectAsLazyPagingItems()
     val sortOrder by viewModel.sortOrder.collectAsState()
-    val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    // Scroll to top whenever the screen resumes — covers returning from a game session
-    // (GameActivity finishes → MainActivity resumes → NavBackStackEntry resumes).
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME) {
-                coroutineScope.launch { listState.scrollToItem(0) }
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
-    }
+    val isGridView = booleanPreferenceState(
+        id = R.string.pref_key_catalog_layout_grid,
+        default = true
+    ).value
 
     val isLoading = games.loadState.refresh is LoadState.Loading
     if (!isLoading && games.itemCount == 0) {
@@ -63,30 +62,81 @@ fun GamesScreen(
         return
     }
 
-    LazyColumn(state = listState, modifier = modifier.fillMaxSize()) {
-        item(key = "sort_header") {
-            GamesSortHeader(
-                sortOrder = sortOrder,
-                onSortChange = { viewModel.setSortOrder(it) },
-            )
+    if (isGridView) {
+        val gridState = rememberLazyGridState()
+
+        DisposableEffect(lifecycleOwner) {
+            val observer = LifecycleEventObserver { _, event ->
+                if (event == Lifecycle.Event.ON_RESUME) {
+                    coroutineScope.launch { gridState.scrollToItem(0) }
+                }
+            }
+            lifecycleOwner.lifecycle.addObserver(observer)
+            onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
         }
 
-        // Collision-safe keys: prefix loaded-item ids and placeholder indices into
-        // distinct namespaces so a game id can never equal a placeholder's index — which
-        // would crash LazyColumn with a duplicate-key error once maxSize drops pages
-        // back to placeholders during scroll-back. Matches FavoritesScreen's pattern.
-        items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
-            val game = games[index] ?: return@items
-            val variantKey = "${game.systemId}/${game.title}"
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            state = gridState,
+            modifier = modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            item(span = { GridItemSpan(maxLineSpan) }, key = "sort_header") {
+                GamesSortHeader(
+                    sortOrder = sortOrder,
+                    onSortChange = { viewModel.setSortOrder(it) },
+                )
+            }
 
-            LemuroidGameListRow(
-                game = game,
-                isDownloaded = downloadedGameKeys.contains(game.downloadKey),
-                hasVariants = variantKey in titlesWithVariants,
-                onClick = { onGameClick(game) },
-                onLongClick = { onGameLongClick(game) },
-                onFavoriteToggle = { isFavorite -> onGameFavoriteToggle(game, isFavorite) },
-            )
+            items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
+                val game = games[index] ?: return@items
+                val variantKey = "${game.systemId}/${game.title}"
+
+                LemuroidGameGridItem(
+                    game = game,
+                    isDownloaded = downloadedGameKeys.contains(game.downloadKey),
+                    hasVariants = variantKey in titlesWithVariants,
+                    onClick = { onGameClick(game) },
+                    onLongClick = { onGameLongClick(game) },
+                )
+            }
+        }
+    } else {
+        val listState = rememberLazyListState()
+
+        DisposableEffect(lifecycleOwner) {
+            val observer = LifecycleEventObserver { _, event ->
+                if (event == Lifecycle.Event.ON_RESUME) {
+                    coroutineScope.launch { listState.scrollToItem(0) }
+                }
+            }
+            lifecycleOwner.lifecycle.addObserver(observer)
+            onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+        }
+
+        LazyColumn(state = listState, modifier = modifier.fillMaxSize()) {
+            item(key = "sort_header") {
+                GamesSortHeader(
+                    sortOrder = sortOrder,
+                    onSortChange = { viewModel.setSortOrder(it) },
+                )
+            }
+
+            items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
+                val game = games[index] ?: return@items
+                val variantKey = "${game.systemId}/${game.title}"
+
+                LemuroidGameListRow(
+                    game = game,
+                    isDownloaded = downloadedGameKeys.contains(game.downloadKey),
+                    hasVariants = variantKey in titlesWithVariants,
+                    onClick = { onGameClick(game) },
+                    onLongClick = { onGameLongClick(game) },
+                    onFavoriteToggle = { isFavorite -> onGameFavoriteToggle(game, isFavorite) },
+                )
+            }
         }
     }
 }

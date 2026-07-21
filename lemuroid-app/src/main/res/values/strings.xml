@@ -42,6 +42,9 @@
     <string name="settings_title_immersive_mode">Immersive mode</string>
     <string name="settings_description_immersive_mode">Dynamically colors the background based on game visuals</string>
 
+    <string name="settings_title_catalog_layout_grid">Grid View for Catalogs</string>
+    <string name="settings_description_catalog_layout_grid">Use a grid layout for per-system game lists. If disabled, a list layout will be used.</string>
+
     <string name="settings_title_gamepad_settings">External devices</string>
     <string name="settings_description_gamepad_settings">Configure external gamepads and keyboards</string>
 

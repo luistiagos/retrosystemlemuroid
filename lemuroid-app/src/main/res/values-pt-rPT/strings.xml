@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_home">Início</string>
     <string name="title_search">Pesquisar</string>
@@ -36,6 +36,9 @@
     <string name="settings_description_hd_quality">Ajustar a qualidade do HD</string>
     <string name="settings_title_immersive_mode">Modo imersivo</string>
     <string name="settings_description_immersive_mode">Colore o fundo dinamicamente com base no visual do jogo</string>
+
+    <string name="settings_title_catalog_layout_grid">Visualização em Grelha</string>
+    <string name="settings_description_catalog_layout_grid">Usa o formato de grelha no catálogo de cada sistema. Se desativado, o formato de lista atual será exibido.</string>
     <string name="settings_title_gamepad_settings">Dispositivos externos</string>
     <string name="settings_description_gamepad_settings">Configurar comandos externos e teclados</string>
     <string name="settings_retropad_button_name">RetroPad %1$s</string>
