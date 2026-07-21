@@ -97,7 +97,11 @@ class ManifestQuickLoader(
         //          (neogeo, cps1, cps2, cps3, dataeast, galaxian, toaplan, taito, psikyo, pgm,
         //          kaneko, cave, technos, seta). One-time DB re-point below so existing installs
         //          show the new systems. See documentacao/bugs/2026-07-01-neogeo-bios-fbneo-kof2002.md
-        private const val MANIFEST_SCHEMA_VERSION = 24
+        //   v25  arcade reclassification fix: also reclassify from mame2003plus and force re-run
+        //          by bumping version to 25.
+        //   v26  cleaned up catalog_manifest.txt to fix duplicate catalog items (grouping variants properly)
+        //   v27  stale catalog deletion and arcade re-run for version 27
+        private const val MANIFEST_SCHEMA_VERSION = 27
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(
@@ -218,13 +222,10 @@ class ManifestQuickLoader(
             }
         }
 
-        // v24 one-time migration: arcade games were reclassified from the generic `fbneo` system
-        // into dedicated sub-systems (neogeo, cps1, ...). Fresh installs get the correct systemId
-        // from the prebuilt DB, but existing installs keep the on-disk DB (Room.createFromAsset
-        // only copies when absent), so those games stay under `fbneo` and the new systems never
-        // appear in the catalog. Re-point the stale rows here (and move any already-downloaded ROM
-        // file so it isn't orphaned). Best-effort — never crash the boot sequence.
-        if (loadedSchema < 24) {
+        // v27 one-time migration: arcade games were reclassified from the generic `fbneo` and
+        // `mame2003plus` systems into dedicated sub-systems (neogeo, cps1, ...).
+        // Force re-running this migration for version 27 to ensure clean state and eliminate duplicates.
+        if (loadedSchema < 27) {
             try {
                 val romsDir = directoriesManager.getInternalRomsDirectory()
                 val manifestAlias = loadManifestAlias(context)
@@ -236,12 +237,14 @@ class ManifestQuickLoader(
                 }
                 database.withTransaction {
                     for ((fileName, newSystem) in reclassified) {
-                        // Preserve a downloaded ROM: move roms/fbneo/<f> → roms/<newSystem>/<f>.
-                        val oldFile = File(File(romsDir, "fbneo"), fileName)
-                        if (oldFile.exists() && oldFile.length() > 0L) {
-                            val newFile = File(File(romsDir, newSystem), fileName)
-                            newFile.parentFile?.mkdirs()
-                            if (!newFile.exists()) runCatching { oldFile.renameTo(newFile) }
+                        // Preserve downloaded ROMs from fbneo and mame2003plus
+                        listOf("fbneo", "mame2003plus").forEach { oldSystem ->
+                            val oldFile = File(File(romsDir, oldSystem), fileName)
+                            if (oldFile.exists() && oldFile.length() > 0L) {
+                                val newFile = File(File(romsDir, newSystem), fileName)
+                                newFile.parentFile?.mkdirs()
+                                if (!newFile.exists()) runCatching { oldFile.renameTo(newFile) }
+                            }
                         }
                         val newUri = File(File(romsDir, newSystem), fileName).toUri().toString()
                         database.gameDao().reassignArcadeSystem(fileName, newSystem, newUri)
@@ -249,9 +252,9 @@ class ManifestQuickLoader(
                         database.downloadedRomDao().reassignSystem(fileName, newSystem)
                     }
                 }
-                Timber.i("ManifestQuickLoader: v24 reclassified ${reclassified.size} arcade games")
+                Timber.i("ManifestQuickLoader: v25 reclassified ${reclassified.size} arcade games")
             } catch (t: Throwable) {
-                Timber.e(t, "ManifestQuickLoader: v24 arcade reclassification failed (continuing)")
+                Timber.e(t, "ManifestQuickLoader: v25 arcade reclassification failed (continuing)")
             }
         }
 
@@ -350,6 +353,34 @@ class ManifestQuickLoader(
                     )
                 }
             }
+        }
+
+        // Delete stale/duplicate catalog games in the database that are no longer in the manifest.
+        // This handles cleaned manifest lines (where duplicates were removed) and reclassified systems
+        // whose old paths (like fbneo/...) are no longer present.
+        try {
+            val realPrefix = romsDir.toUri().toString().trimEnd('/')
+            val manifestUris = games.map { it.fileUri }.toSet()
+            val manifestSentinelUris = games.map {
+                it.fileUri.replace(realPrefix, PREBUILT_URI_PREFIX)
+            }.toSet()
+            val allManifestUris = manifestUris + manifestSentinelUris
+
+            val dbGames = database.gameDao().selectAll()
+            val toDelete = dbGames.filter { game ->
+                val uri = game.fileUri
+                val isCatalogGame = uri.startsWith(realPrefix) || uri.startsWith(PREBUILT_URI_PREFIX)
+                isCatalogGame && uri !in allManifestUris
+            }
+
+            if (toDelete.isNotEmpty()) {
+                database.withTransaction {
+                    database.gameDao().delete(toDelete)
+                }
+                Timber.i("ManifestQuickLoader: deleted ${toDelete.size} stale catalog games not in new manifest")
+            }
+        } catch (t: Throwable) {
+            Timber.e(t, "ManifestQuickLoader: failed to delete stale catalog games (continuing)")
         }
 
         prefs.edit()

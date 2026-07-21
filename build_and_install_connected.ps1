@@ -190,9 +190,33 @@ if ($LASTEXITCODE -ne 0) {
     throw "Build falhou com codigo $LASTEXITCODE"
 }
 
-$apkFile = Get-ChildItem -Path $apkOutputDir -Recurse -Filter "*.apk" |
-    Sort-Object LastWriteTimeUtc -Descending |
-    Select-Object -First 1
+# Get device's supported ABIs to pick the right split APK
+$deviceAbisRaw = & $adbExe @adbArgs shell getprop ro.product.cpu.abilist
+$deviceAbis = if ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($deviceAbisRaw)) {
+    @($deviceAbisRaw.Trim().Split(',')) | ForEach-Object { $_.Trim() }
+} else {
+    @()
+}
+
+Write-Host "Device supported ABIs: $($deviceAbis -join ', ')"
+
+$apkFile = $null
+foreach ($abi in $deviceAbis) {
+    $matchedApk = Get-ChildItem -Path $apkOutputDir -Recurse -Filter "*$abi*.apk" |
+        Sort-Object LastWriteTimeUtc -Descending |
+        Select-Object -First 1
+    if ($matchedApk) {
+        $apkFile = $matchedApk
+        break
+    }
+}
+
+if (-not $apkFile) {
+    Write-Host "No APK matching device ABI found. Falling back to most recently modified APK."
+    $apkFile = Get-ChildItem -Path $apkOutputDir -Recurse -Filter "*.apk" |
+        Sort-Object LastWriteTimeUtc -Descending |
+        Select-Object -First 1
+}
 
 if (-not $apkFile) {
     throw "Nenhum APK foi encontrado em $apkOutputDir"

@@ -148,12 +148,19 @@ Bugs descobertos durante a implementação que causaram crash no primeiro boot. 
 
 ### `MANIFEST_SCHEMA_VERSION`
 
-Constante em `ManifestQuickLoader` que tracking de versão do **formato** do manifest, independente do `versionCode` do app:
+Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteúdo** do manifest (para forçar re-processamento no banco de dados):
 
 | Versão | Mudança |
 |--------|---------|
-| v1 | 4 campos: `path \| title \| coverUrl \| popularityIndex` |
-| v2 | + 5º campo `isRepresentative` (agrupamento pré-computado) |
+| <= 23 | Estrutura antiga |
+| 24 | Mapeamento inicial de arcade para subsistemas |
+| 25 | Correção e re-execução da migração de arcade (mame2003plus + fbneo) |
+| 26 | Limpeza e remoção de duplicatas no `catalog_manifest.txt` |
+| 27 | Deleção no DB de jogos do catálogo obsoletos + re-execução segura da migração de arcade |
+
+> ⚠️ **Desenvolvimento e Fast-Path**: Durante o desenvolvimento, o `versionCode` do aplicativo debug permanece o mesmo (ex: 231). Caso o arquivo `catalog_manifest.txt` seja alterado, o aplicativo irá pular (fast-skip) a carga do manifesto nas próximas instalações sob o mesmo build porque os dados em SharedPreferences já estarão marcados como processados para aquela versão. **Sempre que alterar o manifesto ou a lógica de carregamento, você DEVE bumpar a constante `MANIFEST_SCHEMA_VERSION` em `ManifestQuickLoader.kt`** para forçar o recarregamento.
+>
+> 💡 **Limpeza de registros órfãos**: O processo de reload na versão 27 compara todas as URIs presentes no banco de dados que pertencem ao diretório de ROMs interno ou ao prefixo sentinela e deleta as que não estão presentes no novo `catalog_manifest.txt`. Isso garante que jogos removidos do manifesto (como duplicatas) sumam do banco imediatamente pós-upgrade, mantendo o banco sincronizado com o manifesto de assets.
 
 > **Sem placeholders em disco**: o check `isGamePlaceholder` em `GameInteractor` usa `File.length() == 0L`, que retorna `0` para arquivos **inexistentes** (comportamento garantido pela JVM). Portanto não é necessário criar arquivos 0-byte — o diálogo de download é disparado corretamente sem eles.
 
