@@ -111,6 +111,32 @@ function Get-ConnectedDevices {
     )
 }
 
+function Get-DeviceAbiList {
+    param(
+        [string]$adbExe,
+        [string[]]$adbArgs
+    )
+
+    # ro.product.cpu.abilist vem em ordem de preferencia (a ABI nativa do
+    # dispositivo primeiro, seguida de ABIs de compatibilidade). Em devices
+    # 64-bit-only (ex.: Moto G86 5G) a lista contem so "arm64-v8a", sem
+    # fallback para armeabi-v7a.
+    $raw = (& $adbExe @adbArgs shell getprop ro.product.cpu.abilist).Trim()
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($raw)) {
+        throw "Nao foi possivel obter ro.product.cpu.abilist do dispositivo."
+    }
+
+    return @($raw -split "," | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" })
+}
+
+function Get-BuildVariantFolderHint {
+    param([string]$taskName)
+
+    if ($taskName -match "(?i)debug") { return "debug" }
+    if ($taskName -match "(?i)release") { return "release" }
+    return $null
+}
+
 if (-not (Test-Path $gradleWrapper)) {
     throw "Gradle wrapper nao encontrado em $gradleWrapper"
 }
@@ -146,12 +172,55 @@ if ($LASTEXITCODE -ne 0) {
     throw "Build falhou com codigo $LASTEXITCODE"
 }
 
-$apkFile = Get-ChildItem -Path $apkOutputDir -Recurse -Filter "*.apk" |
-    Sort-Object LastWriteTimeUtc -Descending |
-    Select-Object -First 1
+$allApks = @(Get-ChildItem -Path $apkOutputDir -Recurse -Filter "*.apk")
+if ($allApks.Count -eq 0) {
+    throw "Nenhum APK foi encontrado em $apkOutputDir"
+}
+
+# Filtra pela variante (debug/release) inferida do nome da task, para nao
+# instalar um release quando a task pediu debug (e vice-versa).
+$variantHint = Get-BuildVariantFolderHint -taskName $Task
+$variantApks = $allApks
+if ($variantHint) {
+    $filtered = @($allApks | Where-Object { $_.FullName -match "(?i)[\\/]$variantHint[\\/]" })
+    if ($filtered.Count -gt 0) {
+        $variantApks = $filtered
+    }
+}
+
+# Seleciona o APK cujo split de ABI casa com o dispositivo. Sem isso, o
+# assemble gera varios splits (arm64-v8a, armeabi-v7a) e a heuristica antiga
+# de "mais recente por timestamp" podia escolher um ABI incompativel,
+# causando INSTALL_FAILED_NO_MATCHING_ABIS em devices 64-bit-only.
+$deviceAbis = Get-DeviceAbiList -adbExe $adbExe -adbArgs $adbArgs
+Write-Host "ABIs do dispositivo (ordem de preferencia): $($deviceAbis -join ', ')"
+
+$knownAbis = @("arm64-v8a", "armeabi-v7a", "armeabi", "x86_64", "x86")
+$apkFile = $null
+foreach ($abi in $deviceAbis) {
+    $match = @($variantApks | Where-Object { $_.Name -match "(?i)[-_]$([regex]::Escape($abi))[-_.]" }) |
+        Sort-Object LastWriteTimeUtc -Descending |
+        Select-Object -First 1
+    if ($match) {
+        $apkFile = $match
+        break
+    }
+}
+
+# Fallback: APK universal (sem token de ABI no nome), depois qualquer APK.
+if (-not $apkFile) {
+    $universal = @($variantApks | Where-Object {
+        $name = $_.Name
+        -not ($knownAbis | Where-Object { $name -match "(?i)[-_]$([regex]::Escape($_))[-_.]" })
+    }) | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1
+    if ($universal) {
+        Write-Host "Nenhum APK especifico de ABI encontrado; usando APK universal."
+        $apkFile = $universal
+    }
+}
 
 if (-not $apkFile) {
-    throw "Nenhum APK foi encontrado em $apkOutputDir"
+    throw "Nenhum APK compativel com as ABIs do dispositivo ($($deviceAbis -join ', ')) foi encontrado em $apkOutputDir"
 }
 
 Write-Host "Instalando APK: $($apkFile.FullName)"
