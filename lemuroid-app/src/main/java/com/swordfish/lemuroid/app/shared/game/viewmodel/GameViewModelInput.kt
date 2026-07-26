@@ -80,7 +80,8 @@ class GameViewModelInput(
     ) {
         if (port < 0) return
         val isJoystickSource = (event.source and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK ||
-            (event.source and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD
+            (event.source and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||
+            (event.source and InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD
         if (isJoystickSource) {
             if (controllerConfigsState.value[port]?.mergeDPADAndLeftStickEvents == true) {
                 sendMergedMotionEvents(event, port)
@@ -98,6 +99,7 @@ class GameViewModelInput(
             listOf(
                 retrieveCoordinates(event, MotionEvent.AXIS_HAT_X, MotionEvent.AXIS_HAT_Y),
                 retrieveCoordinates(event, MotionEvent.AXIS_X, MotionEvent.AXIS_Y),
+                retrieveFallbackLeftCoordinates(event),
             )
 
         val xVal = events.maxByOrNull { abs(it.x) }?.x ?: 0f
@@ -159,6 +161,7 @@ class GameViewModelInput(
             MotionEvent.AXIS_Y,
             port,
         )
+        sendFallbackLeftStickMotion(event, port)
         sendStickMotion(
             event,
             MOTION_SOURCE_ANALOG_RIGHT,
@@ -174,6 +177,44 @@ class GameViewModelInput(
         yAxis: Int,
     ): PointF {
         return PointF(event.getAxisValue(xAxis), event.getAxisValue(yAxis))
+    }
+
+    private fun retrieveFallbackLeftCoordinates(event: MotionEvent): PointF {
+        return if (event.device?.hasPrimaryDirectionAxes() == false) {
+            retrieveCoordinates(event, MotionEvent.AXIS_RX, MotionEvent.AXIS_RY)
+        } else {
+            PointF(0f, 0f)
+        }
+    }
+
+    private fun sendFallbackLeftStickMotion(
+        event: MotionEvent,
+        port: Int,
+    ) {
+        if (event.device?.hasPrimaryDirectionAxes() == false) {
+            sendStickMotion(
+                event,
+                MOTION_SOURCE_DPAD,
+                MotionEvent.AXIS_RX,
+                MotionEvent.AXIS_RY,
+                port,
+            )
+            sendStickMotion(
+                event,
+                MOTION_SOURCE_ANALOG_LEFT,
+                MotionEvent.AXIS_RX,
+                MotionEvent.AXIS_RY,
+                port,
+            )
+        }
+    }
+
+    private fun InputDevice.hasPrimaryDirectionAxes(): Boolean {
+        val axes = motionRanges.map { it.axis }.toSet()
+        return sequenceOf(
+            MotionEvent.AXIS_HAT_X to MotionEvent.AXIS_HAT_Y,
+            MotionEvent.AXIS_X to MotionEvent.AXIS_Y,
+        ).any { (xAxis, yAxis) -> xAxis in axes && yAxis in axes }
     }
 
     fun sendKeyEvent(
