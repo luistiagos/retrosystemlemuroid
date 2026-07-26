@@ -24,6 +24,8 @@ private fun InputDevice.isGamepad(): Boolean {
         (sources and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||
         (sources and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK
 
+    // Ver a nota em InputClass.isGamepadInputClass: BUTTON_1..4 sao evidencia
+    // legitima de stick arcade DirectInput; KEYCODE_1..4 nao sao.
     val hasGenericNumberedButtons =
         hasKeys(
             KeyEvent.KEYCODE_BUTTON_1,
@@ -32,16 +34,7 @@ private fun InputDevice.isGamepad(): Boolean {
             KeyEvent.KEYCODE_BUTTON_4,
         ).all { it }
 
-    val hasKeyboardNumberButtons =
-        keyboardType != InputDevice.KEYBOARD_TYPE_ALPHABETIC &&
-            hasKeys(
-                KeyEvent.KEYCODE_1,
-                KeyEvent.KEYCODE_2,
-                KeyEvent.KEYCODE_3,
-                KeyEvent.KEYCODE_4,
-            ).all { it }
-
-    return isGamepadSource || hasGenericNumberedButtons || hasKeyboardNumberButtons
+    return isGamepadSource || hasGenericNumberedButtons
 }
 
 fun InputDevice?.getLemuroidInputDevice(): LemuroidInputDevice {

@@ -29,7 +29,9 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
                 KeyEvent.KEYCODE_BUTTON_B to KeyEvent.KEYCODE_BUTTON_A,
                 KeyEvent.KEYCODE_BUTTON_X to KeyEvent.KEYCODE_BUTTON_Y,
                 KeyEvent.KEYCODE_BUTTON_Y to KeyEvent.KEYCODE_BUTTON_X,
-                // Generic USB arcade sticks often expose DirectInput-style numbered buttons.
+                // Sticks arcade USB DirectInput expoem os botoes pela faixa evdev
+                // BTN_TRIGGER..BTN_BASE6, traduzida pelo Generic.kl para
+                // BUTTON_1..BUTTON_16. A ordem segue a tabela do manual do NJP308.
                 KeyEvent.KEYCODE_BUTTON_1 to KeyEvent.KEYCODE_BUTTON_B,
                 KeyEvent.KEYCODE_BUTTON_2 to KeyEvent.KEYCODE_BUTTON_A,
                 KeyEvent.KEYCODE_BUTTON_3 to KeyEvent.KEYCODE_BUTTON_Y,
@@ -40,16 +42,6 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
                 KeyEvent.KEYCODE_BUTTON_8 to KeyEvent.KEYCODE_BUTTON_R1,
                 KeyEvent.KEYCODE_BUTTON_9 to KeyEvent.KEYCODE_BUTTON_SELECT,
                 KeyEvent.KEYCODE_BUTTON_10 to KeyEvent.KEYCODE_BUTTON_START,
-                KeyEvent.KEYCODE_1 to KeyEvent.KEYCODE_BUTTON_B,
-                KeyEvent.KEYCODE_2 to KeyEvent.KEYCODE_BUTTON_A,
-                KeyEvent.KEYCODE_3 to KeyEvent.KEYCODE_BUTTON_Y,
-                KeyEvent.KEYCODE_4 to KeyEvent.KEYCODE_BUTTON_X,
-                KeyEvent.KEYCODE_5 to KeyEvent.KEYCODE_BUTTON_L2,
-                KeyEvent.KEYCODE_6 to KeyEvent.KEYCODE_BUTTON_R2,
-                KeyEvent.KEYCODE_7 to KeyEvent.KEYCODE_BUTTON_L1,
-                KeyEvent.KEYCODE_8 to KeyEvent.KEYCODE_BUTTON_R1,
-                KeyEvent.KEYCODE_9 to KeyEvent.KEYCODE_BUTTON_SELECT,
-                KeyEvent.KEYCODE_0 to KeyEvent.KEYCODE_BUTTON_START,
             )
 
         return allAvailableInputs + defaultOverride
@@ -60,7 +52,9 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
         // joystick (analógico ou HAT do D-pad), é um controle de verdade — habilita.
         // Controles remotos de TV não expõem eixos SOURCE_JOYSTICK, então continuam
         // desabilitados por padrão a menos que passem no teste de teclas.
-        return device.supportsAllKeys(MINIMAL_KEYS_DEFAULT_ENABLED) || hasJoystickAxes()
+        return device.supportsAllKeys(MINIMAL_KEYS_DEFAULT_ENABLED) ||
+            device.supportsAllKeys(GENERIC_NUMBERED_FACE_KEYS) ||
+            hasJoystickAxes()
     }
 
     override fun getSupportedShortcuts(): List<GameShortcutType> = GameShortcutType.values().toList()
@@ -92,6 +86,11 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
                 KeyEvent.KEYCODE_BUTTON_SELECT,
                 KeyEvent.KEYCODE_BUTTON_L1,
                 KeyEvent.KEYCODE_BUTTON_R1,
+                // Sticks arcade DirectInput so expoem botoes numerados.
+                KeyEvent.KEYCODE_BUTTON_1,
+                KeyEvent.KEYCODE_BUTTON_2,
+                KeyEvent.KEYCODE_BUTTON_3,
+                KeyEvent.KEYCODE_BUTTON_4,
             ).any { it }
         if (anyButton) return true
 
@@ -130,6 +129,16 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
                 KeyEvent.KEYCODE_BUTTON_B,
                 KeyEvent.KEYCODE_BUTTON_X,
                 KeyEvent.KEYCODE_BUTTON_Y,
+            )
+
+        // Botoes de face de stick arcade DirectInput, como o Generic.kl do
+        // Android os expoe. Ver a nota em getDefaultBindings.
+        private val GENERIC_NUMBERED_FACE_KEYS =
+            inputKeysOf(
+                KeyEvent.KEYCODE_BUTTON_1,
+                KeyEvent.KEYCODE_BUTTON_2,
+                KeyEvent.KEYCODE_BUTTON_3,
+                KeyEvent.KEYCODE_BUTTON_4,
             )
 
         private val MINIMAL_KEYS_DEFAULT_ENABLED =

@@ -24,6 +24,11 @@ private fun InputDevice.isGamepadInputClass(): Boolean {
         (sources and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||
             (sources and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK
 
+    // Sticks arcade DirectInput expoem os botoes pela faixa evdev
+    // BTN_TRIGGER..BTN_BASE6, que o Generic.kl traduz para BUTTON_1..BUTTON_16
+    // em vez de BUTTON_A/B/X/Y. Nao usamos KEYCODE_1..9 como evidencia: essa
+    // faixa vem de KEY_1..KEY_9 (linha numerica de teclado), que um HID de
+    // gamepad nunca emite, e aceita-la transformaria remotes de TV em gamepad.
     val hasGenericNumberedButtons =
         hasKeys(
             KeyEvent.KEYCODE_BUTTON_1,
@@ -32,14 +37,5 @@ private fun InputDevice.isGamepadInputClass(): Boolean {
             KeyEvent.KEYCODE_BUTTON_4,
         ).all { it }
 
-    val hasKeyboardNumberButtons =
-        keyboardType != InputDevice.KEYBOARD_TYPE_ALPHABETIC &&
-            hasKeys(
-                KeyEvent.KEYCODE_1,
-                KeyEvent.KEYCODE_2,
-                KeyEvent.KEYCODE_3,
-                KeyEvent.KEYCODE_4,
-            ).all { it }
-
-    return isGamepadSource || hasGenericNumberedButtons || hasKeyboardNumberButtons
+    return isGamepadSource || hasGenericNumberedButtons
 }
