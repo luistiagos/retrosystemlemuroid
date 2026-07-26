@@ -64,6 +64,11 @@ class GameViewModelInput(
     private val keyEventsFlow: MutableSharedFlow<KeyEvent?> = MutableSharedFlow()
     private val motionEventsFlow: MutableSharedFlow<MotionEvent> = MutableSharedFlow()
 
+    // Ver hasDedicatedDpad(). Chaveado por InputDevice.id, que e estavel enquanto
+    // o device fica conectado. ConcurrentHashMap por seguranca: hoje so o coletor
+    // de initializeGamePadMotionsFlow le/escreve, mas nao ha nada que garanta isso.
+    private val dedicatedDpadCache = java.util.concurrent.ConcurrentHashMap<Int, Boolean>()
+
     fun getAllTiltConfigurations(): List<TiltConfiguration> {
         return controllerConfigsState.value[0]
             ?.tiltConfigurations
@@ -147,13 +152,17 @@ class GameViewModelInput(
         event: MotionEvent,
         port: Int,
     ) {
-        // Sticks arcade digitais reportam o manche em AXIS_X/Y e nao expoem eixos
-        // HAT. Nos sistemas cujo ControllerConfig nao faz merge de DPAD com o
-        // analogico esquerdo (N64, PSX dualshock, PSP, NDS, DOS, 3DS, Dreamcast,
-        // GameCube, Amiga) o DPAD receberia sempre zero e o direcional morreria.
-        val hasHatAxes = event.device?.hasHatAxes() != false
-        val dpadXAxis = if (hasHatAxes) MotionEvent.AXIS_HAT_X else MotionEvent.AXIS_X
-        val dpadYAxis = if (hasHatAxes) MotionEvent.AXIS_HAT_Y else MotionEvent.AXIS_Y
+        // Sticks arcade digitais reportam o manche em AXIS_X/Y e nao tem canal
+        // proprio de DPAD. Nos sistemas cujo ControllerConfig nao faz merge de
+        // DPAD com o analogico esquerdo (N64, PSX dualshock, PSP, NDS, DOS, 3DS,
+        // Dreamcast, GameCube, Amiga) o DPAD receberia sempre zero e o direcional
+        // morreria. So caimos nesse fallback quando o device nao tem NENHUM canal
+        // de DPAD: sem eixos HAT e sem teclas DPAD_*. Um gamepad analogico que
+        // manda o DPAD por teclas continua com os dois canais separados, que e o
+        // proposito do merge = false.
+        val dpadFromLeftStick = event.device?.hasDedicatedDpad() == false
+        val dpadXAxis = if (dpadFromLeftStick) MotionEvent.AXIS_X else MotionEvent.AXIS_HAT_X
+        val dpadYAxis = if (dpadFromLeftStick) MotionEvent.AXIS_Y else MotionEvent.AXIS_HAT_Y
 
         sendDPADMotion(
             event,
@@ -186,9 +195,31 @@ class GameViewModelInput(
         return PointF(event.getAxisValue(xAxis), event.getAxisValue(yAxis))
     }
 
-    private fun InputDevice.hasHatAxes(): Boolean {
-        val axes = motionRanges.map { it.axis }.toSet()
-        return MotionEvent.AXIS_HAT_X in axes && MotionEvent.AXIS_HAT_Y in axes
+    // Um canal de DPAD proprio pode chegar como eixos HAT ou como teclas DPAD_*.
+    // Aqui um hasKeys que mente para false so nos faz cair no fallback de
+    // AXIS_X/Y, que e o comportamento desejado para stick arcade; e um hasKeys
+    // que mente para true apenas preserva o comportamento antigo. Os dois erros
+    // caem no lado seguro.
+    //
+    // Cacheado por id: InputDevice.hasKeys e uma chamada IPC para o
+    // InputManagerService e motionRanges aloca uma lista a cada acesso. Isto roda
+    // no caminho de motion event, que chega dezenas de vezes por segundo durante
+    // o jogo - consultar direto custaria um binder por evento.
+    private fun InputDevice.hasDedicatedDpad(): Boolean {
+        return dedicatedDpadCache.getOrPut(id) {
+            val axes = motionRanges.map { it.axis }.toSet()
+            val hasHatAxes = MotionEvent.AXIS_HAT_X in axes && MotionEvent.AXIS_HAT_Y in axes
+
+            val hasDpadKeys =
+                hasKeys(
+                    KeyEvent.KEYCODE_DPAD_UP,
+                    KeyEvent.KEYCODE_DPAD_DOWN,
+                    KeyEvent.KEYCODE_DPAD_LEFT,
+                    KeyEvent.KEYCODE_DPAD_RIGHT,
+                ).any { it }
+
+            hasHatAxes || hasDpadKeys
+        }
     }
 
     fun sendKeyEvent(

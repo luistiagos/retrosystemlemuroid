@@ -16,22 +16,19 @@ import com.swordfish.lemuroid.app.shared.settings.GameShortcutType
 
 class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInputDevice {
     override fun getDefaultBindings(): Map<InputKey, RetroKey> {
-        // Binding identidade para todas as teclas de saída. Não consultamos
-        // hasKeys(): em TV boxes baratas ele retorna false para teclas que o
-        // controle envia, o que mapeava botões reais para KEYCODE_UNKNOWN.
-        val allAvailableInputs =
-            InputDeviceManager.OUTPUT_KEYS
-                .associate { InputKey(it.keyCode) to RetroKey(it.keyCode) }
+        // A ORDEM destes tres blocos importa. A tela de Configuracoes > Controles
+        // inverte este mapa com reverseLookup() (associateBy: o ultimo vence).
+        // Varias InputKeys apontam para a mesma RetroKey - BUTTON_A e BUTTON_1
+        // ambos viram BUTTON_B - entao quem aparece por ultimo e o nome exibido.
+        // Os overrides de stick arcade vem PRIMEIRO para que o nome canonico
+        // (BUTTON_A, BUTTON_START, ...) seja o mostrado em controles normais.
+        // O mapa resultante e o mesmo nos dois casos; so a ordem de iteracao muda.
 
-        val defaultOverride =
+        // Sticks arcade USB DirectInput expoem os botoes pela faixa evdev
+        // BTN_TRIGGER..BTN_BASE6, traduzida pelo Generic.kl para
+        // BUTTON_1..BUTTON_16. A ordem segue a tabela do manual do NJP308.
+        val genericArcadeOverride =
             bindingsOf(
-                KeyEvent.KEYCODE_BUTTON_A to KeyEvent.KEYCODE_BUTTON_B,
-                KeyEvent.KEYCODE_BUTTON_B to KeyEvent.KEYCODE_BUTTON_A,
-                KeyEvent.KEYCODE_BUTTON_X to KeyEvent.KEYCODE_BUTTON_Y,
-                KeyEvent.KEYCODE_BUTTON_Y to KeyEvent.KEYCODE_BUTTON_X,
-                // Sticks arcade USB DirectInput expoem os botoes pela faixa evdev
-                // BTN_TRIGGER..BTN_BASE6, traduzida pelo Generic.kl para
-                // BUTTON_1..BUTTON_16. A ordem segue a tabela do manual do NJP308.
                 KeyEvent.KEYCODE_BUTTON_1 to KeyEvent.KEYCODE_BUTTON_B,
                 KeyEvent.KEYCODE_BUTTON_2 to KeyEvent.KEYCODE_BUTTON_A,
                 KeyEvent.KEYCODE_BUTTON_3 to KeyEvent.KEYCODE_BUTTON_Y,
@@ -44,7 +41,22 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
                 KeyEvent.KEYCODE_BUTTON_10 to KeyEvent.KEYCODE_BUTTON_START,
             )
 
-        return allAvailableInputs + defaultOverride
+        // Binding identidade para todas as teclas de saída. Não consultamos
+        // hasKeys(): em TV boxes baratas ele retorna false para teclas que o
+        // controle envia, o que mapeava botões reais para KEYCODE_UNKNOWN.
+        val allAvailableInputs =
+            InputDeviceManager.OUTPUT_KEYS
+                .associate { InputKey(it.keyCode) to RetroKey(it.keyCode) }
+
+        val faceButtonSwap =
+            bindingsOf(
+                KeyEvent.KEYCODE_BUTTON_A to KeyEvent.KEYCODE_BUTTON_B,
+                KeyEvent.KEYCODE_BUTTON_B to KeyEvent.KEYCODE_BUTTON_A,
+                KeyEvent.KEYCODE_BUTTON_X to KeyEvent.KEYCODE_BUTTON_Y,
+                KeyEvent.KEYCODE_BUTTON_Y to KeyEvent.KEYCODE_BUTTON_X,
+            )
+
+        return genericArcadeOverride + allAvailableInputs + faceButtonSwap
     }
 
     override fun isEnabledByDefault(appContext: Context): Boolean {
