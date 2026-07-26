@@ -1,7 +1,7 @@
 # [BUG] Controle arcade NJP308/NJP308A: stick nao responde no jogo
 
 **Data:** 2026-07-23
-**Status:** Em aberto - causa da recorrencia identificada em 2026-07-26 (fix existente nao esta neste branch)
+**Status:** Correcao aplicada em 2026-07-26 (cherry-pick + reconciliacao); aguardando validacao fisica com o controle
 **Severidade:** Media - controle fisico conectado pode aparecer sem porta efetiva no jogo
 **Modelo afetado:** NJP308 / NJP308A "Game Arcade Controller" USB para PC/Android/PSII/PSIII
 **Branch:** version9
@@ -260,17 +260,71 @@ o que praticamente todo joystick tem. Logo `retrieveFallbackLeftCoordinates()` e
 As 5 alteracoes estao **apenas no working tree**, sem commit. Qualquer build feito a
 partir de um checkout limpo nao contem o patch.
 
-## Plano de correcao proposto
+## Correcao aplicada (2026-07-26)
 
-1. `git cherry-pick b424cda` no `version9` - traz os 5 edits ja validados.
-2. Resolver o conflito em `LemuroidInputDeviceGamePad.kt` mantendo o **binding
-   identidade** do `version8` e sobrepondo apenas os overrides numericos
-   `BUTTON_1..10` do patch de 07-23 (sao aditivos, nao conflitam).
-3. Remover `retrieveFallbackLeftCoordinates` / `sendFallbackLeftStickMotion` (codigo
-   morto) e, no lugar, tratar o caso `merge = false` + device sem `AXIS_HAT`.
-4. Commitar antes de gerar APK de teste.
-5. Restaurar `documentacao/backlogs/fix-controles-genericos-tvbox-haskeys.md` no
-   `version9` (vem junto no cherry-pick) para nao perder o plano de novo.
+Tres commits no `version9`:
+
+| Commit | O que faz |
+|--------|-----------|
+| `8932d81` | Checkpoint: preserva o patch de 07-23 que estava solto no working tree |
+| `b91cc7b` | Cherry-pick de `b424cda` - traz os 5 edits do `version8` |
+| `d986589` | Reconciliacao: remove a heuristica errada e trata o caso do DPAD |
+
+**`b91cc7b`** restaura os quatro pontos perdidos: binding identidade no lugar do
+`KEYCODE_UNKNOWN`, `hasGamepadEvidence()` / `hasJoystickAxes()` em `isSupported` e
+`isEnabledByDefault`, roteamento por `event.device.sources` em `dispatchKeyEvent`, log
+`INPUT_DIAG` de devices rejeitados. Traz de volta tambem
+`documentacao/backlogs/fix-controles-genericos-tvbox-haskeys.md`.
+
+Conflito resolvido apenas em `LemuroidInputDeviceGamePad.kt`: mantido o lado do
+`b424cda` em `isSupported`/`isEnabledByDefault`, preservados os overrides
+`BUTTON_1..10` do patch de 07-23.
+
+**`d986589`** faz tres coisas:
+
+1. **Remove a heuristica `KEYCODE_1..4`.** A premissa estava errada: `KEYCODE_1..9`
+   vem de `KEY_1..KEY_9`, a linha numerica de um teclado, e um HID de gamepad nunca
+   emite esses codigos. Botao de stick arcade DirectInput cai na faixa evdev
+   `BTN_TRIGGER..BTN_BASE6`, que o `Generic.kl` traduz para `BUTTON_1..BUTTON_16`.
+   Alem de nao pegar o NJP308, a heuristica fazia remotes de TV e receptores IR com
+   teclas numericas virarem gamepad. Removidos junto os `KEYCODE_0..9` de
+   `InputClassGamePad.INPUT_KEYS` e os overrides correspondentes.
+   `BUTTON_1..4` foi **mantido** - essa parte e evidencia legitima - e agora tambem
+   entra em `hasGamepadEvidence()` e `isEnabledByDefault()`.
+2. **Remove o fallback `AXIS_RX/RY`**, que era codigo morto:
+   `hasPrimaryDirectionAxes()` retorna `true` para qualquer device com `AXIS_X` e
+   `AXIS_Y`, ou seja praticamente todo joystick, entao as duas funcoes nunca
+   executavam.
+3. **Trata o DPAD em stick digital sem eixos HAT** (a Descoberta 3 acima): quando o
+   device nao expoe `AXIS_HAT_X/Y`, `sendSeparateMotionEvents` passa a alimentar o
+   DPAD com `AXIS_X/Y` em vez de mandar zero.
+
+Validacao executada:
+
+```powershell
+./gradlew.bat :lemuroid-app:compileFreeBundleDebugKotlin   # BUILD SUCCESSFUL
+./gradlew.bat :lemuroid-app:ktlintMainSourceSetCheck        # ver nota abaixo
+```
+
+> `ktlintMainSourceSetCheck` falha no repo inteiro, em arquivos nao tocados por esta
+> correcao (ex.: `LemuroidApplicationModule.kt`). Nao e regressao desta mudanca.
+
+## O que ainda falta - validacao fisica
+
+**A correcao nao foi exercitada contra o hardware.** Continua valendo a limitacao do
+diagnostico original: no teste ADB o celular estava em `data_role=device`, entao o
+Android nunca enumerou o controle. Para validar de verdade:
+
+1. Parear o ADB por Wi-Fi (libera a porta USB do celular).
+2. Plugar o NJP308 via OTG.
+3. `adb logcat -s INPUT_DIAG` - agora loga tanto os devices registrados quanto os
+   rejeitados com o motivo.
+4. Conferir se aparece `registered gamepad id=... port=0` para o controle.
+5. Testar o stick em um sistema com `merge = true` (arcade, NES) **e** em um com
+   `merge = false` (PSX dualshock) - sao caminhos de codigo diferentes.
+
+Se o `INPUT_DIAG` mostrar o controle em `rejected device`, o `sources` e o
+`isVirtual` do log dizem qual filtro barrou.
 
 ## Licao
 
@@ -279,6 +333,12 @@ automaticamente. Ao cherry-pickar commits entre branches de versao, conferir a l
 completa com `git log --oneline versaoNova..versaoAntiga` em vez de escolher commits
 individualmente - foi exatamente assim que o `b424cda` se perdeu enquanto os dois
 commits de build pipeline vizinhos foram trazidos.
+
+Corolario: quando um bug "recorre" logo depois de uma correcao ter sido dada como
+pronta, checar primeiro se a correcao esta no branch atual (`git merge-base
+--is-ancestor <commit> HEAD`) antes de rediagnosticar. Diagnosticar de novo sobre um
+baseline sem o fix leva a um patch que redescobre metade do problema e erra a outra
+metade - foi o que aconteceu com o patch de 07-23.
 
 ## Observacao sobre o botao MODE
 
