@@ -45,6 +45,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.abs
 
 class GameViewModelInput(
@@ -67,7 +68,7 @@ class GameViewModelInput(
     // Ver hasDedicatedDpad(). Chaveado por InputDevice.id, que e estavel enquanto
     // o device fica conectado. ConcurrentHashMap por seguranca: hoje so o coletor
     // de initializeGamePadMotionsFlow le/escreve, mas nao ha nada que garanta isso.
-    private val dedicatedDpadCache = java.util.concurrent.ConcurrentHashMap<Int, Boolean>()
+    private val dedicatedDpadCache = ConcurrentHashMap<Int, Boolean>()
 
     fun getAllTiltConfigurations(): List<TiltConfiguration> {
         return controllerConfigsState.value[0]
