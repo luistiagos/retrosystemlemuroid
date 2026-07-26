@@ -299,12 +299,36 @@ Conflito resolvido apenas em `LemuroidInputDeviceGamePad.kt`: mantido o lado do
    device nao expoe `AXIS_HAT_X/Y`, `sendSeparateMotionEvents` passa a alimentar o
    DPAD com `AXIS_X/Y` em vez de mandar zero.
 
+**`dee8db4`** corrige tres bugs encontrados na revisao da propria correcao:
+
+1. **O fallback de DPAD sequestrava o analogico esquerdo.** O guard checava so
+   eixos HAT. Gamepad analogico que manda o D-pad por teclas `KEYCODE_DPAD_*` nao
+   tem eixos HAT, entao o analogico passava a acionar tambem o DPAD - nos 9
+   sistemas onde `merge = false` existe justamente para separar os dois. Agora o
+   fallback exige ausencia de **todo** canal de DPAD: sem HAT e sem teclas DPAD.
+2. **Os overrides numericos quebravam a tela de controles de todos os controles.**
+   `Configuracoes > Controles` inverte o mapa de bindings com `reverseLookup()`
+   (`associateBy`, ultimo vence) e a tela de TV faz o mesmo com
+   `.map { it.value to it.key }.toMap()`. Como `BUTTON_1..10` sao chaves novas,
+   caiam no fim do mapa e ganhavam a inversao: os 10 botoes customizaveis
+   exibiam "Botao A: BUTTON_2", "Start: BUTTON_10" em vez do nome canonico, em
+   **qualquer** controle. `getDefaultBindings` agora monta o mapa em tres blocos
+   ordenados, com os overrides de arcade primeiro. Mapa direto identico; so a
+   ordem de iteracao muda.
+3. **`hasKeys` por motion event.** `InputDevice.hasKeys` e IPC para o
+   `InputManagerService` e `motionRanges` aloca lista por acesso;
+   `hasDedicatedDpad` roda no caminho de motion event. Cacheado por
+   `InputDevice.id`.
+
 Validacao executada:
 
 ```powershell
 ./gradlew.bat :lemuroid-app:compileFreeBundleDebugKotlin   # BUILD SUCCESSFUL
 ./gradlew.bat :lemuroid-app:ktlintMainSourceSetCheck        # ver nota abaixo
 ```
+
+A equivalencia do mapa direto e a correcao da inversao (bug 2) foram verificadas
+simulando a semantica de `LinkedHashMap`.
 
 > `ktlintMainSourceSetCheck` falha no repo inteiro, em arquivos nao tocados por esta
 > correcao (ex.: `LemuroidApplicationModule.kt`). Nao e regressao desta mudanca.
