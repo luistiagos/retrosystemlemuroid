@@ -320,6 +320,30 @@ Conflito resolvido apenas em `LemuroidInputDeviceGamePad.kt`: mantido o lado do
    `hasDedicatedDpad` roda no caminho de motion event. Cacheado por
    `InputDevice.id`.
 
+**`e983c52`** corrige um quarto bug, da mesma familia do 3 e nao pego na
+primeira revisao. `initializeVirtualGamePadMotionsFlow` chama
+`event.device.getInputClass()` a **cada** motion event, e o patch de 07-23 tinha
+posto um `hasKeys(BUTTON_1..4)` dentro de `getInputClass` **atribuido a um val
+antes do `||`** - ou seja, o `||` nao curto-circuitava e o binder rodava sempre,
+mesmo em controle comum.
+
+A checagem foi **removida** de `InputClass.getInputClass` e
+`LemuroidInputDevice.isGamepad` em vez de so ser tornada preguicosa, porque nos
+dois pontos ela e inerte e so pode causar dano:
+
+- *Inerte*: `getAllGamePads` filtra por `isSupported()`, que exige source de
+  gamepad. Com source, `isGamepad()` ja retorna true por ele; sem source,
+  `isSupported()` reprova de qualquer forma.
+- *Danosa*: device sem source de gamepad mas com `BUTTON_1..4` deixava de ser
+  roteado para `LemuroidInputDeviceKeyboard` - que poderia suporta-lo - e passava
+  a engolir teclas em `sendKeyEvent` sem ter porta atribuida.
+
+Com isso `InputClass.kt`, `LemuroidInputDevice.kt` e `InputClassGamePad.kt`
+voltaram a ser **logicamente identicos ao upstream** (so ganharam comentarios),
+verificado por diff ignorando comentarios e linhas em branco. A superficie real
+da correcao ficou restrita a `LemuroidInputDeviceGamePad.kt`,
+`GameViewModelInput.kt`, `BaseGameActivity.kt` e `InputDeviceManager.kt`.
+
 Validacao executada:
 
 ```powershell
