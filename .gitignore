@@ -26,7 +26,8 @@ carbon.zip
 hs_err_pid*.log
 replay_pid*.log
 *.hprof
-.kotlin/errors/
+# Diretório de trabalho do plugin Kotlin do Gradle (errors/ e sessions/)
+.kotlin/
 
 # Build artifacts / temporários que não devem ser commitados
 *.apk
