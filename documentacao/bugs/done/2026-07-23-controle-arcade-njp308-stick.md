@@ -1,10 +1,30 @@
 # [BUG] Controle arcade NJP308/NJP308A: stick nao responde no jogo
 
 **Data:** 2026-07-23
-**Status:** Correcao aplicada em 2026-07-26 (cherry-pick + reconciliacao); aguardando validacao fisica com o controle
+**Status:** Resolvido ✅ (correção aplicada 2026-07-26 — **sem validação física**, ver ressalva abaixo)
 **Severidade:** Media - controle fisico conectado pode aparecer sem porta efetiva no jogo
 **Modelo afetado:** NJP308 / NJP308A "Game Arcade Controller" USB para PC/Android/PSII/PSIII
 **Branch:** version9
+
+> ⚠️ **Ressalva sobre o fechamento.** Este bug foi fechado com a correção aplicada e
+> compilando, mas **o hardware NJP308 nunca foi enumerado pelo Android em teste algum** —
+> nos testes de ADB o celular ficou em `data_role=device`, ou seja, era ele o dispositivo
+> USB, não o host OTG. Toda a cadeia de causa-raiz específica deste modelo continua sendo
+> hipótese. O que está comprovadamente corrigido é a classe de bug (ver os quatro arquivos
+> `2026-07-26-*` e o de perda entre branches). Se o controle voltar a falhar, começar pelo
+> roteiro em "O que ainda falta - validacao fisica" no fim deste arquivo, **não** por um
+> novo diagnóstico do zero.
+
+## Bugs relacionados
+
+A investigação desta recorrência gerou quatro arquivos próprios:
+
+| Arquivo | O que é |
+|---------|---------|
+| `2026-07-26-fix-input-generico-perdido-entre-branches.md` | **Causa-raiz da recorrência** — o fix existia, mas só no `version8` |
+| `2026-07-26-bindings-reverselookup-nome-errado.md` | Tela de Controles exibia nome errado em todo controle |
+| `2026-07-26-haskeys-ipc-caminho-motion-event.md` | `hasKeys` (IPC) por evento, em dois pontos |
+| `2026-07-26-dpad-fallback-sequestrava-analogico.md` | Fallback de DPAD quebrava o analógico em 9 sistemas |
 
 ---
 
