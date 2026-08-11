@@ -37,10 +37,12 @@ import com.swordfish.touchinput.radial.sensors.TiltConfiguration
 import com.swordfish.touchinput.radial.settings.TouchControllerSettingsManager
 import gg.padkit.inputevents.InputEvent
 import gg.padkit.inputstate.InputState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class BaseGameScreenViewModel(
@@ -251,7 +253,7 @@ class BaseGameScreenViewModel(
         }
     }
 
-    fun saveQuickSave() {
+    suspend fun saveQuickSave() {
         Timber.d("Saving quick save")
         if (loadingState.value) return
         withLoading {
@@ -259,7 +261,7 @@ class BaseGameScreenViewModel(
         }
     }
 
-    fun loadQuickSave() {
+    suspend fun loadQuickSave() {
         Timber.d("Loading quick save")
         if (loadingState.value) return
         withLoading {
@@ -278,7 +280,9 @@ class BaseGameScreenViewModel(
         withLoading {
             try {
                 delay(appContext.longAnimationDuration().toLong())
-                retroGameView.retroGameViewFlow().reset()
+                // reset() passa por runOnGLThread — bloqueia ate a GLThread drenar a fila.
+                val view = retroGameView.retroGameViewFlow()
+                withContext(Dispatchers.IO) { view.reset() }
             } catch (e: kotlinx.coroutines.CancellationException) {
                 throw e
             } catch (e: Throwable) {

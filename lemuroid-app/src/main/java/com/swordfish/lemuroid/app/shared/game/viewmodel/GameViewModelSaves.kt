@@ -46,10 +46,7 @@ class GameViewModelSaves(
     suspend fun loadSlot(index: Int) {
         try {
             statesManager.getSlotSave(game, systemCoreConfig.coreID, index)?.let {
-                val loaded =
-                    withContext(Dispatchers.IO) {
-                        loadSaveState(it)
-                    }
+                val loaded = loadSaveState(it)
 
                 if (!loaded) {
                     sideEffects.showToast(appContext.getString(R.string.game_toast_load_state_failed))
@@ -69,7 +66,7 @@ class GameViewModelSaves(
 
     suspend fun saveSRAM(game: Game) {
         val retroGameView = retroGameView.retroGameView ?: return
-        val sramState = retroGameView.serializeSRAM()
+        val sramState = withContext(Dispatchers.IO) { retroGameView.serializeSRAM() }
         savesManager.setSaveRAM(game, sramState)
         Timber.i("Stored sram file with size: ${sramState.size}")
     }
@@ -87,7 +84,10 @@ class GameViewModelSaves(
     // On some cores unserialize fails with no reason. So we need to try multiple times.
     suspend fun restoreAutoSaveAsync(saveState: SaveState) {
         // PPSSPP and Mupen64 initialize some state while rendering the first frame, so we have to wait before restoring
-        // the autosave. Do not change thread here. Stick to the GL one to avoid issues with PPSSPP.
+        // the autosave. O unserialize precisa rodar na GLThread — quem garante isso e o
+        // runOnGLThread dentro do GLRetroView, nao o dispatcher deste chamador. Por isso
+        // loadSaveState roda em Dispatchers.IO: o chamador nunca pode ser a main thread,
+        // que ficaria presa no latch sem timeout do runOnGLThread.
         if (!isAutoSaveEnabled()) return
 
         try {
@@ -100,18 +100,22 @@ class GameViewModelSaves(
         }
     }
 
-    private fun getCurrentSaveState(): SaveState? {
+    // serializeState/getCurrentDisk passam por runOnGLThread, que bloqueia o chamador ate a
+    // GLThread drenar a fila. Nunca chamar da main thread — dai o withContext(IO).
+    private suspend fun getCurrentSaveState(): SaveState? {
         val retroGameView = retroGameView.retroGameView ?: return null
-        val currentDisk =
-            if (system.hasMultiDiskSupport) {
-                retroGameView.getCurrentDisk()
-            } else {
-                0
-            }
-        return SaveState(
-            retroGameView.serializeState(),
-            SaveState.Metadata(currentDisk, systemCoreConfig.statesVersion),
-        )
+        return withContext(Dispatchers.IO) {
+            val currentDisk =
+                if (system.hasMultiDiskSupport) {
+                    retroGameView.getCurrentDisk()
+                } else {
+                    0
+                }
+            SaveState(
+                retroGameView.serializeState(),
+                SaveState.Metadata(currentDisk, systemCoreConfig.statesVersion),
+            )
+        }
     }
 
     private suspend fun isAutoSaveEnabled(): Boolean {
@@ -137,29 +141,33 @@ class GameViewModelSaves(
         }
     }
 
-    private fun loadSaveState(saveState: SaveState): Boolean {
+    // Idem getCurrentSaveState: getAvailableDisks/getCurrentDisk/changeDisk/unserializeState
+    // sao todos runOnGLThread e bloqueiam quem chama.
+    private suspend fun loadSaveState(saveState: SaveState): Boolean {
         val retroGameView = retroGameView.retroGameView ?: return false
 
         if (systemCoreConfig.statesVersion != saveState.metadata.version) {
             throw IncompatibleStateException()
         }
 
-        if (system.hasMultiDiskSupport &&
-            retroGameView.getAvailableDisks() > 1 &&
-            retroGameView.getCurrentDisk() != saveState.metadata.diskIndex
-        ) {
-            retroGameView.changeDisk(saveState.metadata.diskIndex)
-        }
+        return withContext(Dispatchers.IO) {
+            if (system.hasMultiDiskSupport &&
+                retroGameView.getAvailableDisks() > 1 &&
+                retroGameView.getCurrentDisk() != saveState.metadata.diskIndex
+            ) {
+                retroGameView.changeDisk(saveState.metadata.diskIndex)
+            }
 
-        return retroGameView.unserializeState(saveState.state)
+            retroGameView.unserializeState(saveState.state)
+        }
     }
 
-    fun saveQuickSave() {
+    suspend fun saveQuickSave() {
         currentQuickSave = getCurrentSaveState()
         sideEffects.showToast(appContext.getString(R.string.game_toast_quick_save_saved))
     }
 
-    fun loadQuickSave() {
+    suspend fun loadQuickSave() {
         val saveToLoad = currentQuickSave
         if (saveToLoad == null) {
             sideEffects.showToast(appContext.getString(R.string.game_toast_load_state_failed))

@@ -32,7 +32,10 @@
       "Bash(rm -rf /c/Windows/Temp/*)",
       "Bash(rm -rf \"C:/Users/luist/AppData/Local/Temp/\"*.tmp)",
       "Bash(rm -rf \"C:/Users/luist/AppData/Local/Temp/\"chrome_*)",
-      "Bash(.\\\\gradlew.bat :lemuroid-app:assembleFreeBundleRelease --no-daemon)"
+      "Bash(.\\\\gradlew.bat :lemuroid-app:assembleFreeBundleRelease --no-daemon)",
+      "Bash(ls libs/_aar_inspect/ 2>/dev/null | head -20; echo \"---\"; find / -maxdepth 3 -iname \"*LibretroDroid*\" -type d 2>/dev/null | head; echo \"---E---\"; ls /e/projects/ 2>/dev/null | head -30)",
+      "Read(//e//**)",
+      "Read(//e/projects//**)"
     ],
     "additionalDirectories": [
       "E:\\projects\\play2\\ARMSX2\\app\\src\\main\\res\\layout",

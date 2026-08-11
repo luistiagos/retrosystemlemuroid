@@ -55,7 +55,10 @@
 param(
     [switch]$SkipBuild,
     [switch]$SkipHF,
-    [switch]$SkipR2
+    [switch]$SkipR2,
+    [switch]$SkipPublicVerify,
+    [switch]$NoBump,
+    [string]$VersionName = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -75,6 +78,63 @@ if (Test-Path -LiteralPath $ENV_FILE) {
             Set-Variable -Name $k -Value $v -Scope Script
         }
     }
+}
+
+# ─── BUMP DE VERSAO ─────────────────────────────────
+# Sobe versionCode (+1) e o patch do versionName ANTES de qualquer coisa: a
+# leitura logo abaixo precisa ja pegar os valores novos, e o build precisa
+# sair com eles. versionName sobe junto de proposito - se so o code subisse,
+# o dialogo de atualizacao no app diria "a versao 1.17.0 esta disponivel,
+# voce tem a 1.17.0". Use -VersionName para saltos que nao sejam de patch.
+if ($SkipBuild) {
+    Write-Host "Bump de versao: PULADO (-SkipBuild usa os APKs que ja existem)" -ForegroundColor Yellow
+} elseif ($NoBump) {
+    Write-Host "Bump de versao: PULADO (-NoBump)" -ForegroundColor Yellow
+} else {
+    $bumpRaw = [System.IO.File]::ReadAllText($GRADLE_FILE)
+
+    # Sem ancora $ de proposito: o arquivo e CRLF e o $ multiline exige estar
+    # logo antes do \n, mas [^\r\n]* nao consome o \r - nunca casaria.
+    # \b evita casar 'versionNameSuffix' (existe mais abaixo no arquivo).
+    $bumpCodeLine = [regex]::Match($bumpRaw, '(?m)^[^\r\n]*\bversionCode\b[^\r\n]*').Value
+    $bumpNameLine = [regex]::Match($bumpRaw, '(?m)^[^\r\n]*\bversionName\b[^\r\n]*').Value
+    if (-not $bumpCodeLine -or -not $bumpNameLine) {
+        throw "Nao encontrei versionCode/versionName em $GRADLE_FILE"
+    }
+
+    $bumpNums = [regex]::Matches($bumpCodeLine, '\d+')
+    if ($bumpNums.Count -ne 1) {
+        throw "A linha do versionCode tem $($bumpNums.Count) numeros; nao da para incrementar com seguranca:`n  $bumpCodeLine"
+    }
+    $bumpOldCode = [int]$bumpNums[0].Value
+    $bumpNewCode = $bumpOldCode + 1
+
+    # A linha do versionName tem um comentario no fim ("// Always remember...")
+    # sem aspas duplas, entao a primeira string entre aspas e mesmo a versao.
+    $bumpNameMatch = [regex]::Match($bumpNameLine, '"([^"]+)"')
+    if (-not $bumpNameMatch.Success) {
+        throw "Nao encontrei o versionName entre aspas duplas:`n  $bumpNameLine"
+    }
+    $bumpOldName = $bumpNameMatch.Groups[1].Value
+
+    if ($VersionName) {
+        $bumpNewName = $VersionName
+    } elseif ($bumpOldName -match '^(\d+)\.(\d+)\.(\d+)$') {
+        $bumpNewName = "$($matches[1]).$($matches[2]).$([int]$matches[3] + 1)"
+    } else {
+        throw "versionName '$bumpOldName' nao segue X.Y.Z; passe -VersionName <valor> para definir a nova versao."
+    }
+
+    Write-Host "Subindo versao:" -ForegroundColor Yellow
+    Write-Host "  versionCode: $bumpOldCode -> $bumpNewCode" -ForegroundColor White
+    Write-Host "  versionName: $bumpOldName -> $bumpNewName" -ForegroundColor White
+
+    $bumpNewCodeLine = $bumpCodeLine -replace '\d+', $bumpNewCode
+    $bumpNewNameLine = $bumpNameLine -replace '"[^"]+"', "`"$bumpNewName`""
+    # Replace no texto bruto preserva as quebras de linha originais do arquivo.
+    $bumpUpdated = $bumpRaw.Replace($bumpCodeLine, $bumpNewCodeLine).Replace($bumpNameLine, $bumpNewNameLine)
+    [System.IO.File]::WriteAllText($GRADLE_FILE, $bumpUpdated, (New-Object System.Text.UTF8Encoding($false)))
+    Write-Host "  build.gradle.kts atualizado" -ForegroundColor Green
 }
 
 # Versao: lida do build.gradle.kts, fonte de verdade do versionamento do app.
@@ -205,6 +265,28 @@ if ($Script:R2_ACCESS_KEY_ID -and $Script:R2_SECRET_ACCESS_KEY -and $Script:R2_E
     $cfg = $null
 }
 
+# ─── URLs PUBLICAS ──────────────────────────────────
+# O bucket "versions" e servido em versions.digitalstoregames.com. Antes isso
+# so saia se publicBaseUrl/R2_PUBLIC_URL estivesse preenchido - e nao esta em
+# lugar nenhum, entao o JSON do /app_version nunca era gerado e as URLs eram
+# montadas na mao. O fallback abaixo resolve.
+$PUBLIC_BASE_DEFAULT = "https://versions.digitalstoregames.com"
+$publicBase = if ($cfg -and $cfg.publicBaseUrl) { $cfg.publicBaseUrl.TrimEnd('/') } else { $PUBLIC_BASE_DEFAULT }
+
+# O "?v=<versionCode>" NAO e enfeite. O cache de borda na frente do R2 continua
+# servindo os bytes ANTIGOS na URL canonica por tempo indeterminado depois do
+# upload, e ignora Cache-Control/Pragma no-cache do cliente. Medido no projeto
+# ARMSX2 em 2026-08-10: o anuncio de versao ja dizia 1.0.9 enquanto a URL do
+# APK ainda entregava o binario 1.0.8. A query string muda a chave de cache,
+# entao cada release busca bytes frescos. Sem isso o app baixa a versao errada.
+$r2PublicUrls = @{}   # com ?v= : e o que vai no JSON, o app usa isso
+$r2BareUrls   = @{}   # sem query: o link que circula para download manual
+foreach ($abi in $AbiMap.Keys) {
+    $fileName = "retro-game-system-$($AbiMap[$abi]).apk"
+    $r2BareUrls[$abi]   = "$publicBase/$R2_FOLDER/$fileName"
+    $r2PublicUrls[$abi] = "$publicBase/$R2_FOLDER/$($fileName)?v=$($VERSION_CODE)"
+}
+
 # ─── STEP 3: R2 UPLOAD (distribuicao, sem versao) ──
 if (-not $SkipR2) {
     Print-Step "PASSO 3/3: Upload para R2 (distribuicao)"
@@ -266,6 +348,95 @@ if (-not $SkipR2) {
     }
     Write-Host "Verificacao passou." -ForegroundColor Green
 
+    # ─── Purga do cache de borda ────────────────────
+    # Sem isto o link que circula com os clientes continua entregando o APK da
+    # versao anterior por tempo indeterminado. Precisa de CF_API_TOKEN e
+    # CF_ZONE_ID no build.properties. A permissao no token e de ZONA:
+    # "Cache" -> acao "Purge"; token com escopo de conta inteira nem enxerga
+    # essa permissao e falha com erro 10000.
+    $cfToken = $Script:CF_API_TOKEN
+    $cfZone  = $Script:CF_ZONE_ID
+    Write-Host ""
+    if ([string]::IsNullOrWhiteSpace($cfToken) -or [string]::IsNullOrWhiteSpace($cfZone)) {
+        Write-Host "Purga do cache: PULADA (defina CF_API_TOKEN e CF_ZONE_ID no build.properties)" -ForegroundColor Yellow
+        Write-Host "  O link de download manual pode servir a versao anterior ate o cache expirar." -ForegroundColor Yellow
+    } else {
+        Write-Host "Purgando cache de borda..." -ForegroundColor Yellow
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        $purgeUrls = @()
+        foreach ($abi in $AbiMap.Keys) { $purgeUrls += $r2BareUrls[$abi] }
+        $purgeResp = Invoke-RestMethod -Method Post `
+            -Uri "https://api.cloudflare.com/client/v4/zones/$cfZone/purge_cache" `
+            -Headers @{ Authorization = "Bearer $cfToken" } `
+            -ContentType 'application/json' `
+            -Body (@{ files = $purgeUrls } | ConvertTo-Json) `
+            -TimeoutSec 60
+        if (-not $purgeResp.success) {
+            throw "Purga falhou: $($purgeResp.errors | ConvertTo-Json -Compress)"
+        }
+        Write-Host "  OK: cache purgado" -ForegroundColor Green
+        Start-Sleep -Seconds 5
+    }
+
+    # ─── Verificacao pela URL PUBLICA ───────────────
+    # A verificacao acima fala com o R2 pela API S3 e PULA o cache de borda:
+    # ela pode passar enquanto o cliente ainda recebe a versao anterior. Esta
+    # aqui e a unica que prova o que o usuario final baixa. Custa ~200 MB de
+    # download por publicacao (os dois APKs); use -SkipPublicVerify pra pular.
+    if ($SkipPublicVerify) {
+        Write-Host ""
+        Write-Host "Verificacao pela URL publica: SKIPPED (-SkipPublicVerify)" -ForegroundColor Yellow
+    } else {
+        Write-Host ""
+        Write-Host "Verificando pela URL publica (o que o cliente recebe)..." -ForegroundColor Yellow
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        $savedProgress = $ProgressPreference
+        $ProgressPreference = 'SilentlyContinue'
+        try {
+            foreach ($abi in $AbiMap.Keys) {
+                $localSha = (Get-FileHash -LiteralPath $DistApks[$abi] -Algorithm SHA256).Hash.ToLower()
+                $localSize = (Get-Item -LiteralPath $DistApks[$abi]).Length
+
+                $probe = Join-Path $env:TEMP "lemuroid-publish-probe-$($AbiMap[$abi]).apk"
+                Invoke-WebRequest -Uri $r2PublicUrls[$abi] -OutFile $probe -TimeoutSec 600 -Headers @{ 'Cache-Control' = 'no-cache' }
+                $probeSha = (Get-FileHash -LiteralPath $probe -Algorithm SHA256).Hash.ToLower()
+                $probeSize = (Get-Item -LiteralPath $probe).Length
+                Remove-Item $probe -Force -ErrorAction SilentlyContinue
+
+                if ($probeSha -ne $localSha) {
+                    throw @"
+VERIFICACAO FALHOU: a URL publica de $abi entregou bytes DIFERENTES do publicado.
+  esperado: $localSha ($localSize bytes)
+  recebido: $probeSha ($probeSize bytes)
+  url:      $($r2PublicUrls[$abi])
+O app baixaria a versao errada. Normalmente e cache de borda servindo o APK
+anterior: purgue o cache do Cloudflare para $publicBase/$R2_FOLDER/* e repita.
+"@
+                }
+                Write-Host "  OK: $($DeviceLabel[$abi]) entrega os bytes certos ($probeSize bytes)" -ForegroundColor Green
+
+                # Link sem query = o que circula para download manual. Se estiver
+                # velho nao quebra a atualizacao in-app (que usa ?v=), mas quem
+                # clicar no link baixa a versao anterior.
+                try {
+                    $bare = Join-Path $env:TEMP "lemuroid-publish-bare-$($AbiMap[$abi]).apk"
+                    Invoke-WebRequest -Uri $r2BareUrls[$abi] -OutFile $bare -TimeoutSec 600
+                    $bareSha = (Get-FileHash -LiteralPath $bare -Algorithm SHA256).Hash.ToLower()
+                    Remove-Item $bare -Force -ErrorAction SilentlyContinue
+                    if ($bareSha -ne $localSha) {
+                        Write-Host "  AVISO: o link manual de $abi ainda serve a versao anterior (cache de borda)." -ForegroundColor Yellow
+                        Write-Host "         $($r2BareUrls[$abi])" -ForegroundColor Yellow
+                        Write-Host "         Purgue o cache no painel Cloudflare para o link manual atualizar." -ForegroundColor Yellow
+                    }
+                } catch {
+                    Write-Host "  AVISO: nao foi possivel conferir o link manual de ${abi}: $($_.Exception.Message)" -ForegroundColor Yellow
+                }
+            }
+        } finally {
+            $ProgressPreference = $savedProgress
+        }
+    }
+
     Write-Host ""
     Write-Host "Upload para R2 concluido!" -ForegroundColor Green
 } else {
@@ -285,17 +456,10 @@ if (-not $SkipHF) {
     }
 }
 
-$r2PublicUrls = @{}
 Write-Host ""
-Write-Host "R2 (distribuicao):" -ForegroundColor Cyan
-if ($cfg.publicBaseUrl) {
-    $base = $cfg.publicBaseUrl.TrimEnd('/')
-    foreach ($abi in $AbiMap.Keys) {
-        $r2PublicUrls[$abi] = "$base/$R2_FOLDER/retro-game-system-$($AbiMap[$abi]).apk"
-        Write-Host "  $($DeviceLabel[$abi]): $($r2PublicUrls[$abi])" -ForegroundColor Cyan
-    }
-} else {
-    Write-Host "  (defina publicBaseUrl / R2_PUBLIC_URL para ver as URLs)" -ForegroundColor Yellow
+Write-Host "R2 (distribuicao) - link para download manual:" -ForegroundColor Cyan
+foreach ($abi in $AbiMap.Keys) {
+    Write-Host "  $($DeviceLabel[$abi]): $($r2BareUrls[$abi])" -ForegroundColor Cyan
 }
 
 # ─── JSON app_version ───────────────────────────────
@@ -304,21 +468,17 @@ if ($cfg.publicBaseUrl) {
 # aponta pro arm64 - maioria dos devices em campo.
 Write-Host ""
 Write-Host "JSON para /app_version:" -ForegroundColor Cyan
-if ($r2PublicUrls.ContainsKey("arm64-v8a") -and $r2PublicUrls.ContainsKey("armeabi-v7a")) {
-    $appVersionJson = [ordered]@{
-        versionCode = [int]$VERSION_CODE
-        versionName = $VERSION_NAME
-        channel     = "default"
-        apkUrl      = $r2PublicUrls["arm64-v8a"]
-        apkUrls     = [ordered]@{
-            "arm64-v8a"    = $r2PublicUrls["arm64-v8a"]
-            "armeabi-v7a"  = $r2PublicUrls["armeabi-v7a"]
-        }
-    } | ConvertTo-Json -Depth 5
-    Write-Host $appVersionJson -ForegroundColor White
-} else {
-    Write-Host "  (defina publicBaseUrl / R2_PUBLIC_URL para gerar o JSON)" -ForegroundColor Yellow
-}
+$appVersionJson = [ordered]@{
+    versionCode = [int]$VERSION_CODE
+    versionName = $VERSION_NAME
+    channel     = "default"
+    apkUrl      = $r2PublicUrls["arm64-v8a"]
+    apkUrls     = [ordered]@{
+        "arm64-v8a"    = $r2PublicUrls["arm64-v8a"]
+        "armeabi-v7a"  = $r2PublicUrls["armeabi-v7a"]
+    }
+} | ConvertTo-Json -Depth 5
+Write-Host $appVersionJson -ForegroundColor White
 
 Write-Host ""
 Write-Host "Todos os passos concluidos com sucesso!" -ForegroundColor Green

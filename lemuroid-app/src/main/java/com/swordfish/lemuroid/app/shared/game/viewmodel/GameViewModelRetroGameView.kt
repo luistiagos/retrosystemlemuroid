@@ -126,7 +126,6 @@ class GameViewModelRetroGameView(
                 systemCoreConfig,
                 directLoad,
             )
-                .flowOn(Dispatchers.IO)
                 .catch { e ->
                     if (e is CancellationException) throw e
                     if (e is GameLoaderException && e.error is GameLoaderError.LoadCore && !coreDownloadRetried) {
@@ -165,6 +164,11 @@ class GameViewModelRetroGameView(
                         sideEffects.requestFailureFinish(message)
                     }
                 }
+                // flowOn cobre tudo que esta ACIMA dele — precisa ficar depois do catch para
+                // que o corpo do catch (CoreDownloader/BiosDownloader, que fazem mkdirs,
+                // isElfCompatible e md5 do arquivo inteiro) tambem saia da main thread.
+                // O collect abaixo continua na main, que e onde a UI precisa dele.
+                .flowOn(Dispatchers.IO)
                 .debounce(50)
                 .collect { loadingState ->
                     gameState.value =

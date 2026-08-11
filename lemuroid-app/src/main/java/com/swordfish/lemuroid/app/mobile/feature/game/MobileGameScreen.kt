@@ -63,6 +63,8 @@ import com.swordfish.touchinput.radial.ui.LemuroidButtonPressFeedback
 import gg.padkit.PadKit
 import gg.padkit.config.HapticFeedbackType
 import gg.padkit.inputstate.InputState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
@@ -146,7 +148,15 @@ fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
                         (viewPos.right - fullPos.left) / fullPos.width,
                         (viewPos.bottom - fullPos.top) / fullPos.height,
                     )
-                gameView.viewport = viewport
+                // O setter de viewport entra em GLRetroView.runOnGLThread, que faz
+                // queueEvent + CountDownLatch.await() SEM timeout. A GLThread so drena a
+                // fila entre callbacks do renderer, e neste ponto ela ainda esta dentro de
+                // onSurfaceCreated -> initializeCore() -> retro_load_game(). Este effect
+                // dispara no primeiro layout, antes do primeiro frame: na main thread isso
+                // e o tempo inteiro de carga da ROM parado (ANR em ROM grande, ex. GameCube).
+                withContext(Dispatchers.IO) {
+                    gameView.viewport = viewport
+                }
             }
 
             ConstraintLayout(

@@ -43,9 +43,11 @@ import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
 import com.swordfish.touchinput.radial.sensors.TiltConfiguration
 import dagger.Lazy
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.system.exitProcess
@@ -195,7 +197,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             ?.let { LemuroidCoreOption(exposedSetting, it) }
     }
 
-    private fun displayOptionsDialog(
+    private suspend fun displayOptionsDialog(
         currentTiltConfiguration: TiltConfiguration,
         tiltConfigurations: List<TiltConfiguration>,
     ) {
@@ -214,7 +216,12 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 .mapNotNull { transformExposedSetting(it, coreOptions) }
 
         val retroGameView = baseGameScreenViewModel.retroGameView.retroGameView
-        val availableDisks = retroGameView?.getAvailableDisks() ?: 0
+        // getAvailableDisks/getCurrentDisk sao runOnGLThread: bloqueiam o chamador ate a
+        // GLThread drenar a fila. Fora da main thread.
+        val (availableDisks, retroCurrentDisk) =
+            withContext(Dispatchers.IO) {
+                (retroGameView?.getAvailableDisks() ?: 0) to (retroGameView?.getCurrentDisk() ?: 0)
+            }
         val fdsSideCount = baseGameScreenViewModel.retroGameView.fdsSideCount ?: 0
         val menuDisks = if (game.systemId == SystemID.FDS.dbname) {
             maxOf(availableDisks, fdsSideCount, 2)
@@ -224,7 +231,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         val currentDisk = if (game.systemId == SystemID.FDS.dbname) {
             fdsCurrentSideIndex
         } else {
-            retroGameView?.getCurrentDisk() ?: 0
+            retroCurrentDisk
         }.coerceIn(0, maxOf(menuDisks - 1, 0))
 
         val intent =
@@ -290,11 +297,11 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             }
     }
 
-    private fun performSaveQuickSave() {
+    private suspend fun performSaveQuickSave() {
         baseGameScreenViewModel.saveQuickSave()
     }
 
-    private fun performLoadQuickSave() {
+    private suspend fun performLoadQuickSave() {
         baseGameScreenViewModel.loadQuickSave()
     }
 
@@ -451,7 +458,11 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                         changeFdsSide(index)
                     }
                 } else {
-                    baseGameScreenViewModel.retroGameView.retroGameView?.changeDisk(index)
+                    // changeDisk e runOnGLThread — nunca da main thread.
+                    val retroGameView = baseGameScreenViewModel.retroGameView.retroGameView
+                    lifecycleScope.launch {
+                        withContext(Dispatchers.IO) { retroGameView?.changeDisk(index) }
+                    }
                 }
             }
             if (data?.hasExtra(GameMenuContract.RESULT_ENABLE_AUDIO) == true) {

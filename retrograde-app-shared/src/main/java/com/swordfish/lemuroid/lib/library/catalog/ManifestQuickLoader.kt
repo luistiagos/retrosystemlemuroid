@@ -101,7 +101,10 @@ class ManifestQuickLoader(
         //          by bumping version to 25.
         //   v26  cleaned up catalog_manifest.txt to fix duplicate catalog items (grouping variants properly)
         //   v27  stale catalog deletion and arcade re-run for version 27
-        private const val MANIFEST_SCHEMA_VERSION = 27
+        //   v28  snes: +493 titles from luistiagos/roms/snes .zip batch (romsrepository source_id=1);
+        //          33 realigned to an existing title as isRepresentative=0 variants to avoid
+        //          duplicate cards (punctuation-only differences vs. the curated .sfc set)
+        private const val MANIFEST_SCHEMA_VERSION = 28
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(
