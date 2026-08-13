@@ -104,7 +104,24 @@ class ManifestQuickLoader(
         //   v28  snes: +493 titles from luistiagos/roms/snes .zip batch (romsrepository source_id=1);
         //          33 realigned to an existing title as isRepresentative=0 variants to avoid
         //          duplicate cards (punctuation-only differences vs. the curated .sfc set)
-        private const val MANIFEST_SCHEMA_VERSION = 28
+        //   v29  snes: +7 titles present in the retrobat catalog but missing here (the whole
+        //          "Dem*" block: Demolition Man, Demons Blazon, Demons Crest).
+        //          Also fixes "Super Mario World I" -> "Super Mario World" (+ boxart): the
+        //          spurious "I" came from the v28 .zip batch and made the game unfindable.
+        //          Boxart backfill for that same batch, which shipped with zero covers:
+        //          264 scraped via IGDB (super_scrapper) + 35 reused from .sfc entries of the
+        //          same title. Covers shared by >=3 distinct titles are treated as junk and
+        //          never propagated. 300/493 covered; the rest stay empty on purpose.
+        //   v30  snes: +66 more covers in the same v28 .zip batch via HfsDB (dev token) and
+        //          HfsPlay (session cookies, retrobat credentials), 366/493 (74%) covered now.
+        //   v31  catalog-wide boxart pass. +4711 covers (libretro-thumbnails by exact No-Intro
+        //          name with region expansion, then IGDB/HfsDB/HfsPlay for the rest) and 3577
+        //          wrong covers wiped: a single image was serving as boxart for up to 196
+        //          distinct games, residue of an old scraper bug that accepted search hits
+        //          without comparing titles. Wiping is the fix, not replacing: an empty cover
+        //          falls back to the placeholder and lets a later scrape find the right one.
+        //          Emptied rows were re-scraped, which recovered the correct art for most.
+        private const val MANIFEST_SCHEMA_VERSION = 31
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

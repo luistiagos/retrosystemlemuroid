@@ -157,6 +157,38 @@ Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteú
 | 25 | Correção e re-execução da migração de arcade (mame2003plus + fbneo) |
 | 26 | Limpeza e remoção de duplicatas no `catalog_manifest.txt` |
 | 27 | Deleção no DB de jogos do catálogo obsoletos + re-execução segura da migração de arcade |
+| 28 | SNES: +493 títulos do lote `.zip` (romsrepository source_id=1); 33 realinhados como `isRepresentative=0` |
+| 29 | SNES: +7 títulos presentes no catálogo do retrobat e ausentes aqui (bloco `Dem*`) + correção `Super Mario World I` → `Super Mario World` + 300 capas e 151 popularidades no lote `.zip` da v28 |
+| 30 | SNES: mais 66 capas no lote `.zip` da v28 via HfsDB/HfsPlay (credenciais do retrobat), somando 366/493 (74%); catálogo SNES em 91% de cobertura |
+| 31 | Passe de capas no catálogo inteiro: +4.711 capas novas e 3.577 capas erradas removidas (ver "Passe de capas v31" abaixo) |
+
+### Backfill de capas (`super_scrapper`)
+
+O script `E:\fetchimagers\super_scrapper.py` preenche capas via IGDB e outros providers, mas **grava manifests de 4 campos** — rodá-lo direto no `catalog_manifest.txt` do Lemuroid apagaria o 5º campo (`isRepresentative`) de todas as linhas. O procedimento seguro é:
+
+1. Extrair as linhas-alvo para um manifest temporário de 4 campos, guardando o mapa `path → isRepresentative`.
+2. Rodar o `super_scrapper` nesse subset (`--csv ""`, `--limit N` em blocos — o manifest só é salvo no fim de cada bloco).
+3. Fazer o merge de volta aplicando **apenas** os campos 3 (capa) e 4 (popularidade). Títulos propostos pelo IGDB **não** são aplicados: mudar título altera o agrupamento de variantes e a ordenação alfabética.
+
+> ⚠️ **Capas-lixo**: o catálogo carregava o resíduo de um bug antigo do scraper (match sem comparar título) — uma única imagem chegou a ser capa de 196 títulos distintos. Limpo na v31, mas o scraper **continua** produzindo esses falsos positivos: no último lote o filtro descartou 64 URLs. Ao gravar ou reaproveitar capas, **sempre** descartar URLs compartilhadas por ≥ 3 títulos distintos, ou o dano volta.
+
+### Passe de capas v31 (catálogo inteiro)
+
+Duas fontes, nesta ordem — a barata e exata primeiro:
+
+**1. libretro-thumbnails por nome exato** (3.987 capas). O nome do arquivo no manifest já é, na maioria dos sistemas, o nome No-Intro — que é exatamente o nome do boxart no repo. Monta-se a URL candidata e faz-se um `HEAD`: **200 significa que existe uma capa com aquele nome**, o que já prova ser o jogo certo. Não há fuzzy match, logo não há risco de capa trocada.
+
+- Não usar a API do GitHub para listar o repo: são 60 req/h sem token e estoura na hora. O `HEAD` direto em `raw.githubusercontent.com` roda a ~70/s com 16 threads — 16 mil entradas em ~4 min.
+- Repos usam underscore no nome (`Sega_-_32X`), não espaço.
+- **Expansão de região é obrigatória**: o manifest usa `(US)`/`(JP)`/`(EU)`, o No-Intro usa `(USA)`/`(Japan)`/`(Europe)`. Só isso levou o msx2 de 0% → 68% e o gg de 0% → 38%.
+
+**2. `super_scrapper` (IGDB/HfsDB/HfsPlay)** para o que sobrou (724 capas, ~20% de acerto). A taxa é baixa de propósito: o que chega nesta fase é justamente o que o libretro não tinha — protótipos, demos japonesas, unlicensed.
+
+**Limpeza das capas erradas.** Detecção: uma URL que serve de capa para ≥ 3 títulos **distintos** não é capa de nenhum deles. A ação é **esvaziar**, nunca substituir por palpite — capa vazia cai no placeholder e permite um scrape futuro achar a certa; capa errada parece certa e nunca se corrige. As linhas esvaziadas foram re-scrapeadas e a maioria recuperou a arte correta (gba 66%, nds 73%, gg 68%, nes 63%).
+
+> ⚠️ **A chave de contagem NÃO pode incluir o `systemId`**: um jogo multiplataforma (Casper no GB, GBC e PSX) compartilha capa legitimamente, e contá-lo como 3 jogos distintos apaga capa boa — na primeira tentativa isso inflou o alvo em ~800 linhas. Normalizar também pontuação e numeral romano (`Fun 'n Games` == `Fun n Games`).
+
+**Sem solução por scraping** (~17 mil linhas): `zxspectrum` (10.356) e `atari800` (5.475) usam nomes TOSEC (`Game (1987)(Publisher)[a2].tap`) e são majoritariamente títulos caseiros de micro 8-bit; `pico8`, `arduboy`, `lowresnx`, `uzebox`, `vircon32` são fantasy consoles/homebrew que nenhum provider comercial cataloga.
 
 > ⚠️ **Desenvolvimento e Fast-Path**: Durante o desenvolvimento, o `versionCode` do aplicativo debug permanece o mesmo (ex: 231). Caso o arquivo `catalog_manifest.txt` seja alterado, o aplicativo irá pular (fast-skip) a carga do manifesto nas próximas instalações sob o mesmo build porque os dados em SharedPreferences já estarão marcados como processados para aquela versão. **Sempre que alterar o manifesto ou a lógica de carregamento, você DEVE bumpar a constante `MANIFEST_SCHEMA_VERSION` em `ManifestQuickLoader.kt`** para forçar o recarregamento.
 >
