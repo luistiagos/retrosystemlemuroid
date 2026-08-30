@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Build release (celular + smart TV) + upload para HuggingFace (versionado) e R2 (distribuicao).
 
@@ -18,8 +18,24 @@
     3. UPLOAD PARA R2 (distribuicao - sempre sobrescreve, sem numero de versao)
        - Mesmo bucket "versions" usado pelo GODSend, pasta propria RetroGameSystem/
        - Envia retro-game-system-arm64.apk / -armv7.apk via rclone
+       - Sidecars .sha256 (suporte descarta download corrompido na hora)
+       - Verificacao pela API S3, purga do cache de borda e verificacao pela URL
+         publica (a unica que prova o que o cliente baixa)
        - Credenciais: build.properties/r2-config.json locais, com fallback para
          E:\projects\GODSend\r2-config.json (mesma conta R2)
+
+    4. ANUNCIO DA VERSAO (RetroGameSystem/version.json)
+       - E o mecanismo de atualizacao: o AppUpdateManager do app le esta URL,
+         compara o versionCode e oferece a atualizacao a quem esta atrasado.
+       - Gerado a partir dos APKs recem-publicados (versionCode/versionName/
+         channel/apkUrls por ABI/sha256/size), entao nunca anuncia uma versao
+         que nao esta no ar.
+       - ULTIMA escrita da publicacao, de proposito: so vai ao ar depois que os
+         APKs passaram na verificacao pela URL publica.
+       - Ate 2026-08-13 o app consultava https://emuladores.pythonanywhere.com/app_version,
+         que responde 404 - por isso ninguem nunca recebeu aviso de versao nova.
+         Aquele JSON era so impresso no fim deste script para ser colado a mao
+         naquela rota, passo manual que nunca aconteceu.
 
 .PARAMETER SkipBuild
     Pula o build (usa APKs existentes em dist\).
@@ -68,6 +84,14 @@ $PROJECT_ROOT = Split-Path -Parent $MyInvocation.MyCommand.Path
 $DIST_DIR = Join-Path $PROJECT_ROOT "dist"
 $ENV_FILE = Join-Path $PROJECT_ROOT "build.properties"
 $GRADLE_FILE = Join-Path $PROJECT_ROOT "lemuroid-app\build.gradle.kts"
+
+# Recupera JAVA_HOME/GRADLE_USER_HOME/ANDROID_HOME gravados no escopo User que um
+# terminal ja aberto nao herdou. Feito aqui, e nao so no release.ps1, porque a
+# conferencia do versionCode com aapt2 (mais abaixo) procura o SDK em ANDROID_HOME /
+# ANDROID_SDK_ROOT: sem eles ela vira um aviso e o upload perde a unica trava que
+# impede publicar um APK velho — inclusive com -SkipBuild, que nem chama o release.ps1.
+. (Join-Path $PROJECT_ROOT "build-env.ps1")
+Initialize-BuildEnv
 
 # Load build.properties
 if (Test-Path -LiteralPath $ENV_FILE) {
@@ -156,6 +180,12 @@ $HF_TOKEN = if ($env:HF_TOKEN) { $env:HF_TOKEN } elseif ($Script:HF_TOKEN) { $Sc
 
 # R2 (mesmo bucket "versions" do GODSend, pasta propria)
 $R2_FOLDER = "RetroGameSystem"
+
+# Canal de atualizacao. Precisa bater com BuildConfig.APP_UPDATE_CHANNEL
+# (lemuroid-app/build.gradle.kts) - o app recusa um version.json de canal
+# diferente. Canal != default publica version-<canal>.json, entao um build de
+# teste nunca dispara atualizacao nos clientes do canal estavel.
+$UPDATE_CHANNEL = if ($env:APP_UPDATE_CHANNEL) { $env:APP_UPDATE_CHANNEL } else { "default" }
 $LOCAL_R2_CONFIG = Join-Path $PROJECT_ROOT "r2-config.json"
 $GODSEND_R2_CONFIG = "E:\projects\GODSend\r2-config.json"
 
@@ -172,6 +202,37 @@ function Print-Step {
     Write-Host "========================================" -ForegroundColor $Color
 }
 
+# Purga URLs no cache de borda do Cloudflare. Retorna $true se purgou.
+# Precisa de CF_API_TOKEN e CF_ZONE_ID no build.properties. A permissao no
+# token e de ZONA: "Cache" -> acao "Purge"; token com escopo de conta inteira
+# nem enxerga essa permissao e falha com erro 10000.
+function Purge-EdgeCache {
+    param([string[]]$Urls)
+
+    $cfToken = $Script:CF_API_TOKEN
+    $cfZone  = $Script:CF_ZONE_ID
+
+    if ([string]::IsNullOrWhiteSpace($cfToken) -or [string]::IsNullOrWhiteSpace($cfZone)) {
+        Write-Host "Purga do cache: PULADA (defina CF_API_TOKEN e CF_ZONE_ID no build.properties)" -ForegroundColor Yellow
+        Write-Host "  A URL pode servir a versao anterior ate o cache expirar." -ForegroundColor Yellow
+        return $false
+    }
+
+    Write-Host "Purgando cache de borda ($($Urls.Count) URL(s))..." -ForegroundColor Yellow
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    $purgeResp = Invoke-RestMethod -Method Post `
+        -Uri "https://api.cloudflare.com/client/v4/zones/$cfZone/purge_cache" `
+        -Headers @{ Authorization = "Bearer $cfToken" } `
+        -ContentType 'application/json' `
+        -Body (@{ files = $Urls } | ConvertTo-Json) `
+        -TimeoutSec 60
+    if (-not $purgeResp.success) {
+        throw "Purga falhou: $($purgeResp.errors | ConvertTo-Json -Compress)"
+    }
+    Write-Host "  OK: cache purgado" -ForegroundColor Green
+    return $true
+}
+
 function Find-Rclone {
     $cmd = Get-Command rclone -ErrorAction SilentlyContinue
     if ($cmd) { return $cmd.Source }
@@ -183,15 +244,37 @@ function Find-Rclone {
     throw "rclone.exe not found. Install with: winget install Rclone.Rclone (then restart shell)."
 }
 
+# ─── PREFLIGHT ──────────────────────────────────────
+# Resolve AGORA as ferramentas dos passos 2-4. O build leva minutos e nao serve de nada
+# se o upload for morrer em seguida por falta de um executavel: ja se perdeu uma rodada
+# inteira com "the term 'hf' is not recognized" depois de um build completo.
+# Falha em segundos, e nao no fim.
+$HfCli = $null
+$RcloneExe = $null
+if (-not ($SkipHF -and $SkipR2)) {
+    Write-Host "Verificando ferramentas de upload..." -ForegroundColor Yellow
+    if (-not $SkipHF) {
+        if (-not $HF_TOKEN) {
+            throw "HF_TOKEN nao definido. Crie build.properties na raiz (veja build.properties.example) ou defina a variavel de ambiente HF_TOKEN."
+        }
+        $HfCli = Find-HfCli
+        Write-Host "  hf     : $HfCli" -ForegroundColor DarkGray
+    }
+    if (-not $SkipR2) {
+        $RcloneExe = Find-Rclone
+        Write-Host "  rclone : $RcloneExe" -ForegroundColor DarkGray
+    }
+}
+
 # ─── STEP 1: BUILD ──────────────────────────────────
 if (-not $SkipBuild) {
-    Print-Step "PASSO 1/3: Build release v$VERSION_NAME (celular + smart TV)"
+    Print-Step "PASSO 1/4: Build release v$VERSION_NAME (celular + smart TV)"
     & (Join-Path $PROJECT_ROOT "release.ps1")
     if ($LASTEXITCODE -ne 0 -and $null -ne $LASTEXITCODE) {
         throw "release.ps1 falhou com exit code $LASTEXITCODE"
     }
 } else {
-    Print-Step "PASSO 1/3: Build (SKIPPED - usando APKs existentes em dist\)"
+    Print-Step "PASSO 1/4: Build (SKIPPED - usando APKs existentes em dist\)"
 }
 
 $DistApks = @{}
@@ -203,13 +286,51 @@ foreach ($abi in $AbiMap.Keys) {
     $DistApks[$abi] = $path
 }
 
+# ─── GATE: o APK em dist\ e mesmo a versao que vamos anunciar? ──
+# $VERSION_CODE vem do build.gradle.kts, nao do binario. Se o build falhar no
+# meio (ex.: OOM do R8 depois do bump ja ter acontecido), dist\ fica com o APK
+# ANTERIOR enquanto o .kts ja diz a versao nova - e o anuncio apontaria a versao
+# nova para os bytes velhos. O app baixaria, instalaria, continuaria na versao
+# antiga e seria avisado de novo no proximo boot: loop de atualizacao infinito.
+# Ler o versionCode do proprio APK e o unico jeito de fechar essa porta.
+$aapt = Get-ChildItem -Path (Join-Path $env:LOCALAPPDATA "Android\Sdk\build-tools"), `
+                            "$env:ANDROID_HOME\build-tools", "$env:ANDROID_SDK_ROOT\build-tools" `
+                     -Filter "aapt2.exe" -Recurse -ErrorAction SilentlyContinue |
+        Sort-Object FullName | Select-Object -Last 1 -ExpandProperty FullName
+
+if (-not $aapt) {
+    Write-Host "AVISO: aapt2 nao encontrado - nao da para conferir o versionCode dentro do APK." -ForegroundColor Yellow
+    Write-Host "       Confie no dist\ por sua conta e risco." -ForegroundColor Yellow
+} else {
+    foreach ($abi in $AbiMap.Keys) {
+        $badging = & $aapt dump badging $DistApks[$abi] 2>$null
+        $line = $badging | Select-String -Pattern "^package: name='([^']+)' versionCode='(\d+)' versionName='([^']*)'"
+        if (-not $line) {
+            throw "Nao foi possivel ler o versionCode de $($DistApks[$abi])."
+        }
+        $apkCode = $line.Matches[0].Groups[2].Value
+        $apkName = $line.Matches[0].Groups[3].Value
+        if ([int]$apkCode -ne [int]$VERSION_CODE) {
+            throw @"
+VERIFICACAO FALHOU: o APK em dist\ nao e a versao que seria anunciada.
+  esperado (build.gradle.kts): versionCode $VERSION_CODE ($VERSION_NAME)
+  encontrado no APK:           versionCode $apkCode ($apkName)
+  arquivo:                     $($DistApks[$abi])
+Publicar assim faria o anuncio apontar a versao nova para bytes antigos, e o
+app entraria em loop de atualizacao. Rode o build (sem -SkipBuild) antes.
+"@
+        }
+        Write-Host "  dist\$(Split-Path $DistApks[$abi] -Leaf): versionCode $apkCode ($apkName) OK" -ForegroundColor Green
+    }
+}
+
 # ─── STEP 2: HUGGINGFACE UPLOAD (versionado) ───────
 if (-not $SkipHF) {
-    Print-Step "PASSO 2/3: Upload para HuggingFace (versionado)"
+    Print-Step "PASSO 2/4: Upload para HuggingFace (versionado)"
 
-    if (-not $HF_TOKEN) {
-        throw "HF_TOKEN nao definido. Crie build.properties na raiz (veja build.properties.example) ou defina a variavel de ambiente HF_TOKEN."
-    }
+    # Ja resolvido no preflight; refeito aqui so para o caso de o script ser editado
+    # e o preflight deixar de rodar.
+    if (-not $HfCli) { $HfCli = Find-HfCli }
 
     Write-Host "Repositorio: $HF_REPO ($HF_REPO_TYPE)" -ForegroundColor Yellow
     Write-Host "Pasta remota: $HF_FOLDER/" -ForegroundColor Yellow
@@ -228,7 +349,7 @@ if (-not $SkipHF) {
         $savedEAP = $ErrorActionPreference
         $ErrorActionPreference = "Continue"
         try {
-            hf upload $HF_REPO "$($DistApks[$abi])" $hfRemotePath `
+            & $HfCli upload $HF_REPO "$($DistApks[$abi])" $hfRemotePath `
                 --repo-type $HF_REPO_TYPE --token $HF_TOKEN --commit-message "v$VERSION_NAME ($suffix)" 2>&1
         } finally {
             $ErrorActionPreference = $savedEAP
@@ -242,7 +363,7 @@ if (-not $SkipHF) {
         Write-Host "  OK: $($hfUrls[$abi])" -ForegroundColor Green
     }
 } else {
-    Print-Step "PASSO 2/3: Upload para HuggingFace (SKIPPED)"
+    Print-Step "PASSO 2/4: Upload para HuggingFace (SKIPPED)"
 }
 
 # ─── CONFIG R2 (resolvida sempre — usada tambem pra gerar o JSON do
@@ -287,9 +408,68 @@ foreach ($abi in $AbiMap.Keys) {
     $r2PublicUrls[$abi] = "$publicBase/$R2_FOLDER/$($fileName)?v=$($VERSION_CODE)"
 }
 
+# ─── ANUNCIO DA VERSAO (version.json) ───────────────
+# Este arquivo E o mecanismo de atualizacao. O AppUpdateManager do app le esta
+# URL, compara o versionCode com o proprio e, se for maior, oferece a atualizacao.
+#
+# Antes disso, o app apontava para https://emuladores.pythonanywhere.com/app_version,
+# uma rota que responde 404: a checagem sempre falhava e ninguem nunca era
+# avisado de versao nova. O JSON era so IMPRESSO no fim deste script para ser
+# colado a mao naquela rota - passo manual que nunca aconteceu. Agora o proprio
+# script publica o anuncio ao lado do APK, entao ele nao tem como dessincronizar
+# do binario que esta no ar (mesma logica do ARMSX2, rgs/ps2/version.json).
+#
+# Formato: "apkUrls" mapeia ABI -> URL (o app escolhe pela Build.SUPPORTED_ABIS),
+# com "apkSha256"/"apkSizes" paralelos. Os campos legados "apkUrl"/"sha256"/"size"
+# apontam para o arm64 e existem para clientes antigos que so sabem ler isso.
+# Os mapas sao paralelos de proposito (e nao objetos aninhados dentro de apkUrls):
+# o parser ja instalado em campo le apkUrls[abi] como string, e um objeto
+# aninhado viraria uma URL-lixo na mao dele.
+$apkSha256 = @{}
+$apkSizes  = @{}
+foreach ($abi in $AbiMap.Keys) {
+    $apkSha256[$abi] = (Get-FileHash -LiteralPath $DistApks[$abi] -Algorithm SHA256).Hash.ToLower()
+    $apkSizes[$abi]  = (Get-Item -LiteralPath $DistApks[$abi]).Length
+}
+
+$VERSION_JSON_NAME = if ($UPDATE_CHANNEL -eq "default") { "version.json" } else { "version-$UPDATE_CHANNEL.json" }
+$versionJsonFile = Join-Path $DIST_DIR $VERSION_JSON_NAME
+$versionJsonUrl  = "$publicBase/$R2_FOLDER/$VERSION_JSON_NAME"
+
+$versionPayload = [ordered]@{
+    versionCode = [int]$VERSION_CODE
+    versionName = $VERSION_NAME
+    channel     = $UPDATE_CHANNEL
+    apkUrl      = $r2PublicUrls["arm64-v8a"]
+    sha256      = $apkSha256["arm64-v8a"]
+    size        = [long]$apkSizes["arm64-v8a"]
+    apkUrls     = [ordered]@{
+        "arm64-v8a"   = $r2PublicUrls["arm64-v8a"]
+        "armeabi-v7a" = $r2PublicUrls["armeabi-v7a"]
+    }
+    apkSha256   = [ordered]@{
+        "arm64-v8a"   = $apkSha256["arm64-v8a"]
+        "armeabi-v7a" = $apkSha256["armeabi-v7a"]
+    }
+    apkSizes    = [ordered]@{
+        "arm64-v8a"   = [long]$apkSizes["arm64-v8a"]
+        "armeabi-v7a" = [long]$apkSizes["armeabi-v7a"]
+    }
+} | ConvertTo-Json -Depth 5
+$versionPayload | Out-File -FilePath $versionJsonFile -Encoding ascii -Force
+
+# Sidecar de hash por ABI: deixa o suporte descartar download corrompido em segundos.
+$shaFiles = @{}
+foreach ($abi in $AbiMap.Keys) {
+    $apkName  = "retro-game-system-$($AbiMap[$abi]).apk"
+    $shaPath  = Join-Path $DIST_DIR "$apkName.sha256"
+    "$($apkSha256[$abi])  $apkName" | Out-File -FilePath $shaPath -Encoding ascii -Force
+    $shaFiles[$abi] = $shaPath
+}
+
 # ─── STEP 3: R2 UPLOAD (distribuicao, sem versao) ──
 if (-not $SkipR2) {
-    Print-Step "PASSO 3/3: Upload para R2 (distribuicao)"
+    Print-Step "PASSO 3/4: Upload para R2 (distribuicao)"
 
     if (-not $cfg) {
         throw "Credenciais R2 nao encontradas. Defina R2_* no build.properties, crie r2-config.json (veja r2-config.example.json), ou garanta que $GODSEND_R2_CONFIG existe."
@@ -348,35 +528,32 @@ if (-not $SkipR2) {
     }
     Write-Host "Verificacao passou." -ForegroundColor Green
 
+    # ─── Sidecars .sha256 ───────────────────────────
+    Write-Host ""
+    Write-Host "Enviando sidecars .sha256..." -ForegroundColor Yellow
+    $txtHeaders = @(
+        "--header-upload=Content-Type: text/plain; charset=utf-8",
+        "--header-upload=Cache-Control: max-age=300"
+    )
+    foreach ($abi in $AbiMap.Keys) {
+        $shaName = "retro-game-system-$($AbiMap[$abi]).apk.sha256"
+        & $rclone copyto $shaFiles[$abi] "$dest/$shaName" @s3Flags @txtHeaders
+        if ($LASTEXITCODE -ne 0) {
+            throw "rclone copyto falhou no sidecar $shaName (exit code $LASTEXITCODE)"
+        }
+        Write-Host "  OK: $shaName" -ForegroundColor Green
+    }
+
     # ─── Purga do cache de borda ────────────────────
     # Sem isto o link que circula com os clientes continua entregando o APK da
     # versao anterior por tempo indeterminado. Precisa de CF_API_TOKEN e
     # CF_ZONE_ID no build.properties. A permissao no token e de ZONA:
     # "Cache" -> acao "Purge"; token com escopo de conta inteira nem enxerga
     # essa permissao e falha com erro 10000.
-    $cfToken = $Script:CF_API_TOKEN
-    $cfZone  = $Script:CF_ZONE_ID
     Write-Host ""
-    if ([string]::IsNullOrWhiteSpace($cfToken) -or [string]::IsNullOrWhiteSpace($cfZone)) {
-        Write-Host "Purga do cache: PULADA (defina CF_API_TOKEN e CF_ZONE_ID no build.properties)" -ForegroundColor Yellow
-        Write-Host "  O link de download manual pode servir a versao anterior ate o cache expirar." -ForegroundColor Yellow
-    } else {
-        Write-Host "Purgando cache de borda..." -ForegroundColor Yellow
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-        $purgeUrls = @()
-        foreach ($abi in $AbiMap.Keys) { $purgeUrls += $r2BareUrls[$abi] }
-        $purgeResp = Invoke-RestMethod -Method Post `
-            -Uri "https://api.cloudflare.com/client/v4/zones/$cfZone/purge_cache" `
-            -Headers @{ Authorization = "Bearer $cfToken" } `
-            -ContentType 'application/json' `
-            -Body (@{ files = $purgeUrls } | ConvertTo-Json) `
-            -TimeoutSec 60
-        if (-not $purgeResp.success) {
-            throw "Purga falhou: $($purgeResp.errors | ConvertTo-Json -Compress)"
-        }
-        Write-Host "  OK: cache purgado" -ForegroundColor Green
-        Start-Sleep -Seconds 5
-    }
+    $purgeUrls = @()
+    foreach ($abi in $AbiMap.Keys) { $purgeUrls += $r2BareUrls[$abi] }
+    if (Purge-EdgeCache $purgeUrls) { Start-Sleep -Seconds 5 }
 
     # ─── Verificacao pela URL PUBLICA ───────────────
     # A verificacao acima fala com o R2 pela API S3 e PULA o cache de borda:
@@ -439,8 +616,62 @@ anterior: purgue o cache do Cloudflare para $publicBase/$R2_FOLDER/* e repita.
 
     Write-Host ""
     Write-Host "Upload para R2 concluido!" -ForegroundColor Green
+
+    # ─── STEP 4: ANUNCIO DA VERSAO ──────────────────
+    # Ultima escrita da publicacao, de proposito: e este arquivo que dispara a
+    # atualizacao em todos os apps instalados. So vai ao ar depois que os APKs
+    # subiram, foram conferidos pela API S3 E provados pela URL publica - assim
+    # nenhum cliente ve "versao nova" apontando para bytes que ainda nao estao
+    # servidos corretamente.
+    Print-Step "PASSO 4/4: Anuncio da versao ($VERSION_JSON_NAME)"
+
+    Write-Host "Conteudo:" -ForegroundColor Yellow
+    Write-Host $versionPayload -ForegroundColor White
+    Write-Host ""
+
+    # TTL curto: o app pede no-cache, mas isso limita quanto tempo um cache
+    # intermediario pode segurar o anuncio da versao nova.
+    $jsonHeaders = @(
+        "--header-upload=Content-Type: application/json; charset=utf-8",
+        "--header-upload=Cache-Control: max-age=300"
+    )
+    & $rclone copyto $versionJsonFile "$dest/$VERSION_JSON_NAME" @s3Flags @jsonHeaders
+    if ($LASTEXITCODE -ne 0) {
+        throw "rclone copyto falhou no $VERSION_JSON_NAME (exit code $LASTEXITCODE)"
+    }
+
+    $jsonEntries = & $rclone lsjson $dest @s3Flags | ConvertFrom-Json
+    $liveJson = $jsonEntries | Where-Object { -not $_.IsDir -and $_.Name -eq $VERSION_JSON_NAME } | Select-Object -First 1
+    if (-not $liveJson) {
+        throw "VERIFICACAO FALHOU: $VERSION_JSON_NAME nao encontrado no remoto apos o upload."
+    }
+    Write-Host "  OK: $VERSION_JSON_NAME publicado ($($liveJson.Size) bytes)" -ForegroundColor Green
+
+    Write-Host ""
+    if (Purge-EdgeCache @($versionJsonUrl)) { Start-Sleep -Seconds 5 }
+
+    # Confere o anuncio pela URL publica - e exatamente o GET que o app faz.
+    # Um JSON velho aqui significa que ninguem sera avisado da versao nova.
+    Write-Host ""
+    Write-Host "Verificando o anuncio pela URL publica..." -ForegroundColor Yellow
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    try {
+        $publicJson = Invoke-RestMethod -Uri $versionJsonUrl -TimeoutSec 60 -Headers @{ 'Cache-Control' = 'no-cache' }
+        if ([int]$publicJson.versionCode -ne [int]$VERSION_CODE) {
+            throw "VERIFICACAO FALHOU: $VERSION_JSON_NAME publico anuncia versionCode $($publicJson.versionCode), esperado $VERSION_CODE"
+        }
+        if ($publicJson.sha256 -ne $apkSha256["arm64-v8a"]) {
+            throw "VERIFICACAO FALHOU: $VERSION_JSON_NAME publico anuncia sha256 $($publicJson.sha256), esperado $($apkSha256['arm64-v8a'])"
+        }
+        Write-Host "  OK: o app vera a versao $($publicJson.versionName) (code $($publicJson.versionCode))" -ForegroundColor Green
+    } catch [System.Net.WebException] {
+        throw "VERIFICACAO FALHOU: nao foi possivel ler $versionJsonUrl - $($_.Exception.Message)"
+    }
 } else {
-    Print-Step "PASSO 3/3: Upload para R2 (SKIPPED)"
+    Print-Step "PASSO 3/4: Upload para R2 (SKIPPED)"
+    Print-Step "PASSO 4/4: Anuncio da versao (SKIPPED)"
+    Write-Host "Sem o upload do $VERSION_JSON_NAME nenhum usuario e avisado desta versao." -ForegroundColor Yellow
+    Write-Host "Gerado localmente em: $versionJsonFile" -ForegroundColor Yellow
 }
 
 # ─── SUMMARY ────────────────────────────────────────
@@ -462,23 +693,14 @@ foreach ($abi in $AbiMap.Keys) {
     Write-Host "  $($DeviceLabel[$abi]): $($r2BareUrls[$abi])" -ForegroundColor Cyan
 }
 
-# ─── JSON app_version ───────────────────────────────
-# Pronto para colar na rota /app_version do pythonanywhere. Usa as URLs
-# publicas do R2 (nomes estaveis, sem versao no path). "apkUrl" legado
-# aponta pro arm64 - maioria dos devices em campo.
 Write-Host ""
-Write-Host "JSON para /app_version:" -ForegroundColor Cyan
-$appVersionJson = [ordered]@{
-    versionCode = [int]$VERSION_CODE
-    versionName = $VERSION_NAME
-    channel     = "default"
-    apkUrl      = $r2PublicUrls["arm64-v8a"]
-    apkUrls     = [ordered]@{
-        "arm64-v8a"    = $r2PublicUrls["arm64-v8a"]
-        "armeabi-v7a"  = $r2PublicUrls["armeabi-v7a"]
-    }
-} | ConvertTo-Json -Depth 5
-Write-Host $appVersionJson -ForegroundColor White
+Write-Host "Anuncio da versao (o que o app le para se atualizar):" -ForegroundColor Cyan
+Write-Host "  $versionJsonUrl" -ForegroundColor Cyan
+if (-not $SkipR2) {
+    Write-Host "  Todo usuario em versao anterior a $VERSION_NAME sera avisado na proxima abertura." -ForegroundColor Green
+} else {
+    Write-Host "  NAO publicado (-SkipR2): ninguem sera avisado desta versao." -ForegroundColor Yellow
+}
 
 Write-Host ""
 Write-Host "Todos os passos concluidos com sucesso!" -ForegroundColor Green

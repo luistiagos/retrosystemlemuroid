@@ -40,7 +40,12 @@
     <string name="setting_mgba_interframe_blending">LCD ghosting</string>
     <string name="setting_mgba_frameskip">Frameskip</string>
     <string name="setting_mgba_color_correction">Color correction</string>
+    <string name="setting_mupen64plus_aspect">Aspect ratio (restart)</string>
+    <string name="value_mupen64plus_aspect_4_3">4:3 (original)</string>
+    <string name="value_mupen64plus_aspect_169_adjusted">16:9 widescreen hack</string>
+    <string name="value_mupen64plus_aspect_169">16:9 stretched</string>
     <string name="setting_mupen64plus_43screensize">Screen size 4:3</string>
+    <string name="setting_mupen64plus_169screensize">Screen size 16:9</string>
     <string name="setting_mupen64plus_cpucore">Dynamic recompiler</string>
     <string name="setting_mupen64plus_BilinearMode">Bilinear mode</string>
     <string name="setting_mupen64plus_pak1">Player 1 Pak</string>
@@ -69,6 +74,9 @@
     <string name="setting_citra_resolution_factor">Resolution scaling</string>
     <string name="setting_citra_use_acc_mul">Accurate shaders multiplication</string>
     <string name="setting_citra_use_acc_geo_shaders">Accurate geometry shaders</string>
+    <string name="setting_yabasanshiro_sh2coretype">SH2 CPU core</string>
+    <string name="setting_yabasanshiro_frameskip">Auto frameskip</string>
+    <string name="setting_yabasanshiro_polygon_mode">Polygon rendering</string>
 
     <!-- Core settings values. Duplicated here to ease the translation process. -->
     <string name="value_gambatte_mix_frames_disabled">Disabled</string>
@@ -110,6 +118,13 @@
     <string name="value_mupen64plus_cpucore_pureinterpreter">Pure interpreter</string>
     <string name="value_mupen64plus_cpucore_cachedinterpreter">Cached interpreter</string>
 
+    <string name="value_yabasanshiro_sh2coretype_interpreter">Interpreter (compatible)</string>
+    <string name="value_yabasanshiro_sh2coretype_dynarec">Dynamic recompiler (fast)</string>
+
+    <string name="value_yabasanshiro_polygon_mode_perspective">Perspective correction</string>
+    <string name="value_yabasanshiro_polygon_mode_cpu">CPU tessellation</string>
+    <string name="value_yabasanshiro_polygon_mode_gpu">GPU tessellation</string>
+
     <string name="value_mupen64plus_bilinearmode_standard">Standard</string>
     <string name="value_mupen64plus_bilinearmode_3point">3-Point</string>
 
@@ -150,6 +165,8 @@
     <string name="value_flycast_resolution_2x">2x (1280x960)</string>
     <string name="value_flycast_resolution_3x">3x (1920x1440)</string>
     <string name="value_flycast_resolution_4x">4x (2560x1920)</string>
+    <string name="setting_reicast_widescreen_hack">Widescreen hack (restart)</string>
+    <string name="setting_reicast_widescreen_cheats">Widescreen cheats (restart)</string>
     <string name="setting_reicast_force_wince">Force Windows CE mode (full MMU)</string>
     <string name="setting_reicast_emulate_framebuffer">Full framebuffer emulation</string>
 

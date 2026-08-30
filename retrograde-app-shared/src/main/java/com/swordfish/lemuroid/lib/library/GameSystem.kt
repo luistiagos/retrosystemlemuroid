@@ -149,6 +149,9 @@ data class GameSystem(
                     listOf(
                         SystemCoreConfig(
                             CoreID.SNES9X,
+                            // Version 0 may contain auto-states created while .fig/.swc/.bs
+                            // archives were incorrectly passed to Snes9x as raw ZIP files.
+                            statesVersion = 1,
                             controllerConfigs =
                                 hashMapOf(
                                     0 to arrayListOf(ControllerConfigs.SNES),
@@ -156,6 +159,10 @@ data class GameSystem(
                         ),
                     ),
                     uniqueExtensions = listOf("smc", "sfc"),
+                    // Snes9x advertises smc|sfc|swc|fig|bs|st. Keep .st out because it
+                    // conflicts with Atari ST, but accept the other native SNES dump formats
+                    // so single-ROM ZIPs are extracted before being handed to the core.
+                    supportedExtensions = listOf("smc", "sfc", "swc", "fig", "bs"),
                 ),
                 GameSystem(
                     SystemID.SMS,
@@ -664,9 +671,35 @@ data class GameSystem(
                             CoreID.MUPEN64_PLUS_NEXT,
                             exposedSettings =
                                 listOf(
+                                    // "16:9 adjusted" e o widescreen hack do core: alarga o
+                                    // frustum para o jogo RENDERIZAR mais cena, em vez de esticar
+                                    // a imagem 4:3. "16:9" puro so estica. O tamanho de render
+                                    // usado passa a ser o 169screensize, nao o 43screensize.
+                                    ExposedSetting(
+                                        "mupen64plus-aspect",
+                                        R.string.setting_mupen64plus_aspect,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "4:3",
+                                                R.string.value_mupen64plus_aspect_4_3,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "16:9 adjusted",
+                                                R.string.value_mupen64plus_aspect_169_adjusted,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "16:9",
+                                                R.string.value_mupen64plus_aspect_169,
+                                            ),
+                                        ),
+                                    ),
                                     ExposedSetting(
                                         "mupen64plus-43screensize",
                                         R.string.setting_mupen64plus_43screensize,
+                                    ),
+                                    ExposedSetting(
+                                        "mupen64plus-169screensize",
+                                        R.string.setting_mupen64plus_169screensize,
                                     ),
                                     ExposedSetting(
                                         "mupen64plus-cpucore",
@@ -2163,9 +2196,24 @@ data class GameSystem(
                                             ),
                                         ),
                                     ),
+                                    // Alarga o frustum para o jogo renderizar mais cena. O core
+                                    // marca a opcao como "Restart Required": o valor so entra em
+                                    // vigor no proximo boot do jogo, porque as variaveis sao
+                                    // passadas no LibretroDroid.create(), antes do retro_load_game.
+                                    ExposedSetting(
+                                        "reicast_widescreen_hack",
+                                        R.string.setting_reicast_widescreen_hack,
+                                    ),
                                 ),
                             exposedAdvancedSettings =
                                 listOf(
+                                    // Cheats por jogo que forcam widescreen em titulos que o
+                                    // hack de frustum sozinho nao cobre. Existem para poucos
+                                    // jogos, dai ficar no avancado.
+                                    ExposedSetting(
+                                        "reicast_widescreen_cheats",
+                                        R.string.setting_reicast_widescreen_cheats,
+                                    ),
                                     ExposedSetting(
                                         "reicast_force_wince",
                                         R.string.setting_reicast_force_wince,
@@ -2578,6 +2626,68 @@ data class GameSystem(
                             // saturn_bios.bin (in system/ root). Auto-downloaded from the
                             // HuggingFace BIOS dataset (see BiosManager.SUPPORTED_BIOS).
                             requiredBIOSFiles = listOf("saturn_bios.bin"),
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "yabasanshiro_sh2coretype",
+                                        R.string.setting_yabasanshiro_sh2coretype,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "interpreter",
+                                                R.string.value_yabasanshiro_sh2coretype_interpreter,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "dynarec",
+                                                R.string.value_yabasanshiro_sh2coretype_dynarec,
+                                            ),
+                                        ),
+                                    ),
+                                    ExposedSetting(
+                                        "yabasanshiro_frameskip",
+                                        R.string.setting_yabasanshiro_frameskip,
+                                    ),
+                                ),
+                            exposedAdvancedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "yabasanshiro_polygon_mode",
+                                        R.string.setting_yabasanshiro_polygon_mode,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "perspective_correction",
+                                                R.string.value_yabasanshiro_polygon_mode_perspective,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "cpu_tesselation",
+                                                R.string.value_yabasanshiro_polygon_mode_cpu,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "gpu_tesselation",
+                                                R.string.value_yabasanshiro_polygon_mode_gpu,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            // Fixa a configuração validada no aparelho (moto g86 / Mali-G615), toda
+                            // ela igual ao default do próprio core, mas explícita para não depender
+                            // de mudança de default num rebuild futuro do .so:
+                            //  - `sh2coretype = dynarec`: medido a 60 fps sem crash em Quake, MK II
+                            //    e Tomb Raider. O interpretador continua exposto como opção — é a
+                            //    primeira coisa a testar se algum aparelho ainda crashar.
+                            //  - `polygon_mode`/`rbg_use_compute_shader`: mantêm o core no caminho
+                            //    GLES 3.0; os outros valores usam shaders `#version 310 es`
+                            //    (tessellation e compute do RBG).
+                            //  - `resolution_mode = original`: evita FBO de 704x512 x4.
+                            // A tela preta do Saturn NÃO vinha daqui — era o FBO recriado pelo
+                            // LibretroDroid a cada troca de modo de vídeo. Ver
+                            // documentacao/bugs/done/2026-08-13-saturn-tela-preta-yabasanshiro.md
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("yabasanshiro_sh2coretype", "dynarec"),
+                                    CoreVariable("yabasanshiro_resolution_mode", "original"),
+                                    CoreVariable("yabasanshiro_polygon_mode", "perspective_correction"),
+                                    CoreVariable("yabasanshiro_rbg_use_compute_shader", "disabled"),
+                                ),
                             controllerConfigs =
                                 hashMapOf(
                                     0 to arrayListOf(ControllerConfigs.SATURN),

@@ -29,9 +29,13 @@ fun readGradleProperty(key: String): String? =
 fun sanitizeFileToken(value: String): String =
     value.replace(Regex("[^A-Za-z0-9_.-]"), "_")
 
+// O anuncio de versao e um arquivo estatico publicado ao lado do APK pelo
+// build-and-upload.ps1 (mesmo esquema do ARMSX2). Canal != default le um
+// arquivo separado, entao um build de teste nunca dispara atualizacao nos
+// clientes do canal estavel.
 fun appUpdateEndpointForChannel(baseUrl: String, channel: String): String {
-    if (channel == "default") return baseUrl
-    return "${baseUrl.trimEnd('/')}/$channel"
+    val base = baseUrl.trimEnd('/')
+    return if (channel == "default") "$base/version.json" else "$base/version-$channel.json"
 }
 
 fun normalizeApplicationIdSuffix(value: String?): String {
@@ -41,8 +45,13 @@ fun normalizeApplicationIdSuffix(value: String?): String {
 
 val catalogChannel = readGradleProperty("catalogChannel") ?: "default"
 val appUpdateChannel = readGradleProperty("appUpdateChannel") ?: catalogChannel
+// Ate 2026-08-13 isto apontava para https://emuladores.pythonanywhere.com/app_version,
+// que responde 404: a checagem de versao falhava sempre e nenhum usuario jamais
+// foi avisado de uma versao nova. O anuncio agora vive no mesmo R2 que ja serve
+// os APKs, publicado pelo build-and-upload.ps1 - nao existe mais passo manual
+// entre publicar o APK e os usuarios saberem dele.
 val appUpdateBaseUrl = readGradleProperty("appUpdateBaseUrl")
-    ?: "https://emuladores.pythonanywhere.com/app_version"
+    ?: "https://versions.digitalstoregames.com/RetroGameSystem"
 val appUpdateEndpoint = readGradleProperty("appUpdateEndpoint")
     ?: appUpdateEndpointForChannel(appUpdateBaseUrl, appUpdateChannel)
 val catalogManifestOverride = readGradleProperty("catalogManifest")
@@ -58,8 +67,8 @@ val catalogApplicationIdSuffix = normalizeApplicationIdSuffix(readGradleProperty
 
 android {
     defaultConfig {
-        versionCode = 232
-        versionName = "1.17.1" // Always remember to update Cores Tag!
+        versionCode = 243
+        versionName = "1.17.12" // Always remember to update Cores Tag!
         applicationId = "app.retrogamesystem$catalogApplicationIdSuffix"
 
         buildConfigField("String", "CATALOG_CHANNEL", "\"${escapeBuildConfigValue(catalogChannel)}\"")

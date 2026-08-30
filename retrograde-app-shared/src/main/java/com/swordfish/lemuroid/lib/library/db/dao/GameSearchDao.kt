@@ -125,27 +125,32 @@ class GameSearchDao(private val internalDao: Internal) {
     }
 
     companion object {
+        /** Runs of anything the unicode61 tokenizer does not consider part of a token. */
+        private val NON_TOKEN_CHARS = "[^\\p{L}\\p{N}]+".toRegex()
+
         /**
-         * Sanitizes an FTS4 MATCH query to prevent SQLiteException on malformed input.
-         * Strips characters that are illegal or cause parse errors in SQLite FTS4 MATCH expressions.
-         * Appends '*' to each term to enable prefix matching (e.g. "Samurai Sho" matches "Samurai Shodown").
+         * Turns raw user input into an FTS4 MATCH expression made only of prefix terms.
+         *
+         * Punctuation must never survive into the expression, because MATCH input is *syntax*,
+         * not text. Android builds SQLite without `SQLITE_ENABLE_FTS3_PARENTHESIS`, so FTS uses
+         * the **standard** query syntax, in which a term glued to a preceding '-' is a negation:
+         * typing "x-men" produced the expression `x NOT men*`, which asks for rows containing
+         * "x" and *not* "men" — the one query guaranteed to hide every X-Men title. '"', '(',
+         * ')', ':' (column filter) and '*' are syntax too, and FTS4 additionally reads a leading
+         * '^' as "must be the first token".
+         *
+         * Splitting on every non-letter/non-digit run covers all of them at once and mirrors
+         * exactly what the unicode61 tokenizer did when it built the index: "X-Men" is stored as
+         * the tokens `x` + `men`, so it must be searched as `x* men*` (implicit AND).
+         *
+         * The trailing '*' on each term gives prefix matching ("Samurai Sho" finds "Samurai
+         * Shodown") and, as a side effect, defuses the bare keywords AND/OR/NOT/NEAR — the
+         * parser only treats those as operators when they are not followed by '*'.
          */
         private fun sanitizeFtsQuery(query: String): String {
-            // Remove characters that can cause FTS4 parse errors:
-            // quotes, parentheses, hyphens/colons as operators, etc.
-            val sanitized = query
-                .replace('"', ' ')
-                .replace('\'', ' ')
-                .replace('(', ' ')
-                .replace(')', ' ')
-                .replace(':', ' ')
-                .replace('*', ' ')
-                .trim()
-            if (sanitized.isEmpty()) return "\"\""
-            // Append '*' to each word for prefix matching
-            return sanitized.split("\\s+".toRegex())
-                .filter { it.isNotEmpty() }
-                .joinToString(" ") { "$it*" }
+            val terms = query.split(NON_TOKEN_CHARS).filter { it.isNotEmpty() }
+            if (terms.isEmpty()) return "\"\""
+            return terms.joinToString(" ") { "$it*" }
         }
     }
 

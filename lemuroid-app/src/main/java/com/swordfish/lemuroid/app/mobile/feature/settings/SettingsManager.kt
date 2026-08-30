@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.settings.HDModeQuality
+import com.swordfish.lemuroid.app.shared.settings.ScreenAspectRatio
 import com.swordfish.lemuroid.common.math.Fraction
 import com.swordfish.lemuroid.lib.storage.cache.CacheCleaner
 import dagger.Lazy
@@ -31,6 +32,14 @@ class SettingsManager(private val context: Context, sharedPreferences: Lazy<Shar
         )
 
     suspend fun hdMode() = booleanPreference(R.string.pref_key_hd_mode, false)
+
+    suspend fun screenAspectRatio() =
+        ScreenAspectRatio.parse(
+            stringPreference(
+                R.string.pref_key_screen_aspect_ratio,
+                context.resources.getStringArray(R.array.pref_key_screen_aspect_ratio_values).first(),
+            ),
+        )
 
     suspend fun hdModeQuality() = HDModeQuality.parse(intPreference(R.string.pref_key_hd_mode_quality, 1))
 

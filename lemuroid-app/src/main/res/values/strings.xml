@@ -351,6 +351,11 @@
         \n\n If none of the above works, it might be possible that this Game/Core is not supported by this device.
     </string>
 
+    <string name="lemuroid_app_error_disclamer">The app hit an internal error and had to close the game. This is not a problem with your game, your ROM or the emulation core, so clearing data or resetting won\'t help. Sending us the message below is what gets it fixed.</string>
+
+    <!-- Technical footprint shown on the crash screen: a photo of it has to be enough to diagnose. -->
+    <string name="crash_device_info" translatable="false">%1$s · Android %2$s (SDK %3$d) · %4$s</string>
+
     <string name="error_message_incompatible_state">This save state is not compatible with the current core version. Please load the latest in-game save or use a previous Retro Game System version.</string>
 
     <string name="shader_filter_names_auto">Auto</string>
@@ -358,6 +363,15 @@
     <string name="shader_filter_names_smooth">Smooth</string>
     <string name="shader_filter_names_crt">CRT</string>
     <string name="shader_filter_names_lcd">LCD</string>
+
+    <string name="settings_title_screen_aspect_ratio">Aspect ratio</string>
+    <string name="screen_aspect_ratio_names_auto">Auto (game native)</string>
+    <string name="screen_aspect_ratio_names_4_3">4:3</string>
+    <string name="screen_aspect_ratio_names_16_9">16:9</string>
+    <string name="screen_aspect_ratio_names_19_9">19:9</string>
+    <string name="screen_aspect_ratio_names_20_9">20:9</string>
+    <string name="screen_aspect_ratio_names_21_9">21:9</string>
+    <string name="screen_aspect_ratio_names_fill">Stretch to fill</string>
 
     <string name="haptic_feedback_mode_names_none">None</string>
     <string name="haptic_feedback_mode_names_press">Press</string>
@@ -388,6 +402,10 @@
     <string name="update_no_update_title">No updates</string>
     <string name="update_no_update_message">No updates are available right now.</string>
     <string name="update_error_title">Update error</string>
+    <string name="update_checking">Checking for updates…</string>
+    <string name="update_permission_title">Permission required</string>
+    <string name="update_permission_message">To install the update, allow this app to install apps from unknown sources. You will be taken to the system settings screen.</string>
+    <string name="update_permission_action">Open settings</string>
     <string name="settings_title_check_update">Check for updates</string>
     <string name="settings_description_check_update">Check whether a new app version is available</string>
 

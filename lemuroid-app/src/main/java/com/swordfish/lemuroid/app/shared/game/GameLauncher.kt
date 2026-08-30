@@ -57,6 +57,9 @@ class GameLauncher(
     }
 
     private fun showRomNotFoundDialog(activity: Activity, game: Game) {
+        // Chega aqui depois de dois hops em Dispatchers.IO — a activity pode ter fechado no meio.
+        if (activity.isFinishing || activity.isDestroyed) return
+
         AlertDialog.Builder(activity)
             .setTitle(activity.getString(R.string.game_rom_not_found_title))
             .setMessage(activity.getString(R.string.game_rom_not_found_message, game.fileName))

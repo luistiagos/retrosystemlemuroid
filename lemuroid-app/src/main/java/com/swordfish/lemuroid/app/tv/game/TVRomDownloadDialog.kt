@@ -94,6 +94,10 @@ class TVRomDownloadDialog(
     }
 
     private fun showError(message: String) {
+        // O download leva minutos: se o usuário saiu da tela nesse meio-tempo, `show()` pega um token
+        // já morto e a BadTokenException derruba o app. Ver SafeToast.
+        if (activity.isFinishing || activity.isDestroyed) return
+
         AlertDialog.Builder(activity)
             .setTitle(R.string.rom_download_dialog_title)
             .setMessage(message)

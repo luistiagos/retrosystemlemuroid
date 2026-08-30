@@ -29,6 +29,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp" />
 
+        <!-- Aparelho + versao do Android + versao do app: uma foto desta tela precisa bastar
+             para o diagnostico. Ver documentacao/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:alpha="0.6"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

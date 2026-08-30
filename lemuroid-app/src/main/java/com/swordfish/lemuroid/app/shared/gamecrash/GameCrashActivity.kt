@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.app.shared.gamecrash
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -24,6 +25,25 @@ class GameCrashActivity : Activity() {
             isVisible = !messageDetail.isNullOrEmpty()
             text = messageDetail
         }
+
+        findViewById<TextView>(R.id.text3).text = deviceFootprint()
+    }
+
+    /**
+     * Aparelho, versão do Android e versão do app. Suporte quase sempre recebe uma foto desta tela e
+     * nada mais — sem isto, descobrir em que Android o aparelho está vira investigação.
+     */
+    private fun deviceFootprint(): String {
+        val appVersion =
+            runCatching { packageManager.getPackageInfo(packageName, 0).versionName }
+                .getOrNull() ?: "?"
+        return getString(
+            R.string.crash_device_info,
+            "${Build.MANUFACTURER} ${Build.MODEL}",
+            Build.VERSION.RELEASE,
+            Build.VERSION.SDK_INT,
+            appVersion,
+        )
     }
 
     companion object {

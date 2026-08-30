@@ -13,6 +13,7 @@ import com.google.android.material.color.DynamicColors
 import com.swordfish.lemuroid.app.shared.covers.CoverUtils
 import com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer
 import com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer
+import com.swordfish.lemuroid.app.shared.telemetry.CrashTelemetry
 import com.swordfish.lemuroid.app.utils.android.isMainProcess
 import com.swordfish.lemuroid.ext.feature.context.ContextHandler
 import com.swordfish.lemuroid.lib.injection.HasWorkerInjector
@@ -36,6 +37,18 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
+
+        // Error telemetry, first thing — a crash during the rest of onCreate should still report.
+        // Installed in BOTH processes: the emulator (and most crashes) live in ":game", and a
+        // handler installed only under isMainProcess() would miss exactly those.
+        // BaseGameActivity later chains its own handler on top of this one.
+        CrashTelemetry.installUncaughtHandler(this, if (isMainProcess()) "main" else "game")
+        if (isMainProcess()) {
+            // Native crash / ANR / low-memory kill never unwind through Java, so they are recovered
+            // from the previous session via ApplicationExitInfo. The API is scoped to the package,
+            // so this single scan also covers the ":game" process.
+            CrashTelemetry.reportPastExitsAsync(this)
+        }
 
         // Install Conscrypt in background — no HTTP calls happen before the UI is visible,
         // and each OkHttpClient also applies Conscrypt explicitly via applyConscryptTls().

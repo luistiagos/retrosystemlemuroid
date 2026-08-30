@@ -458,6 +458,7 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 - Queries Room paginadas retornam `PagingSource<Int, Game>`; queries de lista retornam `Flow<List<Game>>`.
 - Migrações sempre em `Migrations.kt`, registradas em `LemuroidApplicationModule.kt`.
 - `PermanentHttpException` sinaliza erros HTTP não-retriáveis (4xx exceto 429); capturado em `downloadToFile` antes do bloco geral de `IOException`.
+- **Toast só por `Context.displayToast`** ([SafeToast.kt](retrograde-util/src/main/java/com/swordfish/lemuroid/common/SafeToast.kt)). `Toast.makeText(...).show()` direto é proibido — ver pitfall 7.
 
 ---
 
@@ -517,3 +518,46 @@ if (!exists) { ... }
 **Causa:** O `.so` do buildbot libretro não linka `libandroid.so`; o símbolo weak `ASharedMemory_create` fica nulo → fallback `open("/dev/ashmem")` → EACCES com targetSdk ≥ 29 (o app usa 35) → fastmem desliga (`[VMEM] ... errno 13` no logcat) → o caminho fallback do dynarec trunca o pointer tag (`0xb4…`) do Android 11+ → SIGSEGV.
 
 **Regra:** Ao atualizar o core Flycast do buildbot, **sempre rodar `python patch_flycast_libandroid.py`** (raiz do repo, requer `pip install lief`) antes de buildar. Detalhes em `documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.
+
+### 7. `Toast` mata o processo no Android 7.1 — e o público-alvo é exatamente esse aparelho
+
+**Sintoma:** Em TV box (MXQ 4K Pro e clones), **todo** jogo de **todo** sistema termina na tela de crash com `Unable to add window -- token android.os.BinderProxy@… is not valid; is your activity running?`.
+
+**Causa:** No 7.1 (API 25) o `NotificationManagerService` expira o token da janela do toast por tempo (2 s / 3,5 s), mas quem monta a janela é o app — `Toast$TN.handleShow` roda numa mensagem da main thread. Main thread ocupada (o boot do jogo faz `dlopen` do core nela) = token vencido quando o `addView` finalmente roda = `BadTokenException`. O `try/catch` do framework só existe a partir da API 26.
+
+**Regras:**
+1. **Nunca** `Toast.makeText(...).show()` direto. Use `Context.displayToast` — ele monta o toast sobre um `ContextWrapper` cujo `WindowManager` engole a `BadTokenException`.
+2. **Nunca guarde por `SDK_INT`** ao lidar com bug de framework antigo: essas boxes anunciam Android 9/11 rodando 7.1 de verdade. Guard por versão deixa de fora justamente o aparelho afetado.
+3. Não enfileire toast/diálogo durante o boot do jogo. Se o aviso é sobre o jogo, espere `waitGLEvent<FrameRendered>()` — precedente em `GameViewModelInput.initializeControllerConfigsFlow`.
+4. `minSdkVersion` é **21** e a build armeabi-v7a é distribuída para TV box velha: qualquer API nova precisa de guard, e qualquer bug conhecido de Android 5–7 é bug nosso na prática.
+
+Detalhes em `documentacao/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md`.
+
+### 8. A tela de crash não pode acusar o núcleo por qualquer exceção
+
+**Sintoma:** Usuário limpa cache e faz reset de fábrica atrás de um bug de UI, porque a tela dizia "o núcleo do Libretro teve um problema… tente formatação de fábrica".
+
+**Causa:** `RESULT_UNEXPECTED_ERROR` (qualquer exceção Java não tratada no processo `:game`) mostrava sempre `lemuroid_crash_disclamer` e ainda relançava o jogo com cada core restante — repetindo o mesmo crash 2-3 vezes.
+
+**Regra:** Crash de core é **SIGSEGV**: não desenrola pela JVM e só é visto na sessão seguinte por `ApplicationExitInfo`. Portanto exceção Java que chega ao `UncaughtExceptionHandler` é bug de app até prova em contrário — `BaseGameActivity.isEmulatorFailure` só devolve `true` com frame de `com.swordfish.libretrodroid` ou `OutOfMemoryError`. Quando é `false`: sem fallback de core e mensagem `lemuroid_app_error_disclamer`.
+
+**Ao ler um report:** o `text1` da tela é disclaimer fixo, **o sinal real é o `text2`** (mensagem da exceção); o `text3` traz aparelho + versão do Android + versão do app — uma foto da tela tem que bastar para diagnosticar.
+
+---
+
+## Ambiente de build
+
+**Armadilha:** o `gradle.properties` **versionado** carrega caminhos absolutos da máquina de build original — `org.gradle.user.home=E:/.gradle`, `-Djava.io.tmpdir=E:/gradle_tmp` e `org.gradle.java.home=C:\Program Files\Microsoft\jdk-17.0.18.8-hotspot`. Em qualquer máquina sem drive `E:` (ou sem aquele JDK exato) o build não sobe.
+
+**Não conserte editando o arquivo do projeto** — isso quebraria a máquina original. Escreva os overrides em `%USERPROFILE%\.gradle\gradle.properties`, que tem **precedência maior** que o `gradle.properties` do projeto:
+
+```properties
+org.gradle.java.home=<caminho do JDK 17>
+org.gradle.jvmargs=-Xmx5120m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -Djava.io.tmpdir=<tmp que exista>
+```
+
+E aponte `GRADLE_USER_HOME` (variável de ambiente) para um `.gradle` que exista, senão o `org.gradle.user.home=E:/.gradle` do projeto vale.
+
+**O que é necessário:** JDK 17; SDK com `platforms;android-35` (compileSdk 35), `build-tools;34.0.0` e `platform-tools`; `local.properties` (não versionado) com `sdk.dir` apontando para esse SDK. **NDK não é necessário** para compilar o app — só para rebuildar o `libretrodroid-patched.aar`. Assinatura de release usa o `debug.keystore` do próprio repo, não precisa de keystore separado.
+
+**Máquina atual (configurada em 2026-08-16):** JDK 17.0.20 em `D:\DevCaches\jdk-17`, SDK em `D:\DevCaches\Android\Sdk`, `GRADLE_USER_HOME=C:\Users\luist\.gradle`, tmp em `%LOCALAPPDATA%\Temp\gradle_tmp`. Variáveis `JAVA_HOME`/`ANDROID_HOME`/`ANDROID_SDK_ROOT`/`GRADLE_USER_HOME` gravadas no escopo User, e `platform-tools` (adb) no PATH.

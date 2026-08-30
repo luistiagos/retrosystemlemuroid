@@ -6,10 +6,32 @@ Documentação das funcionalidades implementadas no Lemuroid.
 
 ## Arquivos
 
+### [`proporcao-tela.md`](proporcao-tela.md)
+**Proporção da tela (Automática / 4:3 / 16:9 / 19:9 / 20:9 / 21:9 / Preencher)**
+
+Lista de proporções alvo, no desenho adotado por DuckStation, Dolphin, PCSX2 e RetroArch —
+"original" e "preencher" são casos particulares de uma proporção, não modos separados. O encaixe
+acontece no renderer nativo (`VideoLayout::updateForegroundVertices`), então a feature exige
+rebuild da `libretrodroid-patched.aar` a partir de `C:\projects\lemuroid\LibretroDroid-patched`.
+Documenta o levantamento de mercado que motivou o desenho, o contrato do valor (`AUTO`/`FILL`/
+explicita), por que o zoom-com-corte foi removido e por que isso dispensou o scissor.
+
+---
+
+### [`widescreen-cores-3d.md`](widescreen-cores-3d.md)
+**Widescreen nos cores 3D (Dreamcast e N64)**
+
+Opções que fazem o core **renderizar** imagem mais larga em vez de esticar ou cortar a imagem
+4:3 pronta — o análogo dos widescreen patches do PCSX2. Documenta as chaves conferidas no
+core de verdade (`reicast_widescreen_hack`, `mupen64plus-aspect`), por que console 2D nunca
+pode ter isso, quais cores foram verificados e não têm, e como conferir a chave de um core.
+
+---
+
 ### [`atualizacao-automatica.md`](atualizacao-automatica.md)
 **Atualização automática do APK**
 
-Descreve o fluxo de verificação, download e instalação de novas versões do app via endpoint de versão, incluindo estados da UI, `PackageInstaller`, `FileProvider` e preservação de dados.
+Descreve o fluxo de verificação, download e instalação de novas versões do app a partir do `version.json` publicado no R2 pelo `build-and-upload.ps1` (mesmo diretório dos APKs). Inclui o formato do anúncio com splits por ABI, verificação de SHA-256, throttle de 12h, estados da UI mobile e TV, `PackageInstaller`, `FileProvider` e preservação de dados.
 
 ---
 

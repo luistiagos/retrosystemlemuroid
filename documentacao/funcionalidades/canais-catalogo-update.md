@@ -21,8 +21,8 @@ O canal controla três coisas:
 | `catalogChannel` | `default` | Nome lógico da edição/catálogo. |
 | `catalogManifest` | `lemuroid-app/src/main/assets/catalog_manifest.txt` | Manifest alternativo usado para gerar o DB prebuilt e empacotado como asset. |
 | `appUpdateChannel` | valor de `catalogChannel` | Canal consultado pelo update. |
-| `appUpdateBaseUrl` | `https://emuladores.pythonanywhere.com/app_version` | Base para montar `base/<channel>`. |
-| `appUpdateEndpoint` | base ou `base/<channel>` | Endpoint exato, caso precise sobrescrever. |
+| `appUpdateBaseUrl` | `https://versions.digitalstoregames.com/RetroGameSystem` | **Diretório** onde vive o anúncio de versão. |
+| `appUpdateEndpoint` | `<base>/version.json` ou `<base>/version-<channel>.json` | URL exata, caso precise sobrescrever. |
 | `catalogApplicationIdSuffix` | vazio | Sufixo opcional do `applicationId`, como `.ps2` ou `.arcade`. |
 
 Esses valores viram `BuildConfig`:
@@ -32,7 +32,7 @@ Esses valores viram `BuildConfig`:
 | `CATALOG_CHANNEL` | `ps2` |
 | `CATALOG_MANIFEST_ASSET` | `catalog_manifest_ps2.txt` |
 | `APP_UPDATE_CHANNEL` | `ps2` |
-| `APP_UPDATE_ENDPOINT` | `https://emuladores.pythonanywhere.com/app_version/ps2` |
+| `APP_UPDATE_ENDPOINT` | `https://versions.digitalstoregames.com/RetroGameSystem/version-ps2.json` |
 
 ---
 
@@ -49,7 +49,7 @@ Exemplo para gerar uma edição `ps2`:
 Isso gera `dist/retro-game-system-ps2.apk` e configura o app para consultar:
 
 ```text
-https://emuladores.pythonanywhere.com/app_version/ps2
+https://versions.digitalstoregames.com/RetroGameSystem/version-ps2.json
 ```
 
 Para instalar lado a lado com a edição principal:
@@ -90,12 +90,14 @@ Com endpoint explícito:
 
 ## Endpoint de Update
 
-Cada canal deve ter seu próprio JSON de versão.
+Cada canal tem seu próprio arquivo de anúncio, publicado no R2 ao lado dos APKs — não há
+rota de servidor envolvida. Formato completo em
+[`atualizacao-automatica.md`](atualizacao-automatica.md).
 
 Exemplo para canal `ps2`:
 
 ```http
-GET https://emuladores.pythonanywhere.com/app_version/ps2
+GET https://versions.digitalstoregames.com/RetroGameSystem/version-ps2.json
 ```
 
 Resposta:
@@ -105,7 +107,9 @@ Resposta:
   "channel": "ps2",
   "versionCode": 232,
   "versionName": "1.18.0-ps2",
-  "apkUrl": "https://emuladores.pythonanywhere.com/static/apks/retro-game-system-ps2-v1.18.0.apk"
+  "apkUrl": "https://versions.digitalstoregames.com/RetroGameSystem/retro-game-system-ps2-arm64.apk?v=232",
+  "sha256": "a1b2…",
+  "size": 111552915
 }
 ```
 
@@ -116,8 +120,11 @@ Regras:
 - O APK precisa ter o mesmo `applicationId` do app instalado.
 - O APK precisa estar assinado com a mesma chave.
 - Se o JSON tiver `channel`, ele precisa bater com `BuildConfig.APP_UPDATE_CHANNEL`; caso contrário, o app recusa o update.
+- `sha256`/`size` são conferidos antes de instalar; sem eles o app instala sem verificar integridade.
 
-O campo `channel` é opcional para compatibilidade, mas recomendado para evitar que uma edição baixe APK de outra edição por erro de servidor.
+O campo `channel` é opcional para compatibilidade, mas recomendado para evitar que uma edição baixe APK de outra edição por erro de publicação.
+
+Para publicar num canal, defina `$env:APP_UPDATE_CHANNEL` antes de rodar o `build-and-upload.ps1` — é isso que decide se o script escreve `version.json` ou `version-<canal>.json`.
 
 ---
 
@@ -155,7 +162,7 @@ Exemplo:
 Esse APK substitui qualquer instalação anterior de `app.retrogamesystem` e passa a consultar:
 
 ```text
-https://emuladores.pythonanywhere.com/app_version/arcade
+https://versions.digitalstoregames.com/RetroGameSystem/version-arcade.json
 ```
 
 ---
@@ -182,7 +189,7 @@ Consequências:
 - Instala lado a lado com a edição principal.
 - Banco, saves, states, ROMs e preferências ficam separados por `applicationId`.
 - O update dessa edição só aceita APKs assinados iguais e com o mesmo `applicationId` com suffix.
-- O endpoint do canal continua separado, por exemplo `/app_version/arcade`.
+- O anúncio do canal continua separado, por exemplo `version-arcade.json`.
 
 Esse modo é recomendado para edições independentes, testes públicos, builds temáticos ou catálogos que não devem misturar banco/dados.
 
@@ -206,23 +213,22 @@ Isso evita drift entre o catálogo lido pelo app e o banco prebuilt empacotado n
 
 1. Gere o manifest do canal, por exemplo `catalog_manifest_ps2.txt`.
 2. Build o APK com `-CatalogChannel` e `-CatalogManifest`.
-3. Publique o APK em uma URL HTTPS direta.
-4. Atualize o JSON do canal com `channel`, `versionCode`, `versionName` e `apkUrl`.
-5. Confirme que o `versionCode` é maior que o instalado naquele canal.
-6. Confirme que a assinatura é a mesma da instalação anterior daquele `applicationId`.
-7. Teste o botão `Verificar atualizações` no app instalado.
+3. Publique com `$env:APP_UPDATE_CHANNEL = "ps2"; .\build-and-upload.ps1` — o script sobe o APK e escreve o `version-ps2.json` por último, já conferido pela URL pública.
+4. Confirme que o `versionCode` é maior que o instalado naquele canal (o bump automático cuida disso).
+5. Confirme que a assinatura é a mesma da instalação anterior daquele `applicationId`.
+6. Teste o botão `Verificar atualizações` no app instalado.
 
 ---
 
-## Exemplos de Layout no Servidor
+## Exemplos de Layout no Bucket
 
 ```text
-/app_version
-/app_version/ps2
-/app_version/arcade
-/static/apks/retro-game-system-v1.18.0.apk
-/static/apks/retro-game-system-ps2-v1.18.0.apk
-/static/apks/retro-game-system-arcade-v1.18.0.apk
+/RetroGameSystem/version.json
+/RetroGameSystem/version-ps2.json
+/RetroGameSystem/version-arcade.json
+/RetroGameSystem/retro-game-system-arm64.apk
+/RetroGameSystem/retro-game-system-armv7.apk
+/RetroGameSystem/retro-game-system-arm64.apk.sha256
 ```
 
-Cada endpoint pode apontar para um APK diferente, desde que respeite o `applicationId` esperado por aquela instalação.
+Cada anúncio pode apontar para um APK diferente, desde que respeite o `applicationId` esperado por aquela instalação.

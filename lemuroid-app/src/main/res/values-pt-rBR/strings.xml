@@ -188,12 +188,22 @@
         \n\u2022 Vá nas configurações do Retro Game System e execute a formatação de fábrica
         \n\n Se nenhuma das opções acima funcionar, pode ser possível que este jogo/núcleo não seja compatível com este dispositivo.
     </string>
+    <string name="lemuroid_app_error_disclamer">O aplicativo teve um erro interno e precisou fechar o jogo. O problema não é do seu jogo, da sua ROM nem do núcleo de emulação — limpar dados ou resetar não vai adiantar. O que resolve é nos enviar a mensagem abaixo.</string>
     <string name="error_message_incompatible_state">Este estado de salvamento não é compatível com a versão principal atual. Por favor, carregue o último salvamento no jogo ou use uma versão anterior do Retro Game System.</string>
     <string name="shader_filter_names_auto">Automático</string>
     <string name="shader_filter_names_sharp">Nítido</string>
     <string name="shader_filter_names_smooth">Suavização</string>
     <string name="shader_filter_names_crt">CRT</string>
     <string name="shader_filter_names_lcd">LCD</string>
+
+    <string name="settings_title_screen_aspect_ratio">Proporção da tela</string>
+    <string name="screen_aspect_ratio_names_auto">Automática (do jogo)</string>
+    <string name="screen_aspect_ratio_names_4_3">4:3</string>
+    <string name="screen_aspect_ratio_names_16_9">16:9</string>
+    <string name="screen_aspect_ratio_names_19_9">19:9</string>
+    <string name="screen_aspect_ratio_names_20_9">20:9</string>
+    <string name="screen_aspect_ratio_names_21_9">21:9</string>
+    <string name="screen_aspect_ratio_names_fill">Esticar para preencher</string>
     <string name="haptic_feedback_mode_names_none">Nenhuma</string>
     <string name="haptic_feedback_mode_names_press">Pressione</string>
     <string name="haptic_feedback_mode_names_press_release">Pressione &amp; liberar</string>
@@ -365,6 +375,10 @@
     <string name="update_no_update_title">Sem atualizações</string>
     <string name="update_no_update_message">Não há atualizações disponíveis no momento.</string>
     <string name="update_error_title">Erro na atualização</string>
+    <string name="update_checking">Procurando atualizações…</string>
+    <string name="update_permission_title">Permissão necessária</string>
+    <string name="update_permission_message">Para instalar a atualização, permita que este app instale apps de fontes desconhecidas. Você será levado à tela de configurações do sistema.</string>
+    <string name="update_permission_action">Abrir configurações</string>
     <string name="settings_title_check_update">Verificar atualizações</string>
     <string name="settings_description_check_update">Verificar se há uma nova versão disponível</string>
 

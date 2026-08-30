@@ -14,6 +14,7 @@ import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.settings.SaveSyncPreferences
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
+import com.swordfish.lemuroid.app.tv.shared.TVAppUpdateDialog
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
 import com.swordfish.lemuroid.common.kotlin.NTuple2
@@ -186,6 +187,7 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
                     handleResetGamePadBindings()
                 }
             getString(R.string.pref_key_reset_settings) -> handleResetSettings()
+            getString(R.string.pref_key_check_update) -> TVAppUpdateDialog(requireActivity()).checkManually()
         }
         return super.onPreferenceTreeClick(preference)
     }

@@ -41,6 +41,15 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
                 KeyEvent.KEYCODE_BUTTON_10 to KeyEvent.KEYCODE_BUTTON_START,
             )
 
+        // Fallbacks para controles/TV boxes que reportam confirmacao como DPAD_CENTER ou ENTER.
+        // Ficam antes de allAvailableInputs para que o nome canonico (BUTTON_START, etc.)
+        // prevaleça no reverseLookup() das configuracoes.
+        val genericExtraOverride =
+            bindingsOf(
+                KeyEvent.KEYCODE_DPAD_CENTER to KeyEvent.KEYCODE_BUTTON_A,
+                KeyEvent.KEYCODE_ENTER to KeyEvent.KEYCODE_BUTTON_START,
+            )
+
         // Binding identidade para todas as teclas de saída. Não consultamos
         // hasKeys(): em TV boxes baratas ele retorna false para teclas que o
         // controle envia, o que mapeava botões reais para KEYCODE_UNKNOWN.
@@ -56,16 +65,17 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
                 KeyEvent.KEYCODE_BUTTON_Y to KeyEvent.KEYCODE_BUTTON_X,
             )
 
-        return genericArcadeOverride + allAvailableInputs + faceButtonSwap
+        return genericArcadeOverride + genericExtraOverride + allAvailableInputs + faceButtonSwap
     }
 
     override fun isEnabledByDefault(appContext: Context): Boolean {
         // hasKeys mente em muitas TV boxes. Se o dispositivo expõe eixos reais de
-        // joystick (analógico ou HAT do D-pad), é um controle de verdade — habilita.
-        // Controles remotos de TV não expõem eixos SOURCE_JOYSTICK, então continuam
-        // desabilitados por padrão a menos que passem no teste de teclas.
+        // joystick (analógico ou HAT do D-pad), ou tem nome explícito de gamepad,
+        // é um controle de verdade — habilita.
+        // Controles remotos de TV não expõem eixos de joystick nem nomes de gamepad.
         return device.supportsAllKeys(MINIMAL_KEYS_DEFAULT_ENABLED) ||
             device.supportsAllKeys(GENERIC_NUMBERED_FACE_KEYS) ||
+            isKnownGamepadName(device.name) ||
             hasJoystickAxes()
     }
 
@@ -106,16 +116,27 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
             ).any { it }
         if (anyButton) return true
 
+        if (isKnownGamepadName(device.name)) return true
+
         return hasJoystickAxes()
     }
 
-    // Eixos consultados especificamente na classe SOURCE_JOYSTICK para não
-    // confundir com eixos de mouse/touch de air-mouses e controles remotos.
+    // Eixos consultados para detectar controle real. Checa SOURCE_JOYSTICK,
+    // SOURCE_GAMEPAD e motionRanges genericos excluindo apenas mouse/touchpad.
     private fun hasJoystickAxes(): Boolean {
-        return sequenceOf(
+        val candidateAxes = sequenceOf(
             MotionEvent.AXIS_X,
+            MotionEvent.AXIS_Y,
             MotionEvent.AXIS_HAT_X,
-        ).any { axis -> device.getMotionRange(axis, InputDevice.SOURCE_JOYSTICK) != null }
+            MotionEvent.AXIS_HAT_Y,
+            MotionEvent.AXIS_Z,
+            MotionEvent.AXIS_RZ,
+        )
+        return candidateAxes.any { axis ->
+            device.getMotionRange(axis, InputDevice.SOURCE_JOYSTICK) != null ||
+                device.getMotionRange(axis, InputDevice.SOURCE_GAMEPAD) != null ||
+                (device.getMotionRange(axis)?.let { (it.source and InputDevice.SOURCE_CLASS_POINTER) == 0 } ?: false)
+        }
     }
 
     override fun getCustomizableKeys(): List<RetroKey> {
@@ -175,5 +196,10 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
                 KeyEvent.KEYCODE_BUTTON_THUMBR,
                 KeyEvent.KEYCODE_BUTTON_MODE,
             )
+
+        private fun isKnownGamepadName(name: String): Boolean {
+            val lower = name.lowercase()
+            return sequenceOf("gamepad", "joystick", "controller", "ipega", "pg-").any { lower.contains(it) }
+        }
     }
 }

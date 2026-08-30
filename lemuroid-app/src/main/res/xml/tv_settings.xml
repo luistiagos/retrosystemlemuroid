@@ -50,6 +50,15 @@
             app:dependency="@string/pref_key_hd_mode"
             android:defaultValue="auto"/>
 
+        <ListPreference
+            android:key="@string/pref_key_screen_aspect_ratio"
+            android:title="@string/settings_title_screen_aspect_ratio"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true"
+            android:entries="@array/pref_key_screen_aspect_ratio_display_names"
+            app:entryValues="@array/pref_key_screen_aspect_ratio_values"
+            android:defaultValue="auto"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -84,6 +93,12 @@
             android:key="@string/pref_key_display_bios_info"
             android:title="@string/settings_title_display_bios_info"
             app:summary="@string/settings_description_display_bios_info"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
+            android:key="@string/pref_key_check_update"
+            android:title="@string/settings_title_check_update"
+            app:summary="@string/settings_description_check_update"
             app:iconSpaceReserved="false"/>
 
         <PreferenceScreen

@@ -24,6 +24,8 @@ import com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelSideEffects
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
 import com.swordfish.lemuroid.app.shared.settings.ControllerConfigsManager
+import com.swordfish.lemuroid.app.shared.telemetry.TelemetryContext
+import com.swordfish.lemuroid.app.shared.telemetry.TelemetryReporter
 import com.swordfish.lemuroid.app.tv.game.TVGameActivity
 import com.swordfish.lemuroid.common.animationDuration
 import com.swordfish.lemuroid.common.coroutines.launchOnState
@@ -102,6 +104,17 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as? SystemCoreConfig ?: run { finish(); return }
         system = GameSystem.findByIdOrNull(game.systemId) ?: run { finish(); return }
 
+        // Breadcrumb for the crash reporter. A SIGSEGV inside a libretro core is only recovered on
+        // the next launch, when this process no longer exists to say what it was running — so the
+        // system/core/game is persisted here, and the report names the culprit core instead of
+        // just "native crash".
+        TelemetryContext.setGameSession(
+            applicationContext,
+            systemId = game.systemId,
+            coreName = systemCoreConfig.coreID.coreName,
+            gameTitle = game.title,
+        )
+
         val viewModel by viewModels<BaseGameScreenViewModel> {
             BaseGameScreenViewModel.Factory(
                 applicationContext,
@@ -165,6 +178,16 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     private fun setUpExceptionsHandler() {
         Thread.setDefaultUncaughtExceptionHandler { thread, exception ->
+            // This replaces the process-wide handler installed in LemuroidApplication, so the
+            // report has to be filed here too or every in-game Java crash goes unreported.
+            // Synchronous on purpose: the paths below tear the process down immediately.
+            TelemetryReporter.reportThrowable(
+                component = "game",
+                thread = thread,
+                error = exception,
+                extraContext = TelemetryContext.lastGameSession(applicationContext),
+                terminal = true,
+            )
             if (isEglIncompatibilityException(exception)) {
                 Timber.e(exception, "EGL incompatibility detected on this device")
                 performErrorFinish(getString(R.string.game_loader_error_gl_incompatible))
@@ -360,6 +383,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     }
 
     private fun performSuccessfulActivityFinish() {
+        // Clean exit — drop the breadcrumb so an unrelated crash later isn't blamed on this game.
+        TelemetryContext.clearGameSession(applicationContext)
         val resultIntent =
             Intent().apply {
                 putExtra(PLAY_GAME_RESULT_SESSION_DURATION, System.currentTimeMillis() - startGameTime)
@@ -371,12 +396,32 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         finishAndExitProcess()
     }
 
+    /**
+     * Um crash de core é SIGSEGV: não desenrola pela JVM, mata o processo direto e só é recuperado
+     * na sessão seguinte via `ApplicationExitInfo`. Ou seja, o que chega ao
+     * `UncaughtExceptionHandler` é, quase sempre, bug de app — não do núcleo. Só tratamos como falha
+     * de emulação o que tem frame do LibretroDroid ou o que é falta de memória, porque só nesses
+     * casos trocar de core (e culpar o núcleo na tela de erro) faz algum sentido.
+     */
+    private fun isEmulatorFailure(exception: Throwable): Boolean {
+        var current: Throwable? = exception
+        var depth = 0
+        while (current != null && depth < MAX_CAUSE_DEPTH) {
+            if (current is OutOfMemoryError) return true
+            if (current.stackTrace.any { it.className.startsWith(LIBRETRODROID_PACKAGE) }) return true
+            current = current.cause
+            depth++
+        }
+        return false
+    }
+
     private fun performUnexpectedErrorFinish(exception: Throwable) {
         Timber.e(exception, "Handling java exception in BaseGameActivity")
         val triedCores = buildUpdatedTriedCores()
         val resultIntent =
             Intent().apply {
-                putExtra(PLAY_GAME_RESULT_ERROR, exception.message)
+                putExtra(PLAY_GAME_RESULT_ERROR, exception.message ?: exception.javaClass.name)
+                putExtra(PLAY_GAME_RESULT_IS_EMULATOR_FAILURE, isEmulatorFailure(exception))
                 putExtra(PLAY_GAME_RESULT_GAME, intent.getSerializableExtra(EXTRA_GAME))
                 if (::systemCoreConfig.isInitialized) {
                     putExtra(PLAY_GAME_RESULT_CORE_ID, systemCoreConfig.coreID.coreName)
@@ -548,7 +593,11 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         const val PLAY_GAME_RESULT_LEANBACK = "PLAY_GAME_RESULT_LEANBACK"
         const val PLAY_GAME_RESULT_ERROR = "PLAY_GAME_RESULT_ERROR"
         const val PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE = "PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE"
+        const val PLAY_GAME_RESULT_IS_EMULATOR_FAILURE = "PLAY_GAME_RESULT_IS_EMULATOR_FAILURE"
         const val PLAY_GAME_RESULT_CORE_ID = "PLAY_GAME_RESULT_CORE_ID"
+
+        private const val LIBRETRODROID_PACKAGE = "com.swordfish.libretrodroid"
+        private const val MAX_CAUSE_DEPTH = 10
 
         const val RESULT_ERROR = Activity.RESULT_FIRST_USER + 2
         const val RESULT_UNEXPECTED_ERROR = Activity.RESULT_FIRST_USER + 3

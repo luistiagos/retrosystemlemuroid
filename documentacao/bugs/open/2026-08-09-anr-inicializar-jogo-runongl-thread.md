@@ -1,7 +1,7 @@
 # [BUG] ANR ao inicializar jogo — main thread bloqueia em `runOnGLThread` enquanto o core carrega a ROM
 
 **Data:** 2026-08-09
-**Status:** Parcialmente corrigido 🟡 — bloqueios de main thread eliminados no app; timeout no AAR pendente (sem NDK na máquina)
+**Status:** Corrigido 🟢 (app + AAR) — falta só validar em device; `dlopen` na main segue como resíduo conhecido
 **Severidade:** Alta (ANR visível ao usuário — "Retro Game System não está respondendo")
 **Branch:** version9
 
@@ -154,13 +154,12 @@ espera.
 `loadSaveState`. `takeScreenshot` não precisou de mudança: já usa `queueEvent` +
 `suspendCoroutine`, não bloqueia.
 
-## Correção preparada (lado AAR — **não empacotada**)
+## Correção aplicada (lado AAR — **empacotada**)
 
-Feita no checkout `E:\projects\lemuroid\LibretroDroid-patched`, **mas não compilada**: a
-máquina não tem NDK instalado (`Android/Sdk/ndk/` não existe; `local.properties` aponta para
-um `29.0.14206865` inexistente). O `libs/libretrodroid-patched.aar` do app segue intacto em
-SHA-1 `16a6c3f8c9907c49331e6b5f0d4c7bc4a06fcbda` — **as mudanças abaixo ainda não estão no
-APK** e entram no próximo rebuild do AAR.
+Feita no checkout `E:\projects\lemuroid\LibretroDroid-patched` e compilada no rebuild de
+2026-08-13 (o do FBO do Saturn). Está no `libs/libretrodroid-patched.aar` atual, SHA-1
+`304ec039c37aa75625f6f79648c39e9622ad5fb4` — **verificado extraindo o `classes.jar` e
+confirmando a presença de `GLRetroView$GLThreadTimeoutException.class`**, não pelo hash.
 
 - `runOnGLThread`: espera limitada a 30 s (`awaitUninterruptibly(timeoutMillis)`, novo
   overload em `KtUtils`, que ignora interrupt mas conta o tempo gasto contra o prazo);
@@ -174,10 +173,14 @@ APK** e entram no próximo rebuild do AAR.
 O fix do app **não depende** desse rebuild — ele é defesa em profundidade, e foi escrito
 para sobreviver a um rollback do AAR para `.known-good`.
 
+> ⚠️ Esta seção esteve registrada por engano como "não empacotada, sem NDK na máquina".
+> Era falso: o SDK real fica em `E:\DevCaches\Android\Sdk` (via `ANDROID_HOME`) e **tem**
+> NDK — o `local.properties` é que aponta para um `C:\Users\...` inexistente. Checar
+> `local.properties` em vez de `$env:ANDROID_HOME` leva à conclusão errada de que não dá
+> para buildar nativo.
+
 ## Pendente
 
-- **Empacotar o AAR** quando houver NDK (`sdkmanager "ndk;29.0.14206865"`, ~3 GB), seguindo
-  a disciplina de backup + verificação de SHA-1.
 - **`LibretroDroid.create` (dlopen do core, 14 MB no Dolphin) continua na main thread.**
   Não mexido: `createRetroView` roda no `factory` do `AndroidView` (obrigatoriamente main) e
   o `ON_CREATE` do `GLRetroView` é despachado sincronamente ali. Mover exige reordenar o
@@ -193,9 +196,18 @@ para sobreviver a um rollback do AAR para `.known-good`.
 
 - `./gradlew.bat :lemuroid-app:compileFreeBundleDebugKotlin` → **BUILD SUCCESSFUL**, sem
   warning novo (só os pré-existentes de deprecation).
+- `./gradlew.bat assembleFreeBundleRelease` → **BUILD SUCCESSFUL**, incluindo `lintVital` e
+  R8. APKs gerados: arm64-v8a (106 MB) e armeabi-v7a (90 MB).
+- Presença do fix do AAR conferida por extração do `classes.jar` (ver acima).
 - **Não testado em device.** Roteiro pendente: repro em device intermediário com jogo de
   GameCube; confirmar via `adb shell dumpsys activity anr` que a main **não** aparece mais
-  em `CountDownLatch.await` ← `GLRetroView.runOnGLThread`.
+  em `CountDownLatch.await` ← `GLRetroView.runOnGLThread`. O adb existe em
+  `E:\DevCaches\Android\Sdk\platform-tools\adb.exe` (fora do PATH).
+
+> Nota de ambiente: o `assembleFreeBundleRelease` chegou a falhar duas vezes por **OOM da
+> JVM** (`paging file is too small`, `G1 virtual space`), não por código. Causa: daemons
+> Gradle acumulados + `org.gradle.parallel=true` com `-Xmx2560m`. Contorno usado, sem
+> alterar `gradle.properties`: `--no-daemon --no-parallel --max-workers=1 -Xmx1536m`.
 
 ## Lição
 

@@ -57,7 +57,20 @@ class GameLaunchTaskHandler(
                 val triedCores = data?.getStringArrayListExtra(BaseGameActivity.PLAY_GAME_RESULT_TRIED_CORES) ?: arrayListOf()
                 val leanback = data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_LEANBACK, false) ?: false
                 val errorDetail = data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)
-                if (!tryFallbackCore(activity, game, triedCores, leanback)) {
+                // Default true = comportamento antigo, para o caso de o extra não vir.
+                val isEmulatorFailure =
+                    data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_IS_EMULATOR_FAILURE, true) ?: true
+                if (!isEmulatorFailure) {
+                    // Bug de app, não do núcleo: trocar de core só repete o mesmo crash com outro
+                    // núcleo (e faz o usuário esperar 2-3 vezes), e o disclaimer de core mandaria
+                    // limpar cache / resetar de fábrica por um problema que não é dele.
+                    Timber.w("Non-emulator failure in game process: $errorDetail")
+                    handleUnsuccessfulGameFinish(
+                        activity,
+                        activity.getString(R.string.lemuroid_app_error_disclamer),
+                        errorDetail,
+                    )
+                } else if (!tryFallbackCore(activity, game, triedCores, leanback)) {
                     handleUnsuccessfulGameFinish(
                         activity,
                         activity.getString(R.string.lemuroid_crash_disclamer),

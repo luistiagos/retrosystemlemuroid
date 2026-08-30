@@ -25,6 +25,13 @@ if (-not (Test-Path $keystorePath)) {
     Write-Host "         Build vai falhar na etapa de assinatura." -ForegroundColor Yellow
 }
 
+# Ambiente: recupera JAVA_HOME/GRADLE_USER_HOME/ANDROID_HOME do escopo persistente
+# (um terminal aberto antes de elas serem gravadas nao as tem) e resolve o JDK, que
+# gradlew.bat exige para subir a JVM antes de ler qualquer gradle.properties.
+. (Join-Path $repoRoot "build-env.ps1")
+Initialize-BuildEnv
+Set-ResolvedJavaHome -RepoRoot $repoRoot | Out-Null
+
 Write-Host "Executando: .\gradlew.bat assembleFreeBundleRelease" -ForegroundColor Yellow
 & $gradleWrapper assembleFreeBundleRelease
 

@@ -311,6 +311,11 @@ class GameViewModelInput(
     }
 
     private suspend fun initializeGamePadShortcutsFlow() {
+        // Espera o primeiro frame, como initializeControllerConfigsFlow. Um toast enfileirado
+        // enquanto a main thread ainda carrega o core perde o token da janela por tempo — e no
+        // Android 7.1 isso mata o processo (ver SafeToast). Depois do primeiro frame a main
+        // thread está livre e o aviso aparece sobre o jogo, que é onde ele é útil.
+        retroGameView.waitGLEvent<GLRetroView.GLRetroEvents.FrameRendered>()
         inputDeviceManager.getGameShortcutsObservable()
             .distinctUntilChanged()
             .safeCollect { allShortcuts ->
@@ -354,7 +359,12 @@ class GameViewModelInput(
             .safeCollect { (shortcuts, ports, bindings, event) ->
                 val (device, action, keyCode) = event
                 val port = ports(device)
-                val bindKeyCode = bindings(device)[InputKey(keyCode)]?.keyCode ?: keyCode
+                val rawBindKeyCode = bindings(device)[InputKey(keyCode)]?.keyCode
+                val bindKeyCode = if (rawBindKeyCode == null || rawBindKeyCode == KeyEvent.KEYCODE_UNKNOWN || rawBindKeyCode == 0) {
+                    keyCode
+                } else {
+                    rawBindKeyCode
+                }
                 android.util.Log.d("INPUT_DIAG", "keysFlow deviceId=${device?.id} deviceName=${device?.name} keyCode=$keyCode bindKeyCode=$bindKeyCode port=$port action=$action")
 
                 if (port == 0) {

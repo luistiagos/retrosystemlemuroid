@@ -37,6 +37,7 @@ import com.swordfish.lemuroid.app.utils.android.settings.indexPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.intPreferenceState
 import com.swordfish.lemuroid.app.utils.android.stringListResource
 import com.swordfish.lemuroid.app.utils.settings.rememberSafePreferenceIndexSettingState
+import com.swordfish.lemuroid.common.displayToast
 import android.provider.DocumentsContract
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -246,6 +247,16 @@ private fun GeneralSettings() {
             items = stringListResource(R.array.pref_key_shader_filter_display_names),
         )
         LemuroidSettingsList(
+            state =
+                indexPreferenceState(
+                    R.string.pref_key_screen_aspect_ratio,
+                    "auto",
+                    stringListResource(R.array.pref_key_screen_aspect_ratio_values).toList(),
+                ),
+            title = { Text(text = stringResource(id = R.string.settings_title_screen_aspect_ratio)) },
+            items = stringListResource(R.array.pref_key_screen_aspect_ratio_display_names),
+        )
+        LemuroidSettingsList(
             state = languageState,
             title = { Text(text = stringResource(id = R.string.settings_title_language)) },
             subtitle = { Text(text = stringResource(id = R.string.settings_description_language)) },
@@ -448,7 +459,7 @@ private fun openSafFolderInFileManager(context: android.content.Context, treeUri
         }
         context.startActivity(intent)
     } catch (e: Exception) {
-        android.widget.Toast.makeText(context, treeUriString, android.widget.Toast.LENGTH_LONG).show()
+        context.displayToast(treeUriString, android.widget.Toast.LENGTH_LONG)
     }
 }
 
@@ -469,6 +480,6 @@ private fun openFolderInFileManager(context: android.content.Context, path: Stri
         }
         context.startActivity(intent)
     } catch (e: Exception) {
-        android.widget.Toast.makeText(context, path, android.widget.Toast.LENGTH_LONG).show()
+        context.displayToast(path, android.widget.Toast.LENGTH_LONG)
     }
 }

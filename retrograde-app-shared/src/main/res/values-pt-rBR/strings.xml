@@ -34,7 +34,14 @@
     <string name="setting_mgba_interframe_blending">LCD ghosting</string>
     <string name="setting_mgba_frameskip">Frameskip</string>
     <string name="setting_mgba_color_correction">Correção de cor</string>
+    <string name="setting_mupen64plus_aspect">Proporção (reiniciar)</string>
+    <string name="value_mupen64plus_aspect_4_3">4:3 (original)</string>
+    <string name="value_mupen64plus_aspect_169_adjusted">16:9 widescreen real</string>
+    <string name="value_mupen64plus_aspect_169">16:9 esticado</string>
     <string name="setting_mupen64plus_43screensize">Tamanho da tela 4:3</string>
+    <string name="setting_mupen64plus_169screensize">Tamanho da tela 16:9</string>
+    <string name="setting_reicast_widescreen_hack">Widescreen real (reiniciar)</string>
+    <string name="setting_reicast_widescreen_cheats">Cheats de widescreen (reiniciar)</string>
     <string name="setting_mupen64plus_cpucore">Recompilador dinâmico</string>
     <string name="setting_mupen64plus_BilinearMode">Modo Bilinear</string>
     <string name="setting_mupen64plus_pak1">Player 1 Pak</string>

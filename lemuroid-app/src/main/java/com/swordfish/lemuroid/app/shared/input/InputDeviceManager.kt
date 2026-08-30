@@ -158,8 +158,12 @@ class InputDeviceManager(
             return defaultBindings
         }
 
-        val decoded = runCatching { Json.decodeFromString(bindingsMapSerializer, preference) }
-        return decoded.getOrDefault(defaultBindings)
+        val decoded = runCatching { Json.decodeFromString(bindingsMapSerializer, preference) }.getOrNull()
+            ?: return defaultBindings
+
+        // Sanitiza entradas corrompidas ou legadas que mapearam teclas para KEYCODE_UNKNOWN ou 0.
+        val sanitized = decoded.filterValues { it.keyCode != KeyEvent.KEYCODE_UNKNOWN && it.keyCode != 0 }
+        return defaultBindings + sanitized
     }
 
     suspend fun updateBinding(

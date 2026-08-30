@@ -12,6 +12,7 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.shared.game.ShaderChooser
 import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
 import com.swordfish.lemuroid.app.shared.settings.HDModeQuality
+import com.swordfish.lemuroid.app.shared.settings.ScreenAspectRatio
 import com.swordfish.lemuroid.common.coroutines.MutableStateProperty
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.view.disableTouchEvents
@@ -106,6 +107,7 @@ class GameViewModelRetroGameView(
         val enableRumble = settingsManager.enableRumble()
         val directLoad = settingsManager.allowDirectGameLoad()
         val enableImmersiveMode = settingsManager.enableImmersiveMode()
+        val screenAspectRatio = settingsManager.screenAspectRatio()
 
         val hasMicrophonePermission =
             ContextCompat.checkSelfPermission(
@@ -186,6 +188,7 @@ class GameViewModelRetroGameView(
                                     enableRumble,
                                     enableMicrophone,
                                     enableImmersiveMode,
+                                    screenAspectRatio,
                                 )
                             GameState.Loaded(
                                 gameData = loadingState.gameData,
@@ -258,6 +261,7 @@ class GameViewModelRetroGameView(
         requestRumble: Boolean,
         requestMicrophone: Boolean,
         enableImmersiveMode: Boolean,
+        screenAspectRatio: ScreenAspectRatio,
     ): GLRetroViewData {
         return GLRetroViewData(appContext).apply {
             coreFilePath = gameData.coreLibrary
@@ -296,6 +300,7 @@ class GameViewModelRetroGameView(
             skipDuplicateFrames = systemCoreConfig.skipDuplicateFrames
             enableMicrophone = requestMicrophone
             immersiveMode = buildImmersiveModeConfiguration(enableImmersiveMode)
+            targetAspectRatio = screenAspectRatio.targetAspectRatio
         }
     }
 

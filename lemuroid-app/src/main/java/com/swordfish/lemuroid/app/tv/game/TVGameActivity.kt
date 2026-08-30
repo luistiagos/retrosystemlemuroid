@@ -10,7 +10,9 @@ import com.swordfish.lemuroid.app.tv.gamemenu.TVGameMenuActivity
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
 import com.swordfish.lemuroid.common.displayToast
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 
 class TVGameActivity : BaseGameActivity() {
     override fun getDialogClass() = TVGameMenuActivity::class.java
@@ -32,9 +34,14 @@ class TVGameActivity : BaseGameActivity() {
     }
 
     private suspend fun initializeShortcutToastFlow() {
+        // Só na transição para "sem controle": getGamePadsObservable reemite a cada evento do
+        // InputManager e, no boot de uma TV box, isso enfileirava vários toasts de uma vez —
+        // cada um com um token de janela com prazo de validade (ver SafeToast).
         inputDeviceManager
             .getEnabledInputsObservable()
-            .filter { it.isEmpty() }
+            .map { it.isEmpty() }
+            .distinctUntilChanged()
+            .filter { it }
             .safeCollect {
                 displayToast(R.string.tv_game_message_missing_gamepad)
             }

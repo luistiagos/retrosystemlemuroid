@@ -12,6 +12,7 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
 import com.google.api.services.drive.DriveScopes
+import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.ext.R
 import timber.log.Timber
 
@@ -25,7 +26,7 @@ class ActivateGoogleDriveActivity : Activity() {
             authenticateGoogle()
         } else {
             val message = getString(R.string.gdrive_missing_play_services)
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            displayToast(message, Toast.LENGTH_LONG)
             finish()
         }
     }
@@ -41,7 +42,7 @@ class ActivateGoogleDriveActivity : Activity() {
             try {
                 val account = completedTask.getResult(ApiException::class.java)
                 val message = getString(R.string.gdrive_sign_in_success, account?.email)
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                displayToast(message)
                 finish()
             } catch (e: ApiException) {
                 val message =
@@ -51,7 +52,7 @@ class ActivateGoogleDriveActivity : Activity() {
                         e.statusCode.toString(),
                     )
                 Timber.e(e, message)
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                displayToast(message)
                 finish()
             }
         }
@@ -73,7 +74,7 @@ class ActivateGoogleDriveActivity : Activity() {
     private fun disableGoogleDriveIntegration() {
         val signInClient = googleSignInClient()
         signInClient.signOut().addOnSuccessListener {
-            Toast.makeText(this, R.string.gdrive_sign_out_success, Toast.LENGTH_SHORT).show()
+            displayToast(R.string.gdrive_sign_out_success)
             finish()
         }
     }

@@ -10,6 +10,8 @@ import com.swordfish.lemuroid.app.tv.shared.BaseTVActivity
 import javax.inject.Inject
 
 class TVGamePadBindingActivity : BaseTVActivity() {
+    override val enableGamepadNavigationTranslation = false
+
     @Inject
     lateinit var inputDeviceManager: InputDeviceManager
 

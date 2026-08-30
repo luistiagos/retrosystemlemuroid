@@ -14,6 +14,7 @@
     <string name="pref_key_hd_mode_quality" translatable="false">hd_mode_quality</string>
     <string name="pref_key_autosave" translatable="false">autosave</string>
     <string name="pref_key_reset_settings" translatable="false">reset_settings</string>
+    <string name="pref_key_check_update" translatable="false">check_update</string>
     <string name="pref_key_low_latency_audio" translatable="false">low_latency_audio</string>
     <string name="pref_key_enable_rumble" translatable="false">enable_rumble</string>
     <string name="pref_key_enable_device_rumble" translatable="false">enable_device_rumble</string>
@@ -29,6 +30,7 @@
     <string name="pref_key_save_sync_cores" translatable="false">save_sync_cores</string>
 
     <string name="pref_key_shader_filter" translatable="false">shader_filter_0</string>
+    <string name="pref_key_screen_aspect_ratio" translatable="false">screen_aspect_ratio</string>
     <string name="pref_key_hd_mode" translatable="false">hd_mode</string>
 
     <string-array translatable="false" name="pref_key_haptic_feedback_mode_values">
@@ -57,5 +59,25 @@
         <item>@string/shader_filter_names_smooth</item>
         <item>@string/shader_filter_names_crt</item>
         <item>@string/shader_filter_names_lcd</item>
+    </string-array>
+
+    <string-array translatable="false" name="pref_key_screen_aspect_ratio_values">
+        <item>auto</item>
+        <item>4:3</item>
+        <item>16:9</item>
+        <item>19:9</item>
+        <item>20:9</item>
+        <item>21:9</item>
+        <item>fill</item>
+    </string-array>
+
+    <string-array translatable="false" name="pref_key_screen_aspect_ratio_display_names">
+        <item>@string/screen_aspect_ratio_names_auto</item>
+        <item>@string/screen_aspect_ratio_names_4_3</item>
+        <item>@string/screen_aspect_ratio_names_16_9</item>
+        <item>@string/screen_aspect_ratio_names_19_9</item>
+        <item>@string/screen_aspect_ratio_names_20_9</item>
+        <item>@string/screen_aspect_ratio_names_21_9</item>
+        <item>@string/screen_aspect_ratio_names_fill</item>
     </string-array>
 </resources>

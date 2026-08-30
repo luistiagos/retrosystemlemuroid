@@ -28,6 +28,7 @@ import com.swordfish.lemuroid.app.tv.games.TVGamesFragment
 import com.swordfish.lemuroid.app.tv.home.TVHomeFragment
 import com.swordfish.lemuroid.app.tv.search.TVSearchFragment
 import com.swordfish.lemuroid.app.tv.shared.BaseTVActivity
+import com.swordfish.lemuroid.app.tv.shared.TVAppUpdateDialog
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
@@ -64,6 +65,9 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
         }
 
         ensureLegacyStoragePermissionsIfNeeded()
+
+        // Aviso de versao nova ao entrar no app (silencioso, no maximo 1x/12h).
+        TVAppUpdateDialog(this).checkOnStartup()
     }
 
     override fun onActivityResult(

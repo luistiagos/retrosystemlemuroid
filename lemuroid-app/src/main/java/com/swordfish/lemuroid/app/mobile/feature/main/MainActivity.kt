@@ -105,6 +105,7 @@ import dagger.Lazy
 import dagger.Provides
 import de.charlex.compose.material3.HtmlText
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
@@ -706,6 +707,35 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         dismissButton = {
                             androidx.compose.material3.TextButton(
                                 onClick = { updateViewModel.dismissUpdate() },
+                            ) {
+                                Text(stringResource(R.string.update_dialog_no))
+                            }
+                        },
+                    )
+                }
+                is AppUpdateViewModel.State.PermissionRequired -> {
+                    AlertDialog(
+                        onDismissRequest = { updateViewModel.resetState() },
+                        title = {
+                            Text(stringResource(R.string.update_permission_title))
+                        },
+                        text = {
+                            Text(stringResource(R.string.update_permission_message))
+                        },
+                        confirmButton = {
+                            androidx.compose.material3.TextButton(
+                                onClick = {
+                                    updateViewModel.resetState()
+                                    runCatching { startActivity(updateViewModel.buildAllowInstallIntent()) }
+                                        .onFailure { Timber.w(it, "Could not open install-permission settings") }
+                                },
+                            ) {
+                                Text(stringResource(R.string.update_permission_action))
+                            }
+                        },
+                        dismissButton = {
+                            androidx.compose.material3.TextButton(
+                                onClick = { updateViewModel.resetState() },
                             ) {
                                 Text(stringResource(R.string.update_dialog_no))
                             }

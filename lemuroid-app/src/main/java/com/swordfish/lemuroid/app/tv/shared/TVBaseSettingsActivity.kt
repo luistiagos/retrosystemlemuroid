@@ -1,6 +1,7 @@
 package com.swordfish.lemuroid.app.tv.shared
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import androidx.leanback.preference.LeanbackSettingsFragmentCompat
 import androidx.preference.Preference
@@ -10,6 +11,14 @@ import androidx.preference.PreferenceScreen
 import com.swordfish.lemuroid.app.shared.ImmersiveActivity
 
 abstract class TVBaseSettingsActivity : ImmersiveActivity() {
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        val translatedEvent = BaseTVActivity.translateGamepadNavEvent(event)
+        if (translatedEvent != null) {
+            return super.dispatchKeyEvent(translatedEvent)
+        }
+        return super.dispatchKeyEvent(event)
+    }
+
     abstract class BaseSettingsFragmentWrapper : LeanbackSettingsFragmentCompat() {
         override fun onPreferenceStartInitialScreen() {
             startPreferenceFragment(createFragment())
