@@ -12,7 +12,6 @@ import androidx.leanback.widget.ClassPresenterSelector
 import androidx.leanback.widget.DiffCallback
 import androidx.leanback.widget.HeaderItem
 import androidx.leanback.widget.ListRow
-import androidx.leanback.widget.ListRowPresenter
 import androidx.leanback.widget.ObjectAdapter
 import androidx.leanback.widget.OnItemViewClickedListener
 import androidx.lifecycle.Lifecycle
@@ -28,6 +27,7 @@ import com.swordfish.lemuroid.app.tv.folderpicker.TVFolderPickerLauncher
 import com.swordfish.lemuroid.app.tv.settings.TVSettingsActivity
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
+import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -170,7 +170,7 @@ class TVHomeFragment : BrowseSupportFragment() {
         includeRecentGames: Boolean,
         includeSystems: Boolean,
     ) {
-        val result = ArrayObjectAdapter(ListRowPresenter())
+        val result = ArrayObjectAdapter(TVListRowPresenter())
         val cardSize = resources.getDimensionPixelSize(com.swordfish.lemuroid.lib.R.dimen.card_size)
         val systemsCardPadding =
             resources.getDimensionPixelSize(

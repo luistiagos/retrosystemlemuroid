@@ -8,13 +8,13 @@ import androidx.leanback.paging.PagingDataAdapter
 import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.HeaderItem
 import androidx.leanback.widget.ListRow
-import androidx.leanback.widget.ListRowPresenter
 import androidx.leanback.widget.ObjectAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
+import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -77,7 +77,7 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
     }
 
     private fun createAdapter(): ArrayObjectAdapter {
-        val searchAdapter = ArrayObjectAdapter(ListRowPresenter())
+        val searchAdapter = ArrayObjectAdapter(TVListRowPresenter())
 
         val gamePresenter =
             GamePresenter(

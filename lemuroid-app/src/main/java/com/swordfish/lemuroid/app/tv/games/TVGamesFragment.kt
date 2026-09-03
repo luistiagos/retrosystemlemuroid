@@ -6,13 +6,13 @@ import android.view.View
 import androidx.leanback.app.VerticalGridSupportFragment
 import androidx.leanback.paging.PagingDataAdapter
 import androidx.leanback.widget.OnItemViewClickedListener
-import androidx.leanback.widget.VerticalGridPresenter
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
+import com.swordfish.lemuroid.app.tv.shared.TVVerticalGridPresenter
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
@@ -30,7 +30,7 @@ class TVGamesFragment : VerticalGridSupportFragment() {
     private val args: TVGamesFragmentArgs by navArgs()
 
     init {
-        val gridPresenter = VerticalGridPresenter()
+        val gridPresenter = TVVerticalGridPresenter()
         gridPresenter.numberOfColumns = 4
         setGridPresenter(gridPresenter)
     }

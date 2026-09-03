@@ -1820,6 +1820,11 @@ data class GameSystem(
                                     CoreVariable("citra_mouse_touchscreen", "disabled"),
                                     CoreVariable("citra_render_touchscreen", "disabled"),
                                     CoreVariable("citra_use_hw_shader_cache", "disabled"),
+                                    // Same as the core's own default. Spelled out because it is the
+                                    // knob CoreCrashFallback flips after citra aborts on a shader
+                                    // link failure, and a default nobody can see is a default
+                                    // nobody maintains.
+                                    CoreVariable("citra_use_hw_shaders", "enabled"),
                                 ),
                             exposedSettings =
                                 listOf(
@@ -1845,9 +1850,15 @@ data class GameSystem(
                                         "citra_use_acc_mul",
                                         R.string.setting_citra_use_acc_mul,
                                     ),
+                                    // The way out of the SIGTRAP on drivers whose GLSL compiler
+                                    // rejects citra's generated PICA shaders: off means the
+                                    // accelerated draw path — and that shader link — never runs.
+                                    // `citra_use_acc_geo_shaders` used to sit here and was
+                                    // removed: citra_libretro declares it and never reads it, so
+                                    // the switch did nothing.
                                     ExposedSetting(
-                                        "citra_use_acc_geo_shaders",
-                                        R.string.setting_citra_use_acc_geo_shaders,
+                                        "citra_use_hw_shaders",
+                                        R.string.setting_citra_use_hw_shaders,
                                     ),
                                 ),
                             statesSupported = false,
@@ -2227,6 +2238,11 @@ data class GameSystem(
                                 listOf(
                                     CoreVariable("reicast_internal_resolution", "640x480"),
                                     CoreVariable("reicast_anisotropic_filtering", "4"),
+                                    // BIOS real (dc_boot.bin/dc_flash.bin ja sao requiredBIOSFiles
+                                    // deste core). Ligar o HLE foi testado em 2026-09-03 contra o
+                                    // GTA2 e nao mudou nada — segue travando a 9,68 fps — entao
+                                    // nao ha ganho que pague o risco de trocar a BIOS real por uma
+                                    // HLE incompleta na biblioteca inteira.
                                     CoreVariable("reicast_hle_bios", "disabled"),
                                     // VGA (default do core) deixa tela preta após a licença SEGA
                                     // em jogos sem suporte a cabo VGA (GTA2, Unreal Tournament,

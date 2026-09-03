@@ -78,6 +78,7 @@ import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
+import com.swordfish.lemuroid.app.shared.game.CoreCrashFallback
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
@@ -635,6 +636,42 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             pendingDownloadGame.value = null
                         }) {
                             Text(stringResource(R.string.save_action_cancel))
+                        }
+                    },
+                )
+            }
+
+            // O jogo anterior morreu dentro do core: sem excecao Java, sem tela de crash, o app
+            // simplesmente sumia no meio da partida. O aviso vem aqui, na home, e nunca durante o
+            // boot de um jogo — enfileirar UI com a main thread carregando o core e o que derruba
+            // as TV box de Android 7.1 (pitfall 7 do CLAUDE.md).
+            val coreCrashNotice = CoreCrashFallback.pendingNotice().collectAsState()
+            coreCrashNotice.value?.let { crashNotice ->
+                AlertDialog(
+                    onDismissRequest = { CoreCrashFallback.consumeNotice(applicationContext) },
+                    title = { Text(stringResource(R.string.core_crash_notice_title)) },
+                    text = {
+                        Text(
+                            if (crashNotice.optionDisabled) {
+                                stringResource(
+                                    R.string.core_crash_notice_message_option_disabled,
+                                    crashNotice.gameTitle,
+                                    crashNotice.coreName,
+                                )
+                            } else {
+                                stringResource(
+                                    R.string.core_crash_notice_message,
+                                    crashNotice.gameTitle,
+                                    crashNotice.coreName,
+                                )
+                            },
+                        )
+                    },
+                    confirmButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            CoreCrashFallback.consumeNotice(applicationContext)
+                        }) {
+                            Text(stringResource(android.R.string.ok))
                         }
                     },
                 )

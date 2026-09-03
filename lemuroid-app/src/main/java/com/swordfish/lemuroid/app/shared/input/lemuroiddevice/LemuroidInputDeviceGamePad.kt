@@ -11,8 +11,8 @@ import com.swordfish.lemuroid.app.shared.input.bindingsOf
 import com.swordfish.lemuroid.app.shared.input.inputKeysOf
 import com.swordfish.lemuroid.app.shared.input.inputclass.getInputClass
 import com.swordfish.lemuroid.app.shared.input.retroKeysOf
-import com.swordfish.lemuroid.app.shared.input.supportsAllKeys
 import com.swordfish.lemuroid.app.shared.settings.GameShortcutType
+import java.util.concurrent.ConcurrentHashMap
 
 class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInputDevice {
     override fun getDefaultBindings(): Map<InputKey, RetroKey> {
@@ -73,8 +73,8 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
         // joystick (analógico ou HAT do D-pad), ou tem nome explícito de gamepad,
         // é um controle de verdade — habilita.
         // Controles remotos de TV não expõem eixos de joystick nem nomes de gamepad.
-        return device.supportsAllKeys(MINIMAL_KEYS_DEFAULT_ENABLED) ||
-            device.supportsAllKeys(GENERIC_NUMBERED_FACE_KEYS) ||
+        return supportsAllCached(MINIMAL_KEYS_DEFAULT_ENABLED) ||
+            supportsAllCached(GENERIC_NUMBERED_FACE_KEYS) ||
             isKnownGamepadName(device.name) ||
             hasJoystickAxes()
     }
@@ -85,40 +85,42 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
         val isGamepadSource =
             (device.sources and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||
                 (device.sources and InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK
-        return sequenceOf(
-            isGamepadSource,
-            hasGamepadEvidence(),
-            device.isVirtual.not(),
-        ).all { it }
+        return isGamepadSource && device.isVirtual.not() && hasGamepadEvidence()
     }
 
     // hasKeys() depende dos arquivos .kl da ROM; em TV boxes baratas ele retorna
     // false para botões que o controle realmente envia. Aceitamos qualquer
     // evidência de gamepad em vez de exigir hasKeys(A,B,X,Y) completo.
     private fun hasGamepadEvidence(): Boolean {
-        if (device.supportsAllKeys(MINIMAL_SUPPORTED_KEYS)) return true
-
-        val anyButton =
-            device.hasKeys(
-                KeyEvent.KEYCODE_BUTTON_A,
-                KeyEvent.KEYCODE_BUTTON_B,
-                KeyEvent.KEYCODE_BUTTON_X,
-                KeyEvent.KEYCODE_BUTTON_Y,
-                KeyEvent.KEYCODE_BUTTON_START,
-                KeyEvent.KEYCODE_BUTTON_SELECT,
-                KeyEvent.KEYCODE_BUTTON_L1,
-                KeyEvent.KEYCODE_BUTTON_R1,
-                // Sticks arcade DirectInput so expoem botoes numerados.
-                KeyEvent.KEYCODE_BUTTON_1,
-                KeyEvent.KEYCODE_BUTTON_2,
-                KeyEvent.KEYCODE_BUTTON_3,
-                KeyEvent.KEYCODE_BUTTON_4,
-            ).any { it }
-        if (anyButton) return true
+        val supportedKeys = getCachedSupportedKeys()
+        if (MINIMAL_SUPPORTED_KEYS.all { it.keyCode in supportedKeys }) return true
+        if (supportedKeys.isNotEmpty()) return true
 
         if (isKnownGamepadName(device.name)) return true
 
         return hasJoystickAxes()
+    }
+
+    private fun supportsAllCached(keys: List<InputKey>): Boolean {
+        val supportedKeys = getCachedSupportedKeys()
+        return keys.all { it.keyCode in supportedKeys }
+    }
+
+    private fun getCachedSupportedKeys(): Set<Int> {
+        keySupportCache[device.id]
+            ?.takeIf { it.descriptor == device.descriptor }
+            ?.let { return it.supportedKeys }
+
+        // A single hasKeys() covers every heuristic used by this wrapper. Do not
+        // hold a lock during Binder IPC; duplicate concurrent first lookups are
+        // harmless and subsequent enumerations use the cached value.
+        val hasKeys = device.hasKeys(*GAMEPAD_EVIDENCE_KEY_CODES)
+        val supportedKeys =
+            GAMEPAD_EVIDENCE_KEY_CODES
+                .filterIndexed { index, _ -> hasKeys.getOrElse(index) { false } }
+                .toSet()
+        keySupportCache[device.id] = CachedKeySupport(device.descriptor, supportedKeys)
+        return supportedKeys
     }
 
     // Eixos consultados para detectar controle real. Checa SOURCE_JOYSTICK,
@@ -156,6 +158,34 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
     }
 
     companion object {
+        private data class CachedKeySupport(
+            val descriptor: String,
+            val supportedKeys: Set<Int>,
+        )
+
+        private val keySupportCache = ConcurrentHashMap<Int, CachedKeySupport>()
+
+        private val GAMEPAD_EVIDENCE_KEY_CODES =
+            intArrayOf(
+                KeyEvent.KEYCODE_BUTTON_A,
+                KeyEvent.KEYCODE_BUTTON_B,
+                KeyEvent.KEYCODE_BUTTON_X,
+                KeyEvent.KEYCODE_BUTTON_Y,
+                KeyEvent.KEYCODE_BUTTON_START,
+                KeyEvent.KEYCODE_BUTTON_SELECT,
+                KeyEvent.KEYCODE_BUTTON_L1,
+                KeyEvent.KEYCODE_BUTTON_R1,
+                // Sticks arcade DirectInput so expoem botoes numerados.
+                KeyEvent.KEYCODE_BUTTON_1,
+                KeyEvent.KEYCODE_BUTTON_2,
+                KeyEvent.KEYCODE_BUTTON_3,
+                KeyEvent.KEYCODE_BUTTON_4,
+            )
+
+        internal fun invalidateKeySupportCache(deviceId: Int) {
+            keySupportCache.remove(deviceId)
+        }
+
         private val MINIMAL_SUPPORTED_KEYS =
             inputKeysOf(
                 KeyEvent.KEYCODE_BUTTON_A,

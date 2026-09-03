@@ -9,6 +9,7 @@ import com.swordfish.lemuroid.app.shared.gamecrash.GameCrashActivity
 import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.app.shared.storage.cache.CacheCleanerWork
+import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.library.GameSystem
@@ -60,7 +61,19 @@ class GameLaunchTaskHandler(
                 // Default true = comportamento antigo, para o caso de o extra não vir.
                 val isEmulatorFailure =
                     data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_IS_EMULATOR_FAILURE, true) ?: true
-                if (!isEmulatorFailure) {
+                val isCoreStall =
+                    data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_IS_CORE_STALL, false) ?: false
+                if (isCoreStall) {
+                    // Nucleo parou de responder: trocar de core so repetiria a espera de 30 s, e
+                    // nem o disclaimer de core (limpar dados / resetar) nem o de app ("o problema
+                    // nao e do nucleo de emulacao") descrevem o que aconteceu.
+                    Timber.w("Core stalled the GL thread: $errorDetail")
+                    handleUnsuccessfulGameFinish(
+                        activity,
+                        activity.getString(R.string.lemuroid_core_stalled_disclamer),
+                        errorDetail,
+                    )
+                } else if (!isEmulatorFailure) {
                     // Bug de app, não do núcleo: trocar de core só repete o mesmo crash com outro
                     // núcleo (e faz o usuário esperar 2-3 vezes), e o disclaimer de core mandaria
                     // limpar cache / resetar de fábrica por um problema que não é dele.
@@ -168,6 +181,14 @@ class GameLaunchTaskHandler(
         enableRatingFlow: Boolean,
         data: Intent?,
     ) {
+        // O aviso vem do processo `:game`, que sai com `finishAndExitProcess()` logo depois de
+        // mandar o resultado — um toast de la nunca chegaria a aparecer. Ver
+        // `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
+        if (data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_SAVES_FAILED, false) == true) {
+            Timber.w("Game exited without persisting its saves")
+            activity.displayToast(R.string.game_toast_exit_save_failed)
+        }
+
         val duration =
             data?.extras?.getLong(BaseGameActivity.PLAY_GAME_RESULT_SESSION_DURATION)
                 ?: 0L

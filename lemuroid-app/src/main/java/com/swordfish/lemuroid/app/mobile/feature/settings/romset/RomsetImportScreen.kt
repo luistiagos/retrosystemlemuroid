@@ -24,9 +24,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.utils.android.launchSafely
 import com.swordfish.lemuroid.lib.romset.RomsetProgress
 
 @Composable
@@ -34,6 +36,7 @@ fun RomsetImportScreen(
     modifier: Modifier = Modifier,
     viewModel: RomsetViewModel,
 ) {
+    val context = LocalContext.current
     val state = viewModel.uiState.collectAsState().value
 
     val filePicker = rememberLauncherForActivityResult(
@@ -59,7 +62,9 @@ fun RomsetImportScreen(
                     isSearching = state.isSearchingMedia,
                     zipFiles = state.availableZipFiles.map { it.name },
                     onImportFile = { index -> viewModel.startImportFromFile(state.availableZipFiles[index]) },
-                    onPickFile = { filePicker.launch("application/zip") },
+                    onPickFile = {
+                        filePicker.launchSafely(context, "application/zip", R.string.settings_no_file_picker)
+                    },
                     onRefresh = { viewModel.checkForImportableMedia() },
                 )
             }

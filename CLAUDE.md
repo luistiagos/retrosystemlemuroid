@@ -459,6 +459,7 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 - Migrações sempre em `Migrations.kt`, registradas em `LemuroidApplicationModule.kt`.
 - `PermanentHttpException` sinaliza erros HTTP não-retriáveis (4xx exceto 429); capturado em `downloadToFile` antes do bloco geral de `IOException`.
 - **Toast só por `Context.displayToast`** ([SafeToast.kt](retrograde-util/src/main/java/com/swordfish/lemuroid/common/SafeToast.kt)). `Toast.makeText(...).show()` direto é proibido — ver pitfall 7.
+- **Intent implícita só por `startActivitySafely` / `launchSafely`** ([SafeIntents.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/SafeIntents.kt)). `startActivity` cru vale só para Intent explícita — ver pitfall 9.
 
 ---
 
@@ -511,13 +512,15 @@ if (!exists) { ... }
 
 **Regra:** O scan deve ser **aditivo + metadata-refresh** para o catálogo, nunca destrutivo. `deleteByLastIndexedAtLessThan` recebe `romsPrefix` (URI da pasta de ROMs gerenciada) e `sentinelPrefix` (`file:///lemuroid_prebuilt`) e **nunca** apaga games sob esses prefixos — todo o catálogo + downloads vivem sob `romsPrefix`. Só ROMs importadas pelo usuário fora da pasta gerenciada (pasta externa / SAF) que sumiram do disco são removidas. Comparação por `SUBSTR` (não `LIKE`, para não quebrar com `_`/`%` no path); prefixo vazio protege tudo. Prefixo passado por `LemuroidLibrary.romsUriPrefix` (via `DirectoriesManager`).
 
-### 6. Core Flycast (Dreamcast) exige patch de `libandroid.so` no DT_NEEDED
+### 6. O `.so` de Flycast (Dreamcast) empacotado tem que ser o do buildbot **e** patchado
 
-**Sintoma:** Todo jogo de Dreamcast crasha com SIGSEGV ~1–2 s após o boot.
+Este espaço já produziu dois bugs de produção — ambos de empacotamento, ambos invisíveis até um aparelho crashar em código nativo.
 
-**Causa:** O `.so` do buildbot libretro não linka `libandroid.so`; o símbolo weak `ASharedMemory_create` fica nulo → fallback `open("/dev/ashmem")` → EACCES com targetSdk ≥ 29 (o app usa 35) → fastmem desliga (`[VMEM] ... errno 13` no logcat) → o caminho fallback do dynarec trunca o pointer tag (`0xb4…`) do Android 11+ → SIGSEGV.
+**6a — sem `libandroid.so` no DT_NEEDED (2026-07-07).** Todo jogo de Dreamcast crasha com SIGSEGV ~1–2 s após o boot. O `.so` do buildbot libretro não linka `libandroid.so`; o símbolo weak `ASharedMemory_create` fica nulo → fallback `open("/dev/ashmem")` → EACCES com targetSdk ≥ 29 (o app usa 35) → fastmem desliga (`[VMEM] ... errno 13` no logcat) → o caminho fallback do dynarec trunca o pointer tag (`0xb4…`) do Android 11+ → SIGSEGV. Corrigido por `python patch_flycast_libandroid.py` (raiz do repo, requer `pip install lief`). Detalhes em `documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.
 
-**Regra:** Ao atualizar o core Flycast do buildbot, **sempre rodar `python patch_flycast_libandroid.py`** (raiz do repo, requer `pip install lief`) antes de buildar. Detalhes em `documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.
+**6b — core compilado à mão no lugar do buildbot (2026-09-02).** O `.so` de **arm64-v8a** (só essa ABI) tinha virado o build local de `E:/projects/lemuroid/flycast_src` — o fork antigo `libretro/flycast`, sem o patch. Resultado: SIGTRAP `TRAP_BRKPT` na `GLThread` (`os_DebugBreak` do handler de sinal do dynarec) em **todo** aparelho arm64, por seis semanas. Detalhes em `documentacao/bugs/done/2026-09-02-flycast-arm64-core-hand-build-sigtrap.md`.
+
+**Regra:** rodar o script continua valendo, mas **a instrução em documento não é o guard** — ela já falhou uma vez. O guard é a task Gradle `verifyFlycastCore` ([FlycastCoreVerifier.kt](buildSrc/src/main/kotlin/FlycastCoreVerifier.kt)), pendurada em `merge*NativeLibs` / `package*` / `bundle*`: o build **falha** se algum `.so` de Flycast (2 módulos × 4 ABIs) não listar `libandroid.so` no DT_NEEDED, ou se embutir um caminho de fonte absoluto (marca de core compilado à mão — os binários do buildbot não embutem nenhum). Se a task acusar, **não desabilite**: restaure o binário do buildbot e rode o patch.
 
 ### 7. `Toast` mata o processo no Android 7.1 — e o público-alvo é exatamente esse aparelho
 
@@ -541,7 +544,39 @@ Detalhes em `documentacao/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md
 
 **Regra:** Crash de core é **SIGSEGV**: não desenrola pela JVM e só é visto na sessão seguinte por `ApplicationExitInfo`. Portanto exceção Java que chega ao `UncaughtExceptionHandler` é bug de app até prova em contrário — `BaseGameActivity.isEmulatorFailure` só devolve `true` com frame de `com.swordfish.libretrodroid` ou `OutOfMemoryError`. Quando é `false`: sem fallback de core e mensagem `lemuroid_app_error_disclamer`.
 
+**Terceira categoria (2026-09-03): núcleo travado.** `GLRetroView.GLThreadTimeoutException` é lançada de dentro do `runOnGLThread` — casaria o teste por pacote e viraria "crash de core", com conselho de formatação de fábrica e fallback que só paga outro timeout de 30 s. Mas o disclaimer de app também mente ali ("o problema não é… nem do núcleo de emulação"). Por isso `isCoreStall` é testado **antes** dos outros dois, `isEmulatorFailure` devolve `false` para ela **antes** do teste por pacote, e a tela usa `lemuroid_core_stalled_disclamer`, sem fallback. Ao adicionar qualquer exceção nossa lançada de dentro do pacote `libretrodroid`, decidir explicitamente em qual das três categorias ela cai — o default (teste por pacote) a joga na pior delas.
+
 **Ao ler um report:** o `text1` da tela é disclaimer fixo, **o sinal real é o `text2`** (mensagem da exceção); o `text3` traz aparelho + versão do Android + versão do app — uma foto da tela tem que bastar para diagnosticar.
+
+**Para validar mudança nesta classificação** a travada real não é necessária (nem reproduz sob demanda): build temporário com `postDelayed { throw … }` no `onCreate` do `BaseGameActivity`, uma rodada por categoria, conferindo o `W GameLaunchTaskHandler:` no logcat e a tela. Depois `diff` do `.kt` contra a cópia limpa antes de rebuildar — instrumentação esquecida num build de distribuição derruba todo jogo em 20 s.
+
+### 9. Intent implícita de sistema não pode ser lançada crua — em TV não há handler
+
+**Sintoma:** `ActivityNotFoundException` em `Instrumentation.checkStartActivityResult` ao tocar num item de Ajustes. Visto em Fire TV Stick (seletor de `application/zip`) e TCL Smart TV (`ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION`).
+
+**Causa:** builds de Android TV e Fire OS frequentemente não embarcam `DocumentsUI`/Files, e a tela de "acesso a todos os arquivos" não existe. `startActivity` com Intent implícita — e `ActivityResultLauncher.launch`, que chama `startActivityForResult` de forma **síncrona** — lança e derruba o app.
+
+**Regras:**
+1. Toda Intent implícita passa por `Context.startActivitySafely` ou `ActivityResultLauncher.launchSafely` ([SafeIntents.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/SafeIntents.kt)). Intent explícita (`Intent(context, X::class.java)`) não precisa.
+2. **Nunca guardar por `resolveActivity`.** O app não declara `<queries>` no manifesto, então na API 30+ o filtro de visibilidade de pacotes devolve `null` mesmo havendo handler — o guard esconderia botões que funcionam. Iniciar por Intent implícita continua permitido sem `<queries>`; só a consulta é filtrada. Pelo mesmo motivo, não esconder itens de UI "quando não houver handler".
+3. Quando a Intent existe para **conceder algo** (permissão), falhar em abri-la exige desfazer o estado otimista da UI — o switch de "acesso a todos os arquivos" volta para desligado, senão mente.
+4. Numa cadeia de fallback, só a última tentativa recebe `fallbackMessage`; as anteriores passam `null`.
+
+Detalhes em `documentacao/bugs/done/2026-09-02-intents-sistema-sem-resolve-crasham-tv.md`.
+
+### 10. `tmpfile()` não funciona em processo de app — e o core não checa o retorno
+
+**Sintoma:** salvar (ou carregar) estado de Saturn mata o processo `:game` com `signal 6 (SIGABRT)` e `Abort message: FORTIFY: fwrite: null FILE*`, três quadros abaixo de `LibretroDroid::serializeState()`.
+
+**Causa:** `tmpfile()` do bionic cria o arquivo em `$TMPDIR` e, sem a variável, cai em `/data/local/tmp` — que é `shell:shell drwxrwx--x`, então o uid do app leva `EACCES` e `tmpfile()` devolve `NULL`. O Android **não exporta `TMPDIR`** para processos de app. O yabasanshiro passa esse `NULL` direto para `fwrite`, e o `_FORTIFY_SOURCE` transforma em `abort()`. Determinístico, em todo aparelho — a telemetria mostrava só 2 ocorrências porque pouca gente joga Saturn e salva.
+
+**Regras:**
+1. `TMPDIR` é exportado por [NativeTempDir.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/startup/NativeTempDir.kt), chamado no topo de `LemuroidApplication.onCreate`. Não mover para depois das threads (`setenv` corre com `getenv` nativo) nem condicionar a `isMainProcess()` (que devolve `true` quando não resolve o nome, e aí o `:game` fica de fora).
+2. **Criar o diretório antes de exportar.** O bionic atual não tem segundo fallback: `$TMPDIR` inexistente = `ENOENT`, pior que a variável ausente.
+3. Ao adicionar um core novo, conferir `llvm-nm -D --undefined-only` por `tmpfile`/`mkstemp`/`tmpnam`. Já importam: `yabasanshiro`, `libppsspp`, `atari800`, `hatari`, `libfake08`. `tmpnam` usa `P_tmpdir` = `/tmp` e ignora `TMPDIR` — segue quebrado, sem correção possível do lado do app.
+4. Com o `.so` no repo, `llvm-objdump -d --start-address=…` (NDK) responde o que "não temos as fontes do core" sugere ser impossível: os quadros do tombstone levam à instrução exata.
+
+Detalhes em `documentacao/bugs/done/2026-09-02-saturn-yabasanshiro-serializestate-fwrite-null.md`.
 
 ---
 

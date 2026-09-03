@@ -106,3 +106,44 @@ no manifest (recuperáveis do git) e bumpar o schema — o load INSERT OR IGNORE
   ~9,8fps constante = hang de boot (idle spin), não performance.
 - fps **idêntico** entre jogos distintos ⇒ caminho compartilhado/cap, não demanda do jogo.
 - "WinCE" não é sinônimo de "quebrado" neste core — testar empiricamente foi o certo.
+
+## Nota (2026-09-02) — o core empacotado mudou embaixo deste bug
+
+Entre esta investigação e 09/2026, o `.so` de Flycast de **arm64-v8a** foi trocado por um
+build local sem o patch de `libandroid.so`, o que fez **todo** jogo de Dreamcast crashar
+com SIGTRAP em aparelho arm64 — ver [[2026-09-02-flycast-arm64-core-hand-build-sigtrap]].
+O core do buildbot já foi restaurado.
+
+Consequências para este bug:
+
+- As medições acima continuam válidas: foram feitas em 07-08/07 **com o core do buildbot**
+  (nightly de 07/07), antes da troca.
+- Qualquer relato de usuário sobre Dreamcast na janela do app 1.17.x é suspeito — o
+  sintoma dominante ali era o crash, não o hang a 9,8 fps.
+- O "próximo passo" desta página (testar um build de core diferente reaplicando o patch)
+  foi provavelmente o que originou a troca. Ao tentar de novo: trocar o binário **nas 4
+  ABIs**, sempre a partir do buildbot, e rodar `patch_flycast_libandroid.py`. A task
+  `verifyFlycastCore` agora quebra o build se isso não for feito.
+
+## Tentativa e resultado negativo: `reicast_hle_bios` (2026-09-03)
+
+O default do bloco DREAMCAST tinha sido virado para `reicast_hle_bios=enabled` numa sessão
+anterior, sem registro nem validação. Testado e **revertido**:
+
+| Teste | Config | Resultado |
+|---|---|---|
+| *Grand Theft Auto 2* (USA) | `hle_bios=enabled` | ❌ trava na licença SEGA, **9,68 fps** — a mesma assinatura de sempre |
+| *ChuChu Rocket!* (USA) | `hle_bios=disabled` (revertido) | ✅ 60 fps, jogo jogável ("PRESS START BUTTON!") |
+
+Leitura: ligar o HLE **não mexe no travamento** e cobraria o preço de trocar a BIOS real por
+uma HLE incompleta na biblioteca inteira — ainda mais porque `dc_boot.bin`/`dc_flash.bin` são
+`requiredBIOSFiles` deste core e estavam presentes no aparelho de teste. Default restaurado
+para `disabled`, que é a config registrada como validada em 07/2026, com o motivo escrito no
+próprio [GameSystem.kt](../../../retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/GameSystem.kt)
+para ninguém repetir o experimento às cegas.
+
+**Saída do jogo de Dreamcast validada de passagem:** `Stored autosave file with size: 35908309`
+→ `System.exit called, status: 0` → `Process exited cleanly (0)`.
+
+A causa-raiz continua onde estava: **dentro do core**. Nada do lado do app alcança.
+

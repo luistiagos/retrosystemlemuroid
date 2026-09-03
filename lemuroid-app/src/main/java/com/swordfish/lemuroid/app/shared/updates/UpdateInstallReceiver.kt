@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInstaller
+import com.swordfish.lemuroid.app.utils.android.startActivitySafely
 import timber.log.Timber
 
 class UpdateInstallReceiver : BroadcastReceiver() {
@@ -16,7 +17,9 @@ class UpdateInstallReceiver : BroadcastReceiver() {
             @Suppress("DEPRECATION")
             val confirmIntent = intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)
             confirmIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            confirmIntent?.let { context.startActivity(it) }
+            // Uma exceção aqui mata o processo pelo BroadcastReceiver: em firmware de TV sem UI de
+            // instalador a confirmação simplesmente não abre, e a atualização fica para depois.
+            confirmIntent?.let { context.startActivitySafely(it) }
         }
     }
 }

@@ -32,6 +32,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SHORT_SERVICE"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <!-- Explicit WakeLock: keeps CPU awake during background download even on OEM devices
@@ -70,6 +71,8 @@
             android:name="com.swordfish.lemuroid.app.shared.game.ExternalGameLauncherActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode"
             android:exported="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
             android:theme="@style/LemuroidMaterialTheme.Game">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -86,12 +89,18 @@
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode"
             android:launchMode="singleInstance"
             android:process=":game"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
             android:theme="@style/LemuroidMaterialTheme.Game" />
 
         <service
             android:name=".app.mobile.feature.game.GameService"
-            android:foregroundServiceType="dataSync"
-            android:process=":game" />
+            android:foregroundServiceType="specialUse"
+            android:process=":game">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Maintains an active user-initiated emulation session and its ongoing game notification" />
+        </service>
 
         <service
             android:name=".app.shared.roms.DownloadForegroundService"

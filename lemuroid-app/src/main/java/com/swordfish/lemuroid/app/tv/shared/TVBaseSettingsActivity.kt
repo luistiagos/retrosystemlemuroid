@@ -50,7 +50,7 @@ abstract class TVBaseSettingsActivity : ImmersiveActivity() {
             pref: PreferenceScreen,
         ): Boolean {
             val fragment = createFragment()
-            val args = Bundle(1)
+            val args = Bundle(fragment.arguments)
             args.putString(PreferenceFragmentCompat.ARG_PREFERENCE_ROOT, pref.key)
             fragment.arguments = args
             startPreferenceFragment(fragment)

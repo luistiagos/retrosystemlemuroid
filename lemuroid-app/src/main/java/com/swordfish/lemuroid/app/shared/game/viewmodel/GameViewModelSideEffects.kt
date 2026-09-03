@@ -16,7 +16,7 @@ class GameViewModelSideEffects(private val scope: CoroutineScope) {
 
         data class ShowToast(val message: String) : UiEffect
 
-        data object SuccessfulFinish : UiEffect
+        data class SuccessfulFinish(val savesFailed: Boolean = false) : UiEffect
 
         data class FailureFinish(val message: String, val isRomLoadFailure: Boolean = false) : UiEffect
 
@@ -56,9 +56,9 @@ class GameViewModelSideEffects(private val scope: CoroutineScope) {
         }
     }
 
-    fun requestSuccessfulFinish() {
+    fun requestSuccessfulFinish(savesFailed: Boolean = false) {
         scope.launch {
-            uiEffects.emit(UiEffect.SuccessfulFinish)
+            uiEffects.emit(UiEffect.SuccessfulFinish(savesFailed))
         }
     }
 

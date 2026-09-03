@@ -1,5 +1,6 @@
 package com.swordfish.lemuroid.app.tv.gamemenu
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.leanback.preference.LeanbackPreferenceFragmentCompat
@@ -8,31 +9,39 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.coreoptions.CoreOptionsPreferenceHelper
-import com.swordfish.lemuroid.app.shared.coreoptions.LemuroidCoreOption
 import com.swordfish.lemuroid.app.shared.gamemenu.GameMenuHelper
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
+import com.swordfish.lemuroid.app.tv.gamemenu.TVGameMenuActivity.GameMenuRequest
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
-import com.swordfish.lemuroid.lib.library.SystemCoreConfig
-import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
-class TVGameMenuFragment(
-    private val statesManager: StatesManager,
-    private val statesPreviewManager: StatesPreviewManager,
-    private val inputDeviceManager: InputDeviceManager,
-    private val game: Game,
-    private val systemCoreConfig: SystemCoreConfig,
-    private val coreOptions: Array<LemuroidCoreOption>,
-    private val advancedCoreOptions: Array<LemuroidCoreOption>,
-    private val numDisks: Int,
-    private val currentDisk: Int,
-    private val audioEnabled: Boolean,
-    private val fastForwardEnabled: Boolean,
-    private val fastForwardSupported: Boolean,
-) : LeanbackPreferenceFragmentCompat() {
+class TVGameMenuFragment : LeanbackPreferenceFragmentCompat() {
+    @Inject
+    lateinit var statesManager: StatesManager
+
+    @Inject
+    lateinit var statesPreviewManager: StatesPreviewManager
+
+    @Inject
+    lateinit var inputDeviceManager: InputDeviceManager
+
+    private lateinit var request: GameMenuRequest
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        request = GameMenuRequest.from(requireArguments())
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreatePreferences(
         savedInstanceState: Bundle?,
         rootKey: String?,
@@ -48,12 +57,21 @@ class TVGameMenuFragment(
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        GameMenuHelper.setupAudioOption(preferenceScreen, audioEnabled)
-        GameMenuHelper.setupFastForwardOption(preferenceScreen, fastForwardEnabled, fastForwardSupported)
-        GameMenuHelper.setupSaveOption(preferenceScreen, systemCoreConfig)
+        GameMenuHelper.setupAudioOption(preferenceScreen, request.audioEnabled)
+        GameMenuHelper.setupFastForwardOption(
+            preferenceScreen,
+            request.fastForwardEnabled,
+            request.fastForwardSupported,
+        )
+        GameMenuHelper.setupSaveOption(preferenceScreen, request.systemCoreConfig)
 
-        if (numDisks > 1) {
-            GameMenuHelper.setupChangeDiskOption(activity, preferenceScreen, currentDisk, numDisks)
+        if (request.numDisks > 1) {
+            GameMenuHelper.setupChangeDiskOption(
+                activity,
+                preferenceScreen,
+                request.currentDisk,
+                request.numDisks,
+            )
         }
 
         launchOnState(Lifecycle.State.CREATED) {
@@ -79,17 +97,17 @@ class TVGameMenuFragment(
 
         CoreOptionsPreferenceHelper.addPreferences(
             coreOptionsScreen,
-            game.systemId,
-            coreOptions.toList(),
-            advancedCoreOptions.toList(),
+            request.game.systemId,
+            request.coreOptions.toList(),
+            request.advancedCoreOptions.toList(),
         )
 
         CoreOptionsPreferenceHelper.addControllers(
             coreOptionsScreen,
-            game.systemId,
-            systemCoreConfig.coreID,
+            request.game.systemId,
+            request.systemCoreConfig.coreID,
             connectedGamePads,
-            systemCoreConfig.controllerConfigs,
+            request.systemCoreConfig.controllerConfigs,
         )
     }
 
@@ -97,10 +115,10 @@ class TVGameMenuFragment(
         val saveScreen = findPreference<PreferenceScreen>(GameMenuHelper.SECTION_SAVE_GAME)
         val loadScreen = findPreference<PreferenceScreen>(GameMenuHelper.SECTION_LOAD_GAME)
 
-        saveScreen?.isEnabled = systemCoreConfig.statesSupported
-        loadScreen?.isEnabled = systemCoreConfig.statesSupported
+        saveScreen?.isEnabled = request.systemCoreConfig.statesSupported
+        loadScreen?.isEnabled = request.systemCoreConfig.statesSupported
 
-        val slotsInfo = statesManager.getSavedSlotsInfo(game, systemCoreConfig.coreID)
+        val slotsInfo = statesManager.getSavedSlotsInfo(request.game, request.systemCoreConfig.coreID)
 
         slotsInfo.forEachIndexed { index, saveInfo ->
             val bitmap =
@@ -108,8 +126,8 @@ class TVGameMenuFragment(
                     requireContext(),
                     statesPreviewManager,
                     saveInfo,
-                    game,
-                    systemCoreConfig.coreID,
+                    request.game,
+                    request.systemCoreConfig.coreID,
                     index,
                 )
 
@@ -132,4 +150,11 @@ class TVGameMenuFragment(
 
     @dagger.Module
     class Module
+
+    companion object {
+        fun newInstance(request: GameMenuRequest) =
+            TVGameMenuFragment().apply {
+                arguments = request.toBundle()
+            }
+    }
 }

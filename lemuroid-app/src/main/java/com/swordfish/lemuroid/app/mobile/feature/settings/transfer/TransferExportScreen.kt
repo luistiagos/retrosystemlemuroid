@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.utils.android.launchSafely
 import com.swordfish.lemuroid.lib.transfer.TransferProgress
 
 @Composable
@@ -68,7 +69,9 @@ fun TransferExportScreen(
                     ExportConfiguration(
                         state = state,
                         viewModel = viewModel,
-                        onExport = { folderPicker.launch(null) },
+                        onExport = {
+                            folderPicker.launchSafely(context, null, R.string.settings_no_folder_picker)
+                        },
                     )
                 }
             }

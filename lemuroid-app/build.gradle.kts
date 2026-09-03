@@ -1,3 +1,4 @@
+import com.swordfish.lemuroid.builder.FlycastCoreVerifier
 import com.swordfish.lemuroid.builder.PrebuiltDbGenerator
 import java.util.Properties
 
@@ -444,6 +445,49 @@ afterEvaluate {
         }
         if (catalogManifestOverride != null && name != prepareCatalogManifestAsset.name) {
             dependsOn(prepareCatalogManifestAsset)
+        }
+    }
+}
+
+// The Flycast core has shipped broken twice from packaging alone: once as a buildbot `.so`
+// without `libandroid.so` in DT_NEEDED (2026-07-07), once as a hand-compiled arm64 binary
+// that replaced the buildbot one on that ABI only (2026-09-02). Both only showed up as a
+// native crash on a user's device, so the check runs at build time instead of relying on
+// "remember to run patch_flycast_libandroid.py". See FlycastCoreVerifier.
+val flycastCoreBinaries = listOf("lemuroid_core_flycast", "bundled-cores").flatMap { module ->
+    listOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64").map { abi ->
+        rootProject.file(
+            "lemuroid-cores/$module/src/main/jniLibs/$abi/libflycast_libretro_android.so",
+        )
+    }
+}
+
+val flycastVerifiedStamp = layout.buildDirectory.file("flycast-core-verified.txt")
+
+val verifyFlycastCore = tasks.register("verifyFlycastCore") {
+    description = "Fails the build if a packaged Flycast core would crash Dreamcast on device."
+    inputs.files(flycastCoreBinaries).withPropertyName("flycastCoreBinaries")
+    inputs.files(rootProject.fileTree("buildSrc/src/main/kotlin"))
+    outputs.file(flycastVerifiedStamp)
+
+    doLast {
+        FlycastCoreVerifier.verify(flycastCoreBinaries)
+        flycastVerifiedStamp.get().asFile.apply {
+            parentFile.mkdirs()
+            writeText("ok\n")
+        }
+    }
+}
+
+afterEvaluate {
+    tasks.matching { task ->
+        val n = task.name
+        (n.startsWith("merge", ignoreCase = true) && n.contains("NativeLibs", ignoreCase = true)) ||
+            n.startsWith("package", ignoreCase = true) ||
+            n.startsWith("bundle", ignoreCase = true)
+    }.configureEach {
+        if (name != verifyFlycastCore.name) {
+            dependsOn(verifyFlycastCore)
         }
     }
 }

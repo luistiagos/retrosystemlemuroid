@@ -264,6 +264,10 @@
 
     <string name="game_toast_settings_button_using_gamepad">Gamepad detected. Access settings menu with %1$s.</string>
     <string name="game_toast_load_state_failed">Cannot load this state</string>
+    <string name="game_toast_exit_save_failed">The game could not save before closing. Recent progress may be lost.</string>
+    <string name="core_crash_notice_title">The game closed unexpectedly</string>
+    <string name="core_crash_notice_message">%1$s stopped because the %2$s emulator core crashed. If it keeps happening, try another core for this system in Settings.</string>
+    <string name="core_crash_notice_message_option_disabled">%1$s stopped because the %2$s emulator core crashed. Hardware shaders were turned off for this system so it can run again — you can turn them back on in the in-game settings.</string>
     <string name="game_toast_quick_save_loaded">Quick loaded</string>
     <string name="game_toast_quick_save_saved">Quick saved</string>
 
@@ -352,6 +356,10 @@
     </string>
 
     <string name="lemuroid_app_error_disclamer">The app hit an internal error and had to close the game. This is not a problem with your game, your ROM or the emulation core, so clearing data or resetting won\'t help. Sending us the message below is what gets it fixed.</string>
+
+    <!-- The core stopped answering the render thread. Neither of the two disclaimers above fits:
+         it is not an app bug, and clearing data or a factory reset cannot reach a stuck thread. -->
+    <string name="lemuroid_core_stalled_disclamer">The emulation core stopped responding and the game had to be closed. This is not a problem with your device or your ROM, so clearing data or resetting won\'t help. Open the game again — any progress since your last save may have been lost.</string>
 
     <!-- Technical footprint shown on the crash screen: a photo of it has to be enough to diagnose. -->
     <string name="crash_device_info" translatable="false">%1$s · Android %2$s (SDK %3$d) · %4$s</string>
@@ -461,5 +469,10 @@
     <string name="romset_export_try_again">Try again</string>
     <string name="romset_import_again">Import another</string>
     <string name="romset_import_try_again">Try again</string>
+
+    <!-- Fallbacks for devices with no system app to handle the intent (TV / Fire TV) -->
+    <string name="settings_no_file_picker">This device has no app to pick files. Copy the ZIP file to the root of an SD card or USB drive and tap Refresh.</string>
+    <string name="settings_no_folder_picker">This device has no app to pick a folder, so this operation is not available here.</string>
+    <string name="settings_no_all_files_screen">This device does not have the screen used to grant access to all files.</string>
 
 </resources>

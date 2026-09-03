@@ -148,8 +148,13 @@ class BaseGameScreenViewModel(
 
     private inline fun withLoading(block: () -> Unit) {
         loadingState.value = true
-        block()
-        loadingState.value = false
+        try {
+            block()
+        } finally {
+            // Sem o finally, qualquer excecao dentro do bloco deixava o spinner ligado para sempre
+            // e todo `if (loadingState.value) return` seguinte virava um no-op silencioso.
+            loadingState.value = false
+        }
     }
 
     fun getGameState(): Flow<GameViewModelRetroGameView.GameState> {
@@ -290,14 +295,30 @@ class BaseGameScreenViewModel(
             }
         }
 
+    /**
+     * Sair do jogo nao pode falhar. As gravacoes finais passam por `runOnGLThread`, que estoura
+     * depois de 30 s quando a GLThread esta presa dentro de um callback do renderer — em producao
+     * isso vinha do Dolphin no fim da partida. Antes a excecao subia deste `launch`, chegava ao
+     * `UncaughtExceptionHandler` e o usuario via a tela de crash em vez de voltar para a lista.
+     *
+     * `saveOnExit` nunca lanca: ele avisa se nao conseguiu gravar, e a saida acontece de qualquer
+     * jeito. Ver `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
+     */
     fun requestFinish() {
         if (loadingState.value) return
         loadingState.value = true
         viewModelScope.launch {
             withLoading {
-                saves.saveSRAM(game)
-                saves.saveAutoSave(game)
-                sideEffects.requestSuccessfulFinish()
+                val saved =
+                    try {
+                        saves.saveOnExit(game)
+                    } catch (e: kotlinx.coroutines.CancellationException) {
+                        throw e
+                    } catch (e: Throwable) {
+                        Timber.e(e, "Unexpected error while saving on exit")
+                        false
+                    }
+                sideEffects.requestSuccessfulFinish(savesFailed = !saved)
             }
         }
     }

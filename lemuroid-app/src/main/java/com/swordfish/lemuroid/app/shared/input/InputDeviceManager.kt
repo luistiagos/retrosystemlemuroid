@@ -3,25 +3,27 @@ package com.swordfish.lemuroid.app.shared.input
 import android.content.Context
 import android.content.SharedPreferences
 import android.hardware.input.InputManager
+import android.os.Handler
+import android.os.HandlerThread
 import android.view.InputDevice
 import android.view.KeyEvent
 import androidx.core.content.edit
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
+import com.swordfish.lemuroid.app.shared.input.lemuroiddevice.LemuroidInputDeviceGamePad
 import com.swordfish.lemuroid.app.shared.input.lemuroiddevice.getLemuroidInputDevice
 import com.swordfish.lemuroid.app.shared.settings.GameShortcut
 import com.swordfish.lemuroid.app.shared.settings.GameShortcutType
 import dagger.Lazy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onSubscription
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.MapSerializer
@@ -37,6 +39,13 @@ class InputDeviceManager(
     sharedPreferencesFactory: Lazy<SharedPreferences>,
 ) {
     private val inputManager = context.getSystemService(Context.INPUT_SERVICE) as InputManager
+
+    // InputDevice.hasKeys() crosses Binder into InputManagerService. Keep device
+    // enumeration and listener registration away from the main looper.
+    private val inputDeviceHandler by lazy {
+        val thread = HandlerThread(INPUT_DEVICE_THREAD_NAME).apply { start() }
+        Handler(thread.looper)
+    }
 
     private val sharedPreferences by lazy { sharedPreferencesFactory.get() }
 
@@ -207,26 +216,32 @@ class InputDeviceManager(
         }
 
     fun getGamePadsObservable(): Flow<List<InputDevice>> {
-        val result = MutableStateFlow(getAllGamePads())
+        return callbackFlow {
+            val refresh = Runnable { trySend(getAllGamePads()) }
 
-        val listener =
-            object : InputManager.InputDeviceListener {
-                override fun onInputDeviceAdded(deviceId: Int) {
-                    result.value = getAllGamePads()
-                }
-
-                override fun onInputDeviceChanged(deviceId: Int) {
-                    result.value = getAllGamePads()
-                }
-
-                override fun onInputDeviceRemoved(deviceId: Int) {
-                    result.value = getAllGamePads()
-                }
+            fun onDeviceEvent(deviceId: Int) {
+                LemuroidInputDeviceGamePad.invalidateKeySupportCache(deviceId)
+                inputDeviceHandler.removeCallbacks(refresh)
+                inputDeviceHandler.postDelayed(refresh, INPUT_DEVICE_CHANGE_DEBOUNCE_MS)
             }
 
-        return result
-            .onSubscription { inputManager.registerInputDeviceListener(listener, null) }
-            .onCompletion { inputManager.unregisterInputDeviceListener(listener) }
+            val listener =
+                object : InputManager.InputDeviceListener {
+                    override fun onInputDeviceAdded(deviceId: Int) = onDeviceEvent(deviceId)
+
+                    override fun onInputDeviceChanged(deviceId: Int) = onDeviceEvent(deviceId)
+
+                    override fun onInputDeviceRemoved(deviceId: Int) = onDeviceEvent(deviceId)
+                }
+
+            inputManager.registerInputDeviceListener(listener, inputDeviceHandler)
+            inputDeviceHandler.post(refresh)
+
+            awaitClose {
+                inputDeviceHandler.removeCallbacks(refresh)
+                inputManager.unregisterInputDeviceListener(listener)
+            }
+        }.flowOn(Dispatchers.IO)
     }
 
     fun getDistinctGamePadsObservable(): Flow<List<InputDevice>> {
@@ -305,6 +320,8 @@ class InputDeviceManager(
         private const val GAME_PAD_BINDING_PREFERENCE_BASE_KEY = "pref_key_gamepad_binding_key"
         private const val GAME_PAD_ENABLED_PREFERENCE_BASE_KEY = "pref_key_gamepad_enabled"
         private const val PORT_ORDER_PREFERENCE_KEY = "pref_key_port_order"
+        private const val INPUT_DEVICE_THREAD_NAME = "lemuroid-input-devices"
+        private const val INPUT_DEVICE_CHANGE_DEBOUNCE_MS = 150L
 
         private val bindingsMapSerializer = MapSerializer(InputKey.serializer(), RetroKey.serializer())
         private val bindingsComboSerializer = PairSerializer(InputKey.serializer(), InputKey.serializer())

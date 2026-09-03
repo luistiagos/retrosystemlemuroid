@@ -231,11 +231,72 @@ Nada de `PopupWindow` (só código comentado em `TouchControllerCustomizer`) nem
   `throw IllegalStateException("teste")` no `onCreate` do `BaseGameActivity`) e conferir que a tela
   mostra o texto de erro **de app** (não o do núcleo), que o jogo **não** é relançado com os outros
   cores, e que o rodapé traz aparelho + Android + versão.
-- **Confirmação pendente pela telemetria** (não foi possível puxar daqui — o `.env` com o
-  `JWT_SECRET_KEY` está em `C:\projects\digitalstoregamesproject\digitalstoregamesbackend\.env` e o
-  acesso foi bloqueado nesta sessão). Buscar em `/admin/errors` os reports de
-  `retrogamesystem/game` com `device=… MXQ…` e conferir dois campos: `platform` (esperado
-  `sdk 25`) e o log anexo (esperado terminar em `android.widget.Toast$TN.handleShow`).
+- ~~**Confirmação pendente pela telemetria**~~ → **feita em 2026-09-02**, ver abaixo.
+
+## Validação possível fora da TV box (2026-09-03)
+
+A MXQ é do cliente, então o que dá para validar aqui é **o que a correção não pode ter
+quebrado**: que o `displayToast` continua desenhando um toast de verdade. O `SafeToastContext`
+troca o `WindowManager` que o `Toast$TN.handleShow` usa — se o wrapper estivesse errado, o
+sintoma no aparelho saudável seria o toast **sumir em silêncio**, que é pior de descobrir do
+que um crash.
+
+**Aparelho:** Moto G86 5G, Android 16, app `1.17.12-DEBUG`.
+**Gatilho usado:** *Super Mario World* (SNES), estado do slot 1 sobrescrito com lixo por `adb`,
+depois carregado pelo menu do jogo → caminho `game_toast_load_state_failed` em
+`GameViewModelSaves`.
+
+```
+I SurfaceFlinger: onHandleDestroyed: layerId=24644, name=5910e40 Toast#24644
+W NotificationService: Toast already killed. pkg=app.retrogamesystem.debug token=android.os.BinderProxy@…
+```
+
+- ✅ A janela de toast **é criada** e vive o tempo normal — o wrapper não engole o caminho feliz.
+- ✅ Nenhum `BadTokenException` no logcat.
+- ⚠️ O toast **não aparece no `screencap`** (a camada é excluída da captura), então a prova aqui
+  é o log do SurfaceFlinger, não a imagem. Vale anotar para a próxima vez que alguém tentar
+  conferir toast por screenshot e concluir errado que não apareceu.
+- Também conferido por varredura estática: **zero** `Toast.makeText(...)` fora do `SafeToast.kt`
+  em `lemuroid-app`, `retrograde-app-shared`, `retrograde-util` e `lemuroid-touchinput`.
+
+**Continua faltando** o que só a MXQ (ou o `rockchip YBOX`) responde: que o jogo abre até o fim
+sem cair na `GameCrashActivity`. É por isso que esta página segue em `open/`.
+
+## Confirmação pela telemetria (2026-09-02)
+
+A triagem de produção fechou os dois campos que faltavam. **A hipótese estava certa.**
+
+- **Errors (serviço):** 18 ocorrências — 1229, 1230, 1231, 1232, 1233, 1235, 1237, 1238, 1284,
+  1285, 1286, 1287, 1288, 1289, 1290, 1291, 1292, 1293. Todos `retrogamesystem/game`,
+  `ViewRootImpl.java::android.view.ViewRootImpl.setView`.
+- **Aparelho:** `rockchip YBOX` (clone da mesma família da MXQ), **armeabi-v7a** — não a MXQ
+  nominalmente, mas o mesmo hardware/ROM.
+- **`platform`: `Android 12.1 (sdk 25)`** — o aparelho anuncia 12.1 e é **sdk 25**, exatamente a
+  armadilha descrita na regra 2 acima. Um guard por `SDK_INT` teria deixado esse aparelho de fora.
+- **Log anexo** (error 1290), como previsto:
+
+  ```
+  android.view.WindowManager$BadTokenException: Unable to add window -- token
+  android.os.BinderProxy@ba1fbf9 is not valid; is your activity running?
+  	at android.view.ViewRootImpl.setView(ViewRootImpl.java:679)
+  	at android.widget.Toast$TN.handleShow(Toast.java:459)      <- exatamente o previsto
+  	at android.widget.Toast$TN$2.handleMessage(Toast.java:342)
+  	at android.os.Looper.loop(Looper.java:154)                 <- assinatura de Android 7.1
+  	at android.app.ActivityThread.main(ActivityThread.java:6121)
+  ```
+
+- **Atinge todo sistema**, como o relato dizia: atari2600/stella, gb/gambatte, galaxian/fbneo,
+  jaguar/virtualjaguar — 8 jogos distintos em 15 minutos de uso.
+
+**Sinal de que a correção segurou:** as 18 ocorrências são **todas** do app **1.17.6** e
+concentradas em 2026-08-16 (01:40 → 13:08). Não há nenhum `BadTokenException` em 1.17.8 a
+1.17.12, apesar de essas versões dominarem a telemetria do período. Falta só a validação
+física no aparelho do cliente para fechar o bug.
+
+> Achado colateral no **mesmo** `rockchip YBOX`: `NullPointerException:
+> getRunningAppProcesses(...) must not be null` (error 1347, app 1.17.8) — outro crash
+> exclusivo dessa classe de aparelho, registrado em
+> [[2026-09-02-ismainprocess-npe-getrunningappprocesses]].
 
 ## Lição
 

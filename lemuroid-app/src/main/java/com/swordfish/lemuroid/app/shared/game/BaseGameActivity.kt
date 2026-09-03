@@ -42,6 +42,7 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.saves.SavesManager
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
+import com.swordfish.libretrodroid.GLRetroView
 import com.swordfish.touchinput.radial.sensors.TiltConfiguration
 import dagger.Lazy
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -239,12 +240,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 .mapNotNull { transformExposedSetting(it, coreOptions) }
 
         val retroGameView = baseGameScreenViewModel.retroGameView.retroGameView
-        // getAvailableDisks/getCurrentDisk sao runOnGLThread: bloqueiam o chamador ate a
-        // GLThread drenar a fila. Fora da main thread.
-        val (availableDisks, retroCurrentDisk) =
-            withContext(Dispatchers.IO) {
-                (retroGameView?.getAvailableDisks() ?: 0) to (retroGameView?.getCurrentDisk() ?: 0)
-            }
+        val (availableDisks, retroCurrentDisk) = readDiskState(retroGameView)
         val fdsSideCount = baseGameScreenViewModel.retroGameView.fdsSideCount ?: 0
         val menuDisks = if (game.systemId == SystemID.FDS.dbname) {
             maxOf(availableDisks, fdsSideCount, 2)
@@ -288,6 +284,57 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
+    /**
+     * Disco atual e total de discos, ou `0 to 0` quando a GLThread nao responde.
+     *
+     * `getAvailableDisks`/`getCurrentDisk` passam por `runOnGLThread`: bloqueiam o chamador ate a
+     * GLThread drenar a fila e, se ela estiver presa dentro de um callback do renderer, desistem
+     * com [GLRetroView.GLThreadTimeoutException] depois de 30 s. Deixar essa excecao subir daqui
+     * derrubava a sessao inteira: ela escapa do `collect` de `initializeViewModelsEffectsFlow`,
+     * chega ao `UncaughtExceptionHandler` e o usuario ve a tela de crash — em vez do menu que
+     * pediu, que e justamente por onde ele sairia do jogo travado. Reproduzido em device com
+     * GameCube/Dolphin em 2026-09-03.
+     *
+     * Por isso a sonda barata antes: se a GLThread nao drena a fila em [GL_PROBE_TIMEOUT_MS], o
+     * menu abre na hora sem a linha de discos, em vez de fazer o usuario esperar 30 s por um
+     * resultado que ja se sabe que nao vem.
+     */
+    private suspend fun readDiskState(retroGameView: GLRetroView?): Pair<Int, Int> {
+        if (retroGameView == null) return 0 to 0
+        return withContext(Dispatchers.IO) {
+            try {
+                if (!glThreadResponds(retroGameView)) {
+                    Timber.w("GL thread is not draining its queue; opening menu without disk info")
+                    return@withContext 0 to 0
+                }
+                retroGameView.getAvailableDisks() to retroGameView.getCurrentDisk()
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                Timber.e(e, "Failed to read disk state; opening menu without disk info")
+                TelemetryReporter.reportThrowable(
+                    component = "game",
+                    thread = Thread.currentThread(),
+                    error = e,
+                    extraContext = "phase=open-menu; call=getAvailableDisks; " +
+                        "system=${system.id.dbname}; game=${game.title}",
+                    terminal = false,
+                )
+                0 to 0
+            }
+        }
+    }
+
+    /** Enfileira um no-op e espera pouco: distingue GLThread lenta de GLThread parada. */
+    private fun glThreadResponds(view: GLRetroView): Boolean =
+        try {
+            val latch = java.util.concurrent.CountDownLatch(1)
+            view.queueEvent { latch.countDown() }
+            latch.await(GL_PROBE_TIMEOUT_MS, java.util.concurrent.TimeUnit.MILLISECONDS)
+        } catch (e: Throwable) {
+            false
+        }
+
     protected abstract fun getDialogClass(): Class<out Activity>
 
     private fun getCoreOptions(): List<CoreOption> {
@@ -311,7 +358,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                             it.tiltConfigurations,
                         )
                     is GameViewModelSideEffects.UiEffect.ShowToast -> displayToast(it.message)
-                    is GameViewModelSideEffects.UiEffect.SuccessfulFinish -> performSuccessfulActivityFinish()
+                    is GameViewModelSideEffects.UiEffect.SuccessfulFinish -> performSuccessfulActivityFinish(it.savesFailed)
                     is GameViewModelSideEffects.UiEffect.FailureFinish -> performErrorFinish(it.message, it.isRomLoadFailure)
                     is GameViewModelSideEffects.UiEffect.SaveQuickSave -> performSaveQuickSave()
                     is GameViewModelSideEffects.UiEffect.LoadQuickSave -> performLoadQuickSave()
@@ -382,7 +429,12 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         return super.onKeyUp(keyCode, event)
     }
 
-    private fun performSuccessfulActivityFinish() {
+    /**
+     * [savesFailed] viaja no resultado porque o aviso nao pode ser dado daqui: este metodo termina
+     * em `finishAndExitProcess()`, e um toast enfileirado no processo `:game` morre junto com ele.
+     * Quem mostra e o processo principal, no `GameLaunchTaskHandler`.
+     */
+    private fun performSuccessfulActivityFinish(savesFailed: Boolean = false) {
         // Clean exit — drop the breadcrumb so an unrelated crash later isn't blamed on this game.
         TelemetryContext.clearGameSession(applicationContext)
         val resultIntent =
@@ -390,6 +442,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 putExtra(PLAY_GAME_RESULT_SESSION_DURATION, System.currentTimeMillis() - startGameTime)
                 putExtra(PLAY_GAME_RESULT_GAME, intent.getSerializableExtra(EXTRA_GAME))
                 putExtra(PLAY_GAME_RESULT_LEANBACK, intent.getBooleanExtra(EXTRA_LEANBACK, false))
+                putExtra(PLAY_GAME_RESULT_SAVES_FAILED, savesFailed)
             }
 
         setResult(Activity.RESULT_OK, resultIntent)
@@ -403,14 +456,31 @@ abstract class BaseGameActivity : ImmersiveActivity() {
      * de emulação o que tem frame do LibretroDroid ou o que é falta de memória, porque só nesses
      * casos trocar de core (e culpar o núcleo na tela de erro) faz algum sentido.
      */
+    /** A excecao e suas causas, limitada em profundidade para nao girar num ciclo de `cause`. */
+    private fun causeChain(exception: Throwable): Sequence<Throwable> =
+        generateSequence(exception) { it.cause }.take(MAX_CAUSE_DEPTH)
+
+    /**
+     * A GLThread parou de drenar a fila e uma chamada nossa estourou o prazo de 30 s.
+     *
+     * Nao e crash de core (o core nao morreu, parou de responder) nem bug de app: e um prazo que
+     * o proprio `runOnGLThread` cria. Merece as duas coisas que nenhuma das outras duas categorias
+     * daria certo: **nao** trocar de nucleo (repetiria a espera inteira) e **nao** mandar limpar
+     * dados ou resetar de fabrica — nada disso alcanca a GLThread.
+     *
+     * Ver `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
+     */
+    private fun isCoreStall(exception: Throwable): Boolean =
+        causeChain(exception).any { it is GLRetroView.GLThreadTimeoutException }
+
     private fun isEmulatorFailure(exception: Throwable): Boolean {
-        var current: Throwable? = exception
-        var depth = 0
-        while (current != null && depth < MAX_CAUSE_DEPTH) {
+        for (current in causeChain(exception)) {
             if (current is OutOfMemoryError) return true
+            // Antes do teste por pacote de proposito: a GLThreadTimeoutException e lancada de
+            // dentro de GLRetroView, entao casaria LIBRETRODROID_PACKAGE e seria tratada como
+            // crash de core — com fallback de nucleo e conselho de formatacao de fabrica.
+            if (current is GLRetroView.GLThreadTimeoutException) return false
             if (current.stackTrace.any { it.className.startsWith(LIBRETRODROID_PACKAGE) }) return true
-            current = current.cause
-            depth++
         }
         return false
     }
@@ -422,6 +492,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             Intent().apply {
                 putExtra(PLAY_GAME_RESULT_ERROR, exception.message ?: exception.javaClass.name)
                 putExtra(PLAY_GAME_RESULT_IS_EMULATOR_FAILURE, isEmulatorFailure(exception))
+                putExtra(PLAY_GAME_RESULT_IS_CORE_STALL, isCoreStall(exception))
                 putExtra(PLAY_GAME_RESULT_GAME, intent.getSerializableExtra(EXTRA_GAME))
                 if (::systemCoreConfig.isInitialized) {
                     putExtra(PLAY_GAME_RESULT_CORE_ID, systemCoreConfig.coreID.coreName)
@@ -575,6 +646,9 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     companion object {
         const val DIALOG_REQUEST = 100
 
+        /** Curto de proposito: so distingue "GLThread ocupada" de "GLThread parada". */
+        private const val GL_PROBE_TIMEOUT_MS = 2_000L
+
         private const val FDS_CONTROL_PORT = 0
         private const val FDS_BUTTON_PULSE_MS = 80L
         private const val FDS_BUTTON_GAP_MS = 120L
@@ -589,11 +663,13 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         const val REQUEST_PLAY_GAME = 1001
         const val PLAY_GAME_RESULT_SESSION_DURATION = "PLAY_GAME_RESULT_SESSION_DURATION"
+        const val PLAY_GAME_RESULT_SAVES_FAILED = "PLAY_GAME_RESULT_SAVES_FAILED"
         const val PLAY_GAME_RESULT_GAME = "PLAY_GAME_RESULT_GAME"
         const val PLAY_GAME_RESULT_LEANBACK = "PLAY_GAME_RESULT_LEANBACK"
         const val PLAY_GAME_RESULT_ERROR = "PLAY_GAME_RESULT_ERROR"
         const val PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE = "PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE"
         const val PLAY_GAME_RESULT_IS_EMULATOR_FAILURE = "PLAY_GAME_RESULT_IS_EMULATOR_FAILURE"
+        const val PLAY_GAME_RESULT_IS_CORE_STALL = "PLAY_GAME_RESULT_IS_CORE_STALL"
         const val PLAY_GAME_RESULT_CORE_ID = "PLAY_GAME_RESULT_CORE_ID"
 
         private const val LIBRETRODROID_PACKAGE = "com.swordfish.libretrodroid"

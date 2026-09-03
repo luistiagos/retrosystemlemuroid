@@ -1,7 +1,7 @@
 # [BUG] ANR ao inicializar jogo — main thread bloqueia em `runOnGLThread` enquanto o core carrega a ROM
 
 **Data:** 2026-08-09
-**Status:** Corrigido 🟢 (app + AAR) — falta só validar em device; `dlopen` na main segue como resíduo conhecido
+**Status:** 🟡 Corrigido em três pontos e validado em device (2026-09-03, GameCube/Dolphin) — segue **aberto** porque a causa de fundo (GLThread travando dentro do core) não é nossa e não reproduz sob demanda; `dlopen` na main segue como resíduo conhecido
 **Severidade:** Alta (ANR visível ao usuário — "Retro Game System não está respondendo")
 **Branch:** version9
 
@@ -199,20 +199,169 @@ para sobreviver a um rollback do AAR para `.known-good`.
 - `./gradlew.bat assembleFreeBundleRelease` → **BUILD SUCCESSFUL**, incluindo `lintVital` e
   R8. APKs gerados: arm64-v8a (106 MB) e armeabi-v7a (90 MB).
 - Presença do fix do AAR conferida por extração do `classes.jar` (ver acima).
-- **Não testado em device.** Roteiro pendente: repro em device intermediário com jogo de
-  GameCube; confirmar via `adb shell dumpsys activity anr` que a main **não** aparece mais
-  em `CountDownLatch.await` ← `GLRetroView.runOnGLThread`. O adb existe em
-  `E:\DevCaches\Android\Sdk\platform-tools\adb.exe` (fora do PATH).
+- ~~**Não testado em device.**~~ → **testado em 2026-09-03**, ver a seção abaixo.
 
 > Nota de ambiente: o `assembleFreeBundleRelease` chegou a falhar duas vezes por **OOM da
 > JVM** (`paging file is too small`, `G1 virtual space`), não por código. Causa: daemons
 > Gradle acumulados + `org.gradle.parallel=true` com `-Xmx2560m`. Contorno usado, sem
 > alterar `gradle.properties`: `--no-daemon --no-parallel --max-workers=1 -Xmx1536m`.
 
+## Validação em device (2026-09-03) — e um terceiro ponto que ainda quebrava
+
+**Aparelho:** Moto G86 5G, Android 16, app `1.17.12-DEBUG`.
+**Jogo:** *Need for Speed - Underground 2* (GameCube / dolphin) — **o mesmo jogo e core que a
+telemetria nomeia**.
+
+### O que passou
+
+- **Boot sem ANR.** O jogo carrega e roda a 60 fps (`EMUFPS 60.00`). O sintoma do relato
+  original — pad de GameCube desenhado sobre tela preta — aparece, mas **sem** o diálogo
+  "não está respondendo": é o intro do jogo, não a main thread presa.
+- **Saída limpa** em todas as sessões testadas (SNES, 3DS, GameCube):
+  `Stored sram file with size: …` → `System.exit called, status: 0` → `Process exited
+  cleanly (0)`. Nenhum `GLThreadTimeoutException` escapou do `saveOnExit`.
+
+### O que NÃO passou — bug novo, encontrado aqui
+
+Numa das sessões o Dolphin **parou de renderizar** (zero `EMUFPS`/`VIDEOFRAMES` por 12 s
+seguidos, processo `:game` vivo, atividade resumida): a GLThread parada dentro de um callback
+do renderer, exatamente a condição de fundo desta página. Com ela nesse estado, **abrir o menu
+do jogo matava a sessão**:
+
+```
+E BaseGameActivity: com.swordfish.libretrodroid.GLRetroView$GLThreadTimeoutException:
+                    GLThread did not answer in 30000 ms
+I ActivityTaskManager: START … GameCrashActivity
+```
+
+O caminho é o terceiro da tabela "Mesma classe de bug em outros dois pontos", e o que faltava
+nele não era o `withContext(IO)` (esse já estava) e sim o **tratamento do timeout**:
+`displayOptionsDialog` chamava `getAvailableDisks`/`getCurrentDisk` sem `try/catch`, a exceção
+escapava do `collect` de `initializeViewModelsEffectsFlow`, chegava ao
+`UncaughtExceptionHandler` e o usuário via a tela de crash — **em vez do menu, que é por onde
+ele sairia do jogo travado**. Pior: o crash só chegava 30 s depois do toque, então na prática
+o menu "não abria" e depois o app "quebrava sozinho".
+
+### Correção (2026-09-03)
+
+[BaseGameActivity.kt](../../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt):
+`readDiskState()` substitui a leitura crua.
+
+1. **Sonda barata antes** (`queueEvent` + latch de 2 s, o mesmo padrão de `glThreadResponds`
+   em `GameViewModelSaves`): GLThread parada custa 2 s, não 30 s.
+2. **`try/catch` mesmo assim** — a parada pode começar entre a sonda e a chamada.
+3. Degrada para `0 to 0`: o menu abre **sem a linha de discos**, que é informação acessória,
+   em vez de não abrir.
+4. Reporta à telemetria com `phase=open-menu` (não-terminal), para a recorrência aparecer sem
+   custar uma sessão do usuário.
+
+### Validação da correção, no mesmo aparelho
+
+- Menu abre em **1.181 ms** com a GLThread saudável (900 ms dos quais são o *hold* que o
+  próprio botão exige) — a sonda não cobra nada no caminho normal.
+- A sessão de GameCube sobreviveu a abrir/fechar o menu, tela apagada + PIN e ida e volta para
+  o background, voltando sempre a 60 fps.
+- **A travada da GLThread não voltou a acontecer sob demanda.** Ocorreu uma vez e não
+  reproduziu em ~15 min de tentativa dirigida (screen-off/on, background/foreground, jogo
+  parado). Ou seja: o caminho corrigido está exercitado no estado saudável e o crash está
+  provado no estado travado **antes** da correção; o "depois" no estado travado depende de a
+  travada reaparecer. É por isso que esta página continua em `open/`.
+
+### A tela de crash acusava o núcleo — corrigido (2026-09-03)
+
+O disclaimer exibido foi o de **falha de núcleo** ("limpe o cache… execute a formatação de
+fábrica"), porque `isEmulatorFailure` casava o frame `com.swordfish.libretrodroid` e a
+`GLThreadTimeoutException` é lançada de dentro de `GLRetroView.runOnGLThread`. Além do texto,
+`isEmulatorFailure = true` também dispara `tryFallbackCore`: o app relançaria o jogo com o
+próximo núcleo e pagaria **outro** timeout de 30 s.
+
+Nenhum dos dois textos existentes servia:
+
+| Texto | Por que não serve para uma GLThread travada |
+|---|---|
+| `lemuroid_crash_disclamer` | manda limpar dados e resetar de fábrica — nada disso alcança uma thread presa |
+| `lemuroid_app_error_disclamer` | afirma "o problema não é do seu jogo, da sua ROM **nem do núcleo de emulação**", e o núcleo é exatamente o que parou |
+
+**Correção:** terceira categoria, própria.
+
+- [BaseGameActivity.kt](../../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt):
+  `causeChain()` unifica a caminhada pelas causas (com o limite de profundidade que já existia);
+  `isCoreStall()` procura `GLRetroView.GLThreadTimeoutException` na cadeia; e `isEmulatorFailure`
+  ganhou `return false` para essa exceção **antes** do teste por pacote — sem isso ela sempre
+  casaria `LIBRETRODROID_PACKAGE`. O resultado vai no extra novo
+  `PLAY_GAME_RESULT_IS_CORE_STALL`.
+- [GameLaunchTaskHandler.kt](../../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/main/GameLaunchTaskHandler.kt):
+  ramo próprio antes dos outros dois — mostra `lemuroid_core_stalled_disclamer` e **não** chama
+  `tryFallbackCore`.
+- String nova em `values/` e `values-pt-rBR/` (os dois locais onde o disclaimer de app vive):
+  "O núcleo de emulação parou de responder e o jogo precisou ser fechado. O problema não é do
+  seu aparelho nem da sua ROM — limpar dados ou resetar de fábrica não vai adiantar. Abra o jogo
+  de novo; o progresso desde o último salvamento pode ter se perdido."
+
+**Validado em device (2026-09-03)** com a exceção forçada — o mesmo roteiro que a página do
+Toast já prevê para conferir a blindagem, já que a travada real não reproduz sob demanda. Build
+temporário com `postDelayed { throw … }` no `onCreate`, duas rodadas, e o `.kt` conferido por
+`diff` contra a cópia limpa depois de remover a instrumentação:
+
+| Exceção forçada | Log | Tela |
+|---|---|---|
+| `GLRetroView.GLThreadTimeoutException` | `W GameLaunchTaskHandler: Core stalled the GL thread:` e **nenhum** `Core fallback:` | texto novo do núcleo travado |
+| `IllegalStateException` | `W GameLaunchTaskHandler: Non-emulator failure in game process:` | disclaimer de app, como antes |
+
+Nos dois casos o `text2` seguiu trazendo a mensagem real (`GLThread did not answer in 30000 ms`)
+e o rodapé, aparelho + Android + versão — que é o que o pitfall 8 pede que uma foto da tela
+resolva. Instrumentação removida e o build limpo reinstalado e conferido rodando um jogo a
+60 fps.
+
+## Recorrência em produção (telemetria, 2026-09-02)
+
+O fix **está no build distribuído e está funcionando como projetado** — mas a causa de fundo
+continua: a GLThread realmente trava, e agora o que se vê é o timeout de 30 s disparando.
+
+- **Errors (serviço):** 3810, 3359, 3358 — `retrogamesystem/game`,
+  `SourceFile::com.swordfish.libretrodroid.GLRetroView.runOnGLThread`
+- **Versões:** app **1.17.11 e 1.17.12** — ou seja, **depois** do rebuild do AAR
+- **Datas:** 2026-08-31 11:41, 2026-09-02 04:50
+- **Aparelhos:** Samsung SM-A515F (Android 13) e outro Android 16 — `system=gc; core=dolphin;
+  game=Need for Speed - Underground 2`
+
+```
+com.swordfish.libretrodroid.GLRetroView$GLThreadTimeoutException: GLThread did not answer in 30000 ms
+	at com.swordfish.libretrodroid.GLRetroView.runOnGLThread(SourceFile:81)
+	at com.swordfish.libretrodroid.GLRetroView.serializeSRAM(SourceFile:3)
+	at j4.d$k.invokeSuspend(SourceFile:13)
+	...
+	Suppressed: T6.i: [T0{Cancelling}@486ab15, Dispatchers.Main.immediate]
+```
+
+Leitura:
+
+1. **O call-site é o `serializeSRAM` da saída do jogo** — a segunda linha da tabela "Mesma
+   classe de bug em outros dois pontos"
+   ([BaseGameScreenViewModel.kt:289-299](../../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameScreenViewModel.kt#L289-L299)).
+   O `Suppressed: … Dispatchers.Main.immediate` mostra que o escopo cancelado é o Main, então o
+   `withContext(IO)` aplicado nesse ponto está de fato tirando a main da espera — **o ANR virou
+   crash de timeout**, que é uma troca boa mas não é a solução.
+2. **A GLThread ficou 30 s sem drenar a fila.** Isso não é lentidão de `dlopen`: é a GLThread
+   parada dentro de um callback do renderer do Dolphin, no fim da partida. Três das quatro
+   ocorrências são `core=dolphin`.
+3. Provável interação com [[2026-09-02-libretrodroid-dlclose-core-anterior-sigabrt]]: se a
+   partida anterior deixa estado sujo, o `serializeSRAM` da saída pode estar competindo com a
+   destruição do core.
+
+**Pendência que isso adiciona:** hoje o timeout **lança** e o usuário perde o save da SRAM sem
+aviso. Precisa de tratamento no chamador — no mínimo não derrubar a saída do jogo por causa
+disso, e idealmente tentar de novo antes de desistir.
+
 ## Lição
 
 `GLSurfaceView.queueEvent` + `CountDownLatch.await()` sem timeout é um bloqueio de duração
 **ilimitada** — a GLThread pode estar dentro de um callback do renderer que demora o que o
 core quiser. Nenhuma chamada `runOnGLThread` pode partir da main thread.
+
+E o corolário que a telemetria acrescentou: **timeout não é correção, é contenção**. Trocar
+"trava para sempre" por "lança depois de 30 s" tira o ANR do caminho, mas o trabalho (salvar a
+SRAM) continua não acontecendo — quem introduz um timeout tem que decidir também o que fazer
+quando ele estoura.
 
 Ver também [2026-08-09-telemetria-nao-captura-anr.md](2026-08-09-telemetria-nao-captura-anr.md).

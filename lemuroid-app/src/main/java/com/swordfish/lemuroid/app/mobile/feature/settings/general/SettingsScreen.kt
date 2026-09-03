@@ -35,6 +35,7 @@ import com.swordfish.lemuroid.app.utils.android.settings.LemuroidSettingsSwitch
 import com.swordfish.lemuroid.app.utils.android.settings.booleanPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.indexPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.intPreferenceState
+import com.swordfish.lemuroid.app.utils.android.startActivitySafely
 import com.swordfish.lemuroid.app.utils.android.stringListResource
 import com.swordfish.lemuroid.app.utils.settings.rememberSafePreferenceIndexSettingState
 import com.swordfish.lemuroid.common.displayToast
@@ -350,22 +351,33 @@ private fun RomsSettings(
         }
         val storageProvidersPrefs = context.getSharedPreferences(com.swordfish.lemuroid.lib.storage.StorageProviderRegistry.PREF_NAME, android.content.Context.MODE_PRIVATE)
 
+        val allFilesState = booleanPreferenceState("all_files", false, storageProvidersPrefs)
+
         LemuroidSettingsSwitch(
-            state = booleanPreferenceState("all_files", false, storageProvidersPrefs),
+            state = allFilesState,
             title = { Text(text = stringResource(id = com.swordfish.lemuroid.lib.R.string.all_files_storage)) },
             subtitle = { Text(text = stringResource(id = com.swordfish.lemuroid.lib.R.string.all_files_storage_desc)) },
             onCheckedChange = { isChecked ->
                 if (isChecked && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     if (!Environment.isExternalStorageManager()) {
-                        try {
-                            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
+                        // A tela específica do app não existe em todo firmware, e em Android TV / Fire OS
+                        // nenhuma das duas existe — daí o toast e a reversão do switch no fim da cadeia.
+                        val appSpecificIntent =
+                            Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
                                 data = Uri.parse("package:${context.packageName}")
                             }
-                            context.startActivity(intent)
-                        } catch (e: Exception) {
-                            val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                            context.startActivity(intent)
-                        }
+                        val genericIntent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+
+                        val opened =
+                            context.startActivitySafely(appSpecificIntent) ||
+                                context.startActivitySafely(
+                                    genericIntent,
+                                    R.string.settings_no_all_files_screen,
+                                )
+
+                        // Sem tela para conceder a permissão o switch mentiria: ficaria ligado e o
+                        // scan não enxergaria nada fora das pastas já acessíveis.
+                        if (!opened) allFilesState.value = false
                     }
                 }
             }

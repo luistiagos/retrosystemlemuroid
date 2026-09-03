@@ -5,6 +5,7 @@ import androidx.startup.Initializer
 import androidx.work.WorkManagerInitializer
 import androidx.work.WorkManager
 import com.swordfish.lemuroid.app.LemuroidApplication
+import com.swordfish.lemuroid.app.shared.game.CoreCrashFallback
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
 import com.swordfish.lemuroid.app.shared.roms.StreamingRomsWork
@@ -40,6 +41,10 @@ class MainProcessInitializer : Initializer<Unit> {
                 Timber.e(e, "MainProcessInitializer: manifest quick load failed")
             }
         }
+
+        // If the previous game session died inside the core, turn off the core option known to
+        // cause it before the user relaunches the same game and hits it again.
+        CoreCrashFallback.applyAsync(context)
 
         // Move WorkManager scheduling off the main thread so the UI becomes
         // responsive sooner — these calls resolve ContentProvider URIs and

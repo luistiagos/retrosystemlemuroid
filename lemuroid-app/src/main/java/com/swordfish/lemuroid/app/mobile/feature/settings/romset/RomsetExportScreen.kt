@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.utils.android.launchSafely
 import com.swordfish.lemuroid.lib.romset.RomsetProgress
 
 @Composable
@@ -50,7 +51,9 @@ fun RomsetExportScreen(
             is RomsetProgress.Idle -> {
                 RomsetExportIdle(
                     exportSizeBytes = state.exportSizeBytes,
-                    onExport = { folderPicker.launch(null) },
+                    onExport = {
+                        folderPicker.launchSafely(context, null, R.string.settings_no_folder_picker)
+                    },
                 )
             }
             is RomsetProgress.InProgress -> {

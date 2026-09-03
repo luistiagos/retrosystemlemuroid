@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared.game.viewmodel
 import android.content.Context
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
+import com.swordfish.lemuroid.app.shared.telemetry.TelemetryReporter
 import com.swordfish.lemuroid.common.graphics.GraphicsUtils
 import com.swordfish.lemuroid.common.graphics.takeScreenshot
 import com.swordfish.lemuroid.lib.library.GameSystem
@@ -18,6 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
 class GameViewModelSaves(
@@ -64,11 +67,102 @@ class GameViewModelSaves(
         }
     }
 
-    suspend fun saveSRAM(game: Game) {
-        val retroGameView = retroGameView.retroGameView ?: return
-        val sramState = withContext(Dispatchers.IO) { retroGameView.serializeSRAM() }
-        savesManager.setSaveRAM(game, sramState)
-        Timber.i("Stored sram file with size: ${sramState.size}")
+    /**
+     * Grava o que precisa sobreviver a saida do jogo, na ordem do que o jogador sentiria mais
+     * falta: a SRAM (o progresso que o proprio cartucho guardaria) antes do autosave (conveniencia
+     * que o app refaz jogando de novo).
+     *
+     * **Nunca lanca.** `serializeSRAM`/`serializeState` passam por `runOnGLThread`, que desiste com
+     * [GLRetroView.GLThreadTimeoutException] depois de 30 s — e em producao isso acontece de
+     * verdade ao sair de uma sessao de Dolphin. Deixar a excecao subir do `viewModelScope.launch`
+     * levava o `UncaughtExceptionHandler` a matar o processo `:game` e mostrar a tela de crash em
+     * vez de simplesmente sair do jogo.
+     *
+     * @return false quando algo nao pode ser gravado, para o chamador avisar o usuario.
+     */
+    suspend fun saveOnExit(game: Game): Boolean {
+        val view = retroGameView.retroGameView ?: return true
+
+        val sramSaved = trySaveSRAM(view, game)
+
+        // Um timeout ja custou 30 s de espera. So vale tentar o autosave se a GLThread voltou a
+        // responder — senao o usuario paga outro timeout inteiro so para sair do jogo.
+        if (!sramSaved && !glThreadResponds(view)) {
+            Timber.w("Skipping autosave on exit: GL thread is not draining its event queue")
+            return false
+        }
+
+        val autoSaved = trySaveAutoSave(game)
+        return sramSaved && autoSaved
+    }
+
+    private suspend fun trySaveSRAM(
+        view: GLRetroView,
+        game: Game,
+    ): Boolean {
+        repeat(GL_SAVE_ATTEMPTS) { attempt ->
+            try {
+                val sramState = withContext(Dispatchers.IO) { view.serializeSRAM() }
+                savesManager.setSaveRAM(game, sramState)
+                Timber.i("Stored sram file with size: ${sramState.size}")
+                return true
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
+            } catch (e: GLRetroView.GLThreadTimeoutException) {
+                Timber.w(e, "SRAM save timed out (attempt ${attempt + 1}/$GL_SAVE_ATTEMPTS)")
+                // So repete se a GLThread voltou a drenar a fila; senao seriam mais 30 s parados.
+                if (attempt == GL_SAVE_ATTEMPTS - 1 || !glThreadResponds(view)) {
+                    reportExitSaveFailure("serializeSRAM", e)
+                    return false
+                }
+            } catch (e: Throwable) {
+                Timber.e(e, "Error while saving sram")
+                reportExitSaveFailure("serializeSRAM", e)
+                return false
+            }
+        }
+        return false
+    }
+
+    private suspend fun trySaveAutoSave(game: Game): Boolean =
+        try {
+            saveAutoSave(game)
+            true
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (e: Throwable) {
+            Timber.e(e, "Error while saving autosave on exit")
+            reportExitSaveFailure("serializeState", e)
+            false
+        }
+
+    /**
+     * Sonda barata: enfileira um no-op e espera pouco. Se a GLThread esta drenando a fila, volta na
+     * hora; se esta presa dentro de um callback do renderer, custa [GL_PROBE_TIMEOUT_MS] em vez dos
+     * 30 s que uma chamada de verdade custaria antes de estourar.
+     */
+    private suspend fun glThreadResponds(view: GLRetroView): Boolean =
+        withContext(Dispatchers.IO) {
+            try {
+                val latch = CountDownLatch(1)
+                view.queueEvent { latch.countDown() }
+                latch.await(GL_PROBE_TIMEOUT_MS, TimeUnit.MILLISECONDS)
+            } catch (e: Throwable) {
+                false
+            }
+        }
+
+    private fun reportExitSaveFailure(
+        call: String,
+        error: Throwable,
+    ) {
+        TelemetryReporter.reportThrowable(
+            component = "game",
+            thread = Thread.currentThread(),
+            error = error,
+            extraContext = "phase=exit-save; call=$call; system=${system.id.dbname}; game=${game.title}",
+            terminal = false,
+        )
     }
 
     suspend fun saveAutoSave(game: Game) {
@@ -179,5 +273,13 @@ class GameViewModelSaves(
         } else {
             sideEffects.showToast(appContext.getString(R.string.game_toast_load_state_failed))
         }
+    }
+
+    companion object {
+        /** Tentativas de gravar a SRAM na saida. A segunda so acontece se a GLThread respondeu. */
+        private const val GL_SAVE_ATTEMPTS = 2
+
+        /** Quanto esperar a GLThread responder um no-op antes de considera-la presa. */
+        private const val GL_PROBE_TIMEOUT_MS = 2_000L
     }
 }

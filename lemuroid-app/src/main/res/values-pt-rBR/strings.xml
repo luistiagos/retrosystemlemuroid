@@ -124,6 +124,10 @@
     <string name="loading_preparing_environment">Preparando o ambiente…</string>
     <string name="game_toast_settings_button_using_gamepad">Controle detectado. Acesse o menu de configurações com %1$s.</string>
     <string name="game_toast_load_state_failed">Não é possível carregar este estado</string>
+    <string name="game_toast_exit_save_failed">O jogo não conseguiu salvar antes de fechar. O progresso recente pode ter sido perdido.</string>
+    <string name="core_crash_notice_title">O jogo fechou inesperadamente</string>
+    <string name="core_crash_notice_message">%1$s parou porque o núcleo %2$s travou. Se continuar acontecendo, tente outro núcleo para este sistema nas Configurações.</string>
+    <string name="core_crash_notice_message_option_disabled">%1$s parou porque o núcleo %2$s travou. Os shaders de hardware foram desligados para este sistema para que ele volte a rodar — você pode religá-los nas configurações dentro do jogo.</string>
     <string name="game_toast_quick_save_loaded">Carregamento rápido</string>
     <string name="game_toast_quick_save_saved">Salvamento rapido</string>
     <string name="empty_view_default">Nenhum item</string>
@@ -189,6 +193,7 @@
         \n\n Se nenhuma das opções acima funcionar, pode ser possível que este jogo/núcleo não seja compatível com este dispositivo.
     </string>
     <string name="lemuroid_app_error_disclamer">O aplicativo teve um erro interno e precisou fechar o jogo. O problema não é do seu jogo, da sua ROM nem do núcleo de emulação — limpar dados ou resetar não vai adiantar. O que resolve é nos enviar a mensagem abaixo.</string>
+    <string name="lemuroid_core_stalled_disclamer">O núcleo de emulação parou de responder e o jogo precisou ser fechado. O problema não é do seu aparelho nem da sua ROM — limpar dados ou resetar de fábrica não vai adiantar. Abra o jogo de novo; o progresso desde o último salvamento pode ter se perdido.</string>
     <string name="error_message_incompatible_state">Este estado de salvamento não é compatível com a versão principal atual. Por favor, carregue o último salvamento no jogo ou use uma versão anterior do Retro Game System.</string>
     <string name="shader_filter_names_auto">Automático</string>
     <string name="shader_filter_names_sharp">Nítido</string>
@@ -407,5 +412,10 @@
     <string name="romset_export_try_again">Tentar novamente</string>
     <string name="romset_import_again">Importar outro</string>
     <string name="romset_import_try_again">Tentar novamente</string>
+
+    <!-- Fallbacks para aparelhos sem app de sistema para a Intent (TV / Fire TV) -->
+    <string name="settings_no_file_picker">Este aparelho não tem app para escolher arquivos. Copie o arquivo ZIP para a raiz de um cartão SD ou pen drive e toque em Atualizar.</string>
+    <string name="settings_no_folder_picker">Este aparelho não tem app para escolher pastas, então esta operação não está disponível aqui.</string>
+    <string name="settings_no_all_files_screen">Este aparelho não tem a tela usada para conceder acesso a todos os arquivos.</string>
 
 </resources>

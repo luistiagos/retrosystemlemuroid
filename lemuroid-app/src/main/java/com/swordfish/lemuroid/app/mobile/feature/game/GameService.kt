@@ -7,11 +7,14 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.content.pm.ServiceInfo
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.utils.android.isForegroundServiceStartNotAllowed
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import timber.log.Timber
 
 class GameService : Service() {
     private val binder = NotificationServiceBinder()
@@ -52,12 +55,32 @@ class GameService : Service() {
 
     private fun displayNotification(game: Game?) {
         val notification = NotificationsManager(applicationContext).gameRunningNotification(game)
-        ServiceCompat.startForeground(
-            this,
-            NotificationsManager.GAME_RUNNING_NOTIFICATION_ID,
-            notification,
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
-        )
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                ServiceCompat.startForeground(
+                    this,
+                    NotificationsManager.GAME_RUNNING_NOTIFICATION_ID,
+                    notification,
+                    ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE,
+                )
+            } else {
+                // specialUse was introduced in API 34. The legacy overload keeps the
+                // notification behavior without resolving a newer FGS type on old devices.
+                startForeground(NotificationsManager.GAME_RUNNING_NOTIFICATION_ID, notification)
+            }
+        } catch (exception: RuntimeException) {
+            if (!exception.isForegroundServiceStartNotAllowed()) throw exception
+
+            Timber.w(exception, "GameService: foreground promotion was not allowed")
+            showRegularNotification(notification)
+        }
+    }
+
+    private fun showRegularNotification(notification: android.app.Notification) {
+        runCatching {
+            NotificationManagerCompat.from(this)
+                .notify(NotificationsManager.GAME_RUNNING_NOTIFICATION_ID, notification)
+        }.onFailure { Timber.w(it, "GameService: regular notification could not be shown") }
     }
 
     private fun hideNotification() {
@@ -66,6 +89,17 @@ class GameService : Service() {
 
     override fun onDestroy() {
         hideNotification()
+    }
+
+    override fun onTimeout(
+        startId: Int,
+        fgsType: Int,
+    ) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return
+
+        Timber.w("GameService: foreground service timed out (type=%d), stopping", fgsType)
+        stopForeground(STOP_FOREGROUND_REMOVE)
+        stopSelfResult(startId)
     }
 
     companion object {

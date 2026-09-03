@@ -19,6 +19,9 @@ import java.util.regex.Pattern
  * live: the API is scoped to the package, not the process, so a scan from the main process sees
  * `:game` exits too.
  *
+ * Not every such exit is a defect, and a scan that reports them all drowns the panel in noise:
+ * see [isInteresting] for what is filtered out and why.
+ *
  * Everything here is best-effort and must never change app behavior.
  */
 object CrashTelemetry {
@@ -36,14 +39,21 @@ object CrashTelemetry {
 
     @Volatile private var installed = false
 
+    /** Tag of the current process — `main` or `game` — resolved right after the handler is live. */
+    @Volatile private var component = "main"
+
     /**
      * Installs the uncaught-exception handler for the current process, chaining to whatever handler
      * was already there so existing behavior (crash screen, process teardown) is preserved.
      *
-     * [component] tags the report — `main` or `game` — so the panel shows which process died.
+     * [componentResolver] tags the report — `main` or `game` — so the panel shows which process
+     * died. It is a lambda, and it runs only **after** the handler is live: naming the process
+     * touches `ActivityManager`, exactly the kind of call that fails on the old TV-box ROMs this
+     * app supports, and a failure while resolving it would leave the startup crash it caused
+     * invisible to telemetry.
      */
     @Synchronized
-    fun installUncaughtHandler(context: Context, component: String) {
+    fun installUncaughtHandler(context: Context, componentResolver: () -> String) {
         if (installed) return
         try {
             TelemetryReporter.init(context)
@@ -65,6 +75,7 @@ object CrashTelemetry {
         } catch (ignored: Throwable) {
             // telemetry never affects app behavior
         }
+        component = runCatching { componentResolver() }.getOrDefault(component)
     }
 
     /** Scans the previous session's abnormal exits on a daemon thread. Call once, from the main process. */
@@ -92,7 +103,7 @@ object CrashTelemetry {
                 val ts = info.timestamp
                 if (ts > maxTs) maxTs = ts
                 if (ts <= watermark) return@forEach // already processed in a prior session
-                if (!isInteresting(info.reason)) return@forEach
+                if (!isInteresting(info)) return@forEach
                 reportOneExit(context, info)
             }
 
@@ -102,11 +113,40 @@ object CrashTelemetry {
         }
     }
 
-    private fun isInteresting(reason: Int): Boolean =
-        reason == ApplicationExitInfo.REASON_CRASH_NATIVE ||
-            reason == ApplicationExitInfo.REASON_CRASH ||
-            reason == ApplicationExitInfo.REASON_ANR ||
-            reason == ApplicationExitInfo.REASON_LOW_MEMORY
+    /**
+     * Which exits are worth a report. Two reasons are deliberately absent:
+     *
+     * - **`REASON_CRASH`**: a Java crash unwinds through the handler installed by
+     *   [installUncaughtHandler] in *both* processes, which reports it **with its stack** at the
+     *   moment it happens. Finding the same event here on the next launch reported it a second
+     *   time, and `ApplicationExitInfo` keeps no stack for a Java crash — the echo arrived as
+     *   `description == "crash"`, with the literal word `crash` as its only log. [TelemetryReporter]
+     *   dedups against an in-memory set, so it cannot see across sessions and never caught it.
+     *   Dropping it loses nothing: the one case the live handler misses is a crash killed before
+     *   its report goes out, and the echo has no stack to add there either.
+     * - **`REASON_LOW_MEMORY` on a background process**: see [isLowMemoryWorthReporting].
+     */
+    private fun isInteresting(info: ApplicationExitInfo): Boolean =
+        when (info.reason) {
+            ApplicationExitInfo.REASON_CRASH_NATIVE, ApplicationExitInfo.REASON_ANR -> true
+            ApplicationExitInfo.REASON_LOW_MEMORY -> isLowMemoryWorthReporting(info)
+            else -> false
+        }
+
+    /**
+     * The low-memory killer reclaiming a **cached** process is Android working as designed: the user
+     * left the app and the system later recycled it. Reporting that amounts to reporting that the
+     * app was closed — it produced 1,297 of 1,374 `lowmemory` reports (all `IMPORTANCE_CACHED`, 400)
+     * and buried the handful that mean something.
+     *
+     * Importance counts *down*, so the cut keeps everything at or above
+     * [ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE] (200) — the process died with
+     * something on screen. That is `IMPORTANCE_FOREGROUND` (100), in front of the user, and
+     * `IMPORTANCE_FOREGROUND_SERVICE` (125), which is `:game` with a match running: real memory
+     * bugs of ours. `IMPORTANCE_PERCEPTIBLE` (230) and below are not.
+     */
+    private fun isLowMemoryWorthReporting(info: ApplicationExitInfo): Boolean =
+        info.importance <= ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE
 
     private fun reportOneExit(context: Context, info: ApplicationExitInfo) {
         try {

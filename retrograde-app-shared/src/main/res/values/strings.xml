@@ -74,6 +74,7 @@
     <string name="setting_citra_resolution_factor">Resolution scaling</string>
     <string name="setting_citra_use_acc_mul">Accurate shaders multiplication</string>
     <string name="setting_citra_use_acc_geo_shaders">Accurate geometry shaders</string>
+    <string name="setting_citra_use_hw_shaders">Hardware shaders (turn off if the game closes by itself)</string>
     <string name="setting_yabasanshiro_sh2coretype">SH2 CPU core</string>
     <string name="setting_yabasanshiro_frameskip">Auto frameskip</string>
     <string name="setting_yabasanshiro_polygon_mode">Polygon rendering</string>

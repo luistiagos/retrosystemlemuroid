@@ -254,6 +254,7 @@ private fun HomeScreen(
         }
 
         homeGridSection(
+            "recent",
             sectionRecent,
             state.recentGames,
             downloadedGameKeys,
@@ -261,6 +262,7 @@ private fun HomeScreen(
             onGameLongClick,
         )
         homeGridSection(
+            "favorites",
             sectionFavorites,
             state.favoritesGames,
             downloadedGameKeys,
@@ -268,6 +270,7 @@ private fun HomeScreen(
             onGameLongClick,
         )
         homeGridSection(
+            "discover",
             sectionDiscover,
             state.discoveryGames,
             downloadedGameKeys,
@@ -278,6 +281,7 @@ private fun HomeScreen(
 }
 
 private fun LazyGridScope.homeGridSection(
+    sectionKey: String,
     title: String,
     games: List<Game>,
     downloadedGameKeys: Set<String>,
@@ -286,7 +290,7 @@ private fun LazyGridScope.homeGridSection(
 ) {
     if (games.isEmpty()) return
 
-    item(span = { GridItemSpan(maxLineSpan) }) {
+    item(span = { GridItemSpan(maxLineSpan) }, key = "header_$sectionKey") {
         Text(
             text = title,
             style = MaterialTheme.typography.titleLarge,
@@ -294,7 +298,7 @@ private fun LazyGridScope.homeGridSection(
         )
     }
 
-    items(games, key = { it.id }) { game ->
+    items(games, key = { "$sectionKey/${it.id}" }) { game ->
         LemuroidGameCard(
             modifier = Modifier.fillMaxWidth(),
             game = game,

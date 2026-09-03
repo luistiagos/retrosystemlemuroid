@@ -55,6 +55,9 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setShowWhenLocked(true)
+        setTurnScreenOn(true)
+
         setContentView(R.layout.activity_loading)
         if (savedInstanceState == null) {
             val gameId = intent.data?.pathSegments?.lastOrNull()?.toIntOrNull()

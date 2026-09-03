@@ -59,6 +59,18 @@ object TelemetryContext {
             ""
         }
 
+    /**
+     * When the session reported by [lastGameSession] started, or `0` when there is none. Lets a
+     * reader tell an exit that belongs to that session from an older, unrelated one still sitting
+     * in [android.app.ActivityManager.getHistoricalProcessExitReasons].
+     */
+    fun lastGameSessionStartedAt(context: Context): Long =
+        try {
+            prefs(context).getLong(PREF_SESSION_STARTED_AT, 0L)
+        } catch (e: Throwable) {
+            0L
+        }
+
     fun processName(context: Context?): String =
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

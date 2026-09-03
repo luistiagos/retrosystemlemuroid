@@ -4,25 +4,15 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.swordfish.lemuroid.app.shared.GameMenuContract
 import com.swordfish.lemuroid.app.shared.coreoptions.LemuroidCoreOption
-import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.tv.shared.TVBaseSettingsActivity
+import com.swordfish.lemuroid.lib.injection.PerFragment
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import com.swordfish.lemuroid.lib.saves.StatesManager
-import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
+import dagger.android.ContributesAndroidInjector
+import java.io.Serializable
 import java.security.InvalidParameterException
-import javax.inject.Inject
 
 class TVGameMenuActivity : TVBaseSettingsActivity() {
-    @Inject
-    lateinit var statesManager: StatesManager
-
-    @Inject
-    lateinit var statesPreviewManager: StatesPreviewManager
-
-    @Inject
-    lateinit var inputDeviceManager: InputDeviceManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
@@ -69,19 +59,18 @@ class TVGameMenuActivity : TVBaseSettingsActivity() {
                     ?: throw InvalidParameterException("Missing EXTRA_FAST_FORWARD_SUPPORTED")
 
             val fragment =
-                TVGameMenuFragmentWrapper(
-                    statesManager,
-                    statesPreviewManager,
-                    inputDeviceManager,
-                    game,
-                    core,
-                    options,
-                    advancedOptions,
-                    numDisks,
-                    currentDisk,
-                    audioEnabled,
-                    fastForwardEnabled,
-                    fastForwardSupported,
+                TVGameMenuFragmentWrapper.newInstance(
+                    GameMenuRequest(
+                        game,
+                        core,
+                        options,
+                        advancedOptions,
+                        numDisks,
+                        currentDisk,
+                        audioEnabled,
+                        fastForwardEnabled,
+                        fastForwardSupported,
+                    ),
                 )
             supportFragmentManager.beginTransaction().replace(android.R.id.content, fragment)
                 .commit()
@@ -93,35 +82,50 @@ class TVGameMenuActivity : TVBaseSettingsActivity() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
-    class TVGameMenuFragmentWrapper(
-        private val statesManager: StatesManager,
-        private val statesPreviewManager: StatesPreviewManager,
-        private val inputDeviceManager: InputDeviceManager,
-        private val game: Game,
-        private val systemCoreConfig: SystemCoreConfig,
-        private val coreOptions: Array<LemuroidCoreOption>,
-        private val advancedCoreOptions: Array<LemuroidCoreOption>,
-        private val numDisks: Int,
-        private val currentDisk: Int,
-        private val audioEnabled: Boolean,
-        private val fastForwardEnabled: Boolean,
-        private val fastForwardSupported: Boolean,
-    ) : BaseSettingsFragmentWrapper() {
+    class TVGameMenuFragmentWrapper : BaseSettingsFragmentWrapper() {
         override fun createFragment(): Fragment {
-            return TVGameMenuFragment(
-                statesManager,
-                statesPreviewManager,
-                inputDeviceManager,
-                game,
-                systemCoreConfig,
-                coreOptions,
-                advancedCoreOptions,
-                numDisks,
-                currentDisk,
-                audioEnabled,
-                fastForwardEnabled,
-                fastForwardSupported,
-            )
+            return TVGameMenuFragment.newInstance(GameMenuRequest.from(requireArguments()))
         }
+
+        companion object {
+            fun newInstance(request: GameMenuRequest) =
+                TVGameMenuFragmentWrapper().apply {
+                    arguments = request.toBundle()
+                }
+        }
+    }
+
+    @Suppress("ArrayInDataClass")
+    data class GameMenuRequest(
+        val game: Game,
+        val systemCoreConfig: SystemCoreConfig,
+        val coreOptions: Array<LemuroidCoreOption>,
+        val advancedCoreOptions: Array<LemuroidCoreOption>,
+        val numDisks: Int,
+        val currentDisk: Int,
+        val audioEnabled: Boolean,
+        val fastForwardEnabled: Boolean,
+        val fastForwardSupported: Boolean,
+    ) : Serializable {
+        fun toBundle() =
+            Bundle(1).apply {
+                putSerializable(ARG_REQUEST, this@GameMenuRequest)
+            }
+
+        companion object {
+            private const val ARG_REQUEST = "game_menu_request"
+
+            @Suppress("DEPRECATION")
+            fun from(arguments: Bundle): GameMenuRequest =
+                arguments.getSerializable(ARG_REQUEST) as? GameMenuRequest
+                    ?: throw InvalidParameterException("Missing game menu request")
+        }
+    }
+
+    @dagger.Module
+    abstract class Module {
+        @PerFragment
+        @ContributesAndroidInjector(modules = [TVGameMenuFragment.Module::class])
+        abstract fun tvGameMenuFragment(): TVGameMenuFragment
     }
 }

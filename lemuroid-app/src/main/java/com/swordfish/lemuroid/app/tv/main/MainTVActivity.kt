@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,6 +18,7 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
+import com.swordfish.lemuroid.app.shared.game.CoreCrashFallback
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
@@ -68,6 +70,35 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
 
         // Aviso de versao nova ao entrar no app (silencioso, no maximo 1x/12h).
         TVAppUpdateDialog(this).checkOnStartup()
+
+        // Mesma explicacao que a home do celular da: o jogo anterior morreu dentro do core, sem
+        // excecao Java e sem tela de crash. A deteccao roda numa thread de fundo do
+        // MainProcessInitializer, entao aqui e uma coleta, nao uma leitura unica.
+        launchOnState(Lifecycle.State.STARTED) {
+            CoreCrashFallback.pendingNotice().safeCollect { notice ->
+                if (notice == null || isFinishing || isDestroyed) return@safeCollect
+                CoreCrashFallback.consumeNotice(applicationContext)
+                AlertDialog.Builder(this@MainTVActivity)
+                    .setTitle(R.string.core_crash_notice_title)
+                    .setMessage(
+                        if (notice.optionDisabled) {
+                            getString(
+                                R.string.core_crash_notice_message_option_disabled,
+                                notice.gameTitle,
+                                notice.coreName,
+                            )
+                        } else {
+                            getString(
+                                R.string.core_crash_notice_message,
+                                notice.gameTitle,
+                                notice.coreName,
+                            )
+                        },
+                    )
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+            }
+        }
     }
 
     override fun onActivityResult(

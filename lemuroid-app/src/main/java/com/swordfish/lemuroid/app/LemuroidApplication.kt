@@ -13,6 +13,7 @@ import com.google.android.material.color.DynamicColors
 import com.swordfish.lemuroid.app.shared.covers.CoverUtils
 import com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer
 import com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer
+import com.swordfish.lemuroid.app.shared.startup.NativeTempDir
 import com.swordfish.lemuroid.app.shared.telemetry.CrashTelemetry
 import com.swordfish.lemuroid.app.utils.android.isMainProcess
 import com.swordfish.lemuroid.ext.feature.context.ContextHandler
@@ -34,6 +35,12 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     @Inject
     lateinit var manifestQuickLoader: ManifestQuickLoader
 
+    /**
+     * Resolved once. Below API 28 naming the process is a binder round-trip, and this is asked on
+     * every onTrimMemory; the process a live Application belongs to never changes.
+     */
+    private val runningInMainProcess: Boolean by lazy { isMainProcess() }
+
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
@@ -41,9 +48,17 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
         // Error telemetry, first thing — a crash during the rest of onCreate should still report.
         // Installed in BOTH processes: the emulator (and most crashes) live in ":game", and a
         // handler installed only under isMainProcess() would miss exactly those.
+        // The process tag is passed as a lambda so that nothing has to be resolved *before* the
+        // handler exists — naming the process is itself a call that fails on old TV boxes.
         // BaseGameActivity later chains its own handler on top of this one.
-        CrashTelemetry.installUncaughtHandler(this, if (isMainProcess()) "main" else "game")
-        if (isMainProcess()) {
+        CrashTelemetry.installUncaughtHandler(this) { if (runningInMainProcess) "main" else "game" }
+
+        // Native TMPDIR, before anything can load a core. Unconditional for the same reason as the
+        // handler above: a process misdetected as "main" would skip it, and this has to hold in
+        // ":game", where the cores run. Costs a stat and a mkdir on an existing directory.
+        NativeTempDir.install(this)
+
+        if (runningInMainProcess) {
             // Native crash / ANR / low-memory kill never unwind through Java, so they are recovered
             // from the previous session via ApplicationExitInfo. The API is scoped to the package,
             // so this single scan also covers the ":game" process.
@@ -65,12 +80,12 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
         // composable doesn't trigger getCacheDir() disk I/O on the main thread (~143ms).
         // Only in the main (UI) process — the :game process never shows cover art and
         // must keep every spare MB for the emulator core on weak devices.
-        if (isMainProcess()) {
+        if (runningInMainProcess) {
             Thread { imageLoader }.start()
         }
 
         val initializeComponent =
-            if (isMainProcess()) {
+            if (runningInMainProcess) {
                 MainProcessInitializer::class.java
             } else {
                 GameProcessInitializer::class.java
@@ -104,7 +119,7 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
         // Only the main (UI) process has an image cache to trim. Touching
         // applicationContext.imageLoader in the :game process would lazily *build* an
         // ImageLoader just to clear it — wasteful exactly when memory is scarce.
-        if (!isMainProcess()) return
+        if (!runningInMainProcess) return
         when {
             // App went to background — drop the whole image memory cache; it can be
             // rebuilt from the disk cache cheaply when the user returns.
@@ -123,7 +138,7 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
 
     override fun onLowMemory() {
         super.onLowMemory()
-        if (!isMainProcess()) return
+        if (!runningInMainProcess) return
         applicationContext.imageLoader.memoryCache?.clear()
     }
 
