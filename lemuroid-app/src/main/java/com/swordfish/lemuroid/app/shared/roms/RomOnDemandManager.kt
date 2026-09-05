@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
+import com.swordfish.lemuroid.lib.library.catalog.CatalogRemovals
 import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
 import com.swordfish.lemuroid.lib.library.db.dao.GameDao
 import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
@@ -295,6 +296,42 @@ class RomOnDemandManager(
         }
         downloadedRomDao.delete(game.systemId, game.fileName)
         LibraryIndexScheduler.triggerCatalogQuickLoad(context)
+    }
+
+    /**
+     * Removes the game from the catalog entirely: deletes the ROM from disk (no 0-byte
+     * placeholder left behind, unlike [deleteRom]), drops the `games` rows and records the
+     * removal in [CatalogRemovals] so a later manifest reload does not bring it back.
+     *
+     * The catalog groups ROMs by `(systemId, title)` and shows only the representative, so
+     * every variant of the title goes too — leaving them would keep the game in search
+     * while its card vanished from the catalog.
+     *
+     * Undone in bulk by the "restaurar catálogo" action in settings.
+     */
+    suspend fun deleteFromCatalog(game: Game): Unit = withContext(Dispatchers.IO) {
+        val variants = runCatching {
+            gameDao.selectVariantsByTitleOnce(game.systemId, game.title)
+        }.getOrNull()?.takeIf { it.isNotEmpty() } ?: listOf(game)
+
+        for (variant in variants) {
+            val destFile = resolveDestFile(variant)
+            if (destFile.exists()) {
+                val systemDir = File(directoriesManager.getInternalRomsDirectory(), variant.systemId)
+                val parentDir = destFile.parentFile
+                if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
+                    // Multi-disc extraction directory — take the whole folder.
+                    parentDir.deleteRecursively()
+                } else {
+                    destFile.delete()
+                }
+            }
+            downloadedRomDao.delete(variant.systemId, variant.fileName)
+        }
+
+        CatalogRemovals.add(context, variants.map { it.downloadKey })
+        gameDao.delete(variants)
+        Timber.i("deleteFromCatalog: removed ${variants.size} row(s) for ${game.systemId}/${game.title}")
     }
 
     fun isManagedRom(game: Game): Boolean {

@@ -13,10 +13,22 @@ import com.swordfish.lemuroid.lib.storage.SmartStoragePicker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.withContext
+import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
+import com.swordfish.lemuroid.lib.library.catalog.CatalogRemovals
+import com.swordfish.lemuroid.lib.library.catalog.ManifestQuickLoader
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
 import com.swordfish.lemuroid.app.shared.roms.RomsDownloadManager
 import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
@@ -53,6 +65,8 @@ class SettingsViewModel(
         val defaultRomsDirPath: String = "",
     )
 
+    private val appContext = context.applicationContext
+
     val indexingInProgress = PendingOperationsMonitor(context).anyLibraryOperationInProgress()
 
     val directoryScanInProgress = PendingOperationsMonitor(context).isDirectoryScanInProgress()
@@ -83,6 +97,41 @@ class SettingsViewModel(
                     defaultRomsDirPath = defaultRomsDir.absolutePath,
                 )
             }
+
+    /** How many catalog games the user removed — 0 hides the restore action's counter. */
+    val catalogRemovalCount: StateFlow<Int> =
+        flow { emitAll(CatalogRemovals.observe(appContext)) }
+            .map { it.size }
+            .flowOn(Dispatchers.IO)
+            .stateIn(viewModelScope, SharingStarted.Lazily, 0)
+
+    private val _catalogResetInProgress = MutableStateFlow(false)
+    val catalogResetInProgress: StateFlow<Boolean> = _catalogResetInProgress.asStateFlow()
+
+    private val _catalogResetCompleted = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val catalogResetCompleted: SharedFlow<Unit> = _catalogResetCompleted.asSharedFlow()
+
+    /**
+     * Brings back every game the user removed from the catalog: clears the removal list and
+     * forces a full manifest pass, which re-inserts the missing rows. Downloaded ROMs deleted
+     * along the way are not restored — the games come back as placeholders, ready to download.
+     */
+    fun resetCatalog() {
+        if (_catalogResetInProgress.value) return
+        viewModelScope.launch {
+            _catalogResetInProgress.value = true
+            try {
+                withContext(Dispatchers.IO) {
+                    CatalogRemovals.clear(appContext)
+                    ManifestQuickLoader.forceReload(appContext)
+                }
+                LibraryIndexScheduler.triggerCatalogQuickLoad(appContext)
+            } finally {
+                _catalogResetInProgress.value = false
+                _catalogResetCompleted.tryEmit(Unit)
+            }
+        }
+    }
 
     fun changeLocalStorageFolder() {
         settingsInteractor.changeLocalStorageFolder()

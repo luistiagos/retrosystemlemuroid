@@ -102,6 +102,25 @@ Isso elimina toda a lógica de agrupamento em runtime: o app só lê o campo e m
    - **Batch UPDATE de `popularityIndex` + `isRepresentative`** via `updateManifestFields()` em transação para jogos que já existiam (sincroniza mudanças no manifest após app update / schema bump).
    - Salva `versionCode` e `MANIFEST_SCHEMA_VERSION` em SharedPreferences.
 
+### Remoções do catálogo (`CatalogRemovals`)
+
+Jogos que o usuário exclui do catálogo (menu de contexto do jogo ▸ **Excluir do catálogo**, nas
+duas UIs — Compose no mobile, `GameContextMenuListener` na TV) têm a chave
+`"systemId/fileName"` gravada em `CatalogRemovals` (SharedPreferences `catalog_removals_prefs`).
+Só deletar a linha de `games` **não** é permanente: qualquer passada completa do
+`ManifestQuickLoader` (troca de `versionCode`, bump de `MANIFEST_SCHEMA_VERSION`) reinsere tudo do
+manifest e o jogo voltaria sozinho.
+
+O `load()` pula essas chaves ao montar a lista `games` e desconta `removedKeys.size` do
+`expectedSize` do fast-skip. **Restaurar catálogo** (mobile: Ajustes ▸ ROMs; TV: Ajustes ▸
+Diversos) limpa a lista, chama `ManifestQuickLoader.forceReload(context)` e dispara o quick-load.
+
+> ⚠️ `forceReload` grava a flag `force_full_reload` — **não** limpa `loaded_manifest_schema`.
+> Zerar o schema faria `loadedSchema` virar `-1` e re-disparar todas as migrações one-time
+> guardadas por `loadedSchema < N` (a reclassificação de arcade da v27 varre o manifest inteiro
+> mexendo em arquivos). Ao mexer nos fast-paths do loader, manter os dois `if` guardados por
+> `!forceFullReload`.
+
 ### Prebuilt DB Asset (`retrograde-prebuilt.db`)
 
 Para eliminar a tela "preparando ambiente" no primeiro startup pós-instalação (~5-15s), o APK contém um SQLite pre-populado em `assets/retrograde-prebuilt.db` com todos os ~29k games + FTS index já indexado.

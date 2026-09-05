@@ -10,12 +10,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -69,6 +75,16 @@ fun SettingsScreen(
             .collectAsState(false)
             .value
 
+    val context = LocalContext.current
+    val catalogRemovalCount by viewModel.catalogRemovalCount.collectAsState()
+    val catalogResetInProgress by viewModel.catalogResetInProgress.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.catalogResetCompleted.collect {
+            context.displayToast(R.string.settings_reset_catalog_done)
+        }
+    }
+
     LemuroidSettingsPage(modifier = modifier) {
         RomsSettings(
             state = state,
@@ -78,6 +94,9 @@ fun SettingsScreen(
             smartStorageUsingRemovable = state.smartStorageUsingRemovable,
             smartStorageUserOverride = state.smartStorageUserOverride,
             smartStorageVolumes = state.smartStorageVolumes,
+            catalogRemovalCount = catalogRemovalCount,
+            catalogResetInProgress = catalogResetInProgress,
+            onResetCatalog = { viewModel.resetCatalog() },
         )
         GeneralSettings()
         InputSettings(navController = navController)
@@ -280,6 +299,9 @@ private fun RomsSettings(
     smartStorageUsingRemovable: Boolean,
     smartStorageUserOverride: Boolean,
     smartStorageVolumes: List<com.swordfish.lemuroid.lib.storage.SmartStoragePicker.VolumeInfo>,
+    catalogRemovalCount: Int,
+    catalogResetInProgress: Boolean,
+    onResetCatalog: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -349,6 +371,11 @@ private fun RomsSettings(
                 enabled = !indexingInProgress,
             )
         }
+        ResetCatalogItem(
+            removalCount = catalogRemovalCount,
+            resetInProgress = catalogResetInProgress,
+            onResetCatalog = onResetCatalog,
+        )
         val storageProvidersPrefs = context.getSharedPreferences(com.swordfish.lemuroid.lib.storage.StorageProviderRegistry.PREF_NAME, android.content.Context.MODE_PRIVATE)
 
         val allFilesState = booleanPreferenceState("all_files", false, storageProvidersPrefs)
@@ -402,6 +429,57 @@ private fun RomsSettings(
             ),
             title = { Text(text = stringResource(id = R.string.settings_wifi_only_title)) },
             subtitle = { Text(text = stringResource(id = R.string.settings_wifi_only_subtitle)) },
+        )
+    }
+}
+
+/**
+ * Brings back the games removed one by one with "excluir do catálogo" in the game context menu.
+ * Always visible (not only when something was removed) so a user who wiped part of the catalog
+ * on an older session can still find the way back.
+ */
+@Composable
+private fun ResetCatalogItem(
+    removalCount: Int,
+    resetInProgress: Boolean,
+    onResetCatalog: () -> Unit,
+) {
+    var confirmVisible by remember { mutableStateOf(false) }
+
+    LemuroidSettingsMenuLink(
+        title = { Text(text = stringResource(id = R.string.settings_title_reset_catalog)) },
+        subtitle = {
+            Text(
+                text = when {
+                    resetInProgress -> stringResource(id = R.string.settings_reset_catalog_in_progress)
+                    removalCount > 0 ->
+                        stringResource(id = R.string.settings_description_reset_catalog_count, removalCount)
+                    else -> stringResource(id = R.string.settings_description_reset_catalog)
+                },
+            )
+        },
+        enabled = !resetInProgress,
+        onClick = { confirmVisible = true },
+    )
+
+    if (confirmVisible) {
+        AlertDialog(
+            onDismissRequest = { confirmVisible = false },
+            title = { Text(stringResource(R.string.settings_title_reset_catalog)) },
+            text = { Text(stringResource(R.string.settings_reset_catalog_confirm_message)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    confirmVisible = false
+                    onResetCatalog()
+                }) {
+                    Text(stringResource(R.string.ok))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { confirmVisible = false }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            },
         )
     }
 }

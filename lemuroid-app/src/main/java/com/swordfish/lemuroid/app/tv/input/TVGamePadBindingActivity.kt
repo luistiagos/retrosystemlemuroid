@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.app.tv.input
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.MotionEvent
 import androidx.leanback.app.GuidedStepSupportFragment
 import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.app.shared.input.InputBindingUpdater
@@ -50,5 +51,16 @@ class TVGamePadBindingActivity : BaseTVActivity() {
         }
 
         return result
+    }
+
+    // Gatilho analogico nao gera KeyEvent na maioria dos controles. Aqui a janela da
+    // Activity e a unica em foco, entao o override basta.
+    override fun onGenericMotionEvent(event: MotionEvent): Boolean {
+        if (inputBindingUpdater.handleMotionEvent(event)) {
+            finish()
+            return true
+        }
+
+        return super.onGenericMotionEvent(event)
     }
 }

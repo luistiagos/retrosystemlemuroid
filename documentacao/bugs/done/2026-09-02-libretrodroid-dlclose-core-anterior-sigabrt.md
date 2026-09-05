@@ -138,3 +138,15 @@ limpando esse estado sem descarregar a biblioteca antiga.
 ## Pendente
 
 - Validar em device, na mesma sessão do processo `:game`: PSP → GameCube e Saturn → PSX.
+
+## 🔁 Recorrência — triagem de 2026-09-03
+
+**1 error novo: 4182.** Xiaomi 2412DPC0AG, arm64-v8a, Android 16, app **1.17.12**,
+`system=psp; core=ppsspp; game=Dante's Inferno`. Mesma assinatura
+(`libppsspp_libretro_android.so`, `signal 6 (SIGABRT), code SI_QUEUE`), elevando o grupo de 9
+para **10 ocorrências**.
+
+**Não é regressão.** O campo `when` do report é `2026-09-01 20:16:03` — ou seja, o crash
+aconteceu **antes** de o AAR corrigido ser empacotado (2026-09-02); só a coleta pelo
+`ApplicationExitInfo` caiu na sessão seguinte, em 2026-09-03. O critério de reabertura continua
+sendo o mesmo: **`when` posterior à distribuição do AAR corrigido**.

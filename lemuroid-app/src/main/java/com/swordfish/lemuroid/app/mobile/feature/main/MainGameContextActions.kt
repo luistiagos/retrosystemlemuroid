@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AppShortcut
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.PlayArrow
@@ -58,6 +59,7 @@ fun MainGameContextActions(
     onFavoriteToggle: (Game, Boolean) -> Unit,
     onCreateShortcut: (Game) -> Unit,
     onDeleteRom: ((Game) -> Unit)? = null,
+    onDeleteFromCatalog: ((Game) -> Unit)? = null,
 ) {
     val modalSheetState = rememberModalBottomSheetState(true)
     val selectedGame = selectedGameState.value
@@ -85,6 +87,7 @@ fun MainGameContextActions(
                 onCreateShortcut = onCreateShortcut,
                 isGameDownloaded = isGameDownloaded,
                 onDeleteRom = onDeleteRom,
+                onDeleteFromCatalog = onDeleteFromCatalog,
             )
         }
     }
@@ -101,6 +104,7 @@ private fun ContextActionContent(
     onCreateShortcut: (Game) -> Unit,
     isGameDownloaded: Boolean = true,
     onDeleteRom: ((Game) -> Unit)? = null,
+    onDeleteFromCatalog: ((Game) -> Unit)? = null,
 ) {
     Column(
         modifier =
@@ -158,12 +162,27 @@ private fun ContextActionContent(
             )
         }
 
+        // Frees the disk space but keeps the catalog entry, so the game can be downloaded
+        // again later. Hidden when there is no downloaded file to delete.
         if (isGameDownloaded && onDeleteRom != null) {
             ContextActionEntry(
                 label = stringResource(id = R.string.game_context_menu_delete_rom),
                 icon = Icons.Default.Delete,
                 onClick = {
                     onDeleteRom(selectedGame)
+                    selectedGameState.value = null
+                },
+            )
+        }
+
+        // Drops the game from the catalog too. Always available — a placeholder the user
+        // never wants to see again is exactly the case where this is useful.
+        if (onDeleteFromCatalog != null) {
+            ContextActionEntry(
+                label = stringResource(id = R.string.game_context_menu_delete_from_catalog),
+                icon = Icons.Default.DeleteForever,
+                onClick = {
+                    onDeleteFromCatalog(selectedGame)
                     selectedGameState.value = null
                 },
             )

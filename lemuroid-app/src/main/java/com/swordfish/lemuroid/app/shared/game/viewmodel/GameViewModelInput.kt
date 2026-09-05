@@ -11,12 +11,15 @@ import androidx.lifecycle.LifecycleOwner
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.input.InputKey
+import com.swordfish.lemuroid.app.shared.input.RetroKey
+import com.swordfish.lemuroid.app.shared.input.inputclass.AXIS_PRESS_THRESHOLD
 import com.swordfish.lemuroid.app.shared.input.inputclass.getInputClass
 import com.swordfish.lemuroid.app.shared.settings.ControllerConfigsManager
 import com.swordfish.lemuroid.app.shared.settings.GameShortcutType
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
 import com.swordfish.lemuroid.common.kotlin.NTuple2
+import com.swordfish.lemuroid.common.kotlin.NTuple3
 import com.swordfish.lemuroid.common.kotlin.NTuple4
 import com.swordfish.lemuroid.common.kotlin.filterNotNullValues
 import com.swordfish.lemuroid.common.kotlin.toIndexedMap
@@ -359,12 +362,7 @@ class GameViewModelInput(
             .safeCollect { (shortcuts, ports, bindings, event) ->
                 val (device, action, keyCode) = event
                 val port = ports(device)
-                val rawBindKeyCode = bindings(device)[InputKey(keyCode)]?.keyCode
-                val bindKeyCode = if (rawBindKeyCode == null || rawBindKeyCode == KeyEvent.KEYCODE_UNKNOWN || rawBindKeyCode == 0) {
-                    keyCode
-                } else {
-                    rawBindKeyCode
-                }
+                val bindKeyCode = resolveBoundKeyCode(bindings(device), keyCode)
                 android.util.Log.d("INPUT_DIAG", "keysFlow deviceId=${device?.id} deviceName=${device?.name} keyCode=$keyCode bindKeyCode=$bindKeyCode port=$port action=$action")
 
                 if (port == 0) {
@@ -398,29 +396,46 @@ class GameViewModelInput(
             }
     }
 
+    // Um binding ausente, KEYCODE_UNKNOWN ou 0 significa "sem remapeamento": manda a
+    // propria tecla fisica. Usado pelos dois caminhos de entrada - teclas e gatilhos
+    // analogicos - para que ambos respondam ao mesmo mapa.
+    private fun resolveBoundKeyCode(
+        bindings: Map<InputKey, RetroKey>,
+        keyCode: Int,
+    ): Int {
+        val bound = bindings[InputKey(keyCode)]?.keyCode
+        return if (bound == null || bound == KeyEvent.KEYCODE_UNKNOWN || bound == 0) {
+            keyCode
+        } else {
+            bound
+        }
+    }
+
     private suspend fun initializeVirtualGamePadMotionsFlow() {
         val events =
             combine(
                 inputDeviceManager.getGamePadsPortMapperObservable(),
+                inputDeviceManager.getInputBindingsObservable(),
                 motionEventsFlow,
-                ::NTuple2,
+                ::NTuple3,
             )
 
         events
-            .mapNotNull { (ports, event) ->
-                ports(event.device)?.let { it to event }
+            .mapNotNull { (ports, bindings, event) ->
+                ports(event.device)?.let { NTuple3(it, bindings(event.device), event) }
             }
-            .map { (port, event) ->
+            .map { (port, deviceBindings, event) ->
                 val axes = event.device.getInputClass().getAxesMap().entries
 
                 axes.map { (axis, button) ->
                     val action =
-                        if (event.getAxisValue(axis) > 0.5) {
+                        if (event.getAxisValue(axis) > AXIS_PRESS_THRESHOLD) {
                             KeyEvent.ACTION_DOWN
                         } else {
                             KeyEvent.ACTION_UP
                         }
-                    SingleAxisEvent(axis, action, button, port)
+                    // O gatilho e a tecla fisica; o binding decide o que sai para o core.
+                    SingleAxisEvent(axis, action, resolveBoundKeyCode(deviceBindings, button), port)
                 }.toSet()
             }
             .scan(emptySet<SingleAxisEvent>()) { prev, next ->

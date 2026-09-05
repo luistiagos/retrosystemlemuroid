@@ -246,6 +246,11 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
             val pendingDownloadGame = remember { mutableStateOf<Game?>(null) }
 
+            // Both deletions are destructive and sit right below "pin to launcher" in the
+            // context menu, so each one goes through a confirmation dialog first.
+            val pendingDeleteRomGame = remember { mutableStateOf<Game?>(null) }
+            val pendingDeleteCatalogGame = remember { mutableStateOf<Game?>(null) }
+
             // Game selected to show variant-picker modal (has multiple ROMs with same title).
             val pendingVariantsGame = remember { mutableStateOf<Game?>(null) }
             val variantGames = remember { mutableStateOf<List<Game>>(emptyList()) }
@@ -582,8 +587,12 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             MainGameContextActions(
                 selectedGameState = selectedGameState,
                 shortcutSupported = gameInteractor.supportShortcuts(),
+                // A ROM downloaded before downloaded_roms tracking existed (or imported by
+                // the user) has no row in that table, so fall back to what is on disk —
+                // otherwise "delete downloaded ROM" silently disappears for those games.
                 isGameDownloaded = selectedGameState.value
-                    ?.let { downloadedGameKeys.contains(it.downloadKey) } ?: true,
+                    ?.let { downloadedGameKeys.contains(it.downloadKey) || !isGamePlaceholder(it) }
+                    ?: true,
                 onGamePlay = { game ->
                     if (!isGamePlaceholder(game)) {
                         gameInteractor.onGamePlay(game)
@@ -608,12 +617,61 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     gameInteractor.onFavoriteToggle(game, isFavorite)
                 },
                 onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
-                onDeleteRom = { game ->
-                    lifecycleScope.launch {
-                        romOnDemandManager.deleteRom(game)
-                    }
-                },
+                onDeleteRom = { game -> pendingDeleteRomGame.value = game },
+                onDeleteFromCatalog = { game -> pendingDeleteCatalogGame.value = game },
             )
+
+            pendingDeleteRomGame.value?.let { game ->
+                AlertDialog(
+                    onDismissRequest = { pendingDeleteRomGame.value = null },
+                    title = { Text(stringResource(R.string.delete_rom_confirm_title)) },
+                    text = { Text(stringResource(R.string.delete_rom_confirm_message, game.title)) },
+                    confirmButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            pendingDeleteRomGame.value = null
+                            lifecycleScope.launch {
+                                romOnDemandManager.deleteRom(game)
+                            }
+                        }) {
+                            Text(stringResource(R.string.delete_confirm_action))
+                        }
+                    },
+                    dismissButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            pendingDeleteRomGame.value = null
+                        }) {
+                            Text(stringResource(R.string.cancel))
+                        }
+                    },
+                )
+            }
+
+            pendingDeleteCatalogGame.value?.let { game ->
+                AlertDialog(
+                    onDismissRequest = { pendingDeleteCatalogGame.value = null },
+                    title = { Text(stringResource(R.string.delete_from_catalog_confirm_title)) },
+                    text = {
+                        Text(stringResource(R.string.delete_from_catalog_confirm_message, game.title))
+                    },
+                    confirmButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            pendingDeleteCatalogGame.value = null
+                            lifecycleScope.launch {
+                                romOnDemandManager.deleteFromCatalog(game)
+                            }
+                        }) {
+                            Text(stringResource(R.string.delete_confirm_action))
+                        }
+                    },
+                    dismissButton = {
+                        androidx.compose.material3.TextButton(onClick = {
+                            pendingDeleteCatalogGame.value = null
+                        }) {
+                            Text(stringResource(R.string.cancel))
+                        }
+                    },
+                )
+            }
 
             pendingDownloadGame.value?.let { game ->
                 AlertDialog(
@@ -645,7 +703,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             // simplesmente sumia no meio da partida. O aviso vem aqui, na home, e nunca durante o
             // boot de um jogo — enfileirar UI com a main thread carregando o core e o que derruba
             // as TV box de Android 7.1 (pitfall 7 do CLAUDE.md).
-            val coreCrashNotice = CoreCrashFallback.pendingNotice().collectAsState()
+            val coreCrashNotice = CoreCrashFallback.pendingNotice.collectAsState()
             coreCrashNotice.value?.let { crashNotice ->
                 AlertDialog(
                     onDismissRequest = { CoreCrashFallback.consumeNotice(applicationContext) },

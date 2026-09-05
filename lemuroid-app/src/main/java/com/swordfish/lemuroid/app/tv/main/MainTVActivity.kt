@@ -75,7 +75,7 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
         // excecao Java e sem tela de crash. A deteccao roda numa thread de fundo do
         // MainProcessInitializer, entao aqui e uma coleta, nao uma leitura unica.
         launchOnState(Lifecycle.State.STARTED) {
-            CoreCrashFallback.pendingNotice().safeCollect { notice ->
+            CoreCrashFallback.pendingNotice.safeCollect { notice ->
                 if (notice == null || isFinishing || isDestroyed) return@safeCollect
                 CoreCrashFallback.consumeNotice(applicationContext)
                 AlertDialog.Builder(this@MainTVActivity)
@@ -176,6 +176,7 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                 onPlaceholderGame = { game, onComplete ->
                     TVRomDownloadDialog(activity, romOnDemandManager).show(game, onComplete)
                 },
+                romOnDemandManager = romOnDemandManager,
             )
         }
     }

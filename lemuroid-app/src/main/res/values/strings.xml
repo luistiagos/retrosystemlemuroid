@@ -109,6 +109,12 @@
     <string name="game_context_menu_restart">Restart</string>
     <string name="game_context_menu_create_shortcut">Pin to launcher</string>
     <string name="game_context_menu_delete_rom">Delete downloaded ROM</string>
+    <string name="game_context_menu_delete_from_catalog">Remove from catalog</string>
+    <string name="delete_confirm_action">Delete</string>
+    <string name="delete_rom_confirm_title">Delete downloaded ROM?</string>
+    <string name="delete_rom_confirm_message">"%1$s" will be deleted from storage to free up space. The game stays in the catalog and can be downloaded again.</string>
+    <string name="delete_from_catalog_confirm_title">Remove from catalog?</string>
+    <string name="delete_from_catalog_confirm_message">"%1$s" will be removed from the catalog and deleted from storage. Use "Restore catalog" in settings to bring it back.</string>
     <string name="rom_download_dialog_title">Download ROM</string>
     <string name="rom_download_dialog_message">This ROM is not downloaded yet. Download it now to play?</string>
     <string name="rom_download_dialog_confirm">Download</string>
@@ -226,6 +232,12 @@
     <!-- WiFi-only download setting -->
     <string name="settings_wifi_only_title">Download over WiFi only</string>
     <string name="settings_wifi_only_subtitle">Warn when download is not on WiFi</string>
+    <string name="settings_title_reset_catalog">Restore catalog</string>
+    <string name="settings_description_reset_catalog">Bring back the games removed from the catalog</string>
+    <string name="settings_description_reset_catalog_count">%1$d game(s) removed from the catalog will be restored</string>
+    <string name="settings_reset_catalog_in_progress">Restoring catalog…</string>
+    <string name="settings_reset_catalog_confirm_message">Every game removed from the catalog comes back as a placeholder, ready to download again. Downloaded ROMs already deleted are not restored.</string>
+    <string name="settings_reset_catalog_done">Catalog restored</string>
 
     <string name="notification_download_roms_title">Downloading ROMs Pack</string>
     <string name="notification_download_roms_message">Download continues in background even with screen off.</string>

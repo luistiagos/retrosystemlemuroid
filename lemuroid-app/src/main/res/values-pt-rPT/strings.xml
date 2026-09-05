@@ -206,6 +206,12 @@
 
     <!-- Contexto de jogo / download por pedido -->
     <string name="game_context_menu_delete_rom">Eliminar ROM descarregada</string>
+    <string name="game_context_menu_delete_from_catalog">Remover do catálogo</string>
+    <string name="delete_confirm_action">Eliminar</string>
+    <string name="delete_rom_confirm_title">Eliminar ROM descarregada?</string>
+    <string name="delete_rom_confirm_message">"%1$s" será apagado do armazenamento para libertar espaço. O jogo permanece no catálogo e pode ser descarregado outra vez.</string>
+    <string name="delete_from_catalog_confirm_title">Remover do catálogo?</string>
+    <string name="delete_from_catalog_confirm_message">"%1$s" sai do catálogo e é apagado do armazenamento. Use "Restaurar catálogo" nas definições para o trazer de volta.</string>
     <string name="rom_download_dialog_title">Descarregar ROM</string>
     <string name="rom_download_dialog_message">Esta ROM ainda não foi descarregada. Descarregar agora para jogar?</string>
     <string name="rom_download_dialog_confirm">Descarregar</string>
@@ -289,6 +295,12 @@
     <!-- Definição apenas WiFi -->
     <string name="settings_wifi_only_title">Descarregar apenas via WiFi</string>
     <string name="settings_wifi_only_subtitle">Avisar quando o descarregamento não estiver em WiFi</string>
+    <string name="settings_title_reset_catalog">Restaurar catálogo</string>
+    <string name="settings_description_reset_catalog">Traz de volta os jogos removidos do catálogo</string>
+    <string name="settings_description_reset_catalog_count">%1$d jogo(s) removido(s) do catálogo serão restaurados</string>
+    <string name="settings_reset_catalog_in_progress">A restaurar catálogo…</string>
+    <string name="settings_reset_catalog_confirm_message">Todos os jogos removidos do catálogo voltam como placeholder, prontos para descarregar outra vez. As ROMs já apagadas não são restauradas.</string>
+    <string name="settings_reset_catalog_done">Catálogo restaurado</string>
 
     <!-- Notificação de descarregamento -->
     <string name="notification_download_roms_title">A descarregar Pacote de ROMs</string>

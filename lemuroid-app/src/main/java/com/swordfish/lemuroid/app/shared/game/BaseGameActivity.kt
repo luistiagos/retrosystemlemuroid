@@ -358,7 +358,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                             it.tiltConfigurations,
                         )
                     is GameViewModelSideEffects.UiEffect.ShowToast -> displayToast(it.message)
-                    is GameViewModelSideEffects.UiEffect.SuccessfulFinish -> performSuccessfulActivityFinish(it.savesFailed)
+                    is GameViewModelSideEffects.UiEffect.SuccessfulFinish ->
+                        performSuccessfulActivityFinish(it.savesFailed)
                     is GameViewModelSideEffects.UiEffect.FailureFinish -> performErrorFinish(it.message, it.isRomLoadFailure)
                     is GameViewModelSideEffects.UiEffect.SaveQuickSave -> performSaveQuickSave()
                     is GameViewModelSideEffects.UiEffect.LoadQuickSave -> performLoadQuickSave()

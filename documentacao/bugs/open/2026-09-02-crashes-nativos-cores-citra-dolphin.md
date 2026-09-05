@@ -180,10 +180,70 @@ dolphin). Para o citra, *Ocarina of Time 3D* num Galaxy da linha S25 é o caso m
 - [ ] Citra: testar um build mais recente do core no mesmo aparelho.
 - [ ] Dolphin: tentar forçar backend/driver alternativo nas opções do core em aparelhos
       Adreno — antes, achar qual chamada GL recebe o buffer inválido.
-- [ ] Genérico (vale para os três cores): avisar o usuário quando a sessão anterior morreu
-      em código nativo, em vez de o app fechar sem explicação. O `CoreCrashFallback` já
-      **detecta** exatamente isso e só falta a UI. Mas **sem `Toast` durante o boot do
-      jogo** (pitfall 7).
+- [x] Genérico (vale para os três cores): avisar o usuário quando a sessão anterior morreu
+      em código nativo, em vez de o app fechar sem explicação — implementado **e validado em
+      device** em 2026-09-03, ver "Aviso ao usuário" abaixo.
+
+## Aviso ao usuário quando o core mata a sessão (2026-09-03)
+
+Um core que aborta sozinho leva o processo `:game` junto: não há exceção Java, não há tela de
+crash, não há nada em que o usuário possa agir. O app **some** no meio da partida e volta como
+se nada tivesse acontecido — e a leitura natural disso é "o app é bugado", não "este núcleo não
+roda nesta GPU". O `CoreCrashFallback` já detectava a morte nativa para virar a opção do citra;
+o que faltava era contar.
+
+**O que mudou em [CoreCrashFallback.kt](../../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/CoreCrashFallback.kt):**
+
+1. A detecção deixou de ser exclusiva do 3DS. Antes, `apply()` saía cedo com
+   `if (!session.contains("system=3ds")) return` — um crash nativo de dolphin ou flycast não
+   produzia efeito nenhum. Agora a detecção é genérica e o flip da opção do citra virou
+   `applyCitraFallback()`, chamado de dentro dela.
+2. `nativeCrashDuringLastSession()` devolve o **timestamp** do exit (era `Boolean`), que vai
+   para `PREF_LAST_NOTIFIED_EXIT_AT`. Sem isso o mesmo crash seria anunciado em toda abertura
+   do app: o breadcrumb do `TelemetryContext` só é limpo numa saída limpa, então ele continua
+   lá depois de uma morte nativa.
+3. `pendingNotice: StateFlow<Notice?>` com o jogo, o núcleo e se alguma opção foi desligada.
+   É `StateFlow` e não uma leitura de preferência porque `applyAsync` roda numa thread de
+   fundo do `MainProcessInitializer` e pode terminar **depois** da home já composta — uma tela
+   que lesse a preferência uma vez, na entrada, simplesmente perderia o aviso. Também é `val`
+   e não `fun`: `collectAsState()` chaveia pela instância do flow, e uma função devolveria um
+   wrapper novo a cada recomposição, reiniciando a coleta.
+4. O `Notice` é persistido em `PREF_PENDING_NOTICE` e só sai no `consumeNotice()`, para
+   sobreviver ao app ser morto antes de o usuário ver.
+
+**Onde aparece:** diálogo na home — [MainActivity.kt](../../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/main/MainActivity.kt)
+(Compose) e [MainTVActivity.kt](../../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/tv/main/MainTVActivity.kt)
+(`AlertDialog` comum, o mesmo padrão do `TVAppUpdateDialog`). **Na home, nunca durante o boot
+do jogo** — enfileirar UI com a main thread carregando o core é exatamente o que derruba as TV
+box de Android 7.1 (pitfall 7). Duas strings, en + pt-BR: uma genérica ("o núcleo X travou; se
+persistir, troque de núcleo nas Configurações") e outra para quando o fallback do citra agiu
+("os shaders de hardware foram desligados… você pode religá-los").
+
+**Validado em device (2026-09-03).** Moto G86 5G, Android 16, app `1.17.12-DEBUG`.
+
+O crash real do citra depende de GPU Xclipse, que não está em mãos — mas o que o
+`CoreCrashFallback` lê não é o sinal e sim `ApplicationExitInfo.REASON_CRASH_NATIVE` do
+processo `:game`, e um SIGSEGV entregue por sinal produz exatamente isso. Roteiro em
+`test_core_crash_notice.py`: abre *Super Mario World* (snes/snes9x), mata o `:game`, e só então
+reabre o app.
+
+| Passo | Resultado |
+|---|---|
+| breadcrumb gravado no início da sessão | `system=snes; core=snes9x; game=Super Mario World` |
+| `run-as … kill -11 <pid do :game>` | `dumpsys activity exit-info` → `process=…:game reason=5 (APP CRASH(NATIVE)) status=11` |
+| reabrir o app | diálogo **"O jogo fechou inesperadamente"** / *"Super Mario World parou porque o núcleo snes9x travou. Se continuar acontecendo, tente outro núcleo para este sistema nas Configurações."* |
+| tocar em OK | some, e `core_crash_pending_notice` sai das preferências |
+| reabrir de novo | **não** volta — `core_crash_last_notified_exit_at` segura, e o breadcrumb continua lá (só some numa saída limpa) |
+| `core_fallback_3ds_hw_shaders_applied` | **ausente** — a sessão era SNES, então o aviso genérico disparou e o fallback específico do citra corretamente não |
+
+A última linha é a prova de que a generalização funcionou: antes desta mudança um crash nativo
+fora do 3DS não produzia efeito nenhum, nem aviso nem flag.
+
+> ⚠️ **`adb shell kill` não serve** para isto: roda com o uid `shell`, que não pode sinalizar um
+> processo do app — o kill falha **em silêncio** e o teste passa a não medir nada (foi o que
+> aconteceu nas duas primeiras tentativas, com o `exit-info` mostrando só `FORCE STOP`). Tem que
+> ser `adb shell run-as <pkg> kill -11 <pid>`. E o `dumpsys` imprime `APP CRASH(NATIVE)`, não
+> `CRASH_NATIVE` — um assert procurando a constante do SDK falha mesmo com o teste correto.
 
 ## Lição
 

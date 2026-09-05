@@ -42,5 +42,21 @@ class GameContextMenuListener(
                 true
             }
         }
+
+        if (gameInteractor.supportsRomDeletion()) {
+            // Frees the disk space but keeps the catalog entry — nothing to delete when the
+            // game is still a placeholder, hence the guard.
+            if (gameInteractor.isRomDownloaded(game)) {
+                menu.add(R.string.game_context_menu_delete_rom).setOnMenuItemClickListener {
+                    gameInteractor.onDeleteRom(game)
+                    true
+                }
+            }
+
+            menu.add(R.string.game_context_menu_delete_from_catalog).setOnMenuItemClickListener {
+                gameInteractor.onDeleteFromCatalog(game)
+                true
+            }
+        }
     }
 }

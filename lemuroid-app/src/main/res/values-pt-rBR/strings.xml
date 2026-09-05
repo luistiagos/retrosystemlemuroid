@@ -269,6 +269,12 @@
 
     <!-- Context menu / on-demand download -->
     <string name="game_context_menu_delete_rom">Excluir ROM baixada</string>
+    <string name="game_context_menu_delete_from_catalog">Excluir do catálogo</string>
+    <string name="delete_confirm_action">Excluir</string>
+    <string name="delete_rom_confirm_title">Excluir ROM baixada?</string>
+    <string name="delete_rom_confirm_message">"%1$s" será apagado do armazenamento para liberar espaço. O jogo continua no catálogo e pode ser baixado de novo.</string>
+    <string name="delete_from_catalog_confirm_title">Excluir do catálogo?</string>
+    <string name="delete_from_catalog_confirm_message">"%1$s" sai do catálogo e é apagado do armazenamento. Use "Restaurar catálogo" nos ajustes para trazer de volta.</string>
     <string name="rom_download_dialog_title">Baixar ROM</string>
     <string name="rom_download_dialog_message">Esta ROM ainda não foi baixada. Fazer download agora para jogar?</string>
     <string name="rom_download_dialog_confirm">Baixar</string>
@@ -335,6 +341,12 @@
     <!-- WiFi-only setting -->
     <string name="settings_wifi_only_title">Baixar somente via WiFi</string>
     <string name="settings_wifi_only_subtitle">Avisar quando o download não estiver em WiFi</string>
+    <string name="settings_title_reset_catalog">Restaurar catálogo</string>
+    <string name="settings_description_reset_catalog">Traz de volta os jogos excluídos do catálogo</string>
+    <string name="settings_description_reset_catalog_count">%1$d jogo(s) excluído(s) do catálogo serão restaurados</string>
+    <string name="settings_reset_catalog_in_progress">Restaurando catálogo…</string>
+    <string name="settings_reset_catalog_confirm_message">Todos os jogos excluídos do catálogo voltam como placeholder, prontos para baixar de novo. As ROMs já apagadas não são restauradas.</string>
+    <string name="settings_reset_catalog_done">Catálogo restaurado</string>
 
     <!-- ROM transfer -->
     <string name="settings_transferring_roms_title">Transferindo ROMs</string>

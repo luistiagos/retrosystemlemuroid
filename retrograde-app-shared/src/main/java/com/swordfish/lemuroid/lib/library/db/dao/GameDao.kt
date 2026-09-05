@@ -182,6 +182,12 @@ interface GameDao {
     @Query("SELECT * FROM games WHERE systemId = :systemId AND title = :title ORDER BY fileName ASC")
     fun selectVariantsByTitle(systemId: String, title: String): Flow<List<Game>>
 
+    // One-shot version of the query above. The catalog shows a single card per title, so
+    // "remove from catalog" has to take the whole group with it — otherwise the hidden
+    // variants would survive in search while the card disappears.
+    @Query("SELECT * FROM games WHERE systemId = :systemId AND title = :title ORDER BY fileName ASC")
+    suspend fun selectVariantsByTitleOnce(systemId: String, title: String): List<Game>
+
     // Composite keys "systemId/title" for all titles that have more than one ROM variant.
     // Used to decide whether tapping a game should open the variants modal.
     @Query("""

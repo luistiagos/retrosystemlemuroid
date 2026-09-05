@@ -9,7 +9,6 @@ import com.swordfish.lemuroid.app.shared.input.InputKey
 import com.swordfish.lemuroid.app.shared.input.RetroKey
 import com.swordfish.lemuroid.app.shared.input.bindingsOf
 import com.swordfish.lemuroid.app.shared.input.inputKeysOf
-import com.swordfish.lemuroid.app.shared.input.inputclass.getInputClass
 import com.swordfish.lemuroid.app.shared.input.retroKeysOf
 import com.swordfish.lemuroid.app.shared.settings.GameShortcutType
 import java.util.concurrent.ConcurrentHashMap
@@ -141,21 +140,15 @@ class LemuroidInputDeviceGamePad(private val device: InputDevice) : LemuroidInpu
         }
     }
 
-    override fun getCustomizableKeys(): List<RetroKey> {
-        val deviceAxis =
-            device.motionRanges
-                .map { it.axis }
-                .toSet()
-
-        val keysMappedToAxis =
-            device.getInputClass().getAxesMap()
-                .filter { it.key in deviceAxis }
-                .map { it.value }
-                .toSet()
-
-        return CUSTOMIZABLE_KEYS
-            .filter { it.keyCode !in keysMappedToAxis }
-    }
+    // L2/R2 ficavam de fora da lista sempre que o controle expunha os gatilhos como
+    // eixos (AXIS_LTRIGGER/AXIS_BRAKE e AXIS_RTRIGGER/AXIS_THROTTLE) - o caso da
+    // maioria dos controles modernos. O motivo era honesto: o caminho de motion
+    // event mandava o keycode fixo direto para o core, entao o binding nao teria
+    // efeito nenhum. Hoje esse caminho passa pelo mesmo mapa de bindings
+    // (GameViewModelInput.initializeVirtualGamePadMotionsFlow) e a captura aceita o
+    // proprio gatilho como tecla fisica (InputBindingUpdater.handleMotionEvent),
+    // entao nao ha mais motivo para esconder as duas linhas.
+    override fun getCustomizableKeys(): List<RetroKey> = CUSTOMIZABLE_KEYS
 
     companion object {
         private data class CachedKeySupport(

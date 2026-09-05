@@ -9,6 +9,12 @@ interface InputClass {
     fun getAxesMap(): Map<Int, Int>
 }
 
+// Um gatilho analogico so conta como pressionado acima deste valor. Compartilhado
+// pelo caminho de jogo (GameViewModelInput.initializeVirtualGamePadMotionsFlow) e
+// pela captura de binding (InputBindingUpdater.handleMotionEvent), para que a tela
+// de Controles e o jogo concordem sobre o ponto em que L2/R2 disparam.
+const val AXIS_PRESS_THRESHOLD = 0.5f
+
 // Classificacao apenas por `sources`, que e um campo local barato.
 //
 // Nao consultar hasKeys() aqui: getInputClass() roda no caminho de motion event

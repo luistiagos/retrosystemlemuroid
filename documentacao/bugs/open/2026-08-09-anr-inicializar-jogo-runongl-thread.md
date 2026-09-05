@@ -313,6 +313,38 @@ e o rodapé, aparelho + Android + versão — que é o que o pitfall 8 pede que 
 resolva. Instrumentação removida e o build limpo reinstalado e conferido rodando um jogo a
 60 fps.
 
+### O caminho de ERRO do `saveOnExit`, exercitado por falha injetada (2026-09-03)
+
+A validação acima cobre o caminho feliz e o caminho do **menu** com a GLThread parada. Faltava o
+`saveOnExit` **falhando** — que é justamente o que a telemetria de produção mostra (errors
+3810/3359/3358) e onde mora a decisão de projeto: não derrubar a saída do jogo por causa de uma
+gravação que não deu, e avisar em vez de perder a SRAM em silêncio.
+
+A travada real não reproduz sob demanda (ocorreu uma vez em ~15 min de tentativa dirigida), então
+foi usada falha injetada — o mesmo recurso que esta página já usou para validar a classificação da
+tela de crash. Build temporário com `serializeSRAM` lançando `GLThreadTimeoutException` sempre,
+empacotado como um APK à parte do mesmo commit que o limpo.
+
+**Moto G86 5G, Android 16, *Super Mario World* (snes/snes9x), saída pelo BACK:**
+
+| O que tinha que acontecer | Observado |
+|---|---|
+| tentar de novo antes de desistir | `W GameViewModelSaves: SRAM save timed out (attempt 1/2)` e `(attempt 2/2)` |
+| a sonda evitar a espera longa | saída completa em **5 s** — não os 30 s de um timeout nem os 60 s de dois |
+| **não** cair na tela de crash | volta para a `MainActivity`; nenhum `GameCrashActivity` no log |
+| avisar o usuário | `W GameLaunchTaskHandler: Game exited without persisting its saves` + toast *"O jogo não conseguiu salvar antes de fechar. O progresso recente pode ter sido perdido."* |
+| a gravação ter falhado de verdade | o `.srm` **não** foi reescrito — mesmo mtime de antes do teste |
+
+A última linha é o que impede o teste de passar por acidente: sem ela, um `saveOnExit` que
+silenciosamente gravasse a SRAM daria o mesmo "voltou sem crashar".
+
+O toast só aparece por ~2 s, então a captura tem que ser em rajada logo após o BACK — numa
+tentativa anterior a captura saiu 8 s depois e o toast já tinha sumido, o que parecia falha do
+código e não do roteiro.
+
+**Depois do teste:** `fault_inject.py revert` (diff contra a cópia limpa: vazio), APK limpo
+reinstalado. Instrumentação esquecida num build de distribuição é o pitfall 8.
+
 ## Recorrência em produção (telemetria, 2026-09-02)
 
 O fix **está no build distribuído e está funcionando como projetado** — mas a causa de fundo

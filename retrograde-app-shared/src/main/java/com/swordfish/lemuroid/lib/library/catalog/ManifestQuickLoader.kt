@@ -56,6 +56,12 @@ class ManifestQuickLoader(
         private const val KEY_LOADED_MANIFEST_SCHEMA = "loaded_manifest_schema"
         private const val KEY_FTS_OPTIMIZED = "fts_optimized_version"
 
+        // Set by [forceReload]; makes the next load() take the full manifest pass instead of
+        // either fast path. Deliberately a separate flag rather than clearing
+        // KEY_LOADED_MANIFEST_SCHEMA: that would also re-run every `loadedSchema < N`
+        // one-time migration below (arcade reclassification, vircon32 cleanup, ...).
+        private const val KEY_FORCE_FULL_RELOAD = "force_full_reload"
+
         // Bump to force a one-time FTS index defragmentation (GameSearchDao.optimize) across
         // all installs. Independent of MANIFEST_SCHEMA_VERSION / app version. Needed because
         // the bulk UPDATEs below (sentinel-URI rewrite, manifest-field refresh) fire the FTS
@@ -180,6 +186,20 @@ class ManifestQuickLoader(
         // Sentinel prefix written by the build-time PrebuiltDbGenerator (buildSrc).
         // ManifestQuickLoader rewrites these into real file:// URIs on first launch.
         private const val PREBUILT_URI_PREFIX = "file:///lemuroid_prebuilt"
+
+        /**
+         * Makes the next [load] run the full manifest pass, skipping both fast paths.
+         *
+         * Used by the "restaurar catálogo" action in settings: after
+         * [CatalogRemovals.clear] the games the user had removed are no longer filtered
+         * out, but only a full pass actually re-inserts them.
+         */
+        fun forceReload(context: Context) {
+            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean(KEY_FORCE_FULL_RELOAD, true)
+                .apply()
+        }
     }
 
     /**
@@ -192,6 +212,7 @@ class ManifestQuickLoader(
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val appVersion = currentAppVersion()
         val loadedSchema = prefs.getInt(KEY_LOADED_MANIFEST_SCHEMA, -1)
+        val forceFullReload = prefs.getBoolean(KEY_FORCE_FULL_RELOAD, false)
 
         // Rewrite sentinel URIs (no-op unless the prebuilt asset was used). Wrapped in try/catch
         // because any failure here (DAO missing, schema mismatch, etc.) must NOT crash the boot
@@ -281,7 +302,8 @@ class ManifestQuickLoader(
         // Skip only when both the app version and the manifest schema match what's already
         // loaded. Bumping MANIFEST_SCHEMA_VERSION forces a single reload across all users
         // so new manifest fields (e.g. isRepresentative in v2) flow into the DB.
-        if (prefs.getInt(KEY_LOADED_APP_VERSION, -1) == appVersion &&
+        if (!forceFullReload &&
+            prefs.getInt(KEY_LOADED_APP_VERSION, -1) == appVersion &&
             loadedSchema == MANIFEST_SCHEMA_VERSION
         ) {
             // Common every-boot path. Signal readiness first so Home isn't gated on the
@@ -309,8 +331,14 @@ class ManifestQuickLoader(
             Timber.e(t, "ManifestQuickLoader: countAll failed; assuming empty")
             0
         }
-        val expectedSize = manifest.size
-        if (existingCount >= expectedSize - expectedSize / 50 && loadedSchema == MANIFEST_SCHEMA_VERSION) {
+        // Games the user removed from the catalog are never re-inserted, so they must not
+        // count towards the "DB is already fully populated" threshold either.
+        val removedKeys = CatalogRemovals.all(context)
+        val expectedSize = (manifest.size - removedKeys.size).coerceAtLeast(1)
+        if (!forceFullReload &&
+            existingCount >= expectedSize - expectedSize / 50 &&
+            loadedSchema == MANIFEST_SCHEMA_VERSION
+        ) {
             prefs.edit()
                 .putInt(KEY_LOADED_APP_VERSION, appVersion)
                 .putInt(KEY_LOADED_MANIFEST_SCHEMA, MANIFEST_SCHEMA_VERSION)
@@ -336,6 +364,10 @@ class ManifestQuickLoader(
             val fileName = key.substring(slash + 1)
 
             if (GameSystem.findByIdOrNull(systemId) == null) continue
+
+            // Explicitly removed from the catalog by the user. Left out of `games` so it is
+            // neither re-inserted nor spared by the stale-catalog cleanup below.
+            if (CatalogRemovals.key(systemId, fileName) in removedKeys) continue
 
             val fileUri = File(File(romsDir, systemId), fileName).toUri().toString()
             val title = entry.title?.takeIf { it.isNotBlank() } ?: fileName.substringBeforeLast(".")
@@ -406,6 +438,7 @@ class ManifestQuickLoader(
         prefs.edit()
             .putInt(KEY_LOADED_APP_VERSION, appVersion)
             .putInt(KEY_LOADED_MANIFEST_SCHEMA, MANIFEST_SCHEMA_VERSION)
+            .remove(KEY_FORCE_FULL_RELOAD)
             .apply()
         Timber.i("ManifestQuickLoader: inserted=$inserted total=${games.size}")
         _catalogReady.value = true

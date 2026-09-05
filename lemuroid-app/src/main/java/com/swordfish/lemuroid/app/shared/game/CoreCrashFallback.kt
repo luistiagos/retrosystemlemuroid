@@ -71,7 +71,7 @@ object CoreCrashFallback {
      * thread and can finish after the home screen is already composed — a screen that read the
      * preference once, on entry, would simply miss it.
      */
-    fun pendingNotice(): StateFlow<Notice?> = pendingNoticeState.asStateFlow()
+    val pendingNotice: StateFlow<Notice?> = pendingNoticeState.asStateFlow()
 
     /** Marks the notice as delivered, so the same crash is never announced twice. */
     fun consumeNotice(context: Context) {

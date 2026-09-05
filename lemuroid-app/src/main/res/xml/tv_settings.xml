@@ -96,6 +96,12 @@
             app:iconSpaceReserved="false"/>
 
         <Preference
+            android:key="@string/pref_key_reset_catalog"
+            android:title="@string/settings_title_reset_catalog"
+            app:summary="@string/settings_description_reset_catalog"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
             android:key="@string/pref_key_check_update"
             android:title="@string/settings_title_check_update"
             app:summary="@string/settings_description_check_update"
