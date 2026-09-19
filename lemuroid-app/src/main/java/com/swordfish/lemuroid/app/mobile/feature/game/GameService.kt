@@ -40,10 +40,15 @@ class GameService : Service() {
     }
 
     override fun onStartCommand(
-        intent: Intent,
+        intent: Intent?,
         flags: Int,
         startId: Int,
     ): Int {
+        if (intent == null) {
+            stopSelf(startId)
+            return START_NOT_STICKY
+        }
+
         val game =
             kotlin.runCatching {
                 intent.extras?.getSerializable(EXTRA_GAME) as Game?

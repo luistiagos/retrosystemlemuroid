@@ -5,6 +5,7 @@ import android.app.ActivityManager
 import android.content.ComponentCallbacks2
 import android.content.Context
 import androidx.startup.AppInitializer
+import androidx.work.Configuration
 import androidx.work.ListenableWorker
 import coil.ImageLoader
 import coil.ImageLoaderFactory
@@ -28,7 +29,11 @@ import timber.log.Timber
 import java.security.Security
 import javax.inject.Inject
 
-class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderFactory {
+class LemuroidApplication :
+    DaggerApplication(),
+    HasWorkerInjector,
+    ImageLoaderFactory,
+    Configuration.Provider {
     @Inject
     lateinit var workerInjector: DispatchingAndroidInjector<ListenableWorker>
 
@@ -109,6 +114,13 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     }
 
     override fun workerInjector(): AndroidInjector<ListenableWorker> = workerInjector
+
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
+            .setInitializationExceptionHandler { throwable ->
+                Timber.e(throwable, "WorkManager initialization failed (bad storage or file system state)")
+            }
+            .build()
 
     override fun newImageLoader(): ImageLoader {
         return CoverUtils.buildImageLoader(applicationContext)

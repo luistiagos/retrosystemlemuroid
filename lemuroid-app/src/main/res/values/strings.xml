@@ -282,6 +282,8 @@
     <string name="core_crash_notice_message_option_disabled">%1$s stopped because the %2$s emulator core crashed. Hardware shaders were turned off for this system so it can run again — you can turn them back on in the in-game settings.</string>
     <string name="game_toast_quick_save_loaded">Quick loaded</string>
     <string name="game_toast_quick_save_saved">Quick saved</string>
+    <string name="game_toast_state_while_loading">The game is still loading. Try again in a moment.</string>
+    <string name="game_toast_save_state_failed">Cannot save this state</string>
 
     <string name="empty_view_default">No Items</string>
 

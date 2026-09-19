@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.common
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -53,17 +54,46 @@ private fun showToastSafely(
     length: Int,
 ) {
     try {
-        Toast.makeText(SafeToastContext(context.applicationContext), text, length).show()
+        val safeContext = SafeToastContext(context.applicationContext)
+        val toast = Toast.makeText(safeContext, text, length)
+        hookToastView(toast, safeContext)
+        toast.show()
     } catch (e: Throwable) {
         // Um aviso de UI nunca pode derrubar a tela que o dispara.
         Timber.w(e, "Failed to display toast")
     }
 }
 
+private fun hookToastView(toast: Toast, fallbackContext: SafeToastContext) {
+    try {
+        @Suppress("DEPRECATION")
+        val view = toast.view ?: return
+        val field = View::class.java.getDeclaredField("mContext")
+        field.isAccessible = true
+        val currentContext = field.get(view) as? Context
+        if (currentContext !is SafeToastContext) {
+            field.set(view, SafeToastContext(currentContext ?: fallbackContext))
+        }
+    } catch (e: Throwable) {
+        Timber.d(e, "Could not hook toast view mContext via reflection")
+    }
+}
+
 private class SafeToastContext(base: Context) : ContextWrapper(base) {
-    override fun getApplicationContext(): Context = this
+    override fun getApplicationContext(): Context {
+        val app = baseContext.applicationContext
+        return if (app === this || app === baseContext) {
+            this
+        } else {
+            SafeToastContext(app)
+        }
+    }
 
     override fun getSystemService(name: String): Any? {
+        if (name == Context.LAYOUT_INFLATER_SERVICE) {
+            val inflater = super.getSystemService(name) as? LayoutInflater
+            return inflater?.cloneInContext(this)
+        }
         val service = super.getSystemService(name)
         return if (name == Context.WINDOW_SERVICE && service is WindowManager) {
             SafeWindowManager(service)
@@ -85,6 +115,24 @@ private class SafeWindowManager(
         } catch (e: WindowManager.BadTokenException) {
             // Token expirado antes da main thread desenhar o toast: descarta o aviso, mantém o app.
             Timber.w("Dropped toast with expired window token: ${e.message}")
+        } catch (e: Throwable) {
+            Timber.w(e, "Unexpected error in SafeWindowManager.addView")
+        }
+    }
+
+    override fun removeView(view: View) {
+        try {
+            delegate.removeView(view)
+        } catch (e: Throwable) {
+            Timber.w("Failed to remove toast view: ${e.message}")
+        }
+    }
+
+    override fun removeViewImmediate(view: View) {
+        try {
+            delegate.removeViewImmediate(view)
+        } catch (e: Throwable) {
+            Timber.w("Failed to removeViewImmediate toast view: ${e.message}")
         }
     }
 }

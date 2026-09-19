@@ -213,6 +213,10 @@ class GameLaunchTaskHandler(
     }
 
     private suspend fun updateGamePlayedTimestamp(game: Game) {
-        retrogradeDb.gameDao().update(game.copy(lastPlayedAt = System.currentTimeMillis()))
+        try {
+            retrogradeDb.gameDao().update(game.copy(lastPlayedAt = System.currentTimeMillis()))
+        } catch (e: android.database.sqlite.SQLiteException) {
+            Timber.e(e, "Failed to update lastPlayedAt for ${game.title} due to database error")
+        }
     }
 }

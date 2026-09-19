@@ -15357,13 +15357,13 @@ colecovision/Word Feud (USA).col|Word Feud|https://raw.githubusercontent.com/lib
 colecovision/Zaxxon (Taiwan) (En) (Unl).col|Zaxxon|https://images.igdb.com/igdb/image/upload/t_cover_big/co2bag.jpg|19|1
 colecovision/Zaxxon (USA, Europe).col|Zaxxon|https://raw.githubusercontent.com/libretro-thumbnails/Coleco_-_ColecoVision/master/Named_Boxarts/Zaxxon%20%28USA%2C%20Europe%29.png|19|0
 colecovision/Zenji (USA).col|Zenji|https://raw.githubusercontent.com/libretro-thumbnails/Coleco_-_ColecoVision/master/Named_Boxarts/Zenji%20%28USA%29.png|0|1
-cps1/1941.zip|1941: Counter Attack|https://adb.arcadeitalia.net/?mame=1941&type=title&resize=0|0|1
+cps1/1941j.zip|1941: Counter Attack (Japan)|https://adb.arcadeitalia.net/?mame=1941j&type=title&resize=0|0|1
 cps1/dino.zip|Cadillacs and Dinosaurs|https://adb.arcadeitalia.net/?mame=dino&type=title&resize=0|0|1
 cps1/captcomm.zip|Captain Commando|https://adb.arcadeitalia.net/?mame=captcomm&type=title&resize=0|0|1
 cps1/cawing.zip|Carrier Air Wing|https://adb.arcadeitalia.net/?mame=cawing&type=title&resize=0|0|1
 cps1/dynwar.zip|Dynasty Wars|https://adb.arcadeitalia.net/?mame=dynwar&type=title&resize=0|0|1
 cps1/ffight.zip|Final Fight|https://adb.arcadeitalia.net/?mame=ffight&type=title&resize=0|0|1
-cps1/forgottn.zip|Forgotten Worlds|https://adb.arcadeitalia.net/?mame=forgottn&type=title&resize=0|0|1
+cps1/forgott1.zip|Forgotten Worlds (USA 880715)|https://adb.arcadeitalia.net/?mame=forgott1&type=title&resize=0|0|1
 cps1/ghouls.zip|Ghouls'n Ghosts|https://adb.arcadeitalia.net/?mame=ghouls&type=title&resize=0|0|1
 cps1/ghoulsu.zip|Ghouls'n Ghosts|https://adb.arcadeitalia.net/?mame=ghoulsu&type=title&resize=0|0|0
 cps1/knights.zip|Knights of the Round|https://adb.arcadeitalia.net/?mame=knights&type=title&resize=0|0|1
@@ -15375,7 +15375,7 @@ cps1/mbombrd.zip|Muscle Bomber Duo: Ultimate Team Battle|https://adb.arcadeitali
 cps1/nemo.zip|Nemo|https://adb.arcadeitalia.net/?mame=nemo&type=title&resize=0|0|1
 cps1/qad.zip|Quiz & Dragons: Capcom Quiz Game|https://adb.arcadeitalia.net/?mame=qad&type=title&resize=0|0|1
 cps1/slammast.zip|Saturday Night Slam Masters|https://adb.arcadeitalia.net/?mame=slammast&type=title&resize=0|0|1
-cps1/sf2ce.zip|Street Fighter II': Champion Edition|https://adb.arcadeitalia.net/?mame=sf2ce&type=title&resize=0|0|1
+cps1/sf2ceua.zip|Street Fighter II': Champion Edition (USA 920513)|https://adb.arcadeitalia.net/?mame=sf2ceua&type=title&resize=0|0|1
 cps1/sf2hf.zip|Street Fighter II': Hyper Fighting|https://adb.arcadeitalia.net/?mame=sf2hf&type=title&resize=0|0|1
 cps1/sf2.zip|Street Fighter II: The World Warrior|https://adb.arcadeitalia.net/?mame=sf2&type=title&resize=0|0|1
 cps1/strider.zip|Strider|https://adb.arcadeitalia.net/?mame=strider&type=title&resize=0|0|1
@@ -25658,10 +25658,8 @@ gc/LEGO Super Soccer Adventure.rvz|LEGO Super Soccer Adventure||0|1
 gc/Lemony Snicket - Raetselhafte Ereignisse.rvz|Lemony Snicket - Raetselhafte Ereignisse||0|1
 gc/Lemony Snicket's A Series of Unfortunate Events.rvz|Lemony Snicket's A Series of Unfortunate Events||0|1
 gc/Looney Tunes - Back in Action.rvz|Looney Tunes - Back in Action||0|1
-gc/Lord of the Rings - Futatsu no Tou (Japan).rvz|Lord of the Rings - Futatsu no Tou|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lord%20of%20the%20Rings%20-%20Futatsu%20no%20Tou%20%28Japan%29.png|0|1
 gc/NBA Street.rvz|NBA Street||0|1
 gc/NBA Street Vol. 2.rvz|NBA Street Vol. 2||0|1
-gc/NCAA College Basketball 2K3 (USA).rvz|NCAA College Basketball 2K3|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NCAA%20College%20Basketball%202K3%20%28USA%29.png|0|1
 gc/NCAA College Football 2K3.rvz|NCAA College Football 2K3||0|1
 gc/NCAA Football 2003.rvz|NCAA Football 2003||0|1
 gc/NCAA Football 2004.rvz|NCAA Football 2004||0|1
@@ -25927,8 +25925,6 @@ gc/Spartan - Total Warrior.rvz|Spartan - Total Warrior||0|1
 gc/Spawn - Armageddon.rvz|Spawn - Armageddon||0|1
 gc/Special Jinsei Game.rvz|Special Jinsei Game||0|1
 gc/Speed Challenge - Jacques Villeneuve's Racing Vision.rvz|Speed Challenge - Jacques Villeneuve's Racing Vision||0|1
-gc/Speed%20Kings%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.zip.rvz|Speed%20Kings%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29||0|1
-gc/Sphinx%20and%20the%20Cursed%20Mummy%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.zip.rvz|Sphinx%20and%20the%20Cursed%20Mummy%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29||0|1
 gc/Spider-Man 2..rvz|Spider-Man 2.||0|1
 gc/Spider-Man..rvz|Spider-Man.||0|1
 gc/Spirits & Spells..rvz|Spirits & Spells.||0|1

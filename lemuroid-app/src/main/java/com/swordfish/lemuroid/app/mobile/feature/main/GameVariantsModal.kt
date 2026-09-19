@@ -43,6 +43,7 @@ fun GameVariantsModal(
     downloadedGameKeys: Set<String>,
     onDismiss: () -> Unit,
     onVariantSelected: (Game) -> Unit,
+    onVariantLongClick: (Game) -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
 
@@ -75,6 +76,10 @@ fun GameVariantsModal(
                         onDismiss()
                         onVariantSelected(variant)
                     },
+                    onLongClick = {
+                        onDismiss()
+                        onVariantLongClick(variant)
+                    },
                 )
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
             }
@@ -89,12 +94,16 @@ private fun VariantRow(
     coverUrl: String?,
     isDownloaded: Boolean,
     onClick: () -> Unit,
+    onLongClick: () -> Unit,
 ) {
     val context = LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .combinedClickable(onClick = onClick)
+            .combinedClickable(
+                onClick = onClick,
+                onLongClick = onLongClick,
+            )
             .padding(horizontal = 16.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

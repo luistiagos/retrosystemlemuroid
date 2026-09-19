@@ -11,13 +11,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @OptIn(DelicateCoroutinesApi::class)
-class ShortcutBindingUpdater(
+class ShortcutBindingUpdater private constructor(
     private val inputDeviceManager: InputDeviceManager,
     private val scope: CoroutineScope,
-    intent: Intent,
+    val extras: IntentExtras,
 ) {
-    val extras = parseExtras(intent)
-
     private var firstKeyCodeInCombo: Int? = null
 
     fun getTitle(context: Context): String {
@@ -61,22 +59,30 @@ class ShortcutBindingUpdater(
         return device != null && extras.device.name == device.name
     }
 
-    private fun parseExtras(intent: Intent): IntentExtras {
-        val device =
-            intent.extras?.getParcelable<InputDevice>(REQUEST_DEVICE)
-                ?: throw IllegalArgumentException("REQUEST_DEVICE has not been passed")
-
-        val shortcutType =
-            intent.extras?.getString(REQUEST_SHORTCUT_TYPE)
-                ?: throw IllegalArgumentException("REQUEST_SHORTCUT_TYPE has not been passed")
-
-        return IntentExtras(device, GameShortcutType.valueOf(shortcutType))
-    }
-
     data class IntentExtras(val device: InputDevice, val shortcutType: GameShortcutType)
 
     companion object {
         const val REQUEST_DEVICE = "REQUEST_DEVICE"
         const val REQUEST_SHORTCUT_TYPE = "REQUEST_SHORTCUT_TYPE"
+
+        /**
+         * `null` quando o intent nao traz o dispositivo ou um atalho valido. Nenhum fluxo do app faz
+         * isso: quem faz e o Robo test do Pre-Launch Report, que lanca as activities declaradas sem
+         * extras. A activity fecha com `finish()` — lancar aqui derrubava o processo em
+         * `performLaunchActivity`.
+         */
+        fun fromIntent(
+            inputDeviceManager: InputDeviceManager,
+            scope: CoroutineScope,
+            intent: Intent,
+        ): ShortcutBindingUpdater? {
+            val extras = intent.extras ?: return null
+            val device = extras.getParcelable<InputDevice>(REQUEST_DEVICE) ?: return null
+            val shortcutType =
+                extras.getString(REQUEST_SHORTCUT_TYPE)
+                    ?.let { name -> GameShortcutType.values().firstOrNull { it.name == name } }
+                    ?: return null
+            return ShortcutBindingUpdater(inputDeviceManager, scope, IntentExtras(device, shortcutType))
+        }
     }
 }

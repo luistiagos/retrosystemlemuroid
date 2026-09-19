@@ -8,11 +8,16 @@ import android.content.Context
  *
  * | RAM          | Tier          | Hidden systems                                    |
  * |------------- |-------------- |---------------------------------------------------|
- * | ≤ 1 GB       | ULTRA_WEAK   | PSP, 3DS, NDS, N64, PSX, DOS, Sega CD            |
- * | > 1 GB ≤ 2 GB| WEAK         | PSP, 3DS                                          |
+ * | ≤ 1 GB       | ULTRA_WEAK   | PSP, 3DS, GameCube, NDS, N64, DOS, Sega CD, ...   |
+ * | > 1 GB ≤ 2 GB| WEAK         | PSP, 3DS, GameCube                                |
  * | > 2 GB       | NORMAL       | (none)                                            |
  *
  * 2D arcade boards and 8/16-bit consoles are lightweight enough for any device.
+ *
+ * PSX is deliberately absent from every tier: PCSX-ReARMed runs acceptably even on
+ * 1 GB set-top boxes, and hiding it made the whole PlayStation catalogue vanish on
+ * cheap TV boxes — which report `isLowRamDevice = true` and so land in ULTRA_WEAK
+ * even when they have 2 GB. Do not add it back without a measured reason.
  */
 object HeavySystemFilter {
 
@@ -29,7 +34,6 @@ object HeavySystemFilter {
     private val MODERATE_SYSTEMS: Set<SystemID> = setOf(
         SystemID.NDS,          // melonDS / DeSmuME – moderate-heavy
         SystemID.N64,          // Mupen64Plus – moderate-heavy
-        SystemID.PSX,          // PCSX-ReARMed – moderate
         SystemID.DOS,          // DOSBox Pure – moderate
         SystemID.SEGACD,       // Genesis Plus GX CD – moderate
         SystemID.DREAMCAST,    // Flycast – moderate-heavy

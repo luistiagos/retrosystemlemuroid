@@ -12,6 +12,15 @@ package com.swordfish.lemuroid.app.shared.telemetry
  * Only the handful of fields worth reading are decoded; every other field is skipped generically by
  * wire type. Field numbers follow `system/core/debuggerd/proto/tombstone.proto` (AOSP).
  *
+ * Also decodes `memory_mappings`: when the unwinder cannot attribute a frame to any `.so` (the
+ * frame prints as `<unknown>`, see
+ * documentacao/bugs/open/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md), the frame's
+ * `file_name` is empty and there is otherwise no way to tell whether the faulting address fell in
+ * an anonymous mapping, in a gap right past the end of a loaded library, or nowhere near any
+ * mapping at all. The full map is never printed (a process can have 500+ entries) — only the
+ * mapping that encloses each unresolved frame's `pc`, or the two mappings bracketing the gap it
+ * fell in.
+ *
  * Any malformed input makes the parse return null rather than throw.
  */
 object TombstoneParser {
@@ -24,6 +33,7 @@ object TombstoneParser {
     private const val F_ABORT_MESSAGE = 14
     private const val F_CAUSES = 15
     private const val F_THREADS = 16
+    private const val F_MEMORY_MAPPINGS = 17
 
     // Signal
     private const val F_SIG_NUMBER = 1
@@ -42,14 +52,26 @@ object TombstoneParser {
 
     // BacktraceFrame
     private const val F_FRAME_REL_PC = 1
+    private const val F_FRAME_PC = 2
     private const val F_FRAME_FUNCTION_NAME = 4
     private const val F_FRAME_FUNCTION_OFFSET = 5
     private const val F_FRAME_FILE_NAME = 6
 
+    // MemoryMapping
+    private const val F_MAP_BEGIN = 1
+    private const val F_MAP_END = 2
+    private const val F_MAP_READ = 4
+    private const val F_MAP_WRITE = 5
+    private const val F_MAP_EXECUTE = 6
+    private const val F_MAP_NAME = 7
+
     private const val MAX_FRAMES = 64
+    private const val MAX_MAPPINGS = 4096
+    private const val MAX_UNKNOWN_FRAMES_DESCRIBED = 4
 
     private class Frame(
         val relPc: Long,
+        val pc: Long,
         val fileName: String,
         val functionName: String,
         val functionOffset: Long,
@@ -59,6 +81,20 @@ object TombstoneParser {
             val sym = if (functionName.isNotBlank()) " ($functionName+$functionOffset)" else ""
             return "  pc %016x  %s%s".format(relPc, where, sym)
         }
+    }
+
+    /** One `/proc/<pid>/maps` entry as carried in the tombstone. */
+    private class Mapping(
+        val begin: Long,
+        val end: Long,
+        val read: Boolean,
+        val write: Boolean,
+        val execute: Boolean,
+        val name: String,
+    ) {
+        fun perms(): String = "${if (read) "r" else "-"}${if (write) "w" else "-"}${if (execute) "x" else "-"}"
+
+        fun label(): String = name.ifBlank { "[anon]" }
     }
 
     private class ThreadInfo(val id: Int, val name: String, val frames: List<Frame>)
@@ -82,6 +118,7 @@ object TombstoneParser {
             var signalText = ""
             val causes = mutableListOf<String>()
             val threads = mutableListOf<ThreadInfo>()
+            val mappings = mutableListOf<Mapping>()
 
             while (!reader.isAtEnd()) {
                 val tag = reader.readTag() ?: return null
@@ -97,6 +134,9 @@ object TombstoneParser {
                         reader.readMessage { parseCause(it) }?.let { if (it.isNotBlank()) causes.add(it) } ?: return null
                     tag.field == F_THREADS && tag.wire == 2 ->
                         reader.readMessage { parseThreadMapEntry(it) }?.let { threads.add(it) } ?: return null
+                    tag.field == F_MEMORY_MAPPINGS && tag.wire == 2 ->
+                        reader.readMessage { parseMapping(it) }?.let { if (mappings.size < MAX_MAPPINGS) mappings.add(it) }
+                            ?: return null
                     else -> if (!reader.skip(tag.wire)) return null
                 }
             }
@@ -116,6 +156,19 @@ object TombstoneParser {
                     if (crashed != null && crashed.frames.isNotEmpty()) {
                         appendLine("backtrace:")
                         crashed.frames.forEachIndexed { i, f -> appendLine("  #%02d%s".format(i, f.toString())) }
+
+                        // The unwinder could not attribute these frames to any mapped file — show what,
+                        // if anything, occupies that address so a future occurrence is diagnosable (see
+                        // documentacao/bugs/open/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md).
+                        val unresolvedAddrs =
+                            crashed.frames.filter { it.fileName.isBlank() }
+                                .map { it.pc }
+                                .distinct()
+                                .take(MAX_UNKNOWN_FRAMES_DESCRIBED)
+                        if (unresolvedAddrs.isNotEmpty() && mappings.isNotEmpty()) {
+                            appendLine("memory near unresolved frame(s):")
+                            unresolvedAddrs.forEach { addr -> appendLine("  " + describeAddress(addr, mappings)) }
+                        }
                     }
                 }
 
@@ -212,6 +265,7 @@ object TombstoneParser {
 
     private fun parseFrame(r: Reader): Frame {
         var relPc = 0L
+        var pc = 0L
         var fileName = ""
         var functionName = ""
         var functionOffset = 0L
@@ -219,13 +273,64 @@ object TombstoneParser {
             val tag = r.readTag() ?: break
             when {
                 tag.field == F_FRAME_REL_PC && tag.wire == 0 -> relPc = r.readVarint() ?: break
+                tag.field == F_FRAME_PC && tag.wire == 0 -> pc = r.readVarint() ?: break
                 tag.field == F_FRAME_FUNCTION_NAME && tag.wire == 2 -> functionName = r.readString() ?: break
                 tag.field == F_FRAME_FUNCTION_OFFSET && tag.wire == 0 -> functionOffset = r.readVarint() ?: break
                 tag.field == F_FRAME_FILE_NAME && tag.wire == 2 -> fileName = r.readString() ?: break
                 else -> if (!r.skip(tag.wire)) break
             }
         }
-        return Frame(relPc, fileName, functionName, functionOffset)
+        return Frame(relPc, pc, fileName, functionName, functionOffset)
+    }
+
+    private fun parseMapping(r: Reader): Mapping {
+        var begin = 0L
+        var end = 0L
+        var read = false
+        var write = false
+        var execute = false
+        var name = ""
+        while (!r.isAtEnd()) {
+            val tag = r.readTag() ?: break
+            when {
+                tag.field == F_MAP_BEGIN && tag.wire == 0 -> begin = r.readVarint() ?: break
+                tag.field == F_MAP_END && tag.wire == 0 -> end = r.readVarint() ?: break
+                tag.field == F_MAP_READ && tag.wire == 0 -> read = (r.readVarint() ?: 0L) != 0L
+                tag.field == F_MAP_WRITE && tag.wire == 0 -> write = (r.readVarint() ?: 0L) != 0L
+                tag.field == F_MAP_EXECUTE && tag.wire == 0 -> execute = (r.readVarint() ?: 0L) != 0L
+                tag.field == F_MAP_NAME && tag.wire == 2 -> name = r.readString() ?: break
+                else -> if (!r.skip(tag.wire)) break
+            }
+        }
+        return Mapping(begin, end, read, write, execute, name)
+    }
+
+    /**
+     * Describes what, if anything, occupies [addr]: the enclosing mapping, or the two mappings
+     * bracketing the gap. Distinguishes "jumped past the end of a specific library" (strong signal
+     * of a corrupted/computed jump within that library) from "nowhere near any mapping" (wild
+     * pointer / stack or heap corruption).
+     */
+    private fun describeAddress(
+        addr: Long,
+        mappings: List<Mapping>,
+    ): String {
+        val inside = mappings.firstOrNull { addr >= it.begin && addr < it.end }
+        if (inside != null) {
+            return "0x%x is inside %s %s (0x%x-0x%x)"
+                .format(addr, inside.perms(), inside.label(), inside.begin, inside.end)
+        }
+        val below = mappings.filter { it.end <= addr }.maxByOrNull { it.end }
+        val above = mappings.filter { it.begin > addr }.minByOrNull { it.begin }
+        return buildString {
+            append("0x%x is unmapped".format(addr))
+            if (below == null && above == null) return@buildString
+            append(" (")
+            if (below != null) append("below: %s %s ends 0x%x".format(below.perms(), below.label(), below.end))
+            if (below != null && above != null) append("; ")
+            if (above != null) append("above: %s %s starts 0x%x".format(above.perms(), above.label(), above.begin))
+            append(")")
+        }
     }
 
     private class Tag(val field: Int, val wire: Int)

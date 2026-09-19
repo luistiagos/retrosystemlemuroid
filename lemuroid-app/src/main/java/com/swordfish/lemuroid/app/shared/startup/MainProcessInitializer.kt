@@ -27,7 +27,11 @@ class MainProcessInitializer : Initializer<Unit> {
         // immediately, so all subsequent reads in this process see the new values
         // even before the async disk flush completes.
         StreamingRomsManager.markCatalogPopulated(context)
-        WorkManager.getInstance(context).cancelUniqueWork(StreamingRomsWork.UNIQUE_WORK_ID)
+        try {
+            WorkManager.getInstance(context).cancelUniqueWork(StreamingRomsWork.UNIQUE_WORK_ID)
+        } catch (e: Throwable) {
+            Timber.e(e, "MainProcessInitializer: failed to access WorkManager")
+        }
 
         // DB insertion from catalog manifest — skips via SharedPreferences if the same
         // app version was already loaded. A small delay ensures Application.onCreate()
@@ -50,8 +54,12 @@ class MainProcessInitializer : Initializer<Unit> {
         // responsive sooner — these calls resolve ContentProvider URIs and
         // touch the database internally.
         GlobalScope.launch(kotlinx.coroutines.Dispatchers.IO) {
-            SaveSyncWork.enqueueAutoWork(context, 0)
-            LibraryIndexScheduler.scheduleCoreUpdate(context)
+            try {
+                SaveSyncWork.enqueueAutoWork(context, 0)
+                LibraryIndexScheduler.scheduleCoreUpdate(context)
+            } catch (e: Throwable) {
+                Timber.e(e, "MainProcessInitializer: background WorkManager scheduling failed")
+            }
         }
 
     }

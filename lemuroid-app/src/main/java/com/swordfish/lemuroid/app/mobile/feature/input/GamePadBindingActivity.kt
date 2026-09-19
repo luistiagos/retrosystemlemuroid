@@ -33,7 +33,11 @@ class GamePadBindingActivity : RetrogradeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        inputBindingUpdater = InputBindingUpdater(inputDeviceManager, lifecycleScope, intent)
+        // Sem extras = nao veio da tela de controles (o Robo test do Pre-Launch Report lanca toda
+        // activity declarada assim). Fechar, nao lancar.
+        inputBindingUpdater =
+            InputBindingUpdater.fromIntent(inputDeviceManager, lifecycleScope, intent)
+                ?: run { finish(); return }
 
         setContent {
             AppTheme {

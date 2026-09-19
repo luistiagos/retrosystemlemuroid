@@ -1,0 +1,2 @@
+Faça uma verificação recursiva a procura de demais bugs. Faz a primeira verificação, achou bugs, corrige, depois faz outra verificação achou bugs corrigi, e continua o processo até não aparecer nenhum bug. Ao final documente todas a correções em arquivos .md dentro da pasta funcionalidades. Lembre-se que o loop de verificação só pode acabar quando mais nenhum bug for encontrado. 
+Após isto gere o build do apk

@@ -16,65 +16,38 @@ class TVGameMenuActivity : TVBaseSettingsActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            val game =
-                intent.extras?.getSerializable(GameMenuContract.EXTRA_GAME) as? Game
-                    ?: throw InvalidParameterException("Missing EXTRA_GAME")
+            // Extra obrigatorio ausente = nao foi o BaseGameActivity que abriu o menu (o Robo test
+            // do Pre-Launch Report lanca toda activity declarada sem extras). Fechar, nao lancar.
+            val request = parseGameMenuRequest() ?: run { finish(); return }
 
-            val core =
-                intent.extras?.getSerializable(
-                    GameMenuContract.EXTRA_SYSTEM_CORE_CONFIG,
-                ) as? SystemCoreConfig
-                    ?: throw InvalidParameterException("Missing EXTRA_SYSTEM_CORE_CONFIG")
-
-            val options =
-                intent.extras?.getSerializable(
-                    GameMenuContract.EXTRA_CORE_OPTIONS,
-                ) as? Array<LemuroidCoreOption>
-                    ?: throw InvalidParameterException("Missing EXTRA_CORE_OPTIONS")
-
-            val advancedOptions =
-                intent.extras?.getSerializable(
-                    GameMenuContract.EXTRA_ADVANCED_CORE_OPTIONS,
-                ) as? Array<LemuroidCoreOption>
-                    ?: throw InvalidParameterException("Missing EXTRA_ADVANCED_CORE_OPTIONS")
-
-            val numDisks =
-                intent.extras?.getInt(GameMenuContract.EXTRA_DISKS)
-                    ?: throw InvalidParameterException("Missing EXTRA_DISKS")
-
-            val currentDisk =
-                intent.extras?.getInt(GameMenuContract.EXTRA_CURRENT_DISK)
-                    ?: throw InvalidParameterException("Missing EXTRA_CURRENT_DISK")
-
-            val audioEnabled =
-                intent.extras?.getBoolean(GameMenuContract.EXTRA_AUDIO_ENABLED)
-                    ?: throw InvalidParameterException("Missing EXTRA_AUDIO_ENABLED")
-
-            val fastForwardEnabled =
-                intent.extras?.getBoolean(GameMenuContract.EXTRA_FAST_FORWARD)
-                    ?: throw InvalidParameterException("Missing EXTRA_FAST_FORWARD")
-
-            val fastForwardSupported =
-                intent.extras?.getBoolean(GameMenuContract.EXTRA_FAST_FORWARD_SUPPORTED)
-                    ?: throw InvalidParameterException("Missing EXTRA_FAST_FORWARD_SUPPORTED")
-
-            val fragment =
-                TVGameMenuFragmentWrapper.newInstance(
-                    GameMenuRequest(
-                        game,
-                        core,
-                        options,
-                        advancedOptions,
-                        numDisks,
-                        currentDisk,
-                        audioEnabled,
-                        fastForwardEnabled,
-                        fastForwardSupported,
-                    ),
-                )
+            val fragment = TVGameMenuFragmentWrapper.newInstance(request)
             supportFragmentManager.beginTransaction().replace(android.R.id.content, fragment)
                 .commit()
         }
+    }
+
+    private fun parseGameMenuRequest(): GameMenuRequest? {
+        val extras = intent.extras ?: return null
+
+        return GameMenuRequest(
+            game =
+                extras.getSerializable(GameMenuContract.EXTRA_GAME) as? Game
+                    ?: return null,
+            systemCoreConfig =
+                extras.getSerializable(GameMenuContract.EXTRA_SYSTEM_CORE_CONFIG) as? SystemCoreConfig
+                    ?: return null,
+            coreOptions =
+                extras.getSerializable(GameMenuContract.EXTRA_CORE_OPTIONS) as? Array<LemuroidCoreOption>
+                    ?: return null,
+            advancedCoreOptions =
+                extras.getSerializable(GameMenuContract.EXTRA_ADVANCED_CORE_OPTIONS) as? Array<LemuroidCoreOption>
+                    ?: return null,
+            numDisks = extras.getInt(GameMenuContract.EXTRA_DISKS),
+            currentDisk = extras.getInt(GameMenuContract.EXTRA_CURRENT_DISK),
+            audioEnabled = extras.getBoolean(GameMenuContract.EXTRA_AUDIO_ENABLED),
+            fastForwardEnabled = extras.getBoolean(GameMenuContract.EXTRA_FAST_FORWARD),
+            fastForwardSupported = extras.getBoolean(GameMenuContract.EXTRA_FAST_FORWARD_SUPPORTED),
+        )
     }
 
     override fun finish() {

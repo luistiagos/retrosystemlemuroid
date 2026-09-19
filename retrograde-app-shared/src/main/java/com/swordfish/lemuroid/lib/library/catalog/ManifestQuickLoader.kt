@@ -126,8 +126,9 @@ class ManifestQuickLoader(
         //          distinct games, residue of an old scraper bug that accepted search hits
         //          without comparing titles. Wiping is the fix, not replacing: an empty cover
         //          falls back to the placeholder and lets a later scrape find the right one.
-        //          Emptied rows were re-scraped, which recovered the correct art for most.
-        private const val MANIFEST_SCHEMA_VERSION = 31
+        //   v32  gc: removed 4 broken GameCube titles (NCAA Basketball truncated, LOTR 0-byte,
+        //          Speed Kings & Sphinx .zip.rvz malformed) from catalog_manifest.txt.
+        private const val MANIFEST_SCHEMA_VERSION = 32
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

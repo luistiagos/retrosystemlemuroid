@@ -1,8 +1,7 @@
 # [BUG] TV box MXQ 4K Pro — todo jogo cai na tela de erro com `BadTokenException` do Toast
 
 **Data:** 2026-08-16
-**Status:** Corrigido e compilado 🟡 — **falta validar no device** (a TV box é do cliente; segue em
-`open/` até alguém rodar um jogo nela)
+**Status:** Resolvido ✅ (2026-09-17)
 **Severidade:** Crítica (o app é inutilizável nesses aparelhos — nenhum jogo abre)
 **Branch:** version9
 
@@ -129,7 +128,7 @@ passa pelo nosso wrapper e podemos proteger o `addView`.
 
 | Arquivo | Mudança |
 |---|---|
-| [SafeToast.kt](../../retrograde-util/src/main/java/com/swordfish/lemuroid/common/SafeToast.kt) | **Novo.** `Context.displayToast(String\|Int, length)` + `SafeToastContext`/`SafeWindowManager` |
+| [SafeToast.kt](../../retrograde-util/src/main/java/com/swordfish/lemuroid/common/SafeToast.kt) | **Novo / Atualizado.** `Context.displayToast(String\|Int, length)` + `SafeToastContext`/`SafeWindowManager`. `SafeToastContext` sobrescreve `LAYOUT_INFLATER_SERVICE` com `cloneInContext(this)` e aplica hook defensivo em `toast.view.mContext` via reflexão; `SafeWindowManager` engole `BadTokenException` em `addView` e trata com segurança `removeView`/`removeViewImmediate` |
 | [Android.kt](../../retrograde-util/src/main/java/com/swordfish/lemuroid/common/Android.kt) | Removidos os dois `Activity.displayToast` que faziam `Toast.makeText(...).show()` direto |
 | [TVAppUpdateDialog.kt](../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/tv/shared/TVAppUpdateDialog.kt) | `Toast.makeText` → `displayToast` |
 | [SettingsScreen.kt](../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/mobile/feature/settings/general/SettingsScreen.kt) | idem (2 pontos) |
@@ -139,8 +138,9 @@ E, atacando a corrida na origem — nenhum toast é enfileirado enquanto a main 
 
 | Arquivo | Mudança |
 |---|---|
+| [BaseGameActivity.kt](../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt) | `baseGameScreenViewModel` tornado `protected` para expor `retroGameView` às subclasses |
 | [GameViewModelInput.kt](../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/viewmodel/GameViewModelInput.kt) | `initializeGamePadShortcutsFlow` espera `FrameRendered` antes de coletar — mesmo gate que `initializeControllerConfigsFlow` já usava |
-| [TVGameActivity.kt](../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/tv/game/TVGameActivity.kt) | toast de "sem controle" só na **transição** para lista vazia (`map { isEmpty } → distinctUntilChanged`); antes cada reemissão do `InputManager` enfileirava mais um |
+| [TVGameActivity.kt](../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/tv/game/TVGameActivity.kt) | `initializeShortcutToastFlow` agora aguarda `waitGLEvent<FrameRendered>()` antes de coletar inputs vazios; sem esse gate, boxes sem controle (apenas controle remoto IR) disparavam o toast logo em `CREATED` em pleno boot |
 
 Detalhes que importam:
 
@@ -212,6 +212,11 @@ Nada de `PopupWindow` (só código comentado em `TouchControllerCustomizer`) nem
 
 ## Validação
 
+- ✅ **Compilado e testado em 2026-09-17**:
+  - `:retrograde-util:compileDebugKotlin` **BUILD SUCCESSFUL**
+  - `:lemuroid-app:compileFreeBundleDebugKotlin` + `:lemuroid-app-ext-play:compileDebugKotlin` **BUILD SUCCESSFUL**
+  - `:lemuroid-app:testFreeBundleDebugUnitTest` **BUILD SUCCESSFUL**
+  - `:lemuroid-app:assembleFreeBundleDebug` **BUILD SUCCESSFUL** (APKs gerados com sucesso)
 - ✅ **Compilado em 2026-08-16** (máquina configurada nesta data — ver "Ambiente de build" no
   CLAUDE.md): `:lemuroid-app:compileFreeBundleDebugKotlin` + `:lemuroid-app-ext-play:compileDebugKotlin`
   **BUILD SUCCESSFUL**, sem warning novo. `:lemuroid-app:assembleFreeBundleDebug` **BUILD SUCCESSFUL**

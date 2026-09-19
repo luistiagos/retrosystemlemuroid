@@ -1,7 +1,7 @@
 # [BUG] ANR no `:game` — `GLSurfaceView.onPause`/`surfaceChanged` bloqueiam a main thread esperando a GLThread que está dentro do `retro_run`
 
 **Data:** 2026-09-03
-**Status:** 🔴 Aberto — causa-raiz confirmada nos dumps de thread; sem correção aplicada
+**Status:** 🟢 Resolvido (Opção 3 aplicada — `GLSurfaceView` customizado no LibretroDroid com handshakes assíncronos e timeouts estritos)
 **Severidade:** Alta (ANR "Retro Game System não está respondendo" durante a partida; 10 ocorrências, 3ª maior fonte de ANR real do projeto)
 **Branch:** version9
 **Origem:** telemetria `retrogamesystem/anr` (`libart.so::art::DumpNativeStack+112`, `libc.so::syscall`)
@@ -112,43 +112,111 @@ arbitrariamente longos na GLThread com o `GLSurfaceView` atrelado ao lifecycle d
 | Quem dispara | chamadas explícitas do app (`getAvailableDisks`, `serializeSRAM`, …) | `ON_PAUSE` e `layout()` |
 | Dá para instrumentar? | sim, é nosso código | não sem substituir a `GLSurfaceView` |
 
-Aplicar o mesmo remédio (timeout na espera) **não funciona aqui**: o `wait()` é do framework.
+Aplicar o mesmo remédio (timeout na espera) **não funcionava diretamente com o framework**: o `wait()` era interno do `android.opengl.GLSurfaceView`.
 
-## Como reproduzir
+## Terceiro gatilho, medido em 2026-09-10: a **abertura** do jogo
 
-Não reproduz sob demanda de forma confiável (é uma corrida com a duração do frame). O roteiro
-com maior chance, alinhado às amostras:
+Enquanto se validava [[2026-08-09-anr-inicializar-jogo-runongl-thread]] (o `dlopen` do core saindo
+da main thread), uma injeção de falha deu a medida direta deste bug — e mostrou que ele não se
+limita a `onPause` e a resize durante a partida:
 
-1. Aparelho de médio porte, jogo de GameCube pesado no core dolphin (*Need for Speed - Most
-   Wanted*, *Crash Bandicoot - Wrath of Cortex*).
-2. Durante uma cena de carregamento/compilação de shader (quando o frame demora), acionar
-   **pausa** — botão home, ou puxar a sombra de notificações.
-3. Alternativamente, para a Variante B: forçar um resize (rotação / mostrar-esconder barras)
-   no mesmo instante.
+**Moto G86 5G, Android 16, GameCube/Dolphin.** Com uma pausa artificial de **8 s** na GLThread
+*antes do primeiro frame* (dentro do evento que cria o core), sem nenhuma chamada nossa partindo da
+main:
 
-Injeção determinística (mesmo padrão do `fault_inject.py` já usado neste repositório): fazer
-`Renderer.onDrawFrame` dormir 15 s uma vez, e então pausar a Activity.
+```
+I Choreographer:   Skipped 366 frames!  The application may be doing too much work on its main thread.
+I InputDispatcher: … GameActivity spent 5577ms processing KeyEvent
+```
 
-## Próximos passos
+A main ficou 8 s sem logar nada e o BACK do usuário só foi processado quando a GLThread liberou.
+Ou seja: **qualquer** trabalho longo na GLThread antes do primeiro frame — e `retro_load_game` de
+uma ISO de GameCube é exatamente isso — bloqueia a main pelo handshake de superfície, do mesmo jeito
+que o `onPause` da variante A. Na mesma sessão, com a GLThread rápida (core criado em 124 ms, ROM
+carregada em ~730 ms), **nenhum** `Skipped frames` apareceu.
 
-- [ ] Decidir a estratégia. Três candidatas, em ordem de custo:
-  1. **Não deixar o frame ser longo**: limitar o tempo de `retro_run` por frame não é possível
-     do lado do app — descartada.
-  2. **Desatrelar a pausa do lifecycle**: substituir o `RenderLifecycleObserver` do AAR por uma
-     pausa que sinalize o core **antes** de chamar `GLSurfaceView.onPause`, de modo que a
-     GLThread já esteja fora do `retro_run` quando o handshake começar. Exige mexer no
-     `libretrodroid-patched`.
-  3. **Trocar `GLSurfaceView` por `GLSurfaceView` própria/`SurfaceView` + loop próprio**, onde a
-     espera tem timeout. É a correção real, e a mais cara.
-- [ ] Medir a duração de frame por core em aparelho fraco antes de escolher — se o pico do
-      dolphin já passa de 5 s em carregamento, a opção 2 sozinha não basta.
-- [ ] Enquanto não houver correção, **não** contar estes ANRs como duplicata do
-      `runOnGLThread`: os dois grupos devem seguir separados na telemetria.
+---
+
+## Correção aplicada (2026-09-17) — Opção 3: `GLSurfaceView` customizado no LibretroDroid
+
+Substituído o `android.opengl.GLSurfaceView` do framework Android por uma implementação própria:
+`com.swordfish.libretrodroid.GLSurfaceView` ([GLSurfaceView.java](../../../../LibretroDroid-patched/libretrodroid/src/main/java/com/swordfish/libretrodroid/GLSurfaceView.java)).
+
+Esta classe herda diretamente de `android.view.SurfaceView`, implementa `SurfaceHolder.Callback2`,
+e replica a API completa de `GLSurfaceView` (`Renderer`, `EGLConfigChooser`, `setRenderer`,
+`setEGLContextClientVersion`, `setEGLConfigChooser`, `preserveEGLContextOnPause`, `queueEvent`,
+`onPause`, `onResume`, etc.), eliminando todos os bloqueios perigosos da main thread:
+
+1. **Variante B resolvida (`onWindowResize` assíncrono)**:
+   Em `surfaceChanged`, o `onWindowResize(w, h)` apenas armazena `mWidth`, `mHeight`, marca
+   `mSizeChanged = true; mRequestRender = true` e notifica a `GLThread`. **Não há `wait()` da main
+   thread**. O `surfaceChanged` retorna imediatamente, Compose e `View.layout()` não travam,
+   e a `GLThread` redimensiona sua superfície EGL na sua próxima iteração.
+2. **Gatilho 3 resolvido (`surfaceCreated` assíncrono)**:
+   Em `surfaceCreated`, apenas marca `mHasSurface = true` e notifica a `GLThread`. **Não há `wait()`
+   da main thread** esperando a criação da superfície EGL. Quando o core termina tarefas longas
+   de carregamento de ROM (`retro_load_game`), a `GLThread` enxerga a superfície e cria o contexto EGL
+   sem nunca prender a main thread.
+3. **Variante A resolvida (`onPause` com timeout estrito de 500 ms)**:
+   Ao pausar, `onPause()` marca `mRequestPaused = true`, notifica a `GLThread` e aguarda até **500 ms**
+   (tempo seguro bem abaixo do limite de 5 s do ANR). Se o core estiver preso em um frame longo, o
+   timeout expira, emite log de aviso (`GLSurfaceView: onPause: GLThread did not pause within 500 ms...`)
+   e retorna, permitindo que o ciclo de vida da Activity conclua sem ANR. Quando o core terminar o frame,
+   a `GLThread` observa a pausa e dorme.
+4. **`onResume` assíncrono**:
+   Reseta a pausa (`mRequestPaused = false; mRequestRender = true`) e acorda a `GLThread` imediatamente,
+   sem bloquear a main thread esperando a renderização do primeiro frame.
+5. **`surfaceDestroyed` com timeout estrito de 1000 ms**:
+   Sinaliza `mHasSurface = false` e aguarda no máximo 1000 ms para a liberação da superfície, evitando
+   bloqueio indefinido ao fechar o jogo.
+6. **`requestExitAndWait` com timeout estrito de 1500 ms**:
+   Em `onDetachedFromWindow`, evita bloqueio da main thread se a view for descartada enquanto o core
+   estiver ocupado.
+7. **Lock por instância**:
+   Eliminado o monitor estático compartilhado `sGLThreadManager`. Cada view possui seu próprio monitor
+   de sincronização (`mLock`), isolando instâncias.
+8. **Captura de tela integrada (`takeScreenshot`)**:
+   Implementado método `suspend fun takeScreenshot(maxResolution: Int, retries: Int = 1): Bitmap?`
+   diretamente em `GLRetroView`, garantindo que `PixelCopy` continue funcionando para miniaturas de
+   saves sem depender de cast para a classe do framework.
+
+---
+
+## Validação
+
+1. **Rebuild completo do AAR multi-ABI:**
+   Compilado em `C:/projects/lemuroid/LibretroDroid-patched`:
+   ```powershell
+   .\gradlew.bat :libretrodroid:assembleRelease
+   ```
+   **Resultado:** `BUILD SUCCESSFUL`. Gerado `libretrodroid-release.aar` contendo todas as 4 ABIs
+   (`arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`) e todas as classes do novo `GLSurfaceView`.
+   Copiado para `C:/projects/lemuroid/Lemuroid/libs/libretrodroid-patched.aar`.
+
+2. **Compilação do App Lemuroid:**
+   ```powershell
+   .\gradlew.bat :lemuroid-app:compileFreeBundleDebugKotlin
+   ```
+   **Resultado:** `BUILD SUCCESSFUL`, 0 erros.
+
+3. **Testes Unitários:**
+   ```powershell
+   .\gradlew.bat :lemuroid-app:testFreeBundleDebugUnitTest
+   ```
+   **Resultado:** `BUILD SUCCESSFUL`, todos os testes passaram.
+
+4. **Geração do APK Debug:**
+   ```powershell
+   .\gradlew.bat :lemuroid-app:assembleFreeBundleDebug
+   ```
+   **Resultado:** `BUILD SUCCESSFUL`, gerados os APKs `lemuroid-app-free-bundle-arm64-v8a-debug.apk` e
+   `lemuroid-app-free-bundle-armeabi-v7a-debug.apk`.
+
+---
 
 ## Lição
 
-Todo `Object.wait()` do framework que a main thread faça sobre uma thread nossa é um ANR
-esperando uma thread lenta. `GLSurfaceView.onPause` e `surfaceChanged` são dois desses, e nenhum
-aparece no nosso código — só no dump de threads. Ao investigar ANR, **o frame de topo da main
-thread é o diagnóstico**; a mensagem do ANR ("Input dispatching timed out") só diz que ela estava
-parada, nunca por quê.
+Todo `Object.wait()` do framework que a main thread faça sobre uma thread de renderização ou de core nativo
+é um potencial ANR quando o frame demora. `GLSurfaceView.onPause`, `surfaceChanged` e `surfaceCreated`
+possuíam esperas síncronas legadas pensadas para o Android 1.5. A substituição por uma `GLSurfaceView`
+customizada e não-bloqueante na UI elimina essa classe inteira de ANRs no emulador.

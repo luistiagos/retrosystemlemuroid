@@ -57,7 +57,6 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
 import com.swordfish.touchinput.radial.sensors.TiltConfiguration
-import java.security.InvalidParameterException
 import javax.inject.Inject
 
 class GameMenuActivity : RetrogradeComponentActivity() {
@@ -87,51 +86,56 @@ class GameMenuActivity : RetrogradeComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Extra obrigatorio ausente = nao foi o BaseGameActivity que abriu o menu (o Robo test do
+        // Pre-Launch Report lanca toda activity declarada sem extras). Fechar, nao lancar.
+        val gameMenuRequest = parseGameMenuRequest() ?: run { finish(); return }
+
         enableEdgeToEdge(
             SystemBarStyle.dark(Color.TRANSPARENT),
             SystemBarStyle.dark(Color.TRANSPARENT),
         )
 
-        val extras = intent.extras
-
-        val gameMenuRequest =
-            GameMenuRequest(
-                coreOptions =
-                    intent.serializable<Array<LemuroidCoreOption>>(GameMenuContract.EXTRA_CORE_OPTIONS)
-                        ?.toList()
-                        ?: throw InvalidParameterException("Missing EXTRA_CORE_OPTIONS"),
-                advancedCoreOptions =
-                    intent.serializable<Array<LemuroidCoreOption>>(GameMenuContract.EXTRA_ADVANCED_CORE_OPTIONS)
-                        ?.toList()
-                        ?: throw InvalidParameterException("Missing EXTRA_ADVANCED_CORE_OPTIONS"),
-                game =
-                    intent.serializable<Game>(GameMenuContract.EXTRA_GAME)
-                        ?: throw InvalidParameterException("Missing EXTRA_GAME"),
-                coreConfig =
-                    intent.serializable<SystemCoreConfig>(GameMenuContract.EXTRA_SYSTEM_CORE_CONFIG)
-                        ?: throw InvalidParameterException("Missing EXTRA_SYSTEM_CORE_CONFIG"),
-                audioEnabled =
-                    extras?.getBoolean(GameMenuContract.EXTRA_AUDIO_ENABLED, false) ?: false,
-                fastForwardSupported =
-                    extras?.getBoolean(GameMenuContract.EXTRA_FAST_FORWARD_SUPPORTED, false) ?: false,
-                fastForwardEnabled =
-                    extras?.getBoolean(GameMenuContract.EXTRA_FAST_FORWARD, false) ?: false,
-                numDisks =
-                    extras?.getInt(GameMenuContract.EXTRA_DISKS, 0) ?: 0,
-                currentDisk =
-                    extras?.getInt(GameMenuContract.EXTRA_CURRENT_DISK, 0) ?: 0,
-                currentTiltConfiguration =
-                    intent.serializable<TiltConfiguration>(GameMenuContract.EXTRA_CURRENT_TILT_CONFIG)
-                        ?: TiltConfiguration.Disabled,
-                allTiltConfigurations =
-                    intent.serializable<Array<TiltConfiguration>>(GameMenuContract.EXTRA_TILT_ALL_CONFIGS)
-                        ?.toList()
-                        ?: emptyList(),
-            )
-
         setContent {
             GameMenuScreen(gameMenuRequest)
         }
+    }
+
+    private fun parseGameMenuRequest(): GameMenuRequest? {
+        val extras = intent.extras
+
+        return GameMenuRequest(
+            coreOptions =
+                intent.serializable<Array<LemuroidCoreOption>>(GameMenuContract.EXTRA_CORE_OPTIONS)
+                    ?.toList()
+                    ?: return null,
+            advancedCoreOptions =
+                intent.serializable<Array<LemuroidCoreOption>>(GameMenuContract.EXTRA_ADVANCED_CORE_OPTIONS)
+                    ?.toList()
+                    ?: return null,
+            game =
+                intent.serializable<Game>(GameMenuContract.EXTRA_GAME)
+                    ?: return null,
+            coreConfig =
+                intent.serializable<SystemCoreConfig>(GameMenuContract.EXTRA_SYSTEM_CORE_CONFIG)
+                    ?: return null,
+            audioEnabled =
+                extras?.getBoolean(GameMenuContract.EXTRA_AUDIO_ENABLED, false) ?: false,
+            fastForwardSupported =
+                extras?.getBoolean(GameMenuContract.EXTRA_FAST_FORWARD_SUPPORTED, false) ?: false,
+            fastForwardEnabled =
+                extras?.getBoolean(GameMenuContract.EXTRA_FAST_FORWARD, false) ?: false,
+            numDisks =
+                extras?.getInt(GameMenuContract.EXTRA_DISKS, 0) ?: 0,
+            currentDisk =
+                extras?.getInt(GameMenuContract.EXTRA_CURRENT_DISK, 0) ?: 0,
+            currentTiltConfiguration =
+                intent.serializable<TiltConfiguration>(GameMenuContract.EXTRA_CURRENT_TILT_CONFIG)
+                    ?: TiltConfiguration.Disabled,
+            allTiltConfigurations =
+                intent.serializable<Array<TiltConfiguration>>(GameMenuContract.EXTRA_TILT_ALL_CONFIGS)
+                    ?.toList()
+                    ?: emptyList(),
+        )
     }
 
     @OptIn(ExperimentalMaterial3Api::class)

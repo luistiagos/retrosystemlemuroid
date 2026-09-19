@@ -91,13 +91,19 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     @Inject
     lateinit var sharedPreferences: Lazy<SharedPreferences>
 
-    private lateinit var baseGameScreenViewModel: BaseGameScreenViewModel
+    protected lateinit var baseGameScreenViewModel: BaseGameScreenViewModel
 
     private val startGameTime = System.currentTimeMillis()
     private var fdsCurrentSideIndex = 0
     private var fdsDiskInserted = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    /**
+     * `final` de proposito: o `finish(); return` abaixo so sai *deste* metodo. Uma subclasse que
+     * sobrescrevesse `onCreate` seguiria rodando depois do `super.onCreate()` com `game` e
+     * `systemCoreConfig` sem valor — era assim que o `GameActivity` crashava no Pre-Launch Report,
+     * que lanca as activities sem extras. Codigo de subclasse vai em [onGameCreated].
+     */
+    final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpExceptionsHandler()
 
@@ -166,7 +172,11 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         )
 
         initialiseFlows()
+        onGameCreated()
     }
+
+    /** Fim do [onCreate] — so e chamado quando a inicializacao nao abortou por falta de extras. */
+    protected open fun onGameCreated() {}
 
     @Composable
     abstract fun GameScreen(viewModel: BaseGameScreenViewModel)

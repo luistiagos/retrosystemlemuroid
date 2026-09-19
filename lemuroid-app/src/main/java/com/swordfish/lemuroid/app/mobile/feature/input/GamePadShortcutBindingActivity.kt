@@ -29,7 +29,11 @@ class GamePadShortcutBindingActivity : RetrogradeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        shortcutBindingUpdater = ShortcutBindingUpdater(inputDeviceManager, lifecycleScope, intent)
+        // Sem extras = nao veio da tela de controles (o Robo test do Pre-Launch Report lanca toda
+        // activity declarada assim). Fechar, nao lancar.
+        shortcutBindingUpdater =
+            ShortcutBindingUpdater.fromIntent(inputDeviceManager, lifecycleScope, intent)
+                ?: run { finish(); return }
 
         setContent {
             AppTheme {

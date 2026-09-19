@@ -1,8 +1,11 @@
 package com.swordfish.lemuroid.app.shared.roms
 
 import android.content.Context
+import android.database.sqlite.SQLiteException
 import android.net.Uri
 import com.swordfish.lemuroid.BuildConfig
+import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.lib.library.catalog.CatalogRemovals
 import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
@@ -210,13 +213,21 @@ class RomOnDemandManager(
         // .cue/.gdi entry, and delete the zip to reclaim space.
         val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
 
-        downloadedRomDao.insert(
-            DownloadedRom(
-                systemId = finalGame.systemId,
-                fileName = finalGame.fileName,
-                fileSize = finalFile.length(),
-            ),
-        )
+        try {
+            downloadedRomDao.insert(
+                DownloadedRom(
+                    systemId = finalGame.systemId,
+                    fileName = finalGame.fileName,
+                    fileSize = finalFile.length(),
+                ),
+            )
+        } catch (e: SQLiteException) {
+            Timber.e(e, "Failed to record downloaded ROM in DB for ${finalGame.fileName}")
+            context.displayToast(R.string.home_download_roms_out_of_space)
+            return@withContext DownloadResult.Failure(
+                context.getString(R.string.home_download_roms_out_of_space),
+            )
+        }
 
         // Fire-and-forget: catalog refresh doesn't need to complete before the
         // "play now?" dialog appears — launching it async avoids blocking the result.
@@ -294,7 +305,11 @@ class RomOnDemandManager(
                 FileOutputStream(destFile, false).use { }
             }
         }
-        downloadedRomDao.delete(game.systemId, game.fileName)
+        try {
+            downloadedRomDao.delete(game.systemId, game.fileName)
+        } catch (e: SQLiteException) {
+            Timber.e(e, "deleteRom: failed to delete DownloadedRom record for ${game.fileName}")
+        }
         LibraryIndexScheduler.triggerCatalogQuickLoad(context)
     }
 
@@ -329,9 +344,14 @@ class RomOnDemandManager(
             downloadedRomDao.delete(variant.systemId, variant.fileName)
         }
 
-        CatalogRemovals.add(context, variants.map { it.downloadKey })
-        gameDao.delete(variants)
-        Timber.i("deleteFromCatalog: removed ${variants.size} row(s) for ${game.systemId}/${game.title}")
+        try {
+            CatalogRemovals.add(context, variants.map { it.downloadKey })
+            gameDao.delete(variants)
+            Timber.i("deleteFromCatalog: removed ${variants.size} row(s) for ${game.systemId}/${game.title}")
+        } catch (e: SQLiteException) {
+            Timber.e(e, "deleteFromCatalog: failed to delete rows for ${game.systemId}/${game.title}")
+            context.displayToast(R.string.home_download_roms_out_of_space)
+        }
     }
 
     fun isManagedRom(game: Game): Boolean {
@@ -360,13 +380,17 @@ class RomOnDemandManager(
 
         val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
         if (finalGame != game) {
-            downloadedRomDao.insert(
-                DownloadedRom(
-                    systemId = finalGame.systemId,
-                    fileName = finalGame.fileName,
-                    fileSize = finalFile.length(),
-                ),
-            )
+            try {
+                downloadedRomDao.insert(
+                    DownloadedRom(
+                        systemId = finalGame.systemId,
+                        fileName = finalGame.fileName,
+                        fileSize = finalFile.length(),
+                    ),
+                )
+            } catch (e: SQLiteException) {
+                Timber.e(e, "prepareGameForLaunch: failed to insert DownloadedRom for ${finalGame.fileName}")
+            }
         }
         finalGame
     }

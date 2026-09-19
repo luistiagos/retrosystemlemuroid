@@ -297,7 +297,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
      * Reads the embedded catalog manifest from assets. Returns a list of relative paths
      * like "arcade/acrobatm.zip", or null if the asset is not present.
      *
-     * On weak devices, entries for heavy systems (PSP, 3DS, NDS, N64, PSX, DOS, Sega CD)
+     * On weak devices, entries for heavy systems (PSP, 3DS, NDS, N64, DOS, Sega CD, ...)
      * are excluded so their placeholder files are never created.
      */
     private fun loadCatalogFromAssets(): List<String>? {

@@ -14,13 +14,11 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @OptIn(DelicateCoroutinesApi::class)
-class InputBindingUpdater(
+class InputBindingUpdater private constructor(
     private val inputDeviceManager: InputDeviceManager,
     private val scope: CoroutineScope,
-    intent: Intent,
+    val extras: IntentExtras,
 ) {
-    val extras = parseExtras(intent)
-
     fun getTitle(context: Context): String {
         val keyName = InputKey(extras.retroKey).displayName()
         return context.getString(R.string.gamepad_binding_update_title, keyName)
@@ -91,22 +89,29 @@ class InputBindingUpdater(
         return device != null && extras.device.name == device.name
     }
 
-    private fun parseExtras(intent: Intent): IntentExtras {
-        val device =
-            intent.extras?.getParcelable<InputDevice>(REQUEST_DEVICE)
-                ?: throw IllegalArgumentException("REQUEST_DEVICE has not been passed")
-
-        val retroKey =
-            intent.extras?.getInt(REQUEST_RETRO_KEY)
-                ?: throw IllegalArgumentException("REQUEST_RETRO_KEY has not been passed")
-
-        return IntentExtras(device, retroKey)
-    }
-
     data class IntentExtras(val device: InputDevice, val retroKey: Int)
 
     companion object {
         const val REQUEST_DEVICE = "REQUEST_DEVICE"
         const val REQUEST_RETRO_KEY = "REQUEST_RETRO_KEY"
+
+        /**
+         * `null` quando o intent nao traz o dispositivo. Nenhum fluxo do app faz isso: quem faz e o
+         * Robo test do Pre-Launch Report, que lanca as activities declaradas sem extras. A activity
+         * fecha com `finish()` — lancar aqui derrubava o processo em `performLaunchActivity`.
+         */
+        fun fromIntent(
+            inputDeviceManager: InputDeviceManager,
+            scope: CoroutineScope,
+            intent: Intent,
+        ): InputBindingUpdater? {
+            val extras = intent.extras ?: return null
+            val device = extras.getParcelable<InputDevice>(REQUEST_DEVICE) ?: return null
+            return InputBindingUpdater(
+                inputDeviceManager,
+                scope,
+                IntentExtras(device, extras.getInt(REQUEST_RETRO_KEY)),
+            )
+        }
     }
 }

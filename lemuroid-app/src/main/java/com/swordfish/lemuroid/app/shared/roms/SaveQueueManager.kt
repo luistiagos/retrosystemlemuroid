@@ -1,7 +1,10 @@
 package com.swordfish.lemuroid.app.shared.roms
 
 import android.content.Context
+import android.database.sqlite.SQLiteException
 import android.net.Uri
+import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.lib.library.db.dao.GameDao
 import com.swordfish.lemuroid.lib.library.db.dao.SaveQueueDao
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -74,19 +77,25 @@ class SaveQueueManager(
             val alreadyQueued = _entries.value.any { it.fileName == game.fileName }
             if (alreadyQueued) return
 
-            val position = (saveQueueDao.maxPosition() ?: -1) + 1
-            val item = SaveQueueItem(
-                fileName = game.fileName,
-                gameId = game.id,
-                gameTitle = game.title,
-                gameCoverUrl = game.coverFrontUrl,
-                gameFileUri = game.fileUri,
-                systemId = game.systemId,
-                state = "QUEUED",
-                addedAt = System.currentTimeMillis(),
-                position = position,
-            )
-            saveQueueDao.insert(item)
+            try {
+                val position = (saveQueueDao.maxPosition() ?: -1) + 1
+                val item = SaveQueueItem(
+                    fileName = game.fileName,
+                    gameId = game.id,
+                    gameTitle = game.title,
+                    gameCoverUrl = game.coverFrontUrl,
+                    gameFileUri = game.fileUri,
+                    systemId = game.systemId,
+                    state = "QUEUED",
+                    addedAt = System.currentTimeMillis(),
+                    position = position,
+                )
+                saveQueueDao.insert(item)
+            } catch (e: SQLiteException) {
+                Timber.e(e, "SaveQueueManager: failed to persist queue item for ${game.fileName}")
+                appContext.displayToast(R.string.home_download_roms_out_of_space)
+                return
+            }
 
             _entries.update { current ->
                 current + SaveQueueEntry(
@@ -124,7 +133,11 @@ class SaveQueueManager(
             // Processor loop will detect cancellation and move to next item.
         }
         mutex.withLock {
-            saveQueueDao.deleteByFileName(fileName)
+            try {
+                saveQueueDao.deleteByFileName(fileName)
+            } catch (e: SQLiteException) {
+                Timber.e(e, "SaveQueueManager: failed to delete cancelled item $fileName from DB")
+            }
             _entries.update { it.filter { e -> e.fileName != fileName } }
         }
     }
@@ -154,12 +167,21 @@ class SaveQueueManager(
     // ──────────────────────────────────────────────────────────────
 
     private suspend fun restorePersistedQueue() {
-        val persisted = saveQueueDao.getAll()
+        val persisted = try {
+            saveQueueDao.getAll()
+        } catch (e: SQLiteException) {
+            Timber.e(e, "SaveQueueManager: failed to read persisted queue")
+            return
+        }
         if (persisted.isEmpty()) return
 
         // Reset any SAVING items to QUEUED (they were interrupted mid-download).
         persisted.filter { it.state == "SAVING" }.forEach {
-            saveQueueDao.updateState(it.fileName, "QUEUED")
+            try {
+                saveQueueDao.updateState(it.fileName, "QUEUED")
+            } catch (e: SQLiteException) {
+                Timber.e(e, "SaveQueueManager: failed to reset state for ${it.fileName}")
+            }
         }
 
         val restored = persisted.map { item ->
@@ -213,7 +235,11 @@ class SaveQueueManager(
             mutex.withLock {
                 when (result) {
                     is RomOnDemandManager.DownloadResult.Success -> {
-                        saveQueueDao.deleteByFileName(next.fileName)
+                        try {
+                            saveQueueDao.deleteByFileName(next.fileName)
+                        } catch (e: SQLiteException) {
+                            Timber.e(e, "SaveQueueManager: failed to delete completed item from DB for ${next.fileName}")
+                        }
                         _entries.update { list ->
                             list.map {
                                 if (it.fileName == next.fileName)
@@ -233,7 +259,11 @@ class SaveQueueManager(
                         Timber.d("SaveQueueManager: ${next.fileName} saved successfully")
                     }
                     is RomOnDemandManager.DownloadResult.NotFound -> {
-                        saveQueueDao.deleteByFileName(next.fileName)
+                        try {
+                            saveQueueDao.deleteByFileName(next.fileName)
+                        } catch (e: SQLiteException) {
+                            Timber.e(e, "SaveQueueManager: failed to delete not found item from DB for ${next.fileName}")
+                        }
                         _entries.update { list ->
                             list.map {
                                 if (it.fileName == next.fileName)
@@ -243,7 +273,11 @@ class SaveQueueManager(
                         }
                     }
                     is RomOnDemandManager.DownloadResult.Failure -> {
-                        saveQueueDao.deleteByFileName(next.fileName)
+                        try {
+                            saveQueueDao.deleteByFileName(next.fileName)
+                        } catch (e: SQLiteException) {
+                            Timber.e(e, "SaveQueueManager: failed to delete failed item from DB for ${next.fileName}")
+                        }
                         _entries.update { list ->
                             list.map {
                                 if (it.fileName == next.fileName)
@@ -258,7 +292,11 @@ class SaveQueueManager(
     }
 
     private suspend fun setEntryState(fileName: String, dbState: String, uiState: SaveQueueState) {
-        saveQueueDao.updateState(fileName, dbState)
+        try {
+            saveQueueDao.updateState(fileName, dbState)
+        } catch (e: SQLiteException) {
+            Timber.e(e, "SaveQueueManager: failed to update state in DB for $fileName")
+        }
         updateEntryState(fileName, uiState)
     }
 
@@ -287,15 +325,19 @@ class SaveQueueManager(
      * favorite flag, etc. The fallback (row deleted mid-flight) preserves at least the cover.
      */
     private suspend fun buildGame(entry: SaveQueueEntry): Game =
-        gameDao.selectById(entry.gameId)
-            ?: Game(
-                id = entry.gameId,
-                fileName = entry.fileName,
-                fileUri = entry.fileUri,
-                title = entry.title,
-                systemId = entry.systemId,
-                developer = null,
-                coverFrontUrl = entry.coverUrl,
-                lastIndexedAt = 0L,
-            )
+        try {
+            gameDao.selectById(entry.gameId)
+        } catch (e: SQLiteException) {
+            Timber.e(e, "SaveQueueManager: failed to select game by id ${entry.gameId}")
+            null
+        } ?: Game(
+            id = entry.gameId,
+            fileName = entry.fileName,
+            fileUri = entry.fileUri,
+            title = entry.title,
+            systemId = entry.systemId,
+            developer = null,
+            coverFrontUrl = entry.coverUrl,
+            lastIndexedAt = 0L,
+        )
 }

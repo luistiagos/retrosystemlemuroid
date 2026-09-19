@@ -42,3 +42,14 @@ perf_*.txt
 startup_*.txt
 pkgs*.txt
 *_logs.txt
+
+# Scratch de investigação sob tmp/ — imagens de disco, dumps de RAM e clones de build.
+# O GitHub rejeita arquivo > 100 MB, e estes passam disso (gta203.bin = 668 MB).
+# O resto de tmp/ continua versionado de propósito (cores do buildbot, aarcheck, etc.).
+tmp/dc-investigation/
+tmp/libretrodroid-destroy-build/
+tmp/libretrodroid-destroy-test/
+tmp/libretrodroid-before-destroy-fix.aar
+
+# Dump de uiautomator
+wd_*.xml

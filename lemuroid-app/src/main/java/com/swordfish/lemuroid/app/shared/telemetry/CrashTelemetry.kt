@@ -4,6 +4,11 @@ import android.app.ActivityManager
 import android.app.ApplicationExitInfo
 import android.content.Context
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.common.displayToast
+import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.util.regex.Pattern
 
@@ -43,6 +48,43 @@ object CrashTelemetry {
     @Volatile private var component = "main"
 
     /**
+     * Determines whether a throwable indicates a storage environment failure rather than an app logic defect:
+     * - Disk or database is full (SQLiteFullException, SQLITE_FULL, ENOSPC, No space left)
+     * - Storage volume / adoptable storage is missing (SQLiteCantOpenDatabaseException on missing directory)
+     * - Disk I/O failure (SQLiteDiskIOException)
+     * - WorkManager bad filesystem state (ForceStopRunnable IllegalStateException)
+     */
+    fun isStorageEnvironmentFailure(throwable: Throwable?): Boolean {
+        var t: Throwable? = throwable
+        while (t != null) {
+            val className = t.javaClass.name
+            if (className.contains("SQLiteFullException") ||
+                className.contains("SQLiteCantOpenDatabaseException") ||
+                className.contains("SQLiteDiskIOException")
+            ) {
+                return true
+            }
+            val msg = t.message.orEmpty()
+            if (msg.contains("database or disk is full", ignoreCase = true) ||
+                msg.contains("SQLITE_FULL", ignoreCase = true) ||
+                msg.contains("SQLiteCantOpenDatabaseException", ignoreCase = true) ||
+                msg.contains("Cannot open database", ignoreCase = true) ||
+                msg.contains("The file system on the device is in a bad state", ignoreCase = true) ||
+                msg.contains("WorkManager cannot access the app's internal data store", ignoreCase = true) ||
+                msg.contains("ENOSPC", ignoreCase = true) ||
+                msg.contains("No space left on device", ignoreCase = true)
+            ) {
+                return true
+            }
+            for (suppressed in t.suppressed) {
+                if (isStorageEnvironmentFailure(suppressed)) return true
+            }
+            t = t.cause
+        }
+        return false
+    }
+
+    /**
      * Installs the uncaught-exception handler for the current process, chaining to whatever handler
      * was already there so existing behavior (crash screen, process teardown) is preserved.
      *
@@ -59,15 +101,36 @@ object CrashTelemetry {
             TelemetryReporter.init(context)
             val previous = Thread.getDefaultUncaughtExceptionHandler()
             Thread.setDefaultUncaughtExceptionHandler { thread, error ->
-                try {
-                    TelemetryReporter.reportThrowable(
-                        component = component,
-                        thread = thread,
-                        error = error,
-                        extraContext = TelemetryContext.lastGameSession(context),
-                        terminal = true,
-                    )
-                } catch (ignored: Throwable) {
+                val isStorageFailure = isStorageEnvironmentFailure(error)
+                val isMainThread = runCatching { thread == Looper.getMainLooper().thread }.getOrDefault(false)
+
+                if (isStorageFailure && !isMainThread) {
+                    // Non-fatal background storage exception (e.g. Room transaction failure when disk is full,
+                    // or adoptable storage disappeared while app was running).
+                    // Log locally, show friendly toast on UI thread, and avoid killing the process.
+                    Timber.e(error, "Non-fatal background storage error intercepted on thread ${thread.name}")
+                    try {
+                        Handler(Looper.getMainLooper()).post {
+                            context.displayToast(R.string.home_download_roms_out_of_space)
+                        }
+                    } catch (ignored: Throwable) {
+                    }
+                    return@setDefaultUncaughtExceptionHandler
+                }
+
+                if (!isStorageFailure) {
+                    try {
+                        TelemetryReporter.reportThrowable(
+                            component = component,
+                            thread = thread,
+                            error = error,
+                            extraContext = TelemetryContext.lastGameSession(context),
+                            terminal = true,
+                        )
+                    } catch (ignored: Throwable) {
+                    }
+                } else {
+                    Timber.w(error, "Storage environment failure occurred on main thread; omitting from crash telemetry")
                 }
                 previous?.uncaughtException(thread, error)
             }

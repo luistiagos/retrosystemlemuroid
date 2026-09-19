@@ -130,6 +130,8 @@
     <string name="core_crash_notice_message_option_disabled">%1$s parou porque o núcleo %2$s travou. Os shaders de hardware foram desligados para este sistema para que ele volte a rodar — você pode religá-los nas configurações dentro do jogo.</string>
     <string name="game_toast_quick_save_loaded">Carregamento rápido</string>
     <string name="game_toast_quick_save_saved">Salvamento rapido</string>
+    <string name="game_toast_state_while_loading">O jogo ainda está carregando. Tente de novo daqui a pouco.</string>
+    <string name="game_toast_save_state_failed">Não foi possível salvar este estado</string>
     <string name="empty_view_default">Nenhum item</string>
     <string name="core_settings_title">Configurações do Núcleo</string>
     <string name="core_settings_category_preferences">Preferências</string>

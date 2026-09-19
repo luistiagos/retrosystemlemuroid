@@ -358,10 +358,20 @@ A seção **Descubra** exibe até 10 jogos populares com cover, um por sistema, 
 | Tier | RAM | Sistemas ocultos |
 |------|-----|-----------------|
 | `NORMAL` | > 2 GB | nenhum |
-| `WEAK` | 1–2 GB | PSP, 3DS |
-| `ULTRA_WEAK` | ≤ 1 GB | PSP, 3DS, NDS, N64, PSX, DOS, Sega CD |
+| `WEAK` | 1–2 GB | PSP, 3DS, GameCube |
+| `ULTRA_WEAK` | ≤ 1 GB | PSP, 3DS, GameCube, NDS, N64, DOS, Sega CD, Dreamcast, 3DO, Saturn, Amiga (x4), PC-FX, Atari ST |
 
 O `excludedDbNames` é calculado uma vez no `init` do `HomeViewModel` e repassado para todas as queries que precisam de filtragem (recentes, favoritos, descubra).
+
+> ⚠️ **PSX não está em nenhum tier** (removido em 2026-09-05). O PCSX-ReARMed roda
+> aceitavelmente em set-top box de 1 GB, e a classificação `am.isLowRamDevice || totalGb <= 1.0`
+> derruba em `ULTRA_WEAK` **qualquer** aparelho ≤ 2 GB com `ro.config.low_ram=true` — o padrão de
+> TV box barata. Resultado: o catálogo inteiro de PlayStation sumia numa BTV de 2 GB.
+>
+> 💡 O filtro só existe na UI **mobile** (`MetaSystemsViewModel`). `TVHomeViewModel` **não**
+> chama `HeavySystemFilter` — esconde apenas PSP e 3DS. A busca também não filtra por sistema.
+> Portanto, sistema ausente na lista mas achado pela busca = filtro de RAM (e UI mobile);
+> ausente também na busca = linhas fora do banco, outro problema.
 
 ---
 
@@ -479,6 +489,7 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 - `PermanentHttpException` sinaliza erros HTTP não-retriáveis (4xx exceto 429); capturado em `downloadToFile` antes do bloco geral de `IOException`.
 - **Toast só por `Context.displayToast`** ([SafeToast.kt](retrograde-util/src/main/java/com/swordfish/lemuroid/common/SafeToast.kt)). `Toast.makeText(...).show()` direto é proibido — ver pitfall 7.
 - **Intent implícita só por `startActivitySafely` / `launchSafely`** ([SafeIntents.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/SafeIntents.kt)). `startActivity` cru vale só para Intent explícita — ver pitfall 9.
+- **Activity com extra obrigatório: extra ausente → `finish(); return`, nunca `throw`.** O Robo test do Pre-Launch Report lança toda activity declarada no manifesto sem extras, mesmo as não-exportadas. `BaseGameActivity.onCreate` é `final` de propósito — o `return` do abort só sai do método da base, então código de subclasse vai em `onGameCreated()`, que só roda quando a inicialização chegou ao fim.
 
 ---
 
@@ -596,6 +607,30 @@ Detalhes em `documentacao/bugs/done/2026-09-02-intents-sistema-sem-resolve-crash
 4. Com o `.so` no repo, `llvm-objdump -d --start-address=…` (NDK) responde o que "não temos as fontes do core" sugere ser impossível: os quadros do tombstone levam à instrução exata.
 
 Detalhes em `documentacao/bugs/done/2026-09-02-saturn-yabasanshiro-serializestate-fwrite-null.md`.
+
+### 11. Nada que dependa do estado emulado pode rodar antes do **primeiro frame**
+
+**Sintoma:** sair do jogo (ou pedir um save pelo menu) durante a tela preta de carregamento mata o
+processo `:game` com `SIGSEGV … fault addr 0x14` em `retro_serialize_size`, três quadros abaixo de
+`GLRetroView.serializeState`.
+
+**Causa:** o app marca o jogo como pronto (`GameState.Ready`) assim que constrói a `GLRetroView` —
+a ROM só é carregada depois, na GLThread. E **`retro_load_game` retornar também não basta**: o
+Dolphin termina o boot numa thread própria e o PPSSPP/Mupen64 montam estado durante o primeiro
+frame. Serializar antes disso lê estrutura que ainda não existe. A janela é o tempo inteiro de carga
+— segundos numa ISO de GameCube.
+
+**Regra:** o critério é `hasRenderedFrame` (primeiro `retro_run` concluído), guardado por
+`requireGameRunning()` no [GLRetroView.kt](../LibretroDroid-patched/libretrodroid/src/main/java/com/swordfish/libretrodroid/GLRetroView.kt);
+quem chama trata `GLRetroView.GameNotLoadedException` como **"não há o que salvar"** — sucesso, sem
+toast de falha e sem telemetria: jogo que nunca rodou não tem progresso a perder. Ao adicionar
+qualquer chamada nova ao core, decidir se ela entra nessa guarda.
+
+**Corolário de threading:** exceção lançada de dentro de um `queueEvent` sobe na GLThread, onde
+ninguém a captura — mata o processo. Só as chamadas bloqueantes (`runOnGLThread`) podem lançar; as
+fire-and-forget ignoram e logam.
+
+Detalhes em `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
 
 ---
 

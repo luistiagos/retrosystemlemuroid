@@ -1,6 +1,5 @@
 package com.swordfish.lemuroid.app.tv.game
 
-import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.Lifecycle
 import com.swordfish.lemuroid.R
@@ -10,6 +9,7 @@ import com.swordfish.lemuroid.app.tv.gamemenu.TVGameMenuActivity
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
 import com.swordfish.lemuroid.common.displayToast
+import com.swordfish.libretrodroid.GLRetroView
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
@@ -17,8 +17,7 @@ import kotlinx.coroutines.flow.map
 class TVGameActivity : BaseGameActivity() {
     override fun getDialogClass() = TVGameMenuActivity::class.java
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onGameCreated() {
         initializeFlows()
     }
 
@@ -34,9 +33,11 @@ class TVGameActivity : BaseGameActivity() {
     }
 
     private suspend fun initializeShortcutToastFlow() {
-        // Só na transição para "sem controle": getGamePadsObservable reemite a cada evento do
-        // InputManager e, no boot de uma TV box, isso enfileirava vários toasts de uma vez —
-        // cada um com um token de janela com prazo de validade (ver SafeToast).
+        // Espera o primeiro frame renderizado antes de disparar toast.
+        // Em TV boxes sem gamepad (apenas controle remoto IR), inputDeviceManager emite lista vazia
+        // imediatamente no boot; se disparado antes do primeiro frame, o toast compete com o carregamento
+        // pesado do core na main thread, estourando o token de janela (API 25) e matando o processo (ver SafeToast).
+        baseGameScreenViewModel.retroGameView.waitGLEvent<GLRetroView.GLRetroEvents.FrameRendered>()
         inputDeviceManager
             .getEnabledInputsObservable()
             .map { it.isEmpty() }

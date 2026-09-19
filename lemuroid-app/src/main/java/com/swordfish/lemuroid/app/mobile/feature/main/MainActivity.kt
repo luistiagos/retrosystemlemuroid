@@ -756,6 +756,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             pendingDownloadGame.value = variant
                         }
                     },
+                    onVariantLongClick = { variant ->
+                        pendingVariantsGame.value = null
+                        selectedGameState.value = variant
+                    },
                 )
             }
 

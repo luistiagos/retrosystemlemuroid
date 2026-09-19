@@ -352,6 +352,9 @@ class GameViewModelRetroGameView(
 
     private fun printRetroVariables(retroGameView: GLRetroView) {
         scope.launch {
+            // Espera o primeiro frame: o core e criado na GLThread (dlopen do .so, que em core
+            // grande passa de 1 s) e getVariables devolve vazio ate ele existir.
+            waitGLEvent<GLRetroView.GLRetroEvents.FrameRendered>()
             // Some cores do not immediately call SET_VARIABLES so we might need to wait a little bit
             delay(1.seconds)
             retroGameView.getVariables().forEach {

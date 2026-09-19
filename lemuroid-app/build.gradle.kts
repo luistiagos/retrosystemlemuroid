@@ -68,8 +68,8 @@ val catalogApplicationIdSuffix = normalizeApplicationIdSuffix(readGradleProperty
 
 android {
     defaultConfig {
-        versionCode = 244
-        versionName = "1.17.13" // Always remember to update Cores Tag!
+        versionCode = 251
+        versionName = "1.17.20" // Always remember to update Cores Tag!
         applicationId = "app.retrogamesystem$catalogApplicationIdSuffix"
 
         buildConfigField("String", "CATALOG_CHANNEL", "\"${escapeBuildConfigValue(catalogChannel)}\"")
@@ -323,6 +323,8 @@ dependencies {
     implementation(files(rootProject.file(deps.libs.libretrodroid)))
     // Transitive deps do POM original do JitPack que precisamos declarar manualmente.
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${deps.versions.lifecycle}")
+
+    testImplementation("junit:junit:4.13.2")
 
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)

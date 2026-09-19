@@ -69,7 +69,12 @@ class GameInteractor(
     ) {
         val lifecycleOwner = activity.activity() as? LifecycleOwner ?: return
         lifecycleOwner.lifecycleScope.launch {
-            retrogradeDb.gameDao().update(game.copy(isFavorite = isFavorite))
+            try {
+                retrogradeDb.gameDao().update(game.copy(isFavorite = isFavorite))
+            } catch (e: android.database.sqlite.SQLiteException) {
+                timber.log.Timber.e(e, "Failed to toggle favorite for ${game.title} due to database error")
+                activity.activity().displayToast(R.string.home_download_roms_out_of_space)
+            }
         }
     }
 

@@ -38,13 +38,31 @@ class GameViewModelSaves(
     private var currentQuickSave: SaveState? = null
 
     suspend fun saveSlot(index: Int) {
-        getCurrentSaveState()?.let {
-            statesManager.setSlotSave(game, it, systemCoreConfig.coreID, index)
-            runCatching {
-                takeScreenshotPreview(index)
+        try {
+            getCurrentSaveState()?.let {
+                statesManager.setSlotSave(game, it, systemCoreConfig.coreID, index)
+                runCatching {
+                    takeScreenshotPreview(index)
+                }
             }
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (e: Throwable) {
+            // O menu abre sobre a tela preta enquanto a ROM carrega, entao da para pedir um save
+            // antes de existir estado a salvar. Sem isto a excecao subia do launch do chamador ate
+            // o UncaughtExceptionHandler e o usuario via a tela de crash.
+            Timber.e(e, "Error while saving state to slot $index")
+            sideEffects.showToast(appContext.getString(messageForSaveFailure(e)))
         }
     }
+
+    /** Jogo ainda carregando nao e falha de gravacao: a mensagem tem que dizer o que houve. */
+    private fun messageForSaveFailure(error: Throwable): Int =
+        if (error is GLRetroView.GameNotLoadedException) {
+            R.string.game_toast_state_while_loading
+        } else {
+            R.string.game_toast_save_state_failed
+        }
 
     suspend fun loadSlot(index: Int) {
         try {
@@ -108,6 +126,11 @@ class GameViewModelSaves(
                 return true
             } catch (e: kotlinx.coroutines.CancellationException) {
                 throw e
+            } catch (e: GLRetroView.GameNotLoadedException) {
+                // Saiu antes de o jogo rodar o primeiro frame. Nao ha progresso a perder, entao isto
+                // nao e falha: avisar o usuario ou reportar seria alarme falso.
+                Timber.i("Nothing to save: the game never rendered a frame")
+                return true
             } catch (e: GLRetroView.GLThreadTimeoutException) {
                 Timber.w(e, "SRAM save timed out (attempt ${attempt + 1}/$GL_SAVE_ATTEMPTS)")
                 // So repete se a GLThread voltou a drenar a fila; senao seriam mais 30 s parados.
@@ -130,6 +153,9 @@ class GameViewModelSaves(
             true
         } catch (e: kotlinx.coroutines.CancellationException) {
             throw e
+        } catch (e: GLRetroView.GameNotLoadedException) {
+            Timber.i("Nothing to autosave: the game never rendered a frame")
+            true
         } catch (e: Throwable) {
             Timber.e(e, "Error while saving autosave on exit")
             reportExitSaveFailure("serializeState", e)
@@ -257,8 +283,15 @@ class GameViewModelSaves(
     }
 
     suspend fun saveQuickSave() {
-        currentQuickSave = getCurrentSaveState()
-        sideEffects.showToast(appContext.getString(R.string.game_toast_quick_save_saved))
+        try {
+            currentQuickSave = getCurrentSaveState()
+            sideEffects.showToast(appContext.getString(R.string.game_toast_quick_save_saved))
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (e: Throwable) {
+            Timber.e(e, "Error while taking quick save")
+            sideEffects.showToast(appContext.getString(messageForSaveFailure(e)))
+        }
     }
 
     suspend fun loadQuickSave() {
@@ -267,7 +300,15 @@ class GameViewModelSaves(
             sideEffects.showToast(appContext.getString(R.string.game_toast_load_state_failed))
             return
         }
-        val loaded = loadSaveState(saveToLoad)
+        val loaded =
+            try {
+                loadSaveState(saveToLoad)
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                Timber.e(e, "Error while loading quick save")
+                false
+            }
         if (loaded) {
             sideEffects.showToast(appContext.getString(R.string.game_toast_quick_save_loaded))
         } else {
