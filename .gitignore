@@ -53,3 +53,8 @@ tmp/libretrodroid-before-destroy-fix.aar
 
 # Dump de uiautomator
 wd_*.xml
+
+# Backup automatico do fix_mismatched_display_names.py (e de outros scripts de manifest
+# no mesmo estilo) — copia de seguranca criada ao lado do arquivo antes de sobrescrever,
+# nunca destino de commit.
+catalog_manifest*.bak_*

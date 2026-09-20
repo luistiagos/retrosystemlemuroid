@@ -128,7 +128,16 @@ class ManifestQuickLoader(
         //          falls back to the placeholder and lets a later scrape find the right one.
         //   v32  gc: removed 4 broken GameCube titles (NCAA Basketball truncated, LOTR 0-byte,
         //          Speed Kings & Sphinx .zip.rvz malformed) from catalog_manifest.txt.
-        private const val MANIFEST_SCHEMA_VERSION = 32
+        //   v33  zxspectrum/amstradcpc/msx/c64: 2170 titles rewritten from the filename. The v5
+        //          cleanup never fully landed for these four: the display column still carried
+        //          the IGDB fuzzy-match result — a modern game from ANOTHER platform sharing one
+        //          word with the file ("MASK (1987)" shown as "The Legend of Zelda: Majora's
+        //          Mask", "Boxing" as "Hyrule Warriors: Treasure Box"). Also restores 26 titles
+        //          that an earlier title-clean pass truncated at the first dot ("17.11.1989" ->
+        //          "17", "Amnesia v1.02" -> "Amnesia v1"). 73 legitimate Western/full titles kept
+        //          (display_name_keep.txt). Existing installs pick the new titles up through
+        //          updateManifestFieldsWithTitle on this reload. Tool: fix_mismatched_display_names.py.
+        private const val MANIFEST_SCHEMA_VERSION = 33
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

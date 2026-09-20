@@ -1,0 +1,60 @@
+# Linhas que fix_mismatched_display_names.py NAO deve tocar.
+#
+# Formato: system/<titulo derivado do arquivo>  (extensao e tags fora, o que
+# derived_title() devolve; casa sem distinguir maiusculas). Um titulo cobre todas as
+# variantes (Alt 1), [cr], (Disk 1 of 2) etc. do mesmo jogo.
+#
+# Entram aqui os casos em que o display gravado diverge do arquivo MAS e um titulo
+# legitimo do MESMO jogo -- lancamento ocidental, nome completo com subtitulo, licenca
+# no titulo. Conferidos a mao em 2026-09-19 no catalogo irmao (retrobatnew, mesma
+# familia de dados) e reconferidos aqui em 2026-09-20 -- as contagens de c64/msx/
+# amstradcpc batem byte a byte entre os dois projetos, confirmando a mesma origem.
+# Sem esta lista a tool os trocaria pelo titulo do arquivo, que tambem e correto, so
+# menos completo.
+#
+# NAO entra aqui: sequencia ou jogo diferente da mesma familia (Arkanoid II em cima de
+# Arkanoid, Super R-Type em cima de R-Type), "Arcade Archives: X", re-release moderno.
+
+# msx
+msx/Druaga no Tou
+msx/Bomber King
+msx/Meikyuu Shinwa
+msx/Digital Devil Monogatari Megami Tensei
+msx/Kage no Densetsu - Legend of Kage, The
+msx/Super Pierrot
+msx/Decathlon
+msx/Grog's Revenge
+msx/B.C.'s Quest
+msx/Borfesu
+msx/Karuizawa
+msx/Gambler Jiko Chuushinha
+msx/Golvellius
+msx/Vaxol - Heavy Armed Storm Vehicle
+
+# amstradcpc
+amstradcpc/Astro Marine Corps
+amstradcpc/Dragon Ninja
+amstradcpc/Heroes of the Lance
+amstradcpc/Test Match
+amstradcpc/War in Middle Earth
+amstradcpc/Jack Nicklaus Golf
+amstradcpc/Scruples
+amstradcpc/Monty Python's Flying Circus
+amstradcpc/Budokan
+amstradcpc/Side Arms
+amstradcpc/E-SWAT
+amstradcpc/Escape from Planet of Robot Monsters
+amstradcpc/Last Ninja 2
+amstradcpc/Pneumatic Hammers
+amstradcpc/Road Runner and Wile E. Coyote
+amstradcpc/Kat Trap
+amstradcpc/Mad Mix 2
+amstradcpc/Hong Kong Phooey
+amstradcpc/Mikie
+amstradcpc/Count Duckula 2
+amstradcpc/Xarq
+amstradcpc/Adventures of Basildon Bond, The
+amstradcpc/Secret Diary of Adrian Mole, The
+amstradcpc/Panza Kick Boxing
+amstradcpc/All Point Bulletin
+amstradcpc/Yes, Prime Minister
