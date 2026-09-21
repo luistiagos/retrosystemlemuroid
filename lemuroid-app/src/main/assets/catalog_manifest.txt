@@ -9482,7 +9482,7 @@ atari800/Alien Attack.zip|Alien Attack||0|1
 atari800/Alien Blast.zip|Alien Blast||0|1
 atari800/Alien Bugs (19xx)(-).zip|Alien Bugs||0|1
 atari800/Alien Egg.zip|Alien Egg||0|1
-atari800/Alien Encounter v.II (1984)(D.Firth).zip|Alien Encounter v||0|1
+atari800/Alien Encounter v.II (1984)(D.Firth).zip|Alien Encounter v.II||0|1
 atari800/Alien_Ambush_DANA.zip|Alien_Ambush_DANA||0|1
 atari800/Alien_Barrage.zip|Alien_Barrage||0|1
 atari800/Alien_Craft!.zip|Alien_Craft!||0|1
@@ -9666,7 +9666,7 @@ atari800/Ataroid (19xx)(-).zip|Ataroid||0|1
 atari800/Ataroid.zip|Ataroid||0|0
 atari800/Atartris.zip|Atartris||0|1
 atari800/Atartris II (19xx)(Blind Squirrel Software)(PD).zip|Atartris II||0|1
-atari800/Atartris v1.01 (19xx)(Blind Squirrel)(PD)[k-file].zip|Atartris v1||0|1
+atari800/Atartris v1.01 (19xx)(Blind Squirrel)(PD)[k-file].zip|Atartris v1.01||0|1
 atari800/Atarzee.zip|Atarzee||0|1
 atari800/Atlantis (1983)(Imagic)[k-file].zip|Atlantis||0|1
 atari800/Atlantis.zip|Atlantis||0|0
@@ -10753,7 +10753,7 @@ atari800/Dragnet (1980)(Compu-Net).zip|Dragnet||0|1
 atari800/Dragon Castle.zip|Dragon Castle||0|1
 atari800/Dragon Quest (Antic).zip|Dragon Quest||0|1
 atari800/Dragon Quest.zip|Dragon Quest||0|0
-atari800/Dragon Quest v3.14 (1986)(Matt Pritchard)(PD)[BASIC].zip|Dragon Quest v3||0|1
+atari800/Dragon Quest v3.14 (1986)(Matt Pritchard)(PD)[BASIC].zip|Dragon Quest v3.14||0|1
 atari800/Dragon Story (1998)(KAP)(cz)(SW)[Intro][k-file].zip|Dragon Story||0|1
 atari800/Dragon Story - Mini Intro.zip|Dragon Story - Mini Intro||0|1
 atari800/Dragon Story - Part I.zip|Dragon Story - Part I||0|1
@@ -11071,7 +11071,7 @@ atari800/Firefox Boulder Dash 54.zip|Firefox Boulder Dash 54||0|1
 atari800/Firefox Boulder Dash 55.zip|Firefox Boulder Dash 55||0|1
 atari800/First_Steps_with_the_Mr_Men.zip|First_Steps_with_the_Mr_Men||0|1
 atari800/Fische Fischen.zip|Fische Fischen||0|1
-atari800/Fish, The - Adventures of Mr. Fish v1.00 (1995)(Ken Siders)(PD)[k-file].zip|Fish, The - Adventures of Mr. Fish v1||0|1
+atari800/Fish, The - Adventures of Mr. Fish v1.00 (1995)(Ken Siders)(PD)[k-file].zip|Fish, The - Adventures of Mr. Fish v1.00||0|1
 atari800/Fishing.zip|Fishing||0|1
 atari800/Fishing Fun (19xx)(Cascade).zip|Fishing Fun||0|1
 atari800/Five_Card_Stud_Poker.zip|Five_Card_Stud_Poker||0|1
@@ -12511,7 +12511,7 @@ atari800/Moving_Maze_Dynacomp.zip|Moving_Maze_Dynacomp||0|1
 atari800/Mow_Down.zip|Mow_Down||0|1
 atari800/Mozaico.zip|Mozaico||0|1
 atari800/Mozg Procesor (1991)(Mirage)(pl).zip|Mozg Procesor||0|1
-atari800/Mozg Procesor v1.0D (1991)(Mirage)(pl)[BASIC].zip|Mozg Procesor v1||0|1
+atari800/Mozg Procesor v1.0D (1991)(Mirage)(pl)[BASIC].zip|Mozg Procesor v1.0D||0|1
 atari800/Mr Robot and His Robot Factory.zip|Mr Robot and His Robot Factory||0|1
 atari800/Mr. Bear's Honey Craze (19xx)(London)[t].zip|Mr. Bear's Honey Craze||0|1
 atari800/Mr. Cool (1983)(Sierra On-Line).zip|Mr. Cool||0|1
@@ -12971,7 +12971,7 @@ atari800/Polaris.zip|Polaris||0|1
 atari800/Pole 0.zip|Pole 0||0|1
 atari800/Pole Minove II.zip|Pole Minove II||0|1
 atari800/Pole Minove II Edytor.zip|Pole Minove II Edytor||0|1
-atari800/Pole Position Race Designer v3.01 (1984)(Floytt)[k-file].zip|Pole Position Race Designer v3||0|1
+atari800/Pole Position Race Designer v3.01 (1984)(Floytt)[k-file].zip|Pole Position Race Designer v3.01||0|1
 atari800/Pole Position X (1984)(ICS).zip|Pole Position X||0|1
 atari800/pole_minowe.zip|pole_minowe||0|1
 atari800/pole_minowe_unknown.zip|pole_minowe_unknown||0|1
@@ -14320,7 +14320,7 @@ atari800/Tipp_Trainer_Atari_Germany.zip|Tipp_Trainer_Atari_Germany||0|1
 atari800/Titan (1990)(Atlantis)[k-file].zip|Titan||0|1
 atari800/Titan_SoftSide_Publications.zip|Titan_SoftSide_Publications||0|1
 atari800/Titanic II.zip|Titanic II||0|1
-atari800/Titlebout (1984)(Avalon Hill[BASIC].zip|Titlebout (Avalon Hill||0|1
+atari800/Titlebout (1984)(Avalon Hill[BASIC].zip|Titlebout||0|1
 atari800/TKKG Nr. 2.zip|TKKG Nr. 2||0|1
 atari800/TKKG_Das_Leere_Grab_im_Moor.zip|TKKG_Das_Leere_Grab_im_Moor||0|1
 atari800/TNT.zip|TNT||0|1

@@ -19,6 +19,11 @@ confirmando a mesma origem de dado. Todas as ~800 amostradas a mao entre os quat
 sistemas sao erro do processo de preenchimento, nenhuma curadoria legitima (fora as
 excecoes listadas em display_name_keep.txt).
 
+`atari800` (conferido depois, 31/5475 sinalizadas) NAO tem jogo de outra plataforma:
+24 eram falso positivo de extensao dupla (ver abaixo), 6 titulo truncado no ponto da
+versao e 1 display com lixo de parenteses de um nome de arquivo malformado
+(`Titlebout (1984)(Avalon Hill[BASIC].zip` -> display "Titlebout (Avalon Hill").
+
 CRITERIO -- por que titulo exato normalizado, e nao similaridade de string. Foi
 testado com `difflib.SequenceMatcher` primeiro (no retrobatnew): ate ratio 0.75
 ("Bomb Jack" vs "Mighty Bomb Jack", "Gauntlet" vs "Gear Gauntlet") toda amostra era
@@ -37,14 +42,19 @@ que truncou titulo com ponto no meio pensando que era extensao/versao --
 esses casos e devolve o titulo completo, porque o criterio nao e "IGDB errou" e sim
 "o display nao e o titulo do arquivo".
 
-CUIDADO COM EXTENSAO DUPLA (".atr.zip", ".xex.zip", ".p8.png", ...) -- NAO USADO AQUI
-DE PROPOSITO. atari800 tem 8 ".atr.zip" e 2 ".xex.zip": o regex de extensao so tira
-a ULTIMA (".zip"), sobra ".atr"/".xex" grudado no titulo derivado, e a linha entraria
-como "diferente" por um bug do comparador, nao por erro do dado -- aplicar corromperia
-titulo que ja esta certo ("Archon.atr.zip" == "Archon" ficaria "Archon .atr" errado).
-zxspectrum, c64, msx e amstradcpc foram conferidos e NAO tem esse padrao (contagem de
-nomes com duas extensoes seguidas deu 0 nos quatro). Rodar isto num sistema novo sem
-conferir o mesmo padrao primeiro arrisca essa classe de falso positivo.
+EXTENSAO DUPLA (".atr.zip", ".xex.zip") -- LISTA BRANCA, NUNCA REGRA GENERICA. No
+atari800 a imagem de disco vai dentro do zip e o nome carrega as duas: "Archon.atr.zip".
+Tirando so a ultima (".zip"), sobra ".atr" grudado no titulo derivado e a linha entra
+como "diferente" por bug do comparador -- aplicar trocaria o "Archon" certo por
+"Archon .atr". Eram 24 das 31 linhas sinalizadas no atari800.
+
+A tentacao e tirar QUALQUER segmento antes do .zip. Medido no catalogo inteiro, isso
+esta errado: fora .atr (16) e .xex (8), os "segmentos internos" sao .0, .5, .F, .E, ...
+-- pedaco de TITULO: "Bridge 5.0.zip", "F.R.E.E.zip", "Fantasyland 2041 A.D.zip", 22
+arquivos cujo display hoje esta CERTO e passaria a "Bridge 5", "F.R.E", "Fantasyland 2041
+A". Por isso o segundo segmento so sai quando o de fora e arquivo compactado
+(ARCHIVE_EXT) E o de dentro e formato de imagem conhecido (INNER_ROM_EXT). Sistema novo
+com outra dupla: acrescentar o formato na lista depois de conferir, nunca afrouxar a regra.
 
 NAO USAR EM SISTEMAS DE CARTUCHO/CONSOLE (nes/snes/gba/psx/...) SEM AMOSTRAR. Ali o
 nome do arquivo No-Intro costuma ser o titulo JAPONES e a coluna de display traz a
@@ -72,8 +82,26 @@ import argparse, os, re, shutil, sys, time
 DISPLAY_COL = 1  # `system/file|display|capa|popularidade|flag`
 
 TAG_RE = re.compile(r"[\(\[][^\)\]]*[\)\]]")
-EXT_RE = re.compile(r"\.[A-Za-z0-9]{1,6}$")
+EXT_RE = re.compile(r"\.([A-Za-z0-9]{1,6})$")
 NONALNUM_RE = re.compile(r"[^a-z0-9]+")
+
+ARCHIVE_EXT = {"zip", "7z", "rar"}
+# Formatos de imagem do Atari 8-bit que aparecem DENTRO de um zip no nome do arquivo.
+# Ver "EXTENSAO DUPLA" no docstring antes de acrescentar qualquer coisa aqui.
+INNER_ROM_EXT = {"atr", "xex", "atx", "xfd", "pro", "cas", "car", "com"}
+
+
+def strip_extension(filename):
+    """Tira a extensao; e tambem a de dentro quando e imagem conhecida num compactado."""
+    m = EXT_RE.search(filename)
+    if not m:
+        return filename
+    rest = filename[:m.start()]
+    if m.group(1).lower() in ARCHIVE_EXT:
+        inner = EXT_RE.search(rest)
+        if inner and inner.group(1).lower() in INNER_ROM_EXT:
+            rest = rest[:inner.start()]
+    return rest
 
 
 def base_title(name, strip_ext=False):
@@ -85,13 +113,13 @@ def base_title(name, strip_ext=False):
     nome de arquivo sempre tem extensao real; o display, nunca.
     """
     if strip_ext:
-        name = EXT_RE.sub("", name)
+        name = strip_extension(name)
     return NONALNUM_RE.sub("", TAG_RE.sub(" ", name).lower())
 
 
 def derived_title(filename):
     """Titulo legivel do arquivo: sem extensao, sem tags, espacos colapsados."""
-    name = TAG_RE.sub(" ", EXT_RE.sub("", filename))
+    name = TAG_RE.sub(" ", strip_extension(filename))
     return re.sub(r"\s+", " ", name).strip()
 
 

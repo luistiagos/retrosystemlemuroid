@@ -137,7 +137,12 @@ class ManifestQuickLoader(
         //          "17", "Amnesia v1.02" -> "Amnesia v1"). 73 legitimate Western/full titles kept
         //          (display_name_keep.txt). Existing installs pick the new titles up through
         //          updateManifestFieldsWithTitle on this reload. Tool: fix_mismatched_display_names.py.
-        private const val MANIFEST_SCHEMA_VERSION = 33
+        //   v34  atari800: 7 titles restored — 6 truncated at the version dot ("Atartris v1.01"
+        //          -> "Atartris v1") and 1 carrying a paren fragment from a malformed filename
+        //          ("Titlebout (Avalon Hill"). No cross-platform matches in this system. The
+        //          .atr.zip/.xex.zip names (24) were already right; the tool needed an inner-
+        //          extension whitelist to stop flagging them.
+        private const val MANIFEST_SCHEMA_VERSION = 34
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(
