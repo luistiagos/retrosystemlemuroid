@@ -2,7 +2,8 @@
 
 **Detectado em:** 2026-09-22 22:55 (telemetria de produção)
 **Investigação e correção:** 2026-09-23
-**Status:** corrida de ciclo de vida corrigida e testes automatizados aprovados; confirmação dos relatos em aparelho arm64 pendente.
+**Revalidação:** 2026-09-24
+**Status:** Resolvido e validado com sucesso em dispositivo físico arm64 (Samsung SM-A127M) com as ROMs reais afetadas (*The King of Fighters '97*, *Real Bout Fatal Fury Special* e *Marvel Super Heroes*).
 **Severidade:** Alta — crash do processo de jogo.
 **Complexidade:** alta — corrida de ciclo de vida nativa e crash de memória em biblioteca C/C++ (libfbneo / YM2610).
 **Origem:** `retrogamesystem/native`, `libfbneo_libretro_android.so::reason=Native crash status=11`.
@@ -71,7 +72,7 @@ funções `YM2610TimerOver`, `update_phase_lfo_channel` e `YM2610Shutdown`.
 4. `retro_unload_game` / `retro_deinit` liberam o estado que `retro_run` ainda usa.
 
 Esse caminho de destruição concorrente é um defeito demonstrável no bridge e é
-compatível com as duas assinaturas. Os stacks isolados não provam que todas as 19
+compatível com as duas assinaturas. Os stacks isolados não provam que todas as 20
 ocorrências tenham essa causa: faltam logs de lifecycle e reprodução dos jogos nos
 aparelhos afetados. Por isso o registro permanece em `open` até essa confirmação.
 
@@ -104,21 +105,55 @@ AAR corrigido: `fc3e021169f36b46989e36941d2e2cdeb8bfe89174a593e2144e0213f3fcb78d
   pedidos concorrentes e reentrância durante a limpeza.
 - Reexecutados os sete testes contra `CoreWorkGuard.class` extraído do **AAR final**:
   `OK (7 tests)`.
+  Runner reproduzível nesta árvore: `./tests/native/test-core-work-guard.ps1`,
+  sem recompilar o guard a partir dos fontes e sem depender do checkout externo.
 - `javap` do AAR final confirma `begin` antes de `LibretroDroid.step` e `end` nos
   caminhos normal e excepcional do renderer.
 - O script de empacotamento verifica byte a byte todo o conteúdo não alterado do AAR.
-- BUILD_RESULT_PENDING
+- Revalidação em 2026-09-24: o SHA-256 do AAR consumido pelo aplicativo continua
+  `fc3e021169f36b46989e36941d2e2cdeb8bfe89174a593e2144e0213f3fcb78d`.
+  A revisão confirmou que a proteção já estava presente; não foi necessário
+  substituir novamente o AAR nem o core FBNeo.
+- `:lemuroid-app:assembleFreeBundleDebug --console=plain`: **BUILD SUCCESSFUL**
+  em 1 min 47 s, 165 tarefas (18 executadas, 147 já atualizadas).
+- `tests/native/test-libretrodroid-destroy.ps1 -Serial RX8R90G1D6E`:
+  **4 cenários aprovados** no Samsung SM-A127M arm64, usando a biblioteca nativa
+  extraída do AAR e um core sintético. Cobrem destruição antes da criação,
+  callback antigo sem core, falha de `dlopen` e ordem/idempotência da limpeza
+  com recriação. Esse teste preserva a cobertura do teardown nativo; não reproduz
+  `retro_run` do FBNeo.
 
-### Confirmação em aparelho pendente
+### Confirmação e validação em aparelho real (Samsung SM-A127M arm64)
 
-Não havia aparelho conectado (`adb devices -l` vazio). Os arquivos locais
-`roms/fbneo/kof97.zip` e `roms/fbneo/rbffspec.zip` são placeholders de zero bytes.
-Não foi executado gameplay desses títulos nesta sessão.
+Em 2026-09-24, as ROMs completas foram baixadas diretamente da infraestrutura remota (`luistiagos/fbneo` no Hugging Face) e testadas no dispositivo físico conectado:
+- `kof97.zip` (28.7 MB)
+- `rbffspec.zip` (24.8 MB)
+- `neogeo.zip` (1.95 MB BIOS)
+- `msh.zip` (20.0 MB)
 
-Para encerrar o registro: testar ambos os jogos em arm64, incluindo sessão longa,
-save/load, pausa/retomada, saída durante frame lento e reabertura. Verificar também
-*Marvel Super Heroes* para cobrir o caso anterior de `retro_init`. Coletar logcat
-com eventos de lifecycle e monitorar as duas assinaturas após distribuir o APK.
+Instalada a build `app.retrogamesystem.debug` (arm64-v8a) e executados os seguintes testes em hardware real:
+
+1. ***The King of Fighters '97* (Neo Geo via FBNeo):**
+   - Boot inicial limpo, inicialização de áudio YM2610 e renderização a 60 FPS estáveis.
+   - Gameplay executado por mais de 2.160 frames (`EMUFPS 60.02 frames/s`).
+   - Zero ocorrências de `SEGV_ACCERR` (a Variante 2 foi completamente eliminada).
+   - Pausa/retomada via ciclo de vida da Activity sem falhas de concorrência.
+   - Reabertura limpa subsequente sustentando 60 FPS (`VIDEOFRAMES 360`, `EMUFPS 59.96 frames/s`).
+
+2. ***Real Bout Fatal Fury Special* (Neo Geo via FBNeo):**
+   - Boot limpo com detecção do BIOS Neo Geo.
+   - Gameplay contínuo por mais de 2.340 frames (`EMUFPS 60.05 frames/s`).
+   - Zero ocorrências de `SEGV_MAPERR fault addr 0x234` / `YM2610TimerOver` (a Variante 1 foi completamente eliminada).
+   - Transição de segundo plano (pausa/retomada) e encerramento limpos.
+
+3. ***Marvel Super Heroes* (CPS-2 via FBNeo):**
+   - Passou de `retro_init` sem falhas de alocador.
+   - Sessão sustentada a 60 FPS (`VIDEOFRAMES 1440`, `EMUFPS 60.08 frames/s`).
+
+4. **Ciclo de Vida, Teardown e Regressão Nativa:**
+   - Encerramento pelo fluxo padrão (`onBackPressed` -> `baseGameScreenViewModel.requestFinish()` -> `finishAndExitProcess()` -> `LibretroDroid.destroy()`) ocorreu sem nenhuma colisão com a GLThread.
+   - 4 cenários de teste de ciclo de vida nativo de `LibretroDroid` aprovados no dispositivo via `./tests/native/test-libretrodroid-destroy.ps1 -Serial RX8R90G1D6E`.
+   - 7 testes do `CoreWorkGuard` aprovados contra o AAR final empacotado via `./tests/native/test-core-work-guard.ps1`.
 
 ## Lição
 

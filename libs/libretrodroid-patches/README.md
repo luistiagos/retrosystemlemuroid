@@ -10,6 +10,9 @@ retornar dele não garante que o frame terminou.
   terminar. Não mantém o monitor preso durante execução nativa nem espera pela GLThread.
 - `../../tests/native/CoreWorkGuardTest.kt`: sete testes JUnit, incluindo um frame
   bloqueado durante o encerramento, chamadas sobrepostas e destruição concorrente.
+- `../../tests/native/test-core-work-guard.ps1`: compila e executa esses testes
+  diretamente contra `classes.jar` extraído do AAR consumido pelo app. Não precisa
+  do checkout externo nem de ROMs; usa JDK e dependências do cache Gradle local.
 - `update-lifecycle-aar.py`: atualiza somente as classes `GLRetroView` e
   `CoreWorkGuard` no AAR. Verifica que recursos, manifesto, outras classes e todas
   as bibliotecas nativas continuam idênticos. Requer Python 3.
@@ -17,6 +20,19 @@ retornar dele não garante que o frame terminou.
 O checkout-fonte local também recebeu a correção. Estes arquivos a preservam neste
 repositório, que consome `libs/libretrodroid-patched.aar`, sem depender de um commit
 no checkout externo. O core FBNeo não foi substituído.
+
+## Validar o AAR empacotado
+
+Na raiz do Lemuroid:
+
+```powershell
+./tests/native/test-core-work-guard.ps1
+```
+
+O runner não recompila `CoreWorkGuard.kt`: os sete testes exercitam a classe que
+será distribuída no AAR. Os logs JUnit e o disassembly do renderer ficam em
+`tmp/core-work-guard-test`. O disassembly permite conferir também a integração
+`begin` / `step` / `end` (normal e excepcional), além do contador isolado.
 
 ## Reproduzir a compilação
 

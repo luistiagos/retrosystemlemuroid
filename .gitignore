@@ -49,6 +49,8 @@ pkgs*.txt
 tmp/dc-investigation/
 tmp/libretrodroid-destroy-build/
 tmp/libretrodroid-destroy-test/
+tmp/core-work-guard-test/
+tmp/fbneo-lifecycle-validation/
 tmp/libretrodroid-before-destroy-fix.aar
 
 # Dump de uiautomator
