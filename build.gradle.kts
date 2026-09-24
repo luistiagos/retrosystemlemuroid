@@ -1,4 +1,5 @@
 import com.android.build.gradle.BaseExtension
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 buildscript {
     repositories {
@@ -54,6 +55,16 @@ subprojects {
         if (hasProperty("android")) {
             // BaseExtension is common parent for application, library and test modules
             apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+            // Passivo de estilo congelado por modulo. O ktlint 1.x roda no sabor `ktlint_official`
+            // (default quando o .editorconfig nao diz outro) e acusa ~900 violacoes so em
+            // lemuroid-app; nenhuma e bug, mas a task falhava sempre e por isso ninguem a rodava.
+            // Com baseline, `./gradlew ktlintCheck` passa e volta a falhar em violacao NOVA.
+            // Regenerar com `./gradlew ktlintGenerateBaseline` -- e so depois de corrigir algo,
+            // nunca para calar um apontamento recem-criado.
+            extensions.configure(KtlintExtension::class.java) {
+                baseline.set(file("config/ktlint/baseline.xml"))
+            }
 
             extensions.configure(BaseExtension::class.java) {
                 compileSdkVersion(deps.android.compileSdkVersion)

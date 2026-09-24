@@ -82,3 +82,9 @@ Correção revisada contra o código-fonte atual do arquivo (linhas 48-58) — o
 ## Lição
 
 `Bundle(possivelmenteNull)` resolve silenciosamente para o construtor de cópia `Bundle(Bundle from)`, que sincroniza em `from` sem checar nulidade — isso é um pitfall geral do Android, não específico deste fragmento. Qualquer `Bundle(x)` onde `x` é nullable deve usar `x?.let { Bundle(it) } ?: Bundle()`.
+
+## Recorrência (Triagem 2026-09-22)
+
+- **Novos IDs associados:** 8206, 7401, 7326, 7324, 7323, 7322, 7321, 7318, 7315 (9 ocorrências)
+- **Diagnóstico:** Todos os 9 eventos apresentaram a exata mesma assinatura (`NullPointerException: Null reference used for synchronization (monitor-enter)` em `BaseBundle.copyInternal`). Trata-se de aparelhos que ainda operavam na versão anterior (1.17.19) ou instâncias prévias à distribuição do patch. Fechados na telemetria.
+

@@ -1,0 +1,354 @@
+--- a/libretrodroid/src/main/java/com/swordfish/libretrodroid/GLRetroView.kt
++++ b/libretrodroid/src/main/java/com/swordfish/libretrodroid/GLRetroView.kt
+@@ -67,16 +67,16 @@
+     // A fila do GLSurfaceView é FIFO e o create é o primeiro evento, então enfileirar preserva a
+     // ordem antiga ("depois do create") sem que a main espere por ele.
+     var audioEnabled: Boolean by Delegates.observable(true) { _, _, value ->
+-        queueEvent { LibretroDroid.setAudioEnabled(value) }
++        queueCoreEvent { LibretroDroid.setAudioEnabled(value) }
+     }
+ 
+     var frameSpeed: Int by Delegates.observable(1) { _, _, value ->
+-        queueEvent { LibretroDroid.setFrameSpeed(value) }
++        queueCoreEvent { LibretroDroid.setFrameSpeed(value) }
+     }
+ 
+     var shader: ShaderConfig by Delegates.observable(data.shader) { _, _, value ->
+         val builtShader = buildShader(value)
+-        queueEvent { LibretroDroid.setShaderConfig(builtShader) }
++        queueCoreEvent { LibretroDroid.setShaderConfig(builtShader) }
+     }
+ 
+     // Fire-and-forget: ninguém usa o retorno de setViewport. Com runOnGLThread quem
+@@ -84,7 +84,7 @@
+     // callbacks do renderer, ou seja, depois de initializeCore()/retro_load_game().
+     // Atribuir viewport durante a carga da ROM a partir da main thread era ANR certo.
+     var viewport: RectF by Delegates.observable(RectF(0f, 0f, 1f, 1f)) { _, _, value ->
+-        queueEvent {
++        queueCoreEvent {
+             LibretroDroid.setViewport(value.left, value.top, value.width(), value.height())
+         }
+     }
+@@ -94,7 +94,7 @@
+     // explicitamente em onCreate — la o Video ainda nem existe e a chamada so grava o
+     // campo nativo.
+     var targetAspectRatio: Float by Delegates.observable(data.targetAspectRatio) { _, _, value ->
+-        queueEvent {
++        queueCoreEvent {
+             LibretroDroid.setTargetAspectRatio(value)
+         }
+     }
+@@ -104,6 +104,7 @@
+     // Escrito na GLThread (fim do carregamento) e lido por quem chama de fora dela.
+     @Volatile
+     private var isGameLoaded = false
++    @Volatile
+     private var isEmulationReady = false
+ 
+     /**
+@@ -119,24 +120,11 @@
+     @Volatile
+     private var isAborted = false
+ 
+-    // Ciclo de vida do core nativo. LibretroDroid é um singleton de processo: create (GLThread) e
+-    // destroy (main, ON_DESTROY) não podem se sobrepor, e destroy com o core ainda não criado
+-    // seria deref de ponteiro nulo dentro de retro_unload_game.
+-    //
+-    // Regra: quem trabalha no core na GLThread abre com beginCoreWork() e fecha com endCoreWork().
+-    // Se o ON_DESTROY chegar no meio, a destruição é adiada e executada pela própria GLThread ao
+-    // fim do trabalho — a main nunca espera.
+-    private val coreLock = Any()
+-
+-    /** Guardados por [coreLock]. */
+-    private var coreCreated = false
+-    private var coreBusy = false
+-    private var coreDestroyRequested = false
+-    private var coreDestroyed = false
+-
+-    /** Espelho de [coreCreated] para leitura barata fora do lock. */
+-    @Volatile
+-    private var isCoreReady = false
++    // Every JNI call owns a lease. A pause timeout must never allow teardown
++    // to free a core still executing retro_run, serialization, or another call.
++    private val coreWorkGuard = CoreWorkGuard { destroyCore() }
++    private val isCoreReady: Boolean get() = coreWorkGuard.isReady
++
+ 
+     private val retroGLEventsSubject = MutableSharedFlow<GLRetroEvents>(1)
+     private val retroGLIssuesErrors = MutableSharedFlow<Int>(1)
+@@ -284,7 +272,7 @@
+ 
+     /** Roda na GLThread, como primeiro evento da fila. */
+     private fun createCore(refreshRate: Float, language: String) = catchExceptions {
+-        if (!beginCoreWork()) {
++        if (!coreWorkGuard.begin(requireCreated = false)) {
+             Log.w(TAG_LOG, "Skipping core creation: view was already destroyed")
+             return@catchExceptions
+         }
+@@ -309,10 +297,7 @@
+             LibretroDroid.setRumbleEnabled(data.rumbleEventsEnabled)
+             LibretroDroid.setTargetAspectRatio(data.targetAspectRatio)
+ 
+-            synchronized(coreLock) {
+-                coreCreated = true
+-                isCoreReady = true
+-            }
++            coreWorkGuard.markCreated()
+ 
+             // Log permanente: a duração é a que estava na main antes, e o nome da thread é a
+             // prova de que saiu de lá. LOGD nativo está compilado fora (VERBOSE_LOGGING false).
+@@ -328,63 +313,51 @@
+             isAborted = true
+             throw e
+         } finally {
+-            endCoreWork()
++            coreWorkGuard.end()
+         }
+     }
+ 
+     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+     fun onDestroy() {
+-        val destroyNow: Boolean
+-        val deferred: Boolean
+-        synchronized(coreLock) {
+-            coreDestroyRequested = true
+-            destroyNow = coreCreated && !coreDestroyed && !coreBusy
+-            deferred = coreBusy
+-        }
+-
+-        if (destroyNow) {
+-            destroyCore()
+-        } else if (deferred) {
+-            // A GLThread está dentro do create ou do carregamento da ROM. Ela mesma destrói ao
+-            // terminar (endCoreWork); esperar aqui seria devolver à main o bloqueio que este
+-            // patch tirou dela.
+-            Log.i(TAG_LOG, "Core is busy; deferring destroy to the GL thread")
+-        }
+-
++        isEmulationReady = false
++        coreWorkGuard.requestDestroy()
+         lifecycle = null
+     }
+ 
+-    /**
+-     * Abre uma janela de trabalho no core, na GLThread. Retorna false quando não se deve mexer no
+-     * core — a view já foi destruída ou o ON_DESTROY já chegou.
+-     */
+-    private fun beginCoreWork(): Boolean {
+-        synchronized(coreLock) {
+-            if (coreDestroyRequested || coreDestroyed) return false
+-            coreBusy = true
+-            return true
+-        }
+-    }
+-
+-    /** Fecha a janela de trabalho e executa a destruição que a main tenha pedido no meio dela. */
+-    private fun endCoreWork() {
+-        val destroyNow: Boolean
+-        synchronized(coreLock) {
+-            coreBusy = false
+-            destroyNow = coreDestroyRequested && coreCreated && !coreDestroyed
+-        }
+-        if (destroyNow) destroyCore()
+-    }
+-
+-    /** Idempotente. Chamado da main (ON_DESTROY) ou da GLThread (destruição adiada). */
+-    private fun destroyCore() = catchExceptions {
+-        synchronized(coreLock) {
+-            if (coreDestroyed || !coreCreated) return@catchExceptions
+-            coreDestroyed = true
+-            coreCreated = false
+-            isCoreReady = false
+-        }
+-        LibretroDroid.destroy()
++    private fun destroyCore() {
++        isEmulationReady = false
++        isGameLoaded = false
++        hasRenderedFrame = false
++        // Cleanup must also run after a JNI exception marked the session aborted.
++        try {
++            LibretroDroid.destroy()
++        } catch (e: Exception) {
++            Log.e(TAG_LOG, "Error while destroying the native core", e)
++        }
++    }
++
++    private fun queueCoreEvent(block: () -> Unit) {
++        queueEvent {
++            catchExceptions {
++                if (!coreWorkGuard.begin()) return@catchExceptions
++                try {
++                    block()
++                } finally {
++                    coreWorkGuard.end()
++                }
++            }
++        }
++    }
++
++    private fun <T> withCoreWork(block: () -> T): T {
++        if (!coreWorkGuard.begin()) {
++            throw GameNotLoadedException("Native core is unavailable or shutting down")
++        }
++        try {
++            return block()
++        } finally {
++            coreWorkGuard.end()
++        }
+     }
+ 
+     private fun getDeviceLanguage() = Locale.getDefault().language
+@@ -394,11 +367,11 @@
+     }
+ 
+     fun sendKeyEvent(action: Int, keyCode: Int, port: Int = 0) {
+-        queueEvent { LibretroDroid.onKeyEvent(port, action, keyCode) }
++        queueCoreEvent { LibretroDroid.onKeyEvent(port, action, keyCode) }
+     }
+ 
+     fun sendMotionEvent(source: Int, xAxis: Float, yAxis: Float, port: Int = 0) {
+-        queueEvent { LibretroDroid.onMotionEvent(port, source, xAxis, yAxis) }
++        queueCoreEvent { LibretroDroid.onMotionEvent(port, source, xAxis, yAxis) }
+     }
+ 
+     override fun onTouchEvent(event: MotionEvent?): Boolean {
+@@ -414,8 +387,8 @@
+ 
+         // isCoreReady: o toque chega pela main e o core agora nasce na GLThread. Antes de existir
+         // core, o nativo leria input/video da sessão anterior enquanto o create os zera.
+-        if (position != null && isCoreReady) {
+-            LibretroDroid.onTouchEvent(position.x, position.y)
++        if (position != null) {
++            queueCoreEvent { LibretroDroid.onTouchEvent(position.x, position.y) }
+         }
+ 
+         return true
+@@ -493,28 +466,33 @@
+     // GLThread. Vazio aqui significa "ainda não há o que ler" — o menu abre sem as opções do
+     // core em vez de correr o risco, e os chamadores normais só chegam aqui depois do 1º frame.
+     fun getControllers(): Array<Array<Controller>> {
+-        if (!isCoreReady) return emptyArray()
+-        return LibretroDroid.getControllers()
++        if (!coreWorkGuard.begin()) return emptyArray()
++        try {
++            return LibretroDroid.getControllers()
++        } finally {
++            coreWorkGuard.end()
++        }
+     }
+ 
+     fun setControllerType(port: Int, type: Int) {
+         // Fire-and-forget: uma exceção aqui seria lançada na GLThread, onde ninguém a captura e o
+         // processo morre. Por isso ignora em vez de exigir, ao contrário das chamadas bloqueantes.
+-        queueEvent {
+-            if (!isCoreReady) return@queueEvent
+-            LibretroDroid.setControllerType(port, type)
+-        }
++        queueCoreEvent { LibretroDroid.setControllerType(port, type) }
+     }
+ 
+     fun getVariables(): Array<Variable> {
+-        if (!isCoreReady) return emptyArray()
+-        return LibretroDroid.getVariables()
++        if (!coreWorkGuard.begin()) return emptyArray()
++        try {
++            return LibretroDroid.getVariables()
++        } finally {
++            coreWorkGuard.end()
++        }
+     }
+ 
+     fun updateVariables(vararg variables: Variable) {
+         // Cópia porque o array do vararg escapa para dentro do evento.
+         val requested = variables.copyOf()
+-        queueEvent {
++        queueCoreEvent {
+             requested.forEach { LibretroDroid.updateVariable(it) }
+         }
+     }
+@@ -583,33 +561,44 @@
+     private inner class RenderLifecycleObserver : LifecycleObserver {
+         @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+         private fun resume() = catchExceptions {
+-            LibretroDroid.resume()
++            queueCoreEvent {
++                LibretroDroid.resume()
++                isEmulationReady = true
++            }
+             onResume()
+-            isEmulationReady = true
+         }
+ 
+         @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+         private fun pause() = catchExceptions {
+             isEmulationReady = false
++            // FIFO with frames/resume, even if onPause's 500 ms wait expires.
++            queueCoreEvent { LibretroDroid.pause() }
+             onPause()
+-            LibretroDroid.pause()
+         }
+     }
+ 
+     inner class Renderer : GLSurfaceView.Renderer {
+         override fun onDrawFrame(gl: GL10) = catchExceptions {
+-            if (isEmulationReady) {
++            if (!isEmulationReady || !coreWorkGuard.begin()) return@catchExceptions
++            try {
+                 LibretroDroid.step(this@GLRetroView)
+                 hasRenderedFrame = true
+                 lifecycle?.coroutineScope?.launch {
+                     retroGLEventsSubject.emit(GLRetroEvents.FrameRendered)
+                 }
++            } finally {
++                coreWorkGuard.end()
+             }
+         }
+ 
+         override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) = catchExceptions {
+             Thread.currentThread().priority = Thread.MAX_PRIORITY
+-            LibretroDroid.onSurfaceChanged(width, height)
++            if (!isGameLoaded || !coreWorkGuard.begin()) return@catchExceptions
++            try {
++                LibretroDroid.onSurfaceChanged(width, height)
++            } finally {
++                coreWorkGuard.end()
++            }
+         }
+ 
+ 
+@@ -634,7 +623,7 @@
+             return@catchExceptions
+         }
+ 
+-        if (!beginCoreWork()) return@catchExceptions
++        if (!coreWorkGuard.begin()) return@catchExceptions
+ 
+         try {
+             when {
+@@ -653,7 +642,7 @@
+                 lifecycle?.addObserver(RenderLifecycleObserver())
+             }
+         } finally {
+-            endCoreWork()
++            coreWorkGuard.end()
+         }
+     }
+ 
+@@ -701,7 +690,7 @@
+     //      ainda por cima morria dentro da GLThread. Agora ela é propagada ao chamador.
+     private fun <T> runOnGLThread(block: () -> T): T {
+         if (Thread.currentThread().name.startsWith("GLThread")) {
+-            return block()
++            return withCoreWork(block)
+         }
+ 
+         val latch = CountDownLatch(1)
+@@ -709,7 +698,7 @@
+         var error: Throwable? = null
+         queueEvent {
+             try {
+-                result = block()
++                result = withCoreWork(block)
+             } catch (e: Throwable) {
+                 error = e
+             } finally {

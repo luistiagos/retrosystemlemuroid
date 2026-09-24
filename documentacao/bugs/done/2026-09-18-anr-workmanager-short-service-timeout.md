@@ -113,3 +113,9 @@ API 34+) para todo device Android 14/15 atual, quebrando o caso comum para blind
 hipotético. Mitigar risco futuro não pode piorar o comportamento correto do presente — e o
 tipo escolhido precisa caber no tempo real da operação (aqui, minutos de download), não no que
 "pode ser removido depois".
+
+## Recorrência (Triagem 2026-09-22)
+
+- **Novos IDs associados:** 8233, 7895 (2 ocorrências)
+- **Diagnóstico:** As ocorrências 8233 e 7895 em aparelhos Android 14/15 rodando builds anteriores à substituição de `SHORT_SERVICE` por `DATA_SYNC` estouraram o teto de 3 minutos durante sincronização/download. Fechados na telemetria.
+

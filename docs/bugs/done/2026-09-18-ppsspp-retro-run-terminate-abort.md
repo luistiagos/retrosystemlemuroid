@@ -173,3 +173,8 @@ de erro, revertida antes do build final):
    pitfall 6 (instrumentação temporária que simula o defeito, revertida antes do build final)
    funciona igual de bem em C++ quanto funcionou em Kotlin — o que importa é provar o caminho
    de erro ponta a ponta, não reproduzir a causa exata de terceiros.
+
+## Recorrência (Triagem 2026-09-22)
+
+- **Novos IDs associados:** 8103, 7309 (2 ocorrências)
+- **Diagnóstico:** As ocorrências 8103 (Android 14) e 7309 (Android 14) apresentaram a exata mesma assinatura de `std::terminate()` e abort dentro de `retro_run`. Provenientes de builds anteriores à integração do AAR com o wrapper try/catch no `Java_..._step`. Fechados na telemetria.

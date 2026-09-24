@@ -13,6 +13,7 @@ import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.tv.channel.ChannelUpdateWork
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.app.utils.android.displayErrorDialog
+import com.swordfish.lemuroid.app.utils.android.setShowWhenLockedCompat
 import com.swordfish.lemuroid.common.animationDuration
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
@@ -55,8 +56,7 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setShowWhenLocked(true)
-        setTurnScreenOn(true)
+        setShowWhenLockedCompat()
 
         setContentView(R.layout.activity_loading)
         if (savedInstanceState == null) {

@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.7.1" type="baseline" client="gradle" dependencies="false" name="AGP (8.7.1)" variant="all" version="8.7.1">
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 26 (current min is 21): `android.provider.Settings#ACTION_MANAGE_UNKNOWN_APP_SOURCES`"
+        errorLine1="        Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {"
+        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/updates/AppUpdateManager.kt"
+            line="180"
+            column="16"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#REASON_CRASH_NATIVE`"
+        errorLine1="                info.reason == ApplicationExitInfo.REASON_CRASH_NATIVE &amp;&amp;"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/CoreCrashFallback.kt"
+            line="170"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 29 (current min is 21): `android.content.pm.ServiceInfo#FOREGROUND_SERVICE_TYPE_DATA_SYNC`"
+        errorLine1="                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/roms/DownloadForegroundService.kt"
+            line="74"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ActivityManager#getHistoricalProcessExitReasons`"
+        errorLine1="        val exits = activityManager.getHistoricalProcessExitReasons(context.packageName, 0, 0)"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/CoreCrashFallback.kt"
+            line="166"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getReason`"
+        errorLine1="                info.reason == ApplicationExitInfo.REASON_CRASH_NATIVE &amp;&amp;"
+        errorLine2="                     ~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/CoreCrashFallback.kt"
+            line="170"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getTimestamp`"
+        errorLine1="                    info.timestamp >= startedAt &amp;&amp;"
+        errorLine2="                         ~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/CoreCrashFallback.kt"
+            line="171"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getProcessName`"
+        errorLine1="                    info.processName.orEmpty().endsWith(&quot;:game&quot;)"
+        errorLine2="                         ~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/CoreCrashFallback.kt"
+            line="172"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getTimestamp`"
+        errorLine1="            .maxOfOrNull { it.timestamp }"
+        errorLine2="                              ~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/CoreCrashFallback.kt"
+            line="174"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getReason`"
+        errorLine1="        when (info.reason) {"
+        errorLine2="                   ~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="193"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getImportance`"
+        errorLine1="        info.importance &lt;= ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE"
+        errorLine2="             ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="212"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getReason`"
+        errorLine1="            val component = componentFor(info.reason)"
+        errorLine2="                                              ~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="217"
+            column="47"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getReason`"
+        errorLine1="            var method = &quot;reason=${reasonName(info.reason)} status=${info.status}&quot;"
+        errorLine2="                                                   ~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="220"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getStatus`"
+        errorLine1="            var method = &quot;reason=${reasonName(info.reason)} status=${info.status}&quot;"
+        errorLine2="                                                                          ~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="220"
+            column="75"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getReason`"
+        errorLine1="                    append(reasonName(info.reason))"
+        errorLine2="                                           ~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="240"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getDescription`"
+        errorLine1="                    } else if (!info.description.isNullOrBlank()) {"
+        errorLine2="                                     ~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="243"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getDescription`"
+        errorLine1="                        append(&quot;: &quot;).append(info.description)"
+        errorLine2="                                                 ~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="244"
+            column="50"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getProcessName`"
+        errorLine1="                    append(&quot;process=&quot;).append(info.processName)"
+        errorLine2="                                                   ~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="250"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getPid`"
+        errorLine1="                    append(&quot;; pid=&quot;).append(info.pid)"
+        errorLine2="                                                 ~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="251"
+            column="50"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getImportance`"
+        errorLine1="                    append(&quot;; importance=&quot;).append(info.importance)"
+        errorLine2="                                                        ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="252"
+            column="57"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getTimestamp`"
+        errorLine1="                    append(&quot;; when=&quot;).append(TelemetryContext.formatTimestamp(info.timestamp))"
+        errorLine2="                                                                                   ~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="253"
+            column="84"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getDescription`"
+        errorLine1="                if (trace.text.isNotBlank()) arrayOf(trace.text) else arrayOf(info.description ?: &quot;no trace available&quot;)"
+        errorLine2="                                                                                   ~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="260"
+            column="84"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#getTraceInputStream`"
+        errorLine1="                info.traceInputStream?.use { input ->"
+        errorLine2="                     ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt"
+            line="298"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="SdCardPath"
+        message="Do not hardcode &quot;/sdcard/&quot;; use `Environment.getExternalStorageDirectory().getPath()` instead"
+        errorLine1="                        treeDocId.replace(Regex(&quot;^primary:&quot;), &quot;/sdcard/&quot;)"
+        errorLine2="                                                               ~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/mobile/feature/settings/general/SettingsScreen.kt"
+            line="317"
+            column="64"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `extractNativeLibs` is only used in API level 23 and higher (current min is 21)"
+        errorLine1="        android:extractNativeLibs=&quot;true&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="50"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `networkSecurityConfig` is only used in API level 24 and higher (current min is 21)"
+        errorLine1="        android:networkSecurityConfig=&quot;@xml/network_security_config&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="55"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `showWhenLocked` is only used in API level 27 and higher (current min is 21)"
+        errorLine1="            android:showWhenLocked=&quot;true&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="74"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `turnScreenOn` is only used in API level 27 and higher (current min is 21)"
+        errorLine1="            android:turnScreenOn=&quot;true&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="75"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `showWhenLocked` is only used in API level 27 and higher (current min is 21)"
+        errorLine1="            android:showWhenLocked=&quot;true&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="92"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `turnScreenOn` is only used in API level 27 and higher (current min is 21)"
+        errorLine1="            android:turnScreenOn=&quot;true&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="93"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of org.apache.commons:commons-compress than 1.26.1 is available: 1.28.0"
+        errorLine1="    implementation(&quot;org.apache.commons:commons-compress:1.26.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="297"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of org.tukaani:xz than 1.9 is available: 1.12"
+        errorLine1="    implementation(&quot;org.tukaani:xz:1.9&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="298"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="    override fun dispatchKeyEvent(event: KeyEvent): Boolean {"
+        errorLine2="                 ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt"
+            line="393"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="        return super.dispatchKeyEvent(event)"
+        errorLine2="                     ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt"
+            line="410"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="        return super.dispatchKeyEvent(event)"
+        errorLine2="                                      ~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt"
+            line="410"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="    override fun dispatchKeyEvent(event: KeyEvent): Boolean {"
+        errorLine2="                 ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/BaseTVActivity.kt"
+            line="10"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="                return super.dispatchKeyEvent(translatedEvent)"
+        errorLine2="                             ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/BaseTVActivity.kt"
+            line="14"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="                return super.dispatchKeyEvent(translatedEvent)"
+        errorLine2="                                              ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/BaseTVActivity.kt"
+            line="14"
+            column="47"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="        return super.dispatchKeyEvent(event)"
+        errorLine2="                     ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/BaseTVActivity.kt"
+            line="17"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="        return super.dispatchKeyEvent(event)"
+        errorLine2="                                      ~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/BaseTVActivity.kt"
+            line="17"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="    override fun dispatchKeyEvent(event: KeyEvent): Boolean {"
+        errorLine2="                 ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/TVBaseSettingsActivity.kt"
+            line="14"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="            return super.dispatchKeyEvent(translatedEvent)"
+        errorLine2="                         ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/TVBaseSettingsActivity.kt"
+            line="17"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="            return super.dispatchKeyEvent(translatedEvent)"
+        errorLine2="                                          ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/TVBaseSettingsActivity.kt"
+            line="17"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="        return super.dispatchKeyEvent(event)"
+        errorLine2="                     ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/TVBaseSettingsActivity.kt"
+            line="19"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        message="ComponentActivity.dispatchKeyEvent can only be called from within the same library group prefix (referenced groupId=`androidx.core` with prefix androidx from groupId=`Lemuroid`)"
+        errorLine1="        return super.dispatchKeyEvent(event)"
+        errorLine2="                                      ~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/TVBaseSettingsActivity.kt"
+            line="19"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="DiscouragedApi"
+        message="Use of this function is discouraged because resource reflection makes it harder to perform build optimizations and compile-time verification of code. It is much more efficient to retrieve resources by identifier (e.g. `R.foo.bar`) than by name (e.g. `getIdentifier(&quot;bar&quot;, &quot;foo&quot;, null)`)."
+        errorLine1="        val colorResId = cardView.resources.getIdentifier(&quot;main_color&quot;, &quot;color&quot;, cardView.context.packageName)"
+        errorLine2="                                            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/tv/shared/TVCardFocusHighlight.kt"
+            line="39"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        android.util.Log.d(&quot;INPUT_DIAG&quot;, &quot;sendKeyEvent keyCode=$keyCode deviceId=${event.device?.id} deviceName=${event.device?.name} sources=${event.device?.sources} inputClass=${inputClass::class.simpleName} inKeys=$inKeys&quot;)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/viewmodel/GameViewModelInput.kt"
+            line="236"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                android.util.Log.d(&quot;INPUT_DIAG&quot;, &quot;keysFlow deviceId=${device?.id} deviceName=${device?.name} keyCode=$keyCode bindKeyCode=$bindKeyCode port=$port action=$action&quot;)"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/game/viewmodel/GameViewModelInput.kt"
+            line="366"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                android.util.Log.d(&quot;INPUT_DIAG&quot;, &quot;registered gamepad id=${d.id} name=${d.name} port=${portMappings[d.id]} descriptor=${d.descriptor}&quot;)"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/input/InputDeviceManager.kt"
+            line="83"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                        android.util.Log.d("
+        errorLine2="                        ^">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/input/InputDeviceManager.kt"
+            line="290"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                Log.w(TAG, &quot;Could not create ${tempDir.absolutePath}, leaving TMPDIR unset&quot;)"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/startup/NativeTempDir.kt"
+            line="42"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.i(TAG, &quot;Native TMPDIR set to ${tempDir.absolutePath}&quot;)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/startup/NativeTempDir.kt"
+            line="47"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.e(TAG, &quot;Failed to set native TMPDIR&quot;, e)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/startup/NativeTempDir.kt"
+            line="49"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;versions&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;variants_subtitle&quot;>%1$d versions available — choose one to play or download&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="130"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;game&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;settings_description_reset_catalog_count&quot;>%1$d game(s) removed from the catalog will be restored&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="237"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;more&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;notification_rom_queue_more&quot;>+ %1$d more in queue&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="246"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;games&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;transfer_games_selected&quot;>%1$d of %2$d games selected&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="443"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;games&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;transfer_export_completed&quot;>%1$d games exported successfully&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="449"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;games&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;transfer_import_games_count&quot;>%1$d games available to import&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="453"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;games&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;transfer_import_completed&quot;>%1$d games imported successfully&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="456"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;files&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;romset_export_completed&quot;>%1$d files exported successfully&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="470"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;files&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;romset_import_completed&quot;>%1$d files imported successfully&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="480"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `save_confirm_message`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;save_confirm_message&quot;>Adicionar à fila de salvamento?&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pt-rBR/strings.xml"
+            line="308"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="149"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="SystemPermissionTypo"
+        message="Did you mean `android.permission.FOREGROUND_SERVICE`?"
+        errorLine1="    &lt;uses-permission android:name=&quot;android.permission.FOREGROUND_SERVICE_SHORT_SERVICE&quot;/>"
+        errorLine2="                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="36"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="This field leaks a context object"
+        errorLine1="    private val context: Context,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/mobile/feature/settings/romset/RomsetViewModel.kt"
+            line="23"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="This field leaks a context object"
+        errorLine1="    private val context: Context,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/mobile/feature/settings/transfer/TransferViewModel.kt"
+            line="27"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="MergeRootFrame"
+        message="This `&lt;FrameLayout>` can be replaced with a `&lt;merge>` tag"
+        errorLine1="&lt;FrameLayout"
+        errorLine2="^">
+        <location
+            file="src/main/res/layout/activity_tv_main.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    private var _value by mutableStateOf(preferences.safeGetInt(key, defaultValue))"
+        errorLine2="                          ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/utils/settings/SafeIntPreferenceSettingValueState.kt"
+            line="34"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `#000` with a theme that also paints a background (inferred theme is `@style/LemuroidMaterialTheme_Game`)"
+        errorLine1="    android:background=&quot;#000&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_game.xml"
+            line="34"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UsableSpace"
+        message="Consider also using `StorageManager#getAllocatableBytes` and `allocateBytes` which will consider clearable cached data"
+        errorLine1="                                val available = destFile.parentFile?.usableSpace ?: Long.MAX_VALUE"
+        errorLine2="                                                                     ~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/swordfish/lemuroid/app/shared/roms/RomOnDemandManager.kt"
+            line="525"
+            column="70"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icons should not fill every pixel of their square region; see the design guide for details">
+        <location
+            file="src/main/res/mipmap-hdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icons should not fill every pixel of their square region; see the design guide for details">
+        <location
+            file="src/main/res/mipmap-mdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icons should not fill every pixel of their square region; see the design guide for details">
+        <location
+            file="src/main/res/mipmap-xhdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icons should not fill every pixel of their square region; see the design guide for details">
+        <location
+            file="src/main/res/mipmap-xxhdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icons should not fill every pixel of their square region; see the design guide for details">
+        <location
+            file="src/main/res/mipmap-xxxhdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="src/main/res/mipmap-hdpi/lemuroid_launcher_round.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="src/main/res/mipmap-mdpi/lemuroid_launcher_round.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="src/main/res/mipmap-xhdpi/lemuroid_launcher_round.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="src/main/res/mipmap-xxhdpi/lemuroid_launcher_round.png"/>
+    </issue>
+
+    <issue
+        id="IconLauncherShape"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="src/main/res/mipmap-xxxhdpi/lemuroid_launcher_round.png"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive icon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/lemuroid_launcher.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive roundIcon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/lemuroid_launcher_round.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/lemuroid_launcher_foreground.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/lemuroid_launcher_foreground.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: lemuroid_launcher.png, lemuroid_launcher_round.png">
+        <location
+            file="src/main/res/mipmap-hdpi/lemuroid_launcher_round.png"/>
+        <location
+            file="src/main/res/mipmap-hdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: lemuroid_launcher.png, lemuroid_launcher_round.png">
+        <location
+            file="src/main/res/mipmap-mdpi/lemuroid_launcher_round.png"/>
+        <location
+            file="src/main/res/mipmap-mdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: lemuroid_launcher.png, lemuroid_launcher_round.png">
+        <location
+            file="src/main/res/mipmap-xhdpi/lemuroid_launcher_round.png"/>
+        <location
+            file="src/main/res/mipmap-xhdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: lemuroid_launcher.png, lemuroid_launcher_round.png">
+        <location
+            file="src/main/res/mipmap-xxhdpi/lemuroid_launcher_round.png"/>
+        <location
+            file="src/main/res/mipmap-xxhdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: lemuroid_launcher.png, lemuroid_launcher_round.png">
+        <location
+            file="src/main/res/mipmap-xxxhdpi/lemuroid_launcher_round.png"/>
+        <location
+            file="src/main/res/mipmap-xxxhdpi/lemuroid_launcher.png"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_crash.xml"
+            line="14"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/layout_game_long_press.xml"
+            line="26"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginLeft` with `android:layout_marginStart=&quot;4dp&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_marginLeft=&quot;4dp&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_game.xml"
+            line="57"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginRight` with `android:layout_marginEnd=&quot;4dp&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_marginRight=&quot;4dp&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_game.xml"
+            line="72"
+            column="9"/>
+    </issue>
+
+</issues>

@@ -4,13 +4,13 @@ import androidx.compose.runtime.Composable
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.BaseGameScreenViewModel
+import com.swordfish.lemuroid.app.utils.android.setShowWhenLockedCompat
 
 class GameActivity : BaseGameActivity() {
     private var serviceController: GameService.GameServiceController? = null
 
     override fun onGameCreated() {
-        setShowWhenLocked(true)
-        setTurnScreenOn(true)
+        setShowWhenLockedCompat()
         startGameService()
     }
 

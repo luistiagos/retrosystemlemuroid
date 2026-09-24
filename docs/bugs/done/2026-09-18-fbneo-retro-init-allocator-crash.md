@@ -145,3 +145,9 @@ limpa) não seria possível com o binário antigo.
 3. Mesma lição do Flycast se aplica aqui: **o caminho de download externo
    (`luistiagos/libretrocores`) é uma segunda cópia do binário que este commit não
    alcança.** Precisa de atualização manual separada.
+
+## Recorrência (Triagem 2026-09-22)
+
+- **Novos IDs associados:** 7509, 7380 (2 ocorrências)
+- **Diagnóstico:** As ocorrências 7509 (MAME2003+ / Scudo abort) e 7380 (FBNeo / Scudo abort) em aparelhos Samsung SM-A546E rodando versão 1.17.19 são anteriores à distribuição da atualização do core e binários. Fechados na telemetria.
+

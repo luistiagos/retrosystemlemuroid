@@ -14,6 +14,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
+import com.swordfish.lemuroid.app.utils.android.MobileGeneration
+import com.swordfish.lemuroid.app.utils.android.connectivityManagerCompat
+import com.swordfish.lemuroid.app.utils.android.isOnWifiCompat
+import com.swordfish.lemuroid.app.utils.android.mobileGenerationCompat
 import com.swordfish.lemuroid.common.coroutines.combine
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.catalog.ManifestQuickLoader
@@ -99,7 +103,7 @@ class HomeViewModel(
 
     /** Flow that emits true while WiFi is available, false when it's lost. */
     private fun wifiStatusFlow(): Flow<Boolean> = callbackFlow {
-        val cm = appCtx.getSystemService(ConnectivityManager::class.java)
+        val cm = appCtx.connectivityManagerCompat()
         if (cm == null) { trySend(true); awaitClose { }; return@callbackFlow }
         val cb = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) { trySend(true) }
@@ -110,9 +114,7 @@ class HomeViewModel(
             cb,
         )
         // emit initial WiFi state immediately
-        val initial = cm.getNetworkCapabilities(cm.activeNetwork)
-            ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
-        trySend(initial)
+        trySend(cm.isOnWifiCompat())
         awaitClose { cm.unregisterNetworkCallback(cb) }
     }.distinctUntilChanged()
 
@@ -176,16 +178,14 @@ class HomeViewModel(
     }
 
     private fun getMobileNetworkLabel(): String {
-        val cm = appCtx.getSystemService(ConnectivityManager::class.java) ?: return "Móvel"
-        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return "Móvel"
-        return if (caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-            when {
-                caps.linkDownstreamBandwidthKbps >= 20000 -> "5G"
-                caps.linkDownstreamBandwidthKbps >= 1000 -> "4G"
-                caps.linkDownstreamBandwidthKbps >= 200 -> "3G"
-                else -> "2G"
-            }
-        } else "Móvel"
+        val generation = appCtx.connectivityManagerCompat()?.mobileGenerationCompat()
+        return when (generation) {
+            MobileGeneration.G5 -> "5G"
+            MobileGeneration.G4 -> "4G"
+            MobileGeneration.G3 -> "3G"
+            MobileGeneration.G2 -> "2G"
+            null -> "Móvel"
+        }
     }
 
     fun dismissDownloadDialog() {

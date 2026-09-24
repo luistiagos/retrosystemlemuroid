@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.R
@@ -34,7 +35,9 @@ class TVRomDownloadDialog(
 
         val titleView = TextView(activity).apply {
             text = game.title
-            setTextAppearance(android.R.style.TextAppearance_Medium)
+            // setTextAppearance(int) é da API 23; TextViewCompat cai na sobrecarga com Context,
+            // que existe desde a API 1. minSdkVersion = 21.
+            TextViewCompat.setTextAppearance(this, android.R.style.TextAppearance_Medium)
         }
         val statusText = TextView(activity).apply {
             text = activity.getString(R.string.rom_download_dialog_downloading, 0)

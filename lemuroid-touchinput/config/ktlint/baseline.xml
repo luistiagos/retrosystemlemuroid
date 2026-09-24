@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<baseline version="1.0">
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/AtariST.kt">
+        <error line="66" column="1" source="standard:max-line-length" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/ChannelF.kt">
+        <error line="68" column="60" source="standard:discouraged-comment-location" />
+        <error line="69" column="60" source="standard:discouraged-comment-location" />
+        <error line="70" column="60" source="standard:discouraged-comment-location" />
+        <error line="71" column="60" source="standard:discouraged-comment-location" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/Dreamcast.kt">
+        <error line="73" column="60" source="standard:discouraged-comment-location" />
+        <error line="74" column="60" source="standard:discouraged-comment-location" />
+        <error line="75" column="60" source="standard:discouraged-comment-location" />
+        <error line="76" column="60" source="standard:discouraged-comment-location" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/GameCube.kt">
+        <error line="80" column="60" source="standard:discouraged-comment-location" />
+        <error line="81" column="60" source="standard:discouraged-comment-location" />
+        <error line="82" column="60" source="standard:discouraged-comment-location" />
+        <error line="83" column="60" source="standard:discouraged-comment-location" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/Jaguar.kt">
+        <error line="63" column="60" source="standard:discouraged-comment-location" />
+        <error line="64" column="60" source="standard:discouraged-comment-location" />
+        <error line="65" column="60" source="standard:discouraged-comment-location" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/PCFX.kt">
+        <error line="76" column="1" source="standard:max-line-length" />
+        <error line="107" column="40" source="standard:discouraged-comment-location" />
+        <error line="108" column="40" source="standard:discouraged-comment-location" />
+        <error line="109" column="40" source="standard:discouraged-comment-location" />
+        <error line="110" column="40" source="standard:discouraged-comment-location" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/Saturn.kt">
+        <error line="119" column="40" source="standard:discouraged-comment-location" />
+        <error line="120" column="40" source="standard:discouraged-comment-location" />
+        <error line="121" column="40" source="standard:discouraged-comment-location" />
+        <error line="122" column="40" source="standard:discouraged-comment-location" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/ThreeDO.kt">
+        <error line="66" column="60" source="standard:discouraged-comment-location" />
+        <error line="67" column="60" source="standard:discouraged-comment-location" />
+        <error line="68" column="60" source="standard:discouraged-comment-location" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/layouts/Vircon32.kt">
+        <error line="64" column="60" source="standard:discouraged-comment-location" />
+        <error line="65" column="60" source="standard:discouraged-comment-location" />
+        <error line="66" column="60" source="standard:discouraged-comment-location" />
+        <error line="67" column="60" source="standard:discouraged-comment-location" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/settings/TouchControllerID.kt">
+        <error line="3" column="1" source="standard:import-ordering" />
+        <error line="63" column="1" source="standard:import-ordering" />
+        <error line="63" column="1" source="standard:no-unused-imports" />
+        <error line="64" column="1" source="standard:import-ordering" />
+        <error line="64" column="1" source="standard:no-unused-imports" />
+    </file>
+    <file name="src/main/java/com/swordfish/touchinput/radial/ui/GlassSurface.kt">
+        <error line="24" column="31" source="standard:multiline-expression-wrapping" />
+    </file>
+</baseline>

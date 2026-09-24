@@ -68,8 +68,8 @@ val catalogApplicationIdSuffix = normalizeApplicationIdSuffix(readGradleProperty
 
 android {
     defaultConfig {
-        versionCode = 251
-        versionName = "1.17.20" // Always remember to update Cores Tag!
+        versionCode = 252
+        versionName = "1.17.21" // Always remember to update Cores Tag!
         applicationId = "app.retrogamesystem$catalogApplicationIdSuffix"
 
         buildConfigField("String", "CATALOG_CHANNEL", "\"${escapeBuildConfigValue(catalogChannel)}\"")
@@ -174,7 +174,16 @@ android {
             // o armazenamento de Smart TVs com pouca ROM na instalacao.
             isEnable = true
             reset()
-            include("arm64-v8a", "armeabi-v7a")
+            // -PdevAbi=x86_64 (ou "x86,x86_64") acrescenta a ABI do emulador. As .so de
+            // x86/x86_64 ja existem em lemuroid-cores/*/jniLibs e no libretrodroid-patched.aar;
+            // so este filtro as mantinha fora do APK. Sem a propriedade nada muda: o que vai
+            // para distribuicao continua sendo apenas arm64-v8a + armeabi-v7a.
+            val devAbis = (project.findProperty("devAbi") as String?)
+                ?.split(",")
+                ?.map { it.trim() }
+                ?.filter { it.isNotEmpty() }
+                ?: emptyList()
+            include(*(listOf("arm64-v8a", "armeabi-v7a") + devAbis).toTypedArray())
             isUniversalApk = false
         }
     }
@@ -214,6 +223,14 @@ android {
 
     lint {
         disable += setOf("MissingTranslation", "ExtraTranslation", "EnsureInitializerMetadata")
+
+        // Passivo congelado: o que está no baseline hoje já foi olhado um a um (NewApi guardado no
+        // chamador, RestrictedApi de dispatchKeyEvent). Sem ele a task falha sempre, ninguém a roda
+        // e achado novo nasce invisível — foi assim que o NoSuchMethodError de setShowWhenLocked
+        // passou três semanas em produção. Com baseline, `./gradlew :lemuroid-app:lintFreeBundleDebug`
+        // passa e só quebra em achado NOVO, que é o que dá para agir.
+        // Ao corrigir um item da lista, regenerar apagando o arquivo e rodando a task de novo.
+        baseline = file("lint-baseline.xml")
     }
 
     buildFeatures {

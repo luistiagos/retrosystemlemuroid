@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
 import android.provider.Settings
@@ -77,6 +78,7 @@ import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.shared.GameInteractor
+import com.swordfish.lemuroid.app.utils.android.startActivitySafely
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.CoreCrashFallback
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
@@ -197,19 +199,36 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         }
     }
 
+    /**
+     * Pede isenção de otimização de bateria — quando o aparelho tem o que isentar.
+     *
+     * Doze e `isIgnoringBatteryOptimizations` chegaram na API 23; abaixo dela a chamada é
+     * `NoSuchMethodError`, e isto roda no `onCreate`, ou seja, mataria o app na abertura em todo
+     * Android 5.0/5.1. O `catch` acompanha o teste de versão pelo motivo do pitfall 12: as TV Box
+     * baratas anunciam Android 9/11 rodando 7.1 de verdade.
+     *
+     * Falhar aqui significa "não há isenção a pedir": o aparelho sem a API também não tem a tela
+     * de Ajustes correspondente, então o certo é seguir em silêncio.
+     */
     private fun requestBatteryOptimizationExemption() {
-        val pm = getSystemService(POWER_SERVICE) as PowerManager
-        if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return
+
+        val pm = getSystemService(POWER_SERVICE) as? PowerManager ?: return
+        val alreadyExempt =
             try {
-                startActivity(
-                    Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
-                        data = Uri.parse("package:$packageName")
-                    }
-                )
-            } catch (e: android.content.ActivityNotFoundException) {
-                // Some OEM firmware removes this activity — ignore silently.
+                pm.isIgnoringBatteryOptimizations(packageName)
+            } catch (e: NoSuchMethodError) {
+                Timber.w(e, "isIgnoringBatteryOptimizations ausente com SDK_INT=${Build.VERSION.SDK_INT}")
+                true
             }
-        }
+        if (alreadyExempt) return
+
+        // Intent implícita: algumas ROMs de OEM e builds de TV não embarcam esta tela (pitfall 9).
+        startActivitySafely(
+            Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                data = Uri.parse("package:$packageName")
+            },
+        )
     }
 
     @OptIn(ExperimentalMaterial3Api::class)

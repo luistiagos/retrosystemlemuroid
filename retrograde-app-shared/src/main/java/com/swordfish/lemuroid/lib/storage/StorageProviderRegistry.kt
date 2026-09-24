@@ -41,7 +41,7 @@ class StorageProviderRegistry(context: Context, val providers: Set<StorageProvid
     val enabledProviders: Iterable<StorageProvider>
         get() {
             timber.log.Timber.d("StorageProviderRegistry: total providers injected = ${providers.size}")
-            return providers.filter { 
+            return providers.filter {
                 val isEnabled = prefs.getBoolean(it.id, it.enabledByDefault)
                 timber.log.Timber.d("StorageProviderRegistry: provider ${it.id} enabled? $isEnabled")
                 isEnabled

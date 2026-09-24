@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git tag *)"
+      "Bash(git tag *)",
+      "Read(//c/projects/digitalstoregamesproject/digitalstoregamesbackend/**)",
+      "Read(//e/projects/digitalstoregamesproject/digitalstoregamesbackend/**)",
+      "PowerShell($env:JWT_SECRET_KEY = \\(Select-String -Path 'C:\\\\projects\\\\digitalstoregamesproject\\\\digitalstoregamesbackend\\\\.env' -Pattern '^JWT_SECRET_KEY='\\).Line.Split\\('=',2\\)[1].Trim\\('\"'\\); python \"$env:USERPROFILE\\\\.claude\\\\skills\\\\triagem-bugs-prod\\\\scripts\\\\triagem.py\" list --project retrogamesystem --json \"C:\\\\Users\\\\luist\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-lemuroid-Lemuroid\\\\1bc9be2d-9526-4bc0-9759-6337f23f83ca\\\\scratchpad\\\\errs.json\")",
+      "PowerShell($env:JWT_SECRET_KEY = \\(Select-String -Path 'C:\\\\projects\\\\digitalstoregamesproject\\\\digitalstoregamesbackend\\\\.env' -Pattern '^JWT_SECRET_KEY='\\).Line.Split\\('=',2\\)[1].Trim\\('\"'\\); & \"C:/Users/luist/AppData/Local/Python/bin/python3.exe\" \"$env:USERPROFILE\\\\.claude\\\\skills\\\\triagem-bugs-prod\\\\scripts\\\\triagem.py\" list --project retrogamesystem --json \"C:\\\\Users\\\\luist\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-lemuroid-Lemuroid\\\\1bc9be2d-9526-4bc0-9759-6337f23f83ca\\\\scratchpad\\\\errs.json\")",
+      "Bash(C:/Users/luist/AppData/Local/Python/bin/python3.exe -c ' *)"
     ]
   }
 }

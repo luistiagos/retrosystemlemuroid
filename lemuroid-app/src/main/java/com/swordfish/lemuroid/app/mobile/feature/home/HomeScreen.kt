@@ -1,8 +1,6 @@
 package com.swordfish.lemuroid.app.mobile.feature.home
 
 import android.Manifest
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -48,6 +46,9 @@ import com.swordfish.lemuroid.app.utils.android.ComposableLifecycle
 import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
 import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
+import com.swordfish.lemuroid.app.utils.android.connectivityManagerCompat
+import com.swordfish.lemuroid.app.utils.android.hasInternetCompat
+import com.swordfish.lemuroid.app.utils.android.isOnWifiCompat
 import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
@@ -483,16 +484,11 @@ private fun isWifiNeeded(context: android.content.Context): Boolean {
     )
     val wifiOnly = streamingPrefs.getBoolean(StreamingRomsManager.PREF_WIFI_ONLY, true)
     if (!wifiOnly) return false
-    val cm = context.getSystemService(ConnectivityManager::class.java)
-    val isOnWifi = cm?.getNetworkCapabilities(cm.activeNetwork)
-        ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
-    return !isOnWifi
+    return context.connectivityManagerCompat()?.isOnWifiCompat() != true
 }
 
 private fun isNetworkAvailable(context: android.content.Context): Boolean {
-    val cm = context.getSystemService(ConnectivityManager::class.java) ?: return false
-    val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
-    return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    return context.connectivityManagerCompat()?.hasInternetCompat() == true
 }
 
 @Composable

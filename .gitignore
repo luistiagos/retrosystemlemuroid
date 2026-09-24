@@ -58,3 +58,6 @@ wd_*.xml
 # no mesmo estilo) — copia de seguranca criada ao lado do arquivo antes de sobrescrever,
 # nunca destino de commit.
 catalog_manifest*.bak_*
+
+# Fonte upstream usada para auditar offsets do crash FBNeo.
+tmp/fbneo-source/

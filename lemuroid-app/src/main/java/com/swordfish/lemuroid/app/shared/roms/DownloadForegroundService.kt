@@ -92,7 +92,7 @@ class DownloadForegroundService : Service() {
                     }
                 if (!hasWork) {
                     Timber.d("DownloadForegroundService: queue empty, stopping self")
-                    stopForeground(STOP_FOREGROUND_REMOVE)
+                    stopForegroundCompat()
                     stopSelf()
                     return@collect
                 }
@@ -100,6 +100,25 @@ class DownloadForegroundService : Service() {
                 val queued = entries.count { it.state == SaveQueueState.QUEUED }
                 updateNotification(buildNotification(saving?.title, saving?.progress ?: 0f, queued))
             }
+        }
+    }
+
+    /**
+     * `Service.stopForeground(int)` é da API 24 e o `minSdkVersion` é 21: chamada crua vira
+     * `NoSuchMethodError` em Android 5.0–6.0 — e o `catch (RuntimeException)` deste arquivo não
+     * pega `Error`. `ServiceCompat` escolhe entre a sobrecarga nova e a booleana da API 5; o
+     * `catch` extra cobre o aparelho que mente a versão (pitfall 12).
+     *
+     * Existe de propósito num só lugar: o arquivo já teve o mesmo `stopForeground` guardado num
+     * ponto e cru no outro.
+     */
+    private fun stopForegroundCompat() {
+        try {
+            ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+        } catch (e: NoSuchMethodError) {
+            Timber.w(e, "stopForeground(int) ausente com SDK_INT=${Build.VERSION.SDK_INT}")
+            @Suppress("DEPRECATION")
+            stopForeground(true)
         }
     }
 
@@ -152,7 +171,7 @@ class DownloadForegroundService : Service() {
             fgsType,
         )
         saveQueueManager.pauseActive()
-        stopForeground(STOP_FOREGROUND_REMOVE)
+        stopForegroundCompat()
         stopSelfResult(startId)
     }
 

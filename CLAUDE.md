@@ -490,6 +490,17 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 - **Toast só por `Context.displayToast`** ([SafeToast.kt](retrograde-util/src/main/java/com/swordfish/lemuroid/common/SafeToast.kt)). `Toast.makeText(...).show()` direto é proibido — ver pitfall 7.
 - **Intent implícita só por `startActivitySafely` / `launchSafely`** ([SafeIntents.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/SafeIntents.kt)). `startActivity` cru vale só para Intent explícita — ver pitfall 9.
 - **Activity com extra obrigatório: extra ausente → `finish(); return`, nunca `throw`.** O Robo test do Pre-Launch Report lança toda activity declarada no manifesto sem extras, mesmo as não-exportadas. `BaseGameActivity.onCreate` é `final` de propósito — o `return` do abort só sai do método da base, então código de subclasse vai em `onGameCreated()`, que só roda quando a inicialização chegou ao fim.
+- **Mostrar Activity sobre a tela de bloqueio só por `setShowWhenLockedCompat`** ([ActivityUtils.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/ActivityUtils.kt)). `setShowWhenLocked`/`setTurnScreenOn` crus são API 27 e crasham com `minSdk 21` — ver pitfall 12.
+- **Rede só por `NetworkCompat`** ([NetworkCompat.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/NetworkCompat.kt)). `getSystemService(Class)` e `ConnectivityManager.activeNetwork` são API 23 — ver pitfall 12.
+
+### Estilo: ktlint com baseline
+
+`./gradlew ktlintCheck` **passa** e volta a falhar em violação **nova**. O passivo (1.750 apontamentos, ~900 só no `main` de `lemuroid-app`) está congelado em `<modulo>/config/ktlint/baseline.xml`, configurado no [build.gradle.kts](build.gradle.kts) raiz junto com o `apply` do plugin. Regenerar com `./gradlew ktlintGenerateBaseline` — **depois de corrigir** algo, nunca para calar apontamento recém-criado.
+
+Duas coisas medidas antes de escolher o baseline, para não repetir a tentativa:
+
+1. **Não adianta trocar `ktlint_code_style`.** O código já está escrito no sabor `ktlint_official` (o default do ktlint 1.x quando o `.editorconfig` não diz outro). Medido no `main` de `lemuroid-app`: `ktlint_official` 902, `intellij_idea` **1.628** (a regra `function-signature` inverte de sentido — 124 → 803 — e o `continuation_indent_size=8` passa a valer, +360 de `indent`), `android_studio` **2.927** (proíbe trailing comma, que o código usa em todo lugar).
+2. **Espaço em branco sobrando pode derrubar a task inteira de um módulo.** Um espaço depois de `filter {` em `StorageProviderRegistry.kt` fazia a regra `argument-list-wrapping` lançar `IllegalArgumentException: First node in sequence must be a whitespace containing a newline`, e o ktlint reportava isso como "failed to parse file" — mensagem que aponta para a direção errada. Se um módulo inteiro falhar com "failed to parse", rodar com `--stacktrace` e ler qual **regra** estourou.
 
 ---
 
@@ -632,6 +643,23 @@ fire-and-forget ignoram e logam.
 
 Detalhes em `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
 
+### 12. API acima do `minSdkVersion` é `NoSuchMethodError` — e `SDK_INT` mente nas TV Box
+
+**Sintoma:** `java.lang.NoSuchMethodError: No virtual method setShowWhenLocked(Z)V in class Landroid/app/Activity;` no `onCreate` do `GameActivity` — **todo** jogo, em **todo** aparelho com Android 5.0–8.0, por três semanas.
+
+**Causa:** `setShowWhenLocked`/`setTurnScreenOn` entraram na API 27; o projeto tem `minSdkVersion = 21`. `compileSdkVersion = 35` deixa compilar sem um aviso sequer. O quadro sintético do R8 no stack (`G3.b.a`) é *API modeling outlining* — o R8 tira a chamada nova de dentro do método para a verificação não falhar, mas **não** cria guard de runtime; só muda onde o erro é lançado.
+
+**Regras:**
+1. Ao chamar qualquer API de framework, conferir em que nível ela entrou. O compilador não avisa; só o `NewApi` do lint, que não roda no loop de dev (`./gradlew :lemuroid-app:lintFreeBundleDebug` antes de fechar mudança que toque em API de sistema).
+2. **`SDK_INT` sozinho não é guard suficiente neste app.** Pelo mesmo motivo do pitfall 7, as TV Box baratas anunciam Android 9/11 rodando 7.1 de verdade: o teste passa e o `framework.jar` segue sem o método. Guard de versão anda junto com `try/catch` do `NoSuchMethodError`, e os dois caminhos de falha caem no equivalente legado.
+3. Mostrar sobre a tela de bloqueio / acender o display só por `Activity.setShowWhenLockedCompat` ([ActivityUtils.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/ActivityUtils.kt)).
+4. **Rede só por [NetworkCompat.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/NetworkCompat.kt)** — `getSystemService(Class)` e `ConnectivityManager.activeNetwork` são API 23. `connectivityManagerCompat()`, `isOnWifiCompat()`, `hasInternetCompat()` e `mobileGenerationCompat()` já caem em `activeNetworkInfo` abaixo disso.
+5. **O lint agora passa — e volta a falhar em achado novo.** `lemuroid-app/lint-baseline.xml` congela o passivo já analisado (19 `NewApi` falso-positivo de `CrashTelemetry`/`CoreCrashFallback`, 13 `RestrictedApi`, 58 warnings); `:lemuroid-app:lintFreeBundleDebug` termina **BUILD SUCCESSFUL**. **Se falhar, o achado é seu** — não acrescente ao baseline para calar. Ao corrigir um item da lista, apague o arquivo e rode a task para regenerar.
+6. **`removed="23"` no `api-versions.xml` do SDK não é "sumiu do aparelho", é "subiu de classe".** `FrameLayout.setForeground` existe desde a API 1 mas saiu do `android.jar` de `FrameLayout` na 23 — compilando contra a 35, o cast para `FrameLayout` ainda resolve em `View.setForeground` (API 23) e o `NoSuchMethodError` continua. Nesse formato, o caminho legado é reflexão. Conferir o nível em `<SDK>/platforms/android-35/data/api-versions.xml`, nunca de memória.
+
+Detalhes em `documentacao/bugs/done/2026-09-22-gameactivity-nosuchmethoderror-setshowwhenlocked.md` e
+`documentacao/bugs/done/2026-09-22-newapi-sem-guard-android-5x-inicia-mainactivity.md` (os outros 13 sites da mesma família).
+
 ---
 
 ## Ambiente de build
@@ -650,3 +678,45 @@ E aponte `GRADLE_USER_HOME` (variável de ambiente) para um `.gradle` que exista
 **O que é necessário:** JDK 17; SDK com `platforms;android-35` (compileSdk 35), `build-tools;34.0.0` e `platform-tools`; `local.properties` (não versionado) com `sdk.dir` apontando para esse SDK. **NDK não é necessário** para compilar o app — só para rebuildar o `libretrodroid-patched.aar`. Assinatura de release usa o `debug.keystore` do próprio repo, não precisa de keystore separado.
 
 **Máquina atual (configurada em 2026-08-16):** JDK 17.0.20 em `D:\DevCaches\jdk-17`, SDK em `D:\DevCaches\Android\Sdk`, `GRADLE_USER_HOME=C:\Users\luist\.gradle`, tmp em `%LOCALAPPDATA%\Temp\gradle_tmp`. Variáveis `JAVA_HOME`/`ANDROID_HOME`/`ANDROID_SDK_ROOT`/`GRADLE_USER_HOME` gravadas no escopo User, e `platform-tools` (adb) no PATH.
+
+---
+
+## Emulador para Android antigo (AVD)
+
+O público-alvo real é TV box e aparelho velho (`minSdkVersion 21`), e metade dos pitfalls acima
+só aparece em Android 5–7. Configurado em 2026-09-23 no SDK `D:\DevCaches\Android\Sdk`:
+
+| AVD | Imagem | RAM | Serve para |
+|-----|--------|-----|-----------|
+| `lemu_api25_2gb` | `android-25;google_apis;x86_64` | 2 GB | Android 7.1 — pitfall 7 (Toast BadToken) e 12 (`NoSuchMethodError`); tier `WEAK` |
+| `lemu_api21_1gb` | `android-21;default;x86_64` | 1 GB | `minSdkVersion`; tier `ULTRA_WEAK` do `HeavySystemFilter` |
+| `lemu_tv_api25` | `android-25;android-tv;x86` | 2 GB | UI Leanback (TV) — pitfall 9 (intents sem `DocumentsUI`) |
+
+Aceleração: **AEHD 2.2** (`extras;google;Android_Emulator_Hypervisor_Driver`), serviço de kernel
+`aehd`. Escolhido em vez de WHPX porque esta é uma CPU AMD com SVM ligado e **sem Hyper-V ativo** —
+ligar o Hyper-V degradaria VirtualBox/WSL. Conferir com `emulator -accel-check`;
+desinstalar com `silent_install.bat -u`.
+
+> ⚠️ **O emulador precisa ser lançado destacado do shell.** Rodar `emulator -avd …` como processo
+> filho de uma sessão de ferramenta faz o emulador receber o pedido de shutdown quando a sessão
+> termina (ele sai com código 0, salvando snapshot — parece sucesso). Use `Start-Process`.
+
+### `-PdevAbi` — como o APK chega no emulador
+
+`splits.abi` só distribui `arm64-v8a` e `armeabi-v7a`, então por padrão **nenhum APK tem `.so` de
+x86** e o app não instala no emulador. Os `.so` de x86/x86_64 já existem em
+`lemuroid-cores/*/jniLibs` e no `libretrodroid-patched.aar` — só o filtro os barrava. Por isso o
+`include` aceita ABIs extras por propriedade:
+
+```
+./gradlew :lemuroid-app:assembleFreeBundleDebug -PdevAbi=x86_64   # x86 para o AVD de TV
+adb -s emulator-5554 install -r -t lemuroid-app/build/outputs/apk/freeBundle/debug/lemuroid-app-free-bundle-x86_64-debug.apk
+```
+
+Sem a propriedade nada muda: build de distribuição continua saindo só com as duas ABIs ARM.
+
+> ⚠️ **O que o x86_64 NÃO testa:** os pitfalls 6a/6b (Flycast/`libandroid.so`, dynarec ARM) e o
+> truncamento de pointer tag do Android 11+ são específicos de ARM — o core x86 nem usa o mesmo
+> dynarec. Para esses, ou aparelho real, ou `system-images;android-25;google_apis;armeabi-v7a`
+> (roda o APK de distribuição sem alteração, mas por emulação TCG pura: lento demais para jogar,
+> útil só para ver se o core carrega).
