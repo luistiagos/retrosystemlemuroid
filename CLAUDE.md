@@ -660,6 +660,31 @@ Detalhes em `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thre
 Detalhes em `documentacao/bugs/done/2026-09-22-gameactivity-nosuchmethoderror-setshowwhenlocked.md` e
 `documentacao/bugs/done/2026-09-22-newapi-sem-guard-android-5x-inicia-mainactivity.md` (os outros 13 sites da mesma família).
 
+### 13. O LibretroDroid nunca descarrega um core — e o build garante isso
+
+**Sintoma:** SIGSEGV na GLThread com `fault addr == pc`, `SEGV_MAPERR` e todos os frames
+`<unknown>` (1.17.4). E, do mesmo `dlclose`, SIGABRT `terminating` em `__cxa_finalize` ao abrir
+outro jogo (até a 1.17.12).
+
+**Causa:** `Core::close()` fazia `dlclose` do core a partir do `destroy()`/`create()` na main,
+sem exclusão contra a GLThread. O código do core sumia com a thread dentro dele. Quando o PC não
+tem mapa, o unwinder cai para o LR cru. **LR também sem mapa (ou igual ao PC) = biblioteca
+descarregada em uso**, não ponteiro selvagem.
+
+**Regras:**
+1. `Core::close()` só descarta o handle; o core fica carregado até o processo `:game` morrer.
+   Patch em `libs/libretrodroid-patches/core-no-dlclose.patch` — o checkout externo não tem
+   commit dele.
+2. **Não guardar cópias `.bak`/`.known-good` do AAR em `libs/`.** As três que existiam importavam
+   `dlclose` e não tinham `CoreWorkGuard` — foram apagadas em 2026-09-24 (recuperáveis pelo
+   histórico, commit `9190756`). Versão anterior do AAR se busca no git, não em cópia solta.
+   A task `verifyLibretroDroidBridge`
+   ([LibretroDroidBridgeVerifier.kt](buildSrc/src/main/kotlin/LibretroDroidBridgeVerifier.kt)),
+   pendurada nos mesmos `merge*NativeLibs`/`package*`/`bundle*` que a `verifyFlycastCore`, derruba o
+   build nos dois casos. Se ela acusar, **não desabilite**: reaplique os patches e rebuilde o AAR.
+
+Detalhes em `documentacao/bugs/done/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md`.
+
 ---
 
 ## Ambiente de build

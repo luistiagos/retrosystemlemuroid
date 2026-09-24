@@ -1,0 +1,16 @@
+diff --git a/libretrodroid/src/main/cpp/core.cpp b/libretrodroid/src/main/cpp/core.cpp
+index f72d78d..56873e9 100644
+--- a/libretrodroid/src/main/cpp/core.cpp
++++ b/libretrodroid/src/main/cpp/core.cpp
+@@ -68,7 +68,10 @@ void Core::open(const std::string& soCorePath) {
+ 
+ void Core::close() {
+     if (libHandle) {
+-        dlclose(libHandle);
++        // Libretro cores are not safe to unload. Some of them keep joinable threads or
++        // other process-wide state in static objects, whose destructors are invoked by
++        // dlclose and may abort the process. Keep the library loaded until the game
++        // process exits; Android will reclaim it together with the process.
+         libHandle = nullptr;
+     }
+ }

@@ -498,6 +498,32 @@ val verifyFlycastCore = tasks.register("verifyFlycastCore") {
     }
 }
 
+// The LibretroDroid AAR is rebuilt by hand from an external checkout. Every older AAR still
+// `dlcloses` the core (SIGABRT in its static destructors, or its code unmapped under the
+// running GLThread) and/or lacks CoreWorkGuard. A rollback or a rebuild from a clean
+// upstream checkout would bring those crashes back silently. See LibretroDroidBridgeVerifier.
+val libretroDroidAar = rootProject.file(deps.libs.libretrodroid)
+
+val libretroDroidVerifiedStamp = layout.buildDirectory.file("libretrodroid-bridge-verified.txt")
+
+// Fully qualified instead of imported: an import line would shift every frozen entry of
+// this file in config/ktlint/baseline.xml and make ktlintCheck report them as new.
+val verifyLibretroDroidBridge =
+    tasks.register("verifyLibretroDroidBridge") {
+        description = "Fails the build if the packaged LibretroDroid bridge can unload a core or lacks CoreWorkGuard."
+        inputs.file(libretroDroidAar).withPropertyName("libretroDroidAar")
+        inputs.files(rootProject.fileTree("buildSrc/src/main/kotlin"))
+        outputs.file(libretroDroidVerifiedStamp)
+
+        doLast {
+            com.swordfish.lemuroid.builder.LibretroDroidBridgeVerifier.verify(libretroDroidAar)
+            libretroDroidVerifiedStamp.get().asFile.apply {
+                parentFile.mkdirs()
+                writeText("ok\n")
+            }
+        }
+    }
+
 afterEvaluate {
     tasks.matching { task ->
         val n = task.name
@@ -507,6 +533,9 @@ afterEvaluate {
     }.configureEach {
         if (name != verifyFlycastCore.name) {
             dependsOn(verifyFlycastCore)
+        }
+        if (name != verifyLibretroDroidBridge.name) {
+            dependsOn(verifyLibretroDroidBridge)
         }
     }
 }
