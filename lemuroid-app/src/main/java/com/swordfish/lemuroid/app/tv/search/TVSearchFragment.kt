@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.leanback.app.SearchSupportFragment
+import androidx.leanback.app.cancelPendingAutoStartRecognition
 import androidx.leanback.paging.PagingDataAdapter
 import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.HeaderItem
@@ -74,6 +75,11 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
         }
 
         setSearchResultProvider(this)
+    }
+
+    override fun onDestroyView() {
+        cancelPendingAutoStartRecognition()
+        super.onDestroyView()
     }
 
     private fun createAdapter(): ArrayObjectAdapter {

@@ -149,6 +149,12 @@ reports são de builds anteriores ao fix. O fix entrou em `36aa389`; está garan
 pendência de conferir o `app=` dos reports em
 [2026-09-09-gameservice-foregroundservice-timeout](2026-09-09-gameservice-foregroundservice-timeout.md).
 
+### Ocorrência pré-fix (2026-09-24)
+- **Error (serviço):** 8514 (`retrogamesystem/main`, 2026-09-24 23:26:55)
+- **Versão:** `app=1.17.9` (Xiaomi 24117RN76L, Android 16 SDK 36)
+- **Serviço:** `DownloadForegroundService`
+- **Diagnóstico:** Recorrência de versão cliente antiga (`1.17.9` < `1.17.13`). Sem regressão em versões recentes.
+
 ## Próximos passos
 
 - [x] Trocar o tipo do `GameService` para `specialUse`.

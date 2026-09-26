@@ -220,3 +220,15 @@ Todo `Object.wait()` do framework que a main thread faça sobre uma thread de re
 é um potencial ANR quando o frame demora. `GLSurfaceView.onPause`, `surfaceChanged` e `surfaceCreated`
 possuíam esperas síncronas legadas pensadas para o Android 1.5. A substituição por uma `GLSurfaceView`
 customizada e não-bloqueante na UI elimina essa classe inteira de ANRs no emulador.
+
+---
+
+## Recorrência pré-fix (2026-09-24)
+
+- **Error (serviço):** 8501 (`retrogamesystem/anr`, reportado em 2026-09-24 20:04:44)
+- **Timestamp da ocorrência:** `when=2026-09-17 11:07:53`
+- **Versão:** `app=1.17.19` (Xiaomi 2412DPC0AG, Android 16 SDK 36, `arm64-v8a`)
+- **Contexto:** `system=gc; core=dolphin; game=Super Mario Strikers; pid=23582; importance=125`
+- **Sintoma:** `ANR: Input dispatching timed out (9ef7992 ... GameActivity is not responding. Waited 5000ms for FocusEvent(hasFocus=false))`
+- **Diagnóstico:** Evento ocorrido em 17/09/2026 às 11:07 no build `1.17.19`, anterior à distribuição do AAR customizado com a Opção 3 (lançado a partir de 1.17.20/1.17.22). Assinatura clássica da Variante A (`onPause` / `FocusEvent(hasFocus=false)` com core Dolphin em GameCube).
+

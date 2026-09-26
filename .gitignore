@@ -52,6 +52,14 @@ tmp/libretrodroid-destroy-test/
 tmp/core-work-guard-test/
 tmp/fbneo-lifecycle-validation/
 tmp/libretrodroid-before-destroy-fix.aar
+# Clones com .git próprio: sem esta lista, `git add -A` os grava como gitlink (modo 160000)
+# sem .gitmodules e quebra `git submodule status` do repo inteiro. Clone novo em tmp/ entra
+# aqui no mesmo passo.
+tmp/snes9x-source/
+tmp/flycast-source/
+tmp/libretro-flycast-build/
+tmp/libretro-flycast-source/
+tmp/flycast-pre2396-build/
 
 # Dump de uiautomator
 wd_*.xml
@@ -63,3 +71,8 @@ catalog_manifest*.bak_*
 
 # Fonte upstream usada para auditar offsets do crash FBNeo.
 tmp/fbneo-source/
+
+# ROMs comerciais baixadas para validar em aparelho (nunca publicar: 75 MB+ e conteúdo
+# protegido por copyright). Diferente do resto de tmp/, aqui a lista é de exclusão por padrão,
+# não por caso a caso — qualquer coisa nova em test_roms/ é ROM, nunca material versionável.
+tmp/test_roms/
