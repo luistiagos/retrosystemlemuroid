@@ -88,6 +88,17 @@ antigo (r28c) foi preservado em
 `lemuroid-cores/_fbneo_backup_20260918_r28c/<abi>/libfbneo_libretro_android.so` para
 rollback rápido caso o nightly novo regrida algo.
 
+> **Atualização 2026-09-25:** esse diretório foi apagado
+> ([[2026-09-25-fbneo-backup-r28c-com-crash-solto-no-repo-de-cores]]). O rollback é pelo git:
+> o r28c está no `b31f28b` (`main` do GitHub), idêntico byte a byte nos 8 arquivos.
+>
+> ```
+> git -C lemuroid-cores restore --source=b31f28b -- "bundled-cores/src/main/jniLibs/*/libfbneo_libretro_android.so" "lemuroid_core_fbneo/src/main/jniLibs/*/libfbneo_libretro_android.so"
+> ```
+>
+> Use o `restore`, não `git show … > arquivo`: no PowerShell 5.1 o `>` re-encoda a saída
+> como texto e corrompe o `.so`. E o r28c é justamente a versão que crasha em `retro_init`.
+
 > ⚠️ **Caminho de download separado não coberto por esta correção.** Assim como no
 > [[2026-09-02-flycast-arm64-core-hand-build-sigtrap]], o `CoreUpdaterImpl` (variante free)
 > tem um fallback que baixa cores não-bundled do GitHub `luistiagos/libretrocores` na tag

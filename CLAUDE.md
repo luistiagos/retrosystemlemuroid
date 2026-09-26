@@ -497,6 +497,8 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 
 `./gradlew ktlintCheck` **passa** e volta a falhar em violação **nova**. O passivo (1.750 apontamentos, ~900 só no `main` de `lemuroid-app`) está congelado em `<modulo>/config/ktlint/baseline.xml`, configurado no [build.gradle.kts](build.gradle.kts) raiz junto com o `apply` do plugin. Regenerar com `./gradlew ktlintGenerateBaseline` — **depois de corrigir** algo, nunca para calar apontamento recém-criado.
 
+> ⚠️ **Módulos cujo diretório mora no submódulo `lemuroid-cores` (`:bundled-cores`, `:lemuroid_core_*`) não têm baseline.** O `ktlintGenerateBaseline` grava o arquivo no repo de cores, fora de qualquer commit do Lemuroid, e o `ktlintCheck` passa só neste disco. Nesses módulos a violação se **corrige** (com commit no `lemuroid-cores`), não se congela. Depois de rodar a task, conferir `git -C lemuroid-cores status`. Ver `documentacao/bugs/done/2026-09-25-ktlint-baseline-bundled-cores-nao-versionado.md`.
+
 Duas coisas medidas antes de escolher o baseline, para não repetir a tentativa:
 
 1. **Não adianta trocar `ktlint_code_style`.** O código já está escrito no sabor `ktlint_official` (o default do ktlint 1.x quando o `.editorconfig` não diz outro). Medido no `main` de `lemuroid-app`: `ktlint_official` 902, `intellij_idea` **1.628** (a regra `function-signature` inverte de sentido — 124 → 803 — e o `continuation_indent_size=8` passa a valer, +360 de `indent`), `android_studio` **2.927** (proíbe trailing comma, que o código usa em todo lugar).
