@@ -9,6 +9,10 @@ import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 enum class CoreID(
     val coreName: String,
     val coreDisplayName: String,
+    // Always lib<coreName>_libretro_android.so, even when the buildbot ships the core without
+    // the "lib" prefix: the installer only extracts lib*.so into nativeLibraryDir, so any other
+    // name stays inside the release APK and the core gets downloaded again (Android 13+ skips
+    // that filter for debuggable APKs, so debug builds hide it). verifyBundledCores enforces it.
     val libretroFileName: String,
 ) {
     STELLA(
@@ -174,7 +178,7 @@ enum class CoreID(
     OPERA(
         "opera",
         "Opera",
-        "opera_libretro_android.so",
+        "libopera_libretro_android.so",
     ),
     FAKE_08(
         "fake08",
@@ -189,110 +193,82 @@ enum class CoreID(
     PICODRIVE(
         "picodrive",
         "PicoDrive",
-        "picodrive_libretro_android.so",
+        "libpicodrive_libretro_android.so",
     ),
     ATARI800(
         "atari800",
         "Atari800",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive). Copy the file name literally.
-        "atari800_libretro_android.so",
+        "libatari800_libretro_android.so",
     ),
     SAMEDUCK(
         "sameduck",
         "SameDuck",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "sameduck_libretro_android.so",
+        "libsameduck_libretro_android.so",
     ),
     FREECHAF(
         "freechaf",
         "FreeChaF",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "freechaf_libretro_android.so",
+        "libfreechaf_libretro_android.so",
     ),
     UZEM(
         "uzem",
         "Uzem",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "uzem_libretro_android.so",
+        "libuzem_libretro_android.so",
     ),
     LOWRESNX(
         "lowresnx",
         "LowRes NX",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "lowresnx_libretro_android.so",
+        "liblowresnx_libretro_android.so",
     ),
     ARDUOUS(
         "arduous",
         "Arduous",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "arduous_libretro_android.so",
+        "libarduous_libretro_android.so",
     ),
     DOLPHIN(
         "dolphin",
         "Dolphin",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "dolphin_libretro_android.so",
+        "libdolphin_libretro_android.so",
     ),
     YABASANSHIRO(
         "yabasanshiro",
         "YabaSanshiro",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "yabasanshiro_libretro_android.so",
+        "libyabasanshiro_libretro_android.so",
     ),
     VIRTUALJAGUAR(
         "virtualjaguar",
         "Virtual Jaguar",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "virtualjaguar_libretro_android.so",
+        "libvirtualjaguar_libretro_android.so",
     ),
     O2EM(
         "o2em",
         "O2EM",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "o2em_libretro_android.so",
+        "libo2em_libretro_android.so",
     ),
     NEOCD(
         "neocd",
         "NeoCD",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "neocd_libretro_android.so",
+        "libneocd_libretro_android.so",
     ),
     PUAE(
         "puae",
         "PUAE",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "puae_libretro_android.so",
+        "libpuae_libretro_android.so",
     ),
     MEDNAFEN_PCFX(
         "mednafen_pcfx",
         "Beetle PC-FX",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix
-        // (same as Opera/PicoDrive/Atari800). Copy the file name literally.
-        "mednafen_pcfx_libretro_android.so",
+        "libmednafen_pcfx_libretro_android.so",
     ),
     GW(
         "gw",
         "Game & Watch",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix.
-        "gw_libretro_android.so",
+        "libgw_libretro_android.so",
     ),
     HATARI(
         "hatari",
         "Hatari",
-        // Buildbot Android nightlies ship this core WITHOUT the "lib" prefix.
-        "hatari_libretro_android.so",
+        "libhatari_libretro_android.so",
     ),
     ;
 

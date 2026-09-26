@@ -539,3 +539,49 @@ afterEvaluate {
         }
     }
 }
+
+// 17 cores shipped without the `lib` prefix, which the installer does not extract on a release install, and the
+// APK was built for weeks from `.so` files that no pushed commit held. Neither showed up in a debug build, so the
+// build checks both. See BundledCoresVerifier.
+val coresRepoDir = rootProject.file("lemuroid-cores")
+val coreIdSource = rootProject.file("retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/CoreID.kt")
+val coreDownloaderSource =
+    rootProject.file("retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/core/CoreDownloader.kt")
+
+val verifyBundledCores =
+    tasks.register("verifyBundledCores") {
+        description = "Fails the build if a packaged core is not named lib*.so or disagrees with CoreID."
+        doLast {
+            com.swordfish.lemuroid.builder.BundledCoresVerifier.verifyNames(
+                coresRepoDir,
+                coreIdSource,
+                listOf(project.file("src/main/jniLibs")),
+            )
+        }
+    }
+
+val verifyCoresPublished =
+    tasks.register("verifyCoresPublished") {
+        description = "Fails a release build whose cores are not committed, pushed and tagged."
+        doLast {
+            com.swordfish.lemuroid.builder.BundledCoresVerifier.verifyVersioned(
+                coresRepoDir,
+                coreIdSource,
+                coreDownloaderSource,
+            )
+        }
+    }
+
+afterEvaluate {
+    tasks.matching { task ->
+        val n = task.name
+        (n.startsWith("merge", ignoreCase = true) && n.contains("NativeLibs", ignoreCase = true)) ||
+            n.startsWith("package", ignoreCase = true) ||
+            n.startsWith("bundle", ignoreCase = true)
+    }.configureEach {
+        dependsOn(verifyBundledCores)
+        if (name.contains("Release")) {
+            dependsOn(verifyCoresPublished)
+        }
+    }
+}

@@ -45,7 +45,7 @@ Pergunte ao usuário (ou receba via prompt do task) e confirme **antes de tocar 
 | `<CoreIdEnum>` | `BEETLE_SATURN` | Nome do core na enum `CoreID` |
 | `<coreName>` | `mednafen_saturn` | Nome curto do core (igual ao `core_option_NAMESPACE` que o core usa) |
 | `<coreDisplayName>` | "Beetle Saturn" | Nome legível do core |
-| `<libretroFileName>` | `libmednafen_saturn_libretro_android.so` | Arquivo `.so` do core. **PITFALL:** verifique se tem `lib` no início — alguns cores (como Opera) **não têm** o prefixo `lib`. Use o nome literal do arquivo que veio do build. |
+| `<libretroFileName>` | `libmednafen_saturn_libretro_android.so` | Arquivo `.so` do core. **Sempre `lib<coreName>_libretro_android.so`**, mesmo quando o buildbot entrega o arquivo sem o prefixo `lib` (Opera, PicoDrive, Dolphin…). Nesse caso, **renomeie** o `.so` ao copiar. Ver o aviso no Passo 1. |
 | `<libretroFullName>` | "Sega - Saturn" | Nome longo (como usado no LibretroDB) |
 | `<extensoes>` | `["cue", "iso", "chd"]` | Extensões de ROM suportadas |
 | `<biosFiles>` | `["sega_101.bin", "mpr-17933.bin"]` | Lista de BIOS obrigatórias (vazio se o core não precisar). Cada item é o **caminho relativo** dentro de `system/` (ex.: `"saturn/sega_101.bin"` se for em subpasta) |
@@ -79,11 +79,20 @@ file <path>/<libretroFileName>
 # Se vier "ASCII text" ou tamanho < 10KB, o arquivo é um stub e PRECISA ser substituído.
 ```
 
-> **Cores conhecidos SEM o prefixo `lib`** (atualizado jun/2026):  
-> `opera`, `picodrive`, `atari800`, `sameduck`, `freechaf`, `uzem`, `lowresnx`, `arduous`,  
-> `dolphin`, `yabasanshiro`, `virtualjaguar`, `o2em`, `neocd`, `puae`, `mednafen_pcfx`, `gw`  
->  
-> Para qualquer outro core, verifique o nome real do arquivo dentro do `.zip` antes de preencher `libretroFileName` em `CoreID.kt`.
+> ⚠️ **O nome do `.so` TEM que começar com `lib`.** O instalador do Android só extrai de
+> `lib/<abi>/` para o `nativeLibraryDir` os arquivos `lib*.so`; o resto fica preso dentro do
+> APK, onde o `GameLoader` não procura. O jogo cai no download do core e, **sem rede, não abre**.
+> No Android 13+ esse filtro é pulado para APK *debuggable*, então **o build debug funciona e
+> esconde o problema**. Só o release mostra.
+>
+> O buildbot entrega vários cores sem o prefixo (`opera`, `picodrive`, `atari800`, `sameduck`,
+> `freechaf`, `uzem`, `lowresnx`, `arduous`, `dolphin`, `yabasanshiro`, `virtualjaguar`, `o2em`,
+> `neocd`, `puae`, `mednafen_pcfx`, `gw`, `hatari`). **Renomeie** para `lib<nome>_libretro_android.so`
+> ao copiar. Até 2026-09 este guia mandava copiar o nome literal, e 17 cores foram para produção
+> sem ser extraídos ([[2026-09-25-cores-sem-prefixo-lib-nao-extraidos-no-release]]).
+>
+> A task `verifyBundledCores` derruba o build se algum `.so` em `jniLibs` não começar com `lib`,
+> ou se `CoreID.kt` e `bundled-cores/src/main/jniLibs/arm64-v8a/` discordarem nos nomes.
 
 ---
 
@@ -133,13 +142,13 @@ Adicione uma nova entrada **antes do `;` que fecha a enum**. Use o formato exato
 ),
 ```
 
-Exemplo real (Opera, que tem o pitfall do `lib` faltando):
+Exemplo real (Opera: o buildbot entrega `opera_libretro_android.so`, e o arquivo foi renomeado):
 
 ```kotlin
 OPERA(
     "opera",
     "Opera",
-    "opera_libretro_android.so",   // <-- SEM "lib" no início; copie literal o nome do .so
+    "libopera_libretro_android.so",   // <-- sempre com "lib", mesmo que o buildbot não tenha
 ),
 ```
 
@@ -1130,7 +1139,7 @@ unzip -l app/build/outputs/apk/freeBundle/debug/*.apk | grep <coreName>
 
 Confirme item por item antes de declarar pronto:
 
-- [ ] `CoreID.kt` tem a entrada com nome `.so` correto (atenção ao prefixo `lib` ou não)
+- [ ] `CoreID.kt` tem a entrada com nome `lib<coreName>_libretro_android.so` (com `lib`, sempre), igual ao nome dos `.so` copiados
 - [ ] `SystemID.kt` tem a entrada com `dbname` minúsculo
 - [ ] `MetaSystemID.kt` tem **enum** e **branch em fromSystemID()**
 - [ ] `HeavySystemFilter.kt` classificado no tier correto (ou omitido se LIGHT)
@@ -1153,6 +1162,7 @@ Confirme item por item antes de declarar pronto:
 - [ ] `lemuroid-cores/lemuroid_core_<coreName>/src/main/AndroidManifest.xml` criado
 - [ ] **4 `.so` files** (arm64-v8a, armeabi-v7a, x86, x86_64) em `lemuroid_core_<coreName>/src/main/jniLibs/`
 - [ ] **Mesmos 4 `.so` files** também em `bundled-cores/src/main/jniLibs/`
+- [ ] `.so` commitados **e enviados** (`git push`) no `lemuroid-cores`, numa **tag nova**, com `CoreDownloader.CORES_VERSION` apontando para ela: o fallback de download busca `lemuroid_core_<coreName>/…` nessa tag. Sem isso o build de release falha na `verifyCoresPublished`.
 - [ ] `MANIFEST_SCHEMA_VERSION` incrementado em `ManifestQuickLoader.kt` (se adicionou entradas no catálogo)
 - [ ] `mnemonico_map.json` — valor confirmado contra tabela MNEMONICO do endpoint (não assumido igual ao dbname)
 - [ ] Build `:retrograde-app-shared:compileDebugKotlin` passa
@@ -1191,7 +1201,7 @@ Cores que **já se sabe** ter esse comportamento:
 
 **Causa:** o `.so` está faltando para a ABI do device, OU o nome está errado. Cheque:
 1. Os 4 arquivos `.so` estão em `lemuroid_core_<coreName>/src/main/jniLibs/<abi>/<filename>`.
-2. O nome do arquivo bate **exatamente** com `libretroFileName` em `CoreID.kt` (atenção ao prefixo `lib`).
+2. O nome do arquivo bate **exatamente** com `libretroFileName` em `CoreID.kt` e começa com `lib` (a `verifyBundledCores` confere as duas coisas).
 3. Se for variant `bundle`, os mesmos `.so` também em `bundled-cores/src/main/jniLibs/<abi>/`.
 
 ### 27.6. Variant `freeBundle` não inclui o core

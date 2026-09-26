@@ -687,6 +687,58 @@ descarregada em uso**, não ponteiro selvagem.
 
 Detalhes em `documentacao/bugs/done/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md`.
 
+### 14. Core empacotado sem o prefixo `lib` não é extraído — e o build debug esconde isso
+
+**Sintoma:** em 17 sistemas (GameCube, Saturn, Amiga, 3DO, 32X…), o primeiro jogo sempre mostrava
+"baixando core", mesmo com o core dentro do APK. **Sem rede, o jogo não abria.**
+
+**Causa:** o instalador só extrai de `lib/<abi>/` para o `nativeLibraryDir` as entradas `lib*.so`
+(`NativeLibrariesIterator` em `NativeLibraryHelper.cpp`). O buildbot entrega vários cores sem o
+prefixo (`dolphin_libretro_android.so`…), e o `CoreID` copiava o nome literal. O
+`GameLoader.findLibrary` só procura no `nativeLibraryDir` e no `filesDir`, nunca dentro do APK.
+**No Android 13+ o filtro é pulado para APK *debuggable***, então todo teste com o build de
+desenvolvimento passava.
+
+**Regras:**
+1. Todo core é `lib<coreName>_libretro_android.so`: no `CoreID`, no `bundled-cores` e no
+   `lemuroid_core_<coreName>`. Core que vem do buildbot sem `lib` é **renomeado** ao copiar.
+2. A task `verifyBundledCores` ([BundledCoresVerifier.kt](buildSrc/src/main/kotlin/BundledCoresVerifier.kt)),
+   pendurada nos mesmos `merge*NativeLibs`/`package*`/`bundle*`, derruba o build se algum `.so` em
+   `jniLibs` não começar com `lib`, ou se os nomes do `CoreID.kt` e de
+   `bundled-cores/src/main/jniLibs/arm64-v8a/` não forem o mesmo conjunto.
+3. Validação de empacotamento (o que o instalador extrai) se faz no **release**, ou num aparelho/AVD
+   com Android ≤ 12, onde o filtro vale até para debug (`lemu_api25_2gb`). Um debug em Android 13+ mente.
+
+Detalhes em `documentacao/bugs/done/2026-09-25-cores-sem-prefixo-lib-nao-extraidos-no-release.md`.
+
+### 15. O `lemuroid-cores` é a fonte dos binários do APK: tem que estar commitado, enviado e com tag
+
+**Sintoma:** um clone novo não obtinha os cores. O APK era construído a partir de 247 MB de `.so`
+não versionados, sobre um commit (FBNeo) que nunca foi enviado ao GitHub.
+
+**Causa:** um commit `*` com `git add -A` gravou o ponteiro do submódulo dois meses para trás. Os
+cores mais novos ficaram no disco como não versionados, e o build empacota o que está no disco, não
+o que está no git. Além disso, o `.gitmodules` apontava para `e:\projects\lemuroid\LibretroCores`,
+um caminho de outra máquina.
+
+**Regras:**
+1. Fluxo ao mexer em core: commit no `lemuroid-cores` → `git push` → **tag nova** → bumpar
+   `CoreDownloader.CORES_VERSION` para a tag → commitar o ponteiro do submódulo no Lemuroid.
+   O fallback de download (e o flavor `dynamic`) busca
+   `lemuroid_core_<coreName>/src/main/jniLibs/<abi>/<libretroFileName>` **na tag**. Renomear o
+   arquivo sem tag nova dá 404.
+2. A task `verifyCoresPublished` (mesmo verifier, só em variante **release**) derruba o build se
+   houver arquivo não versionado, modificado ou ignorado em `bundled-cores/src/main/jniLibs`, se o
+   `HEAD` do submódulo não estiver em nenhum branch remoto (conforme o último fetch), ou se a tag
+   `CORES_VERSION` não tiver o arquivo de algum `CoreID`.
+3. Ponteiro de submódulo que vai para um commit **mais antigo** que o anterior é erro até prova em
+   contrário. O diff mostra só `Subproject commit` trocado.
+4. URL no `.gitmodules` é sempre a do remoto (`https://github.com/luistiagos/libretrocores.git`),
+   nunca caminho de disco.
+
+Detalhes em `documentacao/bugs/done/2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado.md`
+e `documentacao/bugs/done/2026-09-25-gitmodules-url-drive-e-inexistente.md`.
+
 ---
 
 ## Ambiente de build
