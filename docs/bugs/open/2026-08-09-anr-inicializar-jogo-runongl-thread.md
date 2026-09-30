@@ -567,3 +567,20 @@ emulado** — o mesmo que o app já usava para restaurar autosave, e que agora v
 verificar quem mais espera por ela.
 
 Ver também [2026-08-09-telemetria-nao-captura-anr.md](2026-08-09-telemetria-nao-captura-anr.md).
+
+## Recorrência (Triagem 2026-09-28)
+
+- **Novo ID:** 8622 — `com.swordfish.libretrodroid.GLRetroView$GLThreadTimeoutException: GLThread
+  did not answer in 30000 ms`, call-site `GLRetroView.serializeSRAM` (o mesmo ponto documentado
+  acima em "O call-site é o `serializeSRAM` da saída do jogo").
+- **Contexto:** `phase=exit-save; call=serializeSRAM; system=nes; game=Mario Bros.`, Samsung
+  SM-A166M, Android 16, `app=1.17.22`. Ocorrência única (não é cluster).
+- **Diagnóstico:** confirma que o critério de fechamento desta página ("telemetria parar de
+  acusar `GLThreadTimeoutException` em `runOnGLThread`") continua não satisfeito — mantido
+  `open`. Diferente da maior parte dos casos anteriores (Dolphin/GameCube dominando a lista),
+  este é **NES/nes9x**, um core leve — enfraquece a hipótese de "core pesado demora para
+  responder" como explicação única e é consistente com a leitura já registrada acima: a causa
+  de fundo é o core (ou o driver) ocasionalmente não devolver o controle à GLThread, não um
+  problema de desempenho específico de um sistema.
+- Sem log adicional além da stack Java (é `runOnGLThread`, não crash nativo — não há tombstone).
+  Não reproduzido.

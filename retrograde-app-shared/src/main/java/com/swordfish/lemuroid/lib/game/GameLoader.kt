@@ -31,15 +31,18 @@ import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.migration.DesmumeMigrationHandler
 import com.swordfish.lemuroid.lib.saves.SaveState
+import com.swordfish.lemuroid.lib.saves.SaveStateCompatibility
 import com.swordfish.lemuroid.lib.saves.SavesCoherencyEngine
 import com.swordfish.lemuroid.lib.saves.SavesManager
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.RomFiles
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
 
@@ -73,8 +76,9 @@ class GameLoader(
             try {
                 emit(LoadingState.LoadingCore)
 
-                val system = GameSystem.findByIdOrNull(game.systemId)
-                    ?: throw GameLoaderException(GameLoaderError.Generic)
+                val system =
+                    GameSystem.findByIdOrNull(game.systemId)
+                        ?: throw GameLoaderException(GameLoaderError.Generic)
 
                 if (!isArchitectureSupported(appContext, systemCoreConfig)) {
                     throw GameLoaderException(GameLoaderError.UnsupportedArchitecture)
@@ -85,6 +89,18 @@ class GameLoader(
                         findLibrary(appContext, systemCoreConfig.coreID)!!.absolutePath
                     }.getOrElse { throw GameLoaderException(GameLoaderError.LoadCore) }
 
+                // FBNeo raw states have no build identifier and may corrupt memory on a failed load.
+                // Identify the actual binary, not the app/core version label shared by different builds.
+                val requiresCoreMatch = systemCoreConfig.coreID == CoreID.FBNEO
+                val coreSha256 =
+                    if (requiresCoreMatch) {
+                        withContext(Dispatchers.IO) { SaveStateCompatibility.fingerprint(File(coreLibrary)) }
+                    } else {
+                        null
+                    }
+                val saveStateCompatibility =
+                    SaveStateCompatibility(systemCoreConfig.statesVersion, requiresCoreMatch, coreSha256)
+
                 emit(LoadingState.LoadingGame)
 
                 // Run independent I/O tasks in parallel to reduce total wall-clock time
@@ -93,18 +109,21 @@ class GameLoader(
                 val (gameFiles, saveRAM, coreVariables, systemDirectory, savesDirectory, missingBiosFiles) =
                     coroutineScope {
                         val deferredBios = async { biosManager.getMissingBiosFiles(systemCoreConfig, game) }
-                        val deferredGameFiles = async {
-                            val useVFS = systemCoreConfig.supportsLibretroVFS && directLoad
-                            val dataFiles = retrogradeDatabase.dataFileDao().selectDataFilesForGame(game.id)
-                            lemuroidLibrary.getGameFiles(game, dataFiles, useVFS)
-                        }
-                        val deferredSaveRAM = async {
-                            val data = savesManager.getSaveRAM(game, systemCoreConfig)
-                            desmumeMigrationHandler.resolveSaveData(game, systemCoreConfig.coreID, data)
-                        }
-                        val deferredCoreVars = async {
-                            coreVariablesManager.getOptionsForCore(system.id, systemCoreConfig)
-                        }
+                        val deferredGameFiles =
+                            async {
+                                val useVFS = systemCoreConfig.supportsLibretroVFS && directLoad
+                                val dataFiles = retrogradeDatabase.dataFileDao().selectDataFilesForGame(game.id)
+                                lemuroidLibrary.getGameFiles(game, dataFiles, useVFS)
+                            }
+                        val deferredSaveRAM =
+                            async {
+                                val data = savesManager.getSaveRAM(game, systemCoreConfig)
+                                desmumeMigrationHandler.resolveSaveData(game, systemCoreConfig.coreID, data)
+                            }
+                        val deferredCoreVars =
+                            async {
+                                coreVariablesManager.getOptionsForCore(system.id, systemCoreConfig)
+                            }
                         val deferredSystemDir = async { directoriesManager.getSystemDirectory() }
                         val deferredSavesDir = async { directoriesManager.getSavesDirectory() }
 
@@ -151,6 +170,7 @@ class GameLoader(
                             coreVariables.toTypedArray(),
                             systemDirectory,
                             savesDirectory,
+                            saveStateCompatibility,
                         ),
                     ),
                 )
@@ -211,10 +231,11 @@ class GameLoader(
         }
 
         // Fast path 2: downloaded core at its deterministic versioned path
-        val downloaded = File(
-            context.filesDir,
-            "cores/${com.swordfish.lemuroid.lib.core.CoreDownloader.CORES_VERSION}/$libFileName",
-        )
+        val downloaded =
+            File(
+                context.filesDir,
+                "cores/${com.swordfish.lemuroid.lib.core.CoreDownloader.CORES_VERSION}/$libFileName",
+            )
         if (downloaded.exists() && downloaded.length() > MIN_VALID_CORE_SIZE_BYTES &&
             com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(downloaded, processAbi)
         ) {
@@ -223,16 +244,17 @@ class GameLoader(
         }
 
         // Slow path fallback: walk filesDir for cores in non-standard locations
-        val found = sequenceOf(
-            File(context.applicationInfo.nativeLibraryDir),
-            context.filesDir,
-        )
-            .flatMap { it.walkBottomUp() }
-            .firstOrNull { file ->
-                file.name == libFileName &&
-                    file.length() > MIN_VALID_CORE_SIZE_BYTES &&
-                    com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(file, processAbi)
-            }
+        val found =
+            sequenceOf(
+                File(context.applicationInfo.nativeLibraryDir),
+                context.filesDir,
+            )
+                .flatMap { it.walkBottomUp() }
+                .firstOrNull { file ->
+                    file.name == libFileName &&
+                        file.length() > MIN_VALID_CORE_SIZE_BYTES &&
+                        com.swordfish.lemuroid.lib.util.AbiUtils.isElfCompatible(file, processAbi)
+                }
 
         if (found != null) {
             corePathCache[libFileName] = found.absolutePath
@@ -265,5 +287,6 @@ class GameLoader(
         val coreVariables: Array<CoreVariable>,
         val systemDirectory: File,
         val savesDirectory: File,
+        val saveStateCompatibility: SaveStateCompatibility,
     )
 }

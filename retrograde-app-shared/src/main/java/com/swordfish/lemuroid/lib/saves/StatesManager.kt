@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.lib.saves
 
 import com.swordfish.lemuroid.common.kotlin.readBytesUncompressed
 import com.swordfish.lemuroid.common.kotlin.runCatchingWithRetry
+import com.swordfish.lemuroid.common.kotlin.writeBytesAtomically
 import com.swordfish.lemuroid.common.kotlin.writeBytesCompressed
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -111,7 +112,9 @@ class StatesManager(private val directoriesManager: DirectoriesManager) {
         metadata: SaveState.Metadata,
     ) {
         val metadataFile = getMetadataStateFile(fileName, coreName)
-        metadataFile.writeText(Json.encodeToString(SaveState.Metadata.serializer(), metadata))
+        metadataFile.writeBytesAtomically(
+            Json.encodeToString(SaveState.Metadata.serializer(), metadata).toByteArray(Charsets.UTF_8),
+        )
     }
 
     private fun writeStateToDisk(

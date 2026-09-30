@@ -1,7 +1,10 @@
 # [BUG] Crash nativo na inicialização do FBNeo — Corrupção de alocador de memória no `retro_init` (Scudo / je_large_dalloc)
 
 **Data:** 2026-09-18
-**Status:** Resolvido ✅ (core do buildbot atualizado; confirmado em aparelho real)
+**Status:** ✅ **Resolvido em 2026-09-30** — a causa nunca foi o binário: é um double free do
+FBNeo quando `retro_init` roda pela segunda vez no mesmo processo, que o frontend provocava ao
+reaproveitar o `:game`. Ver "Causa-raiz real e correção (2026-09-30)" no fim. A "Causa-raiz" e a
+"Correção" abaixo (atualização do core) ficam como histórico: só mudaram os offsets.
 **Severidade:** Alta (todo jogo de arcade operado pelo FBNeo crashava na inicialização, em todo aparelho arm64 Android 16 observado)
 **Branch:** version9
 **Origem:** telemetria `retrogamesystem/native` (`libfbneo_libretro_android.so::reason=Native crash`)
@@ -162,3 +165,71 @@ limpa) não seria possível com o binário antigo.
 - **Novos IDs associados:** 7509, 7380 (2 ocorrências)
 - **Diagnóstico:** As ocorrências 7509 (MAME2003+ / Scudo abort) e 7380 (FBNeo / Scudo abort) em aparelhos Samsung SM-A546E rodando versão 1.17.19 são anteriores à distribuição da atualização do core e binários. Fechados na telemetria.
 
+## Recorrência (Triagem 2026-09-28) — build já contém o fix
+
+- **Novos IDs associados:** 8804, 8741, 8740 (todos Samsung SM-A546E, `app=1.17.22`), 8539
+  (Samsung SM-A127M, `app=1.17.22-DEBUG`).
+- **Confirmado que é o binário atualizado, não eco de build antigo.** O offset mudou de
+  `retro_init+196` (r28c, doc original) para **`retro_init+252`** nos quatro reports novos —
+  consistente com o `.so` maior (63 MB → 71,7 MB) da atualização de 2026-09-18. Frame `#07`
+  idêntico byte a byte entre 8804/8740/8741 (`0x21e70f4`, `0x21e6ee8`), e 8539 (jemalloc,
+  variante B) só diverge em 24 bytes num frame interno — mesmo build, mesma rotina.
+  - ⚠️ **`app=` do relatório não prova a versão do crash.** Para exits via
+    `ApplicationExitInfo` (native/anr/lowmemory), `CrashTelemetry.reportOneExit` monta o
+    contexto com `TelemetryReporter.deviceContext()`, que lê a versão **instalada no momento do
+    scan** ([TelemetryReporter.kt:229](../../../lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/telemetry/TelemetryReporter.kt#L229),
+    `safeVersion()` → `PackageManager.getPackageInfo(...).versionName`), não a versão que
+    rodava quando o processo `:game` morreu. Por isso a comparação de causa-raiz acima foi feita
+    pelo **offset binário no tombstone**, não pelo campo `app=`.
+- **Duas variantes de alocador, mesmo ponto de chamada** (`retro_init` → `LibretroDroid::create`):
+  - **Scudo** (8804, 8740, 8741): `Scudo ERROR: corrupted chunk header ... chunk header is zero
+    and might indicate memory corruption or a double free` — mensagem diferente da variante A
+    original (`invalid chunk state`), mesmo offset.
+  - **jemalloc** (8539): `je_large_dalloc`/`je_free`, `SIGSEGV SEGV_MAPERR fault addr 0x0` —
+    igual à "Variante B" original, mesmo device-class (Samsung).
+- **Diagnóstico:** a atualização de core de 2026-09-18 foi uma **mitigação por binário mais
+  novo**, não uma correção da causa. A corrupção de heap em `retro_init` é interna ao FBNeo
+  (upstream, sem fonte neste repositório) e sobrevive a uma nightly diferente — só o offset
+  exato onde o alocador detecta o dano mudou. Reaberto em vez de anotado como recorrência
+  porque os quatro IDs batem no binário **atual** (confirmado por offset, não por `app=`).
+- **Próximo passo real:** não há mais "atualizar o core" como ação — já é o nightly mais
+  recente disponível no momento da 2026-09-18. Ou reportar upstream ao FBNeo/libretro-super com
+  os dois tombstones (Scudo + jemalloc, mesmo `retro_init`), ou aceitar como limitação conhecida
+  do core e não repetir a tentativa de mitigação por atualização sem uma build nova rio acima.
+
+
+## Causa-raiz real e correção (2026-09-30)
+
+Investigada junto com o `strcmp(NULL)` do 8780 em
+[[2026-09-28-investigacoes-baixa-confianca-triagem]], onde está o detalhe completo.
+
+**Os `free` que crasham dentro de `retro_init` só executam se já houve um `retro_init` antes no
+mesmo processo.** `retro_init` → `BurnLibInit()` → `BurnLibExit()` → `BurnGameListExit()` libera
+`pszShortName`/`pszFullNameA`/`pszFullNameW`
+([burn.cpp](https://github.com/libretro/FBNeo/blob/c2c52376cfb49b431200f2b2c986423abd7463e7/src/burn/burn.cpp)).
+Num processo novo os três são `NULL` e os `free` são pulados; o `retro_deinit` da sessão anterior
+libera os três **sem zerar**, e o `retro_init` seguinte libera de novo. Como o LibretroDroid nunca
+faz `dlclose` (pitfall 13), o segundo `dlopen` devolve a mesma imagem com esses ponteiros pendentes.
+
+Confirmado por disassembly nos dois binários:
+
+| Binário | Cadeia do tombstone |
+| --- | --- |
+| r28c (relatos originais) | `retro_init+196` → `bl BurnLibInit` (`0x1dc42f4`) → `0x1dc4310` `bl BurnLibExit` → `0x1dc4524` `free(pszShortName)` (Scudo) / `0x1dc4530` `free(pszFullNameA)` (jemalloc) |
+| atual, Build ID `99e0cc61…` (8539, 8740, 8741, 8804) | `retro_init+252` → `bl BurnLibInit` (`0x21e6ecc`) → `0x21e6ee8` `bl BurnLibExit` → `0x21e70f4` `free(pszShortName)` / `0x21e710c` `free(pszFullNameW)` |
+
+O 8539 roda em `GLThread 2` — o contador de `GLThread` é estático, então o processo já tinha
+criado outra `GLRetroView`. Por isso a validação de 2026-09-18 (processo novo, uma sessão) passava
+e a atualização de core só mudou os offsets.
+
+**Correção:** um processo `:game` hospeda uma sessão de core, nunca duas (`GameProcessSession`;
+sessão recusada num processo já usado é relançada num processo novo pelo processo principal).
+Reproduzido antes (SIGABRT em `retro_init`, `GLThread 2`, no AVD `lemu_api25_2gb`) e validado
+depois (`GLThread 1` num processo novo, 60 FPS) no AVD e no Samsung SM-A127M arm64. A reprodução
+nativa sem ROM ([test-fbneo-reinit.ps1](../../../tests/native/test-fbneo-reinit.ps1)) dá, nesse
+Samsung, o tombstone do 8539 com os mesmos offsets (`je_large_dalloc+52`, `je_free+2116`,
+`retro_init+252`).
+
+**Lição que substitui a 2 acima:** "sem o código-fonte do core, root-cause binário não é viável"
+estava errado — o fonte do FBNeo é público, e o disassembly de três instruções em volta de cada
+frame bastou. O que faltava era comparar o nome da thread entre as famílias.

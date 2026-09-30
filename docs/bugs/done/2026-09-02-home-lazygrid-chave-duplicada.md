@@ -185,4 +185,12 @@ Ver [[2026-09-02-telemetria-lowmemory-e-eco-de-crash]].
 
 - [x] Aplicar a chave namespaceada e recompilar.
 - [x] Validar no aparelho: jogo em Recentes que também caia em Descubra (moto g86 5G, Android 16).
-- [ ] Conferir se o eco em `retrogamesystem/crash` some junto (confirma a correlação).
+- [x] Conferir se o eco em `retrogamesystem/crash` some junto (confirma a correlação) — ver
+      recorrência em [[2026-09-02-telemetria-lowmemory-e-eco-de-crash]], triagem 2026-09-28: os
+      ecos que sobraram são de clientes antigos, não deste bug.
+
+## Recorrência (Triagem 2026-09-28)
+
+- **Novo ID:** 8824 — mesma exceção (`Key "73097" was already used`), motorola moto g14,
+  `app=1.17.10`. Versão anterior ao fix (mesmo commit `36aa389` do `sectionKey`, garantido a
+  partir de `1.17.13`) — cliente desatualizado, não regressão. Fechado.

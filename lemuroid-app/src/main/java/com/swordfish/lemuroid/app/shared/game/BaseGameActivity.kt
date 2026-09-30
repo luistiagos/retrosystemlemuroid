@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Process
 import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.activity.OnBackPressedCallback
@@ -110,6 +111,13 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         game = intent.getSerializableExtra(EXTRA_GAME) as? Game ?: run { finish(); return }
         systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as? SystemCoreConfig ?: run { finish(); return }
         system = GameSystem.findByIdOrNull(game.systemId) ?: run { finish(); return }
+
+        // Antes de qualquer coisa tocar o core — inclusive o breadcrumb abaixo, que e da sessao
+        // anterior ate a de verdade comecar. Ver GameProcessSession.
+        if (!GameProcessSession.tryClaim()) {
+            restartInFreshProcess()
+            return
+        }
 
         // Breadcrumb for the crash reporter. A SIGSEGV inside a libretro core is only recovered on
         // the next launch, when this process no longer exists to say what it was running — so the
@@ -539,6 +547,36 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         }
     }
 
+    /**
+     * Esta instancia nasceu num `:game` que ja hospedou uma sessao (ver [GameProcessSession]) e nao
+     * pode criar core aqui. Devolve os parametros do lancamento a quem chamou, que relanca o jogo
+     * quando este processo tiver sumido, e mata o processo ja — sem esperar a animacao, porque e o
+     * relancamento que o usuario esta esperando.
+     *
+     * `killProcess` e nao `exitProcess`: `exit()` roda os destrutores estaticos das bibliotecas
+     * carregadas, e a GLThread da sessao anterior pode ainda estar dentro do core. O `finish()` e
+     * sincrono com o system_server, entao o resultado ja foi entregue quando o processo morre.
+     */
+    private fun restartInFreshProcess() {
+        val restarts = intent.getIntExtra(EXTRA_PROCESS_RESTARTS, 0)
+        Timber.w("Game process already hosted a session; restarting ${game.title} in a fresh one ($restarts)")
+        val resultIntent =
+            Intent().apply {
+                putExtra(PLAY_GAME_RESULT_GAME, game)
+                putExtra(PLAY_GAME_RESULT_SYSTEM_CORE_CONFIG, systemCoreConfig)
+                putExtra(PLAY_GAME_RESULT_LOAD_SAVE, intent.getBooleanExtra(EXTRA_LOAD_SAVE, false))
+                putExtra(PLAY_GAME_RESULT_LEANBACK, intent.getBooleanExtra(EXTRA_LEANBACK, false))
+                putExtra(PLAY_GAME_RESULT_PROCESS_RESTARTS, restarts)
+                putStringArrayListExtra(
+                    PLAY_GAME_RESULT_TRIED_CORES,
+                    intent.getStringArrayListExtra(EXTRA_TRIED_CORES) ?: arrayListOf(),
+                )
+            }
+        setResult(RESULT_RESTART_IN_FRESH_PROCESS, resultIntent)
+        finish()
+        Process.killProcess(Process.myPid())
+    }
+
     private fun finishAndExitProcess() {
         onFinishTriggered()
         val duration = animationDuration().toLong()
@@ -669,8 +707,12 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         private const val EXTRA_LEANBACK = "LEANBACK"
         private const val EXTRA_SYSTEM_CORE_CONFIG = "EXTRA_SYSTEM_CORE_CONFIG"
         private const val EXTRA_TRIED_CORES = "EXTRA_TRIED_CORES"
+        private const val EXTRA_PROCESS_RESTARTS = "EXTRA_PROCESS_RESTARTS"
 
         const val PLAY_GAME_RESULT_TRIED_CORES = "PLAY_GAME_RESULT_TRIED_CORES"
+        const val PLAY_GAME_RESULT_SYSTEM_CORE_CONFIG = "PLAY_GAME_RESULT_SYSTEM_CORE_CONFIG"
+        const val PLAY_GAME_RESULT_LOAD_SAVE = "PLAY_GAME_RESULT_LOAD_SAVE"
+        const val PLAY_GAME_RESULT_PROCESS_RESTARTS = "PLAY_GAME_RESULT_PROCESS_RESTARTS"
 
         const val REQUEST_PLAY_GAME = 1001
         const val PLAY_GAME_RESULT_SESSION_DURATION = "PLAY_GAME_RESULT_SESSION_DURATION"
@@ -689,6 +731,9 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         const val RESULT_ERROR = Activity.RESULT_FIRST_USER + 2
         const val RESULT_UNEXPECTED_ERROR = Activity.RESULT_FIRST_USER + 3
 
+        /** O `:game` ja tinha hospedado uma sessao; relancar em processo novo. Ver [GameProcessSession]. */
+        const val RESULT_RESTART_IN_FRESH_PROCESS = Activity.RESULT_FIRST_USER + 4
+
         fun launchGame(
             activity: Activity,
             systemCoreConfig: SystemCoreConfig,
@@ -696,6 +741,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             loadSave: Boolean,
             useLeanback: Boolean,
             triedCores: ArrayList<String> = arrayListOf(),
+            processRestarts: Int = 0,
         ) {
             val gameActivity =
                 if (useLeanback) {
@@ -710,6 +756,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                     putExtra(EXTRA_LEANBACK, useLeanback)
                     putExtra(EXTRA_SYSTEM_CORE_CONFIG, systemCoreConfig)
                     putStringArrayListExtra(EXTRA_TRIED_CORES, triedCores)
+                    putExtra(EXTRA_PROCESS_RESTARTS, processRestarts)
                 },
                 REQUEST_PLAY_GAME,
             )

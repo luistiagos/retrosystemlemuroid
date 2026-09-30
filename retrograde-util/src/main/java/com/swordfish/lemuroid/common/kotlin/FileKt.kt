@@ -23,7 +23,9 @@ import androidx.documentfile.provider.DocumentFile
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.IOException
 import java.io.InputStream
+import java.io.OutputStream
 import java.io.PushbackInputStream
 import java.security.MessageDigest
 import java.util.zip.CRC32
@@ -92,13 +94,37 @@ private fun File.uncompressedInputStream(): InputStream {
     }
 }
 
+/**
+ * Replaces the file's content all at once: [write] fills a temporary file in the same directory,
+ * which is then renamed over this one. A process killed in the middle — the low-memory killer
+ * reclaiming a game in the background — leaves the previous content intact instead of a truncated
+ * file. `File.writeBytes` truncates first, and a truncated `.srm` with `length() > 0` is handed to
+ * the core as if it were a valid save.
+ *
+ * Guards against the process dying, not against power loss: there is no `fsync`. Relies on
+ * `rename(2)` replacing the destination, which is POSIX behavior — on a Windows JVM `renameTo`
+ * refuses to overwrite and this throws.
+ */
+fun File.writeAtomically(write: (OutputStream) -> Unit) {
+    val temp = File(parentFile, ".$name.tmp")
+    try {
+        temp.outputStream().use(write)
+        if (!temp.renameTo(this)) {
+            throw IOException("Could not rename $temp to $this")
+        }
+    } catch (e: Throwable) {
+        temp.delete()
+        throw e
+    }
+}
+
+fun File.writeBytesAtomically(array: ByteArray) = writeAtomically { it.write(array) }
+
 /** Write bytes to file using GZIP compression. */
 fun File.writeBytesCompressed(array: ByteArray) {
-    val inputStream = ByteArrayInputStream(array)
-    val outputStream = GZIPOutputStream(this.outputStream())
-    inputStream.use { usedInputStream ->
-        outputStream.use { usedOutputStream ->
-            usedInputStream.copyTo(usedOutputStream)
+    writeAtomically { outputStream ->
+        ByteArrayInputStream(array).use { inputStream ->
+            GZIPOutputStream(outputStream).use { gzip -> inputStream.copyTo(gzip) }
         }
     }
 }

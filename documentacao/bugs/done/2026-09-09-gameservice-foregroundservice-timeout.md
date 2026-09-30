@@ -87,3 +87,10 @@ uma vez. Antes de abrir bug a partir da telemetria:
    build era anterior ao fix, sem precisar de telemetria.
 3. Procurar em `bugs/done/` pela mesma stack. Recorrência se anexa ao arquivo existente, não
    vira bug novo.
+
+## Recorrência (Triagem 2026-09-28)
+
+- **Novos IDs:** 8849, 8647 — mesmo texto (`of type dataSync`), mesmo device (Xiaomi
+  24117RN76L), mesmo jogo (*Duke Nukem: Time to Kill*, psx/pcsx_rearmed), `app=1.17.9` nos
+  dois. Confirma a suposição pendente deste doc ("conferir o `app=` dos 4 reports"): `1.17.9` é
+  anterior a `1.17.13`, então cliente desatualizado, como esperado. Fechados.

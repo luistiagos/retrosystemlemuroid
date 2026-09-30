@@ -17,6 +17,8 @@ import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
 import com.swordfish.libretrodroid.GLRetroView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.concurrent.CountDownLatch
@@ -36,6 +38,7 @@ class GameViewModelSaves(
     private val sideEffects: GameViewModelSideEffects,
 ) {
     private var currentQuickSave: SaveState? = null
+    private val persistMutex = Mutex()
 
     suspend fun saveSlot(index: Int) {
         try {
@@ -98,25 +101,48 @@ class GameViewModelSaves(
      *
      * @return false quando algo nao pode ser gravado, para o chamador avisar o usuario.
      */
-    suspend fun saveOnExit(game: Game): Boolean {
-        val view = retroGameView.retroGameView ?: return true
+    suspend fun saveOnExit(game: Game): Boolean = persistSession(game, PHASE_EXIT)
 
-        val sramSaved = trySaveSRAM(view, game)
-
-        // Um timeout ja custou 30 s de espera. So vale tentar o autosave se a GLThread voltou a
-        // responder — senao o usuario paga outro timeout inteiro so para sair do jogo.
-        if (!sramSaved && !glThreadResponds(view)) {
-            Timber.w("Skipping autosave on exit: GL thread is not draining its event queue")
-            return false
-        }
-
-        val autoSaved = trySaveAutoSave(game)
-        return sramSaved && autoSaved
+    /**
+     * O jogo saiu da tela sem ser fechado (Home, troca de app, tela bloqueada). Dali em diante o
+     * `:game` vive so do `GameService` e e o maior processo perceptivel do aparelho — o primeiro
+     * que o low-memory killer recolhe quando o jogador abre outra coisa pesada. Sem esta gravacao,
+     * esse kill perdia tudo desde a ultima saida pelo menu, inclusive o save feito dentro do jogo.
+     *
+     * Mesmos arquivos e mesma ordem do [saveOnExit], e tambem nunca lanca.
+     */
+    suspend fun saveOnBackground(game: Game) {
+        persistSession(game, PHASE_BACKGROUND)
     }
+
+    /**
+     * Serializado: apertar Home durante a gravacao de saida (ou sair logo depois de voltar ao jogo)
+     * poria duas gravacoes nos mesmos arquivos ao mesmo tempo.
+     */
+    private suspend fun persistSession(
+        game: Game,
+        phase: String,
+    ): Boolean =
+        persistMutex.withLock {
+            val view = retroGameView.retroGameView ?: return@withLock true
+
+            val sramSaved = trySaveSRAM(view, game, phase)
+
+            // Um timeout ja custou 30 s de espera. So vale tentar o autosave se a GLThread voltou a
+            // responder — senao o usuario paga outro timeout inteiro so para sair do jogo.
+            if (!sramSaved && !glThreadResponds(view)) {
+                Timber.w("Skipping autosave ($phase): GL thread is not draining its event queue")
+                return@withLock false
+            }
+
+            val autoSaved = trySaveAutoSave(game, phase)
+            sramSaved && autoSaved
+        }
 
     private suspend fun trySaveSRAM(
         view: GLRetroView,
         game: Game,
+        phase: String,
     ): Boolean {
         repeat(GL_SAVE_ATTEMPTS) { attempt ->
             try {
@@ -135,19 +161,22 @@ class GameViewModelSaves(
                 Timber.w(e, "SRAM save timed out (attempt ${attempt + 1}/$GL_SAVE_ATTEMPTS)")
                 // So repete se a GLThread voltou a drenar a fila; senao seriam mais 30 s parados.
                 if (attempt == GL_SAVE_ATTEMPTS - 1 || !glThreadResponds(view)) {
-                    reportExitSaveFailure("serializeSRAM", e)
+                    reportSaveFailure(phase, "serializeSRAM", e)
                     return false
                 }
             } catch (e: Throwable) {
                 Timber.e(e, "Error while saving sram")
-                reportExitSaveFailure("serializeSRAM", e)
+                reportSaveFailure(phase, "serializeSRAM", e)
                 return false
             }
         }
         return false
     }
 
-    private suspend fun trySaveAutoSave(game: Game): Boolean =
+    private suspend fun trySaveAutoSave(
+        game: Game,
+        phase: String,
+    ): Boolean =
         try {
             saveAutoSave(game)
             true
@@ -157,8 +186,8 @@ class GameViewModelSaves(
             Timber.i("Nothing to autosave: the game never rendered a frame")
             true
         } catch (e: Throwable) {
-            Timber.e(e, "Error while saving autosave on exit")
-            reportExitSaveFailure("serializeState", e)
+            Timber.e(e, "Error while saving autosave ($phase)")
+            reportSaveFailure(phase, "serializeState", e)
             false
         }
 
@@ -178,7 +207,8 @@ class GameViewModelSaves(
             }
         }
 
-    private fun reportExitSaveFailure(
+    private fun reportSaveFailure(
+        phase: String,
         call: String,
         error: Throwable,
     ) {
@@ -186,7 +216,7 @@ class GameViewModelSaves(
             component = "game",
             thread = Thread.currentThread(),
             error = error,
-            extraContext = "phase=exit-save; call=$call; system=${system.id.dbname}; game=${game.title}",
+            extraContext = "phase=$phase; call=$call; system=${system.id.dbname}; game=${game.title}",
             terminal = false,
         )
     }
@@ -215,6 +245,9 @@ class GameViewModelSaves(
             restoreQuickSave(saveState)
         } catch (e: kotlinx.coroutines.CancellationException) {
             throw e
+        } catch (e: IncompatibleStateException) {
+            Timber.w("Skipping incompatible auto-save before calling the native core")
+            sideEffects.showToast(appContext.getString(R.string.error_message_incompatible_state))
         } catch (e: Throwable) {
             Timber.e(e, "Error while loading auto-save")
         }
@@ -231,9 +264,10 @@ class GameViewModelSaves(
                 } else {
                     0
                 }
+            val state = retroGameView.serializeState()
             SaveState(
-                retroGameView.serializeState(),
-                SaveState.Metadata(currentDisk, systemCoreConfig.statesVersion),
+                state,
+                this@GameViewModelSaves.retroGameView.saveStateCompatibility.metadataFor(state, currentDisk),
             )
         }
     }
@@ -266,11 +300,9 @@ class GameViewModelSaves(
     private suspend fun loadSaveState(saveState: SaveState): Boolean {
         val retroGameView = retroGameView.retroGameView ?: return false
 
-        if (systemCoreConfig.statesVersion != saveState.metadata.version) {
-            throw IncompatibleStateException()
-        }
-
         return withContext(Dispatchers.IO) {
+            // Applies to autosaves, manual slots and quick saves before any native state mutation.
+            this@GameViewModelSaves.retroGameView.saveStateCompatibility.requireCompatible(saveState)
             if (system.hasMultiDiskSupport &&
                 retroGameView.getAvailableDisks() > 1 &&
                 retroGameView.getCurrentDisk() != saveState.metadata.diskIndex
@@ -317,6 +349,10 @@ class GameViewModelSaves(
     }
 
     companion object {
+        /** Valores do `phase=` na telemetria; `exit-save` e o que o painel ja conhece. */
+        private const val PHASE_EXIT = "exit-save"
+        private const val PHASE_BACKGROUND = "background-save"
+
         /** Tentativas de gravar a SRAM na saida. A segunda so acontece se a GLThread respondeu. */
         private const val GL_SAVE_ATTEMPTS = 2
 

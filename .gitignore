@@ -76,3 +76,10 @@ tmp/fbneo-source/
 # protegido por copyright). Diferente do resto de tmp/, aqui a lista é de exclusão por padrão,
 # não por caso a caso — qualquer coisa nova em test_roms/ é ROM, nunca material versionável.
 tmp/test_roms/
+
+# FBNeo save compatibility investigation: historical binaries, snapshots and private crash logs.
+tmp/fbneo-recurrence/
+tmp/fbneo-state-test/
+
+# Saída do tests/native/test-fbneo-reinit.ps1 (binário do harness, logs e logcat do aparelho).
+tmp/fbneo-reinit-test/

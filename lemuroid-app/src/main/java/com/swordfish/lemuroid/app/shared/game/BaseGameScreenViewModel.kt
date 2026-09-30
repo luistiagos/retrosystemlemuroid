@@ -1,5 +1,6 @@
 package com.swordfish.lemuroid.app.shared.game
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.KeyEvent
@@ -334,6 +335,28 @@ class BaseGameScreenViewModel(
         owner.lifecycle.addObserver(inputs)
         owner.lifecycle.addObserver(retroGameView)
         owner.lifecycle.addObserver(touchControls)
+    }
+
+    /**
+     * `ON_STOP` aqui e o jogo saindo da tela de verdade: os menus do jogo (mobile e TV) tem tema
+     * translucido e so pausam a activity. Um `finish()` em curso ja gravou o que tinha de gravar
+     * no [requestFinish] — ou saiu por erro, e ai nao ha estado confiavel para salvar.
+     *
+     * Ver `documentacao/bugs/open/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service.md`.
+     */
+    override fun onStop(owner: LifecycleOwner) {
+        super.onStop(owner)
+        if ((owner as? Activity)?.isFinishing != false) return
+
+        viewModelScope.launch {
+            try {
+                saves.saveOnBackground(game)
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                Timber.e(e, "Unexpected error while saving on background")
+            }
+        }
     }
 
     fun sendKeyEvent(

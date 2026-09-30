@@ -107,7 +107,9 @@ import com.swordfish.lemuroid.lib.transfer.GameImportManager
 import dagger.Lazy
 import dagger.Provides
 import de.charlex.compose.material3.HtmlText
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -304,26 +306,17 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 selectedGameState.value = game
             }
 
-            // A game is a streaming placeholder (needs download) when its file:// URI
-            // points to a 0-byte file on disk. SAF (content://) and already-downloaded
-            // games always have content, so they play directly.
-            val isGamePlaceholder = { game: Game ->
-                val uri = Uri.parse(game.fileUri)
-                uri.scheme == "file" &&
-                    uri.path?.let { File(it).length() == 0L } == true
-            }
-
             val onGameClick: (Game) -> Unit = { game: Game ->
                 val variantKey = "${game.systemId}/${game.title}"
-                when {
-                    variantKey in titlesWithVariants -> {
-                        pendingVariantsGame.value = game
-                    }
-                    !isGamePlaceholder(game) -> {
-                        gameInteractor.onGamePlay(game)
-                    }
-                    else -> {
-                        pendingDownloadGame.value = game
+                if (variantKey in titlesWithVariants) {
+                    pendingVariantsGame.value = game
+                } else {
+                    lifecycleScope.launch {
+                        if (!isGamePlaceholder(game)) {
+                            gameInteractor.onGamePlay(game)
+                        } else {
+                            pendingDownloadGame.value = game
+                        }
                     }
                 }
             }
@@ -603,30 +596,42 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 }
             }
 
+            // A ROM downloaded before downloaded_roms tracking existed (or imported by
+            // the user) has no row in that table, so fall back to what is on disk —
+            // otherwise "delete downloaded ROM" silently disappears for those games.
+            // The in-memory check answers first; the disk check runs off the main thread.
+            // Keyed remember, not produceState: produceState keeps the previous game's value
+            // when the keys change and only restarts the producer.
+            val contextMenuGame = selectedGameState.value
+            val isContextMenuGameDownloaded =
+                remember(contextMenuGame, downloadedGameKeys) {
+                    mutableStateOf(contextMenuGame?.let { downloadedGameKeys.contains(it.downloadKey) } ?: true)
+                }
+            LaunchedEffect(isContextMenuGameDownloaded) {
+                if (contextMenuGame != null && !isContextMenuGameDownloaded.value) {
+                    isContextMenuGameDownloaded.value = !isGamePlaceholder(contextMenuGame)
+                }
+            }
+
             MainGameContextActions(
                 selectedGameState = selectedGameState,
                 shortcutSupported = gameInteractor.supportShortcuts(),
-                // A ROM downloaded before downloaded_roms tracking existed (or imported by
-                // the user) has no row in that table, so fall back to what is on disk —
-                // otherwise "delete downloaded ROM" silently disappears for those games.
-                isGameDownloaded = selectedGameState.value
-                    ?.let { downloadedGameKeys.contains(it.downloadKey) || !isGamePlaceholder(it) }
-                    ?: true,
+                isGameDownloaded = isContextMenuGameDownloaded.value,
                 onGamePlay = { game ->
-                    if (!isGamePlaceholder(game)) {
-                        gameInteractor.onGamePlay(game)
-                    } else {
-                        lifecycleScope.launch {
+                    lifecycleScope.launch {
+                        if (!isGamePlaceholder(game)) {
+                            gameInteractor.onGamePlay(game)
+                        } else {
                             saveQueueManager.enqueue(game)
                             saveQueueModalVisible.value = true
                         }
                     }
                 },
                 onGameRestart = { game ->
-                    if (!isGamePlaceholder(game)) {
-                        gameInteractor.onGameRestart(game)
-                    } else {
-                        lifecycleScope.launch {
+                    lifecycleScope.launch {
+                        if (!isGamePlaceholder(game)) {
+                            gameInteractor.onGameRestart(game)
+                        } else {
                             saveQueueManager.enqueue(game)
                             saveQueueModalVisible.value = true
                         }
@@ -769,10 +774,12 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     onDismiss = { pendingVariantsGame.value = null },
                     onVariantSelected = { variant ->
                         pendingVariantsGame.value = null
-                        if (!isGamePlaceholder(variant)) {
-                            gameInteractor.onGamePlay(variant)
-                        } else {
-                            pendingDownloadGame.value = variant
+                        lifecycleScope.launch {
+                            if (!isGamePlaceholder(variant)) {
+                                gameInteractor.onGamePlay(variant)
+                            } else {
+                                pendingDownloadGame.value = variant
+                            }
                         }
                     },
                     onVariantLongClick = { variant ->
@@ -944,6 +951,18 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
         }
     }
+
+    // A game is a streaming placeholder (needs download) when its file:// URI
+    // points to a 0-byte file on disk. SAF (content://) and already-downloaded
+    // games always have content, so they play directly.
+    // The stat runs off the main thread: the ROMs may live on an SD card served by
+    // FUSE, where a busy MediaProvider can hold it for seconds (input-dispatch ANR).
+    private suspend fun isGamePlaceholder(game: Game): Boolean =
+        withContext(Dispatchers.IO) {
+            val uri = Uri.parse(game.fileUri)
+            uri.scheme == "file" &&
+                uri.path?.let { File(it).length() == 0L } == true
+        }
 
     override fun activity(): Activity = this
 

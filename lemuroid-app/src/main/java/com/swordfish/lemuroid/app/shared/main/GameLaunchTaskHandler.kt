@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
+import com.swordfish.lemuroid.app.shared.game.GameProcessSession
 import com.swordfish.lemuroid.app.shared.gamecrash.GameCrashActivity
 import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
@@ -13,6 +14,7 @@ import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.Dispatchers
@@ -91,7 +93,44 @@ class GameLaunchTaskHandler(
                     )
                 }
             }
+            BaseGameActivity.RESULT_RESTART_IN_FRESH_PROCESS -> relaunchInFreshProcess(activity, data)
         }
+    }
+
+    /**
+     * O `:game` recusou a sessao por ja ter hospedado outra (ver [GameProcessSession]) e se matou.
+     * Relanca o mesmo jogo, com os mesmos parametros, depois que aquele processo sumir.
+     */
+    private suspend fun relaunchInFreshProcess(
+        activity: Activity,
+        data: Intent?,
+    ) {
+        val extras = data?.extras ?: return
+        val game = extras.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as? Game ?: return
+        val coreConfig =
+            extras.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_SYSTEM_CORE_CONFIG) as? SystemCoreConfig
+                ?: return
+        val restarts = extras.getInt(BaseGameActivity.PLAY_GAME_RESULT_PROCESS_RESTARTS, 0)
+        if (restarts >= MAX_PROCESS_RESTARTS) {
+            // O processo novo nao veio. Relancar de novo so repetiria o ciclo.
+            handleUnsuccessfulGameFinish(
+                activity,
+                activity.getString(R.string.lemuroid_app_error_disclamer),
+                "Game process could not be restarted ($restarts attempts)",
+            )
+            return
+        }
+
+        GameProcessSession.awaitGameProcessExit(activity.applicationContext)
+        BaseGameActivity.launchGame(
+            activity = activity,
+            systemCoreConfig = coreConfig,
+            game = game,
+            loadSave = extras.getBoolean(BaseGameActivity.PLAY_GAME_RESULT_LOAD_SAVE, false),
+            useLeanback = extras.getBoolean(BaseGameActivity.PLAY_GAME_RESULT_LEANBACK, false),
+            triedCores = extras.getStringArrayList(BaseGameActivity.PLAY_GAME_RESULT_TRIED_CORES) ?: arrayListOf(),
+            processRestarts = restarts + 1,
+        )
     }
 
     private suspend fun handleErrorWithCorruptionCheck(
@@ -141,7 +180,7 @@ class GameLaunchTaskHandler(
         }
     }
 
-    private fun tryFallbackCore(
+    private suspend fun tryFallbackCore(
         activity: Activity,
         game: Game?,
         triedCores: List<String>,
@@ -152,6 +191,9 @@ class GameLaunchTaskHandler(
         val nextCore = system.systemCoreConfigs.firstOrNull { it.coreID.coreName !in triedCores }
             ?: return false
         Timber.i("Core fallback: tried=$triedCores, trying=${nextCore.coreID.coreName}")
+        // O resultado chega no finish(), e o :game que falhou so sai 400 ms depois. Relancar
+        // antes disso cai nele — e o exitProcess pendente mata a sessao nova no meio da carga.
+        GameProcessSession.awaitGameProcessExit(activity.applicationContext)
         BaseGameActivity.launchGame(activity, nextCore, game, false, leanback, ArrayList(triedCores))
         return true
     }
@@ -218,5 +260,13 @@ class GameLaunchTaskHandler(
         } catch (e: android.database.sqlite.SQLiteException) {
             Timber.e(e, "Failed to update lastPlayedAt for ${game.title} due to database error")
         }
+    }
+
+    companion object {
+        /**
+         * Um relancamento basta quando o `:game` velho morre. O segundo cobre o aparelho em que
+         * nao da para listar processos e o relancamento pode cair nele de novo; alem disso e ciclo.
+         */
+        private const val MAX_PROCESS_RESTARTS = 2
     }
 }

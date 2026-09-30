@@ -4,5 +4,10 @@ import kotlinx.serialization.Serializable
 
 class SaveState(val state: ByteArray, val metadata: Metadata) {
     @Serializable
-    data class Metadata(val diskIndex: Int = 0, val version: Int = 0)
+    data class Metadata(
+        val diskIndex: Int = 0,
+        val version: Int = 0,
+        val coreSha256: String? = null,
+        val stateSha256: String? = null,
+    )
 }

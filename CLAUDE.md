@@ -684,8 +684,21 @@ descarregada em uso**, não ponteiro selvagem.
    ([LibretroDroidBridgeVerifier.kt](buildSrc/src/main/kotlin/LibretroDroidBridgeVerifier.kt)),
    pendurada nos mesmos `merge*NativeLibs`/`package*`/`bundle*` que a `verifyFlycastCore`, derruba o
    build nos dois casos. Se ela acusar, **não desabilite**: reaplique os patches e rebuilde o AAR.
+3. **Contrapartida: um processo `:game` hospeda uma sessão de core, nunca duas.** Sem `dlclose`, o
+   `dlopen` da segunda sessão devolve a mesma imagem com os estáticos da primeira, e o `retro_init`
+   roda depois do `retro_deinit` — o FBNeo dá double free (`BurnGameListExit` não zera ponteiros).
+   O processo sobrevive à sessão quando a Activity é destruída fora de `finishAndExitProcess`
+   (tarefa removida dos recentes) e nos 400 ms antes do `exitProcess`. Guard:
+   [GameProcessSession.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/GameProcessSession.kt)
+   no `BaseGameActivity.onCreate` — sessão recusada vira `RESULT_RESTART_IN_FRESH_PROCESS` e o
+   processo principal relança depois que o `:game` morrer. Relançamento feito a partir de um
+   resultado do jogo passa antes por `GameProcessSession.awaitGameProcessExit`.
+4. **`name: GLThread 2` (ou maior) no tombstone = segunda `GLRetroView` no processo** — o contador
+   do `GLSurfaceView` patchado é estático. Comparar o nome da thread entre famílias de crash antes
+   de atribuir a causa ao binário.
 
-Detalhes em `documentacao/bugs/done/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md`.
+Detalhes em `documentacao/bugs/done/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md` e
+`documentacao/bugs/done/2026-09-28-investigacoes-baixa-confianca-triagem.md`.
 
 ### 14. Core empacotado sem o prefixo `lib` não é extraído — e o build debug esconde isso
 

@@ -119,3 +119,9 @@ tipo escolhido precisa caber no tempo real da operação (aqui, minutos de downl
 - **Novos IDs associados:** 8233, 7895 (2 ocorrências)
 - **Diagnóstico:** As ocorrências 8233 e 7895 em aparelhos Android 14/15 rodando builds anteriores à substituição de `SHORT_SERVICE` por `DATA_SYNC` estouraram o teto de 3 minutos durante sincronização/download. Fechados na telemetria.
 
+## Recorrência (Triagem 2026-09-28)
+
+- **Novo ID:** 8764 — Samsung SM-S908E, Android 16, `app=1.17.19`. O fix (commit `45ce0f6`)
+  está garantido a partir de `1.17.20` (versionCode 251); `1.17.19` é rótulo anterior a esse
+  commit, então é cliente desatualizado. Fechado.
+

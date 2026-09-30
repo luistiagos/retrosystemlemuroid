@@ -204,14 +204,18 @@ object CrashTelemetry {
      *
      * Importance counts *down*, so the cut keeps everything at or above
      * [ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE] (200) — the process died with
-     * something on screen. That is `IMPORTANCE_FOREGROUND` (100), in front of the user, and
-     * `IMPORTANCE_FOREGROUND_SERVICE` (125), which is `:game` with a match running: real memory
-     * bugs of ours. `IMPORTANCE_PERCEPTIBLE` (230) and below are not.
+     * something on screen or a foreground service up. That is `IMPORTANCE_FOREGROUND` (100), in
+     * front of the user, and `IMPORTANCE_FOREGROUND_SERVICE` (125): on `:game` a match left running
+     * **off screen** (on screen it would be 100), on the main process a download. Those are kept
+     * because the user loses something; `IMPORTANCE_PERCEPTIBLE` (230) and below are not.
      */
     private fun isLowMemoryWorthReporting(info: ApplicationExitInfo): Boolean =
         info.importance <= ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE
 
-    private fun reportOneExit(context: Context, info: ApplicationExitInfo) {
+    private fun reportOneExit(
+        context: Context,
+        info: ApplicationExitInfo,
+    ) {
         try {
             val trace = readTrace(info)
             val component = componentFor(info.reason)
@@ -252,7 +256,13 @@ object CrashTelemetry {
                     append("; importance=").append(info.importance)
                     append("; when=").append(TelemetryContext.formatTimestamp(info.timestamp))
                     append("; ").append(TelemetryReporter.deviceContext())
-                    TelemetryContext.lastGameSession(context).takeIf { it.isNotEmpty() }
+                    if (info.reason == ApplicationExitInfo.REASON_LOW_MEMORY) {
+                        memoryContext(info.pss, info.rss, deviceTotalMemory(context))
+                            .takeIf { it.isNotEmpty() }
+                            ?.let { append("; ").append(it) }
+                    }
+                    TelemetryContext.gameSessionForExit(context, info.processName, info.timestamp)
+                        .takeIf { it.isNotEmpty() }
                         ?.let { append("; ").append(it) }
                 }
 
@@ -265,6 +275,30 @@ object CrashTelemetry {
         } catch (ignored: Throwable) {
         }
     }
+
+    /**
+     * Sem stack, o `lowmemory` so responde "fomos nos que pesamos ou o aparelho estava sem
+     * memoria?" com o tamanho do processo morto contra a RAM do aparelho. `pss`/`rss` sao o ultimo
+     * valor que o sistema conhecia (KB, 0 = desconhecido); `ram` e o `totalMem` (bytes).
+     */
+    internal fun memoryContext(
+        pssKb: Long,
+        rssKb: Long,
+        totalMemBytes: Long,
+    ): String =
+        listOfNotNull(
+            pssKb.takeIf { it > 0 }?.let { "pss=${it / 1024}MB" },
+            rssKb.takeIf { it > 0 }?.let { "rss=${it / 1024}MB" },
+            totalMemBytes.takeIf { it > 0 }?.let { "ram=${it / (1024 * 1024)}MB" },
+        ).joinToString("; ")
+
+    private fun deviceTotalMemory(context: Context): Long =
+        try {
+            val am = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
+            ActivityManager.MemoryInfo().also { am?.getMemoryInfo(it) }.totalMem
+        } catch (e: Throwable) {
+            0L
+        }
 
     private fun componentFor(reason: Int): String =
         when (reason) {

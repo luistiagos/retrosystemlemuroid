@@ -71,6 +71,36 @@ object TelemetryContext {
             0L
         }
 
+    /**
+     * O breadcrumb, se ele pode ser o da sessao que morreu em [exitTimestamp]; senao vazio.
+     *
+     * O slot e um so, e quem o le e o scan de `ApplicationExitInfo` no proximo cold start do
+     * processo principal — que pode vir horas e varias sessoes depois do exit, e cobre todos os
+     * exits acumulados de uma vez. Sem este filtro, cada relatorio herdava o jogo que estivesse no
+     * slot na hora do scan: o de uma sessao posterior, ou nenhum (uma saida limpa posterior apaga
+     * o slot) — e "sem breadcrumb" era lido como "morreu antes de gravar o breadcrumb".
+     */
+    fun gameSessionForExit(
+        context: Context,
+        processName: String?,
+        exitTimestamp: Long,
+    ): String =
+        if (isSessionOfExit(processName, exitTimestamp, lastGameSessionStartedAt(context))) {
+            lastGameSession(context)
+        } else {
+            ""
+        }
+
+    /**
+     * So um exit do `:game` tem sessao de jogo, e ela tem que ter comecado antes dele. Mesmo
+     * criterio do `CoreCrashFallback`.
+     */
+    internal fun isSessionOfExit(
+        processName: String?,
+        exitTimestamp: Long,
+        sessionStartedAt: Long,
+    ): Boolean = processName.orEmpty().endsWith(":game") && sessionStartedAt in 1..exitTimestamp
+
     fun processName(context: Context?): String =
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

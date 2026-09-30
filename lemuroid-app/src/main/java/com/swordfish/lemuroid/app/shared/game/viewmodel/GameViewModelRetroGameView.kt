@@ -16,19 +16,19 @@ import com.swordfish.lemuroid.app.shared.settings.ScreenAspectRatio
 import com.swordfish.lemuroid.common.coroutines.MutableStateProperty
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.view.disableTouchEvents
-import com.swordfish.lemuroid.lib.core.CoreVariable
-import com.swordfish.lemuroid.lib.core.CoreVariablesManager
 import com.swordfish.lemuroid.lib.bios.BiosDownloader
 import com.swordfish.lemuroid.lib.core.CoreDownloader
+import com.swordfish.lemuroid.lib.core.CoreVariable
+import com.swordfish.lemuroid.lib.core.CoreVariablesManager
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.game.GameLoaderError
 import com.swordfish.lemuroid.lib.game.GameLoaderException
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.GameSystem
-import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
+import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import java.io.File
+import com.swordfish.lemuroid.lib.saves.SaveStateCompatibility
 import com.swordfish.lemuroid.lib.storage.RomFiles
 import com.swordfish.libretrodroid.GLRetroView
 import com.swordfish.libretrodroid.GLRetroViewData
@@ -40,7 +40,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
@@ -51,6 +50,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
 @OptIn(FlowPreview::class)
@@ -81,6 +81,8 @@ class GameViewModelRetroGameView(
 
     private val retroGameViewFlow = MutableStateFlow<GLRetroView?>(null)
     var retroGameView: GLRetroView? by MutableStateProperty(retroGameViewFlow)
+    lateinit var saveStateCompatibility: SaveStateCompatibility
+        private set
     var fdsSideCount: Int? = null
         private set
 
@@ -132,9 +134,10 @@ class GameViewModelRetroGameView(
                     if (e is CancellationException) throw e
                     if (e is GameLoaderException && e.error is GameLoaderError.LoadCore && !coreDownloadRetried) {
                         coreDownloadRetried = true
-                        gameState.value = GameState.Loading(
-                            appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_core)
-                        )
+                        gameState.value =
+                            GameState.Loading(
+                                appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_core),
+                            )
                         try {
                             CoreDownloader.downloadCore(applicationContext, systemCoreConfig.coreID)
                             shouldRetry = true
@@ -145,11 +148,16 @@ class GameViewModelRetroGameView(
                             sideEffects.requestFailureFinish(getErrorMessage(GameLoaderError.LoadCore))
                             shouldRetry = false
                         }
-                    } else if (e is GameLoaderException && e.error is GameLoaderError.MissingBiosFiles && !biosDownloadRetried) {
+                    } else if (
+                        e is GameLoaderException &&
+                        e.error is GameLoaderError.MissingBiosFiles &&
+                        !biosDownloadRetried
+                    ) {
                         biosDownloadRetried = true
-                        gameState.value = GameState.Loading(
-                            appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_bios)
-                        )
+                        gameState.value =
+                            GameState.Loading(
+                                appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_bios),
+                            )
                         val biosError = e.error as GameLoaderError.MissingBiosFiles
                         try {
                             BiosDownloader.downloadMissing(applicationContext, biosError.missingFiles)
@@ -208,6 +216,8 @@ class GameViewModelRetroGameView(
     ): Pair<GameLoader.GameData, GLRetroView> {
         val currentState = gameState.value
         if (currentState !is GameState.Loaded) throw IllegalStateException("Game is not loaded.")
+
+        saveStateCompatibility = currentState.gameData.saveStateCompatibility
 
         val result =
             GLRetroView(context, currentState.retroViewData)
@@ -268,14 +278,16 @@ class GameViewModelRetroGameView(
 
             when (val gameFiles = gameData.gameFiles) {
                 is RomFiles.Standard -> {
-                    val gameFile = gameFiles.files.firstOrNull()
-                        ?: throw GameLoaderException(GameLoaderError.LoadGame)
+                    val gameFile =
+                        gameFiles.files.firstOrNull()
+                            ?: throw GameLoaderException(GameLoaderError.LoadGame)
                     gameFilePath = gameFile.absolutePath
-                    fdsSideCount = if (gameData.game.systemId == SystemID.FDS.dbname) {
-                        countFdsSides(gameFile)
-                    } else {
-                        null
-                    }
+                    fdsSideCount =
+                        if (gameData.game.systemId == SystemID.FDS.dbname) {
+                            countFdsSides(gameFile)
+                        } else {
+                            null
+                        }
                 }
 
                 is RomFiles.Virtual -> {
@@ -312,18 +324,20 @@ class GameViewModelRetroGameView(
 
         val header = ByteArray(FDS_HEADER_SIZE)
         val bytesRead = file.inputStream().use { it.read(header) }
-        val hasHeader = bytesRead == FDS_HEADER_SIZE &&
-            header[0] == 'F'.code.toByte() &&
-            header[1] == 'D'.code.toByte() &&
-            header[2] == 'S'.code.toByte() &&
-            header[3] == 0x1a.toByte()
+        val hasHeader =
+            bytesRead == FDS_HEADER_SIZE &&
+                header[0] == 'F'.code.toByte() &&
+                header[1] == 'D'.code.toByte() &&
+                header[2] == 'S'.code.toByte() &&
+                header[3] == 0x1a.toByte()
 
-        val sides = if (hasHeader) {
-            val headerSides = header[4].toInt() and 0xff
-            if (headerSides > 0) headerSides else ((length - FDS_HEADER_SIZE) / FDS_BYTES_PER_SIDE).toInt()
-        } else {
-            (length / FDS_BYTES_PER_SIDE).toInt()
-        }
+        val sides =
+            if (hasHeader) {
+                val headerSides = header[4].toInt() and 0xff
+                if (headerSides > 0) headerSides else ((length - FDS_HEADER_SIZE) / FDS_BYTES_PER_SIDE).toInt()
+            } else {
+                (length / FDS_BYTES_PER_SIDE).toInt()
+            }
 
         return sides.coerceIn(1, FDS_MAX_SIDES)
     }
@@ -431,8 +445,9 @@ class GameViewModelRetroGameView(
                 else -> GameLoaderError.Generic
             }
 
-        val isRomLoadFailure = gameLoaderError is GameLoaderError.LoadGame ||
-            gameLoaderError is GameLoaderError.Generic
+        val isRomLoadFailure =
+            gameLoaderError is GameLoaderError.LoadGame ||
+                gameLoaderError is GameLoaderError.Generic
         sideEffects.requestFailureFinish(getErrorMessage(gameLoaderError), isRomLoadFailure)
     }
 

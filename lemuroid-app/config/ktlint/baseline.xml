@@ -169,22 +169,21 @@
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/mobile/feature/main/MainActivity.kt">
         <error line="3" column="1" source="standard:import-ordering" />
-        <error line="196" column="1" source="standard:max-line-length" />
-        <error line="277" column="28" source="standard:multiline-expression-wrapping" />
-        <error line="464" column="1" source="standard:indent" />
-        <error line="522" column="47" source="standard:multiline-expression-wrapping" />
-        <error line="550" column="41" source="standard:multiline-expression-wrapping" />
-        <error line="551" column="43" source="standard:multiline-expression-wrapping" />
-        <error line="563" column="41" source="standard:multiline-expression-wrapping" />
-        <error line="564" column="43" source="standard:multiline-expression-wrapping" />
-        <error line="582" column="41" source="standard:multiline-expression-wrapping" />
-        <error line="583" column="43" source="standard:multiline-expression-wrapping" />
-        <error line="594" column="41" source="standard:multiline-expression-wrapping" />
-        <error line="595" column="43" source="standard:multiline-expression-wrapping" />
-        <error line="612" column="36" source="standard:multiline-expression-wrapping" />
-        <error line="924" column="52" source="standard:trailing-comma-on-declaration-site" />
-        <error line="944" column="1" source="standard:no-blank-line-before-rbrace" />
-        <error line="994" column="40" source="standard:multiline-expression-wrapping" />
+        <error line="198" column="1" source="standard:max-line-length" />
+        <error line="279" column="28" source="standard:multiline-expression-wrapping" />
+        <error line="457" column="1" source="standard:indent" />
+        <error line="515" column="47" source="standard:multiline-expression-wrapping" />
+        <error line="543" column="41" source="standard:multiline-expression-wrapping" />
+        <error line="544" column="43" source="standard:multiline-expression-wrapping" />
+        <error line="556" column="41" source="standard:multiline-expression-wrapping" />
+        <error line="557" column="43" source="standard:multiline-expression-wrapping" />
+        <error line="575" column="41" source="standard:multiline-expression-wrapping" />
+        <error line="576" column="43" source="standard:multiline-expression-wrapping" />
+        <error line="587" column="41" source="standard:multiline-expression-wrapping" />
+        <error line="588" column="43" source="standard:multiline-expression-wrapping" />
+        <error line="931" column="52" source="standard:trailing-comma-on-declaration-site" />
+        <error line="951" column="1" source="standard:no-blank-line-before-rbrace" />
+        <error line="1013" column="40" source="standard:multiline-expression-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/mobile/feature/main/MainNavigationBar.kt">
         <error line="10" column="1" source="standard:no-unused-imports" />
@@ -418,38 +417,38 @@
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt">
         <error line="3" column="1" source="standard:import-ordering" />
-        <error line="110" column="74" source="standard:statement-wrapping" />
-        <error line="110" column="83" source="standard:statement-wrapping" />
-        <error line="110" column="91" source="standard:statement-wrapping" />
-        <error line="111" column="1" source="standard:max-line-length" />
-        <error line="111" column="111" source="standard:wrapping" />
-        <error line="111" column="112" source="standard:statement-wrapping" />
-        <error line="111" column="121" source="standard:statement-wrapping" />
-        <error line="111" column="129" source="standard:statement-wrapping" />
-        <error line="112" column="68" source="standard:statement-wrapping" />
-        <error line="112" column="77" source="standard:statement-wrapping" />
-        <error line="112" column="85" source="standard:statement-wrapping" />
-        <error line="215" column="32" source="standard:multiline-expression-wrapping" />
-        <error line="216" column="18" source="standard:wrapping" />
-        <error line="218" column="114" source="standard:wrapping" />
-        <error line="255" column="25" source="standard:multiline-expression-wrapping" />
-        <error line="260" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="329" column="36" source="standard:multiline-expression-wrapping" />
-        <error line="373" column="1" source="standard:max-line-length" />
-        <error line="373" column="94" source="standard:argument-list-wrapping" />
-        <error line="373" column="106" source="standard:argument-list-wrapping" />
-        <error line="373" column="125" source="standard:argument-list-wrapping" />
-        <error line="394" column="1" source="standard:max-line-length" />
-        <error line="394" column="31" source="standard:multiline-expression-wrapping" />
-        <error line="398" column="31" source="standard:multiline-expression-wrapping" />
-        <error line="403" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="470" column="5" source="standard:blank-line-before-declaration" />
-        <error line="470" column="5" source="standard:no-consecutive-comments" />
-        <error line="519" column="36" source="standard:function-signature" />
-        <error line="519" column="53" source="standard:function-signature" />
-        <error line="519" column="86" source="standard:function-signature" />
-        <error line="618" column="34" source="standard:multiline-expression-wrapping" />
-        <error line="631" column="1" source="standard:max-line-length" />
+        <error line="111" column="74" source="standard:statement-wrapping" />
+        <error line="111" column="83" source="standard:statement-wrapping" />
+        <error line="111" column="91" source="standard:statement-wrapping" />
+        <error line="112" column="1" source="standard:max-line-length" />
+        <error line="112" column="111" source="standard:wrapping" />
+        <error line="112" column="112" source="standard:statement-wrapping" />
+        <error line="112" column="121" source="standard:statement-wrapping" />
+        <error line="112" column="129" source="standard:statement-wrapping" />
+        <error line="113" column="68" source="standard:statement-wrapping" />
+        <error line="113" column="77" source="standard:statement-wrapping" />
+        <error line="113" column="85" source="standard:statement-wrapping" />
+        <error line="223" column="32" source="standard:multiline-expression-wrapping" />
+        <error line="224" column="18" source="standard:wrapping" />
+        <error line="226" column="114" source="standard:wrapping" />
+        <error line="263" column="25" source="standard:multiline-expression-wrapping" />
+        <error line="268" column="27" source="standard:multiline-expression-wrapping" />
+        <error line="337" column="36" source="standard:multiline-expression-wrapping" />
+        <error line="381" column="1" source="standard:max-line-length" />
+        <error line="381" column="94" source="standard:argument-list-wrapping" />
+        <error line="381" column="106" source="standard:argument-list-wrapping" />
+        <error line="381" column="125" source="standard:argument-list-wrapping" />
+        <error line="402" column="1" source="standard:max-line-length" />
+        <error line="402" column="31" source="standard:multiline-expression-wrapping" />
+        <error line="406" column="31" source="standard:multiline-expression-wrapping" />
+        <error line="411" column="27" source="standard:multiline-expression-wrapping" />
+        <error line="478" column="5" source="standard:blank-line-before-declaration" />
+        <error line="478" column="5" source="standard:no-consecutive-comments" />
+        <error line="527" column="36" source="standard:function-signature" />
+        <error line="527" column="53" source="standard:function-signature" />
+        <error line="527" column="86" source="standard:function-signature" />
+        <error line="656" column="34" source="standard:multiline-expression-wrapping" />
+        <error line="669" column="1" source="standard:max-line-length" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/game/ExternalGameLauncherActivity.kt">
         <error line="19" column="1" source="standard:no-unused-imports" />
@@ -547,15 +546,15 @@
         <error line="8" column="60" source="standard:function-signature" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/main/GameLaunchTaskHandler.kt">
-        <error line="33" column="57" source="standard:function-signature" />
-        <error line="47" column="36" source="standard:multiline-expression-wrapping" />
-        <error line="49" column="40" source="standard:multiline-expression-wrapping" />
-        <error line="50" column="81" source="standard:trailing-comma-on-call-site" />
-        <error line="52" column="1" source="standard:max-line-length" />
-        <error line="58" column="1" source="standard:max-line-length" />
-        <error line="112" column="31" source="standard:multiline-expression-wrapping" />
-        <error line="152" column="24" source="standard:multiline-expression-wrapping" />
-        <error line="195" column="20" source="standard:multiline-expression-wrapping" />
+        <error line="35" column="57" source="standard:function-signature" />
+        <error line="49" column="36" source="standard:multiline-expression-wrapping" />
+        <error line="51" column="40" source="standard:multiline-expression-wrapping" />
+        <error line="52" column="81" source="standard:trailing-comma-on-call-site" />
+        <error line="54" column="1" source="standard:max-line-length" />
+        <error line="60" column="1" source="standard:max-line-length" />
+        <error line="151" column="31" source="standard:multiline-expression-wrapping" />
+        <error line="191" column="24" source="standard:multiline-expression-wrapping" />
+        <error line="237" column="20" source="standard:multiline-expression-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/roms/RomOnDemandManager.kt">
         <error line="3" column="1" source="standard:import-ordering" />

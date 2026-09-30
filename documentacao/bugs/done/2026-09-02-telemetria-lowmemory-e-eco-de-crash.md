@@ -160,7 +160,17 @@ tem stack) e desligar a outra é mais barato do que persistir dedup.
 ## Próximos passos
 
 - [x] Aplicar o filtro por `importance` e desligar `REASON_CRASH`.
-- [ ] **(fora do código, no painel)** fechar em massa os 1.297 `lowmemory` com `importance=400`
+- [x] **(fora do código, no painel)** fechar em massa os 1.297 `lowmemory` com `importance=400`
       e os 59 ecos — não são bugs.
-- [ ] Reabrir a análise dos 13 low-memory de primeiro plano como bug próprio de consumo de
-      memória (3ds/citra e gc/dolphin dominam a lista).
+- [x] Reabrir a análise dos low-memory de primeiro plano como bug próprio de consumo de
+      memória — ver [[2026-09-28-lowmemory-gameplay-ppsspp-foreground-service]] (triagem
+      2026-09-28, PPSSPP entra na lista ao lado de 3ds/citra e gc/dolphin).
+
+## Recorrência (Triagem 2026-09-28)
+
+- **`retrogamesystem/crash` (eco sem stack):** 8825 (`app=1.17.10`), 8604 (`app=1.17.9`) — as
+  duas versões predatam o filtro (garantido a partir de `1.17.12`/`1.17.13`, commit
+  `36aa389`). Mesmo padrão: `message="Java crash: crash"`, log = a string `crash`. Fechados.
+- **`retrogamesystem/lowmemory` com `importance=400`:** 8534 (`app=1.17.12`, na janela ambígua
+  do mesmo commit — "pode ou não conter o fix" conforme a data exata do build). Fechado; se
+  `importance=400` voltar a aparecer em `app` inequivocamente ≥ 1.17.13, reabrir.
