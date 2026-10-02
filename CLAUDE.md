@@ -78,7 +78,7 @@ system/filename.ext|título|https://cover-url.png|popularityIndex|isRepresentati
 
 - **Campo 4 (`popularityIndex`)**: inteiro positivo. Valores maiores = mais popular. `0` significa sem dados de popularidade. Varia tipicamente de 1 a ~1000.
 - **Campo 5 (`isRepresentative`)**: `1` se este ROM é o representante do seu grupo `(systemId, title-limpo)`; `0` se é variante escondida do catálogo. Default `1` quando ausente (compatibilidade com manifests antigos).
-- Sistemas usam aliases no manifest (`a26` → `atari2600`, `megadrive` → `md`, `colecovision` → `coleco`, `virtualboy` → `vb`, etc.). O mapa folder→dbname vive em **`assets/manifest_alias.json`** — fonte única lida tanto pelo `ManifestQuickLoader.loadManifestAlias()` (runtime) quanto pelo `PrebuiltDbGenerator` (build-time). Nunca duplicar como constante Kotlin: a duplicação já causou um bug de drift (Coleco/VB sumiram da lista por o prebuilt-db gravar `systemId` sem alias).
+- Sistemas usam aliases no manifest (`a26` → `atari2600`, `megadrive` → `md`, `colecovision` → `coleco`, `virtualboy` → `vb`, etc.). O mapa folder→dbname vive em **`assets/manifest_alias.json`** — fonte única lida tanto pelo `ManifestQuickLoader.loadManifestAlias()` (runtime) quanto pelo `PrebuiltDbGenerator` (build-time). Nunca duplicar como constante Kotlin: a duplicação já causou um bug de drift (Coleco/VB sumiram da lista por o prebuilt-db gravar `systemId` sem alias). **Pasta nova no manifest cujo nome não é um `SystemID.dbname` precisa de alias**, senão o loader descarta o sistema inteiro — o `PrebuiltDbGenerator` lê os dbnames do `SystemID.kt` e derruba o build nesse caso.
 
 ### Geração do Campo 5 (`isRepresentative`)
 
@@ -96,7 +96,7 @@ Isso elimina toda a lógica de agrupamento em runtime: o app só lê o campo e m
 1. **`CatalogCoverProvider`** — lê e parseia `catalog_manifest.txt` em `Map<String, ManifestEntry>` (lazy, uma vez por processo).
 2. **`ManifestQuickLoader.load()`** — roda no startup via `MainProcessInitializer` (50 ms após a app iniciar):
    - **URI rewrite**: substitui o prefixo sentinela `file:///lemuroid_prebuilt` pelo `romsDir` real em uma única SQL UPDATE (~100ms). No-op se o DB não veio do asset.
-   - **Fast-path**: se `gameDao().countAll() >= manifest.size * 0.9`, marca prefs e pula tudo. Caso típico em devices que abriram com o asset pre-built ou já rodaram o load antes.
+   - **Fast-path**: se `gameDao().countAll() >= expectedSize - expectedSize/50` **e** `loadedSchema == MANIFEST_SCHEMA_VERSION`, marca prefs e pula tudo. **Não vale para instalação nova**: lá `loadedSchema = -1`, então o primeiro boot sempre faz a passada completa, mesmo com o prebuilt (~25 s no AVD de 2 GB, ~15 s disso no loop de `updateManifestFieldsWithTitle` — ver `documentacao/backlogs/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`).
    - **Skip por versão+schema**: só pula se o `versionCode` do app E o `MANIFEST_SCHEMA_VERSION` salvos batem com os atuais. Bumpar `MANIFEST_SCHEMA_VERSION` força um reload one-time em todos os usuários (usado quando o formato do manifest muda).
    - `INSERT OR IGNORE` de todos os `Game` no banco (não sobrescreve dados enriquecidos pelo LibretroDB).
    - **Batch UPDATE de `popularityIndex` + `isRepresentative`** via `updateManifestFields()` em transação para jogos que já existiam (sincroniza mudanças no manifest após app update / schema bump).
@@ -134,10 +134,10 @@ Para eliminar a tela "preparando ambiente" no primeiro startup pós-instalação
 3. Cria SQLite via sqlite-jdbc (Kotlin, sem dependência Android)
 4. Aplica schema das entities + FTS4 (CREATE VIRTUAL TABLE + triggers)
 5. Cria `room_master_table` com `id=42, identity_hash=<do JSON>`
-6. Bulk INSERT de todos os games com `fileUri = "file:///lemuroid_prebuilt/<systemId>/<fileName>"` (placeholder — o app reescreve no primeiro boot)
+6. Bulk INSERT de todos os games com `fileUri = "file:///lemuroid_prebuilt/<systemId>/<fileName>"` (placeholder — o app reescreve no primeiro boot). **O caminho vai percent-encoded exatamente como `File.toUri()` do Android** (`encodeUriPath`, cópia do `Uri.encode(path, "/")`): o rewrite troca só o prefixo, e `fileUri` é a chave única — sufixo em outra forma faz a passada completa apagar e reinserir a linha (foram 53 mil, ver `documentacao/bugs/done/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`). Nem `URLEncoder` nem `java.net.URI` produzem essa forma.
 7. Bulk populate `INSERT INTO fts_games SELECT id, title FROM games` (1 statement em vez de 29k inserts com tokenization individual)
 8. Cria trigger `games_ai` DEPOIS dos inserts (para que futuros inserts no Android disparem normalmente)
-9. **Build-time validation**: re-verifica que `user_version`, `identity_hash`, contagens de `games` e `fts_games`, tabelas e triggers existem. Falha o build se algo divergir.
+9. **Build-time validation**: re-verifica que `user_version`, `identity_hash`, contagens de `games` e `fts_games`, tabelas e triggers existem; que `encodeUriPath` reproduz os pares de `URI_PATH_KNOWN_ANSWERS` (tirados de `File.toUri()` num aparelho); e que toda `fileUri` está codificada e decodifica de volta para `systemId/fileName`. Falha o build se algo divergir.
 
 **Implementação:** [PrebuiltDbGenerator.kt](buildSrc/src/main/kotlin/PrebuiltDbGenerator.kt) + registro em [lemuroid-app/build.gradle.kts](lemuroid-app/build.gradle.kts) na task `generatePrebuiltDb` (dep de `mergeAssets` e `packageAssets` via `androidComponents.onVariants`).
 
@@ -180,6 +180,7 @@ Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteú
 | 29 | SNES: +7 títulos presentes no catálogo do retrobat e ausentes aqui (bloco `Dem*`) + correção `Super Mario World I` → `Super Mario World` + 300 capas e 151 popularidades no lote `.zip` da v28 |
 | 30 | SNES: mais 66 capas no lote `.zip` da v28 via HfsDB/HfsPlay (credenciais do retrobat), somando 366/493 (74%); catálogo SNES em 91% de cobertura |
 | 31 | Passe de capas no catálogo inteiro: +4.711 capas novas e 3.577 capas erradas removidas (ver "Passe de capas v31" abaixo) |
+| 35 | Alias `amiga500`→`amiga` e `gameandwatch`→`gw`: os 1.637 jogos dessas pastas eram descartados pelo loader e apagados do prebuilt em toda instalação (v32–34: ver histórico no `ManifestQuickLoader.kt`) |
 
 ### Backfill de capas (`super_scrapper`)
 
@@ -553,7 +554,7 @@ if (!exists) { ... }
 
 **Gatilho:** `MediaMountedReceiver` em `ACTION_MEDIA_MOUNTED` (remontagem de storage) chama `scheduleManualLibrarySync`; também qualquer rescan de settings / troca de pasta. Daí o "após um certo período de tempo".
 
-**Regra:** O scan deve ser **aditivo + metadata-refresh** para o catálogo, nunca destrutivo. `deleteByLastIndexedAtLessThan` recebe `romsPrefix` (URI da pasta de ROMs gerenciada) e `sentinelPrefix` (`file:///lemuroid_prebuilt`) e **nunca** apaga games sob esses prefixos — todo o catálogo + downloads vivem sob `romsPrefix`. Só ROMs importadas pelo usuário fora da pasta gerenciada (pasta externa / SAF) que sumiram do disco são removidas. Comparação por `SUBSTR` (não `LIKE`, para não quebrar com `_`/`%` no path); prefixo vazio protege tudo. Prefixo passado por `LemuroidLibrary.romsUriPrefix` (via `DirectoriesManager`).
+**Regra:** O scan deve ser **aditivo + metadata-refresh** para o catálogo, nunca destrutivo. `deleteByLastIndexedAtLessThan` recebe `romsPrefix` (URI da pasta de ROMs gerenciada), `sentinelPrefix` (`file:///lemuroid_prebuilt`) e `managedMarker` (`/Android/data/<pkg>/files/roms/`, a pasta gerenciada de **qualquer** volume — downloads ficam no volume antigo quando a pasta de ROMs troca de volume) e **nunca** apaga games sob eles — todo o catálogo + downloads vivem sob `romsPrefix`. Só ROMs importadas pelo usuário fora da pasta gerenciada (pasta externa / SAF) que sumiram do disco são removidas. Comparação por `SUBSTR` (não `LIKE`, para não quebrar com `_`/`%` no path); prefixo vazio protege tudo. Prefixo passado por `LemuroidLibrary.romsUriPrefix` (via `DirectoriesManager`).
 
 ### 6. O `.so` de Flycast (Dreamcast) empacotado tem que ser o do buildbot **e** patchado
 
@@ -788,6 +789,12 @@ Aceleração: **AEHD 2.2** (`extras;google;Android_Emulator_Hypervisor_Driver`),
 `aehd`. Escolhido em vez de WHPX porque esta é uma CPU AMD com SVM ligado e **sem Hyper-V ativo** —
 ligar o Hyper-V degradaria VirtualBox/WSL. Conferir com `emulator -accel-check`;
 desinstalar com `silent_install.bat -u`.
+
+> 💡 **SD card / segundo volume** (testes do `SmartStoragePicker`): o `hw.sdCard=yes` dos AVDs não
+> traz `sdcard.img` — nenhum SD aparece. Criar com `emulator/mksdcard -l LEMUSD 1024M sd.img` e lançar
+> com `-sdcard sd.img`: monta como volume público (`sm list-volumes all` → `public:253,64 … 0000-0000`).
+> `sm unmount`/`sm mount public:253,64` simulam tirar e recolocar a mídia; `fallocate -l <N>M` em
+> `/data/local/tmp` inverte o espaço livre sem escrever dados.
 
 > ⚠️ **O emulador precisa ser lançado destacado do shell.** Rodar `emulator -avd …` como processo
 > filho de uma sessão de ferramenta faz o emulador receber o pedido de shutdown quando a sessão

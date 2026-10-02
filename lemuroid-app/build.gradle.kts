@@ -68,8 +68,8 @@ val catalogApplicationIdSuffix = normalizeApplicationIdSuffix(readGradleProperty
 
 android {
     defaultConfig {
-        versionCode = 253
-        versionName = "1.17.22" // Always remember to update Cores Tag!
+        versionCode = 254
+        versionName = "1.17.23" // Always remember to update Cores Tag!
         applicationId = "app.retrogamesystem$catalogApplicationIdSuffix"
 
         buildConfigField("String", "CATALOG_CHANNEL", "\"${escapeBuildConfigValue(catalogChannel)}\"")
@@ -420,11 +420,14 @@ val generatePrebuiltDb = tasks.register("generatePrebuiltDb") {
     } else {
         generatedCatalogPrebuiltDir.get().file("manifest_alias.json").asFile
     }
+    val libraryPackageDir = "retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library"
+    val systemIdFile = rootProject.file("$libraryPackageDir/SystemID.kt")
     val outputFile = prebuiltDbFile.get().asFile
 
     inputs.file(schemaJson)
     inputs.file(manifestFile)
     inputs.file(manifestAliasFile)
+    inputs.file(systemIdFile)
     inputs.files(rootProject.fileTree("buildSrc/src/main/kotlin"))
     outputs.file(outputFile)
 
@@ -432,6 +435,7 @@ val generatePrebuiltDb = tasks.register("generatePrebuiltDb") {
         PrebuiltDbGenerator.generate(
             schemaJsonFile = schemaJson,
             manifestFile = manifestFile,
+            systemIdFile = systemIdFile,
             outputDbFile = outputFile,
         )
     }

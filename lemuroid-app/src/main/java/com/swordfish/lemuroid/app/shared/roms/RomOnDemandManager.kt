@@ -13,6 +13,7 @@ import com.swordfish.lemuroid.lib.library.db.dao.GameDao
 import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
+import com.swordfish.lemuroid.lib.storage.RomsDirChoice
 import com.swordfish.lemuroid.lib.storage.local.GameCacheUtils
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -293,7 +294,7 @@ class RomOnDemandManager(
     suspend fun deleteRom(game: Game): Unit = withContext(Dispatchers.IO) {
         val destFile = resolveDestFile(game)
         if (destFile.exists()) {
-            val systemDir = File(directoriesManager.getInternalRomsDirectory(), game.systemId)
+            val systemDir = systemDirOf(destFile, game.systemId)
             val parentDir = destFile.parentFile
             if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
                 // Multi-disc extraction directory — delete the whole folder so all
@@ -332,7 +333,7 @@ class RomOnDemandManager(
         for (variant in variants) {
             val destFile = resolveDestFile(variant)
             if (destFile.exists()) {
-                val systemDir = File(directoriesManager.getInternalRomsDirectory(), variant.systemId)
+                val systemDir = systemDirOf(destFile, variant.systemId)
                 val parentDir = destFile.parentFile
                 if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
                     // Multi-disc extraction directory — take the whole folder.
@@ -356,10 +357,30 @@ class RomOnDemandManager(
 
     fun isManagedRom(game: Game): Boolean {
         return runCatching {
+            val destFile = resolveDestFile(game)
+            // Managed ROMs dir of another volume counts too: downloads stay where they were when
+            // the ROMs dir changed volume.
+            val marker = directoriesManager.getManagedRomsMarker()
+            if (RomsDirChoice.managedRomsRoot(destFile.absolutePath, marker) != null) return@runCatching true
             val romsDir = directoriesManager.getInternalRomsDirectory().canonicalFile
-            val destFile = resolveDestFile(game).canonicalFile
-            destFile.path == romsDir.path || destFile.path.startsWith(romsDir.path + File.separator)
+            val canonical = destFile.canonicalFile
+            canonical.path == romsDir.path || canonical.path.startsWith(romsDir.path + File.separator)
         }.getOrDefault(false)
+    }
+
+    /**
+     * `<roms root>/<systemId>` of the root [destFile] actually lives in — not necessarily the
+     * current ROMs dir. Comparing against the current one for a file on another volume made
+     * every single-file ROM look like a multi-disc extraction dir, and deleting it took the
+     * whole system folder with it.
+     */
+    private fun systemDirOf(
+        destFile: File,
+        systemId: String,
+    ): File {
+        val marker = directoriesManager.getManagedRomsMarker()
+        val root = RomsDirChoice.managedRomsRoot(destFile.absolutePath, marker)?.let { File(it) }
+        return File(root ?: directoriesManager.getInternalRomsDirectory(), systemId)
     }
 
     /**

@@ -17,7 +17,8 @@
  *   • the FTS4 virtual table + triggers that GameSearchDao defines manually
  *   • `user_version` from the Room schema JSON so Room treats the DB as already migrated
  *
- * Sentinel fileUri: rows are inserted with `fileUri = "file:///lemuroid_prebuilt/<systemId>/<fileName>"`.
+ * Sentinel fileUri: rows are inserted with `fileUri = "file:///lemuroid_prebuilt/<systemId>/<fileName>"`,
+ * the path percent-encoded exactly like Android's `File.toUri()` (see [encodeUriPath]).
  * The app rewrites these to real `file://<romsDir>/...` URIs in a single SQL UPDATE on first boot
  * (see ManifestQuickLoader.rewritePrebuiltUris).
  *
@@ -63,15 +64,124 @@ object PrebuiltDbGenerator {
      */
     private const val PREBUILT_URI_PREFIX = "file:///lemuroid_prebuilt"
 
+    /** Characters `android.net.Uri.encode` leaves as-is besides letters and digits. */
+    private const val URI_UNRESERVED = "_-!.~'()*"
+
+    private val HEX_DIGITS = "0123456789ABCDEF".toCharArray()
+
+    /**
+     * Known answers taken from `File.toUri()` on a device (API 25 AVD, 2026-10-02), relative to
+     * the ROMs dir — one per special character in the catalog. [validate] fails the build if
+     * [encodeUriPath] stops reproducing them.
+     */
+    private val URI_PATH_KNOWN_ANSWERS = mapOf(
+        "nes/Final Fantasy 3 (JP) (3DS Virtual Console).nes" to
+            "nes/Final%20Fantasy%203%20(JP)%20(3DS%20Virtual%20Console).nes",
+        "atari800/Montana Test #7 (19xx)(-)[k-file].zip" to
+            "atari800/Montana%20Test%20%237%20(19xx)(-)%5Bk-file%5D.zip",
+        "psx/100% Star (Europe).chd" to "psx/100%25%20Star%20(Europe).chd",
+        "pce/pcengine/Yo, Bro (USA).pce" to "pce/pcengine/Yo%2C%20Bro%20(USA).pce",
+        "snes/Joe & Mac I.zip" to "snes/Joe%20%26%20Mac%20I.zip",
+        "atari800/ik+.zip" to "atari800/ik%2B.zip",
+        "dc/Hundred Swords (Japan) (@barai).chd" to "dc/Hundred%20Swords%20(Japan)%20(%40barai).chd",
+        "gba/WarioWare, Inc. - Mega Microgame$! (US).gba" to
+            "gba/WarioWare%2C%20Inc.%20-%20Mega%20Microgame%24!%20(US).gba",
+        "atari800/The Way = Jesus.zip" to "atari800/The%20Way%20%3D%20Jesus.zip",
+        "psp/Steins;Gate (Japan).iso" to "psp/Steins%3BGate%20(Japan).iso",
+        "psx/Galaxian^3 (Europe).chd" to "psx/Galaxian%5E3%20(Europe).chd",
+        "atari800/Gem'y.zip" to "atari800/Gem'y.zip",
+        "atari2600/Indy 500 ~ Race (USA).a26" to "atari2600/Indy%20500%20~%20Race%20(USA).a26",
+        "lowresnx/Bézier Curve (remix).nx" to "lowresnx/Be%CC%81zier%20Curve%20(remix).nx",
+    )
+
+    /**
+     * Same output as `android.net.Uri.encode(path, "/")`, which is what `File.toUri()` (via
+     * `Uri.fromFile`) puts in the path — the form ManifestQuickLoader builds at runtime. The
+     * sentinel rewrite only swaps the prefix, so a suffix in any other form never matches the
+     * loader's URI: `games.fileUri` is the unique key, and the first full manifest pass would
+     * insert a second row and delete this one (~53k rows on a fresh install).
+     *
+     * Not `URLEncoder` (space → `+`, encodes `'()*!~`) nor `java.net.URI` (leaves `,&+$@=;` and
+     * non-ASCII alone): only a copy of the Android algorithm matches byte for byte. Runs of
+     * disallowed chars are encoded together so surrogate pairs come out as one UTF-8 sequence.
+     */
+    private fun encodeUriPath(path: String): String {
+        val out = StringBuilder(path.length)
+        var i = 0
+        while (i < path.length) {
+            if (isUriPathAllowed(path[i])) {
+                out.append(path[i++])
+                continue
+            }
+            var end = i + 1
+            while (end < path.length && !isUriPathAllowed(path[end])) end++
+            for (byte in path.substring(i, end).toByteArray(Charsets.UTF_8)) {
+                val v = byte.toInt() and 0xff
+                out.append('%').append(HEX_DIGITS[v shr 4]).append(HEX_DIGITS[v and 0xf])
+            }
+            i = end
+        }
+        return out.toString()
+    }
+
+    private fun isUriPathAllowed(c: Char): Boolean =
+        c in 'A'..'Z' || c in 'a'..'z' || c in '0'..'9' || c in URI_UNRESERVED || c == '/'
+
+    /** Inverse of [encodeUriPath]; only used by [validate]. */
+    private fun decodeUriPath(encoded: String): String {
+        val bytes = java.io.ByteArrayOutputStream()
+        var i = 0
+        while (i < encoded.length) {
+            if (encoded[i] == '%') {
+                bytes.write(encoded.substring(i + 1, i + 3).toInt(16))
+                i += 3
+            } else {
+                bytes.write(encoded[i++].code)
+            }
+        }
+        return bytes.toString(Charsets.UTF_8.name())
+    }
+
+    /** `NAME("dbname"),` entries of the `SystemID` enum. */
+    private val SYSTEM_ID_ENTRY = Regex("""^\s*[A-Z][A-Z0-9_]*\("([^"]+)"\)""", RegexOption.MULTILINE)
+
+    /**
+     * dbnames declared in `SystemID.kt`, read from source because buildSrc cannot depend on
+     * the Android module. Every SystemID is registered in GameSystem, so this is the set that
+     * `GameSystem.findByIdOrNull` accepts at runtime.
+     */
+    private fun loadSystemDbNames(systemIdFile: File): Set<String> {
+        require(systemIdFile.exists()) { "SystemID.kt not found at $systemIdFile" }
+        val names = SYSTEM_ID_ENTRY.findAll(systemIdFile.readText()).map { it.groupValues[1] }.toSet()
+        require(names.isNotEmpty()) { "no SystemID entries parsed from $systemIdFile" }
+        return names
+    }
+
+    /**
+     * ManifestQuickLoader skips any row whose post-alias systemId is not a GameSystem, and its
+     * stale-catalog cleanup then deletes the prebuilt copy — the whole system silently vanishes
+     * on every install (amiga500/ and gameandwatch/ without alias: 1637 rows). Fail the build.
+     */
+    private fun requireKnownSystems(games: List<GameRow>, systemDbNames: Set<String>) {
+        val unknown = games.groupingBy { it.systemId }.eachCount().filterKeys { it !in systemDbNames }
+        require(unknown.isEmpty()) {
+            "catalog_manifest.txt has systems that are not a SystemID dbname after $MANIFEST_ALIAS_ASSET: " +
+                unknown.entries.joinToString { "${it.key} (${it.value} rows)" } +
+                ". Add the manifest folder → dbname mapping to $MANIFEST_ALIAS_ASSET."
+        }
+    }
+
     fun generate(
         schemaJsonFile: File,
         manifestFile: File,
+        systemIdFile: File,
         outputDbFile: File,
     ) {
         require(schemaJsonFile.exists()) {
             "Room schema JSON not found at $schemaJsonFile — build the app once so kapt generates it."
         }
         require(manifestFile.exists()) { "catalog_manifest.txt not found at $manifestFile" }
+        val systemDbNames = loadSystemDbNames(systemIdFile)
 
         val schemaJson = JSONObject(schemaJsonFile.readText()).getJSONObject("database")
         val expectedVersion = schemaJson.getInt("version")
@@ -98,6 +208,7 @@ object PrebuiltDbGenerator {
 
             val manifestAlias = loadManifestAlias(manifestFile)
             val games = parseManifest(manifestFile, manifestAlias)
+            requireKnownSystems(games, systemDbNames)
             insertGamesBulk(conn, games)
 
             populateFtsBulk(conn)
@@ -260,7 +371,7 @@ object PrebuiltDbGenerator {
 
                 games += GameRow(
                     fileName = fileName,
-                    fileUri = "$PREBUILT_URI_PREFIX/$canonicalPath",
+                    fileUri = "$PREBUILT_URI_PREFIX/${encodeUriPath(canonicalPath)}",
                     title = title,
                     systemId = systemId,
                     coverFrontUrl = coverFrontUrl,
@@ -360,6 +471,31 @@ object PrebuiltDbGenerator {
                 "fts_games row count mismatch: got $ftsCount, expected $expectedGameCount"
             }
         }
+
+        // fileUri must be in the exact form ManifestQuickLoader builds with File.toUri(),
+        // otherwise the first manifest pass deletes and re-inserts the row (see encodeUriPath).
+        for ((decoded, expected) in URI_PATH_KNOWN_ANSWERS) {
+            val actual = encodeUriPath(decoded)
+            require(actual == expected) {
+                "encodeUriPath diverged from Android's File.toUri(): \"$decoded\" -> \"$actual\", " +
+                    "expected \"$expected\""
+            }
+        }
+        val encodedPathForm = Regex("""(?:[A-Za-z0-9_\-!.~'()*/]|%[0-9A-F]{2})*""")
+        conn.createStatement()
+            .executeQuery("SELECT systemId, fileName, fileUri FROM games")
+            .use { rs ->
+                while (rs.next()) {
+                    val canonicalPath = "${rs.getString(1)}/${rs.getString(2)}"
+                    val fileUri = rs.getString(3)
+                    val encoded = fileUri.removePrefix("$PREBUILT_URI_PREFIX/")
+                    require(
+                        encoded != fileUri &&
+                            encodedPathForm.matches(encoded) &&
+                            decodeUriPath(encoded) == canonicalPath,
+                    ) { "fileUri not in File.toUri() form for \"$canonicalPath\": $fileUri" }
+                }
+            }
 
         // Required tables exist
         val expectedTables = setOf(

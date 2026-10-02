@@ -347,9 +347,15 @@ class LemuroidLibrary(
     private suspend fun removeDeletedGames(startedAtMs: Long) {
         Timber.d("Deleting games from db before: $startedAtMs")
         // Guard the whole catalog (placeholders + downloads live under the ROMs dir) and any rows
-        // still carrying the prebuilt sentinel prefix. Only user-imported ROMs outside the ROMs dir
+        // still carrying the prebuilt sentinel prefix — on any volume, since downloads stay on the
+        // old one when the ROMs dir changes volume. Only user-imported ROMs outside the ROMs dir
         // that vanished from disk are pruned. See GameDao.deleteByLastIndexedAtLessThan.
-        retrogradedb.gameDao().deleteByLastIndexedAtLessThan(startedAtMs, romsUriPrefix, PREBUILT_URI_PREFIX)
+        retrogradedb.gameDao().deleteByLastIndexedAtLessThan(
+            startedAtMs,
+            romsUriPrefix,
+            PREBUILT_URI_PREFIX,
+            directoriesManager.getManagedRomsMarker(),
+        )
     }
 
     fun getGameFiles(

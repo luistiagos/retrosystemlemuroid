@@ -50,9 +50,15 @@ class DirectoriesManager(private val appContext: Context) {
 
     /**
      * Returns the directory where ROMs should be stored/scanned.
-     * Uses [SmartStoragePicker] to automatically select the volume with the most free
-     * space when the user has not configured a custom directory, so that SD cards and
-     * USB drives attached to Smart TVs are preferred over limited built-in flash.
+     * The volume is picked by [SmartStoragePicker] (most free space, so SD cards and USB
+     * drives on Smart TVs beat limited built-in flash) once, and then kept across launches.
      */
     fun getInternalRomsDirectory(): File = cachedRoms
+
+    /**
+     * Fragment present in the path/URI of anything under the managed ROMs dir of ANY volume
+     * — see [RomsDirChoice.managedRomsMarker]. Rows can live on a volume other than
+     * [getInternalRomsDirectory] (downloads kept where they were when the volume changed).
+     */
+    fun getManagedRomsMarker(): String = RomsDirChoice.managedRomsMarker(appContext.packageName)
 }

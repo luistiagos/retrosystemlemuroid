@@ -142,7 +142,11 @@ class ManifestQuickLoader(
         //          ("Titlebout (Avalon Hill"). No cross-platform matches in this system. The
         //          .atr.zip/.xex.zip names (24) were already right; the tool needed an inner-
         //          extension whitelist to stop flagging them.
-        private const val MANIFEST_SCHEMA_VERSION = 34
+        //   v35  amiga500/ and gameandwatch/ folders had no entry in manifest_alias.json, so the
+        //          full pass dropped them at findByIdOrNull and the stale-catalog cleanup deleted
+        //          the prebuilt copies: 1592 Amiga + 45 Game & Watch rows missing on every install.
+        //          Aliased to amiga/gw; this reload inserts them on existing installs.
+        private const val MANIFEST_SCHEMA_VERSION = 35
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(
@@ -241,6 +245,15 @@ class ManifestQuickLoader(
             }
         } catch (t: Throwable) {
             Timber.e(t, "ManifestQuickLoader: prebuilt URI rewrite failed (continuing)")
+        }
+
+        // Rows left on another volume's ROMs dir (the ROMs dir changed volume — older versions
+        // re-chose it on every launch; now only a missing volume makes it fall back). Must run
+        // before the fast paths: those never touch existing rows.
+        try {
+            if (realignManagedRoots() > 0) optimizeFtsIndex(prefs)
+        } catch (t: Throwable) {
+            Timber.e(t, "ManifestQuickLoader: ROMs root realign failed (continuing)")
         }
 
         // v8 one-time cleanup: vircon32 manifest had double path (vircon32/vircon32/file.zip)
@@ -450,6 +463,14 @@ class ManifestQuickLoader(
             Timber.e(t, "ManifestQuickLoader: failed to delete stale catalog games (continuing)")
         }
 
+        // The pass above inserted a current-root placeholder for every download kept on another
+        // volume's ROMs dir; fold those duplicates back now rather than on the next boot.
+        try {
+            realignManagedRoots()
+        } catch (t: Throwable) {
+            Timber.e(t, "ManifestQuickLoader: post-load ROMs root realign failed (continuing)")
+        }
+
         prefs.edit()
             .putInt(KEY_LOADED_APP_VERSION, appVersion)
             .putInt(KEY_LOADED_MANIFEST_SCHEMA, MANIFEST_SCHEMA_VERSION)
@@ -462,6 +483,51 @@ class ManifestQuickLoader(
         // _catalogReady so Home isn't gated on it.
         optimizeFtsIndex(prefs)
         LoadResult(inserted)
+    }
+
+    /**
+     * Re-points catalog rows living under the managed ROMs dir of another volume to the current
+     * one; rows whose file is on disk stay put (see [RomsRootRealigner]). Returns rows touched.
+     */
+    private suspend fun realignManagedRoots(): Int {
+        val dao = database.gameDao()
+        val marker = directoriesManager.getManagedRomsMarker()
+        val currentRoot = directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
+        val foreignRoots = dao.selectForeignManagedRoots(marker, currentRoot)
+        if (foreignRoots.isEmpty()) return 0
+
+        val foreignRows = foreignRoots.flatMap { dao.selectByUriPrefix("$it/") }
+        val currentRows = dao.selectByUriPrefix("$currentRoot/")
+
+        // Downloads are few; walking each root once beats one stat per catalog row.
+        val onDisk = HashSet<String>()
+        for (root in foreignRoots + currentRoot) {
+            val dir = Uri.parse(root).path?.let { File(it) } ?: continue
+            dir.walkTopDown()
+                .filter { it.isFile && it.length() > 0L }
+                .forEach { onDisk += it.absolutePath }
+        }
+
+        val plan =
+            RomsRootRealigner.plan(
+                foreignRows = foreignRows,
+                foreignRoots = foreignRoots,
+                currentRows = currentRows,
+                currentRoot = currentRoot,
+                isOnDisk = { uri -> Uri.parse(uri).path in onDisk },
+            )
+        if (plan.isEmpty) return 0
+
+        database.withTransaction {
+            if (plan.delete.isNotEmpty()) dao.delete(plan.delete)
+            plan.repoint.forEach { (id, uri) -> dao.updateFileUri(id, uri) }
+            if (plan.update.isNotEmpty()) dao.update(plan.update)
+        }
+        Timber.i(
+            "ManifestQuickLoader: realigned ROMs root $foreignRoots -> $currentRoot " +
+                "(repointed=${plan.repoint.size} merged=${plan.update.size} deleted=${plan.delete.size})",
+        )
+        return plan.repoint.size + plan.update.size + plan.delete.size
     }
 
     /**

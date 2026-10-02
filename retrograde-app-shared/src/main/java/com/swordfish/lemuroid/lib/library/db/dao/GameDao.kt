@@ -48,6 +48,8 @@ interface GameDao {
      * never refreshes their `lastIndexedAt`. Without the guards below the scan would delete the
      * entire browsable catalog, leaving only downloaded ROMs. We therefore NEVER delete:
      *   - games under the app-managed ROMs directory ([romsPrefix]) — the whole catalog + downloads;
+     *   - games under the managed ROMs dir of ANY volume ([managedMarker] in the URI) — after a
+     *     volume change, downloads stay on the old volume and must not lose this protection;
      *   - games still carrying the prebuilt sentinel prefix ([sentinelPrefix]) — not yet URI-rewritten;
      *   - games registered in `downloaded_roms`.
      * Only genuinely user-imported ROMs living outside the ROMs dir (external folder / SAF) that
@@ -60,6 +62,7 @@ interface GameDao {
         DELETE FROM games
         WHERE lastIndexedAt < :lastIndexedAt
         AND SUBSTR(fileUri, 1, LENGTH(:romsPrefix)) <> :romsPrefix
+        AND INSTR(fileUri, :managedMarker) = 0
         AND SUBSTR(fileUri, 1, LENGTH(:sentinelPrefix)) <> :sentinelPrefix
         AND NOT EXISTS (
             SELECT 1 FROM downloaded_roms dr
@@ -70,6 +73,7 @@ interface GameDao {
         lastIndexedAt: Long,
         romsPrefix: String,
         sentinelPrefix: String,
+        managedMarker: String,
     )
 
     @Query("SELECT * FROM games WHERE isFavorite = 1 ORDER BY title ASC")
@@ -247,6 +251,34 @@ interface GameDao {
 
     @Query("SELECT * FROM games ORDER BY title ASC")
     suspend fun selectAll(): List<Game>
+
+    /**
+     * Managed ROMs roots (`.../Android/data/<pkg>/files/roms`, no trailing slash) of OTHER
+     * volumes that still hold rows. Almost always empty — it only returns something after the
+     * ROMs dir changed volume. Full scan of `games`, cheap enough for every boot.
+     */
+    @Query(
+        """
+        SELECT DISTINCT SUBSTR(fileUri, 1, INSTR(fileUri, :marker) + LENGTH(:marker) - 2)
+        FROM games
+        WHERE INSTR(fileUri, :marker) > 0
+        AND SUBSTR(fileUri, 1, LENGTH(:currentRoot) + 1) <> :currentRoot || '/'
+        """,
+    )
+    suspend fun selectForeignManagedRoots(
+        marker: String,
+        currentRoot: String,
+    ): List<String>
+
+    /** Rows whose `fileUri` starts with [prefix] (SUBSTR, so `_`/`%` in paths are literal). */
+    @Query("SELECT * FROM games WHERE SUBSTR(fileUri, 1, LENGTH(:prefix)) = :prefix")
+    suspend fun selectByUriPrefix(prefix: String): List<Game>
+
+    @Query("UPDATE games SET fileUri = :fileUri WHERE id = :id")
+    suspend fun updateFileUri(
+        id: Int,
+        fileUri: String,
+    )
 
     /** Total row count — used by [ManifestQuickLoader] to detect a fully populated catalog. */
     @Query("SELECT COUNT(*) FROM games")

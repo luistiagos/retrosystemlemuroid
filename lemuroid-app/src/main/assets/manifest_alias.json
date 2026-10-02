@@ -8,5 +8,7 @@
   "colecovision": "coleco",
   "virtualboy": "vb",
   "pcenginecd": "pcecd",
+  "amiga500": "amiga",
+  "gameandwatch": "gw",
   "ps3":"ps3"
 }
