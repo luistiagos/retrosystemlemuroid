@@ -662,6 +662,9 @@ tabela de "Como ler o próximo report" acima. O critério de fechamento desta p�
 
 ## Passagem de bastão — testes pendentes (2026-10-02)
 
+> ✅ **Executada** na sessão seguinte do mesmo dia: Teste 1 e Teste 2 feitos (resultados abaixo),
+> commits `46b4995` (código) e `6a4eef3` (doc). A passagem **vigente** é a última seção da página.
+
 Estado ao fim da sessão: código do `GLThreadDump` pronto, testes unitários e ktlint verdes,
 **nada commitado**. Arquivos desta rodada (a árvore tem outras mudanças pendentes de trabalhos
 anteriores — commitar só estes):
@@ -844,3 +847,88 @@ aparelho, BACK às 18:50:58 → `Stored sram file` 18:50:59.620 → `Stored auto
   `open/`, então não mover para `done/`.
 - Decisão em aberto (não tomar sem dado): sonda antes da 1ª tentativa de `serializeSRAM` para encurtar
   a saída com jogo travado de ~32 s para ~2 s — ver "Hipóteses descartadas".
+
+## O que falta para `done/` (2026-10-02)
+
+O critério (topo da página) é a telemetria parar de acusar o timeout — o que só acontece corrigindo
+a causa de fundo, e ela ainda é desconhecida. Caminho:
+
+1. **Garantir que o dump sobreviva ao fim do processo** (Task A abaixo) — senão o primeiro report
+   real pode chegar sem o 2º item e a espera recomeça.
+2. **Publicar uma versão com `46b4995` + Task A.** Hoje nenhum aparelho de produção manda o dump
+   (último report: 1.17.22).
+3. **Esperar timeouts de produção com o dump.** Frequência baixa: 9 em ~1 mês, 3 desde a 1.17.19 —
+   pode levar semanas. Consultar com o script de "Resultado do Teste 1" (todos os status, filtro
+   `GLThreadTimeout`) ou `triagem.py list --project retrogamesystem` (só abertos) e
+   `triagem.py logs <id>`.
+4. **Ler o topo da pilha da GLThread** ("Como ler o próximo report"):
+   - `Object.wait` em `guardedRun` ou "no live GLThread" → **nosso** (`GLSurfaceView` patchado /
+     ciclo de vida). Corrigir; o critério é alcançável.
+   - `loadGameFromPath`/`onSurfaceCreated` → carga ainda em curso, ordem de eventos nossa —
+     provavelmente corrigível.
+   - `LibretroDroid.step` (`retro_run` não volta) ou `eglSwapBuffers` → core/driver, **fora do
+     nosso alcance**.
+5. **Se cair em core/driver: decisão do dono** — o critério atual nunca se cumpre. Alternativa:
+   redefinir para "causas nossas descartadas pelos dumps + resto documentado como de terceiros",
+   acompanhado da mitigação em aberto (sonda antes da 1ª tentativa de `serializeSRAM`: saída com
+   jogo travado de ~35 s → ~2 s, ao custo de desistir de SRAM que talvez ainda gravasse — os dumps
+   dão o dado para pesar isso).
+
+## Passagem de bastão — Task A (2026-10-02, vigente)
+
+Estado: árvore limpa quanto a este bug (commits `46b4995`, `6a4eef3`; nada pendente desta página).
+Fora do escopo e **não** commitar junto: `.claude/settings.json` e o resto do
+`lemuroid-app/config/ktlint/baseline.xml` (troca de 3 entradas duplicadas do `Color.kt` entre
+`src/debug` e `src/release` — artefato de regeneração, não desta rodada).
+
+### Task A — o report não-terminal tem que terminar antes do `exitProcess`
+
+**Problema (medido no Teste 2):** `reportSaveFailure` usa `terminal = false` → o POST roda numa
+thread daemon e ninguém espera. O `:game` morreu ~4,5 s depois do report; o servidor registrou o
+9291 só ~1 s antes. Rede lenta = report perdido junto com o dump.
+
+**Símbolos abertos (2026-10-02):**
+
+- `TelemetryReporter.report` (`shared/telemetry/TelemetryReporter.kt:102-156`): cria
+  `Thread("Lemuroid-Telemetry")` daemon; só faz `worker.join(TERMINAL_JOIN_MS = 2500)` quando
+  `terminal`. Não guarda referência ao worker nos não-terminais. Nunca lança (tudo em `try/catch`).
+  Dedup por `component|message` no processo (`seen`).
+- `BaseGameScreenViewModel.requestFinish` (`:308-325`): `saves.saveOnExit(game)` (nunca lança) →
+  `sideEffects.requestSuccessfulFinish(savesFailed = !saved)`.
+- `BaseGameActivity.finishAndExitProcess` (`:582-591`): `GlobalScope.launch { delay(animationDuration());
+  exitProcess(0) }` e `finish()`. **É o ponto único por onde as saídas normais matam o `:game`.**
+- `GameProcessSession` (`shared/game/GameProcessSession.kt:35-36`): o processo principal, antes de
+  relançar um jogo, espera o `:game` sair por `EXIT_TIMEOUT_MS = 3000` e depois o mata. Conta com o
+  `exitProcess` saindo **400 ms** após o `finish()`.
+
+**O que fazer:**
+
+1. `TelemetryReporter`: guardar os workers não-terminais em voo (conjunto sincronizado; remover ao
+   terminar) e expor `awaitPending(timeoutMs: Long)` que faz `join` com prazo **total** (não por
+   worker). Nunca lança.
+2. `BaseGameActivity.finishAndExitProcess`: dentro do `GlobalScope.launch`, antes do `exitProcess`,
+   chamar `TelemetryReporter.awaitPending(...)` (em `Dispatchers.IO` ou aceitando bloquear uma
+   thread do Default — decidir lendo o código). Prazo: **delay + espera < 3000 ms**, senão o
+   `GameProcessSession.awaitGameProcessExit` mata o processo antes (o report se perde do mesmo
+   jeito e o relançamento fica mais lento). Sugestão: espera ≤ 2000 ms.
+   - Atenção ao pitfall 13 do `CLAUDE.md`: o processo continua vivo durante a espera; não pode haver
+     segunda sessão de core nesse intervalo — o `tryClaim` já recusa, mas conferir que nada novo
+     depende do `exitProcess` sair em 400 ms.
+3. Sem report pendente, a espera tem que ser zero (saída normal não pode ficar mais lenta).
+
+**Testes que provam:**
+
+- JVM (`lemuroid-app/src/test/.../telemetry/`): `awaitPending` volta na hora sem pendente; com um
+  worker bloqueado, volta no prazo e não lança. Se o `send` não for injetável, isolar a parte de
+  rastreio dos workers para testar sem rede.
+- Aparelho: repetir **exatamente** o Teste 2 (injeção `FAULT-INJECT` no `trySaveSRAM`, mesmo
+  procedimento de cópia limpa e reversão) com a rede limitada — por exemplo, um
+  `Thread.sleep(3000)` temporário dentro do `send`, também marcado `FAULT-INJECT`. Sem a Task A o
+  report some; com ela, chega com `logs_count: 2`. Conferir no logcat que a saída normal (sem
+  injeção) continua em ~2 s do BACK ao `:game has died`.
+- `./gradlew :lemuroid-app:testFreeBundleDebugUnitTest` e `:lemuroid-app:ktlintCheck` verdes;
+  reverter as injeções (`grep -rn FAULT-INJECT lemuroid-app/src` vazio + hash igual à cópia limpa).
+- Fechar no painel só os reports gerados pela injeção (`triagem.py close <id>` + `verify`).
+
+**Depois:** registrar resultados aqui, commitar, e o passo seguinte é publicar a versão (passo 2 de
+"O que falta para `done/`"). O bug continua em `open/`.
