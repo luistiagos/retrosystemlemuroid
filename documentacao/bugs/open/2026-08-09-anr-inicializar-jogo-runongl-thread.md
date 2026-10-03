@@ -1,7 +1,7 @@
 # [BUG] ANR ao inicializar jogo — main thread bloqueia em `runOnGLThread` enquanto o core carrega a ROM
 
 **Data:** 2026-08-09
-**Status:** 🟡 Todos os bloqueios de main thread **nossos** foram corrigidos e validados em device — o
+**Status:** 🟡 (2026-10-02: o report de timeout passou a levar a pilha da GLThread — ver a última seção) Todos os bloqueios de main thread **nossos** foram corrigidos e validados em device — o
 último resíduo, o `dlopen` do core, saiu da main em 2026-09-10 (ver seção própria). Segue **aberto**
 apenas porque a causa de fundo (GLThread travando dentro do core) não é nossa e não reproduz sob
 demanda: o critério de fechamento é a telemetria parar de acusar `GLThreadTimeoutException` em
@@ -584,3 +584,263 @@ Ver também [2026-08-09-telemetria-nao-captura-anr.md](2026-08-09-telemetria-nao
   problema de desempenho específico de um sistema.
 - Sem log adicional além da stack Java (é `runOnGLThread`, não crash nativo — não há tombstone).
   Não reproduzido.
+
+## Onde a GLThread está presa? — a telemetria não dizia (2026-10-02)
+
+As quatro ocorrências (3358, 3359, 3810, 8622) trazem só a pilha de **quem espera**
+(`runOnGLThread ← serializeSRAM ← saveOnExit`), que é sempre a mesma e não aponta causa. Sem saber
+em que ponto a GLThread parou, a causa de fundo não tem como ser corrigida — e ela não reproduz sob
+demanda. Esta rodada fecha esse buraco de diagnóstico.
+
+### Símbolos abertos e o que se descobriu
+
+- `GLSurfaceView.GLThread.guardedRun` (patchado, `LibretroDroid-patched`): a fila é drenada **antes**
+  de pausa/superfície/desenho, um evento por volta, sob `mLock`. `mShouldExit` é testado **antes**
+  da fila: thread encerrada descarta em silêncio o que estiver enfileirado, e `queueEvent` depois
+  disso só faz `add` numa lista que ninguém lê — o chamador paga os 30 s inteiros.
+- `GLThread.queueEvent` entra em `synchronized(mLock)`. Logo, um timeout (e não um travamento
+  eterno de quem chama) prova que a GLThread **não** estava segurando `mLock`: ela estava fora do
+  bloco — em `event.run()`, `createSurface`, `onSurfaceCreated` (carga da ROM), `onSurfaceChanged`,
+  `onDrawFrame` (`LibretroDroid.step` → `retro_run`) ou `eglSwapBuffers` — ou nem existia mais.
+- `onDetachedFromWindow → requestExitAndWait` é o único caminho para `mShouldExit` com a view viva
+  (fora o `finalize`). Na saída pelo BACK/menu a view segue anexada: o `AndroidView` de
+  `MobileGameScreen`/`TVGameScreen` não sai da composição durante o `loadingState`, e o
+  `GameActivity` declara todo `configChanges` (não há recriação). Então, para `phase=exit-save`,
+  "thread encerrada" é improvável — mas é barato confirmar, e é o que o dump abaixo faz.
+- Nativo: `LibretroDroid::step` limita a 2 frames por volta e `FPSSync::wait` dorme no máximo um
+  intervalo de frame; `CoreWorkGuard.begin/end` só pegam um lock curto, nunca esperam. **Nada nosso
+  segura a GLThread por 30 s** — sobra core ou driver.
+- `TelemetryReporter.reportThrowable` já aceita `extraLog` (vira um segundo item de `logs`).
+
+### Hipóteses descartadas
+
+- **Lentidão de core pesado**: a 8622 é NES (core leve) — já registrado acima.
+- **Detach da view antes da gravação de saída**: ver acima; sem caminho conhecido no fluxo de saída.
+- **Lost wakeup no `GLSurfaceView` patchado**: `queueEvent` faz `add` + `notifyAll` sob o mesmo
+  lock em que a GLThread testa a fila antes do `wait()`. Não há janela.
+- **Probe antes da primeira tentativa de `serializeSRAM` para encurtar a saída**: tiraria os 30 s
+  da saída com jogo travado, mas trocaria SRAM que talvez ainda fosse gravada por velocidade — sem
+  dado de quantas vezes a GLThread volta depois de 2 s, não há base para essa troca. Fica para
+  depois que o dump disser onde ela para.
+
+### O que foi feito
+
+- `GLThreadDump` (app, `shared/game`): no timeout, lista as threads vivas `GLThread *` do processo
+  com estado e pilha — ou registra que não há nenhuma (thread encerrada: os eventos nunca rodariam).
+- O dump vai como `extraLog` nos três pontos que reportam `GLThreadTimeoutException`:
+  `GameViewModelSaves.reportSaveFailure` (`exit-save`/`background-save`), `BaseGameActivity.readDiskState`
+  (`open-menu`) e o `UncaughtExceptionHandler` do `BaseGameActivity` (núcleo travado, terminal).
+- Teste JVM `GLThreadDumpTest`: thread `GLThread <n>` parada num método conhecido aparece no dump
+  com o método; sem thread, o dump diz que não há GLThread viva.
+
+**Como ler o próximo report:** o topo da pilha da GLThread decide o dono — `LibretroDroid.step`
+(core: `retro_run` não volta), `eglSwapBuffers`/`EglHelper.swap` (driver/BufferQueue),
+`LibretroDroid.loadGameFromPath`/`onSurfaceCreated` (carga da ROM ainda em curso), `Object.wait`
+dentro de `guardedRun` (a GLThread **está ociosa** e não viu o evento — bug nosso no
+`GLSurfaceView`), ou "no live GLThread" (thread encerrada antes da gravação — bug nosso no ciclo de
+vida).
+
+### Validação (2026-10-02)
+
+- `./gradlew :lemuroid-app:testFreeBundleDebugUnitTest` → 49 testes, 0 falhas (inclui os 3 de
+  `GLThreadDumpTest`; o primeiro só passa se o dump trouxer o **método** em que a thread está parada,
+  não só o nome dela).
+- `./gradlew :lemuroid-app:ktlintCheck` → passa. O baseline do `lemuroid-app` foi regenerado só porque
+  as duas linhas inseridas no `BaseGameActivity` deslocaram 21 entradas já congeladas (mesmas regras e
+  colunas, linha +1/+2); o diff do `baseline.xml` não tem apontamento novo.
+- Release: `-keep class com.swordfish.libretrodroid.** { *; }` (`proguard-rules.pro:91`) mantém
+  `GLSurfaceView$GLThread`, `GLRetroView$Renderer` e `LibretroDroid` legíveis no dump; frames do app,
+  se aparecerem, precisam do `mapping.txt` da versão.
+- **Não testado em device**: a travada real não reproduz sob demanda, e o que mudou é só o conteúdo do
+  report (o fluxo de saída/menu é o mesmo validado em 2026-09-03).
+
+### Próximo passo
+
+Esperar o próximo `GLThreadTimeoutException` na telemetria (app ≥ a versão que levar este commit) e
+ler o segundo item de `logs` — o dump. O topo da pilha da GLThread escolhe o caminho, conforme a
+tabela de "Como ler o próximo report" acima. O critério de fechamento desta página não muda.
+
+## Passagem de bastão — testes pendentes (2026-10-02)
+
+Estado ao fim da sessão: código do `GLThreadDump` pronto, testes unitários e ktlint verdes,
+**nada commitado**. Arquivos desta rodada (a árvore tem outras mudanças pendentes de trabalhos
+anteriores — commitar só estes):
+
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/GLThreadDump.kt` (novo)
+- `lemuroid-app/src/test/java/com/swordfish/lemuroid/app/shared/game/GLThreadDumpTest.kt` (novo)
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/viewmodel/GameViewModelSaves.kt`
+  (`reportSaveFailure` → `extraLog = GLThreadDump.forFailure(error)`)
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt`
+  (`readDiskState` e `setUpExceptionsHandler`)
+- `lemuroid-app/config/ktlint/baseline.xml` (só deslocamento de linha do `BaseGameActivity`;
+  o arquivo já tinha mudanças pendentes de antes — conferir o hunk ao fazer `git add -p`)
+- esta página
+
+Não é preciso reler o código da análise: as conclusões estão nas seções "Onde a GLThread está
+presa?" e "Validação (2026-10-02)" acima.
+
+### Teste 1 — telemetria: há padrão nas ocorrências? (precisa de permissão)
+
+Nesta sessão a consulta não rodou: sem `JWT_SECRET_KEY`/`TRIAGEM_TOKEN` no ambiente, e o modo auto
+barra a leitura do `.env`. Com o modo **edit** e a permissão aceita, seguir a skill
+`triagem-bugs-prod` (`~/.claude/skills/triagem-bugs-prod/SKILL.md`, seção "Ambiente" — injeta
+`JWT_SECRET_KEY` a partir de `C:\projects\digitalstoregamesproject\digitalstoregamesbackend\.env`):
+
+```
+python ~/.claude/skills/triagem-bugs-prod/scripts/triagem.py list --project retrogamesystem --json <scratch>/errs.json
+```
+
+Filtrar **todos os status** (não só `open`) por `GLThreadTimeoutException` e tabular, a partir do
+`page_url` (contexto): `phase=` (`exit-save` / `background-save` / `open-menu` / terminal),
+`system=`, `device=`, `app=`. Perguntas que a tabela responde:
+
+1. Aparece `phase=background-save`? Se sim, reabrir a hipótese "view desanexada → GLThread encerrada
+   → eventos descartados" (activity destruída com o `:game` em segundo plano) — ver
+   `GLSurfaceView.onDetachedFromWindow`/`requestExitAndWait` no `LibretroDroid-patched`.
+2. Concentra em fabricante/driver (Samsung/Mali?) ou em core? Driver aponta para `eglSwapBuffers`.
+3. Já há report com o 2º item de `logs` (o dump)? Só a partir da versão que levar este commit.
+
+**Não fechar** esses erros no painel por esta rodada: a página continua aberta e eles são o
+critério de fechamento. Registrar a tabela aqui, com o comando e os números.
+
+#### Resultado do Teste 1 (2026-10-02)
+
+O `triagem.py list` só devolve `status=open`; para todos os status foi usado um script de scratchpad
+que importa o próprio `triagem.fetch_all` e filtra por `"GLThreadTimeout"` em qualquer campo:
+**9.284 erros no serviço → 11 com `GLThreadTimeoutException`, todos já `close`, todos com
+`logs_count: 1`**. Dois são `1.17.12-DEBUG` do Moto G86 (4193, 4219 — as injeções de 2026-09-03) e
+saem da conta. A fase das versões anteriores à 1.17.19 (sem `phase=` no contexto) foi tirada do
+call-site, 3ª linha da pilha (`triagem.py logs <ids> --out <scratch>`): `getAvailableDisks` =
+`open-menu`.
+
+| id | data | app | aparelho | Android | sistema | call-site | fase |
+|----|------|-----|----------|---------|---------|-----------|------|
+| 3358 | 08-31 11:41 | 1.17.11 | samsung SM-G990E | 16 | gc (dolphin) | `getAvailableDisks` | open-menu |
+| 3359 | 08-31 11:43 | 1.17.11 | samsung SM-G990E | 16 | gc (dolphin) | `serializeSRAM` | gravação (sem `phase=`) |
+| 3810 | 09-02 04:50 | 1.17.12 | samsung SM-A515F | 13 | gc (dolphin) | `serializeSRAM` | gravação (sem `phase=`) |
+| 5947 | 09-11 17:45 | 1.17.12 | samsung SM-A515F | 13 | gc (dolphin) | `getAvailableDisks` | open-menu |
+| 5948 | 09-11 17:46 | 1.17.12 | samsung SM-A515F | 13 | gc (dolphin) | `getAvailableDisks` | open-menu |
+| 5965 | 09-11 19:16 | 1.17.12 | samsung SM-A515F | 13 | gc (dolphin) | `getAvailableDisks` | open-menu |
+| 6283 | 09-13 16:42 | 1.17.19 | samsung SM-G985F | 13 | gc | `serializeSRAM` | exit-save |
+| 7631 | 09-20 17:19 | 1.17.20 | Xiaomi 24095PCADG | 16 | neogeo | `serializeSRAM` | exit-save |
+| 8622 | 09-25 21:57 | 1.17.22 | samsung SM-A166M | 16 | nes | `serializeSRAM` | exit-save |
+
+Respostas:
+
+1. **`phase=background-save`: nenhuma.** Das 5 gravações, 3 são `exit-save` explícito e 2 (3359,
+   3810) são de antes do `phase=` — a classe ofuscada (`j4.d$k`) não diz se era saída ou segundo
+   plano sem o `mapping.txt` daquela versão. A hipótese "view desanexada → GLThread encerrada" não
+   ganha apoio; segue improvável.
+2. **Concentração:**
+   - **Core:** 6 de 9 são GameCube/Dolphin — mas 4 delas vêm de um único SM-A515F, todas em jogos
+     *Need for Speed* (U, U2, Hot Pursuit 2), e duas vêm de um único SM-G990E na mesma sessão de
+     jogo (menu às 11:41, saída às 11:43). São **5 aparelhos distintos** ao todo. Os 3 casos de
+     ≥ 1.17.19 são 3 sistemas diferentes (gc, neogeo, nes).
+   - **Fabricante:** Samsung em 7 de 9 reports / 4 de 5 aparelhos. Linha de base: Samsung é **59,1%**
+     dos 4.012 reports `retrogamesystem/*` não-debug (mesma coleta). Com n = 5 aparelhos isso não
+     separa de acaso — **não dá para apontar driver** (e a tela de `eglSwapBuffers` não fica mais nem
+     menos provável).
+   - Dado lateral: das 76 reports não-debug de `retrogamesystem/game`, 9 são `system=gc` — e 6 dessas
+     9 são este timeout. No GameCube, este é o erro dominante.
+3. **Report com o dump (2º item de `logs`): nenhum** — todos têm `logs_count: 1`. A última versão que
+   reportou foi a 1.17.22; o `GLThreadDump` ainda não foi distribuído.
+
+**Correção ao que está acima:** a seção "Recorrência em produção (telemetria, 2026-09-02)" põe 3358
+como `serializeSRAM`; a pilha dela é `getAvailableDisks` (abrir o menu). E "As quatro ocorrências"
+de "Onde a GLThread está presa?" eram, na verdade, nove em produção — 5947, 5948, 5965, 6283 e 7631
+foram fechadas em triagens anteriores sem entrar nesta página. Nenhuma das duas correções muda a
+conclusão: a pilha de quem espera continua sem apontar causa.
+
+**Observação:** os 4 `open-menu` são todos ≤ 1.17.12; de 1.17.19 em diante só aparece `exit-save`.
+Não investigado se é mudança de comportamento ou acaso de amostra pequena.
+
+### Teste 2 — em aparelho: o dump chega à telemetria? (injeção de falha)
+
+A travada real não reproduz sob demanda, então forçar uma — mesmo método das validações de
+2026-09-03 e 2026-09-10. Aparelho: SM-A127M `RX8R90G1D6E` via adb (ou o Moto G86 se conectado).
+
+1. Copiar `GameViewModelSaves.kt` limpo para o scratchpad.
+2. Em `trySaveSRAM`, antes do `withContext(Dispatchers.IO) { view.serializeSRAM() }`, só na
+   primeira tentativa, inserir com marcador:
+   ```kotlin
+   // FAULT-INJECT: prende a GLThread num evento por 40 s
+   if (attempt == 0) view.queueEvent { Thread.sleep(40_000) }
+   ```
+   O `serializeSRAM` enfileirado atrás dele estoura os 30 s, a sonda de 2 s falha e cai em
+   `reportSaveFailure` → `GLThreadDump`.
+3. `./gradlew :lemuroid-app:assembleFreeBundleDebug`, instalar o APK `arm64-v8a`, abrir um jogo leve
+   (SNES/NES), esperar o 1º frame, sair pelo BACK.
+4. Conferir, nesta ordem:
+   - logcat: `W GameViewModelSaves: SRAM save timed out (attempt 1/2)` e, ~32 s depois do BACK, a volta
+     para a `MainActivity` com o toast de "não conseguiu salvar" — **sem** `GameCrashActivity`;
+   - painel (Teste 1, `triagem.py logs <id>`): o report novo tem **dois** itens em `logs`, e o segundo
+     começa com `GLThread <n> state=TIMED_WAITING` e traz `Thread.sleep` ← `GameViewModelSaves` ←
+     `GLSurfaceView$GLThread.guardedRun`. Isso prova que o dump pega a thread certa no processo
+     `:game` real (o teste JVM só prova com thread sintética).
+   - A telemetria deduplica por mensagem **dentro do processo**: repetir só após matar o `:game`.
+5. Reverter: `grep -rn "FAULT-INJECT" lemuroid-app/src` vazio **e** `diff` contra a cópia limpa
+   vazio; rebuild e reinstalar o APK limpo. Instrumentação esquecida em build de distribuição é o
+   pitfall 8. Fechar no painel **só** o erro gerado pela injeção.
+
+#### Resultado do Teste 2 (2026-10-02) — passou
+
+SM-A127M `RX8R90G1D6E` (Android 13), `assembleFreeBundleDebug` com a injeção acima (app
+`1.17.23-DEBUG`), APK `arm64-v8a`. Jogo: *Super Mario Bros. 3 (EU)*, NES — baixado pelo próprio app
+(o aparelho não tinha ROM). Primeiro frame visível, depois BACK.
+
+Linha do tempo (logcat `-v time`, relógio do aparelho):
+
+| hora | evento |
+|------|--------|
+| 18:45:24.140 | `Displayed …GameActivity: +3s607ms` |
+| 18:45:43.603 | BACK (imagem congela com spinner — GLThread no `sleep`) |
+| 18:46:13.758 | `W GameViewModelSaves: SRAM save timed out (attempt 1/2)` — **+30,15 s** |
+| 18:46:17.788 | `W GameViewModelSaves: Skipping autosave (exit-save): GL thread is not draining its event queue` |
+| 18:46:18.291 | `Process app.retrogamesystem.debug:game (pid 30990) has died` |
+| 18:46:18.435 | toast via `SafeToastKt.showToastSafely`, no processo principal (pid 30090) |
+
+Sem `GameCrashActivity`: volta para a `MainActivity` com o toast. A saída levou **34,7 s**, não os
+~32 s previstos — são **duas** sondas de 2 s, uma no `trySaveSRAM` (decide se repete) e outra no
+`persistSession` (decide se tenta o autosave).
+
+Painel: report **9291** (`retrogamesystem/game`, `phase=exit-save; call=serializeSRAM; system=nes;
+game=Super Mario Bros. 3`, `logs_count: 2`). `triagem.py logs 9291`, item `seq=1`:
+
+```
+GLThread 1 state=TIMED_WAITING
+	at java.lang.Thread.sleep(Native Method)
+	at java.lang.Thread.sleep0(Thread.java:689)
+	at java.lang.Thread.sleep(Thread.java:667)
+	at java.lang.Thread.sleep(Thread.java:580)
+	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelSaves.trySaveSRAM$lambda$5$lambda$4(GameViewModelSaves.kt:151)
+	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelSaves.$r8$lambda$ZTFw7N7MTx9WY6AVeYCyB9jT8h0(GameViewModelSaves.kt:0)
+	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelSaves$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+	at com.swordfish.libretrodroid.GLSurfaceView$GLThread.guardedRun(GLSurfaceView.java:785)
+	at com.swordfish.libretrodroid.GLSurfaceView$GLThread.run(GLSurfaceView.java:608)
+```
+
+Exatamente o previsto: o dump pega a GLThread **real** do processo `:game` e mostra em que evento
+ela está presa (`guardedRun:785` = `event.run()`), não só o nome. Numa travada de verdade, o lugar
+do `sleep` será ocupado por `LibretroDroid.step`, `eglSwapBuffers` etc.
+
+**Risco observado (não corrigido):** o report é `terminal = false` — POST numa thread daemon. O
+servidor registrou o 9291 às `21:46:17` UTC, ~1 s antes de o `:game` morrer (18:46:18.29 local). A
+janela entre o `reportSaveFailure` e o `exitProcess` é só a das duas sondas (~4,5 s); numa rede lenta
+o report — e o dump com ele — se perde. Se os próximos timeouts de produção chegarem sem o 2º item,
+este é o primeiro suspeito.
+
+Reversão: cópia limpa restaurada; `FAULT-INJECT` em `lemuroid-app/src` → 0 ocorrências; hash
+SHA-256 do `GameViewModelSaves.kt` igual ao da cópia limpa. Rebuild e reinstalação do APK limpo; no
+aparelho, BACK às 18:50:58 → `Stored sram file` 18:50:59.620 → `Stored autosave file with size:
+13805` 18:50:59.736 → `:game` encerrado 18:51:00.244 (saída normal em ~2 s).
+
+9291 fechado no painel (`triagem.py close 9291` → `affected=1`; `verify 9291` → `ainda abertos: 0`).
+
+### Depois dos testes
+
+- Registrar os resultados aqui (comandos literais, números, o trecho do dump).
+- Commitar só os arquivos listados acima (mensagem sugerida:
+  `diag(game): anexa a pilha da GLThread ao report de GLThreadTimeoutException`) — o bug segue em
+  `open/`, então não mover para `done/`.
+- Decisão em aberto (não tomar sem dado): sonda antes da 1ª tentativa de `serializeSRAM` para encurtar
+  a saída com jogo travado de ~32 s para ~2 s — ver "Hipóteses descartadas".
