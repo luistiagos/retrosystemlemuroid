@@ -20,8 +20,8 @@ import timber.log.Timber
  * singleton nativo e um so: um `destroy()` adiado da sessao velha roda por cima da nova.
  *
  * O processo morre em `BaseGameActivity.finishAndExitProcess`, mas nao na hora: o `exitProcess`
- * sai `config_mediumAnimTime` (400 ms) depois do `finish()`, e e nessa janela que o fallback de
- * core relanca o jogo. E toda destruicao da Activity que nao passa por la (tarefa removida dos
+ * sai `config_mediumAnimTime` (400 ms) depois do `finish()` — ate 2,4 s com telemetria em envio —,
+ * e e nessa janela que o fallback de core relanca o jogo. E toda destruicao da Activity que nao passa por la (tarefa removida dos
  * recentes, recriacao) deixa o processo vivo em cache, pronto para o proximo jogo reaproveitar.
  *
  * Sinal na telemetria: o tombstone traz `name: GLThread 2` (ou maior). O contador de `GLThread` e
@@ -32,7 +32,10 @@ import timber.log.Timber
 object GameProcessSession {
     private const val POLL_INTERVAL_MS = 50L
 
-    /** Folga para o `exitProcess` de `finishAndExitProcess`, que sai 400 ms depois do `finish()`. */
+    /**
+     * Folga para o `exitProcess` de `finishAndExitProcess`: 400 ms depois do `finish()`, ate 2,4 s
+     * quando ha report de telemetria em envio (`BaseGameActivity.EXIT_DEADLINE_MS`).
+     */
     private const val EXIT_TIMEOUT_MS = 3_000L
 
     /** Depois do `killProcess`, quanto esperar o sistema tirar o processo da lista. */

@@ -51,6 +51,9 @@ object TelemetryReporter {
     /** hash(component + "|" + message) already sent this session. */
     private val seen = Collections.synchronizedSet(HashSet<Int>())
 
+    /** POSTs em voo, terminais ou nao — ver [awaitPending]. */
+    private val workers = TelemetryWorkers()
+
     /** Reads the kill-switch/endpoint config. Safe to call very early in onCreate. Never throws. */
     fun init(context: Context) {
         try {
@@ -97,7 +100,8 @@ object TelemetryReporter {
 
     /**
      * General report. [component] becomes `retrogamesystem/<component>`. When [terminal] is false
-     * the POST runs on a detached daemon thread so the caller is never blocked. Never throws.
+     * the POST runs on a detached daemon thread so the caller is never blocked — whoever kills the
+     * process right after must call [awaitPending] first. Never throws.
      */
     fun report(
         component: String,
@@ -136,8 +140,7 @@ object TelemetryReporter {
                     )
                 }
 
-            val worker = Thread({ send(body) }, "Lemuroid-Telemetry").apply { isDaemon = true }
-            worker.start()
+            val worker = workers.start("Lemuroid-Telemetry") { send(body) }
             if (terminal) {
                 // Crash paths can't just detach — the process is about to die and would take the
                 // thread with it. But they must not hang either: BaseGameActivity shows its error
@@ -153,6 +156,15 @@ object TelemetryReporter {
         } catch (ignored: Throwable) {
             // telemetry never affects app behavior
         }
+    }
+
+    /**
+     * Espera os reports ainda em envio, por no maximo [timeoutMs] no total. Para quem vai matar o
+     * processo logo em seguida (`BaseGameActivity.finishAndExitProcess`): um report nao-terminal
+     * roda num thread daemon e morreria junto. Sem report pendente volta na hora. Never throws.
+     */
+    fun awaitPending(timeoutMs: Long) {
+        workers.awaitAll(timeoutMs)
     }
 
     private fun send(body: JSONObject) {

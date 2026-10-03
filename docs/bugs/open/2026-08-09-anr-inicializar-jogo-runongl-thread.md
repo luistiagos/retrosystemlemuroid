@@ -874,7 +874,10 @@ a causa de fundo, e ela ainda é desconhecida. Caminho:
    jogo travado de ~35 s → ~2 s, ao custo de desistir de SRAM que talvez ainda gravasse — os dumps
    dão o dado para pesar isso).
 
-## Passagem de bastão — Task A (2026-10-02, vigente)
+## Passagem de bastão — Task A (2026-10-02)
+
+> ✅ **Executada** na sessão seguinte do mesmo dia — ver "Resultado da Task A" abaixo. A passagem
+> **vigente** é a última seção da página.
 
 Estado: árvore limpa quanto a este bug (commits `46b4995`, `6a4eef3`; nada pendente desta página).
 Fora do escopo e **não** commitar junto: `.claude/settings.json` e o resto do
@@ -932,3 +935,100 @@ thread daemon e ninguém espera. O `:game` morreu ~4,5 s depois do report; o ser
 
 **Depois:** registrar resultados aqui, commitar, e o passo seguinte é publicar a versão (passo 2 de
 "O que falta para `done/`"). O bug continua em `open/`.
+
+### Execução da Task A (2026-10-02)
+
+**Análise antes da edição** (símbolos reabertos nesta sessão, além dos listados acima):
+
+- `TelemetryReporter.report:139-152`: o worker é criado e iniciado na mesma linha; o `send` não é
+  injetável (o objeto lê `Build.*` e `HttpURLConnection` direto). Por isso o rastreio dos workers vai
+  para uma classe à parte, `TelemetryWorkers`, testável na JVM sem rede.
+- `BaseGameActivity.finishAndExitProcess:582-591`: `GlobalScope.launch` sem dispatcher = `Default`.
+  A espera é um `Thread.join` (bloqueante), então o `launch` passa a `Dispatchers.IO` — bloquear até
+  2 s uma thread do `Default` competiria com as corrotinas da UI que ainda rodam no fade-out.
+- `animationDuration()` (`retrograde-util/.../Android.kt:23`) = `config_mediumAnimTime`, 400 ms no
+  AOSP mas valor de recurso do fabricante. O prazo do report é calculado como
+  `EXIT_DEADLINE_MS (2400) − duração`, não fixo em 2000: delay + espera fica ≤ 2,4 s mesmo numa ROM
+  que alongue a animação, abaixo dos 3 s do `GameProcessSession.EXIT_TIMEOUT_MS`.
+- `setUpExceptionsHandler:198-217`: o report terminal já faz `join(2500)` e depois chama
+  `performUnexpectedErrorFinish` → `finishAndExitProcess`. **Decisão:** rastrear **todos** os workers,
+  não só os não-terminais — um terminal que estourou os 2,5 s ganha a mesma janela extra antes do
+  `exitProcess`, e o código fica sem bifurcação. O orçamento de 3 s do processo principal começa a
+  contar só quando o resultado chega (no `finish()`, depois do `join`), então não é afetado.
+- Pitfall 13: o que depende do `:game` sair rápido é (a) `tryFallbackCore`, que já espera por
+  `awaitGameProcessExit` (3 s, mata depois), e (b) um jogo novo aberto pelo usuário nessa janela, que
+  cai no processo velho e é recusado por `tryClaim` → `RESULT_RESTART_IN_FRESH_PROCESS` →
+  `killProcess`. Nenhum dos dois quebra com a janela maior; no pior caso o report é perdido, que é o
+  contrato da telemetria. Sem report pendente, `awaitAll` volta na hora (a janela continua 400 ms).
+
+**Tasks:**
+
+1. `shared/telemetry/TelemetryWorkers.kt` (novo): `start(name, block)` registra o thread **antes** do
+   `start()` (senão um worker rápido sai do conjunto antes de entrar) e se remove no `finally`;
+   `awaitAll(timeoutMs)` faz `join` com prazo total; nunca lança. Teste:
+   `TelemetryWorkersTest` (sem pendente volta na hora; worker preso → volta no prazo sem lançar;
+   worker que termina → `pendingCount` volta a 0).
+2. `TelemetryReporter.report`: worker via `TelemetryWorkers.start`; `awaitPending(timeoutMs)` público.
+3. `BaseGameActivity.finishAndExitProcess`: `launch(Dispatchers.IO)` → `delay` →
+   `TelemetryReporter.awaitPending(EXIT_DEADLINE_MS − duração)` → `exitProcess(0)`.
+4. Aparelho: Teste 2 com `Thread.sleep(3000)` extra no `send` (as duas injeções `FAULT-INJECT`).
+
+#### Resultado da Task A (2026-10-02) — passou
+
+**Código:** `TelemetryWorkers` (novo), `TelemetryReporter.report` → `workers.start(...)` +
+`awaitPending`, `BaseGameActivity.finishAndExitProcess` (`launch(Dispatchers.IO)` → `delay` →
+`awaitPending(EXIT_DEADLINE_MS − duração)` → `exitProcess`), `EXIT_DEADLINE_MS = 2_400L`. Comentários
+de prazo em `GameProcessSession` e `GameLaunchTaskHandler.tryFallbackCore` (diziam "400 ms").
+
+**JVM:** `./gradlew :lemuroid-app:testFreeBundleDebugUnitTest` → **54 testes, 0 falhas** (49 + 5 de
+`TelemetryWorkersTest`: sem pendente volta em < 100 ms — medido 2 ms; dois workers presos com prazo de
+300 ms → volta em 250–1000 ms, medido 309 ms, prazo total e não por worker; worker que termina em 200 ms
+→ esperado e `pendingCount` 0; worker que lança → sai do conjunto; thread interrompido → não lança e
+mantém a flag). `:lemuroid-app:ktlintCheck` → passa. As 18 entradas do `baseline.xml` do
+`TelemetryReporter` (+12 linhas) e as 2 do `BaseGameActivity` (+7) foram **deslocadas à mão** — mesma
+regra e coluna — em vez de regenerar o arquivo, que tem mudanças pendentes alheias (as do `Color.kt`).
+
+**Aparelho** (SM-A127M `RX8R90G1D6E`, Android 13, `1.17.23-DEBUG` `arm64-v8a`, *Super Mario Bros. 3
+(EU)*, BACK depois do 1º frame). Injeções `FAULT-INJECT`: a do Teste 2 no `trySaveSRAM` +
+`Thread.sleep(2_000)` no início do `TelemetryReporter.send`. **2 s e não os 3 s sugeridos:** no Teste 2
+o report saiu ~2,5 s antes da morte do `:game` e a rede levou ~1,5 s; com 2 s, sem a Task A o envio
+termina ~1 s depois da morte, e com ela ~1 s antes do teto de 2,4 s — margem dos dois lados.
+
+| build | report (≈ timeout + sonda) | `finish` (≈ "Skipping autosave") | `:game has died` | painel |
+|-------|------|------|------|------|
+| **controle** (+ 3ª injeção: `awaitPending(0L)`) | 22:26:47,6 | 22:26:49,66 | 22:26:50,16 (+0,5 s) | **nada** — nenhum report do SM-A127M |
+| **Task A** | 22:31:25,1 | 22:31:27,13 | 22:31:28,21 (+1,1 s) | **9311**, `01:31:28` UTC, `logs_count: 2` |
+
+Com a Task A a espera acabou assim que o envio terminou (+1,1 s, abaixo do teto de 2,4 s), e o toast de
+"não salvou" apareceu às 22:31:27,71, **antes** da morte do `:game` — o resultado chega no `finish()`,
+então a espera não atrasa nada que o usuário veja. Sem `GameCrashActivity` nos dois builds.
+`triagem.py logs 9311`, `seq=1`: `GLThread 1 state=TIMED_WAITING` → `Thread.sleep` ←
+`GameViewModelSaves.trySaveSRAM…(GameViewModelSaves.kt:151)` ← `GLSurfaceView$GLThread.guardedRun(:785)`
+— o mesmo dump do Teste 2.
+
+**Saída normal** (APK limpo): BACK ~22:34:50,5 → `Stored sram` 50,623 → `Stored autosave` 50,813 →
+`:game has died` 51,433. 620 ms do último save à morte (400 ms de animação + overhead): sem report
+pendente, a espera é zero.
+
+**Reversão:** `grep -rn FAULT-INJECT lemuroid-app/src` → 0; `sha256sum -c` dos 3 arquivos contra a cópia
+limpa → OK; rebuild e reinstalação do APK limpo (a saída normal acima é dele). Painel: `close 9311` →
+`affected=1`; `verify 9311` → `ainda abertos: 0`.
+
+#### Ocorrência nova em produção: 9292 (achada nesta rodada, **não** fechada)
+
+`retrogamesystem/game`, 2026-10-02 21:48 UTC, **Anbernic RG557** (Android 14), app **1.17.23**,
+`phase=exit-save; call=serializeSRAM; system=gc`, *Capcom vs. SNK 2 EO*, `logs_count: 1`. É a 10ª em
+produção e a primeira fora de Samsung/Xiaomi — de novo GameCube. Sem dump porque a 1.17.23 foi
+fechada em `bc9c343` (18:00), **antes** do `46b4995` (21:28): `git log -S'versionName = "1.17.23"'`
+→ `bc9c343`. Fica aberta: os reports desta família são o critério de fechamento da página.
+
+> ⚠️ **A versão que levar o dump precisa ser 1.17.24 ou maior.** A 1.17.23 já existe em produção
+> **sem** o `GLThreadDump`; publicar o dump com o mesmo `versionName` torna impossível saber, pelo
+> `app=` do report, se a ausência do 2º item é "versão sem dump" ou "dump perdido".
+
+## Passagem de bastão — publicar e esperar (2026-10-02, vigente)
+
+Task A feita e commitada (esta seção substitui a anterior como vigente). Próximo passo é o 2 de
+"O que falta para `done/`": publicar uma versão **≥ 1.17.24** com `46b4995` + Task A. Depois, consultar
+`triagem.py list --project retrogamesystem` filtrando `GLThreadTimeout` e ler o `seq=1` de cada report
+com `app=` ≥ 1.17.24 conforme "Como ler o próximo report". O 9292 continua aberto no painel.

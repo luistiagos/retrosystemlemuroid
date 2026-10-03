@@ -191,8 +191,8 @@ class GameLaunchTaskHandler(
         val nextCore = system.systemCoreConfigs.firstOrNull { it.coreID.coreName !in triedCores }
             ?: return false
         Timber.i("Core fallback: tried=$triedCores, trying=${nextCore.coreID.coreName}")
-        // O resultado chega no finish(), e o :game que falhou so sai 400 ms depois. Relancar
-        // antes disso cai nele — e o exitProcess pendente mata a sessao nova no meio da carga.
+        // O resultado chega no finish(), e o :game que falhou so sai 400 ms (ate 2,4 s, com
+        // telemetria em envio) depois. Relancar antes disso cai nele — e o exitProcess pendente mata a sessao nova no meio da carga.
         GameProcessSession.awaitGameProcessExit(activity.applicationContext)
         BaseGameActivity.launchGame(activity, nextCore, game, false, leanback, ArrayList(triedCores))
         return true

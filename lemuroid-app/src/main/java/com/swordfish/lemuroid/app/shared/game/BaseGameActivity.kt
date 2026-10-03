@@ -579,11 +579,18 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         Process.killProcess(Process.myPid())
     }
 
+    /**
+     * Antes do `exitProcess`, espera os reports de telemetria ainda em envio: o de falha na gravacao
+     * de saida e nao-terminal (thread daemon) e sai segundos antes daqui — sem a espera, numa rede
+     * lenta ele morria junto com o processo. Sem report pendente a espera e zero. `Dispatchers.IO`
+     * porque a espera e um `join` bloqueante.
+     */
     private fun finishAndExitProcess() {
         onFinishTriggered()
         val duration = animationDuration().toLong()
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
             delay(duration)
+            TelemetryReporter.awaitPending((EXIT_DEADLINE_MS - duration).coerceAtLeast(0L))
             exitProcess(0)
         }
         finish()
@@ -729,6 +736,13 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         private const val LIBRETRODROID_PACKAGE = "com.swordfish.libretrodroid"
         private const val MAX_CAUSE_DEPTH = 10
+
+        /**
+         * Do `finish()` ao `exitProcess`, no maximo: animacao + espera pela telemetria em voo. Abaixo
+         * dos 3 s em que o processo principal desiste de esperar o `:game` e o mata
+         * ([GameProcessSession.awaitGameProcessExit]) — passar disso perderia o report do mesmo jeito.
+         */
+        private const val EXIT_DEADLINE_MS = 2_400L
 
         const val RESULT_ERROR = Activity.RESULT_FIRST_USER + 2
         const val RESULT_UNEXPECTED_ERROR = Activity.RESULT_FIRST_USER + 3
