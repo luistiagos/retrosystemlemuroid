@@ -205,6 +205,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 thread = thread,
                 error = exception,
                 extraContext = TelemetryContext.lastGameSession(applicationContext),
+                extraLog = if (isCoreStall(exception)) GLThreadDump.capture() else null,
                 terminal = true,
             )
             if (isEglIncompatibilityException(exception)) {
@@ -336,6 +337,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                     error = e,
                     extraContext = "phase=open-menu; call=getAvailableDisks; " +
                         "system=${system.id.dbname}; game=${game.title}",
+                    extraLog = GLThreadDump.forFailure(e),
                     terminal = false,
                 )
                 0 to 0

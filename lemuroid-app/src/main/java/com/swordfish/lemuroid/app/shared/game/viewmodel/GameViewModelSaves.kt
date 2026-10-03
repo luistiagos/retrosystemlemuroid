@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared.game.viewmodel
 import android.content.Context
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
+import com.swordfish.lemuroid.app.shared.game.GLThreadDump
 import com.swordfish.lemuroid.app.shared.telemetry.TelemetryReporter
 import com.swordfish.lemuroid.common.graphics.GraphicsUtils
 import com.swordfish.lemuroid.common.graphics.takeScreenshot
@@ -217,6 +218,7 @@ class GameViewModelSaves(
             thread = Thread.currentThread(),
             error = error,
             extraContext = "phase=$phase; call=$call; system=${system.id.dbname}; game=${game.title}",
+            extraLog = GLThreadDump.forFailure(error),
             terminal = false,
         )
     }
