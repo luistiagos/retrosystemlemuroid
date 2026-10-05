@@ -32,6 +32,16 @@ library desugaring*, nada no build avisou (o lint não lê bytecode de dependên
 PSP, DOS, 3DS, Dreamcast, GameCube e Amiga (e PSX com DualShock) caía ~1 s depois do boot — sempre que o
 pad touch está na tela, isto é, sem gamepad conectado. O release caía igual.
 
+### Desde quando
+
+Desde o início do fork: o commit raiz (`1071b08`, 2026-03-12, importado do Lemuroid upstream) já trazia
+`padkit 1.0.0-beta1` sem desugaring — o upstream (`Swordfish90/Lemuroid`, `master`) segue igual. Com o
+`minSdkVersion = 23` original, o crash valia para Android 6.0–7.1. O `25a4b58` (2026-04-21, ~1.17.0)
+baixou o `minSdk` para **21** e estendeu o crash ao 5.0–5.1 — e, junto, expôs o
+`getSystemService(Class)` do haptics do padkit (API 23), impossível com minSdk 23
+(`2026-10-05-padkit-haptics-getsystemservice-android-5.md`). Nenhum commit do desugaring foi revertido:
+`git log -S coreLibraryDesugaring` só acha um heap dump (`java_pid29980.hprof`) commitado e apagado em junho.
+
 ## Análise (2026-10-05, antes da correção)
 
 ### Símbolos abertos

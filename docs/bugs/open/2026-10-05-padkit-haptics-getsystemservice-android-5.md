@@ -44,6 +44,9 @@ logcat em segundos e resiste a `am force-stop` (só `run-as … kill -9` resolve
 - No dex do APK, `gg.padkit.haptics.AndroidHapticGenerator` é o único chamador de
   `Context.getSystemService(Class)` no caminho do `:game` (os demais são `androidx.core` `*Api23Impl`
   e `ShortcutManagerCompat`/`ShortcutsGenerator`, do processo principal).
+- **Introduzido pelo `25a4b58` (2026-04-21, ~1.17.0)**, que baixou o `minSdkVersion` de 23 (valor do
+  upstream e do commit raiz) para 21 sem auditar as dependências: com minSdk 23 esse código nunca rodava
+  abaixo da API 23. Desde então nenhum jogo abre no Android 5.0–5.1 pela UI mobile.
 - **Não é coberto pelo desugaring** (é API de framework) e **subir o padkit não resolve**: a 1.0.0 tem o
   mesmo `buildVibrator`.
 
