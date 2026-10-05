@@ -14,7 +14,7 @@ estão refutados pela desmontagem. O try/catch do `step` nunca poderia cobrir es
 **Severidade:** Alta (todo jogo de PSP pode abortar o processo `:game` a qualquer momento durante a partida, sem ação do usuário além de jogar)
 **Branch:** version9
 **Origem:** telemetria `retrogamesystem/native` (`libppsspp_libretro_android.so::reason=Native crash status=6`)
-**Errors (serviço):** 6986, 6559, 6423, 6417, 6150, 8103, 7309, 9180, 9187, 9203, 9355 (11 ocorrências)
+**Errors (serviço):** 6986, 6559, 6423, 6417, 6150, 8103, 7309, 9180, 9187, 9203, 9355, 9390 (12 ocorrências — 9390 na reprodução determinística instrumentada no SM-A127M)
 **Reincidência:** primeira vez detectado (5 ocorrências, Xiaomi/POCO rodin, arm64-v8a, Android 16, app 1.17.19)
 
 ---

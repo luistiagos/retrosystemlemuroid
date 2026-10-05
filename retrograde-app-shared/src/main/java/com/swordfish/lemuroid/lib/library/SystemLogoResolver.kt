@@ -77,6 +77,15 @@ object SystemLogoResolver {
             MetaSystemID.UZEBOX -> R.drawable.game_system_uzebox_hover
             MetaSystemID.LOWRES_NX -> R.drawable.game_system_lowresnx_hover
             MetaSystemID.ARDUBOY -> R.drawable.game_system_arduboy_hover
+            MetaSystemID.GAMECUBE -> R.drawable.game_system_gc_hover
+            MetaSystemID.SATURN -> R.drawable.game_system_saturn_hover
+            MetaSystemID.JAGUAR -> R.drawable.game_system_jaguar_hover
+            MetaSystemID.ODYSSEY2 -> R.drawable.game_system_odyssey2_hover
+            MetaSystemID.NEOCD -> R.drawable.game_system_neocd_hover
+            MetaSystemID.AMIGA -> R.drawable.game_system_amiga_hover
+            MetaSystemID.PCFX -> R.drawable.game_system_pcfx_hover
+            MetaSystemID.GAME_WATCH -> R.drawable.game_system_gw_hover
+            MetaSystemID.ATARI_ST -> R.drawable.game_system_atarist_hover
             else -> metaSystem.imageResId
         }
     }

@@ -2,9 +2,11 @@
 
 **Data:** 2026-10-05
 **Status:** ✅ Resolvido em 2026-10-05 — *core library desugaring* no `:lemuroid-app`
+**Complexidade:** média — configuração de build com core library desugaring no gradle (`desugar_jdk_libs:2.1.5`) e resolução de dependências Java 8+ desugared bytecode
 **Severidade:** Alta — público-alvo (TV box 7.1, `minSdk 21`); todo jogo de 8 sistemas
 **Branch:** version9
-**Origem:** achado durante a validação do core PPSSPP (`2026-09-18-ppsspp-retro-run-terminate-abort.md`)
+**Origem:** telemetria `retrogamesystem/game` (`Instant.kt::kotlinx.datetime.Instant.<clinit>`), achado durante a validação do core PPSSPP (`2026-09-18-ppsspp-retro-run-terminate-abort.md`)
+**Errors (serviço):** 9391, 9392, 9404 (3 ocorrências nos testes de reprodução no AVD Android 7.1.1 API 25)
 
 ## Sintoma
 

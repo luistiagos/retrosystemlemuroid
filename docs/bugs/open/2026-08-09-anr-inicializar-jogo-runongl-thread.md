@@ -1014,13 +1014,14 @@ pendente, a espera é zero.
 limpa → OK; rebuild e reinstalação do APK limpo (a saída normal acima é dele). Painel: `close 9311` →
 `affected=1`; `verify 9311` → `ainda abertos: 0`.
 
-#### Ocorrências em produção: 9292, 9378, 9379 (triagem 2026-10-05)
+#### Ocorrências em produção: 9292, 9378, 9379, 9408 (triagem 2026-10-05)
 
 - **9292:** `retrogamesystem/game`, 2026-10-02 21:48 UTC, **Anbernic RG557** (Android 14), app **1.17.23**, `phase=exit-save; call=serializeSRAM; system=gc`, *Capcom vs. SNK 2 EO*, `logs_count: 1`.
 - **9378:** `retrogamesystem/game`, 2026-10-04 22:18 UTC, **Anbernic RG557** (Android 14), app **1.17.23**, `phase=exit-save; call=serializeSRAM; system=gc; game=Ant Bully, The`, `logs_count: 1`.
 - **9379:** `retrogamesystem/game`, 2026-10-04 22:20 UTC, **Anbernic RG557** (Android 14), app **1.17.23**, `phase=exit-save; call=serializeSRAM; system=gc; game=Crash Bandicoot - Gatchanko World`, `logs_count: 1`.
+- **9408:** `retrogamesystem/game`, 2026-10-05 16:44 UTC, **Samsung Galaxy S23 FE (SM-S711B)** (Android 15), app **1.17.23**, `phase=exit-save; call=serializeSRAM; system=gc; game=Auto Modellista - U.S.-tuned`, `logs_count: 1`.
 
-Mesmo aparelho portátil (Anbernic RG557), todos em GameCube no momento do salvamento de saída (`serializeSRAM`). Como a versão 1.17.23 foi cortada antes da integração do dump da GLThread (`46b4995`), os relatórios ainda não trazem o `seq=1` com o stack trace da thread de renderização. Os erros 9292, 9378 e 9379 foram fechados no painel de telemetria conforme a regra da skill (rastreabilidade mantida aberta aqui neste documento).
+Todos em GameCube no momento do salvamento de saída (`serializeSRAM`) na versão de produção 1.17.23 (anterior ao `GLThreadDump` da 1.17.24). Os erros 9292, 9378, 9379 e 9408 foram fechados no painel de telemetria conforme a regra da skill (rastreabilidade mantida aberta aqui neste documento).
 
 > ⚠️ **A versão que levar o dump precisa ser 1.17.24 ou maior.** A 1.17.23 já existe em produção
 > **sem** o `GLThreadDump`; publicar o dump com o mesmo `versionName` torna impossível saber, pelo

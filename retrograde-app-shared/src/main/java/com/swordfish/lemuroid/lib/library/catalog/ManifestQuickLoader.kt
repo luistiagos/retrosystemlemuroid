@@ -149,7 +149,10 @@ class ManifestQuickLoader(
         //   v36  Expansão do catálogo com 1.402 novos jogos comerciais completos a partir do
         //          repositório central em FBNeo (+401), Dreamcast (+351), CPS1/2 (+301), NeoGeo (+59),
         //          PSX (+52), ZX Spectrum (+46), GameCube (+31), Cave (+20), etc.
-        private const val MANIFEST_SCHEMA_VERSION = 36
+        //   v37  cps1: representação corrigida para os sets-pai hospedados no FBNeo (sf2ce.zip,
+        //          1941.zip, forgottn.zip) com título e capa do arcadeitalia, rebaixando os clones
+        //          não hospedados (sf2ceua.zip, 1941j.zip, forgott1.zip). Corrige erro "ROM not found".
+        private const val MANIFEST_SCHEMA_VERSION = 37
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

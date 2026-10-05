@@ -15430,13 +15430,13 @@ colecovision/Word Feud (USA).col|Word Feud|https://raw.githubusercontent.com/lib
 colecovision/Zaxxon (Taiwan) (En) (Unl).col|Zaxxon|https://images.igdb.com/igdb/image/upload/t_cover_big/co2bag.jpg|19|1
 colecovision/Zaxxon (USA, Europe).col|Zaxxon|https://raw.githubusercontent.com/libretro-thumbnails/Coleco_-_ColecoVision/master/Named_Boxarts/Zaxxon%20%28USA%2C%20Europe%29.png|19|0
 colecovision/Zenji (USA).col|Zenji|https://raw.githubusercontent.com/libretro-thumbnails/Coleco_-_ColecoVision/master/Named_Boxarts/Zenji%20%28USA%29.png|0|1
-cps1/1941j.zip|1941: Counter Attack (Japan)|https://adb.arcadeitalia.net/?mame=1941j&type=title&resize=0|0|1
+cps1/1941j.zip|||0|0
 cps1/dino.zip|Cadillacs and Dinosaurs|https://adb.arcadeitalia.net/?mame=dino&type=title&resize=0|0|1
 cps1/captcomm.zip|Captain Commando|https://adb.arcadeitalia.net/?mame=captcomm&type=title&resize=0|0|1
 cps1/cawing.zip|Carrier Air Wing|https://adb.arcadeitalia.net/?mame=cawing&type=title&resize=0|0|1
 cps1/dynwar.zip|Dynasty Wars|https://adb.arcadeitalia.net/?mame=dynwar&type=title&resize=0|0|1
 cps1/ffight.zip|Final Fight|https://adb.arcadeitalia.net/?mame=ffight&type=title&resize=0|0|1
-cps1/forgott1.zip|Forgotten Worlds (USA 880715)|https://adb.arcadeitalia.net/?mame=forgott1&type=title&resize=0|0|1
+cps1/forgott1.zip|||0|0
 cps1/ghouls.zip|Ghouls'n Ghosts|https://adb.arcadeitalia.net/?mame=ghouls&type=title&resize=0|0|1
 cps1/ghoulsu.zip|Ghouls'n Ghosts|https://adb.arcadeitalia.net/?mame=ghoulsu&type=title&resize=0|0|0
 cps1/knights.zip|Knights of the Round|https://adb.arcadeitalia.net/?mame=knights&type=title&resize=0|0|1
@@ -15448,7 +15448,7 @@ cps1/mbombrd.zip|Muscle Bomber Duo: Ultimate Team Battle|https://adb.arcadeitali
 cps1/nemo.zip|Nemo|https://adb.arcadeitalia.net/?mame=nemo&type=title&resize=0|0|1
 cps1/qad.zip|Quiz & Dragons: Capcom Quiz Game|https://adb.arcadeitalia.net/?mame=qad&type=title&resize=0|0|1
 cps1/slammast.zip|Saturday Night Slam Masters|https://adb.arcadeitalia.net/?mame=slammast&type=title&resize=0|0|1
-cps1/sf2ceua.zip|Street Fighter II': Champion Edition (USA 920513)|https://adb.arcadeitalia.net/?mame=sf2ceua&type=title&resize=0|0|1
+cps1/sf2ceua.zip|||0|0
 cps1/sf2hf.zip|Street Fighter II': Hyper Fighting|https://adb.arcadeitalia.net/?mame=sf2hf&type=title&resize=0|0|1
 cps1/sf2.zip|Street Fighter II: The World Warrior|https://adb.arcadeitalia.net/?mame=sf2&type=title&resize=0|0|1
 cps1/strider.zip|Strider|https://adb.arcadeitalia.net/?mame=strider&type=title&resize=0|0|1
@@ -15516,7 +15516,7 @@ cps1/wofh.zip|||0|0
 cps1/wofj.zip|||0|0
 cps1/wofu.zip|||0|0
 cps1/wonder3.zip|||0|0
-cps1/1941.zip|||0|0
+cps1/1941.zip|1941: Counter Attack (World 900227)|https://adb.arcadeitalia.net/?mame=1941&type=title&resize=0|0|1
 cps1/3wonderh.zip|||0|0
 cps1/3wonderu.zip|||0|0
 cps1/captcomb.zip|||0|0
@@ -15526,7 +15526,7 @@ cps1/daimakr2.zip|||0|0
 cps1/dinopic.zip|||0|0
 cps1/dinopic2.zip|||0|0
 cps1/dynwaru.zip|||0|0
-cps1/forgottn.zip|||0|0
+cps1/forgottn.zip|Forgotten Worlds (World, newer)|https://adb.arcadeitalia.net/?mame=forgottn&type=title&resize=0|0|1
 cps1/mercsua.zip|||0|0
 cps1/punipic.zip|||0|0
 cps1/punipic2.zip|||0|0
@@ -15536,7 +15536,7 @@ cps1/punishru.zip|||0|0
 cps1/qadj.zip|||0|0
 cps1/qtono2.zip|||0|0
 cps1/sf2accp2.zip|||0|0
-cps1/sf2ce.zip|||0|0
+cps1/sf2ce.zip|Street Fighter II': Champion Edition (World 920513)|https://adb.arcadeitalia.net/?mame=sf2ce&type=title&resize=0|0|1
 cps1/sf2cej.zip|||0|0
 cps1/sf2eb.zip|||0|0
 cps1/sf2koryu.zip|||0|0

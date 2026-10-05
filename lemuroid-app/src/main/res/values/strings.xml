@@ -141,6 +141,7 @@
     <string name="save_queue_error">Error</string>
     <string name="save_queue_clear_errors">Clear errors</string>
     <string name="save_queue_badge">✓ Saved</string>
+    <string name="save_queue_rom_not_found">This game is not available on the server. Try another version.</string>
     <string name="save_action_save">Save</string>
     <string name="save_action_pause">Pause</string>
     <string name="save_action_resume">Resume</string>

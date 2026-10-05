@@ -267,7 +267,10 @@ class SaveQueueManager(
                         _entries.update { list ->
                             list.map {
                                 if (it.fileName == next.fileName)
-                                    it.copy(state = SaveQueueState.ERROR, errorMessage = "ROM not found")
+                                    it.copy(
+                                        state = SaveQueueState.ERROR,
+                                        errorMessage = appContext.getString(R.string.save_queue_rom_not_found),
+                                    )
                                 else it
                             }
                         }

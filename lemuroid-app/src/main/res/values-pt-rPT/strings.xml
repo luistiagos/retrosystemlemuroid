@@ -314,4 +314,5 @@
     <!-- Permissão de notificação -->
     <string name="game_interactor_notification_permission_required">Por favor, active as notificações em Início para continuar</string>
 
+    <string name="save_queue_rom_not_found">Este jogo não está disponível no servidor. Tente outra versão.</string>
 </resources>

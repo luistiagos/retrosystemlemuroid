@@ -114,7 +114,8 @@ Você vai editar/criar **estes arquivos** (na ordem). Não pule nenhum:
 | 10 | `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/ShaderChooser.kt` | Adicionar branch em **2 funções** |
 | 11 | `retrograde-app-shared/src/main/res/values/strings.xml` | Strings de settings expostos |
 | 12 | `retrograde-app-shared/src/main/res/values/strings-game-system.xml` | `game_system_title_X` + `game_system_abbr_X` |
-| 13 | `retrograde-app-shared/src/main/res/drawable/game_system_<dbname>.xml` | **Criar** ícone do sistema (vector drawable) |
+| 13 | `retrograde-app-shared/src/main/res/drawable/game_system_<dbname>.png` e `_hover.png` | **Copiar** logos normal (277x192) e hover (333x230) de `logos_extracted/all-systems/` |
+| 13b | `retrograde-app-shared/src/main/java/.../SystemLogoResolver.kt` | Adicionar mapeamento do hover em `resolve()` |
 | 14 | `lemuroid-touchinput/src/main/res/drawable/<prefix>_button_<n>.xml` | (se face buttons custom) Criar drawables das letras dos botões |
 | 15 | `lemuroid-app/src/main/res/values/core_names.xml` | Nome do core para dynamic feature |
 | 16 | `lemuroid-app/src/main/assets/mnemonico_map.json` | Adicionar entrada `"<dbname>": "<dbname>"` |
@@ -808,32 +809,23 @@ A `abbr` é mostrada em listas compactas, o `title` em telas detalhe.
 
 ---
 
-## 15. Passo 13 — Ícone do sistema (vector drawable)
+## 15. Passo 13 — Logos do sistema (Normal e Hover PNG)
 
-Crie `retrograde-app-shared/src/main/res/drawable/game_system_<dbname>.xml`.
+O Lemuroid utiliza logos rasterizados no padrão RetroBat com dois estados (normal e hover quando em foco no Leanback/TV/Compose).
 
-Template base (substitua `#XXXXXX` pela cor predominante do sistema):
+1. Localize os arquivos em `logos_extracted/all-systems/`:
+   - `*-<sistema>-normal.png` (277x192 RGBA)
+   - `*-<sistema>-hover.png` (333x230 RGBA)
+2. Copie para `retrograde-app-shared/src/main/res/drawable/`:
+   - `game_system_<dbname>.png`
+   - `game_system_<dbname>_hover.png`
+3. Em `retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/SystemLogoResolver.kt`:
+   - Adicione o mapeamento do hover no `when (metaSystem)`:
+     ```kotlin
+     MetaSystemID.<SYSTEM> -> R.drawable.game_system_<dbname>_hover
+     ```
 
-```xml
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="100dp"
-    android:height="100dp"
-    android:viewportWidth="100"
-    android:viewportHeight="100">
-  <!-- Background card -->
-  <path
-      android:fillColor="#XXXXXX"
-      android:pathData="M10,10 L90,10 L90,90 L10,90 Z"/>
-  <!-- Texto do sistema (opcional, simples) -->
-  <path
-      android:fillColor="#FFFFFF"
-      android:pathData="<seu_path_aqui>"/>
-</vector>
-```
-
-Se você não conseguir desenhar o logo, faça um simples retângulo colorido + texto. Pode usar [Material Design Icons](https://fonts.google.com/icons) como inspiração.
-
-> **Não use PNG.** Use sempre vector drawable XML — escala em qualquer densidade e mantém o APK pequeno.
+> ⚠️ **Atenção:** Nunca crie arquivos `.xml` vetoriais improvisados no lugar de PNG. Todos os 79 sistemas utilizam o par PNG normal/hover extraído de `logos_extracted/all-systems/`. Ter um `.xml` e um `.png` com o mesmo nome também quebra o build do AAPT (Duplicate resources).
 
 ---
 
