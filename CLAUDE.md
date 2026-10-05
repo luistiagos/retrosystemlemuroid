@@ -851,3 +851,19 @@ Sem a propriedade nada muda: build de distribuição continua saindo só com as 
 > dynarec. Para esses, ou aparelho real, ou `system-images;android-25;google_apis;armeabi-v7a`
 > (roda o APK de distribuição sem alteração, mas por emulação TCG pura: lento demais para jogar,
 > útil só para ver se o core carrega).
+
+### Abrir um jogo e tocar no pad sem navegar pela UI
+
+- **Deep link:** `adb shell am start -W -a android.intent.action.VIEW -d
+  "retrogamesystem://<applicationId>/play-game/id/<gameId>"` (`ExternalGameLauncherActivity`).
+- **O `gameId` muda entre instalações.** Debug: `adb shell run-as <pkg> sqlite3 databases/retrograde
+  "SELECT id, fileUri FROM games WHERE …"` (`/system/xbin/sqlite3` no AVD; o SM-A127M não tem — copiar o
+  banco com `adb exec-out run-as <pkg> cat databases/retrograde{,-wal}` e abrir no host). Release
+  instalado limpo: o id é o do `lemuroid-app/build/generated/prebuiltDb/retrograde-prebuilt.db` do build.
+- **Toque rápido (duplo toque < 200 ms, multitoque):** `adb shell input` sobe um processo por chamada e
+  não cabe nisso; usar `sendevent` em `/dev/input/event1` (o `qwerty2` do AVD, eixos 0–32767) com
+  `ABS_MT_PRESSURE` > 0 — com eixo de pressão declarado, toque de pressão 0 vira *hover* e é ignorado.
+- **`lemu_api21_1gb` não tem armazenamento externo:** a pasta de ROMs vira `/roms`. Pôr a ROM em
+  `files/` do app via `run-as` e apontar a `fileUri` da linha para lá (ou lançar com `-sdcard`).
+- No Git Bash, `export MSYS_NO_PATHCONV=1` antes de `adb shell` com caminho `/sdcard/…` — e aí o APK do
+  `adb install` vai com caminho Windows (`C:/…`), não `/c/…`.
