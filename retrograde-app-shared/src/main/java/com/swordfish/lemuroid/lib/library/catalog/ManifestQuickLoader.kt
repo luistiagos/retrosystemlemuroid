@@ -146,7 +146,10 @@ class ManifestQuickLoader(
         //          full pass dropped them at findByIdOrNull and the stale-catalog cleanup deleted
         //          the prebuilt copies: 1592 Amiga + 45 Game & Watch rows missing on every install.
         //          Aliased to amiga/gw; this reload inserts them on existing installs.
-        private const val MANIFEST_SCHEMA_VERSION = 35
+        //   v36  Expansão do catálogo com 1.402 novos jogos comerciais completos a partir do
+        //          repositório central em FBNeo (+401), Dreamcast (+351), CPS1/2 (+301), NeoGeo (+59),
+        //          PSX (+52), ZX Spectrum (+46), GameCube (+31), Cave (+20), etc.
+        private const val MANIFEST_SCHEMA_VERSION = 36
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

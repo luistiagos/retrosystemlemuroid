@@ -85,8 +85,10 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
          * Bumped 9→10: Fix catalog placeholder creation — the manifest format is "path|url"
          * but the path was being used with the "|url" suffix, making all filenames invalid
          * on Android (pipe is illegal). Force re-population so valid 0-byte files are created.
+         * Bumped 10→11: Catalog expansion adding 1,402 commercial games from the central
+         * repository across FBNeo, Dreamcast, CPS1/2, NeoGeo, PSX, ZX Spectrum, GameCube, etc.
          */
-        private const val CATALOG_VERSION = 10
+        private const val CATALOG_VERSION = 11
 
         /**
          * Root path inside the HuggingFace dataset repository.

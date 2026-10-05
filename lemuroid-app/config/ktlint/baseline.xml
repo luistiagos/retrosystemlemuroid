@@ -22,6 +22,8 @@
     </file>
     <file name="src/debug/java/com/swordfish/lemuroid/app/mobile/shared/compose/ui/Color.kt">
         <error line="69" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="69" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="69" column="1" source="standard:no-consecutive-blank-lines" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/LemuroidApplication.kt">
         <error line="119" column="17" source="standard:multiline-expression-wrapping" />
@@ -1047,8 +1049,6 @@
         <error line="27" column="39" source="standard:multiline-expression-wrapping" />
     </file>
     <file name="src/release/java/com/swordfish/lemuroid/app/mobile/shared/compose/ui/Color.kt">
-        <error line="69" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="69" column="1" source="standard:no-consecutive-blank-lines" />
         <error line="69" column="1" source="standard:no-consecutive-blank-lines" />
     </file>
     <file name="src/test/java/com/swordfish/lemuroid/app/shared/telemetry/StorageEnvironmentFailureTest.kt">
