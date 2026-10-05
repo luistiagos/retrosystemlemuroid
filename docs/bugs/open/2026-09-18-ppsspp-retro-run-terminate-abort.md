@@ -473,12 +473,12 @@ x86/x86_64 não estão nos splits distribuídos — só valem para AVD e o fallb
 
 `lemuroid-cores` `55d29c2` (push em `main`) → tag anotada `1.21.0` (push; o raw da tag já serve o
 `.so` novo, `Content-Length: 22588760`) → `CoreDownloader.CORES_VERSION = "1.21.0"` → ponteiro do
-submódulo, commit `411fe17` no Lemuroid (sem push). `verifyBundledCores` e `verifyCoresPublished`
+submódulo, commit `411fe17` no Lemuroid (push junto com `def7bda`). `verifyBundledCores` e `verifyCoresPublished`
 passam.
 
 ### Próximo passo
 
-1. Release com o `411fe17` (versionCode já está em 255 / 1.17.24 no working tree, não commitado).
+1. Release da `version9` a partir de `def7bda` (versionCode 255 / 1.17.24, cores 1.21.0).
 2. Na telemetria, depois do release: `libppsspp_libretro_android.so` + `terminating` em versão
    ≥ 1.17.24 = o patch não cobriu algum caminho — comparar o frame com `retro_run+1056`.
 3. Sem reincidência → mover para `done`.
