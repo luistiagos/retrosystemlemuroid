@@ -169,6 +169,8 @@ object deps {
         const val composeHtmlText          = "de.charlex.compose.material3:material3-html-text:2.0.0-beta01"
         const val collectionsImmutable     = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.8"
         const val padkit                   = "io.github.swordfish90:padkit:${versions.padkit}"
+        // java.time & co. para minSdk < 26 (core library desugaring). 2.1.x exige AGP >= 8.0.
+        const val desugarJdkLibs           = "com.android.tools:desugar_jdk_libs:2.1.5"
         // Local patched LibretroDroid AAR (fallback EGLConfigChooser para Smart TVs com EGL strict).
         // O arquivo vive em <rootProject>/libs/libretrodroid-patched.aar e é referenciado no
         // build.gradle.kts da lemuroid-app via files(rootProject.file(...)).

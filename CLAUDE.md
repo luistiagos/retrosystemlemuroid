@@ -493,6 +493,7 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 - **Activity com extra obrigatório: extra ausente → `finish(); return`, nunca `throw`.** O Robo test do Pre-Launch Report lança toda activity declarada no manifesto sem extras, mesmo as não-exportadas. `BaseGameActivity.onCreate` é `final` de propósito — o `return` do abort só sai do método da base, então código de subclasse vai em `onGameCreated()`, que só roda quando a inicialização chegou ao fim.
 - **Mostrar Activity sobre a tela de bloqueio só por `setShowWhenLockedCompat`** ([ActivityUtils.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/ActivityUtils.kt)). `setShowWhenLocked`/`setTurnScreenOn` crus são API 27 e crasham com `minSdk 21` — ver pitfall 12.
 - **Rede só por `NetworkCompat`** ([NetworkCompat.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/NetworkCompat.kt)). `getSystemService(Class)` e `ConnectivityManager.activeNetwork` são API 23 — ver pitfall 12.
+- **Dependência nova ou atualizada: auditar o dex do release** com [audit_dex_api_level.py](audit_dex_api_level.py). O lint não lê bytecode de biblioteca — ver pitfall 16.
 
 ### Estilo: ktlint com baseline
 
@@ -752,6 +753,37 @@ um caminho de outra máquina.
 
 Detalhes em `documentacao/bugs/done/2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado.md`
 e `documentacao/bugs/done/2026-09-25-gitmodules-url-drive-e-inexistente.md`.
+
+### 16. Biblioteca que chama API acima do `minSdk` passa calada pelo build — o lint não lê bytecode de dependência
+
+**Sintoma:** em Android 5–7, todo jogo de N64, PSP, DOS, 3DS, Dreamcast, GameCube e Amiga (e PSX com
+DualShock) caía ~1 s depois do boot na tela de erro de app: `NoClassDefFoundError: Failed resolution of:
+Ljava/time/Instant;` em `kotlinx.datetime.Instant.<clinit>` ← `gg.padkit.handlers.AnalogPointerHandler$Data.<init>`.
+Só sem gamepad conectado — com controle, o pad touch nem é composto.
+
+**Causa:** o padkit (`1.0.0-beta1`) mede o duplo toque do analógico com `kotlinx.datetime`, que no JVM é
+`java.time` — API 26. Três camadas deixaram passar: o `NewApi` do lint só lê o código-fonte do projeto; o
+AAR do padkit não declara `coreLibraryDesugaringEnabled` na metadata (o `checkAarMetadata` não exige
+nada); e o R8 só faz *outlining* de API (pitfall 12), não reescreve a chamada.
+
+**Regras:**
+1. O `:lemuroid-app` tem *core library desugaring* (`isCoreLibraryDesugaringEnabled` +
+   `deps.libs.desugarJdkLibs`, bloco no fim do [build.gradle.kts](lemuroid-app/build.gradle.kts)).
+   **Não desligar:** ele reescreve `java.time`, `java.util.stream`/`function`, `Optional` etc. de **todas**
+   as dependências para `j$.*`, e vale em qualquer aparelho, sem depender do `SDK_INT` (que mente nas TV
+   box — pitfall 7). Só o módulo do app precisa do flag: é ele que gera o dex.
+2. O desugaring **não** cobre tudo: `java.nio.file`, `java.lang.invoke`, as APIs novas de
+   `javax.net.ssl`/`java.security.cert` e **nenhuma API de framework** (`android.*`). O padkit tem uma
+   dessas também: o haptics chama `Context.getSystemService(Class)` (API 23) e derruba todo jogo no
+   Android 5.0–5.1 (`documentacao/bugs/open/2026-10-05-padkit-haptics-getsystemservice-android-5.md`).
+   Ao **adicionar ou subir dependência**, rodar `audit_dex_api_level.py` (raiz) no APK de release com
+   `--mapping` — e de novo com `--android --skip Landroidx/ --skip 'Lj$/'` — e triar toda classe que não
+   esteja na triagem do bug doc. Ainda não há verificador de build para isso — backlog
+   `documentacao/backlogs/2026-10-05-verificador-api-level-dex.md`.
+3. `desugar_jdk_libs` 2.1.x exige AGP ≥ 8.0. O AGP efetivo é o **8.7.1** que o `com.android.test` do bloco
+   `plugins` raiz puxa, não o 8.4.0 do `deps.kt`.
+
+Detalhes em `documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`.
 
 ---
 

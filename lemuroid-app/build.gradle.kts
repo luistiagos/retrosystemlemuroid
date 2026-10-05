@@ -589,3 +589,19 @@ afterEvaluate {
         }
     }
 }
+
+// O padkit (analógico do pad touch) usa kotlinx-datetime, que no JVM delega a java.time — API 26.
+// Sem core library desugaring, montar o analógico em Android 5–7 lança NoClassDefFoundError e derruba
+// todo jogo de N64, PSP, DOS, 3DS, Dreamcast, GameCube, Amiga (e PSX com DualShock). O R8 não resolve
+// sozinho, e o lint não lê o bytecode das dependências. Só este módulo precisa do flag: é ele que gera o
+// dex do APK e desugariza tudo o que empacota, inclusive os outros módulos do projeto.
+// Ver documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md.
+android {
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring(deps.libs.desugarJdkLibs)
+}
