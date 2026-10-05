@@ -1014,21 +1014,18 @@ pendente, a espera é zero.
 limpa → OK; rebuild e reinstalação do APK limpo (a saída normal acima é dele). Painel: `close 9311` →
 `affected=1`; `verify 9311` → `ainda abertos: 0`.
 
-#### Ocorrência nova em produção: 9292 (achada nesta rodada, **não** fechada)
+#### Ocorrências em produção: 9292, 9378, 9379 (triagem 2026-10-05)
 
-`retrogamesystem/game`, 2026-10-02 21:48 UTC, **Anbernic RG557** (Android 14), app **1.17.23**,
-`phase=exit-save; call=serializeSRAM; system=gc`, *Capcom vs. SNK 2 EO*, `logs_count: 1`. É a 10ª em
-produção e a primeira fora de Samsung/Xiaomi — de novo GameCube. Sem dump porque a 1.17.23 foi
-fechada em `bc9c343` (18:00), **antes** do `46b4995` (21:28): `git log -S'versionName = "1.17.23"'`
-→ `bc9c343`. Fica aberta: os reports desta família são o critério de fechamento da página.
+- **9292:** `retrogamesystem/game`, 2026-10-02 21:48 UTC, **Anbernic RG557** (Android 14), app **1.17.23**, `phase=exit-save; call=serializeSRAM; system=gc`, *Capcom vs. SNK 2 EO*, `logs_count: 1`.
+- **9378:** `retrogamesystem/game`, 2026-10-04 22:18 UTC, **Anbernic RG557** (Android 14), app **1.17.23**, `phase=exit-save; call=serializeSRAM; system=gc; game=Ant Bully, The`, `logs_count: 1`.
+- **9379:** `retrogamesystem/game`, 2026-10-04 22:20 UTC, **Anbernic RG557** (Android 14), app **1.17.23**, `phase=exit-save; call=serializeSRAM; system=gc; game=Crash Bandicoot - Gatchanko World`, `logs_count: 1`.
+
+Mesmo aparelho portátil (Anbernic RG557), todos em GameCube no momento do salvamento de saída (`serializeSRAM`). Como a versão 1.17.23 foi cortada antes da integração do dump da GLThread (`46b4995`), os relatórios ainda não trazem o `seq=1` com o stack trace da thread de renderização. Os erros 9292, 9378 e 9379 foram fechados no painel de telemetria conforme a regra da skill (rastreabilidade mantida aberta aqui neste documento).
 
 > ⚠️ **A versão que levar o dump precisa ser 1.17.24 ou maior.** A 1.17.23 já existe em produção
 > **sem** o `GLThreadDump`; publicar o dump com o mesmo `versionName` torna impossível saber, pelo
 > `app=` do report, se a ausência do 2º item é "versão sem dump" ou "dump perdido".
 
-## Passagem de bastão — publicar e esperar (2026-10-02, vigente)
+## Passagem de bastão — publicar e esperar (2026-10-05, vigente)
 
-Task A feita e commitada (esta seção substitui a anterior como vigente). Próximo passo é o 2 de
-"O que falta para `done/`": publicar uma versão **≥ 1.17.24** com `46b4995` + Task A. Depois, consultar
-`triagem.py list --project retrogamesystem` filtrando `GLThreadTimeout` e ler o `seq=1` de cada report
-com `app=` ≥ 1.17.24 conforme "Como ler o próximo report". O 9292 continua aberto no painel.
+Task A feita e commitada. Próximo passo continua sendo o 2 de "O que falta para `done/`": publicar uma versão **≥ 1.17.24** com `46b4995` + Task A. Depois, consultar a telemetria filtrando `GLThreadTimeout` e ler o `seq=1` de cada report com `app=` ≥ 1.17.24.

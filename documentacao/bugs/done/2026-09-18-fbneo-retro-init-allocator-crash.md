@@ -233,3 +233,12 @@ Samsung, o tombstone do 8539 com os mesmos offsets (`je_large_dalloc+52`, `je_fr
 **Lição que substitui a 2 acima:** "sem o código-fonte do core, root-cause binário não é viável"
 estava errado — o fonte do FBNeo é público, e o disassembly de três instruções em volta de cada
 frame bastou. O que faltava era comparar o nome da thread entre as famílias.
+
+## Recorrência em Builds Legados (Triagem 2026-10-05)
+
+- **Novos IDs associados:** 9338, 9344 (duplicata de envio do mesmo crash às 16:27:22), 9367 (14:01:48).
+- **Aparelho:** Samsung SM-A546E (Galaxy A54), Android 16 (sdk 36), `app=1.17.22`.
+- **Diagnóstico:**
+  Os três crashes ocorreram exatamente sob `GLThread 2` (9338, 9344) e `GLThread 3` (9367), com a assinatura clássica de double free no `retro_init+252` (`0x21e70f4`, `0x21e6ee8`) e mensagem `Scudo ERROR: corrupted chunk header at address 0x200007c903ae910: chunk header is zero and might indicate memory corruption or a double free`.
+  Como o cliente estava na versão **1.17.22** (anterior à versão 1.17.23 que introduziu o `GameProcessSession` impedindo o reuso do processo `:game`), o processo tentou re-inicializar o FBNeo uma segunda/terceira vez. Não representa regressão na versão 1.17.23+. IDs fechados na telemetria.
+

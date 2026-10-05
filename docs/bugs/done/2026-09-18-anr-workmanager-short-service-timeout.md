@@ -125,3 +125,9 @@ tipo escolhido precisa caber no tempo real da operação (aqui, minutos de downl
   está garantido a partir de `1.17.20` (versionCode 251); `1.17.19` é rótulo anterior a esse
   commit, então é cliente desatualizado. Fechado.
 
+## Recorrência em Builds Legados (Triagem 2026-10-05)
+
+- **Novos IDs associados:** 9191 (Android 15, `app=1.17.12`), 9235 (Android 14, `app=1.17.19`).
+- **Diagnóstico:** Ambos os erros ocorreram em versões anteriores a `1.17.20` (onde o `WorkManagerUtils` foi corrigido para usar `DATA_SYNC`). Clientes desatualizados que estouraram o timeout de 3 minutos do `SHORT_SERVICE`. Fechados na telemetria.
+
+

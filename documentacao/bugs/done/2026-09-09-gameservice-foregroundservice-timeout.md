@@ -94,3 +94,9 @@ uma vez. Antes de abrir bug a partir da telemetria:
   24117RN76L), mesmo jogo (*Duke Nukem: Time to Kill*, psx/pcsx_rearmed), `app=1.17.9` nos
   dois. Confirma a suposição pendente deste doc ("conferir o `app=` dos 4 reports"): `1.17.9` é
   anterior a `1.17.13`, então cliente desatualizado, como esperado. Fechados.
+
+## Recorrência (Triagem 2026-10-05)
+
+- **Novo ID:** 9168 — Android 16 (sdk 36), `app=1.17.9`, mesmo texto (`of type dataSync`) no `GameService`.
+  Cliente rodando versão desatualizada (1.17.9 < 1.17.13). Fechado na telemetria.
+

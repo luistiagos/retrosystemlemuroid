@@ -1,10 +1,11 @@
 # [BUG] Picodrive SIGSEGV em `0x2200000` e ANR na home com `fstatat64`
 
 **Data:** 2026-09-30
-**Status:** ✅ Resolvido em 2026-09-30. Item 2 (ANR): causa confirmada pelo trace do 8623 e corrigida
-(`stat` fora da main thread). Item 1 (Picodrive): trace lido, `GLThread 1` — defeito interno do core,
-sem ação do lado do app; reabre se reincidir. Telemetria 8541/8621/8623 fechada e verificada.
-**Severidade:** Média (item 2: 3 ANRs no mesmo aparelho em 20 min) / Baixa (item 1: 1 ocorrência)
+**Status:** 🟡 **Reaberto em 2026-10-05 (Item 1 reincidiu com o exato mesmo PC `0x136f74`)**.
+Item 2 (ANR): segue resolvido (fix no código de stat fora da main thread).
+Item 1 (Picodrive): reaberto devido ao novo crash com o mesmo endereço em Android 16 (ID 9209).
+- **Complexidade:** alta — Análise de disassembly do binário Picodrive / investigação upstream.
+**Severidade:** Alta (crash durante gameplay em core Mega Drive / Genesis)
 **Branch:** version9
 **Origem:** separado de [[2026-09-28-investigacoes-baixa-confianca-triagem]] (itens 2 e 4), cujo
 item 1 foi resolvido.
@@ -14,45 +15,32 @@ item 1 foi resolvido.
 
 ---
 
-## 1. Picodrive: SIGSEGV `SEGV_MAPERR` em `0x2200000`
+## 1. Picodrive: SIGSEGV `SEGV_MAPERR` / `SEGV_ACCERR` em `0x136f74`
 
-**Error:** 8541 — Skyth S11, Android 13, `app=1.17.22`, `when=` 2026-09-24 20:43:25.
+**Errors:**
+- **8541:** Skyth S11, Android 13, `app=1.17.22`, `when=` 2026-09-24 20:43:25.
+- **9209:** Samsung Galaxy S23 Ultra (SM-S918B), Android 16 (sdk 36), `app=1.17.22`, `when=` 2026-09-30 15:57:26, `pid: 525, tid: 630, name: GLThread 1`.
 
 ```
-  #00  pc 0x136f74  .../files/cores/1.19.0/picodrive_libretro_android.so
-  #01  pc 0x06f21c  .../picodrive_libretro_android.so
-  #02  pc 0x13f468  .../picodrive_libretro_android.so   (= retro_run+0x378)
-  #03  liblibretrodroid.so (LibretroDroid::step()+112)
+signal 11 (SIGSEGV), code SEGV_ACCERR, fault addr 0x732f7dc000
+backtrace:
+  #00  pc 0000000000136f74  .../lib/arm64/picodrive_libretro_android.so
+  #01  pc 000000000006f21c  .../lib/arm64/picodrive_libretro_android.so
+  #02  pc 000000000013f468  .../lib/arm64/picodrive_libretro_android.so (retro_run+888)
+  #03  pc 00000000000b94e8  .../liblibretrodroid.so (libretrodroid::LibretroDroid::step()+112)
+  #04  pc 00000000000b425c  .../liblibretrodroid.so (Java_com_swordfish_libretrodroid_LibretroDroid_step+60)
 ```
 
 Apurado:
 
-- `#02` é `retro_run+0x378`: a falha é em gameplay, não na carga. `#00`/`#01` são funções internas
+- `#02` é `retro_run+888` / `retro_run+0x378`: a falha é em gameplay, não na carga. `#00`/`#01` são funções internas
   sem símbolo (o `.so` é stripped; só 46 símbolos dinâmicos definidos).
-- O caminho `files/cores/1.19.0/` é o core baixado pelo `CoreDownloader` porque, até o 1.17.22, o
+- O caminho `files/cores/1.19.0/` era o core baixado pelo `CoreDownloader` porque, até o 1.17.22, o
   `.so` empacotado não tinha o prefixo `lib` e o instalador não o extraía (pitfall 14). **O binário
   é o mesmo** que o app empacota hoje: blob `f395e5c168c742c3e691210d1af6e5eb032ae192` em
-  `1.19.0:…/picodrive_libretro_android.so` e em `1.20.0:…/libpicodrive_libretro_android.so`. A
-  troca de prefixo não altera o que roda.
-- `0x2200000` = `0x02000000 + 2 MiB`. Hipótese não verificada: o Picodrive pede o mapeamento da ROM
-  com dica de endereço `0x02000000`, e a leitura seria logo depois do fim de uma ROM de 2 MiB (ou
-  numa ROM já desmapeada). Sem o fonte do Picodrive aqui, é só aritmética.
-
-**Próximo passo:** `triagem.py logs 8541` e ler o `name:` da thread. `GLThread 2` ou maior ⇒
-segunda sessão no mesmo processo, já coberta pelo `GameProcessSession`; `GLThread 1` ⇒ defeito do
-core naquele jogo, e aí vale localizar `0x136f74` no fonte do Picodrive da tag.
-
-**Trace lido (sessão 3, 2026-09-30):** `pid: 31335, tid: 31398, name: GLThread 1` — **não** é
-segunda sessão no processo. Backtrace completo = o do cabeçalho, seguido do caminho normal
-`LibretroDroid::step` ← `GLRetroView$Renderer.onDrawFrame` ← `GLThread.guardedRun`. Nada do app
-entre o `retro_run` e a falha.
-
-**Classificação:** defeito interno do Picodrive, provavelmente ligado a um jogo específico (leitura
-logo após o fim de uma região mapeada — a hipótese de `0x02000000 + 2 MiB` segue não verificada, sem
-fonte). Uma ocorrência, sem breadcrumb confiável do jogo (ver aviso no topo). Nada a corrigir no app;
-o `CoreCrashFallback` já avisa o usuário na volta à home. **Reabrir** se reincidir com o mesmo
-`pc 0x136f74` — aí compensa baixar o fonte do Picodrive e localizar a instrução
-(`llvm-objdump -d --start-address=0x136f00`, ver pitfall 10 regra 4).
+  `1.19.0:…/picodrive_libretro_android.so` e em `1.20.0:…/libpicodrive_libretro_android.so`.
+- **Reabertura confirmada (2026-10-05):** O erro **9209** em um Samsung Galaxy S23 Ultra (Android 16) repetiu o exato mesmo `#00 pc 0x136f74` e `#01 pc 0x06f21c` em `GLThread 1`. Trata-se de defeito determinístico em instruções internas do Picodrive ao rodar em `retro_run`.
+- **Próximos passos:** Baixar o código fonte do Picodrive correspondente à tag e realizar o disassembly via `llvm-objdump -d --start-address=0x136f00` no `libpicodrive_libretro_android.so` para identificar a instrução com falha de acesso à memória. O erro 9209 foi fechado no painel da telemetria (rastreabilidade viva neste doc).
 
 ## 2. ANR na `MainActivity`, fora de jogo
 

@@ -7,6 +7,7 @@ telemetria), validado no emulador; falta 1 conferência de log (ver "Validação
 primeiro plano como bug próprio de consumo de memória").
 **Severidade:** Média (mata a sessão sem aviso ao usuário; não é crash visível, é o processo
 sumindo)
+- **Complexidade:** media — Gerenciamento de memória e retenção em background de workers de download/sync.
 **Branch:** version9
 **Origem:** telemetria `retrogamesystem/lowmemory` — todos já filtrados por
 `isLowMemoryWorthReporting` (`importance <= IMPORTANCE_VISIBLE`), ou seja, **não** são os
@@ -39,6 +40,8 @@ forte deste grupo: não é um pico isolado, é o mesmo aparelho repetindo.
 | 8568 | 2026-09-25 10:02 | Samsung SM-A055M (mesmo device do grupo A) | 125, processo **principal**, não `:game` |
 | 8736 | 2026-09-27 00:43 | motorola moto g35 5G | 125, processo principal |
 | 8737 | 2026-09-27 02:08 | motorola moto g35 5G (mesmo device, ~1h25 depois) | 125, processo principal |
+| 9166 | 2026-09-29 22:45 | motorola moto g35 5G (mesmo device, 3ª vez) | 125, processo principal (`app=1.17.22`) |
+| 9178 | 2026-09-30 04:45 | samsung SM-A105M | 125, processo principal (`app=1.17.22`) |
 
 Sem `system=`/`core=`/`game=` no breadcrumb — não havia jogo rodando. `importance=125`
 (`FOREGROUND_SERVICE`) no processo principal sem jogo bate com um **worker do WorkManager em
