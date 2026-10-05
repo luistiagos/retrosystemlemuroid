@@ -186,7 +186,7 @@ baixou o `minSdk` para **21** e estendeu o crash ao 5.0–5.1 — e, junto, exp�
     parte, abaixo. LibretroDroid `KtUtils → Looper.isCurrentThread` é guardado (`SDK_INT >= 23`).
 - **AVD `lemu_api21_1gb` (Android 5.0) — não validável:** o `:game` cai antes, no haptics do padkit
   (`NoSuchMethodError: Context.getSystemService(Class)` em `PadKit(PadKit.kt:86)`), outro bug,
-  registrado em `documentacao/bugs/open/2026-10-05-padkit-haptics-getsystemservice-android-5.md`.
+  registrado em `documentacao/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md`.
   O mecanismo do desugaring é o mesmo do 7.1.
 - **Gates:** `ktlintKotlinScriptCheck` (raiz e `:lemuroid-app`, onde estão as edições) passam.
   `lintFreeBundleDebug` e `ktlintMainSourceSetCheck` falham por passivo de commits anteriores
@@ -211,7 +211,7 @@ baixou o `minSdk` para **21** e estendeu o crash ao 5.0–5.1 — e, junto, exp�
 
 ## Fora de escopo (registrado)
 
-- `documentacao/bugs/open/2026-10-05-padkit-haptics-getsystemservice-android-5.md` — Android 5.0–5.1.
+- `documentacao/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md` — Android 5.0–5.1.
 - `documentacao/bugs/open/2026-10-05-lint-ktlint-gates-falhando-passivo-novo.md` — gates quebrados.
 - `documentacao/backlogs/2026-10-05-verificador-api-level-dex.md` — transformar a auditoria em gate.
 - `documentacao/backlogs/2026-10-05-subir-padkit-1-0-0-compose-kotlin.md` — padkit 1.0.0.

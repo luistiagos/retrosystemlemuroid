@@ -773,9 +773,14 @@ nada); e o R8 só faz *outlining* de API (pitfall 12), não reescreve a chamada.
    as dependências para `j$.*`, e vale em qualquer aparelho, sem depender do `SDK_INT` (que mente nas TV
    box — pitfall 7). Só o módulo do app precisa do flag: é ele que gera o dex.
 2. O desugaring **não** cobre tudo: `java.nio.file`, `java.lang.invoke`, as APIs novas de
-   `javax.net.ssl`/`java.security.cert` e **nenhuma API de framework** (`android.*`). O padkit tem uma
-   dessas também: o haptics chama `Context.getSystemService(Class)` (API 23) e derruba todo jogo no
-   Android 5.0–5.1 (`documentacao/bugs/open/2026-10-05-padkit-haptics-getsystemservice-android-5.md`).
+   `javax.net.ssl`/`java.security.cert` e **nenhuma API de framework** (`android.*`). O padkit tinha uma
+   dessas: o haptics chamava `Context.getSystemService(Class)` (API 23) e derrubava todo jogo no
+   Android 5.0–5.1. Corrigido sem fork, por instrumentação de bytecode no build: `PadkitGetSystemServiceCompat`,
+   no fim do [build.gradle.kts](lemuroid-app/build.gradle.kts), troca a chamada por
+   `ContextCompat.getSystemService` só em `gg.padkit.*`
+   (`documentacao/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md`). **Não remover ao
+   subir o padkit** — a 1.0.0 tem o mesmo código. É o molde para API de framework sem guarda numa
+   dependência: trocar pela chamada `*Compat` de mesma pilha; fork/AAR local é o último recurso.
    Ao **adicionar ou subir dependência**, rodar `audit_dex_api_level.py` (raiz) no APK de release com
    `--mapping` — e de novo com `--android --skip Landroidx/ --skip 'Lj$/'` — e triar toda classe que não
    esteja na triagem do bug doc. Ainda não há verificador de build para isso — backlog
@@ -784,6 +789,28 @@ nada); e o R8 só faz *outlining* de API (pitfall 12), não reescreve a chamada.
    `plugins` raiz puxa, não o 8.4.0 do `deps.kt`.
 
 Detalhes em `documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`.
+
+### 17. A saída do `:game` não pode depender só do `System.exit` — nem voltar ao handler
+
+**Sintoma:** no Android 5, depois de qualquer exceção Java não tratada **na main thread** do `:game`, o
+processo não morria: `RuntimeException: System.exit returned normally…` a cada ~400 ms, para sempre.
+
+**Causa:** a main que morre numa exceção leva o `AndroidRuntime` ao `DestroyJavaVM` (`D AndroidRuntime:
+Shutting down VM` sai **antes** do handler): a VM entra em shutdown e todo `Thread.start()` passa a lançar
+`InternalError: Thread starting during runtime shutdown`. O `Runtime.exit` do libcore liga `shuttingDown`
+antes de iniciar os shutdown hooks — a primeira chamada morre nessa `InternalError`, as seguintes retornam
+sem sair. A exceção da corrotina de saída caía no handler default do `:game`, que pedia outra saída.
+
+**Regras:**
+1. O `:game` sai por `exitGameProcess()` ([BaseGameActivity.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/BaseGameActivity.kt)):
+   `exitProcess(0)` com fallback `Process.killProcess(myPid())`. Nunca `exitProcess` cru.
+2. Depois do `finish()` do `finishAndExitProcess`, `exitRequested` liga e o handler só reporta e mata.
+   Código novo no handler não pode reabrir o fluxo de erro com a saída já pedida.
+3. Com a VM em shutdown, nada que precise criar thread funciona — nem o `delay` das corrotinas (o
+   `DefaultExecutor` recria a thread depois de 1 s ocioso) nem o envio da telemetria. Por isso a regra 2:
+   qualquer falha dessas no caminho de saída tem de terminar em `killProcess`, nunca em outra volta.
+
+Detalhes em `documentacao/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md`.
 
 ---
 

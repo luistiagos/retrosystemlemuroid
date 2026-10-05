@@ -208,7 +208,13 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 extraLog = if (isCoreStall(exception)) GLThreadDump.capture() else null,
                 terminal = true,
             )
-            if (isEglIncompatibilityException(exception)) {
+            if (exitRequested) {
+                // O resultado ja foi entregue e o processo esta saindo: refazer o fluxo de erro so
+                // pediria outra saida. No Android 5 as falhas do proprio shutdown da VM caem aqui, e
+                // cada volta gerava a seguinte. Ver exitGameProcess.
+                Timber.e(exception, "Uncaught exception while the game process was exiting")
+                Process.killProcess(Process.myPid())
+            } else if (isEglIncompatibilityException(exception)) {
                 Timber.e(exception, "EGL incompatibility detected on this device")
                 performErrorFinish(getString(R.string.game_loader_error_gl_incompatible))
             } else {
@@ -591,10 +597,27 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         GlobalScope.launch(Dispatchers.IO) {
             delay(duration)
             TelemetryReporter.awaitPending((EXIT_DEADLINE_MS - duration).coerceAtLeast(0L))
-            exitProcess(0)
+            exitGameProcess()
         }
         finish()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        exitRequested = true
+    }
+
+    /**
+     * `exitProcess` que nao devolve o controle ao handler. Quando a main morre numa excecao nao
+     * tratada, a VM entra em shutdown antes desta corrotina rodar, e no Android 5 o `System.exit`
+     * lanca `InternalError: Thread starting during runtime shutdown` ao iniciar os shutdown hooks — e
+     * dali em diante retorna normalmente. Sem o fallback, a excecao voltava ao handler, que pedia
+     * outra saida: o `:game` girava para sempre, uma volta a cada ~400 ms enchendo o logcat.
+     */
+    private fun exitGameProcess() {
+        try {
+            exitProcess(0)
+        } catch (e: Throwable) {
+            Timber.w(e, "exitProcess failed; killing the game process")
+            Process.killProcess(Process.myPid())
+        }
     }
 
     open fun onFinishTriggered() {}
@@ -736,6 +759,10 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         private const val LIBRETRODROID_PACKAGE = "com.swordfish.libretrodroid"
         private const val MAX_CAUSE_DEPTH = 10
+
+        /** [finishAndExitProcess] ja entregou o resultado; o processo esta de saida. */
+        @Volatile
+        private var exitRequested = false
 
         /**
          * Do `finish()` ao `exitProcess`, no maximo: animacao + espera pela telemetria em voo. Abaixo

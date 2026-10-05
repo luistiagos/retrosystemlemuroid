@@ -605,3 +605,72 @@ android {
 dependencies {
     coreLibraryDesugaring(deps.libs.desugarJdkLibs)
 }
+
+// O haptics do padkit (raiz do pad touch da UI mobile) obtém o Vibrator com Context.getSystemService(Class) —
+// API 23, sem guarda. No Android 5.0–5.1 a primeira composição da tela de jogo lança NoSuchMethodError: nenhum
+// jogo abre, com ou sem gamepad, mesmo com a vibração desligada. O desugaring acima não cobre API de framework,
+// e a 1.0.0 do padkit tem o mesmo código. A instrumentação troca, só nas classes do padkit, cada chamada por
+// ContextCompat.getSystemService(Context, Class): mesma pilha de entrada e de saída (os frames não mudam), e
+// abaixo da API 23 ela resolve o serviço pelo nome. Fica aqui, e não no buildSrc, porque o classloader do
+// buildSrc é pai do que carrega o AGP: não enxerga a API de instrumentação sem sombrear a do AGP.
+// Ver documentacao/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md.
+abstract class PadkitGetSystemServiceCompat :
+    com.android.build.api.instrumentation.AsmClassVisitorFactory<
+        com.android.build.api.instrumentation.InstrumentationParameters.None,
+        > {
+    override fun isInstrumentable(classData: com.android.build.api.instrumentation.ClassData): Boolean =
+        classData.className.startsWith("gg.padkit.")
+
+    override fun createClassVisitor(
+        classContext: com.android.build.api.instrumentation.ClassContext,
+        nextClassVisitor: org.objectweb.asm.ClassVisitor,
+    ): org.objectweb.asm.ClassVisitor {
+        val api = instrumentationContext.apiVersion.get()
+        return object : org.objectweb.asm.ClassVisitor(api, nextClassVisitor) {
+            override fun visitMethod(
+                access: Int,
+                name: String?,
+                descriptor: String?,
+                signature: String?,
+                exceptions: Array<out String>?,
+            ): org.objectweb.asm.MethodVisitor {
+                val next = super.visitMethod(access, name, descriptor, signature, exceptions)
+                return object : org.objectweb.asm.MethodVisitor(api, next) {
+                    override fun visitMethodInsn(
+                        opcode: Int,
+                        owner: String?,
+                        name: String?,
+                        descriptor: String?,
+                        isInterface: Boolean,
+                    ) {
+                        val isGetSystemServiceByClass =
+                            opcode == org.objectweb.asm.Opcodes.INVOKEVIRTUAL &&
+                                owner == "android/content/Context" &&
+                                name == "getSystemService" &&
+                                descriptor == "(Ljava/lang/Class;)Ljava/lang/Object;"
+                        if (isGetSystemServiceByClass) {
+                            super.visitMethodInsn(
+                                org.objectweb.asm.Opcodes.INVOKESTATIC,
+                                "androidx/core/content/ContextCompat",
+                                "getSystemService",
+                                "(Landroid/content/Context;Ljava/lang/Class;)Ljava/lang/Object;",
+                                false,
+                            )
+                        } else {
+                            super.visitMethodInsn(opcode, owner, name, descriptor, isInterface)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+androidComponents {
+    onVariants { variant ->
+        variant.instrumentation.transformClassesWith(
+            PadkitGetSystemServiceCompat::class.java,
+            com.android.build.api.instrumentation.InstrumentationScope.ALL,
+        ) {}
+    }
+}

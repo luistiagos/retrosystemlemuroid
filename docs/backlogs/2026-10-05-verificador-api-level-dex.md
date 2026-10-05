@@ -60,9 +60,11 @@ Task `verifyDexApiLevel` no `buildSrc`, no molde de `FlycastCoreVerifier`/`Bundl
    Pacote `j$/` fica fora por regra, não por baseline. O código do próprio app (`com/swordfish/`) pode
    ficar fora também — o lint já o cobre.
 4. Validar que o guard pega regressão: desligar o desugaring num build local tem que falhar a task
-   apontando `kotlinx.datetime.Instant → java/time/Instant.ofEpochSecond`; e, enquanto o padkit não for
-   corrigido, `gg.padkit.haptics.AndroidHapticGenerator → Context.getSystemService(Class)` tem que
-   estar no baseline marcado como bug aberto, não como guardado.
+   apontando `kotlinx.datetime.Instant → java/time/Instant.ofEpochSecond`; e desligar o
+   `PadkitGetSystemServiceCompat` (instrumentação no fim do `lemuroid-app/build.gradle.kts`, que corrigiu o
+   haptics em 2026-10-05) tem que falhar apontando
+   `gg.padkit.haptics.AndroidHapticGenerator → Context.getSystemService(Class)`. A task tem que ler o dex
+   **depois** da instrumentação — o APK, não o AAR do cache.
 
 ## Custo de não fazer
 
