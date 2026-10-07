@@ -156,6 +156,51 @@ faz 58 mil chamadas `suspend` ao Room, uma por linha já existente, e o custo é
 escrita (ver a hipótese do UPDATE condicional, descartada). Próximo passo registrado em
 `documentacao/backlogs/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`.
 
+## Confirmação de campo (chamado #112, anexada em 2026-10-07)
+
+O sintoma que o cliente enxerga não estava registrado aqui: **o contador de jogos de cada sistema
+dobra e depois cai pela metade**, e ele lê isso como o app apagando jogos.
+
+Chamado de suporte #112, sessão `43087531405512@lid`, Moto G86, compra em 2026-09-29 (instalou com
+o APK publicado na época, anterior ao versionCode 254). Mensagem `[130247]`, 2026-10-04 02:52 UTC,
+dentro de um pedido de reembolso:
+
+> *"quando.abre ele mostra ds com 5386 jogos PSP com 3482 game cube com 2400 e 3ds com 2400 mais
+> logo esse número cai pra 2693 de ds 1800 de PSP 1080 de game cube por isso eu quero o reembolso"*
+
+O que bate com a causa deste bug:
+
+- **DS: 5386 = 2 × 2693, exato.** `git show bc9c343:lemuroid-app/src/main/assets/catalog_manifest.txt | grep -c "^nds/"`
+  → 2693 (igual em `2c02594`, de 09-30). Todas as linhas de `nds/` têm caractere codificável no
+  nome (0 sem), então todas eram reinseridas.
+- O contador é a contagem crua de linhas (`GameDao::selectSystemsWithCount`,
+  `SELECT count(*) ... GROUP BY systemId`, um `Flow` observado pela home), e o
+  `ManifestQuickLoader::load` insere antes de apagar: `insertIfNotExists` (linha 422), depois o loop
+  de `updateManifestFieldsWithTitle` (linha 434, os ~15 s do "Custo residual"), e só então
+  `selectAll` + `delete` (linhas 455–464). Nesse intervalo a tabela tem as duas formas de cada jogo
+  e a home mostra o dobro.
+- Os valores finais dos outros sistemas batem com o manifesto da época (PSP 1799, GameCube 1082,
+  3DS 1027). Os iniciais que ele citou (3482, 2400, 2400) não são o dobro exato (seriam ~3598,
+  ~2135, 2054): leitura de memória ou no meio da contagem. Só o DS fecha na unidade.
+
+**Inconclusivo: se ele viu isso de novo em 10-04.** O operador mandou o link do APK às 02:34 UTC e a
+mensagem é de 02:52. Não há versão do app no banco, e não sei a que horas o versionCode 254 foi
+publicado. Se ele reinstalou do zero já com o 254, o prebuilt vem codificado e o contador não deveria
+dobrar. Esta evidência não reprova a correção e o doc fica em `done/`.
+
+O que falta para fechar a dúvida: instalação limpa do APK **publicado**
+(`https://versions.digitalstoregames.com/RetroGameSystem/version.json`, hoje versionCode 256) e
+olhar o contador do DS na home durante o primeiro minuto. Esperado: nunca acima do total do
+manifesto.
+
+Proposta, para decidir à parte: qualquer causa futura de reinserção em massa (troca de `romsDir`,
+mudança na forma da URI) volta a mostrar o dobro, porque inserção e limpeza são transações
+separadas e o `Flow` emite o estado intermediário. O contador da home poderia não refletir a carga
+em andamento.
+
+Mesmo chamado, outros achados: `documentacao/bugs/open/2026-10-07-catalogo-3ds-sem-pokemon-y.md` e
+`documentacao/bugs/open/2026-10-07-audio-engasgando-gba-nds-moto-g86-sem-diagnostico.md`.
+
 ## Lição
 
 - **URI montada à mão tem que sair do mesmo algoritmo que a de comparação.** Concatenar
