@@ -1,7 +1,8 @@
 # [BUG] ANR ao inicializar jogo — main thread bloqueia em `runOnGLThread` enquanto o core carrega a ROM
 
 **Data:** 2026-08-09
-**Status:** 🟡 (2026-10-02: o report de timeout passou a levar a pilha da GLThread — ver a última seção) Todos os bloqueios de main thread **nossos** foram corrigidos e validados em device — o
+**Status:** 🟡 (2026-10-02: o report de timeout passou a levar a pilha da GLThread; 2026-10-06: a
+1.17.25 é a primeira versão em produção com ela, e ainda não há dump — ver a última seção) Todos os bloqueios de main thread **nossos** foram corrigidos e validados em device — o
 último resíduo, o `dlopen` do core, saiu da main em 2026-09-10 (ver seção própria). Segue **aberto**
 apenas porque a causa de fundo (GLThread travando dentro do core) não é nossa e não reproduz sob
 demanda: o critério de fechamento é a telemetria parar de acusar `GLThreadTimeoutException` em
@@ -1030,3 +1031,78 @@ Todos em GameCube no momento do salvamento de saída (`serializeSRAM`) na versã
 ## Passagem de bastão — publicar e esperar (2026-10-05, vigente)
 
 Task A feita e commitada. Próximo passo continua sendo o 2 de "O que falta para `done/`": publicar uma versão **≥ 1.17.24** com `46b4995` + Task A. Depois, consultar a telemetria filtrando `GLThreadTimeout` e ler o `seq=1` de cada report com `app=` ≥ 1.17.24.
+
+### Rodada 2026-10-05 — procurar a trava do nosso lado sem o dump
+
+Pedido: "corrija este bug". Sem dump de produção, a única saída era achar no nosso código algo que
+segurasse a GLThread por 30 s. Não achei.
+
+**Estado da publicação: a 1.17.24 nunca chegou à produção, e a 1.17.25 acabou de chegar.** Consulta
+feita com o modo *edit* (o auto barra a leitura do `.env` do backend, como a skill `triagem-bugs-prod`
+prevê). Script de scratchpad que importa `triagem.fetch_all` e filtra `"GLThreadTimeout"` em qualquer
+campo e qualquer status:
+
+- **9.440 erros** no serviço. Os únicos reports de 1.17.24 são `1.17.24-DEBUG` (9390, 9391, 9392,
+  9404). O primeiro report de produção da **1.17.25** é o 9435, de `2026-10-05 22:52:59`.
+- A 1.17.25 é o `a8f994f` (o commit que levou `versionCode = 256`), já em `origin/version9`. Contém
+  `46b4995` (dump) e `1f5efd7` (Task A), conferido com `git merge-base --is-ancestor`.
+- **17 `GLThreadTimeout` ao todo, todos `close`, nenhum de versão ≥ 1.17.24.** Ainda não existe dump
+  de produção para ler. A espera da passagem de bastão começa agora, não em 2026-10-02.
+
+**Dado novo, tirado dos horários: nos aparelhos afetados a travada não é rara, ela se repete em
+minutos.** A telemetria deduplica por mensagem **dentro do processo**, então dois reports iguais
+vêm de duas sessões. Até a 1.17.12, o timeout do `open-menu` derrubava o processo (sem o `try/catch`
+de 2026-09-03):
+
+| aparelho | reports | intervalo | o que cabe nele |
+|---|---|---|---|
+| SM-A515F, *NFS Underground*, 1.17.12 | 5947 → 5948 (`open-menu`) | **67 s** | tela de crash, reabrir, carregar a ISO, jogar, travar, abrir o menu e esperar 30 s |
+| SM-G990E, *Codename Kids Next Door*, 1.17.11 | 3358 (`open-menu`, crash) → 3359 (`serializeSRAM`) | 2 min | idem, e sair |
+| RG557, *Ant Bully* → *Crash Bandicoot*, 1.17.23 | 9378 → 9379 (`exit-save`) | 2 min 14 s | sair (~35 s), abrir outro jogo, jogar, travar, sair (~35 s) |
+
+Na segunda sessão do SM-A515F, o jogo travou **segundos** depois de começar a rodar, e no RG557 o
+mesmo vale para outro jogo. O "não reproduz sob demanda" vale para os aparelhos de teste (Moto G86:
+uma vez em ~15 min), não para estes. Inferência, não medida: nesses aparelhos o GameCube trava em
+quase toda sessão, o que casa com este ser o erro dominante do GameCube (Teste 1, 2026-10-02).
+
+**Símbolos abertos e o que se descobriu** (`LibretroDroid-patched`):
+
+- `GLRetroView.RenderLifecycleObserver` (`GLRetroView.kt:561-578`): no `ON_PAUSE` (menu do jogo
+  aberto) faz `isEmulationReady = false` + `queueCoreEvent { LibretroDroid.pause() }` + `onPause()`.
+  Com `isEmulationReady = false` o `onDrawFrame` nem entra no core. `preserveEGLContextOnPause = true`
+  (`:144`).
+- `LibretroDroid::pause/resume` (`libretrodroid.cpp:431-457`): só param/iniciam o áudio e trocam o
+  `Input`, nenhuma espera.
+- `LibretroDroid::step` (`:459-531`): no máximo `2 × frameSpeed` `retro_run` por volta + `fpsSync->wait()`
+  (limitado a um intervalo de frame, já registrado acima).
+- `Audio::write` (`audio.cpp:100`): `fifoBuffer->write` do oboe, que não bloqueia com buffer cheio. O
+  callback de áudio do core **não** prende o `retro_run` mesmo com o áudio parado ou mudo.
+- `LibretroDroid::serializeSRAM` (`:175-181`): `retro_get_memory_size` + `memcpy`. Só trava se o core
+  travar.
+
+**Hipóteses descartadas:**
+
+- **Sair pelo menu recria o contexto EGL e o `context_reset` do Dolphin trava.** O menu só pausa a
+  activity, com `preserveEGLContextOnPause = true`. O `QUIT` chega no `onActivityResult` antes do
+  `onResume`, então o `serializeSRAM` roda com a GLThread pausada, e ela drena a fila mesmo pausada.
+  Isso não explica, além disso, os `exit-save` saídos pelo BACK sem passar pelo menu.
+- **Escrita de áudio bloqueante com o áudio parado.** O FIFO do oboe descarta em vez de esperar.
+
+**Leitura dos dados, sem fato novo:** a travada da GLThread acontece **durante o jogo**, e o
+`exit-save` com timeout é o jogador saindo de um jogo que já congelou. No Moto G86 (2026-09-03) foram
+12 s sem `EMUFPS` com a activity resumida, **antes** de qualquer saída. Os `open-menu` ≤ 1.17.12 são o
+mesmo gesto: o jogador abre o menu porque a imagem parou. Daí o `serializeSRAM` dominar a telemetria.
+Ele não é a causa, é só a primeira chamada bloqueante depois do congelamento. Corrigir a saída não
+corrige o bug.
+
+**Dado novo da triagem 2026-10-05:** o **Anbernic RG557** reportou 3 vezes em 2 dias (9292, 9378, 9379),
+sempre GameCube. Nesse aparelho a travada é frequente, ao contrário do "não reproduz sob demanda" dos
+aparelhos de teste. Se o dono tiver acesso a um RG557 (ou a um aparelho com o mesmo SoC; não
+conferido qual é), é o melhor candidato para capturar a pilha ao vivo (`debuggerd -b <pid do :game>`) sem esperar
+o dump de produção.
+
+**Próximo passo:** esperar `GLThreadTimeout` de `app=1.17.25` ou maior e ler o `seq=1`
+(`triagem.py logs <id>`). A tabela de "Como ler o próximo report" escolhe o caminho. Pelo ritmo de
+2026-10-02 a 10-05 (4 reports em 4 dias, todos GameCube), o primeiro dump deve chegar em dias, conforme
+a 1.17.25 se espalha. Para achar os timeouts, o `triagem.py list` não basta: ele só devolve abertos, e
+a triagem diária fecha os erros. Filtrar todos os status, como acima. Nenhum código mudou nesta rodada.

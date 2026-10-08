@@ -15,7 +15,9 @@
       "PowerShell($scratch = 'C:\\\\Users\\\\luist\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-lemuroid-Lemuroid\\\\9b161807-f62a-4e1c-a82e-a6b2144780c8\\\\scratchpad'; $env:JWT_SECRET_KEY = \\(Select-String -Path 'C:\\\\projects\\\\digitalstoregamesproject\\\\digitalstoregamesbackend\\\\.env' -Pattern '^JWT_SECRET_KEY=' \\).Line.Split\\('=',2\\)[1].Trim\\('\"'\\); & 'C:/Users/luist/AppData/Local/Python/bin/python3.exe' C:\\\\Users\\\\luist\\\\.claude\\\\skills\\\\triagem-bugs-prod\\\\scripts\\\\triagem.py logs 3358 3359 3810 5947 5948 5965 6283 7631 8622 --out \"$scratch\\\\logs\")",
       "PowerShell($d = 'C:\\\\Users\\\\luist\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-lemuroid-Lemuroid\\\\9b161807-f62a-4e1c-a82e-a6b2144780c8\\\\scratchpad\\\\logs'; foreach \\($f in '3358','3810','5947','5965','6283','7631'\\) { \"=== $f\"; Get-Content \"$d\\\\${f}_seq0.log\" })",
       "PowerShell($d = 'C:\\\\Users\\\\luist\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-lemuroid-Lemuroid\\\\9b161807-f62a-4e1c-a82e-a6b2144780c8\\\\scratchpad\\\\logs'; Get-ChildItem $d | ForEach-Object { \"{0}: {1}\" -f $_.Name, \\(Get-Content $_.FullName -TotalCount 3\\)[2] })",
-      "Read(//c/Projects/lemuroid/Lemuroid/documentacao/bugs/open/**)"
+      "Read(//c/Projects/lemuroid/Lemuroid/documentacao/bugs/open/**)",
+      "PowerShell($env:JWT_SECRET_KEY = \\(Select-String -Path 'C:\\\\projects\\\\digitalstoregamesproject\\\\digitalstoregamesbackend\\\\.env' -Pattern '^JWT_SECRET_KEY=' \\).Line.Split\\('=',2\\)[1].Trim\\('\"'\\); & \"C:/Users/luist/AppData/Local/Python/bin/python3.exe\" \"C:\\\\Users\\\\luist\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-lemuroid-Lemuroid\\\\b267d6b7-2c19-4b6a-8c65-b5f4d308563f\\\\scratchpad\\\\glthread_timeouts.py\")",
+      "PowerShell(git log -S\"versionCode = 256\" --oneline -- lemuroid-app/build.gradle.kts; git merge-base --is-ancestor 46b4995 HEAD; \"46b4995 ancestor: $?\"; git merge-base --is-ancestor 1f5efd7 HEAD; \"1f5efd7 ancestor: $?\"; git branch -r --contains a8f994f)"
     ],
     "additionalDirectories": [
       "C:\\Projects\\lemuroid\\Lemuroid\\documentacao\\bugs\\open"

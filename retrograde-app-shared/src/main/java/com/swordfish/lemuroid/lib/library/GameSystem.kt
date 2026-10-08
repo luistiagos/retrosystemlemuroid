@@ -161,8 +161,9 @@ data class GameSystem(
                     uniqueExtensions = listOf("smc", "sfc"),
                     // Snes9x advertises smc|sfc|swc|fig|bs|st. Keep .st out because it
                     // conflicts with Atari ST, but accept the other native SNES dump formats
-                    // so single-ROM ZIPs are extracted before being handed to the core.
-                    supportedExtensions = listOf("smc", "sfc", "swc", "fig", "bs"),
+                    // (including copier formats like gd3/gd7/dx2/ufo) so single-ROM ZIPs are extracted
+                    // before being handed to the core.
+                    supportedExtensions = listOf("smc", "sfc", "swc", "fig", "bs", "gd3", "gd7", "dx2", "ufo"),
                 ),
                 GameSystem(
                     SystemID.SMS,

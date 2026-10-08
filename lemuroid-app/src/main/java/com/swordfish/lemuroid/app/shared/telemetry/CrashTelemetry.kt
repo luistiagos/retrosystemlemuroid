@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import androidx.annotation.RequiresApi
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.common.displayToast
 import timber.log.Timber
@@ -212,6 +213,7 @@ object CrashTelemetry {
     private fun isLowMemoryWorthReporting(info: ApplicationExitInfo): Boolean =
         info.importance <= ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun reportOneExit(
         context: Context,
         info: ApplicationExitInfo,

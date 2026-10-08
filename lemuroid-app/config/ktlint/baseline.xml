@@ -808,19 +808,16 @@
         <error line="265" column="38" source="standard:argument-list-wrapping" />
         <error line="265" column="41" source="standard:argument-list-wrapping" />
         <error line="265" column="121" source="standard:argument-list-wrapping" />
-        <error line="270" column="37" source="standard:multiline-if-else" />
-        <error line="271" column="38" source="standard:multiline-if-else" />
-        <error line="271" column="38" source="standard:if-else-wrapping" />
-        <error line="284" column="37" source="standard:multiline-if-else" />
-        <error line="285" column="38" source="standard:multiline-if-else" />
-        <error line="285" column="38" source="standard:if-else-wrapping" />
-        <error line="294" column="39" source="standard:function-signature" />
-        <error line="294" column="57" source="standard:function-signature" />
-        <error line="294" column="74" source="standard:function-signature" />
-        <error line="294" column="97" source="standard:function-signature" />
-        <error line="303" column="34" source="standard:function-signature" />
-        <error line="303" column="52" source="standard:function-signature" />
-        <error line="303" column="73" source="standard:function-signature" />
+        <error line="289" column="37" source="standard:multiline-if-else" />
+        <error line="290" column="38" source="standard:multiline-if-else" />
+        <error line="290" column="38" source="standard:if-else-wrapping" />
+        <error line="299" column="39" source="standard:function-signature" />
+        <error line="299" column="57" source="standard:function-signature" />
+        <error line="299" column="74" source="standard:function-signature" />
+        <error line="299" column="97" source="standard:function-signature" />
+        <error line="308" column="34" source="standard:function-signature" />
+        <error line="308" column="52" source="standard:function-signature" />
+        <error line="308" column="73" source="standard:function-signature" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/roms/StreamingRomsManager.kt">
         <error line="3" column="1" source="standard:import-ordering" />
@@ -833,50 +830,50 @@
         <error line="50" column="23" source="standard:no-multi-spaces" />
         <error line="50" column="25" source="standard:discouraged-comment-location" />
         <error line="64" column="1" source="standard:no-empty-first-line-in-class-body" />
-        <error line="132" column="5" source="standard:spacing-between-declarations-with-comments" />
-        <error line="136" column="5" source="standard:spacing-between-declarations-with-comments" />
-        <error line="138" column="17" source="standard:property-naming" />
-        <error line="171" column="17" source="standard:chain-wrapping" />
-        <error line="172" column="17" source="standard:chain-wrapping" />
+        <error line="134" column="5" source="standard:spacing-between-declarations-with-comments" />
+        <error line="138" column="5" source="standard:spacing-between-declarations-with-comments" />
+        <error line="140" column="17" source="standard:property-naming" />
         <error line="173" column="17" source="standard:chain-wrapping" />
-        <error line="173" column="36" source="standard:wrapping" />
-        <error line="201" column="29" source="standard:multiline-if-else" />
+        <error line="174" column="17" source="standard:chain-wrapping" />
+        <error line="175" column="17" source="standard:chain-wrapping" />
+        <error line="175" column="36" source="standard:wrapping" />
         <error line="203" column="29" source="standard:multiline-if-else" />
-        <error line="353" column="33" source="standard:string-template" />
-        <error line="433" column="1" source="standard:max-line-length" />
-        <error line="433" column="58" source="standard:argument-list-wrapping" />
-        <error line="433" column="130" source="standard:argument-list-wrapping" />
-        <error line="433" column="131" source="standard:argument-list-wrapping" />
-        <error line="434" column="1" source="standard:max-line-length" />
-        <error line="434" column="26" source="standard:argument-list-wrapping" />
-        <error line="434" column="123" source="standard:argument-list-wrapping" />
-        <error line="516" column="40" source="standard:function-signature" />
-        <error line="516" column="69" source="standard:function-signature" />
-        <error line="516" column="82" source="standard:function-signature" />
-        <error line="536" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="550" column="1" source="standard:max-line-length" />
-        <error line="550" column="71" source="standard:argument-list-wrapping" />
-        <error line="550" column="132" source="standard:argument-list-wrapping" />
-        <error line="565" column="1" source="standard:max-line-length" />
-        <error line="565" column="25" source="standard:multiline-if-else" />
-        <error line="565" column="43" source="standard:argument-list-wrapping" />
-        <error line="565" column="122" source="standard:argument-list-wrapping" />
-        <error line="565" column="123" source="standard:argument-list-wrapping" />
-        <error line="567" column="35" source="standard:multiline-expression-wrapping" />
-        <error line="568" column="1" source="standard:max-line-length" />
-        <error line="573" column="1" source="standard:max-line-length" />
-        <error line="573" column="30" source="standard:argument-list-wrapping" />
-        <error line="573" column="126" source="standard:argument-list-wrapping" />
-        <error line="597" column="24" source="standard:multiline-expression-wrapping" />
-        <error line="610" column="48" source="standard:function-signature" />
-        <error line="610" column="61" source="standard:function-signature" />
-        <error line="610" column="75" source="standard:function-signature" />
-        <error line="618" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="634" column="25" source="standard:multiline-if-else" />
+        <error line="205" column="29" source="standard:multiline-if-else" />
+        <error line="355" column="33" source="standard:string-template" />
+        <error line="435" column="1" source="standard:max-line-length" />
+        <error line="435" column="58" source="standard:argument-list-wrapping" />
+        <error line="435" column="130" source="standard:argument-list-wrapping" />
+        <error line="435" column="131" source="standard:argument-list-wrapping" />
+        <error line="436" column="1" source="standard:max-line-length" />
+        <error line="436" column="26" source="standard:argument-list-wrapping" />
+        <error line="436" column="123" source="standard:argument-list-wrapping" />
+        <error line="518" column="40" source="standard:function-signature" />
+        <error line="518" column="69" source="standard:function-signature" />
+        <error line="518" column="82" source="standard:function-signature" />
+        <error line="538" column="27" source="standard:multiline-expression-wrapping" />
+        <error line="552" column="1" source="standard:max-line-length" />
+        <error line="552" column="71" source="standard:argument-list-wrapping" />
+        <error line="552" column="132" source="standard:argument-list-wrapping" />
+        <error line="567" column="1" source="standard:max-line-length" />
+        <error line="567" column="25" source="standard:multiline-if-else" />
+        <error line="567" column="43" source="standard:argument-list-wrapping" />
+        <error line="567" column="122" source="standard:argument-list-wrapping" />
+        <error line="567" column="123" source="standard:argument-list-wrapping" />
+        <error line="569" column="35" source="standard:multiline-expression-wrapping" />
+        <error line="570" column="1" source="standard:max-line-length" />
+        <error line="575" column="1" source="standard:max-line-length" />
+        <error line="575" column="30" source="standard:argument-list-wrapping" />
+        <error line="575" column="126" source="standard:argument-list-wrapping" />
+        <error line="599" column="24" source="standard:multiline-expression-wrapping" />
+        <error line="612" column="48" source="standard:function-signature" />
+        <error line="612" column="61" source="standard:function-signature" />
+        <error line="612" column="75" source="standard:function-signature" />
+        <error line="620" column="27" source="standard:multiline-expression-wrapping" />
         <error line="636" column="25" source="standard:multiline-if-else" />
-        <error line="661" column="31" source="standard:multiline-expression-wrapping" />
-        <error line="662" column="1" source="standard:max-line-length" />
-        <error line="674" column="23" source="standard:multiline-expression-wrapping" />
+        <error line="638" column="25" source="standard:multiline-if-else" />
+        <error line="663" column="31" source="standard:multiline-expression-wrapping" />
+        <error line="664" column="1" source="standard:max-line-length" />
+        <error line="676" column="23" source="standard:multiline-expression-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/roms/StreamingRomsWork.kt">
         <error line="19" column="1" source="standard:no-empty-first-line-in-class-body" />
@@ -899,13 +896,13 @@
         <error line="64" column="1" source="standard:no-blank-line-before-rbrace" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt">
-        <error line="98" column="32" source="standard:function-signature" />
-        <error line="98" column="50" source="standard:function-signature" />
-        <error line="98" column="81" source="standard:function-signature" />
-        <error line="133" column="1" source="standard:max-line-length" />
-        <error line="133" column="30" source="standard:argument-list-wrapping" />
-        <error line="133" column="37" source="standard:argument-list-wrapping" />
-        <error line="133" column="121" source="standard:argument-list-wrapping" />
+        <error line="99" column="32" source="standard:function-signature" />
+        <error line="99" column="50" source="standard:function-signature" />
+        <error line="99" column="81" source="standard:function-signature" />
+        <error line="134" column="1" source="standard:max-line-length" />
+        <error line="134" column="30" source="standard:argument-list-wrapping" />
+        <error line="134" column="37" source="standard:argument-list-wrapping" />
+        <error line="134" column="121" source="standard:argument-list-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/telemetry/TelemetryReporter.kt">
         <error line="191" column="18" source="standard:try-catch-finally-spacing" />
