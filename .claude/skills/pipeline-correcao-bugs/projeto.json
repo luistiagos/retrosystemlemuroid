@@ -1,0 +1,30 @@
+{
+  "_leia": "Config do PROJETO para o motor generico (scripts/pipeline.py). Nunca sobrescrita pela sincronizacao (a fonte da skill e C:\\projects\\retrobatnew\\source\\skills\\pipeline-correcao-bugs). Caminhos relativos a `raiz`; `{root}` e `{wt}` sao trocados nos cmd. Racional: DESIGN.md secao 22.11.D. O build povoa o submodulo lemuroid-cores a partir do clone da arvore principal (sem rede): numa worktree nova ele vem vazio.",
+  "nome": "Lemuroid (RetroSystem Android)",
+  "remoto": "origin",
+  "base": "origin/version9",
+  "rodizio_contas": false,
+  "commit_docs": "docs(bug)",
+  "build": {
+    "cmd": ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
+            "Set-Location -LiteralPath '{wt}'; git -c protocol.file.allow=always -c 'submodule.lemuroid-cores.url={root}/lemuroid-cores' submodule update --init lemuroid-cores; if ($LASTEXITCODE) { exit $LASTEXITCODE }; & .\\gradlew.bat :lemuroid-app:assembleFreeBundleDebug :lemuroid-app:testFreeBundleDebugUnitTest; exit $LASTEXITCODE"],
+    "lock": "lemuroid-build",
+    "timeout_h": 1
+  },
+  "gerados": [
+    "^lemuroid-cores$",
+    "^\\.claude/settings\\.local\\.json$"
+  ],
+  "entradas_ignoradas": [],
+  "e2e": {},
+  "preflight": [
+    {"cmd": ["cmd", "/c", "%JAVA_HOME%\\bin\\java.exe", "-version"], "msg": "JAVA_HOME aponta para um JDK (o gradlew.bat precisa dele antes de ler o gradle.properties)",
+     "fix": "JAVA_HOME no escopo do usuario (CLAUDE.md do repo, 'Ambiente de build': D:\\DevCaches\\jdk-17)"},
+    {"cmd": ["where", "adb"], "msg": "adb no PATH (o E2E roda no aparelho)"},
+    {"cmd": ["adb", "-s", "RX8R90G1D6E", "get-state"], "msg": "Galaxy A12 de teste (RX8R90G1D6E) conectado e autorizado no adb",
+     "fix": "conectar o A12 por USB com a depuracao ligada e aceitar a chave RSA no aparelho"},
+    {"existe": "lemuroid-cores/bundled-cores/build.gradle.kts", "msg": "submodulo lemuroid-cores povoado na arvore principal (as lanes clonam dele, sem rede)",
+     "fix": "git submodule update --init lemuroid-cores na arvore principal"}
+  ],
+  "proibido_na_sessao": "`gradlew` de build/assemble nem de testes de unidade fora do helper (`ktlintCheck`, `lint` e o `adb install` do APK que o `build` deixou na lane sao permitidos: manual, secoes Dev e Teste (E2E))"
+}
