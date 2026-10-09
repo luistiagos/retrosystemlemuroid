@@ -121,6 +121,12 @@ Nao foi feito nesta sessao (checkout compartilhado; regras do repo de la). Medid
 **Prova de pronto:** o `grep` do item 4 sem linha; os dois caminhos novos existem (`Test-Path`); `git show --stat` de cada
 commit com so o doc dele e so a linha do link.
 
+**Feito (2026-10-09):** `c81a0e74` (doc de 2026-10-05) e `8d2f1d9e` (doc de 2026-09-29) no digitalstoregamesproject,
+um por doc, cada um com so a linha do link no doc (+ `STATUS.md`/`PAINEL.html`, que o pre-commit do repo regenera e
+adiciona em todo commit). A carimbagem alheia continuava `M`: o indice foi montado com o blob do `HEAD` + so a linha
+trocada (`git hash-object -w` + `git update-index --cacheinfo`), e a carimbagem segue sem commit no working tree (3/3 e
+5/5, igual a antes). Prova: o `git grep` do item 4 nao devolve nenhuma linha; os dois caminhos novos existem.
+
 ## Licao
 
 Junction dentro de um repo git no Windows nao e transparente: o Git for Windows a trata como pasta e versiona o conteudo
