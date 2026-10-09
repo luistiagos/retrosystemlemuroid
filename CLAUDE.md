@@ -181,6 +181,9 @@ Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteú
 | 30 | SNES: mais 66 capas no lote `.zip` da v28 via HfsDB/HfsPlay (credenciais do retrobat), somando 366/493 (74%); catálogo SNES em 91% de cobertura |
 | 31 | Passe de capas no catálogo inteiro: +4.711 capas novas e 3.577 capas erradas removidas (ver "Passe de capas v31" abaixo) |
 | 35 | Alias `amiga500`→`amiga` e `gameandwatch`→`gw`: os 1.637 jogos dessas pastas eram descartados pelo loader e apagados do prebuilt em toda instalação (v32–34: ver histórico no `ManifestQuickLoader.kt`) |
+| 36 | Expansão de 1.402 novos jogos no catálogo (FBNeo, Dreamcast, CPS1/2, NeoGeo, PSX, etc.) |
+| 37 | CPS1: ajuste de representação de clones vs pais (sf2ce, 1941, forgottn) para evitar "ROM not found" |
+| 38 | 3DS: adição do Pokémon Y (Europa), completando o par com Pokémon X |
 
 ### Backfill de capas (`super_scrapper`)
 

@@ -152,7 +152,9 @@ class ManifestQuickLoader(
         //   v37  cps1: representação corrigida para os sets-pai hospedados no FBNeo (sf2ce.zip,
         //          1941.zip, forgottn.zip) com título e capa do arcadeitalia, rebaixando os clones
         //          não hospedados (sf2ceua.zip, 1941j.zip, forgott1.zip). Corrige erro "ROM not found".
-        private const val MANIFEST_SCHEMA_VERSION = 37
+        //   v38  3ds: adição de Pokemon Y (Europe) (En,Ja,Fr,De,Es,It,Ko).3ds, completando o par
+        //          de 6ª geração com Pokemon X.
+        private const val MANIFEST_SCHEMA_VERSION = 38
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(
