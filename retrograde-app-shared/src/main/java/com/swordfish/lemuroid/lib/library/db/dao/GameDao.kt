@@ -25,8 +25,10 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Update
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.lib.library.db.entity.InstalledGameGroup
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -349,6 +351,131 @@ interface GameDao {
 
     @Update
     suspend fun update(games: List<Game>)
+
+    @Query("UPDATE games SET lastPlayedAt = :timestamp WHERE id = :gameId")
+    suspend fun updateLastPlayedAt(gameId: Int, timestamp: Long)
+
+    @Query("UPDATE games SET lastIndexedAt = :timestamp WHERE id = :gameId")
+    suspend fun updateLastIndexedAt(gameId: Int, timestamp: Long)
+
+    @Query(
+        """
+        WITH InstalledRoms AS (
+            SELECT g.*, COALESCE(dr.downloadedAt, 0) AS downloadedAt
+            FROM games g
+            LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
+            WHERE (
+                dr.fileName IS NOT NULL 
+                OR (
+                    g.fileUri NOT LIKE 'file:///lemuroid_prebuilt/%' 
+                    AND INSTR(g.fileUri, :managedMarker) = 0 
+                    AND SUBSTR(g.fileUri, 1, LENGTH(:romsDirPrefix)) <> :romsDirPrefix
+                )
+            )
+        ),
+        DistinctGroups AS (
+            SELECT DISTINCT systemId, title FROM InstalledRoms
+        )
+        SELECT 
+            rep.*,
+            COUNT(DISTINCT all_v.fileName) AS installedVariantsCount,
+            MAX(MAX(COALESCE(all_v.lastPlayedAt, 0), all_v.downloadedAt)) AS lastActionAt
+        FROM DistinctGroups dg
+        INNER JOIN InstalledRoms all_v 
+            ON all_v.systemId = dg.systemId AND all_v.title = dg.title
+        INNER JOIN InstalledRoms rep 
+            ON rep.id = (
+                SELECT r.id FROM InstalledRoms r
+                WHERE r.systemId = dg.systemId AND r.title = dg.title
+                ORDER BY MAX(COALESCE(r.lastPlayedAt, 0), r.downloadedAt) DESC, r.isRepresentative DESC, r.fileName ASC, r.id ASC
+                LIMIT 1
+            )
+        GROUP BY dg.systemId, dg.title
+        ORDER BY lastActionAt DESC, rep.title ASC, rep.id ASC
+        """
+    )
+    @RewriteQueriesToDropUnusedColumns
+    fun observeInstalledGameGroups(
+        romsDirPrefix: String,
+        managedMarker: String,
+    ): Flow<List<InstalledGameGroup>>
+
+    @Query(
+        """
+        WITH InstalledRoms AS (
+            SELECT g.*, COALESCE(dr.downloadedAt, 0) AS downloadedAt
+            FROM games g
+            LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
+            WHERE (
+                dr.fileName IS NOT NULL 
+                OR (
+                    g.fileUri NOT LIKE 'file:///lemuroid_prebuilt/%' 
+                    AND INSTR(g.fileUri, :managedMarker) = 0 
+                    AND SUBSTR(g.fileUri, 1, LENGTH(:romsDirPrefix)) <> :romsDirPrefix
+                )
+            )
+        ),
+        MatchingGroups AS (
+            SELECT DISTINCT systemId, title
+            FROM InstalledRoms
+            WHERE (
+                :query = '' 
+                OR title LIKE '%' || :query || '%' 
+                OR fileName LIKE '%' || :query || '%'
+                OR systemId IN (:matchedSystemIds)
+            )
+        )
+        SELECT 
+            rep.*,
+            COUNT(DISTINCT all_v.fileName) AS installedVariantsCount,
+            MAX(MAX(COALESCE(all_v.lastPlayedAt, 0), all_v.downloadedAt)) AS lastActionAt
+        FROM MatchingGroups mg
+        INNER JOIN InstalledRoms all_v 
+            ON all_v.systemId = mg.systemId AND all_v.title = mg.title
+        INNER JOIN InstalledRoms rep 
+            ON rep.id = (
+                SELECT r.id FROM InstalledRoms r
+                WHERE r.systemId = mg.systemId AND r.title = mg.title
+                ORDER BY MAX(COALESCE(r.lastPlayedAt, 0), r.downloadedAt) DESC, r.isRepresentative DESC, r.fileName ASC, r.id ASC
+                LIMIT 1
+            )
+        GROUP BY mg.systemId, mg.title
+        ORDER BY lastActionAt DESC, rep.title ASC, rep.id ASC
+        """
+    )
+    @RewriteQueriesToDropUnusedColumns
+    fun searchInstalledGameGroups(
+        query: String,
+        matchedSystemIds: List<String>,
+        romsDirPrefix: String,
+        managedMarker: String,
+    ): Flow<List<InstalledGameGroup>>
+
+    @Query(
+        """
+        SELECT g.* 
+        FROM games g
+        LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
+        WHERE g.systemId = :systemId 
+          AND g.title = :title
+          AND (
+              dr.fileName IS NOT NULL 
+              OR (
+                  g.fileUri NOT LIKE 'file:///lemuroid_prebuilt/%' 
+                  AND INSTR(g.fileUri, :managedMarker) = 0 
+                  AND SUBSTR(g.fileUri, 1, LENGTH(:romsDirPrefix)) <> :romsDirPrefix
+              )
+          )
+        ORDER BY MAX(COALESCE(g.lastPlayedAt, 0), COALESCE(dr.downloadedAt, 0)) DESC, g.fileName ASC, g.id ASC
+        """
+    )
+    suspend fun getInstalledVariantsForGroup(
+        systemId: String,
+        title: String,
+        romsDirPrefix: String,
+        managedMarker: String,
+    ): List<Game>
 }
+
 
 data class SystemCount(val systemId: String, val count: Int)

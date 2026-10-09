@@ -74,15 +74,21 @@ class LemuroidLibrary(
 
     suspend fun indexLibrary() {
         val startedAtMs = System.currentTimeMillis()
+        var indexingCompletedSuccessfully = false
 
         try {
             indexProviders(startedAtMs)
+            indexingCompletedSuccessfully = true
         } catch (e: kotlinx.coroutines.CancellationException) {
             throw e
         } catch (e: Throwable) {
             Timber.e("Library indexing stopped due to exception", e)
         } finally {
-            cleanUp(startedAtMs)
+            if (indexingCompletedSuccessfully) {
+                cleanUp(startedAtMs)
+            } else {
+                Timber.w("Library indexing had errors or was cancelled; aborting destructive cleanUp to protect offline media/SAF games")
+            }
         }
 
         val executionTime = System.currentTimeMillis() - startedAtMs

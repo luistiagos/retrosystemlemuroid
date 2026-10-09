@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
+import androidx.core.net.toUri
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
@@ -41,14 +42,19 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesScreen
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
+import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGamesScreen
+import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGamesViewModel
+import com.swordfish.lemuroid.app.mobile.feature.installed.StorageAvailabilityMonitor
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchScreen
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchViewModel
+import com.swordfish.lemuroid.app.shared.search.SystemSearchResolver
 import com.swordfish.lemuroid.app.mobile.feature.settings.advanced.AdvancedSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.advanced.AdvancedSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.bios.BiosScreen
@@ -157,6 +163,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     @Inject
     lateinit var romsetImportManager: Lazy<RomsetImportManager>
 
+    @Inject
+    lateinit var directoriesManager: DirectoriesManager
+
     private val reviewManager = ReviewManager()
 
     private val mainViewModel: MainViewModel by viewModels {
@@ -249,12 +258,25 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     mutableStateOf(false)
                 }
 
+            val searchScopeInstalled = remember { mutableStateOf(false) }
+            val previousRoute = remember { mutableStateOf<MainRoute?>(null) }
+
             LaunchedEffect(currentRoute) {
+                if (previousRoute.value == MainRoute.INSTALLED && currentRoute == MainRoute.SEARCH) {
+                    searchScopeInstalled.value = true
+                } else if (currentRoute != MainRoute.SEARCH) {
+                    searchScopeInstalled.value = false
+                }
+                previousRoute.value = currentRoute
+
                 mainViewModel.changeRoute(currentRoute)
                 if (currentRoute != MainRoute.SEARCH && currentRoute != MainRoute.SYSTEM_GAMES) {
                     mainViewModel.setCurrentMetaSystem(null)
                 }
             }
+
+            val storageAvailabilityMonitor = remember { StorageAvailabilityMonitor(applicationContext) }
+            val systemSearchResolver = remember { SystemSearchResolver(applicationContext) }
 
             val selectedGameState =
                 remember {
@@ -274,15 +296,31 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
             // Game selected to show variant-picker modal (has multiple ROMs with same title).
             val pendingVariantsGame = remember { mutableStateOf<Game?>(null) }
+            val pendingVariantsOnlyInstalled = remember { mutableStateOf(false) }
             val variantGames = remember { mutableStateOf<List<Game>>(emptyList()) }
-            LaunchedEffect(pendingVariantsGame.value) {
+            LaunchedEffect(pendingVariantsGame.value, pendingVariantsOnlyInstalled.value) {
                 val game = pendingVariantsGame.value ?: run {
                     variantGames.value = emptyList()
                     return@LaunchedEffect
                 }
-                retrogradeDb.gameDao()
-                    .selectVariantsByTitle(game.systemId, game.title)
-                    .collect { variantGames.value = it }
+                if (pendingVariantsOnlyInstalled.value) {
+                    val romsDirPrefix = runCatching {
+                        directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
+                    }.getOrDefault("")
+                    val managedMarker = directoriesManager.getManagedRomsMarker()
+                    variantGames.value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                        retrogradeDb.gameDao().getInstalledVariantsForGroup(
+                            systemId = game.systemId,
+                            title = game.title,
+                            romsDirPrefix = romsDirPrefix,
+                            managedMarker = managedMarker,
+                        )
+                    }
+                } else {
+                    retrogradeDb.gameDao()
+                        .selectVariantsByTitle(game.systemId, game.title)
+                        .collect { variantGames.value = it }
+                }
             }
 
             val playAfterDownload = remember { mutableStateOf<Game?>(null) }
@@ -309,6 +347,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             val onGameClick: (Game) -> Unit = { game: Game ->
                 val variantKey = "${game.systemId}/${game.title}"
                 if (variantKey in titlesWithVariants) {
+                    pendingVariantsOnlyInstalled.value = false
                     pendingVariantsGame.value = game
                 } else {
                     lifecycleScope.launch {
@@ -372,6 +411,40 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
                         )
                     }
+                    composable(MainRoute.INSTALLED) {
+                        val installedViewModel: InstalledGamesViewModel = viewModel(
+                            factory = InstalledGamesViewModel.Factory(
+                                retrogradeDb = retrogradeDb,
+                                directoriesManager = directoriesManager,
+                                storageAvailabilityMonitor = storageAvailabilityMonitor,
+                                systemSearchResolver = systemSearchResolver,
+                            ),
+                        )
+                        InstalledGamesScreen(
+                            modifier = Modifier.padding(padding),
+                            viewModel = installedViewModel,
+                            onGameClick = { uiModel ->
+                                val game = uiModel.group.game
+                                if (!uiModel.isAvailable) {
+                                    displayToast(R.string.installed_media_unavailable)
+                                    return@InstalledGamesScreen
+                                }
+                                if (uiModel.group.installedVariantsCount > 1) {
+                                    pendingVariantsOnlyInstalled.value = true
+                                    pendingVariantsGame.value = game
+                                } else {
+                                    lifecycleScope.launch {
+                                        if (!isGamePlaceholder(game)) {
+                                            gameInteractor.onGamePlay(game)
+                                        } else {
+                                            pendingDownloadGame.value = game
+                                        }
+                                    }
+                                }
+                            },
+                            onGameLongClick = onGameLongClick,
+                        )
+                    }
                     composable(MainRoute.FAVORITES) {
                         FavoritesScreen(
                             modifier = Modifier.padding(padding),
@@ -385,16 +458,53 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         )
                     }
                     composable(MainRoute.SEARCH) {
+                        val searchViewModel: SearchViewModel = viewModel(
+                            factory = SearchViewModel.Factory(retrogradeDb, directoriesManager),
+                        )
+                        LaunchedEffect(searchScopeInstalled.value) {
+                            searchViewModel.setOnlyInstalled(searchScopeInstalled.value)
+                        }
                         SearchScreen(
                             modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory = SearchViewModel.Factory(retrogradeDb),
-                                ),
+                            viewModel = searchViewModel,
                             searchQuery = mainUIState.searchQuery,
                             systemIds = mainUIState.currentSystemIds,
                             downloadedGameKeys = downloadedGameKeys,
-                            onGameClick = onGameClick,
+                            onGameClick = { game ->
+                                if (searchViewModel.onlyInstalled.value) {
+                                    lifecycleScope.launch {
+                                        val romsDirPrefix = runCatching {
+                                            directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
+                                        }.getOrDefault("")
+                                        val managedMarker = directoriesManager.getManagedRomsMarker()
+                                        val installedVariants = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                                            retrogradeDb.gameDao().getInstalledVariantsForGroup(
+                                                systemId = game.systemId,
+                                                title = game.title,
+                                                romsDirPrefix = romsDirPrefix,
+                                                managedMarker = managedMarker,
+                                            )
+                                        }
+                                        if (installedVariants.size > 1) {
+                                            pendingVariantsOnlyInstalled.value = true
+                                            pendingVariantsGame.value = game
+                                        } else if (installedVariants.isNotEmpty()) {
+                                            val single = installedVariants.first()
+                                            if (!storageAvailabilityMonitor.isGameAvailable(single)) {
+                                                displayToast(R.string.installed_media_unavailable)
+                                            } else if (!isGamePlaceholder(single)) {
+                                                gameInteractor.onGamePlay(single)
+                                            } else {
+                                                pendingDownloadGame.value = single
+                                            }
+                                        } else {
+                                            onGameClick(game)
+                                        }
+                                    }
+                                } else {
+                                    onGameClick(game)
+                                }
+                            },
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
                             onResetSearchQuery = { mainViewModel.changeQueryString("") },
@@ -771,10 +881,18 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     game = game,
                     variants = variantGames.value,
                     downloadedGameKeys = downloadedGameKeys,
-                    onDismiss = { pendingVariantsGame.value = null },
+                    onDismiss = {
+                        pendingVariantsGame.value = null
+                        pendingVariantsOnlyInstalled.value = false
+                    },
                     onVariantSelected = { variant ->
                         pendingVariantsGame.value = null
+                        pendingVariantsOnlyInstalled.value = false
                         lifecycleScope.launch {
+                            if (!storageAvailabilityMonitor.isGameAvailable(variant)) {
+                                displayToast(R.string.installed_media_unavailable)
+                                return@launch
+                            }
                             if (!isGamePlaceholder(variant)) {
                                 gameInteractor.onGamePlay(variant)
                             } else {
@@ -784,6 +902,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     },
                     onVariantLongClick = { variant ->
                         pendingVariantsGame.value = null
+                        pendingVariantsOnlyInstalled.value = false
                         selectedGameState.value = variant
                     },
                 )

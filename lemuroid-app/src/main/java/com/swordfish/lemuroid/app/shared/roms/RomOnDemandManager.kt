@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared.roms
 import android.content.Context
 import android.database.sqlite.SQLiteException
 import android.net.Uri
+import androidx.documentfile.provider.DocumentFile
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.common.displayToast
@@ -292,18 +293,34 @@ class RomOnDemandManager(
      * as a placeholder (File.length() returns 0 for missing files on the JVM).
      */
     suspend fun deleteRom(game: Game): Unit = withContext(Dispatchers.IO) {
-        val destFile = resolveDestFile(game)
-        if (destFile.exists()) {
-            val systemDir = systemDirOf(destFile, game.systemId)
-            val parentDir = destFile.parentFile
-            if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
-                // Multi-disc extraction directory — delete the whole folder so all
-                // track files are removed and not just the .cue sheet.
-                parentDir.deleteRecursively()
-                Timber.d("deleteRom: removed extraction dir ${parentDir.name}")
-            } else {
-                // Single-file ROM — truncate to 0-byte placeholder.
-                FileOutputStream(destFile, false).use { }
+        val uri = Uri.parse(game.fileUri)
+        if (uri.scheme == "content") {
+            runCatching {
+                DocumentFile.fromSingleUri(context, uri)?.delete()
+            }.onFailure {
+                Timber.e(it, "deleteRom: failed to delete SAF document for ${game.fileName}")
+            }
+        } else {
+            val destFile = resolveDestFile(game)
+            if (destFile.exists()) {
+                if (isManagedRom(game)) {
+                    val systemDir = systemDirOf(destFile, game.systemId)
+                    val parentDir = destFile.parentFile
+                    if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
+                        // Multi-disc extraction directory — delete the whole folder so all
+                        // track files are removed and not just the .cue sheet.
+                        parentDir.deleteRecursively()
+                        Timber.d("deleteRom: removed extraction dir ${parentDir.name}")
+                    } else {
+                        // Single-file ROM — truncate to 0-byte placeholder.
+                        FileOutputStream(destFile, false).use { }
+                    }
+                } else {
+                    // ROM local fora da pasta gerenciada: apaga APENAS o arquivo da ROM
+                    // NUNCA deleta recursivamente o parentDir para não apagar a pasta de ROMs do usuário!
+                    destFile.delete()
+                    Timber.d("deleteRom: removed unmanaged local ROM file ${destFile.name}")
+                }
             }
         }
         try {
@@ -331,15 +348,26 @@ class RomOnDemandManager(
         }.getOrNull()?.takeIf { it.isNotEmpty() } ?: listOf(game)
 
         for (variant in variants) {
-            val destFile = resolveDestFile(variant)
-            if (destFile.exists()) {
-                val systemDir = systemDirOf(destFile, variant.systemId)
-                val parentDir = destFile.parentFile
-                if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
-                    // Multi-disc extraction directory — take the whole folder.
-                    parentDir.deleteRecursively()
-                } else {
-                    destFile.delete()
+            val uri = Uri.parse(variant.fileUri)
+            if (uri.scheme == "content") {
+                runCatching {
+                    DocumentFile.fromSingleUri(context, uri)?.delete()
+                }
+            } else {
+                val destFile = resolveDestFile(variant)
+                if (destFile.exists()) {
+                    if (isManagedRom(variant)) {
+                        val systemDir = systemDirOf(destFile, variant.systemId)
+                        val parentDir = destFile.parentFile
+                        if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
+                            // Multi-disc extraction directory — take the whole folder.
+                            parentDir.deleteRecursively()
+                        } else {
+                            destFile.delete()
+                        }
+                    } else {
+                        destFile.delete()
+                    }
                 }
             }
             downloadedRomDao.delete(variant.systemId, variant.fileName)

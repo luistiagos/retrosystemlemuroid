@@ -240,7 +240,6 @@ class GameLaunchTaskHandler(
                 return
             }
 
-        updateGamePlayedTimestamp(game)
         if (enableRatingFlow) {
             displayReviewRequest(activity, duration)
         }
@@ -252,14 +251,6 @@ class GameLaunchTaskHandler(
     ) {
         delay(500)
         reviewManager.launchReviewFlow(activity, durationMillis)
-    }
-
-    private suspend fun updateGamePlayedTimestamp(game: Game) {
-        try {
-            retrogradeDb.gameDao().update(game.copy(lastPlayedAt = System.currentTimeMillis()))
-        } catch (e: android.database.sqlite.SQLiteException) {
-            Timber.e(e, "Failed to update lastPlayedAt for ${game.title} due to database error")
-        }
     }
 
     companion object {

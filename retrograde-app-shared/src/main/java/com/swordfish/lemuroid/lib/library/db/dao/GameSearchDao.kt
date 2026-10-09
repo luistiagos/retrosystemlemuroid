@@ -8,6 +8,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.sqlite.db.SupportSQLiteQuery
+import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 class GameSearchDao(private val internalDao: Internal) {
@@ -91,37 +92,59 @@ class GameSearchDao(private val internalDao: Internal) {
         db.execSQL("INSERT INTO fts_games(fts_games) VALUES('optimize')")
     }
 
-    fun search(query: String, systemIds: List<String>? = null): PagingSource<Int, Game> {
+    fun search(
+        query: String,
+        systemIds: List<String>? = null,
+        onlyInstalled: Boolean = false,
+        romsPrefix: String = "",
+        managedMarker: String = "",
+    ): PagingSource<Int, Game> {
         val matchArg = sanitizeFtsQuery(query)
-        return if (systemIds != null && systemIds.isNotEmpty()) {
-            val placeholders = systemIds.joinToString(",") { "?" }
-            internalDao.rawSearch(
-                SimpleSQLiteQuery(
-                    """
-                    SELECT games.*
-                        FROM fts_games
-                        JOIN games ON games.id = fts_games.docid
-                        WHERE fts_games MATCH ?
-                        AND games.systemId IN ($placeholders)
-                        LIMIT 100
-                    """,
-                    arrayOf(matchArg, *systemIds.toTypedArray()),
-                ),
-            )
-        } else {
-            internalDao.rawSearch(
-                SimpleSQLiteQuery(
-                    """
-                    SELECT games.*
-                        FROM fts_games
-                        JOIN games ON games.id = fts_games.docid
-                        WHERE fts_games MATCH ?
-                        LIMIT 100
-                    """,
-                    arrayOf(matchArg),
-                ),
-            )
+        val args = mutableListOf<Any>(matchArg)
+        val sql = StringBuilder()
+
+        sql.append("""
+            SELECT games.*
+            FROM fts_games
+            JOIN games ON games.id = fts_games.docid
+        """)
+
+        if (onlyInstalled) {
+            sql.append("""
+                LEFT JOIN downloaded_roms dr ON games.systemId = dr.systemId AND games.fileName = dr.fileName
+            """)
         }
+
+        sql.append(" WHERE fts_games MATCH ? ")
+
+        if (!systemIds.isNullOrEmpty()) {
+            val placeholders = systemIds.joinToString(",") { "?" }
+            sql.append(" AND games.systemId IN ($placeholders) ")
+            args.addAll(systemIds)
+        }
+
+        if (onlyInstalled) {
+            require(romsPrefix.isNotEmpty() && managedMarker.isNotEmpty()) {
+                "romsPrefix e managedMarker são obrigatórios quando onlyInstalled=true"
+            }
+            sql.append("""
+                AND (
+                    dr.fileName IS NOT NULL
+                    OR (
+                        games.fileUri NOT LIKE 'file:///lemuroid_prebuilt/%'
+                        AND INSTR(games.fileUri, ?) = 0
+                        AND SUBSTR(games.fileUri, 1, LENGTH(?)) <> ?
+                    )
+                )
+            """)
+            args.add(managedMarker)
+            args.add(romsPrefix)
+            args.add(romsPrefix)
+        }
+
+        sql.append(" LIMIT 100 ")
+
+        return internalDao.rawSearch(SimpleSQLiteQuery(sql.toString(), args.toTypedArray()))
     }
 
     companion object {
@@ -156,7 +179,7 @@ class GameSearchDao(private val internalDao: Internal) {
 
     @Dao
     interface Internal {
-        @RawQuery(observedEntities = [(Game::class)])
+        @RawQuery(observedEntities = [Game::class, DownloadedRom::class])
         fun rawSearch(query: SupportSQLiteQuery): PagingSource<Int, Game>
     }
 }

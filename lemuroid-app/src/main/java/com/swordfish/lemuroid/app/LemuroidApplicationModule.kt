@@ -597,7 +597,8 @@ abstract class LemuroidApplicationModule {
         fun gameLauncher(
             coresSelection: CoresSelection,
             gameLaunchTaskHandler: GameLaunchTaskHandler,
-        ) = GameLauncher(coresSelection, gameLaunchTaskHandler)
+            retrogradeDb: RetrogradeDatabase,
+        ) = GameLauncher(coresSelection, gameLaunchTaskHandler, retrogradeDb)
 
         @Provides
         @PerApp

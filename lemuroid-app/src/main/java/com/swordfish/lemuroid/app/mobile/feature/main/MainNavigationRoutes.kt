@@ -3,11 +3,13 @@ package com.swordfish.lemuroid.app.mobile.feature.main
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DownloadDone
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.VideogameAsset
+import androidx.compose.material.icons.outlined.DownloadDone
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.VideogameAsset
@@ -43,6 +45,10 @@ enum class MainRoute(
     HOME(
         route = "home",
         titleId = R.string.title_home,
+    ),
+    INSTALLED(
+        route = "installed",
+        titleId = R.string.title_installed,
     ),
     FAVORITES(
         route = "favorites",
@@ -161,6 +167,7 @@ enum class MainNavigationRoutes(
     val unselectedIcon: ImageVector,
 ) {
     HOME(MainRoute.HOME, R.string.title_home, Icons.Filled.Home, Icons.Outlined.Home),
+    INSTALLED(MainRoute.INSTALLED, R.string.title_installed, Icons.Filled.DownloadDone, Icons.Outlined.DownloadDone),
     FAVORITES(MainRoute.FAVORITES, R.string.favorites, Icons.Filled.Favorite, Icons.Filled.FavoriteBorder),
     SYSTEMS(MainRoute.SYSTEMS, R.string.title_systems, Icons.Filled.VideogameAsset, Icons.Outlined.VideogameAsset),
     SEARCH(MainRoute.SEARCH, R.string.title_search, Icons.Filled.Search, Icons.Outlined.Search),

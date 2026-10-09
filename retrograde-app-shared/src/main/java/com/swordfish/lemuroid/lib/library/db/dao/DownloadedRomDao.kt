@@ -13,6 +13,12 @@ interface DownloadedRomDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(downloadedRom: DownloadedRom)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertIgnore(downloadedRom: DownloadedRom): Long
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertIgnore(downloadedRoms: List<DownloadedRom>): List<Long>
+
     @Query("DELETE FROM downloaded_roms WHERE systemId = :systemId AND fileName = :fileName")
     suspend fun delete(systemId: String, fileName: String)
 

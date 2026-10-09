@@ -1,11 +1,13 @@
 package com.swordfish.lemuroid.app.mobile.feature.search
 
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.swordfish.lemuroid.common.paging.buildFlowPaging
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
+import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,18 +21,29 @@ import kotlinx.coroutines.flow.stateIn
 import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
-class SearchViewModel(private val retrogradeDb: RetrogradeDatabase) : ViewModel() {
-    class Factory(val retrogradeDb: RetrogradeDatabase) : ViewModelProvider.Factory {
+class SearchViewModel(
+    private val retrogradeDb: RetrogradeDatabase,
+    private val directoriesManager: DirectoriesManager? = null,
+) : ViewModel() {
+    class Factory(
+        val retrogradeDb: RetrogradeDatabase,
+        val directoriesManager: DirectoriesManager? = null,
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SearchViewModel(retrogradeDb) as T
+            return SearchViewModel(retrogradeDb, directoriesManager) as T
         }
     }
 
     val queryString = MutableStateFlow("")
     private val systemIdsFlow = MutableStateFlow<List<String>?>(null)
+    val onlyInstalled = MutableStateFlow(false)
 
     fun setSystemIds(ids: List<String>?) {
         systemIdsFlow.value = ids
+    }
+
+    fun setOnlyInstalled(only: Boolean) {
+        onlyInstalled.value = only
     }
 
     enum class UIState { Idle, Loading, Ready }
@@ -57,11 +70,23 @@ class SearchViewModel(private val retrogradeDb: RetrogradeDatabase) : ViewModel(
     // Driven by activeQuery (already debounced) rather than queryString, so
     // subscribing/resubscribing the UI does not restart the debounce timer.
     val searchResults =
-        combine(activeQuery, systemIdsFlow) { query, systemIds -> query to systemIds }
-            .filter { (query, _) -> query.length >= 3 }
-            .flatMapLatest { (query, systemIds) ->
+        combine(activeQuery, systemIdsFlow, onlyInstalled) { query, systemIds, onlyInst ->
+            Triple(query, systemIds, onlyInst)
+        }
+            .filter { (query, _, _) -> query.length >= 3 }
+            .flatMapLatest { (query, systemIds, onlyInst) ->
+                val romsPrefix = runCatching {
+                    directoriesManager?.getInternalRomsDirectory()?.toUri()?.toString()?.trimEnd('/') ?: ""
+                }.getOrDefault("")
+                val managedMarker = directoriesManager?.getManagedRomsMarker() ?: ""
                 buildFlowPaging(30, viewModelScope) {
-                    retrogradeDb.gameSearchDao().search(query, systemIds)
+                    retrogradeDb.gameSearchDao().search(
+                        query = query,
+                        systemIds = systemIds,
+                        onlyInstalled = onlyInst,
+                        romsPrefix = romsPrefix,
+                        managedMarker = managedMarker,
+                    )
                 }
             }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), PagingData.empty())

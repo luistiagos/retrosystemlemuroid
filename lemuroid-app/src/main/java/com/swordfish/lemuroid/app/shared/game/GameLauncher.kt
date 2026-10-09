@@ -11,6 +11,8 @@ import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
+import timber.log.Timber
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,6 +21,7 @@ import java.io.File
 class GameLauncher(
     private val coresSelection: CoresSelection,
     private val gameLaunchTaskHandler: GameLaunchTaskHandler,
+    private val retrogradeDb: RetrogradeDatabase,
 ) {
     fun launchGameAsync(
         activity: Activity,
@@ -38,7 +41,14 @@ class GameLauncher(
             }
             val system = GameSystem.findByIdOrNull(launchGame.systemId) ?: return@launch
             val coreConfig = coresSelection.getCoreConfigForSystem(system)
-            withContext(Dispatchers.IO) { gameLaunchTaskHandler.handleGameStart(activity.applicationContext) }
+            withContext(Dispatchers.IO) {
+                gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
+                runCatching {
+                    retrogradeDb.gameDao().updateLastPlayedAt(launchGame.id, System.currentTimeMillis())
+                }.onFailure { e ->
+                    Timber.e(e, "Failed to update lastPlayedAt for ${launchGame.title}")
+                }
+            }
             BaseGameActivity.launchGame(activity, coreConfig, launchGame, loadSave, leanback)
         }
     }
