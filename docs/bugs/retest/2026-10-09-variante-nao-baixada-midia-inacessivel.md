@@ -1,7 +1,7 @@
 # [BUG] Escolher variante ainda não baixada mostra "Mídia inacessível" em vez de baixar (relatado em 3DO)
 
 **Data:** 2026-10-09
-**Status:** 🔵 Retest — correção comprovada no Galaxy A12 (3DO); faltam Amstrad CPC e o controle de variante já baixada
+**Status:** 🔵 Retest — correção comprovada no Galaxy A12 (3DO) e no Moto G86 (Amstrad CPC + variante já baixada); falta o cliente confirmar
 **Severidade:** Alta — nenhum jogo com mais de uma variante (região/revisão) pode ser baixado pelo modal de variantes
 **Branch:** version9
 **Origem:** relato do dono: 3DO, Super Street Fighter II e GEX dão "Mídia inacessível" ao escolher
@@ -73,10 +73,19 @@ operam só sobre variantes instaladas e ficam como estão.
   a sequência), app aberto do zero: Sistemas → 3DO → Super Street Fighter II Turbo → (Europe) →
   abre o diálogo **"Save ROM? / Adicionar à fila de salvamento?"** (Cancelar / Salvar); nenhum
   toast. Mesmo caminho que no APK antigo dava "Mídia inacessível". Cancelado (CHD grande).
-- [ ] Amstrad CPC → Indiana Jones: não feito — o A12 saiu do `adb devices` no meio do teste.
+- [x] **Amstrad CPC**, Moto G86 `ZY32LMNN9B` (Android 16), mesmo APK de 2026-10-09 03:00 instalado
+  por cima de 1.17.19 (2026-10-09 11:49); `getevent`: 0 toques físicos durante o teste.
+  Sistemas → Amstrad CPC → *Indiana Jones and the Fate of Atlantis* → modal "2 versions" →
+  (Disk 1 of 2) → diálogo "Save ROM? / Adicionar à fila de salvamento?"; nenhum toast.
+- [x] **Controle positivo (variante já baixada)**, mesmo aparelho: Salvar → arquivo
+  `roms/amstradcpc/…(Disk 1 of 2)….zip` com 73.945 bytes, diálogo "Download Concluído" → "Agora
+  não"; de novo card → modal → (Disk 1 of 2) → abre `GameActivity` direto (CPC rodando, controle
+  virtual na tela), sem toast e sem diálogo de download.
+- Título sem variante: não exercitado — `onGameClick` (caminho sem modal) não foi tocado pelo diff.
+- [ ] (histórico) Amstrad CPC no A12: não feito — o A12 saiu do `adb devices` no meio do teste.
   Observação à parte, não investigada: na aba Buscar, "temple of doom" e "indiana" deram
   "Nenhum item" (pode ser o escopo "só instalados" da busca); conferir antes de abrir bug.
-- [ ] Controle positivo: variante já baixada joga direto; título sem variante segue igual
+- [x] Controle positivo: variante já baixada joga direto (Moto G86, acima)
 
 ## Lição
 
