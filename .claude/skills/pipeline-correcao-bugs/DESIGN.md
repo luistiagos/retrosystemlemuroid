@@ -1679,3 +1679,37 @@ origin/version9`, PIPE padrao; 19 s, 27.972 arquivos):
 **Fazer:** no Lemuroid, `.claude/skills/pipeline-correcao-bugs/{projeto.json,projeto.md}` (as 9 secoes de 22.10) e
 `docs/bugs/{open,retest}/README.md`; na fonte, `DESTINOS` += Lemuroid e commit; `sync_copias.py --check` (falta) e `--commit
 --destino <Lemuroid>`; `preflight --skip-spawn`. Worktree de medida e `C:\projects\lemuroid\.bugfix-pipeline-Lemuroid` ja removidas.
+
+**T4 do Lemuroid FEITA, menos o trust (2026-10-09 ~17:00).** Lemuroid `version9` publicado (`9a6461a..bc0303e`;
+`origin/version9...version9` = `0 0`), so com commits desta sessao (os arquivos sem commit da outra sessao ficaram):
+- `1350581` `projeto.json`, `projeto.md` (as 9 secoes de 22.10), `docs/bugs/{open,retest}/README.md`;
+- `e59bc9c` as mesmas README em `documentacao/bugs/` (a junction as criou no disco; o repo commita os dois caminhos) e o
+  manual explicando a junction;
+- `bc0303e` copia da fonte em `a4db189` (`sync_copias.py --commit --destino <Lemuroid>`, fonte limpa, sem `--fonte`).
+  `--check --destino <Lemuroid>` -> `[OK] ... igual a fonte`, rc 0.
+- Fonte: `10bda8c` (registro antes da edicao) e `a4db189` (`DESTINOS` += Lemuroid; correcao da junction neste registro).
+- **Prova do `build.cmd` exato** (script que repete o `project_cmd`: placeholders trocados, `cwd=ROOT`, lane nova
+  `...\lanes\wt-1` criada como o `ensure_wt`): rc 0 em 59 s com cache quente; `Submodule path 'lemuroid-cores': checked out
+  '55d29c2...'`; 2 APKs; 10 suites de teste; `git status` da lane vazio; url comum intacta; remocao como o `cmd_cleanup`
+  (`worktree remove --force` rc 255 `Filename too long` + `rmtree`) sem sobra.
+- **Controle dos `gerados`** (o `GENERATED` montado pelo `configure` da copia): `lemuroid-cores` e `.claude/settings.local.json`
+  casam; `.claude/settings.json`, `lemuroid-cores-x/a.kt`, um `.kt` do app e um doc de `docs/bugs` nao. A linha de submodulo sujo
+  no `porcelain` e ` M <caminho>` sem barra (provado num repo temporario, com commit novo e com conteudo sujo).
+- `preflight --skip-spawn` rodado da copia, em `C:\projects\lemuroid\Lemuroid`, depois do push: `[OK]` claude.exe, projeto (lanes
+  em `C:\projects\lemuroid\.bugfix-pipeline-Lemuroid\lanes`), manual, "copia da skill igual a fonte", os 4 itens do `projeto.json`
+  (JAVA_HOME, adb, A12 `RX8R90G1D6E`, submodulo), `version9`, `claude agents`, "rodizio de contas desligado"; `[AVISO]` 14 arquivos
+  reais nao commitados (a outra sessao, fix da busca); `[FALHA] trust` -> **acao do dono** (`claude.exe` num terminal no repo,
+  aceitar, sair). Antes do push havia tambem `[AVISO]` 3 commits locais e "a skill difere da de origin/version9"; sumiram.
+- A pasta do pipeline que o preflight cria (so `lanes\` vazia) foi apagada; `git worktree list` so com a principal.
+
+**Pendencias do dono (Lemuroid):** trust; T5 (preflight com spawn). Nao medido aqui: a ESCRITA do kill-switch de telemetria por
+`run-as` (o manual manda; a 1a execucao confirma ou cai no "anote a janela de horario"). Fora de escopo, sem doc:
+1. `gradlew ktlintCheck` vermelho em `origin/version9`, contra o "passa" do `CLAUDE.md` do repo (`Color.kt` de `src/debug`;
+   `function-signature` em `lemuroid-app/build.gradle.kts`).
+2. A tabela de rotas do Passo 4 da `triagem-chamados` (`source/skills/triagem-chamados/SKILL.md`) nao tem o Lemuroid/RetroSystem
+   Android: um chamado desse produto nao tem destino escrito.
+3. O `CLAUDE.md` do Lemuroid ainda manda `[BUG]` para `documentacao/bugs` e nao cita a junction `docs -> documentacao`; o repo
+   rastreia as duas arvores em dobro, e `.claude/settings.local.json` tambem e rastreado.
+
+**Proxima:** T5 com o dono nos projetos com trust aceito (22.5 item 5; nenhuma execucao real sem ele). A T4 dos quatro repos
+esta feita.
