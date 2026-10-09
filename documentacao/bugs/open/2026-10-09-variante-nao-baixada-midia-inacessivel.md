@@ -58,6 +58,17 @@ operam só sobre variantes instaladas e ficam como estão.
 ## Validação
 
 - [x] Build `:lemuroid-app:assembleFreeBundleDebug` verde (2026-10-09; JDK `D:\DevCaches\jdk-17` passado por `-Dorg.gradle.java.home`, porque o do `gradle.properties` nao existe nesta maquina)
+- [x] **Antes (reproduzido)**, Galaxy A12 `RX8R90G1D6E` (Android 13), APK de 2026-10-08 21:53:
+  Sistemas → 3DO → Super Street Fighter II Turbo → (Europe) → toast "Mídia inacessível".
+  Banco do aparelho: as 5 variantes têm `fileUri` `file:///…/files/roms/3do/…chd` e a pasta
+  `roms/3do/` não existe (placeholder = arquivo inexistente, `length()` = 0).
+- [ ] **Depois**, APK de 2026-10-09 03:00 (contém `eaefe1d`), mesmo caminho: o toast **não**
+  aparece mais (print 0,8 s após o toque), mas o diálogo de download (`save_confirm_title`)
+  também não foi visto. Teste interrompido: o A12 tem **toque fantasma** — `getevent` em
+  `/dev/input/event3` (`sec_touchscreen`) registrou toques físicos de 16 ms repetidos em
+  X=663 Y=99 (a engrenagem de Configurações) sem ninguém tocar; eles abriam Configurações/Ajuda e
+  dispensariam o AlertDialog (toque fora). Por duas vezes chegaram a abrir o seletor de pasta de
+  ROMs (cancelado; `roms_dir` conferido intacto). Refazer com o aparelho sem interferência.
 - [ ] No aparelho: 3DO → Gex → escolher variante não baixada → abre o diálogo de download
 - [ ] Controle positivo: variante já baixada joga direto; título sem variante segue igual
 
