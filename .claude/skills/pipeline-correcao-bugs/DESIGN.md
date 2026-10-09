@@ -1707,13 +1707,16 @@ origin/version9`, PIPE padrao; 19 s, 27.972 arquivos):
 1. `gradlew ktlintCheck` vermelho em `origin/version9`, contra o "passa" do `CLAUDE.md` do repo (`Color.kt` de `src/debug`;
    `function-signature` em `lemuroid-app/build.gradle.kts`).
 2. A tabela de rotas do Passo 4 da `triagem-chamados` (`source/skills/triagem-chamados/SKILL.md`) nao tem o Lemuroid/RetroSystem
-   Android: um chamado desse produto nao tem destino escrito.
+   Android: um chamado desse produto nao tem destino escrito. **Virou bug** (pedido do dono):
+   `source/docs/bugs/open/skill-triagem-chamados-sem-rota-para-lemuroid_2026-10-09.md` (`625b142`, passada 1).
 3. ~~O `CLAUDE.md` do Lemuroid ainda manda `[BUG]` para `documentacao/bugs`~~ **corrigido a pedido do dono** (`35636b8`, publicado):
-   o workflow manda para `docs/bugs` (`open -> retest -> done`, citando os README), explica a junction e o commit dos dois
-   caminhos, e os 17 links "Detalhes em" apontam para `docs/bugs` (todos conferidos com `git ls-files`; o do TV box MXQ estava
-   em `open/` e o doc ja esta em `done/`). Continua: o repo rastreia as duas arvores em dobro, `.claude/settings.local.json` e
-   rastreado, e comentarios em `buildSrc/*Verifier.kt`, `audit_dex_api_level.py` e o `.claude/settings.json` ainda citam
-   `documentacao/bugs` (validos: o arquivo existe nos dois caminhos).
+   o workflow manda para `docs/bugs` (`open -> retest -> done`, citando os README) e os 17 links "Detalhes em" apontam para
+   `docs/bugs` (todos conferidos com `git ls-files`; o do TV box MXQ estava em `open/` e o doc ja esta em `done/`).
+   **Depois, a pedido do dono, `documentacao/` saiu do repo:** junction removida, `docs/` virou pasta real, `documentacao/`
+   fora do indice e as 84 referencias em 53 arquivos trocadas por `docs/` (Lemuroid
+   `docs/bugs/done/2026-10-09-documentacao-duplicada-junction-docs.md`). O que este registro diz acima sobre a junction e o
+   "commit dos dois caminhos" vale ate 2026-10-09 ~20:40; o manual do pipeline do Lemuroid ja nao tem a secao do espelho.
+   Continua: `.claude/settings.local.json` rastreado.
 
 **Proxima:** T5 com o dono nos projetos com trust aceito (22.5 item 5; nenhuma execucao real sem ele). A T4 dos quatro repos
 esta feita.
