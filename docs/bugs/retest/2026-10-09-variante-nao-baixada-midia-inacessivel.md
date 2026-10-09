@@ -1,7 +1,7 @@
 # [BUG] Escolher variante ainda não baixada mostra "Mídia inacessível" em vez de baixar (relatado em 3DO)
 
 **Data:** 2026-10-09
-**Status:** 🟡 Corrigido no código — falta prova no aparelho
+**Status:** 🔵 Retest — correção comprovada no Galaxy A12 (3DO); faltam Amstrad CPC e o controle de variante já baixada
 **Severidade:** Alta — nenhum jogo com mais de uma variante (região/revisão) pode ser baixado pelo modal de variantes
 **Branch:** version9
 **Origem:** relato do dono: 3DO, Super Street Fighter II e GEX dão "Mídia inacessível" ao escolher
@@ -69,7 +69,13 @@ operam só sobre variantes instaladas e ficam como estão.
   X=663 Y=99 (a engrenagem de Configurações) sem ninguém tocar; eles abriam Configurações/Ajuda e
   dispensariam o AlertDialog (toque fora). Por duas vezes chegaram a abrir o seletor de pasta de
   ROMs (cancelado; `roms_dir` conferido intacto). Refazer com o aparelho sem interferência.
-- [ ] No aparelho: 3DO → Gex → escolher variante não baixada → abre o diálogo de download
+- [x] **Depois, refeito sem interferência** (2026-10-09 11:46, `getevent`: 0 toques físicos durante
+  a sequência), app aberto do zero: Sistemas → 3DO → Super Street Fighter II Turbo → (Europe) →
+  abre o diálogo **"Save ROM? / Adicionar à fila de salvamento?"** (Cancelar / Salvar); nenhum
+  toast. Mesmo caminho que no APK antigo dava "Mídia inacessível". Cancelado (CHD grande).
+- [ ] Amstrad CPC → Indiana Jones: não feito — o A12 saiu do `adb devices` no meio do teste.
+  Observação à parte, não investigada: na aba Buscar, "temple of doom" e "indiana" deram
+  "Nenhum item" (pode ser o escopo "só instalados" da busca); conferir antes de abrir bug.
 - [ ] Controle positivo: variante já baixada joga direto; título sem variante segue igual
 
 ## Lição
