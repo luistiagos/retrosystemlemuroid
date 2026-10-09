@@ -57,7 +57,7 @@ operam só sobre variantes instaladas e ficam como estão.
 
 ## Validação
 
-- [ ] Build `assembleDebug`
+- [x] Build `:lemuroid-app:assembleFreeBundleDebug` verde (2026-10-09; JDK `D:\DevCaches\jdk-17` passado por `-Dorg.gradle.java.home`, porque o do `gradle.properties` nao existe nesta maquina)
 - [ ] No aparelho: 3DO → Gex → escolher variante não baixada → abre o diálogo de download
 - [ ] Controle positivo: variante já baixada joga direto; título sem variante segue igual
 

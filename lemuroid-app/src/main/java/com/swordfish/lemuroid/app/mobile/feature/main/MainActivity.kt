@@ -889,14 +889,14 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         pendingVariantsGame.value = null
                         pendingVariantsOnlyInstalled.value = false
                         lifecycleScope.launch {
-                            if (!storageAvailabilityMonitor.isGameAvailable(variant)) {
-                                displayToast(R.string.installed_media_unavailable)
-                                return@launch
-                            }
-                            if (!isGamePlaceholder(variant)) {
-                                gameInteractor.onGamePlay(variant)
-                            } else {
+                            // Placeholder first: a not-yet-downloaded variant is a 0-byte file,
+                            // which isGameAvailable reports as unavailable.
+                            if (isGamePlaceholder(variant)) {
                                 pendingDownloadGame.value = variant
+                            } else if (!storageAvailabilityMonitor.isGameAvailable(variant)) {
+                                displayToast(R.string.installed_media_unavailable)
+                            } else {
+                                gameInteractor.onGamePlay(variant)
                             }
                         }
                     },
