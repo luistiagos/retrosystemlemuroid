@@ -1708,8 +1708,12 @@ origin/version9`, PIPE padrao; 19 s, 27.972 arquivos):
    `function-signature` em `lemuroid-app/build.gradle.kts`).
 2. A tabela de rotas do Passo 4 da `triagem-chamados` (`source/skills/triagem-chamados/SKILL.md`) nao tem o Lemuroid/RetroSystem
    Android: um chamado desse produto nao tem destino escrito.
-3. O `CLAUDE.md` do Lemuroid ainda manda `[BUG]` para `documentacao/bugs` e nao cita a junction `docs -> documentacao`; o repo
-   rastreia as duas arvores em dobro, e `.claude/settings.local.json` tambem e rastreado.
+3. ~~O `CLAUDE.md` do Lemuroid ainda manda `[BUG]` para `documentacao/bugs`~~ **corrigido a pedido do dono** (`35636b8`, publicado):
+   o workflow manda para `docs/bugs` (`open -> retest -> done`, citando os README), explica a junction e o commit dos dois
+   caminhos, e os 17 links "Detalhes em" apontam para `docs/bugs` (todos conferidos com `git ls-files`; o do TV box MXQ estava
+   em `open/` e o doc ja esta em `done/`). Continua: o repo rastreia as duas arvores em dobro, `.claude/settings.local.json` e
+   rastreado, e comentarios em `buildSrc/*Verifier.kt`, `audit_dex_api_level.py` e o `.claude/settings.json` ainda citam
+   `documentacao/bugs` (validos: o arquivo existe nos dois caminhos).
 
 **Proxima:** T5 com o dono nos projetos com trust aceito (22.5 item 5; nenhuma execucao real sem ele). A T4 dos quatro repos
 esta feita.
