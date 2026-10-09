@@ -94,6 +94,33 @@ inexistente): ela deve commitar so `docs/...`. O `CLAUDE.md` passa a dizer isso.
   "documentacao" (= documentacao, nao a pasta) no motor da skill (`SKILL.md:46`, `pipeline.py:2314`,
   `git_pipeline.py:209`) e (d) o registro historico na copia do DESIGN da skill. Nenhum arquivo nao rastreado cita.
 
+## Passagem de bastao — links no digitalstoregamesproject (pedido do dono, 2026-10-09 ~21:00)
+
+Ultimo resto: dois bug docs do `C:\projects\digitalstoregamesproject` citam caminho do Lemuroid em `documentacao\`.
+Nao foi feito nesta sessao (checkout compartilhado; regras do repo de la). Medido as ~21:00:
+
+| doc (em `docs/modules/chatbot-whatsapp/areas/prompt-kb/bugs/`) | linha | hoje | trocar por |
+|---|---|---|---|
+| `2026-10-05-agente-inventa-causa-e-manda-reinstalar-o-app-android-para-erro-rom-not-found.md` | 37 | `C:\projects\lemuroid\Lemuroid\documentacao\bugs\open\2026-10-05-catalogo-sf2-champion-edition-aponta-rom-nao-hospedada-rom-not-found.md` | `C:\projects\lemuroid\Lemuroid\docs\bugs\done\2026-10-05-catalogo-sf2-champion-edition-aponta-rom-nao-hospedada-rom-not-found.md` (**o doc mudou de `open/` para `done/`**: `git -C C:\projects\lemuroid\Lemuroid ls-files "docs/bugs/*catalogo-sf2*"`) |
+| `2026-09-29-agente-nao-pergunta-o-que-deu-errado-no-pedido-de-reembolso.md` | 68 | `C:\projects\lemuroid\Lemuroid\documentacao\bugs\done\2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md` | o mesmo com `docs\` no lugar de `documentacao\` (existe em `docs/bugs/done/`) |
+
+**Cuidados (medidos):**
+1. Os DOIS docs ja estao `M` sem commit, junto com ~140 docs da mesma pasta: e a carimbagem do gerador
+   (`tools/gen_status.py`: front-matter `status`, `commits`, `gerado_em`; `--numstat` 3/3 e 5/5) de outra sessao.
+   `git commit -- <doc>` levaria esse hunk junto. Antes de editar: `git -C C:\projects\digitalstoregamesproject status --short --
+   docs/modules/chatbot-whatsapp/areas/prompt-kb/bugs/<doc>`. Se ainda `M`: ou espere o commit de quem rodou o gerador, ou
+   grave so a sua linha no indice (`git diff` -> patch com o hunk da linha 37/68 -> `git apply --cached`) e commite sem pathspec
+   de arquivo inteiro. Nunca `git checkout`/`restore`/`stash` no hunk alheio.
+2. Regras de commit de la (`AGENTS.md` do repo, "Commits, tasks e autoria"): um commit por doc, a mensagem cita o caminho do
+   doc, nunca dois docs no mesmo commit; nao digitar `Commits:`/`Status:` (o gerador escreve).
+3. Commit local la vai ao ar no deploy de outra sessao (`deploy-all.ps1`): aqui e so texto de doc, sem efeito em producao;
+   nunca rodar o `deploy-all.ps1`.
+4. A busca desta sessao la foi so em `*.{md,py,json,ps1,txt,html}`: repita sem filtro
+   (`git -C C:\projects\digitalstoregamesproject grep -n -i "lemuroid.\{0,3\}.documentacao"`) antes de dar por encerrado.
+
+**Prova de pronto:** o `grep` do item 4 sem linha; os dois caminhos novos existem (`Test-Path`); `git show --stat` de cada
+commit com so o doc dele e so a linha do link.
+
 ## Licao
 
 Junction dentro de um repo git no Windows nao e transparente: o Git for Windows a trata como pasta e versiona o conteudo
