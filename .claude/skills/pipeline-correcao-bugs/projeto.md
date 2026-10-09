@@ -166,17 +166,21 @@ wt-2 (bug B) --(espera o slot)--> ...
 - `final-deploy`: sem deploy neste projeto, sai 0 sem fazer nada. Subir a versao e publicar (`build-and-upload.ps1`) e do
   dono: no briefing, vai em "falta para done".
 - Ciclo de pastas: `open/` -> `retest/` (o pipeline) -> `done/` (o dono, com a versao publicada e a prova do cliente).
-- **Espelho `documentacao/bugs/`:** o repo mantem uma copia de `docs/bugs/` la (o `CLAUDE.md` ainda manda `[BUG]` para
-  ela). O pipeline NAO a toca (o motor so trata `docs/` como documentacao). Decisao do dono (2026-10-09): o briefing
-  lista, numa secao "Espelho documentacao/bugs", cada doc que o pipeline criou ou moveu (`open -> retest`, novo em
-  `open/`), para o dono replicar.
+- **Espelho `documentacao/bugs/`:** na arvore principal `docs` e uma *junction* para `documentacao`: os dois caminhos
+  sao o mesmo arquivo no disco e o git rastreia os dois (todo commit de doc de bug do repo leva os dois). Nas lanes nao
+  ha junction e o pipeline escreve so `docs/bugs/` (o motor so trata `docs/` como documentacao). Consequencia: depois
+  que a arvore principal recebe os commits do pipeline, o caminho `documentacao/bugs/...` de cada doc criado ou movido
+  aparece sujo nela (` D` em `open/`, `??` em `retest/`). Decisao do dono (2026-10-09): o pipeline nao o corrige; o
+  briefing lista, numa secao "Espelho documentacao/bugs", cada doc criado ou movido, para o dono (ou a proxima sessao)
+  commitar os dois caminhos.
 - Briefing em `C:\projects\lemuroid\.bugfix-pipeline-Lemuroid\runs\<execucao>-briefing.md`; o link de cada doc e
   relativo a essa pasta: `../../Lemuroid/docs/bugs/retest/<doc>.md`.
 
 ## Maestro (SKILL.md)
 
 - Trust: o dono roda o `claude.exe` num terminal em `C:\projects\lemuroid\Lemuroid`, aceita e sai.
-- Bugs: `docs/bugs/open/*.md` (sem subpastas). `documentacao/bugs/` fica fora (espelho; secao Finalizacao).
+- Bugs: `docs/bugs/open/*.md` (sem subpastas). `documentacao/bugs/` fica fora: na arvore principal e o mesmo arquivo
+  pela junction `docs -> documentacao` (secao Finalizacao).
 - O E2E usa o Galaxy A12: ao iniciar, avise o dono que o A12 tem que ficar conectado, desbloqueado e sem uso (dele ou de
   outra sessao) nas janelas de teste, e que o app debug dele sera reinstalado com o APK de cada bug.
 - Commits locais na arvore principal: publicar antes com `git -C C:\projects\lemuroid\Lemuroid push origin version9`,
