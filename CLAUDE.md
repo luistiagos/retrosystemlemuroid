@@ -11,13 +11,13 @@ Roteamento por prefixo do pedido do usuário. Cada item vira **um arquivo Markdo
 | Prefixo | Onde documentar | Ciclo de vida |
 |---------|-----------------|---------------|
 | `[BUG]` | `docs/bugs/open/` ao **iniciar**; mover para `docs/bugs/retest/` quando corrigido e testado aqui, e para `docs/bugs/done/` com a versão publicada e a prova do cliente | criar em `open` no começo da investigação; ciclo, template e critério de complexidade em `docs/bugs/open/README.md`; o `## Status` do retest em `docs/bugs/retest/README.md` |
-| `[FEATURE]` | `documentacao/funcionalidades/` | documentar a funcionalidade implementada |
-| `[BACKLOG]` | `documentacao/backlogs/` | registrar a ideia/tarefa para o futuro |
+| `[FEATURE]` | `docs/funcionalidades/` | documentar a funcionalidade implementada |
+| `[BACKLOG]` | `docs/backlogs/` | registrar a ideia/tarefa para o futuro |
 
 - Nome de arquivo: `YYYY-MM-DD-slug-curto.md` (ex.: `2026-07-01-catalogo-some-scan-biblioteca.md`).
 - Bugs seguem o formato dos arquivos existentes em `bugs/done/`: título com prefixo `[BUG]`, e blocos **Data / Status / Severidade / Branch**, depois **Sintoma / Causa-raiz / Correção / Validação / Lição**.
 - "Mover" = `git mv` do `.md` entre as pastas de `docs/bugs/` (não duplicar).
-- **Bugs moram em `docs/bugs/`** (é o que o pipeline `pipeline-correcao-bugs` lê). Nesta árvore, `docs` é uma *junction* para `documentacao` (criada em 2026-09-17): no disco os dois caminhos são o mesmo arquivo, mas o git rastreia os dois. Ao commitar doc de bug, `git add` explícito dos dois caminhos (`docs/bugs/...` e `documentacao/bugs/...`), como o histórico faz. Numa worktree nova não há junction: lá só `docs/bugs/` conta.
+- **Bugs moram em `docs/bugs/`** (é o que o pipeline `pipeline-correcao-bugs` lê). Nesta árvore, `docs` é uma *junction* para `documentacao` (criada em 2026-09-17): no disco os dois caminhos são o mesmo arquivo, mas o git rastreia os dois. Ao commitar doc de bug, `git add` explícito dos dois caminhos (`docs/bugs/...` e `docs/bugs/...`), como o histórico faz. Numa worktree nova não há junction: lá só `docs/bugs/` conta.
 
 ---
 
@@ -97,7 +97,7 @@ Isso elimina toda a lógica de agrupamento em runtime: o app só lê o campo e m
 1. **`CatalogCoverProvider`** — lê e parseia `catalog_manifest.txt` em `Map<String, ManifestEntry>` (lazy, uma vez por processo).
 2. **`ManifestQuickLoader.load()`** — roda no startup via `MainProcessInitializer` (50 ms após a app iniciar):
    - **URI rewrite**: substitui o prefixo sentinela `file:///lemuroid_prebuilt` pelo `romsDir` real em uma única SQL UPDATE (~100ms). No-op se o DB não veio do asset.
-   - **Fast-path**: se `gameDao().countAll() >= expectedSize - expectedSize/50` **e** `loadedSchema == MANIFEST_SCHEMA_VERSION`, marca prefs e pula tudo. **Não vale para instalação nova**: lá `loadedSchema = -1`, então o primeiro boot sempre faz a passada completa, mesmo com o prebuilt (~25 s no AVD de 2 GB, ~15 s disso no loop de `updateManifestFieldsWithTitle` — ver `documentacao/backlogs/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`).
+   - **Fast-path**: se `gameDao().countAll() >= expectedSize - expectedSize/50` **e** `loadedSchema == MANIFEST_SCHEMA_VERSION`, marca prefs e pula tudo. **Não vale para instalação nova**: lá `loadedSchema = -1`, então o primeiro boot sempre faz a passada completa, mesmo com o prebuilt (~25 s no AVD de 2 GB, ~15 s disso no loop de `updateManifestFieldsWithTitle` — ver `docs/backlogs/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`).
    - **Skip por versão+schema**: só pula se o `versionCode` do app E o `MANIFEST_SCHEMA_VERSION` salvos batem com os atuais. Bumpar `MANIFEST_SCHEMA_VERSION` força um reload one-time em todos os usuários (usado quando o formato do manifest muda).
    - `INSERT OR IGNORE` de todos os `Game` no banco (não sobrescreve dados enriquecidos pelo LibretroDB).
    - **Batch UPDATE de `popularityIndex` + `isRepresentative`** via `updateManifestFields()` em transação para jogos que já existiam (sincroniza mudanças no manifest após app update / schema bump).
@@ -788,7 +788,7 @@ nada); e o R8 só faz *outlining* de API (pitfall 12), não reescreve a chamada.
    Ao **adicionar ou subir dependência**, rodar `audit_dex_api_level.py` (raiz) no APK de release com
    `--mapping` — e de novo com `--android --skip Landroidx/ --skip 'Lj$/'` — e triar toda classe que não
    esteja na triagem do bug doc. Ainda não há verificador de build para isso — backlog
-   `documentacao/backlogs/2026-10-05-verificador-api-level-dex.md`.
+   `docs/backlogs/2026-10-05-verificador-api-level-dex.md`.
 3. `desugar_jdk_libs` 2.1.x exige AGP ≥ 8.0. O AGP efetivo é o **8.7.1** que o `com.android.test` do bloco
    `plugins` raiz puxa, não o 8.4.0 do `deps.kt`.
 

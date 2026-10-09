@@ -595,7 +595,7 @@ afterEvaluate {
 // todo jogo de N64, PSP, DOS, 3DS, Dreamcast, GameCube, Amiga (e PSX com DualShock). O R8 não resolve
 // sozinho, e o lint não lê o bytecode das dependências. Só este módulo precisa do flag: é ele que gera o
 // dex do APK e desugariza tudo o que empacota, inclusive os outros módulos do projeto.
-// Ver documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md.
+// Ver docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md.
 android {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -613,7 +613,7 @@ dependencies {
 // ContextCompat.getSystemService(Context, Class): mesma pilha de entrada e de saída (os frames não mudam), e
 // abaixo da API 23 ela resolve o serviço pelo nome. Fica aqui, e não no buildSrc, porque o classloader do
 // buildSrc é pai do que carrega o AGP: não enxerga a API de instrumentação sem sombrear a do AGP.
-// Ver documentacao/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md.
+// Ver docs/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md.
 abstract class PadkitGetSystemServiceCompat :
     com.android.build.api.instrumentation.AsmClassVisitorFactory<
         com.android.build.api.instrumentation.InstrumentationParameters.None,

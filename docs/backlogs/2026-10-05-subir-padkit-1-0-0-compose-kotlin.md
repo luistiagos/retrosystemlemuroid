@@ -2,7 +2,7 @@
 
 **Data:** 2026-10-05
 **Origem:** hipótese descartada de
-`documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
+`docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
 
 ## Situação
 
@@ -46,6 +46,6 @@ e o `lemuroid-touchinput` tem ~45 layouts que dependem dela.
 > ⚠️ Subir para a 1.0.0 **não** resolve o crash do Android 5.0–5.1: o `AndroidHapticGenerator.buildVibrator`
 > da 1.0.0 ainda chama `getSystemService(Vibrator::class.java)` (API 23) abaixo da API 31. O crash foi
 > corrigido no build, sem fork (`PadkitGetSystemServiceCompat`, no fim do `lemuroid-app/build.gradle.kts`;
-> ver `documentacao/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md`), e a instrumentação
+> ver `docs/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md`), e a instrumentação
 > vale para a 1.0.0 também: **mantê-la** ao subir. Ela não mexe no relógio de parede do analógico — esse
 > continua sendo o motivo deste backlog.

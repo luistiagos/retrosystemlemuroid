@@ -77,4 +77,4 @@
 ## 5. Referências
 - Cores Android: `https://buildbot.libretro.com/nightly/android/latest/<abi>/<core>_libretro_android.so.zip`
 - Mapa folder→dbname do catálogo: `assets/manifest_alias.json`
-- Backlog relacionado: `documentacao/backlogs/dreamcast-flycast-standalone-embed.md` (Dreamcast/Naomi/Atomiswave dependem disso).
+- Backlog relacionado: `docs/backlogs/dreamcast-flycast-standalone-embed.md` (Dreamcast/Naomi/Atomiswave dependem disso).

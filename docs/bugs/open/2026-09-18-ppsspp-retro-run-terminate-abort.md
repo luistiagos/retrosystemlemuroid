@@ -194,7 +194,7 @@ de erro, revertida antes do build final):
 - **Diagnóstico e Causa da Reabertura:**
   A ocorrência 9355 comprova que o abort nativo em `retro_run` persiste na versão 1.17.23 com o mesmo frame `#04 ... std::terminate()`.
   A causa é que `libppsspp_libretro_android.so` é linkado com sua própria cópia estática do `libc++`. Em sistemas Android modernos, o mecanismo de busca de tratadores de exceção (`_Unwind_RaiseException`) não consegue cruzar a fronteira de bibliotecas compartilhadas para alcançar o `try/catch` de `Java_com_swordfish_libretrodroid_LibretroDroid_step` em `liblibretrodroid.so`. Como o `ppsspp` não encontra tratador dentro de sua própria imagem binária, o runtime C++ dispara `std::terminate()` imediatamente.
-- **Ação:** O bug foi reaberto e movido para `documentacao/bugs/open/`. Todos os 4 IDs foram fechados no painel de telemetria.
+- **Ação:** O bug foi reaberto e movido para `docs/bugs/open/`. Todos os 4 IDs foram fechados no painel de telemetria.
 
 
 ## Verificação da reabertura (2026-10-05) — o crash não é exceção

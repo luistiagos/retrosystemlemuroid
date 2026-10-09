@@ -32,7 +32,7 @@ import timber.log.Timber
  * por versão deixaria justamente o device afetado de fora. Onde o framework já protege, o wrapper é
  * inerte.
  *
- * Ver `documentacao/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md`.
+ * Ver `docs/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md`.
  */
 fun Context.displayToast(
     string: String,

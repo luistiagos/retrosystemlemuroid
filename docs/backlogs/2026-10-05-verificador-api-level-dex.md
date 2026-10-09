@@ -1,7 +1,7 @@
 # [BACKLOG] Verificador de build: API acima do `minSdk` no bytecode das dependências
 
 **Data:** 2026-10-05
-**Origem:** lição de `documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
+**Origem:** lição de `docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
 (pitfall 16 do `CLAUDE.md`)
 
 ## Situação

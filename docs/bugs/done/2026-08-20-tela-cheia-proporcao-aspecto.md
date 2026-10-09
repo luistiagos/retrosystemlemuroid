@@ -72,7 +72,7 @@ via `adb`. Testado visualmente com KOF'98 (NeoGeo 320×224, 4:3) em paisagem: os
 funcionaram como esperado (capturas de tela comparando os três, incluindo `ZOOM` em retrato
 confirmando que o scissor não deixava a imagem vazar sobre os controles).
 
-Documentado em `documentacao/funcionalidades/proporcao-tela.md` (versão 1).
+Documentado em `docs/funcionalidades/proporcao-tela.md` (versão 1).
 
 > Nesta iteração também escrevi uma justificativa **errada** para o porquê do scissor (disse que
 > o caso de risco era retrato; o usuário perguntou e, ao reabrir a conta, o caso de risco real é
@@ -120,7 +120,7 @@ adb shell run-as app.retrogamesystem.debug cat files/cores/1.19.0/<core>.so > co
 
 `ExposedSetting` adicionadas em `GameSystem.kt` (N64 e Dreamcast) + strings en/pt-BR. Só
 Kotlin, sem rebuild de AAR. `BUILD SUCCESSFUL`. **Não testado visualmente** (sem ROM de DC/N64
-no device na hora). Documentado em `documentacao/funcionalidades/widescreen-cores-3d.md`.
+no device na hora). Documentado em `docs/funcionalidades/widescreen-cores-3d.md`.
 
 ### Pedido de pesquisa de mercado
 
@@ -198,7 +198,7 @@ Preferência, strings (en + pt-BR) e telas (mobile + TV) atualizadas.
 - Sem resíduo de `ScaleMode`/`scale_mode`/`SCALE_MODE` em nenhum dos dois repositórios
   (`grep` limpo).
 
-`documentacao/funcionalidades/proporcao-tela.md` **reescrita do zero** para este desenho — a
+`docs/funcionalidades/proporcao-tela.md` **reescrita do zero** para este desenho — a
 seção de validação da versão anterior foi apagada (não reaproveitada) porque medir três modos
 não tem correspondência com medir uma lista de proporções. `index.md` atualizado.
 
@@ -285,6 +285,6 @@ cleanly (0)`), sem `GLThreadTimeoutException` — ver [[2026-08-09-anr-inicializ
 
 O "como funciona" completo do desenho atual (contrato do valor, arquivos tocados, por que não
 há mais scissor, como reconstruir a AAR) está em
-[`documentacao/funcionalidades/proporcao-tela.md`](../../funcionalidades/proporcao-tela.md) e
-[`documentacao/funcionalidades/widescreen-cores-3d.md`](../../funcionalidades/widescreen-cores-3d.md).
+[`docs/funcionalidades/proporcao-tela.md`](../../funcionalidades/proporcao-tela.md) e
+[`docs/funcionalidades/widescreen-cores-3d.md`](../../funcionalidades/widescreen-cores-3d.md).
 Este arquivo é o registro da investigação e das decisões.

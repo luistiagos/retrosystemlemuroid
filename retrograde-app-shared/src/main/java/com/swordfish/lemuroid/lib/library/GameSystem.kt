@@ -2697,7 +2697,7 @@ data class GameSystem(
                             //  - `resolution_mode = original`: evita FBO de 704x512 x4.
                             // A tela preta do Saturn NÃO vinha daqui — era o FBO recriado pelo
                             // LibretroDroid a cada troca de modo de vídeo. Ver
-                            // documentacao/bugs/done/2026-08-13-saturn-tela-preta-yabasanshiro.md
+                            // docs/bugs/done/2026-08-13-saturn-tela-preta-yabasanshiro.md
                             defaultSettings =
                                 listOf(
                                     CoreVariable("yabasanshiro_sh2coretype", "dynarec"),

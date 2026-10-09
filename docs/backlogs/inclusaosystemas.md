@@ -1,7 +1,7 @@
 # Backlog: Avaliação de Inclusão de Novos Sistemas
 
 > Avaliação de viabilidade de inclusão dos sistemas abaixo no Lemuroid, segundo o critério central de
-> [`documentacao/prompts/adicionar-novo-sistema-libretro.md`](../prompts/adicionar-novo-sistema-libretro.md):
+> [`docs/prompts/adicionar-novo-sistema-libretro.md`](../prompts/adicionar-novo-sistema-libretro.md):
 > **só é possível incluir um sistema que tenha um core Libretro com `.so` Android compilado para as 4 ABIs.**
 > Sistemas sem core Libretro Android estão fora de escopo (não se porta emulador nativo).
 >

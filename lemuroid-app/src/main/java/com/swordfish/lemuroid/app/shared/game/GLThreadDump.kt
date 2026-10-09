@@ -11,7 +11,7 @@ import com.swordfish.libretrodroid.GLRetroView
  * carga da ROM ainda em curso, ou `Object.wait` ociosa (bug no `GLSurfaceView` patchado) — ou a
  * ausencia dela, quando a thread ja encerrou e os eventos enfileirados nunca vao rodar.
  *
- * Ver `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
+ * Ver `docs/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
  */
 object GLThreadDump {
     // Nome dado pelo GLSurfaceView patchado ("GLThread <n>"); e o mesmo prefixo com que o

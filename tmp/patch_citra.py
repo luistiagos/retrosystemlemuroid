@@ -1,5 +1,5 @@
 import io
-p = "documentacao/bugs/open/2026-09-02-crashes-nativos-cores-citra-dolphin.md"
+p = "docs/bugs/open/2026-09-02-crashes-nativos-cores-citra-dolphin.md"
 s = io.open(p, encoding="utf-8").read()
 
 start = s.index("### Valida\u00e7\u00e3o\n\nCompila (`:lemuroid-app:compileFreeBundleDebugKotlin`)")

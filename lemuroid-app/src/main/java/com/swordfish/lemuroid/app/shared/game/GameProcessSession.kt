@@ -27,7 +27,7 @@ import timber.log.Timber
  * Sinal na telemetria: o tombstone traz `name: GLThread 2` (ou maior). O contador de `GLThread` e
  * estatico, entao so passa de 1 quando o processo ja criou outra `GLRetroView`.
  *
- * Ver `documentacao/bugs/done/2026-09-28-investigacoes-baixa-confianca-triagem.md`.
+ * Ver `docs/bugs/done/2026-09-28-investigacoes-baixa-confianca-triagem.md`.
  */
 object GameProcessSession {
     private const val POLL_INTERVAL_MS = 50L

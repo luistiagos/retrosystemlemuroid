@@ -215,7 +215,7 @@ que ja estava sem o fix de input anterior**. Duas descobertas, ambas verificadas
 ### Descoberta 1 - o fix de input existe, mas em outro branch
 
 O commit `b424cda` (2026-07-20) aplicou os 5 edits do plano
-`documentacao/backlogs/fix-controles-genericos-tvbox-haskeys.md` e **so existe no branch
+`docs/backlogs/fix-controles-genericos-tvbox-haskeys.md` e **so existe no branch
 `version8`**. O branch atual `version9` divergiu de `version8` no commit `095f1dc`,
 antes desse fix.
 
@@ -294,7 +294,7 @@ Tres commits no `version9`:
 `KEYCODE_UNKNOWN`, `hasGamepadEvidence()` / `hasJoystickAxes()` em `isSupported` e
 `isEnabledByDefault`, roteamento por `event.device.sources` em `dispatchKeyEvent`, log
 `INPUT_DIAG` de devices rejeitados. Traz de volta tambem
-`documentacao/backlogs/fix-controles-genericos-tvbox-haskeys.md`.
+`docs/backlogs/fix-controles-genericos-tvbox-haskeys.md`.
 
 Conflito resolvido apenas em `LemuroidInputDeviceGamePad.kt`: mantido o lado do
 `b424cda` em `isSupported`/`isEnabledByDefault`, preservados os overrides

@@ -15,7 +15,7 @@ package androidx.leanback.app
  * dispara `onQueryTextChange` — apagaria a busca do usuário. Reflexão não serve: o R8 renomeia os
  * campos da Leanback no release. E o `View.getHandler()` é outro handler, o do `ViewRootImpl`.
  *
- * Ver `documentacao/bugs/done/2026-09-24-tv-searchfragment-searchbar-npe-ondestroyview.md`.
+ * Ver `docs/bugs/done/2026-09-24-tv-searchfragment-searchbar-npe-ondestroyview.md`.
  */
 internal fun SearchSupportFragment.cancelPendingAutoStartRecognition() {
     mHandler.removeCallbacks(mStartRecognitionRunnable)

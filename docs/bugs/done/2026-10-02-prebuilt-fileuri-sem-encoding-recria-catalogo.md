@@ -5,7 +5,7 @@
 **Severidade:** Média (desempenho do primeiro boot; anula o propósito do prebuilt)
 **Branch:** version9
 **Origem:** achado lateral da validação de
-`documentacao/bugs/done/2026-10-02-smartstoragepicker-pasta-roms-alterna-entre-volumes.md`
+`docs/bugs/done/2026-10-02-smartstoragepicker-pasta-roms-alterna-entre-volumes.md`
 
 ---
 
@@ -143,7 +143,7 @@ forma certa.
   - `deleted 1637` = 1.592 `amiga500` + 45 `gameandwatch`, sistemas sem alias no
     `manifest_alias.json` (`SystemID` usa `amiga` e `gw`): o loader não os monta e apaga a linha do
     prebuilt. É o catálogo inteiro desses dois sistemas sumindo — outro bug, registrado em
-    `documentacao/bugs/open/2026-10-02-amiga500-gameandwatch-sem-alias-somem-do-catalogo.md`.
+    `docs/bugs/open/2026-10-02-amiga500-gameandwatch-sem-alias-somem-do-catalogo.md`.
   Diff por sistema (prebuilt × DB do aparelho) feito com `SELECT systemId, COUNT(*) … GROUP BY systemId`
   nos dois lados: só esses dois sistemas diferem.
 
@@ -154,7 +154,7 @@ limpa: montar a lista 1.434 ms · `insertIfNotExists` 4.080 ms · **loop de
 `updateManifestFieldsWithTitle` 14.588 ms** · `selectAll` 1.944 ms · filtro + delete 495 ms. O loop
 faz 58 mil chamadas `suspend` ao Room, uma por linha já existente, e o custo é por chamada — não pela
 escrita (ver a hipótese do UPDATE condicional, descartada). Próximo passo registrado em
-`documentacao/backlogs/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`.
+`docs/backlogs/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`.
 
 ## Confirmação de campo (chamado #112, anexada em 2026-10-07)
 
@@ -198,8 +198,8 @@ mudança na forma da URI) volta a mostrar o dobro, porque inserção e limpeza s
 separadas e o `Flow` emite o estado intermediário. O contador da home poderia não refletir a carga
 em andamento.
 
-Mesmo chamado, outros achados: `documentacao/bugs/open/2026-10-07-catalogo-3ds-sem-pokemon-y.md` e
-`documentacao/bugs/open/2026-10-07-audio-engasgando-gba-nds-moto-g86-sem-diagnostico.md`.
+Mesmo chamado, outros achados: `docs/bugs/open/2026-10-07-catalogo-3ds-sem-pokemon-y.md` e
+`docs/bugs/open/2026-10-07-audio-engasgando-gba-nds-moto-g86-sem-diagnostico.md`.
 
 ## Lição
 

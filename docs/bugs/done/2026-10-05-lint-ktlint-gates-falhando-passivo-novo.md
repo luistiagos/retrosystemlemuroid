@@ -4,7 +4,7 @@
 **Status:** Aberto (registrado de passagem; não corrigido)
 **Severidade:** Baixa no app, alta no processo — gate quebrado é gate que ninguém roda
 **Branch:** version9
-**Origem:** validação de `documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
+**Origem:** validação de `docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
 
 ## Sintoma
 

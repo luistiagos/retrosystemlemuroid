@@ -14,7 +14,7 @@ package com.swordfish.lemuroid.app.shared.telemetry
  *
  * Also decodes `memory_mappings`: when the unwinder cannot attribute a frame to any `.so` (the
  * frame prints as `<unknown>`, see
- * documentacao/bugs/open/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md), the frame's
+ * docs/bugs/open/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md), the frame's
  * `file_name` is empty and there is otherwise no way to tell whether the faulting address fell in
  * an anonymous mapping, in a gap right past the end of a loaded library, or nowhere near any
  * mapping at all. The full map is never printed (a process can have 500+ entries) — only the
@@ -159,7 +159,7 @@ object TombstoneParser {
 
                         // The unwinder could not attribute these frames to any mapped file — show what,
                         // if anything, occupies that address so a future occurrence is diagnosable (see
-                        // documentacao/bugs/open/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md).
+                        // docs/bugs/open/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md).
                         val unresolvedAddrs =
                             crashed.frames.filter { it.fileName.isBlank() }
                                 .map { it.pc }

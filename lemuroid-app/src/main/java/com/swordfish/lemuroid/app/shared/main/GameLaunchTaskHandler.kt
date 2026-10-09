@@ -225,7 +225,7 @@ class GameLaunchTaskHandler(
     ) {
         // O aviso vem do processo `:game`, que sai com `finishAndExitProcess()` logo depois de
         // mandar o resultado — um toast de la nunca chegaria a aparecer. Ver
-        // `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
+        // `docs/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
         if (data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_SAVES_FAILED, false) == true) {
             Timber.w("Game exited without persisting its saves")
             activity.displayToast(R.string.game_toast_exit_save_failed)

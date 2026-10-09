@@ -10,13 +10,13 @@
  *      `ASharedMemory_create` never resolves, vmem falls back to `open("/dev/ashmem")`
  *      (EACCES with targetSdk >= 29), fastmem turns off and the dynarec fallback path
  *      crashes. Fix: `patch_flycast_libandroid.py` adds `libandroid.so` to DT_NEEDED.
- *      See documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md
+ *      See docs/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md
  *
  *   2. 2026-09-02 — a hand-built core (from a local `flycast_src` checkout of the old
  *      `libretro/flycast` fork) was dropped into `jniLibs/arm64-v8a` while the other
  *      three ABIs kept the correct buildbot binary. It was unpatched too, so every
  *      arm64 device — i.e. every real user — hit `os_DebugBreak` (SIGTRAP) in the
- *      GLThread. See documentacao/bugs/done/2026-09-02-crashes-nativos-cores-citra-flycast-dolphin.md
+ *      GLThread. See docs/bugs/done/2026-09-02-crashes-nativos-cores-citra-flycast-dolphin.md
  *
  * Both are packaging mistakes that a human step ("remember to run the script") failed
  * to prevent twice, so the build enforces them instead:

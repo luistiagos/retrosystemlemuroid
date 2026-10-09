@@ -495,7 +495,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
      * daria certo: **nao** trocar de nucleo (repetiria a espera inteira) e **nao** mandar limpar
      * dados ou resetar de fabrica — nada disso alcanca a GLThread.
      *
-     * Ver `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
+     * Ver `docs/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
      */
     private fun isCoreStall(exception: Throwable): Boolean =
         causeChain(exception).any { it is GLRetroView.GLThreadTimeoutException }

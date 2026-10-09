@@ -6,7 +6,7 @@
 celular com SD.
 **Branch:** version9
 **Origem:** achado lateral da investigação de
-`documentacao/bugs/open/2026-10-02-tvbox-enduro-atari2600-sumiu-do-catalogo.md`
+`docs/bugs/open/2026-10-02-tvbox-enduro-atari2600-sumiu-do-catalogo.md`
 
 ---
 
@@ -202,7 +202,7 @@ para um volume inexistente e o download falharia.
   `public:253,64` (`0000-0000`), e `sm unmount`/`sm mount` simulam tirar e recolocar a mídia.
 - Achado lateral, fora do escopo e registrado à parte: na primeira abertura, a passada completa
   apagou 53.735 linhas e inseriu 52.099, porque o prebuilt guarda a `fileUri` sem codificar e o loader
-  monta com `%20` (`documentacao/bugs/open/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`).
+  monta com `%20` (`docs/bugs/open/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`).
 
 ## Lição
 

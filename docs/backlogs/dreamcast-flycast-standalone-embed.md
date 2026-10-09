@@ -5,7 +5,7 @@
 > do buildbot sem `libandroid.so` no DT_NEEDED (→ `/dev/ashmem` EACCES com
 > targetSdk 35 → fastmem off → fallback do dynarec quebrado). Fix: patch de ELF
 > via `patch_flycast_libandroid.py`. Detalhes em
-> `documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.
+> `docs/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.
 > Este plano de embutir o standalone NÃO é mais necessário.
 
 **Status:** obsoleto (superado pelo fix do core libretro)

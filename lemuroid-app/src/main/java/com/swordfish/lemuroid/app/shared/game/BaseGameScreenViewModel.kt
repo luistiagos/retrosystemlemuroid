@@ -303,7 +303,7 @@ class BaseGameScreenViewModel(
      * `UncaughtExceptionHandler` e o usuario via a tela de crash em vez de voltar para a lista.
      *
      * `saveOnExit` nunca lanca: ele avisa se nao conseguiu gravar, e a saida acontece de qualquer
-     * jeito. Ver `documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
+     * jeito. Ver `docs/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
      */
     fun requestFinish() {
         if (loadingState.value) return
@@ -342,7 +342,7 @@ class BaseGameScreenViewModel(
      * translucido e so pausam a activity. Um `finish()` em curso ja gravou o que tinha de gravar
      * no [requestFinish] — ou saiu por erro, e ai nao ha estado confiavel para salvar.
      *
-     * Ver `documentacao/bugs/open/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service.md`.
+     * Ver `docs/bugs/open/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service.md`.
      */
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)

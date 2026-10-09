@@ -1,5 +1,5 @@
 import io
-p = "documentacao/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md"
+p = "docs/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md"
 s = io.open(p, encoding="utf-8").read()
 
 marker = "## Confirma\u00e7\u00e3o pela telemetria (2026-09-02)"

@@ -5,7 +5,7 @@
 **Severidade:** Alta (dois sistemas inteiros sem nenhum jogo no catálogo, em toda instalação)
 **Branch:** version9
 **Origem:** achado lateral de
-`documentacao/bugs/done/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`
+`docs/bugs/done/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`
 
 ---
 

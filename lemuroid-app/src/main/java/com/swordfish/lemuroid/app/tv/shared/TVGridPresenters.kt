@@ -25,7 +25,7 @@ import androidx.leanback.widget.VerticalGridPresenter
  * animations buy us nothing there. Focus zoom is a separate mechanism (FocusHighlightHelper) and
  * is not affected.
  *
- * See documentacao/bugs/done/2026-09-02-tv-leanback-verticalgrid-posicao-invalida.md.
+ * See docs/bugs/done/2026-09-02-tv-leanback-verticalgrid-posicao-invalida.md.
  */
 
 /** [VerticalGridPresenter] whose grid never runs predictive item animations. */

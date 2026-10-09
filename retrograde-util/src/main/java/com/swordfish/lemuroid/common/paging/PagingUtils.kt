@@ -20,7 +20,7 @@ fun <T : Any> buildFlowPaging(
     // ("dancing") on any system with more items than maxSize. The memory maxSize would save
     // here is negligible: Game rows are lightweight, and the heavy part (cover bitmaps) is
     // already bounded by Coil's own memory cache, independent of Paging. See
-    // documentacao/bugs/done/2026-06-19-catalogo-reordena-constantemente.md.
+    // docs/bugs/done/2026-06-19-catalogo-reordena-constantemente.md.
     return Pager(PagingConfig(pageSize), pagingSourceFactory = source)
         .flow
         .cachedIn(coroutineScope)

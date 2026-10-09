@@ -9,7 +9,7 @@ Cliente usa Lemuroid numa TV Box **MXQ 4K** com dois controles wireless genéric
 (clones de PS2 com dongle USB 2.4G, botão MODE, marcação "S2-G"). Os controles
 **não funcionam** no app.
 
-Já existe um fix anterior (documentado em `documentacao/bugs/done/correcoes-2026-04-18.md`)
+Já existe um fix anterior (documentado em `docs/bugs/done/correcoes-2026-04-18.md`)
 que fez todas as camadas aceitarem `SOURCE_JOYSTICK` além de `SOURCE_GAMEPAD`.
 Esse fix está aplicado e **não** deve ser refeito. O problema atual é outra camada.
 

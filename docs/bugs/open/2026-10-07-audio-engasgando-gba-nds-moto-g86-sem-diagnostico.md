@@ -54,7 +54,7 @@ Nenhum símbolo foi aberto para este bug. O que falta medir:
 
 ## Escopo — o que NÃO é este bug
 
-- Jogo ausente do catálogo (mesmo chamado): `documentacao/bugs/open/2026-10-07-catalogo-3ds-sem-pokemon-y.md`.
+- Jogo ausente do catálogo (mesmo chamado): `docs/bugs/open/2026-10-07-catalogo-3ds-sem-pokemon-y.md`.
 - Sistemas pesados travando por desempenho (Dreamcast, PSP): outros docs em `open/`.
 
 ## Próximos passos

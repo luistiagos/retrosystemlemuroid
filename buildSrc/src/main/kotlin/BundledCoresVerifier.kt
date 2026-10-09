@@ -11,12 +11,12 @@
  *      Android 13 the filter is skipped for *debuggable* APKs, so every debug build hid
  *      it). In the release APK those cores were never extracted, `GameLoader.findLibrary`
  *      missed them and every user downloaded them again — or, offline, could not play.
- *      See documentacao/bugs/done/2026-09-25-cores-sem-prefixo-lib-nao-extraidos-no-release.md
+ *      See docs/bugs/done/2026-09-25-cores-sem-prefixo-lib-nao-extraidos-no-release.md
  *
  *   2. The submodule pointer moved two months back, the newer cores stayed on disk as
  *      untracked files and the APK was built for weeks from binaries no commit held,
  *      on top of a local commit that was never pushed.
- *      See documentacao/bugs/done/2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado.md
+ *      See docs/bugs/done/2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado.md
  *
  * So the build enforces:
  *

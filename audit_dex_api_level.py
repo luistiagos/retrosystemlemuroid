@@ -19,7 +19,7 @@ Com --android entram também as APIs `android.*` -- foi assim que apareceu o
 Android 5.0-5.1. A lista fica grande (androidx guarda tudo em classes `*ApiNNImpl`): usar
 --skip Landroidx/ --skip 'Lj$/' e triar o resto.
 
-Ver: documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md
+Ver: docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md
      (triagem do release 1.17.24 -- o que já está lá não precisa ser revisto)
 
 USO: rodar no APK de RELEASE (é o código que o R8 manteve, o único que pode executar):

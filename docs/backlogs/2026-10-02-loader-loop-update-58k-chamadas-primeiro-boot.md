@@ -2,7 +2,7 @@
 
 **Data:** 2026-10-02
 **Origem:** custo residual de
-`documentacao/bugs/done/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`
+`docs/bugs/done/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`
 
 ## Situação
 

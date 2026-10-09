@@ -10,7 +10,7 @@ desliga, e o caminho fallback do dynarec crasha com SIGSEGV (trunca o tag 0xb4 d
 ponteiros do Android 11+). Com libandroid no DT_NEEDED, ASharedMemory_create resolve,
 o fastmem liga e o Dreamcast funciona.
 
-Ver: documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md
+Ver: docs/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md
 
 USO: rodar após atualizar o .so do Flycast a partir do buildbot, ANTES de buildar:
     pip install lief

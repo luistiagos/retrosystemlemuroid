@@ -6,7 +6,7 @@ volta ao handler
 **Severidade:** Alta para API 21–22 (`minSdk`) — nenhum jogo abre na UI mobile, com ou sem gamepad
 **Branch:** version9
 **Origem:** validação no `lemu_api21_1gb` de
-`documentacao/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
+`docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
 
 ## Sintoma
 

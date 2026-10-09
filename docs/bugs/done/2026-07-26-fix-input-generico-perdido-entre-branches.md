@@ -23,7 +23,7 @@ Não era regressão de código. O fix estava correto e completo — **só não e
 branch**.
 
 O commit `b424cda` (2026-07-20) aplicou os 5 edits do plano
-`documentacao/backlogs/fix-controles-genericos-tvbox-haskeys.md` e ficou **exclusivamente
+`docs/backlogs/fix-controles-genericos-tvbox-haskeys.md` e ficou **exclusivamente
 no branch `version8`**. O `version9` divergiu de `version8` no commit `095f1dc`, antes
 dele.
 

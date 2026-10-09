@@ -1,5 +1,5 @@
 import io
-p = "documentacao/bugs/open/2026-07-08-dreamcast-subset-jogos-travam-9fps.md"
+p = "docs/bugs/open/2026-07-08-dreamcast-subset-jogos-travam-9fps.md"
 s = io.open(p, encoding="utf-8").read()
 
 s = s.rstrip() + """

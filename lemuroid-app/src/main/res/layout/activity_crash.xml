@@ -30,7 +30,7 @@
             android:layout_marginTop="32dp" />
 
         <!-- Aparelho + versao do Android + versao do app: uma foto desta tela precisa bastar
-             para o diagnostico. Ver documentacao/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md -->
+             para o diagnostico. Ver docs/bugs/open/2026-08-16-tvbox-mxq-crash-toast-badtoken.md -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text3"
             android:layout_width="match_parent"

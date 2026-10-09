@@ -95,14 +95,14 @@ class ManifestQuickLoader(
         //   v20  gw (Nintendo Game & Watch) added
         //   v21  atarist (Atari ST) added; ATARI_ST system + Hatari core registered
         //   v22  dc (Sega Dreamcast, 1425 games) re-added — see bug fix
-        //          documentacao/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md
+        //          docs/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md
         //   v23  dc broken titles removed (GTA2, RE3, Soul Reaver, Worms Armageddon — hang at
         //          boot in the Flycast core; see bugs/open/2026-07-08-dreamcast-subset-jogos-
         //          travam-9fps.md). Manifest lines dropped + one-time DB delete below.
         //   v24  arcade reclassification: ~400 games moved from fbneo/ to dedicated sub-systems
         //          (neogeo, cps1, cps2, cps3, dataeast, galaxian, toaplan, taito, psikyo, pgm,
         //          kaneko, cave, technos, seta). One-time DB re-point below so existing installs
-        //          show the new systems. See documentacao/bugs/2026-07-01-neogeo-bios-fbneo-kof2002.md
+        //          show the new systems. See docs/bugs/2026-07-01-neogeo-bios-fbneo-kof2002.md
         //   v25  arcade reclassification fix: also reclassify from mame2003plus and force re-run
         //          by bumping version to 25.
         //   v26  cleaned up catalog_manifest.txt to fix duplicate catalog items (grouping variants properly)

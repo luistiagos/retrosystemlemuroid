@@ -24,7 +24,7 @@ import timber.log.Timber
  *    a mystery. Shown by the main process on its home screen — never during a game boot, where an
  *    enqueued toast is exactly what kills Android 7.1 boxes (pitfall 7 in `CLAUDE.md`).
  * 2. **A core option flipped off**, for the one case where the failing path was traced end to end:
- *    **3DS / citra** (see `documentacao/bugs/open/2026-09-02-crashes-nativos-cores-citra-dolphin.md`):
+ *    **3DS / citra** (see `docs/bugs/open/2026-09-02-crashes-nativos-cores-citra-dolphin.md`):
  *
  * ```
  * citra_use_hw_shaders=enabled  ->  Settings::values.use_hw_shader

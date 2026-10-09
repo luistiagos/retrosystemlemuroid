@@ -27,7 +27,7 @@ import timber.log.Timber
  *   Intent para tentar em seguida — só a última da cadeia deve falar com o usuário.
  * @return `true` se a Activity foi iniciada.
  *
- * Ver `documentacao/bugs/done/2026-09-02-intents-sistema-sem-resolve-crasham-tv.md`.
+ * Ver `docs/bugs/done/2026-09-02-intents-sistema-sem-resolve-crasham-tv.md`.
  */
 fun Context.startActivitySafely(
     intent: Intent,

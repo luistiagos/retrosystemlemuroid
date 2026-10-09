@@ -8,7 +8,7 @@ import java.io.File
  * The ROMs directory must be stable across processes: every catalog row stores an absolute
  * `fileUri` under it, so a different answer on the next launch re-points nothing and silently
  * splits the library between volumes. See the bug doc
- * 2026-10-02-smartstoragepicker-pasta-roms-alterna-entre-volumes.md (documentacao/bugs).
+ * 2026-10-02-smartstoragepicker-pasta-roms-alterna-entre-volumes.md (docs/bugs).
  */
 object RomsDirChoice {
     const val ROMS_DIR_NAME = "roms"

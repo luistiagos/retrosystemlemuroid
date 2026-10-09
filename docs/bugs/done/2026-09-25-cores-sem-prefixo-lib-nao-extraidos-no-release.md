@@ -63,7 +63,7 @@ A cópia embutida nunca era usada.
 
 A origem do nome errado é documental: o `CoreID.kt` tinha, em 15 dos 17 cores, o comentário
 "Buildbot Android nightlies ship this core WITHOUT the "lib" prefix. Copy the file name
-literally.", e o guia `documentacao/prompts/adicionar-novo-sistema-libretro.md` mandava "use o
+literally.", e o guia `docs/prompts/adicionar-novo-sistema-libretro.md` mandava "use o
 nome literal do arquivo que veio do build". Cada core novo sem `lib` repetia o erro por instrução.
 
 ## Por que ninguém viu

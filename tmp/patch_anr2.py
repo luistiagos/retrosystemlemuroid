@@ -1,5 +1,5 @@
 import io
-p = "documentacao/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md"
+p = "docs/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md"
 s = io.open(p, encoding="utf-8").read()
 
 old = """### Nota sobre a tela de crash que apareceu

@@ -17,7 +17,7 @@ Sistemas recém-adicionados ou recentemente visíveis no catálogo (exemplo: **G
 
 1. **Origem do desenho vetorial:**
    - No commit `73e0aeef` (10/06/2026), 4 novos sistemas foram adicionados: `gw` (Game & Watch), `amiga` (Amiga 500), `atarist` (Atari ST) e `pcfx` (PC-FX).
-   - O desenvolvedor seguiu à risca o guia `documentacao/prompts/adicionar-novo-sistema-libretro.md` (Passo 13), que instruía textualmente: *"Não use PNG. Use sempre vector drawable XML"*.
+   - O desenvolvedor seguiu à risca o guia `docs/prompts/adicionar-novo-sistema-libretro.md` (Passo 13), que instruía textualmente: *"Não use PNG. Use sempre vector drawable XML"*.
    - Como resultado, foram criados manualmente arquivos `<vector>` improvisados:
      - `game_system_gw.xml`
      - `game_system_amiga.xml`
@@ -79,7 +79,7 @@ Todos os outros 70 sistemas já possuíam os pares normais/hover em PNG e estava
    - Total em `SystemLogoResolver.kt`: **79 de 79 sistemas (100% de cobertura)**.
 
 4. **Atualização do Guia de Engenharia:**
-   - Atualizado `documentacao/prompts/adicionar-novo-sistema-libretro.md` (Passo 13 e tabela inicial) para orientar o uso dos PNGs de `logos_extracted/all-systems/` e registro no `SystemLogoResolver.kt`.
+   - Atualizado `docs/prompts/adicionar-novo-sistema-libretro.md` (Passo 13 e tabela inicial) para orientar o uso dos PNGs de `logos_extracted/all-systems/` e registro no `SystemLogoResolver.kt`.
 
 ## 4. Validação
 

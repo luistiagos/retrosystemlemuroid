@@ -1,5 +1,5 @@
 import io, re
-p = "documentacao/bugs/open/2026-08-20-tela-cheia-proporcao-aspecto.md"
+p = "docs/bugs/open/2026-08-20-tela-cheia-proporcao-aspecto.md"
 s = io.open(p, encoding="utf-8").read()
 
 old_status = """**Status:** \U0001f7e1 Em andamento — 3ª iteração do design implementada e compilando, **validação visual

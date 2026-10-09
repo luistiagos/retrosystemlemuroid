@@ -38,7 +38,7 @@ fun Context.longAnimationDuration(): Int {
  * Chamado quando o usuário nega uma permissão, para que ele possa concedê-la à mão. Em Android TV /
  * Fire OS essa tela pode não existir: sem o guard, `startActivity` lança `ActivityNotFoundException`
  * e derruba o app justamente depois de um "negar" — ver
- * `documentacao/bugs/done/2026-09-02-intents-sistema-sem-resolve-crasham-tv.md`.
+ * `docs/bugs/done/2026-09-02-intents-sistema-sem-resolve-crasham-tv.md`.
  *
  * @return `true` se a tela foi aberta.
  */

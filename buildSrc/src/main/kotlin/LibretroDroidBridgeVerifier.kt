@@ -11,14 +11,14 @@
  *
  *   1. `Core::close()` calls `dlclose` on the libretro core. Unloading a core runs its
  *      static destructors (SIGABRT in `std::thread::~thread`, see
- *      documentacao/bugs/done/2026-09-02-libretrodroid-dlclose-core-anterior-sigabrt.md)
+ *      docs/bugs/done/2026-09-02-libretrodroid-dlclose-core-anterior-sigabrt.md)
  *      and unmaps its code while the GLThread may still be executing inside it — the
  *      SIGSEGV whose PC *is* the fault address and whose every frame is `<unknown>`, see
- *      documentacao/bugs/done/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md
+ *      docs/bugs/done/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md
  *
  *   2. No `CoreWorkGuard`, so `LibretroDroid.destroy()` can run on the main thread while a
  *      frame or a queued save is still inside the core on the GLThread, see
- *      documentacao/bugs/done/2026-09-22-fbneo-retro-run-segv-gameplay.md
+ *      docs/bugs/done/2026-09-22-fbneo-retro-run-segv-gameplay.md
  *
  * So the build enforces what the fixed AAR looks like:
  *
