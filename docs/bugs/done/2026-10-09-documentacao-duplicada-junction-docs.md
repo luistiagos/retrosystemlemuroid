@@ -62,3 +62,39 @@ blobs a partir de 2026-09-19. Desde entao todo `git add` de doc pega os dois cam
 
 Se a outra sessao commitar depois disto com `git add documentacao/...`, o git recusa o comando inteiro (pathspec
 inexistente): ela deve commitar so `docs/...`. O `CLAUDE.md` passa a dizer isso.
+
+## Correcao aplicada
+
+- **T1 `0a7b9cf`:** `cmd /c rmdir docs` (rc 0; `documentacao` seguiu com 131 arquivos), `Rename-Item documentacao docs`
+  (ok; `Get-Item docs` sem `LinkType`, `Test-Path documentacao` falso, 131 arquivos), `git rm -r --cached documentacao`
+  (130 `D`, nada fora de `documentacao/` staged) e commit so desse caminho. Depois: `git ls-files documentacao` = 0,
+  `git ls-files docs` = 131; `git status -- docs` so com o `D`/`??` da outra sessao (doc da busca).
+- **T2 `664443f`:** script com troca em bytes (`documentacao/` -> `docs/`, e as formas com `\\` do `settings.json`) em 53
+  arquivos rastreados e limpos, 84 trocas; pulados o doc da outra sessao, este doc e a copia da skill do pipeline.
+  Conferido: os 53 sao exatamente o `HEAD` com a troca (com CRLF normalizado), `--numstat` 84/84. Os 2 restos (texto sobre
+  a junction no `CLAUDE.md` e no README) foram para a T3.
+- **T3:** `CLAUDE.md` (Workflow: tudo em `docs/`, nao recriar `documentacao/` nem junction), `docs/bugs/open/README.md`
+  e o manual do pipeline (`.claude/skills/pipeline-correcao-bugs/projeto.md`: some a secao do espelho) reescritos.
+- Desvio do plano: nenhum. Fica de fora, para o dono: os 2 bug docs do `digitalstoregamesproject` que citam caminhos do
+  Lemuroid em `documentacao/` (lista na Evidencia); e o doc da busca da outra sessao (`docs/bugs/done/2026-10-09-busca-...`,
+  ainda nao commitado), que ela deve commitar so pelo caminho `docs/`.
+
+- **T3 `f89011a`.**
+
+## Testes executados
+
+- Comparacao das arvores no `HEAD` antes da T1: 130 = 130, blobs identicos (nada perdido ao tirar `documentacao/`).
+- `git ls-files documentacao` = 0 e `git ls-files docs` = 131 depois da T1; `Get-Item docs` sem `LinkType`.
+- Conferencia da T2: os 53 arquivos = `HEAD` com a troca, nada mais.
+- Build do `664443f` (T2) numa worktree temporaria (submodulo do clone local): `gradlew :lemuroid-app:assembleFreeBundleDebug
+  :lemuroid-app:testFreeBundleDebugUnitTest` rc 0 em 349 s; na worktree `docs/` e pasta e `documentacao/` nao existe;
+  `git status` dela vazio; removida sem sobra.
+- `git grep -n documentacao` depois da T3: nenhum caminho vivo. Sobram so (a) os avisos de proposito "a antiga
+  `documentacao/` foi removida" no `CLAUDE.md`, no README de `open/` e no manual do pipeline, (b) este doc, (c) a palavra
+  "documentacao" (= documentacao, nao a pasta) no motor da skill (`SKILL.md:46`, `pipeline.py:2314`,
+  `git_pipeline.py:209`) e (d) o registro historico na copia do DESIGN da skill. Nenhum arquivo nao rastreado cita.
+
+## Licao
+
+Junction dentro de um repo git no Windows nao e transparente: o Git for Windows a trata como pasta e versiona o conteudo
+duas vezes. Pasta de docs com outro nome se resolve com rename + `git rm --cached`, nunca com link.
