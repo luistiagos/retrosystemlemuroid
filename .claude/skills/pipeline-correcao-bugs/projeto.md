@@ -31,7 +31,8 @@ Fatos medidos que sustentam este manual: DESIGN 22.11.D.
   `startActivitySafely`, rede so por `NetworkCompat`, Activity com extra ausente -> `finish(); return`) e os **17
   "Pitfalls de Android / Room"**, todos bugs reais de producao com a regra para nao regredir. Leia o pitfall do modulo
   que o fix toca (Room/`createFromAsset`, `minSdk 21` e `SDK_INT` que mente nas TV box, processo `:game`, cores).
-  **Ignore la o "Workflow de Documentacao"**: o pipeline escreve em `docs/bugs/` (secao Maestro).
+  O "Workflow de Documentacao" de la ja manda os bugs para `docs/bugs/`; a regra de commitar tambem o caminho
+  `documentacao/` vale na arvore principal (junction), nao na lane.
 - `prj.md` (raiz): especificacao por area (fluxo click -> launch, entrega de ROM, busca, catalogo, Transferir Jogos,
   portas do controle) e o "Key File Index".
 
