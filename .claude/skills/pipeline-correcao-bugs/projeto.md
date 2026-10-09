@@ -31,8 +31,7 @@ Fatos medidos que sustentam este manual: DESIGN 22.11.D.
   `startActivitySafely`, rede so por `NetworkCompat`, Activity com extra ausente -> `finish(); return`) e os **17
   "Pitfalls de Android / Room"**, todos bugs reais de producao com a regra para nao regredir. Leia o pitfall do modulo
   que o fix toca (Room/`createFromAsset`, `minSdk 21` e `SDK_INT` que mente nas TV box, processo `:game`, cores).
-  O "Workflow de Documentacao" de la ja manda os bugs para `docs/bugs/`; a regra de commitar tambem o caminho
-  `documentacao/` vale na arvore principal (junction), nao na lane.
+  O "Workflow de Documentacao" de la manda os bugs para `docs/bugs/`, a unica pasta de docs do repo.
 - `prj.md` (raiz): especificacao por area (fluxo click -> launch, entrega de ROM, busca, catalogo, Transferir Jogos,
   portas do controle) e o "Key File Index".
 
@@ -167,21 +166,13 @@ wt-2 (bug B) --(espera o slot)--> ...
 - `final-deploy`: sem deploy neste projeto, sai 0 sem fazer nada. Subir a versao e publicar (`build-and-upload.ps1`) e do
   dono: no briefing, vai em "falta para done".
 - Ciclo de pastas: `open/` -> `retest/` (o pipeline) -> `done/` (o dono, com a versao publicada e a prova do cliente).
-- **Espelho `documentacao/bugs/`:** na arvore principal `docs` e uma *junction* para `documentacao`: os dois caminhos
-  sao o mesmo arquivo no disco e o git rastreia os dois (todo commit de doc de bug do repo leva os dois). Nas lanes nao
-  ha junction e o pipeline escreve so `docs/bugs/` (o motor so trata `docs/` como documentacao). Consequencia: depois
-  que a arvore principal recebe os commits do pipeline, o caminho `documentacao/bugs/...` de cada doc criado ou movido
-  aparece sujo nela (` D` em `open/`, `??` em `retest/`). Decisao do dono (2026-10-09): o pipeline nao o corrige; o
-  briefing lista, numa secao "Espelho documentacao/bugs", cada doc criado ou movido, para o dono (ou a proxima sessao)
-  commitar os dois caminhos.
 - Briefing em `C:\projects\lemuroid\.bugfix-pipeline-Lemuroid\runs\<execucao>-briefing.md`; o link de cada doc e
   relativo a essa pasta: `../../Lemuroid/docs/bugs/retest/<doc>.md`.
 
 ## Maestro (SKILL.md)
 
 - Trust: o dono roda o `claude.exe` num terminal em `C:\projects\lemuroid\Lemuroid`, aceita e sai.
-- Bugs: `docs/bugs/open/*.md` (sem subpastas). `documentacao/bugs/` fica fora: na arvore principal e o mesmo arquivo
-  pela junction `docs -> documentacao` (secao Finalizacao).
+- Bugs: `docs/bugs/open/*.md` (sem subpastas). A antiga `documentacao/` (copia por junction) foi removida em 2026-10-09.
 - O E2E usa o Galaxy A12: ao iniciar, avise o dono que o A12 tem que ficar conectado, desbloqueado e sem uso (dele ou de
   outra sessao) nas janelas de teste, e que o app debug dele sera reinstalado com o APK de cada bug.
 - Commits locais na arvore principal: publicar antes com `git -C C:\projects\lemuroid\Lemuroid push origin version9`,

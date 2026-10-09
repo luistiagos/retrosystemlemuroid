@@ -3,11 +3,8 @@
 Bugs ativos, sem correcao publicada. Vem de chamados de suporte (skill `triagem-chamados`), da telemetria de
 erros (`triagem-bugs-prod`, projeto `retrogamesystem/...`), do Play Console e de investigacao no codigo.
 
-`docs/bugs/` tem os mesmos arquivos: na arvore principal, `docs` e uma *junction* para `documentacao`
-(desde 2026-09-17), entao os dois caminhos sao o MESMO arquivo no disco, e o git rastreia os dois. Todo commit de
-doc de bug leva os dois caminhos (`git add` explicito de cada um). O pipeline `pipeline-correcao-bugs` roda em
-worktrees, onde nao ha junction: escreve so `docs/bugs/`, e o caminho `docs/` correspondente aparece sujo na
-arvore principal depois que ela recebe os commits dele (o briefing do pipeline lista quais).
+Esta e a unica pasta de bugs do repo. A antiga `documentacao/bugs/` (copia desta por uma *junction*) foi removida
+em 2026-10-09; nao a recrie.
 
 ## Nome e template
 

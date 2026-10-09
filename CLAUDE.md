@@ -17,7 +17,7 @@ Roteamento por prefixo do pedido do usuário. Cada item vira **um arquivo Markdo
 - Nome de arquivo: `YYYY-MM-DD-slug-curto.md` (ex.: `2026-07-01-catalogo-some-scan-biblioteca.md`).
 - Bugs seguem o formato dos arquivos existentes em `bugs/done/`: título com prefixo `[BUG]`, e blocos **Data / Status / Severidade / Branch**, depois **Sintoma / Causa-raiz / Correção / Validação / Lição**.
 - "Mover" = `git mv` do `.md` entre as pastas de `docs/bugs/` (não duplicar).
-- **Bugs moram em `docs/bugs/`** (é o que o pipeline `pipeline-correcao-bugs` lê). Nesta árvore, `docs` é uma *junction* para `documentacao` (criada em 2026-09-17): no disco os dois caminhos são o mesmo arquivo, mas o git rastreia os dois. Ao commitar doc de bug, `git add` explícito dos dois caminhos (`docs/bugs/...` e `docs/bugs/...`), como o histórico faz. Numa worktree nova não há junction: lá só `docs/bugs/` conta.
+- **Bugs moram em `docs/bugs/`** (é o que o pipeline `pipeline-correcao-bugs` lê). Toda a documentação do repo mora em `docs/` (bugs, funcionalidades, backlogs, prompts). A antiga pasta `documentacao/` foi removida em 2026-10-09: era cópia de `docs/` por uma *junction* e o git guardava tudo em dobro (`docs/bugs/done/2026-10-09-documentacao-duplicada-junction-docs.md`). Não recrie `documentacao/` nem junction; commite só o caminho `docs/...`.
 
 ---
 
