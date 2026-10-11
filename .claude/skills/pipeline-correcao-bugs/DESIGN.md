@@ -620,6 +620,15 @@ lane, e o roteiro repassava ao dono o que o helper proibia ou nao sabia fazer.
 - **O codigo de terceiro e o ULTIMO commit.** Se nao compila, publica-se o prefixo so-docs
   e ele fica local. Arquivo novo fora de `docs/` e arquivo mexido ha menos de 10 min nao sao
   commitados (origem desconhecida; outra sessao editando agora).
+- **Arquivo modificado na pasta da propria skill tambem nao e commitado** (vira `PENDENCIA DO DONO`;
+  bug `pipeline-final-sync-main-publica-codigo-da-skill-em-edicao-por-outra-sessao_2026-10-09`, 2026-10-10). O portao "publica se
+  compilar" e o build do PROJETO, que nao importa nem testa o helper: para esse codigo ele passa sempre,
+  e o helper e o que a propria execucao roda e o que o `sync_copias.py` replica nas copias. A idade do
+  arquivo nao prova que a edicao terminou (a B2 ficou ~34 min sem commit e saiu pela metade em
+  `a361a1b`); rodar os testes da skill como portao tambem nao (a bateria antiga passaria com a B2 pela
+  metade). Quem sabe que terminou e quem edita: ele commita. A pasta e a de `skill_rel()` (`skills/...`
+  aqui, `.claude/skills/...` nas copias). Commit LOCAL da skill continua publicado (decisao 1): commitar
+  e ato deliberado.
 - **C3 e provado por cadeia, nao por inspecao do binario:** commit de cada `retest` e ancestral do SHA
   deployado; entre esse SHA e o origin so mudou `docs/`; MD5 atual do `dist/` = MD5 gravado logo depois
   do deploy (e conferido contra a saida do build da lane).
@@ -638,7 +647,9 @@ lane, e o roteiro repassava ao dono o que o helper proibia ou nao sabia fazer.
   `cleanup`; o `stop-final` so cobre as da finalizacao. Desde a secao 19 a retomada nao abre mais copia;
   o limite so vale para as abertas por execucao anterior a ela.
 - "Compila" e so `deploy.ps1 -BuildOnly`: nao prova que o codigo de terceiro funciona, e nao valida
-  Python (skill, testes).
+  Python. A pasta da skill saiu do commit automatico (acima); o resto que o build nao toca (`scripts/*.py`,
+  `tests/`) continua publicado so pelo build — generalizar pediria uma lista por projeto no `projeto.json`
+  e reabriria a decisao 2.
 
 ## 19. Retomada: sem flags e com a sessao parada; o ledger segue o id impresso (2026-10-03)
 
@@ -1291,8 +1302,10 @@ commit alcancavel; assunto `TASK-NNNN:`; commit de docs `chore:`.
 (`git_pipeline.py`) e `d788ecc` (`sim_pipeline.py`).
 - **O codigo foi para o origin por outro caminho:** com a edicao ainda sem commit, a finalizacao da execucao
   `20261009-1144` (rodando no retrobatnew) fez `final-sync-main` e publicou o `pipeline.py` como codigo de terceiros
-  (`a361a1b`, `chore(terceiros): ...`, 12:34; o build compilou). E o desenho do `sync_main`, nao um defeito: e a
-  regra "editou: commit na hora" vale tambem contra a propria finalizacao. `git diff a361a1b -- .../pipeline.py` = vazio:
+  (`a361a1b`, `chore(terceiros): ...`, 12:34; o build compilou). Era o desenho do `sync_main` de entao, e a
+  regra "editou: commit na hora" vale tambem contra a propria finalizacao. Tratado como defeito depois: bug
+  `pipeline-final-sync-main-publica-codigo-da-skill-em-edicao-por-outra-sessao_2026-10-09` — desde 2026-10-10 o `sync_main` deixa o
+  arquivo modificado da pasta da skill como pendencia do dono (secao 18, "Como"). `git diff a361a1b -- .../pipeline.py` = vazio:
   o commit contem exatamente a B2. Historia publicada nao foi reescrita.
 - Simbolos novos: `stage_path`, `retest_path`, `task_field`/`set_task_field`/`task_status`, `item_kind`, `task_of`,
   `task_number`/`task_id`/`task_commits`, `task_plan_errors`, `task_numbers`, `cmd_task_reserve` (`task-reserve --bug`),
