@@ -42,6 +42,10 @@ forte deste grupo: não é um pico isolado, é o mesmo aparelho repetindo.
 | 8737 | 2026-09-27 02:08 | motorola moto g35 5G (mesmo device, ~1h25 depois) | 125, processo principal |
 | 9166 | 2026-09-29 22:45 | motorola moto g35 5G (mesmo device, 3ª vez) | 125, processo principal (`app=1.17.22`) |
 | 9178 | 2026-09-30 04:45 | samsung SM-A105M | 125, processo principal (`app=1.17.22`) |
+| 9508 | 2026-10-07 04:39 | motorola moto g35 5G (4ª vez) | 125, processo principal (`ram=3383MB`, `app=1.17.23`) |
+| 9544 | 2026-10-08 00:03 | motorola moto g35 5G (5ª vez) | 125, processo principal (`rss=330MB`, `ram=3383MB`, `app=1.17.25`) |
+| 9573 | 2026-10-08 14:54 | motorola moto g04s | 125, processo principal (`app=1.17.19`) |
+| 9652 | 2026-10-09 22:26 | motorola moto g04s | 125, Died when creating service (`app=1.17.19`) |
 
 Sem `system=`/`core=`/`game=` no breadcrumb — não havia jogo rodando. `importance=125`
 (`FOREGROUND_SERVICE`) no processo principal sem jogo bate com um **worker do WorkManager em
@@ -67,6 +71,12 @@ padrão; listado para não perder o sinal caso se repita no mesmo device ou no m
 Único ponto de dado, versão bem mais antiga que os demais (1.17.9 vs. 1.17.22) — TV box de
 recursos limitados por natureza (categoria já coberta por `HeavySystemFilter` para outros
 sistemas, mas N64 só é bloqueado no tier `ULTRA_WEAK`, ≤1 GB).
+
+### E. CPS1/fbneo, aparelho de entrada (SM-A105M)
+
+| Error | Quando | Device | Jogo | `importance` |
+|---|---|---|---|---|
+| 9801 | 2026-10-11 15:00 | samsung SM-A105M (Galaxy A10, 2GB RAM) | Street Fighter II': Hyper Fighting | 125, `:game`, `app=1.17.22` |
 
 ## Causa-raiz
 

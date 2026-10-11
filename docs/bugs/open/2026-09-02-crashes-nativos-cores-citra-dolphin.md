@@ -253,3 +253,11 @@ foi lido no `command_processor.cpp`. A leitura do fonte também mostrou o oposto
 esperado em dois pontos: `Draw` chama `ApplyTo` **também** no caminho não-acelerado (logo a
 mitigação é parcial, não uma cura), e `citra_use_acc_geo_shaders` — que estava exposta no
 nosso menu há tempos — nunca foi lida pelo core.
+
+---
+
+## Recorrência (Triagem 2026-10-11)
+
+- **Citra (3DS):** ID **9511** (2026-10-07 06:55) — Samsung Galaxy S23 FE (`SM-S711B`, Exynos 2200 com GPU Xclipse 920, Android 15, `app=1.17.23`). `SIGTRAP TRAP_BRKPT` idêntico em `OpenGL::LoadProgram` -> `OGLProgram::Create` -> `ShaderProgramManager::ApplyTo` na `GLThread 1`. Reconfirma a rejeição de GLSL pelo driver Xclipse da Samsung.
+- **Dolphin (GameCube):** IDs **9451** (2026-10-06 09:20) e **9524** (2026-10-07 18:10) — POCO F5 (`Xiaomi 23049PCD8G` / marble, Snapdragon 7+ Gen 2 / GPU Adreno, Android 15, `app=1.17.25`). `SIGSEGV` idêntico em `__memcpy_aarch64_simd` via `libGLESv2_adreno.so` chamado por `dolphin_libretro_android.so!retro_run` na `GLThread 1`.
+

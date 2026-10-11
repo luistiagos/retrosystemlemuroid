@@ -1106,3 +1106,27 @@ o dump de produção.
 2026-10-02 a 10-05 (4 reports em 4 dias, todos GameCube), o primeiro dump deve chegar em dias, conforme
 a 1.17.25 se espalha. Para achar os timeouts, o `triagem.py list` não basta: ele só devolve abertos, e
 a triagem diária fecha os erros. Filtrar todos os status, como acima. Nenhum código mudou nesta rodada.
+
+---
+
+### Confirmação em produção (1.17.25) — triagem 2026-10-11
+
+Os primeiros dumps de `seq=1` com `app=1.17.25` chegaram e foram lidos na triagem:
+- **GameCube (Animal Crossing, Dolphin, Samsung SM-X620 / Galaxy Tab S10 FE):** errors **9519**, **9520**, **9521**, **9522** (2026-10-07 17:32–17:40, 4 ocorrências seguidas de `serializeSRAM` em `exit-save` e `background-save`).
+- **Amiga 1200 (PUAE, Xiaomi 22041216G):** errors **9759** (*Body Blows Galactic*, 2026-10-11 00:43) e **9798** (*Body Blows*, 2026-10-11 06:14).
+
+Em **todas as 6 ocorrências**, o anexo `seq=1` trouxe exatamente o mesmo dump de pilha:
+```text
+GLThread 1 state=RUNNABLE
+	at com.swordfish.libretrodroid.LibretroDroid.step(Native Method)
+	at com.swordfish.libretrodroid.GLRetroView$Renderer$onDrawFrame$1.invoke(SourceFile:3)
+	at com.swordfish.libretrodroid.GLRetroView$Renderer$onDrawFrame$1.invoke(SourceFile:1)
+	at com.swordfish.libretrodroid.GLRetroView.catchExceptions(SourceFile:7)
+	at com.swordfish.libretrodroid.GLRetroView.access$catchExceptions(SourceFile:1)
+	at com.swordfish.libretrodroid.GLRetroView$Renderer.onDrawFrame(SourceFile:13)
+	at com.swordfish.libretrodroid.GLSurfaceView$GLThread.guardedRun(SourceFile:468)
+	at com.swordfish.libretrodroid.GLSurfaceView$GLThread.run(SourceFile:1)
+```
+
+**Diagnóstico confirmado:** A `GLThread` não está morta, em deadlock de mutex Java ou aguardando monitor — seu estado é `RUNNABLE` executando continuamente dentro de `LibretroDroid.step(Native Method)` (ou seja, o loop de emulação nativa do core). Como o loop nativo nunca retorna para o frame handler do `GLSurfaceView`, os eventos enfileirados por `queueEvent` para `serializeSRAM` não são processados, estourando o timeout de 30s.
+

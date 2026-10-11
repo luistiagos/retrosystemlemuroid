@@ -100,3 +100,9 @@ uma vez. Antes de abrir bug a partir da telemetria:
 - **Novo ID:** 9168 — Android 16 (sdk 36), `app=1.17.9`, mesmo texto (`of type dataSync`) no `GameService`.
   Cliente rodando versão desatualizada (1.17.9 < 1.17.13). Fechado na telemetria.
 
+## Recorrência (Triagem 2026-10-11)
+
+- **Novo ID:** 9540 — 2026-10-07 23:09, mesmo device (Xiaomi 24117RN76L), mesmo jogo (*Duke Nukem: Time to Kill*, psx/pcsx_rearmed), `app=1.17.9`.
+  Mesmo usuário/aparelho desatualizado das triagens de 2026-09-28 e 2026-10-05.
+
+
