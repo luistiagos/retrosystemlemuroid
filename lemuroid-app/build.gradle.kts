@@ -68,8 +68,8 @@ val catalogApplicationIdSuffix = normalizeApplicationIdSuffix(readGradleProperty
 
 android {
     defaultConfig {
-        versionCode = 256
-        versionName = "1.17.25" // Always remember to update Cores Tag!
+        versionCode = 257
+        versionName = "1.17.26" // Always remember to update Cores Tag!
         applicationId = "app.retrogamesystem$catalogApplicationIdSuffix"
 
         buildConfigField("String", "CATALOG_CHANNEL", "\"${escapeBuildConfigValue(catalogChannel)}\"")

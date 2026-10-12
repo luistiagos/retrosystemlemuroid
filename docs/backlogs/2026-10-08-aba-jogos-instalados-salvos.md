@@ -2,7 +2,7 @@
 
 **Data:** 2026-10-08  
 **Autor:** Antigravity  
-**Status:** Planejamento consolidado — pendências da primeira, segunda e terceira rodadas de revisão técnica (R1 a R9) totalmente resolvidas  
+**Status:** Concluído e Publicado (Build 257 / v1.17.26 em produção)  
 **Origem:** Demanda de usabilidade — eliminar a necessidade de o usuário navegar por `Sistemas → [Sistema] → [Jogo]` a cada nova sessão para jogar títulos já presentes no aparelho.  
 **Referência de Implementação:** Padrão de biblioteca local e aba `Salvos` do `ARMSX2-forkv2` (`HomeTab.Saved` / `HomeScreen.kt`).
 
@@ -433,3 +433,25 @@ jogado só se acha por Sistemas → console.
 **O que falta deste lado:** publicar uma build com a aba (bump de `versionCode`). Ao publicar,
 o guia do agente Android precisa citar a aba — ver
 `C:\projects\digitalstoregamesproject\docs\modules\chatbot-whatsapp\areas\prompt-kb\bugs\2026-10-11-guia-app-android-nao-diz-onde-ficam-os-jogos-baixados-chamado-173.md`.
+
+---
+
+## 10. Conclusão e Publicação em Produção (2026-10-12)
+
+Todas as etapas do backlog e as pendências de campo foram finalizadas:
+
+1. **Ajuste Final de Navegação (Design & UX alinhados ao ARMSX2-forkv2):**
+   - **Ordem das 5 abas na barra inferior:** `Início` (Home) | `Favoritos` | `Catálogo` (Sistemas) | `Jogos salvos` (Instalados) | `Busca`.
+   - **Ícone:** Atualizado de `DownloadDone` para `Album` (`Icons.Filled.Album` / `Icons.Outlined.Album` — ícone de DVD/disco).
+   - **Rótulo:** Atualizado para `"Jogos salvos"` (`title_installed` em `values-pt-rBR`) e `"Saved games"` (`values`).
+   - Validado no aparelho físico (`SM-A127M`, Android 13) via `./gradlew installFreeBundleDebug` e documentado em `prj.md`.
+
+2. **Publicação da Release (Build 257 / v1.17.26):**
+   - `versionCode` bump para `257` e `versionName` para `1.17.26` em `lemuroid-app/build.gradle.kts`.
+   - Gerados os APKs release arm64 e armv7 com assinatura e upload executado via `build-and-upload.ps1`.
+   - Publicado no dataset Hugging Face (`luisluis123/versions`) e no Cloudflare R2 (`https://versions.digitalstoregames.com/RetroGameSystem/version.json`).
+
+3. **Sincronização com o Guia do Agente de IA do WhatsApp (Chamado #173 resolvido):**
+   - Atualizado `C:\projects\digitalstoregamesproject\digitalstoregamesbackend\mysite\templates\prompts\fragments\guias\app_android_retro.md` com a seção `## Navegação do app, como baixar e onde ficam os jogos salvos`.
+   - Agente instruído formalmente sobre as 5 abas, o ícone de DVD/disco para jogos baixados/salvos e proibido de alucinar gerenciador de arquivos ou desinstalação.
+   - Chamado #173 marcado como `status: resolved` no repositório `digitalstoregamesproject`.
