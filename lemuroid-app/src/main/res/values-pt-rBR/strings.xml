@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_home">Início</string>
-    <string name="title_installed">Instalados</string>
+    <string name="title_installed">Jogos salvos</string>
     <string name="title_search">Buscar</string>
     <string name="title_systems">Sistemas</string>
     <string name="title_games">Jogos</string>
@@ -11,6 +11,8 @@
     <string name="installed_media_unavailable">Mídia inacessível</string>
     <string name="installed_versions_count">%d versões</string>
     <string name="search_scope_installed">Jogos instalados</string>
+    <string name="search_no_games_in_system">Nenhum jogo em %s</string>
+    <string name="search_all_systems">Buscar em todos os sistemas</string>
     <string name="clear">Limpar</string>
     <string name="recent">Recentes</string>
     <string name="favorites">Favoritos</string>

@@ -1,6 +1,6 @@
 <resources>
     <string name="title_home">Home</string>
-    <string name="title_installed">Installed</string>
+    <string name="title_installed">Saved games</string>
     <string name="title_search">Search</string>
     <string name="title_systems">Systems</string>
     <string name="title_games">Games</string>
@@ -10,6 +10,8 @@
     <string name="installed_media_unavailable">Media unavailable</string>
     <string name="installed_versions_count">%d versions</string>
     <string name="search_scope_installed">Installed games</string>
+    <string name="search_no_games_in_system">No games found in %s</string>
+    <string name="search_all_systems">Search all systems</string>
     <string name="clear">Clear</string>
     <string name="recent">Recents</string>
     <string name="favorites">Favorites</string>

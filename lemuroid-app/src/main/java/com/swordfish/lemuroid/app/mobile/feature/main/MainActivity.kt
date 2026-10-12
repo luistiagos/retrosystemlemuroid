@@ -469,6 +469,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             viewModel = searchViewModel,
                             searchQuery = mainUIState.searchQuery,
                             systemIds = mainUIState.currentSystemIds,
+                            systemName = mainUIState.currentMetaSystem?.let { stringResource(it.titleResId) },
                             downloadedGameKeys = downloadedGameKeys,
                             onGameClick = { game ->
                                 if (searchViewModel.onlyInstalled.value) {
@@ -508,6 +509,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
                             onResetSearchQuery = { mainViewModel.changeQueryString("") },
+                            onClearSystemScope = { mainViewModel.setCurrentMetaSystem(null) },
                         )
                     }
                     composable(MainRoute.SYSTEMS) {

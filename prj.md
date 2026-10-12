@@ -464,7 +464,7 @@ Both use separate WorkManager `UNIQUE_WORK_ID`s (`LibraryIndexWork` vs `LibraryI
 
 ## 10. Navigation (Mobile)
 
-### Bottom navigation (4 tabs)
+### Bottom navigation (5 tabs)
 
 Defined in `MainNavigationRoutes` enum:
 
@@ -472,7 +472,8 @@ Defined in `MainNavigationRoutes` enum:
 |-----|-------|-------|
 | Home | `home` | `Home` / `Outlined.Home` |
 | Favorites | `favorites` | `Favorite` / `FavoriteBorder` |
-| Systems | `systems/home` | `VideogameAsset` / `Outlined.VideogameAsset` |
+| Systems (Catalog) | `systems/home` | `VideogameAsset` / `Outlined.VideogameAsset` |
+| Saved / Installed Games | `installed` | `Album` / `Outlined.Album` (DVD/Disc) |
 | Search | `search` | `Search` / `Outlined.Search` |
 
 ### Full route map (`MainRoute` enum)
@@ -481,8 +482,9 @@ Defined in `MainNavigationRoutes` enum:
 |------------|------|-----------|
 | `HOME` | `home` | ✅ |
 | `FAVORITES` | `favorites` | ✅ |
-| `SEARCH` | `search` | ✅ |
 | `SYSTEMS` | `systems/home` | ✅ |
+| `INSTALLED` | `installed` | ✅ |
+| `SEARCH` | `search` | ✅ |
 | `SYSTEM_GAMES` | `systems/{metaSystemId}` | ✅ (parent=SYSTEMS) |
 | `SETTINGS` | `settings/home` | ❌ |
 | `SETTINGS_ADVANCED` | `settings/advanced` | ❌ |
@@ -795,8 +797,11 @@ fun search(query: String, systemIds: List<String>? = null): PagingSource<Int, Ga
 |------------------|--------------------|
 | Enter `SYSTEM_GAMES/{id}` | `MetaSystemID.valueOf(id).systemIDs.map { it.dbname }` |
 | Tap Search tab (holding system context) | unchanged (SEARCH route does not clear) |
+| Dismiss system chip (X) or "Search all systems" | `null` (cleared via `onClearSystemScope`) |
 | Navigate to HOME / FAVORITES / SYSTEMS / SETTINGS | `null` (cleared) |
 | Navigate back to `SYSTEM_GAMES` | re-set by `LaunchedEffect(metaSystemId)` |
+
+**System scope chip & clear**: When searching within a system context, `SearchScreen` displays a dismissible `FilterChip` showing the system name with a close icon (X). Clicking the chip clears the filter via `onClearSystemScope` (`mainViewModel.setCurrentMetaSystem(null)`), immediately expanding results to the full catalog. If the search yields no results within that system, an empty view displays "No games found in <system>" accompanied by a "Search all systems" button.
 
 **Example** — inside FBNeo system: `systemIds = listOf("fbneo")`. Inside Genesis system: `systemIds = listOf("md", "scd")` (Genesis + SegaCD share `MetaSystemID.GENESIS`).
 | `CoreID.kt` | `retrograde-app-shared/.../library/CoreID.kt` |

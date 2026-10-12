@@ -405,3 +405,31 @@ fun search(
 - [x] **Busca global restrita:** `LIMIT 100` é aplicado após o filtro de instalados; consultas com `null`, lista vazia, 1 ID e múltiplos IDs executam sem erro; chip `[x] Jogos Instalados` permite alternar para o catálogo completo.
 - [x] **Consistência de clique na busca restrita:** abrir resultado da busca restrita não oferece variantes não baixadas do catálogo.
 - [x] **Validação em compilação:** build/kapt valida Room, `@RawQuery`, CTEs e compatibilidade Android API 21+.
+
+---
+
+## 9. Evidência de campo — chamado #173 (2026-10-11): a falta desta aba já custa pedido de reembolso
+
+Registrado pela triagem do chamado de suporte **#173** (sessão `275621003452487@lid`, Android,
+pacote Sistema Multigames). O chamado foi aberto por **pedido de reembolso**
+(`programmatic_refund_intercept`); o cliente reclamou de complexidade, o agente o guiou até
+instalar o app e rodar um jogo, e a dúvida que sobrou foi exatamente a motivação deste backlog.
+Horários do banco (UTC), ids de `Wpp_proccess`:
+
+| id | hora | cliente |
+|---|---|---|
+| 138700 | 21:46:19 | *"Depois que entrar tem que baixar jogo por jogo"* |
+| 138732 | 21:59:18 | *"Agora eu não a lista de jogos baixados"* |
+| 138754 | 22:21:19 | *"Rodou de boa"* (o jogo baixado abriu) |
+| 138804 | 23:33:32 | *"Então, já baixei todos, mas eles não aparecem na tela inicial e não tem uma aba de jogos baixados"* |
+
+**Por que o cliente não tem a aba:** o APK publicado é o `versionCode 256` / `1.17.25`
+(`https://versions.digitalstoregames.com/RetroGameSystem/version.json`; `Last-Modified` do APK
+arm64 = **2026-10-05 16:49 GMT**). A aba entrou no commit `78b7ff2` de **2026-10-08** e o
+`versionCode` continua 256 no fonte — **a aba Instalados está implementada mas não foi
+publicada**. Na build 256 só aparece em "Recentes" o que já foi jogado; o que foi baixado e não
+jogado só se acha por Sistemas → console.
+
+**O que falta deste lado:** publicar uma build com a aba (bump de `versionCode`). Ao publicar,
+o guia do agente Android precisa citar a aba — ver
+`C:\projects\digitalstoregamesproject\docs\modules\chatbot-whatsapp\areas\prompt-kb\bugs\2026-10-11-guia-app-android-nao-diz-onde-ficam-os-jogos-baixados-chamado-173.md`.

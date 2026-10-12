@@ -36,6 +36,7 @@ class MainViewModel(
         val displaySearch: Boolean = false,
         val searchQuery: String = "",
         val currentSystemIds: List<String>? = null,
+        val currentMetaSystem: MetaSystemID? = null,
     )
 
     private val currentRouteFlow = MutableStateFlow(MainRoute.HOME)
@@ -70,16 +71,20 @@ class MainViewModel(
                 searchQueryFlow,
                 currentMetaSystemIdFlow,
             ) { currentRoute, saveSyncEnabled, operationInProgress, searchQuery, metaSystemId ->
-                val systemIds = metaSystemId
-                    ?.let { runCatching { MetaSystemID.valueOf(it) }.getOrNull() }
-                    ?.systemIDs
-                    ?.map { it.dbname }
+                val metaSystem =
+                    metaSystemId
+                        ?.let { runCatching { MetaSystemID.valueOf(it) }.getOrNull() }
+                val systemIds =
+                    metaSystem
+                        ?.systemIDs
+                        ?.map { it.dbname }
                 UiState(
                     operationInProgress = operationInProgress,
                     saveSyncEnabled = saveSyncEnabled,
                     displaySearch = currentRoute == MainRoute.SEARCH,
                     searchQuery = searchQuery,
                     currentSystemIds = systemIds,
+                    currentMetaSystem = metaSystem,
                 )
             }
 
