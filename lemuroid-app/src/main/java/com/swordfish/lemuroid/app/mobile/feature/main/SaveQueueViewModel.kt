@@ -29,6 +29,11 @@ class SaveQueueViewModel(
 
     val justCompleted: SharedFlow<Game> = saveQueueManager.justCompleted
 
+    /** [entries] by `"$systemId/$fileName"`, the same key as `Game.downloadKey`, for the cover badges. */
+    val entriesByKey: StateFlow<Map<String, SaveQueueEntry>> = saveQueueManager.entries
+        .map { list -> list.associateBy { "${it.systemId}/${it.fileName}" } }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
     val hasActiveOrQueued: StateFlow<Boolean> = saveQueueManager.entries
         .map { list ->
             list.any { it.state == SaveQueueState.QUEUED || it.state == SaveQueueState.SAVING || it.state == SaveQueueState.PAUSED }

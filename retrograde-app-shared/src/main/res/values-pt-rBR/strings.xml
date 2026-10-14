@@ -128,4 +128,18 @@
     <string name="value_handy_rot_none">0</string>
     <string name="value_handy_rot_90">90</string>
     <string name="value_handy_rot_270">270</string>
+    <string name="setting_yabasanshiro_sh2coretype">Núcleo da CPU SH2</string>
+    <string name="setting_yabasanshiro_frameskip">Pulo de quadros automático</string>
+    <string name="setting_yabasanshiro_polygon_mode">Renderização de polígonos</string>
+    <string name="value_yabasanshiro_sh2coretype_interpreter">Interpretador (compatível)</string>
+    <string name="value_yabasanshiro_sh2coretype_dynarec">Recompilador dinâmico (rápido)</string>
+    <string name="value_yabasanshiro_polygon_mode_perspective">Correção de perspectiva</string>
+    <string name="value_yabasanshiro_polygon_mode_cpu">Tesselação na CPU</string>
+    <string name="value_yabasanshiro_polygon_mode_gpu">Tesselação na GPU</string>
+    <string name="setting_flycast_internal_resolution">Resolução interna</string>
+    <string name="setting_reicast_force_wince">Forçar modo Windows CE (MMU completa)</string>
+    <string name="setting_reicast_emulate_framebuffer">Emulação completa do framebuffer</string>
+    <string name="controller_sega32x">Padrão (6 botões)</string>
+    <string name="setting_opera_cpu_overclock">Velocidade da CPU</string>
+    <string name="value_opera_cpu_overclock_1x">1x — Nativa (12,5 MHz)</string>
 </resources>

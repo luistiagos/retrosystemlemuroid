@@ -16,7 +16,7 @@
     <string name="recent">Recents</string>
     <string name="favorites">Favorites</string>
     <string name="discover">Discover</string>
-    <string name="sort_popularity">Popularidade</string>
+    <string name="sort_popularity">Popularity</string>
     <string name="sort_alphabetical">A-Z</string>
     <string name="rescan">Rescan</string>
     <string name="stop">Stop</string>

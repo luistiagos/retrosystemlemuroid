@@ -12,9 +12,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.navigation.NavController
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidSystemCard
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalDimens
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 
 @Composable
@@ -49,12 +51,15 @@ private fun MetaSystemsScreen(
         return
     }
 
+    val dimens = LocalDimens.current
+
     LazyVerticalGrid(
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        columns = GridCells.Adaptive(144.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(dimens.screenMargin),
+        // Phone, upright or sideways: blocks of at least 144 dp. TV box: the size of the "A · TV" boards.
+        columns = GridCells.Adaptive(max(SYSTEM_BLOCK_MIN_WIDTH, dimens.systemCardWidth)),
+        horizontalArrangement = Arrangement.spacedBy(dimens.cardSpacing),
+        verticalArrangement = Arrangement.spacedBy(dimens.cardSpacing),
     ) {
         items(metaSystems.size, key = { metaSystems[it].metaSystem }) { index ->
             val system = metaSystems[index]
@@ -66,3 +71,5 @@ private fun MetaSystemsScreen(
         }
     }
 }
+
+private val SYSTEM_BLOCK_MIN_WIDTH = 144.dp

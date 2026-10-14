@@ -1,27 +1,37 @@
 package com.swordfish.lemuroid.app.mobile.feature.games
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -29,27 +39,48 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AmbientBackdrop
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidColors
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameGridItem
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameListRow
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidSystemImage
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalDimens
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalLemuroidTypography
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.PillShape
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SystemPalette
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.rememberCoverSaveState
+import com.swordfish.lemuroid.app.shared.roms.SaveQueueEntry
 import com.swordfish.lemuroid.app.utils.android.settings.booleanPreferenceState
+import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.launch
 
+/**
+ * Catalog of one system.
+ *
+ * @param metaSystem shows the system header (art, name, number of games); null = only the sort chips.
+ * @param saveQueueEntries save queue by `Game.downloadKey` (`SaveQueueViewModel.entriesByKey`), passed
+ * as `State` so that only the item whose state changed recomposes.
+ */
 @Composable
 fun GamesScreen(
     modifier: Modifier = Modifier,
     viewModel: GamesViewModel,
     downloadedGameKeys: Set<String> = emptySet(),
     titlesWithVariants: Set<String> = emptySet(),
+    metaSystem: MetaSystemID? = null,
+    saveQueueEntries: State<Map<String, SaveQueueEntry>>? = null,
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
 ) {
     val games = viewModel.games.collectAsLazyPagingItems()
     val sortOrder by viewModel.sortOrder.collectAsState()
+    val totalGames by viewModel.totalGames.collectAsState()
     val coroutineScope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
+    val dimens = LocalDimens.current
 
     val isGridView = booleanPreferenceState(
         id = R.string.pref_key_catalog_layout_grid,
@@ -76,28 +107,38 @@ fun GamesScreen(
         }
 
         LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
+            columns = remember(dimens.gridCoverMinWidth) { CatalogGridCells(dimens.gridCoverMinWidth) },
             state = gridState,
             modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            // No top padding: the header is drawn edge to edge from the top.
+            contentPadding = PaddingValues(
+                start = dimens.screenMargin,
+                end = dimens.screenMargin,
+                bottom = dimens.screenMargin,
+            ),
+            verticalArrangement = Arrangement.spacedBy(dimens.cardSpacing),
+            horizontalArrangement = Arrangement.spacedBy(dimens.cardSpacing),
         ) {
             item(span = { GridItemSpan(maxLineSpan) }, key = "sort_header") {
-                GamesSortHeader(
+                GamesCatalogHeader(
+                    metaSystem = metaSystem,
+                    gameCount = totalGames,
                     sortOrder = sortOrder,
                     onSortChange = { viewModel.setSortOrder(it) },
+                    modifier = Modifier.bleedHorizontally(dimens.screenMargin),
                 )
             }
 
             items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
                 val game = games[index] ?: return@items
                 val variantKey = "${game.systemId}/${game.title}"
+                val isDownloaded = downloadedGameKeys.contains(game.downloadKey)
 
                 LemuroidGameGridItem(
                     game = game,
-                    isDownloaded = downloadedGameKeys.contains(game.downloadKey),
+                    isDownloaded = isDownloaded,
                     hasVariants = variantKey in titlesWithVariants,
+                    saveState = rememberCoverSaveState(game.downloadKey, isDownloaded, saveQueueEntries),
                     onClick = { onGameClick(game) },
                     onLongClick = { onGameLongClick(game) },
                 )
@@ -118,7 +159,9 @@ fun GamesScreen(
 
         LazyColumn(state = listState, modifier = modifier.fillMaxSize()) {
             item(key = "sort_header") {
-                GamesSortHeader(
+                GamesCatalogHeader(
+                    metaSystem = metaSystem,
+                    gameCount = totalGames,
                     sortOrder = sortOrder,
                     onSortChange = { viewModel.setSortOrder(it) },
                 )
@@ -127,11 +170,13 @@ fun GamesScreen(
             items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
                 val game = games[index] ?: return@items
                 val variantKey = "${game.systemId}/${game.title}"
+                val isDownloaded = downloadedGameKeys.contains(game.downloadKey)
 
                 LemuroidGameListRow(
                     game = game,
-                    isDownloaded = downloadedGameKeys.contains(game.downloadKey),
+                    isDownloaded = isDownloaded,
                     hasVariants = variantKey in titlesWithVariants,
+                    saveState = rememberCoverSaveState(game.downloadKey, isDownloaded, saveQueueEntries),
                     onClick = { onGameClick(game) },
                     onLongClick = { onGameLongClick(game) },
                     onFavoriteToggle = { isFavorite -> onGameFavoriteToggle(game, isFavorite) },
@@ -141,27 +186,145 @@ fun GamesScreen(
     }
 }
 
+/**
+ * System art over the ambient backdrop, name, number of games and the sort chips (on the same
+ * line when landscape, where height is short).
+ */
 @Composable
-private fun GamesSortHeader(
+private fun GamesCatalogHeader(
+    metaSystem: MetaSystemID?,
+    gameCount: Int?,
     sortOrder: GameSortOrder,
     onSortChange: (GameSortOrder) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val dimens = LocalDimens.current
+
+    if (metaSystem == null) {
+        GamesSortChips(
+            sortOrder = sortOrder,
+            onSortChange = onSortChange,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = dimens.screenMargin, vertical = 8.dp),
+        )
+        return
+    }
+
+    val systemColor = remember(metaSystem) { SystemPalette.color(metaSystem) }
+    AmbientBackdrop(
+        model = metaSystem.imageResId,
+        systemColor = systemColor,
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = dimens.screenMargin, end = dimens.screenMargin, top = 16.dp, bottom = 8.dp),
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                LemuroidSystemImage(
+                    metaSystem = metaSystem,
+                    modifier = Modifier
+                        .width(if (dimens.isLandscape) 88.dp else 104.dp)
+                        .clip(RoundedCornerShape(dimens.cardCornerRadius)),
+                )
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 12.dp, end = 8.dp),
+                ) {
+                    Text(
+                        text = stringResource(metaSystem.titleResId),
+                        style = LocalLemuroidTypography.current.screenTitle,
+                        color = LemuroidColors.Text,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                    // Total with variants (GamesViewModel.totalGames), as in every game count of the app.
+                    if (gameCount != null && gameCount > 0) {
+                        Text(
+                            text = stringResource(R.string.system_grid_details, gameCount.toString()),
+                            style = LocalLemuroidTypography.current.support,
+                            color = LemuroidColors.TextSupportOnBackdrop,
+                            maxLines = 1,
+                        )
+                    }
+                }
+                if (dimens.isLandscape) {
+                    GamesSortChips(sortOrder = sortOrder, onSortChange = onSortChange)
+                }
+            }
+            if (!dimens.isLandscape) {
+                GamesSortChips(
+                    sortOrder = sortOrder,
+                    onSortChange = onSortChange,
+                    modifier = Modifier.padding(top = 12.dp),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun GamesSortChips(
+    sortOrder: GameSortOrder,
+    onSortChange: (GameSortOrder) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         FilterChip(
             selected = sortOrder == GameSortOrder.POPULARITY,
             onClick = { onSortChange(GameSortOrder.POPULARITY) },
             label = { Text(stringResource(R.string.sort_popularity)) },
+            shape = PillShape,
         )
         FilterChip(
             selected = sortOrder == GameSortOrder.ALPHABETICAL,
             onClick = { onSortChange(GameSortOrder.ALPHABETICAL) },
             label = { Text(stringResource(R.string.sort_alphabetical)) },
+            shape = PillShape,
         )
     }
 }
+
+/** Grid item wider than its slot by [margin] on each side: draws over the grid's content padding. */
+private fun Modifier.bleedHorizontally(margin: Dp) =
+    layout { measurable, constraints ->
+        val bleed = margin.roundToPx()
+        val placeable =
+            measurable.measure(
+                constraints.copy(
+                    minWidth = constraints.minWidth + 2 * bleed,
+                    maxWidth = constraints.maxWidth + 2 * bleed,
+                ),
+            )
+        layout(constraints.maxWidth, placeable.height) { placeable.place(-bleed, 0) }
+    }
+
+/**
+ * As many columns of at least [minSize] as fit, never fewer than [MIN_COLUMNS] (the portrait
+ * spec): a plain `GridCells.Adaptive` drops to 2 on narrow phones.
+ */
+private class CatalogGridCells(private val minSize: Dp) : GridCells {
+    override fun Density.calculateCrossAxisCellSizes(
+        availableSize: Int,
+        spacing: Int,
+    ): List<Int> {
+        val count = maxOf(MIN_COLUMNS, (availableSize + spacing) / (minSize.roundToPx() + spacing))
+        val cellsSpace = (availableSize - spacing * (count - 1)).coerceAtLeast(0)
+        val cellSize = cellsSpace / count
+        val remainder = cellsSpace % count
+        return List(count) { cellSize + if (it < remainder) 1 else 0 }
+    }
+
+    override fun equals(other: Any?): Boolean = other is CatalogGridCells && other.minSize == minSize
+
+    override fun hashCode(): Int = minSize.hashCode()
+}
+
+private const val MIN_COLUMNS = 3

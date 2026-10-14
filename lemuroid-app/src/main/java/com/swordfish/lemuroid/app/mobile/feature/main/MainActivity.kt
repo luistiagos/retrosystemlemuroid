@@ -340,6 +340,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     .collectAsState()
                     .value
 
+            // Kept as State: the progress ticks several times per second, and only the cover whose
+            // state changed should recompose (read inside the item, see rememberCoverSaveState).
+            val saveQueueEntries = saveQueueViewModel.entriesByKey.collectAsState()
+
             val onGameLongClick = { game: Game ->
                 selectedGameState.value = game
             }
@@ -546,6 +550,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             onGameFavoriteToggle = onGameFavoriteToggle,
                             downloadedGameKeys = downloadedGameKeys,
                             titlesWithVariants = titlesWithVariants,
+                            metaSystem = MetaSystemID.valueOf(metaSystemId),
+                            saveQueueEntries = saveQueueEntries,
                         )
                     }
                     composable(MainRoute.SETTINGS) {

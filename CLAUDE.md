@@ -497,6 +497,7 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 - **Activity com extra obrigatório: extra ausente → `finish(); return`, nunca `throw`.** O Robo test do Pre-Launch Report lança toda activity declarada no manifesto sem extras, mesmo as não-exportadas. `BaseGameActivity.onCreate` é `final` de propósito — o `return` do abort só sai do método da base, então código de subclasse vai em `onGameCreated()`, que só roda quando a inicialização chegou ao fim.
 - **Mostrar Activity sobre a tela de bloqueio só por `setShowWhenLockedCompat`** ([ActivityUtils.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/ActivityUtils.kt)). `setShowWhenLocked`/`setTurnScreenOn` crus são API 27 e crasham com `minSdk 21` — ver pitfall 12.
 - **Rede só por `NetworkCompat`** ([NetworkCompat.kt](lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/NetworkCompat.kt)). `getSystemService(Class)` e `ConnectivityManager.activeNetwork` são API 23 — ver pitfall 12.
+- **Cor, fonte, espaço e efeito de UI mobile vêm do design system** (`LemuroidColors`, `LocalLemuroidTypography`, `LocalDimens`, `LocalVisualQuality`) — ver "Design system" abaixo.
 - **Dependência nova ou atualizada: auditar o dex do release** com [audit_dex_api_level.py](audit_dex_api_level.py). O lint não lê bytecode de biblioteca — ver pitfall 16.
 
 ### Estilo: ktlint com baseline
@@ -509,6 +510,30 @@ Duas coisas medidas antes de escolher o baseline, para não repetir a tentativa:
 
 1. **Não adianta trocar `ktlint_code_style`.** O código já está escrito no sabor `ktlint_official` (o default do ktlint 1.x quando o `.editorconfig` não diz outro). Medido no `main` de `lemuroid-app`: `ktlint_official` 902, `intellij_idea` **1.628** (a regra `function-signature` inverte de sentido — 124 → 803 — e o `continuation_indent_size=8` passa a valer, +360 de `indent`), `android_studio` **2.927** (proíbe trailing comma, que o código usa em todo lugar).
 2. **Espaço em branco sobrando pode derrubar a task inteira de um módulo.** Um espaço depois de `filter {` em `StorageProviderRegistry.kt` fazia a regra `argument-list-wrapping` lançar `IllegalArgumentException: First node in sequence must be a whitespace containing a newline`, e o ktlint reportava isso como "failed to parse file" — mensagem que aponta para a direção errada. Se um módulo inteiro falhar com "failed to parse", rodar com `--stacktrace` e ler qual **regra** estourou.
+
+### Design system (redesenho visual, direção A)
+
+Fundação em `mobile/shared/compose/ui/` (Fase 1 de `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`,
+cuja seção "Especificação visual" é a referência dos valores):
+
+| Arquivo | O que tem |
+|---------|-----------|
+| `Color.kt` | `LemuroidColors` (tokens da direção A) e o esquema M3. **Uma cópia só, em `src/main`** — as cópias de `src/debug`/`src/release` foram apagadas. |
+| `Type.kt` | Outfit 400/500/700 (`res/font/outfit_*.ttf`, OFL, arquivos **estáticos**) + `LocalLemuroidTypography` (`cardTitle` 12, `support` 11…). |
+| `Shape.kt` / `Dimens.kt` | Raios; `LocalDimens` com três conjuntos: em pé, deitado compacto (altura < 480 dp) e deitado grande (TV box). |
+| `SystemPalette.kt` | Cor por `MetaSystemID` (79, contraste ≥ 4,5:1 com branco). `when` exaustivo: sistema novo sem cor não compila. |
+| `VisualQuality.kt` | `FULL`/`LITE`, uma vez por processo (`CoverUtils.isLowRamDevice` ou animações desligadas). |
+| `GeneratedCover`, `AmbientBackdrop`, `SaveStateBadge` (`CoverSaveState`), `SectionHeader`, `effects/FocusHighlight` | Componentes. A capa gerada já substitui o quadrado de iniciais dentro de `LemuroidGameImage`. |
+
+Regras:
+1. **Nunca `Modifier.blur`** — só funciona no Android 12+. Fundo "desfocado" = imagem decodificada em ~32 px e esticada (`AmbientBackdrop`).
+2. **Todo efeito novo atrás de `LocalVisualQuality`**, com variante `LITE` (sem imagem de fundo, sem animação).
+3. **`AppTheme` sem Coil.** Ele roda também no `:game` (`BaseGameActivity`, `GameMenuActivity`); nada carregado por ele pode tocar em capa/`ImageLoader`.
+4. **Chave de item em lista paginada** continua `"id_$id"`/`"idx_$it"` (colisão = crash).
+5. `colorScheme.error` é cor de **texto** (Ajustes); o vermelho de selo da especificação (`#B3261E`) é `errorContainer`/`LemuroidColors.ErrorBadge`.
+6. Arte `game_system_*` decodificada à mão: `inScaled = false` (os PNGs estão em `drawable/` sem densidade e seriam ampliados 3×).
+7. Arte `game_system_*` na UI mobile só por `LemuroidSystemImage`: o PNG traz moldura branca embutida (cortada ali) e 10 sistemas têm arte em outra proporção (ver `docs/funcionalidades/2026-10-13-redesenho-sistemas.md`).
+8. **Contagem de jogos mostra sempre o total, com as variantes** (decisão do dono, 14/10/2026). Fonte: `GameDao.selectSystemsWithCount()` (ex.: `GamesViewModel.totalGames`), nunca o `itemCount` do paging agrupado (`selectGrouped*`), que conta só os representantes.
 
 ---
 

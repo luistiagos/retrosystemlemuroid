@@ -441,5 +441,13 @@
     <string name="settings_no_file_picker">Este aparelho não tem app para escolher arquivos. Copie o arquivo ZIP para a raiz de um cartão SD ou pen drive e toque em Atualizar.</string>
     <string name="settings_no_folder_picker">Este aparelho não tem app para escolher pastas, então esta operação não está disponível aqui.</string>
     <string name="settings_no_all_files_screen">Este aparelho não tem a tela usada para conceder acesso a todos os arquivos.</string>
-
+    <string name="sort_popularity">Popularidade</string>
+    <string name="sort_alphabetical">A-Z</string>
+    <string name="variants_badge">Várias versões disponíveis</string>
+    <string name="variants_subtitle">%1$d versões disponíveis — escolha uma para jogar ou salvar</string>
+    <string name="save_confirm_title">Salvar ROM?</string>
+    <string name="notification_rom_queue_title">Salvando ROM…</string>
+    <string name="notification_rom_queue_downloading">Salvando… %1$d%%</string>
+    <string name="notification_rom_queue_more">+ %1$d na fila</string>
+    <string name="notification_rom_queue_waiting">Aguardando para começar…</string>
 </resources>

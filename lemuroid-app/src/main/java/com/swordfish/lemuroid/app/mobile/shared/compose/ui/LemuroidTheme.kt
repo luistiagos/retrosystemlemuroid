@@ -4,6 +4,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 
 private val LightColorScheme =
     lightColorScheme(
@@ -69,16 +72,41 @@ private val DarkColorScheme =
         surfaceTint = md_theme_dark_surfaceTint,
         outlineVariant = md_theme_dark_outlineVariant,
         scrim = md_theme_dark_scrim,
+        surfaceBright = md_theme_dark_surfaceBright,
+        surfaceDim = md_theme_dark_surfaceDim,
+        surfaceContainer = md_theme_dark_surfaceContainer,
+        surfaceContainerHigh = md_theme_dark_surfaceContainerHigh,
+        surfaceContainerHighest = md_theme_dark_surfaceContainerHighest,
+        surfaceContainerLow = md_theme_dark_surfaceContainerLow,
+        surfaceContainerLowest = md_theme_dark_surfaceContainerLowest,
     )
 
+/**
+ * Theme of every Compose screen, including the `:game` process (game menu, pad binding). Keep it
+ * free of Coil and of anything that loads covers: that process never shows one and needs every MB
+ * for the core.
+ */
 @Composable
 fun AppTheme(
     darkTheme: Boolean = true,
     content: @Composable () -> Unit,
 ) {
     val colors = if (darkTheme) DarkColorScheme else LightColorScheme
+    val context = LocalContext.current
+    val visualQuality = remember { VisualQuality.of(context) }
+    val dimens = rememberDimens()
 
-    MaterialTheme(colorScheme = colors) {
-        content()
+    MaterialTheme(
+        colorScheme = colors,
+        typography = LemuroidMaterialTypography,
+        shapes = LemuroidShapes,
+    ) {
+        CompositionLocalProvider(
+            LocalVisualQuality provides visualQuality,
+            LocalDimens provides dimens,
+            LocalLemuroidTypography provides LemuroidTypography.Default,
+        ) {
+            content()
+        }
     }
 }
