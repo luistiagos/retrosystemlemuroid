@@ -35,6 +35,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -51,6 +52,7 @@ import androidx.navigation.NavHostController
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainTopBar(
     currentRoute: MainRoute,
@@ -61,6 +63,8 @@ fun MainTopBar(
     hasSaveQueueActive: Boolean = false,
     saveQueueProgress: Float = 0f,
     onOpenSaveQueue: () -> Unit = {},
+    showSaveQueueAction: Boolean = true,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
     Column {
         LemuroidTopAppBar(
@@ -69,9 +73,10 @@ fun MainTopBar(
             mainUIState = mainUIState,
             onHelpPressed = onHelpPressed,
             onUpdateQueryString = onUpdateQueryString,
-            hasSaveQueueActive = hasSaveQueueActive,
+            hasSaveQueueActive = hasSaveQueueActive && showSaveQueueAction,
             saveQueueProgress = saveQueueProgress,
             onOpenSaveQueue = onOpenSaveQueue,
+            scrollBehavior = scrollBehavior,
         )
 
         AnimatedVisibility(mainUIState.operationInProgress) {
@@ -98,11 +103,13 @@ fun LemuroidTopAppBar(
     hasSaveQueueActive: Boolean = false,
     saveQueueProgress: Float = 0f,
     onOpenSaveQueue: () -> Unit = {},
+    scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
     val context = LocalContext.current
     val topBarColor = BottomAppBarDefaults.containerColor
 
     TopAppBar(
+        scrollBehavior = scrollBehavior,
         title = {
             if (route == MainRoute.SEARCH) {
                 LemuroidSearchView(

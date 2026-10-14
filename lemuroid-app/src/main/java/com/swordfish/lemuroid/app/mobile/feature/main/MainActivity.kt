@@ -18,6 +18,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,6 +29,8 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldDefaults
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -34,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -49,6 +55,7 @@ import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
+import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
 import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.installed.StorageAvailabilityMonitor
@@ -83,6 +90,7 @@ import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalDimens
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.utils.android.startActivitySafely
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
@@ -286,6 +294,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             val saveQueueModalVisible = remember { mutableStateOf(false) }
             val hasSaveQueueActive by saveQueueViewModel.hasActiveOrQueued.collectAsState()
             val saveQueueProgress by saveQueueViewModel.activeProgress.collectAsState()
+            val saveQueueCount by saveQueueViewModel.activeCount.collectAsState()
 
             val pendingDownloadGame = remember { mutableStateOf<Game?>(null) }
 
@@ -364,6 +373,28 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 }
             }
 
+            // Tap on a saved game (Saved games tab and its row on the Home): unavailable media warns;
+            // more than one saved version opens the picker with only the saved ones; one plays.
+            val onInstalledGameClick: (InstalledGameGroupUiModel) -> Unit = onInstalledGameClick@{ uiModel ->
+                val game = uiModel.group.game
+                if (!uiModel.isAvailable) {
+                    displayToast(R.string.installed_media_unavailable)
+                    return@onInstalledGameClick
+                }
+                if (uiModel.group.installedVariantsCount > 1) {
+                    pendingVariantsOnlyInstalled.value = true
+                    pendingVariantsGame.value = game
+                } else {
+                    lifecycleScope.launch {
+                        if (!isGamePlaceholder(game)) {
+                            gameInteractor.onGamePlay(game)
+                        } else {
+                            pendingDownloadGame.value = game
+                        }
+                    }
+                }
+            }
+
             val onGameFavoriteToggle = { game: Game, isFavorite: Boolean ->
                 gameInteractor.onFavoriteToggle(game, isFavorite)
             }
@@ -377,339 +408,381 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     .collectAsState(MainViewModel.UiState())
                     .value
 
-            Scaffold(
-                topBar = {
-                    MainTopBar(
+            // Window wider than tall: the 5 tabs move to a side rail (with the save queue at its
+            // foot) and the top bar hides while scrolling down. See "Especificação visual ›
+            // Deitado" in docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md.
+            val isLandscape = LocalDimens.current.isLandscape
+            val showRail = isLandscape && currentRoute.showBottomNavigation
+            val topBarScrollBehavior = if (isLandscape) TopAppBarDefaults.enterAlwaysScrollBehavior() else null
+            LaunchedEffect(currentRoute) {
+                // Every screen opens with its top bar visible.
+                topBarScrollBehavior?.state?.heightOffset = 0f
+            }
+
+            Row(modifier = Modifier.fillMaxSize()) {
+                if (showRail) {
+                    MainNavigationRail(
                         currentRoute = currentRoute,
                         navController = navController,
-                        onHelpPressed = onHelpPressed,
-                        mainUIState = mainUIState,
-                        onUpdateQueryString = { mainViewModel.changeQueryString(it) },
                         hasSaveQueueActive = hasSaveQueueActive,
                         saveQueueProgress = saveQueueProgress,
+                        saveQueueCount = saveQueueCount,
                         onOpenSaveQueue = { saveQueueModalVisible.value = true },
                     )
-                },
-                bottomBar = { MainNavigationBar(currentRoute, navController) },
-            ) { padding ->
-                NavHost(
-                    modifier = Modifier.fillMaxSize(),
-                    navController = navController,
-                    startDestination = MainRoute.HOME.route,
-                ) {
-                    composable(MainRoute.HOME) {
-                        HomeScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        HomeViewModel.Factory(
-                                            applicationContext,
-                                            retrogradeDb,
-                                            coresSelection,
-                                        ),
-                                ),
-                            downloadedGameKeys = downloadedGameKeys,
-                            onGameClick = onGameClick,
-                            onGameLongClick = onGameLongClick,
-                            onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
-                        )
-                    }
-                    composable(MainRoute.INSTALLED) {
-                        val installedViewModel: InstalledGamesViewModel = viewModel(
-                            factory = InstalledGamesViewModel.Factory(
-                                retrogradeDb = retrogradeDb,
-                                directoriesManager = directoriesManager,
-                                storageAvailabilityMonitor = storageAvailabilityMonitor,
-                                systemSearchResolver = systemSearchResolver,
-                            ),
-                        )
-                        InstalledGamesScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel = installedViewModel,
-                            onGameClick = { uiModel ->
-                                val game = uiModel.group.game
-                                if (!uiModel.isAvailable) {
-                                    displayToast(R.string.installed_media_unavailable)
-                                    return@InstalledGamesScreen
-                                }
-                                if (uiModel.group.installedVariantsCount > 1) {
-                                    pendingVariantsOnlyInstalled.value = true
-                                    pendingVariantsGame.value = game
-                                } else {
-                                    lifecycleScope.launch {
-                                        if (!isGamePlaceholder(game)) {
-                                            gameInteractor.onGamePlay(game)
-                                        } else {
-                                            pendingDownloadGame.value = game
-                                        }
-                                    }
-                                }
+                }
+                Scaffold(
+                    modifier =
+                        Modifier
+                            .weight(1f)
+                            .let { modifier ->
+                                topBarScrollBehavior
+                                    ?.let { modifier.nestedScroll(it.nestedScrollConnection) }
+                                    ?: modifier
                             },
-                            onGameLongClick = onGameLongClick,
-                        )
-                    }
-                    composable(MainRoute.FAVORITES) {
-                        FavoritesScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory = FavoritesViewModel.Factory(retrogradeDb),
-                                ),
-                            downloadedGameKeys = downloadedGameKeys,
-                            onGameClick = onGameClick,
-                            onGameLongClick = onGameLongClick,
-                        )
-                    }
-                    composable(MainRoute.SEARCH) {
-                        val searchViewModel: SearchViewModel = viewModel(
-                            factory = SearchViewModel.Factory(retrogradeDb, directoriesManager),
-                        )
-                        LaunchedEffect(searchScopeInstalled.value) {
-                            searchViewModel.setOnlyInstalled(searchScopeInstalled.value)
-                        }
-                        SearchScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel = searchViewModel,
-                            searchQuery = mainUIState.searchQuery,
-                            systemIds = mainUIState.currentSystemIds,
-                            systemName = mainUIState.currentMetaSystem?.let { stringResource(it.titleResId) },
-                            downloadedGameKeys = downloadedGameKeys,
-                            onGameClick = { game ->
-                                if (searchViewModel.onlyInstalled.value) {
-                                    lifecycleScope.launch {
-                                        val romsDirPrefix = runCatching {
-                                            directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
-                                        }.getOrDefault("")
-                                        val managedMarker = directoriesManager.getManagedRomsMarker()
-                                        val installedVariants = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-                                            retrogradeDb.gameDao().getInstalledVariantsForGroup(
-                                                systemId = game.systemId,
-                                                title = game.title,
-                                                romsDirPrefix = romsDirPrefix,
-                                                managedMarker = managedMarker,
-                                            )
-                                        }
-                                        if (installedVariants.size > 1) {
-                                            pendingVariantsOnlyInstalled.value = true
-                                            pendingVariantsGame.value = game
-                                        } else if (installedVariants.isNotEmpty()) {
-                                            val single = installedVariants.first()
-                                            if (!storageAvailabilityMonitor.isGameAvailable(single)) {
-                                                displayToast(R.string.installed_media_unavailable)
-                                            } else if (!isGamePlaceholder(single)) {
-                                                gameInteractor.onGamePlay(single)
-                                            } else {
-                                                pendingDownloadGame.value = single
-                                            }
-                                        } else {
-                                            onGameClick(game)
-                                        }
-                                    }
-                                } else {
-                                    onGameClick(game)
-                                }
-                            },
-                            onGameLongClick = onGameLongClick,
-                            onGameFavoriteToggle = onGameFavoriteToggle,
-                            onResetSearchQuery = { mainViewModel.changeQueryString("") },
-                            onClearSystemScope = { mainViewModel.setCurrentMetaSystem(null) },
-                        )
-                    }
-                    composable(MainRoute.SYSTEMS) {
-                        MetaSystemsScreen(
-                            modifier = Modifier.padding(padding),
+                    topBar = {
+                        MainTopBar(
+                            currentRoute = currentRoute,
                             navController = navController,
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        MetaSystemsViewModel.Factory(
-                                            retrogradeDb,
-                                            applicationContext,
-                                        ),
-                                ),
+                            onHelpPressed = onHelpPressed,
+                            mainUIState = mainUIState,
+                            onUpdateQueryString = { mainViewModel.changeQueryString(it) },
+                            hasSaveQueueActive = hasSaveQueueActive,
+                            saveQueueProgress = saveQueueProgress,
+                            onOpenSaveQueue = { saveQueueModalVisible.value = true },
+                            // The rail already shows the queue.
+                            showSaveQueueAction = !showRail,
+                            // The search field lives in the top bar: it never hides.
+                            scrollBehavior = topBarScrollBehavior.takeIf { currentRoute != MainRoute.SEARCH },
                         )
-                    }
-                    composable(MainRoute.SYSTEM_GAMES) { entry ->
-                        val metaSystemId = entry.arguments?.getString("metaSystemId") ?: return@composable
-                        LaunchedEffect(metaSystemId) {
-                            mainViewModel.setCurrentMetaSystem(metaSystemId)
+                    },
+                    bottomBar = { if (!isLandscape) MainNavigationBar(currentRoute, navController) },
+                    // The rail already took the insets of its side (cutout, navigation bar).
+                    contentWindowInsets =
+                        if (showRail) {
+                            ScaffoldDefaults.contentWindowInsets
+                                .only(WindowInsetsSides.Vertical + WindowInsetsSides.End)
+                        } else {
+                            ScaffoldDefaults.contentWindowInsets
+                        },
+                ) { padding ->
+                    NavHost(
+                        modifier = Modifier.fillMaxSize(),
+                        navController = navController,
+                        startDestination = MainRoute.HOME.route,
+                    ) {
+                        composable(MainRoute.HOME) {
+                            HomeScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            HomeViewModel.Factory(
+                                                applicationContext,
+                                                retrogradeDb,
+                                                coresSelection,
+                                                directoriesManager,
+                                            ),
+                                    ),
+                                downloadedGameKeys = downloadedGameKeys,
+                                onGameClick = onGameClick,
+                                onGameLongClick = onGameLongClick,
+                                onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
+                                saveQueueEntries = saveQueueEntries,
+                                // The systems carousel exists only in landscape: upright, the Home
+                                // does not pay for the query. Same ViewModel (and RAM filter) as the
+                                // Systems tab.
+                                metaSystems =
+                                    if (isLandscape) {
+                                        viewModel<MetaSystemsViewModel>(
+                                            factory = MetaSystemsViewModel.Factory(retrogradeDb, applicationContext),
+                                        ).availableMetaSystems.collectAsState().value
+                                    } else {
+                                        null
+                                    },
+                                onSystemClick = { navController.navigate("systems/${it.metaSystem.name}") },
+                                onSavedGameClick = onInstalledGameClick,
+                                onShowAllSavedGames = { navController.navigateToTab(MainNavigationRoutes.INSTALLED) },
+                                onOpenSaveQueue = { saveQueueModalVisible.value = true },
+                            )
                         }
-                        GamesScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        GamesViewModel.Factory(
-                                            retrogradeDb,
-                                            MetaSystemID.valueOf(metaSystemId),
-                                        ),
+                        composable(MainRoute.INSTALLED) {
+                            val installedViewModel: InstalledGamesViewModel = viewModel(
+                                factory = InstalledGamesViewModel.Factory(
+                                    retrogradeDb = retrogradeDb,
+                                    directoriesManager = directoriesManager,
+                                    storageAvailabilityMonitor = storageAvailabilityMonitor,
+                                    systemSearchResolver = systemSearchResolver,
                                 ),
-                            onGameClick = onGameClick,
-                            onGameLongClick = onGameLongClick,
-                            onGameFavoriteToggle = onGameFavoriteToggle,
-                            downloadedGameKeys = downloadedGameKeys,
-                            titlesWithVariants = titlesWithVariants,
-                            metaSystem = MetaSystemID.valueOf(metaSystemId),
-                            saveQueueEntries = saveQueueEntries,
-                        )
-                    }
-                    composable(MainRoute.SETTINGS) {
-                        SettingsScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        SettingsViewModel.Factory(
-                                            applicationContext,
-                                            settingsInteractor.get(),
-                                            saveSyncManager,
-                                            FlowSharedPreferences(
-                                                SharedPreferencesHelper.getLegacySharedPreferences(
-                                                    applicationContext,
+                            )
+                            InstalledGamesScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel = installedViewModel,
+                                onGameClick = onInstalledGameClick,
+                                onGameLongClick = onGameLongClick,
+                            )
+                        }
+                        composable(MainRoute.FAVORITES) {
+                            FavoritesScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory = FavoritesViewModel.Factory(retrogradeDb),
+                                    ),
+                                downloadedGameKeys = downloadedGameKeys,
+                                onGameClick = onGameClick,
+                                onGameLongClick = onGameLongClick,
+                            )
+                        }
+                        composable(MainRoute.SEARCH) {
+                            val searchViewModel: SearchViewModel = viewModel(
+                                factory = SearchViewModel.Factory(retrogradeDb, directoriesManager),
+                            )
+                            LaunchedEffect(searchScopeInstalled.value) {
+                                searchViewModel.setOnlyInstalled(searchScopeInstalled.value)
+                            }
+                            SearchScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel = searchViewModel,
+                                searchQuery = mainUIState.searchQuery,
+                                systemIds = mainUIState.currentSystemIds,
+                                systemName = mainUIState.currentMetaSystem?.let { stringResource(it.titleResId) },
+                                downloadedGameKeys = downloadedGameKeys,
+                                onGameClick = { game ->
+                                    if (searchViewModel.onlyInstalled.value) {
+                                        lifecycleScope.launch {
+                                            val romsDirPrefix = runCatching {
+                                                directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
+                                            }.getOrDefault("")
+                                            val managedMarker = directoriesManager.getManagedRomsMarker()
+                                            val installedVariants = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                                                retrogradeDb.gameDao().getInstalledVariantsForGroup(
+                                                    systemId = game.systemId,
+                                                    title = game.title,
+                                                    romsDirPrefix = romsDirPrefix,
+                                                    managedMarker = managedMarker,
+                                                )
+                                            }
+                                            if (installedVariants.size > 1) {
+                                                pendingVariantsOnlyInstalled.value = true
+                                                pendingVariantsGame.value = game
+                                            } else if (installedVariants.isNotEmpty()) {
+                                                val single = installedVariants.first()
+                                                if (!storageAvailabilityMonitor.isGameAvailable(single)) {
+                                                    displayToast(R.string.installed_media_unavailable)
+                                                } else if (!isGamePlaceholder(single)) {
+                                                    gameInteractor.onGamePlay(single)
+                                                } else {
+                                                    pendingDownloadGame.value = single
+                                                }
+                                            } else {
+                                                onGameClick(game)
+                                            }
+                                        }
+                                    } else {
+                                        onGameClick(game)
+                                    }
+                                },
+                                onGameLongClick = onGameLongClick,
+                                onGameFavoriteToggle = onGameFavoriteToggle,
+                                onResetSearchQuery = { mainViewModel.changeQueryString("") },
+                                onClearSystemScope = { mainViewModel.setCurrentMetaSystem(null) },
+                            )
+                        }
+                        composable(MainRoute.SYSTEMS) {
+                            MetaSystemsScreen(
+                                modifier = Modifier.padding(padding),
+                                navController = navController,
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            MetaSystemsViewModel.Factory(
+                                                retrogradeDb,
+                                                applicationContext,
+                                            ),
+                                    ),
+                            )
+                        }
+                        composable(MainRoute.SYSTEM_GAMES) { entry ->
+                            val metaSystemId = entry.arguments?.getString("metaSystemId") ?: return@composable
+                            LaunchedEffect(metaSystemId) {
+                                mainViewModel.setCurrentMetaSystem(metaSystemId)
+                            }
+                            GamesScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            GamesViewModel.Factory(
+                                                retrogradeDb,
+                                                MetaSystemID.valueOf(metaSystemId),
+                                            ),
+                                    ),
+                                onGameClick = onGameClick,
+                                onGameLongClick = onGameLongClick,
+                                onGameFavoriteToggle = onGameFavoriteToggle,
+                                downloadedGameKeys = downloadedGameKeys,
+                                titlesWithVariants = titlesWithVariants,
+                                metaSystem = MetaSystemID.valueOf(metaSystemId),
+                                saveQueueEntries = saveQueueEntries,
+                            )
+                        }
+                        composable(MainRoute.SETTINGS) {
+                            SettingsScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            SettingsViewModel.Factory(
+                                                applicationContext,
+                                                settingsInteractor.get(),
+                                                saveSyncManager,
+                                                FlowSharedPreferences(
+                                                    SharedPreferencesHelper.getLegacySharedPreferences(
+                                                        applicationContext,
+                                                    ),
                                                 ),
                                             ),
-                                        ),
-                                ),
-                            navController = navController,
-                                onCheckUpdate = { updateViewModel.checkManually() },
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_ADVANCED) {
-                        AdvancedSettingsScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        AdvancedSettingsViewModel.Factory(
-                                            applicationContext,
-                                            settingsInteractor.get(),
-                                        ),
-                                ),
-                            navController = navController,
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_BIOS) {
-                        BiosScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory = BiosSettingsViewModel.Factory(biosManager.get()),
-                                ),
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_CORES_SELECTION) {
-                        CoresSelectionScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        CoresSelectionViewModel.Factory(
-                                            applicationContext,
-                                            coresSelection,
-                                        ),
-                                ),
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_INPUT_DEVICES) {
-                        InputDevicesSettingsScreen(
-                            modifier = Modifier.padding(padding),
-                            navController = navController,
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        InputDevicesSettingsViewModel.Factory(
-                                            applicationContext,
+                                    ),
+                                navController = navController,
+                                    onCheckUpdate = { updateViewModel.checkManually() },
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_ADVANCED) {
+                            AdvancedSettingsScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            AdvancedSettingsViewModel.Factory(
+                                                applicationContext,
+                                                settingsInteractor.get(),
+                                            ),
+                                    ),
+                                navController = navController,
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_BIOS) {
+                            BiosScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory = BiosSettingsViewModel.Factory(biosManager.get()),
+                                    ),
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_CORES_SELECTION) {
+                            CoresSelectionScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            CoresSelectionViewModel.Factory(
+                                                applicationContext,
+                                                coresSelection,
+                                            ),
+                                    ),
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_INPUT_DEVICES) {
+                            InputDevicesSettingsScreen(
+                                modifier = Modifier.padding(padding),
+                                navController = navController,
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            InputDevicesSettingsViewModel.Factory(
+                                                applicationContext,
+                                                inputDeviceManager.get(),
+                                            ),
+                                    ),
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_PORT_ASSIGNMENT) {
+                            PortAssignmentScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory = PortAssignmentViewModel.Factory(
                                             inputDeviceManager.get(),
                                         ),
-                                ),
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_PORT_ASSIGNMENT) {
-                        PortAssignmentScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory = PortAssignmentViewModel.Factory(
-                                        inputDeviceManager.get(),
+                                    ),
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_SAVE_SYNC) {
+                            SaveSyncSettingsScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            SaveSyncSettingsViewModel.Factory(
+                                                application,
+                                                saveSyncManager,
+                                            ),
+                                    ),
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_TRANSFER) {
+                            TransferSettingsScreen(
+                                modifier = Modifier.padding(padding),
+                                navController = navController,
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_TRANSFER_EXPORT) {
+                            TransferExportScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel = viewModel(
+                                    factory = TransferViewModel.Factory(
+                                        applicationContext,
+                                        retrogradeDb,
+                                        gameExportManager.get(),
+                                        gameImportManager.get(),
                                     ),
                                 ),
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_SAVE_SYNC) {
-                        SaveSyncSettingsScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        SaveSyncSettingsViewModel.Factory(
-                                            application,
-                                            saveSyncManager,
-                                        ),
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_TRANSFER_IMPORT) {
+                            TransferImportScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel = viewModel(
+                                    factory = TransferViewModel.Factory(
+                                        applicationContext,
+                                        retrogradeDb,
+                                        gameExportManager.get(),
+                                        gameImportManager.get(),
+                                    ),
                                 ),
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_TRANSFER) {
-                        TransferSettingsScreen(
-                            modifier = Modifier.padding(padding),
-                            navController = navController,
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_TRANSFER_EXPORT) {
-                        TransferExportScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel = viewModel(
-                                factory = TransferViewModel.Factory(
-                                    applicationContext,
-                                    retrogradeDb,
-                                    gameExportManager.get(),
-                                    gameImportManager.get(),
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_ROMSET) {
+                            RomsetSettingsScreen(
+                                modifier = Modifier.padding(padding),
+                                navController = navController,
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_ROMSET_EXPORT) {
+                            RomsetExportScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel = viewModel(
+                                    factory = RomsetViewModel.Factory(
+                                        applicationContext,
+                                        romsetExportManager.get(),
+                                        romsetImportManager.get(),
+                                    ),
                                 ),
-                            ),
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_TRANSFER_IMPORT) {
-                        TransferImportScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel = viewModel(
-                                factory = TransferViewModel.Factory(
-                                    applicationContext,
-                                    retrogradeDb,
-                                    gameExportManager.get(),
-                                    gameImportManager.get(),
+                            )
+                        }
+                        composable(MainRoute.SETTINGS_ROMSET_IMPORT) {
+                            RomsetImportScreen(
+                                modifier = Modifier.padding(padding),
+                                viewModel = viewModel(
+                                    factory = RomsetViewModel.Factory(
+                                        applicationContext,
+                                        romsetExportManager.get(),
+                                        romsetImportManager.get(),
+                                    ),
                                 ),
-                            ),
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_ROMSET) {
-                        RomsetSettingsScreen(
-                            modifier = Modifier.padding(padding),
-                            navController = navController,
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_ROMSET_EXPORT) {
-                        RomsetExportScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel = viewModel(
-                                factory = RomsetViewModel.Factory(
-                                    applicationContext,
-                                    romsetExportManager.get(),
-                                    romsetImportManager.get(),
-                                ),
-                            ),
-                        )
-                    }
-                    composable(MainRoute.SETTINGS_ROMSET_IMPORT) {
-                        RomsetImportScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel = viewModel(
-                                factory = RomsetViewModel.Factory(
-                                    applicationContext,
-                                    romsetExportManager.get(),
-                                    romsetImportManager.get(),
-                                ),
-                            ),
-                        )
+                            )
+                        }
                     }
                 }
             }

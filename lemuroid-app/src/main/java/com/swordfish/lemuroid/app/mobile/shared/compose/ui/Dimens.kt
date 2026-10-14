@@ -23,10 +23,10 @@ data class Dimens(
     val screenMargin: Dp,
     val cardSpacing: Dp,
     val cardCornerRadius: Dp,
-    /** Cover in horizontal rows. The portrait value is provisional until delivery 2.3. */
+    /** Cover of the Home rows (3:4). Portrait shows the title below it; landscape, cover only. */
     val rowCoverWidth: Dp,
     val rowCoverHeight: Dp,
-    /** System card in the Home carousel. The portrait value is provisional until delivery 2.3. */
+    /** System art in the landscape Home carousel (277:192). Portrait has no carousel. */
     val systemCardWidth: Dp,
     val systemCardHeight: Dp,
     /**

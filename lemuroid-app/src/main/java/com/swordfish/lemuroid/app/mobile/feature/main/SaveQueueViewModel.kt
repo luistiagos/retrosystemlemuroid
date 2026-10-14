@@ -40,6 +40,18 @@ class SaveQueueViewModel(
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
+    /** Entries still to finish (queued, saving or paused): the count on the landscape rail. */
+    val activeCount: StateFlow<Int> =
+        saveQueueManager.entries
+            .map { list ->
+                list.count {
+                    it.state == SaveQueueState.QUEUED ||
+                        it.state == SaveQueueState.SAVING ||
+                        it.state == SaveQueueState.PAUSED
+                }
+            }
+            .stateIn(viewModelScope, SharingStarted.Lazily, 0)
+
     val activeProgress: StateFlow<Float> = saveQueueManager.entries
         .map { list -> list.firstOrNull { it.state == SaveQueueState.SAVING }?.progress ?: 0f }
         .stateIn(viewModelScope, SharingStarted.Lazily, 0f)

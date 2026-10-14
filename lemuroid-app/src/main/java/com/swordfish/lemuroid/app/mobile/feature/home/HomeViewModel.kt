@@ -10,6 +10,10 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
+import com.swordfish.lemuroid.app.mobile.feature.installed.StorageAvailabilityMonitor
+import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -37,6 +41,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -52,8 +58,9 @@ import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 @OptIn(FlowPreview::class)
 class HomeViewModel(
     appContext: Context,
-    retrogradeDb: RetrogradeDatabase,
+    private val retrogradeDb: RetrogradeDatabase,
     private val coresSelection: CoresSelection,
+    private val directoriesManager: DirectoriesManager,
 ) : ViewModel() {
     companion object {
         const val CAROUSEL_MAX_ITEMS = 10
@@ -68,11 +75,43 @@ class HomeViewModel(
         val appContext: Context,
         val retrogradeDb: RetrogradeDatabase,
         val coresSelection: CoresSelection,
+        val directoriesManager: DirectoriesManager,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return HomeViewModel(appContext, retrogradeDb, coresSelection) as T
+            return HomeViewModel(appContext, retrogradeDb, coresSelection, directoriesManager) as T
         }
     }
+
+    private val storageAvailabilityMonitor = StorageAvailabilityMonitor(appContext)
+
+    /**
+     * The "Saved games" row: the [CAROUSEL_MAX_ITEMS] most recent groups of the Saved games tab,
+     * from the same query and with the same media check (`InstalledGamesViewModel.installedGames`).
+     *
+     * Cold on purpose: the query walks the whole `games` table, so the Home starts collecting it
+     * only after its first frame. `InstalledGamesViewModel` is not reused because its `init` scans
+     * the ROMs folder.
+     */
+    val savedGames: Flow<List<InstalledGameGroupUiModel>> =
+        flow {
+            // Resolving the ROMs folder touches the storage: done here, on the IO dispatcher.
+            val romsDirPrefix =
+                runCatching {
+                    directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
+                }.getOrDefault("")
+            val managedMarker = directoriesManager.getManagedRomsMarker()
+            emitAll(
+                retrogradeDb.gameDao().observeInstalledGameGroups(romsDirPrefix, managedMarker)
+                    .combine(storageAvailabilityMonitor.mediaStateChanges) { groups, _ ->
+                        groups.take(CAROUSEL_MAX_ITEMS).map { group ->
+                            InstalledGameGroupUiModel(
+                                group = group,
+                                isAvailable = storageAvailabilityMonitor.isGameAvailable(group.game),
+                            )
+                        }
+                    },
+            )
+        }.flowOn(Dispatchers.IO)
 
     data class UIState(
         val favoritesGames: List<Game> = emptyList(),

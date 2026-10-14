@@ -1,8 +1,9 @@
 # [BACKLOG] Redesenho visual do Lemuroid inspirado nos temas do Pegasus
 
 **Data:** 2026-10-13
-**Status:** Fase 1 (fundação) e entrega 2.1 (Sistemas) implementadas em 13/10/2026; entrega 2.2 (Catálogo do
-sistema) implementada e verificada no AVD em 14/10/2026. Tudo sem commit. Pendente: abrir o menu do jogo à mão.
+**Status:** Fase 1, 2.1 (Sistemas) e 2.2 (Catálogo) commitadas (`06c7911`). Entrega 2.3 (Início + moldura
+deitada) implementada e medida em 14/10/2026 (A/B sem regressão), sem commit. Pendente: abrir o menu
+do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
 
@@ -834,3 +835,137 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     paging agrupado.
   - **Próximo passo:** ktlint e lint; depois a 2.3 (Home). Abrir a sessão com: "Leia
     `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 2.3 (Home)."
+- **2026-10-14 (entrega 2.3, registro analítico antes do código).** Fase 1 + 2.1 + 2.2 + ajustes já commitados
+  (`06c7911`); árvore limpa no início.
+  - **Abertos:**
+    - `M/feature/home/HomeScreen.kt` — overload público (`:55-146`): `ON_RESUME` → `updatePermissions`, diálogo
+      de troca para rede móvel, coleta `getViewStates`/`getDownloadRomsState`/`getStreamingRomsState`.
+      Overload privado (`:148-282`): diálogo do prompt, carregando (`:188-202`), `LazyVerticalGrid(Adaptive(140))`
+      com o bloco de avisos (`:213-255`: varredura, notificação, microfone, DeSmuME, `HomeStreamingCard`) e
+      **três** seções — Recentes, **Favoritos** e Descubra (`homeGridSection`, chave `"$sectionKey/${id}"`). A
+      especificação lista só Jogos salvos/Recentes/Descubra; Favoritos **fica** (tirar seria mudar função).
+      `HomeDownloadCard` não tem chamador (código morto já registrado).
+    - `M/feature/home/HomeViewModel.kt` — `UIState` (recentes, favoritos e descubra, até 10 cada, já filtrados por
+      `HeavySystemFilter`); `Factory(appContext, retrogradeDb, coresSelection)`, único chamador
+      `MainActivity.kt:406`. **Nada muda** além de um fluxo novo de leitura.
+    - `M/feature/main/MainActivity.kt::MainScreen` — `Scaffold(topBar = MainTopBar, bottomBar =
+      MainNavigationBar)`; cada rota aplica `Modifier.padding(padding)`. `onGameClick` (`:351-365`); toque da aba
+      Jogos salvos (`:430-448`: mídia inacessível → toast; > 1 versão salva → seletor só das salvas; senão
+      joga/salva). `saveQueueEntries` já é `State` (2.2). `directoriesManager` disponível.
+    - `M/feature/main/MainNavigationBar.kt` — `NavigationBar` com as 5 abas de `MainNavigationRoutes`;
+      `navigate(route) { popUpTo(start) { saveState = false }; launchSingleTop; restoreState = false }`;
+      some (`AnimatedVisibility`) quando `showBottomNavigation == false`.
+    - `M/feature/main/MainTopBar.kt` — `LemuroidTopAppBar` (`TopAppBar` sem `scrollBehavior`) e
+      `LemuroidTopBarActions` (fila só com `hasSaveQueueActive`, Ajuda, Sincronizar, Configurações). Embaixo, as
+      barras de progresso da operação e da fila.
+    - `M/feature/main/SaveQueueViewModel.kt` — `entries`, `entriesByKey`, `hasActiveOrQueued`, `activeProgress`.
+      `SaveQueueEntry` tem `title`, `coverUrl`, `systemId`, `fileName`, `state`, `progress`.
+    - `M/feature/systems/MetaSystemsViewModel.kt` — `availableMetaSystems` (`Eagerly`, `null` = carregando): filtra
+      por `HeavySystemFilter.excludedSystems(deviceTier)` e, em TV, PSP/3DS; soma as contagens por meta-sistema
+      (total com variantes) e ordena pelo nome. `MetaSystemScreen.kt` navega com `"systems/${metaSystem.name}"`.
+    - `LIB/library/db/dao/GameDao.kt::observeInstalledGameGroups` + `InstalledGameGroup(game,
+      installedVariantsCount, lastActionAt)`. `InstalledGamesViewModel` monta `romsDirPrefix`/`managedMarker` a
+      partir do `DirectoriesManager`, combina com `StorageAvailabilityMonitor.mediaStateChanges` e marca
+      `isAvailable` (`isGameAvailable` faz `stat`/`openInputStream`: I/O). O `init` varre a pasta de ROMs — **não**
+      instanciar na Home.
+    - `M/feature/installed/LemuroidInstalledGameCard.kt` — chip do sistema (`GameSystem.shortTitleResId`), alfa 0,6
+      e ícone `CloudOff` se inacessível, pílula `Layers` + contagem se > 1 versão.
+    - Fundação: `Dimens.kt` (`rowCoverWidth/Height` e `systemCardWidth/Height` por modo; os de pé marcados
+      "provisórios até a 2.3"), `SaveStateBadge.kt` (`rememberCoverSaveState`, `SaveStateOverlay`),
+      `AmbientBackdrop.kt` (`model` + `systemColor`; em `LITE` só degradê), `SectionHeader.kt` (título + ação),
+      `effects/FocusHighlight.kt`, `LemuroidGameImage.kt`, `LemuroidSystemImage.kt` (277:192, `fadeTo`),
+      `SystemPalette.colorForSystemId/darkTone`, `Type.kt` (`heroTitle`, `section`, `cardTitle`, `support`).
+    - `MainActivity.kt:1087` `isGamePlaceholder` = `file://` com tamanho 0. Jogo importado (fora da pasta
+      gerenciada) **não** está em `downloadedGameKeys` (vem de `downloaded_roms`) e mesmo assim joga.
+  - **Comandos que provaram algo:**
+    - `javap` no `classes.jar` do `material3-android-1.2.1` do cache do Gradle: `NavigationRail(modifier,
+      containerColor, contentColor, header, windowInsets, content)`, `NavigationRailItem` (altura fixa 56 dp),
+      `ScaffoldDefaults.getContentWindowInsets`, `TopAppBarDefaults.enterAlwaysScrollBehavior(state, canScroll,
+      snap, fling)` e `TopAppBar(…, windowInsets, colors, scrollBehavior)` presentes.
+    - Strings reaproveitadas (en/pt-BR/es-ES conferidas): `download_complete_play` (Jogar), `save_action_save`
+      (Salvar), `save_queue_saving_progress` (Salvando… %d%%), `save_queue_waiting/paused/error`, `show_all`,
+      `recent`, `favorites`, `discover`, `title_installed`, `installed_media_unavailable`.
+  - **Hipóteses descartadas:**
+    - *"Usar o `NavigationRail` do material3 com os itens dele."* Item de 56 dp fixos: 5 abas + barra de status +
+      indicador da fila passam dos ~360 dp do celular deitado. Trilho próprio (itens de 48 dp, abas roláveis, fila
+      fixa no pé), com as mesmas cores da barra inferior.
+    - *"Trilho dentro do conteúdo do `Scaffold`."* Cada rota já aplica `padding(padding)` com o recuo esquerdo do
+      recorte/barra: daria recuo dobrado e exigiria mexer nas 20 rotas. Fica `Row { trilho; Scaffold }`, com o
+      `Scaffold` sem os recuos do lado do trilho.
+    - *"Rótulo do botão do destaque só por `downloadedGameKeys`."* ROM importada joga mas diria "Salvar". O
+      destaque faz o mesmo teste de `isGamePlaceholder` (um `stat`, fora da main) para o seu único jogo.
+    - *"Instanciar o `MetaSystemsViewModel` sempre na Home."* O carrossel só existe deitado; em pé a Home não paga
+      a query.
+    - *"Fileira Jogos salvos pelo `InstalledGamesViewModel`."* Ver acima (`init` varre o disco). A Home ganha um
+      fluxo próprio com a mesma query e o mesmo `isAvailable`, coletado só depois do primeiro quadro.
+  - **Desenho:**
+    - **Em pé** (`LazyColumn`): avisos (o mesmo bloco); **destaque** (fundo ambiente com a capa, capa 3:4 à
+      esquerda, rótulo "Continue jogando"/"Descubra", título, chip do sistema, botão Jogar/Salvar/"Salvando 42%");
+      **faixa "Salvando agora"** (só com fila ativa; abre o `SaveQueueModal`); fileiras Jogos salvos (com
+      "Mostrar todos" → aba), Recentes, Favoritos, Descubra (`LazyRow`, capa 104×139 com título embaixo).
+    - **Deitado:** trilho lateral em todas as rotas com barra inferior (abas + indicador da fila no pé); barra
+      superior some ao rolar (`enterAlwaysScrollBehavior`, exceto na Busca) e perde o ícone da fila. Início: fundo
+      ambiente na tela toda (capa do item em destaque/foco, troca depois de 300 ms parado), cabeçalho com rótulo,
+      título, chip e botão; fileiras só de capas (72×96 / 150×200), na ordem Recentes, **Sistemas** (blocos só com
+      a arte, 101×70 / 208×144), Jogos salvos, Favoritos, Descubra. O foco num cartão leva o título ao cabeçalho;
+      num sistema, o nome e a contagem.
+    - Toque: o mesmo `onGameClick`; Jogos salvos usa o mesmo lambda da aba (extraído para um `val`, corpo igual);
+      sistema navega para `systems/{id}`.
+  - **Tasks:**
+    1. `SaveQueueViewModel.activeCount` (leitura aditiva). Prova: contagem no trilho com 3 na fila.
+    2. `MainNavigationBar.kt` — `navigateToTab` comum; `MainNavigationRail`. Prova: abas e fila no trilho deitado,
+       D-pad entra e sai do trilho.
+    3. `MainTopBar.kt` — `scrollBehavior` e `showSaveQueueAction` opcionais. Prova: barra some/volta ao rolar.
+    4. `HomeViewModel` — `savedGames` (mesma query da aba, 10 grupos, `isAvailable`); `Factory` recebe
+       `DirectoriesManager`. Prova: fileira igual ao topo da aba Jogos salvos.
+    5. `HomeScreen.kt` + `HomeLayouts.kt` (novo) — em pé e deitado. Prova: roteiro funcional, D-pad, rotação,
+       `gfxinfo` da Início antes/depois.
+    6. `MainActivity.kt` — moldura deitada, parâmetros novos da Home, `onInstalledGameClick`.
+    7. Strings: `home_hero_continue` (en/pt-BR/es-ES).
+- **2026-10-14 (entrega 2.3, entrega):** Início no visual novo e moldura deitada, **sem commit**. Doc da entrega:
+  [`docs/funcionalidades/2026-10-14-redesenho-home.md`](../funcionalidades/2026-10-14-redesenho-home.md)
+  (capturas em `docs/funcionalidades/img/2026-10-14-redesenho-home*.jpg`).
+  - **Feito:** as 7 tasks do registro analítico. Desvios: (a) o botão do destaque usa `remember` +
+    `LaunchedEffect` em vez de `produceState` (o lint acusa `ProduceStateDoesNotAssignValue` mesmo com a
+    atribuição); (b) os avisos do topo perderam o `spacedBy`, que deixava ~64 dp vazios com todos escondidos (já
+    acontecia antes); (c) o rótulo do topo deitado segue a fileira do item focado ("Continue jogando" nos
+    recentes, o nome da fileira nas outras).
+  - **Verificação:** build x86_64 e `lintFreeBundleDebug` OK; ktlint sem apontamento no código novo (o passivo
+    reindentado do `MainActivity` aparece em outras linhas). Roteiro no `lemu_api25_2gb`: salvar pelo destaque →
+    confirmação → anel/"Saving… 16%"/faixa → ✓/"Play"/"Play now?"; deitado: trilho, barra que some ao rolar, D-pad
+    (trilho ↔ conteúdo, topo e fundo seguem o foco), carrossel → catálogo → voltar. `logcat -b crash` vazio.
+  - **Medição inválida (refazer):** base 7,1% / 10,8% / 27,5% de quadros lentos (PSS ~93 MB); depois 42% / 86% /
+    90% (PSS ~98 MB). Mas o controle (tela Sistemas, intocada) deu 54% / 81% contra 0,9–4,7% na 2.1, e entre as
+    duas medições subiu o emulador `pp_api34` de outro projeto (host a 30–40% de CPU). A primeira tentativa do
+    "depois" rodou junto com o lint e uma rolagem virou toque (abriu um jogo). O APK do HEAD não foi regerado para
+    um A/B porque o checkout tem mudanças de outra sessão (`catalog_manifest.txt` nos dois caminhos), que um
+    `stash` atrapalharia. Roteiro: `measure_home.sh` (force-stop, abre a Início, 3 × [6 gestos para cima + 6 para
+    baixo], `gfxinfo`/`meminfo`).
+  - **Não commitar** `catalog_manifest.txt` / `lemuroid-app/src/main/assets/catalog_manifest.txt`: não são desta
+    entrega.
+  - **Pendências novas:** recuo esquerdo dobrado da `TopAppBar` ao lado do trilho quando a barra de sistema/recorte
+    está à esquerda (2.6); foco volta ao trilho depois do catálogo; "Systems" repetido no topo deitado.
+  - **Próximo passo:** com só o `lemu_api25_2gb` no ar, medir A/B (APK do `06c7911` e o desta entrega, intercalados)
+    e conferir no `lemu_api21_1gb`; depois commit da 2.3 (com o aval do dono) e a 2.4 (Jogos salvos). Abrir a sessão
+    com: "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e feche a medição da entrega 2.3."
+- **2026-10-14 (entrega 2.3, medição fechada):** **sem regressão.** A tabela está no doc da entrega (seção de
+  verificação).
+  - **Como:** A/B intercalado (depois → antes → depois → antes) num moto g86 5G (Android 16, 120 Hz, depuração
+    sem fio `192.168.18.112`), por troca do plano: o dono conectou um aparelho real no lugar do `lemu_api25_2gb`.
+    O SM-A127M não apareceu no USB (o Windows não listava nenhum `VID_04E8`). APK da base compilado do `06c7911`
+    num `git worktree` em `C:\projects\lemuroid\wt-06c7911` (submódulo por `--reference` ao local), sem tocar no
+    checkout compartilhado. Roteiro: `measure.sh <rótulo> <home|systems>` (scratchpad da sessão), gestos
+    y 2000↔800.
+  - **Números:** Início antes 0–0,08% de quadros lentos, p90 12–14 ms, PSS 214–216 MB; depois 0–0,18%,
+    p90 11–13 ms, PSS 207–217 MB. Controle (Sistemas) igual nos dois lados (0–0,07%, p90 11–15 ms), então a
+    medição vale.
+  - **Hipótese descartada:** *"A Início nova tem 42–90% de quadros lentos"* (medição anterior). O controle
+    também dava 54–81% com o `pp_api34` disputando a CPU do host. Era o host, não o código.
+  - **`lemu_api21_1gb`:** Início abre e rola, zero `FATAL EXCEPTION`. A fileira Jogos salvos mostra PSP no tier
+    `ULTRA_WEAK`, igual à aba (sem `HeavySystemFilter`). **Decisão do dono (14/10/2026): fica assim.** Jogos
+    salvos (aba e fileira) mostram tudo o que está salvo, em qualquer tier. Não aplicar o filtro de RAM ali.
+  - **Limite:** o g86 é forte. Desempenho em TV box segue sem medida (sem aparelho).
+  - **Próximo passo:** commit da 2.3, com o aval do dono, **sem** os dois `catalog_manifest.txt` (são de outra
+    sessão); depois remover o worktree (`git worktree remove C:\projects\lemuroid\wt-06c7911`); depois a 2.4
+    (Jogos salvos). Abrir a sessão com: "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`
+    e execute a entrega 2.4 (Jogos salvos)."

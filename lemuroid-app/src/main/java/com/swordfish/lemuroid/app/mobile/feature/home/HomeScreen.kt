@@ -9,16 +9,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyGridScope
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
@@ -29,11 +23,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -41,7 +37,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameCard
+import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalDimens
+import com.swordfish.lemuroid.app.shared.roms.SaveQueueEntry
+import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.utils.android.ComposableLifecycle
 import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
 import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
@@ -60,8 +59,24 @@ fun HomeScreen(
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onOpenCoreSelection: () -> Unit,
+    saveQueueEntries: State<Map<String, SaveQueueEntry>>? = null,
+    metaSystems: List<MetaSystemInfo>? = null,
+    onSystemClick: (MetaSystemInfo) -> Unit = { },
+    onSavedGameClick: ((InstalledGameGroupUiModel) -> Unit)? = null,
+    onShowAllSavedGames: (() -> Unit)? = null,
+    onOpenSaveQueue: () -> Unit = { },
 ) {
     val context = LocalContext.current
+
+    // The "Saved games" query walks the whole games table: it starts only after the first frame,
+    // so it never delays the opening of the Home.
+    val savedGames = remember { mutableStateOf<List<InstalledGameGroupUiModel>>(emptyList()) }
+    if (onSavedGameClick != null) {
+        LaunchedEffect(viewModel) {
+            withFrameNanos { }
+            viewModel.savedGames.collect { savedGames.value = it }
+        }
+    }
     val applicationContext = context.applicationContext
 
     ComposableLifecycle { _, event ->
@@ -124,6 +139,15 @@ fun HomeScreen(
         downloadRomsState.value,
         streamingRomsState.value,
         downloadedGameKeys,
+        HomeExtras(
+            savedGames = savedGames.value,
+            metaSystems = metaSystems,
+            saveQueueEntries = saveQueueEntries,
+            onSystemClick = onSystemClick,
+            onSavedGameClick = onSavedGameClick,
+            onShowAllSavedGames = onShowAllSavedGames,
+            onOpenSaveQueue = onOpenSaveQueue,
+        ),
         onGameClick,
         onGameLongClick,
         onOpenCoreSelection,
@@ -152,6 +176,7 @@ private fun HomeScreen(
     downloadRomsState: DownloadRomsState,
     streamingRomsState: StreamingRomsState,
     downloadedGameKeys: Set<String> = emptySet(),
+    extras: HomeExtras,
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onOpenCoreSelection: () -> Unit,
@@ -200,115 +225,94 @@ private fun HomeScreen(
         }
         return
     }
-    val sectionRecent = stringResource(id = R.string.recent)
-    val sectionFavorites = stringResource(id = R.string.favorites)
-    val sectionDiscover = stringResource(id = R.string.discover)
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 140.dp),
-        modifier = modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-    ) {
-        item(span = { GridItemSpan(maxLineSpan) }) {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                AnimatedVisibility(state.userScanInProgress) {
-                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-                }
-                AnimatedVisibility(state.showNoNotificationPermissionCard) {
-                    HomeNotification(
-                        titleId = R.string.home_notification_title,
-                        messageId = R.string.home_notification_message,
-                        actionId = R.string.home_notification_action,
-                        onAction = onEnableNotificationsClicked,
-                    )
-                }
-                AnimatedVisibility(state.showNoMicrophonePermissionCard) {
-                    HomeNotification(
-                        titleId = R.string.home_microphone_title,
-                        messageId = R.string.home_microphone_message,
-                        actionId = R.string.home_microphone_action,
-                        onAction = onEnableMicrophoneClicked,
-                    )
-                }
-                AnimatedVisibility(state.showDesmumeDeprecatedCard) {
-                    HomeNotification(
-                        titleId = R.string.home_notification_desmume_deprecated_title,
-                        messageId = R.string.home_notification_desmume_deprecated_message,
-                        actionId = R.string.home_notification_desmume_deprecated_action,
-                        onAction = onOpenCoreSelection,
-                    )
-                }
-                // Card is only shown while the download is not yet complete.
-                // The Done state is handled exclusively via Settings → "Baixar novamente",
-                // which calls resetForRedownload() and transitions the state back to Idle.
-                AnimatedVisibility(streamingRomsState !is StreamingRomsState.Done) {
-                    HomeStreamingCard(
-                        state = streamingRomsState,
-                        onDownloadClicked = onStartStreamingClicked,
-                        onCancelClicked = onCancelStreamingClicked,
-                        onPauseClicked = onPauseStreamingClicked,
-                        onResumeClicked = onResumeStreamingClicked,
-                    )
-                }
+    // Notices of the top of the Home (scan, permissions, DeSmuME, catalog download): the same cards
+    // as before the redesign, first item of both layouts. Each card brings its own top gap, so the
+    // block takes no room when all are hidden.
+    val notices: @Composable () -> Unit = {
+        Column {
+            AnimatedVisibility(state.userScanInProgress) {
+                LinearProgressIndicator(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                )
+            }
+            AnimatedVisibility(state.showNoNotificationPermissionCard) {
+                HomeNotification(
+                    titleId = R.string.home_notification_title,
+                    messageId = R.string.home_notification_message,
+                    actionId = R.string.home_notification_action,
+                    onAction = onEnableNotificationsClicked,
+                )
+            }
+            AnimatedVisibility(state.showNoMicrophonePermissionCard) {
+                HomeNotification(
+                    titleId = R.string.home_microphone_title,
+                    messageId = R.string.home_microphone_message,
+                    actionId = R.string.home_microphone_action,
+                    onAction = onEnableMicrophoneClicked,
+                )
+            }
+            AnimatedVisibility(state.showDesmumeDeprecatedCard) {
+                HomeNotification(
+                    titleId = R.string.home_notification_desmume_deprecated_title,
+                    messageId = R.string.home_notification_desmume_deprecated_message,
+                    actionId = R.string.home_notification_desmume_deprecated_action,
+                    onAction = onOpenCoreSelection,
+                )
+            }
+            // Card is only shown while the download is not yet complete.
+            // The Done state is handled exclusively via Settings → "Baixar novamente",
+            // which calls resetForRedownload() and transitions the state back to Idle.
+            AnimatedVisibility(streamingRomsState !is StreamingRomsState.Done) {
+                HomeStreamingCard(
+                    state = streamingRomsState,
+                    onDownloadClicked = onStartStreamingClicked,
+                    onCancelClicked = onCancelStreamingClicked,
+                    onPauseClicked = onPauseStreamingClicked,
+                    onResumeClicked = onResumeStreamingClicked,
+                )
             }
         }
+    }
 
-        homeGridSection(
-            "recent",
-            sectionRecent,
-            state.recentGames,
-            downloadedGameKeys,
-            onGameClicked,
-            onGameLongClick,
+    val data =
+        HomeLayoutData(
+            recentGames = state.recentGames,
+            favoritesGames = state.favoritesGames,
+            discoveryGames = state.discoveryGames,
+            savedGames = extras.savedGames,
+            metaSystems = extras.metaSystems,
+            downloadedGameKeys = downloadedGameKeys,
+            saveQueueEntries = extras.saveQueueEntries,
+            onGameClick = onGameClicked,
+            onGameLongClick = onGameLongClick,
+            onSavedGameClick = extras.onSavedGameClick,
+            onShowAllSavedGames = extras.onShowAllSavedGames,
+            onSystemClick = extras.onSystemClick,
+            onOpenSaveQueue = extras.onOpenSaveQueue,
         )
-        homeGridSection(
-            "favorites",
-            sectionFavorites,
-            state.favoritesGames,
-            downloadedGameKeys,
-            onGameClicked,
-            onGameLongClick,
-        )
-        homeGridSection(
-            "discover",
-            sectionDiscover,
-            state.discoveryGames,
-            downloadedGameKeys,
-            onGameClicked,
-            onGameLongClick,
-        )
+
+    // Window wider than tall (phone sideways, TV box): the TV layout. See "Especificação visual ›
+    // Deitado" in docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md.
+    if (LocalDimens.current.isLandscape) {
+        HomeLandscape(data = data, notices = notices, modifier = modifier)
+    } else {
+        HomePortrait(data = data, notices = notices, modifier = modifier)
     }
 }
 
-private fun LazyGridScope.homeGridSection(
-    sectionKey: String,
-    title: String,
-    games: List<Game>,
-    downloadedGameKeys: Set<String>,
-    onGameClicked: (Game) -> Unit,
-    onGameLongClick: (Game) -> Unit,
-) {
-    if (games.isEmpty()) return
-
-    item(span = { GridItemSpan(maxLineSpan) }, key = "header_$sectionKey") {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
-        )
-    }
-
-    items(games, key = { "$sectionKey/${it.id}" }) { game ->
-        LemuroidGameCard(
-            modifier = Modifier.fillMaxWidth(),
-            game = game,
-            isDownloaded = downloadedGameKeys.contains(game.downloadKey),
-            onClick = { onGameClicked(game) },
-            onLongClick = { onGameLongClick(game) },
-        )
-    }
-}
+/** Optional sources of the redesigned Home, passed by the route (see the public [HomeScreen]). */
+private class HomeExtras(
+    val savedGames: List<InstalledGameGroupUiModel>,
+    val metaSystems: List<MetaSystemInfo>?,
+    val saveQueueEntries: State<Map<String, SaveQueueEntry>>?,
+    val onSystemClick: (MetaSystemInfo) -> Unit,
+    val onSavedGameClick: ((InstalledGameGroupUiModel) -> Unit)?,
+    val onShowAllSavedGames: (() -> Unit)?,
+    val onOpenSaveQueue: () -> Unit,
+)
 
 @Composable
 private fun HomeNotification(
@@ -323,7 +327,7 @@ private fun HomeNotification(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp),
     ) {
         Column(
             modifier =
@@ -558,7 +562,7 @@ private fun HomeStreamingCard(
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
     ) {
         Column(
             modifier = Modifier
