@@ -1,8 +1,8 @@
 # [BACKLOG] Redesenho visual do Lemuroid inspirado nos temas do Pegasus
 
 **Data:** 2026-10-13
-**Status:** Fase 1 e entregas 2.1–2.4 commitadas (`06c7911`, `df706f4`, `0f2962c`). Entrega 2.5 (Favoritos e
-Busca) implementada e verificada em 14/10/2026, sem commit. Próxima: 2.6 (Moldura). Pendente: abrir o menu
+**Status:** Fase 1 e entregas 2.1–2.5 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`). Próxima: 2.6
+(Moldura). Pendente: abrir o menu
 do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
@@ -1100,3 +1100,4 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     2.3 (recuo esquerdo dobrado da `TopAppBar` ao lado do trilho, foco que volta ao trilho depois do catálogo,
     "Systems" repetido no topo deitado). Abrir a sessão com: "Leia
     `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 2.6 (Moldura)."
+  - **Feito depois:** commit `5d8725f` (2.5), com o aval do dono.
