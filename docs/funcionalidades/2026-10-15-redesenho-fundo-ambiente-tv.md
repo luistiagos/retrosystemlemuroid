@@ -1,7 +1,7 @@
 # [FEATURE] Redesenho visual — entrega 3.3: fundo ambiente da TV
 
 **Data:** 2026-10-15
-**Status:** implementada e verificada no `lemu_tv_api25` (Android 7.1), **sem commit**
+**Status:** implementada e verificada no `lemu_tv_api25` (Android 7.1); commit `2dc9412`
 **Branch:** version10
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md), Fase 3, item 3.3
 

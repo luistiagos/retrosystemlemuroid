@@ -2,7 +2,7 @@
 
 **Data:** 2026-10-13
 **Status:** Fase 1, Fase 2 (2.1–2.6) e entregas 3.1–3.2 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`,
-2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). 3.3 (fundo ambiente da TV) implementada em 15/10/2026, sem commit; próxima: avaliar a 3.4. Pendente: abrir o menu do jogo à mão.
+2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). 3.3 (fundo ambiente da TV) em `2dc9412`; próxima: avaliar a 3.4. Pendente: abrir o menu do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
 
@@ -1360,6 +1360,7 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     voltar. `logcat -b crash` vazio.
   - **Não verificado:** Favoritos (o AVD não tem), TV box real, `gfxinfo`.
   - **Pendências:** fade de 500 ms do `BackgroundManager` também em `LITE`; contraste do campo de busca sobre capa clara.
-  - **Próximo passo:** commit da 3.3 (com o aval do dono); depois avaliar a 3.4 (painel do item em
+  - **Feito depois:** commit `2dc9412` (3.3), com o aval do dono.
+  - **Próximo passo:** avaliar a 3.4 (painel do item em
     foco). Abrir a sessão com: "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e avalie a
     entrega 3.4 (Painel do item em foco na Home da TV)."
