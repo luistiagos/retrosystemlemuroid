@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AppShortcut
 import androidx.compose.material.icons.filled.Delete
@@ -27,10 +28,10 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.RestartAlt
 import androidx.compose.material3.BottomSheetDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
@@ -38,14 +39,26 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameTexts
-import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidSmallGameImage
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidBottomSheet
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidColors
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameImage
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalLemuroidTypography
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SheetMargin
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SystemChip
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,7 +86,7 @@ fun MainGameContextActions(
     }
 
     if (selectedGame != null) {
-        ModalBottomSheet(
+        LemuroidBottomSheet(
             sheetState = modalSheetState,
             onDismissRequest = { selectedGameState.value = null },
         ) {
@@ -113,7 +126,7 @@ private fun ContextActionContent(
                 .windowInsetsPadding(WindowInsets.safeContent.only(WindowInsetsSides.Bottom)),
     ) {
         ContextActionHeader(game = selectedGame)
-        Divider()
+        HorizontalDivider(color = LemuroidColors.Border, modifier = Modifier.padding(bottom = 4.dp))
         ContextActionEntry(
             label = stringResource(id = R.string.game_context_menu_resume),
             icon = Icons.Default.PlayArrow,
@@ -168,6 +181,7 @@ private fun ContextActionContent(
             ContextActionEntry(
                 label = stringResource(id = R.string.game_context_menu_delete_rom),
                 icon = Icons.Default.Delete,
+                destructive = true,
                 onClick = {
                     onDeleteRom(selectedGame)
                     selectedGameState.value = null
@@ -181,6 +195,7 @@ private fun ContextActionContent(
             ContextActionEntry(
                 label = stringResource(id = R.string.game_context_menu_delete_from_catalog),
                 icon = Icons.Default.DeleteForever,
+                destructive = true,
                 onClick = {
                     onDeleteFromCatalog(selectedGame)
                     selectedGameState.value = null
@@ -193,58 +208,75 @@ private fun ContextActionContent(
 @Composable
 private fun ContextActionHeader(game: Game) {
     Row(
-        modifier =
-            Modifier.padding(
-                start = 16.dp,
-                top = 8.dp,
-                bottom = 8.dp,
-                end = 16.dp,
-            ),
+        modifier = Modifier.padding(start = SheetMargin, end = SheetMargin, bottom = 12.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        LemuroidSmallGameImage(
+        Box(
             modifier =
                 Modifier
-                    .width(40.dp)
-                    .height(40.dp)
-                    .align(Alignment.CenterVertically),
-            game = game,
-        )
-        LemuroidGameTexts(
+                    .width(HEADER_COVER_WIDTH)
+                    .clip(RoundedCornerShape(6.dp)),
+        ) {
+            LemuroidGameImage(game = game, compact = true)
+        }
+        Column(
             modifier =
                 Modifier
                     .weight(1f)
-                    .padding(start = 8.dp),
-            game = game,
-        )
+                    .padding(start = 12.dp),
+        ) {
+            Text(
+                text = game.title,
+                style = LocalLemuroidTypography.current.section,
+                color = LemuroidColors.Text,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
+            SystemChip(game.systemId, modifier = Modifier.padding(top = 6.dp))
+        }
     }
 }
 
+/**
+ * One action of the menu. D-pad focus paints the accent pill behind the whole line, like the list
+ * rows. [destructive] actions (deleting) take the error text colour.
+ */
 @Composable
 private fun ContextActionEntry(
     modifier: Modifier = Modifier,
     label: String,
     icon: ImageVector,
+    destructive: Boolean = false,
     onClick: () -> Unit,
 ) {
+    var focused by remember { mutableStateOf(false) }
+    val tint = if (destructive) MaterialTheme.colorScheme.error else LemuroidColors.Text
     Row(
         modifier =
             modifier
                 .fillMaxWidth()
+                .onFocusChanged { focused = it.hasFocus }
+                .background(if (focused) LemuroidColors.AccentPill else Color.Transparent)
                 .clickable(onClick = onClick)
-                .height(56.dp),
+                .height(52.dp)
+                .padding(horizontal = SheetMargin),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
-            modifier = Modifier.padding(start = 16.dp),
             imageVector = icon,
-            contentDescription = label,
+            contentDescription = null,
+            tint = if (destructive) tint else LemuroidColors.TextSupport,
         )
         Text(
             modifier = Modifier.padding(start = 16.dp),
             text = label,
+            style = MaterialTheme.typography.bodyLarge,
+            color = tint,
         )
     }
 }
+
+private val HEADER_COVER_WIDTH = 48.dp
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
@@ -34,15 +33,20 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.input.InputMode
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInputModeManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -343,6 +347,10 @@ internal fun HomeLandscape(
 
     val onFocusGame: FocusGame = { game, labelId, onDevice -> focused = Featured.OfGame(game, labelId, onDevice) }
 
+    // System opened with the D-pad. The Home is composed anew when it comes back from that catalog,
+    // and the focus would fall on the rail: the block of the system takes it back instead.
+    var systemToRefocus by rememberSaveable { mutableStateOf<String?>(null) }
+
     Box(modifier = modifier.fillMaxSize()) {
         AmbientBackdrop(
             model =
@@ -376,7 +384,13 @@ internal fun HomeLandscape(
             }
 
             gamesRow("recent", R.string.recent, data.recentGames, data, showTitles = false, onFocusGame)
-            systemsRow(data, onFocusSystem = { focused = Featured.OfSystem(it) })
+            systemsRow(
+                data = data,
+                onFocusSystem = { focused = Featured.OfSystem(it) },
+                systemToRefocus = systemToRefocus,
+                onSystemOpenedWithKeys = { systemToRefocus = it },
+                onRefocused = { systemToRefocus = null },
+            )
             savedGamesRow(data, showTitles = false, onFocusGame)
             gamesRow("favorites", R.string.favorites, data.favoritesGames, data, showTitles = false, onFocusGame)
             gamesRow("discover", R.string.discover, data.discoveryGames, data, showTitles = false, onFocusGame)
@@ -417,13 +431,9 @@ private fun LandscapeHeader(
             is Featured.OfSystem -> {
                 val context = LocalContext.current
                 val system = featured.system
-                Text(
-                    text = stringResource(R.string.title_systems),
-                    style = LocalLemuroidTypography.current.support,
-                    color = LemuroidColors.TextSupportOnBackdrop,
-                    // Same height as the label row of a game (it has the system chip): the rows below stay put.
-                    modifier = Modifier.height(HEADER_LABEL_HEIGHT).wrapContentHeight(Alignment.CenterVertically),
-                )
+                // No label: "Systems" is already the title of the row in focus, right below. The empty
+                // line keeps the height of the label row of a game, so the rows below stay put.
+                Spacer(modifier = Modifier.height(HEADER_LABEL_HEIGHT))
                 Text(
                     text = remember(system.metaSystem) { system.getName(context) },
                     style = LocalLemuroidTypography.current.heroTitle,
@@ -449,6 +459,9 @@ private fun LandscapeHeader(
 private fun LazyListScope.systemsRow(
     data: HomeLayoutData,
     onFocusSystem: (MetaSystemInfo) -> Unit,
+    systemToRefocus: String?,
+    onSystemOpenedWithKeys: (String) -> Unit,
+    onRefocused: () -> Unit,
 ) {
     val systems = data.metaSystems
     if (systems.isNullOrEmpty()) return
@@ -466,6 +479,9 @@ private fun LazyListScope.systemsRow(
                     width = dimens.systemCardWidth,
                     onClick = { data.onSystemClick(system) },
                     onFocused = { onFocusSystem(system) },
+                    refocus = systemToRefocus == system.metaSystem.name,
+                    onOpenedWithKeys = { onSystemOpenedWithKeys(system.metaSystem.name) },
+                    onRefocused = onRefocused,
                 )
             }
         }
@@ -478,23 +494,43 @@ private fun SystemTile(
     width: Dp,
     onClick: () -> Unit,
     onFocused: () -> Unit,
+    refocus: Boolean = false,
+    onOpenedWithKeys: () -> Unit = {},
+    onRefocused: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val dimens = LocalDimens.current
     var isFocused by remember { mutableStateOf(false) }
     val name = remember(system.metaSystem) { system.getName(context) }
+    val inputModeManager = LocalInputModeManager.current
+    val focusRequester = remember { FocusRequester() }
+
+    // Read once, when the tile is composed: the click itself turns [refocus] on while this tile is
+    // still on screen, and only the tile composed again after the catalog may take the focus.
+    val refocusOnStart = remember { refocus }
+    if (refocusOnStart) {
+        LaunchedEffect(Unit) {
+            // Touch never gets here (only D-pad clicks set it), so the outline only shows with keys.
+            runCatching { focusRequester.requestFocus() }
+            onRefocused()
+        }
+    }
 
     Box(
         modifier =
             Modifier
                 .width(width)
+                .focusRequester(focusRequester)
                 .focusHighlight()
                 .onFocusChanged {
                     isFocused = it.hasFocus
                     if (it.hasFocus) onFocused()
                 }
                 .clip(RoundedCornerShape(dimens.cardCornerRadius))
-                .clickable(role = Role.Button, onClick = onClick)
+                .clickable(role = Role.Button) {
+                    if (inputModeManager.inputMode == InputMode.Keyboard) onOpenedWithKeys()
+                    onClick()
+                }
                 .semantics { contentDescription = name },
     ) {
         LemuroidSystemImage(

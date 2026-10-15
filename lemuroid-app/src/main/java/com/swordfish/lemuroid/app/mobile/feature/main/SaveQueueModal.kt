@@ -12,25 +12,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -39,6 +43,13 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.BottomSheetHeader
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidBottomSheet
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidColors
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalLemuroidTypography
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SheetMargin
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SystemPalette
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.effects.focusHighlight
 import com.swordfish.lemuroid.app.shared.roms.SaveQueueEntry
 import com.swordfish.lemuroid.app.shared.roms.SaveQueueState
 
@@ -52,45 +63,45 @@ fun SaveQueueModal(
     val hasErrors by viewModel.hasErrors.collectAsState()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
 
-    ModalBottomSheet(
+    LemuroidBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 4.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                text = stringResource(R.string.save_queue_title),
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.weight(1f),
-            )
+        BottomSheetHeader(title = stringResource(R.string.save_queue_title)) {
             if (hasErrors) {
-                TextButton(onClick = { viewModel.clearErrors() }) {
+                TextButton(
+                    onClick = { viewModel.clearErrors() },
+                    modifier = Modifier.focusHighlight(cornerRadius = 20.dp),
+                ) {
                     Text(stringResource(R.string.save_queue_clear_errors))
                 }
             }
         }
-        HorizontalDivider()
 
         if (entries.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(32.dp),
-                contentAlignment = Alignment.Center,
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                Icon(
+                    imageVector = Icons.Outlined.Download,
+                    contentDescription = null,
+                    tint = LemuroidColors.TextSupport,
+                    modifier = Modifier.size(40.dp),
+                )
                 Text(
                     text = stringResource(R.string.save_queue_empty),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = LemuroidColors.TextSupport,
+                    modifier = Modifier.padding(top = 12.dp),
                 )
             }
         } else {
             LazyColumn(
-                modifier = Modifier.padding(bottom = 16.dp),
+                modifier = Modifier.padding(top = 4.dp, bottom = 16.dp),
             ) {
                 items(entries, key = { it.fileName }) { entry ->
                     SaveQueueItemRow(
@@ -105,7 +116,6 @@ fun SaveQueueModal(
                             }
                         },
                     )
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
         }
@@ -120,24 +130,32 @@ private fun SaveQueueItemRow(
     onCancel: () -> Unit,
 ) {
     val context = LocalContext.current
+    // Shows through while the cover loads, and stays when there is none (offline, no art).
+    val coverBackground =
+        remember(entry.systemId) { SystemPalette.darkTone(SystemPalette.colorForSystemId(entry.systemId)) }
+
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = SheetMargin, vertical = 8.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Box(
-                modifier = Modifier
-                    .size(56.dp, 72.dp)
-                    .background(MaterialTheme.colorScheme.surfaceVariant),
+                modifier =
+                    Modifier
+                        .size(COVER_WIDTH, COVER_HEIGHT)
+                        .clip(RoundedCornerShape(6.dp))
+                        .background(coverBackground),
             ) {
                 AsyncImage(
-                    model = ImageRequest.Builder(context)
-                        .data(entry.coverUrl)
-                        .build(),
+                    model =
+                        ImageRequest.Builder(context)
+                            .data(entry.coverUrl)
+                            .build(),
                     contentDescription = entry.title,
                     modifier = Modifier.matchParentSize(),
                     contentScale = ContentScale.Crop,
@@ -147,64 +165,96 @@ private fun SaveQueueItemRow(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = entry.title,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = LemuroidColors.Text,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
-                Spacer(Modifier.height(4.dp))
+                Spacer(Modifier.height(2.dp))
                 Text(
                     text = statusLabel(entry),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = LocalLemuroidTypography.current.support,
+                    color =
+                        when (entry.state) {
+                            SaveQueueState.SAVING -> LemuroidColors.Accent
+                            SaveQueueState.ERROR -> MaterialTheme.colorScheme.error
+                            else -> LemuroidColors.TextSupport
+                        },
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
 
             // Action buttons
             when (entry.state) {
-                SaveQueueState.SAVING -> {
-                    IconButton(onClick = onPause) {
-                        Icon(Icons.Default.Pause, contentDescription = stringResource(R.string.save_action_pause))
-                    }
-                }
-                SaveQueueState.PAUSED -> {
-                    IconButton(onClick = onResume) {
-                        Icon(Icons.Default.PlayArrow, contentDescription = stringResource(R.string.save_action_resume))
-                    }
-                }
+                SaveQueueState.SAVING ->
+                    RowAction(Icons.Default.Pause, stringResource(R.string.save_action_pause), onPause)
+                SaveQueueState.PAUSED ->
+                    RowAction(Icons.Default.PlayArrow, stringResource(R.string.save_action_resume), onResume)
                 else -> {}
             }
 
             if (entry.state != SaveQueueState.SAVED) {
-                IconButton(onClick = onCancel) {
-                    Icon(Icons.Default.Clear, contentDescription = stringResource(R.string.save_action_cancel))
-                }
+                RowAction(Icons.Default.Clear, stringResource(R.string.save_action_cancel), onCancel)
             }
         }
 
         // Progress bar for active downloads
         if (entry.state == SaveQueueState.SAVING || entry.state == SaveQueueState.PAUSED) {
-            Spacer(Modifier.height(6.dp))
+            Spacer(Modifier.height(8.dp))
+            val barModifier =
+                Modifier
+                    .fillMaxWidth()
+                    .clip(CircleShape)
             if (entry.progress > 0f) {
                 LinearProgressIndicator(
                     progress = { entry.progress },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = barModifier,
+                    color =
+                        if (entry.state == SaveQueueState.PAUSED) LemuroidColors.TextSupport else LemuroidColors.Accent,
+                    trackColor = LemuroidColors.Border,
                 )
             } else {
-                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                LinearProgressIndicator(
+                    modifier = barModifier,
+                    color = LemuroidColors.Accent,
+                    trackColor = LemuroidColors.Border,
+                )
             }
         }
     }
 }
 
 @Composable
-private fun statusLabel(entry: SaveQueueEntry): String = when (entry.state) {
-    SaveQueueState.QUEUED -> stringResource(R.string.save_queue_waiting)
-    SaveQueueState.SAVING -> if (entry.progress > 0f)
-        stringResource(R.string.save_queue_saving_progress, (entry.progress * 100).toInt())
-    else
-        stringResource(R.string.save_queue_saving)
-    SaveQueueState.PAUSED -> stringResource(R.string.save_queue_paused)
-    SaveQueueState.SAVED -> stringResource(R.string.save_queue_done)
-    SaveQueueState.ERROR -> entry.errorMessage
-        ?: stringResource(R.string.save_queue_error)
+private fun RowAction(
+    icon: ImageVector,
+    description: String,
+    onClick: () -> Unit,
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier.focusHighlight(cornerRadius = 20.dp),
+    ) {
+        Icon(icon, contentDescription = description, tint = LemuroidColors.Text)
+    }
 }
+
+@Composable
+private fun statusLabel(entry: SaveQueueEntry): String =
+    when (entry.state) {
+        SaveQueueState.QUEUED -> stringResource(R.string.save_queue_waiting)
+        SaveQueueState.SAVING ->
+            if (entry.progress > 0f) {
+                stringResource(R.string.save_queue_saving_progress, (entry.progress * 100).toInt())
+            } else {
+                stringResource(R.string.save_queue_saving)
+            }
+        SaveQueueState.PAUSED -> stringResource(R.string.save_queue_paused)
+        SaveQueueState.SAVED -> stringResource(R.string.save_queue_done)
+        SaveQueueState.ERROR ->
+            entry.errorMessage
+                ?: stringResource(R.string.save_queue_error)
+    }
+
+private val COVER_WIDTH = 48.dp
+private val COVER_HEIGHT = 64.dp

@@ -457,6 +457,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             showSaveQueueAction = !showRail,
                             // The search field lives in the top bar: it never hides.
                             scrollBehavior = topBarScrollBehavior.takeIf { currentRoute != MainRoute.SEARCH },
+                            // Same as the content below: the rail already took the insets of its side.
+                            windowInsets =
+                                if (showRail) {
+                                    TopAppBarDefaults.windowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.End)
+                                } else {
+                                    TopAppBarDefaults.windowInsets
+                                },
                         )
                     },
                     bottomBar = { if (!isLandscape) MainNavigationBar(currentRoute, navController) },
@@ -991,6 +998,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     game = game,
                     variants = variantGames.value,
                     downloadedGameKeys = downloadedGameKeys,
+                    saveQueueEntries = saveQueueEntries,
                     onDismiss = {
                         pendingVariantsGame.value = null
                         pendingVariantsOnlyInstalled.value = false

@@ -3,15 +3,22 @@ package com.swordfish.lemuroid.app.mobile.feature.main
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -24,11 +31,13 @@ import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -67,25 +76,88 @@ private fun LemuroidNavigationBar(
     currentRoute: MainRoute?,
     navController: NavHostController,
 ) {
-    NavigationBar(modifier = Modifier.fillMaxWidth()) {
-        MainNavigationRoutes.values().forEach { destination ->
-            val isSelected = currentRoute?.root == destination.route
-            val iconDrawable = if (isSelected) destination.selectedIcon else destination.unselectedIcon
+    Column(
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .background(LemuroidColors.Bars),
+    ) {
+        HorizontalDivider(color = LemuroidColors.Border)
+        Row(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .windowInsetsPadding(NavigationBarDefaults.windowInsets)
+                    .height(BAR_HEIGHT)
+                    .selectableGroup(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            MainNavigationRoutes.values().forEach { destination ->
+                BarItem(
+                    destination = destination,
+                    selected = currentRoute?.root == destination.route,
+                    onClick = { navController.navigateToTab(destination) },
+                )
+            }
+        }
+    }
+}
 
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        imageVector = iconDrawable,
-                        contentDescription = stringResource(destination.titleId),
+/**
+ * One tab of the bottom bar: the whole cell is the touch target, the icon sits in the accent pill
+ * when selected. Not the material3 `NavigationBarItem`: its D-pad focus is only a 12% state layer,
+ * hard to see on a TV box; here the pill gets the accent outline.
+ */
+@Composable
+private fun RowScope.BarItem(
+    destination: MainNavigationRoutes,
+    selected: Boolean,
+    onClick: () -> Unit,
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val focused by interactionSource.collectIsFocusedAsState()
+    val dimens = LocalDimens.current
+    Box(
+        modifier =
+            Modifier
+                .weight(1f)
+                .fillMaxHeight()
+                .selectable(
+                    selected = selected,
+                    interactionSource = interactionSource,
+                    indication = LocalIndication.current,
+                    role = Role.Tab,
+                    onClick = onClick,
+                ),
+        contentAlignment = Alignment.Center,
+    ) {
+        Box(
+            modifier =
+                Modifier
+                    .size(width = BAR_PILL_WIDTH, height = BAR_PILL_HEIGHT)
+                    .then(
+                        if (focused) {
+                            Modifier.border(dimens.focusBorderWidth, LemuroidColors.Accent, PillShape)
+                        } else {
+                            Modifier
+                        },
                     )
-                },
-                label = null,
-                selected = isSelected,
-                onClick = { navController.navigateToTab(destination) },
+                    .clip(PillShape)
+                    .background(if (selected) LemuroidColors.AccentPill else Color.Transparent),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(
+                imageVector = if (selected) destination.selectedIcon else destination.unselectedIcon,
+                contentDescription = stringResource(destination.titleId),
+                tint = if (selected) LemuroidColors.Accent else LemuroidColors.TextSupport,
             )
         }
     }
 }
+
+private val BAR_HEIGHT = 64.dp
+private val BAR_PILL_WIDTH = 64.dp
+private val BAR_PILL_HEIGHT = 32.dp
 
 /** Navigation of the tabs, shared by the bottom bar, the landscape rail and the Home shortcuts. */
 fun NavHostController.navigateToTab(destination: MainNavigationRoutes) {
