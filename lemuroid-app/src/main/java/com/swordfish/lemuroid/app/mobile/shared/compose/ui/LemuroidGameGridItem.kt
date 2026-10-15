@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
@@ -19,11 +20,13 @@ import com.swordfish.lemuroid.app.mobile.shared.compose.ui.effects.focusHighligh
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 /**
- * Cover card of the catalog grid: 3:4 cover with the save state (top-end) and the variants badge
+ * Cover card of the catalog and Favorites grids: 3:4 cover with the save state (top-end) and the variants badge
  * (bottom-end), title below.
  *
  * @param saveState overrides [isDownloaded] when the caller knows the queue state
  * ([rememberCoverSaveState]).
+ * @param showSystemChip the system chip at the top-start corner, for grids that mix systems
+ * (Favorites); the catalog is a single system and leaves it off.
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -33,6 +36,7 @@ fun LemuroidGameGridItem(
     isDownloaded: Boolean = false,
     hasVariants: Boolean = false,
     saveState: CoverSaveState = if (isDownloaded) CoverSaveState.Saved else CoverSaveState.NotSaved,
+    showSystemChip: Boolean = false,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
 ) {
@@ -60,6 +64,17 @@ fun LemuroidGameGridItem(
                 modifier = Modifier.fillMaxSize(),
                 generatedCoverTitle = false,
             )
+            if (showSystemChip) {
+                SystemChip(
+                    systemId = game.systemId,
+                    compact = true,
+                    modifier =
+                        Modifier
+                            .align(Alignment.TopStart)
+                            // Leaves the top-end corner to the save-state badge (22 dp + margins).
+                            .padding(start = 6.dp, top = 6.dp, end = 34.dp),
+                )
+            }
             SaveStateOverlay(saveState)
             if (hasVariants) {
                 VariantsBadge()

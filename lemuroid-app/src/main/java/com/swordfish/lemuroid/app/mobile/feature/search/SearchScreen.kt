@@ -17,20 +17,21 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.SearchOff
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -38,10 +39,19 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameListRow
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalDimens
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.PillShape
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.rememberCoverSaveState
+import com.swordfish.lemuroid.app.shared.roms.SaveQueueEntry
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.library.metaSystemID
 
+/**
+ * @param titlesWithVariants `"systemId/title"` keys with more than one version (variants badge).
+ * @param saveQueueEntries save queue by `Game.downloadKey` (`SaveQueueViewModel.entriesByKey`), passed
+ * as `State` so that only the row whose state changed recomposes.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
@@ -51,6 +61,8 @@ fun SearchScreen(
     systemIds: List<String>? = null,
     systemName: String? = null,
     downloadedGameKeys: Set<String> = emptySet(),
+    titlesWithVariants: Set<String> = emptySet(),
+    saveQueueEntries: State<Map<String, SaveQueueEntry>>? = null,
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
@@ -106,38 +118,19 @@ fun SearchScreen(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 6.dp)
+                        .padding(horizontal = LocalDimens.current.screenMargin, vertical = 6.dp)
                         .horizontalScroll(rememberScrollState()),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 if (hasSystemScope && activeSystemName != null) {
-                    FilterChip(
-                        selected = true,
-                        onClick = clearSystemScopeAction,
-                        label = { Text(activeSystemName) },
-                        trailingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Close,
-                                contentDescription = stringResource(R.string.clear),
-                                modifier = Modifier.size(16.dp),
-                            )
-                        },
-                    )
+                    SearchScopeChip(label = activeSystemName, onClear = clearSystemScopeAction)
                 }
 
                 if (isOnlyInstalled) {
-                    FilterChip(
-                        selected = true,
-                        onClick = { viewModel.setOnlyInstalled(false) },
-                        label = { Text(stringResource(R.string.search_scope_installed)) },
-                        trailingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Close,
-                                contentDescription = stringResource(R.string.clear),
-                                modifier = Modifier.size(16.dp),
-                            )
-                        },
+                    SearchScopeChip(
+                        label = stringResource(R.string.search_scope_installed),
+                        onClear = { viewModel.setOnlyInstalled(false) },
                     )
                 }
             }
@@ -154,7 +147,11 @@ fun SearchScreen(
         ) { state ->
             when {
                 state == SearchViewModel.UIState.Idle -> {
-                    SearchEmptyView(Modifier.fillMaxSize(), stringResource(R.string.game_page_search_suggestion))
+                    LemuroidEmptyView(
+                        modifier = Modifier.fillMaxSize(),
+                        text = stringResource(R.string.game_page_search_suggestion),
+                        icon = Icons.Outlined.Search,
+                    )
                 }
 
                 state == SearchViewModel.UIState.Loading -> {
@@ -163,14 +160,19 @@ fun SearchScreen(
 
                 state == SearchViewModel.UIState.Ready && searchGames.itemCount == 0 -> {
                     if (hasSystemScope && activeSystemName != null) {
-                        SearchEmptyView(
+                        LemuroidEmptyView(
                             modifier = Modifier.fillMaxSize(),
                             text = stringResource(R.string.search_no_games_in_system, activeSystemName),
+                            icon = Icons.Outlined.SearchOff,
                             actionText = stringResource(R.string.search_all_systems),
                             onActionClick = clearSystemScopeAction,
                         )
                     } else {
-                        SearchEmptyView(Modifier.fillMaxSize(), stringResource(id = R.string.empty_view_default))
+                        LemuroidEmptyView(
+                            modifier = Modifier.fillMaxSize(),
+                            text = stringResource(id = R.string.empty_view_default),
+                            icon = Icons.Outlined.SearchOff,
+                        )
                     }
                 }
 
@@ -179,6 +181,8 @@ fun SearchScreen(
                         Modifier.fillMaxSize(),
                         searchGames,
                         downloadedGameKeys,
+                        titlesWithVariants,
+                        saveQueueEntries,
                         onGameClick,
                         onGameLongClick,
                         onGameFavoriteToggle,
@@ -189,11 +193,35 @@ fun SearchScreen(
     }
 }
 
+/** Active scope of the search, in a pill; tapping it clears the scope. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun SearchScopeChip(
+    label: String,
+    onClear: () -> Unit,
+) {
+    FilterChip(
+        selected = true,
+        onClick = onClear,
+        label = { Text(label) },
+        shape = PillShape,
+        trailingIcon = {
+            Icon(
+                imageVector = Icons.Default.Close,
+                contentDescription = stringResource(R.string.clear),
+                modifier = Modifier.size(16.dp),
+            )
+        },
+    )
+}
+
 @Composable
 private fun SearchResultsView(
     modifier: Modifier,
     games: LazyPagingItems<Game>,
     downloadedGameKeys: Set<String>,
+    titlesWithVariants: Set<String>,
+    saveQueueEntries: State<Map<String, SaveQueueEntry>>?,
     onGameClick: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onGameFavoriteToggle: (Game, Boolean) -> Unit,
@@ -205,10 +233,13 @@ private fun SearchResultsView(
         // FavoritesScreen's pattern and pairs with the new Paging maxSize.
         items(games.itemCount, key = { games[it]?.id?.let { id -> "id_$id" } ?: "idx_$it" }) { index ->
             val game = games[index] ?: return@items
+            val isDownloaded = downloadedGameKeys.contains(game.downloadKey)
 
             LemuroidGameListRow(
                 game = game,
-                isDownloaded = downloadedGameKeys.contains(game.downloadKey),
+                isDownloaded = isDownloaded,
+                hasVariants = "${game.systemId}/${game.title}" in titlesWithVariants,
+                saveState = rememberCoverSaveState(game.downloadKey, isDownloaded, saveQueueEntries),
                 onClick = { onGameClick(game) },
                 onLongClick = { onGameLongClick(game) },
                 onFavoriteToggle = { isFavorite ->
@@ -216,40 +247,6 @@ private fun SearchResultsView(
                 },
             )
         }
-    }
-}
-
-@Composable
-private fun SearchEmptyView(
-    modifier: Modifier,
-    text: String,
-    actionText: String? = null,
-    onActionClick: (() -> Unit)? = null,
-) {
-    if (actionText != null && onActionClick != null) {
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.padding(16.dp),
-            ) {
-                Text(
-                    text = text,
-                    textAlign = TextAlign.Center,
-                )
-                TextButton(onClick = onActionClick) {
-                    Text(text = actionText)
-                }
-            }
-        }
-    } else {
-        LemuroidEmptyView(
-            modifier = modifier,
-            text = text,
-        )
     }
 }
 

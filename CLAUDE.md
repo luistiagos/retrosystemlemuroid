@@ -325,7 +325,7 @@ when {
 
 ### Comportamentos Conhecidos
 
-- O badge `ContentCopy` só é exibido na tela de catálogo por sistema (`GamesScreen`). Em Favoritos e Busca o badge não aparece, mas o tap abre o modal corretamente.
+- O selo de variantes (`ContentCopy`) aparece no catálogo por sistema, em Favoritos e na Busca (desde a entrega 2.5 do redesenho). Na Início ele não aparece, mas o tap abre o modal corretamente.
 - Long-press em um jogo agrupado abre o menu de contexto agindo sobre o **representante** — não navega pelo modal de variantes.
 - Script Python de limpeza de títulos: `E:\fetchimagers\cleantitles\clean_titles.py` gera `catalog_manifest_clean.txt` com títulos sem região/Rev/Disc/data, ordenados alfabeticamente por sistema, e adiciona o 5º campo `isRepresentative` (1=rep, 0=variante).
 

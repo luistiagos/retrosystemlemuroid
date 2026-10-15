@@ -539,6 +539,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                         factory = FavoritesViewModel.Factory(retrogradeDb),
                                     ),
                                 downloadedGameKeys = downloadedGameKeys,
+                                titlesWithVariants = titlesWithVariants,
+                                saveQueueEntries = saveQueueEntries,
                                 onGameClick = onGameClick,
                                 onGameLongClick = onGameLongClick,
                             )
@@ -558,6 +560,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 systemIds = mainUIState.currentSystemIds,
                                 systemName = mainUIState.currentMetaSystem?.let { stringResource(it.titleResId) },
                                 downloadedGameKeys = downloadedGameKeys,
+                                titlesWithVariants = titlesWithVariants,
+                                saveQueueEntries = saveQueueEntries,
                                 onGameClick = { game ->
                                     if (searchViewModel.onlyInstalled.value) {
                                         lifecycleScope.launch {

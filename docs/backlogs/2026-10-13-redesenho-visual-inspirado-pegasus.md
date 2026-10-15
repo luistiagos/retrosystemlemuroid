@@ -1,8 +1,8 @@
 # [BACKLOG] Redesenho visual do Lemuroid inspirado nos temas do Pegasus
 
 **Data:** 2026-10-13
-**Status:** Fase 1, 2.1 (Sistemas) e 2.2 (Catálogo) commitadas (`06c7911`). Entrega 2.3 (Início + moldura
-deitada) implementada e medida em 14/10/2026 (A/B sem regressão), sem commit. Pendente: abrir o menu
+**Status:** Fase 1 e entregas 2.1–2.4 commitadas (`06c7911`, `df706f4`, `0f2962c`). Entrega 2.5 (Favoritos e
+Busca) implementada e verificada em 14/10/2026, sem commit. Próxima: 2.6 (Moldura). Pendente: abrir o menu
 do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
@@ -1039,3 +1039,64 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     ícone, não da lógica.
   - **Ambiente:** `adb install` de 150 MB travou duas vezes neste AVD sem sair nada (o cliente ficou parado
     antes da cópia). `adb push` + `pm install` com `timeout` resolve em segundos.
+- **2026-10-14 (entrega 2.5, registro analítico antes do código).** 2.4 commitada (`0f2962c`); árvore limpa.
+  - **Abertos:**
+    - `M/feature/favorites/FavoritesScreen.kt` — `LazyVerticalGrid(Adaptive(144))`, margem/espaço 16, chave
+      `"id_$id"`/`"idx_$it"`, `LemuroidGameCard`. Mostra `LemuroidEmptyView` sempre que `itemCount == 0`,
+      **inclusive enquanto a primeira página carrega** (o catálogo só mostra com `refresh` concluído).
+      `FavoritesViewModel` (`selectFavorites`, paging 20) **não muda**.
+    - `LemuroidGameCard.kt` — `ElevatedCard` + `bounceClick` (`pointerInput`, **não focável**: os favoritos não
+      são alcançáveis pelo D-pad hoje), capa + `LemuroidGameTexts` (título e sistema), selo `Download` se salvo.
+      **Único chamador:** `FavoritesScreen`.
+    - `M/feature/search/SearchScreen.kt` — chips de escopo (sistema, "só salvos") como `FilterChip` padrão;
+      `AnimatedContent` entre Idle (`game_page_search_suggestion`), Loading (anel), vazio (`empty_view_default`,
+      ou `search_no_games_in_system` + botão `search_all_systems` com escopo de sistema) e resultados em
+      `LazyColumn` de `LemuroidGameListRow` (já no visual novo desde a 2.2, mas sem `saveState`/`hasVariants`).
+      `SearchViewModel` **não muda**.
+    - `LemuroidEmptyView.kt` — `Box` + `Text` centrado. Chamadores: Favoritos, Busca, Catálogo, Sistemas,
+      Jogos salvos (todos sem argumento, exceto a Busca com `text`).
+    - `MainActivity.kt:534-606` — rotas `FAVORITES` e `SEARCH`; o `onGameClick` próprio da Busca com "só salvos"
+      (`:561-600`) **não muda**. `saveQueueEntries` (`State`, `:358`) e `titlesWithVariants` (`:351`) já existem
+      no escopo e já vão para o catálogo (`:640-642`).
+    - Peças: `LemuroidGameGridItem` (capa 3:4, `SaveStateOverlay`, `VariantsBadge`, `focusHighlight`,
+      `combinedClickable`), `CoverGridCells`, `SystemChip(compact)` (como no cartão de Jogos salvos),
+      `rememberCoverSaveState`, `PillShape`, `LocalDimens`/`LocalLemuroidTypography`. `material-icons-extended`
+      está nas dependências (`deps.kt:95`).
+  - **Hipóteses descartadas:**
+    - *"Manter `LemuroidGameCard` com restyle."* `bounceClick` não é focável; o cartão da grade já existe
+      (`LemuroidGameGridItem`). O `LemuroidGameCard` fica sem chamador e é apagado.
+    - *"Favoritos sem o sistema, como o catálogo."* O catálogo é de um sistema só; Favoritos mistura sistemas e
+      hoje mostra o sistema (subtítulo). Vai o `SystemChip` compacto sobre a capa, como em Jogos salvos.
+    - *"Busca em grade."* A busca cruza sistemas e tem o favorito na linha; a linha (2.2) já mostra sistema e
+      estado. Fica em lista.
+    - *"Texto novo para o vazio de Favoritos."* Exigiria strings em 3 idiomas; o pedido é ícone. Textos mantidos.
+  - **Desenho:** Favoritos = `CoverGridCells(gridCoverMinWidth)` com `LemuroidGameGridItem` (+ chip do sistema,
+    estado de salvamento, selo de variantes); vazio com ícone de coração só depois do carregamento. Busca = chips
+    de escopo em pílula com margem de `LocalDimens`, linhas com estado e variantes, vazios com ícone (busca,
+    busca sem resultado) e botão de ação em pílula. `LemuroidEmptyView` ganha `icon` e ação opcionais, texto em
+    `TextSupport`.
+  - **Tasks:**
+    1. `LemuroidEmptyView.kt` — `icon`, `actionText`/`onActionClick` opcionais. Prova: outras telas sem ícone
+       continuam iguais.
+    2. `LemuroidGameGridItem.kt` — `showSystemChip` opcional. Prova: catálogo igual.
+    3. `FavoritesScreen.kt` — grade nova, `titlesWithVariants`/`saveQueueEntries` opcionais; apagar
+       `LemuroidGameCard.kt`. Prova: favoritos em pé/deitado, D-pad alcança os cartões, toque/toque longo.
+    4. `SearchScreen.kt` — chips, vazios, parâmetros opcionais. Prova: busca com escopo de sistema, "só salvos",
+       sem resultado, idle.
+    5. `MainActivity.kt` — passa os dois parâmetros nas duas rotas. `CLAUDE.md` ("Comportamentos Conhecidos":
+       o selo de variantes passa a aparecer em Favoritos e Busca).
+- **2026-10-14 (entrega 2.5, entrega):** Favoritos e Busca no visual novo, **sem commit**. Doc da entrega:
+  [`docs/funcionalidades/2026-10-14-redesenho-favoritos-busca.md`](../funcionalidades/2026-10-14-redesenho-favoritos-busca.md)
+  (capturas em `docs/funcionalidades/img/2026-10-14-redesenho-favoritos-busca-*.jpg`).
+  - **Feito:** as 5 tasks do registro analítico, sem desvio do desenho. O vazio com escopo de sistema da Busca
+    deixou de ter componente próprio (`SearchEmptyView`): é o `LemuroidEmptyView` com ação.
+  - **Verificação:** build x86_64, `ktlintMainSourceSetCheck` e `lintFreeBundleDebug` OK. Roteiro no moto g86 5G
+    (o único aparelho conectado; debug arm64 instalado limpo), em pé e deitado: vazios, favoritar pela Busca,
+    grade de Favoritos com chip, D-pad, toque longo, variantes → modal, não salvo → confirmação → fila → "Jogar
+    agora?" → ✓ na linha, Jogos salvos → Busca com "Jogos instalados". `logcat -b crash` vazio.
+  - **Não testado:** estados intermediários da fila nestas duas telas (download curto demais), botão "Buscar em
+    todos os sistemas", AVDs, TV box, TalkBack, medição de quadros.
+  - **Próximo passo:** commit da 2.5 (com o aval do dono); depois a 2.6 (Moldura), que herda as pendências da
+    2.3 (recuo esquerdo dobrado da `TopAppBar` ao lado do trilho, foco que volta ao trilho depois do catálogo,
+    "Systems" repetido no topo deitado). Abrir a sessão com: "Leia
+    `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 2.6 (Moldura)."
