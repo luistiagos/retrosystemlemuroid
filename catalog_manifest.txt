@@ -574,12 +574,6 @@
 3do/Yamamura Misa Suspense - Kyoto Kurama Sansou Satsujin Jiken (Japan) (Disc 2).chd|Yamamura Misa Suspense: Kyoto Kurama Sansou Satsujin Jiken|https://images.igdb.com/igdb/image/upload/t_cover_big/co7yud.jpg|0|0
 3do/Yu Yu Hakusho (Japan).chd|YuYu Hakusho Final: Makai Saikyou Retsuden|https://images.igdb.com/igdb/image/upload/t_cover_big/co3z43.jpg|0|1
 3do/Zhadnost - The People's Party (USA, Europe).chd|Zhadnost: The People's Party|https://images.igdb.com/igdb/image/upload/t_cover_big/coawpy.jpg|0|1
-3do/3DO Interactive Sampler CD 2, The (USA).chd|||0|0
-3do/3DO Interactive Sampler CD 3, The (USA).chd|||0|0
-3do/3DO Interactive Sampler CD 4, The (USA).chd|||0|0
-3do/3DO Interactive Sampler CD, The (USA).chd|||0|0
-3do/3DO Interactive Sampler, The (Europe).chd|||0|0
-3do/3DO Multi Game Sampler Number 3, The (Europe).chd|||0|0
 3do/Demolition Man (Japan).chd|||0|0
 3do/Demolition Man (USA).chd|||0|0
 3do/Panasonic REAL 3DO Interactive Multiplayer - Demonstration CD (USA).chd|||0|0
@@ -15185,10 +15179,6 @@ c64/Write Now! 64 (USA, Europe) (Program).zip|Write Now! 64|https://images.igdb.
 c64/Zaxxon (USA, Europe).zip|Zaxxon|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_64/master/Named_Boxarts/Zaxxon%20%28USA%2C%20Europe%29.png|0|1
 c64/Zenji (USA, Europe).zip|Zenji|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_64/master/Named_Boxarts/Zenji%20%28USA%2C%20Europe%29.png|0|1
 c64/Zone Ranger (USA, Europe).zip|Zone Ranger|https://raw.githubusercontent.com/libretro-thumbnails/Commodore_-_64/master/Named_Boxarts/Zone%20Ranger%20%28USA%2C%20Europe%29.png|0|1
-c64/Action Replay Professional (Europe) (v3) (Program) (Unl).zip|Action Replay Professional||0|0
-c64/Action Replay Professional (Europe) (v4.2) (Program) (Unl).zip|Action Replay Professional||0|0
-c64/Action Replay Professional (Europe) (v6.0) (Program) (Unl).zip|Action Replay Professional||0|0
-c64/Action Replay Professional (USA) (v5.0) (Program) (Unl).zip|Action Replay Professional||0|0
 cave/blazeon.zip|Blaze On|https://adb.arcadeitalia.net/?mame=blazeon&type=title&resize=0|0|1
 cave/deathsml.zip|Deathsmiles|https://adb.arcadeitalia.net/?mame=deathsml&type=title&resize=0|0|1
 cave/donpachi.zip|DonPachi|https://adb.arcadeitalia.net/?mame=donpachi&type=title&resize=0|0|1
@@ -17197,87 +17187,22 @@ dc/Zombie Revenge (Japan) (Rev A).chd|Zombie Revenge|https://raw.githubuserconte
 dc/Zombie Revenge (Japan).chd|Zombie Revenge|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dc/master/Named_Boxarts/Zombie%20Revenge%20%28Japan%29.png|9|0
 dc/Zombie Revenge (USA).chd|Zombie Revenge|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dc/master/Named_Boxarts/Zombie%20Revenge%20%28USA%29.png|9|0
 dc/Zusar Vasar (Japan) (En,Ja).chd|Zusar Vasar|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dc/master/Named_Boxarts/Zusar%20Vasar%20%28Japan%29%20%28En%2CJa%29.png|0|1
-dc/Aero Dancing F (Japan) (Taikenban).chd|Aero Dancing F: Todoroki Tsubasa no Hatsu Hikou|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Aero%20Dancing%20F%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Aero Dancing featuring Blue Impulse (Japan) (Tentou Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Aero%20Dancing%20featuring%20Blue%20Impulse%20%28Japan%29%20%28Tentou%20Taikenban%29.png|0|0
-dc/Aero to Jet de Dancing! (Japan) (Taikenban Disc).chd|||0|0
-dc/Berserk - Millennium Falcon-hen - Wasurebana no Shou (Japan) (Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Berserk%20-%20Millennium%20Falcon-hen%20-%20Wasurebana%20no%20Shou%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Capcom vs. SNK - Millennium Fight 2000 (Japan) (Tentou Taikenban).chd|Capcom vs. SNK: Millennium Fight 2000|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Capcom%20vs.%20SNK%20-%20Millennium%20Fight%202000%20%28Japan%29%20%28Tentou%20Taikenban%29.png|9|0
-dc/Chu-Chu Rocket! (Japan) (Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Chu-Chu%20Rocket%21%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Cool Boarders Burrrn! (Japan) (Taikenban).chd|Cool Boarders Burrrn!|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Cool%20Boarders%20Burrrn%21%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Cool Cool Toon (Japan) (Tentou-you Taikenban).chd|Cool Cool Toon|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Cool%20Cool%20Toon%20%28Japan%29%20%28Tentou-you%20Taikenban%29.png|0|0
-dc/Crazy Taxi 2 (Japan) (Taikenban).chd|Crazy Taxi 2|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Crazy%20Taxi%202%20%28Japan%29%20%28Taikenban%29.png|34|0
-dc/Dabi Tsuku - Derby-ba o Tsukurou! (Japan) (Taikenban).chd|Derby Tsuku: Derby Uma wo Tsukurou!|https://images.igdb.com/igdb/image/upload/t_cover_big/co7ngc.jpg|0|0
-dc/Daytona USA 2001 (Japan) (Taikenban).chd|Daytona USA|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Daytona%20USA%202001%20%28Japan%29%20%28Taikenban%29.png|1|0
-dc/DC X-Terminator (Japan) (Unl).chd|||0|0
-dc/Dead or Alive 2 (Japan) (Taikenban).chd|Dead or Alive 2|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Dead%20or%20Alive%202%20%28Japan%29%20%28Taikenban%29.png|72|0
 dc/Escapee, The (USA, Japan) (En,Ja,Fr,De,Es,It) (Unl).chd|Escapee, The||445|0
-dc/F355 Challenge (Japan) (Taikenban).chd|F355 Challenge|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/F355%20Challenge%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/GameShark CDX (USA) (Unl) (Final Version).chd|||0|0
-dc/GameShark CDX (USA) (Unl).chd|||0|0
-dc/GameShark Lite Version 4.0 (USA) (Unl).chd|||0|0
-dc/GameShark Video Game Enhancer - Upgrade Disk (USA) (Unl).chd|||0|0
-dc/Get Bass (Japan) (Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Get%20Bass%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/GigaWing (Japan) (Tentou Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/GigaWing%20%28Japan%29%20%28Tentou%20Taikenban%29.png|0|0
-dc/GigaWing 2 (Japan) (Tentou Taikenban).chd|||0|0
 dc/Grand Theft Auto 2 (Europe) (En,Fr,De,Es,It).chd|Grand Theft Auto 2|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Grand%20Theft%20Auto%202%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|542|0
 dc/Grand Theft Auto 2 (France).chd|Grand Theft Auto 2|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Grand%20Theft%20Auto%202%20%28France%29.png|542|0
 dc/Grand Theft Auto 2 (USA).chd|Grand Theft Auto 2|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Grand%20Theft%20Auto%202%20%28USA%29.png|542|0
-dc/Guilty Gear X (Japan) (Taikenban).chd|Guilty Gear X|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Guilty%20Gear%20X%20%28Japan%29%20%28Taikenban%29.png|27|0
-dc/Gunspike (Japan) (Tentou Taikenban).chd|||0|0
-dc/House of the Dead 2, The (Japan, Europe) (Taikenban).chd|The House of the Dead 2|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/House%20of%20the%20Dead%202%2C%20The%20%28Japan%2C%20Europe%29%20%28Taikenban%29.png|66|0
-dc/Jojo no Kimyou na Bouken - Mirai e no Isan (Japan) (Tentou Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Jojo%20no%20Kimyou%20na%20Bouken%20-%20Mirai%20e%20no%20Isan%20%28Japan%29%20%28Tentou%20Taikenban%29.png|0|0
-dc/Karat DC-you - Pro Action Replay (Japan) (Unl).chd|||0|0
-dc/Karat DC-you - Pro Action Replay 2 (Japan) (Unl).chd|||0|0
-dc/Karat DC-you - Pro Action Replay DC PAR - Sampler - Nyuumon-hen (Japan) (Unl).chd|||0|0
 dc/Legacy of Kain - Soul Reaver (Europe).chd|Legacy of Kain: Soul Reaver|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Legacy%20of%20Kain%20-%20Soul%20Reaver%20%28Europe%29.png|179|0
 dc/Legacy of Kain - Soul Reaver (France).chd|Legacy of Kain: Soul Reaver|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Legacy%20of%20Kain%20-%20Soul%20Reaver%20%28France%29.png|179|0
 dc/Legacy of Kain - Soul Reaver (Germany).chd|Legacy of Kain: Soul Reaver|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Legacy%20of%20Kain%20-%20Soul%20Reaver%20%28Germany%29.png|179|0
 dc/Legacy of Kain - Soul Reaver (Italy).chd|Legacy of Kain: Soul Reaver|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Legacy%20of%20Kain%20-%20Soul%20Reaver%20%28Italy%29.png|179|0
 dc/Legacy of Kain - Soul Reaver (Spain).chd|Legacy of Kain: Soul Reaver|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Legacy%20of%20Kain%20-%20Soul%20Reaver%20%28Spain%29.png|179|0
 dc/Legacy of Kain - Soul Reaver (USA).chd|Legacy of Kain: Soul Reaver|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Legacy%20of%20Kain%20-%20Soul%20Reaver%20%28USA%29.png|179|0
-dc/Maboroshi Tsukiyo (Japan) (Taikenban).chd|Maboroshi Tsukiyo|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Maboroshi%20Tsukiyo%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Marvel vs. Capcom - Clash of Super Heroes (Japan) (Tentou Taikenban).chd|Marvel vs. Capcom: Clash of Super Heroes|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Marvel%20vs.%20Capcom%20-%20Clash%20of%20Super%20Heroes%20%28Japan%29%20%28Tentou%20Taikenban%29.png|114|0
-dc/Marvel vs. Capcom 2 - New Age of Heroes (Japan) (Tentou Taikenban).chd|Marvel vs. Capcom 2: New Age of Heroes|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Marvel%20vs.%20Capcom%202%20-%20New%20Age%20of%20Heroes%20%28Japan%29%20%28Tentou%20Taikenban%29.png|128|0
-dc/Memories Off 2nd - Promotion Disc (Japan).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Memories%20Off%202nd%20-%20Promotion%20Disc%20%28Japan%29.png|0|0
-dc/Morita no Saikyou Reversi (Japan) (Tentou Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Morita%20no%20Saikyou%20Reversi%20%28Japan%29%20%28Tentou%20Taikenban%29.png|0|0
-dc/Official Sega Dreamcast Magazine Vol. 10 - January 2001 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Official%20Sega%20Dreamcast%20Magazine%20Vol.%2010%20-%20January%202001%20%28USA%29.png|0|0
-dc/Official Sega Dreamcast Magazine Vol. 11 - February 2001 (USA).chd|||0|0
-dc/Official Sega Dreamcast Magazine Vol. 2 - November 1999 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Official%20Sega%20Dreamcast%20Magazine%20Vol.%202%20-%20November%201999%20%28USA%29.png|0|0
-dc/Official Sega Dreamcast Magazine Vol. 3 - January 2000 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Official%20Sega%20Dreamcast%20Magazine%20Vol.%203%20-%20January%202000%20%28USA%29.png|0|0
-dc/Official Sega Dreamcast Magazine Vol. 4 - March 2000 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Official%20Sega%20Dreamcast%20Magazine%20Vol.%204%20-%20March%202000%20%28USA%29.png|0|0
-dc/Official Sega Dreamcast Magazine Vol. 5 - May 2000 (USA).chd|||0|0
-dc/Official Sega Dreamcast Magazine Vol. 6 - July 2000 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Official%20Sega%20Dreamcast%20Magazine%20Vol.%206%20-%20July%202000%20%28USA%29.png|0|0
-dc/Official Sega Dreamcast Magazine Vol. 7 - September 2000 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Official%20Sega%20Dreamcast%20Magazine%20Vol.%207%20-%20September%202000%20%28USA%29.png|0|0
-dc/Official Sega Dreamcast Magazine Vol. 8 - November 2000 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Official%20Sega%20Dreamcast%20Magazine%20Vol.%208%20-%20November%202000%20%28USA%29.png|0|0
-dc/Official Sega Dreamcast Magazine Vol. 9 - December 2000 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Official%20Sega%20Dreamcast%20Magazine%20Vol.%209%20-%20December%202000%20%28USA%29.png|0|0
-dc/PenPen TriIcelon (Japan) (Taikenban).chd|Pen Pen TriIcelon|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/PenPen%20TriIcelon%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/PenPen TriIcelon (Japan) (Tentou Taikenban).chd|Pen Pen TriIcelon|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/PenPen%20TriIcelon%20%28Japan%29%20%28Tentou%20Taikenban%29.png|0|0
-dc/Power Stone (Japan) (Tentou Taikenban).chd|Power Stone|https://images.igdb.com/igdb/image/upload/t_cover_big/co1w5b.jpg|41|0
-dc/Psychic Force 2012 (Japan) (Taikenban).chd|Psychic Force 2012|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Psychic%20Force%202012%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Puyo Puyoon (Japan) (Taikenban).chd|Puyo Puyo~n|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Puyo%20Puyoon%20%28Japan%29%20%28Taikenban%29.png|5|0
-dc/Record of Lodoss War - The Advent of Cardice (Japan) (Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Record%20of%20Lodoss%20War%20-%20The%20Advent%20of%20Cardice%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Remember 11 - The Age of Infinity - Promotion Disc (Japan).chd|||0|0
 dc/Resident Evil 3 - Nemesis (Europe) (Fr,Es).chd|Resident Evil 3: Nemesis|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Resident%20Evil%203%20-%20Nemesis%20%28Europe%29%20%28Fr%2CEs%29.png|445|0
 dc/Resident Evil 3 - Nemesis (Europe).chd|Resident Evil 3: Nemesis|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Resident%20Evil%203%20-%20Nemesis%20%28Europe%29.png|445|0
 dc/Resident Evil 3 - Nemesis (Germany).chd|Resident Evil 3: Nemesis|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Resident%20Evil%203%20-%20Nemesis%20%28Germany%29.png|445|0
 dc/Resident Evil 3 - Nemesis (USA).chd|Resident Evil 3: Nemesis|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Resident%20Evil%203%20-%20Nemesis%20%28USA%29.png|445|0
-dc/Sega GT - Homologation Special (Japan) (Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Sega%20GT%20-%20Homologation%20Special%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Sengoku Turb (Japan) (Taikenban).chd|Sengoku Turb: Fanfan I Heart Me Dunce-Doublentendre|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Sengoku%20Turb%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Shinki Sekai Evolution (Japan) (Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Shinki%20Sekai%20Evolution%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Shutokou Battle (Japan) (Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Shutokou%20Battle%20%28Japan%29%20%28Taikenban%29.png|0|0
-dc/Sonic Adventure 2 (Japan) (En,Ja,Fr,De,Es) (Taikenban).chd|Sonic Adventure 2|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Sonic%20Adventure%202%20%28Japan%29%20%28En%2CJa%2CFr%2CDe%2CEs%29%20%28Taikenban%29.png|182|0
-dc/Soulcalibur (Japan) (Tentou Taikenban).chd|SoulCalibur|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Soulcalibur%20%28Japan%29%20%28Tentou%20Taikenban%29.png|130|0
-dc/Soulcalibur (Japan) (Tokubetsu Taikenban).chd|SoulCalibur|https://images.igdb.com/igdb/image/upload/t_cover_big/co1x6g.jpg|130|0
-dc/Space Channel 5 (Japan) (Taikenban).chd|Space Channel 5|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Space%20Channel%205%20%28Japan%29%20%28Taikenban%29.png|25|0
-dc/Star Gladiator 2 - Nightmare of Bilstein (Japan) (Tentou Taikenban).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Star%20Gladiator%202%20-%20Nightmare%20of%20Bilstein%20%28Japan%29%20%28Tentou%20Taikenban%29.png|0|0
-dc/Street Fighter Zero 3 - Saikyo-ryu Dojo (Japan) (Tentou Taikenban).chd|Street Fighter Alpha 3|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Street%20Fighter%20Zero%203%20-%20Saikyo-ryu%20Dojo%20%28Japan%29%20%28Tentou%20Taikenban%29.png|0|0
-dc/Super Magnetic Niuniu - Promotion Disc (Japan).chd|||0|0
-dc/Super Runabout (Japan) (Taikenban).chd|Super Runabout: San Francisco Edition|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Super%20Runabout%20%28Japan%29%20%28Taikenban%29.png|0|0
 dc/Worms Armageddon (Europe) (En,Fr,De,Nl,Sv,No,Da).chd|Worms Armageddon|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Worms%20Armageddon%20%28Europe%29%20%28En%2CFr%2CDe%2CNl%2CSv%2CNo%2CDa%29.png|358|0
 dc/Worms Armageddon (USA) (En,Fr,De,Nl,Sv,No,Da).chd|Worms Armageddon|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Worms%20Armageddon%20%28USA%29%20%28En%2CFr%2CDe%2CNl%2CSv%2CNo%2CDa%29.png|358|0
-dc/Xploder DC (USA) (Unl).chd|||0|0
-dc/Zombie Revenge (Japan) (Taikenban).chd|Zombie Revenge|https://images.igdb.com/igdb/image/upload/t_cover_big/co2mse.jpg|9|0
-dc/Zusar Vasar (Japan) (Taikenban).chd|Zusar Vasar|https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dreamcast/master/Named_Boxarts/Zusar%20Vasar%20%28Japan%29%20%28Taikenban%29.png|0|0
 dc/102 Dalmatians - Puppies to the Rescue v1.001 (2000)(EIDOS)(NTSC)(US)[!].chd|||0|0
 dc/18 Wheeler - American Pro Trucker v1.500 (2001)(Sega)(NTSC)(US)[!].chd|||0|0
 dc/4 Wheel Thunder v1.002 (2000)(Midway)(NTSC)(US)[!].chd|||0|0
@@ -17337,7 +17262,6 @@ dc/ECW Hardcore Revolution v1.001 (2000)(Acclaim)(NTSC)(US)[!].chd|||0|0
 dc/ESPN International Track & Field v1.001 (2000)(Konami)(NTSC)(US)[!].chd|||0|0
 dc/Elansar (Europe) (En,Fr,De,Es,It) (Unl).chd|||0|0
 dc/Elemental Gimmick Gear v1.001 (1999)(Vatical)(NTSC)(US)[!].chd|||0|0
-dc/Espion-Age-nts (Japan) (Tentou-you Demonstration Movie).chd|||0|0
 dc/Evil Dead - Hail to the King v1.002 (2000)(THQ)(NTSC)(US)[!].chd|||0|0
 dc/Evolution - The World of Sacred Device v1.290 (1999)(Ubi Soft)(NTSC)(US)[!].chd|||0|0
 dc/Evolution 2 - Far Off Promise v1.000 (2000)(Ubi Soft)(NTSC)(US)[!].chd|||0|0
@@ -21362,8 +21286,6 @@ gb/Zoop (Japan) (En).gb|Zoop|https://db.hfsplay.fr/files/2019/08/21/Zoop_USA_Eur
 gb/Zoop (USA, Europe).gb|Zoop|https://images.igdb.com/igdb/image/upload/t_cover_big/co87qb.jpg|0|0
 gb/Zuigao Jimi (Top Secret) (Taiwan) (Multicart Rip) (Unl).gb|Zuigao Jimi||0|1
 gb/Zuigao Jimi (Top Secret) (Taiwan) (Unl).gb|Zuigao Jimi||0|0
-gb/Action Replay Pro (World) (Unl).gb|Action Replay Pro (World)||0|0
-gb/Pro Action Replay (Europe) (Unl).gb|Pro Action Replay (Europe)||0|0
 gb/Bikkuri Nekketsu Shin Kiroku! - Dokodemo Kin Medal (Japan).gb|||0|0
 gb/Downtown - Nekketsu Koushinkyoku - Dokodemo Daiundoukai (Japan).gb|||0|0
 gb/Makaimura Gaiden - The Demon Darkness (Japan).gb|||0|0
@@ -26056,12 +25978,6 @@ gbc/Zok Zok Heroes (Japan).gbc|Zok Zok Heroes|https://images.igdb.com/igdb/image
 gbc/Zone Control (World) (Aftermarket) (Unl).gbc|Zone Control||0|1
 gbc/Zook Z (USA) (Unl).gbc|Zook Z|https://images.igdb.com/igdb/image/upload/t_cover_big/co7t2q.jpg|0|1
 gbc/Zork + Harris (World) (v0.0.1.0) (Proto) (Aftermarket) (Unl).gbc|Zork + Harris||0|1
-gbc/Action Replay Online (Europe) (Unl).gbc|Action Replay Online (Europe)||0|0
-gbc/Action Replay Xtreme - Special Edition for Pokemon Crystal (Europe) (Unl).gbc|Action Replay Xtreme - Special Edition for Pokemon Crystal (Europe)||0|0
-gbc/GameShark MX (USA) (v1.02) (Unl).gbc|GameShark MX (USA)||0|0
-gbc/GameShark Online (USA) (Unl).gbc|GameShark Online (USA)||0|0
-gbc/Xploder GB (Europe) (v1.2.3E) (GB Compatible) (Unl).gbc|Xploder GB (Europe)||0|0
-gbc/Xploder GB (Germany) (v1.2.2G) (GB Compatible) (Unl).gbc|Xploder GB (Germany)||0|0
 gbc/Castlevania - Demon Castle (World) (Aftermarket) (Unl).gbc|||0|0
 gbc/Itsudemo Pachinko GB - CR Monster House (Japan).gbc|||0|0
 gbc/Revelations - The Demon Slayer (USA) (SGB Enhanced) (GB Compatible).gbc|||0|0
@@ -27121,33 +27037,6 @@ gc/Zoids Vs..zip (1).rvz|Zoids Vs.||0|1
 gc/Zoids Vs. II.zip (1).rvz|Zoids Vs. II||0|1
 gc/Zoids Vs. III.zip (1).rvz|Zoids Vs. III||0|1
 gc/ZooCube.zip (1).rvz|ZooCube||0|1
-gc/Action Replay for GameCube & SD Media Launcher for GameCube-Wii (Europe) (Unl).rvz|||0|0
-gc/Action Replay for GameCube & SD Media Launcher for GameCube-Wii (USA) (Unl).rvz|||0|0
-gc/Action Replay for GameCube (Europe) (En,Fr,De,Es,It,Pt) (Unl) (v1.09).rvz|||0|0
-gc/Action Replay for GameCube (Europe) (En,Fr,De,Es,It,Pt) (Unl) (v1.14b).rvz|||0|0
-gc/Action Replay for GameCube (Europe) (Unl) (GameCube + Wii) (v1.0E).rvz|||0|0
-gc/Action Replay for GameCube (USA) (En,Fr,De,Es,It,Pt) (Unl) (v1.06).rvz|||0|0
-gc/Action Replay for GameCube (USA) (En,Fr,De,Es,It,Pt) (Unl) (v1.12).rvz|||0|0
-gc/Action Replay for GameCube (USA) (En,Fr,De,Es,It,Pt) (Unl) (v1.13).rvz|||0|0
-gc/Action Replay for GameCube (USA, Europe) (En,Fr,De,Es,It,Pt) (Unl) (v1.08).rvz|||0|0
-gc/Action Replay Max (USA, Europe) (En,Fr,De,Es,It,Pt) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Cheats for Use with Enter the Matrix (UK) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Cheats for Use with Mario Kart - Double Dash!! (UK) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Cheats for Use with Pokemon Colosseum (UK) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Cheats fuer Enter the Matrix (Germany) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Cheats fuer Pokemon Colosseum (Germany) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Codes for Use with Enter the Matrix (USA) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Codes for Use with Final Fantasy - Crystal Chronicles (USA) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Codes for Use with Soul Calibur II (USA) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Codes for Use with The Legend of Zelda - Twilight Princess (USA) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Codes for Use with Wario World (USA) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Codes Greatest Hits - Best Buy Achievers Weekend 2004 (USA) (Unl).rvz|||0|0
-gc/Action Replay Ultimate Codes Max Pack (USA) (Unl).rvz|||0|0
-gc/Action Replay Ultimative Cheatcodes fuer Final Fantasy - Crystal Chronicles (Germany) (Unl).rvz|||0|0
-gc/Action Replay Ultimative Cheats Greatest Hits 2003 (Germany) (Unl).rvz|||0|0
-gc/Beach Spikers - Virtua Beach Volleyball (Japan) (Taikenban).rvz|||0|0
-gc/Capcom vs. SNK 2 EO (Japan) (Tentou Taikenban).rvz|||0|0
-gc/Dairantou Smash Brothers DX (Japan) (Taikenban).rvz|||0|0
 gc/Lord of the Rings - Futatsu no Tou (Japan).rvz|||0|0
 gc/Speed%20Kings%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.zip.rvz|||0|0
 gc/Sphinx%20and%20the%20Cursed%20Mummy%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.zip.rvz|||0|0
@@ -42513,13 +42402,6 @@ psp/Zettai Zetsumei Toshi 3 - Kowareyuku Machi to Kanojo no Uta (Japan) (v1.02).
 psp/Zhuo Hou La - Hou Zi Ai Zuo Zhan (Asia).iso|Zhuo Hou La - Hou Zi Ai Zuo Zhan||0|1
 psp/Zill O'll Infinite Plus (Japan).iso|Zill O'll Infinite Plus|https://images.igdb.com/igdb/image/upload/t_cover_big/co4o36.jpg|0|1
 psp/Zwei!! (Japan).iso|Zwei!!: The Arges Adventure|https://images.igdb.com/igdb/image/upload/t_cover_big/co5w90.jpg|0|1
-psp/Blokus Club Portable with Bumpy Trot (Japan) (Taikenban).iso|||0|0
-psp/Bounty Hounds (Japan) (Taikenban).iso|Bounty Hounds|https://images.igdb.com/igdb/image/upload/t_cover_big/co2nhw.jpg|0|0
-psp/Capcom Special Taikenban 3 in 1 (Japan).iso|||0|0
-psp/God Eater (Japan) (Taikenban).iso|Gods Eater Burst||0|0
-psp/Initial D - Street Stage (Japan) (Taikenban).iso|Initial D: Street Stage|https://images.igdb.com/igdb/image/upload/t_cover_big/co2c2b.jpg|0|0
-psp/Irem Taikenban-shuu - 2007 Kaki Tokubetsugou (Japan).iso|Irem Taikenban-shuu - 2007 Kaki Tokubetsugou (Japan)||0|0
-psp/Irem Taikenban-shuu - 2008 Haru no Tokubetsugou (Japan).iso|Irem Taikenban-shuu - 2008 Haru no Tokubetsugou (Japan)||0|0
 psp/Hakuoki - Demon of the Fleeting Blossom (USA).iso|||0|0
 psp/Beta Bloc (Italy).iso|||0|0
 psx/007 Racing (Europe).chd|007 Racing|https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/007%20Racing%20%28Europe%29.png|25|1
@@ -44928,52 +44810,6 @@ psx/Zero Divide (Europe).chd|Zero Divide|https://raw.githubusercontent.com/libre
 psx/Zero Divide 2 - The Secret Wish (Europe).chd|Zero Divide 2 - The Secret Wish|https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Zero%20Divide%202%20-%20The%20Secret%20Wish%20%28Europe%29.png|0|1
 psx/Zoboomafoo - Leapin' Lemurs! (USA).chd|Zoboomafoo - Leapin' Lemurs!|https://images.igdb.com/igdb/image/upload/t_cover_big/vg2jhtnmnuxcp9yd5ls0.jpg|0|1
 psx/Zoop - America's Largest Killer of Time! (USA).chd|Zoop - America's Largest Killer of Time!|https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Zoop%20-%20America%27s%20Largest%20Killer%20of%20Time%21%20%28USA%29.png|0|1
-psx/Action Replay (Europe) (Unl).chd|||0|0
-psx/Action Replay 2 - Bonus PSone Codes! (USA) (Disc 2) (Unl).chd|||0|0
-psx/Action Replay 2 - Bonus PSone Codes! (USA) (En,Fr,Es,Pt) (Disc 2) (Unl) (Rev 1).chd|||0|0
-psx/Action Replay 2 V2 - Bonus PSone Codes (USA) (Disc 2) (Unl).chd|||0|0
-psx/Action Replay 2 Version 2.23 (Europe) (En,Fr,De,It) (Disc 2) (Bonus PSone Codes!) (Unl).chd|||0|0
-psx/Action Replay Ultimate Codes for Final Fantasy Compilation Pack (USA) (Unl).chd|||0|0
-psx/Action Replay for PSX & PSone (USA) (Unl).chd|||0|0
-psx/Blockbuster Presents - GameShark Top 50 - Summer Fall 2001 (USA) (Unl).chd|||0|0
-psx/Code Breaker (USA) (Unl).chd|||0|0
-psx/Code Breaker Version 2 (USA) (Unl).chd|||0|0
-psx/Code Breaker Version 3 (USA) (Unl).chd|||0|0
-psx/Final Fantasy VII (USA) (Interactive Sampler CD).chd|Final Fantasy VII|https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Final%20Fantasy%20VII%20%28USA%29%20%28Interactive%20Sampler%20CD%29.png|5|0
-psx/Front Action Replay (Europe) (Unl).chd|||0|0
-psx/GSi - GameShark Interactive Magazine (USA) (Unl).chd|||0|0
-psx/GameShark - Metal Gear Solid 2 - Sons of Liberty (USA) (Disc 2) (Strategy in Action) (Unl).chd|||0|0
-psx/GameShark - Video Game Enhancer - Version 5 (USA) (Unl).chd|||0|0
-psx/GameShark 2 - Video Game Enhancer - Code Archive Disc (USA) (En,Fr,Es,Pt) (Unl) (Rev 2).chd|||0|0
-psx/GameShark 2 - Video Game Enhancer - Code Archive Disc (USA) (Unl) (Rev 1).chd|||0|0
-psx/GameShark 2 - Video Game Enhancer - Code Archive Disc (USA) (Unl).chd|||0|0
-psx/GameShark CDX (USA) (En,Fr,Es,Pt) (Unl) (v4.1).chd|||0|0
-psx/GameShark CDX (USA) (Unl) (v3.4).chd|||0|0
-psx/GameShark CDX (USA) (Unl) (v3.41).chd|||0|0
-psx/GameShark CDX (USA) (Unl) (v3.51).chd|||0|0
-psx/GameShark CDX (USA) (Unl) (v4.0A).chd|||0|0
-psx/GameShark CDX (USA) (Unl) (v4.11A).chd|||0|0
-psx/GameShark CDX (USA) (Unl) (v4.11B).chd|||0|0
-psx/GameShark CDX - Version 3.3 (USA) (Unl) (v3.3).chd|||0|0
-psx/GameShark Lite (USA) (Unl).chd|||0|0
-psx/Interactive CD Sampler Disc 6 (USA) (Rev 1).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%206%20%28USA%29%20%28Rev%201%29.png|0|0
-psx/Interactive CD Sampler Disc 6 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%206%20%28USA%29.png|0|0
-psx/Interactive CD Sampler Disc Vol. 10 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%20Vol.%2010%20%28USA%29.png|0|0
-psx/Interactive CD Sampler Disc Vol. 11 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%20Vol.%2011%20%28USA%29.png|0|0
-psx/Interactive CD Sampler Disc Vol. 9 (USA) (SCUS-94295).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%20Vol.%209%20%28USA%29%20%28SCUS-94295%29.png|0|0
-psx/Interactive CD Sampler Disc Vol. 9 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%20Vol.%209%20%28USA%29.png|0|0
-psx/Interactive CD Sampler Disc Volume 4 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%20Volume%204%20%28USA%29.png|0|0
-psx/Interactive CD Sampler Disc Volume 7 (USA) (Rev 1).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%20Volume%207%20%28USA%29%20%28Rev%201%29.png|0|0
-psx/Interactive CD Sampler Disc Volume 7 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%20Volume%207%20%28USA%29.png|0|0
-psx/Interactive CD Sampler Disc Volume 8 (USA).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Interactive%20CD%20Sampler%20Disc%20Volume%208%20%28USA%29.png|0|0
-psx/Interactive Preview Plus - PS2 Launch Guide & Playable GameShark Sampler (USA) (Unl).chd|||0|0
-psx/Official PlayStation Magazine Best Games Ever 2000 (Europe).chd||https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Official%20PlayStation%20Magazine%20Best%20Games%20Ever%202000%20%28Europe%29.png|0|0
-psx/PlayStation-Pepsi Sampler Disc (USA).chd|||0|0
-psx/Toys R Us - Interactive CD Sampler Disc (USA).chd|||0|0
-psx/Xploder CD9000 Version 1 (Europe) (Unl).chd|||0|0
-psx/Xploder CD9000 Version 2.0 (Europe) (En,Fr,Es,It,Nl,Pt,Sv,No,Da,Fi) (Unl).chd|||0|0
-psx/Xploder CD9000 Version 3.0 (Europe) (Unl).chd|||0|0
-psx/Xploder CD9000 Version 4.0 (Europe) (Unl).chd|||0|0
 psx/Demolition Racer (Europe) (En,Fr,De,Es,It).chd|||0|0
 psx/Exclusive PlayStation Racing Demos (Europe).chd|||0|0
 psx/Pandemonium 2 (Europe).chd|||0|0
@@ -49883,7 +49719,6 @@ snes/Zoop (EU).sfc|Zoop|https://images.igdb.com/igdb/image/upload/t_cover_big/co
 snes/Zoop (US).sfc|Zoop|https://images.igdb.com/igdb/image/upload/t_cover_big/co2dip.jpg|0|0
 snes/Zootto Mahjong! (JP) (NP).sfc|Zootto Mahjong!|https://images.igdb.com/igdb/image/upload/t_cover_big/co4cnh.jpg|0|1
 snes/Zootto Mahjong! (JP) (Rev-1) (NP).sfc|Zootto Mahjong!|https://images.igdb.com/igdb/image/upload/t_cover_big/co4cnh.jpg|0|0
-snes/Super Bomberman 2 (JP) (Caravan You Taikenban).sfc|Super Bomberman 2 (JP)||0|0
 supervision/2 in 1 - Block Buster + Cross High (US - EU).sv|2 in 1 - Block Buster + Cross High|https://raw.githubusercontent.com/libretro-thumbnails/Watara_-_Supervision/master/Named_Boxarts/2%20in%201%20-%20Block%20Buster%20%2B%20Cross%20High%20%28USA%2C%20Europe%29.png|0|1
 supervision/2 in 1 - Hash Blocks + Eagle Plan (US - EU).sv|2 in 1: Hash Block & Eagle Plan|https://images.igdb.com/igdb/image/upload/t_cover_big/oiqeyyep07bwto0zuybu.jpg|0|1
 supervision/4 in 1 - Hash Block + Challenger Tank + Brain Power + Jacky Lucky (US - EU).sv|4 in 1 - Hash Block + Challenger Tank + Brain Power + Jacky Lucky||0|1
@@ -50523,7 +50358,6 @@ wsc/Wizardry Scenario 1 - Proving Grounds of the Mad Overlord (Japan).wsc|Wizard
 wsc/Wonder Classic (Japan).wsc|Wonder Classic|https://images.igdb.com/igdb/image/upload/t_cover_big/co6tcb.jpg|0|1
 wsc/X - Card of Fate (Japan).wsc|X: Card of Fate|https://images.igdb.com/igdb/image/upload/t_cover_big/mhbs0gtgfoxfo39mzsxc.jpg|0|1
 wsc/XI Little (Japan).wsc|Xi Little|https://images.igdb.com/igdb/image/upload/t_cover_big/co4x0j.jpg|0|1
-wsc/Star Hearts - Hoshi to Daichi no Shisha - Taikenban (Japan) (Not For Sale).wsc|||0|0
 wsc/Dokodemo Hamster 3 - Odekake Saffron (Japan) (Rev 2).wsc|||0|0
 zxspectrum/07 Zglos Sie (19xx)(Kuba Rozpruwacz)(PL)[m tzxtools].tap|07 Zglos Sie||0|1
 zxspectrum/1 Line Space Trader (2007)(Digital Prawn - Saukas, Einar)(16K)[m tzxtools].tap|1 Line Space Trader||0|1
@@ -60879,8 +60713,6 @@ zxspectrum/Cookie (1983)(Ultimate Play The Game)(16K)[h Telekom][tr ru].tap|Cook
 zxspectrum/Cookie (1983)(Ultimate Play The Game)(16K)[h Tserikopik][tr ru].tap|Cookie||28|0
 zxspectrum/Cookie (1983)(Ultimate Play The Game)(16K)[tr ru].tap|Cookie||28|0
 zxspectrum/Mario Islands (1997)(Omega Hackers Group)(128K)(RU)(en).tap|Mario Islands|https://images.igdb.com/igdb/image/upload/t_cover_big/co4ac4.jpg|50|1
-zxspectrum/Code Breakers (19xx)(Dobie, Paul)[m tzxtools].tap|Code Breakers||0|0
-zxspectrum/Code Setter - Code Breaker (1984)(Sinclair User).tap|Code Setter - Code Breaker||0|0
 zxspectrum/Calling of the Demon, The (1987)(Visual Dimensions)(128K)[m tzxtools].tap|||0|0
 zxspectrum/Calling of the Demon, The (1987)(Visual Dimensions)(48K-128K)[m tzxtools].tap|||0|0
 zxspectrum/Cursed Demons Of Wallachia (2023)(Furillo Productions)(es).tap|||0|0
