@@ -2,7 +2,7 @@
 
 **Data:** 2026-10-13
 **Status:** Fase 1, Fase 2 (2.1–2.6) e entregas 3.1–3.2 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`,
-2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). 3.3 (fundo ambiente da TV) em `2dc9412`; 3.4 (painel do item em foco, opção A) pronta, sem commit (ver Andamento). Pendente: abrir o menu do jogo à mão.
+2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). 3.3 (fundo ambiente da TV) em `2dc9412`; 3.4 (painel do item em foco, opção A) em `18cf57d`. Pendente: abrir o menu do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
 
@@ -1486,5 +1486,6 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     título longo, "Ver todos", catálogo inalterado (cartões em 135 dp, como na 3.2) e voltar, busca e voltar, menu de
     contexto, jogar e voltar. `logcat -b crash` vazio. 11 favoritos temporários no banco do AVD, desfeitos no fim.
   - **Não verificado:** TV box real, escala de fonte > 1,0, digitar na busca, `gfxinfo`.
-  - **Próximo passo:** aval do dono para o commit da 3.4. Depois, decidir 3.5 (selo de salvo na TV) e 3.6 (fileira
+  - **Feito depois:** commit `18cf57d` (3.4), com o aval do dono.
+  - **Próximo passo:** decidir 3.5 (selo de salvo na TV) e 3.6 (fileira
     "Jogos salvos" na TV), que dependem de decisão própria; ou abrir o menu do jogo à mão (pendência antiga).
