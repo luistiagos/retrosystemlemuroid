@@ -541,7 +541,9 @@ Regras:
    via `TVTypography` (`android:fontFamily` com `res/font` só vale no Android 8+); cartão novo chama `styleCard`, fileira
    nova usa `TVListRowPresenter`. Capa e arte de sistema na TV só por `TVCovers` (capa gerada, cor da `SystemPalette`);
    diálogo no visual novo passa o tema pelo id (`AlertDialog.Builder(activity, R.style.LemuroidTVDialog)`) — com
-   `ContextThemeWrapper` o `Builder` ignora o tema.
+   `ContextThemeWrapper` o `Builder` ignora o tema. O `browseRowsMarginTop` do tema (espaço do painel de foco da
+   Início, `TVFocusPanel`) é também o `paddingTop` das grades Leanback: elas o fixam por `itemsVerticalGridStyle`
+   (`docs/funcionalidades/2026-10-15-redesenho-painel-foco-tv.md`).
 
 ---
 

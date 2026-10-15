@@ -2,7 +2,7 @@
 
 **Data:** 2026-10-13
 **Status:** Fase 1, Fase 2 (2.1–2.6) e entregas 3.1–3.2 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`,
-2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). 3.3 (fundo ambiente da TV) em `2dc9412`; próxima: avaliar a 3.4. Pendente: abrir o menu do jogo à mão.
+2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). 3.3 (fundo ambiente da TV) em `2dc9412`; 3.4 (painel do item em foco, opção A) pronta, sem commit (ver Andamento). Pendente: abrir o menu do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
 
@@ -1364,3 +1364,127 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
   - **Próximo passo:** avaliar a 3.4 (painel do item em
     foco). Abrir a sessão com: "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e avalie a
     entrega 3.4 (Painel do item em foco na Home da TV)."
+- **2026-10-15 (entrega 3.4, avaliação — nenhum código alterado).** Aguarda a decisão do dono entre as opções abaixo.
+  - **Abertos:**
+    - `TV/home/TVHomeFragment.kt` — único `BrowseSupportFragment` do app (`grep BrowseSupportFragment` em `src/main`).
+      Fileiras: Favoritos (`GamePresenter` + "ver todos"), Recentes (`GamePresenter`), Sistemas (`SystemPresenter`),
+      Ajustes (`SettingPresenter`). O `onItemViewSelectedListener` já existe (3.3) e só alimenta o
+      `TVAmbientBackground` — o painel engataria no mesmo ponto.
+    - **Os cartões já mostram o que o painel mostraria.** `GamePresenter`: título em 2 linhas + `GameUtils.getGameSubtitle`
+      (nome curto do sistema; `developer` é nulo no catálogo). `SystemPresenter`: nome + "N jogos". `SettingPresenter`:
+      rótulo. Tema: `infoVisibility=always` (`leanback-themes.xml:25`). Não há outro dado do jogo (ano, gênero,
+      descrição — hipótese já descartada na análise do plano).
+    - Capturas da 3.3 (960×540 dp): a fileira em foco é alinhada a 167 dp do topo (`lb_browse_rows_margin_top`); na
+      primeira fileira a faixa de cima tem só o orbe de busca (x 56–110, y 27–87 dp); da segunda em diante o orbe some e
+      as fileiras sobem.
+    - Leanback 1.1.0-rc01 (`javap` + `res/` do AAR): `BrowseSupportFragment.onCreate` lê `browseRowsMarginTop` do tema
+      do contexto (`mContainerListAlignTop`, também passado ao painel de cabeçalhos) — como só a Início é
+      `BrowseSupportFragment`, mudar o atributo no `LemuroidLeanbackTheme` só afeta ela. `updateTitleViewVisibility`
+      mostra o `TitleView` só com o painel de cabeçalhos aberto ou na primeira fileira com conteúdo.
+      `setBrowseTransitionListener` é público (para esconder o painel quando os cabeçalhos abrem).
+      `BaseCardView.setInfoVisibility` é público (cartão sem texto por instância, sem mexer no tema).
+      `lb_title_view.xml`: orbe à esquerda, `title_text`/`title_badge` à direita.
+  - **Hipóteses descartadas:**
+    - *"Usar o título do próprio `BrowseSupportFragment` (`title = game.title`)."* O `TitleView` some a partir da segunda
+      fileira (`updateTitleViewVisibility`): o painel sumiria justamente nas fileiras de Sistemas e Ajustes.
+    - *"`onInflateTitleView` com um `TitleView` próprio maior."* Mesmo problema: herda a regra de visibilidade do título.
+    - *"Trocar o `BrowseSupportFragment` por `RowsSupportFragment` num layout nosso."* Perde orbe de busca e painel de
+      cabeçalhos; reescrita da Início, não redesenho.
+    - *"Painel somado aos cartões como estão."* Título e sistema apareceriam duas vezes na tela, a ~150 dp de distância.
+      Custo de manutenção sem ganho de informação.
+  - **Opções para o dono:**
+    - **A (recomendada) — vitrine da prancha A:** painel fixo no topo (título Outfit 700 em até 2 linhas, chip com a cor
+      da `SystemPalette` e o nome do sistema; em sistema, nome + "N jogos"; em ajuste, o rótulo), e os cartões de **jogo
+      e sistema da Início** só com a imagem (`setInfoVisibility` por instância; catálogo, favoritos e busca continuam com
+      título). É o mesmo arranjo que a Início deitada do celular já usa ("nas fileiras só a capa; o título do item em
+      foco fica no topo"). **Efeito colateral a aceitar:** jogo sem capa na fileira vira só a capa gerada (sem título, por
+      decisão da 3.2) — ZX Spectrum/Arduboy nos Favoritos ficam iguais entre si até o foco chegar neles.
+    - **B — não fazer a 3.4.** A 3.3 já dá o fundo ambiente, e o cartão já identifica o item. Fecha a Fase 3 visual
+      com a 3.5/3.6 pendentes de decisão própria.
+  - **Tasks, se A:**
+    1. `res/layout/tv_focus_panel.xml` + `TV/home/TVFocusPanel.kt` (novo): título, chip e linha de apoio; não focável;
+       troca imediata no `FULL` com *fade* curto, sem animação no `LITE`; `Game`/`MetaSystemInfo`/`TVSetting`/`null`
+       (placeholder mantém o anterior). Prova: foco por D-pad nas quatro fileiras.
+    2. `TVHomeFragment.onCreateView` — sobrepor o painel à `BrowseFrameLayout` (abrir antes como o `BrowseSupportFragment`
+       guarda a raiz: se usa `getView()` em algum ponto, embrulhar num `FrameLayout` quebra); alimentar pelo
+       `onItemViewSelectedListener` existente; esconder com `setBrowseTransitionListener` quando os cabeçalhos abrem.
+    3. `browseRowsMarginTop` no `LemuroidLeanbackTheme` (valor a medir: painel ~90–110 dp entre o orbe e a fileira, sem
+       a fileira de jogo de 200 dp + zoom passar dos 540 dp). Prova: captura em 960×540 dp com a fileira de jogos e a de
+       sistemas em foco.
+    4. `GamePresenter`/`SystemPresenter` com parâmetro `showInfo` (padrão `true`); a Início passa `false`. Ajustes ficam
+       com rótulo (ícone sozinho não diz o que faz).
+    5. Verificação: build x86, `ktlintMainSourceSetCheck`, `lintFreeBundleDebug`, `lemu_tv_api25` em `LITE` e `FULL`
+       forçado (Início, abrir/fechar cabeçalhos, busca e voltar, jogar e voltar, menu de contexto), `logcat -b crash`
+       vazio; capturas antes/depois no doc da entrega.
+  - **Próximo passo:** decisão do dono (A ou B). Se A, abrir a sessão com: "Leia
+    `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 3.4 (opção A)."
+- **2026-10-15 (entrega 3.4, opção A — registro analítico antes do código).** O dono escolheu a opção A.
+  - **Abertos nesta sessão:** `TVHomeFragment` (inteiro), `GamePresenter`, `SystemPresenter`, `SettingPresenter`,
+    `TVSetting`/`TVSettingType`, `TVAmbientBackground`, `TVTypography`, `TVCardFocusHighlight`, `TVGridPresenters`,
+    `leanback-themes.xml`, `leanback-colors.xml`, `dimens.xml` (`tv_*`), `GameUtils.getGameSubtitle` (nome curto do
+    sistema por `GameSystem.shortTitleResId`), `MetaSystemInfo`, `SystemChip` (mobile: nome curto, negrito, branco,
+    pílula na cor da `SystemPalette`, padding 10/3). Leanback 1.1.0-rc01 por `javap -c` (cópia em scratchpad):
+    - `BrowseSupportFragment.onCreate` lê `browseRowsMarginTop` de `getContext()` (a Activity) para
+      `mContainerListAlignTop`; ele vira a linha de alinhamento da fileira selecionada (`setMainFragmentAlignment`,
+      reaplicado em **todo** `onStart` e em cada transição de cabeçalhos — `expandMainFragment`), o alinhamento do
+      painel de cabeçalhos e o `pivotY` do `ScaleFrameLayout`. Sobrescrever o alinhamento por código seria desfeito
+      nesses pontos.
+    - `onCreateView` devolve a raiz `browse_dummy` (`FrameLayout`); `browse_frame` e o `TitleView` ficam dentro dela.
+    - `RowsSupportFragment.setAlignment`: `NO_EDGE`, `itemAlignmentOffset 0` — o **conteúdo** da fileira (não o
+      cabeçalho) encosta na linha; o cabeçalho fica ~30 dp acima (captura da 3.3: linha 167, texto "Systems" em
+      145–162, cartões em 183). A fileira anterior termina ~57 dp acima da linha.
+    - `BrowseTransitionListener` (`onHeadersTransitionStart/Stop(withHeaders)`), `isShowingHeaders()`,
+      `getRowsSupportFragment()` são públicos.
+    - `ImageCardView`: `lbImageCardViewType = ImageOnly` (0) remove o `mInfoArea` no construtor; `setTitleText` com
+      título nulo não faz nada. O construtor `ImageCardView(Context)` lê `?imageCardViewStyle` do tema do contexto.
+  - **Hipóteses descartadas (corrigem a avaliação acima):**
+    - *"Mudar `browseRowsMarginTop` no `LemuroidLeanbackTheme` só afeta a Início."* Falso: o atributo também é o
+      `paddingTop` de `Widget.Leanback.GridItems.VerticalGridView` (`itemsVerticalGridStyle`), a grade do
+      `VerticalGridSupportFragment` — catálogo e favoritos desceriam 69 dp. (`grep browseRowsMarginTop` no `values.xml`
+      do AAR: só o `BrowseSupportFragment` em código e essa linha de estilo; o `Rows.VerticalGridView` não tem
+      `paddingTop`, e a busca usa `lb_search_browse_rows_align_top`.) Correção: o tema sobe o atributo **e** fixa
+      `itemsVerticalGridStyle` num estilo nosso com o `paddingTop` de hoje (167 dp).
+    - *"`setInfoVisibility` por instância esconde o texto."* Só há `always`/`activated`/`selected`; não existe
+      "nunca", e `selected` mostraria o título justamente no cartão em foco, repetindo o painel. Cartão só-imagem =
+      `ImageCardView` sobre `ContextThemeWrapper` com um `imageCardViewStyle` `ImageOnly`.
+    - *"Sobrepor o painel basta."* A fileira anterior à selecionada continua desenhada acima dela (na 3.3, o "1010"
+      aparece no topo com Sistemas em foco) e ficaria embaixo do painel. Correção: `clipBounds` na `VerticalGridView`
+      da `RowsSupportFragment`, cortando o que fica acima do cabeçalho da fileira selecionada.
+  - **Geometria (960×540 dp):** orbe em y 27–87 (só na 1ª fileira); painel ancorado embaixo, terminando em y 188,
+    conteúdo de até ~94 dp (título 24sp em 2 linhas + chip) → começa em ≥ 94; corte das fileiras em y 200; linha de
+    alinhamento 236 (+69). Fileira de jogo só-imagem: 236 + 16 + 200 = 452, + zoom do foco < 540.
+  - **Tasks:**
+    1. `res/layout/tv_focus_panel.xml` + `TV/home/TVFocusPanel.kt`: título (Outfit 700, 24sp, 2 linhas), chip
+       (pílula na cor da `SystemPalette`, nome curto do sistema; em sistema, "N jogos"; ajuste sem chip). Não focável,
+       fora da acessibilidade (o cartão já é lido). `FULL`: fade de 150 ms; `LITE`: troca seca. `null` mantém.
+    2. `TVHomeFragment`: painel na raiz devolvida por `super.onCreateView`; alimentado pelo `onItemViewSelectedListener`
+       da 3.3; escondido por `setBrowseTransitionListener` (cabeçalhos abrindo) e no início se `isShowingHeaders()`;
+       corte das fileiras por `registerFragmentLifecycleCallbacks` (no `onCreate`, como o `TVTypography`) na
+       `RowsSupportFragment`.
+    3. Tema: `browseRowsMarginTop` = 236 dp; `itemsVerticalGridStyle` com `paddingTop` 167 dp (grades iguais a hoje).
+    4. `GamePresenter(showInfo)`, `SystemPresenter(showInfo)`, `SettingPresenter(showInfo)`, padrão `true`. A Início
+       passa `false` para jogos, sistemas e o "Ver todos" da fileira de Favoritos (desvio da avaliação: com os jogos
+       só-imagem, o "Ver todos" com rótulo deixaria a fileira com alturas desiguais; o painel mostra "Ver todos" no
+       foco). A fileira Ajustes mantém o rótulo.
+    5. Prova no `lemu_tv_api25`: medir as linhas com `uiautomator dump` (cabeçalho, corte, painel), catálogo e busca
+       sem deslocamento (comparar com as capturas da 3.2/3.3), abrir/fechar cabeçalhos, jogar e voltar, menu de
+       contexto; `LITE` e `FULL` forçado; build x86, `ktlintMainSourceSetCheck`, `lintFreeBundleDebug`,
+       `logcat -b crash` vazio.
+- **2026-10-15 (entrega 3.4, opção A — entrega):** painel do item em foco na Início da TV pronto, **sem commit**. Doc da
+  entrega: [`docs/funcionalidades/2026-10-15-redesenho-painel-foco-tv.md`](../funcionalidades/2026-10-15-redesenho-painel-foco-tv.md)
+  (capturas em `docs/funcionalidades/img/2026-10-15-redesenho-painel-foco-tv-*.jpg`).
+  - **Feito:** as tasks 1–4 do registro analítico acima.
+  - **Desvios do registro:** corte em 196 dp (não 200): medido no `uiautomator dump`, o cabeçalho da fileira selecionada
+    ocupa 208–236 e os cartões da fileira de cima terminam em ~180, então 196 deixa 12–16 dp de folga para cada lado.
+    Título com `includeFontPadding=false`: com o padding, um título de 2 linhas começava a 2 dp do orbe (agora 9 dp).
+  - **Hipótese descartada na prova:** *"Aplicar o conteúdo direto no listener."* Ao voltar do catálogo, o Leanback
+    despacha a seleção de dentro da passada de layout das fileiras; o `requestLayout` do `setText` se perdia e o painel
+    ficava vazio (log temporário: evento `MetaSystemInfo` chegando com o painel criado; `dumpsys activity top`: título
+    com largura 0). Correção: conteúdo aplicado num `post`.
+  - **Verificação:** build x86 e `ktlintMainSourceSetCheck` OK; `lintFreeBundleDebug` BUILD SUCCESSFUL. No `lemu_tv_api25`
+    (`LITE` real e `FULL` forçado num build temporário, revertido): cabeçalhos abertos/fechados, as quatro fileiras,
+    título longo, "Ver todos", catálogo inalterado (cartões em 135 dp, como na 3.2) e voltar, busca e voltar, menu de
+    contexto, jogar e voltar. `logcat -b crash` vazio. 11 favoritos temporários no banco do AVD, desfeitos no fim.
+  - **Não verificado:** TV box real, escala de fonte > 1,0, digitar na busca, `gfxinfo`.
+  - **Próximo passo:** aval do dono para o commit da 3.4. Depois, decidir 3.5 (selo de salvo na TV) e 3.6 (fileira
+    "Jogos salvos" na TV), que dependem de decisão própria; ou abrir o menu do jogo à mão (pendência antiga).

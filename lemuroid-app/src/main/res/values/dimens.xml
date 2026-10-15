@@ -21,4 +21,20 @@
     <dimen name="tv_system_card_height">144dp</dimen>
     <dimen name="tv_dialog_cover_width">96dp</dimen>
     <dimen name="tv_dialog_cover_height">128dp</dimen>
+
+    <!--
+        Focus panel of the TV home (delivery 3.4), on a 960x540 dp screen. The search orb takes y 27-83 on the first
+        row; the panel (title in up to 2 lines + chip, ~96 dp) ends at tv_focus_panel_bottom; the rows above the
+        selected one are cut at tv_home_rows_clip_top, between their cards (end at ~180) and the header of the
+        selected row (208-236); the content of the selected row aligns at tv_home_rows_align_top
+        (browseRowsMarginTop; Leanback default 167).
+    -->
+    <dimen name="tv_focus_panel_bottom">188dp</dimen>
+    <!-- Aligned with the row headers (Leanback browsePaddingStart) -->
+    <dimen name="tv_focus_panel_margin_start">56dp</dimen>
+    <dimen name="tv_focus_panel_title_max_width">640dp</dimen>
+    <dimen name="tv_home_rows_clip_top">196dp</dimen>
+    <dimen name="tv_home_rows_align_top">236dp</dimen>
+    <!-- browseRowsMarginTop is also the top padding of the Leanback grids (catalog, favorites): kept at the default -->
+    <dimen name="tv_grid_padding_top">167dp</dimen>
 </resources>

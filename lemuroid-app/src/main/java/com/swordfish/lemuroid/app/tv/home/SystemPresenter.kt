@@ -9,10 +9,16 @@ import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.tv.shared.TVCardFocusHighlight
 import com.swordfish.lemuroid.app.tv.shared.TVCovers
 import com.swordfish.lemuroid.app.tv.shared.TVTypography
+import com.swordfish.lemuroid.app.tv.shared.newTVCardView
 import com.swordfish.lemuroid.lib.library.SystemLogoResolver
 
-/** System block of the redesign: console art over the `SystemPalette` colour, 208x144. */
-class SystemPresenter : Presenter() {
+/**
+ * System block of the redesign: console art over the `SystemPalette` colour, 208x144. Without [showInfo] it is only
+ * the art: on the home the focus panel ([TVFocusPanel]) carries name and game count.
+ */
+class SystemPresenter(
+    private val showInfo: Boolean = true,
+) : Presenter() {
     override fun onBindViewHolder(
         viewHolder: Presenter.ViewHolder?,
         item: Any,
@@ -21,14 +27,19 @@ class SystemPresenter : Presenter() {
         val systemInfo = item as? MetaSystemInfo ?: return
         val context = holder.view.context
 
-        holder.mCardView.titleText = context.resources.getString(systemInfo.metaSystem.titleResId)
-        holder.mCardView.contentText = context.getString(R.string.system_grid_details, systemInfo.count.toString())
+        val name = context.resources.getString(systemInfo.metaSystem.titleResId)
+        if (showInfo) {
+            holder.mCardView.titleText = name
+            holder.mCardView.contentText = context.getString(R.string.system_grid_details, systemInfo.count.toString())
+        } else {
+            holder.mCardView.contentDescription = name
+        }
         holder.mCardView.tag = systemInfo
         holder.showArt(systemInfo, hovered = holder.mCardView.hasFocus())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): Presenter.ViewHolder {
-        val cardView = ImageCardView(parent.context)
+        val cardView = newTVCardView(parent.context, showInfo)
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
         cardView.setMainImageDimensions(

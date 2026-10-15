@@ -19,10 +19,32 @@
         <item name="android:colorPrimary">@color/leanback_bars</item>
         <item name="android:windowBackground">@color/leanback_background</item>
         <item name="imageCardViewStyle">@style/LemuroidLeanbackTheme.ImageCardViewStyle</item>
+        <!--
+            Room for the focus panel of the home (TVFocusPanel). Only BrowseSupportFragment reads this in code; the
+            other reader is the top padding of the grids, pinned back below.
+        -->
+        <item name="browseRowsMarginTop">@dimen/tv_home_rows_align_top</item>
+        <item name="itemsVerticalGridStyle">@style/LemuroidLeanbackTheme.ItemsVerticalGridStyle</item>
+    </style>
+
+    <style name="LemuroidLeanbackTheme.ItemsVerticalGridStyle" parent="Widget.Leanback.GridItems.VerticalGridView">
+        <item name="android:paddingTop">@dimen/tv_grid_padding_top</item>
     </style>
 
     <style name="LemuroidLeanbackTheme.ImageCardViewStyle" parent="Widget.Leanback.ImageCardViewStyle">
         <item name="infoVisibility">always</item>
+    </style>
+
+    <!--
+        Theme overlay of the home cards that show only the image: the focus panel carries title and system.
+        ImageOnly makes ImageCardView drop its info area.
+    -->
+    <style name="LemuroidLeanbackTheme.ImageOnlyCards" parent="">
+        <item name="imageCardViewStyle">@style/LemuroidLeanbackTheme.ImageOnlyCardViewStyle</item>
+    </style>
+
+    <style name="LemuroidLeanbackTheme.ImageOnlyCardViewStyle" parent="LemuroidLeanbackTheme.ImageCardViewStyle">
+        <item name="lbImageCardViewType">ImageOnly</item>
     </style>
 
     <!--

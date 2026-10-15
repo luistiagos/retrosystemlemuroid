@@ -48,6 +48,9 @@ class TVHomeFragment : BrowseSupportFragment() {
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
+    /** Title and system of the focused card (redesign 3.4); the home cards show only the image. */
+    private var focusPanel: TVFocusPanel? = null
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
@@ -56,6 +59,7 @@ class TVHomeFragment : BrowseSupportFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         TVTypography.styleBrowseHeaders(this)
+        TVFocusPanel.clipRowsAboveSelection(this)
     }
 
     override fun onCreateView(
@@ -96,7 +100,9 @@ class TVHomeFragment : BrowseSupportFragment() {
                 }
             }
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val root = super.onCreateView(inflater, container, savedInstanceState)
+        focusPanel = (root as? ViewGroup)?.let { TVFocusPanel.attach(it) }
+        return root
     }
 
     override fun onViewCreated(
@@ -107,7 +113,22 @@ class TVHomeFragment : BrowseSupportFragment() {
 
         val ambientBackground = TVAmbientBackground.attach(this)
         onItemViewSelectedListener =
-            OnItemViewSelectedListener { _, item, _, _ -> ambientBackground.onItemSelected(item) }
+            OnItemViewSelectedListener { _, item, _, _ ->
+                ambientBackground.onItemSelected(item)
+                focusPanel?.onItemSelected(item)
+            }
+        focusPanel?.setShown(!isShowingHeaders)
+        setBrowseTransitionListener(
+            object : BrowseTransitionListener() {
+                override fun onHeadersTransitionStart(withHeaders: Boolean) {
+                    if (withHeaders) focusPanel?.setShown(false)
+                }
+
+                override fun onHeadersTransitionStop(withHeaders: Boolean) {
+                    if (!withHeaders) focusPanel?.setShown(true)
+                }
+            },
+        )
 
         recreateAdapter(
             includeFavorites = false,
@@ -125,6 +146,11 @@ class TVHomeFragment : BrowseSupportFragment() {
             homeViewModel.getViewStates()
                 .collect { update(it) }
         }
+    }
+
+    override fun onDestroyView() {
+        focusPanel = null
+        super.onDestroyView()
     }
 
     private fun update(viewState: TVHomeViewModel.HomeViewState) {
@@ -191,14 +217,16 @@ class TVHomeFragment : BrowseSupportFragment() {
 
         if (includeFavorites) {
             val presenter = ClassPresenterSelector()
-            presenter.addClassPresenter(Game::class.java, GamePresenter(gameInteractor))
-            // "Show all" sits next to the games: same size as the game card, so the row keeps one height.
+            presenter.addClassPresenter(Game::class.java, GamePresenter(gameInteractor, showInfo = false))
+            // "Show all" sits next to the games: same size as the game card and only the icon, so the row keeps one
+            // height. The focus panel shows its label.
             presenter.addClassPresenter(
                 TVSetting::class.java,
                 SettingPresenter(
                     resources.getDimensionPixelSize(R.dimen.tv_game_card_width),
                     resources.getDimensionPixelSize(R.dimen.tv_game_card_height),
                     settingsCardPadding,
+                    showInfo = false,
                 ),
             )
             val favouritesItems = ArrayObjectAdapter(presenter)
@@ -207,13 +235,13 @@ class TVHomeFragment : BrowseSupportFragment() {
         }
 
         if (includeRecentGames) {
-            val recentItems = ArrayObjectAdapter(GamePresenter(gameInteractor))
+            val recentItems = ArrayObjectAdapter(GamePresenter(gameInteractor, showInfo = false))
             val title = resources.getString(R.string.tv_home_section_recents)
             result.add(ListRow(HeaderItem(RECENTS_ADAPTER, title), recentItems))
         }
 
         if (includeSystems) {
-            val systemItems = ArrayObjectAdapter(SystemPresenter())
+            val systemItems = ArrayObjectAdapter(SystemPresenter(showInfo = false))
             val title = resources.getString(R.string.tv_home_section_systems)
             result.add(ListRow(HeaderItem(SYSTEM_ADAPTER, title), systemItems))
         }

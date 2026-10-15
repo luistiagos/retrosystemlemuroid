@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Focus panel of the TV home (TVFocusPanel): title and system of the focused card, anchored at the bottom of the band
+    above the rows. Not focusable, and hidden from accessibility: the card itself carries the description.
+    The fonts (Outfit) and the chip colour are applied by code: android:fontFamily needs Android 8+.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tv_focus_panel_bottom"
+    android:layout_marginStart="@dimen/tv_focus_panel_margin_start"
+    android:layout_marginEnd="@dimen/tv_focus_panel_margin_start"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:gravity="bottom|start"
+    android:importantForAccessibility="noHideDescendants"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_focus_panel_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxWidth="@dimen/tv_focus_panel_title_max_width"
+        android:maxLines="2"
+        android:shadowColor="#CC000000"
+        android:shadowDy="1"
+        android:shadowRadius="6"
+        android:textColor="@color/leanback_text"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_focus_panel_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingStart="12dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="4dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:visibility="gone" />
+</LinearLayout>

@@ -6,12 +6,17 @@ import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
 import com.swordfish.lemuroid.app.tv.shared.TVCardFocusHighlight
 import com.swordfish.lemuroid.app.tv.shared.TVTypography
+import com.swordfish.lemuroid.app.tv.shared.newTVCardView
 
-/** Setting card. In the Favorites row it takes the game card size, so the row keeps one height. */
+/**
+ * Setting card. In the Favorites row it takes the game card size and, as the games there, shows only the icon
+ * (without [showInfo]: the focus panel of the home carries the label), so the row keeps one height.
+ */
 class SettingPresenter(
     private val cardWidth: Int,
     private val cardHeight: Int,
     private val cardPadding: Int,
+    private val showInfo: Boolean = true,
 ) : Presenter() {
     override fun onBindViewHolder(
         viewHolder: Presenter.ViewHolder?,
@@ -19,7 +24,12 @@ class SettingPresenter(
     ) {
         val viewHolder = viewHolder as? ViewHolder ?: return
         val setting = item as TVSetting
-        viewHolder.mCardView.titleText = viewHolder.view.context.resources.getString(setting.type.text)
+        val label = viewHolder.view.context.resources.getString(setting.type.text)
+        if (showInfo) {
+            viewHolder.mCardView.titleText = label
+        } else {
+            viewHolder.mCardView.contentDescription = label
+        }
         viewHolder.mCardView.setMainImageDimensions(cardWidth, cardHeight)
         viewHolder.mCardView.mainImageView.setImageResource(setting.type.icon)
 
@@ -30,7 +40,7 @@ class SettingPresenter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): Presenter.ViewHolder {
-        val cardView = ImageCardView(parent.context)
+        val cardView = newTVCardView(parent.context, showInfo)
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
         TVTypography.styleCard(cardView)
