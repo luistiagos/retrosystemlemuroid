@@ -24,13 +24,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CloudOff
-import androidx.compose.material.icons.filled.Layers
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -47,7 +42,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -59,6 +53,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
+import com.swordfish.lemuroid.app.mobile.feature.installed.SAVED_GAME_UNAVAILABLE_ALPHA
+import com.swordfish.lemuroid.app.mobile.feature.installed.SavedGameBadges
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AmbientBackdrop
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.CoverSaveState
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidColors
@@ -70,13 +66,13 @@ import com.swordfish.lemuroid.app.mobile.shared.compose.ui.PillShape
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SaveStateIndicator
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SaveStateOverlay
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SectionHeader
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SystemChip
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SystemPalette
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.effects.focusHighlight
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.rememberCoverSaveState
 import com.swordfish.lemuroid.app.shared.roms.SaveQueueEntry
 import com.swordfish.lemuroid.app.shared.roms.SaveQueueState
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
-import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -641,55 +637,14 @@ private fun SavedCover(
         onClick = onClick,
         onLongClick = onLongClick,
         onFocused = onFocused,
-        coverAlpha = if (item.isAvailable) 1f else UNAVAILABLE_ALPHA,
+        coverAlpha = if (item.isAvailable) 1f else SAVED_GAME_UNAVAILABLE_ALPHA,
     ) {
         LemuroidGameImage(
             game = game,
             modifier = Modifier.fillMaxSize(),
             generatedCoverTitle = !showTitle,
         )
-        if (!item.isAvailable) {
-            Box(
-                modifier =
-                    Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(6.dp)
-                        .size(22.dp)
-                        .background(LemuroidColors.ErrorBadge, CircleShape),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(
-                    imageVector = Icons.Default.CloudOff,
-                    contentDescription = stringResource(R.string.installed_media_unavailable),
-                    tint = Color.White,
-                    modifier = Modifier.size(13.dp),
-                )
-            }
-        }
-        if (item.group.installedVariantsCount > 1) {
-            Row(
-                modifier =
-                    Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(6.dp)
-                        .background(LemuroidColors.Bars, PillShape)
-                        .padding(horizontal = 6.dp, vertical = 2.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Layers,
-                    contentDescription = null,
-                    tint = LemuroidColors.Text,
-                    modifier = Modifier.size(11.dp),
-                )
-                Text(
-                    text = " ${item.group.installedVariantsCount}",
-                    style = LocalLemuroidTypography.current.support,
-                    fontWeight = FontWeight.Bold,
-                    color = LemuroidColors.Text,
-                )
-            }
-        }
+        SavedGameBadges(item)
     }
 }
 
@@ -765,28 +720,6 @@ private fun HeroLabel(
         style = LocalLemuroidTypography.current.support,
         color = LemuroidColors.TextSupportOnBackdrop,
         maxLines = 1,
-    )
-}
-
-/** Short name of the system in a pill of its colour. */
-@Composable
-private fun SystemChip(systemId: String) {
-    val context = LocalContext.current
-    val name =
-        remember(systemId) {
-            GameSystem.findByIdOrNull(systemId)?.shortTitleResId?.let { context.getString(it) } ?: systemId
-        }
-    val color = remember(systemId) { SystemPalette.colorForSystemId(systemId) }
-    Text(
-        text = name,
-        style = LocalLemuroidTypography.current.support,
-        fontWeight = FontWeight.Bold,
-        color = Color.White,
-        maxLines = 1,
-        modifier =
-            Modifier
-                .background(color, PillShape)
-                .padding(horizontal = 10.dp, vertical = 3.dp),
     )
 }
 
@@ -879,4 +812,3 @@ private val HERO_COVER_WIDTH = 112.dp
 private val HERO_BUTTON_HEIGHT = 36.dp
 private val HEADER_LABEL_HEIGHT = 24.dp
 private const val BACKDROP_DELAY_MS = 300L
-private const val UNAVAILABLE_ALPHA = 0.6f

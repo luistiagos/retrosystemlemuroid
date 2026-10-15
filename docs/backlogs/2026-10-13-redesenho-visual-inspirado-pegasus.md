@@ -969,3 +969,73 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     sessão); depois remover o worktree (`git worktree remove C:\projects\lemuroid\wt-06c7911`); depois a 2.4
     (Jogos salvos). Abrir a sessão com: "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`
     e execute a entrega 2.4 (Jogos salvos)."
+  - **Feito depois (mesma sessão):** commit `df706f4` (2.3, sem os manifests); worktree removido.
+- **2026-10-14 (entrega 2.4, registro analítico antes do código).** Árvore: só os dois `catalog_manifest.txt` da
+  outra sessão modificados.
+  - **Abertos:**
+    - `M/feature/installed/InstalledGamesScreen.kt` — `Column` com `OutlinedTextField` (busca, `installed_search_hint`,
+      limpar com `clear`) e `LazyVerticalGrid(Adaptive(144))`; vazio sem busca = `LemuroidEmptyView`, vazio com
+      busca = `installed_no_search_results`; chave `"${systemId}_${title}_${id}"`. Toque e toque longo vêm da
+      `MainActivity`.
+    - `M/feature/installed/LemuroidInstalledGameCard.kt` — `ElevatedCard` + `bounceClick`, `LemuroidGameImage` +
+      `LemuroidGameTexts`, chip do sistema (`shortTitleResId`, fallback `systemId`) no topo esquerdo, `CloudOff`
+      vermelho + alfa 0,6 quando `!isAvailable`, pílula `Layers` + contagem quando `installedVariantsCount > 1`.
+      Único chamador: a tela acima.
+    - `M/feature/installed/InstalledGamesViewModel.kt` — **não muda.** `installedGames` (`WhileSubscribed`,
+      `initialValue = emptyList()`: a tela vazia aparece um instante antes dos dados, comportamento já existente),
+      busca com `debounce(150)` e `SystemSearchResolver`, `init` reconcilia a pasta gerenciada (R5).
+    - `MainActivity.kt:378-396` `onInstalledGameClick` (mídia inacessível → toast; > 1 versão → seletor só das
+      salvas; senão joga ou salva) e `:508-523` (rota `INSTALLED`, `Modifier.padding(padding)`). **Não mudam.**
+    - `HomeLayouts.kt::SavedCover` (`:630-694`) já desenha o jogo salvo no visual novo: `CloudOff` em
+      `LemuroidColors.ErrorBadge`, pílula `Layers` em `LemuroidColors.Bars` no canto inferior direito, alfa
+      `UNAVAILABLE_ALPHA` 0,6. `SystemChip` (`:773`) é privado (pílula na cor de `SystemPalette`).
+    - `GamesScreen.kt::CatalogGridCells` (`:313-328`) — grade de no mínimo 3 colunas, privada.
+      `LemuroidGameGridItem` — capa 3:4 (`COVER_ASPECT` 0,75), `focusHighlight`, `combinedClickable`, título
+      `cardTitle` 2 linhas, `generatedCoverTitle = false`.
+    - R1–R9 e matriz da seção 8 de `2026-10-08-aba-jogos-instalados-salvos.md`: quase tudo é camada de dados (DAO,
+      realinhador, monitor de mídia), que esta entrega não toca. O que é de UI: chip do sistema, contagem de
+      versões, indicador de mídia inacessível com o jogo ainda na lista, busca por nome de sistema, busca que
+      mantém a contagem de versões, Jogos salvos → Busca com escopo restrito.
+  - **Hipóteses descartadas:**
+    - *"Reaproveitar `LemuroidGameGridItem` com parâmetros novos."* Ele mostra `SaveStateOverlay` e o selo de
+      variantes do catálogo. Aqui todo jogo está salvo (o ✓ seria ruído) e as versões contam só as salvas. Cartão
+      próprio, montado com as mesmas peças.
+    - *"Copiar `SavedCover` e `SystemChip` para o pacote `installed`."* Duas cópias divergem. Os selos de jogo
+      salvo e o chip saem para componentes compartilhados, usados pela Início e pela aba.
+  - **Desenho:** campo de busca em pílula (fundo `LemuroidColors.Surface`, sem contorno, ícones `TextSupport`);
+    grade `CoverGridCells(gridCoverMinWidth)` (3 colunas em pé, mais deitado), margens/espaço de `LocalDimens`.
+    Cartão: capa 3:4 com `cardCornerRadius`, chip do sistema compacto sobre a capa (topo esquerdo), `CloudOff`
+    (topo direito) e pílula de versões (inferior direito), alfa 0,6 na capa se inacessível, título `cardTitle`
+    2 linhas embaixo, `focusHighlight` + `combinedClickable`. Mensagem de busca sem resultado em `TextSupport`.
+  - **Tasks:**
+    1. `shared/compose/ui/CoverGridCells.kt` (novo) — `CatalogGridCells` sai do `GamesScreen` sem mudar a conta.
+       Prova: catálogo do SNES com as mesmas colunas (3 em pé, 6 deitado no AVD).
+    2. `shared/compose/ui/SystemChip.kt` (novo) — `SystemChip(systemId, compact)`; a Início usa o normal. Prova:
+       destaque da Início igual à captura da 2.3.
+    3. `feature/installed/SavedGameBadges.kt` (novo) — `BoxScope.SavedGameBadges(item)` (mídia + versões);
+       `HomeLayouts.SavedCover` passa a usar. Prova: fileira da Início sem mudança visual.
+    4. `LemuroidInstalledGameCard.kt` — cartão novo (assinatura mantida). `InstalledGamesScreen.kt` — busca e
+       grade novas; chave e textos mantidos. Prova: roteiro abaixo.
+    5. Verificação: build x86_64; AVD com 2+ jogos salvos (um com 2 versões); busca por título e por sistema
+       ("snes"/"Super Nintendo"); toque (1 versão joga, 2 abre o seletor só das salvas); toque longo; deitado (mais
+       colunas, D-pad); modo avião (abre, capas, joga); Jogos salvos → Busca com o chip de escopo. Mídia
+       inacessível: `sm unmount` no AVD com SD, se der.
+- **2026-10-14 (entrega 2.4, entrega):** Jogos salvos no visual novo, **sem commit**. Doc da entrega:
+  [`docs/funcionalidades/2026-10-14-redesenho-jogos-salvos.md`](../funcionalidades/2026-10-14-redesenho-jogos-salvos.md)
+  (capturas em `docs/funcionalidades/img/2026-10-14-redesenho-jogos-salvos*.jpg`).
+  - **Feito:** as 4 tasks de código do registro analítico. Desvio: o campo de busca ganhou `onPreviewKeyEvent`
+    (para baixo/cima saem do campo; esquerda sai com o campo vazio). Sem isso, o D-pad ficava preso no campo e a
+    grade era inalcançável numa TV box. Provavelmente já acontecia com o `OutlinedTextField` antigo (mesmo
+    `BasicTextField`), mas não foi medido.
+  - **Verificação:** roteiro do item 5 no `lemu_api25_2gb` (instância própria, `emulator-5556`; o
+    `emulator-5554` é de outro projeto e não foi tocado). Resultado por item no doc da entrega. Modo avião só
+    valeu com `adb root` + `airplane_mode_on` + broadcast; `svc wifi disable` como `shell` não derruba a rede
+    no API 25 (`SecurityException` no próprio `svc`).
+  - **ktlint:** nenhum apontamento nos arquivos novos nem no `HomeLayouts`. No `GamesScreen`, 9 apontamentos
+    antigos se deslocaram de linha (imports mexidos) e saíram do baseline; foram **corrigidos** (formatação),
+    não congelados.
+  - **Hipótese descartada:** *"O seletor de versões mostra download em versão já salva."* O ícone `Download` só
+    aparece com `isDownloaded` (descrição `rom_download_badge_downloaded`): quer dizer "salvo". A confusão é do
+    ícone, não da lógica.
+  - **Ambiente:** `adb install` de 150 MB travou duas vezes neste AVD sem sair nada (o cliente ficou parado
+    antes da cópia). `adb push` + `pm install` com `timeout` resolve em segundos.

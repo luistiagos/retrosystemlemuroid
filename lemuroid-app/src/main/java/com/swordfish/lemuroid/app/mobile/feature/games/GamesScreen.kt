@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -30,7 +29,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -40,6 +38,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AmbientBackdrop
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.CoverGridCells
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidColors
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameGridItem
@@ -82,10 +81,11 @@ fun GamesScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
     val dimens = LocalDimens.current
 
-    val isGridView = booleanPreferenceState(
-        id = R.string.pref_key_catalog_layout_grid,
-        default = true
-    ).value
+    val isGridView =
+        booleanPreferenceState(
+            id = R.string.pref_key_catalog_layout_grid,
+            default = true,
+        ).value
 
     val isLoading = games.loadState.refresh is LoadState.Loading
     if (!isLoading && games.itemCount == 0) {
@@ -97,25 +97,27 @@ fun GamesScreen(
         val gridState = rememberLazyGridState()
 
         DisposableEffect(lifecycleOwner) {
-            val observer = LifecycleEventObserver { _, event ->
-                if (event == Lifecycle.Event.ON_RESUME) {
-                    coroutineScope.launch { gridState.scrollToItem(0) }
+            val observer =
+                LifecycleEventObserver { _, event ->
+                    if (event == Lifecycle.Event.ON_RESUME) {
+                        coroutineScope.launch { gridState.scrollToItem(0) }
+                    }
                 }
-            }
             lifecycleOwner.lifecycle.addObserver(observer)
             onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
         }
 
         LazyVerticalGrid(
-            columns = remember(dimens.gridCoverMinWidth) { CatalogGridCells(dimens.gridCoverMinWidth) },
+            columns = remember(dimens.gridCoverMinWidth) { CoverGridCells(dimens.gridCoverMinWidth) },
             state = gridState,
             modifier = modifier.fillMaxSize(),
             // No top padding: the header is drawn edge to edge from the top.
-            contentPadding = PaddingValues(
-                start = dimens.screenMargin,
-                end = dimens.screenMargin,
-                bottom = dimens.screenMargin,
-            ),
+            contentPadding =
+                PaddingValues(
+                    start = dimens.screenMargin,
+                    end = dimens.screenMargin,
+                    bottom = dimens.screenMargin,
+                ),
             verticalArrangement = Arrangement.spacedBy(dimens.cardSpacing),
             horizontalArrangement = Arrangement.spacedBy(dimens.cardSpacing),
         ) {
@@ -148,11 +150,12 @@ fun GamesScreen(
         val listState = rememberLazyListState()
 
         DisposableEffect(lifecycleOwner) {
-            val observer = LifecycleEventObserver { _, event ->
-                if (event == Lifecycle.Event.ON_RESUME) {
-                    coroutineScope.launch { listState.scrollToItem(0) }
+            val observer =
+                LifecycleEventObserver { _, event ->
+                    if (event == Lifecycle.Event.ON_RESUME) {
+                        coroutineScope.launch { listState.scrollToItem(0) }
+                    }
                 }
-            }
             lifecycleOwner.lifecycle.addObserver(observer)
             onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
         }
@@ -204,9 +207,10 @@ private fun GamesCatalogHeader(
         GamesSortChips(
             sortOrder = sortOrder,
             onSortChange = onSortChange,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = dimens.screenMargin, vertical = 8.dp),
+            modifier =
+                modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = dimens.screenMargin, vertical = 8.dp),
         )
         return
     }
@@ -218,21 +222,24 @@ private fun GamesCatalogHeader(
         modifier = modifier.fillMaxWidth(),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = dimens.screenMargin, end = dimens.screenMargin, top = 16.dp, bottom = 8.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = dimens.screenMargin, end = dimens.screenMargin, top = 16.dp, bottom = 8.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 LemuroidSystemImage(
                     metaSystem = metaSystem,
-                    modifier = Modifier
-                        .width(if (dimens.isLandscape) 88.dp else 104.dp)
-                        .clip(RoundedCornerShape(dimens.cardCornerRadius)),
+                    modifier =
+                        Modifier
+                            .width(if (dimens.isLandscape) 88.dp else 104.dp)
+                            .clip(RoundedCornerShape(dimens.cardCornerRadius)),
                 )
                 Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 12.dp, end = 8.dp),
+                    modifier =
+                        Modifier
+                            .weight(1f)
+                            .padding(start = 12.dp, end = 8.dp),
                 ) {
                     Text(
                         text = stringResource(metaSystem.titleResId),
@@ -305,26 +312,3 @@ private fun Modifier.bleedHorizontally(margin: Dp) =
             )
         layout(constraints.maxWidth, placeable.height) { placeable.place(-bleed, 0) }
     }
-
-/**
- * As many columns of at least [minSize] as fit, never fewer than [MIN_COLUMNS] (the portrait
- * spec): a plain `GridCells.Adaptive` drops to 2 on narrow phones.
- */
-private class CatalogGridCells(private val minSize: Dp) : GridCells {
-    override fun Density.calculateCrossAxisCellSizes(
-        availableSize: Int,
-        spacing: Int,
-    ): List<Int> {
-        val count = maxOf(MIN_COLUMNS, (availableSize + spacing) / (minSize.roundToPx() + spacing))
-        val cellsSpace = (availableSize - spacing * (count - 1)).coerceAtLeast(0)
-        val cellSize = cellsSpace / count
-        val remainder = cellsSpace % count
-        return List(count) { cellSize + if (it < remainder) 1 else 0 }
-    }
-
-    override fun equals(other: Any?): Boolean = other is CatalogGridCells && other.minSize == minSize
-
-    override fun hashCode(): Int = minSize.hashCode()
-}
-
-private const val MIN_COLUMNS = 3
