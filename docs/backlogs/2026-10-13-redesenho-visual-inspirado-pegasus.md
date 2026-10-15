@@ -1,9 +1,8 @@
 # [BACKLOG] Redesenho visual do Lemuroid inspirado nos temas do Pegasus
 
 **Data:** 2026-10-13
-**Status:** 3.2 (Cartões e diálogo de salvar da TV) e 3.1 (Tema da TV) implementadas em 15/10/2026, sem commit. Fase 1 e entregas 2.1–2.5 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`). 2.6 (Moldura)
-implementada e verificada em 15/10/2026, sem commit. Fase 2 completa; próxima: Fase 3 (TV). Pendente: abrir o
-menu do jogo à mão.
+**Status:** Fase 1, Fase 2 (2.1–2.6) e entregas 3.1–3.2 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`,
+2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). Próxima: 3.3 (fundo ambiente da TV). Pendente: abrir o menu do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
 
@@ -1295,6 +1294,9 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     menu de contexto, TV box real.
   - **Pendências:** foco do botão do diálogo (âmbar a 25%) a conferir em TV box real; `systems_card_padding`
     (`retrograde-app-shared`) sem uso.
-  - **Próximo passo:** commit da 2.6, da 3.1 e da 3.2 (com o aval do dono); depois a 3.3. Abrir a sessão com:
+  - **Commits (15/10/2026, com o aval do dono):** 2.6 em `31cab86`; 3.1 + 3.2 juntas em `773dbe2` (mexem nos mesmos
+    arquivos de TV). A remoção da cópia `src/debug/res/values/leanback-colors.xml` (3.1) saiu no `31cab86`, por já
+    estar no índice; sem efeito no build, a cópia era idêntica à de `main`.
+  - **Próximo passo:** a 3.3. Abrir a sessão com:
     "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 3.3 (Fundo ambiente
     da TV)."
