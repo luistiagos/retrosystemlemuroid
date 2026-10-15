@@ -1489,3 +1489,35 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
   - **Feito depois:** commit `18cf57d` (3.4), com o aval do dono.
   - **Próximo passo:** decidir 3.5 (selo de salvo na TV) e 3.6 (fileira
     "Jogos salvos" na TV), que dependem de decisão própria; ou abrir o menu do jogo à mão (pendência antiga).
+- **2026-10-15 (passagem de bastão: 3.5 e 3.6 em sessões paralelas).** O dono pediu as duas entregas, cada uma numa
+  sessão nova. **O pedido vale como o aval da 3.6** exigido na Fase 3 ("só com o aval do dono").
+  - **Estado de partida:** `version10` em `30b68e7`, árvore limpa, tudo enviado. Fase 3 visual (3.1–3.4) fechada.
+  - **Ponteiros conferidos (só existência, por `grep`; abrir antes de escrever código):**
+    `DownloadedRomDao.observeAllDownloadedKeys(): Flow<List<String>>` (`LIB/library/db/dao/DownloadedRomDao.kt:36`);
+    `GameDao.observeInstalledGameGroups(` (`LIB/library/db/dao/GameDao.kt:398`); estados de salvamento do mobile em
+    `M/shared/compose/ui/SaveStateBadge.kt` (`CoverSaveState`: NotSaved/Queued/Saving/Paused/Error/Saved, e
+    `CoverSaveState.of(entry, isDownloaded)`). Cartões da TV: `GamePresenter` (+ `newTVCardView`, `showInfo`),
+    capas por `TVCovers`; Início: `TVHomeFragment.recreateAdapter`/`update` + `TVHomeViewModel`.
+  - **Colisão entre as duas sessões:** as duas mexem em `TVHomeViewModel`/`TVHomeFragment`, e a 3.6 usa o
+    `GamePresenter` que a 3.5 altera. Cada sessão trabalha num **git worktree próprio** (`EnterWorktree`), faz
+    `git pull --rebase` antes de commitar e resolve o conflito no seu lado. Há um só `lemu_tv_api25`: quem o encontrar
+    em uso lança uma segunda instância com `-read-only` (`Start-Process`, ver `CLAUDE.md`) ou espera; nunca reinstalar
+    por cima do APK da outra sessão no meio de um teste (memória "sessões paralelas no mesmo checkout").
+  - **3.5 — selo de salvo na TV.** Escopo: nos cartões de jogo da TV (Início, catálogo, favoritos, busca), selo de
+    "salvo" (✓ na cor de destaque, como o `Saved` do mobile), lido de `observeAllDownloadedKeys` exposto aos
+    ViewModels da TV (leitura aditiva, sem query nova). Decidir na análise: só "salvo" ou também fila/salvando
+    (exigiria o `SaveQueueManager`, que a TV não usa: na TV o salvamento é o `TVRomDownloadDialog`, síncrono);
+    como o presenter recebe o conjunto de chaves sem reconstruir as grades paginadas; formato da chave
+    (`systemId/fileName`? conferir no DAO). Variante `LITE` sem animação. Prova: salvar um jogo pelo diálogo e ver o
+    selo aparecer no catálogo e na Início sem reabrir a tela; excluir a ROM pelo menu de contexto e o selo sumir.
+  - **3.6 — fileira "Jogos salvos" na TV.** Funcionalidade nova: gera doc de feature próprio em
+    `docs/funcionalidades/`. Escopo do plano: fileira na Início alimentada por `observeInstalledGameGroups`, seletor
+    simples quando o grupo tem mais de uma versão salva, aviso de mídia inacessível. Reaproveitar as regras do mobile
+    (`M/feature/installed/`, requisitos R1–R9 da seção "Download sob demanda e Jogos salvos", e o roteamento de toque
+    `MainActivity.kt` de Jogos salvos) — abrir e listar o que a TV precisa repetir antes de desenhar. Ordem da fileira
+    na Início, rótulo (`title_installed`, "Jogos salvos") e o painel de foco (3.4) mostrando o item: decidir e
+    registrar. Prova: fileira aparece só com jogo salvo; jogar; versões; mídia inacessível (SD do AVD com
+    `-sdcard` + `sm unmount`, ver `CLAUDE.md`).
+  - **As duas seguem o "Como usar":** registro analítico neste doc antes do primeiro código, doc de entrega em
+    `docs/funcionalidades/`, verificação da seção "Verificação" (build x86, ktlint, lint, AVD de TV), commit só com o
+    aval do dono.
