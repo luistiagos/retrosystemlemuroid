@@ -185,6 +185,7 @@ Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteú
 | 36 | Expansão de 1.402 novos jogos no catálogo (FBNeo, Dreamcast, CPS1/2, NeoGeo, PSX, etc.) |
 | 37 | CPS1: ajuste de representação de clones vs pais (sf2ce, 1941, forgottn) para evitar "ROM not found" |
 | 38 | 3DS: adição do Pokémon Y (Europa), completando o par com Pokémon X |
+| 39 | Remoção de 168 entradas do manifest (Dreamcast 66, PSX 46, GameCube 27 e outras 29) |
 
 ### Backfill de capas (`super_scrapper`)
 

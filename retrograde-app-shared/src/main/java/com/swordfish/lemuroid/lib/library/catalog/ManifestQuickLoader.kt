@@ -154,7 +154,10 @@ class ManifestQuickLoader(
         //          não hospedados (sf2ceua.zip, 1941j.zip, forgott1.zip). Corrige erro "ROM not found".
         //   v38  3ds: adição de Pokemon Y (Europe) (En,Ja,Fr,De,Es,It,Ko).3ds, completando o par
         //          de 6ª geração com Pokemon X.
-        private const val MANIFEST_SCHEMA_VERSION = 38
+        //   v39  168 entradas removidas do catalog_manifest.txt (dc 66, psx 46, gc 27, psp 7, 3do 6,
+        //          gbc 6, c64 4, gb 2, zxspectrum 2, snes 1, wsc 1; commit 4e276da). O bump força a
+        //          passada completa, cuja limpeza de catálogo obsoleto apaga essas linhas do banco.
+        private const val MANIFEST_SCHEMA_VERSION = 39
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(
