@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
+import com.swordfish.lemuroid.app.tv.shared.TVAmbientBackground
 import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
 import com.swordfish.lemuroid.app.tv.shared.TVTypography
 import com.swordfish.lemuroid.common.coroutines.launchOnState
@@ -54,6 +55,10 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
             view.findViewById(androidx.leanback.R.id.lb_search_text_editor),
             TVTypography.Weight.REGULAR,
         )
+
+        val ambientBackground = TVAmbientBackground.attach(this)
+        ambientBackground.showNeutral()
+        setOnItemViewSelectedListener { _, item, _, _ -> ambientBackground.onItemSelected(item) }
 
         setOnItemViewClickedListener { _, item, _, _ ->
             when (item) {

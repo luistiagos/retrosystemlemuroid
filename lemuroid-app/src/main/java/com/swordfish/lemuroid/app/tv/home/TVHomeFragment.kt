@@ -14,6 +14,7 @@ import androidx.leanback.widget.HeaderItem
 import androidx.leanback.widget.ListRow
 import androidx.leanback.widget.ObjectAdapter
 import androidx.leanback.widget.OnItemViewClickedListener
+import androidx.leanback.widget.OnItemViewSelectedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -26,6 +27,7 @@ import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.tv.folderpicker.TVFolderPickerLauncher
 import com.swordfish.lemuroid.app.tv.settings.TVSettingsActivity
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
+import com.swordfish.lemuroid.app.tv.shared.TVAmbientBackground
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
 import com.swordfish.lemuroid.app.tv.shared.TVTypography
@@ -102,6 +104,10 @@ class TVHomeFragment : BrowseSupportFragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+
+        val ambientBackground = TVAmbientBackground.attach(this)
+        onItemViewSelectedListener =
+            OnItemViewSelectedListener { _, item, _, _ -> ambientBackground.onItemSelected(item) }
 
         recreateAdapter(
             includeFavorites = false,

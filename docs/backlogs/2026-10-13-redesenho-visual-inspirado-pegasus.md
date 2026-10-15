@@ -2,7 +2,7 @@
 
 **Data:** 2026-10-13
 **Status:** Fase 1, Fase 2 (2.1–2.6) e entregas 3.1–3.2 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`,
-2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). Próxima: 3.3 (fundo ambiente da TV). Pendente: abrir o menu do jogo à mão.
+2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). 3.3 (fundo ambiente da TV) implementada em 15/10/2026, sem commit; próxima: avaliar a 3.4. Pendente: abrir o menu do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
 
@@ -1300,3 +1300,66 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
   - **Próximo passo:** a 3.3. Abrir a sessão com:
     "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 3.3 (Fundo ambiente
     da TV)."
+- **2026-10-15 (entrega 3.3, registro analítico antes do código).** Escrito com 2.6, 3.1 e 3.2 ainda sem commit; outra
+  sessão as commitou no meio da 3.3 (`31cab86`, `773dbe2`), e a árvore ficou só com a 3.3. Nada é commitado sem o aval do dono.
+  - **Abertos:**
+    - `TV/home/TVHomeFragment.kt` — `BrowseSupportFragment`; só `onItemViewClickedListener` (itens `Game`,
+      `MetaSystemInfo`, `TVSetting`). `TVGamesFragment`/`TVFavoritesFragment` — `VerticalGridSupportFragment` com
+      `PagingDataAdapter` (item `null` = placeholder do paging). `TVGamesFragment` tem `args.metaSystemId`.
+      `TVSearchFragment` — `SearchSupportFragment`, uma linha paginada. Os três tipos têm
+      `setOnItemViewSelectedListener` público (`javap` do AAR 1.1.0-rc01). `grep BackgroundManager|OnItemViewSelectedListener`
+      em `lemuroid-app/src/main/java`: nenhuma ocorrência.
+    - `MainTVActivity` — `activity_tv_main.xml` é um `FrameLayout` sem fundo; o fundo vem do `windowBackground`
+      do `LemuroidLeanbackTheme` (`leanback_background`). Layouts `lb_browse_fragment`, `lb_vertical_grid_fragment`
+      e `lb_search_fragment` não declaram fundo: o que o `BackgroundManager` pinta no decor aparece atrás das
+      fileiras (o painel de cabeçalhos continua opaco, `defaultBrandColor`).
+    - `BackgroundManager` (bytecode do AAR): `attach` duas vezes lança `IllegalStateException` (guard por
+      `isAttached`); troca com fade de 500 ms e no máximo uma troca a cada 500 ms (`getRunnableDelay`); sem camada de
+      escurecimento por padrão (`lb_background.xml` só tem `imagein`/`imageout`); `onStop` com
+      `autoReleaseOnStop` (padrão) solta o drawable e o `onStart` o recupera do `BackgroundContinuityService` por
+      **`drawable.getConstantState().newDrawable()`** — um `Drawable` próprio sem `ConstantState` daria NPE ao
+      voltar do jogo. Por isso o fundo é um `BitmapDrawable`.
+    - `TVCovers.kt` (3.2) — `SystemArtDrawable` (cor + arte em *screen*, sem a moldura) e `systemArt` (privado,
+      `SystemArtCache`); `SystemPalette.color/colorForSystemId/darkTone`; `VisualQuality.of(context)` (uma vez por
+      processo, sem Coil). `AmbientBackdrop` (mobile): imagem a 32 px, alpha 0,6, degradê por cima; em `LITE`, só o
+      degradê do tom escuro do sistema.
+  - **Hipóteses descartadas:**
+    - *"`setDrawable` com um `Drawable` próprio (capa + degradê)."* Sem `ConstantState`, quebra no `onStart` (acima).
+    - *"`BitmapDrawable` da capa de 32 px direto no `BackgroundManager`."* Ele estica sem manter a proporção (capa
+      3:4 numa tela 16:9) e não leva o degradê. O fundo é composto num bitmap de 96×54 (capa recortada ao centro +
+      degradê), que o `BitmapDrawable` amplia com filtro bilinear — o "desfoque" da direção A.
+    - *"Capa por Coil com o padrão do app."* Bitmap de hardware não desenha num `Canvas` de software:
+      `allowHardware(false)`.
+    - *"Arte do sistema pelo Coil a 32 px."* A moldura branca do PNG viraria uma faixa clara nas bordas. Usa o
+      `SystemArtDrawable` (já recorta a moldura) desenhado no bitmap pequeno.
+  - **Tasks:**
+    1. `TV/shared/TVAmbientBackground.kt` (novo) — liga o `BackgroundManager` (uma vez), espera 300 ms parado no
+       item, compõe o bitmap 96×54 e chama `setDrawable`. Jogo: capa (Coil 32 px) ou, sem capa, arte do sistema;
+       sistema: arte do sistema; ajuste: fundo neutro; `null` (placeholder): ignora. `LITE`: só o degradê do tom escuro
+       do sistema, sem Coil. `TVCovers.systemArt` passa a `internal`.
+    2. Fragments — `TVHomeFragment`, `TVGamesFragment` (começa com a arte do sistema), `TVFavoritesFragment`,
+       `TVSearchFragment` (começa neutro) com `setOnItemViewSelectedListener`.
+    3. Prova no `lemu_tv_api25`: Início (fileiras de jogos, sistemas, ajustes), catálogo, busca, voltar ao Início, jogar
+       e voltar (fundo restaurado, sem crash); build x86, `ktlintMainSourceSetCheck`, `lintFreeBundleDebug`,
+       `logcat -b crash` vazio.
+- **2026-10-15 (entrega 3.3, entrega):** fundo ambiente da TV pronto, **sem commit**. Doc da entrega:
+  [`docs/funcionalidades/2026-10-15-redesenho-fundo-ambiente-tv.md`](../funcionalidades/2026-10-15-redesenho-fundo-ambiente-tv.md)
+  (capturas em `docs/funcionalidades/img/2026-10-15-redesenho-fundo-ambiente-tv-*.jpg`).
+  - **Feito:** as tasks 1–2 do registro analítico.
+  - **Desvios do registro:** bitmap de 48×27 em vez de 96×54 (a 96×54 a arte do sistema ainda saía legível, sem
+    cara de desfoque; a capa já chega a 32 px). `isAutoReleaseOnStop = false` no `attach`.
+  - **Hipóteses descartadas na prova:**
+    - *"O `onStart` devolve o fundo do `BackgroundContinuityService`."* Só o `attach` lê o serviço; com o
+      auto-release padrão, ao voltar do jogo (ou da Home) o fundo ficava neutro.
+    - *"O fundo não troca no catálogo"* (primeira prova). Não era defeito: o `lemu_tv_api25` (2 GB) é tier `WEAK`, logo
+      `LITE`, onde todo jogo do mesmo sistema tem o mesmo degradê. Conferido por reflexão nos portões do
+      `postChangeRunnable` (alpha 255, sem animação, fragment retomado) e com `FULL` forçado num build temporário.
+    - *"`runCatching` em volta do `execute` do Coil."* Engolia o cancelamento: a seleção anterior aplicaria um fundo velho.
+  - **Verificação:** build x86, `ktlintMainSourceSetCheck` (1 apontamento novo corrigido) e `lintFreeBundleDebug`.
+    `LITE` real e `FULL` forçado no `lemu_tv_api25`: Início, catálogo, voltar, Ajustes, busca, Home + reabrir, jogar e
+    voltar. `logcat -b crash` vazio.
+  - **Não verificado:** Favoritos (o AVD não tem), TV box real, `gfxinfo`.
+  - **Pendências:** fade de 500 ms do `BackgroundManager` também em `LITE`; contraste do campo de busca sobre capa clara.
+  - **Próximo passo:** commit da 3.3 (com o aval do dono); depois avaliar a 3.4 (painel do item em
+    foco). Abrir a sessão com: "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e avalie a
+    entrega 3.4 (Painel do item em foco na Home da TV)."

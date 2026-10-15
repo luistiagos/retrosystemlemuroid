@@ -85,7 +85,7 @@ object TVCovers {
         SystemPalette.darkTone(SystemPalette.colorForSystemId(game.systemId)).toArgb()
 
     /** Decoded once per art and shared with the mobile UI; a PNG of ~277x192, a few ms on a TV box. */
-    private fun systemArt(
+    internal fun systemArt(
         context: Context,
         @DrawableRes resId: Int,
     ): Bitmap? = SystemArtCache.load(context, resId)?.asAndroidBitmap()

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
+import com.swordfish.lemuroid.app.tv.shared.TVAmbientBackground
 import com.swordfish.lemuroid.app.tv.shared.TVVerticalGridPresenter
 import com.swordfish.lemuroid.app.tv.shared.TV_GAME_GRID_COLUMNS
 import com.swordfish.lemuroid.common.coroutines.launchOnState
@@ -57,9 +58,12 @@ class TVGamesFragment : VerticalGridSupportFragment() {
                 .collect { pagingAdapter.submitData(lifecycle, it) }
         }
 
-        args.metaSystemId.let {
-            gamesViewModel.metaSystemId.value = MetaSystemID.valueOf(it)
-        }
+        val metaSystem = MetaSystemID.valueOf(args.metaSystemId)
+        gamesViewModel.metaSystemId.value = metaSystem
+
+        val ambientBackground = TVAmbientBackground.attach(this)
+        ambientBackground.showSystem(metaSystem)
+        setOnItemViewSelectedListener { _, item, _, _ -> ambientBackground.onItemSelected(item) }
 
         onItemViewClickedListener =
             OnItemViewClickedListener { _, item, _, _ ->
