@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Body of the TV save dialog (TVRomDownloadDialog): cover, heading, game, system and message/status; the progress
+    bar shows only while saving. The fonts (Outfit) are applied by code: android:fontFamily needs Android 8+.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="24dp"
+    android:paddingTop="24dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/tv_dialog_cover"
+        android:layout_width="@dimen/tv_dialog_cover_width"
+        android:layout_height="@dimen/tv_dialog_cover_height"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_dialog_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/leanback_accent"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_game_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/leanback_text"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_system"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:textColor="@color/leanback_text_support"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/leanback_text"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/tv_dialog_progress"
+            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

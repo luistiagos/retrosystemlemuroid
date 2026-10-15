@@ -1,16 +1,22 @@
 <resources>
 
-    <!-- Here we override the defualt Leanback colors to make them look Lemuroidish -->
-    <color name="lb_basic_card_bg_color">@color/leanback_foreground</color>
-    <color name="lb_basic_card_info_bg_color">@color/leanback_info</color>
+    <!-- Leanback colors overridden with the redesign tokens (leanback-colors.xml) -->
+    <color name="lb_basic_card_bg_color">@color/leanback_surface</color>
+    <color name="lb_basic_card_info_bg_color">@color/leanback_surface</color>
+    <color name="lb_basic_card_title_text_color">@color/leanback_text</color>
+    <color name="lb_basic_card_content_text_color">@color/leanback_text_support</color>
+    <color name="lb_browse_header_color">@color/leanback_text</color>
+    <color name="lb_browse_header_description_color">@color/leanback_text_support</color>
 
+    <!-- The font is applied by code (TVTypography): android:fontFamily with res/font needs Android 8+ -->
     <style name="LemuroidLeanbackTheme" parent="Theme.Leanback">
-        <item name="defaultBrandColor">@color/leanback_foreground</item>
-        <item name="defaultBrandColorDark">@color/leanback_foreground</item>
-        <item name="defaultSearchColor">@color/main_color</item>
-        <item name="colorAccent">@color/main_color</item>
-        <item name="android:colorAccent">@color/main_color</item>
-        <item name="android:colorPrimary">@color/leanback_foreground</item>
+        <item name="defaultBrandColor">@color/leanback_bars</item>
+        <item name="defaultBrandColorDark">@color/leanback_bars</item>
+        <item name="defaultSearchColor">@color/leanback_accent</item>
+        <item name="defaultSearchIconColor">@color/leanback_on_accent</item>
+        <item name="colorAccent">@color/leanback_accent</item>
+        <item name="android:colorAccent">@color/leanback_accent</item>
+        <item name="android:colorPrimary">@color/leanback_bars</item>
         <item name="android:windowBackground">@color/leanback_background</item>
         <item name="imageCardViewStyle">@style/LemuroidLeanbackTheme.ImageCardViewStyle</item>
     </style>
@@ -19,11 +25,27 @@
         <item name="infoVisibility">always</item>
     </style>
 
+    <!--
+        Save dialog of the TV (TVRomDownloadDialog), passed explicitly to its AlertDialog.Builder. Not set as the
+        alertDialogTheme of the activity: the other TV dialogs are outside the redesign delivery 3.2.
+        colorAccent tints the buttons text and the progress bar; colorControlHighlight is the focused button.
+    -->
+    <style name="LemuroidTVDialog" parent="android:Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/tv_dialog_background</item>
+        <item name="android:colorBackground">@color/leanback_surface</item>
+        <item name="android:colorAccent">@color/leanback_accent</item>
+        <item name="android:colorControlActivated">@color/leanback_accent</item>
+        <item name="android:colorControlHighlight">@color/leanback_accent_focus</item>
+        <item name="android:textColorPrimary">@color/leanback_text</item>
+        <item name="android:textColorSecondary">@color/leanback_text_support</item>
+    </style>
+
     <style name="LemuroidLeanbackPreferencesTheme" parent="Theme.Leanback">
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Leanback</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:colorPrimary">@color/main_color</item>
+        <item name="android:colorPrimary">@color/leanback_accent</item>
+        <item name="android:colorAccent">@color/leanback_accent</item>
     </style>
 </resources>

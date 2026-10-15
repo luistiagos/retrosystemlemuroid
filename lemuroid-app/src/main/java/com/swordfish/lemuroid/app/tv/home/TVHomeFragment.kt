@@ -28,6 +28,7 @@ import com.swordfish.lemuroid.app.tv.settings.TVSettingsActivity
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
+import com.swordfish.lemuroid.app.tv.shared.TVTypography
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -48,6 +49,11 @@ class TVHomeFragment : BrowseSupportFragment() {
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        TVTypography.styleBrowseHeaders(this)
     }
 
     override fun onCreateView(
@@ -172,10 +178,6 @@ class TVHomeFragment : BrowseSupportFragment() {
     ) {
         val result = ArrayObjectAdapter(TVListRowPresenter())
         val cardSize = resources.getDimensionPixelSize(com.swordfish.lemuroid.lib.R.dimen.card_size)
-        val systemsCardPadding =
-            resources.getDimensionPixelSize(
-                com.swordfish.lemuroid.lib.R.dimen.systems_card_padding,
-            )
         val settingsCardPadding =
             resources.getDimensionPixelSize(
                 com.swordfish.lemuroid.lib.R.dimen.settings_card_padding,
@@ -183,26 +185,34 @@ class TVHomeFragment : BrowseSupportFragment() {
 
         if (includeFavorites) {
             val presenter = ClassPresenterSelector()
-            presenter.addClassPresenter(Game::class.java, GamePresenter(cardSize, gameInteractor))
-            presenter.addClassPresenter(TVSetting::class.java, SettingPresenter(cardSize, settingsCardPadding))
+            presenter.addClassPresenter(Game::class.java, GamePresenter(gameInteractor))
+            // "Show all" sits next to the games: same size as the game card, so the row keeps one height.
+            presenter.addClassPresenter(
+                TVSetting::class.java,
+                SettingPresenter(
+                    resources.getDimensionPixelSize(R.dimen.tv_game_card_width),
+                    resources.getDimensionPixelSize(R.dimen.tv_game_card_height),
+                    settingsCardPadding,
+                ),
+            )
             val favouritesItems = ArrayObjectAdapter(presenter)
             val title = resources.getString(R.string.tv_home_section_favorites)
             result.add(ListRow(HeaderItem(FAVORITES_ADAPTER, title), favouritesItems))
         }
 
         if (includeRecentGames) {
-            val recentItems = ArrayObjectAdapter(GamePresenter(cardSize, gameInteractor))
+            val recentItems = ArrayObjectAdapter(GamePresenter(gameInteractor))
             val title = resources.getString(R.string.tv_home_section_recents)
             result.add(ListRow(HeaderItem(RECENTS_ADAPTER, title), recentItems))
         }
 
         if (includeSystems) {
-            val systemItems = ArrayObjectAdapter(SystemPresenter(cardSize, systemsCardPadding))
+            val systemItems = ArrayObjectAdapter(SystemPresenter())
             val title = resources.getString(R.string.tv_home_section_systems)
             result.add(ListRow(HeaderItem(SYSTEM_ADAPTER, title), systemItems))
         }
 
-        val settingsItems = ArrayObjectAdapter(SettingPresenter(cardSize, settingsCardPadding))
+        val settingsItems = ArrayObjectAdapter(SettingPresenter(cardSize, cardSize, settingsCardPadding))
         settingsItems.setItems(
             buildSettingsRowItems(indexInProgress = false, scanInProgress = false),
             LEANBACK_SETTING_DIFF_CALLBACK,

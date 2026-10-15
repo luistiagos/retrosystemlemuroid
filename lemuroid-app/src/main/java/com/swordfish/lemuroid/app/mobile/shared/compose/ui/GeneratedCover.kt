@@ -108,7 +108,7 @@ fun rememberSystemArt(
     return art
 }
 
-private object SystemArtCache {
+internal object SystemArtCache {
     // Sized in bytes because the art is not uniform: 277x192 (~210 KB in ARGB, half of that in
     // RGB_565) for most systems, up to 720x332 for a few. Either budget holds ~28 standard arts:
     // the Systems screen shows 10-15 blocks at a time, about 30 on a TV box.

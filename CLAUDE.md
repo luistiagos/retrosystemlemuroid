@@ -525,6 +525,7 @@ cuja seção "Especificação visual" é a referência dos valores):
 | `SystemPalette.kt` | Cor por `MetaSystemID` (79, contraste ≥ 4,5:1 com branco). `when` exaustivo: sistema novo sem cor não compila. |
 | `VisualQuality.kt` | `FULL`/`LITE`, uma vez por processo (`CoverUtils.isLowRamDevice` ou animações desligadas). |
 | `GeneratedCover`, `AmbientBackdrop`, `SaveStateBadge` (`CoverSaveState`), `SectionHeader`, `effects/FocusHighlight` | Componentes. A capa gerada já substitui o quadrado de iniciais dentro de `LemuroidGameImage`. |
+| `LemuroidBottomSheet` (`BottomSheetHeader`, `SheetMargin`) | Folha inferior do visual novo (menu de contexto, versões, fila). Folha nova usa esta, não o `ModalBottomSheet` cru. |
 
 Regras:
 1. **Nunca `Modifier.blur`** — só funciona no Android 12+. Fundo "desfocado" = imagem decodificada em ~32 px e esticada (`AmbientBackdrop`).
@@ -535,6 +536,12 @@ Regras:
 6. Arte `game_system_*` decodificada à mão: `inScaled = false` (os PNGs estão em `drawable/` sem densidade e seriam ampliados 3×).
 7. Arte `game_system_*` na UI mobile só por `LemuroidSystemImage`: o PNG traz moldura branca embutida (cortada ali) e 10 sistemas têm arte em outra proporção (ver `docs/funcionalidades/2026-10-13-redesenho-sistemas.md`).
 8. **Contagem de jogos mostra sempre o total, com as variantes** (decisão do dono, 14/10/2026). Fonte: `GameDao.selectSystemsWithCount()` (ex.: `GamesViewModel.totalGames`), nunca o `itemCount` do paging agrupado (`selectGrouped*`), que conta só os representantes.
+9. **TV (Leanback):** cor só pelos tokens de `res/values/leanback-colors.xml` (os mesmos de `LemuroidColors`), **nunca
+   `main_color`** — ele é também o fundo do ícone e da splash, e o debug o pinta de vermelho. Fonte só por código,
+   via `TVTypography` (`android:fontFamily` com `res/font` só vale no Android 8+); cartão novo chama `styleCard`, fileira
+   nova usa `TVListRowPresenter`. Capa e arte de sistema na TV só por `TVCovers` (capa gerada, cor da `SystemPalette`);
+   diálogo no visual novo passa o tema pelo id (`AlertDialog.Builder(activity, R.style.LemuroidTVDialog)`) — com
+   `ContextThemeWrapper` o `Builder` ignora o tema.
 
 ---
 

@@ -1,17 +1,18 @@
 package com.swordfish.lemuroid.app.tv.home
 
-import android.graphics.Color
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.tv.shared.TVCardFocusHighlight
+import com.swordfish.lemuroid.app.tv.shared.TVCovers
+import com.swordfish.lemuroid.app.tv.shared.TVTypography
 import com.swordfish.lemuroid.lib.library.SystemLogoResolver
 
-class SystemPresenter(private val cardSize: Int, private val cardPadding: Int) : Presenter() {
+/** System block of the redesign: console art over the `SystemPalette` colour, 208x144. */
+class SystemPresenter : Presenter() {
     override fun onBindViewHolder(
         viewHolder: Presenter.ViewHolder?,
         item: Any,
@@ -22,37 +23,51 @@ class SystemPresenter(private val cardSize: Int, private val cardPadding: Int) :
 
         holder.mCardView.titleText = context.resources.getString(systemInfo.metaSystem.titleResId)
         holder.mCardView.contentText = context.getString(R.string.system_grid_details, systemInfo.count.toString())
-        holder.mCardView.setMainImageDimensions(cardSize, cardSize)
-        holder.mCardView.mainImageView.setImageResource(
-            SystemLogoResolver.resolve(systemInfo.metaSystem, hovered = holder.mCardView.hasFocus())
-        )
-        holder.mCardView.mainImageView.setPadding(cardPadding, cardPadding, cardPadding, cardPadding)
-        holder.mCardView.setMainImageScaleType(ImageView.ScaleType.FIT_CENTER)
-        holder.mCardView.mainImageView.setBackgroundColor(systemInfo.metaSystem.color())
-
         holder.mCardView.tag = systemInfo
+        holder.showArt(systemInfo, hovered = holder.mCardView.hasFocus())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): Presenter.ViewHolder {
         val cardView = ImageCardView(parent.context)
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
-        cardView.findViewById<TextView>(androidx.leanback.R.id.content_text)?.setTextColor(Color.LTGRAY)
+        cardView.setMainImageDimensions(
+            parent.resources.getDimensionPixelSize(R.dimen.tv_system_card_width),
+            parent.resources.getDimensionPixelSize(R.dimen.tv_system_card_height),
+        )
+        TVTypography.styleCard(cardView)
+        val holder = ViewHolder(cardView)
         TVCardFocusHighlight.setupOnCard(cardView) { hasFocus ->
             val systemInfo = cardView.tag as? MetaSystemInfo ?: return@setupOnCard
-            cardView.mainImageView.setImageResource(
-                SystemLogoResolver.resolve(systemInfo.metaSystem, hovered = hasFocus)
-            )
+            holder.showArt(systemInfo, hovered = hasFocus)
         }
-        return ViewHolder(cardView)
+        return holder
     }
 
     override fun onUnbindViewHolder(viewHolder: Presenter.ViewHolder?) {
         val vh = viewHolder as? ViewHolder ?: return
         vh.mCardView.mainImage = null
+        vh.mCardView.tag = null
     }
 
     class ViewHolder(view: ImageCardView) : Presenter.ViewHolder(view) {
         val mCardView: ImageCardView = view
+
+        fun showArt(
+            systemInfo: MetaSystemInfo,
+            hovered: Boolean,
+        ) {
+            val imageView = mCardView.mainImageView
+            // ImageCardView leaves the image INVISIBLE after `mainImage = null` (unbind).
+            imageView.visibility = View.VISIBLE
+            imageView.alpha = 1f
+            imageView.setImageDrawable(
+                TVCovers.systemCard(
+                    mCardView.context,
+                    systemInfo.metaSystem,
+                    SystemLogoResolver.resolve(systemInfo.metaSystem, hovered),
+                ),
+            )
+        }
     }
 }

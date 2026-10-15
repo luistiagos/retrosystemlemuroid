@@ -1,5 +1,17 @@
 <resources>
-    <color name="leanback_background">@color/surface_elevation_0dp</color>
-    <color name="leanback_foreground">@color/surface_elevation_3dp</color>
-    <color name="leanback_info">@color/surface_elevation_1dp</color>
+    <!--
+        Tokens da direção A do redesenho (docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md,
+        "Especificação visual"), os mesmos do LemuroidColors do Compose. A TV não usa main_color: ele também é o
+        fundo do ícone e da splash, e o debug o sobrescreve.
+    -->
+    <color name="leanback_background">#0E0F13</color>
+    <color name="leanback_bars">#14161B</color>
+    <color name="leanback_surface">#1A1C22</color>
+    <color name="leanback_border">#23262E</color>
+    <!-- Focus of the dialog buttons: amber at 25% over the surface -->
+    <color name="leanback_accent_focus">#40F2B544</color>
+    <color name="leanback_text">#F2F0EA</color>
+    <color name="leanback_text_support">#A4A7B0</color>
+    <color name="leanback_accent">#F2B544</color>
+    <color name="leanback_on_accent">#1A1300</color>
 </resources>

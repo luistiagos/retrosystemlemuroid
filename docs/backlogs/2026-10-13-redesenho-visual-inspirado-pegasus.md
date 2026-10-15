@@ -1,9 +1,9 @@
 # [BACKLOG] Redesenho visual do Lemuroid inspirado nos temas do Pegasus
 
 **Data:** 2026-10-13
-**Status:** Fase 1 e entregas 2.1–2.5 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`). Próxima: 2.6
-(Moldura). Pendente: abrir o menu
-do jogo à mão.
+**Status:** 3.2 (Cartões e diálogo de salvar da TV) e 3.1 (Tema da TV) implementadas em 15/10/2026, sem commit. Fase 1 e entregas 2.1–2.5 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`). 2.6 (Moldura)
+implementada e verificada em 15/10/2026, sem commit. Fase 2 completa; próxima: Fase 3 (TV). Pendente: abrir o
+menu do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.
 
@@ -1101,3 +1101,200 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     "Systems" repetido no topo deitado). Abrir a sessão com: "Leia
     `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 2.6 (Moldura)."
   - **Feito depois:** commit `5d8725f` (2.5), com o aval do dono.
+- **2026-10-15 (entrega 2.6, registro analítico antes do código).** 2.5 commitada (`5d8725f`, `26dcc48`); árvore
+  limpa.
+  - **Abertos:**
+    - `M/feature/main/MainTopBar.kt` — `MainTopBar` (`Column`: `LemuroidTopAppBar` + barra da operação + barra da
+      fila, esta só sem operação). `LemuroidTopAppBar`: `TopAppBar` com `BottomAppBarDefaults.containerColor`,
+      `windowInsets` **padrão** (`safeDrawing` Horizontal + Top: é o recuo esquerdo dobrado ao lado do trilho),
+      título `route.titleId` (na Busca, `LemuroidSearchView`: `Surface` pílula com `tonalElevation` + `TextField`
+      transparente com foco automático). `LemuroidTopBarActions`: fila (`BadgedBox` com anel de 10 dp), Ajuda,
+      Sincronizar (`saveSyncEnabled`, desabilitado com operação), Configurações (`showBottomNavigation`). Único
+      chamador: `MainActivity.kt:447`.
+    - `M/feature/main/MainNavigationBar.kt` — `MainNavigationBar` (`AnimatedVisibility` por `showBottomNavigation`)
+      → `NavigationBar` + `NavigationBarItem` sem rótulo, `navigateToTab`. `MainNavigationRail` (2.3) já no visual
+      novo: itens 56×40 com `focusHighlight` e pílula `AccentPillOpaque`, fila no pé.
+    - `M/feature/main/MainNavigationRoutes.kt` — 5 abas (Início, Favoritos, Sistemas, Jogos salvos, Buscar);
+      `SYSTEM_GAMES` tem `parent = SYSTEMS`, `title_games` e **mostra** a barra/trilho.
+    - `M/feature/main/MainGameContextActions.kt` — `ModalBottomSheet` padrão; cabeçalho `LemuroidSmallGameImage`
+      40×40 (iniciais) + `LemuroidGameTexts`; entradas `Row` 56 dp `clickable` (retomar, reiniciar, favoritar,
+      atalho, excluir ROM se `isGameDownloaded`, excluir do catálogo); cada uma chama o lambda e zera o estado.
+      `FakeScrim` sem chamador (já registrado como código morto).
+    - `M/feature/main/GameVariantsModal.kt` — título, `variants_subtitle`, `LazyColumn` (chave `it.id`) de linhas
+      `combinedClickable` com a capa **do representante** (`AsyncImage` cru, sem capa gerada) e ícone `Download`
+      para salvo. Toque/toque longo chamam `onDismiss` e o lambda.
+    - `M/feature/main/SaveQueueModal.kt` — título + "limpar erros"; vazio; `LazyColumn` (chave `fileName`) com capa
+      `AsyncImage(entry.coverUrl)` sobre `surfaceVariant`, título, `statusLabel`, pausar (SAVING)/retomar
+      (PAUSED), cancelar (tudo menos SAVED; em ERROR chama `dismissError`), barra de progresso em SAVING/PAUSED.
+    - `MainActivity.kt:415-470` — `Row { trilho; Scaffold }`; `contentWindowInsets` sem o lado do trilho; a
+      `TopAppBar` não recebia o mesmo tratamento. `:836-866` contexto, `:982-1019` fila e variantes (lambdas
+      **não mudam**). `saveQueueEntries` (`State`, `:358`) já no escopo.
+    - `M/feature/home/HomeLayouts.kt` — `LandscapeHeader` (`:387-446`) com `Featured.OfSystem` imprime
+      `title_systems` como rótulo, e a fileira logo abaixo tem o mesmo título (`:456`): o "Systems" repetido.
+      `SystemTile` (`:476-506`) navega por `data.onSystemClick`; ao voltar, a Início é recomposta do zero e o
+      foco cai no primeiro focável (o trilho).
+    - Design system: `LemuroidColors` (Bars/Border/Surface/Accent/AccentPill), `LocalLemuroidTypography`,
+      `PillShape`, `focusHighlight` (precisa vir antes do nó focável na cadeia), `SaveStateIndicator`,
+      `rememberCoverSaveState`, `LemuroidGameImage(compact)`, `SystemChip(compact)`, `SystemPalette.darkTone`.
+      Nenhuma outra tela usa `ModalBottomSheet` (grep em `lemuroid-app/src/main/java` fora de `feature/main/`).
+  - **Hipóteses descartadas:**
+    - *"`NavigationBarItem` com cores novas basta."* O foco do D-pad nele é só a camada de estado de 12%, quase
+      invisível numa TV box. Item próprio com contorno âmbar na pílula, como o trilho.
+    - *"Nome do sistema no título da barra do catálogo."* Repetiria o cabeçalho da 2.2 logo abaixo. A
+      especificação pede "voltar e, abaixo, o nome do sistema": a barra do catálogo fica sem título.
+    - *"Restaurar o foco em todo retorno à Início."* No toque, focar o bloco acenderia o contorno sem D-pad. Só
+      quando o clique veio do teclado/D-pad (`InputMode.Keyboard`).
+  - **Tasks:**
+    1. `MainTopBar.kt` — cores das barras, borda inferior, títulos Outfit, botões com `focusHighlight`, fila com
+       anel âmbar, barras de progresso âmbar, busca em pílula `Surface`; `windowInsets` opcional; sem título no
+       `SYSTEM_GAMES`. `MainActivity` passa `Top + End` com o trilho. Prova: deitado com a barra de navegação à
+       esquerda, sem recuo extra.
+    2. `MainNavigationBar.kt` — barra inferior própria (64 dp + insets, pílula âmbar, contorno no foco). Prova:
+       5 abas na ordem, D-pad visível.
+    3. `shared/compose/ui/LemuroidBottomSheet.kt` (novo) — folha com `Surface`, cantos 16, alça e cabeçalho comuns.
+    4. `MainGameContextActions.kt`, `GameVariantsModal.kt` (+ `saveQueueEntries` opcional), `SaveQueueModal.kt` —
+       visual novo, lógica igual. Prova: roteiro funcional (toque longo, variantes, pausar/retomar/cancelar).
+    5. `HomeLayouts.kt` — rótulo do sistema sem "Systems"; foco volta ao bloco do sistema depois do catálogo
+       (só D-pad). Prova: D-pad Início ▸ sistema ▸ voltar.
+- **2026-10-15 (entrega 2.6, entrega):** moldura no visual novo, **sem commit**. Doc da entrega:
+  [`docs/funcionalidades/2026-10-15-redesenho-moldura.md`](../funcionalidades/2026-10-15-redesenho-moldura.md)
+  (capturas em `docs/funcionalidades/img/2026-10-15-redesenho-moldura-*.jpg`).
+  - **Feito:** as 5 tasks do registro analítico, mais o estado de salvamento por versão na folha de versões.
+    Desvio: a barra inferior usa `LocalIndication` (o `rememberRipple` está depreciado na versão de Compose
+    efetivamente resolvida e o build trata o aviso como erro).
+  - **Verificação:** build x86_64 e arm64, `ktlintMainSourceSetCheck` e `lintFreeBundleDebug` OK. Roteiro no moto
+    g86 5G (único aparelho), com a barra de navegação à esquerda deitado: sem recuo dobrado; D-pad sistema ▸
+    catálogo ▸ voltar com o foco no bloco; menu de contexto, salvar → fila → pausar/retomar/cancelar, versões.
+    `logcat -b crash` vazio.
+  - **Hipótese descartada:** *"`rememberRipple(bounded = false)` na aba."* Depreciado como erro de compilação.
+  - **Pendência nova:** ao entrar no catálogo pelo D-pad o foco cai no trilho (já acontecia; é da 2.2).
+  - **Próximo passo:** commit da 2.6 (com o aval do dono); depois a Fase 3 (TV), entrega 3.1 (tema). Abrir a
+    sessão com: "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 3.1
+    (Tema da TV)."
+- **2026-10-15 (entrega 3.1, registro analítico antes do código).** A 2.6 segue **sem commit** na árvore (outra
+  sessão); a 3.1 não toca em nenhum arquivo dela além deste doc.
+  - **Abertos:**
+    - `res/values/leanback-themes.xml` — `LemuroidLeanbackTheme` (`Theme.Leanback`): marca = `leanback_foreground`,
+      busca/acento = `main_color`, fundo = `leanback_background`, cartão com `infoVisibility=always`; sobrescreve
+      `lb_basic_card_bg_color`/`lb_basic_card_info_bg_color`. `LemuroidLeanbackPreferencesTheme` (Ajustes da TV):
+      `colorPrimary` = `main_color`.
+    - `res/values/leanback-colors.xml` e a cópia **idêntica** em `src/debug/res/values` (`diff` vazio): três tons
+      cinza (`surface_elevation_0/1/3dp` de `retrograde-util`).
+    - **`main_color` não pode mudar:** é também o fundo do ícone (`lemuroid_launcher_background.xml`) e da splash
+      (`splash-theme.xml`), e o `src/debug/res/values/material-colors.xml` o sobrescreve em vermelho no debug. A TV
+      ganha cores próprias (`leanback_accent` etc.); quem usa `main_color` na TV passa a usá-las:
+      `TVCardFocusHighlight.kt:39` (por `getIdentifier`) e `activity_tv_main.xml:23` (progresso).
+    - `TV/shared/TVCardFocusHighlight.kt::setupOnCard` — borda de 3 dp no `foreground` ao focar
+      (`setFocusBorderCompat`: `View.foreground` com guard + reflexão em `FrameLayout`, pitfall 12). Chamadores:
+      `GamePresenter`, `SystemPresenter` (troca a arte no foco pelo callback), `SettingPresenter`.
+    - Presenters: os três criam `ImageCardView` cru; `GamePresenter` e `SystemPresenter` pintam `content_text` de
+      `Color.LTGRAY` por código.
+    - `TV/home/TVHomeFragment.kt` — `BrowseSupportFragment` com painel de cabeçalhos (padrão `HEADERS_ENABLED`),
+      linhas por `TVListRowPresenter`, sem título. `TVGamesFragment`/`TVFavoritesFragment`
+      (`VerticalGridSupportFragment`, sem título nem cabeçalho). `TVSearchFragment` (`SearchSupportFragment`, uma
+      linha por `TVListRowPresenter`).
+    - Leanback 1.1.0-rc01 (AAR do cache do Gradle, `values.xml` e `javap`): `lb_basic_card_title_text_color`,
+      `lb_basic_card_content_text_color`, `lb_browse_header_color` e `lb_browse_header_description_color` são
+      sobrescrevíveis como já se faz com `lb_basic_card_bg_color`; o orbe de busca lê `defaultSearchColor` e
+      `defaultSearchIconColor` (ícone branco sobre âmbar daria ~1,9:1). `RowPresenter()` cria `RowHeaderPresenter()`
+      (layout `lb_row_header`, público); o painel lateral usa `RowHeaderPresenter(R.layout.lb_header)`, construtor
+      **`@RestrictTo`** (lint `RestrictedApi`). `BaseRowSupportFragment.getVerticalGridView()` é público.
+  - **Hipóteses descartadas:**
+    - *"`android:fontFamily="@font/outfit_*"` no tema."* Só vale no Android 8+; a TV box do público é 7.1.
+    - *"Percorrer a árvore no `OnGlobalLayoutListener`."* O `RecyclerView` engole o `requestLayout` durante a
+      rolagem: cartão que entra rolando ficaria sem a fonte até o próximo layout.
+    - *"Trocar o seletor do painel lateral por `RowHeaderPresenter(lb_header)`."* Construtor restrito. E embrulhar o
+      presenter original arrisca o `cast` interno do `HeadersSupportFragment`. Fica o
+      `addOnChildAttachStateChangeListener` no `VerticalGridView` do painel, que dispara em toda vinculação.
+    - *"Contorno afastado 3 dp, como no celular."* O `ListRowPresenter` recorta o cartão no contorno arredondado
+      (`clipToOutline`): nada fora dos limites do cartão aparece. Equivalente dentro do cartão: anel âmbar de 3 dp
+      por fora e anel escuro de 2 dp por dentro, que separa o âmbar de capa clara.
+    - *"Fonte nos Ajustes da TV."* Exigiria engatar nas listas do `leanback-preference`; Ajustes estão fora do
+      redesenho (herdam só cores, pelo tema). Registrado como não feito.
+  - **Tasks:**
+    1. `leanback-colors.xml` (main) com os tokens da direção A; apagar a cópia de `src/debug`. Prova: build debug.
+    2. `leanback-themes.xml` — marca = barras, acento/busca = âmbar, ícone da busca escuro, textos dos cartões e
+       cabeçalhos; Ajustes com `colorPrimary`/`colorAccent` âmbar. `activity_tv_main.xml` com o progresso âmbar.
+    3. `TV/shared/TVCardFocusHighlight.kt` — anel âmbar + anel escuro, cor por `R.color`, sem `getIdentifier`.
+    4. `TV/shared/TVTypography.kt` (novo) — Outfit por `ResourcesCompat.getFont` (falha = fonte padrão),
+       `styleCard`, cabeçalho de fileira (`TVRowHeaderPresenter` em `TVListRowPresenter`), painel lateral
+       (`TVHomeFragment`) e campo da busca (`TVSearchFragment`). Presenters sem `Color.LTGRAY`.
+    5. Prova: `lemu_tv_api25` (Android 7.1) — Início, sistema, favoritos, busca, ajustes, foco por D-pad, menu de
+       contexto; `logcat -b crash` vazio; build, `ktlintMainSourceSetCheck`, `lintFreeBundleDebug`.
+- **2026-10-15 (entrega 3.1, entrega):** tema da TV pronto, **sem commit**. Doc da entrega:
+  [`docs/funcionalidades/2026-10-15-redesenho-tema-tv.md`](../funcionalidades/2026-10-15-redesenho-tema-tv.md)
+  (capturas antes/depois em `docs/funcionalidades/img/2026-10-15-redesenho-tema-tv-*.jpg`).
+  - **Feito:** as tasks 1–4 do registro analítico. Regra 9 nova na seção "Design system" do `CLAUDE.md`.
+  - **Verificação:** build x86, `ktlintMainSourceSetCheck` e `lintFreeBundleDebug` OK. O ktlint acusou 8
+    apontamentos antigos do baseline que mudaram de linha; foram corrigidos, sem regenerar o baseline. No
+    `lemu_tv_api25` (7.1), a Outfit renderiza e o D-pad passou por painel, fileiras, catálogo rolado, busca e
+    Ajustes com o foco visível. `logcat -b crash` vazio.
+  - **Não verificado:** menu de contexto (o `adb` não reproduz o toque longo neste AVD; o código não foi
+    tocado), jogar, TV box real.
+  - **Pendências:** títulos longos cortam antes com a Outfit (3.2, capa retrato); o fundo do painel dos Ajustes
+    continua o do `leanback-preference`.
+  - **Próximo passo:** commit da 2.6 e da 3.1 (com o aval do dono); depois a 3.2. Abrir a sessão com: "Leia
+    `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 3.2 (Cartões e diálogo
+    de salvar da TV)."
+- **2026-10-15 (entrega 3.2, registro analítico antes do código).** 2.6 e 3.1 continuam **sem commit** na árvore;
+  a 3.2 é escrita por cima delas (`GamePresenter`, `SystemPresenter`, `SettingPresenter` e `TVHomeFragment` já
+  modificados pela 3.1). Nada é commitado nesta sessão sem o aval do dono.
+  - **Abertos:**
+    - `TV/shared/GamePresenter.kt` — `ImageCardView` com `setMainImageDimensions(cardSize, cardSize)` (176 dp,
+      `retrograde-app-shared` `dimens.xml:30`); capa por `CoverUtils.loadCover` (Coil no `mainImageView`, com
+      `fallback`/`error` = `TextDrawable` de iniciais em cor aleatória). `loadCover` só tem este chamador;
+      `getFallbackDrawable` também é usado por `ShortcutsGenerator` e `LemuroidSmallGameImage` (não mudam).
+    - Chamadores do `GamePresenter`: `TVHomeFragment.recreateAdapter` (Favoritos, com `SettingPresenter` na mesma
+      fileira para o "ver todos", e Recentes), `TVGamesFragment:47`, `TVFavoritesFragment:43`,
+      `TVSearchFragment:95`. Grades com `numberOfColumns = 4` (`TVGamesFragment`, `TVFavoritesFragment`).
+    - `TV/home/SystemPresenter.kt` — quadrado de 176 dp, arte `SystemLogoResolver` em `FIT_CENTER` com padding de
+      22 dp sobre `MetaSystemID.color()`; troca a arte no foco pelo callback do `TVCardFocusHighlight`.
+    - `TV/game/TVRomDownloadDialog.kt` — três `android.app.AlertDialog` no tema da Activity: confirmação
+      (`rom_download_dialog_*`), progresso (título, status, `ProgressBar` horizontal, `setCancelable(false)`,
+      Cancelar → `cancelActiveDownload()`), erro (com guarda de Activity finalizando). Chamador único:
+      `MainTVActivity.kt:177` (`onPlaceholderGame`).
+    - Design system mobile: `SystemPalette.color/colorForSystemId/darkTone` (Compose `Color`, sem Coil);
+      `GeneratedCover.kt` com `SystemArtCache` **privado** (LRU por bytes, `inScaled = false`, RGB_565 em `LITE`);
+      `LemuroidSystemImage.drawSystemArt` (recorte de 2,2% da moldura branca, mistura *screen*, arte larga
+      ajustada inteira).
+    - Leanback 1.1.0-rc01 (AAR do cache, `values.xml` e `javap`): título do `ImageCardView` com `maxLines=1`;
+      `setMainImage(null)` deixa o `mainImageView` `INVISIBLE` e o construtor também o cria `INVISIBLE` sem
+      drawable; pôr o drawable direto no `ImageView` (como o Coil faz) não muda a visibilidade.
+  - **Medido no `lemu_tv_api25`:** tela 1920×1080 a 320 dpi = 960×540 dp. Grade atual: 4 colunas de 176 dp
+    ocupam ~728 dp. Com 150 dp, 5 colunas ocupam ~782 dp; 6 não cabem com o zoom do foco.
+  - **Hipóteses descartadas:**
+    - *"Reaproveitar o `GeneratedCover` do Compose."* Os presenters são `View`; a capa gerada da TV é um
+      `Drawable` que repete o desenho (tom escuro + arte em *screen*), sem título — o título já está no cartão.
+    - *"Título do cartão em 2 linhas pelo tema."* Valeria para todo `ImageCardView` (ajustes, sistemas). Fica por
+      código só no cartão de jogo, com 2 linhas fixas para a grade não ficar com alturas desiguais.
+    - *"`alertDialogTheme` no `LemuroidLeanbackTheme`."* Mudaria também o `TVAppUpdateDialog`, fora da entrega. O
+      tema do diálogo vai explícito no `AlertDialog.Builder` do `TVRomDownloadDialog`.
+  - **Tasks:**
+    1. `GeneratedCover.kt` — `SystemArtCache` passa de `private` a `internal` (a TV reaproveita o cache).
+    2. `TV/shared/TVCovers.kt` (novo) — `Drawable` de arte de sistema (cor + arte recortada em *screen*) e
+       `loadCover`: sem URL = capa gerada; com URL = Coil com o tom do sistema enquanto carrega e capa gerada no
+       erro. Prova: catálogo do Arduboy (sem capas) e um sistema com capas.
+    3. `GamePresenter` 150×200 (`res/values/dimens.xml` do app), título em 2 linhas; `SystemPresenter` 208×144
+       com `SystemPalette`; `SettingPresenter` com largura/altura (na fileira de Favoritos usa o tamanho do jogo).
+       Chamadores atualizados; grades com 5 colunas. Prova: Início, catálogo, favoritos, busca no AVD de TV.
+    4. `TVRomDownloadDialog` — tema `LemuroidTVDialog` (superfície, cantos 16, âmbar, foco visível), layout com
+       capa, título, sistema e status; mesmos três diálogos, mesmos botões e handlers. Prova: salvar um jogo
+       (confirmação → progresso → joga), cancelar no meio, erro.
+    5. Verificação: build x86, `ktlintMainSourceSetCheck`, `lintFreeBundleDebug`, `logcat -b crash` vazio.
+- **2026-10-15 (entrega 3.2, entrega):** cartões e diálogo de salvar da TV prontos, **sem commit**. Doc da entrega:
+  [`docs/funcionalidades/2026-10-15-redesenho-cartoes-tv.md`](../funcionalidades/2026-10-15-redesenho-cartoes-tv.md)
+  (capturas em `docs/funcionalidades/img/2026-10-15-redesenho-cartoes-tv-*.jpg`).
+  - **Feito:** as tasks 1–4 do registro analítico.
+  - **Desvio do registro:** o tema do diálogo vai pelo id no `AlertDialog.Builder(activity, R.style.LemuroidTVDialog)`.
+    Com `Builder(ContextThemeWrapper)` o diálogo saiu cinza e sem cantos: o construtor resolve o
+    `?android:alertDialogTheme` do contexto, não o tema do wrapper (hipótese descartada na prova do AVD).
+  - **Verificação:** build x86, `ktlintMainSourceSetCheck` (4 imports corrigidos) e `lintFreeBundleDebug` OK. No
+    `lemu_tv_api25`: Início, fileira de sistemas com foco, catálogo da Amiga CD32 (5 colunas, títulos em 2 linhas,
+    capas geradas), busca, salvar → progresso → cancelar, jogo salvo → joga. `logcat -b crash` vazio.
+  - **Não verificado:** diálogo de erro, salvar → jogar ponta a ponta com o diálogo novo, Favoritos (o AVD não tem),
+    menu de contexto, TV box real.
+  - **Pendências:** foco do botão do diálogo (âmbar a 25%) a conferir em TV box real; `systems_card_padding`
+    (`retrograde-app-shared`) sem uso.
+  - **Próximo passo:** commit da 2.6, da 3.1 e da 3.2 (com o aval do dono); depois a 3.3. Abrir a sessão com:
+    "Leia `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` e execute a entrega 3.3 (Fundo ambiente
+    da TV)."

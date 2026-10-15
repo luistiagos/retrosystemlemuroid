@@ -13,4 +13,12 @@
     <dimen name="loading_circle_progress">56dp</dimen>
     <dimen name="loading_circle_icon">32dp</dimen>
     <dimen name="loading_circle_progress_thickness">6dp</dimen>
+
+    <!-- TV cards of the redesign (direction A, "A · TV" board): 3:4 cover and the 208x144 system block -->
+    <dimen name="tv_game_card_width">150dp</dimen>
+    <dimen name="tv_game_card_height">200dp</dimen>
+    <dimen name="tv_system_card_width">208dp</dimen>
+    <dimen name="tv_system_card_height">144dp</dimen>
+    <dimen name="tv_dialog_cover_width">96dp</dimen>
+    <dimen name="tv_dialog_cover_height">128dp</dimen>
 </resources>

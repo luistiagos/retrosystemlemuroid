@@ -8,10 +8,10 @@ import androidx.leanback.paging.PagingDataAdapter
 import androidx.leanback.widget.OnItemViewClickedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVVerticalGridPresenter
+import com.swordfish.lemuroid.app.tv.shared.TV_GAME_GRID_COLUMNS
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -27,7 +27,7 @@ class TVFavoritesFragment : VerticalGridSupportFragment() {
 
     init {
         val gridPresenter = TVVerticalGridPresenter()
-        gridPresenter.numberOfColumns = 4
+        gridPresenter.numberOfColumns = TV_GAME_GRID_COLUMNS
         setGridPresenter(gridPresenter)
     }
 
@@ -40,10 +40,9 @@ class TVFavoritesFragment : VerticalGridSupportFragment() {
         val factory = TVFavoritesViewModel.Factory(retrogradeDb)
         val favoritesViewModel = ViewModelProvider(this, factory)[TVFavoritesViewModel::class.java]
 
-        val cardSize = resources.getDimensionPixelSize(com.swordfish.lemuroid.lib.R.dimen.card_size)
         val pagingAdapter =
             PagingDataAdapter(
-                GamePresenter(cardSize, gameInteractor),
+                GamePresenter(gameInteractor),
                 Game.DIFF_CALLBACK,
             )
 

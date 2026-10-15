@@ -16,6 +16,7 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
+import com.swordfish.lemuroid.app.tv.shared.TVTypography
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -48,6 +49,11 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+
+        TVTypography.apply(
+            view.findViewById(androidx.leanback.R.id.lb_search_text_editor),
+            TVTypography.Weight.REGULAR,
+        )
 
         setOnItemViewClickedListener { _, item, _, _ ->
             when (item) {
@@ -85,11 +91,7 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
     private fun createAdapter(): ArrayObjectAdapter {
         val searchAdapter = ArrayObjectAdapter(TVListRowPresenter())
 
-        val gamePresenter =
-            GamePresenter(
-                resources.getDimensionPixelSize(com.swordfish.lemuroid.lib.R.dimen.card_size),
-                gameInteractor,
-            )
+        val gamePresenter = GamePresenter(gameInteractor)
 
         val gamesAdapter = PagingDataAdapter(gamePresenter, Game.DIFF_CALLBACK)
         searchAdapter.add(

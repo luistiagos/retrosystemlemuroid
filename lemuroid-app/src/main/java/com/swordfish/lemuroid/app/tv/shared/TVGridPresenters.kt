@@ -36,10 +36,20 @@ class TVVerticalGridPresenter : VerticalGridPresenter() {
     }
 }
 
-/** [ListRowPresenter] whose rows never run predictive item animations. */
+/** [ListRowPresenter] whose rows never run predictive item animations, with the row header in Outfit. */
 class TVListRowPresenter : ListRowPresenter() {
+    init {
+        headerPresenter = TVRowHeaderPresenter()
+    }
+
     override fun initializeRowViewHolder(holder: RowPresenter.ViewHolder) {
         super.initializeRowViewHolder(holder)
         (holder as ListRowPresenter.ViewHolder).gridView.setAnimateChildLayout(false)
     }
 }
+
+/**
+ * Columns of the game grids (catalog, favorites). Five 150 dp cards ([GamePresenter]) take ~780 of the
+ * 960 dp of a 1080p TV; six do not fit with the focus zoom.
+ */
+const val TV_GAME_GRID_COLUMNS = 5
