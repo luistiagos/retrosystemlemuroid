@@ -72,18 +72,22 @@ class GamesViewModel(
                 val systemIds = metaSystem.systemIDs.map { it.dbname }
                 when (systemIds.size) {
                     0 -> emptyFlow()
-                    1 -> buildFlowPaging(20, viewModelScope) {
-                        if (sort == GameSortOrder.POPULARITY)
-                            retrogradeDb.gameDao().selectGroupedBySystemSortedByPopularity(systemIds.first())
-                        else
-                            retrogradeDb.gameDao().selectGroupedBySystem(systemIds.first())
-                    }
-                    else -> buildFlowPaging(20, viewModelScope) {
-                        if (sort == GameSortOrder.POPULARITY)
-                            retrogradeDb.gameDao().selectGroupedBySystemsSortedByPopularity(systemIds)
-                        else
-                            retrogradeDb.gameDao().selectGroupedBySystems(systemIds)
-                    }
+                    1 ->
+                        buildFlowPaging(20, viewModelScope) {
+                            if (sort == GameSortOrder.POPULARITY) {
+                                retrogradeDb.gameDao().selectGroupedBySystemSortedByPopularity(systemIds.first())
+                            } else {
+                                retrogradeDb.gameDao().selectGroupedBySystem(systemIds.first())
+                            }
+                        }
+                    else ->
+                        buildFlowPaging(20, viewModelScope) {
+                            if (sort == GameSortOrder.POPULARITY) {
+                                retrogradeDb.gameDao().selectGroupedBySystemsSortedByPopularity(systemIds)
+                            } else {
+                                retrogradeDb.gameDao().selectGroupedBySystems(systemIds)
+                            }
+                        }
                 }
             }
 }

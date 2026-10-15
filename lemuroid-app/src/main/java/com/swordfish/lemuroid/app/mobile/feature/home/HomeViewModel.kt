@@ -11,26 +11,30 @@ import android.net.NetworkRequest
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
-import com.swordfish.lemuroid.app.mobile.feature.installed.StorageAvailabilityMonitor
-import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
+import com.swordfish.lemuroid.app.mobile.feature.installed.StorageAvailabilityMonitor
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
+import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
+import com.swordfish.lemuroid.app.shared.roms.RomsDownloadManager
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 import com.swordfish.lemuroid.app.utils.android.MobileGeneration
 import com.swordfish.lemuroid.app.utils.android.connectivityManagerCompat
 import com.swordfish.lemuroid.app.utils.android.isOnWifiCompat
 import com.swordfish.lemuroid.app.utils.android.mobileGenerationCompat
 import com.swordfish.lemuroid.common.coroutines.combine
+import com.swordfish.lemuroid.common.coroutines.debounceAfterFirst
 import com.swordfish.lemuroid.lib.core.CoresSelection
-import com.swordfish.lemuroid.lib.library.catalog.ManifestQuickLoader
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.SystemID
+import com.swordfish.lemuroid.lib.library.catalog.ManifestQuickLoader
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import com.swordfish.lemuroid.common.coroutines.debounceAfterFirst
+import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -42,18 +46,14 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
-import com.swordfish.lemuroid.app.shared.roms.RomsDownloadManager
-import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
-import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 
 @OptIn(FlowPreview::class)
 class HomeViewModel(
@@ -65,6 +65,7 @@ class HomeViewModel(
     companion object {
         const val CAROUSEL_MAX_ITEMS = 10
         const val DEBOUNCE_TIME = 100L
+
         // Pool of top popular games queried from DB; grouped per system so each system
         // can contribute at most DISCOVER_TOP_PER_SYSTEM candidates to Discover.
         private const val DISCOVER_POOL_SIZE = 300
@@ -130,32 +131,45 @@ class HomeViewModel(
     private val microphonePermissionEnabledState = MutableStateFlow(true)
     private val notificationsPermissionEnabledState = MutableStateFlow(true)
     private val uiStates = MutableStateFlow(UIState())
+
     @SuppressLint("StaticFieldLeak") // appContext is the Application context, not Activity
     private val appCtx: Context = appContext
     private val romsDownloadManager = RomsDownloadManager(appContext)
     private val streamingRomsManager = StreamingRomsManager(appContext)
     private val downloadDialogDismissed = MutableStateFlow(false)
     private val excludedDbNames = HeavySystemFilter.excludedDbNames(HeavySystemFilter.deviceTier(appContext))
+
     // Emits the mobile network label (e.g. "4G", "5G") when WiFi is lost during an active download
     private val _mobileSwitchEvent = MutableSharedFlow<String>(extraBufferCapacity = 1)
     val mobileSwitchEvent: Flow<String> = _mobileSwitchEvent
 
     /** Flow that emits true while WiFi is available, false when it's lost. */
-    private fun wifiStatusFlow(): Flow<Boolean> = callbackFlow {
-        val cm = appCtx.connectivityManagerCompat()
-        if (cm == null) { trySend(true); awaitClose { }; return@callbackFlow }
-        val cb = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) { trySend(true) }
-            override fun onLost(network: Network) { trySend(false) }
-        }
-        cm.registerNetworkCallback(
-            NetworkRequest.Builder().addTransportType(NetworkCapabilities.TRANSPORT_WIFI).build(),
-            cb,
-        )
-        // emit initial WiFi state immediately
-        trySend(cm.isOnWifiCompat())
-        awaitClose { cm.unregisterNetworkCallback(cb) }
-    }.distinctUntilChanged()
+    private fun wifiStatusFlow(): Flow<Boolean> =
+        callbackFlow {
+            val cm = appCtx.connectivityManagerCompat()
+            if (cm == null) {
+                trySend(true)
+                awaitClose { }
+                return@callbackFlow
+            }
+            val cb =
+                object : ConnectivityManager.NetworkCallback() {
+                    override fun onAvailable(network: Network) {
+                        trySend(true)
+                    }
+
+                    override fun onLost(network: Network) {
+                        trySend(false)
+                    }
+                }
+            cm.registerNetworkCallback(
+                NetworkRequest.Builder().addTransportType(NetworkCapabilities.TRANSPORT_WIFI).build(),
+                cb,
+            )
+            // emit initial WiFi state immediately
+            trySend(cm.isOnWifiCompat())
+            awaitClose { cm.unregisterNetworkCallback(cb) }
+        }.distinctUntilChanged()
 
     fun getViewStates(): Flow<UIState> {
         return uiStates
@@ -170,16 +184,19 @@ class HomeViewModel(
     // The !isIndexing guard prevents a false Idle during the post-download library scan,
     // which would otherwise flash the "Download ROMs" card and dialog right after a
     // successful download while the scanner is still populating the DB.
-    fun getDownloadRomsState(): Flow<DownloadRomsState> = combine(
-        romsDownloadManager.state,
-        uiStates.map { it.showNoGamesCard }.distinctUntilChanged(),
-        indexingFlow,
-    ) { dlState, noGames, isIndexing ->
-        if (dlState is DownloadRomsState.Done && noGames && !isIndexing && !romsDownloadManager.isDownloadStarted())
-            DownloadRomsState.Idle
-        else
-            dlState
-    }
+    fun getDownloadRomsState(): Flow<DownloadRomsState> =
+        combine(
+            romsDownloadManager.state,
+            uiStates.map { it.showNoGamesCard }.distinctUntilChanged(),
+            indexingFlow,
+        ) { dlState, noGames, isIndexing ->
+            val nothingToShow = noGames && !isIndexing && !romsDownloadManager.isDownloadStarted()
+            if (dlState is DownloadRomsState.Done && nothingToShow) {
+                DownloadRomsState.Idle
+            } else {
+                dlState
+            }
+        }
 
     fun cancelDownload() {
         viewModelScope.launch {
@@ -291,9 +308,9 @@ class HomeViewModel(
         // failed on a prior APK version and WorkManager cached the FAILED state).
         viewModelScope.launch {
             val initialState = streamingRomsManager.state.first()
-            if ((initialState is StreamingRomsState.Idle || initialState is StreamingRomsState.Error)
-                && !streamingRomsManager.isDownloadDone()
-                && !downloadDialogDismissed.value
+            if ((initialState is StreamingRomsState.Idle || initialState is StreamingRomsState.Error) &&
+                !streamingRomsManager.isDownloadDone() &&
+                !downloadDialogDismissed.value
             ) {
                 startStreamingDownload()
                 downloadDialogDismissed.value = true
@@ -304,10 +321,12 @@ class HomeViewModel(
         // PREF_DOWNLOAD_STARTED) and notify the UI so it can offer to resume on mobile.
         viewModelScope.launch {
             wifiStatusFlow().collect { isWifi ->
-                if (isWifi) return@collect  // WiFi available – nothing to do
-                val wifiOnly = appCtx.getSharedPreferences(
-                    "streaming_roms_prefs", Context.MODE_PRIVATE,
-                ).getBoolean(StreamingRomsManager.PREF_WIFI_ONLY, true)
+                if (isWifi) return@collect // WiFi available – nothing to do
+                val wifiOnly =
+                    appCtx.getSharedPreferences(
+                        "streaming_roms_prefs",
+                        Context.MODE_PRIVATE,
+                    ).getBoolean(StreamingRomsManager.PREF_WIFI_ONLY, true)
                 if (!wifiOnly) return@collect
                 if (!streamingRomsManager.isCurrentlyDownloading()) return@collect
                 // Pause first so the UI transitions to Paused state and the Worker is
@@ -330,11 +349,12 @@ class HomeViewModel(
                     ::buildViewState,
                 ).combine(downloadDialogDismissed) { state, dismissed ->
                     state.copy(
-                        showDownloadPromptDialog = state.showNoGamesCard
-                            && !state.indexInProgress
-                            && !romsDownloadManager.isDownloadStarted()
-                            && !streamingRomsManager.isDownloadStarted()
-                            && !dismissed,
+                        showDownloadPromptDialog =
+                            state.showNoGamesCard &&
+                                !state.indexInProgress &&
+                                !romsDownloadManager.isDownloadStarted() &&
+                                !streamingRomsManager.isDownloadStarted() &&
+                                !dismissed,
                     )
                 }.combine(userScanInProgress(appContext)) { state, userScan ->
                     state.copy(userScanInProgress = userScan)
@@ -342,9 +362,10 @@ class HomeViewModel(
                     // Keep spinner (isInitialLoadComplete=false) until the catalog has been
                     // inserted into the DB. Skip the wait if the DB already has games so
                     // subsequent launches don't show a spinner unnecessarily.
-                    val hasGames = state.recentGames.isNotEmpty() ||
-                        state.favoritesGames.isNotEmpty() ||
-                        state.discoveryGames.isNotEmpty()
+                    val hasGames =
+                        state.recentGames.isNotEmpty() ||
+                            state.favoritesGames.isNotEmpty() ||
+                            state.discoveryGames.isNotEmpty()
                     if (ready || hasGames) state else state.copy(isInitialLoadComplete = false)
                 }
 
@@ -383,10 +404,12 @@ class HomeViewModel(
      * artwork, and never includes systems the current device cannot run.
      */
     private fun discoveryGames(retrogradeDb: RetrogradeDatabase): Flow<List<Game>> {
-        val candidatesFlow = if (excludedDbNames.isNotEmpty())
-            retrogradeDb.gameDao().selectTopPopularWithCoversExcluding(DISCOVER_POOL_SIZE, excludedDbNames)
-        else
-            retrogradeDb.gameDao().selectTopPopularWithCovers(DISCOVER_POOL_SIZE)
+        val candidatesFlow =
+            if (excludedDbNames.isNotEmpty()) {
+                retrogradeDb.gameDao().selectTopPopularWithCoversExcluding(DISCOVER_POOL_SIZE, excludedDbNames)
+            } else {
+                retrogradeDb.gameDao().selectTopPopularWithCovers(DISCOVER_POOL_SIZE)
+            }
 
         return candidatesFlow.map { games ->
             // Games arrive sorted by popularityIndex DESC from the query.
@@ -402,12 +425,18 @@ class HomeViewModel(
     }
 
     private fun recentGames(retrogradeDb: RetrogradeDatabase) =
-        if (excludedDbNames.isNotEmpty()) retrogradeDb.gameDao().selectFirstUnfavoriteRecentsExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
-        else retrogradeDb.gameDao().selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS)
+        if (excludedDbNames.isNotEmpty()) {
+            retrogradeDb.gameDao().selectFirstUnfavoriteRecentsExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
+        } else {
+            retrogradeDb.gameDao().selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS)
+        }
 
     private fun favoritesGames(retrogradeDb: RetrogradeDatabase) =
-        if (excludedDbNames.isNotEmpty()) retrogradeDb.gameDao().selectFirstFavoritesExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
-        else retrogradeDb.gameDao().selectFirstFavorites(CAROUSEL_MAX_ITEMS)
+        if (excludedDbNames.isNotEmpty()) {
+            retrogradeDb.gameDao().selectFirstFavoritesExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
+        } else {
+            retrogradeDb.gameDao().selectFirstFavorites(CAROUSEL_MAX_ITEMS)
+        }
 
     private fun dsGamesCount(retrogradeDb: RetrogradeDatabase): Flow<Int> {
         return retrogradeDb.gameDao().selectSystemsWithCount()

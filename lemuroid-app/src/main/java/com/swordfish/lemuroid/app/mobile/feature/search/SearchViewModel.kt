@@ -75,9 +75,10 @@ class SearchViewModel(
         }
             .filter { (query, _, _) -> query.length >= 3 }
             .flatMapLatest { (query, systemIds, onlyInst) ->
-                val romsPrefix = runCatching {
-                    directoriesManager?.getInternalRomsDirectory()?.toUri()?.toString()?.trimEnd('/') ?: ""
-                }.getOrDefault("")
+                val romsPrefix =
+                    runCatching {
+                        directoriesManager?.getInternalRomsDirectory()?.toUri()?.toString()?.trimEnd('/') ?: ""
+                    }.getOrDefault("")
                 val managedMarker = directoriesManager?.getManagedRomsMarker() ?: ""
                 buildFlowPaging(30, viewModelScope) {
                     retrogradeDb.gameSearchDao().search(

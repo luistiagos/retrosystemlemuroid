@@ -18,31 +18,36 @@ data class InstalledGameGroupUiModel(
 )
 
 class StorageAvailabilityMonitor(private val context: Context) {
+    val mediaStateChanges: Flow<Long> =
+        callbackFlow {
+            val receiver =
+                object : BroadcastReceiver() {
+                    override fun onReceive(
+                        ctx: Context?,
+                        intent: Intent?,
+                    ) {
+                        trySend(System.currentTimeMillis())
+                    }
+                }
 
-    val mediaStateChanges: Flow<Long> = callbackFlow {
-        val receiver = object : BroadcastReceiver() {
-            override fun onReceive(ctx: Context?, intent: Intent?) {
-                trySend(System.currentTimeMillis())
+            val filter =
+                IntentFilter().apply {
+                    addAction(Intent.ACTION_MEDIA_MOUNTED)
+                    addAction(Intent.ACTION_MEDIA_UNMOUNTED)
+                    addAction(Intent.ACTION_MEDIA_EJECT)
+                    addAction(Intent.ACTION_MEDIA_REMOVED)
+                    addAction(Intent.ACTION_MEDIA_BAD_REMOVAL)
+                    addDataScheme("file")
+                }
+
+            context.registerReceiver(receiver, filter)
+            // Initial emission
+            trySend(System.currentTimeMillis())
+
+            awaitClose {
+                runCatching { context.unregisterReceiver(receiver) }
             }
         }
-
-        val filter = IntentFilter().apply {
-            addAction(Intent.ACTION_MEDIA_MOUNTED)
-            addAction(Intent.ACTION_MEDIA_UNMOUNTED)
-            addAction(Intent.ACTION_MEDIA_EJECT)
-            addAction(Intent.ACTION_MEDIA_REMOVED)
-            addAction(Intent.ACTION_MEDIA_BAD_REMOVAL)
-            addDataScheme("file")
-        }
-
-        context.registerReceiver(receiver, filter)
-        // Initial emission
-        trySend(System.currentTimeMillis())
-
-        awaitClose {
-            runCatching { context.unregisterReceiver(receiver) }
-        }
-    }
 
     fun isGameAvailable(game: Game): Boolean {
         val uri = Uri.parse(game.fileUri)

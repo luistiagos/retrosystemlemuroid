@@ -10,12 +10,12 @@ import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.GameSystem
-import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import timber.log.Timber
+import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.io.File
 
 class GameLauncher(
@@ -31,9 +31,10 @@ class GameLauncher(
     ) {
         val lifecycleOwner = activity as? LifecycleOwner ?: return
         lifecycleOwner.lifecycleScope.launch {
-            val launchGame = withContext(Dispatchers.IO) {
-                gameLaunchTaskHandler.prepareGameForLaunch(game)
-            }
+            val launchGame =
+                withContext(Dispatchers.IO) {
+                    gameLaunchTaskHandler.prepareGameForLaunch(game)
+                }
             val available = withContext(Dispatchers.IO) { isGameFileAvailable(activity, launchGame) }
             if (!available) {
                 showRomNotFoundDialog(activity, launchGame)
@@ -53,7 +54,10 @@ class GameLauncher(
         }
     }
 
-    private fun isGameFileAvailable(activity: Activity, game: Game): Boolean {
+    private fun isGameFileAvailable(
+        activity: Activity,
+        game: Game,
+    ): Boolean {
         val uri = Uri.parse(game.fileUri)
         return when (uri.scheme) {
             "file" -> File(uri.path ?: return false).exists()
@@ -66,7 +70,10 @@ class GameLauncher(
         }
     }
 
-    private fun showRomNotFoundDialog(activity: Activity, game: Game) {
+    private fun showRomNotFoundDialog(
+        activity: Activity,
+        game: Game,
+    ) {
         // Chega aqui depois de dois hops em Dispatchers.IO — a activity pode ter fechado no meio.
         if (activity.isFinishing || activity.isDestroyed) return
 

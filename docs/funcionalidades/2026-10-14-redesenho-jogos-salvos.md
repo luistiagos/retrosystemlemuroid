@@ -42,9 +42,10 @@ foram tocados.
 
 `assembleFreeBundleDebug -PdevAbi=x86_64` OK; `lintFreeBundleDebug` **BUILD SUCCESSFUL**. `ktlintMainSourceSetCheck`:
 zero apontamentos nos arquivos desta entrega. Os 9 antigos do `GamesScreen`, que se deslocaram de linha e saíram do
-baseline, foram corrigidos. A task segue falhando por arquivos que esta entrega não tocou: `HomeViewModel` 50,
-`RomOnDemandManager` 46, `MainActivity` 31, `HomeScreen` 24, `InstalledGamesViewModel` 9 e outros. Os da 2.3
-são o mesmo deslocamento.
+baseline, foram corrigidos. A task ainda falhava por outros 12 arquivos (191 apontamentos: `HomeViewModel`
+50, `RomOnDemandManager` 46, `MainActivity` 31, `HomeScreen` 24…). Foram corrigidos no commit seguinte
+(`ktlintMainSourceSetFormat` restrito a esses 12, mais 6 à mão: 5 linhas > 120 e `_pausedFlow` → `_isPaused`).
+**Desde então, `:lemuroid-app:ktlintMainSourceSetCheck` passa sem mexer no baseline.**
 
 Roteiro no `lemu_api25_2gb` (instância própria, `emulator-5556`),
 com 5 jogos salvos e uma segunda variante colocada à mão na pasta gerenciada (dois `.tap` do 1Kanoid). A

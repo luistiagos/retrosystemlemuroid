@@ -6,13 +6,14 @@ import android.net.Uri
 import androidx.documentfile.provider.DocumentFile
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
+import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.lib.library.catalog.CatalogRemovals
 import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
 import com.swordfish.lemuroid.lib.library.db.dao.GameDao
 import com.swordfish.lemuroid.lib.library.db.entity.DownloadedRom
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.RomsDirChoice
 import com.swordfish.lemuroid.lib.storage.local.GameCacheUtils
@@ -21,11 +22,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,7 +37,6 @@ import okhttp3.FormBody
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import com.swordfish.lemuroid.lib.ssl.ConscryptOkHttpHelper.applyConscryptTls
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
@@ -69,7 +69,9 @@ class RomOnDemandManager(
          *  [game] is the final Game record — its [Game.fileUri] and [Game.fileName]
          *  may differ from the original if the zip was extracted to a disc-image. */
         data class Success(val game: Game) : DownloadResult()
+
         data class NotFound(val fileName: String) : DownloadResult()
+
         data class Failure(val message: String) : DownloadResult()
     }
 
@@ -81,10 +83,11 @@ class RomOnDemandManager(
     private val backgroundScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val archiveCookieJar = ArchiveCookieJar()
+
     @Volatile private var archiveSessionReady = false
 
-    private val _pausedFlow = MutableStateFlow(false)
-    val isPaused: StateFlow<Boolean> = _pausedFlow.asStateFlow()
+    private val _isPaused = MutableStateFlow(false)
+    val isPaused: StateFlow<Boolean> = _isPaused.asStateFlow()
 
     @Volatile private var activeCall: Call? = null
 
@@ -110,20 +113,22 @@ class RomOnDemandManager(
         val password = BuildConfig.ARCHIVE_PASSWORD
         if (email.isBlank() || password.isBlank()) return
         try {
-            val body = FormBody.Builder()
-                .add("username", email)
-                .add("password", password)
-                .add("remember", "CHECKED")
-                .add("referer", "https://archive.org/")
-                .add("login", "Log in")
-                .add("submit_by_js", "true")
-                .build()
-            val request = Request.Builder()
-                .url("https://archive.org/account/login")
-                .post(body)
-                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
-                .header("Referer", "https://archive.org/")
-                .build()
+            val body =
+                FormBody.Builder()
+                    .add("username", email)
+                    .add("password", password)
+                    .add("remember", "CHECKED")
+                    .add("referer", "https://archive.org/")
+                    .add("login", "Log in")
+                    .add("submit_by_js", "true")
+                    .build()
+            val request =
+                Request.Builder()
+                    .url("https://archive.org/account/login")
+                    .post(body)
+                    .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
+                    .header("Referer", "https://archive.org/")
+                    .build()
             httpClient.newCall(request).execute().use { response ->
                 Timber.d("Archive.org login: HTTP ${response.code}")
                 if (response.code in 200..399) {
@@ -138,22 +143,21 @@ class RomOnDemandManager(
         }
     }
 
-    private fun isArchiveHost(host: String): Boolean =
-        host == "archive.org" || host.endsWith(".archive.org")
+    private fun isArchiveHost(host: String): Boolean = host == "archive.org" || host.endsWith(".archive.org")
 
     fun pauseDownload() {
-        _pausedFlow.value = true
+        _isPaused.value = true
     }
 
     fun resumeDownload() {
-        _pausedFlow.value = false
+        _isPaused.value = false
     }
 
     /** Cancels the active OkHttp call so blocking IO is interrupted immediately. */
     fun cancelActiveDownload() {
         activeCall?.cancel()
         activeCall = null
-        _pausedFlow.value = false
+        _isPaused.value = false
     }
 
     /**
@@ -164,80 +168,85 @@ class RomOnDemandManager(
     suspend fun downloadRom(
         game: Game,
         onProgress: (Float) -> Unit = {},
-    ): DownloadResult = withContext(Dispatchers.IO) {
-        // Reset pause for each new download.
-        _pausedFlow.value = false
+    ): DownloadResult =
+        withContext(Dispatchers.IO) {
+            // Reset pause for each new download.
+            _isPaused.value = false
 
-        val endpointSystem = RomSystemMapper.toEndpointSystem(context, game.systemId)
-        if (endpointSystem == null) {
-            Timber.w("No endpoint mapping for systemId=${game.systemId}")
-            return@withContext DownloadResult.NotFound(game.fileName)
+            val endpointSystem = RomSystemMapper.toEndpointSystem(context, game.systemId)
+            if (endpointSystem == null) {
+                Timber.w("No endpoint mapping for systemId=${game.systemId}")
+                return@withContext DownloadResult.NotFound(game.fileName)
+            }
+
+            val findUrl =
+                "$FIND_BY_FILE_ENDPOINT" +
+                    "?path=${Uri.encode(game.fileName)}&source_id=1&system=${Uri.encode(endpointSystem)}"
+            Timber.d("On-demand lookup: $findUrl")
+
+            val finalUrl =
+                try {
+                    resolveDownloadUrl(findUrl)
+                } catch (e: IOException) {
+                    Timber.e(e, "Lookup failed for ${game.fileName}: ${e.message}")
+                    return@withContext DownloadResult.Failure(e.message ?: "Lookup network error")
+                }
+
+            if (finalUrl.isNullOrBlank()) {
+                Timber.w("Endpoint returned no URL for ${game.fileName} (system=$endpointSystem)")
+                return@withContext DownloadResult.NotFound(game.fileName)
+            }
+            Timber.d("On-demand download URL for ${game.fileName}: $finalUrl")
+
+            val destFile = resolveDestFile(game)
+            try {
+                downloadToFile(finalUrl, destFile, onProgress)
+            } catch (e: CancellationException) {
+                // Restore 0-byte placeholder on cancellation so the game remains in the catalog.
+                runCatching { FileOutputStream(destFile, false).close() }
+                throw e
+            } catch (e: IOException) {
+                Timber.e(e, "Failed to download ROM: ${game.fileName}")
+                return@withContext DownloadResult.Failure(e.message ?: "Unknown IO error")
+            }
+
+            val downloadedSize = destFile.length()
+            if (downloadedSize == 0L) {
+                Timber.w("Download completed but file is empty: ${game.fileName} (url=$finalUrl)")
+                runCatching { FileOutputStream(destFile, false).close() }
+                return@withContext DownloadResult.Failure(
+                    "Arquivo vazio recebido do servidor. O arquivo pode não estar disponível na hospedagem.",
+                )
+            }
+
+            // For multi-file disc-image zips (Dreamcast CUE+BIN, etc.): extract all
+            // entries to a sibling directory, update the game record to point at the
+            // .cue/.gdi entry, and delete the zip to reclaim space.
+            val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
+
+            try {
+                downloadedRomDao.insert(
+                    DownloadedRom(
+                        systemId = finalGame.systemId,
+                        fileName = finalGame.fileName,
+                        fileSize = finalFile.length(),
+                    ),
+                )
+            } catch (e: SQLiteException) {
+                Timber.e(e, "Failed to record downloaded ROM in DB for ${finalGame.fileName}")
+                context.displayToast(R.string.home_download_roms_out_of_space)
+                return@withContext DownloadResult.Failure(
+                    context.getString(R.string.home_download_roms_out_of_space),
+                )
+            }
+
+            // Fire-and-forget: catalog refresh doesn't need to complete before the
+            // "play now?" dialog appears — launching it async avoids blocking the result.
+            backgroundScope.launch { LibraryIndexScheduler.triggerCatalogQuickLoad(context) }
+
+            Timber.d("ROM downloaded successfully: ${finalGame.fileName} (${finalFile.length()} bytes)")
+            DownloadResult.Success(finalGame)
         }
-
-        val findUrl = "$FIND_BY_FILE_ENDPOINT" +
-            "?path=${Uri.encode(game.fileName)}&source_id=1&system=${Uri.encode(endpointSystem)}"
-        Timber.d("On-demand lookup: $findUrl")
-
-        val finalUrl = try {
-            resolveDownloadUrl(findUrl)
-        } catch (e: IOException) {
-            Timber.e(e, "Lookup failed for ${game.fileName}: ${e.message}")
-            return@withContext DownloadResult.Failure(e.message ?: "Lookup network error")
-        }
-
-        if (finalUrl.isNullOrBlank()) {
-            Timber.w("Endpoint returned no URL for ${game.fileName} (system=$endpointSystem)")
-            return@withContext DownloadResult.NotFound(game.fileName)
-        }
-        Timber.d("On-demand download URL for ${game.fileName}: $finalUrl")
-
-        val destFile = resolveDestFile(game)
-        try {
-            downloadToFile(finalUrl, destFile, onProgress)
-        } catch (e: CancellationException) {
-            // Restore 0-byte placeholder on cancellation so the game remains in the catalog.
-            runCatching { FileOutputStream(destFile, false).close() }
-            throw e
-        } catch (e: IOException) {
-            Timber.e(e, "Failed to download ROM: ${game.fileName}")
-            return@withContext DownloadResult.Failure(e.message ?: "Unknown IO error")
-        }
-
-        val downloadedSize = destFile.length()
-        if (downloadedSize == 0L) {
-            Timber.w("Download completed but file is empty: ${game.fileName} (url=$finalUrl)")
-            runCatching { FileOutputStream(destFile, false).close() }
-            return@withContext DownloadResult.Failure("Arquivo vazio recebido do servidor. O arquivo pode não estar disponível na hospedagem.")
-        }
-
-        // For multi-file disc-image zips (Dreamcast CUE+BIN, etc.): extract all
-        // entries to a sibling directory, update the game record to point at the
-        // .cue/.gdi entry, and delete the zip to reclaim space.
-        val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
-
-        try {
-            downloadedRomDao.insert(
-                DownloadedRom(
-                    systemId = finalGame.systemId,
-                    fileName = finalGame.fileName,
-                    fileSize = finalFile.length(),
-                ),
-            )
-        } catch (e: SQLiteException) {
-            Timber.e(e, "Failed to record downloaded ROM in DB for ${finalGame.fileName}")
-            context.displayToast(R.string.home_download_roms_out_of_space)
-            return@withContext DownloadResult.Failure(
-                context.getString(R.string.home_download_roms_out_of_space),
-            )
-        }
-
-        // Fire-and-forget: catalog refresh doesn't need to complete before the
-        // "play now?" dialog appears — launching it async avoids blocking the result.
-        backgroundScope.launch { LibraryIndexScheduler.triggerCatalogQuickLoad(context) }
-
-        Timber.d("ROM downloaded successfully: ${finalGame.fileName} (${finalFile.length()} bytes)")
-        DownloadResult.Success(finalGame)
-    }
 
     /**
      * Calls the find_by_file endpoint and returns the ROM download URL as plain text,
@@ -247,10 +256,11 @@ class RomOnDemandManager(
      */
     private suspend fun resolveDownloadUrl(findUrl: String): String? {
         for (attempt in 1..3) {
-            val request = Request.Builder()
-                .url(findUrl)
-                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
-                .build()
+            val request =
+                Request.Builder()
+                    .url(findUrl)
+                    .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
+                    .build()
             var retryAfterMs: Long? = null
             try {
                 httpClient.newCall(request).execute().use { response ->
@@ -292,44 +302,45 @@ class RomOnDemandManager(
      * [com.swordfish.lemuroid.lib.library.GameInteractor.isGamePlaceholder] treats
      * as a placeholder (File.length() returns 0 for missing files on the JVM).
      */
-    suspend fun deleteRom(game: Game): Unit = withContext(Dispatchers.IO) {
-        val uri = Uri.parse(game.fileUri)
-        if (uri.scheme == "content") {
-            runCatching {
-                DocumentFile.fromSingleUri(context, uri)?.delete()
-            }.onFailure {
-                Timber.e(it, "deleteRom: failed to delete SAF document for ${game.fileName}")
-            }
-        } else {
-            val destFile = resolveDestFile(game)
-            if (destFile.exists()) {
-                if (isManagedRom(game)) {
-                    val systemDir = systemDirOf(destFile, game.systemId)
-                    val parentDir = destFile.parentFile
-                    if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
-                        // Multi-disc extraction directory — delete the whole folder so all
-                        // track files are removed and not just the .cue sheet.
-                        parentDir.deleteRecursively()
-                        Timber.d("deleteRom: removed extraction dir ${parentDir.name}")
+    suspend fun deleteRom(game: Game): Unit =
+        withContext(Dispatchers.IO) {
+            val uri = Uri.parse(game.fileUri)
+            if (uri.scheme == "content") {
+                runCatching {
+                    DocumentFile.fromSingleUri(context, uri)?.delete()
+                }.onFailure {
+                    Timber.e(it, "deleteRom: failed to delete SAF document for ${game.fileName}")
+                }
+            } else {
+                val destFile = resolveDestFile(game)
+                if (destFile.exists()) {
+                    if (isManagedRom(game)) {
+                        val systemDir = systemDirOf(destFile, game.systemId)
+                        val parentDir = destFile.parentFile
+                        if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
+                            // Multi-disc extraction directory — delete the whole folder so all
+                            // track files are removed and not just the .cue sheet.
+                            parentDir.deleteRecursively()
+                            Timber.d("deleteRom: removed extraction dir ${parentDir.name}")
+                        } else {
+                            // Single-file ROM — truncate to 0-byte placeholder.
+                            FileOutputStream(destFile, false).use { }
+                        }
                     } else {
-                        // Single-file ROM — truncate to 0-byte placeholder.
-                        FileOutputStream(destFile, false).use { }
+                        // ROM local fora da pasta gerenciada: apaga APENAS o arquivo da ROM
+                        // NUNCA deleta recursivamente o parentDir para não apagar a pasta de ROMs do usuário!
+                        destFile.delete()
+                        Timber.d("deleteRom: removed unmanaged local ROM file ${destFile.name}")
                     }
-                } else {
-                    // ROM local fora da pasta gerenciada: apaga APENAS o arquivo da ROM
-                    // NUNCA deleta recursivamente o parentDir para não apagar a pasta de ROMs do usuário!
-                    destFile.delete()
-                    Timber.d("deleteRom: removed unmanaged local ROM file ${destFile.name}")
                 }
             }
+            try {
+                downloadedRomDao.delete(game.systemId, game.fileName)
+            } catch (e: SQLiteException) {
+                Timber.e(e, "deleteRom: failed to delete DownloadedRom record for ${game.fileName}")
+            }
+            LibraryIndexScheduler.triggerCatalogQuickLoad(context)
         }
-        try {
-            downloadedRomDao.delete(game.systemId, game.fileName)
-        } catch (e: SQLiteException) {
-            Timber.e(e, "deleteRom: failed to delete DownloadedRom record for ${game.fileName}")
-        }
-        LibraryIndexScheduler.triggerCatalogQuickLoad(context)
-    }
 
     /**
      * Removes the game from the catalog entirely: deletes the ROM from disk (no 0-byte
@@ -342,46 +353,48 @@ class RomOnDemandManager(
      *
      * Undone in bulk by the "restaurar catálogo" action in settings.
      */
-    suspend fun deleteFromCatalog(game: Game): Unit = withContext(Dispatchers.IO) {
-        val variants = runCatching {
-            gameDao.selectVariantsByTitleOnce(game.systemId, game.title)
-        }.getOrNull()?.takeIf { it.isNotEmpty() } ?: listOf(game)
-
-        for (variant in variants) {
-            val uri = Uri.parse(variant.fileUri)
-            if (uri.scheme == "content") {
+    suspend fun deleteFromCatalog(game: Game): Unit =
+        withContext(Dispatchers.IO) {
+            val variants =
                 runCatching {
-                    DocumentFile.fromSingleUri(context, uri)?.delete()
-                }
-            } else {
-                val destFile = resolveDestFile(variant)
-                if (destFile.exists()) {
-                    if (isManagedRom(variant)) {
-                        val systemDir = systemDirOf(destFile, variant.systemId)
-                        val parentDir = destFile.parentFile
-                        if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
-                            // Multi-disc extraction directory — take the whole folder.
-                            parentDir.deleteRecursively()
+                    gameDao.selectVariantsByTitleOnce(game.systemId, game.title)
+                }.getOrNull()?.takeIf { it.isNotEmpty() } ?: listOf(game)
+
+            for (variant in variants) {
+                val uri = Uri.parse(variant.fileUri)
+                if (uri.scheme == "content") {
+                    runCatching {
+                        DocumentFile.fromSingleUri(context, uri)?.delete()
+                    }
+                } else {
+                    val destFile = resolveDestFile(variant)
+                    if (destFile.exists()) {
+                        if (isManagedRom(variant)) {
+                            val systemDir = systemDirOf(destFile, variant.systemId)
+                            val parentDir = destFile.parentFile
+                            if (parentDir != null && parentDir.canonicalPath != systemDir.canonicalPath) {
+                                // Multi-disc extraction directory — take the whole folder.
+                                parentDir.deleteRecursively()
+                            } else {
+                                destFile.delete()
+                            }
                         } else {
                             destFile.delete()
                         }
-                    } else {
-                        destFile.delete()
                     }
                 }
+                downloadedRomDao.delete(variant.systemId, variant.fileName)
             }
-            downloadedRomDao.delete(variant.systemId, variant.fileName)
-        }
 
-        try {
-            CatalogRemovals.add(context, variants.map { it.downloadKey })
-            gameDao.delete(variants)
-            Timber.i("deleteFromCatalog: removed ${variants.size} row(s) for ${game.systemId}/${game.title}")
-        } catch (e: SQLiteException) {
-            Timber.e(e, "deleteFromCatalog: failed to delete rows for ${game.systemId}/${game.title}")
-            context.displayToast(R.string.home_download_roms_out_of_space)
+            try {
+                CatalogRemovals.add(context, variants.map { it.downloadKey })
+                gameDao.delete(variants)
+                Timber.i("deleteFromCatalog: removed ${variants.size} row(s) for ${game.systemId}/${game.title}")
+            } catch (e: SQLiteException) {
+                Timber.e(e, "deleteFromCatalog: failed to delete rows for ${game.systemId}/${game.title}")
+                context.displayToast(R.string.home_download_roms_out_of_space)
+            }
         }
-    }
 
     fun isManagedRom(game: Game): Boolean {
         return runCatching {
@@ -417,32 +430,33 @@ class RomOnDemandManager(
      * downloader, which writes the ZIP directly and therefore bypasses the normal
      * on-demand extraction path.
      */
-    suspend fun prepareGameForLaunch(game: Game): Game = withContext(Dispatchers.IO) {
-        val destFile = resolveDestFile(game)
-        if (!destFile.exists() ||
-            destFile.length() == 0L ||
-            destFile.extension.lowercase() != "zip" ||
-            !isManagedRom(game)
-        ) {
-            return@withContext game
-        }
-
-        val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
-        if (finalGame != game) {
-            try {
-                downloadedRomDao.insert(
-                    DownloadedRom(
-                        systemId = finalGame.systemId,
-                        fileName = finalGame.fileName,
-                        fileSize = finalFile.length(),
-                    ),
-                )
-            } catch (e: SQLiteException) {
-                Timber.e(e, "prepareGameForLaunch: failed to insert DownloadedRom for ${finalGame.fileName}")
+    suspend fun prepareGameForLaunch(game: Game): Game =
+        withContext(Dispatchers.IO) {
+            val destFile = resolveDestFile(game)
+            if (!destFile.exists() ||
+                destFile.length() == 0L ||
+                destFile.extension.lowercase() != "zip" ||
+                !isManagedRom(game)
+            ) {
+                return@withContext game
             }
+
+            val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
+            if (finalGame != game) {
+                try {
+                    downloadedRomDao.insert(
+                        DownloadedRom(
+                            systemId = finalGame.systemId,
+                            fileName = finalGame.fileName,
+                            fileSize = finalFile.length(),
+                        ),
+                    )
+                } catch (e: SQLiteException) {
+                    Timber.e(e, "prepareGameForLaunch: failed to insert DownloadedRom for ${finalGame.fileName}")
+                }
+            }
+            finalGame
         }
-        finalGame
-    }
 
     /**
      * If [zipFile] is a zip containing a disc-image entry (.cue / .gdi / .iso / .chd),
@@ -467,10 +481,11 @@ class RomOnDemandManager(
 
                     // Check if the zip contains a disc-image entry — if not, return as-is
                     // (arcade ROMs should be passed directly to the core as a zip).
-                    val hasDiscEntry = entries.any {
-                        it.name.substringAfterLast('.').lowercase() in
-                            GameCacheUtils.DISC_IMAGE_EXTENSIONS
-                    }
+                    val hasDiscEntry =
+                        entries.any {
+                            it.name.substringAfterLast('.').lowercase() in
+                                GameCacheUtils.DISC_IMAGE_EXTENSIONS
+                        }
                     if (!hasDiscEntry) return@withContext game to zipFile
 
                     // Extract all files into dc/GameTitle/ (sibling of the zip).
@@ -487,18 +502,20 @@ class RomOnDemandManager(
                         }
                     }
 
-                    val mainFile = GameCacheUtils.findMainDiscFile(extractDir)
-                        ?: return@withContext game to zipFile  // shouldn't happen, but be safe
+                    val mainFile =
+                        GameCacheUtils.findMainDiscFile(extractDir)
+                            ?: return@withContext game to zipFile // shouldn't happen, but be safe
 
                     // Delete the zip to reclaim space — the extracted files are permanent.
                     zipFile.delete()
 
                     // Update the DB record so the game's fileUri points to the .cue/.gdi.
                     val newFileUri = Uri.fromFile(mainFile).toString()
-                    val updatedGame = game.copy(
-                        fileUri = newFileUri,
-                        fileName = mainFile.name,
-                    )
+                    val updatedGame =
+                        game.copy(
+                            fileUri = newFileUri,
+                            fileName = mainFile.name,
+                        )
                     gameDao.update(updatedGame)
 
                     Timber.d(
@@ -516,24 +533,30 @@ class RomOnDemandManager(
 
     private fun resolveDestFile(game: Game): File {
         val uri = Uri.parse(game.fileUri)
-        val path = uri.path ?: run {
-            val systemDir = File(directoriesManager.getInternalRomsDirectory(), game.systemId)
-            return File(systemDir, game.fileName)
-        }
+        val path =
+            uri.path ?: run {
+                val systemDir = File(directoriesManager.getInternalRomsDirectory(), game.systemId)
+                return File(systemDir, game.fileName)
+            }
         return File(path)
     }
 
-    private suspend fun downloadToFile(url: String, destFile: File, onProgress: (Float) -> Unit) {
+    private suspend fun downloadToFile(
+        url: String,
+        destFile: File,
+        onProgress: (Float) -> Unit,
+    ) {
         val maxAttempts = 5
         val parsedUrl = Uri.parse(url)
         val isArchive = isArchiveHost(parsedUrl.host ?: "")
         val partialFile = File(destFile.parentFile, "${destFile.name}.download")
         if (isArchive) ensureArchiveSession()
         for (attempt in 1..maxAttempts) {
-            val request = Request.Builder()
-                .url(url)
-                .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
-                .build()
+            val request =
+                Request.Builder()
+                    .url(url)
+                    .header("User-Agent", "Mozilla/5.0 (Android) RetroGameSystem/1.0")
+                    .build()
 
             val call = httpClient.newCall(request)
             activeCall = call
@@ -553,7 +576,9 @@ class RomOnDemandManager(
                             // Reset session so next download attempt re-auths, then fail immediately
                             // without retrying — retries won't help for access-denied responses.
                             archiveSessionReady = false
-                            throw PermanentHttpException("HTTP ${response.code}: ROM source inaccessível (coleção restrita)")
+                            throw PermanentHttpException(
+                                "HTTP ${response.code}: ROM source inaccessível (coleção restrita)",
+                            )
                         }
                         response.code in 400..499 ->
                             throw PermanentHttpException("HTTP ${response.code}: ${response.message}")
@@ -577,7 +602,7 @@ class RomOnDemandManager(
                                     val freeMb = available / (1024 * 1024)
                                     throw PermanentHttpException(
                                         "Espaço insuficiente no dispositivo. " +
-                                            "Necessário: ${needMb} MB, disponível: ${freeMb} MB.",
+                                            "Necessário: $needMb MB, disponível: $freeMb MB.",
                                     )
                                 }
                             }
@@ -597,7 +622,7 @@ class RomOnDemandManager(
                                         // Cancellation checkpoint (each buffer chunk).
                                         currentCoroutineContext().ensureActive()
                                         // Pause checkpoint: suspends the coroutine until resumed.
-                                        if (_pausedFlow.value) _pausedFlow.first { !it }
+                                        if (_isPaused.value) _isPaused.first { !it }
                                     }
                                 }
                             }
@@ -635,7 +660,12 @@ class RomOnDemandManager(
                     throw PermanentHttpException("Espaço insuficiente no dispositivo para salvar a ROM.")
                 }
                 Timber.w("downloadToFile attempt $attempt/$maxAttempts failed: ${e.message}")
-                if (attempt >= maxAttempts) throw IOException("Download failed after $maxAttempts attempts: ${e.message}", e)
+                if (attempt >= maxAttempts) {
+                    throw IOException(
+                        "Download failed after $maxAttempts attempts: ${e.message}",
+                        e,
+                    )
+                }
                 // Re-login before the next attempt if session was invalidated by a 401
                 if (isArchive && !archiveSessionReady) ensureArchiveSession()
                 val ioDelayMs = minOf(5_000L * attempt, 30_000L)
@@ -659,7 +689,9 @@ class RomOnDemandManager(
             val msg = t.message ?: ""
             if (msg.contains("ENOSPC", ignoreCase = true) ||
                 msg.contains("No space left", ignoreCase = true)
-            ) return true
+            ) {
+                return true
+            }
             t = t.cause
         }
         return false
@@ -670,7 +702,10 @@ class RomOnDemandManager(
         private val lock = Any()
         private val store = LinkedHashMap<String, Cookie>()
 
-        override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+        override fun saveFromResponse(
+            url: HttpUrl,
+            cookies: List<Cookie>,
+        ) {
             synchronized(lock) {
                 cookies.forEach { store["${it.domain}|${it.name}"] = it }
             }
@@ -683,4 +718,3 @@ class RomOnDemandManager(
         }
     }
 }
-

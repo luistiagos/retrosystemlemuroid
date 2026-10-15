@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
-import androidx.core.net.toUri
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
@@ -14,24 +13,21 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.lifecycleScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.res.stringResource
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -40,7 +36,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -48,7 +48,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesScreen
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
@@ -61,7 +60,6 @@ import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGamesViewMod
 import com.swordfish.lemuroid.app.mobile.feature.installed.StorageAvailabilityMonitor
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchScreen
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchViewModel
-import com.swordfish.lemuroid.app.shared.search.SystemSearchResolver
 import com.swordfish.lemuroid.app.mobile.feature.settings.advanced.AdvancedSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.advanced.AdvancedSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.bios.BiosScreen
@@ -74,25 +72,22 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevi
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.PortAssignmentScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.PortAssignmentViewModel
-import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsScreen
-import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetExportScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetImportScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.romset.RomsetViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.transfer.TransferExportScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.transfer.TransferImportScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.transfer.TransferSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.transfer.TransferViewModel
-import com.swordfish.lemuroid.lib.romset.RomsetExportManager
-import com.swordfish.lemuroid.lib.romset.RomsetImportManager
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalDimens
 import com.swordfish.lemuroid.app.shared.GameInteractor
-import com.swordfish.lemuroid.app.utils.android.startActivitySafely
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.CoreCrashFallback
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
@@ -101,9 +96,12 @@ import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.app.shared.roms.SaveQueueManager
+import com.swordfish.lemuroid.app.shared.search.SystemSearchResolver
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel
+import com.swordfish.lemuroid.app.utils.android.startActivitySafely
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
+import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.android.RetrogradeComponentActivity
 import com.swordfish.lemuroid.lib.bios.BiosManager
@@ -114,6 +112,8 @@ import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
+import com.swordfish.lemuroid.lib.romset.RomsetExportManager
+import com.swordfish.lemuroid.lib.romset.RomsetImportManager
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.transfer.GameExportManager
@@ -212,7 +212,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
     private fun requestNotificationPermissionOnStartup() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            val permission = android.Manifest.permission.POST_NOTIFICATIONS
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 0)
             }
         }
@@ -308,23 +309,26 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             val pendingVariantsOnlyInstalled = remember { mutableStateOf(false) }
             val variantGames = remember { mutableStateOf<List<Game>>(emptyList()) }
             LaunchedEffect(pendingVariantsGame.value, pendingVariantsOnlyInstalled.value) {
-                val game = pendingVariantsGame.value ?: run {
-                    variantGames.value = emptyList()
-                    return@LaunchedEffect
-                }
-                if (pendingVariantsOnlyInstalled.value) {
-                    val romsDirPrefix = runCatching {
-                        directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
-                    }.getOrDefault("")
-                    val managedMarker = directoriesManager.getManagedRomsMarker()
-                    variantGames.value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-                        retrogradeDb.gameDao().getInstalledVariantsForGroup(
-                            systemId = game.systemId,
-                            title = game.title,
-                            romsDirPrefix = romsDirPrefix,
-                            managedMarker = managedMarker,
-                        )
+                val game =
+                    pendingVariantsGame.value ?: run {
+                        variantGames.value = emptyList()
+                        return@LaunchedEffect
                     }
+                if (pendingVariantsOnlyInstalled.value) {
+                    val romsDirPrefix =
+                        runCatching {
+                            directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
+                        }.getOrDefault("")
+                    val managedMarker = directoriesManager.getManagedRomsMarker()
+                    variantGames.value =
+                        kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                            retrogradeDb.gameDao().getInstalledVariantsForGroup(
+                                systemId = game.systemId,
+                                title = game.title,
+                                romsDirPrefix = romsDirPrefix,
+                                managedMarker = managedMarker,
+                            )
+                        }
                 } else {
                     retrogradeDb.gameDao()
                         .selectVariantsByTitle(game.systemId, game.title)
@@ -486,7 +490,11 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 downloadedGameKeys = downloadedGameKeys,
                                 onGameClick = onGameClick,
                                 onGameLongClick = onGameLongClick,
-                                onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
+                                onOpenCoreSelection = {
+                                    navController.navigateToRoute(
+                                        MainRoute.SETTINGS_CORES_SELECTION,
+                                    )
+                                },
                                 saveQueueEntries = saveQueueEntries,
                                 // The systems carousel exists only in landscape: upright, the Home
                                 // does not pay for the query. Same ViewModel (and RAM filter) as the
@@ -506,14 +514,16 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             )
                         }
                         composable(MainRoute.INSTALLED) {
-                            val installedViewModel: InstalledGamesViewModel = viewModel(
-                                factory = InstalledGamesViewModel.Factory(
-                                    retrogradeDb = retrogradeDb,
-                                    directoriesManager = directoriesManager,
-                                    storageAvailabilityMonitor = storageAvailabilityMonitor,
-                                    systemSearchResolver = systemSearchResolver,
-                                ),
-                            )
+                            val installedViewModel: InstalledGamesViewModel =
+                                viewModel(
+                                    factory =
+                                        InstalledGamesViewModel.Factory(
+                                            retrogradeDb = retrogradeDb,
+                                            directoriesManager = directoriesManager,
+                                            storageAvailabilityMonitor = storageAvailabilityMonitor,
+                                            systemSearchResolver = systemSearchResolver,
+                                        ),
+                                )
                             InstalledGamesScreen(
                                 modifier = Modifier.padding(padding),
                                 viewModel = installedViewModel,
@@ -534,9 +544,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             )
                         }
                         composable(MainRoute.SEARCH) {
-                            val searchViewModel: SearchViewModel = viewModel(
-                                factory = SearchViewModel.Factory(retrogradeDb, directoriesManager),
-                            )
+                            val searchViewModel: SearchViewModel =
+                                viewModel(
+                                    factory = SearchViewModel.Factory(retrogradeDb, directoriesManager),
+                                )
                             LaunchedEffect(searchScopeInstalled.value) {
                                 searchViewModel.setOnlyInstalled(searchScopeInstalled.value)
                             }
@@ -550,18 +561,23 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 onGameClick = { game ->
                                     if (searchViewModel.onlyInstalled.value) {
                                         lifecycleScope.launch {
-                                            val romsDirPrefix = runCatching {
-                                                directoriesManager.getInternalRomsDirectory().toUri().toString().trimEnd('/')
-                                            }.getOrDefault("")
+                                            val romsDirPrefix =
+                                                runCatching {
+                                                    directoriesManager.getInternalRomsDirectory()
+                                                        .toUri()
+                                                        .toString()
+                                                        .trimEnd('/')
+                                                }.getOrDefault("")
                                             val managedMarker = directoriesManager.getManagedRomsMarker()
-                                            val installedVariants = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-                                                retrogradeDb.gameDao().getInstalledVariantsForGroup(
-                                                    systemId = game.systemId,
-                                                    title = game.title,
-                                                    romsDirPrefix = romsDirPrefix,
-                                                    managedMarker = managedMarker,
-                                                )
-                                            }
+                                            val installedVariants =
+                                                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                                                    retrogradeDb.gameDao().getInstalledVariantsForGroup(
+                                                        systemId = game.systemId,
+                                                        title = game.title,
+                                                        romsDirPrefix = romsDirPrefix,
+                                                        managedMarker = managedMarker,
+                                                    )
+                                                }
                                             if (installedVariants.size > 1) {
                                                 pendingVariantsOnlyInstalled.value = true
                                                 pendingVariantsGame.value = game
@@ -644,7 +660,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                             ),
                                     ),
                                 navController = navController,
-                                    onCheckUpdate = { updateViewModel.checkManually() },
+                                onCheckUpdate = { updateViewModel.checkManually() },
                             )
                         }
                         composable(MainRoute.SETTINGS_ADVANCED) {
@@ -702,9 +718,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 modifier = Modifier.padding(padding),
                                 viewModel =
                                     viewModel(
-                                        factory = PortAssignmentViewModel.Factory(
-                                            inputDeviceManager.get(),
-                                        ),
+                                        factory =
+                                            PortAssignmentViewModel.Factory(
+                                                inputDeviceManager.get(),
+                                            ),
                                     ),
                             )
                         }
@@ -730,27 +747,31 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         composable(MainRoute.SETTINGS_TRANSFER_EXPORT) {
                             TransferExportScreen(
                                 modifier = Modifier.padding(padding),
-                                viewModel = viewModel(
-                                    factory = TransferViewModel.Factory(
-                                        applicationContext,
-                                        retrogradeDb,
-                                        gameExportManager.get(),
-                                        gameImportManager.get(),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            TransferViewModel.Factory(
+                                                applicationContext,
+                                                retrogradeDb,
+                                                gameExportManager.get(),
+                                                gameImportManager.get(),
+                                            ),
                                     ),
-                                ),
                             )
                         }
                         composable(MainRoute.SETTINGS_TRANSFER_IMPORT) {
                             TransferImportScreen(
                                 modifier = Modifier.padding(padding),
-                                viewModel = viewModel(
-                                    factory = TransferViewModel.Factory(
-                                        applicationContext,
-                                        retrogradeDb,
-                                        gameExportManager.get(),
-                                        gameImportManager.get(),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            TransferViewModel.Factory(
+                                                applicationContext,
+                                                retrogradeDb,
+                                                gameExportManager.get(),
+                                                gameImportManager.get(),
+                                            ),
                                     ),
-                                ),
                             )
                         }
                         composable(MainRoute.SETTINGS_ROMSET) {
@@ -762,25 +783,29 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         composable(MainRoute.SETTINGS_ROMSET_EXPORT) {
                             RomsetExportScreen(
                                 modifier = Modifier.padding(padding),
-                                viewModel = viewModel(
-                                    factory = RomsetViewModel.Factory(
-                                        applicationContext,
-                                        romsetExportManager.get(),
-                                        romsetImportManager.get(),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            RomsetViewModel.Factory(
+                                                applicationContext,
+                                                romsetExportManager.get(),
+                                                romsetImportManager.get(),
+                                            ),
                                     ),
-                                ),
                             )
                         }
                         composable(MainRoute.SETTINGS_ROMSET_IMPORT) {
                             RomsetImportScreen(
                                 modifier = Modifier.padding(padding),
-                                viewModel = viewModel(
-                                    factory = RomsetViewModel.Factory(
-                                        applicationContext,
-                                        romsetExportManager.get(),
-                                        romsetImportManager.get(),
+                                viewModel =
+                                    viewModel(
+                                        factory =
+                                            RomsetViewModel.Factory(
+                                                applicationContext,
+                                                romsetExportManager.get(),
+                                                romsetImportManager.get(),
+                                            ),
                                     ),
-                                ),
                             )
                         }
                     }
@@ -1128,7 +1153,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 }
                 AppUpdateViewModel.State.Checking,
                 AppUpdateViewModel.State.Idle,
-                AppUpdateViewModel.State.Installing -> Unit
+                AppUpdateViewModel.State.Installing,
+                -> Unit
             }
 
             if (infoDialogDisplayed.value) {
@@ -1148,7 +1174,6 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     confirmButton = { },
                 )
             }
-
         }
     }
 
@@ -1210,8 +1235,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 shortcutsGenerator: ShortcutsGenerator,
                 gameLauncher: GameLauncher,
             ): GameInteractor {
-                val hasNoTouchscreen = !activity.packageManager
-                    .hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)
+                val hasNoTouchscreen =
+                    !activity.packageManager
+                        .hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)
                 return GameInteractor(activity, retrogradeDb, hasNoTouchscreen, shortcutsGenerator, gameLauncher)
             }
         }

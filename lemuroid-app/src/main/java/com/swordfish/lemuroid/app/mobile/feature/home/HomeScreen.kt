@@ -39,16 +39,16 @@ import androidx.lifecycle.Lifecycle
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalDimens
+import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
 import com.swordfish.lemuroid.app.shared.roms.SaveQueueEntry
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
+import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.utils.android.ComposableLifecycle
-import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
-import com.swordfish.lemuroid.app.shared.roms.DownloadRomsState
-import com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager
 import com.swordfish.lemuroid.app.utils.android.connectivityManagerCompat
 import com.swordfish.lemuroid.app.utils.android.hasInternetCompat
 import com.swordfish.lemuroid.app.utils.android.isOnWifiCompat
-import com.swordfish.lemuroid.app.shared.roms.StreamingRomsState
+import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @Composable
@@ -214,7 +214,7 @@ private fun HomeScreen(
         Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 CircularProgressIndicator()
                 Text(
@@ -384,14 +384,16 @@ private fun HomeDownloadCard(
         )
     }
     ElevatedCard(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Text(
@@ -483,9 +485,11 @@ private fun HomeDownloadCard(
  * In that case the caller should prompt the user before starting/resuming a download.
  */
 private fun isWifiNeeded(context: android.content.Context): Boolean {
-    val streamingPrefs = context.getSharedPreferences(
-        "streaming_roms_prefs", android.content.Context.MODE_PRIVATE
-    )
+    val streamingPrefs =
+        context.getSharedPreferences(
+            "streaming_roms_prefs",
+            android.content.Context.MODE_PRIVATE,
+        )
     val wifiOnly = streamingPrefs.getBoolean(StreamingRomsManager.PREF_WIFI_ONLY, true)
     if (!wifiOnly) return false
     return context.connectivityManagerCompat()?.isOnWifiCompat() != true
@@ -560,14 +564,16 @@ private fun HomeStreamingCard(
         )
     }
     ElevatedCard(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Text(
@@ -583,9 +589,13 @@ private fun HomeStreamingCard(
                     OutlinedButton(
                         modifier = Modifier.align(Alignment.End),
                         onClick = {
-                            if (!isNetworkAvailable(context)) showNoNetworkDialog = true
-                            else if (isWifiNeeded(context)) wifiConfirmAction = { onDownloadClicked() }
-                            else onDownloadClicked()
+                            if (!isNetworkAvailable(context)) {
+                                showNoNetworkDialog = true
+                            } else if (isWifiNeeded(context)) {
+                                wifiConfirmAction = { onDownloadClicked() }
+                            } else {
+                                onDownloadClicked()
+                            }
                         },
                     ) {
                         Text(stringResource(R.string.home_streaming_roms_action))
@@ -593,17 +603,20 @@ private fun HomeStreamingCard(
                 }
                 is StreamingRomsState.Downloading -> {
                     val fileLabel = if (state.currentFile.isNotEmpty()) state.currentFile else "…"
-                    val countLabel = if (state.totalFiles > 0)
-                        "${state.downloadedFiles}/${state.totalFiles}"
-                    else
-                        "${state.downloadedFiles}"
+                    val countLabel =
+                        if (state.totalFiles > 0) {
+                            "${state.downloadedFiles}/${state.totalFiles}"
+                        } else {
+                            "${state.downloadedFiles}"
+                        }
                     Text(
-                        text = stringResource(
-                            R.string.home_streaming_roms_downloading,
-                            (state.progress * 100).toInt(),
-                            countLabel,
-                            fileLabel,
-                        ),
+                        text =
+                            stringResource(
+                                R.string.home_streaming_roms_downloading,
+                                (state.progress * 100).toInt(),
+                                countLabel,
+                                fileLabel,
+                            ),
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     LinearProgressIndicator(
@@ -635,9 +648,13 @@ private fun HomeStreamingCard(
                             Text(stringResource(R.string.home_streaming_roms_action_cancel))
                         }
                         OutlinedButton(onClick = {
-                            if (!isNetworkAvailable(context)) showNoNetworkDialog = true
-                            else if (isWifiNeeded(context)) wifiConfirmAction = { onResumeClicked() }
-                            else onResumeClicked()
+                            if (!isNetworkAvailable(context)) {
+                                showNoNetworkDialog = true
+                            } else if (isWifiNeeded(context)) {
+                                wifiConfirmAction = { onResumeClicked() }
+                            } else {
+                                onResumeClicked()
+                            }
                         }) {
                             Text(stringResource(R.string.home_streaming_roms_resume))
                         }

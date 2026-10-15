@@ -24,10 +24,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
-import kotlinx.coroutines.launch
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidColors
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalDimens
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalVisualQuality
+import kotlinx.coroutines.launch
 
 /**
  * D-pad focus of the redesign: accent outline [Dimens.focusBorderWidth] wide, drawn

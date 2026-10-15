@@ -11,7 +11,6 @@ import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +20,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
@@ -30,7 +30,6 @@ class InstalledGamesViewModel(
     private val storageAvailabilityMonitor: StorageAvailabilityMonitor,
     private val systemSearchResolver: SystemSearchResolver,
 ) : ViewModel() {
-
     class Factory(
         private val retrogradeDb: RetrogradeDatabase,
         private val directoriesManager: DirectoriesManager,
@@ -84,7 +83,7 @@ class InstalledGamesViewModel(
                                 fileName = name,
                                 fileSize = file.length(),
                                 downloadedAt = 0L,
-                            )
+                            ),
                         )
                     }
                 }
@@ -103,22 +102,23 @@ class InstalledGamesViewModel(
         _searchQuery.value = query
     }
 
-    private val rawGroupsFlow = _searchQuery
-        .debounce(150)
-        .flatMapLatest { query ->
-            val trimmed = query.trim()
-            if (trimmed.isEmpty()) {
-                retrogradeDb.gameDao().observeInstalledGameGroups(romsDirPrefix, managedMarker)
-            } else {
-                val matchedSystemIds = systemSearchResolver.resolveSystemIds(trimmed).ifEmpty { listOf("__none__") }
-                retrogradeDb.gameDao().searchInstalledGameGroups(
-                    query = trimmed,
-                    matchedSystemIds = matchedSystemIds,
-                    romsDirPrefix = romsDirPrefix,
-                    managedMarker = managedMarker,
-                )
+    private val rawGroupsFlow =
+        _searchQuery
+            .debounce(150)
+            .flatMapLatest { query ->
+                val trimmed = query.trim()
+                if (trimmed.isEmpty()) {
+                    retrogradeDb.gameDao().observeInstalledGameGroups(romsDirPrefix, managedMarker)
+                } else {
+                    val matchedSystemIds = systemSearchResolver.resolveSystemIds(trimmed).ifEmpty { listOf("__none__") }
+                    retrogradeDb.gameDao().searchInstalledGameGroups(
+                        query = trimmed,
+                        matchedSystemIds = matchedSystemIds,
+                        romsDirPrefix = romsDirPrefix,
+                        managedMarker = managedMarker,
+                    )
+                }
             }
-        }
 
     val installedGames: StateFlow<List<InstalledGameGroupUiModel>> =
         combine(rawGroupsFlow, storageAvailabilityMonitor.mediaStateChanges) { groups, _ ->
@@ -136,12 +136,16 @@ class InstalledGamesViewModel(
                 initialValue = emptyList(),
             )
 
-    suspend fun getInstalledVariants(systemId: String, title: String): List<Game> = withContext(Dispatchers.IO) {
-        retrogradeDb.gameDao().getInstalledVariantsForGroup(
-            systemId = systemId,
-            title = title,
-            romsDirPrefix = romsDirPrefix,
-            managedMarker = managedMarker,
-        )
-    }
+    suspend fun getInstalledVariants(
+        systemId: String,
+        title: String,
+    ): List<Game> =
+        withContext(Dispatchers.IO) {
+            retrogradeDb.gameDao().getInstalledVariantsForGroup(
+                systemId = systemId,
+                title = title,
+                romsDirPrefix = romsDirPrefix,
+                managedMarker = managedMarker,
+            )
+        }
 }
