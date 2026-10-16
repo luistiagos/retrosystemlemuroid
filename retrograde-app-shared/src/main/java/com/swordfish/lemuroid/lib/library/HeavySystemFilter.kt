@@ -28,6 +28,7 @@ object HeavySystemFilter {
         SystemID.PSP,          // PPSSPP – very demanding
         SystemID.NINTENDO_3DS, // Citra – very demanding
         SystemID.GAMECUBE,     // Dolphin – very demanding
+        SystemID.MAME289,      // MAME 0.289 (Arcade) – very demanding
     )
 
     // ── Moderate / moderate-heavy — additionally excluded on ≤ 1 GB ─────────

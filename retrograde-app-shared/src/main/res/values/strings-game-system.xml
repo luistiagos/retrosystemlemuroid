@@ -178,4 +178,6 @@
     <string name="game_system_title_gw">Nintendo Game &amp; Watch</string>
     <string name="game_system_abbr_atarist">Atari ST</string>
     <string name="game_system_title_atarist">Atari ST</string>
+    <string name="game_system_abbr_arcade_mame289">MAME</string>
+    <string name="game_system_title_arcade_mame289">MAME 0.289</string>
 </resources>

@@ -157,7 +157,8 @@ class ManifestQuickLoader(
         //   v39  168 entradas removidas do catalog_manifest.txt (dc 66, psx 46, gc 27, psp 7, 3do 6,
         //          gbc 6, c64 4, gb 2, zxspectrum 2, snes 1, wsc 1; commit 4e276da). O bump força a
         //          passada completa, cuja limpeza de catálogo obsoleto apaga essas linhas do banco.
-        private const val MANIFEST_SCHEMA_VERSION = 39
+        //   v40  mame289 (MAME 0.289 Arcade Core on-demand): inclusão do sistema e 14.357 títulos de arcade.
+        private const val MANIFEST_SCHEMA_VERSION = 40
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

@@ -186,6 +186,7 @@ Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteú
 | 37 | CPS1: ajuste de representação de clones vs pais (sf2ce, 1941, forgottn) para evitar "ROM not found" |
 | 38 | 3DS: adição do Pokémon Y (Europa), completando o par com Pokémon X |
 | 39 | Remoção de 168 entradas do manifest (Dreamcast 66, PSX 46, GameCube 27 e outras 29) |
+| 40 | MAME 0.289: inclusão de 14.357 títulos de arcade não-CHD apontando para o core mamearcade |
 
 ### Backfill de capas (`super_scrapper`)
 

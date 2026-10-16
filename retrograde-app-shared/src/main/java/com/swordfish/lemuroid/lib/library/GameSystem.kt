@@ -1467,6 +1467,40 @@ data class GameSystem(
                         ),
                 ),
                 GameSystem(
+                    SystemID.MAME289,
+                    "MAME 0.289",
+                    R.string.game_system_title_arcade_mame289,
+                    R.string.game_system_abbr_arcade_mame289,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.MAMEARCADE,
+                            statesSupported = false,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to
+                                        arrayListOf(
+                                            ControllerConfigs.MAME_2003_4,
+                                            ControllerConfigs.MAME_2003_6,
+                                        ),
+                                    1 to
+                                        arrayListOf(
+                                            ControllerConfigs.MAME_2003_4,
+                                            ControllerConfigs.MAME_2003_6,
+                                        ),
+                                ),
+                        ),
+                    ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip", "7z"),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                ),
+                GameSystem(
                     SystemID.NDS,
                     "Nintendo - Nintendo DS",
                     R.string.game_system_title_nds,

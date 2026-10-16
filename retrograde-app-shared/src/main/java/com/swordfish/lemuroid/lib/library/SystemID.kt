@@ -80,4 +80,5 @@ enum class SystemID(val dbname: String) {
     PCFX("pcfx"),
     GAME_WATCH("gw"),
     ATARI_ST("atarist"),
+    MAME289("mame289"),
 }

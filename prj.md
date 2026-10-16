@@ -74,6 +74,7 @@ Defined in `retrograde-app-shared/.../library/SystemID.kt`:
 | `NEOGEO` | `neogeo` | SNK Neo Geo |
 | `FBNEO` | `fbneo` | FinalBurn Neo (arcade genérico) |
 | `MAME2003PLUS` | `mame2003plus` | MAME 2003-Plus (arcade) |
+| `MAME289` | `mame289` | MAME 0.289 (arcade moderno) |
 
 ### 3.2 Arcade Board Systems (14)
 
@@ -593,6 +594,7 @@ Ao sair de um jogo (a `BaseGameActivity` termina e o app retoma o `MainActivity`
 | `CITRA` | `libcitra_libretro_android.so` | Nintendo 3DS |
 | `FBNEO` | `libfbneo_libretro_android.so` | FBNeo, Neo Geo, CPS1/2/3, e todos os boards arcade |
 | `MAME2003PLUS` | `libmame2003_plus_libretro_android.so` | MAME2003Plus |
+| `MAMEARCADE` | `libmamearcade_libretro_android.so` | MAME 0.289 (Arcade) |
 | `DOSBOX_PURE` | `libdosbox_pure_libretro_android.so` | DOS |
 | `FMSX` | `libfmsx_libretro_android.so` | MSX, MSX2 |
 

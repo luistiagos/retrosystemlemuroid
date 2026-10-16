@@ -51,4 +51,5 @@
     <string name="core_name_mednafen_pcfx" translatable="false">mednafen_pcfx</string>
     <string name="core_name_gw" translatable="false">gw</string>
     <string name="core_name_hatari" translatable="false">hatari</string>
+    <string name="core_name_mamearcade" translatable="false">mamearcade</string>
 </resources>

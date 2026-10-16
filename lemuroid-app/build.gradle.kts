@@ -130,6 +130,7 @@ android {
                 ":lemuroid_core_mednafen_pcfx",
                 ":lemuroid_core_gw",
                 ":lemuroid_core_hatari",
+                ":lemuroid_core_mamearcade",
             ),
         )
     }

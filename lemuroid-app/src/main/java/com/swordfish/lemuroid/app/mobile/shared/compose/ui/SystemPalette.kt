@@ -96,6 +96,7 @@ object SystemPalette {
             MetaSystemID.PCFX -> Color(0xFF6A3A2A)
             MetaSystemID.GAME_WATCH -> Color(0xFF8A5A1A)
             MetaSystemID.ATARI_ST -> Color(0xFF3A5A3A)
+            MetaSystemID.MAME289 -> Color(0xFF8B2500)
         }
 
     /** Colour for a `Game.systemId` (dbname). Unknown ids get a neutral surface tone. */

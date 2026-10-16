@@ -270,6 +270,11 @@ enum class CoreID(
         "Hatari",
         "libhatari_libretro_android.so",
     ),
+    MAMEARCADE(
+        "mamearcade",
+        "MAME 0.289 (Arcade)",
+        "libmamearcade_libretro_android.so",
+    ),
     ;
 
     companion object {
