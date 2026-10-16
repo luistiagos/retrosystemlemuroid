@@ -17,8 +17,10 @@ import androidx.leanback.widget.OnItemViewClickedListener
 import androidx.leanback.widget.OnItemViewSelectedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
@@ -33,10 +35,15 @@ import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
 import com.swordfish.lemuroid.app.tv.shared.TVSavedGames
 import com.swordfish.lemuroid.app.tv.shared.TVTypography
 import com.swordfish.lemuroid.common.coroutines.launchOnState
+import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
+import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.coroutines.android.awaitFrame
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TVHomeFragment : BrowseSupportFragment() {
@@ -49,11 +56,24 @@ class TVHomeFragment : BrowseSupportFragment() {
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
+    @Inject
+    lateinit var directoriesManager: DirectoriesManager
+
     /** Title and system of the focused card (redesign 3.4); the home cards show only the image. */
     private var focusPanel: TVFocusPanel? = null
 
     /** "Saved" badge of the home cards (redesign 3.5), shared by the presenters [recreateAdapter] creates. */
-    private lateinit var savedGames: TVSavedGames
+    private lateinit var savedBadges: TVSavedGames
+
+    private val homeViewModel: TVHomeViewModel by lazy {
+        val factory =
+            TVHomeViewModel.Factory(retrogradeDb, requireContext().applicationContext, directoriesManager)
+        ViewModelProvider(this, factory)[TVHomeViewModel::class.java]
+    }
+
+    // Last state of each source: the rows are rebuilt from both (see render).
+    private var homeViewState = TVHomeViewModel.HomeViewState()
+    private var savedGames: List<InstalledGameGroupUiModel> = emptyList()
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -75,6 +95,7 @@ class TVHomeFragment : BrowseSupportFragment() {
             OnItemViewClickedListener { _, item, _, _ ->
                 when (item) {
                     is Game -> gameInteractor.onGamePlay(item)
+                    is InstalledGameGroupUiModel -> onSavedGameClick(item)
                     is MetaSystemInfo -> {
                         val action =
                             TVHomeFragmentDirections.actionNavigationSystemsToNavigationGames(
@@ -115,11 +136,11 @@ class TVHomeFragment : BrowseSupportFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        savedGames = TVSavedGames.attach(this, retrogradeDb)
+        savedBadges = TVSavedGames.attach(this, retrogradeDb)
         val ambientBackground = TVAmbientBackground.attach(this)
         onItemViewSelectedListener =
             OnItemViewSelectedListener { _, item, _, _ ->
-                ambientBackground.onItemSelected(item)
+                ambientBackground.onItemSelected((item as? InstalledGameGroupUiModel)?.group?.game ?: item)
                 focusPanel?.onItemSelected(item)
             }
         focusPanel?.setShown(!isShowingHeaders)
@@ -136,6 +157,7 @@ class TVHomeFragment : BrowseSupportFragment() {
         )
 
         recreateAdapter(
+            includeSavedGames = false,
             includeFavorites = false,
             includeRecentGames = false,
             includeSystems = false,
@@ -144,12 +166,63 @@ class TVHomeFragment : BrowseSupportFragment() {
             findNavController().navigate(R.id.navigation_search)
         }
 
-        val factory = TVHomeViewModel.Factory(retrogradeDb, requireContext().applicationContext)
-        val homeViewModel = ViewModelProvider(this, factory)[TVHomeViewModel::class.java]
-
         launchOnState(Lifecycle.State.RESUMED) {
             homeViewModel.getViewStates()
-                .collect { update(it) }
+                .collect {
+                    homeViewState = it
+                    render()
+                }
+        }
+        launchOnState(Lifecycle.State.RESUMED) {
+            // The saved games query walks the whole games table: it starts only after the home is on screen.
+            awaitFrame()
+            homeViewModel.savedGames
+                .filterNotNull()
+                .collect {
+                    savedGames = it
+                    render()
+                }
+        }
+    }
+
+    /**
+     * Tap on a saved game, the rules of the phone's Saved games tab (`MainActivity.onInstalledGameClick`):
+     * unreachable media warns; more than one saved version opens the picker with only the saved ones; one plays.
+     */
+    private fun onSavedGameClick(savedGame: InstalledGameGroupUiModel) {
+        val game = savedGame.group.game
+        if (!savedGame.isAvailable) {
+            requireContext().displayToast(R.string.installed_media_unavailable)
+            return
+        }
+        if (savedGame.group.installedVariantsCount <= 1) {
+            gameInteractor.onGamePlay(game)
+            return
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            val variants = homeViewModel.savedVariants(game)
+            if (variants.isEmpty()) {
+                gameInteractor.onGamePlay(game)
+                return@launch
+            }
+            TVSavedVariantsDialog.show(requireContext(), game.title, variants) { variant ->
+                onSavedVariantSelected(variant)
+            }
+        }
+    }
+
+    /** Same order as the phone's picker: a version not saved yet goes to the save dialog first. */
+    private fun onSavedVariantSelected(variant: Game) {
+        if (!gameInteractor.isRomDownloaded(variant)) {
+            gameInteractor.onGamePlay(variant)
+            return
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            if (homeViewModel.isAvailable(variant)) {
+                gameInteractor.onGamePlay(variant)
+            } else {
+                requireContext().displayToast(R.string.installed_media_unavailable)
+            }
         }
     }
 
@@ -158,22 +231,35 @@ class TVHomeFragment : BrowseSupportFragment() {
         super.onDestroyView()
     }
 
-    private fun update(viewState: TVHomeViewModel.HomeViewState) {
+    private fun render() {
+        val viewState = homeViewState
+        val adapterHasSaved = findAdapterById<ObjectAdapter>(SAVED_ADAPTER) != null
         val adapterHasFavorites = findAdapterById<ObjectAdapter>(FAVORITES_ADAPTER) != null
         val adapterHasGames = findAdapterById<ObjectAdapter>(RECENTS_ADAPTER) != null
         val adapterHasSystems = findAdapterById<ObjectAdapter>(SYSTEM_ADAPTER) != null
 
+        val savedChanged = adapterHasSaved != savedGames.isNotEmpty()
         val favoritesChanged = adapterHasFavorites != viewState.favoritesGames.isNotEmpty()
         val recentsChanged = adapterHasGames != viewState.recentGames.isNotEmpty()
         val systemsChanged = adapterHasSystems != viewState.metaSystems.isNotEmpty()
 
-        if (favoritesChanged || recentsChanged || systemsChanged) {
+        if (savedChanged || favoritesChanged || recentsChanged || systemsChanged) {
+            // The saved games row arrives after the first frame and above the others: a new adapter keeps the
+            // selected index, which would now point at another row. Below the first row, keep the same row.
+            val selectedRowId = rowIdAt(selectedPosition).takeIf { selectedPosition > 0 }
             recreateAdapter(
+                savedGames.isNotEmpty(),
                 viewState.favoritesGames.isNotEmpty(),
                 viewState.recentGames.isNotEmpty(),
                 viewState.metaSystems.isNotEmpty(),
             )
+            selectedRowId
+                ?.let { id -> (0 until adapter.size()).firstOrNull { rowIdAt(it) == id } }
+                ?.let { setSelectedPosition(it, false) }
         }
+
+        findAdapterById<ArrayObjectAdapter>(SAVED_ADAPTER)
+            ?.setItems(savedGames, LEANBACK_SAVED_GAME_DIFF_CALLBACK)
 
         findAdapterById<ArrayObjectAdapter>(FAVORITES_ADAPTER)?.apply {
             if (viewState.favoritesGames.size <= TVHomeViewModel.CAROUSEL_MAX_ITEMS) {
@@ -198,6 +284,12 @@ class TVHomeFragment : BrowseSupportFragment() {
         )
     }
 
+    private fun rowIdAt(position: Int): Long? {
+        val rows = adapter ?: return null
+        if (position !in 0 until rows.size()) return null
+        return (rows.get(position) as? ListRow)?.headerItem?.id
+    }
+
     private fun <T> findAdapterById(id: Long): T? {
         for (i: Int in 0 until adapter.size()) {
             val item = adapter.get(i)
@@ -209,6 +301,7 @@ class TVHomeFragment : BrowseSupportFragment() {
     }
 
     private fun recreateAdapter(
+        includeSavedGames: Boolean,
         includeFavorites: Boolean,
         includeRecentGames: Boolean,
         includeSystems: Boolean,
@@ -220,11 +313,18 @@ class TVHomeFragment : BrowseSupportFragment() {
                 com.swordfish.lemuroid.lib.R.dimen.settings_card_padding,
             )
 
+        // First row, as the "Saved games" row of the phone's home (redesign 3.6).
+        if (includeSavedGames) {
+            val savedItems = ArrayObjectAdapter(SavedGamePresenter(gameInteractor))
+            val title = resources.getString(R.string.title_installed)
+            result.add(ListRow(HeaderItem(SAVED_ADAPTER, title), savedItems))
+        }
+
         if (includeFavorites) {
             val presenter = ClassPresenterSelector()
             presenter.addClassPresenter(
                 Game::class.java,
-                GamePresenter(gameInteractor, showInfo = false, savedGames = savedGames),
+                GamePresenter(gameInteractor, showInfo = false, savedGames = savedBadges),
             )
             // "Show all" sits next to the games: same size as the game card and only the icon, so the row keeps one
             // height. The focus panel shows its label.
@@ -244,7 +344,7 @@ class TVHomeFragment : BrowseSupportFragment() {
 
         if (includeRecentGames) {
             val recentItems =
-                ArrayObjectAdapter(GamePresenter(gameInteractor, showInfo = false, savedGames = savedGames))
+                ArrayObjectAdapter(GamePresenter(gameInteractor, showInfo = false, savedGames = savedBadges))
             val title = resources.getString(R.string.tv_home_section_recents)
             result.add(ListRow(HeaderItem(RECENTS_ADAPTER, title), recentItems))
         }
@@ -306,6 +406,26 @@ class TVHomeFragment : BrowseSupportFragment() {
         const val SYSTEM_ADAPTER = 2L
         const val SETTINGS_ADAPTER = 3L
         const val FAVORITES_ADAPTER = 4L
+        const val SAVED_ADAPTER = 5L
+
+        val LEANBACK_SAVED_GAME_DIFF_CALLBACK =
+            object : DiffCallback<InstalledGameGroupUiModel>() {
+                override fun areContentsTheSame(
+                    oldItem: InstalledGameGroupUiModel,
+                    newItem: InstalledGameGroupUiModel,
+                ): Boolean {
+                    return oldItem == newItem
+                }
+
+                // One item per (system, title) group; the representative may change (last played version).
+                override fun areItemsTheSame(
+                    oldItem: InstalledGameGroupUiModel,
+                    newItem: InstalledGameGroupUiModel,
+                ): Boolean {
+                    return oldItem.group.game.systemId == newItem.group.game.systemId &&
+                        oldItem.group.game.title == newItem.group.game.title
+                }
+            }
 
         val LEANBACK_MULTI_DIFF_CALLBACK =
             object : DiffCallback<Any>() {

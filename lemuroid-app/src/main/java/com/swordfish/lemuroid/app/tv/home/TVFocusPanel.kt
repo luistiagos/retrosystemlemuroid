@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.app.RowsSupportFragment
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SystemPalette
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.VisualQuality
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
@@ -34,6 +35,7 @@ class TVFocusPanel private constructor(
     private val context: Context = view.context
     private val title: TextView = view.findViewById(R.id.tv_focus_panel_title)
     private val chip: TextView = view.findViewById(R.id.tv_focus_panel_chip)
+    private val detail: TextView = view.findViewById(R.id.tv_focus_panel_detail)
     private val chipBackground =
         GradientDrawable().apply {
             // Larger than half the chip height: a pill, as the SystemChip of the phone.
@@ -48,6 +50,7 @@ class TVFocusPanel private constructor(
         chip.background = chipBackground
         TVTypography.apply(title, TVTypography.Weight.BOLD)
         TVTypography.apply(chip, TVTypography.Weight.BOLD)
+        TVTypography.apply(detail, TVTypography.Weight.MEDIUM)
     }
 
     /** Selection listener entry point. `null` and unknown items keep the current content. */
@@ -72,6 +75,8 @@ class TVFocusPanel private constructor(
             chipBackground.setColor(content.chipColor)
             chip.visibility = View.VISIBLE
         }
+        detail.text = content.detail
+        detail.visibility = if (content.detail == null) View.GONE else View.VISIBLE
 
         if (animate) {
             view.animate().cancel()
@@ -89,12 +94,8 @@ class TVFocusPanel private constructor(
 
     private fun contentOf(item: Any): Content? {
         return when (item) {
-            is Game -> {
-                val systemName =
-                    GameSystem.findByIdOrNull(item.systemId)?.shortTitleResId?.let { context.getString(it) }
-                        ?: item.systemId
-                Content(item.title, systemName, SystemPalette.colorForSystemId(item.systemId).toArgb())
-            }
+            is Game -> contentOf(item, detail = null)
+            is InstalledGameGroupUiModel -> contentOf(item.group.game, savedGameDetail(context, item))
             is MetaSystemInfo ->
                 Content(
                     item.getName(context),
@@ -106,10 +107,21 @@ class TVFocusPanel private constructor(
         }
     }
 
+    private fun contentOf(
+        game: Game,
+        detail: String?,
+    ): Content {
+        val systemName =
+            GameSystem.findByIdOrNull(game.systemId)?.shortTitleResId?.let { context.getString(it) }
+                ?: game.systemId
+        return Content(game.title, systemName, SystemPalette.colorForSystemId(game.systemId).toArgb(), detail)
+    }
+
     private data class Content(
         val title: String,
         val chip: String?,
         @ColorInt val chipColor: Int,
+        val detail: String? = null,
     )
 
     companion object {

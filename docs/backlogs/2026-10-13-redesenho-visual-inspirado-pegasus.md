@@ -1567,3 +1567,25 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
   passa `savedGames` (todos os cartões teriam o selo). **Próximo passo:** aval do dono → `git pull --rebase` sobre o
   `version10` (a 3.6 mexe no `TVHomeFragment`) → commit → push.
 - **2026-10-16 (entrega 3.5 commitada).** Commit `e50c567` no `version10`, com o aval do dono. Fase 3 aguarda só a 3.6.
+- **2026-10-15 (entrega 3.6: fileira "Jogos salvos" na TV).** Branch `redesenho-3.6-jogos-salvos-tv`, worktree
+  `.claude/worktrees/jogos-salvos-tv`, a partir de `cf6b120`. Análise, implementação, validação e capturas em
+  `docs/funcionalidades/2026-10-15-tv-fileira-jogos-salvos.md`.
+  - **Feito:** fileira "Jogos salvos" em primeiro na Início da TV (10 grupos mais recentes, mesma query e checagem de
+    mídia do celular, coletada depois do primeiro quadro e quente a partir daí); regras de toque do celular (mídia
+    inacessível avisa, mais de uma versão abre o seletor só com as salvas, uma versão joga); seletor
+    `TVSavedVariantsDialog`; capa a 60% e texto no painel de foco ("N versões" / "Mídia inacessível") no lugar dos
+    selos do celular. O `GamePresenter` (que a 3.5 altera) não foi tocado; a fileira tem presenter próprio.
+  - **Colisão esperada com a 3.5:** `TVHomeViewModel` (construtor e `Factory` ganharam `DirectoriesManager`) e
+    `TVHomeFragment` (`update` virou `render`, `recreateAdapter` ganhou `includeSavedGames`). Resolver no rebase.
+  - **Verificação:** build x86 e `ktlintMainSourceSetCheck` OK; `ktlintKotlinScriptCheck` falha no
+    `lemuroid-app/build.gradle.kts`, que a entrega não toca; `lintFreeBundleDebug` BUILD SUCCESSFUL. Roteiro no `lemu_tv_api25`
+    (`-read-only`, `-sdcard`) sem crash.
+  - **Segunda rodada (16/10):** pt-BR, mídia que volta (download no SD, `sm unmount`/`mount`) e custo da query
+    (0,171 s / 60.872 linhas no x86) conferidos. Revisão achou e corrigiu: a fileira chega depois e em cima, e o adapter
+    novo mantinha o índice selecionado (foco pulava de fileira); agora a fileira selecionada é mantida pelo id.
+  - **Próximo passo:** commit com o aval do dono (`git pull --rebase` antes, por causa da 3.5); backlog de tela
+    "Jogos salvos" na TV com "Ver todos".
+- **2026-10-16 (3.6 rebaseada sobre a 3.5 e enviada).** Conflito no `TVHomeFragment`: as duas entregas criaram um
+  campo `savedGames`; o da 3.5 (`TVSavedGames`) virou `savedBadges`. A fileira "Jogos salvos" usa `SavedGamePresenter`
+  (sem selo). Build x86 e `ktlintMainSourceSetCheck` OK; no `lemu_tv_api25`: fileira "Jogos salvos" sem selo e
+  Recentes com o ✓, sem crash. **Fase 3 fechada.** Resta a Fase 4 (opcional).
