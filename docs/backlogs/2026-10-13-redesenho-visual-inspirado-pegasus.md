@@ -1589,3 +1589,19 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
   campo `savedGames`; o da 3.5 (`TVSavedGames`) virou `savedBadges`. A fileira "Jogos salvos" usa `SavedGamePresenter`
   (sem selo). Build x86 e `ktlintMainSourceSetCheck` OK; no `lemu_tv_api25`: fileira "Jogos salvos" sem selo e
   Recentes com o ✓, sem crash. **Fase 3 fechada.** Resta a Fase 4 (opcional).
+- **2026-10-16 (passagem de bastão: Fase 3 fechada).** Estado: 3.5 (`e50c567`, `3732836`) e 3.6 (`77a8306`) no
+  `origin/version10`; worktrees `selo-tv` e `jogos-salvos-tv` e suas branches removidos. Nenhum código do redesenho
+  pendente.
+  - **Verificação que ficou em aberto (3.5/3.6), em ordem de custo:**
+    1. `./gradlew ktlintCheck` completo no checkout principal: dentro dos worktrees só o `ktlintKotlinScriptCheck`
+       falhava (no `lemuroid-app/build.gradle.kts`, não tocado — suspeita: baseline não casa o caminho de
+       `.claude/worktrees/`). Se falhar também no checkout principal, é passivo real e vira registro próprio.
+    2. TV: abrir Favoritos e Busca no `lemu_tv_api25` e ver o selo (mesmo `GamePresenter` + `TVSavedGames.attach`,
+       não abertas).
+    3. TV box real e `dumpsys gfxinfo` na Início da TV (fileira "Jogos salvos" + selo).
+  - **Próximos itens do plano:** backlog de tela "Jogos salvos" na TV com "Ver todos" (apontado pela 3.6, ainda sem
+    arquivo em `docs/backlogs/`: criar antes de implementar); Fase 4 (arte extra) só depois de medir.
+  - **Observações para quem pegar:** há um só `lemu_tv_api25`; com outra sessão usando, subir 2ª instância
+    `-read-only -port 5600` (`Start-Process`). Toque longo no AVD 7.1 só por `sendevent /dev/input/event1 1 232 1/0`
+    (o `--longpress` vira clique). Worktree no Windows: apagar a pasta com `rd /s /q \?\<caminho>` (o `git worktree
+    remove` falha com "Filename too long") e copiar o `local.properties` ao criar.
