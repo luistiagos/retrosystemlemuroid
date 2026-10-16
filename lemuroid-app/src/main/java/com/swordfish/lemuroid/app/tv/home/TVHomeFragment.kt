@@ -30,6 +30,7 @@ import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVAmbientBackground
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
+import com.swordfish.lemuroid.app.tv.shared.TVSavedGames
 import com.swordfish.lemuroid.app.tv.shared.TVTypography
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
@@ -50,6 +51,9 @@ class TVHomeFragment : BrowseSupportFragment() {
 
     /** Title and system of the focused card (redesign 3.4); the home cards show only the image. */
     private var focusPanel: TVFocusPanel? = null
+
+    /** "Saved" badge of the home cards (redesign 3.5), shared by the presenters [recreateAdapter] creates. */
+    private lateinit var savedGames: TVSavedGames
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -111,6 +115,7 @@ class TVHomeFragment : BrowseSupportFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
+        savedGames = TVSavedGames.attach(this, retrogradeDb)
         val ambientBackground = TVAmbientBackground.attach(this)
         onItemViewSelectedListener =
             OnItemViewSelectedListener { _, item, _, _ ->
@@ -217,7 +222,10 @@ class TVHomeFragment : BrowseSupportFragment() {
 
         if (includeFavorites) {
             val presenter = ClassPresenterSelector()
-            presenter.addClassPresenter(Game::class.java, GamePresenter(gameInteractor, showInfo = false))
+            presenter.addClassPresenter(
+                Game::class.java,
+                GamePresenter(gameInteractor, showInfo = false, savedGames = savedGames),
+            )
             // "Show all" sits next to the games: same size as the game card and only the icon, so the row keeps one
             // height. The focus panel shows its label.
             presenter.addClassPresenter(
@@ -235,7 +243,8 @@ class TVHomeFragment : BrowseSupportFragment() {
         }
 
         if (includeRecentGames) {
-            val recentItems = ArrayObjectAdapter(GamePresenter(gameInteractor, showInfo = false))
+            val recentItems =
+                ArrayObjectAdapter(GamePresenter(gameInteractor, showInfo = false, savedGames = savedGames))
             val title = resources.getString(R.string.tv_home_section_recents)
             result.add(ListRow(HeaderItem(RECENTS_ADAPTER, title), recentItems))
         }

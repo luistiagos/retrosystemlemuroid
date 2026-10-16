@@ -17,6 +17,7 @@ import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVAmbientBackground
 import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
+import com.swordfish.lemuroid.app.tv.shared.TVSavedGames
 import com.swordfish.lemuroid.app.tv.shared.TVTypography
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
@@ -66,7 +67,7 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
             }
         }
 
-        rowsAdapter = createAdapter()
+        rowsAdapter = createAdapter(TVSavedGames.attach(this, retrogradeDb))
 
         val factory = TVSearchViewModel.Factory(retrogradeDb)
         searchViewModel = ViewModelProvider(this, factory)[TVSearchViewModel::class.java]
@@ -93,10 +94,10 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
         super.onDestroyView()
     }
 
-    private fun createAdapter(): ArrayObjectAdapter {
+    private fun createAdapter(savedGames: TVSavedGames): ArrayObjectAdapter {
         val searchAdapter = ArrayObjectAdapter(TVListRowPresenter())
 
-        val gamePresenter = GamePresenter(gameInteractor)
+        val gamePresenter = GamePresenter(gameInteractor, savedGames = savedGames)
 
         val gamesAdapter = PagingDataAdapter(gamePresenter, Game.DIFF_CALLBACK)
         searchAdapter.add(

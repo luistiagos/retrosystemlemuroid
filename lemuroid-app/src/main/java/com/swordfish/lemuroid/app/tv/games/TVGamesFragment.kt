@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVAmbientBackground
+import com.swordfish.lemuroid.app.tv.shared.TVSavedGames
 import com.swordfish.lemuroid.app.tv.shared.TVVerticalGridPresenter
 import com.swordfish.lemuroid.app.tv.shared.TV_GAME_GRID_COLUMNS
 import com.swordfish.lemuroid.common.coroutines.launchOnState
@@ -45,9 +46,10 @@ class TVGamesFragment : VerticalGridSupportFragment() {
         val factory = TVGamesViewModel.Factory(retrogradeDb)
         val gamesViewModel = ViewModelProvider(this, factory)[TVGamesViewModel::class.java]
 
+        val savedGames = TVSavedGames.attach(this, retrogradeDb)
         val pagingAdapter =
             PagingDataAdapter(
-                GamePresenter(gameInteractor),
+                GamePresenter(gameInteractor, savedGames = savedGames),
                 Game.DIFF_CALLBACK,
             )
 

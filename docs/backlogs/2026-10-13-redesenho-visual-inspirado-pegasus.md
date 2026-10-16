@@ -1521,3 +1521,48 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
   - **As duas seguem o "Como usar":** registro analítico neste doc antes do primeiro código, doc de entrega em
     `docs/funcionalidades/`, verificação da seção "Verificação" (build x86, ktlint, lint, AVD de TV), commit só com o
     aval do dono.
+- **2026-10-15 (entrega 3.5 — registro analítico, antes do código).** Worktree `.claude/worktrees/selo-tv`, branch
+  `redesenho-3.5-selo-tv` a partir de `cf6b120`.
+  - **Símbolos abertos:**
+    - `LIB/library/db/dao/DownloadedRomDao.kt::observeAllDownloadedKeys` — `SELECT systemId || '/' || fileName`;
+      chave = `Game.downloadKey` (`LIB/library/db/entity/Game.kt:71`, `"$systemId/$fileName"`). Flow do Room: emite
+      a cada escrita em `downloaded_roms`.
+    - Quem escreve na tabela: `RomOnDemandManager.downloadRom` (`insert`, :228 — é o que o `TVRomDownloadDialog`
+      chama) e `deleteRom` (`delete`, :338 — "Excluir ROM" do `GameContextMenuListener`, o menu de contexto da TV).
+      Logo o fluxo basta para as duas provas (salvar → selo; excluir → some).
+    - `TV/shared/GamePresenter.kt` — usado por `TVGamesFragment:50`, `TVFavoritesFragment:46`,
+      `TVSearchFragment:99` (paginados) e `TVHomeFragment:220/238` (favoritos e recentes, `showInfo = false`;
+      `recreateAdapter` cria presenters novos a cada mudança de fileiras). Os quatro fragments injetam
+      `retrogradeDb`.
+    - `TV/shared/TVCardFocusHighlight.kt` — a borda de foco usa o `foreground` do cartão: o selo **não** pode ir no
+      foreground.
+    - `TV/shared/TVCovers.loadCover` — põe o `mainImageView` VISIBLE/alpha 1 antes do Coil; o overlay da
+      `ImageView` acompanha a capa.
+    - `M/shared/compose/ui/SaveStateBadge.kt::CoverBadge` — referência visual do `Saved`: círculo 22 dp, margem 6 dp,
+      canto superior direito, fundo `Accent` e ✓ `OnAccent` 14 dp. Na TV: `leanback_accent`/`leanback_on_accent`.
+  - **Decisões:**
+    1. **Só "salvo".** A TV não usa o `SaveQueueManager` (nenhuma referência em `TV/`): o salvamento é o
+       `TVRomDownloadDialog`, modal e síncrono — não há fila a mostrar no cartão.
+    2. **Sem rebuild das grades:** um objeto por fragment, `TVSavedGames` (`TV/shared/`), guarda o conjunto de
+       chaves e os `ViewHolder`s ligados (`WeakHashMap`, só main thread). O `GamePresenter` recebe esse objeto
+       (parâmetro opcional), registra o holder no bind e o tira no unbind; quando o conjunto muda, só os cartões
+       ligados são repintados. Os presenters recriados da Início compartilham a mesma instância.
+    3. **Fluxo coletado no fragment, não no ViewModel.** O handoff sugeria expor nos ViewModels, mas a 3.6 mexe no
+       `TVHomeViewModel` em paralelo: `TVSavedGames.attach(fragment, retrogradeDb)` coleta
+       `observeAllDownloadedKeys` em `launchOnState(STARTED)`, mesmo molde do `TVAmbientBackground.attach`. Recoleta
+       a cada `onStart` (tabela pequena) — aceitável.
+    4. **Desenho:** `Drawable` próprio (círculo + ✓ por `Path`, sem recurso vetorial) no `ViewOverlay` do
+       `mainImageView` (API 18), bounds fixos a partir de `tv_game_card_width`. 24 dp na TV (o cartão tem 150 dp,
+       contra ~110 do mobile), margem 6 dp. Sem animação → a variante `LITE` é a mesma coisa.
+  - **Hipóteses descartadas:** `ImageCardView.badgeImage` — fica na área de info, que os cartões da Início não têm
+    (`ImageOnly`); `foreground` — já é a borda de foco; expor no ViewModel — colisão com a 3.6 sem ganho.
+  - **Tasks:** (a) `TV/shared/TVSavedGames.kt` (novo: holder + drawable + `attach`); (b) `GamePresenter` com
+    `savedGames: TVSavedGames? = null`; (c) ligar nos 4 fragments. Prova: build x86_64, `ktlintCheck`, lint, e no
+    `lemu_tv_api25`: salvar um jogo pelo diálogo → selo no catálogo e na Início sem reabrir; "Excluir ROM" → some.
+- **2026-10-15 (entrega 3.5 implementada).** Conforme o registro acima, sem desvio. Arquivos: `TV/shared/TVSavedGames.kt`
+  (novo), `TV/shared/GamePresenter.kt` (parâmetro `savedGames`) e os quatro fragments. Build x86, ktlint do código e
+  lint verdes; no `lemu_tv_api25` (2ª instância `-read-only`): selo na Início e no catálogo, some ao excluir a ROM e
+  volta ao salvar pelo diálogo, sem reabrir a tela; rolagem da grade sem selo em cartão reciclado. Doc da entrega:
+  `docs/funcionalidades/2026-10-15-redesenho-selo-salvo-tv.md`. **Para a 3.6:** a fileira "Jogos salvos" decide se
+  passa `savedGames` (todos os cartões teriam o selo). **Próximo passo:** aval do dono → `git pull --rebase` sobre o
+  `version10` (a 3.6 mexe no `TVHomeFragment`) → commit → push.

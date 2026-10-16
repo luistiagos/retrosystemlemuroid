@@ -16,11 +16,12 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 /**
  * Game card of the redesign: 3:4 cover ([R.dimen.tv_game_card_width] x [R.dimen.tv_game_card_height]).
  * Without [showInfo] the card is only the cover: on the home the focus panel (`TVFocusPanel`) carries title and
- * system.
+ * system. With [savedGames] the cover gets the "saved" badge (redesign 3.5).
  */
 class GamePresenter(
     private val gameInteractor: GameInteractor,
     private val showInfo: Boolean = true,
+    private val savedGames: TVSavedGames? = null,
 ) : Presenter() {
     override fun onBindViewHolder(
         viewHolder: Presenter.ViewHolder?,
@@ -35,6 +36,7 @@ class GamePresenter(
             viewHolder.mCardView.contentDescription = game.title
         }
         viewHolder.updateCardViewImage(game)
+        savedGames?.bind(viewHolder, game)
         viewHolder.view.setOnCreateContextMenuListener(GameContextMenuListener(gameInteractor, game))
     }
 
@@ -52,17 +54,22 @@ class GamePresenter(
         cardView.findViewById<TextView>(androidx.leanback.R.id.title_text)?.setLines(TITLE_LINES)
         TVTypography.styleCard(cardView)
         TVCardFocusHighlight.setupOnCard(cardView)
-        return ViewHolder(cardView)
+        val imageWidth = parent.resources.getDimensionPixelSize(R.dimen.tv_game_card_width)
+        return ViewHolder(cardView, imageWidth)
     }
 
     override fun onUnbindViewHolder(viewHolder: Presenter.ViewHolder?) {
         val viewHolder = viewHolder as ViewHolder
+        savedGames?.unbind(viewHolder)
         viewHolder.mCardView.mainImage = null
         viewHolder.view.setOnCreateContextMenuListener(null)
     }
 
-    class ViewHolder(view: ImageCardView) : Presenter.ViewHolder(view) {
+    class ViewHolder(view: ImageCardView, imageWidth: Int) : Presenter.ViewHolder(view) {
         val mCardView: ImageCardView = view
+        private val savedBadge = TVSavedBadge(view.mainImageView, imageWidth)
+
+        internal fun setSaved(saved: Boolean) = savedBadge.setShown(saved)
 
         fun updateCardViewImage(game: Game) {
             TVCovers.loadCover(game, mCardView.mainImageView)
