@@ -1566,3 +1566,4 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
   `docs/funcionalidades/2026-10-15-redesenho-selo-salvo-tv.md`. **Para a 3.6:** a fileira "Jogos salvos" decide se
   passa `savedGames` (todos os cartões teriam o selo). **Próximo passo:** aval do dono → `git pull --rebase` sobre o
   `version10` (a 3.6 mexe no `TVHomeFragment`) → commit → push.
+- **2026-10-16 (entrega 3.5 commitada).** Commit `e50c567` no `version10`, com o aval do dono. Fase 3 aguarda só a 3.6.

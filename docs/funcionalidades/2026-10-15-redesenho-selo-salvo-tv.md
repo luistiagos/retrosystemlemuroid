@@ -1,8 +1,8 @@
 # [FEATURE] Redesenho visual — entrega 3.5: selo de salvo nos cartões da TV
 
 **Data:** 2026-10-15
-**Status:** implementada e verificada no `lemu_tv_api25` (Android 7.1); aguardando o aval do dono para commit
-**Branch:** `redesenho-3.5-selo-tv` (worktree `.claude/worktrees/selo-tv`, a partir de `cf6b120` do `version10`)
+**Status:** implementada e verificada no `lemu_tv_api25` (Android 7.1); commit `e50c567`
+**Branch:** version10 (feita no worktree `redesenho-3.5-selo-tv`)
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md), Fase 3, item 3.5
 
 ## O que mudou
