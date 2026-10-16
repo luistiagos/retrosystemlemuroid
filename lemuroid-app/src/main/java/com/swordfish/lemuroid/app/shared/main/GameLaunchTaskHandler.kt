@@ -3,6 +3,9 @@ package com.swordfish.lemuroid.app.shared.main
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import java.io.File
+import java.util.zip.ZipFile
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.GameProcessSession
@@ -164,15 +167,38 @@ class GameLaunchTaskHandler(
                 )
                 return
             }
-            val wasDownloaded = retrogradeDb.downloadedRomDao().isDownloaded(game.systemId, game.fileName)
-            if (wasDownloaded || romOnDemandManager.isManagedRom(game)) {
-                romOnDemandManager.deleteRom(game)
+
+            // Check missing arcade dependencies (clone parents, BIOS, devices)
+            val missingArcadeDeps = withContext(Dispatchers.IO) {
+                romOnDemandManager.getMissingArcadeDependencies(game)
+            }
+            if (missingArcadeDeps.isNotEmpty()) {
+                Timber.w("Load failed for ${game.fileName} but arcade dependencies are missing: $missingArcadeDeps — keeping ROM")
                 handleUnsuccessfulGameFinish(
                     activity,
-                    activity.getString(R.string.rom_corruption_error_message),
+                    "Arquivos de arcade necessários ausentes: ${missingArcadeDeps.joinToString(", ")}",
                     null,
                 )
                 return
+            }
+
+            // Verify if the ROM file is genuinely corrupt before deleting
+            val isCorrupted = withContext(Dispatchers.IO) {
+                isRomFileActuallyCorrupted(game)
+            }
+            if (isCorrupted) {
+                val wasDownloaded = retrogradeDb.downloadedRomDao().isDownloaded(game.systemId, game.fileName)
+                if (wasDownloaded || romOnDemandManager.isManagedRom(game)) {
+                    romOnDemandManager.deleteRom(game)
+                    handleUnsuccessfulGameFinish(
+                        activity,
+                        activity.getString(R.string.rom_corruption_error_message),
+                        null,
+                    )
+                    return
+                }
+            } else {
+                Timber.w("Load failed for ${game.fileName} with isRomLoadFailure, but file is valid on disk. Keeping ROM.")
             }
         }
         if (!tryFallbackCore(activity, game, triedCores, leanback)) {
@@ -251,6 +277,24 @@ class GameLaunchTaskHandler(
     ) {
         delay(500)
         reviewManager.launchReviewFlow(activity, durationMillis)
+    }
+
+    private fun isRomFileActuallyCorrupted(game: Game): Boolean {
+        val uri = Uri.parse(game.fileUri)
+        if (uri.scheme == "content") return false // Cannot verify SAF content reliably, do not delete
+        val file = File(uri.path ?: return false)
+        if (!file.exists() || file.length() == 0L) return true
+        if (file.extension.equals("zip", ignoreCase = true)) {
+            return try {
+                ZipFile(file).use { zf ->
+                    !zf.entries().hasMoreElements()
+                }
+            } catch (e: Exception) {
+                Timber.e(e, "ROM zip file is genuinely corrupt: ${file.name}")
+                true
+            }
+        }
+        return false
     }
 
     companion object {

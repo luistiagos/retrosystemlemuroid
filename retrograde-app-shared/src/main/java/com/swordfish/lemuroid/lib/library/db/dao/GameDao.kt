@@ -251,6 +251,9 @@ interface GameDao {
         isRepresentative: Boolean,
     )
 
+    @Query("SELECT * FROM games WHERE systemId = :systemId AND fileName = :fileName LIMIT 1")
+    suspend fun selectByFileNameOnce(systemId: String, fileName: String): Game?
+
     @Query("SELECT * FROM games ORDER BY title ASC")
     suspend fun selectAll(): List<Game>
 

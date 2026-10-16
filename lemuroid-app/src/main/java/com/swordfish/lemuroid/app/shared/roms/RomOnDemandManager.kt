@@ -8,6 +8,7 @@ import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.common.displayToast
+import com.swordfish.lemuroid.lib.library.ArcadeCloneParents
 import com.swordfish.lemuroid.lib.library.catalog.CatalogRemovals
 import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
 import com.swordfish.lemuroid.lib.library.db.dao.GameDao
@@ -240,6 +241,11 @@ class RomOnDemandManager(
                 )
             }
 
+            // Ensure split arcade dependencies (parents, BIOS, hardware devices) are present.
+            if (ArcadeCloneParents.appliesToSystem(finalGame.systemId)) {
+                ensureArcadeDependencies(finalGame)
+            }
+
             // Fire-and-forget: catalog refresh doesn't need to complete before the
             // "play now?" dialog appears — launching it async avoids blocking the result.
             backgroundScope.launch { LibraryIndexScheduler.triggerCatalogQuickLoad(context) }
@@ -432,6 +438,11 @@ class RomOnDemandManager(
      */
     suspend fun prepareGameForLaunch(game: Game): Game =
         withContext(Dispatchers.IO) {
+            // Ensure split arcade dependencies (parents, BIOS, hardware devices) are present before launch.
+            if (ArcadeCloneParents.appliesToSystem(game.systemId)) {
+                ensureArcadeDependencies(game)
+            }
+
             val destFile = resolveDestFile(game)
             if (!destFile.exists() ||
                 destFile.length() == 0L ||
@@ -539,6 +550,147 @@ class RomOnDemandManager(
                 return File(systemDir, game.fileName)
             }
         return File(path)
+    }
+
+    /**
+     * Resolves and downloads any missing split arcade ROM set dependencies (clone parents,
+     * BIOS files, hardware device sets) mapped in `arcade-clone-parents.json`.
+     *
+     * Ported from RetroBatNew (Program.cs / ArcadeCloneParents.cs).
+     *
+     * Checks both the game's directory and the system/ directory. Missing sets are fetched
+     * from the dedicated BIOS dataset (HuggingFace mame289bios) first, falling back to
+     * the generic find_by_file catalog endpoint.
+     */
+    suspend fun ensureArcadeDependencies(
+        game: Game,
+        onProgress: (name: String, progress: Float) -> Unit = { _, _ -> },
+    ): List<String> =
+        withContext(Dispatchers.IO) {
+            if (!ArcadeCloneParents.appliesToSystem(game.systemId)) return@withContext emptyList()
+
+            val ancestors = ArcadeCloneParents.resolveAncestors(context, game.systemId, game.fileName)
+            if (ancestors.isEmpty()) return@withContext emptyList()
+
+            val destFile = resolveDestFile(game)
+            val romDir = destFile.parentFile ?: return@withContext emptyList()
+            val systemDir = directoriesManager.getSystemDirectory()
+            systemDir.mkdirs()
+
+            val downloadedList = mutableListOf<String>()
+
+            for (dep in ancestors) {
+                val depFileName = "$dep.zip"
+                val depRomFile = File(romDir, depFileName)
+                val depBiosFile = File(systemDir, depFileName)
+
+                val inRoms = depRomFile.exists() && depRomFile.length() > 0L
+                val inBios = depBiosFile.exists() && depBiosFile.length() > 0L
+
+                if (inRoms && inBios) {
+                    continue
+                }
+                if (inRoms && !inBios) {
+                    runCatching { depRomFile.copyTo(depBiosFile, overwrite = true) }
+                    continue
+                }
+                if (!inRoms && inBios) {
+                    runCatching { depBiosFile.copyTo(depRomFile, overwrite = true) }
+                    continue
+                }
+
+                Timber.i("Arcade dependency missing for ${game.fileName}: $depFileName. Resolving download...")
+
+                var downloaded = false
+
+                // 1. Try dedicated BIOS dataset first if configured
+                val dedicatedBase = ArcadeCloneParents.biosDatasetBaseUrl(game.systemId)
+                if (!dedicatedBase.isNullOrBlank()) {
+                    val dedicatedUrl = "$dedicatedBase/$depFileName"
+                    try {
+                        downloadToFile(dedicatedUrl, depRomFile) { p ->
+                            onProgress(depFileName, p)
+                        }
+                        if (depRomFile.exists() && depRomFile.length() > 0L) {
+                            downloaded = true
+                            runCatching { depRomFile.copyTo(depBiosFile, overwrite = true) }
+                            Timber.i("Downloaded arcade dependency $depFileName from dedicated dataset")
+                        }
+                    } catch (e: Exception) {
+                        Timber.d(
+                            "Arcade dependency $depFileName not in dedicated dataset (${e.message}); trying catalog endpoint",
+                        )
+                    }
+                }
+
+                // 2. Fall back to generic find_by_file catalog endpoint
+                if (!downloaded) {
+                    val endpointSystem = RomSystemMapper.toEndpointSystem(context, game.systemId) ?: game.systemId
+                    val findUrl =
+                        "$FIND_BY_FILE_ENDPOINT?path=${Uri.encode(depFileName)}&source_id=1&system=${Uri.encode(endpointSystem)}"
+                    try {
+                        val finalUrl = resolveDownloadUrl(findUrl)
+                        if (!finalUrl.isNullOrBlank()) {
+                            downloadToFile(finalUrl, depRomFile) { p ->
+                                onProgress(depFileName, p)
+                            }
+                            if (depRomFile.exists() && depRomFile.length() > 0L) {
+                                downloaded = true
+                                runCatching { depRomFile.copyTo(depBiosFile, overwrite = true) }
+                                Timber.i("Downloaded arcade dependency $depFileName from catalog endpoint")
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Timber.w("Failed to download arcade dependency $depFileName via catalog: ${e.message}")
+                    }
+                }
+
+                if (downloaded) {
+                    downloadedList.add(depFileName)
+                    try {
+                        val matchingGame = gameDao.selectByFileNameOnce(game.systemId, depFileName)
+                        if (matchingGame != null) {
+                            downloadedRomDao.insert(
+                                DownloadedRom(
+                                    systemId = matchingGame.systemId,
+                                    fileName = matchingGame.fileName,
+                                    fileSize = depRomFile.length(),
+                                ),
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Timber.d("No catalog entry for dependency $depFileName (pure BIOS/device set)")
+                    }
+                } else {
+                    Timber.w("Could not download arcade dependency $depFileName for ${game.fileName}")
+                }
+            }
+
+            downloadedList
+        }
+
+    /**
+     * Checks if any arcade dependency (clone parent, BIOS, device) is missing on disk.
+     */
+    fun getMissingArcadeDependencies(game: Game): List<String> {
+        if (!ArcadeCloneParents.appliesToSystem(game.systemId)) return emptyList()
+        val ancestors = ArcadeCloneParents.resolveAncestors(context, game.systemId, game.fileName)
+        if (ancestors.isEmpty()) return emptyList()
+
+        val destFile = resolveDestFile(game)
+        val romDir = destFile.parentFile ?: return emptyList()
+        val systemDir = directoriesManager.getSystemDirectory()
+
+        val missing = mutableListOf<String>()
+        for (dep in ancestors) {
+            val depFileName = "$dep.zip"
+            val inRoms = File(romDir, depFileName).let { it.exists() && it.length() > 0L }
+            val inBios = File(systemDir, depFileName).let { it.exists() && it.length() > 0L }
+            if (!inRoms && !inBios) {
+                missing.add(depFileName)
+            }
+        }
+        return missing
     }
 
     private suspend fun downloadToFile(
