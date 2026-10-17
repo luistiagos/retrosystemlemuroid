@@ -158,7 +158,9 @@ class ManifestQuickLoader(
         //          gbc 6, c64 4, gb 2, zxspectrum 2, snes 1, wsc 1; commit 4e276da). O bump força a
         //          passada completa, cuja limpeza de catálogo obsoleto apaga essas linhas do banco.
         //   v40  mame289 (MAME 0.289 Arcade Core on-demand): inclusão do sistema e 14.357 títulos de arcade.
-        private const val MANIFEST_SCHEMA_VERSION = 40
+        //   v41  mame289: remoção de 89 títulos 3D pesados sem core alternativo (Model 2/3, ZN-1/2, System 11/12/22/23,
+        //          Midway 3D, Cave CV1000) que rodavam a 5-15 FPS no interpretador por software da CPU.
+        private const val MANIFEST_SCHEMA_VERSION = 41
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

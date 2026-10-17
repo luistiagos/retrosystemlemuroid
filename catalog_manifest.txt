@@ -61363,7 +61363,6 @@ mame289/aquajet.zip|Aqua Jet (World, AJ2 Ver.B)|https://adb.arcadeitalia.net/?ma
 mame289/aqualand.zip|Aqualand (set 1)|https://adb.arcadeitalia.net/?mame=aqualand&type=title&resize=0|0|1
 mame289/aquarium.zip|Aquarium (US)|https://adb.arcadeitalia.net/?mame=aquarium&type=title&resize=0|0|1
 mame289/aquarius.zip|Aquarius (NTSC)|https://adb.arcadeitalia.net/?mame=aquarius&type=title&resize=0|0|1
-mame289/aquarush.zip|Aqua Rush (Japan, AQ1/VER.A1)|https://adb.arcadeitalia.net/?mame=aquarush&type=title&resize=0|0|1
 mame289/aquastge.zip|Aqua Stage|https://adb.arcadeitalia.net/?mame=aquastge&type=title&resize=0|0|1
 mame289/ar_airh.zip|SportTime Table Hockey (Arcadia, set 1, V 2.1)|https://adb.arcadeitalia.net/?mame=ar_airh&type=title&resize=0|0|1
 mame289/ar_argh.zip|Aaargh (Arcadia)|https://adb.arcadeitalia.net/?mame=ar_argh&type=title&resize=0|0|1
@@ -61815,7 +61814,6 @@ mame289/beachpt.zip|Beach Patrol (Russia) (Atronic)|https://adb.arcadeitalia.net
 mame289/beambox.zip|Playskool Heroes Transformers Rescue Bots Beam Box (Spain)|https://adb.arcadeitalia.net/?mame=beambox&type=title&resize=0|0|1
 mame289/beaminv.zip|Beam Invader|https://adb.arcadeitalia.net/?mame=beaminv&type=title&resize=0|0|1
 mame289/bearnec.zip|Bear Necessities (Russia) (Atronic)|https://adb.arcadeitalia.net/?mame=bearnec&type=title&resize=0|0|1
-mame289/beastrzr.zip|Beastorizer (USA, Sep 22 1997)|https://adb.arcadeitalia.net/?mame=beastrzr&type=title&resize=0|0|1
 mame289/beatclck.zip|Beat the Clock|https://adb.arcadeitalia.net/?mame=beatclck&type=title&resize=0|0|1
 mame289/beathead.zip|BeatHead (prototype)|https://adb.arcadeitalia.net/?mame=beathead&type=title&resize=0|0|1
 mame289/beautyb.zip|Beauty Block|https://adb.arcadeitalia.net/?mame=beautyb&type=title&resize=0|0|1
@@ -62150,7 +62148,6 @@ mame289/brooks.zip|Brooks & Dunn (rev.T1)|https://adb.arcadeitalia.net/?mame=bro
 mame289/brubber.zip|Burnin' Rubber|https://adb.arcadeitalia.net/?mame=brubber&type=title&resize=0|0|1
 mame289/bruc100.zip|Bruc 100-1 (MSX1, Italy)|https://adb.arcadeitalia.net/?mame=bruc100&type=title&resize=0|0|1
 mame289/brutforc.zip|Brute Force|https://adb.arcadeitalia.net/?mame=brutforc&type=title&resize=0|0|1
-mame289/brvblade.zip|Brave Blade (World)|https://adb.arcadeitalia.net/?mame=brvblade&type=title&resize=0|0|1
 mame289/brvteam.zip|Brave Team|https://adb.arcadeitalia.net/?mame=brvteam&type=title&resize=0|0|1
 mame289/bs9009cx.zip|BrainStation 9009 CXL (Germany)|https://adb.arcadeitalia.net/?mame=bs9009cx&type=title&resize=0|0|1
 mame289/bs94.zip|Buena Suerte '94|https://adb.arcadeitalia.net/?mame=bs94&type=title&resize=0|0|1
@@ -62349,7 +62346,6 @@ mame289/cb2.zip|Cherry Bonus II (V2.00 06/01)|https://adb.arcadeitalia.net/?mame
 mame289/cb2001.zip|Cherry Bonus 2001 (V1.1I)|https://adb.arcadeitalia.net/?mame=cb2001&type=title&resize=0|0|1
 mame289/cb4.zip|Cherry Bonus IV (V5.0)|https://adb.arcadeitalia.net/?mame=cb4&type=title&resize=0|0|1
 mame289/cb5.zip|Cherry Bonus V Five (V1.4)|https://adb.arcadeitalia.net/?mame=cb5&type=title&resize=0|0|1
-mame289/cbaj.zip|Cool Boarders Arcade Jam (Export)|https://adb.arcadeitalia.net/?mame=cbaj&type=title&resize=0|0|1
 mame289/cball.zip|Cannonball (Atari, prototype)|https://adb.arcadeitalia.net/?mame=cball&type=title&resize=0|0|1
 mame289/cbasebal.zip|Capcom Baseball (Japan)|https://adb.arcadeitalia.net/?mame=cbasebal&type=title&resize=0|0|1
 mame289/cbdash.zip|Boulder Dash (DECO Cassette) (US)|https://adb.arcadeitalia.net/?mame=cbdash&type=title&resize=0|0|1
@@ -62907,8 +62903,6 @@ mame289/cruisin5.zip|Cruisin 5: Cruise Back|https://adb.arcadeitalia.net/?mame=c
 mame289/crush.zip|Crush Roller (set 1)|https://adb.arcadeitalia.net/?mame=crush&type=title&resize=0|0|1
 mame289/crusherm.zip|Crusher Makochan (Japan)|https://adb.arcadeitalia.net/?mame=crusherm&type=title&resize=0|0|1
 mame289/crusnexo.zip|Cruis'n Exotica (version 2.4)|https://adb.arcadeitalia.net/?mame=crusnexo&type=title&resize=0|0|1
-mame289/crusnusa.zip|Cruis'n USA (v4.5)|https://adb.arcadeitalia.net/?mame=crusnusa&type=title&resize=0|0|1
-mame289/crusnwld.zip|Cruis'n World (v2.5)|https://adb.arcadeitalia.net/?mame=crusnwld&type=title&resize=0|0|1
 mame289/crvision.zip|CreatiVision|https://adb.arcadeitalia.net/?mame=crvision&type=title&resize=0|0|1
 mame289/crysking.zip|The Crystal of Kings|https://adb.arcadeitalia.net/?mame=crysking&type=title&resize=0|0|1
 mame289/cryspri.zip|Crystal Springs (10144411, NSW/ACT)|https://adb.arcadeitalia.net/?mame=cryspri&type=title&resize=0|0|1
@@ -63014,7 +63008,6 @@ mame289/cybrcycc.zip|Cyber Cycles (World, CB2 Ver.C)|https://adb.arcadeitalia.ne
 mame289/cybrnaut.zip|Cybernaut|https://adb.arcadeitalia.net/?mame=cybrnaut&type=title&resize=0|0|1
 mame289/cybrtvbb.zip|Cyber Arcade TV - Barbie 75-in-1 (JL2500BB)|https://adb.arcadeitalia.net/?mame=cybrtvbb&type=title&resize=0|0|1
 mame289/cybrtvfe.zip|Cyber Arcade TV - Ferrari 105-in-1 (JL2500FE)|https://adb.arcadeitalia.net/?mame=cybrtvfe&type=title&resize=0|0|1
-mame289/cybsled.zip|Cyber Sled (CY2, World)|https://adb.arcadeitalia.net/?mame=cybsled&type=title&resize=0|0|1
 mame289/cybstorm.zip|Cyberstorm (prototype)|https://adb.arcadeitalia.net/?mame=cybstorm&type=title&resize=0|0|1
 mame289/cyclemb.zip|Cycle Maabou (Japan)|https://adb.arcadeitalia.net/?mame=cyclemb&type=title&resize=0|0|1
 mame289/cycln_l5.zip|Cyclone (L-5)|https://adb.arcadeitalia.net/?mame=cycln_l5&type=title&resize=0|0|1
@@ -63101,9 +63094,6 @@ mame289/datacast.zip|Datacast Controller (The Stock Exchange)|https://adb.arcade
 mame289/dataman.zip|DataMan|https://adb.arcadeitalia.net/?mame=dataman&type=title&resize=0|0|1
 mame289/datum.zip|Datum|https://adb.arcadeitalia.net/?mame=datum&type=title&resize=0|0|1
 mame289/dauphin.zip|Dauphin|https://adb.arcadeitalia.net/?mame=dauphin&type=title&resize=0|0|1
-mame289/dayto2pe.zip|Daytona USA 2: Power Edition|https://adb.arcadeitalia.net/?mame=dayto2pe&type=title&resize=0|0|1
-mame289/daytona.zip|Daytona USA (Revision A)|https://adb.arcadeitalia.net/?mame=daytona&type=title&resize=0|0|1
-mame289/daytona2.zip|Daytona USA 2: Battle on the Edge (Revision A)|https://adb.arcadeitalia.net/?mame=daytona2&type=title&resize=0|0|1
 mame289/dazzler.zip|Dazzler|https://adb.arcadeitalia.net/?mame=dazzler&type=title&resize=0|0|1
 mame289/db32016.zip|DB32016|https://adb.arcadeitalia.net/?mame=db32016&type=title&resize=0|0|1
 mame289/dbdancem.zip|Double Dance Mania - Techno Light Edition|https://adb.arcadeitalia.net/?mame=dbdancem&type=title&resize=0|0|1
@@ -63178,7 +63168,6 @@ mame289/dealer.zip|The Dealer|https://adb.arcadeitalia.net/?mame=dealer&type=tit
 mame289/dealracl.zip|The Dealer (ACL)|https://adb.arcadeitalia.net/?mame=dealracl&type=title&resize=0|0|1
 mame289/deathcox.zip|Death Crimson OX (USA)|https://adb.arcadeitalia.net/?mame=deathcox&type=title&resize=0|0|1
 mame289/deathrac.zip|Death Race|https://adb.arcadeitalia.net/?mame=deathrac&type=title&resize=0|0|1
-mame289/deathsml.zip|Deathsmiles (Japan, 2007/10/09 MASTER VER)|https://adb.arcadeitalia.net/?mame=deathsml&type=title&resize=0|0|1
 mame289/debutm.zip|Debut-M|https://adb.arcadeitalia.net/?mame=debutm&type=title&resize=0|0|1
 mame289/decathln.zip|Decathlon (set 1)|https://adb.arcadeitalia.net/?mame=decathln&type=title&resize=0|0|1
 mame289/decathlt.zip|Decathlete (JUET 960709 V1.001)|https://adb.arcadeitalia.net/?mame=decathlt&type=title&resize=0|0|1
@@ -63211,7 +63200,6 @@ mame289/derbyoc.zip|Derby Owners Club (Japan, Rev B)|https://adb.arcadeitalia.ne
 mame289/derbyoc2.zip|Derby Owners Club II Ver.2.1 (Japan, Rev B)|https://adb.arcadeitalia.net/?mame=derbyoc2&type=title&resize=0|0|1
 mame289/derbyocw.zip|Derby Owners Club World Edition EX (Rev D)|https://adb.arcadeitalia.net/?mame=derbyocw&type=title&resize=0|0|1
 mame289/deroon.zip|Deroon DeroDero (earlier, set 1)|https://adb.arcadeitalia.net/?mame=deroon&type=title&resize=0|0|1
-mame289/desert.zip|Desert Tank|https://adb.arcadeitalia.net/?mame=desert&type=title&resize=0|0|1
 mame289/desertbr.zip|Desert Breaker (World) (FD1094 317-0196)|https://adb.arcadeitalia.net/?mame=desertbr&type=title&resize=0|0|1
 mame289/desertdn.zip|Desert Dan|https://adb.arcadeitalia.net/?mame=desertdn&type=title&resize=0|0|1
 mame289/desertgu.zip|Desert Gun|https://adb.arcadeitalia.net/?mame=desertgu&type=title&resize=0|0|1
@@ -63309,8 +63297,6 @@ mame289/dinorex.zip|Dino Rex (World)|https://adb.arcadeitalia.net/?mame=dinorex&
 mame289/dinosa6.zip|Dinosaur (10118811, NSW/ACT)|https://adb.arcadeitalia.net/?mame=dinosa6&type=title&resize=0|0|1
 mame289/dinothun.zip|Power Rangers Dino Thunder: Thunder Action|https://adb.arcadeitalia.net/?mame=dinothun&type=title&resize=0|0|1
 mame289/diolakoa.zip|Diana Olakoa (v8.38)|https://adb.arcadeitalia.net/?mame=diolakoa&type=title&resize=0|0|1
-mame289/dirtdash.zip|Dirt Dash (World, DT2 Ver.C)|https://adb.arcadeitalia.net/?mame=dirtdash&type=title&resize=0|0|1
-mame289/dirtdvls.zip|Dirt Devils (Export, Revision A)|https://adb.arcadeitalia.net/?mame=dirtdvls&type=title&resize=0|0|1
 mame289/dirtfoxj.zip|Dirt Fox (Japan)|https://adb.arcadeitalia.net/?mame=dirtfoxj&type=title&resize=0|0|1
 mame289/dirtypig.zip|Dirty Pigskin Football|https://adb.arcadeitalia.net/?mame=dirtypig&type=title&resize=0|0|1
 mame289/disbestf.zip|Disney & Disney/Pixar Characters Best Friends PC (Japan)|https://adb.arcadeitalia.net/?mame=disbestf&type=title&resize=0|0|1
@@ -63369,9 +63355,7 @@ mame289/dnce2000.zip|Dance 2000 / Hot 2000 (Jin Bao TV Dancing Carpet, SY-2000-0
 mame289/dncsprt.zip|Dancing Spirit (Russia) (Atronic)|https://adb.arcadeitalia.net/?mame=dncsprt&type=title&resize=0|0|1
 mame289/dnjsenso.zip|Club Ultraman - Daichi Boeisen|https://adb.arcadeitalia.net/?mame=dnjsenso&type=title&resize=0|0|1
 mame289/dnv200fs.zip|Denver (GMP-270CMK2) (Family Sport 200-in-1)|https://adb.arcadeitalia.net/?mame=dnv200fs&type=title&resize=0|0|1
-mame289/doa.zip|Dead or Alive (Model 2B, Revision C)|https://adb.arcadeitalia.net/?mame=doa&type=title&resize=0|0|1
 mame289/doa2m.zip|Dead or Alive 2 Millennium|https://adb.arcadeitalia.net/?mame=doa2m&type=title&resize=0|0|1
-mame289/doapp.zip|Dead Or Alive ++ (Japan/USA/Export)|https://adb.arcadeitalia.net/?mame=doapp&type=title&resize=0|0|1
 mame289/dobouchn.zip|Dobou-Chan (ver JAA)|https://adb.arcadeitalia.net/?mame=dobouchn&type=title&resize=0|0|1
 mame289/docastle.zip|Mr. Do's Castle (set 1)|https://adb.arcadeitalia.net/?mame=docastle&type=title&resize=0|0|1
 mame289/docchift.zip|Docchi Fighter (Japan, ver 1.02)|https://adb.arcadeitalia.net/?mame=docchift&type=title&resize=0|0|1
@@ -63429,7 +63413,6 @@ mame289/dotron.zip|Discs of Tron (Upright, 10/4/83)|https://adb.arcadeitalia.net
 mame289/double8l.zip|Double 8 Line|https://adb.arcadeitalia.net/?mame=double8l&type=title&resize=0|0|1
 mame289/doubledr.zip|Double Dragon (Neo-Geo)|https://adb.arcadeitalia.net/?mame=doubledr&type=title&resize=0|0|1
 mame289/dowild.zip|Mr. Do's Wild Ride|https://adb.arcadeitalia.net/?mame=dowild&type=title&resize=0|0|1
-mame289/downhill.zip|Downhill Bikers (World, DH2 Ver. A)|https://adb.arcadeitalia.net/?mame=downhill&type=title&resize=0|0|1
 mame289/downtown.zip|DownTown / Mokugeki (set 1)|https://adb.arcadeitalia.net/?mame=downtown&type=title&resize=0|0|1
 mame289/doyousud.zip|Sudoku: Do You Sudoku?|https://adb.arcadeitalia.net/?mame=doyousud&type=title&resize=0|0|1
 mame289/dpatrol.zip|Desert Patrol|https://adb.arcadeitalia.net/?mame=dpatrol&type=title&resize=0|0|1
@@ -63534,7 +63517,6 @@ mame289/dscjkpot.zip|Disc Jackpot|https://adb.arcadeitalia.net/?mame=dscjkpot&ty
 mame289/dsgnpal.zip|Kiratto Pri-Chan Design Palette (Japan)|https://adb.arcadeitalia.net/?mame=dsgnpal&type=title&resize=0|0|1
 mame289/dsgnwrld.zip|Designer's World (Version 1.0, Dec 20 2005)|https://adb.arcadeitalia.net/?mame=dsgnwrld&type=title&resize=0|0|1
 mame289/dslayrr.zip|Dragon Slayer (Russia, v15.B, 2005/08/10)|https://adb.arcadeitalia.net/?mame=dslayrr&type=title&resize=0|0|1
-mame289/dsmbl.zip|Deathsmiles MegaBlack Label (Japan, 2008/10/06 MEGABLACK LABEL VER)|https://adb.arcadeitalia.net/?mame=dsmbl&type=title&resize=0|0|1
 mame289/dsoccr94.zip|Dream Soccer '94 (World, M107 hardware)|https://adb.arcadeitalia.net/?mame=dsoccr94&type=title&resize=0|0|1
 mame289/dspirit.zip|Dragon Spirit (new version (DS3))|https://adb.arcadeitalia.net/?mame=dspirit&type=title&resize=0|0|1
 mame289/dss1.zip|DSS-1 Digital Sampling Synthesizer|https://adb.arcadeitalia.net/?mame=dss1&type=title&resize=0|0|1
@@ -63555,7 +63537,6 @@ mame289/duet16.zip|Duet-16|https://adb.arcadeitalia.net/?mame=duet16&type=title&
 mame289/dumpump.zip|Dump The Ump|https://adb.arcadeitalia.net/?mame=dumpump&type=title&resize=0|0|1
 mame289/dungdrag.zip|Dungeons & Dragons|https://adb.arcadeitalia.net/?mame=dungdrag&type=title&resize=0|0|1
 mame289/dunhuang.zip|Mahjong Dunhuang|https://adb.arcadeitalia.net/?mame=dunhuang&type=title&resize=0|0|1
-mame289/dunkmnia.zip|Dunk Mania (World, DM2/VER.C)|https://adb.arcadeitalia.net/?mame=dunkmnia&type=title&resize=0|0|1
 mame289/dunkshot.zip|Dunk Shot (Rev C, FD1089A 317-0022)|https://adb.arcadeitalia.net/?mame=dunkshot&type=title&resize=0|0|1
 mame289/dunksunk.zip|Dunk 'n Sunk|https://adb.arcadeitalia.net/?mame=dunksunk&type=title&resize=0|0|1
 mame289/dvisland.zip|Devil Island (Version 1.4R CGA)|https://adb.arcadeitalia.net/?mame=dvisland&type=title&resize=0|0|1
@@ -63587,7 +63568,6 @@ mame289/dynabomb.zip|Dynamite Bomber (Korea, Rev 1.5)|https://adb.arcadeitalia.n
 mame289/dynadice.zip|Dynamic Dice|https://adb.arcadeitalia.net/?mame=dynadice&type=title&resize=0|0|1
 mame289/dynagear.zip|Dyna Gear|https://adb.arcadeitalia.net/?mame=dynagear&type=title&resize=0|0|1
 mame289/dynajack.zip|Dynamite Jack (01J00081, NSW/ACT)|https://adb.arcadeitalia.net/?mame=dynajack&type=title&resize=0|0|1
-mame289/dynamcop.zip|Dynamite Cop (Export, Model 2A)|https://adb.arcadeitalia.net/?mame=dynamcop&type=title&resize=0|0|1
 mame289/dynamj.zip|unknown Dyna mahjong game (V1.60)|https://adb.arcadeitalia.net/?mame=dynamj&type=title&resize=0|0|1
 mame289/dynamoah.zip|Air Hockey (6.12?, encrypted)|https://adb.arcadeitalia.net/?mame=dynamoah&type=title&resize=0|0|1
 mame289/dynamski.zip|Dynamic Ski|https://adb.arcadeitalia.net/?mame=dynamski&type=title&resize=0|0|1
@@ -63681,7 +63661,6 @@ mame289/egghunt.zip|Egg Hunt|https://adb.arcadeitalia.net/?mame=egghunt&type=tit
 mame289/eggor.zip|Eggor|https://adb.arcadeitalia.net/?mame=eggor&type=title&resize=0|0|1
 mame289/eggsrccm.zip|Eggstreme Riches - Mr. Cashman (0351149, US)|https://adb.arcadeitalia.net/?mame=eggsrccm&type=title&resize=0|0|1
 mame289/eggventr.zip|Egg Venture (Release 10)|https://adb.arcadeitalia.net/?mame=eggventr&type=title&resize=0|0|1
-mame289/ehrgeiz.zip|Ehrgeiz (World, EG2/VER.A)|https://adb.arcadeitalia.net/?mame=ehrgeiz&type=title&resize=0|0|1
 mame289/ehx20.zip|Epson HX-20|https://adb.arcadeitalia.net/?mame=ehx20&type=title&resize=0|0|1
 mame289/eibise.zip|Eibise (Japan)|https://adb.arcadeitalia.net/?mame=eibise&type=title&resize=0|0|1
 mame289/eidemax.zip|eidemax|https://adb.arcadeitalia.net/?mame=eidemax&type=title&resize=0|0|1
@@ -64014,7 +63993,6 @@ mame289/eshockey.zip|Exciting Speed Hockey (V19930325)|https://adb.arcadeitalia.
 mame289/esoccer.zip|Electronic Soccer (Entex)|https://adb.arcadeitalia.net/?mame=esoccer&type=title&resize=0|0|1
 mame289/esp250c.zip|250C|https://adb.arcadeitalia.net/?mame=esp250c&type=title&resize=0|0|1
 mame289/espgal.zip|Espgaluda (2003/10/15 Master Ver)|https://adb.arcadeitalia.net/?mame=espgal&type=title&resize=0|0|1
-mame289/espgal2.zip|Espgaluda II (Japan, 2005/11/14.MASTER VER.)|https://adb.arcadeitalia.net/?mame=espgal2&type=title&resize=0|0|1
 mame289/espial.zip|Espial (Europe)|https://adb.arcadeitalia.net/?mame=espial&type=title&resize=0|0|1
 mame289/esprade.zip|ESP Ra.De. (World, 1998 4/22 International Ver.)|https://adb.arcadeitalia.net/?mame=esprade&type=title&resize=0|0|1
 mame289/esprit.zip|Esprit|https://adb.arcadeitalia.net/?mame=esprit&type=title&resize=0|0|1
@@ -64211,7 +64189,6 @@ mame289/fghtatck.zip|Fighter & Attacker (US)|https://adb.arcadeitalia.net/?mame=
 mame289/fghtbskt.zip|Fighting Basketball|https://adb.arcadeitalia.net/?mame=fghtbskt&type=title&resize=0|0|1
 mame289/fghthist.zip|Fighter's History (World Version 43-09, DE-0395-1 PCB)|https://adb.arcadeitalia.net/?mame=fghthist&type=title&resize=0|0|1
 mame289/fgoal.zip|Field Goal (set 1)|https://adb.arcadeitalia.net/?mame=fgoal&type=title&resize=0|0|1
-mame289/fgtlayer.zip|Fighting Layer (Asia, FTL3/VER.A)|https://adb.arcadeitalia.net/?mame=fgtlayer&type=title&resize=0|0|1
 mame289/fh_l9.zip|Funhouse (L-9, SL-2m)|https://adb.arcadeitalia.net/?mame=fh_l9&type=title&resize=0|0|1
 mame289/fhawk.zip|Fighting Hawk (World)|https://adb.arcadeitalia.net/?mame=fhawk&type=title&resize=0|0|1
 mame289/fhboxers.zip|Funky Head Boxers (JUETBKAL 951218 V1.000)|https://adb.arcadeitalia.net/?mame=fhboxers&type=title&resize=0|0|1
@@ -64436,8 +64413,6 @@ mame289/funrlgl.zip|Funtronics: Red Light Green Light|https://adb.arcadeitalia.n
 mame289/funtag.zip|Funtronics: Tag|https://adb.arcadeitalia.net/?mame=funtag&type=title&resize=0|0|1
 mame289/funybubl.zip|Funny Bubble|https://adb.arcadeitalia.net/?mame=funybubl&type=title&resize=0|0|1
 mame289/funystrp.zip|Funny Strip|https://adb.arcadeitalia.net/?mame=funystrp&type=title&resize=0|0|1
-mame289/futari15.zip|Mushihime-Sama Futari Ver 1.5 (Japan, 2006/12/8.MASTER VER. 1.54.)|https://adb.arcadeitalia.net/?mame=futari15&type=title&resize=0|0|1
-mame289/futaribl.zip|Mushihime-Sama Futari Black Label - Another Ver (World, 2009/11/27 INTERNATIONAL BL)|https://adb.arcadeitalia.net/?mame=futaribl&type=title&resize=0|0|1
 mame289/futbol.zip|Futbol (set 1)|https://adb.arcadeitalia.net/?mame=futbol&type=title&resize=0|0|1
 mame289/futflash.zip|Future Flash (set 1)|https://adb.arcadeitalia.net/?mame=futflash&type=title&resize=0|0|1
 mame289/futrquen.zip|Future Queen|https://adb.arcadeitalia.net/?mame=futrquen&type=title&resize=0|0|1
@@ -64603,7 +64578,6 @@ mame289/gckong.zip|Crazy Kong (Gakken)|https://adb.arcadeitalia.net/?mame=gckong
 mame289/gcpinbal.zip|Grand Cross (v1.02F)|https://adb.arcadeitalia.net/?mame=gcpinbal&type=title&resize=0|0|1
 mame289/gcs2mgp.zip|Mini Game Player 48-in-1|https://adb.arcadeitalia.net/?mame=gcs2mgp&type=title&resize=0|0|1
 mame289/gcslottv.zip|Gachinko Shoubu! PachisloTV (Japan)|https://adb.arcadeitalia.net/?mame=gcslottv&type=title&resize=0|0|1
-mame289/gdarius2.zip|G-Darius Ver.2 (Ver 2.03J)|https://adb.arcadeitalia.net/?mame=gdarius2&type=title&resize=0|0|1
 mame289/gdefender.zip|Defender (Gakken)|https://adb.arcadeitalia.net/?mame=gdefender&type=title&resize=0|0|1
 mame289/gdfs.zip|Mobile Suit Gundam Final Shooting (Japan)|https://adb.arcadeitalia.net/?mame=gdfs&type=title&resize=0|0|1
 mame289/gdigdug.zip|Dig Dug (Gakken)|https://adb.arcadeitalia.net/?mame=gdigdug&type=title&resize=0|0|1
@@ -64737,7 +64711,6 @@ mame289/gloc.zip|G-LOC Air Battle (World)|https://adb.arcadeitalia.net/?mame=glo
 mame289/glpn.zip|Genius Leader Power Notebook (Germany)|https://adb.arcadeitalia.net/?mame=glpn&type=title&resize=0|0|1
 mame289/glpracr.zip|Gallop Racer (English Ver 10.17.K)|https://adb.arcadeitalia.net/?mame=glpracr&type=title&resize=0|0|1
 mame289/glpracr2.zip|Gallop Racer 2 (Export)|https://adb.arcadeitalia.net/?mame=glpracr2&type=title&resize=0|0|1
-mame289/glpracr3.zip|Gallop Racer 3 (Export)|https://adb.arcadeitalia.net/?mame=glpracr3&type=title&resize=0|0|1
 mame289/glregion.zip|Golden Region|https://adb.arcadeitalia.net/?mame=glregion&type=title&resize=0|0|1
 mame289/gls.zip|Genius Leader Select|https://adb.arcadeitalia.net/?mame=gls&type=title&resize=0|0|1
 mame289/gluck2.zip|Good Luck II|https://adb.arcadeitalia.net/?mame=gluck2&type=title&resize=0|0|1
@@ -64957,7 +64930,6 @@ mame289/gtbmcx.zip|Genius Tabletop Black Magic CX (Germany)|https://adb.arcadeit
 mame289/gtclassc.zip|Golden Tee Classic (v1.00)|https://adb.arcadeitalia.net/?mame=gtclassc&type=title&resize=0|0|1
 mame289/gtg.zip|Golden Tee Golf (Joystick, v3.3)|https://adb.arcadeitalia.net/?mame=gtg&type=title&resize=0|0|1
 mame289/gtg2.zip|Golden Tee Golf II (Trackball, v2.2)|https://adb.arcadeitalia.net/?mame=gtg2&type=title&resize=0|0|1
-mame289/gticlub.zip|GTI Club: Rally Cote D'Azur (ver EAA)|https://adb.arcadeitalia.net/?mame=gticlub&type=title&resize=0|0|1
 mame289/gtipoker.zip|GTI Double or Nothing Draw Poker|https://adb.arcadeitalia.net/?mame=gtipoker&type=title&resize=0|0|1
 mame289/gtipokra.zip|GTI Poker (SMS hardware)|https://adb.arcadeitalia.net/?mame=gtipokra&type=title&resize=0|0|1
 mame289/gtmr.zip|1000 Miglia: Great 1000 Miles Rally (Taiwan 94/07/18)|https://adb.arcadeitalia.net/?mame=gtmr&type=title&resize=0|0|1
@@ -65091,7 +65063,6 @@ mame289/harem.zip|Harem|https://adb.arcadeitalia.net/?mame=harem&type=title&resi
 mame289/harikiri.zip|Harikiri Junior Baseball (Japan, main ver. 1.0, video ver. 1.3)|https://adb.arcadeitalia.net/?mame=harikiri&type=title&resize=0|0|1
 mame289/harl_a13.zip|Harley Davidson (Sega, CPU 1.03, display A1.04)|https://adb.arcadeitalia.net/?mame=harl_a13&type=title&resize=0|0|1
 mame289/harl_a40.zip|Harley Davidson (Stern, CPU 4.00, display A4.00)|https://adb.arcadeitalia.net/?mame=harl_a40&type=title&resize=0|0|1
-mame289/harley.zip|Harley-Davidson and L.A. Riders (Revision B)|https://adb.arcadeitalia.net/?mame=harley&type=title&resize=0|0|1
 mame289/harriet.zip|Harriet|https://adb.arcadeitalia.net/?mame=harriet&type=title&resize=0|0|1
 mame289/has_wamg.zip|TV Wild Adventure Mini Golf (NTSC)|https://adb.arcadeitalia.net/?mame=has_wamg&type=title&resize=0|0|1
 mame289/hasamu.zip|Hasamu (Japan)|https://adb.arcadeitalia.net/?mame=hasamu&type=title&resize=0|0|1
@@ -65399,7 +65370,6 @@ mame289/husky.zip|Husky|https://adb.arcadeitalia.net/?mame=husky&type=title&resi
 mame289/hustle.zip|Hustle|https://adb.arcadeitalia.net/?mame=hustle&type=title&resize=0|0|1
 mame289/hustler.zip|Video Hustler|https://adb.arcadeitalia.net/?mame=hustler&type=title&resize=0|0|1
 mame289/hustlerp.zip|Hustler|https://adb.arcadeitalia.net/?mame=hustlerp&type=title&resize=0|0|1
-mame289/hvnsgate.zip|Heaven's Gate|https://adb.arcadeitalia.net/?mame=hvnsgate&type=title&resize=0|0|1
 mame289/hvoltage.zip|High Voltage|https://adb.arcadeitalia.net/?mame=hvoltage&type=title&resize=0|0|1
 mame289/hvymetal.zip|Heavy Metal (315-5135)|https://adb.arcadeitalia.net/?mame=hvymetal&type=title&resize=0|0|1
 mame289/hvymetap.zip|Heavy Metal Meltdown|https://adb.arcadeitalia.net/?mame=hvymetap&type=title&resize=0|0|1
@@ -65438,8 +65408,6 @@ mame289/i8550061.zip|IBM PS/2 8550-061 (Model 50Z)|https://adb.arcadeitalia.net/
 mame289/i8555081.zip|IBM PS/2 8555-081 (Model 55SX)|https://adb.arcadeitalia.net/?mame=i8555081&type=title&resize=0|0|1
 mame289/i8580071.zip|IBM PS/2 8580-071 (Model 80)|https://adb.arcadeitalia.net/?mame=i8580071&type=title&resize=0|0|1
 mame289/i8580111.zip|IBM PS/2 8580-111 (Model 80)|https://adb.arcadeitalia.net/?mame=i8580111&type=title&resize=0|0|1
-mame289/ibara.zip|Ibara (Japan, 2005/03/22 MASTER VER.., '06. 3. 7 ver.)|https://adb.arcadeitalia.net/?mame=ibara&type=title&resize=0|0|1
-mame289/ibarablk.zip|Ibara Kuro Black Label (Japan, 2006/02/06. MASTER VER.)|https://adb.arcadeitalia.net/?mame=ibarablk&type=title&resize=0|0|1
 mame289/ibm3153.zip|IBM 3153 Terminal|https://adb.arcadeitalia.net/?mame=ibm3153&type=title&resize=0|0|1
 mame289/ibm3477.zip|InfoWindow 3477|https://adb.arcadeitalia.net/?mame=ibm3477&type=title&resize=0|0|1
 mame289/ibm5100.zip|IBM 5100|https://adb.arcadeitalia.net/?mame=ibm5100&type=title&resize=0|0|1
@@ -65540,7 +65508,6 @@ mame289/indrema5.zip|Indian Dreaming (0100845V, NSW/ACT)|https://adb.arcadeitali
 mame289/indremll.zip|Indian Dreaming - Lady Luck (20151911, NSW/ACT)|https://adb.arcadeitalia.net/?mame=indremll&type=title&resize=0|0|1
 mame289/indunkgam.zip|unknown gambling game on Inder pinball hardware|https://adb.arcadeitalia.net/?mame=indunkgam&type=title&resize=0|0|1
 mame289/indy4.zip|Indy 4|https://adb.arcadeitalia.net/?mame=indy4&type=title&resize=0|0|1
-mame289/indy500.zip|INDY 500 Twin (Revision A, Newer)|https://adb.arcadeitalia.net/?mame=indy500&type=title&resize=0|0|1
 mame289/indy800.zip|Indy 800|https://adb.arcadeitalia.net/?mame=indy800&type=title&resize=0|0|1
 mame289/indy_210.zip|Indiana Jones v2.10|https://adb.arcadeitalia.net/?mame=indy_210&type=title&resize=0|0|1
 mame289/indy_4610.zip|Indy (R4600, 100MHz)|https://adb.arcadeitalia.net/?mame=indy_4610&type=title&resize=0|0|1
@@ -65576,7 +65543,6 @@ mame289/inunoos.zip|Inu no Osanpo / Dog Walking (Japan, Export, Rev A)|https://a
 mame289/invad2ct.zip|Space Invaders II (Midway, cocktail)|https://adb.arcadeitalia.net/?mame=invad2ct&type=title&resize=0|0|1
 mame289/invaders.zip|Space Invaders / Space Invaders M|https://adb.arcadeitalia.net/?mame=invaders&type=title&resize=0|0|1
 mame289/invadpt2.zip|Space Invaders Part II (Taito, bigger ROMs)|https://adb.arcadeitalia.net/?mame=invadpt2&type=title&resize=0|0|1
-mame289/invasnab.zip|Invasion: The Abductors (version 5.0)|https://adb.arcadeitalia.net/?mame=invasnab&type=title&resize=0|0|1
 mame289/invcarht.zip|Invinco / Car Hunt (Germany)|https://adb.arcadeitalia.net/?mame=invcarht&type=title&resize=0|0|1
 mame289/invds.zip|Invinco / Deep Scan|https://adb.arcadeitalia.net/?mame=invds&type=title&resize=0|0|1
 mame289/invho2.zip|Invinco / Head On 2 (set 1)|https://adb.arcadeitalia.net/?mame=invho2&type=title&resize=0|0|1
@@ -66707,7 +66673,6 @@ mame289/ladyshot.zip|Lady Sharpshooter (set 1)|https://adb.arcadeitalia.net/?mam
 mame289/lafootb.zip|Look Alive! Football|https://adb.arcadeitalia.net/?mame=lafootb&type=title&resize=0|0|1
 mame289/lagunar.zip|Laguna Racer|https://adb.arcadeitalia.net/?mame=lagunar&type=title&resize=0|0|1
 mame289/lah_112.zip|Last Action Hero (USA 1.12, display A1.06)|https://adb.arcadeitalia.net/?mame=lah_112&type=title&resize=0|0|1
-mame289/lamachin.zip|L.A. Machineguns|https://adb.arcadeitalia.net/?mame=lamachin&type=title&resize=0|0|1
 mame289/lancelot.zip|Sir Lancelot|https://adb.arcadeitalia.net/?mame=lancelot&type=title&resize=0|0|1
 mame289/landbrk.zip|Land Breaker (World) / Miss Tang Ja Ru Gi (Korea) (pcb ver 3.02)|https://adb.arcadeitalia.net/?mame=landbrk&type=title&resize=0|0|1
 mame289/landgear.zip|Landing Gear (Ver 4.2 O)|https://adb.arcadeitalia.net/?mame=landgear&type=title&resize=0|0|1
@@ -66900,7 +66865,6 @@ mame289/lostspc.zip|Lost in Space (CPU 1.01, display A1.02)|https://adb.arcadeit
 mame289/losttomb.zip|Lost Tomb (easy)|https://adb.arcadeitalia.net/?mame=losttomb&type=title&resize=0|0|1
 mame289/losttrea.zip|Lost Treasure (V1.03)|https://adb.arcadeitalia.net/?mame=losttrea&type=title&resize=0|0|1
 mame289/lostwrlp.zip|Lost World|https://adb.arcadeitalia.net/?mame=lostwrlp&type=title&resize=0|0|1
-mame289/lostwsga.zip|The Lost World: Jurassic Park (Revision A)|https://adb.arcadeitalia.net/?mame=lostwsga&type=title&resize=0|0|1
 mame289/lotlot.zip|Lot Lot|https://adb.arcadeitalia.net/?mame=lotlot&type=title&resize=0|0|1
 mame289/lotoplay.zip|Loto-Play (MC68705, set 1)|https://adb.arcadeitalia.net/?mame=lotoplay&type=title&resize=0|0|1
 mame289/lotr.zip|The Lord Of The Rings (CPU 10.00, display A10.00)|https://adb.arcadeitalia.net/?mame=lotr&type=title&resize=0|0|1
@@ -68233,7 +68197,6 @@ mame289/magspot.zip|Magical Spot|https://adb.arcadeitalia.net/?mame=magspot&type
 mame289/magspot2.zip|Magical Spot II|https://adb.arcadeitalia.net/?mame=magspot2&type=title&resize=0|0|1
 mame289/magtcha5.zip|Magic Touch (0300455V, NSW/ACT)|https://adb.arcadeitalia.net/?mame=magtcha5&type=title&resize=0|0|1
 mame289/magtouch.zip|Magical Touch|https://adb.arcadeitalia.net/?mame=magtouch&type=title&resize=0|0|1
-mame289/magtruck.zip|Magical Truck Adventure (Export)|https://adb.arcadeitalia.net/?mame=magtruck&type=title&resize=0|0|1
 mame289/magzun.zip|Magical Zunou Power (J 961031 V1.000)|https://adb.arcadeitalia.net/?mame=magzun&type=title&resize=0|0|1
 mame289/mahg156.zip|Mini Arcade Handheld Game Console 2.8 Inch Screen Built in 156 Retro Games (Mega Drive handheld)|https://adb.arcadeitalia.net/?mame=mahg156&type=title&resize=0|0|1
 mame289/mahmajn.zip|Tokoro San no MahMahjan (Japan, ROM Based)|https://adb.arcadeitalia.net/?mame=mahmajn&type=title&resize=0|0|1
@@ -68543,7 +68506,6 @@ mame289/mf_brist.zip|Bristles (Max-A-Flex)|https://adb.arcadeitalia.net/?mame=mf
 mame289/mf_flip.zip|Flip & Flop (Max-A-Flex)|https://adb.arcadeitalia.net/?mame=mf_flip&type=title&resize=0|0|1
 mame289/mfabfz.zip|Mikrocomputer fuer Ausbildung|https://adb.arcadeitalia.net/?mame=mfabfz&type=title&resize=0|0|1
 mame289/mfish_13.zip|Multi Fish (040316)|https://adb.arcadeitalia.net/?mame=mfish_13&type=title&resize=0|0|1
-mame289/mfjump.zip|Monster Farm Jump (Japan)|https://adb.arcadeitalia.net/?mame=mfjump&type=title&resize=0|0|1
 mame289/mfleappad.zip|My First LeapPad|https://adb.arcadeitalia.net/?mame=mfleappad&type=title&resize=0|0|1
 mame289/mfootb.zip|Football (Mattel)|https://adb.arcadeitalia.net/?mame=mfootb&type=title&resize=0|0|1
 mame289/mfootb2.zip|Football 2 (Mattel)|https://adb.arcadeitalia.net/?mame=mfootb2&type=title&resize=0|0|1
@@ -68746,7 +68708,6 @@ mame289/mk2.zip|Mortal Kombat II (rev L3.1)|https://adb.arcadeitalia.net/?mame=m
 mame289/mk3.zip|Mortal Kombat 3 (rev 2.1)|https://adb.arcadeitalia.net/?mame=mk3&type=title&resize=0|0|1
 mame289/mk3mdb.zip|Mortal Kombat 3 (scrambled bootleg of Mega Drive version)|https://adb.arcadeitalia.net/?mame=mk3mdb&type=title&resize=0|0|1
 mame289/mk3snes.zip|Mortal Kombat 3 (SNES bootleg with timer)|https://adb.arcadeitalia.net/?mame=mk3snes&type=title&resize=0|0|1
-mame289/mk4.zip|Mortal Kombat 4 (version 3.0)|https://adb.arcadeitalia.net/?mame=mk4&type=title&resize=0|0|1
 mame289/mk83.zip|MK-83|https://adb.arcadeitalia.net/?mame=mk83&type=title&resize=0|0|1
 mame289/mk84.zip|MK-84|https://adb.arcadeitalia.net/?mame=mk84&type=title&resize=0|0|1
 mame289/mk85.zip|MK-85|https://adb.arcadeitalia.net/?mame=mk85&type=title&resize=0|0|1
@@ -68807,7 +68768,6 @@ mame289/mmmbanc.zip|Medal Mahjong Moukari Bancho (Japan, 2007/06/05 MASTER VER.)
 mame289/mmonkey.zip|Minky Monkey|https://adb.arcadeitalia.net/?mame=mmonkey&type=title&resize=0|0|1
 mame289/mmonty.zip|Master Monty|https://adb.arcadeitalia.net/?mame=mmonty&type=title&resize=0|0|1
 mame289/mmpanic.zip|Monkey Mole Panic (USA)|https://adb.arcadeitalia.net/?mame=mmpanic&type=title&resize=0|0|1
-mame289/mmpork.zip|Muchi Muchi Pork! (Japan, 2007/ 4/17 MASTER VER.)|https://adb.arcadeitalia.net/?mame=mmpork&type=title&resize=0|0|1
 mame289/mmr4000be.zip|Magnum R4000 (be)|https://adb.arcadeitalia.net/?mame=mmr4000be&type=title&resize=0|0|1
 mame289/mmr4000le.zip|Magnum R4000 (le)|https://adb.arcadeitalia.net/?mame=mmr4000le&type=title&resize=0|0|1
 mame289/mmt8.zip|MMT-8|https://adb.arcadeitalia.net/?mame=mmt8&type=title&resize=0|0|1
@@ -68888,7 +68848,6 @@ mame289/moshougi.zip|Shougi no Tatsujin - Master of Shougi|https://adb.arcadeita
 mame289/motmarco.zip|Marco|https://adb.arcadeitalia.net/?mame=motmarco&type=title&resize=0|0|1
 mame289/motofren.zip|Moto Frenzy|https://adb.arcadeitalia.net/?mame=motofren&type=title&resize=0|0|1
 mame289/motogonki.zip|Motogonki|https://adb.arcadeitalia.net/?mame=motogonki&type=title&resize=0|0|1
-mame289/motoraid.zip|Motor Raid - Twin|https://adb.arcadeitalia.net/?mame=motoraid&type=title&resize=0|0|1
 mame289/motos.zip|Motos|https://adb.arcadeitalia.net/?mame=motos&type=title&resize=0|0|1
 mame289/motoxgo.zip|Motocross Go! (World, MG3 Ver. A)|https://adb.arcadeitalia.net/?mame=motoxgo&type=title&resize=0|0|1
 mame289/motrdome.zip|MotorDome (rev. D)|https://adb.arcadeitalia.net/?mame=motrdome&type=title&resize=0|0|1
@@ -68954,7 +68913,6 @@ mame289/mrblack.zip|Mr. Black (set 1)|https://adb.arcadeitalia.net/?mame=mrblack
 mame289/mrchalgr.zip|Mr. Challenger (US)|https://adb.arcadeitalia.net/?mame=mrchalgr&type=title&resize=0|0|1
 mame289/mrdig.zip|Mr. Dig|https://adb.arcadeitalia.net/?mame=mrdig&type=title&resize=0|0|1
 mame289/mrdo.zip|Mr. Do!|https://adb.arcadeitalia.net/?mame=mrdo&type=title&resize=0|0|1
-mame289/mrdrillr.zip|Mr. Driller (US, DRI3/VER.A2)|https://adb.arcadeitalia.net/?mame=mrdrillr&type=title&resize=0|0|1
 mame289/mrdrilr2.zip|Mr. Driller 2 (World, DR22 Ver.A)|https://adb.arcadeitalia.net/?mame=mrdrilr2&type=title&resize=0|0|1
 mame289/mrdrilrg.zip|Mr. Driller G (Japan, DRG1 Ver.A)|https://adb.arcadeitalia.net/?mame=mrdrilrg&type=title&resize=0|0|1
 mame289/mrflea.zip|The Amazing Adventures of Mr. F. Lea|https://adb.arcadeitalia.net/?mame=mrflea&type=title&resize=0|0|1
@@ -69137,7 +69095,6 @@ mame289/mushik2e.zip|Mushiking The King Of Beetles - Mushiking II / III / III+ (
 mame289/mushik4e.zip|Mushiking The King Of Beetles - Mushiking IV / V / VI (World)|https://adb.arcadeitalia.net/?mame=mushik4e&type=title&resize=0|0|1
 mame289/mushike.zip|Mushiking The King Of Beetle (2K3 2ND Ver. 1.003-, World)|https://adb.arcadeitalia.net/?mame=mushike&type=title&resize=0|0|1
 mame289/mushisam.zip|Mushihime-Sama (Japan, 2004/10/12.MASTER VER.)|https://adb.arcadeitalia.net/?mame=mushisam&type=title&resize=0|0|1
-mame289/mushitam.zip|Puzzle! Mushihime-Tama (Japan, 2005/09/09.MASTER VER)|https://adb.arcadeitalia.net/?mame=mushitam&type=title&resize=0|0|1
 mame289/mushmagi.zip|Mushroom Magic (Russia) (Atronic)|https://adb.arcadeitalia.net/?mame=mushmagi&type=title&resize=0|0|1
 mame289/musicbal.zip|Music Ball|https://adb.arcadeitalia.net/?mame=musicbal&type=title&resize=0|0|1
 mame289/musicsrt.zip|Music Sort (ver. 2.02)|https://adb.arcadeitalia.net/?mame=musicsrt&type=title&resize=0|0|1
@@ -69181,7 +69138,6 @@ mame289/myaatari.zip|My Arcade Atari (DGUNL-7013, Micro Player Pro)|https://adb.
 mame289/myac220.zip|My Arcade Go Gamer Portable (Family Sport 220-in-1)|https://adb.arcadeitalia.net/?mame=myac220&type=title&resize=0|0|1
 mame289/myangel.zip|Kosodate Quiz My Angel (Japan)|https://adb.arcadeitalia.net/?mame=myangel&type=title&resize=0|0|1
 mame289/myangel2.zip|Kosodate Quiz My Angel 2 (Japan)|https://adb.arcadeitalia.net/?mame=myangel2&type=title&resize=0|0|1
-mame289/myangel3.zip|Kosodate Quiz My Angel 3 (Japan, KQT1/VER.A)|https://adb.arcadeitalia.net/?mame=myangel3&type=title&resize=0|0|1
 mame289/myarccn.zip|My Arcade Caveman Ninja|https://adb.arcadeitalia.net/?mame=myarccn&type=title&resize=0|0|1
 mame289/myb3k.zip|MyBrain 3000|https://adb.arcadeitalia.net/?mame=myb3k&type=title&resize=0|0|1
 mame289/mycom.zip|MYCOMZ-80A|https://adb.arcadeitalia.net/?mame=mycom&type=title&resize=0|0|1
@@ -69510,7 +69466,6 @@ mame289/odin_dlx.zip|Odin De Luxe|https://adb.arcadeitalia.net/?mame=odin_dlx&ty
 mame289/odisea.zip|Odisea Paris-Dakar|https://adb.arcadeitalia.net/?mame=odisea&type=title&resize=0|0|1
 mame289/officeye.zip|Office Yeoin Cheonha (version 1.2)|https://adb.arcadeitalia.net/?mame=officeye&type=title&resize=0|0|1
 mame289/offroad.zip|Ironman Ivan Stewart's Super Off-Road (rev 4)|https://adb.arcadeitalia.net/?mame=offroad&type=title&resize=0|0|1
-mame289/offroadc.zip|Off Road Challenge (v1.63)|https://adb.arcadeitalia.net/?mame=offroadc&type=title&resize=0|0|1
 mame289/offroadt.zip|Ironman Ivan Stewart's Super Off-Road Track-Pak (rev 4?)|https://adb.arcadeitalia.net/?mame=offroadt&type=title&resize=0|0|1
 mame289/offtwall.zip|Off the Wall (2/3-player upright)|https://adb.arcadeitalia.net/?mame=offtwall&type=title&resize=0|0|1
 mame289/ohmygod.zip|Oh My God! (Japan)|https://adb.arcadeitalia.net/?mame=ohmygod&type=title&resize=0|0|1
@@ -69610,7 +69565,6 @@ mame289/outlaw.zip|Outlaw|https://adb.arcadeitalia.net/?mame=outlaw&type=title&r
 mame289/outrun.zip|Out Run (sitdown/upright, Rev B)|https://adb.arcadeitalia.net/?mame=outrun&type=title&resize=0|0|1
 mame289/outzone.zip|Out Zone|https://adb.arcadeitalia.net/?mame=outzone&type=title&resize=0|0|1
 mame289/overdriv.zip|Over Drive (set 1)|https://adb.arcadeitalia.net/?mame=overdriv&type=title&resize=0|0|1
-mame289/overrev.zip|Over Rev (Model 2C, Revision A)|https://adb.arcadeitalia.net/?mame=overrev&type=title&resize=0|0|1
 mame289/overtop.zip|Over Top|https://adb.arcadeitalia.net/?mame=overtop&type=title&resize=0|0|1
 mame289/owlcap.zip|Owl Capone (10008711, NSW/ACT, Show Program)|https://adb.arcadeitalia.net/?mame=owlcap&type=title&resize=0|0|1
 mame289/oz750.zip|Wizard OZ-750|https://adb.arcadeitalia.net/?mame=oz750&type=title&resize=0|0|1
@@ -69624,7 +69578,6 @@ mame289/p500.zip|P500 (NTSC)|https://adb.arcadeitalia.net/?mame=p500&type=title&
 mame289/p5txla.zip|P5TX-LA (i430TX)|https://adb.arcadeitalia.net/?mame=p5txla&type=title&resize=0|0|1
 mame289/p8000.zip|P8000 (8bit Board)|https://adb.arcadeitalia.net/?mame=p8000&type=title&resize=0|0|1
 mame289/pabball.zip|Pro-Action Electronic-Computerized Baseball|https://adb.arcadeitalia.net/?mame=pabball&type=title&resize=0|0|1
-mame289/pacapp.zip|Paca Paca Passion (Japan, PPP1/VER.A2)|https://adb.arcadeitalia.net/?mame=pacapp&type=title&resize=0|0|1
 mame289/pacapp2.zip|Paca Paca Passion 2 (Japan, PKS1/VER.A)|https://adb.arcadeitalia.net/?mame=pacapp2&type=title&resize=0|0|1
 mame289/pacappsp.zip|Paca Paca Passion Special (Japan, PSP1/VER.A)|https://adb.arcadeitalia.net/?mame=pacappsp&type=title&resize=0|0|1
 mame289/paccarn.zip|Pac-Carnival|https://adb.arcadeitalia.net/?mame=paccarn&type=title&resize=0|0|1
@@ -70284,7 +70237,6 @@ mame289/pinclown.zip|Clown (Inder)|https://adb.arcadeitalia.net/?mame=pinclown&t
 mame289/pingpong.zip|Konami's Ping-Pong|https://adb.arcadeitalia.net/?mame=pingpong&type=title&resize=0|0|1
 mame289/pinkiri8.zip|Pinkiri 8|https://adb.arcadeitalia.net/?mame=pinkiri8&type=title&resize=0|0|1
 mame289/pinkjelly.zip|VRT VT SDK 'Pink Jelly' (VT03 Demo)|https://adb.arcadeitalia.net/?mame=pinkjelly&type=title&resize=0|0|1
-mame289/pinkswts.zip|Pink Sweets: Ibara Sorekara (Japan, 2006/04/06 MASTER VER....)|https://adb.arcadeitalia.net/?mame=pinkswts&type=title&resize=0|0|1
 mame289/pinmoonl.zip|Moon Light (Inder)|https://adb.arcadeitalia.net/?mame=pinmoonl&type=title&resize=0|0|1
 mame289/pinpool.zip|Pinball Pool|https://adb.arcadeitalia.net/?mame=pinpool&type=title&resize=0|0|1
 mame289/pinups.zip|Pin Ups (Ver 1.0 Rev A)|https://adb.arcadeitalia.net/?mame=pinups&type=title&resize=0|0|1
@@ -70626,7 +70578,6 @@ mame289/progear.zip|Progear (Europe 010117)|https://adb.arcadeitalia.net/?mame=p
 mame289/progolf.zip|18 Holes Pro Golf (set 1)|https://adb.arcadeitalia.net/?mame=progolf&type=title&resize=0|0|1
 mame289/progress.zip|Progress|https://adb.arcadeitalia.net/?mame=progress&type=title&resize=0|0|1
 mame289/promutrv.zip|Progressive Music Trivia (Question set 1)|https://adb.arcadeitalia.net/?mame=promutrv&type=title&resize=0|0|1
-mame289/propcycl.zip|Prop Cycle (World, PR2 Ver.A)|https://adb.arcadeitalia.net/?mame=propcycl&type=title&resize=0|0|1
 mame289/prophecy.zip|Prophecy (20173411, NSW/ACT)|https://adb.arcadeitalia.net/?mame=prophecy&type=title&resize=0|0|1
 mame289/prophet5r30.zip|Prophet 5 (Model 1000) Rev 3.0|https://adb.arcadeitalia.net/?mame=prophet5r30&type=title&resize=0|0|1
 mame289/prose2k.zip|Prose 2000/2020 v3.4.1|https://adb.arcadeitalia.net/?mame=prose2k&type=title&resize=0|0|1
@@ -70694,7 +70645,6 @@ mame289/pstone2.zip|Power Stone 2|https://adb.arcadeitalia.net/?mame=pstone2&typ
 mame289/psurge.zip|Power Surge|https://adb.arcadeitalia.net/?mame=psurge&type=title&resize=0|0|1
 mame289/psychic5.zip|Psychic 5 (World)|https://adb.arcadeitalia.net/?mame=psychic5&type=title&resize=0|0|1
 mame289/psychos.zip|Psycho Soldier (US)|https://adb.arcadeitalia.net/?mame=psychos&type=title&resize=0|0|1
-mame289/psyforce.zip|Psychic Force (Ver 2.4O)|https://adb.arcadeitalia.net/?mame=psyforce&type=title&resize=0|0|1
 mame289/pt68k2.zip|PT68K2|https://adb.arcadeitalia.net/?mame=pt68k2&type=title&resize=0|0|1
 mame289/pt68k4.zip|PT68K4|https://adb.arcadeitalia.net/?mame=pt68k4&type=title&resize=0|0|1
 mame289/ptblank.zip|Point Blank (World, GN2 Rev B, set 1)|https://adb.arcadeitalia.net/?mame=ptblank&type=title&resize=0|0|1
@@ -71016,7 +70966,6 @@ mame289/ratrc_l1.zip|Rat Race (L-1)|https://adb.arcadeitalia.net/?mame=ratrc_l1&
 mame289/raven.zip|Raven|https://adb.arcadeitalia.net/?mame=raven&type=title&resize=0|0|1
 mame289/ravens.zip|Ravensburger Selbstbaucomputer V0.9|https://adb.arcadeitalia.net/?mame=ravens&type=title&resize=0|0|1
 mame289/raverace.zip|Rave Racer (World, RV2 Ver.B)|https://adb.arcadeitalia.net/?mame=raverace&type=title&resize=0|0|1
-mame289/raystorm.zip|RayStorm (Ver 2.06A)|https://adb.arcadeitalia.net/?mame=raystorm&type=title&resize=0|0|1
 mame289/razmataz.zip|Razzmatazz|https://adb.arcadeitalia.net/?mame=razmataz&type=title&resize=0|0|1
 mame289/rbbrite.zip|Rainbow Brite (mini-arcade)|https://adb.arcadeitalia.net/?mame=rbbrite&type=title&resize=0|0|1
 mame289/rbff1.zip|Real Bout Fatal Fury / Real Bout Garou Densetsu (NGM-095 ~ NGH-095)|https://adb.arcadeitalia.net/?mame=rbff1&type=title&resize=0|0|1
@@ -71123,7 +71072,6 @@ mame289/ribbit.zip|Ribbit!|https://adb.arcadeitalia.net/?mame=ribbit&type=title&
 mame289/ribrac.zip|Ribbit Racin (Lazer-Tron)|https://adb.arcadeitalia.net/?mame=ribrac&type=title&resize=0|0|1
 mame289/ridersrf.zip|Rider's Surf|https://adb.arcadeitalia.net/?mame=ridersrf&type=title&resize=0|0|1
 mame289/ridgera2.zip|Ridge Racer 2 (World, RRS2)|https://adb.arcadeitalia.net/?mame=ridgera2&type=title&resize=0|0|1
-mame289/ridgerac.zip|Ridge Racer (World, RR2 Ver.B)|https://adb.arcadeitalia.net/?mame=ridgerac&type=title&resize=0|0|1
 mame289/ridgeracf.zip|Ridge Racer Full Scale (World, RRF2)|https://adb.arcadeitalia.net/?mame=ridgeracf&type=title&resize=0|0|1
 mame289/ridhero.zip|Riding Hero (NGM-006 ~ NGH-006)|https://adb.arcadeitalia.net/?mame=ridhero&type=title&resize=0|0|1
 mame289/ridingf.zip|Riding Fight (Ver 1.0O)|https://adb.arcadeitalia.net/?mame=ridingf&type=title&resize=0|0|1
@@ -71292,7 +71240,6 @@ mame289/rushbets.zip|Rushing Beat Shura (SNES bootleg)|https://adb.arcadeitalia.
 mame289/rushhero.zip|Rushing Heroes (ver UAB)|https://adb.arcadeitalia.net/?mame=rushhero&type=title&resize=0|0|1
 mame289/rvoicepc.zip|Realvoice PC|https://adb.arcadeitalia.net/?mame=rvoicepc&type=title&resize=0|0|1
 mame289/rvrbt_l3.zip|Riverboat Gambler (L-3)|https://adb.arcadeitalia.net/?mame=rvrbt_l3&type=title&resize=0|0|1
-mame289/rvschool.zip|Rival Schools: United By Fate (Europe 971117)|https://adb.arcadeitalia.net/?mame=rvschool&type=title&resize=0|0|1
 mame289/rw10r.zip|10R (Rockwell)|https://adb.arcadeitalia.net/?mame=rw10r&type=title&resize=0|0|1
 mame289/rw12r.zip|12R: Square Root|https://adb.arcadeitalia.net/?mame=rw12r&type=title&resize=0|0|1
 mame289/rw18r.zip|18R: Memory|https://adb.arcadeitalia.net/?mame=rw18r&type=title&resize=0|0|1
@@ -72429,7 +72376,6 @@ mame289/scruiser.zip|Space Cruiser (U.S. Games)|https://adb.arcadeitalia.net/?ma
 mame289/scrzy_l1.zip|Still Crazy|https://adb.arcadeitalia.net/?mame=scrzy_l1&type=title&resize=0|0|1
 mame289/scsxaio.zip|SCsxAIO (SCATsx chipset)|https://adb.arcadeitalia.net/?mame=scsxaio&type=title&resize=0|0|1
 mame289/sctmagce.zip|Scatter Magic - Cash Express (0251026, US)|https://adb.arcadeitalia.net/?mame=sctmagce&type=title&resize=0|0|1
-mame289/scud.zip|Scud Race / Sega Super GT - Twin/DX|https://adb.arcadeitalia.net/?mame=scud&type=title&resize=0|0|1
 mame289/scudhamm.zip|Scud Hammer (Japan, ver 1.4)|https://adb.arcadeitalia.net/?mame=scudhamm&type=title&resize=0|0|1
 mame289/scumimon.zip|Slotters Club: Umi Monogatari|https://adb.arcadeitalia.net/?mame=scumimon&type=title&resize=0|0|1
 mame289/scv.zip|Super Cassette Vision|https://adb.arcadeitalia.net/?mame=scv&type=title&resize=0|0|1
@@ -72540,10 +72486,6 @@ mame289/sfa2.zip|Street Fighter Alpha 2 (Europe 960229)|https://adb.arcadeitalia
 mame289/sfa3.zip|Street Fighter Alpha 3 (Europe 980904)|https://adb.arcadeitalia.net/?mame=sfa3&type=title&resize=0|0|1
 mame289/sfbonus.zip|Skill Fruit Bonus (Version 1.9R, set 1)|https://adb.arcadeitalia.net/?mame=sfbonus&type=title&resize=0|0|1
 mame289/sfchamp.zip|Super Football Champ (Ver 2.5O)|https://adb.arcadeitalia.net/?mame=sfchamp&type=title&resize=0|0|1
-mame289/sfex.zip|Street Fighter EX (Europe 961219)|https://adb.arcadeitalia.net/?mame=sfex&type=title&resize=0|0|1
-mame289/sfex2.zip|Street Fighter EX2 (Europe 980312)|https://adb.arcadeitalia.net/?mame=sfex2&type=title&resize=0|0|1
-mame289/sfex2p.zip|Street Fighter EX2 Plus (Europe 990611)|https://adb.arcadeitalia.net/?mame=sfex2p&type=title&resize=0|0|1
-mame289/sfexp.zip|Street Fighter EX Plus (USA 970407)|https://adb.arcadeitalia.net/?mame=sfexp&type=title&resize=0|0|1
 mame289/sfightii.zip|Street Fighter II (pinball, set 1)|https://adb.arcadeitalia.net/?mame=sfightii&type=title&resize=0|0|1
 mame289/sfkick.zip|Super Free Kick (set 1)|https://adb.arcadeitalia.net/?mame=sfkick&type=title&resize=0|0|1
 mame289/sflush.zip|Straight Flush|https://adb.arcadeitalia.net/?mame=sflush&type=title&resize=0|0|1
@@ -72567,7 +72509,6 @@ mame289/sgmast.zip|Super Masters Golf (World?, Floppy Based, FD1094 317-0058-05d
 mame289/sgmt1.zip|Super Game Mega Type 1|https://adb.arcadeitalia.net/?mame=sgmt1&type=title&resize=0|0|1
 mame289/sgnascar.zip|NASCAR Arcade (Rev A)|https://adb.arcadeitalia.net/?mame=sgnascar&type=title&resize=0|0|1
 mame289/sgsafari.zip|Super Gran Safari (ver. 3.11)|https://adb.arcadeitalia.net/?mame=sgsafari&type=title&resize=0|0|1
-mame289/sgt24h.zip|Super GT 24h|https://adb.arcadeitalia.net/?mame=sgt24h&type=title&resize=0|0|1
 mame289/sgtetris.zip|Sega Tetris|https://adb.arcadeitalia.net/?mame=sgtetris&type=title&resize=0|0|1
 mame289/sgunner.zip|Steel Gunner (Rev B)|https://adb.arcadeitalia.net/?mame=sgunner&type=title&resize=0|0|1
 mame289/sgunner2.zip|Steel Gunner 2 (US)|https://adb.arcadeitalia.net/?mame=sgunner2&type=title&resize=0|0|1
@@ -72607,7 +72548,6 @@ mame289/shine.zip|Shine/1|https://adb.arcadeitalia.net/?mame=shine&type=title&re
 mame289/shinfz.zip|Shinobi / FZ-2006 (Korean System 16 bootleg) (ISG Selection Master Type 2006)|https://adb.arcadeitalia.net/?mame=shinfz&type=title&resize=0|0|1
 mame289/shinobi.zip|Shinobi (set 6, System 16A) (unprotected)|https://adb.arcadeitalia.net/?mame=shinobi&type=title&resize=0|0|1
 mame289/shinygld.zip|Shiny Golds|https://adb.arcadeitalia.net/?mame=shinygld&type=title&resize=0|0|1
-mame289/shngmtkb.zip|Shanghai Matekibuyuu (Japan)|https://adb.arcadeitalia.net/?mame=shngmtkb&type=title&resize=0|0|1
 mame289/shock.zip|Shock|https://adb.arcadeitalia.net/?mame=shock&type=title&resize=0|0|1
 mame289/shocking.zip|Shocking|https://adb.arcadeitalia.net/?mame=shocking&type=title&resize=0|0|1
 mame289/shocktr2.zip|Shock Troopers - 2nd Squad|https://adb.arcadeitalia.net/?mame=shocktr2&type=title&resize=0|0|1
@@ -72871,7 +72811,6 @@ mame289/solitaire.zip|Solitaire (version 2.5)|https://adb.arcadeitalia.net/?mame
 mame289/solomon.zip|Solomon's Key (US)|https://adb.arcadeitalia.net/?mame=solomon&type=title&resize=0|0|1
 mame289/sols5e.zip|Series 5E Computer Workstation|https://adb.arcadeitalia.net/?mame=sols5e&type=title&resize=0|0|1
 mame289/solution.zip|The Solution|https://adb.arcadeitalia.net/?mame=solution&type=title&resize=0|0|1
-mame289/solvalou.zip|Solvalou (SV1, Japan)|https://adb.arcadeitalia.net/?mame=solvalou&type=title&resize=0|0|1
 mame289/songjang.zip|Songjiangyanyi Final|https://adb.arcadeitalia.net/?mame=songjang&type=title&resize=0|0|1
 mame289/sonic.zip|SegaSonic The Hedgehog (Japan, rev. C)|https://adb.arcadeitalia.net/?mame=sonic&type=title&resize=0|0|1
 mame289/sonic2mb.zip|Sonic The Hedgehog 2 (bootleg of Mega Drive version)|https://adb.arcadeitalia.net/?mame=sonic2mb&type=title&resize=0|0|1
@@ -73048,7 +72987,6 @@ mame289/speedrac.zip|Speed Race (Taito)|https://adb.arcadeitalia.net/?mame=speed
 mame289/speedrcr.zip|Speed Racer|https://adb.arcadeitalia.net/?mame=speedrcr&type=title&resize=0|0|1
 mame289/speedrs.zip|Speed Race (Seletron / Olympia)|https://adb.arcadeitalia.net/?mame=speedrs&type=title&resize=0|0|1
 mame289/speedspn.zip|Speed Spin|https://adb.arcadeitalia.net/?mame=speedspn&type=title&resize=0|0|1
-mame289/speedup.zip|Speed Up (version 2.20, checksum 2037)|https://adb.arcadeitalia.net/?mame=speedup&type=title&resize=0|0|1
 mame289/speedway.zip|Speedway (set 1)|https://adb.arcadeitalia.net/?mame=speedway&type=title&resize=0|0|1
 mame289/speglsht.zip|Super Eagle Shot|https://adb.arcadeitalia.net/?mame=speglsht&type=title&resize=0|0|1
 mame289/spellb.zip|Spelling B (US, 1980 version)|https://adb.arcadeitalia.net/?mame=spellb&type=title&resize=0|0|1
@@ -73072,8 +73010,6 @@ mame289/spidm2.zip|Spider-Man 2 Web Action|https://adb.arcadeitalia.net/?mame=sp
 mame289/spidman.zip|Spider-Man: The Videogame (World)|https://adb.arcadeitalia.net/?mame=spidman&type=title&resize=0|0|1
 mame289/spidtt.zip|Interactive M.A.G. Motion Activated Gear: Spider-Man - Triple Threat|https://adb.arcadeitalia.net/?mame=spidtt&type=title&resize=0|0|1
 mame289/spielbud.zip|Spiel Bude (German)|https://adb.arcadeitalia.net/?mame=spielbud&type=title&resize=0|0|1
-mame289/spikeofe.zip|Spikeout Final Edition|https://adb.arcadeitalia.net/?mame=spikeofe&type=title&resize=0|0|1
-mame289/spikeout.zip|Spikeout (Revision C)|https://adb.arcadeitalia.net/?mame=spikeout&type=title&resize=0|0|1
 mame289/spiker.zip|Spiker (6/9/86)|https://adb.arcadeitalia.net/?mame=spiker&type=title&resize=0|0|1
 mame289/spinlbrk.zip|Spinal Breakers (World)|https://adb.arcadeitalia.net/?mame=spinlbrk&type=title&resize=0|0|1
 mame289/spinmast.zip|Spin Master / Miracle Adventure|https://adb.arcadeitalia.net/?mame=spinmast&type=title&resize=0|0|1
@@ -73136,8 +73072,6 @@ mame289/squeenb.zip|Super Queen Bee (Ver. 101)|https://adb.arcadeitalia.net/?mam
 mame289/squizchs.zip|Seishun-Quiz Colorful High School (CHS1 Ver.A)|https://adb.arcadeitalia.net/?mame=squizchs&type=title&resize=0|0|1
 mame289/sr16.zip|SR-16 (Alesis)|https://adb.arcadeitalia.net/?mame=sr16&type=title&resize=0|0|1
 mame289/sraider.zip|Space Raider|https://adb.arcadeitalia.net/?mame=sraider&type=title&resize=0|0|1
-mame289/srally2.zip|Sega Rally 2: Sega Rally Championship|https://adb.arcadeitalia.net/?mame=srally2&type=title&resize=0|0|1
-mame289/srallyc.zip|Sega Rally Championship - Twin/DX (Revision C)|https://adb.arcadeitalia.net/?mame=srallyc&type=title&resize=0|0|1
 mame289/sralslot.zip|Super Rally (v0204, 2-Feb-1996)|https://adb.arcadeitalia.net/?mame=sralslot&type=title&resize=0|0|1
 mame289/sranger.zip|Super Ranger (v2.0)|https://adb.arcadeitalia.net/?mame=sranger&type=title&resize=0|0|1
 mame289/srdarwin.zip|SRD: Super Real Darwin (World)|https://adb.arcadeitalia.net/?mame=srdarwin&type=title&resize=0|0|1
@@ -73256,7 +73190,6 @@ mame289/starfirp.zip|Star Fire|https://adb.arcadeitalia.net/?mame=starfirp&type=
 mame289/starforc.zip|Star Force|https://adb.arcadeitalia.net/?mame=starforc&type=title&resize=0|0|1
 mame289/stargate.zip|Stargate|https://adb.arcadeitalia.net/?mame=stargate&type=title&resize=0|0|1
 mame289/stargatp.zip|Stargate (pinball, rev.5)|https://adb.arcadeitalia.net/?mame=stargatp&type=title&resize=0|0|1
-mame289/starglad.zip|Star Gladiator Episode I: Final Crusade (USA 960627)|https://adb.arcadeitalia.net/?mame=starglad&type=title&resize=0|0|1
 mame289/stargod.zip|Star God|https://adb.arcadeitalia.net/?mame=stargod&type=title&resize=0|0|1
 mame289/stargrds.zip|Star Guards|https://adb.arcadeitalia.net/?mame=stargrds&type=title&resize=0|0|1
 mame289/stargzr.zip|Stargazer|https://adb.arcadeitalia.net/?mame=stargzr&type=title&resize=0|0|1
@@ -73268,7 +73201,6 @@ mame289/stars.zip|Stars|https://adb.arcadeitalia.net/?mame=stars&type=title&resi
 mame289/starshp1.zip|Starship 1|https://adb.arcadeitalia.net/?mame=starshp1&type=title&resize=0|0|1
 mame289/starsldr.zip|Star Soldier: Vanishing Earth|https://adb.arcadeitalia.net/?mame=starsldr&type=title&resize=0|0|1
 mame289/starspnr.zip|Starspinner (Dutch/Nederlands)|https://adb.arcadeitalia.net/?mame=starspnr&type=title&resize=0|0|1
-mame289/starswep.zip|Star Sweep (World, STP2/VER.A)|https://adb.arcadeitalia.net/?mame=starswep&type=title&resize=0|0|1
 mame289/startrek.zip|Star Trek|https://adb.arcadeitalia.net/?mame=startrek&type=title&resize=0|0|1
 mame289/startrep.zip|Star Trek (Pinball)|https://adb.arcadeitalia.net/?mame=startrep&type=title&resize=0|0|1
 mame289/startrgn.zip|Star Trigon (Japan, STT1 Ver.A)|https://adb.arcadeitalia.net/?mame=startrgn&type=title&resize=0|0|1
@@ -73285,7 +73217,6 @@ mame289/statsymb.zip|Status Symbols (0251147, US)|https://adb.arcadeitalia.net/?
 mame289/statusbj.zip|Status Black Jack (V1.0c)|https://adb.arcadeitalia.net/?mame=statusbj&type=title&resize=0|0|1
 mame289/stbasket.zip|Star Basket|https://adb.arcadeitalia.net/?mame=stbasket&type=title&resize=0|0|1
 mame289/stbsub.zip|Treasure Bonus (Subsino, v1.6)|https://adb.arcadeitalia.net/?mame=stbsub&type=title&resize=0|0|1
-mame289/stcc.zip|Sega Touring Car Championship (newer)|https://adb.arcadeitalia.net/?mame=stcc&type=title&resize=0|0|1
 mame289/stdragon.zip|Saint Dragon (set 1)|https://adb.arcadeitalia.net/?mame=stdragon&type=title&resize=0|0|1
 mame289/ste.zip|STe (USA)|https://adb.arcadeitalia.net/?mame=ste&type=title&resize=0|0|1
 mame289/stealsee.zip|Steal See|https://adb.arcadeitalia.net/?mame=stealsee&type=title&resize=0|0|1
@@ -73328,7 +73259,6 @@ mame289/stress.zip|Stress Busters (J 981020 V1.000)|https://adb.arcadeitalia.net
 mame289/strgchmp.zip|Steering Champ (GQ710 97/12/18 VER. UAA)|https://adb.arcadeitalia.net/?mame=strgchmp&type=title&resize=0|0|1
 mame289/strhoop.zip|Street Hoop / Street Slam / Dunk Dream (DEM-004 ~ DEH-004)|https://adb.arcadeitalia.net/?mame=strhoop&type=title&resize=0|0|1
 mame289/strider.zip|Strider (USA, B-Board 89624B-2)|https://adb.arcadeitalia.net/?mame=strider&type=title&resize=0|0|1
-mame289/strider2.zip|Strider 2 (Europe 991213)|https://adb.arcadeitalia.net/?mame=strider2&type=title&resize=0|0|1
 mame289/strik_l4.zip|Strike Master (L-4) (Shuffle)|https://adb.arcadeitalia.net/?mame=strik_l4&type=title&resize=0|0|1
 mame289/strike.zip|Strike|https://adb.arcadeitalia.net/?mame=strike&type=title&resize=0|0|1
 mame289/striker.zip|Striker (Pinball)|https://adb.arcadeitalia.net/?mame=striker&type=title&resize=0|0|1
@@ -73528,7 +73458,6 @@ mame289/swtht2nz.zip|Sweethearts II (1VXFC5461, New Zealand)|https://adb.arcadei
 mame289/swtpc.zip|SWTPC 6800 Computer System (with SWTBUG)|https://adb.arcadeitalia.net/?mame=swtpc&type=title&resize=0|0|1
 mame289/swtpc09.zip|swtpc S/09 Sbug|https://adb.arcadeitalia.net/?mame=swtpc09&type=title&resize=0|0|1
 mame289/swtril43.zip|Star Wars Trilogy (CPU 4.03, display A4.00)|https://adb.arcadeitalia.net/?mame=swtril43&type=title&resize=0|0|1
-mame289/swtrilgy.zip|Star Wars Trilogy Arcade (Revision A)|https://adb.arcadeitalia.net/?mame=swtrilgy&type=title&resize=0|0|1
 mame289/swyft.zip|Swyft|https://adb.arcadeitalia.net/?mame=swyft&type=title&resize=0|0|1
 mame289/sx100.zip|SX-100 (MSX1, Japan)|https://adb.arcadeitalia.net/?mame=sx100&type=title&resize=0|0|1
 mame289/sx1010.zip|SX1010|https://adb.arcadeitalia.net/?mame=sx1010&type=title&resize=0|0|1
@@ -73712,9 +73641,6 @@ mame289/tek4319.zip|4319 Graphics Workstation|https://adb.arcadeitalia.net/?mame
 mame289/tek4404.zip|4404 Artificial Intelligence System|https://adb.arcadeitalia.net/?mame=tek4404&type=title&resize=0|0|1
 mame289/tek6130.zip|6130|https://adb.arcadeitalia.net/?mame=tek6130&type=title&resize=0|0|1
 mame289/tekipaki.zip|Teki Paki|https://adb.arcadeitalia.net/?mame=tekipaki&type=title&resize=0|0|1
-mame289/tekken.zip|Tekken (World, TE2/VER.C)|https://adb.arcadeitalia.net/?mame=tekken&type=title&resize=0|0|1
-mame289/tekken2.zip|Tekken 2 Ver.B (World, TES2/VER.D)|https://adb.arcadeitalia.net/?mame=tekken2&type=title&resize=0|0|1
-mame289/tekken3.zip|Tekken 3 (World, TET2/VER.E1)|https://adb.arcadeitalia.net/?mame=tekken3&type=title&resize=0|0|1
 mame289/tekkenbs.zip|Tekken Battle Scratch|https://adb.arcadeitalia.net/?mame=tekkenbs&type=title&resize=0|0|1
 mame289/tekkencw.zip|Tekken Card World|https://adb.arcadeitalia.net/?mame=tekkencw&type=title&resize=0|0|1
 mame289/tektagt.zip|Tekken Tag Tournament (World, TEG2/VER.C1, set 1)|https://adb.arcadeitalia.net/?mame=tektagt&type=title&resize=0|0|1
@@ -73875,7 +73801,6 @@ mame289/timaze.zip|unknown electronic maze game (patent)|https://adb.arcadeitali
 mame289/timber.zip|Timber|https://adb.arcadeitalia.net/?mame=timber&type=title&resize=0|0|1
 mame289/timbwolf.zip|Timber Wolf (0154013, US)|https://adb.arcadeitalia.net/?mame=timbwolf&type=title&resize=0|0|1
 mame289/time2000.zip|Time 2000|https://adb.arcadeitalia.net/?mame=time2000&type=title&resize=0|0|1
-mame289/timecris.zip|Time Crisis (World, TS2 Ver.B)|https://adb.arcadeitalia.net/?mame=timecris&type=title&resize=0|0|1
 mame289/timecrs2.zip|Time Crisis II (US, TSS3 Ver. B)|https://adb.arcadeitalia.net/?mame=timecrs2&type=title&resize=0|0|1
 mame289/timefgtr.zip|Time Fighter (Time Pilot conversion on Galaxian hardware)|https://adb.arcadeitalia.net/?mame=timefgtr&type=title&resize=0|0|1
 mame289/timekill.zip|Time Killers (v1.32)|https://adb.arcadeitalia.net/?mame=timekill&type=title&resize=0|0|1
@@ -73999,7 +73924,6 @@ mame289/tomy_400.zip|The Who's Tommy Pinball Wizard (USA 4.00, display A4.00)|ht
 mame289/tomycar.zip|Boku wa Tomica Driver - Hataraku Norimono Daishuugou! (Japan)|https://adb.arcadeitalia.net/?mame=tomycar&type=title&resize=0|0|1
 mame289/tomyegg.zip|Kiratto Pri-Chan - PritamaGO: Misty Purple (Japan)|https://adb.arcadeitalia.net/?mame=tomyegg&type=title&resize=0|0|1
 mame289/tomyspt.zip|Pretty Rhythm Smart Pod Touch (Japan)|https://adb.arcadeitalia.net/?mame=tomyspt&type=title&resize=0|0|1
-mame289/tondemo.zip|Tondemo Crisis (Japan)|https://adb.arcadeitalia.net/?mame=tondemo&type=title&resize=0|0|1
 mame289/tongzi.zip|Tong Zi Maque|https://adb.arcadeitalia.net/?mame=tongzi&type=title&resize=0|0|1
 mame289/tonpuu.zip|Ton Puu Mahjong Version 2.0 RX (Japan)|https://adb.arcadeitalia.net/?mame=tonpuu&type=title&resize=0|0|1
 mame289/tonto.zip|Merlin M1800 Tonto|https://adb.arcadeitalia.net/?mame=tonto&type=title&resize=0|0|1
@@ -74029,7 +73953,6 @@ mame289/toprollr.zip|Top Roller|https://adb.arcadeitalia.net/?mame=toprollr&type
 mame289/topsecex.zip|Top Secret (Exidy) (version 1.0)|https://adb.arcadeitalia.net/?mame=topsecex&type=title&resize=0|0|1
 mame289/topshoot.zip|Top Shooter|https://adb.arcadeitalia.net/?mame=topshoot&type=title&resize=0|0|1
 mame289/topshta6.zip|Top Shot (30123211, NSW/ACT)|https://adb.arcadeitalia.net/?mame=topshta6&type=title&resize=0|0|1
-mame289/topskatr.zip|Top Skater (Export, Revision A)|https://adb.arcadeitalia.net/?mame=topskatr&type=title&resize=0|0|1
 mame289/topsound.zip|Top Sound (French)|https://adb.arcadeitalia.net/?mame=topsound&type=title&resize=0|0|1
 mame289/topspeed.zip|Top Speed (World, rev 1)|https://adb.arcadeitalia.net/?mame=topspeed&type=title&resize=0|0|1
 mame289/toptcash.zip|Top T. Cash|https://adb.arcadeitalia.net/?mame=toptcash&type=title&resize=0|0|1
@@ -74200,7 +74123,6 @@ mame289/tryout.zip|Pro Baseball Skill Tryout (Japan)|https://adb.arcadeitalia.ne
 mame289/ts1.zip|TS-1 (v2.13.0)|https://adb.arcadeitalia.net/?mame=ts1&type=title&resize=0|0|1
 mame289/ts10.zip|TS-10|https://adb.arcadeitalia.net/?mame=ts10&type=title&resize=0|0|1
 mame289/ts12.zip|TS-12|https://adb.arcadeitalia.net/?mame=ts12&type=title&resize=0|0|1
-mame289/ts2.zip|Battle Arena Toshinden 2 (Europe 951124)|https://adb.arcadeitalia.net/?mame=ts2&type=title&resize=0|0|1
 mame289/ts2624.zip|TS-2624|https://adb.arcadeitalia.net/?mame=ts2624&type=title&resize=0|0|1
 mame289/ts28.zip|Endura TS-28|https://adb.arcadeitalia.net/?mame=ts28&type=title&resize=0|0|1
 mame289/ts3000.zip|TS-3000|https://adb.arcadeitalia.net/?mame=ts3000&type=title&resize=0|0|1
@@ -74533,8 +74455,6 @@ mame289/vcarn.zip|Video Carnival 1999 / Super Royal Card (Version 0.11)|https://
 mame289/vcc.zip|Voice Chess Challenger (set 1)|https://adb.arcadeitalia.net/?mame=vcc&type=title&resize=0|0|1
 mame289/vclock3.zip|VoxClock 3|https://adb.arcadeitalia.net/?mame=vclock3&type=title&resize=0|0|1
 mame289/vcombat.zip|Virtual Combat|https://adb.arcadeitalia.net/?mame=vcombat&type=title&resize=0|0|1
-mame289/vcop.zip|Virtua Cop (Revision B)|https://adb.arcadeitalia.net/?mame=vcop&type=title&resize=0|0|1
-mame289/vcop2.zip|Virtua Cop 2|https://adb.arcadeitalia.net/?mame=vcop2&type=title&resize=0|0|1
 mame289/vcs80.zip|VCS-80|https://adb.arcadeitalia.net/?mame=vcs80&type=title&resize=0|0|1
 mame289/vd56sp.zip|Speedcom VD56SP|https://adb.arcadeitalia.net/?mame=vd56sp&type=title&resize=0|0|1
 mame289/vdm79322.zip|VDM 79322/CM 7233|https://adb.arcadeitalia.net/?mame=vdm79322&type=title&resize=0|0|1
@@ -74565,9 +74485,6 @@ mame289/versus.zip|Versus|https://adb.arcadeitalia.net/?mame=versus&type=title&r
 mame289/vesarif.zip|Vesolaya arifmetika|https://adb.arcadeitalia.net/?mame=vesarif&type=title&resize=0|0|1
 mame289/vesta.zip|PK8000 Vesta|https://adb.arcadeitalia.net/?mame=vesta&type=title&resize=0|0|1
 mame289/vet3000.zip|VET 3000 (Brazil, v2.1)|https://adb.arcadeitalia.net/?mame=vet3000&type=title&resize=0|0|1
-mame289/vf.zip|Virtua Fighter|https://adb.arcadeitalia.net/?mame=vf&type=title&resize=0|0|1
-mame289/vf2.zip|Virtua Fighter 2 (Version 2.1)|https://adb.arcadeitalia.net/?mame=vf2&type=title&resize=0|0|1
-mame289/vf3.zip|Virtua Fighter 3 (Revision D)|https://adb.arcadeitalia.net/?mame=vf3&type=title&resize=0|0|1
 mame289/vf4cart.zip|Virtua Fighter 4 (World)|https://adb.arcadeitalia.net/?mame=vf4cart&type=title&resize=0|0|1
 mame289/vf4evoct.zip|Virtua Fighter 4: Evolution (World)|https://adb.arcadeitalia.net/?mame=vf4evoct&type=title&resize=0|0|1
 mame289/vfkids.zip|Virtua Fighter Kids (JUET 960319 V0.000)|https://adb.arcadeitalia.net/?mame=vfkids&type=title&resize=0|0|1
@@ -74594,7 +74511,6 @@ mame289/vic1001.zip|VIC-1001 (Japan)|https://adb.arcadeitalia.net/?mame=vic1001&
 mame289/vicshoot.zip|Victory Shoot|https://adb.arcadeitalia.net/?mame=vicshoot&type=title&resize=0|0|1
 mame289/victhc80.zip|HC-80 (MSX2, Japan)|https://adb.arcadeitalia.net/?mame=victhc80&type=title&resize=0|0|1
 mame289/victhc95.zip|HC-95 (MSX2, Japan)|https://adb.arcadeitalia.net/?mame=victhc95&type=title&resize=0|0|1
-mame289/victlap.zip|Ace Driver: Victory Lap (World, ADV2 Ver.B)|https://adb.arcadeitalia.net/?mame=victlap&type=title&resize=0|0|1
 mame289/victnine.zip|Victorious Nine|https://adb.arcadeitalia.net/?mame=victnine&type=title&resize=0|0|1
 mame289/victor21.zip|Victor 21|https://adb.arcadeitalia.net/?mame=victor21&type=title&resize=0|0|1
 mame289/victor5.zip|Victor 5|https://adb.arcadeitalia.net/?mame=victor5&type=title&resize=0|0|1
@@ -74677,8 +74593,6 @@ mame289/voleybal.zip|Volley|https://adb.arcadeitalia.net/?mame=voleybal&type=tit
 mame289/volfied.zip|Volfied (World, rev 1)|https://adb.arcadeitalia.net/?mame=volfied&type=title&resize=0|0|1
 mame289/vollyrmt.zip|Volly (Ramtek)|https://adb.arcadeitalia.net/?mame=vollyrmt&type=title&resize=0|0|1
 mame289/voltan.zip|Voltan Escapes Cosmic Doom|https://adb.arcadeitalia.net/?mame=voltan&type=title&resize=0|0|1
-mame289/von.zip|Cyber Troopers Virtual-On - Twin (Export)|https://adb.arcadeitalia.net/?mame=von&type=title&resize=0|0|1
-mame289/von2.zip|Cyber Troopers Virtual-On: Oratorio Tangram (Revision B)|https://adb.arcadeitalia.net/?mame=von2&type=title&resize=0|0|1
 mame289/von4.zip|Cyber Troopers Virtual-On 4: Force (Rev E)|https://adb.arcadeitalia.net/?mame=von4&type=title&resize=0|0|1
 mame289/vonot.zip|Cyber Troopers Virtual-On: Oratorio Tangram M.S.B.S. ver 5.66 2000 Edition|https://adb.arcadeitalia.net/?mame=vonot&type=title&resize=0|0|1
 mame289/vortex.zip|Vortex|https://adb.arcadeitalia.net/?mame=vortex&type=title&resize=0|0|1
@@ -74690,7 +74604,6 @@ mame289/vp60.zip|Viewpoint 60|https://adb.arcadeitalia.net/?mame=vp60&type=title
 mame289/vpainter.zip|Video Painter (PAL)|https://adb.arcadeitalia.net/?mame=vpainter&type=title&resize=0|0|1
 mame289/vparadis2.zip|Victory Paradise II (V9)|https://adb.arcadeitalia.net/?mame=vparadis2&type=title&resize=0|0|1
 mame289/vpoker.zip|Challenger Draw Poker|https://adb.arcadeitalia.net/?mame=vpoker&type=title&resize=0|0|1
-mame289/vr.zip|Virtua Racing|https://adb.arcadeitalia.net/?mame=vr&type=title&resize=0|0|1
 mame289/vreader.zip|V.Reader (US, English, 2011-10-17)|https://adb.arcadeitalia.net/?mame=vreader&type=title&resize=0|0|1
 mame289/vreadere.zip|Reader Laptop E (Germany)|https://adb.arcadeitalia.net/?mame=vreadere&type=title&resize=0|0|1
 mame289/vrkon_l1.zip|Varkon (L-1)|https://adb.arcadeitalia.net/?mame=vrkon_l1&type=title&resize=0|0|1
@@ -74791,7 +74704,6 @@ mame289/wasafari.zip|Wanpaku Safari (J 981109 V1.000)|https://adb.arcadeitalia.n
 mame289/waterski.zip|Water Ski|https://adb.arcadeitalia.net/?mame=waterski&type=title&resize=0|0|1
 mame289/waterwld.zip|Waterworld (rev.3)|https://adb.arcadeitalia.net/?mame=waterwld&type=title&resize=0|0|1
 mame289/watrball.zip|Water Balls|https://adb.arcadeitalia.net/?mame=watrball&type=title&resize=0|0|1
-mame289/waverunr.zip|Wave Runner (Japan, Revision A)|https://adb.arcadeitalia.net/?mame=waverunr&type=title&resize=0|0|1
 mame289/wb3.zip|Wonder Boy III - Monster Lair (set 6, World, System 16B) (8751 317-0098)|https://adb.arcadeitalia.net/?mame=wb3&type=title&resize=0|0|1
 mame289/wbbc97.zip|Beach Festival World Championship 1997|https://adb.arcadeitalia.net/?mame=wbbc97&type=title&resize=0|0|1
 mame289/wbeachvl.zip|World Beach Volley (set 1, PIC16C57 audio CPU)|https://adb.arcadeitalia.net/?mame=wbeachvl&type=title&resize=0|0|1
@@ -75157,7 +75069,6 @@ mame289/zenponta.zip|Zenigata Ponta (Japan, ver 1.02)|https://adb.arcadeitalia.n
 mame289/zephy.zip|Zephy (set 1)|https://adb.arcadeitalia.net/?mame=zephy&type=title&resize=0|0|1
 mame289/zephyr.zip|Zephyr (00-441-01)|https://adb.arcadeitalia.net/?mame=zephyr&type=title&resize=0|0|1
 mame289/zerogu2.zip|Zero Gunner 2|https://adb.arcadeitalia.net/?mame=zerogu2&type=title&resize=0|0|1
-mame289/zerogun.zip|Zero Gunner (Export, Model 2B)|https://adb.arcadeitalia.net/?mame=zerogun&type=title&resize=0|0|1
 mame289/zerohour.zip|Zero Hour (set 1)|https://adb.arcadeitalia.net/?mame=zerohour&type=title&resize=0|0|1
 mame289/zeropnt.zip|Zero Point (set 1)|https://adb.arcadeitalia.net/?mame=zeropnt&type=title&resize=0|0|1
 mame289/zeropnt2.zip|Zero Point 2|https://adb.arcadeitalia.net/?mame=zeropnt2&type=title&resize=0|0|1
