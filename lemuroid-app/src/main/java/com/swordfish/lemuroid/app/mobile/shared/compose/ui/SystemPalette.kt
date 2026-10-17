@@ -97,6 +97,8 @@ object SystemPalette {
             MetaSystemID.GAME_WATCH -> Color(0xFF8A5A1A)
             MetaSystemID.ATARI_ST -> Color(0xFF3A5A3A)
             MetaSystemID.MAME289 -> Color(0xFF8B2500)
+            MetaSystemID.NAOMI -> Color(0xFFC84B1A)
+            MetaSystemID.ATOMISWAVE -> Color(0xFF2A52BE)
         }
 
     /** Colour for a `Game.systemId` (dbname). Unknown ids get a neutral surface tone. */

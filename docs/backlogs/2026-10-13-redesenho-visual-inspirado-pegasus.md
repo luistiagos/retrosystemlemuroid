@@ -1605,3 +1605,10 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     `-read-only -port 5600` (`Start-Process`). Toque longo no AVD 7.1 só por `sendevent /dev/input/event1 1 232 1/0`
     (o `--longpress` vira clique). Worktree no Windows: apagar a pasta com `rd /s /q \?\<caminho>` (o `git worktree
     remove` falha com "Filename too long") e copiar o `local.properties` ao criar.
+- **2026-10-17 (verificação 1: `ktlintCheck` completo).** `./gradlew ktlintCheck --continue` no checkout principal:
+  **BUILD FAILED** em 4 tasks (224 apontamentos), **nenhum em arquivo do redesenho**. A suspeita do worktree está
+  descartada: o baseline casa por `linha:coluna`, e o `b631880` (MAME) inseriu uma linha no `build.gradle.kts` — as 8
+  violações são as do baseline uma linha abaixo. O resto é deslocamento + violações novas de `78b7ff2` (aba
+  instalados), `9e9651d` (arcade) e do trabalho de arcade/NAOMI não commitado. Virou registro próprio:
+  `docs/backlogs/2026-10-17-ktlintcheck-vermelho-baseline-por-linha.md` (fora do escopo do redesenho; esperar a
+  sessão de arcade commitar). **Próximo:** verificação 2 (Favoritos e Busca no `lemu_tv_api25`, selo de salvo).

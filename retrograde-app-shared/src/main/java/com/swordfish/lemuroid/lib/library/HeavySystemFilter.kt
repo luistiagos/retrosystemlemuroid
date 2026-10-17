@@ -38,6 +38,8 @@ object HeavySystemFilter {
         SystemID.DOS,          // DOSBox Pure – moderate
         SystemID.SEGACD,       // Genesis Plus GX CD – moderate
         SystemID.DREAMCAST,    // Flycast – moderate-heavy
+        SystemID.NAOMI,        // Flycast – moderate-heavy
+        SystemID.ATOMISWAVE,   // Flycast – moderate-heavy
         SystemID.THREE_DO,     // Opera – moderate-heavy
         SystemID.SATURN,       // YabaSanshiro – moderate-heavy
         SystemID.AMIGA,        // PUAE – moderate

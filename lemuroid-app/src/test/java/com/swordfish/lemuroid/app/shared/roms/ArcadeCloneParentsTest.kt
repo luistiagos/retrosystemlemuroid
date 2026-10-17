@@ -86,4 +86,19 @@ class ArcadeCloneParentsTest {
         val ancestors = ArcadeCloneParents.resolveAncestors(null, "snes", "18wheelr.zip")
         assertTrue(ancestors.isEmpty())
     }
+
+    @Test
+    fun testNaomiAndAtomiswaveRouting() {
+        assertTrue(ArcadeCloneParents.appliesToSystem("naomi"))
+        assertTrue(ArcadeCloneParents.appliesToSystem("atomiswave"))
+        assertTrue(ArcadeCloneParents.hasBiosInAcervo("naomi"))
+        assertTrue(ArcadeCloneParents.hasBiosInAcervo("atomiswave"))
+
+        assertTrue(com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.isNaomiRom("18wheelr.zip"))
+        assertTrue(com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.isNaomiRom("18wheelr"))
+        assertEquals("naomi", com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.dedicatedSystemIdForRom("18wheelr.zip"))
+
+        assertTrue(com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.isAtomiswaveRom("mslug6.zip"))
+        assertEquals("atomiswave", com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.dedicatedSystemIdForRom("mslug6.zip"))
+    }
 }

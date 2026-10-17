@@ -180,4 +180,8 @@
     <string name="game_system_title_atarist">Atari ST</string>
     <string name="game_system_abbr_arcade_mame289">MAME</string>
     <string name="game_system_title_arcade_mame289">MAME 0.289</string>
+    <string name="game_system_abbr_naomi">Naomi</string>
+    <string name="game_system_title_naomi">Sega Naomi</string>
+    <string name="game_system_abbr_atomiswave">Atomiswave</string>
+    <string name="game_system_title_atomiswave">Sammy Atomiswave</string>
 </resources>

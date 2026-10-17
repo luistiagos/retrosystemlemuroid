@@ -408,6 +408,16 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_mame289,
         listOf(SystemID.MAME289),
     ),
+    NAOMI(
+        R.string.game_system_title_naomi,
+        R.drawable.game_system_dc,
+        listOf(SystemID.NAOMI),
+    ),
+    ATOMISWAVE(
+        R.string.game_system_title_atomiswave,
+        R.drawable.game_system_dc,
+        listOf(SystemID.ATOMISWAVE),
+    ),
     ;
 
     fun color(): Int {
@@ -497,6 +507,8 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.GAME_WATCH -> GAME_WATCH
                 SystemID.ATARI_ST -> ATARI_ST
                 SystemID.MAME289 -> MAME289
+                SystemID.NAOMI -> NAOMI
+                SystemID.ATOMISWAVE -> ATOMISWAVE
             }
         }
     }

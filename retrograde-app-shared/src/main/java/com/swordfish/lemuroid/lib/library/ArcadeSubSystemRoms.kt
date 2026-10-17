@@ -560,33 +560,278 @@ object ArcadeSubSystemRoms {
      *
      * PGM (kov, martmast, ...) needs the shared pgm.zip BIOS, same idea.
      */
+    val NAOMI_ROMS: Set<String> =
+        setOf(
+            "18w.zip",
+            "18wheelr.zip",
+            "alienfnt.zip",
+            "alpilotj.zip",
+            "anpanman2.zip",
+            "asndynmt.zip",
+            "ausfache.zip",
+            "azumanga.zip",
+            "bdrdown.zip",
+            "beachspi.zip",
+            "capsnk.zip",
+            "cfield.zip",
+            "chocomk.zip",
+            "cleoftp.zip",
+            "clubk2k3.zip",
+            "clubkcyc.zip",
+            "clubkprz.zip",
+            "clubkpzb.zip",
+            "clubkrt.zip",
+            "confmiss.zip",
+            "crackndj.zip",
+            "crakndj2.zip",
+            "crzytaxi.zip",
+            "csmash.zip",
+            "cspike.zip",
+            "cvs2.zip",
+            "cvsgd.zip",
+            "deathcox.zip",
+            "derbyo2k.zip",
+            "derbyoc.zip",
+            "derbyoc2.zip",
+            "derbyocw.zip",
+            "doa2m.zip",
+            "dragntr.zip",
+            "dragntr2.zip",
+            "dragntr3.zip",
+            "dybb99.zip",
+            "dybbnao.zip",
+            "dygolf.zip",
+            "ggram2.zip",
+            "ggx.zip",
+            "ggxx.zip",
+            "ggxxac.zip",
+            "ggxxrl.zip",
+            "ggxxsla.zip",
+            "gram2000.zip",
+            "gundmct.zip",
+            "gundmgd.zip",
+            "gundmxgd.zip",
+            "gunsur2.zip",
+            "gwing2.zip",
+            "hmgeo.zip",
+            "hopper.zip",
+            "ikaruga.zip",
+            "illvelo.zip",
+            "inidv3cy.zip",
+            "initd.zip",
+            "initdexp.zip",
+            "initdv2j.zip",
+            "initdv3e.zip",
+            "initdv3j.zip",
+            "inunoos.zip",
+            "jambo.zip",
+            "jingystm.zip",
+            "karous.zip",
+            "keyboard.zip",
+            "kick4csh.zip",
+            "kingrt66.zip",
+            "kurucham.zip",
+            "lupinsho.zip",
+            "luptype.zip",
+            "mamonoro.zip",
+            "manicpnc.zip",
+            "marstv.zip",
+            "mazan.zip",
+            "mbaa.zip",
+            "meltyb.zip",
+            "meltybld.zip",
+            "mj1.zip",
+            "moeru.zip",
+            "mok.zip",
+            "monkeyba.zip",
+            "mushi2k3.zip",
+            "mushi2k4.zip",
+            "mushi2k5.zip",
+            "mushi2k61.zip",
+            "mushi2k62.zip",
+            "mushik2e.zip",
+            "mushik4e.zip",
+            "mushike.zip",
+            "mvsc2.zip",
+            "ndcfboxa.zip",
+            "ngdup23a.zip",
+            "ngdup23c.zip",
+            "ngdup23e.zip",
+            "ninjaslt.zip",
+            "ntvmys.zip",
+            "oinori.zip",
+            "otrigger.zip",
+            "pjustic.zip",
+            "pstone.zip",
+            "pstone2.zip",
+            "psyvar2.zip",
+            "puyoda.zip",
+            "puyofev.zip",
+            "qmegamis.zip",
+            "quizqgd.zip",
+            "radirgy.zip",
+            "radirgyn.zip",
+            "rhytngk.zip",
+            "ringout.zip",
+            "samba.zip",
+            "samba2k.zip",
+            "senko.zip",
+            "senkosp.zip",
+            "sfz3ugd.zip",
+            "sgdrvsim.zip",
+            "sgtetris.zip",
+            "shaktam.zip",
+            "shaktamb.zip",
+            "shaktmsp.zip",
+            "shangril.zip",
+            "shikgam2.zip",
+            "shootopl.zip",
+            "shootpl.zip",
+            "shootplm.zip",
+            "shors2k1.zip",
+            "shors2k2.zip",
+            "shors2k2l.zip",
+            "shors2k2m.zip",
+            "shors2k2s.zip",
+            "shorse.zip",
+            "shorsep.zip",
+            "shorsepr.zip",
+            "sl2007.zip",
+            "slasho.zip",
+            "slashout.zip",
+            "smarinef.zip",
+            "smlg99.zip",
+            "soulsurf.zip",
+            "spawn.zip",
+            "spkrbtl.zip",
+            "sprtjam.zip",
+            "ss2005.zip",
+            "sstrkfgt.zip",
+            "starseek.zip",
+            "suchie3.zip",
+            "takoron.zip",
+            "tduno.zip",
+            "tduno2.zip",
+            "tetkiwam.zip",
+            "tokyobus.zip",
+            "totd.zip",
+            "toukon4.zip",
+            "toyfight.zip",
+            "trgheart.zip",
+            "trizeal.zip",
+            "undefeat.zip",
+            "usagiym.zip",
+            "vathlete.zip",
+            "vf4.zip",
+            "vf4cart.zip",
+            "vf4evo.zip",
+            "vf4evoct.zip",
+            "vf4tuned.zip",
+            "virnba.zip",
+            "vonot.zip",
+            "vs2_2k.zip",
+            "vstrik3.zip",
+            "vstrik3c.zip",
+            "vtenis2c.zip",
+            "vtennis.zip",
+            "vtennis2.zip",
+            "vtennisg.zip",
+            "wccf116.zip",
+            "wccf1dup.zip",
+            "wccf212e.zip",
+            "wccf234j.zip",
+            "wccf310j.zip",
+            "wccf322e.zip",
+            "wccf341j.zip",
+            "wccf400j.zip",
+            "wccf420e.zip",
+            "wldkicks.zip",
+            "wldrider.zip",
+            "wrungp.zip",
+            "wsbbgd.zip",
+            "wwfroyal.zip",
+            "zerogu2.zip",
+            "zombrvn.zip",
+            "zunou.zip",
+        )
+
+    val ATOMISWAVE_ROMS: Set<String> =
+        setOf(
+            "anmlbskt.zip",
+            "basschal.zip",
+            "blokpong.zip",
+            "claychal.zip",
+            "demofist.zip",
+            "dirtypig.zip",
+            "dolphin.zip",
+            "fotns.zip",
+            "ftspeed.zip",
+            "ggisuka.zip",
+            "ggx15.zip",
+            "kofnw.zip",
+            "kofxi.zip",
+            "kov7sprt.zip",
+            "maxspeed.zip",
+            "mslug6.zip",
+            "ngbc.zip",
+            "rangrmsn.zip",
+            "rumblef.zip",
+            "rumblef2.zip",
+            "salmankt.zip",
+            "samsptk.zip",
+            "sprtshot.zip",
+            "sushibar.zip",
+            "vfurlong.zip",
+            "waidrive.zip",
+            "xtrmhnt2.zip",
+            "xtrmhunt.zip",
+        )
+
     fun requiredBiosForRom(romName: String?): List<String> {
         val normalized = romName?.lowercase(Locale.ROOT) ?: return emptyList()
-        return when (normalized) {
-            in NEOGEO_ROMS -> listOf("neogeo.zip")
-            in PGM_ROMS -> listOf("pgm.zip")
+        val withZip = if (normalized.endsWith(".zip")) normalized else "$normalized.zip"
+        return when {
+            withZip in NAOMI_ROMS -> listOf("dc/naomi.zip")
+            withZip in ATOMISWAVE_ROMS -> listOf("dc/awbios.zip")
+            withZip in NEOGEO_ROMS -> listOf("neogeo.zip")
+            withZip in PGM_ROMS -> listOf("pgm.zip")
             else -> emptyList()
         }
     }
 
+    fun isNaomiRom(romName: String?): Boolean {
+        val normalized = romName?.lowercase(Locale.ROOT) ?: return false
+        val withZip = if (normalized.endsWith(".zip")) normalized else "$normalized.zip"
+        return withZip in NAOMI_ROMS
+    }
+
+    fun isAtomiswaveRom(romName: String?): Boolean {
+        val normalized = romName?.lowercase(Locale.ROOT) ?: return false
+        val withZip = if (normalized.endsWith(".zip")) normalized else "$normalized.zip"
+        return withZip in ATOMISWAVE_ROMS
+    }
+
     fun dedicatedSystemIdForRom(romName: String?): String? {
         val normalized = romName?.lowercase(Locale.ROOT) ?: return null
+        val withZip = if (normalized.endsWith(".zip")) normalized else "$normalized.zip"
 
         return when {
-            normalized in NEOGEO_ROMS -> SystemID.NEOGEO.dbname
-            normalized in CPS1_ROMS -> SystemID.CPS1.dbname
-            normalized in CPS2_ROMS -> SystemID.CPS2.dbname
-            normalized in CPS3_ROMS -> SystemID.CPS3.dbname
-            normalized in DATAEAST_ROMS -> SystemID.DATAEAST.dbname
-            normalized in GALAXIAN_ROMS -> SystemID.GALAXIAN.dbname
-            normalized in TOAPLAN_ROMS -> SystemID.TOAPLAN.dbname
-            normalized in TAITO_ROMS -> SystemID.TAITO.dbname
-            normalized in PSIKYO_ROMS -> SystemID.PSIKYO.dbname
-            normalized in PGM_ROMS -> SystemID.PGM.dbname
-            normalized in KANEKO_ROMS -> SystemID.KANEKO.dbname
-            normalized in CAVE_ROMS -> SystemID.CAVE.dbname
-            normalized in TECHNOS_ROMS -> SystemID.TECHNOS.dbname
-            normalized in SETA_ROMS -> SystemID.SETA.dbname
+            withZip in NAOMI_ROMS -> SystemID.NAOMI.dbname
+            withZip in ATOMISWAVE_ROMS -> SystemID.ATOMISWAVE.dbname
+            withZip in NEOGEO_ROMS -> SystemID.NEOGEO.dbname
+            withZip in CPS1_ROMS -> SystemID.CPS1.dbname
+            withZip in CPS2_ROMS -> SystemID.CPS2.dbname
+            withZip in CPS3_ROMS -> SystemID.CPS3.dbname
+            withZip in DATAEAST_ROMS -> SystemID.DATAEAST.dbname
+            withZip in GALAXIAN_ROMS -> SystemID.GALAXIAN.dbname
+            withZip in TOAPLAN_ROMS -> SystemID.TOAPLAN.dbname
+            withZip in TAITO_ROMS -> SystemID.TAITO.dbname
+            withZip in PSIKYO_ROMS -> SystemID.PSIKYO.dbname
+            withZip in PGM_ROMS -> SystemID.PGM.dbname
+            withZip in KANEKO_ROMS -> SystemID.KANEKO.dbname
+            withZip in CAVE_ROMS -> SystemID.CAVE.dbname
+            withZip in TECHNOS_ROMS -> SystemID.TECHNOS.dbname
+            withZip in SETA_ROMS -> SystemID.SETA.dbname
             else -> null
         }
     }

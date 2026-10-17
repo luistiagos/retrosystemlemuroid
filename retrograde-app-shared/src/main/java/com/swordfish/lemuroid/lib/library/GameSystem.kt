@@ -2302,6 +2302,132 @@ data class GameSystem(
                     supportedExtensions = listOf("chd", "gdi", "cdi", "cue", "iso", "zip"),
                     hasMultiDiskSupport = false,
                 ),
+                GameSystem(
+                    SystemID.NAOMI,
+                    "Sega - Naomi",
+                    R.string.game_system_title_naomi,
+                    R.string.game_system_abbr_naomi,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FLYCAST,
+                            requiredBIOSFiles = listOf("dc/naomi.zip"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.DREAMCAST),
+                                    1 to arrayListOf(ControllerConfigs.DREAMCAST),
+                                    2 to arrayListOf(ControllerConfigs.DREAMCAST),
+                                    3 to arrayListOf(ControllerConfigs.DREAMCAST),
+                                ),
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "reicast_internal_resolution",
+                                        R.string.setting_flycast_internal_resolution,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "640x480",
+                                                R.string.value_flycast_resolution_native,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "1280x960",
+                                                R.string.value_flycast_resolution_2x,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "1920x1440",
+                                                R.string.value_flycast_resolution_3x,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "2560x1920",
+                                                R.string.value_flycast_resolution_4x,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("reicast_internal_resolution", "640x480"),
+                                    CoreVariable("reicast_anisotropic_filtering", "4"),
+                                    CoreVariable("reicast_threaded_rendering", "enabled"),
+                                ),
+                            rumbleSupported = false,
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip", "7z", "bin", "dat", "lst", "chd"),
+                    hasMultiDiskSupport = false,
+                ),
+                GameSystem(
+                    SystemID.ATOMISWAVE,
+                    "Sammy - Atomiswave",
+                    R.string.game_system_title_atomiswave,
+                    R.string.game_system_abbr_atomiswave,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.FLYCAST,
+                            requiredBIOSFiles = listOf("dc/awbios.zip"),
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.DREAMCAST),
+                                    1 to arrayListOf(ControllerConfigs.DREAMCAST),
+                                    2 to arrayListOf(ControllerConfigs.DREAMCAST),
+                                    3 to arrayListOf(ControllerConfigs.DREAMCAST),
+                                ),
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "reicast_internal_resolution",
+                                        R.string.setting_flycast_internal_resolution,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "640x480",
+                                                R.string.value_flycast_resolution_native,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "1280x960",
+                                                R.string.value_flycast_resolution_2x,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "1920x1440",
+                                                R.string.value_flycast_resolution_3x,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "2560x1920",
+                                                R.string.value_flycast_resolution_4x,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("reicast_internal_resolution", "640x480"),
+                                    CoreVariable("reicast_anisotropic_filtering", "4"),
+                                    CoreVariable("reicast_threaded_rendering", "enabled"),
+                                ),
+                            rumbleSupported = false,
+                            statesSupported = true,
+                            skipDuplicateFrames = false,
+                        ),
+                    ),
+                    scanOptions =
+                        ScanOptions(
+                            scanByFilename = false,
+                            scanByUniqueExtension = false,
+                            scanByPathAndFilename = true,
+                            scanByPathAndSupportedExtensions = false,
+                        ),
+                    uniqueExtensions = listOf(),
+                    supportedExtensions = listOf("zip", "7z", "bin", "dat", "lst", "chd"),
+                    hasMultiDiskSupport = false,
+                ),
 
                 GameSystem(
                     SystemID.THREE_DO,

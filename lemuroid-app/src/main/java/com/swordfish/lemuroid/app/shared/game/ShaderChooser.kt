@@ -108,6 +108,8 @@ object ShaderChooser {
             SystemID.POKEMON_MINI -> ShaderConfig.LCD
             SystemID.SUPERVISION -> ShaderConfig.LCD
             SystemID.DREAMCAST -> ShaderConfig.Default
+            SystemID.NAOMI -> ShaderConfig.Default
+            SystemID.ATOMISWAVE -> ShaderConfig.Default
             SystemID.THREE_DO -> ShaderConfig.Default
             SystemID.PICO_8 -> ShaderConfig.Sharp
             SystemID.VIRCON32 -> ShaderConfig.Default
@@ -387,6 +389,8 @@ object ShaderChooser {
             SystemID.POKEMON_MINI -> upscale8BitsMobile
             SystemID.SUPERVISION -> upscale8BitsMobile
             SystemID.DREAMCAST -> modern
+            SystemID.NAOMI -> modern
+            SystemID.ATOMISWAVE -> modern
             SystemID.THREE_DO -> modern
             SystemID.PICO_8 -> modern
             SystemID.VIRCON32 -> modern

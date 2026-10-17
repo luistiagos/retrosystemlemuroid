@@ -285,6 +285,12 @@ interface GameDao {
         fileUri: String,
     )
 
+    @Query("UPDATE games SET systemId = :systemId WHERE id = :id")
+    suspend fun updateSystemId(
+        id: Int,
+        systemId: String,
+    ): Int
+
     /** Total row count — used by [ManifestQuickLoader] to detect a fully populated catalog. */
     @Query("SELECT COUNT(*) FROM games")
     suspend fun countAll(): Int
@@ -308,10 +314,10 @@ interface GameDao {
      * fileName) index in case a row already exists under [newSystem] (then this is a no-op and
      * [deleteFbneoByFileName] removes the stale fbneo/mame2003plus row).
      */
-    @Query("UPDATE OR IGNORE games SET systemId = :newSystem, fileUri = :newUri WHERE systemId IN ('fbneo', 'mame2003plus') AND fileName = :fileName")
+    @Query("UPDATE OR IGNORE games SET systemId = :newSystem, fileUri = :newUri WHERE systemId IN ('fbneo', 'mame2003plus', 'mame289') AND fileName = :fileName")
     suspend fun reassignArcadeSystem(fileName: String, newSystem: String, newUri: String): Int
 
-    @Query("DELETE FROM games WHERE systemId IN ('fbneo', 'mame2003plus') AND fileName = :fileName")
+    @Query("DELETE FROM games WHERE systemId IN ('fbneo', 'mame2003plus', 'mame289') AND fileName = :fileName")
     suspend fun deleteFbneoByFileName(fileName: String): Int
 
     @Query("SELECT DISTINCT systemId FROM games ORDER BY systemId ASC")

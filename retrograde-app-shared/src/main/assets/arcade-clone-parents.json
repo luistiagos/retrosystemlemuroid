@@ -7,6 +7,7 @@
  "_gerado_em": "2026-09-15",
  "sistemas": [
   "arcade",
+  "atomiswave",
   "cave",
   "cps1",
   "cps2",
@@ -16,18 +17,23 @@
   "hbmame",
   "mame",
   "mame289",
+  "naomi",
   "neogeo",
   "neogeo64",
   "segastv",
   "zinc"
  ],
  "bios_no_acervo": [
+  "atomiswave",
   "mame289",
+  "naomi",
   "zinc"
  ],
  "bios_dataset_base": {
   "mame289": "https://huggingface.co/datasets/luisluis123/mame289bios/resolve/main",
-  "zinc": "https://huggingface.co/datasets/luisluis123/mame289bios/resolve/main"
+  "zinc": "https://huggingface.co/datasets/luisluis123/mame289bios/resolve/main",
+  "naomi": "https://huggingface.co/datasets/luisluis123/mame289bios/resolve/main",
+  "atomiswave": "https://huggingface.co/datasets/luisluis123/mame289bios/resolve/main"
  },
  "clones": {
   "100lions": "aristmk6",

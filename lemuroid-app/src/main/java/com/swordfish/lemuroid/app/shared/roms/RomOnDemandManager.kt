@@ -9,6 +9,8 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.lib.library.ArcadeCloneParents
+import com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms
+import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.catalog.CatalogRemovals
 import com.swordfish.lemuroid.lib.library.db.dao.DownloadedRomDao
 import com.swordfish.lemuroid.lib.library.db.dao.GameDao
@@ -438,21 +440,36 @@ class RomOnDemandManager(
      */
     suspend fun prepareGameForLaunch(game: Game): Game =
         withContext(Dispatchers.IO) {
-            // Ensure split arcade dependencies (parents, BIOS, hardware devices) are present before launch.
-            if (ArcadeCloneParents.appliesToSystem(game.systemId)) {
-                ensureArcadeDependencies(game)
+            // Re-route 3D arcade games from generic arcade systems (mame289, fbneo, mame2003plus)
+            // to their dedicated accelerated system (e.g. Naomi, Atomiswave -> Flycast).
+            val dedicatedSys = ArcadeSubSystemRoms.dedicatedSystemIdForRom(game.fileName)
+            val effectiveGame = if (dedicatedSys != null && dedicatedSys != game.systemId &&
+                (game.systemId == SystemID.MAME289.dbname || game.systemId == SystemID.FBNEO.dbname || game.systemId == SystemID.MAME2003PLUS.dbname)
+            ) {
+                Timber.i("Routing arcade ROM ${game.fileName} from ${game.systemId} to dedicated system $dedicatedSys")
+                runCatching {
+                    gameDao.updateSystemId(game.id, dedicatedSys)
+                }
+                game.copy(systemId = dedicatedSys)
+            } else {
+                game
             }
 
-            val destFile = resolveDestFile(game)
+            // Ensure split arcade dependencies (parents, BIOS, hardware devices) are present before launch.
+            if (ArcadeCloneParents.appliesToSystem(effectiveGame.systemId) || ArcadeCloneParents.appliesToSystem(game.systemId)) {
+                ensureArcadeDependencies(effectiveGame)
+            }
+
+            val destFile = resolveDestFile(effectiveGame)
             if (!destFile.exists() ||
                 destFile.length() == 0L ||
                 destFile.extension.lowercase() != "zip" ||
-                !isManagedRom(game)
+                !isManagedRom(effectiveGame)
             ) {
-                return@withContext game
+                return@withContext effectiveGame
             }
 
-            val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(game, destFile)
+            val (finalGame, finalFile) = extractMultiDiscZipIfNeeded(effectiveGame, destFile)
             if (finalGame != game) {
                 try {
                     downloadedRomDao.insert(
@@ -588,14 +605,17 @@ class RomOnDemandManager(
                 val inBios = depBiosFile.exists() && depBiosFile.length() > 0L
 
                 if (inRoms && inBios) {
+                    syncToDcFolderIfNeeded(systemDir, depRomFile, depFileName)
                     continue
                 }
                 if (inRoms && !inBios) {
                     runCatching { depRomFile.copyTo(depBiosFile, overwrite = true) }
+                    syncToDcFolderIfNeeded(systemDir, depRomFile, depFileName)
                     continue
                 }
                 if (!inRoms && inBios) {
                     runCatching { depBiosFile.copyTo(depRomFile, overwrite = true) }
+                    syncToDcFolderIfNeeded(systemDir, depBiosFile, depFileName)
                     continue
                 }
 
@@ -614,6 +634,7 @@ class RomOnDemandManager(
                         if (depRomFile.exists() && depRomFile.length() > 0L) {
                             downloaded = true
                             runCatching { depRomFile.copyTo(depBiosFile, overwrite = true) }
+                            syncToDcFolderIfNeeded(systemDir, depRomFile, depFileName)
                             Timber.i("Downloaded arcade dependency $depFileName from dedicated dataset")
                         }
                     } catch (e: Exception) {
@@ -637,6 +658,7 @@ class RomOnDemandManager(
                             if (depRomFile.exists() && depRomFile.length() > 0L) {
                                 downloaded = true
                                 runCatching { depRomFile.copyTo(depBiosFile, overwrite = true) }
+                                syncToDcFolderIfNeeded(systemDir, depRomFile, depFileName)
                                 Timber.i("Downloaded arcade dependency $depFileName from catalog endpoint")
                             }
                         }
@@ -847,6 +869,15 @@ class RomOnDemandManager(
             t = t.cause
         }
         return false
+    }
+
+    private fun syncToDcFolderIfNeeded(systemDir: File, sourceFile: File, depFileName: String) {
+        val dcDir = File(systemDir, "dc")
+        dcDir.mkdirs()
+        val dcFile = File(dcDir, depFileName)
+        if (!dcFile.exists() || dcFile.length() != sourceFile.length()) {
+            runCatching { sourceFile.copyTo(dcFile, overwrite = true) }
+        }
     }
 
     /** Minimal in-memory cookie jar that stores cookies keyed by "domain|name". */

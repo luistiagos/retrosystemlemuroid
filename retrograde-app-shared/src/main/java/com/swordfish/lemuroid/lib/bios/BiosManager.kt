@@ -48,10 +48,22 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
         // that still resolve to the generic SystemID.FBNEO (legacy catalog rows, manual scans)
         // so the on-demand BIOS download fires for them too, not only for SystemID.NEOGEO.
         val perGameBiosFiles =
-            if (coreConfig.coreID == CoreID.FBNEO) {
-                ArcadeSubSystemRoms.requiredBiosForRom(game.fileName)
-            } else {
-                emptyList()
+            when (coreConfig.coreID) {
+                CoreID.FBNEO -> ArcadeSubSystemRoms.requiredBiosForRom(game.fileName)
+                CoreID.FLYCAST -> {
+                    when (game.systemId) {
+                        SystemID.NAOMI.dbname -> listOf("dc/naomi.zip")
+                        SystemID.ATOMISWAVE.dbname -> listOf("dc/awbios.zip")
+                        else -> {
+                            when {
+                                ArcadeSubSystemRoms.isNaomiRom(game.fileName) -> listOf("dc/naomi.zip")
+                                ArcadeSubSystemRoms.isAtomiswaveRom(game.fileName) -> listOf("dc/awbios.zip")
+                                else -> emptyList()
+                            }
+                        }
+                    }
+                }
+                else -> emptyList()
             }
 
         val systemDirectory = directoriesManager.getSystemDirectory()
@@ -336,6 +348,32 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     SystemID.DREAMCAST,
                     "C611B498",
                     "dc/dc_flash.bin",
+                ),
+                // Sega Naomi BIOS (Flycast) — files go in system/dc/ subfolder
+                Bios(
+                    "dc/naomi.zip",
+                    "EB4099AEB42EF089CFE94F8FE95E51F6",
+                    "Sega Naomi BIOS",
+                    SystemID.NAOMI,
+                    null,
+                    "dc/naomi.zip",
+                ),
+                Bios(
+                    "dc/naomi2.zip",
+                    "843C0D51237DC945F57237C4B9872B1D",
+                    "Sega Naomi 2 BIOS",
+                    SystemID.NAOMI,
+                    null,
+                    "dc/naomi2.zip",
+                ),
+                // Sammy Atomiswave BIOS (Flycast) — files go in system/dc/ subfolder
+                Bios(
+                    "dc/awbios.zip",
+                    "0EC5AE5B5A5C4959FA8B43FCF8687F7C",
+                    "Sammy Atomiswave BIOS",
+                    SystemID.ATOMISWAVE,
+                    null,
+                    "dc/awbios.zip",
                 ),
                 // Famicom Disk System BIOS (FCEUmm)
                 Bios(

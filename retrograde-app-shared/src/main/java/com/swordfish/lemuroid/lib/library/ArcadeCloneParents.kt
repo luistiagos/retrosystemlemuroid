@@ -106,17 +106,19 @@ object ArcadeCloneParents {
             s.contains("fbneo") ||
             s.contains("arcade") ||
             s.contains("neogeo") ||
-            s.contains("cps")
+            s.contains("cps") ||
+            s == "naomi" ||
+            s == "atomiswave"
     }
 
     fun biosDatasetBaseUrl(systemId: String): String? {
         val s = systemId.lowercase()
-        return biosDatasetBase[s] ?: if (s.startsWith("mame")) biosDatasetBase["mame289"] else null
+        return biosDatasetBase[s] ?: if (s.startsWith("mame") || s == "naomi" || s == "atomiswave") biosDatasetBase["mame289"] else null
     }
 
     fun hasBiosInAcervo(systemId: String): Boolean {
         val s = systemId.lowercase()
-        return biosNoAcervo.contains(s) || s == "mame289"
+        return biosNoAcervo.contains(s) || s == "mame289" || s == "naomi" || s == "atomiswave"
     }
 
     /**
