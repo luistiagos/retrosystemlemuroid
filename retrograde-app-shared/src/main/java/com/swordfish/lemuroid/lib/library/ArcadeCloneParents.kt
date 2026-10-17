@@ -113,7 +113,8 @@ object ArcadeCloneParents {
 
     fun biosDatasetBaseUrl(systemId: String): String? {
         val s = systemId.lowercase()
-        return biosDatasetBase[s] ?: if (s.startsWith("mame") || s == "naomi" || s == "atomiswave") biosDatasetBase["mame289"] else null
+        val usesMameBios = s.startsWith("mame") || s == "naomi" || s == "atomiswave"
+        return biosDatasetBase[s] ?: if (usesMameBios) biosDatasetBase["mame289"] else null
     }
 
     fun hasBiosInAcervo(systemId: String): Boolean {
@@ -125,7 +126,11 @@ object ArcadeCloneParents {
      * Retorna a lista de dependencias (pais, BIOS, dispositivos) de [romName] (com ou sem .zip).
      * Resolve a cadeia de ancestrais em profundidade ate 25 niveis sem loops.
      */
-    fun resolveAncestors(context: Context? = null, systemId: String, romName: String?): List<String> {
+    fun resolveAncestors(
+        context: Context? = null,
+        systemId: String,
+        romName: String?,
+    ): List<String> {
         if (romName.isNullOrBlank()) return emptyList()
         context?.let { init(it) }
         if (!appliesToSystem(systemId)) return emptyList()

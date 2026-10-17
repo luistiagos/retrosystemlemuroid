@@ -1612,3 +1612,6 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
   instalados), `9e9651d` (arcade) e do trabalho de arcade/NAOMI não commitado. Virou registro próprio:
   `docs/backlogs/2026-10-17-ktlintcheck-vermelho-baseline-por-linha.md` (fora do escopo do redesenho; esperar a
   sessão de arcade commitar). **Próximo:** verificação 2 (Favoritos e Busca no `lemu_tv_api25`, selo de salvo).
+- **2026-10-17 (ktlint resolvido).** Depois dos commits de arcade (`7362b1e`, `cc9b8e9`): violações novas corrigidas e
+  baseline regenerado — `./gradlew ktlintCheck` **BUILD SUCCESSFUL**. Detalhes na "Resolução" do backlog acima.
+  Verificação 1 fechada. **Próximo:** verificação 2.

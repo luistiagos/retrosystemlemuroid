@@ -103,16 +103,20 @@ class GameSearchDao(private val internalDao: Internal) {
         val args = mutableListOf<Any>(matchArg)
         val sql = StringBuilder()
 
-        sql.append("""
+        sql.append(
+            """
             SELECT games.*
             FROM fts_games
             JOIN games ON games.id = fts_games.docid
-        """)
+        """,
+        )
 
         if (onlyInstalled) {
-            sql.append("""
+            sql.append(
+                """
                 LEFT JOIN downloaded_roms dr ON games.systemId = dr.systemId AND games.fileName = dr.fileName
-            """)
+            """,
+            )
         }
 
         sql.append(" WHERE fts_games MATCH ? ")
@@ -127,7 +131,8 @@ class GameSearchDao(private val internalDao: Internal) {
             require(romsPrefix.isNotEmpty() && managedMarker.isNotEmpty()) {
                 "romsPrefix e managedMarker são obrigatórios quando onlyInstalled=true"
             }
-            sql.append("""
+            sql.append(
+                """
                 AND (
                     dr.fileName IS NOT NULL
                     OR (
@@ -136,7 +141,8 @@ class GameSearchDao(private val internalDao: Internal) {
                         AND SUBSTR(games.fileUri, 1, LENGTH(?)) <> ?
                     )
                 )
-            """)
+            """,
+            )
             args.add(managedMarker)
             args.add(romsPrefix)
             args.add(romsPrefix)

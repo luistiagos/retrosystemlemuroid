@@ -25,29 +25,48 @@ object HeavySystemFilter {
 
     // ── Very demanding — excluded on ≤ 2 GB ─────────────────────────────────
     private val VERY_HEAVY_SYSTEMS: Set<SystemID> = setOf(
-        SystemID.PSP,          // PPSSPP – very demanding
-        SystemID.NINTENDO_3DS, // Citra – very demanding
-        SystemID.GAMECUBE,     // Dolphin – very demanding
-        SystemID.MAME289,      // MAME 0.289 (Arcade) – very demanding
+        // PPSSPP – very demanding
+        SystemID.PSP,
+        // Citra – very demanding
+        SystemID.NINTENDO_3DS,
+        // Dolphin – very demanding
+        SystemID.GAMECUBE,
+        // MAME 0.289 (Arcade) – very demanding
+        SystemID.MAME289,
     )
 
     // ── Moderate / moderate-heavy — additionally excluded on ≤ 1 GB ─────────
     private val MODERATE_SYSTEMS: Set<SystemID> = setOf(
-        SystemID.NDS,          // melonDS / DeSmuME – moderate-heavy
-        SystemID.N64,          // Mupen64Plus – moderate-heavy
-        SystemID.DOS,          // DOSBox Pure – moderate
-        SystemID.SEGACD,       // Genesis Plus GX CD – moderate
-        SystemID.DREAMCAST,    // Flycast – moderate-heavy
-        SystemID.NAOMI,        // Flycast – moderate-heavy
-        SystemID.ATOMISWAVE,   // Flycast – moderate-heavy
-        SystemID.THREE_DO,     // Opera – moderate-heavy
-        SystemID.SATURN,       // YabaSanshiro – moderate-heavy
-        SystemID.AMIGA,        // PUAE – moderate
-        SystemID.AMIGA_1200,   // PUAE (AGA) – moderate
-        SystemID.AMIGA_CD32,   // PUAE (CD32) – moderate
-        SystemID.AMIGA_CDTV,   // PUAE (CDTV) – moderate
-        SystemID.PCFX,         // Beetle PC-FX – moderate
-        SystemID.ATARI_ST,     // Hatari – moderate (68000-based computer)
+        // melonDS / DeSmuME – moderate-heavy
+        SystemID.NDS,
+        // Mupen64Plus – moderate-heavy
+        SystemID.N64,
+        // DOSBox Pure – moderate
+        SystemID.DOS,
+        // Genesis Plus GX CD – moderate
+        SystemID.SEGACD,
+        // Flycast – moderate-heavy
+        SystemID.DREAMCAST,
+        // Flycast – moderate-heavy
+        SystemID.NAOMI,
+        // Flycast – moderate-heavy
+        SystemID.ATOMISWAVE,
+        // Opera – moderate-heavy
+        SystemID.THREE_DO,
+        // YabaSanshiro – moderate-heavy
+        SystemID.SATURN,
+        // PUAE – moderate
+        SystemID.AMIGA,
+        // PUAE (AGA) – moderate
+        SystemID.AMIGA_1200,
+        // PUAE (CD32) – moderate
+        SystemID.AMIGA_CD32,
+        // PUAE (CDTV) – moderate
+        SystemID.AMIGA_CDTV,
+        // Beetle PC-FX – moderate
+        SystemID.PCFX,
+        // Hatari – moderate (68000-based computer)
+        SystemID.ATARI_ST,
     )
 
     /** All systems that may be excluded on some device tier. */
@@ -56,8 +75,8 @@ object HeavySystemFilter {
     /** Returns the set of [SystemID]s to exclude for the given [tier]. */
     fun excludedSystems(tier: DeviceTier): Set<SystemID> = when (tier) {
         DeviceTier.ULTRA_WEAK -> VERY_HEAVY_SYSTEMS + MODERATE_SYSTEMS
-        DeviceTier.WEAK       -> VERY_HEAVY_SYSTEMS
-        DeviceTier.NORMAL     -> emptySet()
+        DeviceTier.WEAK -> VERY_HEAVY_SYSTEMS
+        DeviceTier.NORMAL -> emptySet()
     }
 
     /** DB names to exclude for a given [tier], for SQL queries. */
@@ -78,9 +97,9 @@ object HeavySystemFilter {
         // Physical RAM takes priority: > 2 GB is always NORMAL regardless of the
         // isLowRamDevice flag, which some manufacturers set even on 4 GB+ devices.
         return when {
-            totalGb > 2.0                        -> DeviceTier.NORMAL
-            am.isLowRamDevice || totalGb <= 1.0  -> DeviceTier.ULTRA_WEAK
-            else                                 -> DeviceTier.WEAK
+            totalGb > 2.0 -> DeviceTier.NORMAL
+            am.isLowRamDevice || totalGb <= 1.0 -> DeviceTier.ULTRA_WEAK
+            else -> DeviceTier.WEAK
         }
     }
 

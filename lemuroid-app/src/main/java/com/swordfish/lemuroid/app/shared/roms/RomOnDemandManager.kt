@@ -443,17 +443,20 @@ class RomOnDemandManager(
             // Re-route 3D arcade games from generic arcade systems (mame289, fbneo, mame2003plus)
             // to their dedicated accelerated system (e.g. Naomi, Atomiswave -> Flycast).
             val dedicatedSys = ArcadeSubSystemRoms.dedicatedSystemIdForRom(game.fileName)
-            val effectiveGame = if (dedicatedSys != null && dedicatedSys != game.systemId &&
-                (game.systemId == SystemID.MAME289.dbname || game.systemId == SystemID.FBNEO.dbname || game.systemId == SystemID.MAME2003PLUS.dbname)
-            ) {
-                Timber.i("Routing arcade ROM ${game.fileName} from ${game.systemId} to dedicated system $dedicatedSys")
-                runCatching {
-                    gameDao.updateSystemId(game.id, dedicatedSys)
+            val effectiveGame =
+                if (dedicatedSys != null && dedicatedSys != game.systemId &&
+                    (game.systemId == SystemID.MAME289.dbname || game.systemId == SystemID.FBNEO.dbname || game.systemId == SystemID.MAME2003PLUS.dbname)
+                ) {
+                    Timber.i(
+                        "Routing arcade ROM ${game.fileName} from ${game.systemId} to dedicated system $dedicatedSys",
+                    )
+                    runCatching {
+                        gameDao.updateSystemId(game.id, dedicatedSys)
+                    }
+                    game.copy(systemId = dedicatedSys)
+                } else {
+                    game
                 }
-                game.copy(systemId = dedicatedSys)
-            } else {
-                game
-            }
 
             // Ensure split arcade dependencies (parents, BIOS, hardware devices) are present before launch.
             if (ArcadeCloneParents.appliesToSystem(effectiveGame.systemId) || ArcadeCloneParents.appliesToSystem(game.systemId)) {
@@ -648,7 +651,9 @@ class RomOnDemandManager(
                 if (!downloaded) {
                     val endpointSystem = RomSystemMapper.toEndpointSystem(context, game.systemId) ?: game.systemId
                     val findUrl =
-                        "$FIND_BY_FILE_ENDPOINT?path=${Uri.encode(depFileName)}&source_id=1&system=${Uri.encode(endpointSystem)}"
+                        "$FIND_BY_FILE_ENDPOINT?path=${Uri.encode(
+                            depFileName,
+                        )}&source_id=1&system=${Uri.encode(endpointSystem)}"
                     try {
                         val finalUrl = resolveDownloadUrl(findUrl)
                         if (!finalUrl.isNullOrBlank()) {
@@ -871,7 +876,11 @@ class RomOnDemandManager(
         return false
     }
 
-    private fun syncToDcFolderIfNeeded(systemDir: File, sourceFile: File, depFileName: String) {
+    private fun syncToDcFolderIfNeeded(
+        systemDir: File,
+        sourceFile: File,
+        depFileName: String,
+    ) {
         val dcDir = File(systemDir, "dc")
         dcDir.mkdirs()
         val dcFile = File(dcDir, depFileName)

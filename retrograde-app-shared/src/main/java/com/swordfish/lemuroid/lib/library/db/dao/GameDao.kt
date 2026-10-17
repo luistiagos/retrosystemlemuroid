@@ -60,7 +60,8 @@ interface GameDao {
      * Prefix matching uses SUBSTR (not LIKE) so `_`/`%` in the path can't cause mismatches. If a
      * prefix is empty the corresponding guard protects every row (safe: nothing gets deleted).
      */
-    @Query("""
+    @Query(
+        """
         DELETE FROM games
         WHERE lastIndexedAt < :lastIndexedAt
         AND SUBSTR(fileUri, 1, LENGTH(:romsPrefix)) <> :romsPrefix
@@ -70,7 +71,8 @@ interface GameDao {
             SELECT 1 FROM downloaded_roms dr
             WHERE dr.systemId = games.systemId AND dr.fileName = games.fileName
         )
-    """)
+    """,
+    )
     suspend fun deleteByLastIndexedAtLessThan(
         lastIndexedAt: Long,
         romsPrefix: String,
@@ -101,7 +103,10 @@ interface GameDao {
     fun selectFirstNotPlayed(limit: Int): Flow<List<Game>>
 
     @Query("SELECT * FROM games WHERE lastPlayedAt IS NULL AND systemId NOT IN (:excludedSystemIds) LIMIT :limit")
-    fun selectFirstNotPlayedExcluding(limit: Int, excludedSystemIds: Set<String>): Flow<List<Game>>
+    fun selectFirstNotPlayedExcluding(
+        limit: Int,
+        excludedSystemIds: Set<String>,
+    ): Flow<List<Game>>
 
     @Query(
         """
@@ -109,41 +114,57 @@ interface GameDao {
         ORDER BY lastPlayedAt DESC LIMIT :limit
         """,
     )
-    fun selectFirstUnfavoriteRecentsExcluding(limit: Int, excludedSystemIds: Set<String>): Flow<List<Game>>
+    fun selectFirstUnfavoriteRecentsExcluding(
+        limit: Int,
+        excludedSystemIds: Set<String>,
+    ): Flow<List<Game>>
 
-    @Query("SELECT * FROM games WHERE isFavorite = 1 AND systemId NOT IN (:excludedSystemIds) ORDER BY lastPlayedAt DESC LIMIT :limit")
-    fun selectFirstFavoritesExcluding(limit: Int, excludedSystemIds: Set<String>): Flow<List<Game>>
+    @Query(
+        "SELECT * FROM games WHERE isFavorite = 1 AND systemId NOT IN (:excludedSystemIds) ORDER BY lastPlayedAt DESC LIMIT :limit",
+    )
+    fun selectFirstFavoritesExcluding(
+        limit: Int,
+        excludedSystemIds: Set<String>,
+    ): Flow<List<Game>>
 
-    @Query("""
+    @Query(
+        """
         SELECT games.* FROM games
         LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId = :systemId
         ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.title ASC, games.id DESC
-    """)
+    """,
+    )
     fun selectBySystem(systemId: String): PagingSource<Int, Game>
 
-    @Query("""
+    @Query(
+        """
         SELECT games.* FROM games
         LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId IN (:systemIds)
         ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.title ASC, games.id DESC
-    """)
+    """,
+    )
     fun selectBySystems(systemIds: List<String>): PagingSource<Int, Game>
 
-    @Query("""
+    @Query(
+        """
         SELECT games.* FROM games
         LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId = :systemId
         ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC, games.id ASC
-    """)
+    """,
+    )
     fun selectBySystemSortedByPopularity(systemId: String): PagingSource<Int, Game>
 
-    @Query("""
+    @Query(
+        """
         SELECT games.* FROM games
         LEFT JOIN downloaded_roms ON games.systemId = downloaded_roms.systemId AND games.fileName = downloaded_roms.fileName
         WHERE games.systemId IN (:systemIds)
         ORDER BY (downloaded_roms.fileName IS NOT NULL) DESC, games.popularityIndex DESC, games.title ASC, games.id ASC
-    """)
+    """,
+    )
     fun selectBySystemsSortedByPopularity(systemIds: List<String>): PagingSource<Int, Game>
 
     // ── Grouped queries (one representative per title) ────────────────────────
@@ -152,73 +173,96 @@ interface GameDao {
     // (systemId, isRepresentative, popularityIndex) composite index makes these queries
     // O(log n) instead of the previous correlated-subquery scan.
 
-    @Query("""
+    @Query(
+        """
         SELECT g.* FROM games g
         LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId = :systemId AND g.isRepresentative = 1
         ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC, g.id ASC
-    """)
+    """,
+    )
     fun selectGroupedBySystemSortedByPopularity(systemId: String): PagingSource<Int, Game>
 
-    @Query("""
+    @Query(
+        """
         SELECT g.* FROM games g
         LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId IN (:systemIds) AND g.isRepresentative = 1
         ORDER BY (dr.fileName IS NOT NULL) DESC, g.popularityIndex DESC, g.title ASC, g.id ASC
-    """)
+    """,
+    )
     fun selectGroupedBySystemsSortedByPopularity(systemIds: List<String>): PagingSource<Int, Game>
 
-    @Query("""
+    @Query(
+        """
         SELECT g.* FROM games g
         LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId = :systemId AND g.isRepresentative = 1
         ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC, g.id ASC
-    """)
+    """,
+    )
     fun selectGroupedBySystem(systemId: String): PagingSource<Int, Game>
 
-    @Query("""
+    @Query(
+        """
         SELECT g.* FROM games g
         LEFT JOIN downloaded_roms dr ON g.systemId = dr.systemId AND g.fileName = dr.fileName
         WHERE g.systemId IN (:systemIds) AND g.isRepresentative = 1
         ORDER BY (dr.fileName IS NOT NULL) DESC, g.title ASC, g.id ASC
-    """)
+    """,
+    )
     fun selectGroupedBySystems(systemIds: List<String>): PagingSource<Int, Game>
 
     // All variants (same title + systemId) — used by GameVariantsModal
     @Query("SELECT * FROM games WHERE systemId = :systemId AND title = :title ORDER BY fileName ASC")
-    fun selectVariantsByTitle(systemId: String, title: String): Flow<List<Game>>
+    fun selectVariantsByTitle(
+        systemId: String,
+        title: String,
+    ): Flow<List<Game>>
 
     // One-shot version of the query above. The catalog shows a single card per title, so
     // "remove from catalog" has to take the whole group with it — otherwise the hidden
     // variants would survive in search while the card disappears.
     @Query("SELECT * FROM games WHERE systemId = :systemId AND title = :title ORDER BY fileName ASC")
-    suspend fun selectVariantsByTitleOnce(systemId: String, title: String): List<Game>
+    suspend fun selectVariantsByTitleOnce(
+        systemId: String,
+        title: String,
+    ): List<Game>
 
     // Composite keys "systemId/title" for all titles that have more than one ROM variant.
     // Used to decide whether tapping a game should open the variants modal.
-    @Query("""
+    @Query(
+        """
         SELECT systemId || '/' || title
         FROM games
         GROUP BY systemId, title
         HAVING COUNT(*) > 1
-    """)
+    """,
+    )
     fun selectAllCompositeKeysWithVariants(): Flow<List<String>>
 
-    @Query("""
+    @Query(
+        """
         SELECT * FROM games
         WHERE coverFrontUrl IS NOT NULL AND popularityIndex > 0
         AND systemId NOT IN (:excludedSystemIds)
         ORDER BY popularityIndex DESC
         LIMIT :limit
-    """)
-    fun selectTopPopularWithCoversExcluding(limit: Int, excludedSystemIds: Set<String>): Flow<List<Game>>
+    """,
+    )
+    fun selectTopPopularWithCoversExcluding(
+        limit: Int,
+        excludedSystemIds: Set<String>,
+    ): Flow<List<Game>>
 
-    @Query("""
+    @Query(
+        """
         SELECT * FROM games
         WHERE coverFrontUrl IS NOT NULL AND popularityIndex > 0
         ORDER BY popularityIndex DESC
         LIMIT :limit
-    """)
+    """,
+    )
     fun selectTopPopularWithCovers(limit: Int): Flow<List<Game>>
 
     /**
@@ -226,24 +270,32 @@ interface GameDao {
      * [ManifestQuickLoader] after an app update so that changes to `popularityIndex`
      * or `isRepresentative` in `catalog_manifest.txt` are picked up without re-inserting.
      */
-    @Query("""
+    @Query(
+        """
         UPDATE games SET popularityIndex = :popularityIndex, isRepresentative = :isRepresentative
         WHERE fileUri = :fileUri
-    """)
-    suspend fun updateManifestFields(fileUri: String, popularityIndex: Int, isRepresentative: Boolean)
+    """,
+    )
+    suspend fun updateManifestFields(
+        fileUri: String,
+        popularityIndex: Int,
+        isRepresentative: Boolean,
+    )
 
     /**
      * Updates manifest-derived fields including [title]. Called on manifest schema bumps
      * (MANIFEST_SCHEMA_VERSION) when titles need to be re-synced — e.g., to wipe bad
      * fuzzy-match enrichments and replace with clean filename-derived titles.
      */
-    @Query("""
+    @Query(
+        """
         UPDATE games SET
             title = :title,
             popularityIndex = :popularityIndex,
             isRepresentative = :isRepresentative
         WHERE fileUri = :fileUri
-    """)
+    """,
+    )
     suspend fun updateManifestFieldsWithTitle(
         fileUri: String,
         title: String,
@@ -252,7 +304,10 @@ interface GameDao {
     )
 
     @Query("SELECT * FROM games WHERE systemId = :systemId AND fileName = :fileName LIMIT 1")
-    suspend fun selectByFileNameOnce(systemId: String, fileName: String): Game?
+    suspend fun selectByFileNameOnce(
+        systemId: String,
+        fileName: String,
+    ): Game?
 
     @Query("SELECT * FROM games ORDER BY title ASC")
     suspend fun selectAll(): List<Game>
@@ -301,12 +356,17 @@ interface GameDao {
      * `<romsDirUri>/<...>` so the rest of the app (downloads, indexing, etc.) sees a normal
      * file:// URI. Runs on first launch after the prebuilt DB is copied into place.
      */
-    @Query("""
+    @Query(
+        """
         UPDATE games
         SET fileUri = :realPrefix || SUBSTR(fileUri, LENGTH(:sentinelPrefix) + 1)
         WHERE fileUri LIKE :sentinelPrefix || '%'
-    """)
-    suspend fun rewritePrebuiltUris(sentinelPrefix: String, realPrefix: String): Int
+    """,
+    )
+    suspend fun rewritePrebuiltUris(
+        sentinelPrefix: String,
+        realPrefix: String,
+    ): Int
 
     /**
      * v24 arcade reclassification: re-points a game that moved out of the generic `fbneo` or
@@ -314,8 +374,14 @@ interface GameDao {
      * fileName) index in case a row already exists under [newSystem] (then this is a no-op and
      * [deleteFbneoByFileName] removes the stale fbneo/mame2003plus row).
      */
-    @Query("UPDATE OR IGNORE games SET systemId = :newSystem, fileUri = :newUri WHERE systemId IN ('fbneo', 'mame2003plus', 'mame289') AND fileName = :fileName")
-    suspend fun reassignArcadeSystem(fileName: String, newSystem: String, newUri: String): Int
+    @Query(
+        "UPDATE OR IGNORE games SET systemId = :newSystem, fileUri = :newUri WHERE systemId IN ('fbneo', 'mame2003plus', 'mame289') AND fileName = :fileName",
+    )
+    suspend fun reassignArcadeSystem(
+        fileName: String,
+        newSystem: String,
+        newUri: String,
+    ): Int
 
     @Query("DELETE FROM games WHERE systemId IN ('fbneo', 'mame2003plus', 'mame289') AND fileName = :fileName")
     suspend fun deleteFbneoByFileName(fileName: String): Int
@@ -347,7 +413,10 @@ interface GameDao {
      * never see them. FTS rows are cleaned up by the games_bd trigger.
      */
     @Query("DELETE FROM games WHERE systemId = :systemId AND title IN (:titles)")
-    suspend fun deleteBySystemAndTitles(systemId: String, titles: List<String>): Int
+    suspend fun deleteBySystemAndTitles(
+        systemId: String,
+        titles: List<String>,
+    ): Int
 
     @Query("SELECT * FROM games WHERE systemId = :systemId AND fileName LIKE '%/%'")
     suspend fun selectBySystemWithNestedPath(systemId: String): List<Game>
@@ -362,10 +431,16 @@ interface GameDao {
     suspend fun update(games: List<Game>)
 
     @Query("UPDATE games SET lastPlayedAt = :timestamp WHERE id = :gameId")
-    suspend fun updateLastPlayedAt(gameId: Int, timestamp: Long)
+    suspend fun updateLastPlayedAt(
+        gameId: Int,
+        timestamp: Long,
+    )
 
     @Query("UPDATE games SET lastIndexedAt = :timestamp WHERE id = :gameId")
-    suspend fun updateLastIndexedAt(gameId: Int, timestamp: Long)
+    suspend fun updateLastIndexedAt(
+        gameId: Int,
+        timestamp: Long,
+    )
 
     @Query(
         """
@@ -401,7 +476,7 @@ interface GameDao {
             )
         GROUP BY dg.systemId, dg.title
         ORDER BY lastActionAt DESC, rep.title ASC, rep.id ASC
-        """
+        """,
     )
     @RewriteQueriesToDropUnusedColumns
     fun observeInstalledGameGroups(
@@ -450,7 +525,7 @@ interface GameDao {
             )
         GROUP BY mg.systemId, mg.title
         ORDER BY lastActionAt DESC, rep.title ASC, rep.id ASC
-        """
+        """,
     )
     @RewriteQueriesToDropUnusedColumns
     fun searchInstalledGameGroups(
@@ -476,7 +551,7 @@ interface GameDao {
               )
           )
         ORDER BY MAX(COALESCE(g.lastPlayedAt, 0), COALESCE(dr.downloadedAt, 0)) DESC, g.fileName ASC, g.id ASC
-        """
+        """,
     )
     suspend fun getInstalledVariantsForGroup(
         systemId: String,
@@ -485,6 +560,5 @@ interface GameDao {
         managedMarker: String,
     ): List<Game>
 }
-
 
 data class SystemCount(val systemId: String, val count: Int)

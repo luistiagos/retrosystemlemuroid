@@ -28,10 +28,10 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.library.metadata.GameMetadata
 import com.swordfish.lemuroid.lib.library.metadata.GameMetadataProvider
 import com.swordfish.lemuroid.lib.storage.BaseStorageFile
+import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.GroupedStorageFiles
 import com.swordfish.lemuroid.lib.storage.RomFiles
 import com.swordfish.lemuroid.lib.storage.StorageFile
-import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.StorageProvider
 import com.swordfish.lemuroid.lib.storage.StorageProviderRegistry
 import dagger.Lazy
@@ -87,7 +87,9 @@ class LemuroidLibrary(
             if (indexingCompletedSuccessfully) {
                 cleanUp(startedAtMs)
             } else {
-                Timber.w("Library indexing had errors or was cancelled; aborting destructive cleanUp to protect offline media/SAF games")
+                Timber.w(
+                    "Library indexing had errors or was cancelled; aborting destructive cleanUp to protect offline media/SAF games",
+                )
             }
         }
 
@@ -132,11 +134,23 @@ class LemuroidLibrary(
 
         // Parallelize metadata lookups with bounded concurrency to avoid overwhelming
         // low-RAM devices. Each call does up to 5 sequential DB queries.
-        val newEntries = coroutineScope {
-            entries.filterIsInstance<ScanEntry.File>()
-                .map { async { metadataSemaphore.withPermit { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs) } } }
-                .awaitAll()
-        }
+        val newEntries =
+            coroutineScope {
+                entries.filterIsInstance<ScanEntry.File>()
+                    .map {
+                        async {
+                            metadataSemaphore.withPermit {
+                                buildEntryFromMetadata(
+                                    it.file,
+                                    provider,
+                                    gameMetadata,
+                                    startedAtMs,
+                                )
+                            }
+                        }
+                    }
+                    .awaitAll()
+            }
 
         handleNewEntries(newEntries, startedAtMs, provider)
     }

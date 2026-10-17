@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import java.io.File
-import java.util.zip.ZipFile
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.GameProcessSession
@@ -24,6 +22,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.io.File
+import java.util.zip.ZipFile
 
 class GameLaunchTaskHandler(
     private val reviewManager: ReviewManager,
@@ -35,8 +35,7 @@ class GameLaunchTaskHandler(
         cancelBackgroundWork(context)
     }
 
-    suspend fun prepareGameForLaunch(game: Game): Game =
-        romOnDemandManager.prepareGameForLaunch(game)
+    suspend fun prepareGameForLaunch(game: Game): Game = romOnDemandManager.prepareGameForLaunch(game)
 
     suspend fun handleGameFinish(
         enableRatingFlow: Boolean,
@@ -49,11 +48,13 @@ class GameLaunchTaskHandler(
             Activity.RESULT_OK -> handleSuccessfulGameFinish(activity, enableRatingFlow, data)
             BaseGameActivity.RESULT_ERROR -> {
                 val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as? Game
-                val errorMessage = data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)
-                    ?: activity.getString(R.string.lemuroid_crash_disclamer)
-                val isRomLoadFailure = data?.getBooleanExtra(
-                    BaseGameActivity.PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE, false
-                ) ?: false
+                val errorMessage =
+                    data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)
+                        ?: activity.getString(R.string.lemuroid_crash_disclamer)
+                val isRomLoadFailure =
+                    data?.getBooleanExtra(
+                        BaseGameActivity.PLAY_GAME_RESULT_IS_ROM_LOAD_FAILURE, false,
+                    ) ?: false
                 val triedCores = data?.getStringArrayListExtra(BaseGameActivity.PLAY_GAME_RESULT_TRIED_CORES) ?: arrayListOf()
                 val leanback = data?.getBooleanExtra(BaseGameActivity.PLAY_GAME_RESULT_LEANBACK, false) ?: false
                 handleErrorWithCorruptionCheck(activity, game, errorMessage, isRomLoadFailure, triedCores, leanback)
@@ -151,13 +152,14 @@ class GameLaunchTaskHandler(
             // discovers after loading (e.g. Sega CD / 32X-CD disc images). Never delete a
             // downloaded ROM in that case — surface the BIOS error so the user can provide it
             // and keep the ROM. Only genuine load failures fall through to corruption handling.
-            val missingBios = withContext(Dispatchers.IO) {
-                GameSystem.findByIdOrNull(game.systemId)
-                    ?.systemCoreConfigs
-                    ?.flatMap { biosManager.getMissingBiosFiles(it, game) }
-                    ?.distinct()
-                    .orEmpty()
-            }
+            val missingBios =
+                withContext(Dispatchers.IO) {
+                    GameSystem.findByIdOrNull(game.systemId)
+                        ?.systemCoreConfigs
+                        ?.flatMap { biosManager.getMissingBiosFiles(it, game) }
+                        ?.distinct()
+                        .orEmpty()
+                }
             if (missingBios.isNotEmpty()) {
                 Timber.w("Load failed for ${game.fileName} but BIOS is missing $missingBios — keeping ROM")
                 handleUnsuccessfulGameFinish(
@@ -169,11 +171,15 @@ class GameLaunchTaskHandler(
             }
 
             // Check missing arcade dependencies (clone parents, BIOS, devices)
-            val missingArcadeDeps = withContext(Dispatchers.IO) {
-                romOnDemandManager.getMissingArcadeDependencies(game)
-            }
+            val missingArcadeDeps =
+                withContext(Dispatchers.IO) {
+                    romOnDemandManager.getMissingArcadeDependencies(game)
+                }
             if (missingArcadeDeps.isNotEmpty()) {
-                Timber.w("Load failed for ${game.fileName} but arcade dependencies are missing: $missingArcadeDeps — keeping ROM")
+                Timber.w(
+                    "Load failed for ${game.fileName} but arcade dependencies are missing: " +
+                        "$missingArcadeDeps — keeping ROM",
+                )
                 handleUnsuccessfulGameFinish(
                     activity,
                     "Arquivos de arcade necessários ausentes: ${missingArcadeDeps.joinToString(", ")}",
@@ -183,9 +189,10 @@ class GameLaunchTaskHandler(
             }
 
             // Verify if the ROM file is genuinely corrupt before deleting
-            val isCorrupted = withContext(Dispatchers.IO) {
-                isRomFileActuallyCorrupted(game)
-            }
+            val isCorrupted =
+                withContext(Dispatchers.IO) {
+                    isRomFileActuallyCorrupted(game)
+                }
             if (isCorrupted) {
                 val wasDownloaded = retrogradeDb.downloadedRomDao().isDownloaded(game.systemId, game.fileName)
                 if (wasDownloaded || romOnDemandManager.isManagedRom(game)) {
@@ -198,7 +205,9 @@ class GameLaunchTaskHandler(
                     return
                 }
             } else {
-                Timber.w("Load failed for ${game.fileName} with isRomLoadFailure, but file is valid on disk. Keeping ROM.")
+                Timber.w(
+                    "Load failed for ${game.fileName} with isRomLoadFailure, but file is valid on disk. Keeping ROM.",
+                )
             }
         }
         if (!tryFallbackCore(activity, game, triedCores, leanback)) {
@@ -214,8 +223,9 @@ class GameLaunchTaskHandler(
     ): Boolean {
         if (game == null) return false
         val system = GameSystem.findByIdOrNull(game.systemId) ?: return false
-        val nextCore = system.systemCoreConfigs.firstOrNull { it.coreID.coreName !in triedCores }
-            ?: return false
+        val nextCore =
+            system.systemCoreConfigs.firstOrNull { it.coreID.coreName !in triedCores }
+                ?: return false
         Timber.i("Core fallback: tried=$triedCores, trying=${nextCore.coreID.coreName}")
         // O resultado chega no finish(), e o :game que falhou so sai 400 ms (ate 2,4 s, com
         // telemetria em envio) depois. Relancar antes disso cai nele — e o exitProcess pendente mata a sessao nova no meio da carga.
@@ -260,11 +270,14 @@ class GameLaunchTaskHandler(
         val duration =
             data?.extras?.getLong(BaseGameActivity.PLAY_GAME_RESULT_SESSION_DURATION)
                 ?: 0L
-        val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as? Game
-            ?: run {
-                Timber.w("handleSuccessfulGameFinish: game extra is null or wrong type, skipping lastPlayedAt update")
-                return
-            }
+        val game =
+            data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as? Game
+                ?: run {
+                    Timber.w(
+                        "handleSuccessfulGameFinish: game extra is null or wrong type, skipping lastPlayedAt update",
+                    )
+                    return
+                }
 
         if (enableRatingFlow) {
             displayReviewRequest(activity, duration)

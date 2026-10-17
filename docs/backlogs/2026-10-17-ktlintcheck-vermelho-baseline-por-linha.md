@@ -1,6 +1,7 @@
 # [BACKLOG] `./gradlew ktlintCheck` vermelho: baseline por posição + violações novas desde 2026-10-07
 
 **Data:** 2026-10-17
+**Status:** resolvido em 2026-10-17 (ver "Resolução" no fim)
 **Origem:** verificação 1 da passagem de bastão da Fase 3 do redesenho
 (`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`, entrada "2026-10-16 (passagem de bastão: Fase 3 fechada)")
 
@@ -62,3 +63,20 @@ falso positivo não.
 passivo exige regenerar o baseline no mesmo commit, senão o check fica vermelho para o próximo. O
 `ktlintMainSourceSetCheck` por módulo (que é o que as entregas rodam) não pega o `ktlintKotlinScriptCheck` nem o
 `ktlintTestSourceSetCheck`; a verificação de fechamento é o `ktlintCheck` completo.
+
+## Resolução (2026-10-17)
+
+A sessão de arcade commitou (`7362b1e`, `cc9b8e9`); o `ktlintCheck` continuava com os mesmos 224 apontamentos.
+
+1. `ktlintMainSourceSetFormat`/`ktlintTestSourceSetFormat` dos dois módulos, revertendo (`git checkout --`) tudo fora
+   dos 8 arquivos com violação nova. Nesses 8, o passivo também foi corrigido, não só o novo.
+2. À mão, o que o format não corrige: 3 `max-line-length` (`GameLaunchTaskHandler` ×2, `ArcadeCloneParents`).
+3. `HeavySystemFilter`: o format **piorou** o arquivo (16 `discouraged-comment-location`), então foi revertido e
+   corrigido à mão — comentário de cada `SystemID` passou para a linha de cima e o alinhamento com espaços dos `when`
+   saiu. Mesmo conteúdo, sem mudança de comportamento.
+4. `ktlintGenerateBaseline`. Ele criou `lemuroid-cores/bundled-cores/config/ktlint/baseline.xml` (não versionado,
+   pitfall conhecido) — apagado. O baseline do `lemuroid-app` perdeu ~300 entradas: arquivos apagados
+   (`src/debug|release/.../Color.kt`, `LemuroidGameCard.kt`) ou reescritos no redesenho.
+
+**Prova:** `./gradlew ktlintCheck` → BUILD SUCCESSFUL; `:retrograde-app-shared:compileDebugKotlin` OK;
+`ArcadeCloneParentsTest` com `--rerun`: 7 testes, 0 falhas. `git -C lemuroid-cores status` limpo.

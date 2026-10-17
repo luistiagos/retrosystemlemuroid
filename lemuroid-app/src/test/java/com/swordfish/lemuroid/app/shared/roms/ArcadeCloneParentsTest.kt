@@ -11,19 +11,22 @@ import java.io.File
 import java.io.FileInputStream
 
 class ArcadeCloneParentsTest {
-
     companion object {
         @BeforeClass
         @JvmStatic
         fun setUp() {
             // Locate arcade-clone-parents.json from assets directory
-            val candidates = listOf(
-                File("retrograde-app-shared/src/main/assets/arcade-clone-parents.json"),
-                File("../retrograde-app-shared/src/main/assets/arcade-clone-parents.json"),
-                File("C:/projects/lemuroid/Lemuroid/retrograde-app-shared/src/main/assets/arcade-clone-parents.json"),
-            )
-            val assetFile = candidates.firstOrNull { it.exists() }
-                ?: error("arcade-clone-parents.json not found in test search paths")
+            val candidates =
+                listOf(
+                    File("retrograde-app-shared/src/main/assets/arcade-clone-parents.json"),
+                    File("../retrograde-app-shared/src/main/assets/arcade-clone-parents.json"),
+                    File(
+                        "C:/projects/lemuroid/Lemuroid/retrograde-app-shared/src/main/assets/arcade-clone-parents.json",
+                    ),
+                )
+            val assetFile =
+                candidates.firstOrNull { it.exists() }
+                    ?: error("arcade-clone-parents.json not found in test search paths")
 
             FileInputStream(assetFile).use { input ->
                 ArcadeCloneParents.loadFromStream(input)
@@ -96,9 +99,15 @@ class ArcadeCloneParentsTest {
 
         assertTrue(com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.isNaomiRom("18wheelr.zip"))
         assertTrue(com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.isNaomiRom("18wheelr"))
-        assertEquals("naomi", com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.dedicatedSystemIdForRom("18wheelr.zip"))
+        assertEquals(
+            "naomi",
+            com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.dedicatedSystemIdForRom("18wheelr.zip"),
+        )
 
         assertTrue(com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.isAtomiswaveRom("mslug6.zip"))
-        assertEquals("atomiswave", com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.dedicatedSystemIdForRom("mslug6.zip"))
+        assertEquals(
+            "atomiswave",
+            com.swordfish.lemuroid.lib.library.ArcadeSubSystemRoms.dedicatedSystemIdForRom("mslug6.zip"),
+        )
     }
 }

@@ -506,6 +506,8 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 
 `./gradlew ktlintCheck` **passa** e volta a falhar em violação **nova**. O passivo (1.750 apontamentos, ~900 só no `main` de `lemuroid-app`) está congelado em `<modulo>/config/ktlint/baseline.xml`, configurado no [build.gradle.kts](build.gradle.kts) raiz junto com o `apply` do plugin. Regenerar com `./gradlew ktlintGenerateBaseline` — **depois de corrigir** algo, nunca para calar apontamento recém-criado.
 
+> ⚠️ **O baseline casa por `linha:coluna:regra`.** Inserir uma linha num arquivo com passivo faz todo o passivo abaixo dela "reaparecer" — foi o que deixou o check vermelho de 10-07 a 10-17 (`docs/backlogs/2026-10-17-ktlintcheck-vermelho-baseline-por-linha.md`). Quem edita arquivo com passivo regenera o baseline no mesmo commit, depois de corrigir o que é novo. E a verificação de fechamento é o `ktlintCheck` **completo**: o `ktlintMainSourceSetCheck` por módulo não roda o `ktlintKotlinScriptCheck` (`build.gradle.kts`) nem o `ktlintTestSourceSetCheck`.
+
 > ⚠️ **Módulos cujo diretório mora no submódulo `lemuroid-cores` (`:bundled-cores`, `:lemuroid_core_*`) não têm baseline.** O `ktlintGenerateBaseline` grava o arquivo no repo de cores, fora de qualquer commit do Lemuroid, e o `ktlintCheck` passa só neste disco. Nesses módulos a violação se **corrige** (com commit no `lemuroid-cores`), não se congela. Depois de rodar a task, conferir `git -C lemuroid-cores status`. Ver `docs/bugs/done/2026-09-25-ktlint-baseline-bundled-cores-nao-versionado.md`.
 
 Duas coisas medidas antes de escolher o baseline, para não repetir a tentativa:
