@@ -286,13 +286,23 @@ interface GameDao {
      * Updates manifest-derived fields including [title]. Called on manifest schema bumps
      * (MANIFEST_SCHEMA_VERSION) when titles need to be re-synced — e.g., to wipe bad
      * fuzzy-match enrichments and replace with clean filename-derived titles.
+     *
+     * Also syncs the cover: a manifest cover always wins; an empty manifest cover only clears
+     * an arcadeitalia URL (a source only the manifest uses), so a cover found by the LibretroDB
+     * scan for a downloaded ROM survives. Without this, manifest cover fixes never reached
+     * existing installs (docs/bugs/open/2026-10-17-mame289-capas-pretas-arcadeitalia.md).
      */
     @Query(
         """
         UPDATE games SET
             title = :title,
             popularityIndex = :popularityIndex,
-            isRepresentative = :isRepresentative
+            isRepresentative = :isRepresentative,
+            coverFrontUrl = CASE
+                WHEN :coverUrl IS NOT NULL THEN :coverUrl
+                WHEN coverFrontUrl LIKE 'https://adb.arcadeitalia.net/%' THEN NULL
+                ELSE coverFrontUrl
+            END
         WHERE fileUri = :fileUri
     """,
     )
@@ -301,6 +311,7 @@ interface GameDao {
         title: String,
         popularityIndex: Int,
         isRepresentative: Boolean,
+        coverUrl: String?,
     )
 
     @Query("SELECT * FROM games WHERE systemId = :systemId AND fileName = :fileName LIMIT 1")

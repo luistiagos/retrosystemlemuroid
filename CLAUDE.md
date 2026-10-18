@@ -100,7 +100,7 @@ Isso elimina toda a lógica de agrupamento em runtime: o app só lê o campo e m
    - **Fast-path**: se `gameDao().countAll() >= expectedSize - expectedSize/50` **e** `loadedSchema == MANIFEST_SCHEMA_VERSION`, marca prefs e pula tudo. **Não vale para instalação nova**: lá `loadedSchema = -1`, então o primeiro boot sempre faz a passada completa, mesmo com o prebuilt (~25 s no AVD de 2 GB, ~15 s disso no loop de `updateManifestFieldsWithTitle` — ver `docs/backlogs/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`).
    - **Skip por versão+schema**: só pula se o `versionCode` do app E o `MANIFEST_SCHEMA_VERSION` salvos batem com os atuais. Bumpar `MANIFEST_SCHEMA_VERSION` força um reload one-time em todos os usuários (usado quando o formato do manifest muda).
    - `INSERT OR IGNORE` de todos os `Game` no banco (não sobrescreve dados enriquecidos pelo LibretroDB).
-   - **Batch UPDATE de `popularityIndex` + `isRepresentative`** via `updateManifestFields()` em transação para jogos que já existiam (sincroniza mudanças no manifest após app update / schema bump).
+   - **Batch UPDATE de título, `popularityIndex`, `isRepresentative` e capa** via `updateManifestFieldsWithTitle()` em transação para jogos que já existiam (sincroniza mudanças no manifest após app update / schema bump). A capa só entrou na v42: até ali, capa trocada ou apagada no manifest **não chegava a quem já tinha o app** (o passe v31 só valeu para instalação nova). Capa vazia no manifest apaga só URL do arcadeitalia; outra capa no banco (ex.: achada pelo scan do LibretroDB) fica.
    - Salva `versionCode` e `MANIFEST_SCHEMA_VERSION` em SharedPreferences.
 
 ### Remoções do catálogo (`CatalogRemovals`)
@@ -187,6 +187,8 @@ Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteú
 | 38 | 3DS: adição do Pokémon Y (Europa), completando o par com Pokémon X |
 | 39 | Remoção de 168 entradas do manifest (Dreamcast 66, PSX 46, GameCube 27 e outras 29) |
 | 40 | MAME 0.289: inclusão de 14.357 títulos de arcade não-CHD apontando para o core mamearcade |
+| 41 | MAME 0.289: remoção de 89 títulos 3D pesados sem core alternativo |
+| 42 | MAME 0.289: capas pretas e genéricas do arcadeitalia esvaziadas; passada completa passa a sincronizar a capa das linhas existentes |
 
 ### Backfill de capas (`super_scrapper`)
 

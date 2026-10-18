@@ -1,7 +1,7 @@
 # [BUG] Jogos de arcade (MAME 0.289) com capa preta ou imagem genérica
 
 **Data:** 2026-10-17
-**Status:** aberto — análise feita, correção não iniciada (decisões do dono pendentes, ver "Correção")
+**Status:** corrigido e testado no AVD (ver `## Status`)
 **Severidade:** baixa (visual; o jogo abre normalmente)
 **Complexidade:** média — manifest + `GameDao` + `MANIFEST_SCHEMA_VERSION`; ver item 2 da causa
 **Branch:** `version10`
@@ -63,13 +63,64 @@ gerada (`GeneratedCover`/`TVCovers`), que é o que o app mostra quando não há 
 **Decisões do dono:** (a) aprovar o desenho do item 2; (b) incluir ou não a limpeza retroativa das 3.577 capas da v31;
 (c) fazer agora ou depois que a sessão de arcade fechar.
 
-## Validação (a fazer)
+**Decidido (2026-10-18):** (a) aprovado. (b) e (c) sem resposta explícita → caminho conservador: **sem** limpeza
+retroativa da v31 (fica para registro próprio) e feito agora (árvore limpa, sessão de arcade já commitou).
 
-- Script: contagem antes/depois de linhas `mame289` com capa; nenhuma URL preta ou genérica no manifest.
-- `lemu_tv_api25` com o app já instalado (sem limpar dados): depois do update, os 3 cartões da busca "1010" mostram a
-  capa gerada, e um jogo com capa nova da v31 passa a mostrá-la.
-- Instalação nova: idem, pelo prebuilt.
+**Desenho final (substitui a migração por lista de URLs do item 2):** `GameDao.updateManifestFieldsWithTitle` ganha
+`coverUrl: String?` e grava
+`coverFrontUrl = CASE WHEN :coverUrl IS NOT NULL THEN :coverUrl WHEN coverFrontUrl LIKE 'https://adb.arcadeitalia.net/%'
+THEN NULL ELSE coverFrontUrl END`. Ou seja: manifest com capa → vale a do manifest; manifest sem capa → só apaga a capa
+do banco se ela veio do arcadeitalia (fonte que só o manifest usa; o scan do LibretroDB usa libretro-thumbnails), e
+preserva qualquer outra. Roda em toda passada completa — sem migração `loadedSchema < N`, sem lista.
+- Tasks: (1) `GameDao.updateManifestFieldsWithTitle` (+ KDoc); (2) `ManifestQuickLoader.load()` passa
+  `coverUrl = game.coverFrontUrl` e comentário do bloco; (3) manifests (raiz + `assets/`) com o campo 3 vazio nas
+  linhas pretas/genéricas da varredura; (4) `MANIFEST_SCHEMA_VERSION` 41 → 42 + histórico no `.kt` e tabela do
+  `CLAUDE.md`; (5) nota no `CLAUDE.md` ("Pipeline de Carga": a passada completa agora também sincroniza a capa).
+- Prova: query no AVD antes/depois (app instalado, sem limpar dados), captura da busca "1010", `ktlintCheck`, build.
+
+## Correção aplicada
+
+- **Varredura completa** das 14.268 capas `mame289` (`scan_covers.py`, 8 conexões, ~1h10): 12.791 imagem real,
+  **1.263 pretas**, **212 genéricas** (md5 `d252a225…`), **3** com a mesma imagem em 3 títulos distintos
+  (Bushido, Jurassic Park, Wize Move — md5 `11cf90ef…`, lixo pela regra ≥ 3 do passe v31) e **2** URLs inválidas
+  (`asc88 (1)`, `ascsasi (1)`: espaço no nome). As **1.480** tiveram o campo 3 esvaziado nos dois manifests.
+- `GameDao::updateManifestFieldsWithTitle` com `coverUrl` (desenho final acima) e `ManifestQuickLoader::load` passando
+  `coverUrl = game.coverFrontUrl`.
+- `MANIFEST_SCHEMA_VERSION` 41 → 42; tabela do `CLAUDE.md` (com a linha da v41, que faltava) e nota no
+  "Pipeline de Carga".
+- Baseline do ktlint do `retrograde-app-shared` regenerado: a edição deslocou passivo do `GameDao`/`ManifestQuickLoader`
+  (nenhuma violação nova).
+
+## Validação
+
+`lemu_tv_api25`, app já instalado com o manifest antigo (dados preservados), APK x86 novo instalado por cima:
+
+| | Antes | Depois |
+|---|---|---|
+| `mame289` com capa nula | 0 | **1.480** |
+| `mame289` com URL do arcadeitalia | 14.268 | 12.788 |
+| `csd`, `di4ever`, `indgldcm`, `holdrma6` | URL (preta / genérica) | `NULL` |
+| `map1010` (capa boa) | URL | URL (mantida) |
+| capas nulas fora do `mame289` | — | 23.348 = linhas sem capa no manifest (banco espelha o manifest) |
+
+- Log: `ManifestQuickLoader: inserted=0 total=75140` — todas as linhas pelo UPDATE, ou seja, pelo caminho da
+  instalação existente. `logcat` sem `FATAL`.
+- Busca "1010": os cartões que eram pretos/genéricos mostram a capa gerada do sistema.
+- `./gradlew ktlintCheck` BUILD SUCCESSFUL; build x86 (com `generatePrebuiltDb` validando o banco pré-montado) OK.
+
+| Antes | Depois |
+|---|---|
+| ![](../img/2026-10-17-mame289-capas-busca-antes.jpg) | ![](../img/2026-10-17-mame289-capas-busca-depois.jpg) |
+
+**Não verificado:** UI mobile (mesma regra `isNullOrBlank` no `LemuroidGameImage`, não aberta no aparelho);
+instalação nova (prebuilt) — coberta só pela validação de build do `PrebuiltDbGenerator`.
 
 ## Lição
 
-(a preencher)
+- **Capa no manifest não era sincronizada para quem já tinha o app.** Qualquer passe de capas futuro (e o v31,
+  retroativamente) depende do `updateManifestFieldsWithTitle` gravar a capa — mexer nessa query exige manter o
+  `CASE`. A limpeza retroativa das 3.577 capas erradas da v31 continua de fora (hosts variados; a regra só apaga
+  arcadeitalia): registro próprio se o dono quiser.
+- **Fonte de capa por tela-título (`type=title`) não é caixa**: tela capturada em branco e placeholder do servidor
+  passam por imagem válida. Ao importar capas de uma fonte nova, classificar o conteúdo (pixels todos 0, md5
+  repetido), não só o HTTP 200.

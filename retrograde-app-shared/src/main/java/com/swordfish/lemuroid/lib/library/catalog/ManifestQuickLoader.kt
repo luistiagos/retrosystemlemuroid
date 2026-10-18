@@ -160,7 +160,10 @@ class ManifestQuickLoader(
         //   v40  mame289 (MAME 0.289 Arcade Core on-demand): inclusão do sistema e 14.357 títulos de arcade.
         //   v41  mame289: remoção de 89 títulos 3D pesados sem core alternativo (Model 2/3, ZN-1/2, System 11/12/22/23,
         //          Midway 3D, Cave CV1000) que rodavam a 5-15 FPS no interpretador por software da CPU.
-        private const val MANIFEST_SCHEMA_VERSION = 41
+        //   v42  mame289: capas pretas (tela-título em branco) e o placeholder genérico do arcadeitalia
+        //          esvaziados; a passada completa passa a sincronizar a capa das linhas existentes
+        //          (GameDao.updateManifestFieldsWithTitle), que antes só era gravada no INSERT.
+        private const val MANIFEST_SCHEMA_VERSION = 42
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(
@@ -431,8 +434,8 @@ class ManifestQuickLoader(
         val inserted = ids.count { it != -1L }
 
         // For rows that already existed (INSERT OR IGNORE skipped them), refresh the
-        // manifest-derived fields (popularityIndex, isRepresentative) so changes to the
-        // catalog between app versions are picked up.
+        // manifest-derived fields (title, popularityIndex, isRepresentative, cover) so changes
+        // to the catalog between app versions are picked up.
         val existingGames = games.zip(ids)
             .filter { (_, id) -> id == -1L }
             .map { (game, _) -> game }
@@ -444,6 +447,7 @@ class ManifestQuickLoader(
                         title = game.title,
                         popularityIndex = game.popularityIndex,
                         isRepresentative = game.isRepresentative,
+                        coverUrl = game.coverFrontUrl,
                     )
                 }
             }
