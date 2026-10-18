@@ -1,5 +1,19 @@
 # [BUG] Jogos de arcade (MAME 0.289) com capa preta ou imagem genérica
 
+## Status
+
+- **Corrigido em:** 2026-10-18, commit `21c4491` (`version10`).
+- **Onde:** `GameDao::updateManifestFieldsWithTitle` (capa no `UPDATE`), `ManifestQuickLoader::load` (passa a capa;
+  `MANIFEST_SCHEMA_VERSION = 42`), `catalog_manifest.txt` + `lemuroid-app/src/main/assets/catalog_manifest.txt`
+  (1.480 capas esvaziadas).
+- **T2 (caminho do usuário, `lemu_tv_api25`, Android 7.1 x86):** app com o manifest antigo instalado e com dados;
+  APK novo por cima; passada completa pelo UPDATE (`inserted=0 total=75140`); `mame289` com capa nula 0 → 1.480;
+  capa boa (`map1010`) mantida; busca "1010" com a capa gerada no lugar da preta/genérica. Controle: capas nulas fora
+  do `mame289` = linhas sem capa no manifest (23.348). Capturas em `docs/bugs/img/2026-10-17-mame289-capas-busca-*.jpg`.
+- **T3:** sem teste de unidade (a regra está numa query Room; provada pelo T2); `ktlintCheck` e build x86 verdes.
+- **T4:** `logcat` do processo sem `FATAL`.
+- **Falta para `done/`:** versão publicada (dono); conferir no celular (UI mobile) e numa instalação nova (prebuilt).
+
 **Data:** 2026-10-17
 **Status:** corrigido e testado no AVD (ver `## Status`)
 **Severidade:** baixa (visual; o jogo abre normalmente)
