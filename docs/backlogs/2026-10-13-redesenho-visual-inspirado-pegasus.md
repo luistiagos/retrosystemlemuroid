@@ -1615,3 +1615,12 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
 - **2026-10-17 (ktlint resolvido).** Depois dos commits de arcade (`7362b1e`, `cc9b8e9`): violações novas corrigidas e
   baseline regenerado — `./gradlew ktlintCheck` **BUILD SUCCESSFUL**. Detalhes na "Resolução" do backlog acima.
   Verificação 1 fechada. **Próximo:** verificação 2.
+- **2026-10-17 (verificação 2: Favoritos e Busca na TV).** `lemu_tv_api25`, build x86 de `ddf3267`: na tela de
+  Favoritos e na Busca o ✓ aparece só no jogo salvo, e nenhum cartão não salvo leva o selo; sem `FATAL`. Capturas e
+  roteiro em `docs/funcionalidades/2026-10-15-redesenho-selo-salvo-tv.md`. Fechada.
+  - **Observação (fora do escopo, não investigada):** na Busca, 3 dos 6 cartões de MAME (`mame289`) aparecem com capa
+    **preta**, não com a capa gerada. Pode ser URL de capa que não carrega no AVD; conferir antes de abrir registro.
+  - **Para quem pegar:** no AVD de TV, `KEYCODE_SEARCH` abre a busca do sistema, não a do app — entrar pela lupa da
+    Início. Na busca, o `DPAD_CENTER` no campo deixou uma letra do teclado na consulta; `DPAD_RIGHT` (do microfone
+    para o campo) + `input text` funciona. Mais de 10 favoritos faz aparecer o "Show All" (`CAROUSEL_MAX_ITEMS`).
+  - **Próximo:** verificação 3 (TV box real + `dumpsys gfxinfo` na Início da TV) — precisa do aparelho físico.

@@ -62,8 +62,19 @@ cada `onStart` é barato.
 | Catálogo, depois de excluir | ![](img/2026-10-15-redesenho-selo-salvo-tv-catalogo-apos-excluir.jpg) |
 | Catálogo rolado (cartões reciclados sem selo) | ![](img/2026-10-15-redesenho-selo-salvo-tv-catalogo-rolado.jpg) |
 
-**Não verificado:** a tela de Favoritos e a Busca no aparelho (o mesmo presenter e o mesmo `attach`, mas não abertas);
-`FULL` (o selo não tem variante); TV box real; `gfxinfo`.
+**Favoritos e Busca (2026-10-17, `lemu_tv_api25`, build de `ddf3267`).** Com o "1010" salvo, favoritado por SQL
+junto com 11 jogos de Arduboy não salvos (app parado; desfeito depois):
+1. `TVFavoritesFragment` (Início ▸ fileira Favoritos ▸ "Show All"): ✓ só no "1010", nenhum nos outros 11.
+2. `TVSearchFragment`, busca "1010": ✓ só no "1010"; "Puzzle_1010_1010" (mesmo sistema, não salvo) e os 6 de MAME
+   sem selo.
+3. `logcat`: sem `FATAL`.
+
+| | |
+|---|---|
+| Tela de Favoritos | ![](img/2026-10-15-redesenho-selo-salvo-tv-favoritos.jpg) |
+| Busca "1010" | ![](img/2026-10-15-redesenho-selo-salvo-tv-busca.jpg) |
+
+**Não verificado:** `FULL` (o selo não tem variante); TV box real; `gfxinfo`.
 
 ## Pendências
 
