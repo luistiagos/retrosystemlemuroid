@@ -32,10 +32,10 @@ import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVAmbientBackground
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.app.tv.shared.TVListRowPresenter
+import com.swordfish.lemuroid.app.tv.shared.TVSavedGameActions
 import com.swordfish.lemuroid.app.tv.shared.TVSavedGames
 import com.swordfish.lemuroid.app.tv.shared.TVTypography
 import com.swordfish.lemuroid.common.coroutines.launchOnState
-import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
@@ -43,7 +43,6 @@ import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.android.awaitFrame
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TVHomeFragment : BrowseSupportFragment() {
@@ -64,6 +63,8 @@ class TVHomeFragment : BrowseSupportFragment() {
 
     /** "Saved" badge of the home cards (redesign 3.5), shared by the presenters [recreateAdapter] creates. */
     private lateinit var savedBadges: TVSavedGames
+
+    private var savedGameActions: TVSavedGameActions? = null
 
     private val homeViewModel: TVHomeViewModel by lazy {
         val factory =
@@ -95,7 +96,7 @@ class TVHomeFragment : BrowseSupportFragment() {
             OnItemViewClickedListener { _, item, _, _ ->
                 when (item) {
                     is Game -> gameInteractor.onGamePlay(item)
-                    is InstalledGameGroupUiModel -> onSavedGameClick(item)
+                    is InstalledGameGroupUiModel -> savedGameActions?.onSavedGameClick(item)
                     is MetaSystemInfo -> {
                         val action =
                             TVHomeFragmentDirections.actionNavigationSystemsToNavigationGames(
@@ -116,6 +117,7 @@ class TVHomeFragment : BrowseSupportFragment() {
                             TVSettingType.CHOOSE_DIRECTORY -> launchFolderPicker()
                             TVSettingType.SETTINGS -> launchTVSettings()
                             TVSettingType.SHOW_ALL_FAVORITES -> launchFavorites()
+                            TVSettingType.SHOW_ALL_SAVED_GAMES -> launchSavedGames()
                             TVSettingType.SAVE_SYNC ->
                                 SaveSyncWork.enqueueManualWork(
                                     requireContext().applicationContext,
@@ -137,6 +139,14 @@ class TVHomeFragment : BrowseSupportFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         savedBadges = TVSavedGames.attach(this, retrogradeDb)
+        savedGameActions =
+            TVSavedGameActions(
+                context = requireContext(),
+                scope = viewLifecycleOwner.lifecycleScope,
+                gameInteractor = gameInteractor,
+                savedVariants = { game -> homeViewModel.savedVariants(game) },
+                isAvailable = { game -> homeViewModel.isAvailable(game) },
+            )
         val ambientBackground = TVAmbientBackground.attach(this)
         onItemViewSelectedListener =
             OnItemViewSelectedListener { _, item, _, _ ->
@@ -185,48 +195,8 @@ class TVHomeFragment : BrowseSupportFragment() {
         }
     }
 
-    /**
-     * Tap on a saved game, the rules of the phone's Saved games tab (`MainActivity.onInstalledGameClick`):
-     * unreachable media warns; more than one saved version opens the picker with only the saved ones; one plays.
-     */
-    private fun onSavedGameClick(savedGame: InstalledGameGroupUiModel) {
-        val game = savedGame.group.game
-        if (!savedGame.isAvailable) {
-            requireContext().displayToast(R.string.installed_media_unavailable)
-            return
-        }
-        if (savedGame.group.installedVariantsCount <= 1) {
-            gameInteractor.onGamePlay(game)
-            return
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            val variants = homeViewModel.savedVariants(game)
-            if (variants.isEmpty()) {
-                gameInteractor.onGamePlay(game)
-                return@launch
-            }
-            TVSavedVariantsDialog.show(requireContext(), game.title, variants) { variant ->
-                onSavedVariantSelected(variant)
-            }
-        }
-    }
-
-    /** Same order as the phone's picker: a version not saved yet goes to the save dialog first. */
-    private fun onSavedVariantSelected(variant: Game) {
-        if (!gameInteractor.isRomDownloaded(variant)) {
-            gameInteractor.onGamePlay(variant)
-            return
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            if (homeViewModel.isAvailable(variant)) {
-                gameInteractor.onGamePlay(variant)
-            } else {
-                requireContext().displayToast(R.string.installed_media_unavailable)
-            }
-        }
-    }
-
     override fun onDestroyView() {
+        savedGameActions = null
         focusPanel = null
         super.onDestroyView()
     }
@@ -258,8 +228,16 @@ class TVHomeFragment : BrowseSupportFragment() {
                 ?.let { setSelectedPosition(it, false) }
         }
 
-        findAdapterById<ArrayObjectAdapter>(SAVED_ADAPTER)
-            ?.setItems(savedGames, LEANBACK_SAVED_GAME_DIFF_CALLBACK)
+        findAdapterById<ArrayObjectAdapter>(SAVED_ADAPTER)?.apply {
+            if (savedGames.size <= TVHomeViewModel.CAROUSEL_MAX_ITEMS) {
+                setItems(savedGames, LEANBACK_MULTI_DIFF_CALLBACK)
+            } else {
+                val allItems =
+                    savedGames.subList(0, TVHomeViewModel.CAROUSEL_MAX_ITEMS) +
+                        listOf(TVSetting(TVSettingType.SHOW_ALL_SAVED_GAMES))
+                setItems(allItems, LEANBACK_MULTI_DIFF_CALLBACK)
+            }
+        }
 
         findAdapterById<ArrayObjectAdapter>(FAVORITES_ADAPTER)?.apply {
             if (viewState.favoritesGames.size <= TVHomeViewModel.CAROUSEL_MAX_ITEMS) {
@@ -315,7 +293,21 @@ class TVHomeFragment : BrowseSupportFragment() {
 
         // First row, as the "Saved games" row of the phone's home (redesign 3.6).
         if (includeSavedGames) {
-            val savedItems = ArrayObjectAdapter(SavedGamePresenter(gameInteractor))
+            val presenter = ClassPresenterSelector()
+            presenter.addClassPresenter(
+                InstalledGameGroupUiModel::class.java,
+                SavedGamePresenter(gameInteractor),
+            )
+            presenter.addClassPresenter(
+                TVSetting::class.java,
+                SettingPresenter(
+                    resources.getDimensionPixelSize(R.dimen.tv_game_card_width),
+                    resources.getDimensionPixelSize(R.dimen.tv_game_card_height),
+                    settingsCardPadding,
+                    showInfo = false,
+                ),
+            )
+            val savedItems = ArrayObjectAdapter(presenter)
             val title = resources.getString(R.string.title_installed)
             result.add(ListRow(HeaderItem(SAVED_ADAPTER, title), savedItems))
         }
@@ -401,6 +393,10 @@ class TVHomeFragment : BrowseSupportFragment() {
         findNavController().navigate(R.id.navigation_favorites)
     }
 
+    private fun launchSavedGames() {
+        findNavController().navigate(R.id.navigation_saved_games)
+    }
+
     companion object {
         const val RECENTS_ADAPTER = 1L
         const val SYSTEM_ADAPTER = 2L
@@ -437,6 +433,9 @@ class TVHomeFragment : BrowseSupportFragment() {
                         (oldItem is Game && newItem is Game) -> {
                             LEANBACK_GAME_DIFF_CALLBACK.areContentsTheSame(oldItem, newItem)
                         }
+                        (oldItem is InstalledGameGroupUiModel && newItem is InstalledGameGroupUiModel) -> {
+                            LEANBACK_SAVED_GAME_DIFF_CALLBACK.areContentsTheSame(oldItem, newItem)
+                        }
                         (oldItem is TVSetting && newItem is TVSetting) -> {
                             LEANBACK_SETTING_DIFF_CALLBACK.areContentsTheSame(oldItem, newItem)
                         }
@@ -451,6 +450,9 @@ class TVHomeFragment : BrowseSupportFragment() {
                     return when {
                         (oldItem is Game && newItem is Game) -> {
                             LEANBACK_GAME_DIFF_CALLBACK.areItemsTheSame(oldItem, newItem)
+                        }
+                        (oldItem is InstalledGameGroupUiModel && newItem is InstalledGameGroupUiModel) -> {
+                            LEANBACK_SAVED_GAME_DIFF_CALLBACK.areItemsTheSame(oldItem, newItem)
                         }
                         (oldItem is TVSetting && newItem is TVSetting) -> {
                             LEANBACK_SETTING_DIFF_CALLBACK.areItemsTheSame(oldItem, newItem)

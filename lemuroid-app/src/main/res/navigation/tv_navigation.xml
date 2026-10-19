@@ -37,4 +37,9 @@
         android:name="com.swordfish.lemuroid.app.tv.favorites.TVFavoritesFragment"
         android:label="@string/favorites"/>
 
+    <fragment
+        android:id="@+id/navigation_saved_games"
+        android:name="com.swordfish.lemuroid.app.tv.saved.TVSavedGamesFragment"
+        android:label="@string/title_installed"/>
+
 </navigation>

@@ -70,8 +70,9 @@ class TVHomeViewModel(
     private val managedMarker: String by lazy { directoriesManager.getManagedRomsMarker() }
 
     /**
-     * The "Saved games" row (redesign 3.6): the [CAROUSEL_MAX_ITEMS] most recent groups of the phone's Saved games
-     * tab, same query and media check as `HomeViewModel.savedGames`. `null` until the first result.
+     * The "Saved games" row (redesign 3.6): up to [CAROUSEL_MAX_ITEMS] + 1 most recent groups of the phone's
+     * Saved games tab (the extra item signals "Show all"), same query and media check as `HomeViewModel.savedGames`.
+     * `null` until the first result.
      *
      * Kept out of the home `combine`: the query walks the whole `games` table and would hold back the first state.
      * The fragment subscribes after its first frame; from then on it stays hot, so coming back from a game does not
@@ -82,7 +83,7 @@ class TVHomeViewModel(
             emitAll(
                 gameDao.observeInstalledGameGroups(romsDirPrefix, managedMarker)
                     .combine(storageAvailabilityMonitor.mediaStateChanges) { groups, _ ->
-                        groups.take(CAROUSEL_MAX_ITEMS).map { group ->
+                        groups.take(CAROUSEL_MAX_ITEMS + 1).map { group ->
                             InstalledGameGroupUiModel(
                                 group = group,
                                 isAvailable = storageAvailabilityMonitor.isGameAvailable(group.game),

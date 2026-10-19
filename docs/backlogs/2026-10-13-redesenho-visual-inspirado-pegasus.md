@@ -1624,3 +1624,6 @@ mockup o desfoque usa `filter: blur`; no app continua valendo a capa em ~32 px a
     Início. Na busca, o `DPAD_CENTER` no campo deixou uma letra do teclado na consulta; `DPAD_RIGHT` (do microfone
     para o campo) + `input text` funciona. Mais de 10 favoritos faz aparecer o "Show All" (`CAROUSEL_MAX_ITEMS`).
   - **Próximo:** verificação 3 (TV box real + `dumpsys gfxinfo` na Início da TV) — precisa do aparelho físico.
+- **2026-10-18 (backlog da tela "Jogos salvos" na TV criado).** `docs/backlogs/2026-10-18-tv-tela-jogos-salvos-ver-todos.md`:
+  "Ver todos" na fileira da Início (como Favoritos) e tela em grade com todos os grupos, regras de toque
+  compartilhadas com a Início. Aguarda o aval do dono e as decisões listadas lá (busca, tela vazia, texto do cartão).
