@@ -64,3 +64,7 @@ Nenhum símbolo foi aberto para este bug. O que falta medir:
 2. Se o cliente voltar a falar com o suporte: pedir a versão do app (Ajustes) e um vídeo curto do
    engasgo, e perguntar em quais jogos acontece.
 3. Decidir se vale reportar underrun de áudio na telemetria. Hoje esse sintoma é invisível.
+
+## Ocorrencia - chamado #112 (2026-10-23)
+
+Mesmo cliente (`43087531405512@lid`) voltou em 22/10 com Pokemon DS acelerado (`[150956]`, `[151325]`: *"estao acelerados com a opcao acelerar desligado"*). Pode ter a mesma causa (ritmo de quadros/audio no Moto G86); registrado a parte em `2026-10-23-pokemon-ds-roda-acelerado-com-acelerar-desligado-moto-g86.md`.
