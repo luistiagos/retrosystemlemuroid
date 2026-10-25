@@ -2952,23 +2952,21 @@ data class GameSystem(
                     listOf(
                         SystemCoreConfig(
                             CoreID.NEOCD,
-                            // NeoCD auto-detects BIOS files in system/neocd/; with a single
-                            // BIOS present it always uses it (index 0). The Universe BIOS 3.2
-                            // is region-free + auto-patched. Auto-downloaded from HuggingFace.
-                            requiredBIOSFiles = listOf("neocd/uni-bioscd.rom"),
-                            // On-device testing showed NeoCD never boots ANY game on this build:
-                            // the BIOS loads and renders its CD dashboard, the core opens and reads
-                            // the data track, but the game never starts — identical across every
-                            // game, every disc format (cue+bin / chd) and both BIOSes (Universe and
-                            // stock CDZ). The only non-standard knobs are this core's two speed
-                            // hacks, both reporting "On" (the libretro neocd defaults are Off, and
-                            // the docs warn "some games may not work properly"). NeoCD exposes no
-                            // user-facing settings, so both are forced Off here to rule the speed
-                            // hacks in or out as the cause. If this fixes booting, loadskip (the
-                            // safe, purely cosmetic "skip loading screens" option) can be turned
-                            // back On for faster loads.
+                            // Stock CDZ BIOS, auto-downloaded from HuggingFace. With the Universe
+                            // BIOS CD (uni-bioscd.rom, the previous default) no game ever booted:
+                            // the CDZ dashboard stays frozen with an empty TOC. The front/top
+                            // loader BIOSes read the disc but stop at "PUSH START BUTTON"; CDZ
+                            // boots straight into the game
+                            // (docs/bugs/done/2026-10-25-neogeo-cd-jogo-nao-inicia.md).
+                            requiredBIOSFiles = listOf("neocd/neocd_z.rom"),
+                            // NeoCD lists every BIOS found in system/neocd/ and defaults to the
+                            // first one. Users who already downloaded uni-bioscd.rom keep it on
+                            // disk, so neocd_bios is pinned instead of trusting directory order.
+                            // The speed hacks were forced Off while chasing this bug; they were
+                            // not the cause, but stay Off (the libretro defaults).
                             defaultSettings =
                                 listOf(
+                                    CoreVariable("neocd_bios", "neocd_z.rom (CDZ)"),
                                     CoreVariable("neocd_cdspeedhack", "Off"),
                                     CoreVariable("neocd_loadskip", "Off"),
                                 ),

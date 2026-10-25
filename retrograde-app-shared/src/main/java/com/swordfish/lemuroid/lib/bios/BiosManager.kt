@@ -420,17 +420,20 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                     "8016A315",
                     "o2rom.bin",
                 ),
-                // Neo Geo CD BIOS (NeoCD) — goes in system/neocd/. The Universe BIOS 3.2 is
-                // region-free and auto-patched by the core. MD5/CRC32 computed from the file
-                // hosted on the HuggingFace dataset (under the neocd/ subfolder). Both the
-                // local path and the HF path carry the neocd/ prefix, so externalName matches.
+                // Neo Geo CD BIOS (NeoCD) — goes in system/neocd/. The stock CDZ BIOS, not the
+                // Universe BIOS CD: with uni-bioscd.rom this NeoCD build never leaves the CDZ
+                // dashboard (TOC never read), while neocd_z.rom boots the disc straight away
+                // (docs/bugs/done/2026-10-25-neogeo-cd-jogo-nao-inicia.md). MD5/CRC32 computed
+                // from the file hosted on the HuggingFace dataset (under the neocd/ subfolder).
+                // Both the local path and the HF path carry the neocd/ prefix, so externalName
+                // matches.
                 Bios(
-                    "neocd/uni-bioscd.rom",
-                    "08CA8B2DBA6662E8024F9E789711C6FC",
-                    "Neo Geo CD BIOS (Universe BIOS 3.2)",
+                    "neocd/neocd_z.rom",
+                    "11526D58D4C524DAEF7D5D677DC6B004",
+                    "Neo Geo CD BIOS (CDZ)",
                     SystemID.NEOCD,
-                    "FF3ABC59",
-                    "neocd/uni-bioscd.rom",
+                    "33697892",
+                    "neocd/neocd_z.rom",
                 ),
                 // Commodore Amiga Kickstart ROMs (PUAE) — files in system/ root.
                 // PUAE picks the matching Kickstart per emulated model. MD5/CRC32 computed

@@ -33,6 +33,19 @@ Em 22/10 diz que os jogos Pokemon de DS rodam acelerados ao tocar A/B e ja comec
 2. Comportamento do proprio jogo (Gen 5 acelera texto ao segurar A/B): o agente assumiu turbo do emulador sem confirmar.
 3. Core efetivo (melonDS x DeSmuME) e versao do app do cliente: desconhecidos.
 
+## Nova evidencia (2026-10-25, outro core no mesmo aparelho)
+
+Durante a validacao de `docs/bugs/done/2026-10-25-neogeo-cd-jogo-nao-inicia.md`, o dono jogou Metal Slug
+(Neo Geo CD, core **NeoCD**) num Moto G86 5G (Android 16, debug 1.17.27) e relatou: *"estava meio acelerado, no
+mais estava ok"*. Logo nao e exclusivo de NDS/melonDS.
+
+- logcat do `:game`: `EMUFPS 60.00 frames/s` estavel; o Neo Geo nativo e ~59,19 Hz (core ~1,4% acima).
+- `MTK_APPList ... GameActivity ... state:PAUSED, fps:90`: o painel estava a **90 Hz** com o jogo aberto
+  (no `MainActivity`, `dumpsys display` mostra `renderFrameRate 60`). 60 quadros num painel de 90 Hz = cadencia
+  3:2 (trepidacao). O mesmo jogo num AVD a 60 Hz nao teve queixa.
+- Reforca a hipotese 1 (ritmo de quadros/audio x taxa do painel). Proximo passo concreto: medir no G86 com a taxa
+  do painel travada em 60 Hz (Configuracoes > Tela > Taxa de atualizacao) e comparar a sensacao/fps.
+
 ## Proximos passos
 
 Pedir ao cliente versao do app e video curto; reproduzir Pokemon Black em aparelho 120 Hz com melonDS e DeSmuME; medir fps/velocidade com Acelerar desligado.
