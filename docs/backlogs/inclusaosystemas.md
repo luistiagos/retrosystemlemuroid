@@ -55,9 +55,10 @@
 | 31 | Spectravideo | `bluemsx` ✓ | ✅ Sim | **Média** | Precisa do `bluemsx` (novo core) + estrutura de system-roms. fMSX atual não cobre SVI. Nicho. |
 | 32 | Thomson (MO/TO) | `theodore` ✓ | ✅ Sim | **Baixa-Média** | BIOS embutida no core. Computador francês, teclado. Nicho. |
 | 33 | Supervision (Watara) | `potator` ✓ | ⏹️ **Já existe** | — | `SystemID.SUPERVISION` já implementado. Nada a fazer. |
-| 34 | GameCube | `dolphin` ✓ | ⚠️ Teórico | **Alta / inviável** | Core existe no buildbot, mas Dolphin-libretro Android é instável e exige hardware muito forte. **Não recomendado.** |
+| 34 | GameCube | `dolphin` ✓ | ⏹️ **Já existe** | — | Implementado depois desta avaliação (`SystemID.GAMECUBE`, catálogo `.rvz`). *(Avaliação original: "Alta / inviável".)* |
 | 35 | Sega Saturn | `yabause` / `mednafen_saturn` ✓ | ✅ Sim | **Alta** | VERY_HEAVY + BIOS. Yabause = lento em ARM; mednafen_saturn = muito pesado. É o exemplo do próprio prompt. |
-| 36 | Nintendo Wii | `dolphin` ✓ | ⚠️ Teórico | **Alta / inviável** | Mesmo caso do GameCube, ainda mais pesado. **Não recomendado.** |
+| 36 | Nintendo Wii | `dolphin` ✓ (**já no projeto**) | ✅ Sim | **Alta** | Reavaliado em 2026-10-25: o core do GC já emula o Wii; o trabalho é controles, catálogo e corte de aparelho. Plano em [`2026-10-25-suporte-nintendo-wii.md`](2026-10-25-suporte-nintendo-wii.md). *(Avaliação original: "inviável".)* |
+| 37 | Nintendo Switch | `suyu` (fora do buildbot; só arm64) | ⚠️ Sim, mas | **Muito alta** | Avaliado em 2026-10-27, fora da lista original. Há core libretro do suyu com build Android desde out/2026, mas sem save state, pausa nem reset. Exige as `prod.keys` do usuário e aparelho topo de linha, e o risco de DMCA atinge o repositório público de cores. Não recomendado agora. Análise em [`2026-10-27-suporte-nintendo-switch.md`](2026-10-27-suporte-nintendo-switch.md). |
 
 ---
 
@@ -66,6 +67,10 @@
 - **Não possíveis (sem core Android):** Apple II (3), Super Cassette Vision (15), Oric Atmos (22), Solarus (26). → 4 itens.
 - **Já existe / desnecessário:** Supervision (33, já implementado); Othello Multivision (23, ≈ SG-1000); GX4000 (2, já carregável via Amstrad CPC).
 - **Possíveis mas desaconselhados (inviáveis na prática):** GameCube (34) e Wii (36) — Dolphin no Android.
+  *Superado:* o GameCube entrou em produção, e o Wii foi reavaliado como viável em 2026-10-25
+  ([`2026-10-25-suporte-nintendo-wii.md`](2026-10-25-suporte-nintendo-wii.md)).
+- **Avaliado depois da lista original:** Nintendo Switch (37). É possível só com um core fora do buildbot (suyu,
+  arm64) e não é recomendado agora ([`2026-10-27-suporte-nintendo-switch.md`](2026-10-27-suporte-nintendo-switch.md)).
 
 ---
 
