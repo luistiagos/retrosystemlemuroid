@@ -163,7 +163,10 @@ class ManifestQuickLoader(
         //   v42  mame289: capas pretas (tela-título em branco) e o placeholder genérico do arcadeitalia
         //          esvaziados; a passada completa passa a sincronizar a capa das linhas existentes
         //          (GameDao.updateManifestFieldsWithTitle), que antes só era gravada no INSERT.
-        private const val MANIFEST_SCHEMA_VERSION = 42
+        //   v43  +1.184 jogos (gba 507, snes 164, megadrive 135, nes 128, sms 54, gbc 49, nds 45, gb 27,
+        //          n64 21, psx 19, dc 14, psp 9, gc 8, saturn 4; commit 48d861f). O manifest mudou sem
+        //          bump naquele commit; este força a passada completa que os insere em instalações existentes.
+        private const val MANIFEST_SCHEMA_VERSION = 43
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

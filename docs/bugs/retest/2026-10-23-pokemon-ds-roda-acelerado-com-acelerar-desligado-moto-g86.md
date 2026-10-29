@@ -7,6 +7,22 @@
 **Branch:** version9 (versao publicada: versionCode 258 / 1.17.27, APK de 2026-10-12 06:28 UTC; versao do cliente nao determinada)
 **Origem:** triagem do chamado #112 (sessao `43087531405512@lid`), conversa de WhatsApp
 
+## Status
+
+- **Corrigido:** 2026-10-29 ~12:10, commit `954dda3`.
+- **Onde:** `../LibretroDroid-patched` `fpssync.cpp::FPSSync::advanceFrames` / `FPSSync::isVSyncTooFast` /
+  `FPSSync::reset` (patch em `libs/libretrodroid-patches/fpssync-vsync-real.patch`); `libs/libretrodroid-patched.aar`
+  com os quatro `liblibretrodroid.so` novos.
+- **T2 (aparelho, caminho do cliente):** Moto G86 `ZY32LMNN9B`, jogo de GB, painel forcado a 120/90 Hz. Controle na
+  base: 120,0 fps. Com o fix: 59,73 fps nos dois. Tabela na secao Validacao.
+- **T3:** `tests/native/test-fpssync-vsync.ps1` contra o `.so` do AAR. Controle no AAR antigo: falha a 90/120 Hz. AAR
+  novo: ALL PASSED no AVD x86_64 e no G86 arm64. Caminho vizinho: painel fixo de 60 Hz continua no vsync, inclusive
+  com travadas (KOF '97 no AVD, sem troca falsa).
+- **T4:** logcat do `:game` no G86: `Screen is refreshing at 97.667047 ... Switching from vsync to time based sync`
+  seguido de `EMUFPS 59.73`.
+- **Falta para `done/`:** versao publicada (dono). O cliente do chamado #112 tem de confirmar no Pokemon Black/Platinum
+  com o boost de toque real; o toque injetado por adb nao dispara esse boost.
+
 ## Sintoma
 
 Mesmo cliente do doc `2026-10-07-audio-engasgando-gba-nds-moto-g86-sem-diagnostico.md` (Moto G86, Pokemon Black DS).

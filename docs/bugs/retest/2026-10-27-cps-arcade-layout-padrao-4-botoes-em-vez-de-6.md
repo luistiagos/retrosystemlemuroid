@@ -7,6 +7,18 @@
 - **Branch:** redesenho-tv-jogos-salvos-tela
 - **Origem:** chamado de suporte WhatsApp (+55 31 9452-3223 / `197637248663793@lid`, cliente Leandro, produto Sistema Multigames)
 
+## Status
+
+- **Corrigido:** commit `240196f` (2026-10-29 12:14, a correcao foi feita em outra sessao em 27-28/10).
+- **Onde:** `GameSystem.kt::SYSTEMS` (`controllerConfigs` de CPS1/2/3, FBNeo, Data East, Genesis e Sega CD): o
+  layout de 6 botoes passa a vir antes do de 4 (ou de 3, no Mega Drive), e a primeira entrada e o padrao.
+- **T2:** AVD `lemu_api25_2gb` (x86_64), Marvel Super Heroes (CPS-2/FBNeo) abriu em `ARCADE_6` e foi jogado ate a
+  partida. Detalhes na secao "Validacao End-to-End". Sem controle positivo registrado na base (build anterior) e sem
+  aparelho fisico.
+- **T3/T4:** nao registrados no doc.
+- **Falta para `done/`:** versao publicada (dono); conferir que o layout salvo pelo usuario nao e sobrescrito
+  (a mudanca so afeta o padrao); e a prova do cliente (chamado do Leandro).
+
 ---
 
 ## Sintoma

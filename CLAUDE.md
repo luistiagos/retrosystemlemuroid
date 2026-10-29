@@ -189,6 +189,7 @@ Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteú
 | 40 | MAME 0.289: inclusão de 14.357 títulos de arcade não-CHD apontando para o core mamearcade |
 | 41 | MAME 0.289: remoção de 89 títulos 3D pesados sem core alternativo |
 | 42 | MAME 0.289: capas pretas e genéricas do arcadeitalia esvaziadas; passada completa passa a sincronizar a capa das linhas existentes |
+| 43 | +1.184 jogos (GBA, SNES, Mega Drive, NES, SMS, GBC, NDS e outros) do commit `48d861f`, que mudou o manifest sem bump |
 
 ### Backfill de capas (`super_scrapper`)
 
