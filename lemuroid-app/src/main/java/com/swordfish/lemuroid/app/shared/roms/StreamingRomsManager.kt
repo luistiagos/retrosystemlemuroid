@@ -88,7 +88,7 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
          * Bumped 10→11: Catalog expansion adding 1,402 commercial games from the central
          * repository across FBNeo, Dreamcast, CPS1/2, NeoGeo, PSX, ZX Spectrum, GameCube, etc.
          */
-        private const val CATALOG_VERSION = 12
+        private const val CATALOG_VERSION = 14
 
         /**
          * Root path inside the HuggingFace dataset repository.

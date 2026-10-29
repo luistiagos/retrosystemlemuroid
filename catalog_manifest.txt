@@ -75138,3 +75138,1187 @@ mame289/zx80.zip|ZX-80|https://adb.arcadeitalia.net/?mame=zx80&type=title&resize
 mame289/zx81.zip|ZX-81|https://adb.arcadeitalia.net/?mame=zx81&type=title&resize=0|0|1
 mame289/zzblock.zip|Zun Zun Block||0|1
 mame289/zzyzzyxx.zip|Zzyzzyxx (set 1)|https://adb.arcadeitalia.net/?mame=zzyzzyxx&type=title&resize=0|0|1
+dc/DOA2BR.zip|Dead or Alive 2|https://romsportugues.com/wp-content/uploads/2019/01/Dead-or-Alive-2-PTBR-DreamCast.webp|0|1
+dc/Donald Duck - Goins's Quakers (BR).cdi|Donald Duck – Quack Attack (Dreamcast)|https://romsportugues.com/wp-content/uploads/2019/04/Donald-Duck-Quack-Attack-Dreamcast-PTBR.webp|0|1
+dc/Evil Dead Hail to the King (BR) (DUB-IA).cdi|Evil Dead: Hail to the King (DreamCast) (Dublado)|https://romsportugues.com/wp-content/uploads/2025/02/Evil-Dead-Hail-to-the-King-DreamCast-PTBR.webp|0|1
+dc/GTA 2 (BR).cdi|Grand Theft Auto 2 (Dream Cast) (GTA)|https://romsportugues.com/wp-content/uploads/2019/02/Grand-Theft-Auto-2-Dream-Cast-GTA-PTBR.webp|0|1
+dc/Hidden_Dangerous_(BR).cdi|Hidden & Dangerous|https://romsportugues.com/wp-content/uploads/2019/03/Hidden-Dangerous-PTBR-DreamCast.webp|0|1
+dc/Pier Solar and the Great Architects (PT).cdi|Pier Solar and the Great Architects|https://romsportugues.com/wp-content/uploads/2023/10/Pier-Solar-and-the-Great-Architects-PTBR-DreamCast.webp|0|1
+dc/RE3 (BR).cdi|Resident Evil 3 – Nemesis (DreamCast)|https://romsportugues.com/wp-content/uploads/2019/03/Resident-Evil-3-Nemesis-DreamCast-PTBR.webp|0|1
+dc/Shadow Man (BR) (T1.0).cdi|Shadow Man (DreamCast)|https://romsportugues.com/wp-content/uploads/2022/12/Shadow-Man-DreamCast-PTBR.webp|0|1
+dc/Shenmue Disco 1 (BR) (T1.3).zip|Shenmue|https://romsportugues.com/wp-content/uploads/2026/10/Shenmue-PTBR-Dreamcast.webp|0|1
+dc/Shenmue Disco 2 (BR) (T1.3).zip|Shenmue|https://romsportugues.com/wp-content/uploads/2026/10/Shenmue-PTBR-Dreamcast.webp|0|1
+dc/Shenmue Disco 3 (BR) (T1.3).zip|Shenmue|https://romsportugues.com/wp-content/uploads/2026/10/Shenmue-PTBR-Dreamcast.webp|0|1
+dc/Soul Reaver (Dublado) (BR).cdi|Legacy of Kain – Soul Reaver (Dreamcast) (Dublado)|https://romsportugues.com/wp-content/uploads/2022/05/Legacy-of-Kain-Soul-Reaver-Dreamcast-Dublado-PTBR.webp|0|1
+dc/Toy Story 2 (Dublado).cdi|Toy Story 2 (Dreamcast) (Dublado)|https://romsportugues.com/wp-content/uploads/2023/02/Toy-Story-2-Dreamcast-Dublado-PTBR-DreamCast.webp|0|1
+dc/What's Shenmue (BR).zip|What’s Shenmue?|https://romsportugues.com/wp-content/uploads/2019/04/Whats-Shenmue-PTBR-Dreamcast.webp|0|1
+gc/Marvel Nemesis Rise of the Imperfects (BR) (T1.0).iso|Marvel Nemesis: Rise of the Imperfects|https://romsportugues.com/wp-content/uploads/2026/06/Marvel-Nemesis-Rise-of-the-Imperfects-PTBR-Gamecube.webp|0|1
+gc/Resident Evil (Disco 1) (BR-U) (Somente DUB).rvz|Resident Evil (GameCube) (Dublado)|https://romsportugues.com/wp-content/uploads/2026/08/Resident-Evil-Gamecube-PTBR.webp|0|1
+gc/Resident Evil (Disco 2) (BR-U) (Somente DUB).rvz|Resident Evil (GameCube) (Dublado)|https://romsportugues.com/wp-content/uploads/2026/08/Resident-Evil-Gamecube-PTBR.webp|0|1
+gc/Resident Evil Zero (Disco 1) (BR) (DUB) (T1.1).rvz|Resident Evil Zero (Dublado)|https://romsportugues.com/wp-content/uploads/2026/09/Resident-Evil-Zero-PTBR-Gamecube.webp|0|1
+gc/Resident Evil Zero (Disco 2) (BR) (DUB) (T1.1).rvz|Resident Evil Zero (Dublado)|https://romsportugues.com/wp-content/uploads/2026/09/Resident-Evil-Zero-PTBR-Gamecube.webp|0|1
+gc/The Hulk (GC) (BR) (T1.0).iso|The Hulk (Gamecube)|https://romsportugues.com/wp-content/uploads/2026/09/The-Hulk-GAMECUBE-PTBR.webp|0|1
+gc/The Sims (BR) (T021).iso|The Sims (GameCube)|https://romsportugues.com/wp-content/uploads/2026/10/The-Sims-Game-Cube-PTBR.webp|0|1
+gc/X-Men The Official Game (BR) (T1.0).iso|X-Men: The Official Game (GameCube)|https://romsportugues.com/wp-content/uploads/2026/08/X-Men-The-Official-Game-Gamecube-PTBR.webp|0|1
+gb/Addams Family, The - Pugsley's Scavenger Hunt (BR).gb|The Addams Family – Pugsley’s Scavenger Hunt GB|https://romsportugues.com/wp-content/uploads/2018/09/The-Addams-Family-Pugsleys-Scavenger-Hunt-PTBR-Gameboy.webp|0|1
+gb/Adventure Island (BR).gb|Adventure Island|https://romsportugues.com/wp-content/uploads/2018/09/Adventure-Island-PTBR-Game-Boy.webp|0|1
+gb/Adventure Island II - Aliens in Paradise (BR).gb|Adventure Island II – Aliens in Paradise|https://romsportugues.com/wp-content/uploads/2018/08/Adventure-Island-II-Aliens-in-Paradise-PTBR.webp|0|1
+gb/Aero Star (BR).gb|Aerostar|https://romsportugues.com/wp-content/uploads/2018/08/Aerostar-PTBR-Game-Boy.webp|0|1
+gb/Alien vs Predator - The Last of His Clan (BR) (T1.05).gb|Alien vs Predator – The Last of His Clan|https://romsportugues.com/wp-content/uploads/2024/09/Alien-vs-Predator-The-Last-of-His-Clan-PTBR-Gameboy.webp|0|1
+gb/Asterix (BR).gb|Asterix|https://romsportugues.com/wp-content/uploads/2018/08/Asterix-Game-Boy-PTBR-Game-Boy.webp|0|1
+gb/Avenging Spirit (BR) (T1.1).gb|Avenging Spirit|https://romsportugues.com/wp-content/uploads/2026/03/Avenging-Spirit-PTBR-Gameboy.webp|0|1
+gb/Battle Pingpong (BR).gb|Battle Pingpong|https://romsportugues.com/wp-content/uploads/2018/08/Battle-Pingpong-PTBR-Game-Boy.webp|0|1
+gb/Battle Unit Zeoth (BR-U) (T1.0).gb|Battle Unit Zeoth|https://romsportugues.com/wp-content/uploads/2026/09/Battle-Unit-Zeoth-PTBR-Game-Boy.webp|0|1
+gb/Choplifter III (BR).gb|Choplifter III GB|https://romsportugues.com/wp-content/uploads/2018/08/Choplifter-III-GB-PTBR.webp|0|1
+gb/Cliffhanger (BR).gb|Cliffhanger (GB)|https://romsportugues.com/wp-content/uploads/2019/12/Cliffhanger-GB-PTBR.webp|0|1
+gb/Garfield Labyrinth (BR).gb|Garfield Labyrinth|https://romsportugues.com/wp-content/uploads/2018/08/Garfield-Labyrinth-PTBR-Game-Boy.webp|0|1
+gb/Killer Instinct (BR).gb|Killer Instinct|https://romsportugues.com/wp-content/uploads/2018/07/Killer-Instinct-PTBR-Game-Boy.webp|0|1
+gb/Kwirk-Puzzle Boy (Japan) (BR) (T1.0).gb|Kwirk|https://romsportugues.com/wp-content/uploads/2023/12/Kwirk-PTBR-Game-Boy.webp|0|1
+gb/Magic Knight RayEarth (BR) (T1.0).gb|Mahou Kishi Rayearth|https://romsportugues.com/wp-content/uploads/2024/05/Mahou-Kishi-Rayearth-PTBR-GB.webp|0|1
+gb/Mickey Mouse II (BR).gb|Mickey Mouse 2|https://romsportugues.com/wp-content/uploads/2018/09/Mickey-Mouse-2-PTBR-Game-Boy.webp|0|1
+gb/Pac-Man (BR).gb|Pac-Man|https://romsportugues.com/wp-content/uploads/2018/08/Pac-Man-Game-Boy-PTBR.webp|0|1
+gb/RoboCop 2 (BR) (T1.03).gb|RoboCop 2|https://romsportugues.com/wp-content/uploads/2024/12/RoboCop-2-PTBR-Gameboy.webp|0|1
+gb/Rolan's Curse (BR).gb|Rolan’s Curse|https://romsportugues.com/wp-content/uploads/2018/08/Rolans-Curse-PTBR-Game-Boy.webp|0|1
+gb/SD Saint Seiya Paradise (BR).gb|Saint Paradise – Saikyou no Senshitachi (Cavaleiros do Zodíaco)|https://romsportugues.com/wp-content/uploads/2018/08/Saint-Paradise-Saikyou-no-Senshitachi-PTBR-Game-Boy.webp|0|1
+gb/Sensible Soccer (BR).gb|Sensible Soccer|https://romsportugues.com/wp-content/uploads/2018/08/Sensible-Soccer-PTBR-Gameboy.webp|0|1
+gb/Snoopy - Magic Show (BR).gb|Snoopy’s Magic Show|https://romsportugues.com/wp-content/uploads/2018/08/Snoopys-Magic-Show-PTBR-Game-Boy.webp|0|1
+gb/Tarzan - Lord of the Jungle (BR-U) (T1.02).gb|Tarzan: Lord of the Jungle|https://romsportugues.com/wp-content/uploads/2026/09/Tarzan-Lord-of-the-Jungle-PTBR-Game-Boy.webp|0|1
+gb/The Chessmaster (BR).gb|The Chessmaster|https://romsportugues.com/wp-content/uploads/2018/08/The-Chessmaster-PTBR-Game-Boy.webp|0|1
+gb/Turok - Battle of the Bionosaurs (BR) (T1.0)).gb|Turok – Battle of the Bionosaurs|https://romsportugues.com/wp-content/uploads/2026/01/Turok-Battle-of-the-Bionosaurs-PTBR-GB.webp|0|1
+gb/World Cup USA '94 (BR).gb|World Cup USA ’94 (Game Boy)|https://romsportugues.com/wp-content/uploads/2019/02/World-Cup-USA-94-Game-Boy.webp|0|1
+gb/Zool - Ninja of the 'Nth' Dimension (BR).gb|Zool – Ninja of the “Nth” Dimension|https://romsportugues.com/wp-content/uploads/2018/09/Zool-Ninja-of-the-Nth-Dimension-PTBR-Game-Boy.webp|0|1
+gba/2006 FIFA World Cup - Germany 2006 (BR) (T1.0).gba|2006 FIFA World Cup|https://romsportugues.com/wp-content/uploads/2022/08/2006-FIFA-World-Cup-PTBR.webp|0|1
+gba/Advance Wars (BR).gba|Advance Wars|https://romsportugues.com/wp-content/uploads/2018/07/Advance-Wars-PTBR-GBA.webp|0|1
+gba/Advance Wars 2 - Black Hole Rising (BR).gba|Advance Wars 2 – Black Hole Rising|https://romsportugues.com/wp-content/uploads/2018/07/Advance-Wars-2-PTBR-GBA.webp|0|1
+gba/Agressive Inline (BR).gba|Agressive Inline|https://romsportugues.com/wp-content/uploads/2018/08/Agressive-Inline-PTBR-GBA.webp|0|1
+gba/Alienators - Evolution Continues (BR).gba|Alienators – Evolution Continues|https://romsportugues.com/wp-content/uploads/2019/07/Alienators-Evolution-Continues-PTBR-GBA.webp|0|1
+gba/Altered Beast - Guardian of the Realms (BR).gba|Altered Beast – Guardian of the Realms|https://romsportugues.com/wp-content/uploads/2018/08/Altered-Beast-Guardian-of-the-Realms-PTBR.webp|0|1
+gba/Banjo-Kazooie - Grunty's Revenge (BR).gba|Banjo-Kazooie – Grunty Revenge|https://romsportugues.com/wp-content/uploads/2018/09/Banjo-Kazooie-Grunty-Revenge-PTBR-GBA.webp|0|1
+gba/Batman Begins (BR).gba|Batman Begins (GBA)|https://romsportugues.com/wp-content/uploads/2019/05/Batman-Begins-GBA-PTBR.webp|0|1
+gba/Batman Rise of Sin Tzu (BR).gba|Batman – Rise of Sin Tzu|https://romsportugues.com/wp-content/uploads/2018/08/Batman-Rise-of-Sin-Tzu-PTBR.webp|0|1
+gba/Beyblade V-Force - Ultimate Blader Jam (BR).gba|Beyblade VForce – Ultimate Blader Jam|https://romsportugues.com/wp-content/uploads/2019/05/Beyblade-VForce-PTBR-GBA.webp|0|1
+gba/Blackthorne (BR).gba|Blackthorne (GBA)|https://romsportugues.com/wp-content/uploads/2018/07/Blachthorne-PTBR-GBA.webp|0|1
+gba/Brother Bear (BR) (T1.0).gba|Disney’s Brother Bear|https://romsportugues.com/wp-content/uploads/2023/05/Disneys-Brother-Bear-PTBR-GBA.webp|0|1
+gba/Cars (PT).gba|Cars|https://romsportugues.com/wp-content/uploads/2019/02/Cars-GBA-PTBR.webp|0|1
+gba/Cartoon Network Speedway (BR).gba|Cartoon Network Speedway|https://romsportugues.com/wp-content/uploads/2019/08/Cartoon-Network-Speedway-PTBR-GBA.webp|0|1
+gba/Casper (PT).gba|Casper (GBA)|https://romsportugues.com/wp-content/uploads/2019/03/Casper-aaGBA.webp|0|1
+gba/Celeste (BR).gba|Celeste Advance|https://romsportugues.com/wp-content/uploads/2022/04/Celeste-Advance-PTBR-GBA.webp|0|1
+gba/Contra Advance - The Alien Wars EX (BR).gba|Contra Advance – The Alien Wars EX|https://romsportugues.com/wp-content/uploads/2018/07/Contra-Advance-PTBR-GBA.webp|0|1
+gba/Crash Bandicoot 2 - N-Tranced (BR).gba|Crash Bandicoot 2 – N-Tranced|https://romsportugues.com/wp-content/uploads/2018/07/Crash-Bandicoot-2-N-Tranced-PTBR-GBA.webp|0|1
+gba/Crash Bandicoot Fusion (BR).gba|Crash Bandicoot Purple: Ripto’s Rampage – Fusion|https://romsportugues.com/wp-content/uploads/2018/07/Crash-Bandicoot-Fusion-PTBR-GBA.webp|0|1
+gba/Crash Bandicoot XS (BR).gba|Crash Bandicoot – The Huge Adventure – XS|https://romsportugues.com/wp-content/uploads/2018/07/Crash-Bandicoot-XS-PTBR-GBA.webp|0|1
+gba/Crash Nitro Kart (BR).gba|Crash Nitro Kart GBA|https://romsportugues.com/wp-content/uploads/2018/07/Crash-Nitro-Kart-PTBR-GBA.webp|0|1
+gba/Crazy Chase (BR).gba|Crazy Chase|https://romsportugues.com/wp-content/uploads/2018/09/Crazy-Chase-PTBR.webp|0|1
+gba/Crazy Taxi - Catch a Ride (BR).gba|Crazy Taxi – Catch a Ride|https://romsportugues.com/wp-content/uploads/2018/07/Crazy-Taxy-PTBR-GBA.webp|0|1
+gba/Dead to Rights (BR).gba|Dead to Rights|https://romsportugues.com/wp-content/uploads/2018/09/Dead-to-Rights-PTBR-GBA.webp|0|1
+gba/Dinotopia - The Timestone Pirates (BR).gba|Dinotopia – The Timestone Pirates|https://romsportugues.com/wp-content/uploads/2019/03/Dinotopia-The-Timestone-Pirates-PTBR.webp|0|1
+gba/Dragon Ball Z - Taiketsu (BR).gba|Dragon Ball Z – Taiketsu|https://romsportugues.com/wp-content/uploads/2018/09/Dragon-Ball-Z-Taiketsu-PTBR-GBA.webp|0|1
+gba/Dragon Ball Z - The Legacy of Goku (BR) (T1.0).gba|Dragon Ball Z – The Legacy of Goku|https://romsportugues.com/wp-content/uploads/2024/02/Dragon-Ball-Z-The-Legacy-of-Goku-PTBR-GBA.webp|0|1
+gba/Dragon Ball Z - The Legacy of Goku II (BR-USA) (T1.0).gba|Dragon Ball Z – The Legacy of Goku|https://romsportugues.com/wp-content/uploads/2024/02/Dragon-Ball-Z-The-Legacy-of-Goku-PTBR-GBA.webp|0|1
+gba/Drill Dozer (BR).gba|Drill Dozer|https://romsportugues.com/wp-content/uploads/2020/06/Drill-Dozer-PTBR-GBA.webp|0|1
+gba/Extreme Ghostbusters - Code Ecto-1 (PT).gba|Extreme Ghostbusters – Code Ecto-1|https://romsportugues.com/wp-content/uploads/2018/11/Extreme-Ghostbusters-–-Code-Ecto-1-PTBR.webp|0|1
+gba/F-Zero - Maximum Velocity (BR).gba|F-Zero – Maximum Velocity|https://romsportugues.com/wp-content/uploads/2018/09/F-Zero-Maximum-Velocity-PTBR.webp|0|1
+gba/FIFA Soccer 2005 (BR).gba|FIFA 2005|https://romsportugues.com/wp-content/uploads/2021/07/FIFA-2005-PTBR-GBA.webp|0|1
+gba/Fairly OddParents!, The - Enter the Cleft (BR).gba|The Fairly Odd Parents! Enter the Cleft|https://romsportugues.com/wp-content/uploads/2018/09/The-Fairly-Odd-Parents-Enter-the-Cleft-PTBR.webp|0|1
+gba/Fifa 2004 (BR).gba|FIFA 2004|https://romsportugues.com/wp-content/uploads/2018/09/FIFA-2004-PTBR.webp|0|1
+gba/Final Fantasy 6 (BR).gba|Final Fantasy 6 – VI Advance|https://romsportugues.com/wp-content/uploads/2018/07/Final-Fantasy-VI-6-GBA-PTBR.webp|0|1
+gba/Final Fantasy I & II - Dawn of Souls (BR) (T1.0) (Breno, cia).gba|Final Fantasy I & II Dawn of Souls|https://romsportugues.com/wp-content/uploads/2023/08/Final-Fantasy-Dawn-of-Souls-PTBR-GBA.webp|0|1
+gba/Finding Nemo (BR) (T1.0).gba|Finding Nemo|https://romsportugues.com/wp-content/uploads/2021/07/Finding-Nemo-PTBR.webp|0|1
+gba/Franklin's Great Adventures (BR).gba|Franklin’s Great Adventures (GBA)|https://romsportugues.com/wp-content/uploads/2019/03/Franklins-Great-Adventures-GBA.webp|0|1
+gba/GTA Advance (BR).gba|GTA Advance (GTA)|https://romsportugues.com/wp-content/uploads/2018/07/GTA-Advance-PTBR-GBA.webp|0|1
+gba/Ghost Rider (BR).GBA|Ghost Rider|https://romsportugues.com/wp-content/uploads/2018/08/Ghost-Rider-PTBR-GBA.webp|0|1
+gba/Golden Sun - The Lost Age (BR).gba|Golden Sun – The Lost Age|https://romsportugues.com/wp-content/uploads/2020/02/Golden-Sun-The-Lost-Age-PTBR-GBA.webp|0|1
+gba/Gremlins - Stripe vs Gizmo (PT).gba|Gremlins – Stripe vs Gizmo|https://romsportugues.com/wp-content/uploads/2020/01/Gremlins-Stripe-vs-Gizmo-PTBR-GBA.webp|0|1
+gba/Harry Potter Collection (PT).gba|Harry Potter Collection|https://romsportugues.com/wp-content/uploads/2020/04/Harry-Potter-Collection-PTBR-GBA.webp|0|1
+gba/Harry Potter and The Order of The Phoenix (BR).gba|Harry Potter and the Order of the Phoenix GBA (Ordem da Fênix)|https://romsportugues.com/wp-content/uploads/2018/09/Harry-Potter-and-the-Order-of-the-Phoenix-GBA-PTBR.webp|0|1
+gba/Harry Potter and the Chamber of Secrets (PT).gba|Harry Potter and the Chamber of Secrets (GBA) (Câmara Secreta)|https://romsportugues.com/wp-content/uploads/2019/04/Harry-Potter-and-the-Chamber-of-Secrets-GBA-PTBR.webp|0|1
+gba/Hugo - The Evil Mirror Advance (PT).gba|Hugo – The Evil Mirror|https://romsportugues.com/wp-content/uploads/2020/04/Hugo-The-Evil-Mirror-PTBR-GBA.webp|0|1
+gba/Ice Nine (BR).gba|Ice Nine|https://romsportugues.com/wp-content/uploads/2019/06/Ice-Nine-PTBR-GBA.webp|0|1
+gba/Incredibles, The - Rise of the Underminer (PT).gba|The Incredibles – Rise of the Underminer|https://romsportugues.com/wp-content/uploads/2019/12/The-Incredibles-Rise-of-the-Underminer-PTBR.webp|0|1
+gba/Iridion 2 (BR).gba|Iridion II|https://romsportugues.com/wp-content/uploads/2018/09/Iridion-II-PTBR.webp|0|1
+gba/James Pond - Codename Robocod (PT).gba|James Pond – Codename Robocod|https://romsportugues.com/wp-content/uploads/2018/12/James-Pond-Codename-Robocod-PTBR.webp|0|1
+gba/Justice League - Injustice for All (BR).gba|Justice League – Injustice For All|https://romsportugues.com/wp-content/uploads/2018/09/Justice-League-Injustice-For-All-PTBR-GBA.webp|0|1
+gba/Kingdom Hearts - Chain of Memories (BR) (T1.0).gba|Kingdom Hearts: Chain of Memories|https://romsportugues.com/wp-content/uploads/2023/08/Kingdom-Hearts-Chain-of-Memories-PTBR-GBA.webp|0|1
+gba/Kirby And The Amazing Mirror (BR) (T1.0).gba|Kirby And The Amazing Mirror|https://romsportugues.com/wp-content/uploads/2023/08/Kirby-And-The-Amazing-Mirror-PTBR-GBA.webp|0|1
+gba/Koala Brothers - Outback Adventures (PT).gba|The Koala Brothers – Outback Adventures|https://romsportugues.com/wp-content/uploads/2018/12/The-Koala-Brothers-Outback-Adventures.webp|0|1
+gba/Kong The Animated Series (BR) (T1.0).gba|Kong: The Animated Series|https://romsportugues.com/wp-content/uploads/2025/04/Kong-The-Animated-Series-PTBR-GBA.webp|0|1
+gba/Lady Sia (BR) (T1.07) (Antígeno).gba|Lady Sia|https://romsportugues.com/wp-content/uploads/2018/08/Lady-Sia-PTBR-GBA.webp|0|1
+gba/Lara Croft Tomb Raider - Legend (BR) (T1.0).gba|Tomb Raider: Legend (GBA)|https://romsportugues.com/wp-content/uploads/2024/08/Tomb-Raider-Legend-GBA-PTBR.webp|0|1
+gba/Lilo & Stitch (BR).gba|Disney’s Lilo & Stitch 2|https://romsportugues.com/wp-content/uploads/2018/09/Disneys-Lilo-Stitch-2-PTBR.webp|0|1
+gba/Lilo & Stitch 2 (BR).gba|Disney’s Lilo & Stitch 2|https://romsportugues.com/wp-content/uploads/2018/09/Disneys-Lilo-Stitch-2-PTBR.webp|0|1
+gba/Lion King, The (BR) (T-1.0).gba|The Lion King (GBA)|https://romsportugues.com/wp-content/uploads/2022/11/The-Lion-King-GBA-PTBR-GBA.webp|0|1
+gba/Madagascar (PT).gba|Madagascar (GBA)|https://romsportugues.com/wp-content/uploads/2020/02/Madagascar-GBA-Baixar-PTBR.webp|0|1
+gba/Magical Vacation (BR) (T1.6).gba|Magical Vacation|https://romsportugues.com/wp-content/uploads/2026/09/Magical-Vacation-PTBR-GBA.webp|0|1
+gba/Max Payne GBA (BR) (T1.0).gba|Max Payne GBA|https://romsportugues.com/wp-content/uploads/2024/07/Max-Payne-GBA-PTBR.webp|0|1
+gba/Metal Slug Advance (BR).gba|Metal Slug Advance|https://romsportugues.com/wp-content/uploads/2018/07/Metal-Slug-Advance-PTBR-GBA.webp|0|1
+gba/Mortal Kombat Deadly Alliance (BR).gba|Mortal Kombat – Deadly Alliance GBA|https://romsportugues.com/wp-content/uploads/2018/08/Mortal-Kombat-Deadly-Alliance-PTBR-GBA.webp|0|1
+gba/Next Generation Tennis (PT).gba|Next Generation Tennis|https://romsportugues.com/wp-content/uploads/2020/01/Next-Generation-Tennis-PTBR.webp|0|1
+gba/Nicktoons - Attack of the Toybots (BR).gba|Nicktoons – Attack of the Toybots|https://romsportugues.com/wp-content/uploads/2018/09/Nicktoons-Attack-of-the-Toybots-PTBR.webp|0|1
+gba/Nicktoons Unite! (BR).gba|Nicktoons Unite!|https://romsportugues.com/wp-content/uploads/2018/09/Nicktoons-Unite-PTBR.webp|0|1
+gba/Ninja Five-0 (BR).gba|Ninja Five-O|https://romsportugues.com/wp-content/uploads/2018/10/Ninja-Five-O-PTBR-GBA.webp|0|1
+gba/Noddy - A Day in Toyland (PT).gba|Noddy – A Day in Toyland|https://romsportugues.com/wp-content/uploads/2020/01/Noddy-A-Day-in-Toyland-PTBR.webp|0|1
+gba/Pac-Man World (BR).gba|Pac-Man World|https://romsportugues.com/wp-content/uploads/2021/04/Pac-Man-World-PTBR.webp|0|1
+gba/Pac-Man World 2 (BR) (T1.0).gba|Pac-Man World 2|https://romsportugues.com/wp-content/uploads/2021/08/Pac-Man-World-2-PTBR-GBA.webp|0|1
+gba/Planet of the Apes (BR).gba|Planet of the Apes|https://romsportugues.com/wp-content/uploads/2018/09/Planet-of-the-Apes-PTBR.webp|0|1
+gba/Powerpuff Girls, The - Mojo Jojo A-Go-Go (BR).gba|The Powerpuff Girls – Mojo Jojo-A-Go-Go|https://romsportugues.com/wp-content/uploads/2018/09/The-Powerpuff-Girls-Mojo-Jojo-A-Go-Go-PTBR-GBA.webp|0|1
+gba/Prince of Persia - The Sands of Time (BR).gba|Prince of Persia – The Sands of Time|https://romsportugues.com/wp-content/uploads/2018/08/Prince-of-Persia-The-Sands-of-Time-PTBR-GBA.webp|0|1
+gba/Princess Natasha - Student, Secret Agent, Princess (BR).gba|Princess Natasha|https://romsportugues.com/wp-content/uploads/2018/09/Princess-Natasha-PTBR.webp|0|1
+gba/R-Type III - The Third Lightning (BR).gba|R-Type 3 – The Third Lightning|https://romsportugues.com/wp-content/uploads/2018/10/R-Type-3-The-Third-Lightning-PTBR-GBA.webp|0|1
+gba/Rainbow Six - Rogue Spear (BR).gba|Rainbow Six – Rogue Spear|https://romsportugues.com/wp-content/uploads/2018/10/Rainbow-Six-Rogue-Spear-PTBR.webp|0|1
+gba/Ratatouille (PT).gba|Ratatouille (GBA)|https://romsportugues.com/wp-content/uploads/2020/03/Ratatouille-GBA-PTBR.webp|0|1
+gba/Rayman 3 (BR).gba|Rayman 3|https://romsportugues.com/wp-content/uploads/2018/09/Rayman-3-PTBR-GBA.webp|0|1
+gba/Rayman Advance (BR).gba|Rayman Advance|https://romsportugues.com/wp-content/uploads/2018/09/Rayman-Advance-PTBR-GBA.webp|0|1
+gba/Riviera The Promised Land (BR) (T1.0).gba|Riviera: The Promised Land|https://romsportugues.com/wp-content/uploads/2026/10/Riviera-The-Promised-Land-PTBR-GBA.webp|0|1
+gba/Robot Wars - Advanced Destruction (BR).gba|Robot Wars – Advanced Destruction|https://romsportugues.com/wp-content/uploads/2018/08/Robot-Wars-Advanced-Destruction-PTBR.webp|0|1
+gba/Robotech - The Macross Saga (BR).gba|Robotech – The Macross Saga|https://romsportugues.com/wp-content/uploads/2018/08/Robotech-The-Macross-Saga-PTBR.webp|0|1
+gba/Rocket Power - Dream Scheme (BR).gba|Rocket Power – Dream Scheme|https://romsportugues.com/wp-content/uploads/2018/08/Rocket-Power-Dream-Scheme-PTBR.webp|0|1
+gba/Samurai Jack - The Amulet of Time (BR).gba|Samurai Jack – The Amulet of Time|https://romsportugues.com/wp-content/uploads/2018/09/Samurai-Jack-The-Amulet-of-Time-PTBR-GBA.webp|0|1
+gba/Scooby-Doo 2 - Monsters Unleashed (BR).gba|Scooby-Doo 2 – Monsters Unleashed|https://romsportugues.com/wp-content/uploads/2018/10/Scooby-Doo-2-Monsters-Unleashed-PTBR-GBA.webp|0|1
+gba/Shaman King - Master of Spirits (BR).gba|Shaman King – Master of Spirits|https://romsportugues.com/wp-content/uploads/2018/08/Shaman-King-Master-os-Spirits-PTBR-GBA.webp|0|1
+gba/Shaman King - Master of Spirits 2 (BR).gba|Shaman King – Master of Spirits 2|https://romsportugues.com/wp-content/uploads/2018/09/Shaman-King-Master-of-Spirits-2-PTBR-GBA.webp|0|1
+gba/Shantae Advance - Risky Revolution (Termos Adaptados) (BR) (T1.0).gba|Shantae Advance: Risky Revolution|https://romsportugues.com/wp-content/uploads/2026/09/Shantae-Advance-Risky-Revolution-PTBR-GBA.webp|0|1
+gba/Shantae Advance - Risky Revolution (Termos Originais) (BR) (T1.0).gba|Shantae Advance: Risky Revolution|https://romsportugues.com/wp-content/uploads/2026/09/Shantae-Advance-Risky-Revolution-PTBR-GBA.webp|0|1
+gba/Shining Soul (BR).gba|Shining Soul|https://romsportugues.com/wp-content/uploads/2018/08/Shining-Soul-PTBR-GBA.webp|0|1
+gba/Shining Soul II (BR).gba|Shining Soul|https://romsportugues.com/wp-content/uploads/2018/08/Shining-Soul-PTBR-GBA.webp|0|1
+gba/Shrek 2 - Beg for Mercy (BR).gba|Shrek 2 – Beg for Mercy|https://romsportugues.com/wp-content/uploads/2024/11/Shrek-2-Beg-for-Mercy-PTBR-GBA.webp|0|1
+gba/SimCity 2000 (BR).gba|SimCity 2000 (GBA)|https://romsportugues.com/wp-content/uploads/2019/11/SimCity-2000-GBA-PTBR.webp|0|1
+gba/Sound of Thunder (BR) (T1.0).gba|A Sound of Thunder|https://romsportugues.com/wp-content/uploads/2023/03/A-Sound-of-Thunder-PTBR-GBA.webp|0|1
+gba/Spider-Man - Battle for New York (BR) (T1.0).gba|Spider-Man – Battle for New York (GBA)|https://romsportugues.com/wp-content/uploads/2023/06/Spider-Man-Battle-for-New-York-GBA-PTBR.webp|0|1
+gba/Spider-Man - Mysterios Menace (BR).gba|Spider-Man – Mysterio’s Menace (Homem Aranha)|https://romsportugues.com/wp-content/uploads/2018/09/Spider-Man-Mysterios-Menace-PTBR-GBA.webp|0|1
+gba/Spider-Man 3 (BR).gba|Spider-Man 3 (GBA)|https://romsportugues.com/wp-content/uploads/2020/11/Spider-Man-3-GBA-PTBR-GBA.webp|0|1
+gba/Splinter Cell - Pandora Tomorrow (BR).gba|Splinter Cell – Pandora Tomorrow|https://romsportugues.com/wp-content/uploads/2018/09/Splinter-Cell-Pandora-Tomorrow-PTBR-GBA.webp|0|1
+gba/SpongeBob SquarePants - SuperSponge (BR).gba|SpongeBob SquarePants – SuperSponge|https://romsportugues.com/wp-content/uploads/2018/10/SpongeBob-SquarePants-SuperSponge-PTBR-GBA.webp|0|1
+gba/Star Wars - Episode III - Revenge of the Sith (BR).gba|Star Wars – Episode 3 – Revenge of the Sith|https://romsportugues.com/wp-content/uploads/2018/09/Star-Wars-Episode-3-Revenge-of-the-Sith-PTBR-GBA.webp|0|1
+gba/Star Wars Episode II - Attack Of The Clones (BR).gba|Star Wars – Episode 2 – Attack of the Clones|https://romsportugues.com/wp-content/uploads/2018/09/Star-Wars-–-Episode-2-–-Attack-of-the-Clones.webp|0|1
+gba/Strawberry Shortcake - Ice Cream Island - Riding Camp (PT) (Rev 1).gba|Strawberry Shortcake – Ice Cream Island – Riding Camp|https://romsportugues.com/wp-content/uploads/2020/03/Strawberry-Shortcake-Ice-Cream-Island-Riding-Camp-PTBR.webp|0|1
+gba/Super Bubble Pop (PT).gba|Super Bubble Pop|https://romsportugues.com/wp-content/uploads/2020/03/Super-Bubble-Pop-PTBR-GBA.webp|0|1
+gba/Super Ghouls N Ghosts (BR).gba|Super Ghouls ‘N Ghosts|https://romsportugues.com/wp-content/uploads/2018/08/Super-Ghoulsn-Ghosts-PTBR-GBA.webp|0|1
+gba/Sword of Mana (BR-U) (T2.0).gba|Sword of Mana|https://romsportugues.com/wp-content/uploads/2026/08/Sword-of-Mana-PTBR-GBA.webp|0|1
+gba/TMNT (BR).gba|TMNT (Tartarugas Ninjas) (GBA)|https://romsportugues.com/wp-content/uploads/2019/06/TMNT-GBA-PTBR.webp|0|1
+gba/Tak - The Great Juju Challenge (BR).gba|Tak – The Great Juju Challenge|https://romsportugues.com/wp-content/uploads/2018/10/Tak-The-Great-Juju-Challenge-PTBR-GBA.webp|0|1
+gba/Teenage Mutant Ninja Turtles (BR).gba|Teenage Mutant Ninja Turtles GBA|https://romsportugues.com/wp-content/uploads/2018/10/Teenage-Mutant-Ninja-Turtles-GBA-PTBR.webp|0|1
+gba/Teenage Mutant Ninja Turtles 2 (BR).gba|Teenage Mutant Ninja Turtles GBA|https://romsportugues.com/wp-content/uploads/2018/10/Teenage-Mutant-Ninja-Turtles-GBA-PTBR.webp|0|1
+gba/Tekken Advance (BR).gba|Tekken Advance|https://romsportugues.com/wp-content/uploads/2018/10/Tekken-Advance-PTBR-GBA.webp|0|1
+gba/The Grim Adventures of Billy & Mandy (BR).gba|The Grim Adventures of Billy e Mandy|https://romsportugues.com/wp-content/uploads/2018/08/The-Grim-Adventures-of-Billy-e-Mandy-PTBR.webp|0|1
+gba/The Hobbit (BR).GBA|The Hobbit|https://romsportugues.com/wp-content/uploads/2018/09/The-Hobbit-PTBR-GBA.webp|0|1
+gba/The Incredibles (BR).GBA|The Incredibles|https://romsportugues.com/wp-content/uploads/2018/09/The-Incredibles-PTBR-GBA.webp|0|1
+gba/The Land Before Time (BR).gba|The Land Before Time|https://romsportugues.com/wp-content/uploads/2018/09/The-Land-Before-Time-PTBR-GBA.webp|0|1
+gba/The Lord of the Rings - the Fellowship of the Ring (BR).gba|The Lord of The Rings – The Fellowship of The Ring|https://romsportugues.com/wp-content/uploads/2018/10/The-Lord-of-The-Rings-The-Fellowship-of-The-Ring-PTBR-GBA.webp|0|1
+gba/The Revenge of Shinobi (BR).gba|The Revenge of Shinobi|https://romsportugues.com/wp-content/uploads/2018/08/The-Revenge-of-Shinobi-PTBR-GBA.webp|0|1
+gba/The Scorpion King - Sword of Osiris (BR).gba|The Scorpion King – Sword of Osiris|https://romsportugues.com/wp-content/uploads/2018/08/The-Scorpion-King-Sword-of-Osiris-PTBR.webp|0|1
+gba/Tom Clancy's Splinter Cell (BR).gba|Splinter Cell GBA|https://romsportugues.com/wp-content/uploads/2018/08/Splinter-Cell-GBA-PTBR.webp|0|1
+gba/Tomb Raider The Prophecy (BR).gba|Tomb Raider – The Prophecy|https://romsportugues.com/wp-content/uploads/2018/09/Tomb-Raider-The-Prophecy-PTBR-GBA.webp|0|1
+gba/Totally Spies! (BR).gba|Totally Spies!|https://romsportugues.com/wp-content/uploads/2018/09/Totally-Spies-PTBR-GBA.webp|0|1
+gba/Van Helsing (BR).gba|Van Helsing GBA|https://romsportugues.com/wp-content/uploads/2018/09/Van-Helsing-GBA-PTBR.webp|0|1
+gba/X-Men 2 - Wolverines Revenge (BR).gba|X-Men – The Official Game|https://romsportugues.com/wp-content/uploads/2018/09/X-Men-The-Official-Game-PTBR.webp|0|1
+gba/X-Men 3 - The Official Game (BR).gba|X-Men – The Official Game|https://romsportugues.com/wp-content/uploads/2018/09/X-Men-The-Official-Game-PTBR.webp|0|1
+gba/X-Men Reign Apocalypse (BR).GBA|X-Men – Reign of Apocalypse|https://romsportugues.com/wp-content/uploads/2018/09/X-Men-Reign-of-Apocalypse-PTBR.webp|0|1
+gba/Yu Yu Hakusho - Spirit Detective (BR).gba|Yu Yu Hakusho – Spirit Detective|https://romsportugues.com/wp-content/uploads/2018/09/Yu-Yu-Hakusho-Spirit-Detective-PTBR-GBA.webp|0|1
+gba/Yu Yu Hakusho - Tournament Tactics (BR).gba|Yu Yu Hakusho – Tournament Tactics|https://romsportugues.com/wp-content/uploads/2018/09/Yu-Yu-Hakusho-Tournament-Tactics-PTBR-GBA.webp|0|1
+gba/Yu-Gi-Oh! - Reshef of Destruction (BR).gba|Yu-Gi-Oh! – Reshef of Destruction|https://romsportugues.com/wp-content/uploads/2021/02/Yu-Gi-Oh-Reshef-of-Destruction-PTBR-GBA.webp|0|1
+gba/Zatchbell! - Electric Arena (BR).gba|Zatch Bell! Electric Arena|https://romsportugues.com/wp-content/uploads/2018/07/Zathbell-Electric-Arena-PTBR-GBA.webp|0|1
+gbc/102 Dalmatians - Puppies to the Rescue (BR).gbc|102 Dalmatians – Puppies to the Rescue|https://romsportugues.com/wp-content/uploads/2018/08/102-Dalmatians-Puppies-to-the-Rescue-PTBR-GBC.webp|0|1
+gbc/Air Force Delta (BR).gbc|AirForce Delta|https://romsportugues.com/wp-content/uploads/2018/08/AirForce-Delta-PTBR-GBC.webp|0|1
+gbc/Alone in the Dark - The New Nightmare (BR).gbc|Alone in The Dark – The New Nightmare GBC|https://romsportugues.com/wp-content/uploads/2018/07/Alone-in-The-Dark-The-New-Nightmare-GBC-PTBR.webp|0|1
+gbc/Army Men (BR).gbc|Army Men|https://romsportugues.com/wp-content/uploads/2018/08/Army-Men-GBC-PTBR.webp|0|1
+gbc/Batman Beyond - Return of the Joker (BR).gbc|Batman Beyond – Return of the Joker|https://romsportugues.com/wp-content/uploads/2018/07/Batman-Beyond-Return-of-the-Joker-PTBR.webp|0|1
+gbc/Bionic Commando - Elite Forces (BR).gbc|Bionic Commando – Elite Forces|https://romsportugues.com/wp-content/uploads/2018/09/Bionic-Commando-Elite-Forces-PTBR-GBC.webp|0|1
+gbc/Bomberman Max - Blue Campion (BR).gbc|Bomberman Max – Blue Champion|https://romsportugues.com/wp-content/uploads/2018/08/Bomberman-Max-Blue-Champion-PTBR-GBC.webp|0|1
+gbc/Bubble Bobble (BR).gbc|Bubble Bobble|https://romsportugues.com/wp-content/uploads/2018/08/Bubble-Bobble-PTBR.webp|0|1
+gbc/Buffy - The Vampire Slayer (BR).gbc|Buffy – The Vampire Slayer|https://romsportugues.com/wp-content/uploads/2018/08/Buffy-The-Vampire-Slayer-PTBR-GBC.webp|0|1
+gbc/Croc (BR).gbc|Croc|https://romsportugues.com/wp-content/uploads/2018/09/Croc-GBC-PTBR.webp|0|1
+gbc/Crystalis (BR) (TKuroi-2017).gbc|Crystalis|https://romsportugues.com/wp-content/uploads/2018/08/Crystalis-PTBR-GBC.webp|0|1
+gbc/Driver - You are the Wheelman (BR).gbc|Driver – You are the Wheelman GBC|https://romsportugues.com/wp-content/uploads/2018/10/Driver-You-are-the-Wheelman-GBC-PTBR.webp|0|1
+gbc/Extreme Ghostbusters (PT).gbc|Extreme Ghostbusters|https://romsportugues.com/wp-content/uploads/2019/02/Extreme-Ghostbusters-PTBR-GBC.webp|0|1
+gbc/Fort Boyard (PT).gbc|Fort Boyard|https://romsportugues.com/wp-content/uploads/2019/03/Fort-Boyard-GBC-PTBR.webp|0|1
+gbc/Gex - Enter the Gecko (BR).gbc|Gex – Enter the Gecko|https://romsportugues.com/wp-content/uploads/2018/09/Gex-Enter-the-Gecko-PTBR-GBC.webp|0|1
+gbc/Gremlins Unleashed (PT).gbc|Gremlins Unleashed|https://romsportugues.com/wp-content/uploads/2019/04/Gremlins-Unleashed-GBC.webp|0|1
+gbc/Harry Potter and The Chamber of Secrets (BR).gbc|Harry Potter and the Chamber of Secrets (GBC) (Câmara Secreta)|https://romsportugues.com/wp-content/uploads/2019/09/Harry-Potter-and-the-Chamber-of-Secrets-GBC-PTBR.webp|0|1
+gbc/Harry Potter and the Sorcerer's Stone (BR).gbc|Harry Potter and the Sorcerer’s Stone (GBC) (Pedra Filosofal)|https://romsportugues.com/wp-content/uploads/2018/12/Harry-Potter-and-the-Sorcerers-Stone-GBC-PTBR.webp|0|1
+gbc/Harvest Moon 2 (BR).gbc|Harvest Moon GBC 2|https://romsportugues.com/wp-content/uploads/2018/07/Harvest-Moon-GBC-2-PTBR.webp|0|1
+gbc/Harvest Moon 3 GBC (BR).gbc|Harvest Moon GBC 3|https://romsportugues.com/wp-content/uploads/2018/07/Harvest-Moon-GBC-PTBR.webp|0|1
+gbc/Harvest Moon GB (BR).gbc|Harvest Moon GBC|https://romsportugues.com/wp-content/uploads/2018/07/Harvest-Moon-GBC-1-PTBR.webp|0|1
+gbc/Hugo - Black Diamond Fever (BR).gbc|Hugo – Black Diamond Fever|https://romsportugues.com/wp-content/uploads/2019/05/Hugo-Black-Diamond-Fever-GBC.webp|0|1
+gbc/International Superstar Soccer 99 (BR).gbc|International Superstar Soccer ’99|https://romsportugues.com/wp-content/uploads/2018/08/International-Superstar-Soccer-99-PTBR-GBC.webp|0|1
+gbc/Kirikou (PT) (C).gbc|Kirikou|https://romsportugues.com/wp-content/uploads/2019/06/Kirikou-PTBR-GBC.webp|0|1
+gbc/LEGO Stunt Rally (BR).gbc|LEGO Stunt Rally|https://romsportugues.com/wp-content/uploads/2018/08/LEGO-Stunt-Rally-PTBR-GBC.webp|0|1
+gbc/Lego Alpha Team (BR).gbc|LEGO Alpha Team|https://romsportugues.com/wp-content/uploads/2018/12/LEGO-Alpha-Team-PTBR-GBC.webp|0|1
+gbc/Lego Island 2 - The Brickster's Revenge (BR).gbc|Lego Island 2 – The Brickster’s Revenge|https://romsportugues.com/wp-content/uploads/2018/11/Lego-Island-2-The-Bricksters-Revenge-PTBR-GBC.webp|0|1
+gbc/Lego Racers (BR).gbc|LEGO Racers|https://romsportugues.com/wp-content/uploads/2018/11/LEGO-Racers-PTBR-GBC.webp|0|1
+gbc/Lufia - The Legend Returns (BR) (T1.2).gbc|Lufia: The Legend Returns|https://romsportugues.com/wp-content/uploads/2026/10/Lufia-The-Legend-Returns-PTBR-GBC.webp|0|1
+gbc/NYR - N.Y. Race (BR).gbc|NYR: New York Race|https://romsportugues.com/wp-content/uploads/2019/06/NYR-New-York-Race-PTBR-GBC.webp|0|1
+gbc/New Addams Family Series, The (PT).gbc|The New Addams Family|https://romsportugues.com/wp-content/uploads/2019/07/The-New-Addams-Family-PTBR-GBC.webp|0|1
+gbc/Perfect Dark (BR).gbc|Perfect Dark|https://romsportugues.com/wp-content/uploads/2018/08/Perfect-Dark-PTBR-GBC.webp|0|1
+gbc/Pocket Bomberman (BR).gbc|Pocket Bomberman|https://romsportugues.com/wp-content/uploads/2018/08/Pocket-Bomberman-PTBR.webp|0|1
+gbc/Pocket Soccer (BR).gbc|Pocket Soccer|https://romsportugues.com/wp-content/uploads/2019/08/Pocket-Soccer-GBC-PTBR.webp|0|1
+gbc/Power Spike - Pro Beach Volleyball (BR).gbc|Power Spike – Pro Beach Volleyball|https://romsportugues.com/wp-content/uploads/2018/08/Power-Spike-Pro-Beach-Volleyball-PTBR-GBC.webp|0|1
+gbc/Return of the Ninja (BR).gbc|Return of the Ninja|https://romsportugues.com/wp-content/uploads/2018/08/Return-of-the-Ninja-PTBR.webp|0|1
+gbc/Ronaldo V-Football (PT).gbc|Ronaldo V-Football|https://romsportugues.com/wp-content/uploads/2018/12/Ronaldo-V-Football-PTBR-GBC.webp|0|1
+gbc/Shantae (BR) T1.0-Dance-Fix).gbc|Shantae|https://romsportugues.com/wp-content/uploads/2018/08/Shantae-PTBR-GBC.webp|0|1
+gbc/Shantae (BR) T1.0-Dance-Fix+GBA-Color-Fix).gbc|Shantae|https://romsportugues.com/wp-content/uploads/2018/08/Shantae-PTBR-GBC.webp|0|1
+gbc/SnowCross (PT).gbc|Polaris Snowcross|https://romsportugues.com/wp-content/uploads/2018/11/SnowCross-PTBR-GBC.webp|0|1
+gbc/Spider-Man (BR).gbc|Spider-Man GBC|https://romsportugues.com/wp-content/uploads/2018/08/Spider-Man-GBC-PTBR.webp|0|1
+gbc/Spider-Man 2 - The Sinister Six (BR).gbc|Spider-Man 2 – The Sinister Six GBC|https://romsportugues.com/wp-content/uploads/2018/08/Spider-Man-2-The-Sinister-Six-GBC-PTBR.webp|0|1
+gbc/Star Wars Episode I - Obi-Wan's Adventures (BR).gbc|Star Wars Episode I – Obi-Wan’s Adventures|https://romsportugues.com/wp-content/uploads/2018/08/Star-Wars-Episode-I-Obi-Wans-Adventures-GBC-PTBR.webp|0|1
+gbc/Survival Kids - Boy (BR).gbc|Survival Kids|https://romsportugues.com/wp-content/uploads/2020/03/Survival-Kids-PTBR-GBC.webp|0|1
+gbc/Survival Kids - Girl (BR).gbc|Survival Kids|https://romsportugues.com/wp-content/uploads/2020/03/Survival-Kids-PTBR-GBC.webp|0|1
+gbc/Suzuki Alstare Extreme Racing (BR).gbc|Suzuki Alstare Extreme Racing|https://romsportugues.com/wp-content/uploads/2018/09/Suzuki-Alstare-Extreme-Racing-PTBR-GBC.webp|0|1
+gbc/Tetris DX (BR).gbc|Tetris DX|https://romsportugues.com/wp-content/uploads/2018/08/Tetris-DX-GBC-PTBR.webp|0|1
+gbc/Top Gear Pocket (BR).gbc|Top Gear Pocket|https://romsportugues.com/wp-content/uploads/2018/08/Top-Gear-Pocket-PTBR-GBC.webp|0|1
+gbc/Yu-Gi-Oh! Dark Duel Stories (BR).gbc|Yu-Gi-Oh! Dark Duel Stories|https://romsportugues.com/wp-content/uploads/2019/07/Yu-Gi-Oh-Dark-Duel-Stories-GBC-PTBR.webp|0|1
+sms/Action Fighter (BR).sms|Action Fighter|https://romsportugues.com/wp-content/uploads/2018/08/Action-Fighter-PTBR-Master-System.webp|0|1
+sms/Aerial Assault (BR).sms|Aerial Assault|https://romsportugues.com/wp-content/uploads/2018/08/Aerial-Assault-PTBR-Master-System.webp|0|1
+sms/Air Rescue (BR).sms|Air Rescue|https://romsportugues.com/wp-content/uploads/2018/11/Air-Rescue-PTBR-Master-System.webp|0|1
+sms/Alex Kidd - High-Tech World (BR).sms|Alex Kidd in High Tech World|https://romsportugues.com/wp-content/uploads/2018/08/Alex-Kidd-in-High-Tech-World-PTBR.webp|0|1
+sms/Alex Kidd in Miracle World (BR).sms|Alex Kidd in Miracle World|https://romsportugues.com/wp-content/uploads/2018/08/Alex-Kidd-in-Miracle-World-PTBR-Master-System.webp|0|1
+sms/Alex Kidd in Shinobi World (BR).sms|Alex Kidd in Shinobi World|https://romsportugues.com/wp-content/uploads/2018/08/Alex-Kidd-in-Shinobi-World-PTBR-Master-System.webp|0|1
+sms/Alien Syndrome (BR).sms|Alien Syndrome|https://romsportugues.com/wp-content/uploads/2021/04/Alien-Syndrome-PTBR-Master-System.webp|0|1
+sms/Altered Beast (BR).sms|Altered Beast|https://romsportugues.com/wp-content/uploads/2018/10/Altered-Beast-PTBR-Master-System.webp|0|1
+sms/Andre Agassi Tennis (BR).sms|Andre Agassi Tennis|https://romsportugues.com/wp-content/uploads/2018/11/Andre-Agassi-Tennis-PTBR-Master-System.webp|0|1
+sms/Argos no Juujiken (BR).sms|Argos no Juujiken|https://romsportugues.com/wp-content/uploads/2018/11/Argos-no-Juujiken-PTBR-Master-System.webp|0|1
+sms/Ayrton Senna's Super Monaco GP II (BR).sms|Ayrton Senna’s Super Monaco GP 2 (Master System)|https://romsportugues.com/wp-content/uploads/2018/11/Ayrton-Sennas-Super-Monaco-GP-2-Master-System.webp|0|1
+sms/Black Belt (BR).sms|Black Belt|https://romsportugues.com/wp-content/uploads/2018/11/Black-Belt-PTBR-Master-System.webp|0|1
+sms/Blade Eagle 3D (BR).sms|Blade Eagle 3D|https://romsportugues.com/wp-content/uploads/2018/10/Blade-Eagle-3D-PTBR-Master-System.webp|0|1
+sms/Bonanza Bros. (BR).sms|Bonanza Bros.|https://romsportugues.com/wp-content/uploads/2021/09/Bonanza-Bros.-PTBR-Master-System.webp|0|1
+sms/Bram Stoker's Dracula (BR).sms|Bram Stoker’s Dracula (Master System)|https://romsportugues.com/wp-content/uploads/2018/08/Bram-Stokers-Dracula-PTBR-Master-System.webp|0|1
+sms/Castle of Illusion Starring Mickey Mouse (BR).sms|Castle of Illusion|https://romsportugues.com/wp-content/uploads/2018/10/Castle-of-Illusion-PTBR-Master-System.webp|0|1
+sms/Choplifter (BR).sms|Choplifter|https://romsportugues.com/wp-content/uploads/2018/10/Choplifter-PTBR-Master-System.webp|0|1
+sms/Cloud Master (BR).sms|Cloud Master|https://romsportugues.com/wp-content/uploads/2018/11/Cloud-Master-PTBR-Master-System.webp|0|1
+sms/Columns (BR).sms|Columns|https://romsportugues.com/wp-content/uploads/2018/11/Columns-PTBR-Master-System.webp|0|1
+sms/Cyborg Hunter (BR).sms|Cyborg Hunter|https://romsportugues.com/wp-content/uploads/2018/11/Cyborg-Hunter-PTBR-Master-System.webp|0|1
+sms/Daffy Duck in Hollywood (BR).sms|Daffy Duck in Hollywood|https://romsportugues.com/wp-content/uploads/2018/10/Daffy-Duck-in-Hollywood-PTBR-Master-System.webp|0|1
+sms/Danan the Jungle Fighter (BR) (T3.1).sms|Danan: The Jungle Fighter|https://romsportugues.com/wp-content/uploads/2023/12/Danan-The-Jungle-Fighter-PTBR-Master-System.webp|0|1
+sms/Disney's Aladdin (BR) (NMega).bin|Disney’s Aladdin (Master System)|https://romsportugues.com/wp-content/uploads/2024/07/Disneys-Aladdin-PTBR-Master-System.webp|0|1
+sms/Dragon - The Bruce Lee Story (BR).bin|Dragon – The Bruce Lee Story (Master System)|https://romsportugues.com/wp-content/uploads/2018/08/Dragon-The-Bruce-Lee-Story-PTBR-Master-System.webp|0|1
+sms/Gain Ground (BR).sms|Gain Ground|https://romsportugues.com/wp-content/uploads/2018/11/Gain-Ground-PTBR-Master-System.webp|0|1
+sms/Ghost House (BR).sms|Ghost House|https://romsportugues.com/wp-content/uploads/2018/11/Ghost-House-PTBR-Master-System.webp|0|1
+sms/Golden Axe Warrior (BR).sms|Golden Axe Warrior|https://romsportugues.com/wp-content/uploads/2018/10/Golden-Axe-Warrior-PTBR-Master-System.webp|0|1
+sms/Golvellius (BR).sms|Golvellius – Valley of Doom|https://romsportugues.com/wp-content/uploads/2018/10/Golvellius-Valley-of-Doom-PTBR-Master-System.webp|0|1
+sms/Jungle Book, The (BR).sms|The Jungle Book|https://romsportugues.com/wp-content/uploads/2018/11/The-Jungle-Book-PTBR-Master-System.webp|0|1
+sms/Kenseiden (BR).sms|Kenseiden|https://romsportugues.com/wp-content/uploads/2018/11/Kenseiden-PTBR-Master-System.webp|0|1
+sms/Lord of the Sword (BR).sms|Lord of the Sword|https://romsportugues.com/wp-content/uploads/2018/11/Lord-of-the-Sword-PTBR-Master-System.webp|0|1
+sms/Master of Darkness (BR).sms|Master of Darkness|https://romsportugues.com/wp-content/uploads/2018/11/Master-of-Darkness-PTBR-Master-System.webp|0|1
+sms/Mortal Kombat (BR).sms|Mortal Kombat – Master System|https://romsportugues.com/wp-content/uploads/2018/10/Mortal-Kombat-PTBR-Master-System.webp|0|1
+sms/Ninja Gaiden (BR).sms|Ninja Gaiden (Master System)|https://romsportugues.com/wp-content/uploads/2018/10/Ninja-Gaiden-PTBR-Master-System.webp|0|1
+sms/Olympic Gold (PT).sms|Olympic Gold (Master System)|https://romsportugues.com/wp-content/uploads/2019/04/Olympic-Gold-PTBR-Master-System.webp|0|1
+sms/Phantasy Star (BR-J) (T2.5).sms|Phantasy Star|https://romsportugues.com/wp-content/uploads/2024/04/Phantasy-Star-PTBR-Master-System.webp|0|1
+sms/Psychic World (BR).sms|Psychic World|https://romsportugues.com/wp-content/uploads/2018/11/Psychic-World-PTBR-Master-System.webp|0|1
+sms/R-Type (BR).sms|R-Type (Master System)|https://romsportugues.com/wp-content/uploads/2018/11/R-Type-Master-System-PTBR.webp|0|1
+sms/Renegade (BR).sms|Renegade|https://romsportugues.com/wp-content/uploads/2018/11/Renegade-PTBR-Master-System.webp|0|1
+sms/Sega Chess (BR).sms|Sega Chess|https://romsportugues.com/wp-content/uploads/2018/11/Sega-Chess-PTBR-Master-System.webp|0|1
+sms/Shinobi (BR).sms|Shinobi (Master System)|https://romsportugues.com/wp-content/uploads/2018/11/Shinobi-Master-System-PTBR.webp|0|1
+sms/Streets of Rage 2 (BR).bin|Streets of Rage 2 (Master System)|https://romsportugues.com/wp-content/uploads/2018/11/Streets-of-Rage-2-Master-System-PTBR.webp|0|1
+sms/Super Kick Off (PT).sms|Super Kick Off|https://romsportugues.com/wp-content/uploads/2019/04/Super-Kick-Off-PTBR-Master-System.webp|0|1
+sms/Superman - The Man of Steel (BR).sms|Superman – The Man of Steel|https://romsportugues.com/wp-content/uploads/2018/11/Superman-The-Man-of-Steel-PTBR-Master-System.webp|0|1
+sms/Terminator, The (BR) (T1.09).sms|The Terminator (Master System)|https://romsportugues.com/wp-content/uploads/2024/09/The-Terminator-Master-System-PTBR.webp|0|1
+sms/The Smurfs (BR) (T1.0).sms|The Smurfs (Master System)|https://romsportugues.com/wp-content/uploads/2024/02/The-Smurfs-Master-System-PTBR-Master-System.webp|0|1
+sms/Time Soldiers (BR).sms|Time Soldiers|https://romsportugues.com/wp-content/uploads/2018/11/Time-Soldiers-PTBR-Master-System.webp|0|1
+sms/Tom and Jerry - The Movie (BR).sms|Tom and Jerry – The Movie|https://romsportugues.com/wp-content/uploads/2018/11/Tom-and-Jerry-The-Movie-PTBR-Master-System.webp|0|1
+sms/Where in the World Is Carmen Sandiego (BR).bin|Where in the World is Carmen Sandiego (Master System)|https://romsportugues.com/wp-content/uploads/2018/10/Where-in-the-World-is-Carmen-Sandiego-PTBR.webp|0|1
+sms/Winter Olympics - Lillehammer '94 (PT).sms|Winter Olympics – Lillehammer ’94 (Master System)|https://romsportugues.com/wp-content/uploads/2019/05/Winter-Olympics-Lillehammer-94-PTBR-Master-System.webp|0|1
+sms/World Cup Italia '90 (BR).sms|World Cup Italia ’90|https://romsportugues.com/wp-content/uploads/2018/11/World-Cup-Italia-90-PTBR-Master-System.webp|0|1
+sms/World Cup USA 94 (PT).sms|World Cup USA 94 (Master Sytem)|https://romsportugues.com/wp-content/uploads/2019/05/World-Cup-USA-94-Master-Sytem-PTBR.webp|0|1
+sms/Zillion (BR).sms|Zillion|https://romsportugues.com/wp-content/uploads/2018/11/Zillion-PTBR-Master-System.webp|0|1
+sms/Zillion II - The Tri Formation (BR).sms|Zillion 2 – The Tri Formation|https://romsportugues.com/wp-content/uploads/2018/11/Zillion-2-The-Tri-Formation-PTBR-Master-System.webp|0|1
+megadrive/Adventures of Batman & Robin, The (BR).bin|The Adventures of Batman and Robin|https://romsportugues.com/wp-content/uploads/2018/11/The-Adventures-of-Batman-and-Robin-PTBR-Mega-Drive.webp|0|1
+megadrive/Aero the Acro-Bat 2 (BR).md|Aero the Acro-Bat 2|https://romsportugues.com/wp-content/uploads/2018/07/Aero-the-Acro-Bat-2-PTBR.webp|0|1
+megadrive/After Burner II (BR).md|After Burner II|https://romsportugues.com/wp-content/uploads/2018/08/After-Burner-II-PTBR.webp|0|1
+megadrive/Alex Kidd in the Enchanted Castle (BR).md|Alex Kidd in the Enchanted Castle|https://romsportugues.com/wp-content/uploads/2018/08/Alex-Kidd-in-the-Enchanted-Castle-PTBR.webp|0|1
+megadrive/Alien 3 (BR).md|Alien 3 Mega Drive|https://romsportugues.com/wp-content/uploads/2018/07/Alien-3-Mega-Drive-PTBR.webp|0|1
+megadrive/Alien Soldier (BR).md|Alien Soldier|https://romsportugues.com/wp-content/uploads/2018/08/Alien-Soldier-PTBR.webp|0|1
+megadrive/Alien Storm (BR).md|Alien Storm|https://romsportugues.com/wp-content/uploads/2018/08/Alien-Storm-PTBR.webp|0|1
+megadrive/Arrow Flash (BR) (T1.0).md|Arrow Flash|https://romsportugues.com/wp-content/uploads/2024/05/Arrow-Flash-PTBR-Mega-Drive.webp|0|1
+megadrive/Atomic Runner (BR).md|Atomic Runner|https://romsportugues.com/wp-content/uploads/2019/07/Atomic-Runner-PTBR-Mega-Drive.webp|0|1
+megadrive/Ayrton Senna's Super Monaco GP II (BR).md|Ayrton Senna’s Super Monaco GP II|https://romsportugues.com/wp-content/uploads/2018/11/Ayrton-Sennas-Super-Monaco-GP-II-PTBR.webp|0|1
+megadrive/BattleToads (BR) (T0.2k2).smd|Battletoads (Mega Drive)|https://romsportugues.com/wp-content/uploads/2022/09/Battletoads-Mega-Drive-PTBR-Mega-Drive.webp|0|1
+megadrive/Beyond Oasis (BR).gen|Beyond Oasis – The Story of Thor: A Successor of The Light|https://romsportugues.com/wp-content/uploads/2020/02/Beyond-Oasis-PTBR-Mega-Drive.webp|0|1
+megadrive/Bishoujo Senshi Sailor Moon (BR).md|Bishoujo Senshi Sailor Moon (Dublado)|https://romsportugues.com/wp-content/uploads/2021/06/Bishoujo-Senshi-Sailor-Moon-Dublado-PTBR-Mega-Drive.webp|0|1
+megadrive/California Games (BR).bin|California Games (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/California-Games-Mega-Drive-PTBR.webp|0|1
+megadrive/Captain Planet and the Planeteers (BR).md|Captain Planet and the Planeteers|https://romsportugues.com/wp-content/uploads/2018/11/Captain-Planet-and-the-Planeteers-PTBR-Mega-Drive.webp|0|1
+megadrive/Castle of Illusion Starring Mickey Mouse (BR).md|Castle of Illusion (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/Castle-of-Illusion-Mega-Drive-PTBR.webp|0|1
+megadrive/Chakan (BR).bin|Chakan – The Forever Man|https://romsportugues.com/wp-content/uploads/2018/11/Chakan-The-Forever-Man-PTBR-Mega-Drive.webp|0|1
+megadrive/Chuck Rock II - Son of Chuck (BR).md|Chuck Rock II – Son of Chuck|https://romsportugues.com/wp-content/uploads/2018/11/Chuck-Rock-II-Son-of-Chuck-PTBR-Mega-Drive.webp|0|1
+megadrive/Comix Zone (BR).md|Comix Zone|https://romsportugues.com/wp-content/uploads/2018/07/Comix-Zone-PTBR-Mega-Drive.webp|0|1
+megadrive/Contra - Hard Corps (BR).bin|Contra – Hard Corps|https://romsportugues.com/wp-content/uploads/2018/11/Contra-Hard-Corps-PTBR.webp|0|1
+megadrive/Crusader of Centy (BR).bin|Crusader of Centy|https://romsportugues.com/wp-content/uploads/2018/11/Crusader-of-Centy-PTBR-Mega-Drive.webp|0|1
+megadrive/Dinosaur's Tale, A (BR).md|A Dinosaur’s Tale|https://romsportugues.com/wp-content/uploads/2019/06/A-Dinosaurs-Tale-PTBR-Mega-Drive.webp|0|1
+megadrive/Donald in Maui Mallard (BR).bin|Donald in Maui Mallard|https://romsportugues.com/wp-content/uploads/2018/11/Donald-in-Maui-Mallard-PTBR-Mega-Drive.webp|0|1
+megadrive/Dragon - The Bruce Lee Story (BR).bin|Dragon – The Bruce Lee Story (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/Dragon-The-Bruce-Lee-Story-Mega-Drive-PTBR.webp|0|1
+megadrive/Dynamite Duke (BR).md|Dynamite Duke|https://romsportugues.com/wp-content/uploads/2018/11/Dynamite-Duke-PTBR-Mega-Drive.webp|0|1
+megadrive/ESWAT - City Under Siege (BR).md|ESWAT – City Under Siege|https://romsportugues.com/wp-content/uploads/2018/11/ESWAT-City-Under-Siege-PTBR.jpg|0|1
+megadrive/Earnest Evans (BR).md|Earnest Evans|https://romsportugues.com/wp-content/uploads/2018/11/Earnest-Evans-PTBR-Mega-Drive.webp|0|1
+megadrive/Ecco the Dolphin (BR).bin|Ecco – The Dolphin|https://romsportugues.com/wp-content/uploads/2018/11/Ecco-The-Dolphin-PTBR-Mega-Drive.webp|0|1
+megadrive/El. Viento (BR).bin|El Viento|https://romsportugues.com/wp-content/uploads/2018/11/El-Viento-PTBR-Mega-Drive.webp|0|1
+megadrive/Elemental Master (BR) (T1.0).bin|Elemental Master|https://romsportugues.com/wp-content/uploads/2023/01/Elemental-Master-PTBR-Mega-Drive.webp|0|1
+megadrive/Ferias Frustradas do Pica-Pau (BR).bin|As Férias Frustradas do Pica Pau (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/As-Ferias-Frustradas-do-Pica-Pau-Mega-Drive-PTBR.webp|0|1
+megadrive/Fighting Masters (BR).md|Fighting Masters|https://romsportugues.com/wp-content/uploads/2018/11/Fighting-Masters-PTBR.webp|0|1
+megadrive/Flashback - The Quest for Identity (BR).md|Flashback (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/Flashback-Mega-Drive-PTBR.webp|0|1
+megadrive/Flicky (BR-U-E) (T1.0).md|Flicky|https://romsportugues.com/wp-content/uploads/2026/07/Flicky-PTBR-Mega-Drive.webp|0|1
+megadrive/Flintstones, The (BR).gen|The Flintstones|https://romsportugues.com/wp-content/uploads/2018/11/The-Flintstones-PTBR-Mega-Drive.webp|0|1
+megadrive/Fushigi no Umi no Nadia (BR).md|Fushigi no umi no Nadia|https://romsportugues.com/wp-content/uploads/2021/05/Fushigi-no-umi-no-Nadia-PTBR-Mega-Drive.webp|0|1
+megadrive/Gaiares (BR).md|Gaiares|https://romsportugues.com/wp-content/uploads/2018/11/Gaiares-PTBR-Mega-Drive.webp|0|1
+megadrive/Gargoyles (BR).md|Gargoyles|https://romsportugues.com/wp-content/uploads/2018/11/Gargoyles-PTBR-Mega-Drive.webp|0|1
+megadrive/Gods (BR) (T1.0) (Fontes Flat).md|GODS|https://romsportugues.com/wp-content/uploads/2024/01/GODS-PTBR-Mega-Drive.webp|0|1
+megadrive/Gods (BR) (T1.0).md|GODS|https://romsportugues.com/wp-content/uploads/2024/01/GODS-PTBR-Mega-Drive.webp|0|1
+megadrive/Golden Axe (BR).gen|Golden Axe|https://romsportugues.com/wp-content/uploads/2018/07/Golden-Axe-PTBR-Mega-Drive.webp|0|1
+megadrive/Golden Axe II (BR).md|Golden Axe II|https://romsportugues.com/wp-content/uploads/2018/07/Golden-Axe-II-PTBR.webp|0|1
+megadrive/Golden Axe III (BR).bin|Golden Axe III|https://romsportugues.com/wp-content/uploads/2018/07/Golden-Axe-III-PTBR.webp|0|1
+megadrive/Goofy's Hysterical History Tour (BR).md|Goofy’s Hysterical History Tour|https://romsportugues.com/wp-content/uploads/2018/11/Goofys-Hysterical-History-Tour-PTBR-Mega-Drive.webp|0|1
+megadrive/Greendog - The Beached Surfer Dude! (BR).bin|Greendog – The Beached Surfer Dude!|https://romsportugues.com/wp-content/uploads/2018/11/Greendog-The-Beached-Surfer-Dude-PTBR-Mega-Drive.webp|0|1
+megadrive/Haunting Starring Polterguy (BR) (T1.1).md|Haunting Starring Polterguy|https://romsportugues.com/wp-content/uploads/2023/04/Haunting-Starring-Polterguy-PTBR-Mega-Drive.webp|0|1
+megadrive/Insector X (BR).md|Insector X|https://romsportugues.com/wp-content/uploads/2018/11/Insector-X-PTBR-Mega-Drive.webp|0|1
+megadrive/Joe & Mac (BR).md|Joe & Mac (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/Joe-Mac-PTBR-Mega-Drive.webp|0|1
+megadrive/JuJu Densetsu (BR).gen|JuJu Densetsu – Toki|https://romsportugues.com/wp-content/uploads/2018/11/JuJu-Densetsu-PTBR-Mega-Drive.webp|0|1
+megadrive/Kid Chameleon (BR) (Solid) (T1.0).md|Kid Chameleon|https://romsportugues.com/wp-content/uploads/2018/11/Kid-Chameleon-PTBR-Mega-Drive.webp|0|1
+megadrive/Landstalker (BR).bin|Landstalker – The Treasures of King Nole|https://romsportugues.com/wp-content/uploads/2018/10/Landstalker-PTBR.webp|0|1
+megadrive/Legend Of Wukong (BR).bin|Legend Of Wukong|https://romsportugues.com/wp-content/uploads/2021/02/Legend-Of-Wukong-PTBR-Mega-Drive.webp|0|1
+megadrive/Lemmings (BR).md|Lemmings (Mega Drive)|https://romsportugues.com/wp-content/uploads/2019/08/Lemmings-Mega-Drive-PTBR-Mega-Drive.webp|0|1
+megadrive/Light Crusader (BR).gen|Light Crusader|https://romsportugues.com/wp-content/uploads/2018/10/Light-Crusader-PTBR.webp|0|1
+megadrive/Lost World, The - Jurassic Park (BR).gen|The Lost World – Jurassic Park|https://romsportugues.com/wp-content/uploads/2019/05/The-Lost-World-Jurassic-Park-PTBR-Mega-Drive.webp|0|1
+megadrive/MUSHA - Metallic Uniframe Super Hybrid Armor (BR).gen|M.U.S.H.A.|https://romsportugues.com/wp-content/uploads/2018/11/M.U.S.H.A.-PTBR-Mega-Drive.webp|0|1
+megadrive/Marsupilami (BR).md|Marsupilami|https://romsportugues.com/wp-content/uploads/2018/11/Marsupilami-PTBR-Mega-Drive.webp|0|1
+megadrive/McDonald's Treasure Land Adventure (BR).gen|McDonald’s Treasure Land Adventure|https://romsportugues.com/wp-content/uploads/2018/11/McDonalds-Treasure-Land-Adventure-PTBR-Mega-Drive.webp|0|1
+megadrive/Mega Man - The Wily Wars (BR).gen|Mega Man – The Wily Wars|https://romsportugues.com/wp-content/uploads/2018/11/Mega-Man-The-Wily-Wars-PTBR-Mega-Drive.webp|0|1
+megadrive/Mercs (BR).md|Mercs|https://romsportugues.com/wp-content/uploads/2018/11/Mercs-PTBR-Mega-Drive.webp|0|1
+megadrive/Michael Jackson's Moonwalker (BR).bin|Michael Jackson’s Moonwalker|https://romsportugues.com/wp-content/uploads/2018/11/Michael-Jacksons-Moonwalker-PTBR-Mega-Drive.webp|0|1
+megadrive/Micro Machines Military (BR).md|Micro Machines Military|https://romsportugues.com/wp-content/uploads/2020/02/Micro-Machines-Military-PTBR-Mega-Drive.webp|0|1
+megadrive/Micro Machines Turbo Tournament 96 (PT).md|Micro Machines: Turbo Tournament ’96|https://romsportugues.com/wp-content/uploads/2020/01/Micro-Machines-Turbo-Tournament-96-PTBR-Mega-Drive.webp|0|1
+megadrive/Midnight Resistance (BR).md|Midnight Resistance|https://romsportugues.com/wp-content/uploads/2018/11/Midnight-Resistance-PTBR-Mega-Drive.webp|0|1
+megadrive/Monster World IV (BR).gen|Monster World 4|https://romsportugues.com/wp-content/uploads/2018/10/Monster-World-4-PTBR.webp|0|1
+megadrive/Mortal Kombat (BR).gen|Mortal Kombat (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/Mortal-Kombat-PTBR-Mega-Drive.webp|0|1
+megadrive/Mystic Defender (BR).gen|Mystic Defender|https://romsportugues.com/wp-content/uploads/2018/11/Mystic-Defender-PTBR-Mega-Drive.webp|0|1
+megadrive/New Zealand Story, The (BR).gen|The NewZealand Story|https://romsportugues.com/wp-content/uploads/2019/06/The-NewZealand-Story-PTBR-Mega-Drive.webp|0|1
+megadrive/OutRun 2019 (BR).md|OutRun 2019|https://romsportugues.com/wp-content/uploads/2018/11/OutRun-2019-PTBR-Mega-Drive.webp|0|1
+megadrive/OutRunners (BR).md|OutRunners|https://romsportugues.com/wp-content/uploads/2018/11/OutRunners-PTBR-Mega-Drive.webp|0|1
+megadrive/Paperboy (BR).gen|Paperboy|https://romsportugues.com/wp-content/uploads/2018/11/Paperboy-PTBR-Mega-Drive.webp|0|1
+megadrive/Phantasy Star II (BR).bin|Phantasy Star II|https://romsportugues.com/wp-content/uploads/2018/07/Phantasy-Star-II-PTBR.webp|0|1
+megadrive/Phantasy Star III (class-parallax) (BR) (T1.1).md|Phantasy Star II|https://romsportugues.com/wp-content/uploads/2018/07/Phantasy-Star-II-PTBR.webp|0|1
+megadrive/Phantasy Star III (orig-parallax) (BR) (T1.1).md|Phantasy Star II|https://romsportugues.com/wp-content/uploads/2018/07/Phantasy-Star-II-PTBR.webp|0|1
+megadrive/Phantasy Star III (orig-semparallax) (BR) (T1.1).md|Phantasy Star II|https://romsportugues.com/wp-content/uploads/2018/07/Phantasy-Star-II-PTBR.webp|0|1
+megadrive/Phantasy Star III (sem-parallax) (BR) (T1.1).md|Phantasy Star II|https://romsportugues.com/wp-content/uploads/2018/07/Phantasy-Star-II-PTBR.webp|0|1
+megadrive/Phantasy Star IV (BR).bin|Phantasy Star IV – The End of the Millenium|https://romsportugues.com/wp-content/uploads/2018/07/Phantasy-Star-IV-PTBR.webp|0|1
+megadrive/Pinocchio (BR).gen|Pinocchio (Mega Drive)|https://romsportugues.com/wp-content/uploads/2019/05/Pinocchio-PTBR-Mega-Drive.webp|0|1
+megadrive/Pirates of Dark Water, The (BR).gen|The Pirates of Dark Water|https://romsportugues.com/wp-content/uploads/2018/11/The-Pirates-of-Dark-Water-PTBR-Mega-Drive.webp|0|1
+megadrive/Power Drive (BR).md|Power Drive (Mega Drive)|https://romsportugues.com/wp-content/uploads/2019/03/Power-Drive-Mega-Drive-PTBR.webp|0|1
+megadrive/Pulseman (BR).gen|Pulseman|https://romsportugues.com/wp-content/uploads/2018/11/Pulseman-PTBR-Mega-Drive.webp|0|1
+megadrive/Punisher, The (BR).gen|The Punisher|https://romsportugues.com/wp-content/uploads/2018/10/The-Punisher-PTBR.webp|0|1
+megadrive/QuackShot Starring Donald Duck (BR).gen|Quack Shot Starring Donald Duck|https://romsportugues.com/wp-content/uploads/2018/11/Quack-Shot-Starring-Donald-Duck-PTBR-Mega-Drive-Download.webp|0|1
+megadrive/Raiden Trad (BR).md|Raiden Trad|https://romsportugues.com/wp-content/uploads/2018/11/Raiden-Trad-PTBR-Mega-Drive.webp|0|1
+megadrive/Rambo III (BR).md|Rambo 3|https://romsportugues.com/wp-content/uploads/2018/11/Rambo-3-PTBR-Mega-Drive.webp|0|1
+megadrive/Ranger X (BR).md|Ranger X|https://romsportugues.com/wp-content/uploads/2018/11/Ranger-X-PTBR-Mega-Drive.webp|0|1
+megadrive/Revenge of Shinobi, The (BR).gen|The Revenge of Shinobi (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/The-Revenge-of-Shinobi-Mega-Drive-PTBR.webp|0|1
+megadrive/Ristar (BR).gen|Ristar|https://romsportugues.com/wp-content/uploads/2018/11/Ristar-PTBR-Mega-Drive.webp|0|1
+megadrive/Road Rash (BR).gen|Road Rash|https://romsportugues.com/wp-content/uploads/2018/11/Road-Rash-PTBR-Mega-Drive.webp|0|1
+megadrive/Road Rash II (BR).md|Road Rash II|https://romsportugues.com/wp-content/uploads/2018/11/Road-Rash-II-PTBR-Mega-Drive.webp|0|1
+megadrive/RoboCop versus The Terminator (BR).bin|Robocop Versus The Terminator|https://romsportugues.com/wp-content/uploads/2018/11/Robocop-Versus-The-Terminator-PTBR-Mega-Drive-Download.webp|0|1
+megadrive/Rocket Knight Adventures (BR).md|Rocket Knight Adventures|https://romsportugues.com/wp-content/uploads/2018/11/Rocket-Knight-Adventures-PTBR-Mega-Drive.webp|0|1
+megadrive/Rolling Thunder 2 (BR).md|Rolling Thunder 2|https://romsportugues.com/wp-content/uploads/2018/11/Rolling-Thunder-2-PTBR-Mega-Drive.webp|0|1
+megadrive/Rolling Thunder 3 ((BR).md|Rolling Thunder 3|https://romsportugues.com/wp-content/uploads/2018/11/Rolling-Thunder-3-PTBR-Mega-Drive.webp|0|1
+megadrive/Sagaia (BR).gen|Sagaia|https://romsportugues.com/wp-content/uploads/2018/11/Sagaia-PTBR-Mega-Drive.webp|0|1
+megadrive/Second Samurai (BR).gen|The Second Samurai|https://romsportugues.com/wp-content/uploads/2018/11/The-Second-Samurai-PTBR-Mega-Drive.webp|0|1
+megadrive/Shadow Dancer - The Secret of Shinobi (BR).md|Shadow Dancer – The Secret of Shinobi|https://romsportugues.com/wp-content/uploads/2018/11/Shadow-Dancer-PTBR-Mega-Drive.webp|0|1
+megadrive/Shining Force (BR).gen|Shining Force|https://romsportugues.com/wp-content/uploads/2018/11/Shining-Force-PTBR-Mega-Drive.webp|0|1
+megadrive/Shining in the Darkness (BR).SMD|Shinning in the Darkness|https://romsportugues.com/wp-content/uploads/2018/10/Shinning-in-the-Darkness-PTBR.webp|0|1
+megadrive/Shinobi III - Return of the Ninja Master (BR).bin|Shinobi III – Return of the Ninja Master|https://romsportugues.com/wp-content/uploads/2018/11/Shinobi-III-Return-of-the-Ninja-Master-PTBR-Mega-Drive.webp|0|1
+megadrive/Show do Milhao - Vol. 1 (BR).md|Show do Milhão|https://romsportugues.com/wp-content/uploads/2018/11/Show-do-Milhao-PTBR-Mega-Drive.webp|0|1
+megadrive/Show do Milhao - Vol. 2 (BR).md|Show do Milhão|https://romsportugues.com/wp-content/uploads/2018/11/Show-do-Milhao-PTBR-Mega-Drive.webp|0|1
+megadrive/Shui Hu - Feng Yun Zhuan (BR).md|Shui Hu – Feng Yun Zhuan|https://romsportugues.com/wp-content/uploads/2018/11/Shui-Hu-Feng-Yun-Zhuan-PTBR-Mega-Drive.webp|0|1
+megadrive/Simpsons, The - Bart Vs. The Space Mutants (BR).bin|The Simpsons – Bart vs. the Space Mutants|https://romsportugues.com/wp-content/uploads/2018/11/The-Simpsons-Bart-vs.-the-Space-Mutants-PTBR-Mega-Drive.webp|0|1
+megadrive/Skeleton Krew (BR).md|Skeleton Krew|https://romsportugues.com/wp-content/uploads/2019/04/Skeleton-Krew-PTBR-Mega-Drive.webp|0|1
+megadrive/Sonic 3D Blast (BR).smd|Sonic 3D Blast / Sonic 3D – Flickies’ Island|https://romsportugues.com/wp-content/uploads/2018/07/Sonic-3D-Blast-PTBR.webp|0|1
+megadrive/Spider-Man vs The Kingpin (BR).gen|Spider-Man vs The Kingpin|https://romsportugues.com/wp-content/uploads/2018/11/Spider-Man-vs-The-Kingpin-PTBR-Mega-Drive.webp|0|1
+megadrive/Streets of Rage (BR).gen|Streets of Rage|https://romsportugues.com/wp-content/uploads/2018/07/Streets-of-Rage-PTBR.webp|0|1
+megadrive/Streets of Rage 2 (BR).bin|Streets of Rage 2|https://romsportugues.com/wp-content/uploads/2018/07/Streets-of-Rage-2-PTBR.webp|0|1
+megadrive/Streets of Rage 3 (BR).gen|Streets of Rage 3|https://romsportugues.com/wp-content/uploads/2018/07/Streets-of-Rage-3-PTBR.webp|0|1
+megadrive/Strider (BR).gen|Strider (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/Strider-Mega-Drive-PTBR.webp|0|1
+megadrive/Super Street Fighter II - The New Challengers (BR).bin|Super Street Fighter II – The New Challengers (Mega Drive)|https://romsportugues.com/wp-content/uploads/2018/11/Super-Street-Fighter-II-The-New-Challengers-Mega-Drive-PTBR.webp|0|1
+megadrive/Syd of Valis (BR).gen|Syd of Valis|https://romsportugues.com/wp-content/uploads/2018/11/Syd-of-Valis-PTBR-Mega-Drive.webp|0|1
+megadrive/Taz in Escape from Mars (BR).md|Taz in Escape From Mars|https://romsportugues.com/wp-content/uploads/2018/11/Taz-in-Escape-From-Mars-PTBR-Mega-Drive.webp|0|1
+megadrive/Taz-Mania (BR).gen|Taz-Mania|https://romsportugues.com/wp-content/uploads/2018/11/Taz-Mania-PTBR-Mega-Drive.webp|0|1
+megadrive/Terminator, The (BR).gen|The Terminator|https://romsportugues.com/wp-content/uploads/2018/11/The-Terminator-PTBR-Mega-Drive.webp|0|1
+megadrive/Thunder Force II (BR).bin|Shining Force II|https://romsportugues.com/wp-content/uploads/2022/11/Shining-Force-II-PTBR-Mega-Drive.webp|0|1
+megadrive/Thunder Force III (BR).gen|Thunder Force 3|https://romsportugues.com/wp-content/uploads/2018/10/Thunder-Force-3-PTBR.webp|0|1
+megadrive/Thunder Force IV (BR).md|Thunder Force 4|https://romsportugues.com/wp-content/uploads/2018/10/Thunder-Force-4-PTBR.webp|0|1
+megadrive/Thunder Fox (BR).gen|Thunder Fox|https://romsportugues.com/wp-content/uploads/2018/11/Thunder-Fox-PTBR-Mega-Drive.webp|0|1
+megadrive/Tintin au Tibet (BR).gen|Tintin in Tibet|https://romsportugues.com/wp-content/uploads/2018/11/Tintin-in-Tibet-PTBR-Mega-Drive.webp|0|1
+megadrive/Toy Story (BR).md|Toy Story Mega Drive|https://romsportugues.com/wp-content/uploads/2018/07/Toy-Story-Mega-Drive-PTBR.webp|0|1
+megadrive/Truxton (BR).gen|Truxton|https://romsportugues.com/wp-content/uploads/2018/11/Truxton-PTBR-Mega-Drive.webp|0|1
+megadrive/Turbo OutRun (BR).md|Turbo Outrun|https://romsportugues.com/wp-content/uploads/2018/11/Turbo-Outrun-PTBR-Mega-Drive.webp|0|1
+megadrive/Turma da Monica na Terra dos Monstros (BR) (Melhorado).bin|Turma da Mônica na Terra dos Monstros (Versão Melhorada)|https://romsportugues.com/wp-content/uploads/2023/12/Turma-da-Monica-na-Terra-dos-Monstros-Mega-Drive.webp|0|1
+megadrive/Twinkle Tale (BR).gen|Twinkle Tale|https://romsportugues.com/wp-content/uploads/2019/05/Twinkle-Tale-PTBR-Mega-Drive.webp|0|1
+megadrive/Valis (BR).gen|Valis – The Fantasm Soldier|https://romsportugues.com/wp-content/uploads/2018/11/Valis-PTBR-Mega-Drive-Download.webp|0|1
+megadrive/Valis III (BR).gen|Valis III|https://romsportugues.com/wp-content/uploads/2018/11/Valis-III-PTBR-Mega-Drive.webp|0|1
+megadrive/Vectorman 2 (BR).bin|Vectorman 2|https://romsportugues.com/wp-content/uploads/2018/11/Vectorman-2-PTBR-Mega-Drive.webp|0|1
+megadrive/Where in the World Is Carmen Sandiego (BR).bin|Where in the World Is Carmen Sandiego?|https://romsportugues.com/wp-content/uploads/2018/10/Where-in-the-World-Is-Carmen-Sandiego-PTBR-Download.webp|0|1
+megadrive/Wonder Boy in Monster World (BR).gen|Wonder Boy in Monster World|https://romsportugues.com/wp-content/uploads/2018/11/Wonder-Boy-in-Monster-World-PTBR-Mega-Drive.webp|0|1
+megadrive/World of Illusion Starring Mickey Mouse and Donald Duck (BR).md|World of Illusion Starring Mickey Mouse and Donald Duck|https://romsportugues.com/wp-content/uploads/2018/10/World-of-Illusion-Starring-Mickey-Mouse-and-Donald-Duck-PTBR.webp|0|1
+megadrive/X-Men 2 - Clone Wars (BR).bin|X-Men 2 – Clone Wars|https://romsportugues.com/wp-content/uploads/2018/11/X-Men-2-Clone-Wars-PTBR-Mega-Drive.webp|0|1
+megadrive/Yu Yu Hakusho Sunset Fighters (BR).md|Yu Yu Hakusho – Sunset Fighter|https://romsportugues.com/wp-content/uploads/2018/10/Yu-Yu-Hakusho-Sunset-Fighter-PTBR.webp|0|1
+megadrive/Zero Tolerance (BR) (T3.0).bin|Zero Tolerance|https://romsportugues.com/wp-content/uploads/2024/02/Zero-Tolerance-PTBR-Mega-Drive.webp|0|1
+n64/AeroGauge (BR) (T1.0).z64|Aero Gauge|https://romsportugues.com/wp-content/uploads/2024/06/Aero-Gauge-PTBR-Nintendo-64.webp|0|1
+n64/All Star T 99 (BR).n64|All Star Tennis ’99|https://romsportugues.com/wp-content/uploads/2018/08/All-Star-Tennis-99-PTBR-N64.webp|0|1
+n64/Automobili Lamborghini (BR).z64|Automobili Lamborghini|https://romsportugues.com/wp-content/uploads/2018/08/Automobili-Lamborghini-PTBR-N64.webp|0|1
+n64/Banjo-Tooie (BR) (V4).z64|Banjo-Tooie|https://romsportugues.com/wp-content/uploads/2026/05/Banjo-Tooie-PTBR-N64.webp|0|1
+n64/ClayFighters63 (BR) (T1.0).z64|ClayFighter 63|https://romsportugues.com/wp-content/uploads/2023/11/ClayFighter-63-PTBR-N64.webp|0|1
+n64/Conker's Bad Fur Day (BR) (Sem Censura) (T1.01).z64|Conker’s Bad Fur Day|https://romsportugues.com/wp-content/uploads/2023/11/Conkers-Bad-Fur-Day-PTBR.webp|0|1
+n64/DOOM 64 (BR).z64|Doom 64|https://romsportugues.com/wp-content/uploads/2018/08/Doom-64-PTBR-N64.webp|0|1
+n64/Donald Duck - Goin' Quackers (BR).n64|Disney’s Donald Duck – Goin’ Quackers|https://romsportugues.com/wp-content/uploads/2018/08/Disneys-Donald-Duck-Goin-Quackers-PTBR-N64.webp|0|1
+n64/Donkey Kong 64 (BR) (T1.0).z64|Donkey Kong 64|https://romsportugues.com/wp-content/uploads/2026/09/Donkey-Kong-64-PTBR-N64.webp|0|1
+n64/F-ZERO X (BR) (T0.99).z64|F-Zero X|https://romsportugues.com/wp-content/uploads/2023/02/F-Zero-X-PTBR-Nintendo-64.webp|0|1
+n64/FIFA 99 (PT).n64|FIFA 99 (N64)|https://romsportugues.com/wp-content/uploads/2019/02/FIFA-99-N64-PTBR.webp|0|1
+n64/GoldenEye 007 BR.z64|GoldenEye 007|https://romsportugues.com/wp-content/uploads/2018/07/GoldenEye-007-PTBR-N64.webp|0|1
+n64/Harvest Moon 64 (BR) (T1.0).z64|Harvest Moon 64|https://romsportugues.com/wp-content/uploads/2022/12/Harvest-Moon-64-PTBR-Nintendo-64.webp|0|1
+n64/Jet Force Gemini (BR).z64|Jet Force Gemini|https://romsportugues.com/wp-content/uploads/2019/12/Jet-Force-Gemini-PTBR-Nintendo-64.webp|0|1
+n64/Mario Party 3 (BR-U) (T1.0).z64|Mario Party 3 (Dublado)|https://romsportugues.com/wp-content/uploads/2026/08/Mario-Party-3-PTBR-N64.webp|0|1
+n64/Perfect Dark (BR).z64|Perfect Dark (N64)|https://romsportugues.com/wp-content/uploads/2019/08/Perfect-Dark-N64-PTBR-N64.webp|0|1
+n64/Ready 2 Rumble Boxing - Round 2 (BR).z64|Ready 2 Rumble Boxing – Round 2|https://romsportugues.com/wp-content/uploads/2021/04/Ready-2-Rumble-Boxing-Round-2-PTBR-N64.webp|0|1
+n64/Shadow Man (BR).n64|Shadow Man N64|https://romsportugues.com/wp-content/uploads/2018/11/Shadow-Man-N64-PTBR.webp|0|1
+n64/South Park (BR).z64|South Park (N64)|https://romsportugues.com/wp-content/uploads/2018/08/South-Park-N64-PTBR.webp|0|1
+n64/Star Wars Episode I - Racer (BR).n64|Star Wars Episode I: Racer|https://romsportugues.com/wp-content/uploads/2021/03/Star-Wars-Episode-I-Racer-PTBR-N64.webp|0|1
+n64/Turok 2 - Seeds of Evil (BR).z64|Turok 2 – Seeds of Evil|https://romsportugues.com/wp-content/uploads/2018/07/Turok-2-Seeds-of-Evil-PTBR-N64.webp|0|1
+nds/Aqua Panic! (PT).nds|Aqua Panic!|https://romsportugues.com/wp-content/uploads/2019/03/Aqua-Panic-PTBR-NDS.webp|0|1
+nds/Barnyard Blast Swine of the Night (PT).nds|Barnyard Blast – Swine of the Night|https://romsportugues.com/wp-content/uploads/2018/08/Barnyard-Blast-Swine-of-the-Night-PTBR-NDS.webp|0|1
+nds/Batman - The Brave and the Bold - The Videogame (BR-EUR) (T1.0).nds|Batman: The Brave and the Bold|https://romsportugues.com/wp-content/uploads/2026/02/Batman-The-Brave-and-the-Bold-PTBR-NDS.webp|0|1
+nds/Ben 10 - Alien Force (BR).nds|Ben 10 – Alien Force|https://romsportugues.com/wp-content/uploads/2018/08/Ben-10-Alien-Force-PTBR-NDS.webp|0|1
+nds/Boogie (PT).nds|Boogie|https://romsportugues.com/wp-content/uploads/2018/11/Boogie-PTBR-NDS.webp|0|1
+nds/Children of Mana (BR-EUR) (T1.0).nds|Children of Mana|https://romsportugues.com/wp-content/uploads/2026/07/Children-of-Mana-PTBR-NDS.webp|0|1
+nds/Clever Kids - Dino Land (PT).nds|Clever Kids – Dino Land|https://romsportugues.com/wp-content/uploads/2018/09/Clever-Kids-Dino-Land-PTBR-NDS.webp|0|1
+nds/Clever Kids - Pony World (PT).nds|Clever Kids – Pony World|https://romsportugues.com/wp-content/uploads/2018/09/Clever-Kids-Pony-World-PTBR-NDS.webp|0|1
+nds/Dementium - The Ward (BR).nds|Dementium – The Ward|https://romsportugues.com/wp-content/uploads/2018/08/Dementium-The-Ward-PTBR-NDS.webp|0|1
+nds/Dragon Ball - Origins - Alamo (BR).nds|Dragon Ball Origins|https://romsportugues.com/wp-content/uploads/2018/07/Dragon-Ball-Origins-PTBR-NDS.webp|0|1
+nds/Dragon Ball - Origins - GotaMagica (BR).nds|Dragon Ball Origins|https://romsportugues.com/wp-content/uploads/2018/07/Dragon-Ball-Origins-PTBR-NDS.webp|0|1
+nds/Dragon Ball - Origins - Original (BR).nds|Dragon Ball Origins|https://romsportugues.com/wp-content/uploads/2018/07/Dragon-Ball-Origins-PTBR-NDS.webp|0|1
+nds/Ferrari Challenge (BR).nds|Ferrari Challenge|https://romsportugues.com/wp-content/uploads/2018/08/Ferrari-Challenge-PTBR-NDS.webp|0|1
+nds/Final Fantasy XII Revenant Wings (BR) (T1.0).nds|Final Fantasy XII: Revenant Wings|https://romsportugues.com/wp-content/uploads/2026/07/Final-Fantasy-XII-Revenant-Wings-PTBR-NDS.webp|0|1
+nds/Franklin's Great Adventures (PT).nds|Franklin’s Great Adventures|https://romsportugues.com/wp-content/uploads/2018/09/Franklins-Great-Adventures-PTBR-NDS.webp|0|1
+nds/Fritz Chess (BR).nds|Fritz Chess|https://romsportugues.com/wp-content/uploads/2018/08/Fritz-Chess-PTBR-NDS.webp|0|1
+nds/Garfield 2 (PT).nds|Garfield 2|https://romsportugues.com/wp-content/uploads/2018/09/Garfield-2-PTBR-NDS.webp|0|1
+nds/Garfield's Nightmare (PT).nds|Garfield’s Nightmare|https://romsportugues.com/wp-content/uploads/2018/09/Garfields-Nightmare-NDS-PTBR.webp|0|1
+nds/Harvest Moon DS - The Tale of Two Towns (BR) (T1.0).nds|Harvest Moon: The Tale of Two Towns|https://romsportugues.com/wp-content/uploads/2026/10/Harvest-Moon-DS-The-Tale-of-Two-Towns-PTBR-NDS.webp|0|1
+nds/Hello Kitty - Big City Dreams (PT) (Rev 1).nds|Hello Kitty – Big City Dreams|https://romsportugues.com/wp-content/uploads/2018/12/Hello-Kitty-Big-City-Dreams.webp|0|1
+nds/Henry Hatsworth in the Puzzling Adventure (BR).nds|Henry Hatsworth in the Puzzling Adventure|https://romsportugues.com/wp-content/uploads/2018/08/Henry-Hatsworth-in-the-Puzzling-Adventure-PTBR-NDS.webp|0|1
+nds/Hugo - Magic in the Troll Woods (PT).nds|Hugo Magic in the Troll Woods (NDS)|https://romsportugues.com/wp-content/uploads/2020/01/Hugo-Magic-in-the-Troll-Woods-NDS-PTBR.webp|0|1
+nds/Inazuma Eleven 3 - Sekai e no Chousen The Ogre (BR) (T1.3).nds|Inazuma Eleven 3 – Sekai e no Chousen: The Ogre|https://romsportugues.com/wp-content/uploads/2023/01/Inazuma-Eleven-3-Sekai-e-no-Chousen-The-Ogre-PTBR.webp|0|1
+nds/Iron Man (BR) (T1.0).nds|Iron Man NDS|https://romsportugues.com/wp-content/uploads/2024/07/Iron-Man-NDS-PTBR.webp|0|1
+nds/LEGO Legends of Chima Lavals Journey (BR).nds|LEGO Legends of Chima – Laval’s Journey|https://romsportugues.com/wp-content/uploads/2018/12/LEGO-Legends-of-Chima-Lavals-Journey-PTBR-NDS.webp|0|1
+nds/LEGO Marvel Super Heroes - Universe in Peril (PT-USA).nds|LEGO Marvel Super Heroes – Universe in Peril|https://romsportugues.com/wp-content/uploads/2024/12/LEGO-Marvel-Super-Heroes-Universe-in-Peril-PTBR-NDS.webp|0|1
+nds/Legend of the Guardians - The Owls of GaHoole (BR).nds|Legend of The Guardians – The Owls Of Ga’Hoole|https://romsportugues.com/wp-content/uploads/2018/12/Legend-of-The-Guardians-The-Owls-Of-GaHoole-PTBR.webp|0|1
+nds/Lola & Virginia (PT).nds|Lola & Virginia|https://romsportugues.com/wp-content/uploads/2019/04/Lola-Virginia-PTBR-NDS.webp|0|1
+nds/Maestro! - Jump in Music (PT).nds|Maestro! Jump in Music|https://romsportugues.com/wp-content/uploads/2019/12/Maestro-Jump-in-Music-PTBR.webp|0|1
+nds/Miffy's World (PT).nds|Miffy’s World|https://romsportugues.com/wp-content/uploads/2020/01/Miffys-World-PTBR.webp|0|1
+nds/Mr Bean (BR).nds|Mr. Bean|https://romsportugues.com/wp-content/uploads/2019/01/Mr.-Bean-PTBR-NDS.webp|0|1
+nds/My Farm Around the World (PT).nds|My Farm Around the World|https://romsportugues.com/wp-content/uploads/2018/12/My-Farm-Around-the-World-PTBR.webp|0|1
+nds/MySims - Agents (BR).nds|MySims Agents|https://romsportugues.com/wp-content/uploads/2019/04/MySims-Agents-PTBR-NDS.webp|0|1
+nds/MySims - Party (PT).nds|MySims Party|https://romsportugues.com/wp-content/uploads/2018/12/MySims-Party-PTBR-NDS.webp|0|1
+nds/Picross (BR).nds|Picross|https://romsportugues.com/wp-content/uploads/2020/07/Picross-PTBR-NDS.webp|0|1
+nds/Postman Pat (BR).nds|Postman Pat|https://romsportugues.com/wp-content/uploads/2019/12/Postman-Pat-PTBR.webp|0|1
+nds/Prince of Persia The Forgotten Sands (BR).nds|Prince of Persia – The Forgotten Sands|https://romsportugues.com/wp-content/uploads/2018/08/Prince-of-Persia-The-Forgotten-Sands-PTBR-NDS.webp|0|1
+nds/Ratatouille (PT).nds|Ratatouille NDS|https://romsportugues.com/wp-content/uploads/2018/09/Ratatouille-NDS-PTBR.webp|0|1
+nds/SimAnimals - Africa (PT).nds|SimAnimals Africa|https://romsportugues.com/wp-content/uploads/2019/05/SimAnimals-Africa-PTBR-NDS.webp|0|1
+nds/Super Scribblenauts (PT).nds|Super Scribblenauts|https://romsportugues.com/wp-content/uploads/2019/01/Super-Scribblenauts-PTBR-NDS.webp|0|1
+nds/Tennis Elbow (BR).nds|Tennis Elbow|https://romsportugues.com/wp-content/uploads/2020/01/Tennis-Elbow-Baixar-em-PTBR.webp|0|1
+nds/The Lord of the Rings - Aragorn's Quest (PT).nds|The Lord of the Rings – Aragorn’s Quest|https://romsportugues.com/wp-content/uploads/2018/12/The-Lord-of-the-Rings-Aragorns-Quest-PTBR-NDS.webp|0|1
+nds/Thor God of Thunder (BR).nds|Thor – God of Thunder|https://romsportugues.com/wp-content/uploads/2019/11/Thor-God-of-Thunder-PTBR.webp|0|1
+nds/Toy Shop Tycoon (BR).nds|Toy Shop Tycoon|https://romsportugues.com/wp-content/uploads/2018/11/Toy-Shop-Tycoon-PTBR-NDS.webp|0|1
+nds/Water Horse, The - Legend of the Deep (PT).nds|The Water Horse – Legend of the Deep|https://romsportugues.com/wp-content/uploads/2019/04/The-Water-Horse-Legend-of-the-Deep-PTBR-NDS.webp|0|1
+nes/8 Eyes (BR) (T1.0).nes|8 Eyes|https://romsportugues.com/wp-content/uploads/2023/06/8-Eyes-PTBR-NES.webp|0|1
+nes/Abadox (BR).nes|Abadox – The Deadly Inner War|https://romsportugues.com/wp-content/uploads/2018/08/Abadox-The-Deadly-Inner-War-PTBR-NES.webp|0|1
+nes/Adventure Island 3 (U) (BR).nes|Adventure Island IV|https://romsportugues.com/wp-content/uploads/2024/02/Adventure-Island-IV-PTBR-NES.webp|0|1
+nes/Adventures of Lolo 3 (BR).nes|Adventures of Lolo 3|https://romsportugues.com/wp-content/uploads/2018/08/Adventures-of-Lolo-3-PTBR-NES.webp|0|1
+nes/Archon (BR).nes|Archon|https://romsportugues.com/wp-content/uploads/2018/10/Archon-PTBR-NES.webp|0|1
+nes/Argos no Senshi (BR).nes|Argos no Senshi (Rygar)- Hachamecha Daishingeki|https://romsportugues.com/wp-content/uploads/2018/10/Argos-no-Senshi-Hachamecha-Daishingeki-PTBR-NES-Baixar.webp|0|1
+nes/Armadillo (BR).nes|Armadillo|https://romsportugues.com/wp-content/uploads/2018/08/Armadillo-PTBR.webp|0|1
+nes/Astyanax (BR).nes|Astyanax|https://romsportugues.com/wp-content/uploads/2018/08/Astyanax-PTBR-NES.webp|0|1
+nes/Balloon Fight (BR).nes|Balloon Fight|https://romsportugues.com/wp-content/uploads/2018/08/Balloon-Fight-PTBR-NES.webp|0|1
+nes/Batman (BR).nes|Batman Returns|https://romsportugues.com/wp-content/uploads/2018/07/Batman-Returns-PTBR-NES.webp|0|1
+nes/Batman - Return of the Joker (BR).nes|Batman – Return of the Joker|https://romsportugues.com/wp-content/uploads/2018/07/Batman-–-Return-of-The-Joker-PTBR-NES.webp|0|1
+nes/Battle City (BR).nes|Battle City|https://romsportugues.com/wp-content/uploads/2018/08/Battle-City-PTBR-NES.webp|0|1
+nes/Battleship (BR).nes|Battleship|https://romsportugues.com/wp-content/uploads/2018/10/Battleship-PTBR-NES.webp|0|1
+nes/Battletoads (BR).nes|Battletoads|https://romsportugues.com/wp-content/uploads/2018/07/Battletoads-PTBR-NES.webp|0|1
+nes/Bionic Commando (BR).nes|Bionic Commando|https://romsportugues.com/wp-content/uploads/2018/08/Bionic-Commando-PTBR-NES.webp|0|1
+nes/Blaster Master (BR).nes|Blaster Master|https://romsportugues.com/wp-content/uploads/2018/08/Blaster-Master-PTBR-NES.webp|0|1
+nes/Bram Stoker's Dracula (BR).nes|Bram Stoker’s Dracula|https://romsportugues.com/wp-content/uploads/2018/07/Bram-Stokers-Dracula-PTBR-NES.webp|0|1
+nes/Bubble Bobble Part 2 (BR).nes|Bubble Bobble Part 2|https://romsportugues.com/wp-content/uploads/2019/03/Bubble-Bobble-Part-2-PTBR.webp|0|1
+nes/Bucky O'Hare (BR).nes|Bucky O’Hare|https://romsportugues.com/wp-content/uploads/2018/08/Bucky-OHare-PTBR-NES.webp|0|1
+nes/Bugs Bunny Crazy Castle, The (BR-USA) (T1.0).nes|The Bugs Bunny Crazy Castle|https://romsportugues.com/wp-content/uploads/2025/04/The-Bugs-Bunny-Crazy-Castle-PTBR-NES.webp|0|1
+nes/BurgerTime (BR).nes|BurgerTime|https://romsportugues.com/wp-content/uploads/2022/06/BurgerTime-PTBR-NES.webp|0|1
+nes/Captain America & the Avengers (BR).smc|Captain America and the Avengers|https://romsportugues.com/wp-content/uploads/2018/08/Captain-America-and-the-Avengers-PTBR-NES.webp|0|1
+nes/Captain Planet and The Planeteers (BR).nes|Captain Planet and the Planeteers|https://romsportugues.com/wp-content/uploads/2018/08/Captain-Planet-and-the-Planeteers-PTBR-NES.webp|0|1
+nes/Chack'n Pop (BR) (T1.0).nes|Chack’n Pop|https://romsportugues.com/wp-content/uploads/2023/08/Chackn-Pop-PTBR-NES.webp|0|1
+nes/Challenger (BR).nes|Challenger|https://romsportugues.com/wp-content/uploads/2018/08/Challenger-PTBR-NES.webp|0|1
+nes/Championship Lode Runner (BR).nes|Championship Lode Runner|https://romsportugues.com/wp-content/uploads/2018/08/Championship-Lode-Runner-PTBR-NES.webp|0|1
+nes/Circus Charlie (BR).nes|Circus Charlie|https://romsportugues.com/wp-content/uploads/2018/10/Circus-Charlie-PTBR-NES.webp|0|1
+nes/Clu Clu Land (BR).nes|Clu Clu Land|https://romsportugues.com/wp-content/uploads/2018/08/Clu-Clu-Land-PTBR-NES.webp|0|1
+nes/Contra Force (BR).nes|Contra Force|https://romsportugues.com/wp-content/uploads/2018/07/Contra-Force-PTBR-NES.webp|0|1
+nes/Crisis Force (BR).nes|Crisis Force|https://romsportugues.com/wp-content/uploads/2018/08/Crisis-Force-PTBR-NES.webp|0|1
+nes/Cross Fire (BR).nes|Cross Fire|https://romsportugues.com/wp-content/uploads/2018/08/Cross-Fire-PTBR-NES.webp|0|1
+nes/Dig Dug (BR).nes|Dig Dug|https://romsportugues.com/wp-content/uploads/2018/08/Dig-Dug-PTBR-NES-.webp|0|1
+nes/Don Doko Don 2 (BR).nes|Don Doko Don 2|https://romsportugues.com/wp-content/uploads/2021/08/Don-Doko-Don-2-PTBR.webp|0|1
+nes/Dragon Ball Z - Kyoushuu! Saiya Jin (BR) (T1.0).nes|Dragon Ball Z: Kyoushuu! Saiyajin|https://romsportugues.com/wp-content/uploads/2023/09/Dragon-Ball-Z-Kyoushuu-Saiyajin-PTBR-NES.webp|0|1
+nes/Dragon Ninja (BR).nes|Dragon Ninja|https://romsportugues.com/wp-content/uploads/2018/10/Dragon-Ninja-PTBR-NES.webp|0|1
+nes/Excitebike (BR).nes|Excitebike|https://romsportugues.com/wp-content/uploads/2018/08/Excitebike-PTBR-NES.webp|0|1
+nes/Exed Exes (BR).nes|Exed Exes|https://romsportugues.com/wp-content/uploads/2022/06/Exed-Exes-PTBR-NES.webp|0|1
+nes/Exodus (BR) (T4.0).nes|Exodus|https://romsportugues.com/wp-content/uploads/2023/08/Exodus-PTBR-NES.webp|0|1
+nes/F-1 Race (BR).nes|F-1 Race|https://romsportugues.com/wp-content/uploads/2022/02/F-1-Race-PTBR-NES.webp|0|1
+nes/Faxanadu (BR).nes|Faxanadu|https://romsportugues.com/wp-content/uploads/2018/10/Faxanadu-PTBR-NES.webp|0|1
+nes/Final Mission (BR).nes|Final Mission|https://romsportugues.com/wp-content/uploads/2018/10/Final-Mission-Black-Hole-Rising-PTBR-NES.webp|0|1
+nes/Fire Dragon (BR) (T1.0).nes|Fire Dragon|https://romsportugues.com/wp-content/uploads/2023/10/Fire-Dragon-PTBR-NES.webp|0|1
+nes/Fire Emblem (BR).nes|Fire Emblem – Shadow Dragon and the Blade of Light|https://romsportugues.com/wp-content/uploads/2019/07/Fire-Emblem-PTBR-NES.webp|0|1
+nes/Flintstones, The - The Rescue of Dino & Hoppy (BR).nes|The Flintstones – The Rescue of Dino & Hoppy|https://romsportugues.com/wp-content/uploads/2019/05/The-Flintstones-The-Rescue-of-Dino-Hoppy-PTBR-NES.webp|0|1
+nes/Flintstones, The - The Surprise at Dinosaur Peak! (BR).nes|The Flintstones – The Surprise at Dinosaur Peak!|https://romsportugues.com/wp-content/uploads/2019/06/The-Flintstones-The-Surprise-at-Dinosaur-Peak-PTBR-NES.webp|0|1
+nes/Frankenstein - The Monster Returns (BR).nes|Frankenstein – The Monster Returns|https://romsportugues.com/wp-content/uploads/2018/08/Frankenstein-The-Monster-Returns-PTBR-NES.webp|0|1
+nes/G.I. Joe (BR).nes|G.I. Joe – A Real American Hero|https://romsportugues.com/wp-content/uploads/2018/08/G.I.-Joe-A-Real-American-Hero-PTBR-NES.webp|0|1
+nes/Galaga - Demons of Death (BR).nes|Galaga: Demons of Death|https://romsportugues.com/wp-content/uploads/2019/11/Galaga-Demons-of-Death-PTBR-NES.webp|0|1
+nes/Galaxian (BR).nes|Galaxian|https://romsportugues.com/wp-content/uploads/2019/12/Galaxian-Portugues-PTBR-NES.webp|0|1
+nes/Galaxy 5000 - Racing in the 51st Century (BR) (T1.1).nes|Galaxy 5000 – Racing in the 51st Century|https://romsportugues.com/wp-content/uploads/2023/05/Galaxy-5000-Racing-in-the-51st-Century-PTBR.webp|0|1
+nes/Ganbare Goemon 2 (BR) (T1.0).nes|Ganbare Goemon 2|https://romsportugues.com/wp-content/uploads/2024/11/Ganbare-Goemon-2-PTBR-NES.webp|0|1
+nes/Ganbare Goemon! - Karakuri Douchuu (BR) (T1.0).nes|Ganbare Goemon! Karakuri Dōchū|https://romsportugues.com/wp-content/uploads/2024/11/Ganbare-Goemon-Karakuri-Douchuu-PTBR-NES.webp|0|1
+nes/Gradius II (BR).nes|Gradius II|https://romsportugues.com/wp-content/uploads/2018/08/Gradius-II-PTBR-NES.webp|0|1
+nes/Gun Nac (BR).nes|Gun-Nac|https://romsportugues.com/wp-content/uploads/2018/08/Gun-Nac-PTBR-NES.webp|0|1
+nes/Gyruss (BR).nes|Gyruss|https://romsportugues.com/wp-content/uploads/2018/08/Gyruss-PTBR-NES.webp|0|1
+nes/Hokuto no Ken (BR).nes|Hokuto no Ken|https://romsportugues.com/wp-content/uploads/2018/08/Hokuto-no-Ken-PTBR-NES.webp|0|1
+nes/Hokuto no Ken 2 (BR).nes|Hokuto no Ken 2 – Seikimatsu Kyuuseishu Densetsu|https://romsportugues.com/wp-content/uploads/2018/10/Hokuto-no-Ken-2-PTBR-NES.webp|0|1
+nes/Honoo no Toukyuuji - Dodge Danpei (BR).nes|Dodge Danpei|https://romsportugues.com/wp-content/uploads/2019/09/Dodge-Danpei-PTBR-NES.webp|0|1
+nes/Hudson Hawk (BR).nes|Hudson Hawk|https://romsportugues.com/wp-content/uploads/2018/08/Hudson-Hawk-PTBR-NES.webp|0|1
+nes/Hudson's Adventure Island (BR).nes|Hudson’s Adventure Island|https://romsportugues.com/wp-content/uploads/2018/08/Hudsons-Adventure-Island-PTBR-NES.webp|0|1
+nes/Ice Climber (BR).nes|Ice Climber|https://romsportugues.com/wp-content/uploads/2018/10/Ice-Climber-PTBR-NES.webp|0|1
+nes/Idol Hakkenden (BR-J) (T1.0).nes|Idol Hakkenden|https://romsportugues.com/wp-content/uploads/2025/07/Idol-Hakkenden-PTBR-NES.webp|0|1
+nes/Immortal, The (BR).nes|The Immortal|https://romsportugues.com/wp-content/uploads/2018/10/The-Immortal-PTBR-NES.webp|0|1
+nes/J.League Winning Goal (Brasileirão).nes|Brasileirão (J-League Winning Goal Hack)|https://romsportugues.com/wp-content/uploads/2019/03/Brasileirao-J-League-Winning-Goal-Hack.webp|0|1
+nes/Jackie Chan's Action Kung Fu (BR).nes|Jackie Chan’s Action Kung Fu|https://romsportugues.com/wp-content/uploads/2019/07/Jackie-Chans-Action-Kung-Fu-PTBR-NES.webp|0|1
+nes/Jetsons, The - Cogswell's Caper! (BR).nes|The Jetsons – Cogswell’s Caper!|https://romsportugues.com/wp-content/uploads/2018/08/The-Jetsons-Cogswells-Caper-PTBR-NES.webp|0|1
+nes/Kaiketsu Yancha Maru 2 - Karakuri Land (BR).nes|Kaiketsu Yanchamaru 2: Karakuri Land|https://romsportugues.com/wp-content/uploads/2021/11/Kaiketsu-Yanchamaru-2-Karakuri-Land-PTBR-NES.webp|0|1
+nes/Kaiketsu Yancha Maru 3 (BR-J).nes|Kaiketsu Yanchamaru 3: Taiketsu! Zouringen|https://romsportugues.com/wp-content/uploads/2026/08/Kaiketsu-Yancha-Maru-3-PTBR-NES.webp|0|1
+nes/Kekkyoku Nankyoku Daibouken (BR).nes|Kekkyoku Nankyoku Daibouken (Antarctic Adventure)|https://romsportugues.com/wp-content/uploads/2020/11/Kekkyoku-Nankyoku-Daibouken-Antarctic-Adventure-PTBR-NES.webp|0|1
+nes/Lode Runner (BR).nes|Lode Runner|https://romsportugues.com/wp-content/uploads/2018/10/Lode-Runner-PTBR-NES.webp|0|1
+nes/Mach Rider (BR).nes|Mach Rider|https://romsportugues.com/wp-content/uploads/2018/08/Mach-Rider-PTBR-NES.webp|0|1
+nes/Makai Island (BR) (T2.0).nes|Makai Island|https://romsportugues.com/wp-content/uploads/2023/08/Makai-Island-PTBR-NES.webp|0|1
+nes/Mappy (BR).nes|Mappy|https://romsportugues.com/wp-content/uploads/2018/10/Mappy-PTBR-NES.webp|0|1
+nes/Mappy-Land (BR).nes|Mappy-Land|https://romsportugues.com/wp-content/uploads/2018/08/Mappy-Land-PTBR-NES.webp|0|1
+nes/Mitsume ga Tooru (BR).nes|Mitsume ga Tooru|https://romsportugues.com/wp-content/uploads/2018/08/Mitsume-ga-Tooru-PTBR-NES.webp|0|1
+nes/Moai-kun (BR-JP) (T1.0).nes|Moai-Kun|https://romsportugues.com/wp-content/uploads/2025/02/Moai-kun-PTBR-NES.webp|0|1
+nes/Monster In My Pocket (BR).nes|Monster in my Pocket|https://romsportugues.com/wp-content/uploads/2018/08/Monster-in-my-Pocket-PTBR-NES.webp|0|1
+nes/Nightshade (BR-USA) (T2.01).nes|Nightshade|https://romsportugues.com/wp-content/uploads/2018/08/Nightshade-PTBR-NES.webp|0|1
+nes/Ninja Crusaders (BR).nes|Ninja Crusaders|https://romsportugues.com/wp-content/uploads/2018/10/Ninja-Crusaders-PTBR-NES.webp|0|1
+nes/Nuts & Milk (BR).nes|Nuts e Milk|https://romsportugues.com/wp-content/uploads/2018/08/Nuts-e-Milk-PTBR-NES.webp|0|1
+nes/Onyanko Town (BR).nes|Onyanko Town|https://romsportugues.com/wp-content/uploads/2020/10/Onyanko-Town-PTBR-NES.webp|0|1
+nes/Pipe Dream (BR).nes|Pipe Dream|https://romsportugues.com/wp-content/uploads/2018/08/Pipe-Dream-PTBR-NES.webp|0|1
+nes/Pooyan (BR).nes|Pooyan|https://romsportugues.com/wp-content/uploads/2018/08/Pooyan-PTBR-NES.webp|0|1
+nes/Popeye - Ijiwaru Majo Sea Hag no Maki (BR).sfc|Popeye|https://romsportugues.com/wp-content/uploads/2023/08/Popeye-PTBR-NES.webp|0|1
+nes/Power Blade 2 (BR).nes|Power Blade 2|https://romsportugues.com/wp-content/uploads/2018/08/Power-Blade-2-PTBR-NES.webp|0|1
+nes/Power Blazer (BR).nes|Power Blazer|https://romsportugues.com/wp-content/uploads/2018/08/Power-Blazer-PTBR-NES.webp|0|1
+nes/Predator (BR).nes|Predator|https://romsportugues.com/wp-content/uploads/2018/08/Predator-NES-PTBR.webp|0|1
+nes/Q-bert (BR).nes|Q*bert|https://romsportugues.com/wp-content/uploads/2018/08/Qbert-PTBR-NES.webp|0|1
+nes/River City Ransom (BR).nes|River City Ransom|https://romsportugues.com/wp-content/uploads/2018/08/River-City-Ransom-PTBR-NES.webp|0|1
+nes/Road Runner (BR) (T1.0).nes|Road Runner|https://romsportugues.com/wp-content/uploads/2023/09/Road-Runner-PTBR-NES.webp|0|1
+nes/Rollergames (BR).nes|Rollergames|https://romsportugues.com/wp-content/uploads/2018/08/Rollergames-PTBR-NES.webp|0|1
+nes/Rolling Thunder (BR).nes|Rolling Thunder|https://romsportugues.com/wp-content/uploads/2018/08/Rolling-Thunder-PTBR-NES.webp|0|1
+nes/SD Hero Soukessen - Taose! Aku no Gundan (BR).nes|SD Hero Soukessen – Taose! Aku no Gundan|https://romsportugues.com/wp-content/uploads/2018/10/SD-Hero-Soukessen-Taose-Aku-no-Gundan-PTBR-NES.webp|0|1
+nes/Saint Seiya - Ougon Densetsu Kanketsu Hen (BR).nes|Saint Seiya 2 – Ougon Densetsu Kanketsu Hen|https://romsportugues.com/wp-content/uploads/2018/08/Saint-Seiya-2-Ougon-Densetsu-Kanketsu-Hen-PTBR-NES.webp|0|1
+nes/Shadow of the Ninja (BR).nes|Shadow of the Ninja|https://romsportugues.com/wp-content/uploads/2018/08/Shadow-of-the-Ninja-PTBR-NES.webp|0|1
+nes/Shadowgate (BR).nes|Shadowgate|https://romsportugues.com/wp-content/uploads/2018/08/Shadowgate-PTBR-NES.webp|0|1
+nes/Shinobi (BR).nes|Shinobi (NES)|https://romsportugues.com/wp-content/uploads/2019/06/Shinobi-NES-Baixar-em-Portugues-Traduzido-PTBR.webp|0|1
+nes/Silver Surfer (BR).nes|Silver Surfer|https://romsportugues.com/wp-content/uploads/2018/08/Silver-Surfer-PTBR-NES.webp|0|1
+nes/Soccer (BR).nes|Soccer|https://romsportugues.com/wp-content/uploads/2018/08/Soccer-PTBR-NES.webp|0|1
+nes/Solomon's Key (BR).nes|Solomon’s Key|https://romsportugues.com/wp-content/uploads/2022/08/Solomons-Key-PTBR-NES.webp|0|1
+nes/Solomon's Key 2 (BR) (T1.0).nes|Solomon’s Key 2|https://romsportugues.com/wp-content/uploads/2023/04/Solomons-Key-2-PTBR-NES.webp|0|1
+nes/Solstice (BR).nes|Solstice|https://romsportugues.com/wp-content/uploads/2018/08/Solstice-PTBR-NES.webp|0|1
+nes/Spelunker (BR).nes|Spelunker|https://romsportugues.com/wp-content/uploads/2018/08/Spelunker-PTBR-NES.webp|0|1
+nes/Sqoon (BR).nes|Sqoon|https://romsportugues.com/wp-content/uploads/2021/04/Sqoon-PTBR-NES.webp|0|1
+nes/Star Gate (BR).nes|Star Gate|https://romsportugues.com/wp-content/uploads/2018/10/Star-Gate-PTBR-NES.webp|0|1
+nes/Street Fighter 2010 (BR).nes|Street Fighter 2010 – The Final Fight|https://romsportugues.com/wp-content/uploads/2018/08/Street-Fighter-2010-The-Final-Fight-PTBR-NES.webp|0|1
+nes/Strider (BR).nes|Strider|https://romsportugues.com/wp-content/uploads/2018/08/Strider-PTBR-NES.webp|0|1
+nes/Super Pitfall (BR).nes|Super Pitfall|https://romsportugues.com/wp-content/uploads/2018/10/Super-Pitfall-PTBR-NES.webp|0|1
+nes/Sword Master (BR).nes|Sword Master|https://romsportugues.com/wp-content/uploads/2021/02/Sword-Master-PTBR-NES.webp|0|1
+nes/Tatakae! Chou Robot Seimeitai Transformers - Convoy no Nazo (BR).nes|Tatakae! Chou Robotto Seimeitai Transformers – Convoy no Nazo|https://romsportugues.com/wp-content/uploads/2018/10/Tatakae-Chou-Robotto-Seimeitai-Transformers-PTBR-NES.webp|0|1
+nes/Teenage Mutant Ninja Turtles (BR).nes|Teenage Mutant Ninja Turtles (Tartarugas Ninjas)|https://romsportugues.com/wp-content/uploads/2018/08/Teenage-Mutant-Ninja-Turtles-PTBR-NES.webp|0|1
+nes/Teenage Mutant Ninja Turtles III - The Manhattan Project (BR).nes|Teenage Mutant Ninja Turtles III – The Manhattan Project|https://romsportugues.com/wp-content/uploads/2018/08/Teenage-Mutant-Ninja-Turtles-III-PTBR-NES.webp|0|1
+nes/Tennis (BR).nes|Tennis|https://romsportugues.com/wp-content/uploads/2018/10/Tennis-PTBR-NES.webp|0|1
+nes/Terminator 2 - Judgment Day (BR).nes|Terminator 2 – Judgment Day|https://romsportugues.com/wp-content/uploads/2018/08/Terminator-2-NES-PTBR.webp|0|1
+nes/Tetris (BR).nes|Tetris|https://romsportugues.com/wp-content/uploads/2018/08/Tetris-PTBR-NES.webp|0|1
+nes/Tetsudou Ou - Famicom Boardgame (BR) (T0.9).nes|Tetsudō-ō: Famicom Board Game|https://romsportugues.com/wp-content/uploads/2024/04/Tetsudo-o-Famicom-Board-Game-PTBR-NES.webp|0|1
+nes/The Adventures of Captain Comic (BR).nes|The Adventures of Captain Comic|https://romsportugues.com/wp-content/uploads/2018/08/The-Adventures-of-Captain-Comic-PTBR-NES.webp|0|1
+nes/The Krion Conquest (BR).nes|The Krion Conquest|https://romsportugues.com/wp-content/uploads/2018/08/The-Krion-Conquest-PTBR-NES.webp|0|1
+nes/Time Lord (BR).nes|Time Lord|https://romsportugues.com/wp-content/uploads/2018/10/Time-Lord-PTBR-NES.webp|0|1
+nes/Titanic (BR) (T1.1).nes|Titanic|https://romsportugues.com/wp-content/uploads/2023/03/Titanic-PTBR-NES.webp|0|1
+nes/Toki (BR).nes|Toki|https://romsportugues.com/wp-content/uploads/2018/08/Toki-PTBR-NES.webp|0|1
+nes/Tokkyuu Shirei Solbrain (BR).nes|Tokkyuu Shirei – Solbrain|https://romsportugues.com/wp-content/uploads/2018/10/Tokkyuu-Shirei-Solbrain-PTBR-NES.webp|0|1
+nes/Totally Rad (BR).nes|Totally Rad|https://romsportugues.com/wp-content/uploads/2018/08/Totally-Rad-PTBR-NES.webp|0|1
+nes/Tower of Druaga, The (BR).nes|The Tower of Druaga|https://romsportugues.com/wp-content/uploads/2018/08/The-Tower-of-Druaga-PTBR-NES.webp|0|1
+nes/Trojan (BR).nes|Trojan|https://romsportugues.com/wp-content/uploads/2018/08/Trojan-PTBR-NES.webp|0|1
+nes/Werewolf - The Last Warrior (BR).nes|Werewolf – The Last Warrior|https://romsportugues.com/wp-content/uploads/2018/08/Werewolf-The-Last-Warrior-PTBR-NES.webp|0|1
+nes/Xevious - The Avenger (BR).nes|Xevious: The Avenger|https://romsportugues.com/wp-content/uploads/2023/05/Xevious-The-Avenger-PTBR-NES.webp|0|1
+nes/Ys (BR-J) (T1.2).nes|Ys|https://romsportugues.com/wp-content/uploads/2026/09/Ys-PTBR-NES.webp|0|1
+psp/4x4 Jam (PT).iso|4×4 Jam|https://romsportugues.com/wp-content/uploads/2020/07/4x4-Jam-PTBR-PSP.webp|0|1
+psp/Academia Ape 2 (BR).iso|Ape Academy 2|https://romsportugues.com/wp-content/uploads/2018/12/Ape-Academy-2-PTBR-PSP.webp|0|1
+psp/Geronimo Stilton Return to the Kingdom of Fantasy (PT).iso|Geronimo Stilton: Return to the Kingdom of Fantasy|https://romsportugues.com/wp-content/uploads/2024/03/Geronimo-Stilton-Return-to-the-Kingdom-of-Fantasy-PTBR-PSP.webp|0|1
+psp/Idiot Squad (PT).iso|Idiot Squad|https://romsportugues.com/wp-content/uploads/2018/11/Idiot-Squad-PTBR-PSP.webp|0|1
+psp/Monster Hunter Freedom Unite (BR) (T1.0).iso|Monster Hunter Freedom Unite|https://romsportugues.com/wp-content/uploads/2026/10/Monster-Hunter-Freedom-Unite-PTBR-PSP.webp|0|1
+psp/No_Gravity (PT).iso|NoGravity|https://romsportugues.com/wp-content/uploads/2018/12/NoGravity-PTBR-PSP.webp|0|1
+psp/Solitaire (PT).iso|Solitaire|https://romsportugues.com/wp-content/uploads/2020/08/Solitaire-PTBR-PSP.webp|0|1
+psp/Tales of Eternia (BR-E) (T1.0).iso|Tales of Eternia (PSP)|https://romsportugues.com/wp-content/uploads/2026/08/Tales-of-Eternia-PTBR-PSP.webp|0|1
+psp/The Sims 2 Pets PSP (BR) (T025).iso|The Sims 2: Pets (PSP)|https://romsportugues.com/wp-content/uploads/2026/09/The-Sims-2-Pets-PSP-PTBR.webp|0|1
+psx/Asterix - Mega Madness (BR) (Sem Seletor).zip|Asterix Mega Madness|https://romsportugues.com/wp-content/uploads/2021/08/Asterix-Mega-Madness-PTBR-PS1.webp|0|1
+psx/Bakusou Dekotora Densetsu (BR-J) (T1.0).zip|Bakusou Dekotora Densetsu: Otoko Ippiki Yume Kaidou|https://romsportugues.com/wp-content/uploads/2026/09/Bakusou-Dekotora-Densetsu-PTBR-PS1.webp|0|1
+psx/Breath of Fire 4 (BR).iso|Breath of Fire 4|https://romsportugues.com/wp-content/uploads/2018/08/Breath-of-Fire-4-PTBR-PS1.webp|0|1
+psx/Digimon World (BR-U) (AnimeWorld) (T1.0).zip|Digimon World 1|https://romsportugues.com/wp-content/uploads/2019/03/Digimon-World-1-PTBR-PS1.webp|0|1
+psx/Disney's Donald Duck Goin' Quackers (BR) (DUB).zip|Disney’s Donald Duck: Goin’ Quackers (PS1) (Dublado)|https://romsportugues.com/wp-content/uploads/2026/08/Disneys-Donald-Duck-Goin-Quackers.webp|0|1
+psx/Koudelka (CD1) (BR) (T1.0).zip|Koudelka|https://romsportugues.com/wp-content/uploads/2026/09/Koudelka-PTBR-PS1-4.webp|0|1
+psx/Koudelka (CD2) (BR) (T1.0).zip|Koudelka|https://romsportugues.com/wp-content/uploads/2026/09/Koudelka-PTBR-PS1-4.webp|0|1
+psx/Koudelka (CD3) (BR) (T1.0).zip|Koudelka|https://romsportugues.com/wp-content/uploads/2026/09/Koudelka-PTBR-PS1-4.webp|0|1
+psx/Koudelka (CD4) (BR) (T1.0).zip|Koudelka|https://romsportugues.com/wp-content/uploads/2026/09/Koudelka-PTBR-PS1-4.webp|0|1
+psx/Legend of Dragoon, The (BR) (CD1) (BETA).zip|The Legend of Dragoon (Dublado)|https://romsportugues.com/wp-content/uploads/2025/01/The-Legend-of-Dragoon-PTBR-PS1.webp|0|1
+psx/Legend of Legaia (BR) (RQ) (T1.0).zip|Legend of Legaia|https://romsportugues.com/wp-content/uploads/2026/06/Legend-of-Legaia-PTBR-PS1.webp|0|1
+psx/Little Big Adventure (BR).zip|Little Big Adventure|https://romsportugues.com/wp-content/uploads/2025/08/Little-Big-Adventure-PTBR-PS1.webp|0|1
+psx/Tales of Eternia PT-BR (Disc 1).zip|Tales of Eternia|https://romsportugues.com/wp-content/uploads/2026/07/Tales-of-Eternia-PTBR-PS1.webp|0|1
+psx/Tales of Eternia PT-BR (Disc 2).zip|Tales of Eternia|https://romsportugues.com/wp-content/uploads/2026/07/Tales-of-Eternia-PTBR-PS1.webp|0|1
+psx/Tales of Eternia PT-BR (Disc 3).zip|Tales of Eternia|https://romsportugues.com/wp-content/uploads/2026/07/Tales-of-Eternia-PTBR-PS1.webp|0|1
+psx/Tenchu - Stealth Assassins (BR) (T1.1).zip|Tenchu: Stealth Assassins (Dublado)|https://romsportugues.com/wp-content/uploads/2024/03/Tenchu-Stealth-Assassins-Dublado-PTBR-PS1.webp|0|1
+psx/Tomba! 2 - The Evil Swine Return (BR).zip|Tomba! 2: The Evil Swine Return|https://romsportugues.com/wp-content/uploads/2026/10/Tomba-2-PTBR-PS1.webp|0|1
+psx/Vagrant Story (BR-U) (T0.9).zip|Vagrant Story|https://romsportugues.com/wp-content/uploads/2018/07/Vagrant-Story-PTBR-PS1.webp|0|1
+psx/Vandal Hearts II (BR-EUR) (T107-Beta).zip|Vandal Hearts II: Heaven’s Gate|https://romsportugues.com/wp-content/uploads/2026/10/Vandal-Hearts-II-PTBR-PS1.webp|0|1
+saturn/Albert Odyssey - Legend of Eldean (BR) (T1.0).zip|Albert Odyssey: Legend of Eldean (Dublado)|https://romsportugues.com/wp-content/uploads/2026/10/Albert-Odyssey-Legend-of-Eldean-PTBR-Saturn.webp|0|1
+saturn/Deep Fear (BR-JP) (CD 1).zip|Deep Fear|https://romsportugues.com/wp-content/uploads/2026/05/Deep-Fear-PTBR-Saturn.webp|0|1
+saturn/Deep Fear (BR-JP) (CD 2).zip|Deep Fear|https://romsportugues.com/wp-content/uploads/2026/05/Deep-Fear-PTBR-Saturn.webp|0|1
+saturn/Steam Hearts (BR) (DUB) (T1.0).zip|Steam Hearts (Dublado)|https://romsportugues.com/wp-content/uploads/2026/07/Steam-Hearts-PTBR-Saturn.webp|0|1
+snes/3 Ninjas Kick Back (BR) (T1.7) (Antígeno).sfc|3 Ninjas Kick Back|https://romsportugues.com/wp-content/uploads/2018/08/3-Ninjas-Kick-Back-PTBR-SNES.webp|0|1
+snes/AAAHH!!! Real Monsters (BR).smc|AAAHH!!! Real Monsters|https://romsportugues.com/wp-content/uploads/2018/08/AAAHH-Real-Monsters-PTBR-SNES.webp|0|1
+snes/ActRaiser 2 (BR).smc|ActRaiser 2|https://romsportugues.com/wp-content/uploads/2018/08/ActRaiser-2-PTBR-SNES.webp|0|1
+snes/Addams Family, The - Pugsley's Scavenger Hunt (BR).sfc|The Addams Family – Pugsley’s Scavenger Hunt|https://romsportugues.com/wp-content/uploads/2018/09/The-Addams-Family-Pugsleys-Scavenger-Hunt-PTBR-SNES.webp|0|1
+snes/Adventures of Batman & Robin, The (BR-EUR) (T1Beta).smc|The Adventures of Batman & Robin|https://romsportugues.com/wp-content/uploads/2025/08/The-Adventures-of-Batman-Robin-PTBR-SNES.webp|0|1
+snes/Aerobiz (BR).sfc|Aerobiz|https://romsportugues.com/wp-content/uploads/2018/10/Aerobiz-PTBR-SNES.webp|0|1
+snes/Alcahest (BR) (Dindo-Taihen) (T1.2).smc|Alcahest|https://romsportugues.com/wp-content/uploads/2024/05/Alcahest-PTBR-SNES.webp|0|1
+snes/Alien 3 (BR).smc|Alien 3 SNES|https://romsportugues.com/wp-content/uploads/2018/07/Alien-3-PTBR-SNES-PTBR.webp|0|1
+snes/Alien vs. Predator (BR).smc|Alien vs. Predator|https://romsportugues.com/wp-content/uploads/2018/07/Alien-vs.-Predator-PTBR-SNES.webp|0|1
+snes/Animaniacs (BR).smc|Animaniacs|https://romsportugues.com/wp-content/uploads/2018/08/Animaniacs-PTBR-SNES.webp|0|1
+snes/Arcana (BR).smc|Arcana|https://romsportugues.com/wp-content/uploads/2018/08/Arcana-PTBR-SNES.webp|0|1
+snes/Bahamut Lagoon (BR) (T1.0).smc|Bahamut Lagoon|https://romsportugues.com/wp-content/uploads/2023/10/Bahamut-Lagoon-PTBR-SNES.webp|0|1
+snes/Batman Forever (BR) (T1.0).sfc|Batman Forever|https://romsportugues.com/wp-content/uploads/2026/10/Batman-Forever-PTBR-SNES.webp|0|1
+snes/Batman Returns (BR) (T1.0).sfc|Batman Returns|https://romsportugues.com/wp-content/uploads/2026/10/Batman-Returns-PTBR-SNES.webp|0|1
+snes/Battle Soccer - Field no Hasha (BR).smc|Battle Soccer – Field no HaSha|https://romsportugues.com/wp-content/uploads/2018/08/Battle-Soccer-Field-no-Hasha-PTBR-SNES.webp|0|1
+snes/Battletoads & Double Dragon (BR) (T0.99).smc|Battletoads & Double Dragon – The Ultimate Team SNES|https://romsportugues.com/wp-content/uploads/2018/07/Battletoads-Double-Dragon-The-Ultimate-Team-PTBR-SNES.webp|0|1
+snes/Battletoads In Battlemaniacs (BR).smc|Battletoads in Battlemaniacs|https://romsportugues.com/wp-content/uploads/2018/07/Battletoads-in-Battlemaniacs-PTBR.webp|0|1
+snes/Beauty and the Beast (BR-U) (T1.0).sfc|Beauty and the Beast|https://romsportugues.com/wp-content/uploads/2026/10/Beauty-and-the-Beast-PTBR-SNES.webp|0|1
+snes/Biker Mice From Mars (BR).smc|Biker Mice From Mars|https://romsportugues.com/wp-content/uploads/2018/07/Biker-Mice-From-Mars-PTBR.webp|0|1
+snes/Bio Metal (BR).smc|Bio Metal|https://romsportugues.com/wp-content/uploads/2018/08/Bio-Metal-PTBR-SNES.webp|0|1
+snes/Bishoujo Senshi Sailor Moon R (BR).smc|Bishoujo Senshi Sailor Moon R|https://romsportugues.com/wp-content/uploads/2018/08/Bishoujo-Senshi-Sailor-Moon-R-PTBR-SNES.webp|0|1
+snes/Blackthorne (BR) (dindorc) (T1.01).sfc|Blackthorne SNES|https://romsportugues.com/wp-content/uploads/2024/02/Blackthorne-PTBR-SNES.webp|0|1
+snes/Bobby's World (BR).smc|Bobby’s World|https://romsportugues.com/wp-content/uploads/2018/08/Bobbys-World-PTBR-SNES.webp|0|1
+snes/Bonkers (BR) (TBeta1).sfc|Bonkers|https://romsportugues.com/wp-content/uploads/2018/09/Bonkers-PTBR-SNES.webp|0|1
+snes/Brainies, The (BR).sfc|The Brainies|https://romsportugues.com/wp-content/uploads/2018/09/The-Brainies-PTBR-SNES.webp|0|1
+snes/Brandish (BR).smc|Brandish|https://romsportugues.com/wp-content/uploads/2018/08/Brandish-PTBR-SNES.webp|0|1
+snes/Bubsy II (BR) (TBeta1).sfc|Bubsy II|https://romsportugues.com/wp-content/uploads/2018/09/Bubsy-II-PTBR-SNES.webp|0|1
+snes/Bubsy in - Claws Encounters of the Furred Kind (BR) (1.0).sfc|Bubsy in Claws Encounters of the Furred Kind|https://romsportugues.com/wp-content/uploads/2018/09/Bubsy-in-Claws-Encounters-of-the-Furred-Kind-PTBR-SNES.webp|0|1
+snes/Bugs Bunny - Rabbit Rampage (BR) (TBeta2).sfc|Bugs Bunny – Rabbit Rampage|https://romsportugues.com/wp-content/uploads/2018/09/Bugs-Bunny-Rabbit-Rampage-PTBR-SNES.webp|0|1
+snes/Captain Commando (BR).smc|Captain Commando|https://romsportugues.com/wp-content/uploads/2018/08/Captain-Commando-PTBR-SNES.webp|0|1
+snes/Captain Tsubasa V - Hasha no Shougou Canpione (BR).smc|Captain Tsubasa V – HaSha no ShouGou Campione|https://romsportugues.com/wp-content/uploads/2018/08/Captain-Tsubasa-V-HaSha-no-ShouGou-Campione-PTBR.webp|0|1
+snes/Chaos Seed - Fuusui Kairouki (BR-J) (T1.01).sfc|Chaos Seed|https://romsportugues.com/wp-content/uploads/2025/12/Chaos-Seed-PTBR-SNES.webp|0|1
+snes/Choplifter III (BR).smc|Choplifter III|https://romsportugues.com/wp-content/uploads/2018/08/Choplifter-III-PTBR-SNES.webp|0|1
+snes/Cliffhanger (BR) (TBeta1).sfc|Cliffhanger|https://romsportugues.com/wp-content/uploads/2018/09/Cliffhanger-PTBR-SNES.webp|0|1
+snes/Clock Tower (BR).smc|Clock Tower (SNES)|https://romsportugues.com/wp-content/uploads/2018/07/Clock-Tower-PTBR-SNES.webp|0|1
+snes/Combatribes, The (BR).sfc|The Combatribes|https://romsportugues.com/wp-content/uploads/2018/09/The-Combatribes-PTBR-SNES.webp|0|1
+snes/Congo's Caper (BR-USA) (T1.0).sfc|Congo’s Caper|https://romsportugues.com/wp-content/uploads/2026/04/Congos-Caper-PTBR-SNES.webp|0|1
+snes/Cooly Skunk (BR) (T1.1).sfc|Cooly Skunk|https://romsportugues.com/wp-content/uploads/2022/05/Cooly-Skunk-PTBR-SNES.webp|0|1
+snes/Cutthroat Island (BR).smc|Cutthroat Island|https://romsportugues.com/wp-content/uploads/2018/09/Cutthroat-Island-PTBR-SNES.webp|0|1
+snes/Cybernator (BR).smc|Cybernator|https://romsportugues.com/wp-content/uploads/2018/08/Cybernator-PTBR-SNES.webp|0|1
+snes/Daffy Duck - The Marvin Missions (BR) (T0.95).smc|Daffy Duck – The Marvin Missions|https://romsportugues.com/wp-content/uploads/2018/08/Daffy-Duck-The-Marvin-Missions-PTBR-SNES.webp|0|1
+snes/Dark Half (BR) (T1.0).sfc|Dark Half|https://romsportugues.com/wp-content/uploads/2023/04/Dark-Half-PTBR-SNES.webp|0|1
+snes/Daze Before Christmas (BR).smc|Daze Before Christmas|https://romsportugues.com/wp-content/uploads/2018/08/Daze-Before-Christmas-PTBR-SNES.webp|0|1
+snes/Death and Return of Superman, The (BR).sfc|The Death and Return of Superman|https://romsportugues.com/wp-content/uploads/2018/09/The-Death-and-Return-of-Superman-PTBR-SNES.webp|0|1
+snes/Demolition Man (BR).smc|Demolition Man|https://romsportugues.com/wp-content/uploads/2018/08/Demolition-Man-PTBR-SNES.webp|0|1
+snes/Demons Crest (BR).smc|Demon’s Crest|https://romsportugues.com/wp-content/uploads/2018/07/Demons-Crest-PTBR-SNES.webp|0|1
+snes/Dottie dreads nought (BR) (T1.0).sfc|Dottie Dreads Nought|https://romsportugues.com/wp-content/uploads/2022/12/Dottie-Dreads-Nought-PTBR-SNES.webp|0|1
+snes/Dragon - The Bruce Lee Story (BR).smc|Dragon – The Bruce Lee Story SNES|https://romsportugues.com/wp-content/uploads/2018/08/Dragon-The-Bruce-Lee-Story-PTBR-SNES.webp|0|1
+snes/Dragon's Lair (BR) (1.0).sfc|Dragon’s Lair|https://romsportugues.com/wp-content/uploads/2018/09/Dragons-Lair-PTBR-SNES.webp|0|1
+snes/E.V.O. Search for Eden (BR).smc|E.V.O. – Search for Eden|https://romsportugues.com/wp-content/uploads/2018/07/E.V.O.-Search-for-Eden-PTBR-SNES.webp|0|1
+snes/Earthworm Jim 2 (BR).sfc|Earthworm Jim 2|https://romsportugues.com/wp-content/uploads/2018/07/Earthworm-Jim-2-PTBR-SNES.webp|0|1
+snes/Final Fight (BR).smc|Final Fight|https://romsportugues.com/wp-content/uploads/2018/07/Final-Fight-PTBR-SNES.webp|0|1
+snes/Final Fight 2 (BR).smc|Final Fight 2|https://romsportugues.com/wp-content/uploads/2018/07/Final-Fight-2-PTBR-SNES.webp|0|1
+snes/Final Fight 3 (BR).sfc|Final Fight 3|https://romsportugues.com/wp-content/uploads/2018/07/Final-Fight-3-PTBR-SNES.webp|0|1
+snes/Final Fight Guy (BR) (0.98).smc|Final Fight Guy|https://romsportugues.com/wp-content/uploads/2018/07/Final-Fight-Guy-PTBR-SNES.webp|0|1
+snes/Fire Emblem - Seisen no Keifu (BR) (T1.13).sfc|Fire Emblem: Seisen no Keifu|https://romsportugues.com/wp-content/uploads/2025/09/Fire-Emblem-Seisen-no-Keifu-PTBR-SNES.webp|0|1
+snes/Fire Striker (BR).smc|FireStriker|https://romsportugues.com/wp-content/uploads/2019/12/FireStriker-PTBR.webp|0|1
+snes/Firepower 2000 (BR).sfc|Firepower 2000|https://romsportugues.com/wp-content/uploads/2018/09/Firepower-2000-PTBR-SNES.webp|0|1
+snes/Flashback (BR).smc|Flashback – The Quest for Identity|https://romsportugues.com/wp-content/uploads/2018/08/Flashback-The-Quest-for-Identity-PTBR-SNES.webp|0|1
+snes/Front Mission Series - Gun Hazard (BR-J) (T1.0).sfc|Front Mission: Gun Hazard|https://romsportugues.com/wp-content/uploads/2018/08/Front-Mission-PTBR-SNES.webp|0|1
+snes/GP-1 - Part II (BR).sfc|GP-1 Part II|https://romsportugues.com/wp-content/uploads/2018/08/GP-1-Part-II-PTBR-SNES.webp|0|1
+snes/Ganbare Goemon 2 (BR) (T1.0).sfc|Ganbare Goemon 2 (SNES)|https://romsportugues.com/wp-content/uploads/2024/11/Ganbare-Goemon-2-SNES-PTBR.webp|0|1
+snes/Ganbare Goemon Yukihime Kyūshutsu Emaki (BR) (T1.0).smc|Ganbare Goemon: Yukihime Kyūshutsu Emaki|https://romsportugues.com/wp-content/uploads/2024/10/Ganbare-Goemon-Yukihime-Kyushutsu-Emaki-PTBR-SNES.webp|0|1
+snes/Go Go Ackman (BR).smc|Go Go Ackman|https://romsportugues.com/wp-content/uploads/2018/08/Go-Go-Ackman-PTBR-SNES.webp|0|1
+snes/Go Go Ackman 3 (BR).sfc|Go Go Ackman 3|https://romsportugues.com/wp-content/uploads/2021/12/Go-Go-Ackman-3-PTBR-SNES.webp|0|1
+snes/Goof Troop (BR).smc|Goof Troop|https://romsportugues.com/wp-content/uploads/2018/07/Goof-Troop-PTBR-SNES.webp|0|1
+snes/Gradius III (BR).smc|Gradius III|https://romsportugues.com/wp-content/uploads/2018/08/Gradius-III-PTBR-SNES.webp|0|1
+snes/Gunman's Proof (BR).smc|Gunman’s Proof|https://romsportugues.com/wp-content/uploads/2018/08/Gunmans-Proof-PTBR-SNES.webp|0|1
+snes/Hamelin no Violin Hiki (BR).smc|Hamelin no Violin Hiki|https://romsportugues.com/wp-content/uploads/2018/08/Hamelin-no-Violin-Hiki-PTBR-SNES.webp|0|1
+snes/Harley's Humongous Adventure (BR).sfc|Harley’s Humongous Adventure|https://romsportugues.com/wp-content/uploads/2018/09/Harleys-Humongous-Adventure-PTBR-SNES.webp|0|1
+snes/Hook (BR-USA) (T2.0).sfc|Hook|https://romsportugues.com/wp-content/uploads/2026/03/Hook-PTBR-SNES.webp|0|1
+snes/Hyper V-Ball (BR).smc|Hyper V-Ball|https://romsportugues.com/wp-content/uploads/2018/08/Hyper-V-Ball-PTBR-SNES.webp|0|1
+snes/Ignition Factor, The (BR).smc|The Ignition Factor|https://romsportugues.com/wp-content/uploads/2018/08/The-Ignition-Factor-PTBR-SNES.webp|0|1
+snes/Illusion of Gaia (BR).smc|Illusion of Gaia|https://romsportugues.com/wp-content/uploads/2018/07/Illusion-of-Gaia-PTBR-SNES.webp|0|1
+snes/Inazuma Serve da!! Super Beach Volley (BR).smc|Inazuma Serve da!! Super Beach Volley|https://romsportugues.com/wp-content/uploads/2018/08/Inazuma-Serve-da-Super-Beach-Volley-PTBR-SNES.webp|0|1
+snes/Inindo - Way of the Ninja (BR).sfc|Inindo – Way of the Ninja|https://romsportugues.com/wp-content/uploads/2018/09/Inindo-Way-of-the-Ninja-PTBR-SNES.webp|0|1
+snes/Inspector Gadget (BR).smc|Inspector Gadget|https://romsportugues.com/wp-content/uploads/2018/08/Inspector-Gadget-PTBR-SNES.webp|0|1
+snes/Iron Commando (BR).sfc|Iron Commando|https://romsportugues.com/wp-content/uploads/2018/09/Iron-Commando-PTBR-SNES.webp|0|1
+snes/JRR Tolkien's The Lord of the Rings - Volume 1 (BR).smc|The Lord of the Rings – Volume 1|https://romsportugues.com/wp-content/uploads/2018/08/The-Lord-of-the-Rings-Volume-1-PTBR-SNES.webp|0|1
+snes/Jetsons, The - Invasion of the Planet Pirates (BR).sfc|The Jetsons – Invasion of the Planet Pirates|https://romsportugues.com/wp-content/uploads/2018/09/The-Jetsons-Invasion-of-the-Planet-Pirates-PTBR-SNES.webp|0|1
+snes/Joe & Mac (BR-USA) (T1.0).sfc|Joe & Mac (SNES)|https://romsportugues.com/wp-content/uploads/2026/07/Joe-Mac-SNES-PTBR.webp|0|1
+snes/Joe & Mac 2 - Lost in the Tropics (BR).sfc|Joe e Mac 2 – Lost in the Tropics|https://romsportugues.com/wp-content/uploads/2018/09/Joe-e-Mac-2-Lost-in-the-Tropics-PTBR-SNES.webp|0|1
+snes/Jungle Book, The (BR-U) (DiegoShark) (T1.0).sfc|The Jungle Book (SNES)|https://romsportugues.com/wp-content/uploads/2019/04/The-Jungle-Book-SNES-PTBR-SNES.webp|0|1
+snes/Jurassic Park Part 2 - The Chaos Continues (BR).smc|Jurassic Park 2 – The Chaos Continues|https://romsportugues.com/wp-content/uploads/2018/08/Jurassic-Park-2-The-Chaos-Continues-PTBR-SNES.webp|0|1
+snes/Kendo Rage (BR).smc|Kendo Rage|https://romsportugues.com/wp-content/uploads/2018/08/Kendo-Rage-PTBR-SNES.webp|0|1
+snes/King Arthur's World (BR).smc|King Arthur’s World|https://romsportugues.com/wp-content/uploads/2018/08/King-Arthurs-World-PTBR-SNES.webp|0|1
+snes/King of Dragons (BR) (T1.0.2).sfc|The King of Dragons|https://romsportugues.com/wp-content/uploads/2018/09/The-King-of-Dragons-PTBR-SNES.webp|0|1
+snes/Knights of the Round (BR).sfc|Knights of the Round|https://romsportugues.com/wp-content/uploads/2018/08/Knights-of-the-Round-PTBR-SNES.webp|0|1
+snes/Lamborghini - American Challenge (BR).smc|Lamborghini – American Challenge|https://romsportugues.com/wp-content/uploads/2018/08/Lamborghini-American-Challenge-PTBR-SNES.webp|0|1
+snes/Laplace no Ma (BR) (T1.0).sfc|Laplace no Ma|https://romsportugues.com/wp-content/uploads/2024/08/Laplace-no-Ma-PTBR-SNES.webp|0|1
+snes/Last Action Hero (BR).sfc|Last Action Hero (SNES)|https://romsportugues.com/wp-content/uploads/2019/04/Last-Action-Hero-PTBR-SNES.webp|0|1
+snes/Legend (BR) (T1.0).sfc|Legend|https://romsportugues.com/wp-content/uploads/2018/09/Legend-PTBR-SNES.webp|0|1
+snes/Lemmings (BR).smc|Lemmings|https://romsportugues.com/wp-content/uploads/2018/08/Lemmings-PTBR-SNES.webp|0|1
+snes/Live-a-Live (BR-J) (T2.3).smc|Live a Live|https://romsportugues.com/wp-content/uploads/2022/12/Live-a-Live-PTBR-SNES.webp|0|1
+snes/Lost Vikings II, The (BR).smc|The Lost Vikings II|https://romsportugues.com/wp-content/uploads/2018/08/The-Lost-Vikings-II-PTBR.webp|0|1
+snes/Lufia & The Fortress of Doom (BR).sfc|Lufia & The Fortress of Doom|https://romsportugues.com/wp-content/uploads/2018/09/Lufia-The-Fortress-of-Doom-PTBR-SNES.webp|0|1
+snes/Lufia II - Rise of the Sinistrals (BR-U) (T1.01).sfc.sfc|Lufia II: Rise of the Sinistrals|https://romsportugues.com/wp-content/uploads/2026/08/Lufia-II-Rise-of-the-Sinistrals-PTBR-SNES.webp|0|1
+snes/Madou Monogatari - Hanamaru Daiyouchienji (BR) (T1.2).sfc|Madou Monogatari: Hanamaru Daiyouchi Enji|https://romsportugues.com/wp-content/uploads/2023/04/Madou-Monogatari-Hanamaru-Daiyouchi-Enji-PTBR-SNES.webp|0|1
+snes/Majuu Ou (BR) (T1.0).sfc|Majuu Ou|https://romsportugues.com/wp-content/uploads/2024/03/Majuu-Ou-PTBR-SNES.webp|0|1
+snes/Marvel Super Heroes - War of the Gems (BR).smc|Marvel Super Heroes – War of the Gems|https://romsportugues.com/wp-content/uploads/2018/08/Marvel-Super-Heroes-War-of-the-Gems-PTBR-SNES.webp|0|1
+snes/Marvelous (BR-J) (T1.0).sfc|Marvelous|https://romsportugues.com/wp-content/uploads/2025/12/Marvelous-PTBR-SNES.webp|0|1
+snes/Metal Warriors (BR).smc|Metal Warriors|https://romsportugues.com/wp-content/uploads/2018/08/Metal-Warriors-PTBR-SNES.webp|0|1
+snes/Monstania (BR).smc|Monstania|https://romsportugues.com/wp-content/uploads/2018/08/Monstania-PTBR-SNES.webp|0|1
+snes/Mystic Ark (BR-J) (T1.3).sfc|Mystic Ark|https://romsportugues.com/wp-content/uploads/2026/10/Mystic-Ark-PTBR-SNES.webp|0|1
+snes/NBA Live 95 (BR-USA).sfc|NBA Live 95|https://romsportugues.com/wp-content/uploads/2025/08/NBA-Live-95-PTBR.webp|0|1
+snes/Neugier (BR) (T1.0).sfc|Neugier: Umi to Kaze no Kodō|https://romsportugues.com/wp-content/uploads/2024/01/Neugier-Umi-to-Kaze-no-Kodo-PTBR-SNES.webp|0|1
+snes/Ogre Battle - The March of the Black Queen (BR).smc|Ogre Battle – The March of the Black Queen|https://romsportugues.com/wp-content/uploads/2018/08/Ogre-Battle-The-March-of-the-Black-Queen-PTBR-SNES.webp|0|1
+snes/Panic in Nakayoshi World (BR).smc|Panic in Nakayoshi World|https://romsportugues.com/wp-content/uploads/2018/08/Panic-in-Nakayoshi-World-PTBR-SNES.webp|0|1
+snes/Popeye - Ijiwaru Majo Sea Hag no Maki (BR) (T1.0) (Starman).sfc|Popeye – Ijiwaru Majo Sea Hag no Maki|https://romsportugues.com/wp-content/uploads/2018/09/Popeye-Ijiwaru-Majo-Sea-Hag-no-Maki-PTBR-SNES.webp|0|1
+snes/Power Drive (PT).sfc|Power Drive|https://romsportugues.com/wp-content/uploads/2019/01/Power-Drive-Baixar-em-PTBR.webp|0|1
+snes/Prince of Persia (BR).smc|Prince of Persia|https://romsportugues.com/wp-content/uploads/2018/07/Prince-of-Persia-PTBR-SNES.webp|0|1
+snes/Radical Dreamers (Kuroi) (BR) (T-Final).smc|Radical Dreamers – Nusumenai Houseki|https://romsportugues.com/wp-content/uploads/2024/04/Radical-Dreamers-Nusumenai-Houseki-PTBR-SNES.webp|0|1
+snes/Raiden Trad (BR).smc|Raiden Trad (SNES)|https://romsportugues.com/wp-content/uploads/2019/12/Raiden-Trad-SNES-PTBR-SNES-.webp|0|1
+snes/Ranma Nibunnoichi - Akanekodan Teki Hihou (BR).smc|Ranma ½ – Akanekodan Teki Hihou|https://romsportugues.com/wp-content/uploads/2018/08/Ranma-½-Akanekodan-Teki-Hihou-PTBR-SNES.webp|0|1
+snes/Rock N' Roll Racing (BR).smc|Rock N’ Roll Racing|https://romsportugues.com/wp-content/uploads/2018/07/Rock-N-Roll-Racing-PTBR-SNES.webp|0|1
+snes/Rushing Beat (BR) (T1.0.1).sfc|Rushing Beat|https://romsportugues.com/wp-content/uploads/2018/09/Rushing-Beat-PTBR-SNES.webp|0|1
+snes/Scooby-Doo Mystery (BR).smc|Scooby-Doo Mystery|https://romsportugues.com/wp-content/uploads/2018/08/Scooby-Doo-Mystery-PTBR-SNES.webp|0|1
+snes/Secret of Evermore (BR) (T1.00).sfc|Secret of Evermore|https://romsportugues.com/wp-content/uploads/2023/03/Secret-of-Evermore-PTBR-SNES.webp|0|1
+snes/Secret of Mana (BR).smc|Secret of Mana|https://romsportugues.com/wp-content/uploads/2018/07/Secret-of-Mana-PTBR-SNES.webp|0|1
+snes/Secret of the Stars (BR).smc|Secret of the Stars|https://romsportugues.com/wp-content/uploads/2018/08/Secret-of-the-Stars-PTBR-SNES.webp|0|1
+snes/Seiken Densetsu 3 (BR) (DindoeCia) (T1.02).sfc|Seiken Densetsu 3|https://romsportugues.com/wp-content/uploads/2018/07/Seiken-Densetsu-3-PTBR.webp|0|1
+snes/Shadowrun (BR).smc|Shadowrun|https://romsportugues.com/wp-content/uploads/2018/09/Shadowrun-PTBR-SNES.webp|0|1
+snes/Shin Kidou Senki Gundam W - Endless Duel (BR).smc|Shin Kidou Senki Gundam Wing – Endless Duel|https://romsportugues.com/wp-content/uploads/2018/08/Shin-Kidou-Senki-Gundam-Wing-Endless-Duel-PTBR-SNES.webp|0|1
+snes/Sid Meier's Civilization (BR).sfc|Civilization|https://romsportugues.com/wp-content/uploads/2018/09/Civilization-PTBR-SNES.webp|0|1
+snes/Side Pocket (BR).sfc|Side Pocket|https://romsportugues.com/wp-content/uploads/2018/07/Side-Pocket-PTBR-SNES.webp|0|1
+snes/Skyblazer (BR-USA) (T1.2).sfc|Skyblazer|https://romsportugues.com/wp-content/uploads/2018/08/Skyblazer-PTBR-SNES.webp|0|1
+snes/Snoopy Concert (BR).smc|Snoopy Concert|https://romsportugues.com/wp-content/uploads/2018/08/Snoopy-Concert-PTBR-SNES.webp|0|1
+snes/Soldiers of Fortune (BR).smc|Soldiers of Fortune|https://romsportugues.com/wp-content/uploads/2018/08/Soldiers-of-Fortune-PTBR-SNES.webp|0|1
+snes/Soul Blazer (BR-USA) (T1.0).sfc|Soul Blazer|https://romsportugues.com/wp-content/uploads/2026/01/Soul-Blazer-PTBR-SNES.webp|0|1
+snes/Space Ace (BR).smc|Space Ace|https://romsportugues.com/wp-content/uploads/2018/08/Space-Ace-PTBR-SNES.webp|0|1
+snes/Spawn (BR).smc|Spawn|https://romsportugues.com/wp-content/uploads/2018/07/Spawn-PTBR-SNES.webp|0|1
+snes/Spell Craft (BR).smc|SpellCraft|https://romsportugues.com/wp-content/uploads/2018/08/SpellCraft-PTBR-SNES.webp|0|1
+snes/Spider-Man - X-Men - Arcade's Revenge (BR).sfc|Arcade’s Revenge|https://romsportugues.com/wp-content/uploads/2018/09/Arcades-Revenge-PTBR-SNES.webp|0|1
+snes/Star Ocean (BR-deJAP) (BETA).sfc|Star Ocean|https://romsportugues.com/wp-content/uploads/2025/01/Star-Ocean-PTBR-SNES.webp|0|1
+snes/Sunset Riders (BR).sfc|Sunset Riders|https://romsportugues.com/wp-content/uploads/2018/07/Sunset-Riders-PTBR-SNES.webp|0|1
+snes/Super Adventure Island II (BR) (T1.01).sfc|Super Adventure Island|https://romsportugues.com/wp-content/uploads/2026/04/Super-Adventure-Island-PTBR-SNES.webp|0|1
+snes/Super Copa (PT).sfc|Super Copa|https://romsportugues.com/wp-content/uploads/2018/11/Super-Copa-ROMs-Portugues-PTBR.webp|0|1
+snes/Super Morph (BR).sfc|Super Morph|https://romsportugues.com/wp-content/uploads/2020/01/Super-Morph-PTBR-SNES.webp|0|1
+snes/Super Soccer (BR).smc|Super Soccer|https://romsportugues.com/wp-content/uploads/2018/08/Super-Soccer-PTBR-SNES.webp|0|1
+snes/Taekwon-Do (BR-J) (T1.0).sfc|Taekwon-Do|https://romsportugues.com/wp-content/uploads/2026/10/Taekwon-Do-PTBR-SNES.webp|0|1
+snes/Tales of Phantasia (BR) (T1.00).smc|Tales of Phantasia|https://romsportugues.com/wp-content/uploads/2018/07/Tales-of-Phantasia-PTBR-SNES.webp|0|1
+snes/Teenage Mutant Ninja Turtles - Tournament Fighters (BR).sfc|Teenage Mutant Ninja Turtles – Tournament Fighters|https://romsportugues.com/wp-content/uploads/2018/07/Teenage-Mutant-Ninja-Turtles-Tournament-Fighters-PTBR-SNES.webp|0|1
+snes/Teenage Mutant Ninja Turtles IV - Turtles in Time (BR).sfc|Teenage Mutant Ninja Turtles IV – Turtles in Time (Tartarugas Ninjas)|https://romsportugues.com/wp-content/uploads/2018/07/Teenage-Mutant-Ninja-Turtles-IV-Turtles-in-Time-PTBR.webp|0|1
+snes/Tengai Makyou Zero (BR) (T1.0).sfc|Tengai Makyō Zero|https://romsportugues.com/wp-content/uploads/2025/06/Tengai-Makyo-Zero-PTBR-SNES.webp|0|1
+snes/The 7th Saga (BR).smc|The 7th Saga|https://romsportugues.com/wp-content/uploads/2018/07/The-7th-Saga-PTBR-SNES.webp|0|1
+snes/The Adventures of Dr. Franken (BR).smc|The Adventures of Dr. Franken|https://romsportugues.com/wp-content/uploads/2020/01/The-Adventures-of-Dr.-Franken-PTBR-SNES.webp|0|1
+snes/The Lion King (BR) (DUB).smc|The Lion King|https://romsportugues.com/wp-content/uploads/2024/02/The-Lion-King-PTBR-SNES.webp|0|1
+snes/The Lost Vikings (BR).smc|The Lost Vikings|https://romsportugues.com/wp-content/uploads/2018/08/The-Lost-Vikings-PTBR-SNES.webp|0|1
+snes/Theme Park (BR) (T1.0).smc|Theme Park|https://romsportugues.com/wp-content/uploads/2023/02/Theme-Park-PTBR-SNES.webp|0|1
+snes/Time Slip (BR) (TBeta1).sfc|Time Slip|https://romsportugues.com/wp-content/uploads/2018/09/Time-Slip-PTBR-SNES.webp|0|1
+snes/Timecop (BR) (TBeta1).sfc|TimeCop|https://romsportugues.com/wp-content/uploads/2018/09/TimeCop-PTBR-SNES.webp|0|1
+snes/Tom and Jerry (BR) (1.0).sfc|Tom & Jerry|https://romsportugues.com/wp-content/uploads/2018/09/Tom-Jerry-PTBR-SNES.webp|0|1
+snes/Top Gear (BR).smc|Top Gear|https://romsportugues.com/wp-content/uploads/2018/07/Top-Gear-PTBR-SNES.webp|0|1
+snes/Top Gear 2 (BR).smc|Top Gear 2|https://romsportugues.com/wp-content/uploads/2018/07/Top-Gear-2-PTBR-SNES.webp|0|1
+snes/Trials of Mana (BR) (T1.02).sfc|Trials of Mana|https://romsportugues.com/wp-content/uploads/2024/02/Trials-of-Mana-PTBR-SNES.webp|0|1
+snes/True Lies (BR).smc|True Lies|https://romsportugues.com/wp-content/uploads/2018/08/True-Lies-PTBR-SNES.webp|0|1
+snes/U.N. Squadron (BR).smc|U.N. Squadron|https://romsportugues.com/wp-content/uploads/2018/08/U.N.-Squadron-PTBR-SNES.webp|0|1
+snes/Warlock (BR).smc|Warlock|https://romsportugues.com/wp-content/uploads/2018/08/Warlock-PTBR-SNES.webp|0|1
+snes/Winter Olympic Games - Lillehammer '94 (PT).sfc|Winter Olympic Games – Lillehammer ’94|https://romsportugues.com/wp-content/uploads/2019/02/Winter-Olympic-Games-Lillehammer-94-PTBR-SNES.webp|0|1
+snes/Wolfchild (BR) (TBeta1).sfc|Wolfchild|https://romsportugues.com/wp-content/uploads/2018/09/Wolfchild-PTBR-SNES.webp|0|1
+snes/Wonder Project J - Kikai no Shounen Pino (BR).smc|Wonder Project J – Kikai no Shounen Pino|https://romsportugues.com/wp-content/uploads/2018/08/Wonder-Project-J-Kikai-no-Shounen-Pino-PTBR-SNES.webp|0|1
+snes/Worms (BR).smc|Worms|https://romsportugues.com/wp-content/uploads/2018/08/Worms-PTBR-SNES.webp|0|1
+snes/X-Kaliber 2097 (BR) (T1.0).sfc|X-Kaliber 2097|https://romsportugues.com/wp-content/uploads/2024/01/X-Kaliber-2097-PTBR-SNES.webp|0|1
+snes/X-Men - Mutant Apocalypse (BR).smc|X-Men – Mutant Apocalypse|https://romsportugues.com/wp-content/uploads/2018/08/X-Men-Mutant-Apocalypse-PTBR-SNES.webp|0|1
+gba/Pokemon Sword And Shield Ultimate + GBA [PT-BR].gba|Pokemon Sword And Shield Ultimate + GBA [PT-BR]|https://pokebat.net/wp-content/uploads/2024/07/aiease_1764124850717.jpg|0|1
+gba/Pokémon Atlas Emerald.gba|Pokémon Atlas Emerald|https://pokebat.net/wp-content/uploads/2023/12/VisualBoyAdvance-100.29.12.2023_17_01_38.jpg|0|1
+gba/Pokemon Unbound 2.1.1.1 [ATT 2022].gba|Pokemon Unbound 2.1.1.1 [ATT 2022]|https://pokebat.net/wp-content/uploads/2021/12/unbound-2022.jpg|0|1
+gba/Pokémon Blue Stars 2 Ultimate Português (PT-BR).gba|Pokémon Blue Stars 2 Ultimate Português (PT-BR)|https://pokebat.net/wp-content/uploads/2024/03/196437476_392316658729902_1339938469432718290_n.png|0|1
+gba/Pokémon Sovereign Of The Skies.gba|Pokémon Sovereign Of The Skies|https://pokebat.net/wp-content/uploads/2022/04/LIKIS2B775.jpg|0|1
+gba/Pokemon Adventure to Empire Isle Rom.gba|Pokemon Adventure to Empire Isle Rom|https://pokebat.net/wp-content/uploads/2021/02/Capturar4.jpg|0|1
+gba/POKÉMON ( DIGIMON FIRE RED).gba|POKÉMON ( DIGIMON FIRE RED)|https://pokebat.net/wp-content/uploads/2021/02/WhatsApp2BImage2B2021-02-212Bat2B20.28.28.jpeg|0|1
+gba/Pokemon Spirit Emerald.gba|Pokemon Spirit Emerald|https://pokebat.net/wp-content/uploads/2020/10/SPIRIT2BEMERALD.jpg|0|1
+gba/POKEDUEL.gba|POKEDUEL|https://pokebat.net/wp-content/uploads/2021/02/WhatsApp2BImage2B2021-02-182Bat2B21.51.31.jpeg|0|1
+gba/Pokémon The Last Fire Red v4.1.gba|Pokémon The Last Fire Red v4.1|https://pokebat.net/wp-content/uploads/2020/08/258342591_1239720449772469_1931941965078906444_n.jpg|0|1
+gba/Pokemon Skye Project.gba|Pokemon Skye Project|https://pokebat.net/wp-content/uploads/2020/08/Capturar.png|0|1
+gba/Pokémon Ice Adventure [PT-BR].gba|Pokémon Ice Adventure [PT-BR]|https://pokebat.net/wp-content/uploads/2020/08/Capturar12.jpg|0|1
+gba/Pokemon Corona Edition.gba|Pokemon Corona Edition|https://pokebat.net/wp-content/uploads/2020/06/WhatsApp2BImage2B2020-06-272Bat2B20.02.06.jpeg|0|1
+gba/Pokémon Ultra Red & Ultra Green PT-BR [ATUALIZADO 2020].gba|Pokémon Ultra Red & Ultra Green PT-BR [ATUALIZADO 2020]|https://pokebat.net/wp-content/uploads/2020/04/20067508_845986152221748_1096592652_n.jpg|0|1
+gba/Pokemon Azure Horizons [COMPLETO].gba|Pokemon Azure Horizons [COMPLETO]|https://pokebat.net/wp-content/uploads/2020/06/AZURE2BHORIZONS2BCOVER.jpg|0|1
+gba/Pokemon Shining Victory Hallowenn.gba|Pokemon Shining Victory Hallowenn|https://pokebat.net/wp-content/uploads/2020/05/IMG_20191108_174409.jpg|0|1
+gba/Pokémon New Emerald [HACK].gba|Pokémon New Emerald [HACK]|https://pokebat.net/wp-content/uploads/2021/10/800px-mega_rayquaza_anime.jpg|0|1
+gba/Pokemon Alternate Evolutions.gba|Pokemon Alternate Evolutions|https://pokebat.net/wp-content/uploads/2018/07/Capturar-2.png|0|1
+gba/Pokémon Theta Emerald EX – 721 & Mega [HACK] – 12.2.2017.gba|Pokémon Theta Emerald EX – 721 & Mega [HACK] – 12.2.2017|https://pokemonsaves.files.wordpress.com/2017/02/158ce-theta2bemerald2bex.jpg?w=300|0|1
+gba/Pokémon Gaia Beta v3.2 [COMPLETO].gba|Pokémon Gaia Beta v3.2 [COMPLETO]|https://pokemonsaves.files.wordpress.com/2016/02/d783b-pokemon2bgaia2bbox2bcover.png?w=300|0|1
+gba/Pokémon Victory Fire [COMPLETO].gba|Pokémon Victory Fire [COMPLETO]|https://pokemonsaves.files.wordpress.com/2015/06/6797e-pokemon_victory_fire.jpg?w=300|0|1
+gba/Pokemon Fire Red 251+ (GBA).gba|Pokemon Fire Red 251+ (GBA)|https://pokebat.net/wp-content/uploads/2021/10/d95bb-71.png|0|1
+gba/Projeto Tradução Pokémon Sapphire PT-BR.gba|Projeto Tradução Pokémon Sapphire PT-BR|https://pokemonsaves.files.wordpress.com/2016/12/7593c-si_gba_pokemonsapphire_engb.jpg?w=300|0|1
+gba/Pokémon Classic 151 [HACK].gba|Pokémon Classic 151 [HACK]|https://pokemonsaves.files.wordpress.com/2016/09/85fd7-g7aej2bcwtxkyy1uwo5l.jpg?w=300|0|1
+gba/Pokemon Eternal Snow v2.gba|Pokemon Eternal Snow v2|https://pokemonsaves.files.wordpress.com/2016/10/e3680-es.jpg?w=300|0|1
+gba/Pokémon OA Emerald.gba|Pokémon OA Emerald|https://pokemonsaves.files.wordpress.com/2016/07/22992-pokemon2bemerald2bao.jpg?w=300|0|1
+gba/Pokémon Sweet Version [HACK].gba|Pokémon Sweet Version [HACK]|https://pokebat.net/wp-content/uploads/2021/10/yo0tEt8.jpg|0|1
+gba/Pokémon Shiny Gold Sigma [HACK-ROM].gba|Pokémon Shiny Gold Sigma [HACK-ROM]|https://pokebat.net/wp-content/uploads/2021/10/13266018_1604192793200175_1348241536171871130_n.png|0|1
+gba/Pokémon Rocket Strike.gba|Pokémon Rocket Strike|https://pokebat.net/wp-content/uploads/2021/10/f6b04-maxresdefault.jpg|0|1
+gba/Pokémon Hack-ROMS Pokémon Shiny Gold Beta 5x.gba|Pokémon Hack-ROMS Pokémon Shiny Gold Beta 5x|https://pokebat.net/wp-content/uploads/2021/10/6172a-screenshot0163.jpg|0|1
+gba/Pokémon Classic Version.gba|Pokémon Classic Version|https://pokebat.net/wp-content/uploads/2026/10/Gemini_Generated_Image_xuw1prxuw1prxuw1-1024x1024.jpg|0|1
+gba/Pokémon Wild Indigo.gba|Pokémon Wild Indigo|https://pokebat.net/wp-content/uploads/2026/10/Gemini_Generated_Image_48a85f48a85f48a8-1024x1024.jpg|0|1
+gba/Pokémon Azoth [English Translation].gba|Pokémon Azoth [English Translation]|https://pokebat.net/wp-content/uploads/2026/10/Gemini_Generated_Image_d1c8ujd1c8ujd1c8a-1024x1024.jpg|0|1
+gba/Pokémon Memories (Tradução Português PT-BR).gba|Pokémon Memories (Tradução Português PT-BR)|https://pokebat.net/wp-content/uploads/2026/10/Gemini_Generated_Image_7ja2s77ja2s77ja2a-1024x1024.jpg|0|1
+gba/Pokemon Quetzal Multiplayer (Att 2026).gba|Pokemon Quetzal Multiplayer (Att 2026)|https://pokebat.net/wp-content/uploads/2022/07/EMERALD-MULTI-quetzal-1024x683.jpg|0|1
+gba/Pokémon Emerald Seaglass [Português PT-BR].gba|Pokémon Emerald Seaglass [Português PT-BR]|https://pokebat.net/wp-content/uploads/2026/10/Pokemon-Emerald-Seaglass-Portugues-PT-BR-cover-gba-1024x1024.jpg|0|1
+gba/Pokémon Crestfall.gba|Pokémon Crestfall|https://pokebat.net/wp-content/uploads/2026/09/Gemini_Generated_Image_7b50p67b50p67b50-1024x1024.jpg|0|1
+gba/Pokémon The Hodgepodge Platoon.gba|Pokémon The Hodgepodge Platoon|https://pokebat.net/wp-content/uploads/2026/09/Gemini_Generated_Image_1whdtw1whdtw1whd-1024x1024.jpg|0|1
+gba/Pokémon Brisk Emerald.gba|Pokémon Brisk Emerald|https://pokebat.net/wp-content/uploads/2026/09/Gemini_Generated_Image_83x1583x1583x158-1024x576.jpg|0|1
+gba/Pokémon Synthesis Version.gba|Pokémon Synthesis Version|https://pokebat.net/wp-content/uploads/2026/09/Gemini_Generated_Image_d6szskd6szskd6sz-1024x1024.jpg|0|1
+gba/Pokémon Sapphire in Reverse.gba|Pokémon Sapphire in Reverse|https://pokebat.net/wp-content/uploads/2025/09/Gemini_Generated_Image_6pfk9g6pfk9g6pfk-1024x1024.jpg|0|1
+gba/Pokémon Odyssey II Heroes of Lemuria.gba|Pokémon Odyssey II Heroes of Lemuria|https://pokebat.net/wp-content/uploads/2026/09/gxtbZAW.jpg|0|1
+gba/Pokémon SoulGold.gba|Pokémon SoulGold|https://pokebat.net/wp-content/uploads/2026/08/Gemini_Generated_Image_6e2t1e6e2t1e6e2t.jpg|0|1
+gba/Pokémon Ghost Grey.gba|Pokémon Ghost Grey|https://pokebat.net/wp-content/uploads/2026/08/Gemini_Generated_Image_hjn55shjn55shjn5-1024x1024.jpg|0|1
+gba/Pokémon Phoenix Red.gba|Pokémon Phoenix Red|https://pokebat.net/wp-content/uploads/2026/08/Gemini_Generated_Image_o5aacfo5aacfo5aa-1024x852.jpg|0|1
+gba/Pokémon Giga Red.gba|Pokémon Giga Red|https://pokebat.net/wp-content/uploads/2026/07/Gemini_Generated_Image_ng08hwng08hwng08-1024x852.jpg|0|1
+gba/Pokémon Fluvio.gba|Pokémon Fluvio|https://pokebat.net/wp-content/uploads/2026/07/3bb7a808-3416-41f4-95c6-0fbb7cc94ec2.png|0|1
+gba/Pokémon The Nuzlomizer.gba|Pokémon The Nuzlomizer|https://pokebat.net/wp-content/uploads/2026/06/nuzlomizer-bugfix-update-3-0-1-move-relearner-bug-and-v0-9kr0klea8p8h1.webp|0|1
+gba/Pokémon Crippling Medical Debt Edition.gba|Pokémon Crippling Medical Debt Edition|https://pokebat.net/wp-content/uploads/2026/07/Gemini_Generated_Image_o9l5h4o9l5h4o9l5-1024x1024.jpg|0|1
+gba/Pokémon Project Pi.gba|Pokémon Project Pi|https://pokebat.net/wp-content/uploads/2026/07/Proj_Pi_BoxArt-1024x1024.jpg|0|1
+gba/Pokémon Vestígio de WAH.gba|Pokémon Vestígio de WAH|https://pokebat.net/wp-content/uploads/2026/06/54d259ca7a9c0756e21e83dd9571d165.gif|0|1
+gba/Pokémon Emerald Rule-ette.gba|Pokémon Emerald Rule-ette|https://pokebat.net/wp-content/uploads/2026/06/Gemini_Generated_Image_oizz04oizz04oizz-1024x852.jpg|0|1
+gba/Pokémon Null.gba|Pokémon Null|https://pokebat.net/wp-content/uploads/2026/05/aiease_1780026607141.jpg|0|1
+gba/Pokémon Amethyst.gba|Pokémon Amethyst|https://pokebat.net/wp-content/uploads/2026/06/custom-cover-art-for-pokemon-amethyst-version-v0-rsnev42udz3h1-1024x1024.webp|0|1
+gba/Pokémon Emerental.gba|Pokémon Emerental|https://pokebat.net/wp-content/uploads/2026/05/Emerental_title.png|0|1
+gba/Pokémon Azul Agua [Português PT-BR].gba|Pokémon Azul Agua [Português PT-BR]|https://pokebat.net/wp-content/uploads/2026/04/Gemini_Generated_Image_cre6u5cre6u5cre6.jpg|0|1
+gba/Pokémon The Shadow Realm.gba|Pokémon The Shadow Realm|https://pokebat.net/wp-content/uploads/2026/04/pokemon-the-shadow-realm-demo-v0-5pxnpokb0urg1-1024x689.webp|0|1
+gba/Pokémon Ruby’s Ruin (Hoenn Trashlocke).gba|Pokémon Ruby’s Ruin (Hoenn Trashlocke)|https://pokebat.net/wp-content/uploads/2026/04/RUBY-RUINS-1-1024x576.jpg|0|1
+gba/Pokémon Fire Red Infinity Horizon.gba|Pokémon Fire Red Infinity Horizon|https://pokebat.net/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-10.44.21-1024x681.webp|0|1
+gba/Pokémon Emerald Azure.gba|Pokémon Emerald Azure|https://pokebat.net/wp-content/uploads/2026/04/Gemini_Generated_Image_7w5k9s7w5k9s7w5k-2.jpg|0|1
+gba/Pokémon Hoenn’s Last Wish.gba|Pokémon Hoenn’s Last Wish|https://pokebat.net/wp-content/uploads/2026/03/pokeemerald-0.png|0|1
+gba/Pokémon Crossroads.gba|Pokémon Crossroads|https://pokebat.net/wp-content/uploads/2026/03/wmremove-transformed-1024x585.jpg|0|1
+gba/Pokémon Rogue Rescue Team.gba|Pokémon Rogue Rescue Team|https://pokebat.net/wp-content/uploads/2026/02/Gemini_Generated_Image_svxdh3svxdh3svxd-1024x572.jpg|0|1
+gba/Pokémon Peach and Lime.gba|Pokémon Peach and Lime|https://pokebat.net/wp-content/uploads/2026/02/Generated-Image-February-13-2026-7_12PM-1024x585.jpg|0|1
+gba/Pokémon Project Nova.gba|Pokémon Project Nova|https://pokebat.net/wp-content/uploads/2026/02/VisualBoyAdvance-143.04.02.2026_01_38_29.jpg|0|1
+gba/Pokémon FireRed Deluxe.gba|Pokémon FireRed Deluxe|https://pokebat.net/wp-content/uploads/2026/01/image-2-1.jpg|0|1
+gba/Pokémon SuFi Mewtwo’s Revenge [FULL].gba|Pokémon SuFi Mewtwo’s Revenge [FULL]|https://pokebat.net/wp-content/uploads/2026/01/1-jan-26.23.01.2026_01_06_42.jpg|0|1
+gba/Pokémon Emerald Isle.gba|Pokémon Emerald Isle|https://pokebat.net/wp-content/uploads/2026/01/2026-01-08-13_44_04-VisualBoyAdvance-138.jpg|0|1
+gba/Pokémon Star Twinkle (Stellar).gba|Pokémon Star Twinkle (Stellar)|https://pokebat.net/wp-content/uploads/2026/01/Generatedsdsaadsads.jpg|0|1
+gba/Pokémon Aesthetic Red.gba|Pokémon Aesthetic Red|https://pokebat.net/wp-content/uploads/2025/12/Box-Art-2-2-1024x1024.jpg|0|1
+gba/Pokémon The Unown King.gba|Pokémon The Unown King|https://pokebat.net/wp-content/uploads/2025/12/Generated-Image-December-03-2025-1_26AM-1-1024x585.jpg|0|1
+gba/Pokémon Emerald Extended Cut.gba|Pokémon Emerald Extended Cut|https://pokebat.net/wp-content/uploads/2025/11/Generated-Image-November-26-2025-12_27AM-2-300x249.jpg|0|1
+gba/Pokémon Rekindled Red.gba|Pokémon Rekindled Red|https://pokebat.net/wp-content/uploads/2025/12/f731c667-0304-4fc6-852b-93abab7a45af.jpg|0|1
+gba/Pokémon Too Many Types 2.gba|Pokémon Too Many Types 2|https://pokebat.net/wp-content/uploads/2025/12/Pokemon-Too-Many-Types-2-Official-Game-Brave.31.12.2025_19_10_26.jpg|0|1
+gba/POKEMON SWORD AND SHIELD – OMEGA.gba|POKEMON SWORD AND SHIELD – OMEGA|https://pokebat.net/wp-content/uploads/2024/07/aiease_1764124850717.jpg|0|1
+gba/Pokémon Lazarus v1.0 [FULL].gba|Pokémon Lazarus v1.0 [FULL]|https://pokebat.net/wp-content/uploads/2025/11/pokemon-lazarus-box-art-v0-3l4q5lcev71g1.webp|0|1
+gba/Pokémon Emerald Destiny.gba|Pokémon Emerald Destiny|https://pokebat.net/wp-content/uploads/2025/11/IMG_20250326_190039.jpg|0|1
+gba/Pokémon Bug Red.gba|Pokémon Bug Red|https://pokebat.net/wp-content/uploads/2025/11/bug-red-1024x576.jpg|0|1
+gba/Pokémon Recordkeepers.gba|Pokémon Recordkeepers|https://pokebat.net/wp-content/uploads/2025/10/20251030_2355_Versao-HD-Pokemon_remix_01k8w2y25xf3e8a5g0ftp2qm45-1024x683.jpg|0|1
+gba/PokeTransform.gba|PokeTransform|https://pokebat.net/wp-content/uploads/2025/10/TransformBoxart-1024x1022.png|0|1
+gba/Pokémon Inkwell.gba|Pokémon Inkwell|https://pokebat.net/wp-content/uploads/2025/10/title.png|0|1
+gba/Pokémon Heart & Soul.gba|Pokémon Heart & Soul|https://pokebat.net/wp-content/uploads/2025/10/POKEMON-heart-soul-COVER.jpg|0|1
+gba/Pokémon Cascade Blue.gba|Pokémon Cascade Blue|https://pokebat.net/wp-content/uploads/2025/10/Capa.jpg|0|1
+gba/Pokémon Monster Hunter Emerald.gba|Pokémon Monster Hunter Emerald|https://pokebat.net/wp-content/uploads/2025/09/1756234143711-png.png|0|1
+gba/Pokémon Autumn Red.gba|Pokémon Autumn Red|https://preview.redd.it/pok%C3%A9mon-autumn-red-release-v0-0rwf2jlu4bgf1.png?width=947&format=png&auto=webp&s=0e9f27cbe868d212e2f93eac0fa9fa3d6e7f9d28|0|1
+gba/Pokémon Eris Emerald.gba|Pokémon Eris Emerald|https://pokebat.net/wp-content/uploads/2025/08/ERIS-EMERALD-1024x576.jpg|0|1
+gba/Pokémon Fire Red Nickless Version.gba|Pokémon Fire Red Nickless Version|https://pokebat.net/wp-content/uploads/2025/08/imagse.jpg|0|1
+gba/PokéSouls.gba|PokéSouls|https://pokebat.net/wp-content/uploads/2025/09/Generated-Image-September-17-2025-4_50PM.jpg|0|1
+gba/Pokémon Voyager (Frontier Demo).gba|Pokémon Voyager (Frontier Demo)|https://pokebat.net/wp-content/uploads/2025/08/ChatGPT-Image-22-de-ago.-de-2025-16_41_04-1-1.png|0|1
+gba/Pokémon FireRed OK Version.gba|Pokémon FireRed OK Version|https://pokebat.net/wp-content/uploads/2025/08/promo-1024x576.jpg|0|1
+gba/Pokémon Trade&’Stache.gba|Pokémon Trade&’Stache|https://pokebat.net/wp-content/uploads/2025/08/a0b0d7d1-8fa9-4eb6-b214-9c289ed63767-1024x683.jpg|0|1
+gba/Pokémon Lucid.gba|Pokémon Lucid|https://pokebat.net/wp-content/uploads/2025/08/VisualBoyAdvance-137.04.08.2025_12_36_53.jpg|0|1
+gba/Pokémon Royal Sapphire.gba|Pokémon Royal Sapphire|https://pokebat.net/wp-content/uploads/2025/08/1754685741798-1024x682.webp|0|1
+gba/Pokémon Contemporary Emerald.gba|Pokémon Contemporary Emerald|https://pokebat.net/wp-content/uploads/2025/08/CONTEMPORARY-EMERALD.jpg|0|1
+gba/Pokémon All In Version.gba|Pokémon All In Version|https://pokebat.net/wp-content/uploads/2025/07/pokemon-all-in-version-emerald-rom-hack-by-chris-piche-v0-fvzc9u8ob2ef1-1024x684.webp|0|1
+gba/Pokémon Dreamstone Mysteries.gba|Pokémon Dreamstone Mysteries|https://pokebat.net/wp-content/uploads/2025/06/national-history-museum-pokemon-cover.png|0|1
+gba/Pokémon The New Kanto - ➤ Mirror Link (MF).gba|Pokémon The New Kanto - ➤ Mirror Link (MF)|https://pokebat.net/wp-content/uploads/2025/07/519776567_1039076741734408_4289982601351214721_n.jpg|0|1
+gba/Pokémon Spongy Version.gba|Pokémon Spongy Version|https://pokebat.net/wp-content/uploads/2025/06/SPONGY-VERSION-AI-COVER-1024x683.jpg|0|1
+gba/Pokémon Big Blue.gba|Pokémon Big Blue|https://pokebat.net/wp-content/uploads/2025/06/2025-06-19-00_42_59-VisualBoyAdvance-95.jpg|0|1
+gba/Pokémon Odyssey [COMPLETO].gba|Pokémon Odyssey [COMPLETO]|https://pokebat.net/wp-content/uploads/2023/02/9cCTu2g.png|0|1
+gba/Pokémon Evolved [Leaf Green Hack] - Versão do Pizza Boy GBA Pro que testei..gba|Pokémon Evolved [Leaf Green Hack] - Versão do Pizza Boy GBA Pro que testei.|https://pokebat.net/wp-content/uploads/2025/06/POKEMON-LEAF-GREEN-EVOLVE-COVER.jpg|0|1
+gba/Pokémon League Performance Review.gba|Pokémon League Performance Review|https://pokebat.net/wp-content/uploads/2025/06/PERFOMANCE-REVIEW-1024x576.jpg|0|1
+gba/Pokémon Poliwhirl Version.gba|Pokémon Poliwhirl Version|https://pokebat.net/wp-content/uploads/2025/06/POKEMON-poliwhirl.jpg|0|1
+gba/Pokémon Evolved [Leaf Green Hack].gba|Pokémon Evolved [Leaf Green Hack]|https://pokebat.net/wp-content/uploads/2025/06/POKEMON-LEAF-GREEN-EVOLVE-COVER.jpg|0|1
+gba/Pokémon Sippy Cup Sapphire.gba|Pokémon Sippy Cup Sapphire|https://pokebat.net/wp-content/uploads/2025/05/Sippy_cup_Sapphire-1024x1024.png|0|1
+gba/Pokémon Emerald 20 Happy Anniversary.gba|Pokémon Emerald 20 Happy Anniversary|https://pokebat.net/wp-content/uploads/2025/05/title-png.png|0|1
+gba/Pokémon FireRed FGX.gba|Pokémon FireRed FGX|https://pokebat.net/wp-content/uploads/2025/05/fire-red-fgx-cover-1024x1024.jpg|0|1
+gba/Pokémon Rubbish Red (FireRed Trashlocke).gba|Pokémon Rubbish Red (FireRed Trashlocke)|https://pokebat.net/wp-content/uploads/2025/05/Rubbish-Red-trashlocke-thumb-cover-youtube-pokemon-1024x576.jpg|0|1
+gba/Pokémon Obscura.gba|Pokémon Obscura|https://pokebat.net/wp-content/uploads/2025/05/pokeemerald-3.webp|0|1
+gba/Pokémon Minced Fusions.gba|Pokémon Minced Fusions|https://pokebat.net/wp-content/uploads/2025/04/MINECED-DIMNENSIONS-1024x576.jpg|0|1
+gba/Super Mariomon.gba|Super Mariomon|https://pokebat.net/wp-content/uploads/2025/04/0.webp|0|1
+gba/Pokémon Blood Stained Leaf.gba|Pokémon Blood Stained Leaf|https://pokebat.net/wp-content/uploads/2025/04/Blood-stained-1024x576.jpg|0|1
+gba/Pokémon FireRed Reignited (PK LG Regrown v1.511_pokebat.net).gba|Pokémon FireRed Reignited (PK LG Regrown v1.511_pokebat.net)|https://pokebat.net/wp-content/uploads/2025/03/FIRE-RED-REIGNETED-1024x576.jpg|0|1
+gba/Pokémon FireRed Reignited (PK Duel Type Regrown v1.511).gba|Pokémon FireRed Reignited (PK Duel Type Regrown v1.511)|https://pokebat.net/wp-content/uploads/2025/03/FIRE-RED-REIGNETED-1024x576.jpg|0|1
+gba/Pokémon FireRed Reignited (PK Hoenn Regrown v1.511).gba|Pokémon FireRed Reignited (PK Hoenn Regrown v1.511)|https://pokebat.net/wp-content/uploads/2025/03/FIRE-RED-REIGNETED-1024x576.jpg|0|1
+gba/Pokémon FireRed Reignited (PK Johto Starter Regrown v1.511).gba|Pokémon FireRed Reignited (PK Johto Starter Regrown v1.511)|https://pokebat.net/wp-content/uploads/2025/03/FIRE-RED-REIGNETED-1024x576.jpg|0|1
+gba/Pokémon Wally Quest.gba|Pokémon Wally Quest|https://pokebat.net/wp-content/uploads/2025/03/wjASjoo.png|0|1
+gba/Pokémon ReEmerald.gba|Pokémon ReEmerald|https://pokebat.net/wp-content/uploads/2025/02/MODERN-EMERALD-1024x576.jpg|0|1
+gba/Pokémon Tarragon.gba|Pokémon Tarragon|https://pokebat.net/wp-content/uploads/2025/02/FIRE-RED-TARRAGON-1024x576.jpg|0|1
+gba/Pokemon Hyper Emerald v5.5 Unnoficial Gen 9 Mod.gba|Pokemon Hyper Emerald v5.5 Unnoficial Gen 9 Mod|https://pokebat.net/wp-content/uploads/2025/02/VisualBoyAdvance-63.04.02.2025_18_26_37.jpg|0|1
+gba/Pokémon Emerald Imperium.gba|Pokémon Emerald Imperium|https://pokebat.net/wp-content/uploads/2025/01/476632043_1360509954908541_5525787057826067936_n.jpg|0|1
+gba/Pokemon Crimson Red.gba|Pokemon Crimson Red|https://pokebat.net/wp-content/uploads/2024/12/crismon-red-1024x576.jpg|0|1
+gba/Pokémon Maxie’s Island.gba|Pokémon Maxie’s Island|https://pokebat.net/wp-content/uploads/2025/01/1-jan-25.18.01.2025_00_30_36-300x225.jpg|0|1
+gba/Pokemon Dark Rising Rebirth.gba|Pokemon Dark Rising Rebirth|https://pokebat.net/wp-content/uploads/2024/12/dark-rising-rebirth.jpg|0|1
+gba/Pokémon Emerald Legacy.gba|Pokémon Emerald Legacy|https://pokebat.net/wp-content/uploads/2024/12/I-Made-the-PERFECT-Pokemon-Emerald-Romhack-YouTube-Brave.19.12.2024_21_47_04-1024x681.jpg|0|1
+gba/Pokemon Marron Merda.gba|Pokemon Marron Merda|https://pokebat.net/wp-content/uploads/2024/12/Pokemon_Marron_Merda_01.jpg|0|1
+gba/Pokémon REGIUS.gba|Pokémon REGIUS|https://pokebat.net/wp-content/uploads/2024/11/screenshots.png|0|1
+gba/Pokemon FireRed Eternity.gba|Pokemon FireRed Eternity|https://pokebat.net/wp-content/uploads/2024/11/VisualBoyAdvance-100.27.11.2024_01_59_07.jpg|0|1
+gba/Pokemon Let’s GO Pikachu Demake.gba|Pokemon Let’s GO Pikachu Demake|https://pokebat.net/wp-content/uploads/2024/11/20241011_163840-300x300.webp|0|1
+gba/Pokémon Lavender.gba|Pokémon Lavender|https://pokebat.net/wp-content/uploads/2024/11/hB9iyeJ.png|0|1
+gba/Pokémon Valiant.gba|Pokémon Valiant|https://pokebat.net/wp-content/uploads/2024/11/82134-75214d7d6d71c4371bc8114184e00365.png|0|1
+gba/Pokemon RECall.gba|Pokemon RECall|https://pokebat.net/wp-content/uploads/2024/10/v.0.1.3-titlescreen.png|0|1
+gba/Pokémon Shadow Flame.gba|Pokémon Shadow Flame|https://pokebat.net/wp-content/uploads/2024/10/VisualBoyAdvance-16.22.10.2024_19_02_27.jpg|0|1
+gba/Pokémon LazyGreen.gba|Pokémon LazyGreen|https://pokebat.net/wp-content/uploads/2024/10/LAZY-GREEN-1024x576.jpg|0|1
+gba/Pokémon Financial Stability.gba|Pokémon Financial Stability|https://pokebat.net/wp-content/uploads/2024/10/2024-10-09-01_55_43-VisualBoyAdvance-97.jpg|0|1
+gba/Pokémon Mu Magma.gba|Pokémon Mu Magma|https://pokebat.net/wp-content/uploads/2024/10/VisualBoyAdvance-54.02.10.2024_00_33_29.jpg|0|1
+gba/Pokémon Emerald ReSprited.gba|Pokémon Emerald ReSprited|https://pokebat.net/wp-content/uploads/2024/09/EMERALD-RESPRITED-1024x576.jpg|0|1
+gba/Pokémon Obsidian Emerald.gba|Pokémon Obsidian Emerald|https://pokebat.net/wp-content/uploads/2024/09/obsidian-emerald-1024x576.jpg|0|1
+gba/Pokémon Glazed Golden.gba|Pokémon Glazed Golden|https://pokebat.net/wp-content/uploads/2024/10/glazed-GOLDEN-1024x576.jpg|0|1
+gba/Pokémon Black Pearl Emerald.gba|Pokémon Black Pearl Emerald|https://pokebat.net/wp-content/uploads/2024/09/1724267333035-1024x681.webp|0|1
+gba/Pokémon Emerald Seaglass.gba|Pokémon Emerald Seaglass|https://pokebat.net/wp-content/uploads/2024/09/8wq58wg9di9d1.jpg|0|1
+gba/Pokémon Peak Kanto.gba|Pokémon Peak Kanto|https://pokebat.net/wp-content/uploads/2024/08/FIRE-RED-PEAK-KANTO-1024x576.jpg|0|1
+gba/Pokémon Weird Type Fun.gba|Pokémon Weird Type Fun|https://pokebat.net/wp-content/uploads/2024/08/w3llvsu-1024x605.png|0|1
+gba/Pokémon Bismuto.gba|Pokémon Bismuto|https://pokebat.net/wp-content/uploads/2024/08/FIRE-RED-bismuto-1024x576.jpg|0|1
+gba/Pokémon Bill’s Secret Garden.gba|Pokémon Bill’s Secret Garden|https://pokebat.net/wp-content/uploads/2024/08/FIRE-RED-Bills-Secret-Garden-1024x576.jpg|0|1
+gba/Pokémon Mystic Horizon.gba|Pokémon Mystic Horizon|https://pokebat.net/wp-content/uploads/2024/08/Mystic-Horizon-TS-2024-1024x680.jpg|0|1
+gba/Pokémon Tourmaline.gba|Pokémon Tourmaline|https://pokebat.net/wp-content/uploads/2024/07/VisualBoyAdvance-97.25.07.2024_19_30_03.jpg|0|1
+gba/Pokémon Coastal Version.gba|Pokémon Coastal Version|https://pokebat.net/wp-content/uploads/2024/07/Coastal-Version-Box-Art.webp|0|1
+gba/Pokémon Scorched Silver.gba|Pokémon Scorched Silver|https://pokebat.net/wp-content/uploads/2024/07/introducing-pokemon-scorched-silver-a-gen-3-johto-romhack-v0-87z5ob8pqy8d1.webp|0|1
+gba/Pokémon Fire Red Extended Version.gba|Pokémon Fire Red Extended Version|https://pokebat.net/wp-content/uploads/2022/03/GRN-69.jpg|0|1
+gba/Fire Red 169.gba|Fire Red 169|https://pokebat.net/wp-content/uploads/2024/06/FIRE-RED-169-1024x576.jpg|0|1
+gba/Pokémon The Pit.gba|Pokémon The Pit|https://pokebat.net/wp-content/uploads/2024/06/THE-PIT-1024x576.jpg|0|1
+gba/Pokémon Recharged Yellow.gba|Pokémon Recharged Yellow|https://pokebat.net/wp-content/uploads/2024/06/jqAeQLY.png|0|1
+gba/Pokémon Kosmo [Português PT-BR].gba|Pokémon Kosmo [Português PT-BR]|https://pokebat.net/wp-content/uploads/2024/05/VisualBoyAdvance-135.27.05.2024_22_53_37.jpg|0|1
+gba/Pokémon Cosmic Version.gba|Pokémon Cosmic Version|https://pokebat.net/wp-content/uploads/2024/06/title.png|0|1
+gba/Magical Altering Gym Menagerie.gba|Magical Altering Gym Menagerie|https://pokebat.net/wp-content/uploads/2024/05/Magical-Altering-Gym-Menagerie-1024x576.jpg|0|1
+gba/Pokémon Cool Spot.gba|Pokémon Cool Spot|https://pokebat.net/wp-content/uploads/2024/05/CoolBox-300x300.webp|0|1
+gba/Pokémon Elaf Gold.gba|Pokémon Elaf Gold|https://pokebat.net/wp-content/uploads/2024/05/Pokemon-Fire-Red-patched6.png|0|1
+gba/Personal Fire Red.gba|Personal Fire Red|https://pokebat.net/wp-content/uploads/2024/04/PERSONAL-FIRE-RED-1024x576.jpg|0|1
+gba/Pokemon Emerald Johto Edition.gba|Pokemon Emerald Johto Edition|https://pokebat.net/wp-content/uploads/2024/04/Screenshot-2024-04-14-at-18.35.07.png|0|1
+gba/Pokémon Wings Of Chaos.gba|Pokémon Wings Of Chaos|https://pokebat.net/wp-content/uploads/2024/04/PERSONAL-WING-OF-CHAOS-1024x576.jpg|0|1
+gba/Pokémon Castform Mat0 a Mi Padre (+18).gba|Pokémon Castform Mat0 a Mi Padre (+18)|https://pokebat.net/wp-content/uploads/2024/04/VisualBoyAdvance-133.09.04.2024_23_30_25.jpg|0|1
+gba/Pokémon Team Rocket Edition – Dragonsden Version.gba|Pokémon Team Rocket Edition – Dragonsden Version|https://pokebat.net/wp-content/uploads/2024/03/ROCKET-EDITION-2.jpg|0|1
+gba/Pokémon Parallel Emerald.gba|Pokémon Parallel Emerald|https://pokebat.net/wp-content/uploads/2024/04/2024-04-03-11_54_38-VisualBoyAdvance-94.jpg|0|1
+gba/Pokémon Modern Emerald.gba|Pokémon Modern Emerald|https://pokebat.net/wp-content/uploads/2024/03/MODERN-EMERALD-1024x576.jpg|0|1
+gba/Pokémon Blue Stars 4 [PT-BR].gba|Pokémon Blue Stars 4 [PT-BR]|https://pokebat.net/wp-content/uploads/2024/03/blue-stars-4-cover-pokemona.jpg|0|1
+gba/Pokémon Elysium.gba|Pokémon Elysium|https://pokebat.net/wp-content/uploads/2024/02/ELYSIUM-GBA-COVER.jpg|0|1
+gba/Pokémon Emerald Z.gba|Pokémon Emerald Z|https://pokebat.net/wp-content/uploads/2024/02/Restauracao-em-alta-definicao._image-1024x617.jpg|0|1
+gba/Pokémon Puffy Pink.gba|Pokémon Puffy Pink|https://pokebat.net/wp-content/uploads/2024/02/2-FEV-24.09.02.2024_00_30_06-300x212.jpg|0|1
+gba/National History Museum [Completo].gba|National History Museum [Completo]|https://pokebat.net/wp-content/uploads/2024/02/national-history-museum-pokemon-cover.jpg|0|1
+gba/Pokémon Orionis Zeta.gba|Pokémon Orionis Zeta|https://pokebat.net/wp-content/uploads/2024/01/orionis-zeta-1024x576.jpg|0|1
+gba/Pokemon Fire Red Multiverse.gba|Pokemon Fire Red Multiverse|https://pokebat.net/wp-content/uploads/2023/12/multiverse-fire-red.jpg|0|1
+gba/Pokémon Shiny Gold Sigma 1.5 [Nova Att 2024].gba|Pokémon Shiny Gold Sigma 1.5 [Nova Att 2024]|https://pokebat.net/wp-content/uploads/2021/10/25660148_1836746079944844_3949254890176484621_n.jpg|0|1
+gba/Pokémon Silver Rival.gba|Pokémon Silver Rival|https://pokebat.net/wp-content/uploads/2023/12/POKEMON-SILVER-RIVAL.jpg|0|1
+gba/Touhoumon Another World Revised.gba|Touhoumon Another World Revised|https://pokebat.net/wp-content/uploads/2023/12/WLR_box_art_sanae_ver-1024x1024.jpg|0|1
+gba/Pokemon Celia’s Stupid.gba|Pokemon Celia’s Stupid|https://pokebat.net/wp-content/uploads/2023/12/VisualBoyAdvance-99.07.12.2023_00_05_49.jpg|0|1
+gba/Digimon Emerald Project.gba|Digimon Emerald Project|https://pokebat.net/wp-content/uploads/2023/11/RLlhdkZ.png|0|1
+gba/Pokémon Climax.gba|Pokémon Climax|https://pokebat.net/wp-content/uploads/2023/11/VisualBoyAdvance-35.25.11.2023_11_36_29.jpg|0|1
+gba/Pokemon Giovannis’ Revenge Is Back!.gba|Pokemon Giovannis’ Revenge Is Back!|https://pokebat.net/wp-content/uploads/2023/12/giovannis-revenge-beta_05.png|0|1
+gba/Pokémon Coliseo Eterno.gba|Pokémon Coliseo Eterno|https://pokebat.net/wp-content/uploads/2023/11/PCE-portada.png|0|1
+gba/Super Pokemon Sapphire Balanced Edition.gba|Super Pokemon Sapphire Balanced Edition|https://pokebat.net/wp-content/uploads/2023/10/SUER-sapphire.jpg|0|1
+gba/Pokémon Temporal.gba|Pokémon Temporal|https://pokebat.net/wp-content/uploads/2023/10/VisualBoyAdvance-99.05.10.2023_18_17_15.jpg|0|1
+gba/Pokémon The Las Renoval Red Ultimate.gba|Pokémon The Las Renoval Red Ultimate|https://pokebat.net/wp-content/uploads/2022/04/VisualBoyAdvance-24.28.10.2023_01_03_53.jpg|0|1
+gba/Pokémon Beta Gold Version.gba|Pokémon Beta Gold Version|https://pokebat.net/wp-content/uploads/2023/10/Pokemon-Beta-Gold-Remake-GBA-Download-PokeHarbor-Brave.01.10.2023_11_21_43.jpg|0|1
+gba/Pokemon Gaia [Traduzido Português PT-BR] (Projeto).gba|Pokemon Gaia [Traduzido Português PT-BR] (Projeto)|https://pokebat.net/wp-content/uploads/2023/09/POKEMON-GAIA-pt-br-1024x576.jpg|0|1
+gba/Pokémon Saiph 2 [Completo].gba|Pokémon Saiph 2 [Completo]|https://pokebat.net/wp-content/uploads/2023/09/startmenunew.png|0|1
+gba/Pokémon Elite Redux.gba|Pokémon Elite Redux|https://pokebat.net/wp-content/uploads/2023/07/tZ9qU6zl.jpg|0|1
+gba/Pokémon Theta Emerald – The Last Dance.gba|Pokémon Theta Emerald – The Last Dance|https://pokebat.net/wp-content/uploads/2023/10/unnamed.jpg|0|1
+gba/Pokémon Classified.gba|Pokémon Classified|https://pokebat.net/wp-content/uploads/2023/05/WjtQ1FC.png|0|1
+gba/Pokemon Perfect Emerald 5.5.gba|Pokemon Perfect Emerald 5.5|https://pokebat.net/wp-content/uploads/2021/03/152414854_5047150972021688_5647946016438203726_o.jpg|0|1
+gba/Pokémon World Stadium.gba|Pokémon World Stadium|https://pokebat.net/wp-content/uploads/2023/04/PK-World-Stadium-v1.1_01.png|0|1
+gba/Pokémon Future Green.gba|Pokémon Future Green|https://pokebat.net/wp-content/uploads/2023/04/future-green-1024x576.png|0|1
+gba/PokeScape [Pokémon + RuneScape).gba|PokeScape [Pokémon + RuneScape)|https://pokebat.net/wp-content/uploads/2023/04/pokeemerald-0.png|0|1
+gba/Pokémon Unbound Tradução [PT-BR] (Att Até a Liga).gba|Pokémon Unbound Tradução [PT-BR] (Att Até a Liga)|https://pokebat.net/wp-content/uploads/2023/03/unbound-2022-PTBR.jpg|0|1
+gba/Pokémon Glimmering Emerald.gba|Pokémon Glimmering Emerald|https://pokebat.net/wp-content/uploads/2023/04/S7rxCuJ.png|0|1
+gba/Pokémon Memories.gba|Pokémon Memories|https://pokebat.net/wp-content/uploads/2023/03/oct22-001813.jpg|0|1
+gba/Pokemon Ascent ( Rogue-Like).gba|Pokemon Ascent ( Rogue-Like)|https://pokebat.net/wp-content/uploads/2023/03/ASCENT-VERSION-EMERALD-ROUGUE-LAYOUT-1024x576.jpg|0|1
+gba/Pokémon SpawnXtreme.gba|Pokémon SpawnXtreme|https://pokebat.net/wp-content/uploads/2023/02/oct22-001589-1024x684.jpg|0|1
+gba/Pokémon Crown.gba|Pokémon Crown|https://pokebat.net/wp-content/uploads/2023/02/Pokemon-Crown-Beta-1-v9_01.png|0|1
+gba/Pokemon Fire Red 898 Randomizer.gba|Pokemon Fire Red 898 Randomizer|https://pokebat.net/wp-content/uploads/2023/01/fire-red-randomizer-898-1024x576.jpg|0|1
+gba/Digimon Nova Red.gba|Digimon Nova Red|https://pokebat.net/wp-content/uploads/2023/01/XMNoq94.png|0|1
+gba/Pokémon Ash H2K Battle Frontier Version.gba|Pokémon Ash H2K Battle Frontier Version|https://pokebat.net/wp-content/uploads/2023/02/picsart-23-01-15-15-17-39-772_orig.jpg|0|1
+gba/Pokémon Variant Emerald.gba|Pokémon Variant Emerald|https://pokebat.net/wp-content/uploads/2023/01/VARIANT-EMERALD-1024x576.jpg|0|1
+gba/Pokemon Spectrobes.gba|Pokemon Spectrobes|https://pokebat.net/wp-content/uploads/2023/01/7wgICVp.png|0|1
+gba/Pokemon Energized Emerald.gba|Pokemon Energized Emerald|https://pokebat.net/wp-content/uploads/2023/02/energized-emerald-1024x576.jpg|0|1
+gba/Pokémon Emerald Crest v1.0.9.9.gba|Pokémon Emerald Crest v1.0.9.9|https://pokebat.net/wp-content/uploads/2022/11/Adobe_Express_20221016_1100470_1-1024x576.png|0|1
+gba/Pokemon ROWE [ATT Pokémon Segue].gba|Pokemon ROWE [ATT Pokémon Segue]|https://pokebat.net/wp-content/uploads/2020/12/ROWE2BEMERALD.jpg|0|1
+gba/Pokémon Gardie’s Adventure.gba|Pokémon Gardie’s Adventure|https://pokebat.net/wp-content/uploads/2022/12/Moi3FkX-927x1024.png|0|1
+gba/Pokemon Infernal Legend.gba|Pokemon Infernal Legend|https://pokebat.net/wp-content/uploads/2022/12/oct22-000699.jpg|0|1
+gba/Pokémon Battle Labyrinth.gba|Pokémon Battle Labyrinth|https://pokebat.net/wp-content/uploads/2022/12/oct22-000635.jpg|0|1
+gba/Pokémon Limited Emerald Boss Bash Bonanza.gba|Pokémon Limited Emerald Boss Bash Bonanza|https://pokebat.net/wp-content/uploads/2022/12/pokemon-emerald-limited-emerald-cover-1024x576.jpg|0|1
+gba/Pokemon Resolute Português PT-BR (2023 Official Post).gba|Pokemon Resolute Português PT-BR (2023 Official Post)|https://pokebat.net/wp-content/uploads/2021/10/ed039-pokemon_resolute_01.jpg|0|1
+gba/Pokémon Toxic Purple.gba|Pokémon Toxic Purple|https://pokebat.net/wp-content/uploads/2022/10/73490b89556014e1240b1f4612420fba.jpg|0|1
+gba/Pokémon Blue Stars 3 FORCES Português [PT-BR].gba|Pokémon Blue Stars 3 FORCES Português [PT-BR]|https://pokebat.net/wp-content/uploads/2022/04/blue-stars-3-cover-pokemon.jpg|0|1
+gba/Pokémon Emerald Cross.gba|Pokémon Emerald Cross|https://pokebat.net/wp-content/uploads/2022/10/emerald-cross-ss.png|0|1
+gba/Pokémon Yellow Cross.gba|Pokémon Yellow Cross|https://pokebat.net/wp-content/uploads/2022/10/iSyTWGj.png|0|1
+gba/Pokémon Regis Origin.gba|Pokémon Regis Origin|https://pokebat.net/wp-content/uploads/2022/09/pokeemerald-7.png|0|1
+gba/Pokemon Gaia [ESPANHOL].gba|Pokemon Gaia [ESPANHOL]|https://pokebat.net/wp-content/uploads/2022/09/POKEMON-GAIA-espanhol-1024x576.jpg|0|1
+gba/Pokémon Exceeded [Emerald Randomizer + Nuzlocke].gba|Pokémon Exceeded [Emerald Randomizer + Nuzlocke]|https://pokebat.net/wp-content/uploads/2022/09/EXECEEDED.jpg|0|1
+gba/Pokémon Good Ruby.gba|Pokémon Good Ruby|https://pokebat.net/wp-content/uploads/2022/08/GOOD-ruby-tittle-screen.jpg|0|1
+gba/Pokemon Emerald Rogue (Like).gba|Pokemon Emerald Rogue (Like)|https://pokebat.net/wp-content/uploads/2022/08/CVS-363-01-1024x645.jpg|0|1
+gba/Pokémon Velvet Sapphire.gba|Pokémon Velvet Sapphire|https://pokebat.net/wp-content/uploads/2022/08/velvet-sapphire-300x200.jpg|0|1
+gba/Pokémon Fire Red – Extended [Lu6ci6fe6r].gba|Pokémon Fire Red – Extended [Lu6ci6fe6r]|https://pokebat.net/wp-content/uploads/2022/03/dSbbfO1.jpeg|0|1
+gba/Pokémon Perfect Fire Red Deluxe v5.0.gba|Pokémon Perfect Fire Red Deluxe v5.0|https://pokebat.net/wp-content/uploads/2022/04/PERFECT-FIRE-RED-1024x576.jpg|0|1
+gba/Pokémon Mezame.gba|Pokémon Mezame|https://pokebat.net/wp-content/uploads/2022/07/pokemon-mezane-1024x576.jpg|0|1
+gba/Pokemon Unown.gba|Pokemon Unown|https://pokebat.net/wp-content/uploads/2022/07/POKEMON-UNOWN-COVER.jpg|0|1
+gba/Pokémon Vega Fairy Edition Ex - Versão 1.2.gba|Pokémon Vega Fairy Edition Ex - Versão 1.2|https://pokebat.net/wp-content/uploads/2022/06/pokemon-vega-fairy-layout-gba-new-fire-red.jpg|0|1
+gba/Pokémon SkyBlue.gba|Pokémon SkyBlue|https://pokebat.net/wp-content/uploads/2022/06/PHb978V.png|0|1
+gba/Moemon Bonds.gba|Moemon Bonds|https://pokebat.net/wp-content/uploads/2022/06/GRN-247-02.jpg|0|1
+gba/Pokémon Fire Gold 2022.gba|Pokémon Fire Gold 2022|https://pokebat.net/wp-content/uploads/2022/05/mqdefault.jpg|0|1
+gba/Pokémon Ephemeral.gba|Pokémon Ephemeral|https://pokebat.net/wp-content/uploads/2022/05/DCFuDmb-1024x483.png|0|1
+gba/Pokémon Rocket Edition 2.gba|Pokémon Rocket Edition 2|https://pokebat.net/wp-content/uploads/2022/06/img_6296cc08e3ec4.png|0|1
+gba/Pokémon Ultra [PORTUGUÊS PT-BR].gba|Pokémon Ultra [PORTUGUÊS PT-BR]|https://pokebat.net/wp-content/uploads/2022/05/PK-ULTRA-SCREEN.jpg|0|1
+gba/Pokémon Hisui Red.gba|Pokémon Hisui Red|https://pokebat.net/wp-content/uploads/2022/05/HISUI-RED-POKEMON-COVER.jpg|0|1
+gba/Pokémon Legends Arceus GBA [PT-BR].gba|Pokémon Legends Arceus GBA [PT-BR]|https://pokebat.net/wp-content/uploads/2022/04/Pokemon-legends-arceus-GBA.jpg|0|1
+gba/Pokémon GOFSP.gba|Pokémon GOFSP|https://pokebat.net/wp-content/uploads/2022/04/GOFSP-1024x576.jpg|0|1
+gba/Pokemon Ebony Phantom [CHINA].gba|Pokemon Ebony Phantom [CHINA]|https://pokebat.net/wp-content/uploads/2022/03/NNA-921.jpg|0|1
+gba/Pokemon Amnesia.gba|Pokemon Amnesia|https://pokebat.net/wp-content/uploads/2022/03/pokemon_new-layout-cover-2022--1024x576.jpg|0|1
+gba/Pokémon Sharp Diamond and Smooth Pearl.gba|Pokémon Sharp Diamond and Smooth Pearl|https://pokebat.net/wp-content/uploads/2022/02/n4n7bZb.png|0|1
+gba/Pokemon Fire Red v514.gba|Pokemon Fire Red v514|https://pokebat.net/wp-content/uploads/2022/02/FIRE-RED-V514-1-1024x576.jpg|0|1
+gba/Pokémon Hyper Emerald v5.3 – Rainbow Eraser Version [CHINA].gba|Pokémon Hyper Emerald v5.3 – Rainbow Eraser Version [CHINA]|https://pokebat.net/wp-content/uploads/2022/02/hyper-emerald-5.jpg|0|1
+gba/Pokémon Distorsion Fire Red.gba|Pokémon Distorsion Fire Red|https://pokebat.net/wp-content/uploads/2022/01/LMyx8ha.png|0|1
+gba/Pokemon Valor Beta 1.3.gba|Pokemon Valor Beta 1.3|https://pokebat.net/wp-content/uploads/2021/12/t56pyVG.png|0|1
+gba/Pokémon Emerald BR Deluxe [Português PT-BR].gba|Pokémon Emerald BR Deluxe [Português PT-BR]|https://pokebat.net/wp-content/uploads/2021/12/EMERALD-BR-DELUXE-1024x576.jpg|0|1
+gba/Pokemon Yuval Version.gba|Pokemon Yuval Version|https://pokebat.net/wp-content/uploads/2021/12/Yuval_final_thumbnail.jpg|0|1
+gba/Pokémon Celestial Version.gba|Pokémon Celestial Version|https://pokebat.net/wp-content/uploads/2021/12/test-1.png|0|1
+gba/Moemon Ash Gray.gba|Moemon Ash Gray|https://pokebat.net/wp-content/uploads/2021/12/moemon-ash-gray-cover.jpg|0|1
+gba/Digimon Escape from Server Island.gba|Digimon Escape from Server Island|https://pokebat.net/wp-content/uploads/2021/12/DIGIMON-ESCAPE-FROM-ISLAND.jpg|0|1
+gba/PokeMetroid Beta 2.0.gba|PokeMetroid Beta 2.0|https://pokebat.net/wp-content/uploads/2021/11/6183titlescreen.png|0|1
+gba/Pokemon Keyra.gba|Pokemon Keyra|https://pokebat.net/wp-content/uploads/2021/11/pokemon-keyra-box-art-300x300.png|0|1
+gba/Pokémon FireGold Version H1.8.gba|Pokémon FireGold Version H1.8|https://pokebat.net/wp-content/uploads/2021/10/FIRE-GOLD-COVER.jpg|0|1
+gba/Pokémon Inclement Emerald v1.13.gba|Pokémon Inclement Emerald v1.13|https://pokebat.net/wp-content/uploads/2021/10/INCLEMENT2BEMERALD.jpg|0|1
+gba/Pokémon Heliodor Emerald.gba|Pokémon Heliodor Emerald|https://1.bp.blogspot.com/-hRpAeDx9YyQ/YWEe0PHXZiI/AAAAAAAAF5k/-ap0Gv_GXc8yn3x6QA0HWnQjF3w0g-0HACLcBGAsYHQ/w588-h391/PK%2BEMR%2BHeliodor_01.png|0|1
+gba/Pokemon Naillevaihcam.gba|Pokemon Naillevaihcam|https://1.bp.blogspot.com/-mcS26euQ-BA/YVfSiEo0dnI/AAAAAAAAF5Q/dG8RyAY5DJ00sxCyh_KPNI3WFPfMlTZIQCLcBGAsYHQ/w597-h321/Naillevaihcam.jpg|0|1
+gba/Pokémon Faria Version.gba|Pokémon Faria Version|https://pokebat.net/wp-content/uploads/2024/06/PK2B-2BFaria2BVersion_01.png|0|1
+gba/Pokémon 2050.gba|Pokémon 2050|https://1.bp.blogspot.com/-QbYS_vnNkIM/YUS-lIcqrbI/AAAAAAAAF2o/xBKjXi1k5MkzfM8toUQhwEiIW5ybRM0wgCLcBGAsYHQ/w509-h337/3qzEagG.png|0|1
+gba/Pokemon Chaos Emerald.gba|Pokemon Chaos Emerald|https://1.bp.blogspot.com/-O7uEWjUIwaw/YTwjzVEu0CI/AAAAAAAAF2A/boRhSQUpasgqKpA-MS2bS__gUZ8O4rIPACLcBGAsYHQ/w545-h423/Pics-Art-09-02-01-42-41-01.jpg|0|1
+gba/Pokémon Spiral Root.gba|Pokémon Spiral Root|https://pokebat.net/wp-content/uploads/2023/01/SPIRAL2BROOT.jpg|0|1
+gba/Pokemon DarkBlue.gba|Pokemon DarkBlue|https://1.bp.blogspot.com/-IDyhTIqCC1A/YRXXgnamkoI/AAAAAAAAFy0/Rk0O_bxqFggh0n6oCe3QecAgr4HGWd6bACLcBGAsYHQ/w511-h335/CTR%2B1297.jpg|0|1
+gba/Pokémon Sors.gba|Pokémon Sors|https://pokebat.net/wp-content/uploads/2026/09/Title.png|0|1
+gba/Pokemon Omega Rebirth.gba|Pokemon Omega Rebirth|https://1.bp.blogspot.com/-MSYY53i7UGQ/YP-WwdsmGqI/AAAAAAAAFx8/wWEBQGNDxxAXNtbkz9pGKuXLPfTcXDBYACLcBGAsYHQ/w582-h363/224519986_552219012806000_5382388042520086497_n.png|0|1
+gba/Pokemon OOF.gba|Pokemon OOF|https://1.bp.blogspot.com/-7AoSD8ClZ5Y/YPrt9PsKsHI/AAAAAAAAFxA/jF-MG5EWjrMKGWEyhrdp5YUxnfYyZI9sACLcBGAsYHQ/w595-h362/PK%2BOOF%2Bver1_01.png|0|1
+gba/Pokémon Dumbdumb Island.gba|Pokémon Dumbdumb Island|https://1.bp.blogspot.com/-lGqfbXTy0PY/YPJOqU3y2pI/AAAAAAAAFwo/5Tbc71w_JIUnHq14Q0wJHiV0r91chzIZgCLcBGAsYHQ/w522-h435/EMERALD%2BDUMBDUMB%2BPOKEMON%2BCOVER.jpg|0|1
+gba/Pokemon Emerald’s Eight [JOGUE COM 8 POKÉMON NA EQUIPE].gba|Pokemon Emerald’s Eight [JOGUE COM 8 POKÉMON NA EQUIPE]|https://1.bp.blogspot.com/-AyQKUVVwU5I/YO72qKYmrUI/AAAAAAAAFvk/7Ha3zAJCDvcfvy0dOpd2AUQzkSP7bYA5ACLcBGAsYHQ/w521-h346/titlescreen%2B%25281%2529.png|0|1
+gba/Pokemon Fused Dimensions.gba|Pokemon Fused Dimensions|https://pokebat.net/wp-content/uploads/2021/10/FUSED2BDIMENSIONS.jpg|0|1
+gba/Pokemon Fusion 3.gba|Pokemon Fusion 3|https://1.bp.blogspot.com/-q0FeSXP0XJk/YMwkOkf6lNI/AAAAAAAAFp4/66VOOdQlC14kghaNsAZoqM0iEg4h5UJIACLcBGAsYHQ/w456-h407/Em2bfTgWMAEuRBY.png|0|1
+gba/Pokémon Versione Subacquea.gba|Pokémon Versione Subacquea|https://1.bp.blogspot.com/-t_y6HsLFXtM/YN9CwNAuz2I/AAAAAAAAFs4/QaieD2BEL1Ys-ok1QKtvPdCJrpPszuR3gCLcBGAsYHQ/w553-h384/PK%2BSubacquea%2B-%2BBeta%2B1_01.jpg|0|1
+gba/Pokemon Lost Legacy.gba|Pokemon Lost Legacy|https://1.bp.blogspot.com/-F6ReIpkSkUo/YLumd5sy13I/AAAAAAAAFoY/hWNzhuo_gQM5pRmdQ5TECNGd9XLaN5IWgCLcBGAsYHQ/w512-h341/unknown.png|0|1
+gba/Pokemon Volt Yellow Anime Version.gba|Pokemon Volt Yellow Anime Version|https://1.bp.blogspot.com/-syubKB2vX5g/YLb0o38EDTI/AAAAAAAAFnw/MKG5N90unoEn8gQVcDJTi2g0cDatMn8PgCLcBGAsYHQ/w504-h335/Pokemon%2BVolt%2BYellow%2B-%2BAnime%2BVersion%2B2020-12-20_01.png|0|1
+gba/Pokemon Stranded.gba|Pokemon Stranded|https://1.bp.blogspot.com/-gymytmd--cc/YKme7n6XnzI/AAAAAAAAFmE/jGDhUvX1TkIeLy8vpXl4ZJapBv2d6LVegCLcBGAsYHQ/w476-h317/Pokemon%2BStranded%2Bv0.1.3_01.png|0|1
+gba/Pokemon Reebot.gba|Pokemon Reebot|https://pokebat.net/wp-content/uploads/2021/05/pokemon2Breboot2Bgba.jpg|0|1
+gba/Pokemon Lilac.gba|Pokemon Lilac|https://1.bp.blogspot.com/-Pk85uyb6Hzo/YJ21ipWmtAI/AAAAAAAAFjs/yeIFy2EYkhEUKMCnAqSx6IA_tAnnQlR4ACLcBGAsYHQ/w561-h374/pokemon_lilac_beta_1.gba_03.png|0|1
+gba/Pokemon Demon Island.gba|Pokemon Demon Island|https://pokebat.net/wp-content/uploads/2021/05/PK2B-2BDemon2BIsland2Bv.1.3d_01.png|0|1
+gba/Pokemon Intel Version.gba|Pokemon Intel Version|https://pokebat.net/wp-content/uploads/2021/04/1.jpg|0|1
+gba/Pokemon Fusion Origins.gba|Pokemon Fusion Origins|https://pokebat.net/wp-content/uploads/2021/04/maxresdefault.jpg|0|1
+gba/Pokémon Ice Blue.gba|Pokémon Ice Blue|https://pokebat.net/wp-content/uploads/2021/04/ice2Bblue.jpg|0|1
+gba/Pokemon Neon Blue.gba|Pokemon Neon Blue|https://pokebat.net/wp-content/uploads/2021/04/Neon2BBlue2Bv2.5X_01.png|0|1
+gba/Pokemon Naruto Shippuden Advance Ninja Showdown [ATT 2021].gba|Pokemon Naruto Shippuden Advance Ninja Showdown [ATT 2021]|https://pokebat.net/wp-content/uploads/2021/03/c6ver.png|0|1
+gba/Pokémon Bruno Adventures [Português PT-BR].gba|Pokémon Bruno Adventures [Português PT-BR]|https://pokebat.net/wp-content/uploads/2021/03/165707479_267082324895839_6828796666049363301_n.png|0|1
+gba/Pokémon Naki Version [Português PT-BR].gba|Pokémon Naki Version [Português PT-BR]|https://pokebat.net/wp-content/uploads/2021/03/Pok25C325A9mon2BNaki2BBeta2B01_01.png|0|1
+gba/Pokemon Ragnarok.gba|Pokemon Ragnarok|https://pokebat.net/wp-content/uploads/2021/03/tumblr_nsvnxoAAjR1tp2yqno1_1280.png|0|1
+gba/Pokemon Team Magma Edition.gba|Pokemon Team Magma Edition|https://pokebat.net/wp-content/uploads/2021/02/C2hhZAJ.png|0|1
+gba/Pokemon Fire Black.gba|Pokemon Fire Black|https://pokebat.net/wp-content/uploads/2021/02/PK2BFire2BBlack2Bv0.6_01.png|0|1
+gba/Pokemon Ash Jotho.gba|Pokemon Ash Jotho|https://pokebat.net/wp-content/uploads/2021/02/result-1610641324812_orig.jpg|0|1
+gba/Pokémon SWSH GBA [PT-BR] – v9.1 DLC ISLE OF ARMOR.gba|Pokémon SWSH GBA [PT-BR] – v9.1 DLC ISLE OF ARMOR|https://pokebat.net/wp-content/uploads/2021/01/SWORD2BSHIELD2BGBA.jpg|0|1
+gba/Pokemon Giratina's Legend [ATT 260321].gba|Pokemon Giratina's Legend [ATT 260321]|https://pokebat.net/wp-content/uploads/2021/01/capa.png|0|1
+gba/Pokemon Ruby Stars.gba|Pokemon Ruby Stars|https://pokebat.net/wp-content/uploads/2021/01/RUBY2BSTARS.jpg|0|1
+gba/Pokemon Tempest.gba|Pokemon Tempest|https://pokebat.net/wp-content/uploads/2021/01/pk2Btempest.jpg|0|1
+gba/Pokemon Voyager.gba|Pokemon Voyager|https://pokebat.net/wp-content/uploads/2021/03/pokemon2Bvoyager2Bcover.jpg|0|1
+gba/Pokemon Return To Origins.gba|Pokemon Return To Origins|https://pokebat.net/wp-content/uploads/2021/01/return2Bto2Borigin2Bemerald.jpg|0|1
+gba/Pokemblem [Fire Emblem Hack-Rom].gba|Pokemblem [Fire Emblem Hack-Rom]|https://pokebat.net/wp-content/uploads/2021/01/Pokemblem_01.png|0|1
+gba/Pokemon Dreams [COMPLETO].gba|Pokemon Dreams [COMPLETO]|https://pokebat.net/wp-content/uploads/2020/12/xSyKDZ9.png|0|1
+gba/Pokemon Terra Firma.gba|Pokemon Terra Firma|https://pokebat.net/wp-content/uploads/2020/11/PK2BTerra2BFirma2BAlpha2B1_01.png|0|1
+gba/Pokémon Pocket Gaiden.gba|Pokémon Pocket Gaiden|https://pokebat.net/wp-content/uploads/2020/12/CTR2B328.jpg|0|1
+gba/Pokemon AlteRed.gba|Pokemon AlteRed|https://pokebat.net/wp-content/uploads/2020/11/PK2BAlteRed2Bv1.9.2_01.png|0|1
+gba/Pokemon Frontier Adventure.gba|Pokemon Frontier Adventure|https://pokebat.net/wp-content/uploads/2020/12/FRONTIER2BADVENTURE.jpg|0|1
+gba/Pokémon Chroma Version.gba|Pokémon Chroma Version|https://pokebat.net/wp-content/uploads/2020/11/pokemon-chroma.png|0|1
+gba/Sun Sky & Moon Galaxy.gba|Sun Sky & Moon Galaxy|https://pokebat.net/wp-content/uploads/2020/11/20191011_144950.jpg|0|1
+gba/Pokémon World Championships [DEMO].gba|Pokémon World Championships [DEMO]|https://pokebat.net/wp-content/uploads/2020/10/CTR2B233.jpg|0|1
+gba/Pokémon Sors Demo.gba|Pokémon Sors Demo|https://pokebat.net/wp-content/uploads/2020/10/Title.png|0|1
+gba/Pokemon The Tree of Time.gba|Pokemon The Tree of Time|https://pokebat.net/wp-content/uploads/2020/10/277225782_140284381843707_5310235782731260851_n.jpg|0|1
+gba/Pokémon Super Light Platinum [Tradução Parcial].gba|Pokémon Super Light Platinum [Tradução Parcial]|https://pokebat.net/wp-content/uploads/2020/10/SUPER2BLIGHT2BPLATINUM2BPT2BBR.jpg|0|1
+gba/Pokemon Turquoise [COMPLETO FULL].gba|Pokemon Turquoise [COMPLETO FULL]|https://pokebat.net/wp-content/uploads/2020/10/TURQUOISE2BCOVER.jpg|0|1
+gba/Pokemon Trashlocke Edition.gba|Pokemon Trashlocke Edition|https://pokebat.net/wp-content/uploads/2020/09/trashlocke2Bthumb.jpg|0|1
+gba/Pokemon Pocket Gaiden 2.gba|Pokemon Pocket Gaiden 2|https://pokebat.net/wp-content/uploads/2020/09/CTR2B85.jpg|0|1
+gba/Pokemon Forever Rubi.gba|Pokemon Forever Rubi|https://pokebat.net/wp-content/uploads/2020/09/FOREVER2BRUBY.jpg|0|1
+gba/Pokemon Secret Diaries.gba|Pokemon Secret Diaries|https://pokebat.net/wp-content/uploads/2020/09/Iol4NgL.png|0|1
+gba/Pokemon Hyper Emerald v4.0 Ash Version [ENGLISH PARCIAL].gba|Pokemon Hyper Emerald v4.0 Ash Version [ENGLISH PARCIAL]|https://pokebat.net/wp-content/uploads/2021/10/919dd442fbf2b211d59ab846c58065380dd78eac.png|0|1
+gba/Pokemon Mythic Legends [COMPLETO].gba|Pokemon Mythic Legends [COMPLETO]|https://pokebat.net/wp-content/uploads/2020/09/MYTICAL2BLEGENDS.jpg|0|1
+gba/Pokemon Eclat Pourpre V2 [TRADUZIDO ESPANHOL].gba|Pokemon Eclat Pourpre V2 [TRADUZIDO ESPANHOL]|https://pokebat.net/wp-content/uploads/2020/08/Pokemon2BEclat2BPourpre2Bv2.5_01.png|0|1
+gba/Pokemon Let’s Go Lugia [Português PT-BR] - John GBA v3.91 Download.gba|Pokemon Let’s Go Lugia [Português PT-BR] - John GBA v3.91 Download|https://pokebat.net/wp-content/uploads/2020/07/pokmon_let_s_go_lugia_by_robertsnaker_dgg37k7.png|0|1
+gba/Digimon Grey.gba|Digimon Grey|https://pokebat.net/wp-content/uploads/2020/07/digimom2Bgray.jpg|0|1
+gba/Pokemon Let’s Go Lugia [Português PT-BR].gba|Pokemon Let’s Go Lugia [Português PT-BR]|https://pokebat.net/wp-content/uploads/2020/07/pokmon_let_s_go_lugia_by_robertsnaker_dgg37k7.png|0|1
+gba/Pokemon Kanto Adventures.gba|Pokemon Kanto Adventures|https://pokebat.net/wp-content/uploads/2020/06/RBS2B480.jpg|0|1
+gba/Pokemon GS Chronicles [COMPLETA].gba|Pokemon GS Chronicles [COMPLETA]|https://pokebat.net/wp-content/uploads/2020/07/wQtGemR.png|0|1
+gba/Pokémon POKEVERSE.gba|Pokémon POKEVERSE|https://pokebat.net/wp-content/uploads/2020/06/WhatsApp2BImage2B2020-06-072Bat2B22.37.19.jpeg|0|1
+gba/Pokemon Emerald Kaizo.gba|Pokemon Emerald Kaizo|https://pokebat.net/wp-content/uploads/2020/06/emerald2Bkaizo.jpg|0|1
+gba/Pokemon Yet Another Fire Red Remake.gba|Pokemon Yet Another Fire Red Remake|https://pokebat.net/wp-content/uploads/2020/05/YET2BANOTHER2BF.jpg|0|1
+gba/Pokemon Polka Aqua 2.gba|Pokemon Polka Aqua 2|https://pokebat.net/wp-content/uploads/2020/05/POLKA2BAQUA2B2.jpg|0|1
+gba/Pokemon Polka Aqua 2 - POLKA AQUA 1 DOWNLOAD.gba|Pokemon Polka Aqua 2 - POLKA AQUA 1 DOWNLOAD|https://pokebat.net/wp-content/uploads/2020/05/POLKA2BAQUA2B2.jpg|0|1
+gba/Pokemon Mega Blue.gba|Pokemon Mega Blue|https://pokebat.net/wp-content/uploads/2020/05/water2Bblue.jpg|0|1
+gba/Pokemon Clover [NOVA VERSÃO 2022].gba|Pokemon Clover [NOVA VERSÃO 2022]|https://pokebat.net/wp-content/uploads/2020/05/Pokemon_Clover_BoxArt.png|0|1
+gba/Pokemon Stigma Version.gba|Pokemon Stigma Version|https://pokebat.net/wp-content/uploads/2020/05/STIGMA2BVERSIPON2BCAPA2BYOUTUBE.jpg|0|1
+gba/Pokemon Legend’s Red.gba|Pokemon Legend’s Red|https://pokebat.net/wp-content/uploads/2020/05/legends2Bred.jpg|0|1
+gba/Pokemon Emerald Party Randomizer Plus.gba|Pokemon Emerald Party Randomizer Plus|https://pokebat.net/wp-content/uploads/2020/05/emerald2Bparty2Brandomizer.jpg|0|1
+gba/Pokemon Beyond.gba|Pokemon Beyond|https://pokebat.net/wp-content/uploads/2020/05/RBS2B589.jpg|0|1
+gba/Pokemon Metal Red.gba|Pokemon Metal Red|https://pokebat.net/wp-content/uploads/2020/05/METAL2BRED.jpg|0|1
+gba/Pokémon Rocket Edition [COMPLETO].gba|Pokémon Rocket Edition [COMPLETO]|https://pokebat.net/wp-content/uploads/2020/04/rocket2Bedition.jpg|0|1
+gba/Pokemon Blast Burn (Att 2020).gba|Pokemon Blast Burn (Att 2020)|https://pokebat.net/wp-content/uploads/2020/04/BLAST2BBURN.jpg|0|1
+gba/Pokémon Radish.gba|Pokémon Radish|https://pokebat.net/wp-content/uploads/2020/03/VAPS2B231.jpg|0|1
+gba/Pokemon Suri.gba|Pokemon Suri|https://pokebat.net/wp-content/uploads/2020/01/Capturar.png|0|1
+gba/Pokemon Sevii (Beta 1).gba|Pokemon Sevii (Beta 1)|https://pokebat.net/wp-content/uploads/2020/01/pokemon-sevii.png|0|1
+gba/Pokemon Kanto Z.gba|Pokemon Kanto Z|https://pokebat.net/wp-content/uploads/2019/12/Pok25C325A9mon2BKanto2BZ2BBeta2B0.1_01.png|0|1
+gba/Pokemon Hollow Mysteries.gba|Pokemon Hollow Mysteries|https://pokebat.net/wp-content/uploads/2019/11/Boxart-Hollow2BMysteries.png|0|1
+gba/Pokemon Eclat Pourpre v2 [FRANCÊS].gba|Pokemon Eclat Pourpre v2 [FRANCÊS]|https://pokebat.net/wp-content/uploads/2019/11/ELCAT2BPOURPRE2B2.jpg|0|1
+gba/Pokemon Times.gba|Pokemon Times|https://pokebat.net/wp-content/uploads/2019/09/Pokemon2BTimes2BBeta_01.png|0|1
+gba/Pokemon A Grand Day Out.gba|Pokemon A Grand Day Out|https://pokebat.net/wp-content/uploads/2019/11/a2Bgrand2Bday2Bout.jpg|0|1
+gba/Pokemon Universe.gba|Pokemon Universe|https://pokebat.net/wp-content/uploads/2021/10/Pok25C325A9mon2BU_07.png|0|1
+gba/Pokemon FireRed ReImagined.gba|Pokemon FireRed ReImagined|https://pokebat.net/wp-content/uploads/2019/08/FR2BREIMAGINED.jpg|0|1
+gba/Pokémon Amazing Cortana.gba|Pokémon Amazing Cortana|https://pokebat.net/wp-content/uploads/2019/08/AMAZING2BCORTANA.jpg|0|1
+gba/Pokemon Mitic Island.gba|Pokemon Mitic Island|https://pokebat.net/wp-content/uploads/2019/08/pokemon-mitic-island-box-art.png|0|1
+gba/Pokemon Scarso Edition [ITALY].gba|Pokemon Scarso Edition [ITALY]|https://pokebat.net/wp-content/uploads/2019/07/SCP427.jpg|0|1
+gba/Pokemon Emerald 2.gba|Pokemon Emerald 2|https://pokebat.net/wp-content/uploads/2019/07/aqui.png|0|1
+gba/Pokemon Islas del Viento.gba|Pokemon Islas del Viento|https://pokebat.net/wp-content/uploads/2019/07/ALIS2B515.jpg|0|1
+gba/Pokémon Gary's Mod.gba|Pokémon Gary's Mod|https://pokebat.net/wp-content/uploads/2019/07/GENERIC2BKANTO2BROMS2BLAYOUT.jpg|0|1
+gba/Pokemon Emerald Green.gba|Pokemon Emerald Green|https://pokebat.net/wp-content/uploads/2019/07/EMERALD2BGREEN.jpg|0|1
+gba/Pokémon Glazed Blazed 8.5.1.gba|Pokémon Glazed Blazed 8.5.1|https://pokebat.net/wp-content/uploads/2021/10/glazed2Bblazed.jpg|0|1
+gba/Pokemon Lotus.gba|Pokemon Lotus|https://pokebat.net/wp-content/uploads/2019/06/lotus.jpg|0|1
+gba/Pokemon Swore and Shilled.gba|Pokemon Swore and Shilled|https://pokebat.net/wp-content/uploads/2019/06/lPNoN6h.png|0|1
+gba/Pokemon Chileno.gba|Pokemon Chileno|https://pokebat.net/wp-content/uploads/2019/07/CHILENO.jpg|0|1
+gba/Pokemon Psychic.gba|Pokemon Psychic|https://pokebat.net/wp-content/uploads/2019/06/pokemon-psychic.jpg|0|1
+gba/Pokemon DarkFire.gba|Pokemon DarkFire|https://pokebat.net/wp-content/uploads/2019/06/Sem2BT25C325ADtulo-1.png|0|1
+gba/Pokemon Emerald Mystery Magikarp.gba|Pokemon Emerald Mystery Magikarp|https://pokebat.net/wp-content/uploads/2019/05/aqui2Bgod2Bkarpa.png|0|1
+gba/Pokemon Bidoof Version.gba|Pokemon Bidoof Version|https://pokebat.net/wp-content/uploads/2019/04/Bidoof2BBeta2B0.2.2_01.png|0|1
+gba/Pokemon HarvestCraft.gba|Pokemon HarvestCraft|https://pokebat.net/wp-content/uploads/2019/03/1.jpg|0|1
+gba/Pokemon Emerald Enhanced.gba|Pokemon Emerald Enhanced|https://pokebat.net/wp-content/uploads/2021/10/Emerald2BEnhanced_01.png|0|1
+gba/Pokemon HD 2 - GDrive.gba|Pokemon HD 2 - GDrive|https://pokebat.net/wp-content/uploads/2019/02/1.png|0|1
+gba/Pokemon FireRed Wonder Trade Challenger.gba|Pokemon FireRed Wonder Trade Challenger|https://pokebat.net/wp-content/uploads/2021/10/FR2BWTC.jpg|0|1
+gba/Pokémon Mega Sol X 3.0.gba|Pokémon Mega Sol X 3.0|https://pokebat.net/wp-content/uploads/2018/10/mega2Bsol2Bx.jpg|0|1
+gba/Pokemon Clear Ocean.gba|Pokemon Clear Ocean|https://pokebat.net/wp-content/uploads/2018/12/Pok25C325A9mon2BClear2BOcean2BGame2BBoy2BAdvance.png|0|1
+gba/Pokemon Soul Dark (GBA).gba|Pokemon Soul Dark (GBA)|https://pokebat.net/wp-content/uploads/2018/10/poke2Bsoul2Bdark.jpg|0|1
+gba/Pokemon Theta Emerald Renev - Doc da hack em pdf.gba|Pokemon Theta Emerald Renev - Doc da hack em pdf|https://pokebat.net/wp-content/uploads/2021/10/theta2Bemerald2Brenev.jpg|0|1
+gba/Sonicmon Fire Red.gba|Sonicmon Fire Red|https://pokebat.net/wp-content/uploads/2021/10/3_maxresdefault.jpg|0|1
+gba/Pokémon Brasul [Demo 2].gba|Pokémon Brasul [Demo 2]|https://pokebat.net/wp-content/uploads/2018/09/brasul2.jpg|0|1
+gba/Pokémon Brasul 2.1.gba|Pokémon Brasul 2.1|https://pokebat.net/wp-content/uploads/2021/10/brasul2.jpg|0|1
+gba/Pokemon Hyper Emerald v2.96 – Destroy Former - Hyper Emerald 807 v2.96 Destroy Former ENGLISH.gba|Pokemon Hyper Emerald v2.96 – Destroy Former - Hyper Emerald 807 v2.96 Destroy Former ENGLISH|https://pokebat.net/wp-content/uploads/2021/10/alpha2Bsapphire.jpg|0|1
+gba/Pokemon (Digimon New World).gba|Pokemon (Digimon New World)|https://pokebat.net/wp-content/uploads/2021/10/25.png|0|1
+gba/Pokemon Dark Violet [ATT- COMPLETA].gba|Pokemon Dark Violet [ATT- COMPLETA]|https://pokebat.net/wp-content/uploads/2021/10/3a48f-darkvioletfront_zpsc97b2c3c.png|0|1
+gba/Pokemon Hyper Emerald 807 [ENGLISH] Att v2z - Doc Localizações das Mega Stones.gba|Pokemon Hyper Emerald 807 [ENGLISH] Att v2z - Doc Localizações das Mega Stones|https://pokebat.net/wp-content/uploads/2021/10/brk011.jpg|0|1
+gba/Pokemon Sea Temple.gba|Pokemon Sea Temple|https://pokebat.net/wp-content/uploads/2018/06/RBS2B551.jpg|0|1
+gba/Pokemon Hyper Emerald 807 [ENGLISH] Att v2z - Hyper Emerald 807 English v2 Download.gba|Pokemon Hyper Emerald 807 [ENGLISH] Att v2z - Hyper Emerald 807 English v2 Download|https://pokebat.net/wp-content/uploads/2021/10/brk011.jpg|0|1
+gba/Pokemon Hyper Emerald 807 [ENGLISH] Att v2z - Hyper Emerald 807 English Parcial Download.gba|Pokemon Hyper Emerald 807 [ENGLISH] Att v2z - Hyper Emerald 807 English Parcial Download|https://pokebat.net/wp-content/uploads/2021/10/brk011.jpg|0|1
+gba/Pokemon V.gba|Pokemon V|https://pokebat.net/wp-content/uploads/2018/03/piokemon2Bv.jpg|0|1
+gba/Pokemon Flare [HACK].gba|Pokemon Flare [HACK]|https://pokebat.net/wp-content/uploads/2018/02/FLARE.jpg|0|1
+gba/Pokémon Random Sky PT-BR [HACK].gba|Pokémon Random Sky PT-BR [HACK]|https://pokebat.net/wp-content/uploads/2017/08/RANDON2BSKY.jpg|0|1
+gba/Pokémon Fluorite.gba|Pokémon Fluorite|https://pokebat.net/wp-content/uploads/2017/10/Pokemon2BFluorite2Bcapa.jpg|0|1
+gba/Pokemon Blossom.gba|Pokemon Blossom|https://pokebat.net/wp-content/uploads/2017/08/Prks106.jpg|0|1
