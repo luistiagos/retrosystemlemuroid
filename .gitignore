@@ -83,3 +83,4 @@ tmp/fbneo-state-test/
 
 # Saída do tests/native/test-fbneo-reinit.ps1 (binário do harness, logs e logcat do aparelho).
 tmp/fbneo-reinit-test/
+tmp/fpssync-vsync-test/

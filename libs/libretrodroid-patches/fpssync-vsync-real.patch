@@ -1,0 +1,67 @@
+diff --git a/libretrodroid/src/main/cpp/fpssync.cpp b/libretrodroid/src/main/cpp/fpssync.cpp
+index ffbe156..0d6cf87 100644
+--- a/libretrodroid/src/main/cpp/fpssync.cpp
++++ b/libretrodroid/src/main/cpp/fpssync.cpp
+@@ -22,7 +22,11 @@
+ namespace libretrodroid {
+ 
+ unsigned FPSSync::advanceFrames() {
+-    if (useVSync) return 1;
++    if (useVSync) {
++        if (!isVSyncTooFast()) return 1;
++        useVSync = false;
++        lastFrame = MIN_TIME;
++    }
+ 
+     if (lastFrame == MIN_TIME) {
+         start();
+@@ -50,6 +54,29 @@ void FPSSync::start() {
+ 
+ void FPSSync::reset() {
+     lastFrame = MIN_TIME;
++    vsyncWindowStart = MIN_TIME;
++    vsyncWindowFrames = 0;
++}
++
++bool FPSSync::isVSyncTooFast() {
++    auto now = std::chrono::steady_clock::now();
++    if (vsyncWindowStart == MIN_TIME) {
++        vsyncWindowStart = now;
++        vsyncWindowFrames = 0;
++        return false;
++    }
++
++    if (++vsyncWindowFrames < VSYNC_CHECK_FRAMES) return false;
++
++    double elapsed = std::chrono::duration<double>(now - vsyncWindowStart).count();
++    double measuredRate = vsyncWindowFrames / elapsed;
++    vsyncWindowStart = now;
++    vsyncWindowFrames = 0;
++
++    if (measuredRate <= contentRefreshRate * VSYNC_MAX_RATE_RATIO) return false;
++
++    LOGI("Screen is refreshing at %f instead of %f. Switching from vsync to time based sync", measuredRate, screenRefreshRate);
++    return true;
+ }
+ 
+ double FPSSync::getTimeStretchFactor() {
+diff --git a/libretrodroid/src/main/cpp/fpssync.h b/libretrodroid/src/main/cpp/fpssync.h
+index 324937d..6f9fef8 100644
+--- a/libretrodroid/src/main/cpp/fpssync.h
++++ b/libretrodroid/src/main/cpp/fpssync.h
+@@ -47,6 +47,15 @@ private:
+ 
+     TimePoint lastFrame = MIN_TIME;
+     Duration sampleInterval;
++
++    // Panels with variable refresh rate (touch boost, adaptive 90/120 Hz) can speed up after the
++    // game started. In vsync mode that would run one frame per (faster) vsync, so we check the real
++    // call rate and fall back to time-based pacing when it is clearly above the content rate.
++    const unsigned VSYNC_CHECK_FRAMES = 60;
++    const double VSYNC_MAX_RATE_RATIO = 1.2;
++    TimePoint vsyncWindowStart;
++    unsigned vsyncWindowFrames = 0;
++    bool isVSyncTooFast();
+ };
+ 
+ }

@@ -59,3 +59,19 @@ Copy-Item "$sourceRoot/libretrodroid/build/lifecycle-patched.aar" libs/libretrod
 Os testes são de JVM e não precisam de ROMs. Ainda é necessário testar a jogabilidade
 de KOF '97 e Real Bout Fatal Fury Special, incluindo pausa/retomada e saída durante
 frames lentos, em aparelho arm64. Os testes de concorrência não substituem essa validação.
+
+# Ritmo de quadros com painel de taxa variável (`fpssync-vsync-real.patch`)
+
+Correção de 2026-10-29 para `docs/bugs/open/2026-10-23-pokemon-ds-roda-acelerado-com-acelerar-desligado-moto-g86.md`.
+O `FPSSync` escolhia o modo vsync (um `retro_run` por `onDrawFrame`) pela taxa do painel lida uma vez na criação.
+Painel que sobe para 90/120 Hz depois (boost de toque do MediaTek no Moto G86) acelerava o jogo junto. Agora o modo
+vsync mede a taxa real de chamadas em janelas de 60 e, acima de 1,2x a taxa do conteúdo, passa para o ritmo por
+relógio, que já existia, até o fim da sessão.
+
+Somente os `jni/*/liblibretrodroid.so` do AAR foram trocados (`classes.jar` e o resto idênticos). Os campos novos
+ficam no fim da classe, para o teste também rodar contra o `.so` antigo (controle negativo):
+
+```powershell
+git -C ../LibretroDroid-patched apply "$PWD/libs/libretrodroid-patches/fpssync-vsync-real.patch"
+./tests/native/test-fpssync-vsync.ps1 -Serial <aparelho arm64>      # ou -Abi x86_64 no AVD
+```
