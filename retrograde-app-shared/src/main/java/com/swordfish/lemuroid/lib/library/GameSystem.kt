@@ -309,23 +309,23 @@ data class GameSystem(
                                 hashMapOf(
                                     0 to
                                         arrayListOf(
-                                            ControllerConfigs.GENESIS_3,
                                             ControllerConfigs.GENESIS_6,
+                                            ControllerConfigs.GENESIS_3,
                                         ),
                                     1 to
                                         arrayListOf(
-                                            ControllerConfigs.GENESIS_3,
                                             ControllerConfigs.GENESIS_6,
+                                            ControllerConfigs.GENESIS_3,
                                         ),
                                     2 to
                                         arrayListOf(
-                                            ControllerConfigs.GENESIS_3,
                                             ControllerConfigs.GENESIS_6,
+                                            ControllerConfigs.GENESIS_3,
                                         ),
                                     3 to
                                         arrayListOf(
-                                            ControllerConfigs.GENESIS_3,
                                             ControllerConfigs.GENESIS_6,
+                                            ControllerConfigs.GENESIS_3,
                                         ),
                                 ),
                         ),
@@ -402,23 +402,23 @@ data class GameSystem(
                                 hashMapOf(
                                     0 to
                                         arrayListOf(
-                                            ControllerConfigs.GENESIS_3,
                                             ControllerConfigs.GENESIS_6,
+                                            ControllerConfigs.GENESIS_3,
                                         ),
                                     1 to
                                         arrayListOf(
-                                            ControllerConfigs.GENESIS_3,
                                             ControllerConfigs.GENESIS_6,
+                                            ControllerConfigs.GENESIS_3,
                                         ),
                                     2 to
                                         arrayListOf(
-                                            ControllerConfigs.GENESIS_3,
                                             ControllerConfigs.GENESIS_6,
+                                            ControllerConfigs.GENESIS_3,
                                         ),
                                     3 to
                                         arrayListOf(
-                                            ControllerConfigs.GENESIS_3,
                                             ControllerConfigs.GENESIS_6,
+                                            ControllerConfigs.GENESIS_3,
                                         ),
                                 ),
                             regionalBIOSFiles =
@@ -932,7 +932,7 @@ data class GameSystem(
                                 ),
                             controllerConfigs =
                                 hashMapOf(
-                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_6, ControllerConfigs.FB_NEO_4),
                                 ),
                         ),
                     ),
@@ -1003,7 +1003,7 @@ data class GameSystem(
                                 ),
                             controllerConfigs =
                                 hashMapOf(
-                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_6, ControllerConfigs.FB_NEO_4),
                                 ),
                         ),
                     ),
@@ -1038,7 +1038,7 @@ data class GameSystem(
                                 ),
                             controllerConfigs =
                                 hashMapOf(
-                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_6, ControllerConfigs.FB_NEO_4),
                                 ),
                         ),
                     ),
@@ -1073,7 +1073,7 @@ data class GameSystem(
                                 ),
                             controllerConfigs =
                                 hashMapOf(
-                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_6, ControllerConfigs.FB_NEO_4),
                                 ),
                         ),
                     ),
@@ -1108,7 +1108,7 @@ data class GameSystem(
                                 ),
                             controllerConfigs =
                                 hashMapOf(
-                                    0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6),
+                                    0 to arrayListOf(ControllerConfigs.FB_NEO_6, ControllerConfigs.FB_NEO_4),
                                 ),
                         ),
                     ),
@@ -1450,8 +1450,8 @@ data class GameSystem(
                                 hashMapOf(
                                     0 to
                                         arrayListOf(
-                                            ControllerConfigs.MAME_2003_4,
                                             ControllerConfigs.MAME_2003_6,
+                                            ControllerConfigs.MAME_2003_4,
                                         ),
                                 ),
                         ),
@@ -1479,13 +1479,13 @@ data class GameSystem(
                                 hashMapOf(
                                     0 to
                                         arrayListOf(
-                                            ControllerConfigs.MAME_2003_4,
                                             ControllerConfigs.MAME_2003_6,
+                                            ControllerConfigs.MAME_2003_4,
                                         ),
                                     1 to
                                         arrayListOf(
-                                            ControllerConfigs.MAME_2003_4,
                                             ControllerConfigs.MAME_2003_6,
+                                            ControllerConfigs.MAME_2003_4,
                                         ),
                                 ),
                         ),
