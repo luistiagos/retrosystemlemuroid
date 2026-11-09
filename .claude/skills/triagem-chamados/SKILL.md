@@ -25,17 +25,17 @@ que os originaram. O produto final e:
 
 Assuma que voce comeca **sem contexto previo** — tudo que precisa esta aqui.
 
-> **Fonte e copias.** A fonte desta skill e `C:\projects\retrobatnew\source\skills\triagem-chamados\`
+> **Fonte e copias.** A fonte desta skill e `source\skills\triagem-chamados\` no retrobatnew
 > (o `.claude\skills\triagem-chamados` do retrobatnew e *junction* para la). Os outros repos
 > carregam copias, que devem ser byte-identicas a fonte (`SKILL.md` + `scripts/chamado.py`):
 >
-> | Repo | Pasta da copia |
+> | Repo (chave do mapa) | Pasta da copia |
 > |---|---|
-> | `C:\projects\digitalstoregamesproject` | `.claude\skills\triagem-chamados\` |
-> | `C:\projects\Downloader-XBOX360-XEX-HDD-Games` | `.claude\skills\triagem-chamados\` |
-> | `D:\projects\PS2Companion` | `.claude\skills\triagem-chamados\` |
-> | `C:\projects\lemuroid\Lemuroid` | `.claude\skills\triagem-chamados\` |
-> | `D:\projects\play2\ARMSX2-forkv2` | `docs\skill\triagem-chamados\` |
+> | `REPO_DSG` | `.claude\skills\triagem-chamados\` |
+> | `REPO_XBOX360` | `.claude\skills\triagem-chamados\` |
+> | `REPO_PS2COMPANION` | `.claude\skills\triagem-chamados\` |
+> | `REPO_LEMUROID` | `.claude\skills\triagem-chamados\` |
+> | `REPO_ARMSX2` | `docs\skill\triagem-chamados\` |
 >
 > A copia que voce carregou pode estar atrasada: em divergencia, **a fonte vale**. E ela **nao**
 > restringe onde o bug e gravado: um chamado costuma render achados em mais de um repositorio.
@@ -58,7 +58,7 @@ Assuma que voce comeca **sem contexto previo** — tudo que precisa esta aqui.
 | O que | Onde |
 |---|---|
 | Chamados e conversa (API) | `POST https://digitalstoregames.pythonanywhere.com/diag/query` — **so `SELECT`**, LIMIT 500, Bearer token |
-| Token (`DIAG_API_TOKEN`) | linha `DIAG_API_TOKEN=` de `C:\projects\retrobatnew\source\.env` (nao versionado), lida pelo `source/scripts/env_local.py`; variavel de ambiente nao vazia vence. Ausente, o script aborta dizendo o nome |
+| Token (`DIAG_API_TOKEN`) | linha `DIAG_API_TOKEN=` do `source/.env` do retrobatnew (nao versionado), lida pelo `source/scripts/env_local.py`; variavel de ambiente nao vazia vence. Ausente, o script aborta dizendo o nome. O `chamado.py` acha o leitor subindo dele e do diretorio atual; fora do retrobatnew e dos repos irmaos, defina `RETROBAT_ROOT` |
 | Painel dos chamados (UI) | `ddigitaladmfrontend/src/pages/SupportTickets.jsx` |
 | Temporarios | o **scratchpad desta sessao** — fora de pasta versionada e **fora de pasta compartilhada** (ver o aviso do atalho) |
 | Interprete | `python` (nao `python3`) |
@@ -192,12 +192,14 @@ Um chamado produz achados em **mais de um repositorio**. Decida por candidato, n
 
 | O achado e sobre | Repositorio | Pasta de bugs |
 |---|---|---|
-| App de PC **Retro Game System / RGS** — EmulationStation, `emulatorLauncher`, emuladores, cores, catalogo de ROMs, BIOS, atualizacao do app, empacotamento | `C:\projects\retrobatnew` | `source/docs/bugs/{open,retest,done}/` — ⚠️ **em `source/`, nao na raiz** |
-| App **Android "Retro Game System"** (Lemuroid, multi-sistema, Libretro) — APK `retro-game-system-arm64.apk`/`armv7.apk`, catalogo, download sob demanda, cores, telemetria do app Android | `C:\projects\lemuroid\Lemuroid` (branch `version9`) | `docs/bugs/{open,retest,done}/` — ⚠️ **`docs/`, nunca `documentacao/`** (removida em 2026-10-09) |
-| App **Android RetroSystem PS2** (fork do ARMSX2) | `D:\projects\play2\ARMSX2-forkv2` (branch `armsx2forkv2`; o antigo `ARMSX2-fork` nao existe mais) | `docs/bugs/open/armsx2-fork/` (linha antiga: `.../legado-version1/`) |
-| **PS2Companion** — preparar HD/pendrive de PS2, OPL | `D:\projects\PS2Companion` | `docs/bugs/{open,retest,close}/` |
-| **Downloader XBOX360** — `xbox-360-companion`, BadAvatar, Aurora, DashLaunch, preparo de HDD/USB | `C:\projects\Downloader-XBOX360-XEX-HDD-Games` | `docs/bugs/{open,retest,closed}/` |
-| **Agente de WhatsApp** — prompts, KB/guias, roteamento, handoff, resumo de chamado, painel, area de membros, pagamentos, remarketing | `C:\projects\digitalstoregamesproject` | `docs/modules/<modulo>/[areas/<area>/]bugs/` |
+| App de PC **Retro Game System / RGS** — EmulationStation, `emulatorLauncher`, emuladores, cores, catalogo de ROMs, BIOS, atualizacao do app, empacotamento | a raiz do retrobatnew (a pasta acima de `source/`; `RETROBAT_ROOT`) | `source/docs/bugs/{open,retest,done}/` — ⚠️ **em `source/`, nao na raiz** |
+| App **Android "Retro Game System"** (Lemuroid, multi-sistema, Libretro) — APK `retro-game-system-arm64.apk`/`armv7.apk`, catalogo, download sob demanda, cores, telemetria do app Android | `REPO_LEMUROID` (branch `version9`) | `docs/bugs/{open,retest,done}/` — ⚠️ **`docs/`, nunca `documentacao/`** (removida em 2026-10-09) |
+| App **Android RetroSystem PS2** (fork do ARMSX2) | `REPO_ARMSX2` (branch `armsx2forkv2`; o antigo `ARMSX2-fork` nao existe mais) | `docs/bugs/open/armsx2-fork/` (linha antiga: `.../legado-version1/`) |
+| **PS2Companion** — preparar HD/pendrive de PS2, OPL | `REPO_PS2COMPANION` | `docs/bugs/{open,retest,close}/` |
+| **Downloader XBOX360** — `xbox-360-companion`, BadAvatar, Aurora, DashLaunch, preparo de HDD/USB | `REPO_XBOX360` | `docs/bugs/{open,retest,closed}/` |
+| **Agente de WhatsApp** — prompts, KB/guias, roteamento, handoff, resumo de chamado, painel, area de membros, pagamentos, remarketing | `REPO_DSG` | `docs/modules/<modulo>/[areas/<area>/]bugs/` |
+
+A pasta de cada repo sai do **mapa da maquina** (chave `REPO_*` no `source/.env` do retrobatnew; vazia = a pasta irma da raiz do retrobatnew): `python <raiz do retrobatnew>/source/scripts/env_local.py --repo REPO_LEMUROID` imprime a pasta, ou aborta dizendo a chave a preencher.
 
 **PC x Android — o mesmo nome, dois repos.** O app de PC e o app Android se chamam ambos
 **"Retro Game System"**, saem do mesmo pacote Multigames e sao atendidos pelo mesmo
@@ -258,9 +260,37 @@ Tres desfechos, e **so um deles cria arquivo**:
 - **Novo** (nada equivalente em nenhuma pasta) → cria (Passo 7).
 - **Ja aberto** (`open/`, ou `backlog`/`implementada` no dsg) → **NAO duplique.** Anexe uma
   secao de evidencia ao doc existente, com data, ids das mensagens e o numero do chamado.
-- **Em `retest/`/`done`/`fechada`** → **NAO duplique.** Anexe como **confirmacao de campo**.
-  Leia antes o que aquele doc diz que **falta** — quase sempre e exatamente o que voce tem em
-  maos ("falta confirmar com o pad fisico do usuario", "falta confirmacao do cliente").
+- **Em `retest/`/`done`/`fechada`** → **NAO crie doc paralelo.** Leia antes o que aquele doc diz
+  que **falta** (quase sempre e exatamente o que voce tem em maos: "falta confirmar com o pad fisico
+  do usuario", "falta confirmacao do cliente") e o que ele **promete**. O destino depende da versao
+  do app do cliente:
+  - versao **anterior** ao fix → anexe como evidencia de cliente desatualizado; o doc fica onde esta;
+  - versao **com o fix** e o problema **resolvido** → anexe como **confirmacao de campo**;
+  - versao **com o fix** e a **mesma falha** → **reabra**: mova para `open/` (regra abaixo);
+  - versao **com o fix** e **outro defeito** → bug novo, com link para o antigo.
+
+  **Versao do app do usuario: conferir SEMPRE antes de classificar** (regra do dono, 2026-11-07).
+
+  1. **Ler a versao que o usuario roda**, nunca supor a ultima:
+     - `retrobatnew`: `[Startup] Retrobat version : 1.0.N` e `EmulatorLauncher.exe version : ... (built/copied <data>)` no
+       log do launcher; `es_built=` no bloco `[env]` (ES). Publicado = `dist/versions/<edicao>/latest.json`.
+     - `xbox-360-companion`: `user_agent = ElectronApp vX.Y.Z`; `backend`/`pipeline` nao mandam versao (use
+       `git log -1 -- <arquivo>`).
+     - Chamado de suporte: a versao em print, log ou telemetria do cliente no periodo da conversa, ou a data do link de
+       download entregue a ele. Sem versao determinavel, escreva **"versao nao determinada"** e nao conclua regressao.
+  2. **Comparar com a data do fix** do doc (`git log -1 --format=%cd <sha>`). Build **anterior** ao fix = cliente
+     desatualizado: anota os IDs no doc e ele **fica onde esta**.
+  3. **Build que ja contem o fix e a MESMA falha que o doc diz ter corrigido → reabrir, sempre.** Vale para `done/`,
+     `retest/` (e `closed/`), em qualquer projeto: `git mv` para `open/` (no dsg o doc nunca muda de pasta: volte o
+     `status` para aberto), linha **REABERTO em <data>** no topo do Status,
+     secao "Reaberto <data>" com IDs, versao do cliente, data do fix e o trecho do log que prova, e tirar o doc dos
+     indices da pasta antiga. Nao basta "anotar recorrencia": doc em `retest/`/`done/` com defeito vivo some do radar.
+  4. **Build com o fix, mas defeito DIFERENTE** (a correcao fez o que prometia e apareceu outro problema) → **bug novo** em
+     `open/` com link para o antigo; o antigo nao reabre. Releia o que o doc promete antes de decidir entre 3 e 4.
+
+  Caso que originou a regra (triagem de 2026-11-07, retrobatnew): o erro 12412, com launcher de 2026-10-29, mostrou
+  `0xC0000135` virando exit 207 sem fallback, exatamente o que o fix de 2026-10-23 prometia evitar. O doc foi so anotado em
+  `retest/` e teve de ser reaberto depois, a pedido do dono. Ja o 12636 (fix presente e cumprido) virou bug novo.
   - **Um resultado negativo nao reprova o fix automaticamente.** Se havia **outra falha ativa**
     durante a medicao, ela contamina o teste: registre como **inconclusiva**, diga qual era a
     outra falha e **deixe o doc onde esta**. Essa regra e explicita no
