@@ -1,7 +1,7 @@
 # [BACKLOG] Suporte a Nintendo Switch — viabilidade
 
 **Data:** 2026-10-27
-**Status:** dono escolheu o caminho A. Fase 0, rodadas 1 e 2 feitas em 2026-10-28 (spike na worktree `Lemuroid-switch`, sem commit). Jogo comercial (LIMBO) roda, a ~20 fps (limite na GPU ou na sincronia com ela, não na CPU). Falta provar um jogo de 64 bits (NCE). Ver "Fase 0 — spike do caminho A".
+**Status:** encerrado no Lemuroid (2026-10-29). A Fase 0 mostrou que o core libretro roda o LIMBO a ~20 fps, contra 60 fps no Eden standalone no mesmo aparelho. Decisão do dono: app próprio, fork do Eden, no molde do ARMSX2-forkv2. Ver `docs/backlogs/2026-10-29-app-switch-fork-eden.md`.
 **Origem:** pedido do dono ("Verifique a possibilidade de adicionarmos o console switch no Lemuroid, nesta etapa não
 implemente nada, apenas verifique a possibilidade"), sessão de planejamento.
 **Tipo:** feature
@@ -397,8 +397,30 @@ de 20, o limite é a GPU Mali. Escolhido o **Eden v0.2.1** (2026-06-01), o mais 
 dele (`eden-emulator/Releases`) dá **451, DMCA da Nintendo de 2026-03**. A fonte oficial é o Forgejo
 `git.eden-emu.dev/eden-emu/eden` (API `/api/v1/repos/eden-emu/eden/releases`), com o APK em
 `stable.eden-emu.dev/v0.2.1/Eden-Android-v0.2.1-standard.apk` (24.970.363 bytes, sha256
-`befbf70b1a05715811fe092ef9cf71e6f1c1672008a6c5caa31d633e99615668`). Ficou no scratchpad, sem instalar: o G86 saiu do
-adb.
+`befbf70b1a05715811fe092ef9cf71e6f1c1672008a6c5caa31d633e99615668`). Instalado no G86 em 2026-10-29.
+
+**Resultado do controle (2026-10-29): o gargalo é o core libretro, não o aparelho.**
+
+| LIMBO no G86, 720p portátil | Core suyu libretro (Lemuroid) | Eden v0.2.1 standalone |
+|------|------|------|
+| fps do jogo, título | ~20 | **60,0** (contador do próprio Eden) |
+| fps do jogo, gameplay | 17–21 (`libretro PERF`) | **59,3–60,0** |
+| Thread `GPU` | 54% | 18% |
+| Threads `CPUCore_*` | 23–31% | 61% / 32% / 21% |
+| PSS | 2,26–2,66 GB | 1,73 GB (+540 MB swap) |
+
+- O Eden registra **os mesmos** avisos `GetSuitability` (11 recursos ausentes, `maxClipDistances 0`): eles vêm do
+  driver Mali, não do port. Não explicam a diferença.
+- Com a mesma GPU e o mesmo jogo, o Eden roda a 3× o fps. O custo está no caminho do core libretro: o renderer
+  *headless* que faz readback para um buffer de CPU a cada quadro, e/ou a base suyu mais antiga. A thread `GPU`, que
+  no core fica a 54% esperando, no Eden fica a 18%.
+- **Consequência para o caminho A:** o core suyu como está não serve, mas o hardware serve. Opções: (1) consertar o
+  caminho de vídeo do core (render direto em contexto do frontend em vez de readback, o que exige HW render
+  Vulkan/GL no LibretroDroid, que é só GL); (2) portar o frontend libretro sobre a base do Eden; (3) caminho B
+  (lançar o Eden/standalone por intent).
+- Instalação do Eden no G86, para repetir: o seletor de chaves só funciona **navegando** até a pasta (não pela busca)
+  e com `files/keys` criada pelo próprio Eden. Pasta criada via `adb push` fica com dono `shell` e a importação falha
+  com "Uma ou mais chaves falharam ao serem copiadas". Chaves e LIMBO de teste ficaram em `/sdcard/Download/eden_teste`.
 
 4. Pendente para fechar a Fase 0: um jogo **de 64 bits** (a maioria do catálogo) para provar se o NCE aborta em código
    comercial, e uma medida que separe custo de CPU e de readback (ex.: comparar `suyu_cpu_accuracy` Unsafe e
