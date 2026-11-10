@@ -233,6 +233,29 @@ function Purge-EdgeCache {
     return $true
 }
 
+# Chaves do R2 no AMBIENTE do rclone, nunca na linha de comando: a linha de comando de um processo e
+# legivel por qualquer processo do usuario (Gerenciador de Tarefas, Win32_Process.CommandLine) e
+# ferramentas de diagnostico a gravam em log (foi assim que as chaves vazaram em 2026-11-10). Durante a
+# chamada saem as RCLONE_* herdadas: em DEBUG o rclone imprime o valor que leu do ambiente. No fim tudo
+# volta ao que era, para a chave nao ficar no PowerShell de quem rodou o script.
+# Uso: Invoke-R2Rclone $rclone $cfg <argumentos do rclone, sem as chaves>
+function Invoke-R2Rclone {
+    $exe = $args[0]
+    $r2 = $args[1]
+    $rcloneArgs = @($args | Select-Object -Skip 2)
+    $herdadas = @(Get-ChildItem Env: | Where-Object { $_.Name -like 'RCLONE_*' } |
+        ForEach-Object { [PSCustomObject]@{ Name = $_.Name; Value = $_.Value } })
+    foreach ($v in $herdadas) { Remove-Item -LiteralPath "Env:$($v.Name)" }
+    try {
+        $env:RCLONE_S3_ACCESS_KEY_ID = $r2.accessKeyId
+        $env:RCLONE_S3_SECRET_ACCESS_KEY = $r2.secretAccessKey
+        & $exe @rcloneArgs
+    } finally {
+        Remove-Item -LiteralPath Env:RCLONE_S3_ACCESS_KEY_ID, Env:RCLONE_S3_SECRET_ACCESS_KEY -ErrorAction SilentlyContinue
+        foreach ($v in $herdadas) { Set-Item -LiteralPath "Env:$($v.Name)" -Value $v.Value }
+    }
+}
+
 function Find-Rclone {
     $cmd = Get-Command rclone -ErrorAction SilentlyContinue
     if ($cmd) { return $cmd.Source }
@@ -489,8 +512,6 @@ if (-not $SkipR2) {
     $dest = ":s3:$($cfg.bucket)/$R2_FOLDER"
     $s3Flags = @(
         "--s3-provider=Cloudflare",
-        "--s3-access-key-id=$($cfg.accessKeyId)",
-        "--s3-secret-access-key=$($cfg.secretAccessKey)",
         "--s3-endpoint=$($cfg.endpoint)",
         "--s3-no-check-bucket"
     )
@@ -498,7 +519,7 @@ if (-not $SkipR2) {
     foreach ($abi in $AbiMap.Keys) {
         $localFile = $DistApks[$abi]
         Write-Host "Enviando $(Split-Path $localFile -Leaf) -> bucket '$($cfg.bucket)/$R2_FOLDER'..." -ForegroundColor Yellow
-        & $rclone copy $localFile $dest @s3Flags --progress
+        Invoke-R2Rclone $rclone $cfg copy $localFile $dest @s3Flags --progress
         if ($LASTEXITCODE -ne 0) {
             throw "rclone copy falhou ($abi) com exit code $LASTEXITCODE"
         }
@@ -508,7 +529,7 @@ if (-not $SkipR2) {
     Write-Host ""
     Write-Host "Verificando transferencia..." -ForegroundColor Yellow
 
-    $remoteEntries = & $rclone lsjson $dest @s3Flags | ConvertFrom-Json
+    $remoteEntries = Invoke-R2Rclone $rclone $cfg lsjson $dest @s3Flags | ConvertFrom-Json
     $remoteByName = @{}
     foreach ($e in $remoteEntries) {
         if (-not $e.IsDir) { $remoteByName[$e.Name] = $e.Size }
@@ -537,7 +558,7 @@ if (-not $SkipR2) {
     )
     foreach ($abi in $AbiMap.Keys) {
         $shaName = "retro-game-system-$($AbiMap[$abi]).apk.sha256"
-        & $rclone copyto $shaFiles[$abi] "$dest/$shaName" @s3Flags @txtHeaders
+        Invoke-R2Rclone $rclone $cfg copyto $shaFiles[$abi] "$dest/$shaName" @s3Flags @txtHeaders
         if ($LASTEXITCODE -ne 0) {
             throw "rclone copyto falhou no sidecar $shaName (exit code $LASTEXITCODE)"
         }
@@ -635,12 +656,12 @@ anterior: purgue o cache do Cloudflare para $publicBase/$R2_FOLDER/* e repita.
         "--header-upload=Content-Type: application/json; charset=utf-8",
         "--header-upload=Cache-Control: max-age=300"
     )
-    & $rclone copyto $versionJsonFile "$dest/$VERSION_JSON_NAME" @s3Flags @jsonHeaders
+    Invoke-R2Rclone $rclone $cfg copyto $versionJsonFile "$dest/$VERSION_JSON_NAME" @s3Flags @jsonHeaders
     if ($LASTEXITCODE -ne 0) {
         throw "rclone copyto falhou no $VERSION_JSON_NAME (exit code $LASTEXITCODE)"
     }
 
-    $jsonEntries = & $rclone lsjson $dest @s3Flags | ConvertFrom-Json
+    $jsonEntries = Invoke-R2Rclone $rclone $cfg lsjson $dest @s3Flags | ConvertFrom-Json
     $liveJson = $jsonEntries | Where-Object { -not $_.IsDir -and $_.Name -eq $VERSION_JSON_NAME } | Select-Object -First 1
     if (-not $liveJson) {
         throw "VERIFICACAO FALHOU: $VERSION_JSON_NAME nao encontrado no remoto apos o upload."
