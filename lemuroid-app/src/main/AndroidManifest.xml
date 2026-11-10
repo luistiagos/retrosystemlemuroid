@@ -69,7 +69,7 @@
 
         <activity
             android:name="com.swordfish.lemuroid.app.shared.game.ExternalGameLauncherActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode|grammaticalGender"
             android:exported="true"
             android:showWhenLocked="true"
             android:turnScreenOn="true"
@@ -86,7 +86,7 @@
 
         <activity
             android:name="com.swordfish.lemuroid.app.mobile.feature.game.GameActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode|grammaticalGender"
             android:launchMode="singleInstance"
             android:process=":game"
             android:showWhenLocked="true"
@@ -163,7 +163,8 @@
 
         <activity
             android:name=".app.tv.game.TVGameActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|mnc|colorMode|density|fontScale|fontWeightAdjustment|keyboard|layoutDirection|locale|mcc|navigation|smallestScreenSize|touchscreen|uiMode|grammaticalGender"
             android:process=":game"
             android:theme="@style/LemuroidMaterialTheme.Game" />
 

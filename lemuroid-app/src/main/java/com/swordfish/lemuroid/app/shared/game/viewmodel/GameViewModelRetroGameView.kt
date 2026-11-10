@@ -9,6 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
+import com.swordfish.lemuroid.app.shared.game.GameProcessSession
 import com.swordfish.lemuroid.app.shared.game.ShaderChooser
 import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
 import com.swordfish.lemuroid.app.shared.settings.HDModeQuality
@@ -121,92 +122,105 @@ class GameViewModelRetroGameView(
 
         var coreDownloadRetried = false
         var biosDownloadRetried = false
-        while (true) {
-            var shouldRetry = false
-            gameLoader.load(
-                applicationContext,
-                game,
-                requestLoadSave && autoSaveEnabled,
-                systemCoreConfig,
-                directLoad,
-            )
-                .catch { e ->
-                    if (e is CancellationException) throw e
-                    if (e is GameLoaderException && e.error is GameLoaderError.LoadCore && !coreDownloadRetried) {
-                        coreDownloadRetried = true
-                        gameState.value =
-                            GameState.Loading(
-                                appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_core),
-                            )
-                        try {
-                            CoreDownloader.downloadCore(applicationContext, systemCoreConfig.coreID)
-                            shouldRetry = true
-                        } catch (downloadEx: CancellationException) {
-                            throw downloadEx
-                        } catch (downloadEx: Exception) {
-                            Timber.e(downloadEx, "Direct core download failed: ${downloadEx.message}")
-                            sideEffects.requestFailureFinish(getErrorMessage(GameLoaderError.LoadCore))
-                            shouldRetry = false
-                        }
-                    } else if (
-                        e is GameLoaderException &&
-                        e.error is GameLoaderError.MissingBiosFiles &&
-                        !biosDownloadRetried
-                    ) {
-                        biosDownloadRetried = true
-                        gameState.value =
-                            GameState.Loading(
-                                appContext.getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_bios),
-                            )
-                        val biosError = e.error as GameLoaderError.MissingBiosFiles
-                        try {
-                            BiosDownloader.downloadMissing(applicationContext, biosError.missingFiles)
-                            shouldRetry = true
-                        } catch (downloadEx: CancellationException) {
-                            throw downloadEx
-                        } catch (downloadEx: Exception) {
-                            Timber.e(downloadEx, "BIOS download failed: ${downloadEx.message}")
-                            sideEffects.requestFailureFinish(getErrorMessage(e.error))
-                            shouldRetry = false
-                        }
-                    } else {
-                        val message = if (e is GameLoaderException) getErrorMessage(e.error) else ""
-                        sideEffects.requestFailureFinish(message)
-                    }
-                }
-                // flowOn cobre tudo que esta ACIMA dele — precisa ficar depois do catch para
-                // que o corpo do catch (CoreDownloader/BiosDownloader, que fazem mkdirs,
-                // isElfCompatible e md5 do arquivo inteiro) tambem saia da main thread.
-                // O collect abaixo continua na main, que e onde a UI precisa dele.
-                .flowOn(Dispatchers.IO)
-                .debounce(50)
-                .collect { loadingState ->
-                    gameState.value =
-                        if (loadingState is GameLoader.LoadingState.Ready) {
-                            Timber.i("Setting state to loaded")
-                            val retroViewData =
-                                buildRetroViewData(
-                                    applicationContext,
-                                    systemCoreConfig,
-                                    loadingState.gameData,
-                                    hdMode,
-                                    hdModeQuality,
-                                    filter,
-                                    lowLatencyAudio,
-                                    enableRumble,
-                                    enableMicrophone,
-                                    enableImmersiveMode,
-                                    screenAspectRatio,
+        try {
+            while (true) {
+                var shouldRetry = false
+                gameLoader.load(
+                    applicationContext,
+                    game,
+                    requestLoadSave && autoSaveEnabled,
+                    systemCoreConfig,
+                    directLoad,
+                )
+                    .catch { e ->
+                        if (e is CancellationException) throw e
+                        if (
+                            e is GameLoaderException &&
+                            e.error is GameLoaderError.LoadCore &&
+                            !coreDownloadRetried
+                        ) {
+                            coreDownloadRetried = true
+                            val msg =
+                                appContext.getString(
+                                    com.swordfish.lemuroid.ext.R.string.game_loading_download_core,
                                 )
-                            GameState.Loaded(
-                                gameData = loadingState.gameData,
-                                retroViewData = retroViewData,
-                            )
+                            gameState.value = GameState.Loading(msg)
+                            try {
+                                CoreDownloader.downloadCore(applicationContext, systemCoreConfig.coreID)
+                                shouldRetry = true
+                            } catch (downloadEx: CancellationException) {
+                                throw downloadEx
+                            } catch (downloadEx: Exception) {
+                                Timber.e(downloadEx, "Direct core download failed: ${downloadEx.message}")
+                                sideEffects.requestFailureFinish(getErrorMessage(GameLoaderError.LoadCore))
+                                shouldRetry = false
+                            }
+                        } else if (
+                            e is GameLoaderException &&
+                            e.error is GameLoaderError.MissingBiosFiles &&
+                            !biosDownloadRetried
+                        ) {
+                            biosDownloadRetried = true
+                            val msg =
+                                appContext.getString(
+                                    com.swordfish.lemuroid.ext.R.string.game_loading_download_bios,
+                                )
+                            gameState.value = GameState.Loading(msg)
+                            val biosError = e.error as GameLoaderError.MissingBiosFiles
+                            try {
+                                BiosDownloader.downloadMissing(applicationContext, biosError.missingFiles)
+                                shouldRetry = true
+                            } catch (downloadEx: CancellationException) {
+                                throw downloadEx
+                            } catch (downloadEx: Exception) {
+                                Timber.e(downloadEx, "BIOS download failed: ${downloadEx.message}")
+                                sideEffects.requestFailureFinish(getErrorMessage(e.error))
+                                shouldRetry = false
+                            }
                         } else {
-                            GameState.Loading(getLoadingMessage(loadingState))
+                            val message = if (e is GameLoaderException) getErrorMessage(e.error) else ""
+                            sideEffects.requestFailureFinish(message)
                         }
-                }
-            if (!shouldRetry) break
+                    }
+                    // flowOn cobre tudo que esta ACIMA dele — precisa ficar depois do catch para
+                    // que o corpo do catch (CoreDownloader/BiosDownloader, que fazem mkdirs,
+                    // isElfCompatible e md5 do arquivo inteiro) tambem saia da main thread.
+                    // O collect abaixo continua na main, que e onde a UI precisa dele.
+                    .flowOn(Dispatchers.IO)
+                    .debounce(50)
+                    .collect { loadingState ->
+                        gameState.value =
+                            if (loadingState is GameLoader.LoadingState.Ready) {
+                                Timber.i("Setting state to loaded")
+                                val retroViewData =
+                                    buildRetroViewData(
+                                        applicationContext,
+                                        systemCoreConfig,
+                                        loadingState.gameData,
+                                        hdMode,
+                                        hdModeQuality,
+                                        filter,
+                                        lowLatencyAudio,
+                                        enableRumble,
+                                        enableMicrophone,
+                                        enableImmersiveMode,
+                                        screenAspectRatio,
+                                    )
+                                GameState.Loaded(
+                                    gameData = loadingState.gameData,
+                                    retroViewData = retroViewData,
+                                )
+                            } else {
+                                GameState.Loading(getLoadingMessage(loadingState))
+                            }
+                    }
+                if (!shouldRetry) break
+            }
+        } catch (e: CancellationException) {
+            if (gameState.value is GameState.Loading) {
+                gameState.value = GameState.Uninitialized
+            }
+            throw e
         }
     }
 
@@ -217,6 +231,7 @@ class GameViewModelRetroGameView(
         val currentState = gameState.value
         if (currentState !is GameState.Loaded) throw IllegalStateException("Game is not loaded.")
 
+        GameProcessSession.onCoreCreated()
         saveStateCompatibility = currentState.gameData.saveStateCompatibility
 
         val result =

@@ -4,10 +4,16 @@ import android.app.ActivityManager
 import android.content.Context
 import android.os.Process
 import android.os.SystemClock
+import android.system.Os
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.io.File
+import java.io.RandomAccessFile
+import java.nio.ByteBuffer
+import java.nio.channels.FileChannel
+import java.nio.channels.FileLock
 
 /**
  * Um processo `:game` hospeda **uma** sessao de core, nunca duas.
@@ -30,7 +36,10 @@ import timber.log.Timber
  * Ver `docs/bugs/done/2026-09-28-investigacoes-baixa-confianca-triagem.md`.
  */
 object GameProcessSession {
+    const val LOCK_FILE_NAME = "game_process.lock"
     private const val POLL_INTERVAL_MS = 50L
+    private const val LOCK_ACQUIRE_ATTEMPTS = 5
+    private const val LOCK_RETRY_DELAY_MS = 10L
 
     /**
      * Folga para o `exitProcess` de `finishAndExitProcess`: 400 ms depois do `finish()`, ate 2,4 s
@@ -41,42 +50,216 @@ object GameProcessSession {
     /** Depois do `killProcess`, quanto esperar o sistema tirar o processo da lista. */
     private const val KILL_TIMEOUT_MS = 1_000L
 
+    /**
+     * Folga para o ActivityManagerService limpar os registros do processo morto
+     * antes de um novo `startActivity` ser disparado.
+     */
+    private const val AMS_CLEANUP_GRACE_PERIOD_MS = 150L
+
     private var claimed = false
+    private var coreCreated = false
+    private var exiting = false
+
+    private var heldLock: FileLock? = null
+    private var heldChannel: FileChannel? = null
+    private var heldRaf: RandomAccessFile? = null
+    private var heldPid: Int? = null
+
+    /**
+     * Chamado na inicializacao do processo `:game` para registrar a existencia e travar o lock file.
+     */
+    @Synchronized
+    fun onProcessStarted(context: Context) {
+        acquireProcessLock(context.filesDir)
+    }
 
     /**
      * Chamado no `:game` antes de qualquer coisa tocar o core. `true` so para a primeira sessao do
-     * processo; quem recebe `false` nao pode criar core aqui.
+     * processo (ou para recriacao de configuracao da mesma Activity antes de qualquer `GLRetroView`
+     * ter sido criada); quem recebe `false` nao pode criar core aqui.
      */
     @Synchronized
-    fun tryClaim(): Boolean {
-        if (claimed) return false
+    fun tryClaim(
+        context: Context? = null,
+        isRecreation: Boolean = false,
+    ): Boolean {
+        if (exiting || coreCreated) return false
+        if (claimed && !isRecreation) return false
         claimed = true
+        context?.let { acquireProcessLock(it.filesDir) }
         return true
     }
+
+    /**
+     * Registra que a `GLRetroView` (e portanto o core nativo `.so`) foi instanciada neste processo.
+     * A partir daqui, nenhuma nova `BaseGameActivity` (nem mesmo recriacao) pode reutilizar o processo.
+     */
+    @Synchronized
+    fun onCoreCreated() {
+        coreCreated = true
+    }
+
+    /**
+     * Registra que a Activity foi destruida durante uma mudanca de configuracao antes de o core
+     * nativo ter sido criado, permitindo que a instancia recriada em seguida assuma a sessao.
+     */
+    @Synchronized
+    fun onActivityDestroyed(isChangingConfigurations: Boolean) {
+        if (isChangingConfigurations && !coreCreated && !exiting) {
+            claimed = false
+        }
+    }
+
+    /**
+     * Registra que o processo `:game` iniciou sua rotina de encerramento.
+     * O `FileLock` nao e liberado em Java de proposito: o proprio kernel Linux libera o lock no
+     * `do_exit()` quando a tabela de file descriptors do processo e fechada.
+     */
+    @Synchronized
+    fun onProcessExiting() {
+        exiting = true
+    }
+
+    @Synchronized
+    fun acquireProcessLock(filesDir: File) {
+        if (heldLock != null) return
+        runCatching {
+            val lockFile = File(filesDir, LOCK_FILE_NAME)
+            val raf = RandomAccessFile(lockFile, "rw")
+            val channel = raf.channel
+            var lock: FileLock? = null
+            for (attempt in 0 until LOCK_ACQUIRE_ATTEMPTS) {
+                lock = runCatching { channel.tryLock() }.getOrNull()
+                if (lock != null) break
+                if (attempt < LOCK_ACQUIRE_ATTEMPTS - 1) {
+                    Thread.sleep(LOCK_RETRY_DELAY_MS)
+                }
+            }
+            if (lock != null) {
+                heldRaf = raf
+                heldChannel = channel
+                heldLock = lock
+                channel.truncate(0)
+                val currentPid = runCatching { Process.myPid() }.getOrNull() ?: 0
+                heldPid = currentPid
+                channel.write(ByteBuffer.wrap("$currentPid\n".toByteArray(Charsets.UTF_8)))
+                channel.force(true)
+            } else {
+                raf.close()
+            }
+        }.onFailure { e ->
+            Timber.w(e, "Failed to acquire game process lock")
+        }
+    }
+
+    @Synchronized
+    fun releaseProcessLock() {
+        try {
+            heldLock?.release()
+            heldChannel?.close()
+            heldRaf?.close()
+        } catch (e: Throwable) {
+            Timber.w(e, "Failed to release game process lock")
+        } finally {
+            heldLock = null
+            heldChannel = null
+            heldRaf = null
+            heldPid = null
+        }
+    }
+
+    fun isGameProcessRunning(filesDir: File): Boolean {
+        val lockFile = File(filesDir, LOCK_FILE_NAME)
+        if (!lockFile.exists()) return false
+
+        // If this process is the one holding the lock, it is definitely running.
+        if (heldLock?.isValid == true) return true
+
+        return runCatching {
+            RandomAccessFile(lockFile, "rw").use { raf ->
+                raf.channel.use { channel ->
+                    val lock = channel.tryLock()
+                    if (lock != null) {
+                        lock.release()
+                        false
+                    } else {
+                        true
+                    }
+                }
+            }
+        }.getOrElse {
+            // If the file is locked by another process, Java NIO can throw OverlappingFileLockException,
+            // and Windows/some filesystems throw IOException ("used by another process").
+            true
+        }
+    }
+
+    /**
+     * Verifica se o processo `:game` esta atualmente rodando, testando o lock file de processo
+     * e o ActivityManager como fallback.
+     */
+    fun isGameProcessRunning(context: Context): Boolean {
+        return isGameProcessRunning(context.filesDir) || runningAppProcessPid(context) != null
+    }
+
+    fun readGameProcessPid(filesDir: File): Int? {
+        if (heldPid != null) return heldPid
+        val lockFile = File(filesDir, LOCK_FILE_NAME)
+        if (!lockFile.exists()) return null
+        return runCatching {
+            RandomAccessFile(lockFile, "r").use { raf ->
+                raf.readLine()?.trim()?.toIntOrNull()
+            }
+        }.getOrNull()
+    }
+
+    fun readGameProcessPid(context: Context): Int? = readGameProcessPid(context.filesDir)
 
     /**
      * Chamado no processo principal antes de relancar um jogo cuja sessao anterior acabou de
      * terminar: espera o `:game` sair, para que o relancamento ganhe um processo novo. Se ele nao
      * sair no prazo, e morto — a sessao dele ja terminou, e por isso que estamos relancando.
      *
-     * Sem como listar os processos (ROMs de TV box devolvem `null` em `getRunningAppProcesses`),
-     * segue sem esperar: no pior caso o relancamento cai no processo velho, que recusa a sessao
-     * por [tryClaim] e devolve [BaseGameActivity.RESULT_RESTART_IN_FRESH_PROCESS].
+     * Usa o lock file do kernel Linux + `Os.kill(pid, 0)` para deteccao confiavel mesmo em ROMs
+     * de TV box onde `getRunningAppProcesses` devolve null ou omite processos secundarios.
      */
-    suspend fun awaitGameProcessExit(context: Context) {
+    suspend fun awaitGameProcessExit(
+        context: Context,
+        expectedPid: Int? = null,
+    ) {
         withContext(Dispatchers.IO) {
             val killAt = SystemClock.elapsedRealtime() + EXIT_TIMEOUT_MS
             val giveUpAt = killAt + KILL_TIMEOUT_MS
             var killed = false
+            var waited = false
+            var lockedPid: Int? = null
+
             while (true) {
-                val pid = gameProcessPid(context) ?: return@withContext
+                val lockHeld = isGameProcessRunning(context.filesDir)
+                if (lockHeld && lockedPid == null) {
+                    lockedPid = readGameProcessPid(context.filesDir)
+                }
+                val amPid = runningAppProcessPid(context)
+                val targetPid = expectedPid ?: lockedPid ?: amPid
+                val running = lockHeld || amPid != null || (targetPid != null && isPidAlive(targetPid))
+
+                if (!running) {
+                    if (waited || expectedPid != null) {
+                        delay(AMS_CLEANUP_GRACE_PERIOD_MS)
+                    }
+                    return@withContext
+                }
+
+                waited = true
                 val now = SystemClock.elapsedRealtime()
                 if (!killed && now >= killAt) {
-                    Timber.w("Game process $pid did not exit in time; killing it before relaunch")
-                    Process.killProcess(pid)
+                    if (targetPid != null) {
+                        Timber.w("Game process $targetPid did not exit in time; killing it before relaunch")
+                        runCatching { Process.killProcess(targetPid) }
+                    }
                     killed = true
                 } else if (now >= giveUpAt) {
-                    Timber.w("Game process $pid still listed after kill; relaunching anyway")
+                    Timber.w("Game process still listed after kill; relaunching anyway")
                     return@withContext
                 }
                 delay(POLL_INTERVAL_MS)
@@ -84,7 +267,19 @@ object GameProcessSession {
         }
     }
 
-    private fun gameProcessPid(context: Context): Int? =
+    private fun isPidAlive(pid: Int): Boolean {
+        if (pid <= 0) return false
+        val myPid = runCatching { Process.myPid() }.getOrNull() ?: 0
+        if (pid == myPid && heldLock == null) return false
+        return try {
+            Os.kill(pid, 0)
+            true
+        } catch (e: Throwable) {
+            false
+        }
+    }
+
+    private fun runningAppProcessPid(context: Context): Int? =
         runCatching {
             val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
             val gameProcessName = "${context.packageName}:game"
@@ -92,4 +287,12 @@ object GameProcessSession {
                 ?.firstOrNull { it.processName == gameProcessName }
                 ?.pid
         }.getOrNull()
+
+    fun resetForTest() {
+        claimed = false
+        coreCreated = false
+        exiting = false
+        releaseProcessLock()
+        heldPid = null
+    }
 }

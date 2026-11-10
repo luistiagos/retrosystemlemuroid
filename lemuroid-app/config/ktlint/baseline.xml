@@ -250,8 +250,6 @@
         <error line="535" column="36" source="standard:function-signature" />
         <error line="535" column="53" source="standard:function-signature" />
         <error line="535" column="86" source="standard:function-signature" />
-        <error line="688" column="34" source="standard:multiline-expression-wrapping" />
-        <error line="701" column="1" source="standard:max-line-length" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/game/ExternalGameLauncherActivity.kt">
         <error line="19" column="1" source="standard:no-unused-imports" />

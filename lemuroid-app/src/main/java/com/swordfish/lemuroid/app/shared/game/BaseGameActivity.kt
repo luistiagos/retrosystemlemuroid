@@ -114,7 +114,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         // Antes de qualquer coisa tocar o core — inclusive o breadcrumb abaixo, que e da sessao
         // anterior ate a de verdade comecar. Ver GameProcessSession.
-        if (!GameProcessSession.tryClaim()) {
+        if (!GameProcessSession.tryClaim(applicationContext, savedInstanceState != null)) {
             restartInFreshProcess()
             return
         }
@@ -575,6 +575,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 putExtra(PLAY_GAME_RESULT_LOAD_SAVE, intent.getBooleanExtra(EXTRA_LOAD_SAVE, false))
                 putExtra(PLAY_GAME_RESULT_LEANBACK, intent.getBooleanExtra(EXTRA_LEANBACK, false))
                 putExtra(PLAY_GAME_RESULT_PROCESS_RESTARTS, restarts)
+                putExtra(PLAY_GAME_RESULT_PID, Process.myPid())
                 putStringArrayListExtra(
                     PLAY_GAME_RESULT_TRIED_CORES,
                     intent.getStringArrayListExtra(EXTRA_TRIED_CORES) ?: arrayListOf(),
@@ -582,6 +583,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             }
         setResult(RESULT_RESTART_IN_FRESH_PROCESS, resultIntent)
         finish()
+        GameProcessSession.onProcessExiting()
         Process.killProcess(Process.myPid())
     }
 
@@ -592,6 +594,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
      * porque a espera e um `join` bloqueante.
      */
     private fun finishAndExitProcess() {
+        GameProcessSession.onProcessExiting()
         onFinishTriggered()
         val duration = animationDuration().toLong()
         GlobalScope.launch(Dispatchers.IO) {
@@ -602,6 +605,11 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         finish()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         exitRequested = true
+    }
+
+    override fun onDestroy() {
+        GameProcessSession.onActivityDestroyed(isChangingConfigurations)
+        super.onDestroy()
     }
 
     /**
@@ -685,8 +693,9 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 baseGameScreenViewModel.showEditControls(true)
             }
             if (data?.hasExtra(GameMenuContract.RESULT_CHANGE_TILT_CONFIG) == true) {
-                val tiltConfig = data.serializable<TiltConfiguration>(GameMenuContract.RESULT_CHANGE_TILT_CONFIG)
-                    ?: return
+                val tiltConfig =
+                    data.serializable<TiltConfiguration>(GameMenuContract.RESULT_CHANGE_TILT_CONFIG)
+                        ?: return
                 baseGameScreenViewModel.changeTiltConfiguration(tiltConfig)
             }
         }
@@ -698,7 +707,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         val targetSide = index.coerceIn(0, sideCount - 1)
 
         Timber.i(
-            "FDS side change request: target=$targetSide current=$fdsCurrentSideIndex sides=$sideCount inserted=$fdsDiskInserted",
+            "FDS side change request: target=$targetSide current=$fdsCurrentSideIndex " +
+                "sides=$sideCount inserted=$fdsDiskInserted",
         )
 
         if (fdsDiskInserted) {
@@ -745,6 +755,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         const val PLAY_GAME_RESULT_SYSTEM_CORE_CONFIG = "PLAY_GAME_RESULT_SYSTEM_CORE_CONFIG"
         const val PLAY_GAME_RESULT_LOAD_SAVE = "PLAY_GAME_RESULT_LOAD_SAVE"
         const val PLAY_GAME_RESULT_PROCESS_RESTARTS = "PLAY_GAME_RESULT_PROCESS_RESTARTS"
+        const val PLAY_GAME_RESULT_PID = "PLAY_GAME_RESULT_PID"
 
         const val REQUEST_PLAY_GAME = 1001
         const val PLAY_GAME_RESULT_SESSION_DURATION = "PLAY_GAME_RESULT_SESSION_DURATION"
@@ -794,6 +805,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 }
             activity.startActivityForResult(
                 Intent(activity, gameActivity).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     putExtra(EXTRA_GAME, game)
                     putExtra(EXTRA_LOAD_SAVE, loadSave)
                     putExtra(EXTRA_LEANBACK, useLeanback)

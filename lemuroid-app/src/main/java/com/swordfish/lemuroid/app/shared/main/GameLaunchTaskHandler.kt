@@ -125,7 +125,8 @@ class GameLaunchTaskHandler(
             return
         }
 
-        GameProcessSession.awaitGameProcessExit(activity.applicationContext)
+        val pid = extras.getInt(BaseGameActivity.PLAY_GAME_RESULT_PID, 0).takeIf { it > 0 }
+        GameProcessSession.awaitGameProcessExit(activity.applicationContext, pid)
         BaseGameActivity.launchGame(
             activity = activity,
             systemCoreConfig = coreConfig,
@@ -312,9 +313,9 @@ class GameLaunchTaskHandler(
 
     companion object {
         /**
-         * Um relancamento basta quando o `:game` velho morre. O segundo cobre o aparelho em que
-         * nao da para listar processos e o relancamento pode cair nele de novo; alem disso e ciclo.
+         * Um relancamento basta quando o `:game` velho morre. O segundo e terceiro cobrem aparelhos em que
+         * nao da para listar processos via ActivityManager e o relancamento pode competir com a saida.
          */
-        private const val MAX_PROCESS_RESTARTS = 2
+        private const val MAX_PROCESS_RESTARTS = 3
     }
 }

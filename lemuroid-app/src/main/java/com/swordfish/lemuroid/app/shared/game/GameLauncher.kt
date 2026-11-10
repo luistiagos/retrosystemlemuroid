@@ -17,12 +17,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
+import java.util.concurrent.atomic.AtomicBoolean
 
 class GameLauncher(
     private val coresSelection: CoresSelection,
     private val gameLaunchTaskHandler: GameLaunchTaskHandler,
     private val retrogradeDb: RetrogradeDatabase,
 ) {
+    private val isLaunching = AtomicBoolean(false)
+
     fun launchGameAsync(
         activity: Activity,
         game: Game,
@@ -30,27 +33,36 @@ class GameLauncher(
         leanback: Boolean,
     ) {
         val lifecycleOwner = activity as? LifecycleOwner ?: return
+        if (!isLaunching.compareAndSet(false, true)) {
+            Timber.d("Ignoring duplicate launchGameAsync while a launch is already in progress")
+            return
+        }
         lifecycleOwner.lifecycleScope.launch {
-            val launchGame =
+            try {
+                val launchGame =
+                    withContext(Dispatchers.IO) {
+                        gameLaunchTaskHandler.prepareGameForLaunch(game)
+                    }
+                val available = withContext(Dispatchers.IO) { isGameFileAvailable(activity, launchGame) }
+                if (!available) {
+                    showRomNotFoundDialog(activity, launchGame)
+                    return@launch
+                }
+                val system = GameSystem.findByIdOrNull(launchGame.systemId) ?: return@launch
+                val coreConfig = coresSelection.getCoreConfigForSystem(system)
                 withContext(Dispatchers.IO) {
-                    gameLaunchTaskHandler.prepareGameForLaunch(game)
+                    gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
+                    runCatching {
+                        retrogradeDb.gameDao().updateLastPlayedAt(launchGame.id, System.currentTimeMillis())
+                    }.onFailure { e ->
+                        Timber.e(e, "Failed to update lastPlayedAt for ${launchGame.title}")
+                    }
+                    GameProcessSession.awaitGameProcessExit(activity.applicationContext)
                 }
-            val available = withContext(Dispatchers.IO) { isGameFileAvailable(activity, launchGame) }
-            if (!available) {
-                showRomNotFoundDialog(activity, launchGame)
-                return@launch
+                BaseGameActivity.launchGame(activity, coreConfig, launchGame, loadSave, leanback)
+            } finally {
+                isLaunching.set(false)
             }
-            val system = GameSystem.findByIdOrNull(launchGame.systemId) ?: return@launch
-            val coreConfig = coresSelection.getCoreConfigForSystem(system)
-            withContext(Dispatchers.IO) {
-                gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
-                runCatching {
-                    retrogradeDb.gameDao().updateLastPlayedAt(launchGame.id, System.currentTimeMillis())
-                }.onFailure { e ->
-                    Timber.e(e, "Failed to update lastPlayedAt for ${launchGame.title}")
-                }
-            }
-            BaseGameActivity.launchGame(activity, coreConfig, launchGame, loadSave, leanback)
         }
     }
 
