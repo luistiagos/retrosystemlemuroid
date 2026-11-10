@@ -27,7 +27,7 @@
 				"matchCommandLine": true
 			}
 		},
-		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.configuration.updateBuildConfiguration": "disabled",
 		"powershell.cwd": "Lemuroid"
 	}
 }
