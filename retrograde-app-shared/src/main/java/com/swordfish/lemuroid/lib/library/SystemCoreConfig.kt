@@ -19,4 +19,17 @@ data class SystemCoreConfig(
     val skipDuplicateFrames: Boolean = true,
     val supportedOnlyArchitectures: Set<String>? = null,
     val supportsMicrophone: Boolean = false,
-) : Serializable
+    /**
+     * Core variable that turns a two-screen system into one picture (3DS: top screen only). While
+     * it is set, the mobile landscape layout puts the touch controls over the game and stretches
+     * the picture to fill, whatever [ControllerConfig.allowTouchOverlay] and the global aspect
+     * ratio say. The key and value must be the ones the menu writes (an [ExposedSetting.Value]).
+     */
+    val singleScreenLayout: CoreVariable? = null,
+) : Serializable {
+    /** Whether [variables] (defaults + the user's choices) put the core in [singleScreenLayout]. */
+    fun isSingleScreenLayout(variables: Iterable<CoreVariable>): Boolean {
+        val target = singleScreenLayout ?: return false
+        return variables.any { it.key == target.key && it.value == target.value }
+    }
+}

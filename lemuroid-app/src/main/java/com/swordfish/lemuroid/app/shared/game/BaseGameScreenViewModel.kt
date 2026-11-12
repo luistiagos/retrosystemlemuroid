@@ -237,6 +237,14 @@ class BaseGameScreenViewModel(
         return touchControls.getTouchControllerConfig()
     }
 
+    fun isSingleScreenLayout(): Flow<Boolean> {
+        return retroGameView.isSingleScreenLayout()
+    }
+
+    suspend fun setStretchToFill(fill: Boolean) {
+        retroGameView.setStretchToFill(fill)
+    }
+
     fun changeTiltConfiguration(tiltConfig: TiltConfiguration) {
         tilt.changeTiltConfiguration(tiltConfig)
     }

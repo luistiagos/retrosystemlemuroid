@@ -1,7 +1,7 @@
 # [BUG] 3DS no celular: não dá para jogar em tela única, os controles ocupam colunas laterais e a imagem sai deformada
 
 - **Data:** 2026-11-07
-- **Status:** aberto. **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. **T2 feita em 2026-11-12** (opção "Tela única" no menu, validada no moto). T3–T6, T8 e T9 estão abertas; as próximas são T4 + T5. Ver "Próximo passo (passagem de bastão, 2026-11-12, depois da T2)".
+- **Status:** aberto. **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. **T2 feita em 2026-11-12** (opção "Tela única" no menu, validada no moto). **T4 + T5 feitas em 2026-11-12:** na tela única em paisagem, os controles ficam sobre o jogo e a imagem estica até preencher; validadas no moto. T3, T6, T8 e T9 estão abertas; a próxima é a T6. Ver "Próximo passo (passagem de bastão, 2026-11-12, depois da T4 + T5)".
 - **Severidade:** Alta para 3DS. Levou uma cliente a pedir reembolso do pacote poucas horas depois da compra.
 - **Complexidade:** Média (uma opção de core é trivial; troca de tela, overlay e proporção por layout mexem em touch e na tela do jogo)
 - **Branch:** redesenho-tv-jogos-salvos-tela (onde foi investigado; a correção ainda não tem branch)
@@ -96,8 +96,8 @@ Tabela atualizada em 2026-11-07 ~22h45 com o que T1, T5 e T7 provaram. T1, T5 (m
 | T1 | ✅ **Feito.** Deformação = `Esticar` com colunas; core sem culpa. Print 3 sem gatilho (falta split screen e janela flutuante) | — | "Tabela de geometria" |
 | T2 | ✅ **Feito em 2026-11-12** (`single_screen`; `large_screen` medido e não exposto). Expor `Single Screen Only` (avaliar `Large Screen, Small Screen`) com tradução pt-BR. **O core atual já aceita o valor** (400×240 medido via prefs), e o Azahar também (`GetLayoutOption`) | `GameSystem.kt`, `strings.xml` | Opção aparece e a tela muda em Mario Kart 7 |
 | T3 | Botão de troca de tela (L3) no layout de toque | `Nintendo3DS.kt` | Tela de baixo acessível e tocável; confirmar se o toque responde com a tela trocada |
-| T4 | Controles sobre o jogo em tela única; colunas só onde o toque na tela de baixo precisa da área livre | `allowTouchOverlay` hoje é fixo por `ControllerConfig`; precisa depender do layout | Print igual à imagem 1 e toque sem disparo acidental |
-| T5 | Tela única com o jogo ocupando a tela: **Single Screen + `Esticar`, com overlay (T4)** reproduz a imagem 1 (Stretch 1,27× no moto, 1,34× no S20 FE). `Automática` dá 5:3 sem distorção com barras laterais. **Dono (2026-11-08): esticado, sem bordas.** `ScreenAspectRatio` é global, então para o 3DS ter o seu é preciso preferência por sistema ou por layout | `ScreenAspectRatio`, `SettingsManager` | Logo do MK7 em ~6,7 (Stretch) ou 5,27 (sem distorção) no S20 FE, conforme a escolha, sem colunas |
+| T4 | ✅ **Feito em 2026-11-12** (`SystemCoreConfig.singleScreenLayout`; ver "T4 + T5: implementação e validação"). Controles sobre o jogo em tela única; colunas só onde o toque na tela de baixo precisa da área livre | `allowTouchOverlay` hoje é fixo por `ControllerConfig`; precisa depender do layout | Print igual à imagem 1 e toque sem disparo acidental |
+| T5 | ✅ **Feito em 2026-11-12**, forma (a) generalizada pelo layout: FILL só na tela única em paisagem; em retrato e nos outros layouts, a pref global. Tela única com o jogo ocupando a tela: **Single Screen + `Esticar`, com overlay (T4)** reproduz a imagem 1 (Stretch 1,27× no moto, 1,34× no S20 FE). `Automática` dá 5:3 sem distorção com barras laterais. **Dono (2026-11-08): esticado, sem bordas.** `ScreenAspectRatio` é global, então para o 3DS ter o seu é preciso preferência por sistema ou por layout | `ScreenAspectRatio`, `SettingsManager` | Logo do MK7 em ~6,7 (Stretch) ou 5,27 (sem distorção) no S20 FE, conforme a escolha, sem colunas |
 | T6 | A deformação de Top-Bottom e Side by Side é **só** `Esticar` aplicado à coluna central (1,35× no moto, 1,90× no S20 FE, 2,68× na vertical em Side by Side). Candidatos: ignorar `Esticar` para o 3DS quando há colunas, ou proporção por sistema (a mesma de T5). Não mexe no core | `GameViewModelRetroGameView` / `ScreenAspectRatio` | Top-Bottom e Side by Side com 5:3 por tela (logo do MK7 em 5,27) com `Esticar` ligado |
 | T7 | **Aprovado pelo dono em 2026-11-08.** **Trocar `citra` pelo libretro do Azahar 2126.2** (sem compilar: binário da release). Medido no moto: 57 contra 42–45 fps de apresentação no MK7, 0 crash. **Obrigatório:** `citra_graphics_api=OpenGL` em `defaultSettings` (sem ela o core quebra no `context_reset`). Migrar as chaves da tabela "Core Azahar" e o `CoreCrashFallback` (`citra_use_hw_shader`). Antes de publicar: repetir num Adreno, conferir o crash de `2026-09-02-crashes-nativos-cores-citra-dolphin.md` e jogar uma corrida inteira | `CoreID.kt`, `GameSystem.kt`, `CoreCrashFallback.kt`, `lemuroid_core_citra` | `braco.sh` A/B no mesmo aparelho, 0 crash em 5 min e log `Using OpenGL hw renderer` |
 | T8 | Resolução padrão do 3DS acima de 1x. **Entra, porque T7 foi aprovado:** o Azahar GL tem folga (~57 fps a 1x) que o core atual não tem (~42). Medir 2x com o Azahar no moto e num Adreno antes de fixar | `defaultSettings` do 3DS em `GameSystem.kt` | Print nítido sem queda abaixo de ~55 fps no demo do MK7 |
@@ -319,6 +319,92 @@ Iniciada a pedido do dono ("continue o desenvolvimento desse backlog"). Registro
 - Se o dono quiser, basta voltar com o valor `large_screen`. O core aceita, e `AzaharMigrationHandler` já converte o rótulo antigo.
 - Capturas: `t2_single_jogo`, `t2_large` e `t2_final_single` em `shots/` do scratchpad `d631b5c2…`.
 
+### T4 + T5: análise (2026-11-12, antes da primeira edição)
+
+**Símbolos abertos:**
+
+- `GameScreenLayout.buildConstraintSet(isLandscape, allowTouchOverlay)`: em retrato, ignora o overlay e usa `buildConstraintSetPortrait`, com o jogo em cima e os pads embaixo. Em paisagem, com overlay, usa `buildConstraintSetLandscape`: `gameView` ocupa o pai inteiro e os pads ficam por cima, com `verticalBias = 1`. Sem overlay, usa `buildConstraintSetLandscapeNoOverlay`: `gameView` fica entre `leftPad` e `rightPad`.
+- `MobileGameScreen`: o único leitor de `allowTouchOverlay`, que aparece em dois lugares. O primeiro escolhe o ConstraintSet. O segundo desenha os `PadContainer` das colunas (`LEFT/RIGHT_CONTAINER`) quando não há overlay. O ConstraintSet é recalculado a cada recomposição, e a troca em runtime já funciona na rotação. O viewport do GL vem do `onGloballyPositioned` do `gameView`, num `LaunchedEffect(fullPos, viewPos)`. Logo, quando o `gameView` cresce, o viewport acompanha sem código novo.
+- `ControllerConfig.allowTouchOverlay` é fixo por config. `NINTENDO_3DS`, `DESMUME` e `MELONDS` usam `false`. Ele chega à tela por `GameViewModelTouchControls.getTouchControllerConfig()`, a partir de `controllerConfigsState`. Não depende de core variable.
+- **Como a troca de layout pelo menu chega ao jogo:** o `GameMenuActivity` usa um tema translúcido (`LemuroidMaterialTheme.Menu`, `windowIsTranslucent`). O jogo só vai para PAUSED e volta a RESUMED. `GameViewModelRetroGameView.onCreate` registra `launchOnState(RESUMED) { initializeCoreVariablesFlow() }`, que é um `repeatOnLifecycle` (`LifecycleUtils.kt`). A cada volta do menu, `CoreVariablesManager.getOptionsForCore` relê default + prefs, e `updateCoreVariables(options)` loga `Updating core variable` e chama `GLRetroView.updateVariables`. **Esse é o ponto para observar `citra_layout_option`.** As variáveis iniciais saem de `GameLoader.load` (`deferredCoreVars`, a mesma função) e ficam em `GameData.coreVariables`, já no `GameState.Loaded`.
+- `ScreenAspectRatio` + `SettingsManager.screenAspectRatio()`: uma preferência global, lida uma vez em `GameViewModelRetroGameView.initialize()`, que vai para `GLRetroViewData.targetAspectRatio`.
+- **`GLRetroView.targetAspectRatio` tem setter em runtime**, um `Delegates.observable` com `queueCoreEvent { LibretroDroid.setTargetAspectRatio(value) }`, que é fire-and-forget na GLThread. O nativo grava o campo e chama `video->updateTargetAspectRatio` se o `Video` existir. **Está no AAR que o app usa:** `javap -p` sobre o `classes.jar` de `libs/libretrodroid-patched.aar` lista `public final void setTargetAspectRatio(float)`. T5 não exige rebuild do AAR.
+- `queueCoreEvent` só roda o bloco se `coreWorkGuard.begin()`. O `markCreated` acontece no `GLRetroView.onCreate`, que dispara no `addObserver` de `createRetroView`, antes de `retroGameViewFlow` receber a view. Quem espera `retroGameViewFlow()` chega depois disso.
+- O jogo usa `windowLayoutInDisplayCutoutMode = shortEdges` (`LemuroidMaterialTheme.Game`), e o `gameView` só desconta o recorte de cima (`displayCutout.only(Top)`). Em paisagem, então, o jogo com overlay vai até debaixo do furo da câmera, como nos outros sistemas com overlay.
+- O TV não usa `MobileGameScreen`; só o `GameActivity` usa.
+
+**Hipóteses descartadas:**
+
+- **T5 (b), uma proporção por sistema com o 3DS em FILL**, descartada. Um valor só por sistema não atende T5 e T6 juntos. FILL em Top-Bottom com colunas é a deformação do print 2 (1,35× no moto, 1,90× no S20 FE), e AUTO não estica a tela única. A proporção certa depende do **layout** do core, não do sistema.
+- **FILL também em retrato**, descartado. Em retrato, a área de jogo do moto tem pelo menos 1220×1464, porque Top-Bottom em AUTO mediu 1220×732 só para a tela de cima. Esticar 400×240 nela achataria a imagem cerca de 2× na vertical. Em retrato, a tela única continua com a pref global, e o medido em AUTO foi 1220×732, 5:3.
+- **Calcular a proporção no ViewModel** (layout + orientação), descartado. A orientação só chega por `onScreenOrientationChanged`, chamado pelo `MobileGameScreen`. No TV ela ficaria no default `PORTRAIT`, e isso funcionaria por acidente. A decisão fica no `MobileGameScreen`, que tem `isLandscape` e o overlay juntos, e o TV fica de fora por construção.
+- **Observar a pref do Harmony por flow**, desnecessário: a releitura no RESUMED já acontece e já é o que muda o core.
+- **Tirar o recorte da câmera da área esticada**, como o Azahar standalone faz (1,27× no moto), não entra. Os outros sistemas com overlay desenham debaixo do recorte, e mudar isso é decisão à parte. **Consequência para a prova:** no moto, a área com overlay é 2712×1220 (2,223), o esticamento é 1,334× e **o logo do MK7 deve medir ~7,0, e não 6,7**. A conta é 5,27 × 2,223 / 1,667.
+- **Toque acidental no jogo debaixo dos controles:** na tela única de cima, o próprio core desliga o ponteiro (`emulated_pointer = false`, ver "T2: análise"). Toque fora dos pads não faz nada.
+
+**Decisão: T5 (a), generalizada pelo layout.** Quando a core variable de "tela única" do sistema está ativa e a tela está em paisagem, os controles ficam por cima do jogo e a imagem usa `TARGET_ASPECT_FILL`. Fora disso, vale o comportamento de hoje (`allowTouchOverlay` do config e a pref global). O conhecimento do 3DS fica num campo do `SystemCoreConfig`, sem `if (system == 3DS)` no código de tela. O mesmo campo serve ao DS (melonDS/DeSmuME) se um dia ele ganhar tela única.
+
+**O que fazer:**
+
+1. `SystemCoreConfig`: novo `singleScreenLayout: CoreVariable? = null`. No bloco 3DS do `GameSystem.kt`, `CoreVariable("citra_layout_option", "single_screen")`.
+2. `GameViewModelRetroGameView`:
+   - um `MutableStateFlow<Boolean>` de tela única, atualizado no `GameState.Loaded` (`gameData.coreVariables`) e em `updateCoreVariables(options)`, e exposto como `Flow`;
+   - guardar a pref global lida em `initialize()`;
+   - `suspend fun setStretchToFill(fill)`, que espera `retroGameViewFlow()` e grava `targetAspectRatio` = FILL ou a pref global.
+3. `BaseGameScreenViewModel`: delegar os dois, no padrão dos outros.
+4. `MobileGameScreen`:
+   - `overlay = config.allowTouchOverlay || telaÚnica` nos dois usos;
+   - `LaunchedEffect(isLandscape && telaÚnica) { setStretchToFill(...) }`.
+5. **Teste unitário** (`lemuroid-app/src/test`; `retrograde-app-shared` não tem source set de teste). Duas coisas:
+   - a regra pura de "variáveis → tela única";
+   - o `singleScreenLayout` do 3DS precisa ser um dos `ExposedSetting.Value` de `citra_layout_option`. Se alguém renomear a chave exposta, o teste quebra.
+6. **Prova no moto** (paisagem, MK7, pref global em `Automática`):
+   - em tela única, o jogo cobre x 0–2711 sob os pads, sem colunas, com o logo em ~7,0;
+   - em Superior — inferior, a imagem fica igual à de hoje (1017×610, x 0,310–0,685, como na "Tabela de geometria");
+   - trocar o layout pelo menu com o jogo aberto atualiza o overlay e a proporção nos dois sentidos;
+   - em retrato, a tela única continua 5:3;
+   - tocar no jogo fora dos pads, na tela única, não faz nada.
+
+### T4 + T5: implementação e validação (2026-11-12)
+
+**Feito no código** (branch `version10`), conforme a análise acima, sem desvio:
+
+- `SystemCoreConfig.singleScreenLayout: CoreVariable?` + `isSingleScreenLayout(variables)`. No 3DS: `CoreVariable("citra_layout_option", "single_screen")`.
+- `GameViewModelRetroGameView`:
+  - `singleScreenLayout` (`MutableStateFlow`), atualizado no `GameState.Loaded` e em `updateCoreVariables`;
+  - `userTargetAspectRatio`, gravado em `initialize()`;
+  - `isSingleScreenLayout()` e `setStretchToFill(fill)`.
+- `BaseGameScreenViewModel`: delega os dois.
+- `MobileGameScreen`:
+  - `allowTouchOverlay = config.allowTouchOverlay || singleScreenLayout` nos dois usos;
+  - `LaunchedEffect(isLandscape && singleScreenLayout) { setStretchToFill(...) }`.
+- `GameSystemSingleScreenTest` (4 testes) passa. Ele cobre a regra e confere que o valor do 3DS é um dos `ExposedSetting.Value` de `citra_layout_option`. Comando: `./gradlew :lemuroid-app:testFreeBundleDebugUnitTest --tests '*GameSystemSingleScreenTest'`.
+- O `ktlintCheck` completo passa. O baseline de `retrograde-app-shared` foi regenerado, e o diff só desloca as 5 entradas de `GameSystem.kt` em +4 linhas. O `lemuroid-app` não tinha nada a regenerar. `:lemuroid-app:assembleFreeBundleDebug` também passa.
+
+**Validado no moto g86** (APK debug `freeBundle` arm64, MK7 `play-game/id/1165`, pref global `Automática`, 20h02–20h10):
+
+- **O aparelho estava em Tela única**, não em Superior — inferior como dizia a passagem anterior: o log do boot mostrou `Updating core variable: citra_layout_option single_screen`. Assim, o caso "abrir o jogo já na tela única" ficou coberto de graça.
+- **Tela única em paisagem** (`single_limpo`): sem colunas, com os pads sobre o jogo e o logo atravessando a tela inteira (imagem 2712×1220).
+- **Esticamento medido** pela letra "O" do logo: `letra_o2.py`, com projeção de colunas e linhas acesas (lum > 45). A componente conexa não serve, porque as listras do carbono quebram a letra.
+
+| Captura | "O" | Razão |
+|---|---|---|
+| Superior — inferior, `Automática` (`tb_auto`) | 91×67 | 1,358 |
+| Tela única, paisagem (`single_limpo`, `single_via_menu`) | 243×133 | 1,827 |
+| Tela única, retrato (`single_retrato`) | 110×80 | 1,375 |
+
+  - Em paisagem, a tela única estica **1,345×** (1,827 ÷ 1,358). A análise previa 1,334×, a conta 2,223 ÷ 1,667. A escala é 2,0× na vertical (de 610 para 1220) e 2,67× na horizontal (de 1017 para 2712), ou seja, a área inteira. Isso equivale ao logo do MK7 em **~7,1**, como previsto (~7,0, desenhando sob o recorte).
+  - Em retrato, **não estica**: 1,375 contra 1,358, dentro de ±1 px.
+- **Troca pelo menu com o jogo aberto, nos dois sentidos:**
+  - Tela única → Superior — inferior dá `… default`. As colunas voltam, e a tela de cima fica 5:3 no meio, como antes;
+  - Superior — inferior → Tela única dá `… single_screen`. O overlay e o FILL voltam, e a medida é idêntica.
+- **Toque:** 3 toques numa área vazia do jogo, em (1356, 950), na tela única. A tela não mudou, o `:game` seguiu vivo e o buffer `crash` ficou vazio. **Prova fraca:** mostra só que nada visível aconteceu. A garantia real é o `emulated_pointer = false` do core.
+- **Receitas novas (paisagem, tela única com overlay):** o botão ☰ fica em **(2612, 628)**, com pressão longa (`input swipe 2612 628 2612 629 900`). O menu do jogo vai de x 125 a 2577. "Configurações" fica em (1760, 1175), "Layout das telas" em (1700, 360) e, no diálogo, Superior — inferior em y 525, Tela única em y 683 e Esquerda — direita em y 841, todos em x ≈ 1280.
+- **Atrapalhou:** um diálogo de ANR do WhatsApp Business estava em foco no aparelho; foi respondido com "Aguardar", e o app não foi fechado. Nenhum PIL nos Pythons da máquina: as medidas rodaram num venv descartável do scratchpad.
+- Capturas e script em `t45/` e `scripts/` do scratchpad `4b172a33…`.
+
+**Estado do aparelho:** o debug desta mudança está instalado, o MK7 está aberto em Tela única e a rotação foi devolvida com `cmd window user-rotation free`.
+
 ## Comparação T7 + T1 (registro de 2026-11-07)
 
 > **Estado (atualizado ~22h45):** T1, T5 e T7 medidos no moto (braços A1, B, A2, C e C2). Conclusão em "Conclusão de T7": trocar o core por desempenho, com GL obrigatório; imagem e layout não dependem do core. Antes disso (~21h): T7 só com o braço A1, conclusão provisória "manter o core". Abaixo, o estado anterior. Análise sem aparelho concluída. T1 medido em parte no moto: a deformação é a preferência `Esticar para preencher`, não o core (ver "Tabela de geometria"). O print 3 não foi reproduzido. Comparação de core (T7) e Azahar standalone (T5) **não feitas**. Nenhum código foi alterado. **Trocar ou manter o core ainda não está decidido.** A sessão de 2026-11-07 parou aqui e passou o bastão: a continuação está em "Próximo passo".
@@ -525,6 +611,19 @@ Fps do core por bloco de 180 quadros (`dist.py`, mesma janela do timestats): no 
 - O Azahar libretro reporta a mesma geometria e também não tem proporção própria (ver "Core Azahar").
 
 Logo, T2, T4, T5 e T9 valem para qualquer um dos dois cores. **Decisão provisória: manter o core** para o problema de imagem e layout. T7 decide só desempenho e crash. Se o Azahar GL não ganhar com folga em fps ou estabilidade, a troca custa a migração das chaves (tabela acima) e o risco do GL forçado sem ganho visível. **Fechar a decisão depois de B/A2/C.**
+
+## Próximo passo (passagem de bastão, 2026-11-12, depois da T4 + T5)
+
+**Feito: T4 + T5.** Ver "T4 + T5: análise" e "T4 + T5: implementação e validação". As provas pendentes da T7 continuam valendo: Adreno, corrida jogada e crash de shader.
+
+**Próxima: T6** (Top-Bottom e Side by Side sem deformação com `Esticar`). A especificação está em "Tasks abertas (2026-11-08)".
+
+- **O gancho já existe.** O `MobileGameScreen` decide a proporção num só ponto: `setStretchToFill(isLandscape && singleScreenLayout)`. Para a T6, o caso "sistema com `singleScreenLayout` e **fora** dele, com colunas" passaria a usar `TARGET_ASPECT_AUTO` em vez de `userTargetAspectRatio`. O jeito provável é trocar o `Boolean` por um modo de três valores: FILL, AUTO forçado ou pref global.
+- **Decidir na análise:**
+  - se a regra vale só com colunas (paisagem) ou também em retrato. Em retrato, Top-Bottom com `Esticar` achata 1,544 contra 1,667, conforme a "Tabela de geometria";
+  - se uma pref global diferente de `Esticar` (16:9, 4:3…) também deve ser ignorada no 3DS. Ela deforma do mesmo jeito.
+- **Prova:** logo do MK7 em 5,27, ou o "O" em ~1,36 pelo `letra_o2.py`, em Top-Bottom e Side by Side, com a pref global em `Esticar`. A pref fica em Ajustes ▸ Proporção da tela; **devolver para `Automática`** no fim.
+- **Primeiro passo exato:** reabrir `MobileGameScreen` (o bloco `singleScreenLayout`/`stretchToFill`) e `GameViewModelRetroGameView.setStretchToFill`, e gravar "T6: análise" neste doc antes de editar.
 
 ## Próximo passo (passagem de bastão, 2026-11-12, depois da T2)
 

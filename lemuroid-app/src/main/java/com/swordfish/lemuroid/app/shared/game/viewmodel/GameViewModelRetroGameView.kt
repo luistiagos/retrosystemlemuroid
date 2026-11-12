@@ -87,8 +87,27 @@ class GameViewModelRetroGameView(
     var fdsSideCount: Int? = null
         private set
 
+    // Layout de tela unica do core (SystemCoreConfig.singleScreenLayout). Muda com o jogo aberto
+    // quando o usuario troca o layout pelo menu: a volta do menu relê as variaveis no RESUMED.
+    private val singleScreenLayout = MutableStateFlow(false)
+
+    // A proporcao escolhida em Ajustes, para voltar a ela quando a tela unica deixa de esticar.
+    private var userTargetAspectRatio = ScreenAspectRatio.AUTO.targetAspectRatio
+
     fun getGameState(): Flow<GameState> {
         return gameState.debounce(200)
+    }
+
+    fun isSingleScreenLayout(): Flow<Boolean> = singleScreenLayout
+
+    /**
+     * Estica a imagem ate preencher a area de jogo, ou devolve a proporcao de Ajustes. Quem decide
+     * e a tela do celular, que conhece a orientacao: em retrato a area e alta e esticar achataria
+     * a imagem (ver docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
+     */
+    suspend fun setStretchToFill(fill: Boolean) {
+        val view = retroGameViewFlow()
+        view.targetAspectRatio = if (fill) GLRetroView.TARGET_ASPECT_FILL else userTargetAspectRatio
     }
 
     suspend fun initialize(
@@ -111,6 +130,7 @@ class GameViewModelRetroGameView(
         val directLoad = settingsManager.allowDirectGameLoad()
         val enableImmersiveMode = settingsManager.enableImmersiveMode()
         val screenAspectRatio = settingsManager.screenAspectRatio()
+        userTargetAspectRatio = screenAspectRatio.targetAspectRatio
 
         val hasMicrophonePermission =
             ContextCompat.checkSelfPermission(
@@ -192,6 +212,10 @@ class GameViewModelRetroGameView(
                         gameState.value =
                             if (loadingState is GameLoader.LoadingState.Ready) {
                                 Timber.i("Setting state to loaded")
+                                singleScreenLayout.value =
+                                    systemCoreConfig.isSingleScreenLayout(
+                                        loadingState.gameData.coreVariables.asIterable(),
+                                    )
                                 val retroViewData =
                                     buildRetroViewData(
                                         applicationContext,
@@ -442,6 +466,7 @@ class GameViewModelRetroGameView(
         }
 
         retroGameView?.updateVariables(*updatedVariables)
+        singleScreenLayout.value = systemCoreConfig.isSingleScreenLayout(options)
     }
 
     private fun handleRetroViewError(errorCode: Int) {

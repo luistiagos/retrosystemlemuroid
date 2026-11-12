@@ -1922,6 +1922,10 @@ data class GameSystem(
                             statesSupported = false,
                             supportsLibretroVFS = true,
                             supportedOnlyArchitectures = setOf("arm64-v8a"),
+                            // In landscape: controls over the game and the picture stretched to
+                            // fill, the owner's choice (2026-11-08). Must match the exposed value
+                            // above; GameSystemSingleScreenTest guards that.
+                            singleScreenLayout = CoreVariable("citra_layout_option", "single_screen"),
                         ),
                     ),
                     uniqueExtensions = listOf("3ds"),

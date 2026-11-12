@@ -91,6 +91,18 @@ fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
         val touchControllerSettings = touchControllerSettingsState.value
         val currentControllerConfig = controllerConfigState.value
 
+        // Tela unica (3DS so com a tela de cima): sem tela de baixo para tocar, as colunas
+        // laterais perdem o motivo. Os controles vao por cima do jogo e, em paisagem, a imagem
+        // estica ate preencher (decisao do dono, 2026-11-08). Em retrato fica a proporcao de
+        // Ajustes. Ver docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
+        val singleScreenLayout = viewModel.isSingleScreenLayout().collectAsState(false).value
+        val allowTouchOverlay = (currentControllerConfig?.allowTouchOverlay ?: true) || singleScreenLayout
+        val stretchToFill = isLandscape && singleScreenLayout
+
+        LaunchedEffect(stretchToFill) {
+            viewModel.setStretchToFill(stretchToFill)
+        }
+
         val tiltConfiguration = viewModel.getTiltConfiguration().collectAsState(TiltConfiguration.Disabled)
         val tiltSimulatedStates = viewModel.getSimulatedTiltEvents().collectAsState(InputState())
         val tiltSimulatedControls = remember { derivedStateOf { tiltConfiguration.value.controlIds() } }
@@ -162,10 +174,7 @@ fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
             ConstraintLayout(
                 modifier = Modifier.fillMaxSize(),
                 constraintSet =
-                    GameScreenLayout.buildConstraintSet(
-                        isLandscape,
-                        currentControllerConfig?.allowTouchOverlay ?: true,
-                    ),
+                    GameScreenLayout.buildConstraintSet(isLandscape, allowTouchOverlay),
             ) {
                 Box(
                     modifier =
@@ -186,7 +195,7 @@ fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
                             PadContainer(
                                 modifier = Modifier.layoutId(GameScreenLayout.CONSTRAINTS_BOTTOM_CONTAINER),
                             )
-                        } else if (!currentControllerConfig.allowTouchOverlay) {
+                        } else if (!allowTouchOverlay) {
                             PadContainer(
                                 modifier = Modifier.layoutId(GameScreenLayout.CONSTRAINTS_LEFT_CONTAINER),
                             )
