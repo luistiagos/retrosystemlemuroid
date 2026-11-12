@@ -1,7 +1,7 @@
 # [BACKLOG] 3DS: trocar o core pelo Azahar (OpenGL) e oferecer tela única esticada com controles sobre o jogo
 
 **Data:** 2026-11-08
-**Status:** em andamento. **T7 feita e publicada em 2026-11-12** (core Azahar 2126.2, tag `1.23.0`, migração de saves e prefs validada no moto). Faltam as provas em Adreno e de corrida jogada antes de um APK para clientes. T2–T6, T8 e T9 seguem abertas; a próxima é a T2. Passagem de bastão no bug doc, seção "Próximo passo (passagem de bastão, 2026-11-12)".
+**Status:** em andamento. **T7 feita e publicada em 2026-11-12** (core Azahar 2126.2, tag `1.23.0`, migração de saves e prefs validada no moto). Faltam as provas em Adreno e de corrida jogada antes de um APK para clientes. **T2 feita em 2026-11-12** ("Tela única" no menu; `large_screen` medido e não exposto). T3–T6, T8 e T9 seguem abertas; as próximas são T4 + T5. Passagem de bastão no bug doc, seção "Próximo passo (passagem de bastão, 2026-11-12, depois da T2)".
 **Origem:** chamado #330. Uma cliente com Galaxy S20 FE pediu reembolso porque o 3DS não tem tela única e a imagem sai deformada. Bug doc: [`docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`](../bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
 **Tipo:** correção + troca de core · **Esforço:** grande (8 tasks; T7 é Alta)
 
@@ -52,11 +52,11 @@ Especificação completa (o que entra, o que não entra, símbolos e prova) no b
 | # | Task | Complexidade | Depende de |
 |---|---|---|---|
 | T7 ✅ (2026-11-12) | Trocar o core pelo Azahar 2126.2. `citra_graphics_api=OpenGL` em `defaultSettings`, migrar as chaves e o `CoreCrashFallback`, publicar no `lemuroid-cores` (pitfall 15: commit, push, tag e `CORES_VERSION`) | Alta | — |
-| T2 | Expor `Single Screen Only` em `citra_layout_option`, com pt-BR | Baixa | T7 (mesmo bloco de `GameSystem.kt`) |
+| T2 ✅ (2026-11-12) | Expor `single_screen` em `citra_layout_option`, com pt-BR (`large_screen` medido e não exposto) | Baixa | T7 (mesmo bloco de `GameSystem.kt`) |
 | T4 | Controles sobre o jogo na tela única; os outros layouts mantêm as colunas | Média | — |
 | T5 | Tela única esticada sem bordas (FILL), sem mudar a proporção dos outros sistemas | Média | T2, T4 |
 | T6 | Top-Bottom e Side by Side sem deformação com `Esticar` | Média | T5 |
-| T3 | Botão de troca de tela, para jogos que exigem toque na tela de baixo. Conferir qual botão o Azahar usa | Média | T7 |
+| T3 | Botão de troca de tela, para jogos que exigem toque na tela de baixo. O Azahar usa L3 (`Toggle`); alternativa: `citra_swap_screen` no menu | Média | T7 |
 | T9 | Layout de toque como o do print: L/R nos cantos, direcional e analógico à esquerda, ABXY à direita, Select/Start no centro | Média | T4 |
 | T8 | Resolução 2x por padrão, se o Azahar sustentar ~55 fps | Baixa / Média | T7 |
 

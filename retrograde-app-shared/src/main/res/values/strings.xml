@@ -144,6 +144,7 @@
     <string name="value_melonds_mic_input_blow">Simulate blow sounds</string>
 
     <string name="value_citra_layout_option_topbottom">Top - Bottom</string>
+    <string name="value_citra_layout_option_singlescreen">Single screen</string>
     <string name="value_citra_layout_option_sidebyside">Left - Right</string>
 
     <string name="value_desmume_screens_layout_topbottom">Top - Bottom</string>

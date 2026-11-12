@@ -1884,6 +1884,16 @@ data class GameSystem(
                                                 "default",
                                                 R.string.value_citra_layout_option_topbottom,
                                             ),
+                                            // Top screen only. The core turns the touch screen
+                                            // off here (emulated_pointer = false), so it is an
+                                            // option, never the default. `large_screen` was
+                                            // measured and left out: between the pad columns it
+                                            // shrinks the top screen and leaves the bottom one
+                                            // as a thumbnail too small to touch.
+                                            ExposedSetting.Value(
+                                                "single_screen",
+                                                R.string.value_citra_layout_option_singlescreen,
+                                            ),
                                             ExposedSetting.Value(
                                                 "side_by_side",
                                                 R.string.value_citra_layout_option_sidebyside,

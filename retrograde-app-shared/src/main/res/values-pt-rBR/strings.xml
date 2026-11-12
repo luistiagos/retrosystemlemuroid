@@ -117,6 +117,7 @@
     <string name="value_melonds_mic_input_microphone">Microfone físico</string>
     <string name="value_melonds_mic_input_blow">Simular sons de sopro</string>
     <string name="value_citra_layout_option_topbottom">Superior — inferior</string>
+    <string name="value_citra_layout_option_singlescreen">Tela única</string>
     <string name="value_citra_layout_option_sidebyside">Esquerda — direita</string>
     <string name="value_desmume_screens_layout_topbottom">Superior — inferior</string>
     <string name="value_desmume_screens_layout_leftright">Esquerda — direita</string>

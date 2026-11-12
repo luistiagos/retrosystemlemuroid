@@ -1,7 +1,7 @@
 # [BUG] 3DS no celular: não dá para jogar em tela única, os controles ocupam colunas laterais e a imagem sai deformada
 
 - **Data:** 2026-11-07
-- **Status:** aberto. **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. T2–T6, T8 e T9 estão abertas; a próxima é a T2. Ver "Próximo passo (passagem de bastão, 2026-11-12)".
+- **Status:** aberto. **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. **T2 feita em 2026-11-12** (opção "Tela única" no menu, validada no moto). T3–T6, T8 e T9 estão abertas; as próximas são T4 + T5. Ver "Próximo passo (passagem de bastão, 2026-11-12, depois da T2)".
 - **Severidade:** Alta para 3DS. Levou uma cliente a pedir reembolso do pacote poucas horas depois da compra.
 - **Complexidade:** Média (uma opção de core é trivial; troca de tela, overlay e proporção por layout mexem em touch e na tela do jogo)
 - **Branch:** redesenho-tv-jogos-salvos-tela (onde foi investigado; a correção ainda não tem branch)
@@ -94,7 +94,7 @@ Tabela atualizada em 2026-11-07 ~22h45 com o que T1, T5 e T7 provaram. T1, T5 (m
 | # | Parte | Onde | Prova |
 |---|---|---|---|
 | T1 | ✅ **Feito.** Deformação = `Esticar` com colunas; core sem culpa. Print 3 sem gatilho (falta split screen e janela flutuante) | — | "Tabela de geometria" |
-| T2 | Expor `Single Screen Only` (avaliar `Large Screen, Small Screen`) com tradução pt-BR. **O core atual já aceita o valor** (400×240 medido via prefs), e o Azahar também (`GetLayoutOption`) | `GameSystem.kt`, `strings.xml` | Opção aparece e a tela muda em Mario Kart 7 |
+| T2 | ✅ **Feito em 2026-11-12** (`single_screen`; `large_screen` medido e não exposto). Expor `Single Screen Only` (avaliar `Large Screen, Small Screen`) com tradução pt-BR. **O core atual já aceita o valor** (400×240 medido via prefs), e o Azahar também (`GetLayoutOption`) | `GameSystem.kt`, `strings.xml` | Opção aparece e a tela muda em Mario Kart 7 |
 | T3 | Botão de troca de tela (L3) no layout de toque | `Nintendo3DS.kt` | Tela de baixo acessível e tocável; confirmar se o toque responde com a tela trocada |
 | T4 | Controles sobre o jogo em tela única; colunas só onde o toque na tela de baixo precisa da área livre | `allowTouchOverlay` hoje é fixo por `ControllerConfig`; precisa depender do layout | Print igual à imagem 1 e toque sem disparo acidental |
 | T5 | Tela única com o jogo ocupando a tela: **Single Screen + `Esticar`, com overlay (T4)** reproduz a imagem 1 (Stretch 1,27× no moto, 1,34× no S20 FE). `Automática` dá 5:3 sem distorção com barras laterais. **Dono (2026-11-08): esticado, sem bordas.** `ScreenAspectRatio` é global, então para o 3DS ter o seu é preciso preferência por sistema ou por layout | `ScreenAspectRatio`, `SettingsManager` | Logo do MK7 em ~6,7 (Stretch) ou 5,27 (sem distorção) no S20 FE, conforme a escolha, sem colunas |
@@ -272,6 +272,52 @@ Iniciada a pedido do dono ("continue o desenvolvimento desse backlog"). Registro
 - **Observação, fora da T7:** o Azahar abre com `citra_is_new_3ds = New 3DS` (o default dele) e `citra_language_value = English`. Ver se isso muda algo em relação ao core antigo.
 
 **Estado do aparelho:** `saves/Azahar` é a cópia migrada. `saves/Citra` está intacta. `saves/Azahar.bancada-2026-11-07` é a pasta da bancada de 07/11, desviada e não apagada. `saves/Azahar.controle-sem-save-2026-11-12` é o controle. O shell não consegue apagar arquivo criado pelo app, nem o `run-as` (SELinux), só renomear; apagar pelo app ou pelo gerenciador de arquivos. O app instalado é o debug desta mudança.
+
+### T2: análise (2026-11-12, antes da primeira edição)
+
+**Símbolos abertos:**
+
+- `GameSystem.kt`, bloco `SystemID.NINTENDO_3DS`: o `ExposedSetting("citra_layout_option")` tem só `default` e `side_by_side`, ambos com chave curta desde a T7. O comentário ali já avisa que a chave precisa ser um valor declarado pelo core.
+- `AzaharMigrationHandler.LAYOUT_VALUES` já converte `Single Screen Only` → `single_screen` e `Large Screen, Small Screen` → `large_screen`. Uma pref antiga com esses rótulos, gravada à mão na bancada de 07/11, chega certa. Nada a mudar ali.
+- Strings: `value_citra_layout_option_{topbottom,sidebyside}` em `retrograde-app-shared/src/main/res/values*/strings.xml` (22 locales). O `MissingTranslation` está desligado no lint (`lemuroid-app/build.gradle.kts:226`), então os locales sem a string nova caem no inglês. Entram `values` e `values-pt-rBR`, como a spec pede, e também `values-pt-rPT`, porque custa uma linha.
+
+**Fonte do Azahar 2126.2 lida** (`src/citra_libretro/emu_window/libretro_window.cpp::ComputeLayoutGeometry`, `citra_libretro.cpp`, `core_settings.cpp`, via `gh api …?ref=2126.2`):
+
+- `SingleScreen` sem troca: 400×240 × fator de resolução, e **`emulated_pointer = false`**. É o mesmo comportamento do core antigo: em tela única de cima, o toque na tela de baixo some.
+- `SingleScreen` com troca: 320×240, com toque.
+- `LargeScreen` sem troca: (400 + 320/4) × 240 = 480×240 (2,0:1), **com toque**. Abaixo do fator 4, o buffer é multiplicado por 4 (1920×960 a 1x) "para a proporção sair certa". A tela de baixo fica em miniatura.
+- **Para a T3:** a troca de tela no Azahar também é `RETRO_DEVICE_ID_JOYPAD_L3` ("Home/Swap screens"), no modo `citra_swap_screen_mode` (`Toggle`, o padrão, ou `Hold`). A tela inicial em destaque é a variável `citra_swap_screen` (`Top` ou `Bottom`). Um `ExposedSetting` de `citra_swap_screen` daria acesso à tela de baixo pelo menu, sem botão novo. Fica registrado como alternativa barata para a T3.
+
+**Decisão sobre `large_screen`:** expor no debug, medir no moto (imagem e fps contra `single_screen`) e só então decidir. A favor: mantém o toque e resolve parte da reclamação ("tela grande"). Contra: o buffer de 1920×960 a 1x e a tela de baixo minúscula. **Resultado:** não exposto. Ver "T2: implementação e validação".
+
+**O que fazer:**
+
+1. `GameSystem.kt`: um `ExposedSetting.Value("single_screen", R.string.value_citra_layout_option_singlescreen)` entre `default` e `side_by_side`. Mais `large_screen`, se a medida justificar.
+2. `strings.xml` (`values`, `values-pt-rBR` e `values-pt-rPT`): `value_citra_layout_option_singlescreen`, e `…_largescreen` se entrar.
+3. **Prova:** com o jogo aberto, o menu mostra a opção. Ao escolhê-la, o logcat mostra `Updating core variable: citra_layout_option single_screen`, e a captura mostra só a tela de cima.
+
+### T2: implementação e validação (2026-11-12)
+
+**Feito no código** (branch `version10`):
+
+- `GameSystem.kt`: `ExposedSetting.Value("single_screen", R.string.value_citra_layout_option_singlescreen)` entre `default` e `side_by_side`.
+- `value_citra_layout_option_singlescreen`: "Single screen" (`values`), "Tela única" (`values-pt-rBR`), "Ecrã único" (`values-pt-rPT`).
+- O baseline do ktlint de `retrograde-app-shared` foi regenerado: as 5 entradas de `GameSystem.kt` só se deslocaram +10 linhas. O `./gradlew ktlintCheck` completo passa, e o `:lemuroid-app:assembleFreeBundleDebug` também.
+
+**Validado no moto g86** (APK debug `freeBundle` arm64, MK7 `play-game/id/1165`, paisagem, 19h10–19h25):
+
+- O menu do jogo mostra "Superior — inferior", "Tela única" e "Esquerda — direita" (`uiautomator dump`).
+- Escolher Tela única com o jogo aberto dá `Updating core variable: citra_layout_option single_screen`. A imagem passa na hora para só a tela de cima, em 5:3, na coluna entre os pads. Voltar dá `… default`.
+- **Desempenho (VIDEOFRAMES, 60 s no demo de corrida):** tela única 57,1 fps, com o pior bloco de 180 quadros a 34,3. 0 crash, e o `:game` ficou vivo.
+- O aparelho ficou em Superior — inferior.
+
+**`large_screen`: medido e não exposto.**
+
+- Funciona (`… large_screen`, 58,5 fps, pior bloco 44,9). Mas, entre as colunas, a tela de cima sai **menor** que na tela única: 336 contra 404 px de largura na captura reduzida a 35%.
+- A tela de baixo vira uma miniatura de ~190×143 px no canto inferior direito, pequena demais para o toque.
+- Depois da T4 (controles sobre o jogo), essa miniatura ficaria embaixo do ABXY.
+- Se o dono quiser, basta voltar com o valor `large_screen`. O core aceita, e `AzaharMigrationHandler` já converte o rótulo antigo.
+- Capturas: `t2_single_jogo`, `t2_large` e `t2_final_single` em `shots/` do scratchpad `d631b5c2…`.
 
 ## Comparação T7 + T1 (registro de 2026-11-07)
 
@@ -479,6 +525,23 @@ Fps do core por bloco de 180 quadros (`dist.py`, mesma janela do timestats): no 
 - O Azahar libretro reporta a mesma geometria e também não tem proporção própria (ver "Core Azahar").
 
 Logo, T2, T4, T5 e T9 valem para qualquer um dos dois cores. **Decisão provisória: manter o core** para o problema de imagem e layout. T7 decide só desempenho e crash. Se o Azahar GL não ganhar com folga em fps ou estabilidade, a troca custa a migração das chaves (tabela acima) e o risco do GL forçado sem ganho visível. **Fechar a decisão depois de B/A2/C.**
+
+## Próximo passo (passagem de bastão, 2026-11-12, depois da T2)
+
+**Feito: T2.** Ver "T2: análise" e "T2: implementação e validação". As provas pendentes da T7 (seção abaixo) continuam valendo.
+
+**Próximas: T4 + T5, juntas** (overlay e FILL na tela única). Especificação em "Tasks abertas (2026-11-08)".
+
+- O valor do layout que o código precisa testar é a pref `cv_3ds_citra_layout_option == "single_screen"`. Ela é lida por `CoreVariablesManager`, e o jogo troca de layout com o jogo aberto pelo menu.
+- Hoje, a tela única sai 5:3 na coluna central entre os pads (captura `t2_single_jogo`). T4 tira as colunas, e T5 estica.
+- **Para a T3**, já lido no fonte do Azahar 2126.2: a troca é L3 (`Toggle` por padrão), e existe `citra_swap_screen` (`Top`/`Bottom`) como alternativa pelo menu. Ver "T2: análise".
+- **Receitas no moto (paisagem):**
+  - menu: pressão longa em (2349, 629);
+  - Configurações: (1760, 1175);
+  - Layout das telas: (1760, 300);
+  - opções a partir de y ≈ 525 (Superior — inferior), 683 (Tela única) e 841 (Esquerda — direita). Elas mudam de altura conforme o diálogo; confirmar com `uiautomator dump`;
+  - `vf60.sh <tag>`, no scratchpad `d631b5c2…`, mede 60 s de VIDEOFRAMES.
+- **Aparelho:** o debug da T2 está instalado, em Superior — inferior. O adb sem fio voltou pelo pareamento em 192.168.18.112; a porta de conexão muda (`adb mdns services`).
 
 ## Próximo passo (passagem de bastão, 2026-11-12)
 
