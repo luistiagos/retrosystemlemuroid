@@ -543,6 +543,17 @@ Logo, T2, T4, T5 e T9 valem para qualquer um dos dois cores. **Decisão provisó
   - `vf60.sh <tag>`, no scratchpad `d631b5c2…`, mede 60 s de VIDEOFRAMES.
 - **Aparelho:** o debug da T2 está instalado, em Superior — inferior. O adb sem fio voltou pelo pareamento em 192.168.18.112; a porta de conexão muda (`adb mdns services`).
 
+**Primeiro passo exato da próxima sessão (etapa analítica da T4 + T5; nada aberto ainda nesta sessão):**
+
+1. Abrir de novo os símbolos citados na spec de 2026-11-08: `ControllerConfigs.NINTENDO_3DS` (`allowTouchOverlay`), `GameScreenLayout.buildConstraintSet` / `buildConstraintSetLandscapeNoOverlay`, `ScreenAspectRatio` e `SettingsManager.screenAspectRatio`.
+2. Descobrir pelo call-site, e não pelo nome:
+   - como a troca de uma core variable pelo menu chega ao processo `:game`, que já loga `Updating core variable` em `GameViewModelRetroGameView`;
+   - onde a tela do jogo poderia observar `citra_layout_option` para trocar o ConstraintSet e o modo de proporção sem reabrir o jogo.
+3. Decidir entre T5 (a), FILL forçado só na tela única, e (b), proporção por sistema, que também serve à T6. Gravar a análise numa seção "T4 + T5: análise" deste doc **antes** da primeira edição.
+4. Prova: as capturas no moto (receitas acima). Logo do MK7 em ~6,7 na tela única, sem colunas; Superior — inferior igual a hoje.
+
+**Fora deste trabalho, no índice do git:** `lemuroid-app/build.gradle.kts` (versão 1.17.30 / 261), `.claude/settings.json` e `docs/bugs/open/2026-11-12-3ds-super-mario-3d-land-sem-som-s20fe.md` estão staged por outra sessão. Não commitar junto. Usar `git commit -- <caminhos>`.
+
 ## Próximo passo (passagem de bastão, 2026-11-12)
 
 **Feito nesta sessão: a T7 inteira**, menos as provas que dependem de outro aparelho ou de uma pessoa jogando.
