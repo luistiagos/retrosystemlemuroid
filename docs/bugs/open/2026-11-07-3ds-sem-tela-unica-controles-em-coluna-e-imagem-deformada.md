@@ -1,7 +1,7 @@
 # [BUG] 3DS no celular: não dá para jogar em tela única, os controles ocupam colunas laterais e a imagem sai deformada
 
 - **Data:** 2026-11-07
-- **Status:** aberto. T1, T5 e T7 medidos no moto g86 (Mali), sem alterar código. Deformação reproduzida: é `Esticar para preencher` com colunas. A imagem esperada é Single Screen + Stretch com overlay. O Azahar em OpenGL roda o MK7 a ~57 fps contra ~43 do core atual. Dono decidiu em 2026-11-08: tela única esticada sem bordas, troca para o core Azahar (GL) e sem Vulkan. Tasks T2–T9 **abertas e não iniciadas**, especificadas em "Tasks abertas (2026-11-08)".
+- **Status:** aberto. **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. T2–T6, T8 e T9 estão abertas; a próxima é a T2. Ver "Próximo passo (passagem de bastão, 2026-11-12)".
 - **Severidade:** Alta para 3DS. Levou uma cliente a pedir reembolso do pacote poucas horas depois da compra.
 - **Complexidade:** Média (uma opção de core é trivial; troca de tela, overlay e proporção por layout mexem em touch e na tela do jogo)
 - **Branch:** redesenho-tv-jogos-salvos-tela (onde foi investigado; a correção ainda não tem branch)
@@ -189,6 +189,89 @@ Depois de publicar, avisar o bug do agente no digitalstoregames: `docs/modules/c
 
 - **Entra:** medir o Azahar GL em 2x no moto e num Adreno com `braco.sh`. Se ficar em ≥ ~55 fps no demo do MK7, fixar o padrão em `defaultSettings`, talvez por faixa de aparelho.
 - **Prova:** captura 1x × 2x da mesma cena e fps.
+
+### T7: análise de implementação (2026-11-12)
+
+Iniciada a pedido do dono ("continue o desenvolvimento desse backlog"). Registro feito antes da primeira edição de código.
+
+**Binário.** O `azahar_libretro.so` sai de `azahar-libretro-android-arm64-v8a-2126.2.zip` (`gh release download 2126.2 -R azahar-emu/azahar`). Tem 38.173.520 bytes, SHA-256 `c2d1e341…6c226`, **sem patch**. O `.so` de bancada (`azahar-2126.2-gl2.so`) difere dele em 14 bytes (`cmp -l | wc -l`), que são o patch da string e o do `MOVZ`. O core atual tem SHA-256 `a733a6db…` e está idêntico em `lemuroid-cores/bundled-cores/.../arm64-v8a/` e em `lemuroid-cores/lemuroid_core_citra/.../arm64-v8a/`. As outras ABIs têm arquivo vazio ou texto de symlink e não mudam.
+
+**Fonte do Azahar lida** (`src/citra_libretro/{core_settings,environment,citra_libretro}.cpp` na tag 2126.2, via `gh api`):
+
+- `ParseStorageOptions`: com `citra_use_libretro_save_path = "LibRetro Default"` (o padrão), a pasta de usuário é **`<saveDir>/Azahar/`**. O core atual usa `<saveDir>/Citra/`: a string `Citra/` e o mesmo `No save dir provided` aparecem no `.so`. **Sem migração, todo o progresso some.** Não é apagado, mas fica numa pasta que o Azahar não lê.
+- No moto, as duas árvores têm a mesma estrutura: `sdmc/Nintendo 3DS/…/title/00040000`, `nand/data/…/{sysdata,extdata}`, `sysdata`, `cheats` e `shaders/opengl/…`. Comando: `adb shell find saves/{Citra,Azahar} -maxdepth 6 -type d`. Copiar `Citra/` para `Azahar/` deve bastar. **Falta provar** com um save do core atual carregado no Azahar.
+- `RegisterCoreOptions`: o LibretroDroid só trata `SET_VARIABLES` (v0). Nesse caminho o core declara as **chaves curtas** como valores: `citra_layout_option` = `default|single_screen|large_screen|side_by_side` e `citra_resolution_factor` = `1|2|3`. Os booleanos ficam `enabled|disabled`.
+- `GetLayoutOption` aceita também os rótulos antigos (`Side by Side`, `Single Screen Only`…). `GetGraphicsAPI` só reconhece `OpenGL` com essa grafia, e qualquer outra coisa vira `GetPreferredRenderer()` (Vulkan).
+- `citra_resolution_factor`: `std::stoi`. O default declarado é `disabled`, que não está na lista; no v0 o core cai no índice 0 (`1`). Vamos fixar `1` em `defaultSettings`.
+
+**App, símbolos abertos:**
+
+- `LemuroidCoreOption.getCorrectExposedSettings` filtra os `ExposedSetting.Value` por `key in coreOption.optionValues`, os valores que o **core** declara. Hoje as chaves são `Default Top-Bottom Screen` e `Side by Side`. Com o Azahar, nenhuma bate, a lista fica vazia e o `GameMenuCoreOptionsScreen` dá `continue` (`if (entriesValues.isEmpty())`): **o layout sumiria do menu**. As chaves passam a `default` e `side_by_side`.
+- `CoreVariablesManager.retrieveCustomCoreVariables` repassa só as chaves expostas, lidas das prefs Harmony com o prefixo `cv_3ds_`. Os valores são `Boolean` (vira `enabled`/`disabled`) ou `String` (vai direto). Renomear uma chave exposta faz a pref antiga ser **ignorada**. Isso inclui o `cv_3ds_citra_use_hw_shaders=false` que o `CoreCrashFallback` grava depois de um crash: sem migração, quem já caiu voltaria aos shaders por hardware.
+- O core antigo declara `citra_resolution_factor` como `1x (Native)|2x|…`, então uma pref antiga pode ter `2x`. O `stoi` do Azahar leria `2`, mas o menu não acharia o valor na lista.
+- `GameLoader.load` monta `coreVariables` e `savesDirectory` (`DirectoriesManager.getSavesDirectory()` = `<externalFiles>/saves`) antes do core existir. É o ponto para migrar prefs e pasta. O molde é o `DesmumeMigrationHandler`, injetado no `GameLoader` por `LemuroidApplicationModule.gameLoader`. Os `SavesMigrator` existentes não servem: lidam com SRAM em `ByteArray`, e o 3DS guarda uma árvore de pastas.
+- `CoreCrashFallback.CITRA_HW_SHADERS` passa a `citra_use_hw_shader`.
+
+**O que fazer (T7, código):**
+
+1. `lemuroid-cores`: trocar os dois `arm64-v8a/libcitra_libretro_android.so` pelo `.so` oficial. O nome do arquivo e o `CoreID.CITRA` ficam iguais. O nome exibido passa a "Azahar", para a telemetria separar crash do core novo do antigo.
+2. `GameSystem.kt`, bloco 3DS, `defaultSettings`: `citra_graphics_api=OpenGL`, `citra_use_libretro_save_path=LibRetro Default` (a migração depende dele), `citra_resolution_factor=1`, `citra_shaders_accurate_mul=disabled`, `citra_use_disk_shader_cache=disabled`, `citra_enable_touch_touchscreen=enabled`, `citra_enable_mouse_touchscreen=disabled` e `citra_use_hw_shader=enabled`. **Sai** `citra_render_touchscreen`.
+3. `GameSystem.kt`, `exposedSettings`: os valores do layout com chaves curtas; `citra_use_acc_mul` → `citra_shaders_accurate_mul`; `citra_use_hw_shaders` → `citra_use_hw_shader`. Os ids de string ficam (evita mexer em ~20 locales).
+4. Novo `lib/migration/AzaharMigrationHandler.kt`, chamado no `GameLoader.load` só quando `coreID == CITRA` e antes de ler as variáveis. Em erro, loga e segue: a migração nunca impede o jogo de abrir.
+   - **Prefs:** renomear `cv_3ds_citra_use_hw_shaders` → `…use_hw_shader` e `cv_3ds_citra_use_acc_mul` → `…shaders_accurate_mul` (só se a nova não existir). Converter os valores de `cv_3ds_citra_layout_option` para as chaves curtas. Converter `cv_3ds_citra_resolution_factor` pelo número inicial, limitado a 1–3. É idempotente.
+   - **Pasta:** se `saves/Azahar` não existe e `saves/Citra` existe, copiar para `saves/Azahar.migrating` (sem `shaders/`, que são cache do outro core) e renomear para `Azahar`. Uma `Azahar.migrating` que sobrou de cópia interrompida é apagada e refeita. `Citra/` fica intacta, como backup e para um eventual rollback.
+5. `CoreCrashFallback`: a constante e o KDoc.
+6. Publicar no `lemuroid-cores` (pitfall 15: commit, push, tag `1.23.0` e `CORES_VERSION`). **Push e tag só depois da validação no aparelho.**
+
+**Prova (no moto):** apagar ou desviar o `saves/Azahar` da bancada. Instalar o debug. O MK7 abre com o save de antes (sem tela de "criar dados") e o log mostra `Using OpenGL hw renderer`. O menu mostra o layout e a resolução. As prefs antigas aparecem migradas no `harmony_options`.
+
+### T7: implementação e validação (2026-11-12)
+
+**Feito no código** (branch `version10`, commitado e enviado em 2026-11-12):
+
+- `lemuroid-cores`: os dois `arm64-v8a/libcitra_libretro_android.so` foram trocados pelo `.so` oficial 2126.2 (`c2d1e341…`). O APK debug leva esse hash (`unzip -p … | sha256sum`). **Publicado:** commit `478fc91` no `lemuroid-cores` (main, enviado), tag `1.23.0` e `CoreDownloader.CORES_VERSION = "1.23.0"`. A URL de fallback `raw.githubusercontent.com/luistiagos/libretrocores/1.23.0/lemuroid_core_citra/…/arm64-v8a/libcitra_libretro_android.so` responde 200 com 38.173.520 bytes. `verifyBundledCores` e `verifyCoresPublished` passam.
+- `GameSystem.kt` (bloco 3DS): `defaultSettings` e `exposedSettings` migrados conforme a análise acima.
+- `CoreID.CITRA`: o nome exibido passou a "Azahar".
+- `CoreCrashFallback.CITRA_HW_SHADERS` = `citra_use_hw_shader`.
+- `lib/migration/AzaharMigrationHandler.kt` (novo), chamado em `GameLoader.load` quando `coreID == CITRA` e injetado por `LemuroidApplicationModule.azaharMigrationHandler`.
+- `AzaharMigrationHandlerTest` (9 testes) passa: `./gradlew :lemuroid-app:testFreeBundleDebugUnitTest --tests '*AzaharMigrationHandlerTest'`. O `ktlintCheck` completo também passa.
+- Os baselines do ktlint (`lemuroid-app` e `retrograde-app-shared`) foram regenerados. O diff só desloca linhas: 37 por 37. Ele inclui o passivo do `ManifestQuickLoader.kt`, que **já estava vermelho desde `eefa700`**: 3 linhas de comentário deslocaram as 15 entradas em +3. Não há violação nova ali.
+
+**Correção da análise:** a resolução do Azahar 2126.2 no aparelho é `1|2|…|18`, conforme `printRetroVariables`. A tabela da fonte que eu tinha lido parava em 3. A migração limita a 10, o máximo do core antigo.
+
+**Validado no moto g86** (APK debug `freeBundle` arm64, MK7 `play-game/id/1165`):
+
+- **Saves migrados e lidos.** `Azahar migration: copied …/saves/Citra to …/saves/Azahar` no logcat, e o core usa a pasta: `SetUserPath: Using …/saves/Azahar/ as the user directory`. O md5 dos saves (`00030700/system4.dat`, `system5.dat`, extdata `F000000B`) ficou igual em `Citra/` e `Azahar/` depois de o jogo passar do diálogo de Mii. **Controle:** com `Citra/` e `Azahar/` desviadas, o MK7 cria `system0.dat`/`system1.dat` do zero. Portanto, com a pasta migrada, ele leu o save existente em vez de criar outro.
+- `Using OpenGL hw renderer`, com as 8 variáveis do `defaultSettings` em `Updating core variable`.
+- `printRetroVariables`: `citra_layout_option = default; default|single_screen|large_screen|side_by_side`, as chaves que o `GameSystem.kt` expõe agora.
+- O MK7 abre e chega ao mesmo diálogo de Mii do core antigo.
+
+- **Menu do jogo** (16h47, depois do desbloqueio): Configurações mostra "Layout das telas: Superior — inferior", "Escala da resolução: 1", "Multiplicação precisa das sombras" desligado e "Shaders por hardware" ligado.
+  - Trocar o layout para "Esquerda — direita" com o jogo aberto dá `Updating core variable: citra_layout_option side_by_side`, e a imagem muda na hora.
+  - Voltar para "Superior — inferior" dá `… default`. O aparelho ficou no padrão, agora gravado explicitamente como `default`.
+  - **Receitas:** o botão de menu do overlay só abre com pressão longa (`input swipe 886 2226 886 2227 700`, em retrato). A tecla Voltar **fecha** o jogo de 3DS, e não abre o menu.
+
+- **Desempenho com o APK de verdade** (`braco.sh`, MK7, 16h57). Braço `T7-apk-real2`, em `t7/` do scratchpad `d631b5c2…`:
+
+| Braço | fps apresentação (SF) | fps core (`VIDEOFRAMES`) | Quadros > 20 ms | > 34 ms | Crash | Imagem |
+|---|---|---|---|---|---|---|
+| **T7-apk-real2** (APK debug desta mudança) | **59,8** (12.334 quadros, 0 descartados) | **57,1** médio; pior bloco 26,6 | **1,0%** | 0,4% | 0, `:game` vivo | demo de corrida aos 2 e aos 5 min |
+| B (07/11, `.so` patchado, sem as chaves novas) | 57,2 | 54,1; pior bloco 16,2 | 1,2% | 0,5% | 0 | demo e menu |
+| A2 (07/11, core antigo) | 41,7 | 40,6 | 7,8% | 5,7% | 0 | transição e demo |
+
+  O ganho sobre o B é coerente com `citra_shaders_accurate_mul=disabled`: no B, o core rodou com o default dele, `enabled`.
+
+  - **Rodada descartada (`T7-apk-real`, 16h49):** 62,5 fps com 0% de quadros lentos, mas as duas capturas mostram o diálogo de Mii parado. É a mesma armadilha do A1 inválido.
+  - **Causa:** as coordenadas do A/B do `braco.sh` (2457,486 / 2310,640) não batem mais com o overlay atual. Em paisagem no moto, A fica em **(2320, 363)** e B em **(2191, 486)**. A cópia corrigida está em `braco2.sh`, no scratchpad desta sessão (`34a66c2b…`).
+  - **Lição:** sempre conferir a captura antes de aceitar o fps.
+
+**Pendente:**
+
+- A migração das prefs no aparelho. Editar o `prefs.data` do Harmony à mão é arriscado por causa do log de transação, então a cobertura é só pelos testes unitários.
+- Riscos de publicação: Adreno, corrida jogada e o crash de shader de `2026-09-02-crashes-nativos-cores-citra-dolphin.md`.
+- **Observação, fora da T7:** o Azahar abre com `citra_is_new_3ds = New 3DS` (o default dele) e `citra_language_value = English`. Ver se isso muda algo em relação ao core antigo.
+
+**Estado do aparelho:** `saves/Azahar` é a cópia migrada. `saves/Citra` está intacta. `saves/Azahar.bancada-2026-11-07` é a pasta da bancada de 07/11, desviada e não apagada. `saves/Azahar.controle-sem-save-2026-11-12` é o controle. O shell não consegue apagar arquivo criado pelo app, nem o `run-as` (SELinux), só renomear; apagar pelo app ou pelo gerenciador de arquivos. O app instalado é o debug desta mudança.
 
 ## Comparação T7 + T1 (registro de 2026-11-07)
 
@@ -396,6 +479,41 @@ Fps do core por bloco de 180 quadros (`dist.py`, mesma janela do timestats): no 
 - O Azahar libretro reporta a mesma geometria e também não tem proporção própria (ver "Core Azahar").
 
 Logo, T2, T4, T5 e T9 valem para qualquer um dos dois cores. **Decisão provisória: manter o core** para o problema de imagem e layout. T7 decide só desempenho e crash. Se o Azahar GL não ganhar com folga em fps ou estabilidade, a troca custa a migração das chaves (tabela acima) e o risco do GL forçado sem ganho visível. **Fechar a decisão depois de B/A2/C.**
+
+## Próximo passo (passagem de bastão, 2026-11-12)
+
+**Feito nesta sessão: a T7 inteira**, menos as provas que dependem de outro aparelho ou de uma pessoa jogando.
+
+- A análise e a validação estão em "T7: análise de implementação" e "T7: implementação e validação".
+- Core publicado (`lemuroid-cores` `478fc91`, tag `1.23.0`).
+- App no `version10`: `GameSystem.kt`, `CoreID.kt`, `CoreCrashFallback.kt`, `GameLoader.kt`, `LemuroidApplicationModule.kt` e `CoreDownloader.CORES_VERSION`.
+- Novo `lib/migration/AzaharMigrationHandler.kt`, com o teste `AzaharMigrationHandlerTest`.
+- Baselines do ktlint regenerados. CLAUDE.md ganhou o pitfall 18.
+
+**Provas da T7 que ainda faltam.** Elas bloqueiam pôr esta mudança num APK para clientes, não o resto do trabalho.
+
+1. **Adreno.** Repetir o `braco2.sh` (coordenadas corrigidas, scratchpad `34a66c2b…`) num Snapdragon: o S20 FE da cliente ou equivalente. Num aparelho novo, as coordenadas do A/B mudam; tirar da captura em paisagem.
+2. **Corrida jogada** no MK7 e a primeira fase do SM3DL, jogadas por uma pessoa.
+3. **Crash de shader** de `2026-09-02-crashes-nativos-cores-citra-dolphin.md`: ver se a família ainda aparece com o Azahar. Isso exige telemetria depois de um build para testadores.
+4. Ver se `citra_is_new_3ds = New 3DS` (default do Azahar) e `citra_language_value = English` mudam algo em relação ao core antigo. Candidato a fixar em `defaultSettings`.
+5. **Bug irmão** `2026-11-12-3ds-super-mario-3d-land-sem-som-s20fe.md`: o som vinha do core antigo. Com o Azahar, o caminho de áudio é outro (`citra_audio_emulation = hle`). Vale pedir à cliente que reteste quando houver build.
+
+**Próxima task: T2** (expor `Single Screen Only`). Especificação em "Tasks abertas (2026-11-08)".
+
+- Agora o `ExposedSetting.Value` precisa da **chave curta `single_screen`**, e não de `"Single Screen Only"` (pitfall 18, regra 3).
+- Entram as strings `value_citra_layout_option_*` em `strings.xml` e `values-pt-rBR/strings.xml`, ambos em `retrograde-app-shared/src/main/res/`.
+- Prova: com o jogo aberto, o menu troca para tela única e o logcat mostra `Updating core variable: citra_layout_option single_screen`.
+- Receitas do menu no moto: pressão longa no botão do overlay; a tecla Voltar fecha o jogo.
+- Depois vêm T4 + T5 (overlay e FILL na tela única), conforme a ordem sugerida.
+
+**Estado do aparelho (moto g86, adb wireless; o IP muda, achar com `adb mdns services`):**
+
+- Instalado o APK debug desta mudança.
+- Em `saves/`: `Azahar` (migrada), `Citra` (intacta), `Azahar.bancada-2026-11-07` e `Azahar.controle-sem-save-2026-11-12`. As duas últimas só foram renomeadas, porque o shell não apaga arquivo criado pelo app.
+- `cv_3ds_citra_layout_option = default` gravado pelo teste do menu.
+- Rotação livre.
+
+**Para a próxima sessão:** ler esta seção e "Tasks abertas (2026-11-08)" deste doc. Não é preciso reler a análise da T7.
 
 ## Próximo passo (passagem de bastão, 2026-11-07 ~22h45)
 

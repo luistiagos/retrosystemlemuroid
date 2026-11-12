@@ -29,6 +29,7 @@ import com.swordfish.lemuroid.lib.library.LemuroidLibrary
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.lib.migration.AzaharMigrationHandler
 import com.swordfish.lemuroid.lib.migration.DesmumeMigrationHandler
 import com.swordfish.lemuroid.lib.saves.SaveState
 import com.swordfish.lemuroid.lib.saves.SaveStateCompatibility
@@ -56,6 +57,7 @@ class GameLoader(
     private val directoriesManager: DirectoriesManager,
     private val biosManager: BiosManager,
     private val desmumeMigrationHandler: DesmumeMigrationHandler,
+    private val azaharMigrationHandler: AzaharMigrationHandler,
 ) {
     sealed class LoadingState {
         object LoadingCore : LoadingState()
@@ -102,6 +104,12 @@ class GameLoader(
                     SaveStateCompatibility(systemCoreConfig.statesVersion, requiresCoreMatch, coreSha256)
 
                 emit(LoadingState.LoadingGame)
+
+                // Before the core variables are read below and before the core sees the saves
+                // dir: Azahar uses other option keys and <saves>/Azahar instead of <saves>/Citra.
+                if (systemCoreConfig.coreID == CoreID.CITRA) {
+                    withContext(Dispatchers.IO) { azaharMigrationHandler.migrate() }
+                }
 
                 // Run independent I/O tasks in parallel to reduce total wall-clock time
                 // on weak devices. Only quickSaveData depends on saveRAM (timestamp), so

@@ -63,6 +63,7 @@ import com.swordfish.lemuroid.lib.library.catalog.CatalogCoverProvider
 import com.swordfish.lemuroid.lib.library.catalog.ManifestQuickLoader
 import com.swordfish.lemuroid.lib.library.metadata.CatalogFallbackMetadataProvider
 import com.swordfish.lemuroid.lib.library.metadata.GameMetadataProvider
+import com.swordfish.lemuroid.lib.migration.AzaharMigrationHandler
 import com.swordfish.lemuroid.lib.migration.DesmumeMigrationHandler
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.saves.SavesCoherencyEngine
@@ -421,6 +422,7 @@ abstract class LemuroidApplicationModule {
             directoriesManager: DirectoriesManager,
             biosManager: BiosManager,
             desmumeMigrationHandler: DesmumeMigrationHandler,
+            azaharMigrationHandler: AzaharMigrationHandler,
         ) = GameLoader(
             lemuroidLibrary,
             statesManager,
@@ -431,6 +433,7 @@ abstract class LemuroidApplicationModule {
             directoriesManager,
             biosManager,
             desmumeMigrationHandler,
+            azaharMigrationHandler,
         )
 
         @Provides
@@ -485,6 +488,14 @@ abstract class LemuroidApplicationModule {
         @JvmStatic
         fun desmumeMigrationHandler(directoriesManager: DirectoriesManager) =
             DesmumeMigrationHandler(directoriesManager)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun azaharMigrationHandler(
+            directoriesManager: DirectoriesManager,
+            sharedPreferences: Lazy<SharedPreferences>,
+        ) = AzaharMigrationHandler(directoriesManager, sharedPreferences)
 
         @Provides
         @PerApp

@@ -1850,16 +1850,27 @@ data class GameSystem(
                                 ),
                             defaultSettings =
                                 listOf(
-                                    CoreVariable("citra_use_acc_mul", "disabled"),
-                                    CoreVariable("citra_touch_touchscreen", "enabled"),
-                                    CoreVariable("citra_mouse_touchscreen", "disabled"),
-                                    CoreVariable("citra_render_touchscreen", "disabled"),
-                                    CoreVariable("citra_use_hw_shader_cache", "disabled"),
+                                    // The core is Azahar (CoreID.CITRA kept its name and file).
+                                    // On Android it picks Vulkan unless told otherwise, and
+                                    // LibretroDroid only speaks GLES: without this key the core
+                                    // dies in context_reset. Never expose it. See
+                                    // docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
+                                    CoreVariable("citra_graphics_api", "OpenGL"),
+                                    // User dir = <saves>/Azahar/. AzaharMigrationHandler copies the
+                                    // old core's <saves>/Citra/ there, so this must stay pinned.
+                                    CoreVariable("citra_use_libretro_save_path", "LibRetro Default"),
+                                    // The core declares "disabled" as default, which is not one of
+                                    // its values; spelled out so std::stoi always gets a number.
+                                    CoreVariable("citra_resolution_factor", "1"),
+                                    CoreVariable("citra_shaders_accurate_mul", "disabled"),
+                                    CoreVariable("citra_enable_touch_touchscreen", "enabled"),
+                                    CoreVariable("citra_enable_mouse_touchscreen", "disabled"),
+                                    CoreVariable("citra_use_disk_shader_cache", "disabled"),
                                     // Same as the core's own default. Spelled out because it is the
-                                    // knob CoreCrashFallback flips after citra aborts on a shader
+                                    // knob CoreCrashFallback flips after the core aborts on a shader
                                     // link failure, and a default nobody can see is a default
                                     // nobody maintains.
-                                    CoreVariable("citra_use_hw_shaders", "enabled"),
+                                    CoreVariable("citra_use_hw_shader", "enabled"),
                                 ),
                             exposedSettings =
                                 listOf(
@@ -1867,12 +1878,14 @@ data class GameSystem(
                                         "citra_layout_option",
                                         R.string.setting_citra_layout_option,
                                         arrayListOf(
+                                            // Keys must be the values the core declares, or
+                                            // LemuroidCoreOption drops them from the menu.
                                             ExposedSetting.Value(
-                                                "Default Top-Bottom Screen",
+                                                "default",
                                                 R.string.value_citra_layout_option_topbottom,
                                             ),
                                             ExposedSetting.Value(
-                                                "Side by Side",
+                                                "side_by_side",
                                                 R.string.value_citra_layout_option_sidebyside,
                                             ),
                                         ),
@@ -1882,17 +1895,17 @@ data class GameSystem(
                                         R.string.setting_citra_resolution_factor,
                                     ),
                                     ExposedSetting(
-                                        "citra_use_acc_mul",
+                                        "citra_shaders_accurate_mul",
                                         R.string.setting_citra_use_acc_mul,
                                     ),
                                     // The way out of the SIGTRAP on drivers whose GLSL compiler
-                                    // rejects citra's generated PICA shaders: off means the
+                                    // rejects the generated PICA shaders: off means the
                                     // accelerated draw path — and that shader link — never runs.
                                     // `citra_use_acc_geo_shaders` used to sit here and was
-                                    // removed: citra_libretro declares it and never reads it, so
+                                    // removed: citra_libretro declared it and never read it, so
                                     // the switch did nothing.
                                     ExposedSetting(
-                                        "citra_use_hw_shaders",
+                                        "citra_use_hw_shader",
                                         R.string.setting_citra_use_hw_shaders,
                                     ),
                                 ),

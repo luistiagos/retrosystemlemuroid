@@ -24,10 +24,12 @@ import timber.log.Timber
  *    a mystery. Shown by the main process on its home screen — never during a game boot, where an
  *    enqueued toast is exactly what kills Android 7.1 boxes (pitfall 7 in `CLAUDE.md`).
  * 2. **A core option flipped off**, for the one case where the failing path was traced end to end:
- *    **3DS / citra** (see `docs/bugs/open/2026-09-02-crashes-nativos-cores-citra-dolphin.md`):
+ *    **3DS** (see `docs/bugs/open/2026-09-02-crashes-nativos-cores-citra-dolphin.md`). The path
+ *    below was traced in citra_libretro; the core is now Azahar (a Citra fork with the same
+ *    renderer), whose key is `citra_use_hw_shader` and feeds the same setting:
  *
  * ```
- * citra_use_hw_shaders=enabled  ->  Settings::values.use_hw_shader
+ * citra_use_hw_shader=enabled  ->  Settings::values.use_hw_shader
  *   -> System::ApplySettings() sets VideoCore::g_hw_shader_enabled
  *   -> command_processor.cpp: accelerate_draw = g_hw_shader_enabled && ...
  *   -> RasterizerOpenGL::AccelerateDrawBatch -> ...Internal -> ShaderProgramManager::ApplyTo
@@ -53,7 +55,9 @@ object CoreCrashFallback {
     private const val PREF_LAST_NOTIFIED_EXIT_AT = "core_crash_last_notified_exit_at"
 
     private const val SYSTEM_3DS = "3ds"
-    private const val CITRA_HW_SHADERS = "citra_use_hw_shaders"
+
+    // Azahar's name. The old core's `citra_use_hw_shaders` is renamed by AzaharMigrationHandler.
+    private const val CITRA_HW_SHADERS = "citra_use_hw_shader"
 
     /** What to tell the user about the session that died. */
     data class Notice(

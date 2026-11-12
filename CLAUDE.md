@@ -857,6 +857,25 @@ sem sair. A exceção da corrotina de saída caía no handler default do `:game`
 
 Detalhes em `docs/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md`.
 
+### 18. O core 3DS é o Azahar, com nome e chaves herdados do Citra
+
+**Desde 2026-11-12** (`lemuroid-cores` tag `1.23.0`), o `CoreID.CITRA` / `libcitra_libretro_android.so` é o
+**Azahar 2126.2**, binário oficial da release, sem patch. O nome exibido é "Azahar". Três armadilhas:
+
+1. **`citra_graphics_api=OpenGL` em `defaultSettings` é obrigatório e nunca é exposto.** No Android o
+   Azahar escolhe Vulkan por padrão, o LibretroDroid só fala GLES, e o core morre no `context_reset`.
+   A grafia é exata: qualquer outro valor volta ao Vulkan.
+2. **A pasta de usuário é `<saves>/Azahar/`**; o core antigo usava `<saves>/Citra/`. O
+   `AzaharMigrationHandler` (chamado no `GameLoader.load`) copia `Citra/` para `Azahar/` uma vez, sem
+   `shaders/`, e deixa `Citra/` como backup. Ele também renomeia as prefs `cv_3ds_*` antigas. Não
+   mexer em `citra_use_libretro_save_path`: a migração depende de `LibRetro Default`.
+3. **O valor de `ExposedSetting.Value` tem de ser um valor que o core declara.** O
+   `LemuroidCoreOption.getCorrectExposedSettings` descarta o resto, e a opção some do menu sem erro.
+   O Azahar declara chaves curtas (`default`, `single_screen`, `side_by_side`; resolução `1..18`).
+
+Detalhes em `docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`
+(seções "T7: análise de implementação" e "T7: implementação e validação").
+
 ---
 
 ## Ambiente de build
