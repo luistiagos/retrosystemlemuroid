@@ -1859,9 +1859,9 @@ data class GameSystem(
                                     // User dir = <saves>/Azahar/. AzaharMigrationHandler copies the
                                     // old core's <saves>/Citra/ there, so this must stay pinned.
                                     CoreVariable("citra_use_libretro_save_path", "LibRetro Default"),
-                                    // The core declares "disabled" as default, which is not one of
-                                    // its values; spelled out so std::stoi always gets a number.
-                                    CoreVariable("citra_resolution_factor", "1"),
+                                    // Never "disabled" (the core's bogus default, breaks std::stoi).
+                                    // 2x: Azahar GL ran 2x..5x at full speed on the moto g86 (T8).
+                                    CoreVariable("citra_resolution_factor", "2"),
                                     CoreVariable("citra_shaders_accurate_mul", "disabled"),
                                     CoreVariable("citra_enable_touch_touchscreen", "enabled"),
                                     CoreVariable("citra_enable_mouse_touchscreen", "disabled"),
