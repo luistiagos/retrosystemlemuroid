@@ -77840,3 +77840,4 @@ atarist/ZoneWarr.st|ZoneWarr||0|1
 atarist/Zool.st|Zool||0|1
 atarist/Zork - The undiscovered Underground (1997)(Activision)[cr Atariforce].st|Zork - The undiscovered Underground||0|1
 atarist/Zynaps (1988)(Hewson).st|Zynaps||0|1
+gc/Mario Kart Double Dash (Retro Track Grand Prix v2.1).iso|Mario Kart Double Dash (Retro Track Grand Prix v2.1)|https://db.hfsplay.fr/files/2019/07/29/Mario_Kart_-_Double_Dash_USA_0SZFbDr.jpg|0|1
