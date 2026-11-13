@@ -1854,7 +1854,7 @@ data class GameSystem(
                                     // On Android it picks Vulkan unless told otherwise, and
                                     // LibretroDroid only speaks GLES: without this key the core
                                     // dies in context_reset. Never expose it. See
-                                    // docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
+                                    // docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
                                     CoreVariable("citra_graphics_api", "OpenGL"),
                                     // User dir = <saves>/Azahar/. AzaharMigrationHandler copies the
                                     // old core's <saves>/Citra/ there, so this must stay pinned.

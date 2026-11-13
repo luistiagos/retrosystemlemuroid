@@ -94,7 +94,7 @@ fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
         // Tela unica (3DS so com a tela de cima): sem tela de baixo para tocar, as colunas
         // laterais perdem o motivo. Os controles vao por cima do jogo e, em paisagem, a imagem
         // estica ate preencher (decisao do dono, 2026-11-08). Em retrato fica a proporcao de
-        // Ajustes. Ver docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
+        // Ajustes. Ver docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
         val singleScreenLayout = viewModel.isSingleScreenLayout().collectAsState(false).value
         val allowTouchOverlay = (currentControllerConfig?.allowTouchOverlay ?: true) || singleScreenLayout
         val stretchToFill = isLandscape && singleScreenLayout

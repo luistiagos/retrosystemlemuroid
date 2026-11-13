@@ -873,7 +873,7 @@ Detalhes em `docs/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5
    `LemuroidCoreOption.getCorrectExposedSettings` descarta o resto, e a opção some do menu sem erro.
    O Azahar declara chaves curtas (`default`, `single_screen`, `side_by_side`; resolução `1..18`).
 
-Detalhes em `docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`
+Detalhes em `docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`
 (seções "T7: análise de implementação" e "T7: implementação e validação").
 
 ---

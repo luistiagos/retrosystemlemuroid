@@ -1,7 +1,40 @@
 # [BUG] 3DS no celular: não dá para jogar em tela única, os controles ocupam colunas laterais e a imagem sai deformada
 
+## Status
+
+**Em retest desde 2026-11-13.** O dono decidiu fechar o bug sem a T9 (redesenho do layout de toque), que virou o backlog `docs/backlogs/2026-11-13-3ds-layout-toque-padrao-imagem-1.md`.
+
+**Commits**
+
+| Task | Commit | Onde |
+|------|--------|------|
+| T7 (core Azahar 2126.2, GL, migração) | `478fc91`, `0e0d6cc` | `CoreID.CITRA`; `GameSystem.kt` (bloco 3DS, `defaultSettings`); `AzaharMigrationHandler`; `lemuroid-cores` tag `1.23.0` |
+| T2 (opção "Tela única") | `e00e834` | `GameSystem.kt::exposedSettings` (`citra_layout_option` = `single_screen`) |
+| T4 + T5 (controles sobre o jogo, imagem esticada) | `a208873` | `SystemCoreConfig.singleScreenLayout`; `GameViewModelRetroGameView` |
+| T6 (3DS ignora a proporção de Ajustes) | `922a2ef` | `GameViewModelRetroGameView`; `MobileGameScreen` |
+| T3 (botão de troca de telas, sem L3 no duplo toque) | `a14e1f0` | `SystemCoreConfig.screenSwap`; `GameViewModelRetroGameView::toggleScreenSwap`; `GameViewModelTouchControls`; `Nintendo3DS.kt`; `Controls.kt::SecondaryButtonSwapScreens` |
+| T8 (resolução padrão 2x) | `447643c` | `GameSystem.kt::defaultSettings` (`citra_resolution_factor` = `2`) |
+
+**Evidência (moto g86 5G, Mali-G615, APK debug)**
+
+- Cada task tem a sua seção "implementação e validação" abaixo, com prints, medidas de proporção e o logcat (`Updating core variable: …`, `logcat -b crash` vazio).
+- **T3:** item 7 inteiro, em 2026-11-12, das 22h10 às 22h25.
+- **T8:** teste do dono de 2x a 5x, sem queda de velocidade.
+- **Testes de unidade:** `GameSystemSingleScreenTest`, `AzaharMigrationHandlerTest`.
+
+**O que falta para `done/`**
+
+1. **Antes do APK de clientes** (pendências da T7):
+   - conferir o crash de shader de `docs/bugs/open/2026-09-02-crashes-nativos-cores-citra-dolphin.md` com o Azahar;
+   - jogar uma corrida inteira do MK7.
+2. **Versão publicada** com o Azahar (decisão do dono).
+3. **Retest da cliente do S20 FE** (chamado #330), que também serve de prova em Adreno, porque não temos aparelho Adreno:
+   - o modelo, em Configurações ▸ Sobre o telefone (SM-G781… = Adreno 650, SM-G780… = Mali-G77);
+   - uma corrida do MK7 em tela única, com print ou vídeo.
+4. **Se aparecer crash só em Adreno:** a telemetria de crash de core avisa, e o `CoreCrashFallback` desliga os shaders de hardware. A correção é um build novo.
+
 - **Data:** 2026-11-07
-- **Status:** aberto. **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. **T2 feita em 2026-11-12** (opção "Tela única" no menu, validada no moto). **T4 + T5 feitas em 2026-11-12:** na tela única em paisagem, os controles ficam sobre o jogo e a imagem estica até preencher; validadas no moto. **T6 feita em 2026-11-12:** o 3DS ignora a proporção de Ajustes, e só a tela única em paisagem estica; validada no moto. T3 feita em 2026-11-12, T8 feita em 2026-11-13 (padrão 2x), T9 aberta. **T3 implementada em 2026-11-12, sem commit e sem a prova no aparelho:** um botão no pad, tratado pelo app por `citra_swap_screen`, com colunas e `AUTO` quando a tela de baixo está visível. O analógico deixou de mandar L3 no duplo toque. Os testes, o ktlint e o build passam. Ver "Próximo passo (passagem de bastão, 2026-11-12, depois da implementação da T3)".
+- **Status:** em retest (ver "## Status" no topo). **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. **T2 feita em 2026-11-12** (opção "Tela única" no menu, validada no moto). **T4 + T5 feitas em 2026-11-12:** na tela única em paisagem, os controles ficam sobre o jogo e a imagem estica até preencher; validadas no moto. **T6 feita em 2026-11-12:** o 3DS ignora a proporção de Ajustes, e só a tela única em paisagem estica; validada no moto. T3 feita em 2026-11-12, T8 feita em 2026-11-13 (padrão 2x), T9 aberta. **T3 implementada em 2026-11-12, sem commit e sem a prova no aparelho:** um botão no pad, tratado pelo app por `citra_swap_screen`, com colunas e `AUTO` quando a tela de baixo está visível. O analógico deixou de mandar L3 no duplo toque. Os testes, o ktlint e o build passam. Ver "Próximo passo (passagem de bastão, 2026-11-12, depois da implementação da T3)".
 - **Severidade:** Alta para 3DS. Levou uma cliente a pedir reembolso do pacote poucas horas depois da compra.
 - **Complexidade:** Média (uma opção de core é trivial; troca de tela, overlay e proporção por layout mexem em touch e na tela do jogo)
 - **Branch:** redesenho-tv-jogos-salvos-tela (onde foi investigado; a correção ainda não tem branch)
@@ -872,7 +905,7 @@ git commit -- retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/lib
   lemuroid-touchinput/src/main/java/com/swordfish/touchinput/radial/layouts/Nintendo3DS.kt \
   lemuroid-touchinput/src/main/java/com/swordfish/touchinput/radial/layouts/shared/Controls.kt \
   lemuroid-touchinput/src/main/res/drawable/button_swap_screens.xml \
-  docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
+  docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
 ```
 
 Se a prova desmentir algo, por exemplo se o core não religar o toque na tela de baixo, corrigir esta seção e a "T3: análise", e não só o código.

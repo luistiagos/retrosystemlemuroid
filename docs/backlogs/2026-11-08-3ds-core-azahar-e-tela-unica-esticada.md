@@ -2,7 +2,7 @@
 
 **Data:** 2026-11-08
 **Status:** em andamento. **T7 feita e publicada em 2026-11-12** (core Azahar 2126.2, tag `1.23.0`, migração de saves e prefs validada no moto). Faltam as provas em Adreno e de corrida jogada antes de um APK para clientes. **T2 feita em 2026-11-12** ("Tela única" no menu; `large_screen` medido e não exposto). **T4 + T5 feitas em 2026-11-12:** na tela única em paisagem, os controles ficam sobre o jogo e a imagem estica até preencher; validadas no moto. **T6 feita em 2026-11-12:** o 3DS ignora a proporção de Ajustes (fica na do core), e só a tela única em paisagem estica; validada no moto. T3, T8 e T9 seguem abertas; a próxima é a T3. A passagem de bastão está no bug doc, seção "Próximo passo (passagem de bastão, 2026-11-12, depois da T6)".
-**Origem:** chamado #330. Uma cliente com Galaxy S20 FE pediu reembolso porque o 3DS não tem tela única e a imagem sai deformada. Bug doc: [`docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`](../bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
+**Origem:** chamado #330. Uma cliente com Galaxy S20 FE pediu reembolso porque o 3DS não tem tela única e a imagem sai deformada. Bug doc: [`docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`](../bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
 **Tipo:** correção + troca de core · **Esforço:** grande (8 tasks; T7 é Alta)
 
 > **O bug doc é a fonte da verdade.** As medições, os scripts de bancada, as hipóteses descartadas e a especificação completa de cada task estão lá, na seção "Tasks abertas (2026-11-08)". Este backlog resume o que foi decidido e por quê, para o item não se perder na fila.

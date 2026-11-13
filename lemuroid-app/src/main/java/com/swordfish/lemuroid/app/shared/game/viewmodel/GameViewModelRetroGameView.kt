@@ -124,7 +124,7 @@ class GameViewModelRetroGameView(
      * Inverte as telas: grava a variavel do core, que aplica no quadro seguinte, pelo mesmo caminho
      * da troca de layout pelo menu. Sem a GLRetroView ainda, ignora sem inverter, para o estado do
      * app nao divergir do core. T3 de
-     * docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
+     * docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
      */
     fun toggleScreenSwap() {
         val screenSwap = systemCoreConfig.screenSwap ?: return
@@ -139,7 +139,7 @@ class GameViewModelRetroGameView(
     /**
      * Estica a imagem ate preencher a area de jogo, ou devolve a proporcao de Ajustes. Quem decide
      * e a tela do celular, que conhece a orientacao: em retrato a area e alta e esticar achataria
-     * a imagem (ver docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
+     * a imagem (ver docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
      */
     suspend fun setStretchToFill(fill: Boolean) {
         val view = retroGameViewFlow()
@@ -579,7 +579,7 @@ class GameViewModelRetroGameView(
         /**
          * A proporcao de Ajustes que vale para este sistema. No 3DS ela e ignorada: cada tela tem
          * proporcao fixa, e qualquer alvo diferente do core a deforma (T6 de
-         * docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
+         * docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
          */
         internal fun effectiveScreenAspectRatio(
             systemCoreConfig: SystemCoreConfig,

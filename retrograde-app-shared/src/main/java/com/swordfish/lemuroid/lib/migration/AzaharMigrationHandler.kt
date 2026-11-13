@@ -25,7 +25,7 @@ import java.io.File
  * Runs on every 3DS load, before the core variables are read. Every step is idempotent and cheap
  * once done. Never throws: a failed migration must not keep the game from opening.
  *
- * See `docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`,
+ * See `docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`,
  * section "T7: análise de implementação".
  */
 class AzaharMigrationHandler(

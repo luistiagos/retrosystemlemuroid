@@ -16,7 +16,7 @@ import org.junit.Test
 
 /**
  * Tela única do 3DS (T4 + T5, T6 e T3 de
- * docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
+ * docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
  */
 class GameSystemSingleScreenTest {
     private val config3ds = GameSystem.findById(SystemID.NINTENDO_3DS.dbname).systemCoreConfigs.single()
