@@ -3,7 +3,7 @@
 **Status:** obsoleto — encerrado em 2026-10-29 (core libretro a ~20 fps); nada em `version10`, verificado em 2026-11-13 (T29)
 
 **Data:** 2026-10-27
-**Status anterior (escrito antes da T29, não verificado):** encerrado no Lemuroid (2026-10-29). A Fase 0 mostrou que o core libretro roda o LIMBO a ~20 fps, contra 60 fps no Eden standalone no mesmo aparelho. Decisão do dono: app próprio, fork do Eden, no molde do ARMSX2-forkv2. Ver `docs/backlogs/2026-10-29-app-switch-fork-eden.md`.
+**Status anterior (escrito antes da T29, não verificado):** encerrado no Lemuroid (2026-10-29). A Fase 0 mostrou que o core libretro roda o LIMBO a ~20 fps, contra 60 fps no Eden standalone no mesmo aparelho. Decisão do dono: app próprio, fork do Eden, no molde do ARMSX2-forkv2. Ver `docs/backlogs/arquivados/2026-10-29-app-switch-fork-eden.md`.
 **Origem:** pedido do dono ("Verifique a possibilidade de adicionarmos o console switch no Lemuroid, nesta etapa não
 implemente nada, apenas verifique a possibilidade"), sessão de planejamento.
 **Tipo:** feature
@@ -94,7 +94,7 @@ Fonte lida na tag `v14.1.0` de `suyu-emu/suyu-main`: `src/libretro_core/retro_co
 | A base é a anticircunvenção (DMCA §1201): as `prod.keys` seriam a medida de proteção. O alvo são repositórios que *"offer, link to, or otherwise provide access to Nintendo Switch emulator(s)"* | texto de `2026-08-17-nintendo.md` |
 | Precedentes: Yuzu (acordo de US$ 2,4 milhões, mar/2024) e Ryujinx (encerrado em out/2024). O Eden entrou na Play Store em 12/09/2025 e tinha saído em 26/09/2025, sem explicação | Android Authority (Eden); fatos conhecidos (Yuzu, Ryujinx) |
 | Segundo um resumo dos requisitos oficiais do Eden, o Android exige GPU com Vulkan 1.1, e a maioria das PowerVR e Xclipse não é suportada. Um guia de 2026 cita Snapdragon 8 Gen 2 como mínimo prático (estimativa de blog, não oficial) | tech-insider.org (fonte secundária) |
-| **Público:** a TV box é "metade do público-alvo da distribuição" e usa a build armeabi-v7a; o `minSdk` é 21. Os aparelhos de teste são fracos para Switch: o Moto G86 é MediaTek mt6878 com Mali, de linha intermediária, e o outro é o SM-A127M | `docs/funcionalidades/atualizacao-automatica.md:229`; `docs/backlogs/2026-10-25-suporte-nintendo-wii.md` (sessão 3) |
+| **Público:** a TV box é "metade do público-alvo da distribuição" e usa a build armeabi-v7a; o `minSdk` é 21. Os aparelhos de teste são fracos para Switch: o Moto G86 é MediaTek mt6878 com Mali, de linha intermediária, e o outro é o SM-A127M | `docs/funcionalidades/atualizacao-automatica.md:229`; `docs/backlogs/arquivados/2026-10-25-suporte-nintendo-wii.md` (sessão 3) |
 
 ### Comandos que provaram
 

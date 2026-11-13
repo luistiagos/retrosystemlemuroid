@@ -31,7 +31,7 @@ interrompido — `[anon:.bss]` é o código gerado pelo dynarec. Ou seja, o cód
 faltou memória, o sinal foi entregue, o handler próprio do Flycast rodou (#01, #00) e
 **abortou de propósito** em vez de recuperar. É exatamente a assinatura
 `signal_handler` → `ngen_Rewrite` → `os_DebugBreak` já descrita na investigação de junho
-(`docs/backlogs/dreamcast-flycast-standalone-embed.md`, item 4).
+(`docs/backlogs/arquivados/dreamcast-flycast-standalone-embed.md`, item 4).
 
 ## Causa-raiz
 

@@ -64,7 +64,7 @@ mais estava ok"*. Logo nao e exclusivo de NDS/melonDS.
 
 ## Nova evidencia (2026-10-25, Dolphin/Wii no spike do Wii) — reproduzido e medido
 
-Achado lateral do spike de `docs/backlogs/2026-10-25-suporte-nintendo-wii.md` (build debug da branch `spike-wii`,
+Achado lateral do spike de `docs/backlogs/arquivados/2026-10-25-suporte-nintendo-wii.md` (build debug da branch `spike-wii`,
 Moto G86 `ZY32LMNN9B`, Mario Kart Wii em corrida):
 - **Com o dedo parado na tela (segurando o A do pad de toque), o painel sobe para 120 Hz** e a emulacao acelera junto.
   `dumpsys display`: `mActiveRenderFrameRate=60.000004` sem toque, `=120.00001` com toque.

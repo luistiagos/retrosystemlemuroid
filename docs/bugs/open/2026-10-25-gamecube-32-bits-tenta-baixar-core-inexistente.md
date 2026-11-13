@@ -6,7 +6,7 @@
   mensagem que leva o usuário a achar que é falha de rede ou do app. Não há crash.
 - **Complexidade:** Média (filtro de sistemas no mobile e na TV; o guard no `SystemCoreConfig` sozinho é Baixa)
 - **Branch:** redesenho-tv-jogos-salvos-tela (onde foi achado)
-- **Origem:** achado lateral do planejamento do Wii (`docs/backlogs/2026-10-25-suporte-nintendo-wii.md`)
+- **Origem:** achado lateral do planejamento do Wii (`docs/backlogs/arquivados/2026-10-25-suporte-nintendo-wii.md`)
 
 ---
 

@@ -5,7 +5,7 @@
 - **Severidade:** Baixa. Afeta só a busca de jogos instalados/salvos, e "nintendo gamecube" ainda acha o GameCube, misturado com NGPC.
 - **Complexidade:** Baixa (troca de um valor num mapa de apelidos)
 - **Branch:** redesenho-tv-jogos-salvos-tela (onde foi achado)
-- **Origem:** achado lateral do planejamento do Wii (`docs/backlogs/2026-10-25-suporte-nintendo-wii.md`)
+- **Origem:** achado lateral do planejamento do Wii (`docs/backlogs/arquivados/2026-10-25-suporte-nintendo-wii.md`)
 
 ---
 

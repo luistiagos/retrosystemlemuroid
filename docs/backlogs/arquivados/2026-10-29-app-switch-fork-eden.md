@@ -7,7 +7,7 @@
 `D:\projects\switch\rgsswitch`. A documentação viva está em `D:\projects\switch\rgsswitch\docs\rgsswitch\`
 (`arquitetura.md`, `riscos.md`), e a passagem de bastão atual é o §17 do `arquitetura.md`. Este doc fica como
 registro da origem.
-**Origem:** fecha a Fase 0 de `docs/backlogs/2026-10-27-suporte-nintendo-switch.md`. Leia lá a seção
+**Origem:** fecha a Fase 0 de `docs/backlogs/arquivados/2026-10-27-suporte-nintendo-switch.md`. Leia lá a seção
 "Resultado do controle (2026-10-29)".
 **Tipo:** projeto novo, **fora do Lemuroid**.
 
@@ -115,7 +115,7 @@ No Lemuroid, as mesmas funcionalidades existem em Kotlin e servem de referência
 
 ## Frase de abertura da sessão nova
 
-> Leia `C:\projects\lemuroid\Lemuroid\docs\backlogs\2026-10-29-app-switch-fork-eden.md` inteiro e, em seguida, o
+> Leia `C:\projects\lemuroid\Lemuroid\docs\backlogs\arquivados\2026-10-29-app-switch-fork-eden.md` inteiro e, em seguida, o
 > `CLAUDE.md` e o `docs/plano-fork-sobre-upstream.md` do `D:\projects\play2\ARMSX2-forkv2`. Faça só a etapa analítica:
 > clone do Eden (`git.eden-emu.dev`), build do APK sem mudanças, levantamento do que reimplementar (catálogo, download,
 > jogos baixados) e da marca a remover. Grave o plano no repositório novo e me traga as 5 decisões da seção
