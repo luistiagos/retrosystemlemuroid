@@ -82,7 +82,7 @@ sistemas / ~58 mil entradas no catálogo. Cobre:
 
 ---
 
-### [`performance-oportunidades.md`](performance-oportunidades.md)
+### [`performance-oportunidades.md`](../backlogs/performance-oportunidades.md)
 **Análise de oportunidades adicionais de performance (TV box / Smart TV)**
 
 Nova análise sobre a versão atual: oportunidades priorizadas (impacto × risco) para reduzir

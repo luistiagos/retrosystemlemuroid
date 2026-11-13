@@ -1,6 +1,6 @@
 # [BACKLOG] Redesenho visual do Lemuroid inspirado nos temas do Pegasus
 
-**Status:** parcial — Fases 1 a 3 entregues (`06c7911` a `77a8306`, 2026-10-14 a 16); faltam a Fase 4 (opcional) e a verificação 3 (TV box real e `gfxinfo`), verificado em 2026-11-13 (T29)
+**Status:** implementado — Fases 1 a 3 entregues (`06c7911` a `77a8306`, 2026-10-14 a 16); dado por concluído pelo dono em 2026-11-13 (a Fase 4, opcional, não entra), verificado em 2026-11-13 (T29)
 
 **Data:** 2026-10-13
 **Status anterior (escrito antes da T29, não verificado):** Fase 1, Fase 2 (2.1–2.6) e entregas 3.1–3.2 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`,

@@ -1,6 +1,6 @@
 # [BACKLOG] Suporte a Nintendo Wii — viabilidade e plano
 
-**Status:** pendente — nada em `version10`; o spike da Fase 0 está só no worktree `Lemuroid-wii`, sem commit, verificado em 2026-11-13 (T29)
+**Status:** obsoleto — arquivado pelo dono em 2026-11-13; nada em `version10`; o spike da Fase 0 está só no worktree `Lemuroid-wii`, sem commit, verificado em 2026-11-13 (T29)
 
 **Data:** 2026-10-25
 **Status anterior (escrito antes da T29, não verificado):** planejado — aprovado pelo dono em 2026-10-25; nada implementado

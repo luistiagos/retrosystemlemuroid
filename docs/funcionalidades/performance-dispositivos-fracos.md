@@ -148,7 +148,7 @@ limpava cache em `TRIM_MEMORY_MODERATE`+, tarde demais; sem `onLowMemory()`.
 
 ## 3-bis. Segunda rodada (2026-06-15) — ganhos de RAM/GPU por tier
 
-Vinda da análise em [`performance-oportunidades.md`](performance-oportunidades.md), itens
+Vinda da análise em [`performance-oportunidades.md`](../backlogs/performance-oportunidades.md), itens
 P1.1 / P2.1 / P2.2. Baixo risco, impacto direto em memória.
 
 ### 3.7 PRAGMA do SQLite escalonado por tier
@@ -231,4 +231,4 @@ chamadas de `getCoverUrl`). O ganho seria marginal e o risco real — por isso f
 ## 6. Oportunidades futuras
 
 Ver a análise de oportunidades adicionais em
-[`performance-oportunidades.md`](performance-oportunidades.md).
+[`performance-oportunidades.md`](../backlogs/performance-oportunidades.md).

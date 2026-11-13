@@ -1,6 +1,6 @@
 # Atualização Automática do Aplicativo
 
-**Status:** implementado — commits `efe2057` (2026-04-15) e `5743485` (2026-08-29); `AppUpdateManager.kt`; seguem abertas as pendências 4 (`Installing` sem saída) e 5 (ignora "só Wi-Fi"), verificado em 2026-11-13 (T29)
+**Status:** implementado — commits `efe2057` (2026-04-15) e `5743485` (2026-08-29); `AppUpdateManager.kt`; as pendências 4 e 5 foram para o backlog `2026-11-13-atualizacao-automatica-pendencias-4-5.md`, verificado em 2026-11-13 (T29)
 
 ## Visão Geral
 
