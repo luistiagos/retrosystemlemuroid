@@ -76322,3 +76322,1521 @@ gba/Pokemon Flare [HACK].gba|Pokemon Flare [HACK]|https://pokebat.net/wp-content
 gba/Pokémon Random Sky PT-BR [HACK].gba|Pokémon Random Sky PT-BR [HACK]|https://pokebat.net/wp-content/uploads/2017/08/RANDON2BSKY.jpg|0|1
 gba/Pokémon Fluorite.gba|Pokémon Fluorite|https://pokebat.net/wp-content/uploads/2017/10/Pokemon2BFluorite2Bcapa.jpg|0|1
 gba/Pokemon Blossom.gba|Pokemon Blossom|https://pokebat.net/wp-content/uploads/2017/08/Prks106.jpg|0|1
+psp/Mortal Kombat - Unchained (USA).iso|Mortal Kombat - Unchained|https://db.hfsplay.fr/files/2019/10/10/Mortal_Kombat_-_Unchained_USA_EuFZz3f.png|0|1
+gc/Mario Kart - Double Dash!! (Europe) (En,Fr,De,Es,It).rvz|Mario Kart - Double Dash!!|https://db.hfsplay.fr/files/2019/07/29/Mario_Kart_-_Double_Dash_USA_0SZFbDr.jpg|0|1
+msx/Bomberman (Japan).rom|Bomberman||0|1
+msx/Bomberman Special (Japan).rom|Bomberman Special||0|1
+msx/Casio Daishogai Keiba - Exciting Jockey (Japan).rom|Casio Daishogai Keiba - Exciting Jockey||0|1
+msx/Fandom Library #1 (Japan).rom|Fandom Library #1|https://db.hfsplay.fr/files/2019/08/30/Fandom_Library_1_Japan_u7vPRnf.jpg|0|1
+msx/Fandom Library #2 (Japan).rom|Fandom Library #2|https://db.hfsplay.fr/files/2019/08/30/Fandom_Library_2_Japan_o7rZX5t.jpg|0|1
+msx/Fandom Library #3 (Japan).rom|Fandom Library #3|https://db.hfsplay.fr/files/2019/08/30/Fandom_Library_3_Japan_dSgwudK.jpg|0|1
+msx/Gofer no Yabo - Episode II (Japan) (Wii U Virtual Console).rom|Gofer no Yabo - Episode II||0|1
+msx/Gradius (Japan) (Wii U Virtual Console).rom|Gradius||0|1
+msx/Gradius 2 (Japan, Europe) (En) (Wii U Virtual Console).rom|Gradius 2||0|1
+msx/Kekkyoku Nankyoku Dai Bouken (Japan) (Wii U Virtual Console).rom|Kekkyoku Nankyoku Dai Bouken||0|1
+msx/Tanigawa Kouji no Shogi Shinan (Japan).rom|Tanigawa Kouji no Shogi Shinan||0|1
+msx/Sword of Ianna, The (World) (v1.1) (Aftermarket) (Unl).rom|The Sword of Ianna||0|1
+msx/Warrior (Japan).rom|Warrior||0|1
+msx/Westen House (World) (v1.2) (Aftermarket) (Unl).rom|Westen House||0|1
+msx/Yume Tairiku Adventure (Japan) (Wii U Virtual Console).rom|Yume Tairiku Adventure||0|1
+wsc/3D Othello (World) (Ja) (WonderWitch) (Unl).wsc|3D Othello||0|1
+wsc/4 Koma TV (World) (Ja) (WonderWitch) (Unl).wsc|4 Koma TV||0|1
+wsc/Artisan (World) (WonderWitch) (Unl).wsc|Artisan||0|1
+wsc/Atchi Muite Hoitsu! (World) (Ja) (WonderWitch) (Unl).wsc|Atchi Muite Hoitsu!||0|1
+wsc/Atop the Witch's Tower (World) (v1.1) (Aftermarket) (Unl).wsc|Atop the Witch's Tower||0|1
+wsc/Bio Worms (World) (WonderWitch) (Unl).wsc|Bio Worms||0|1
+wsc/BloodStorm (World) (WonderWitch) (Unl).wsc|BloodStorm||0|1
+wsc/BOM Danna (World) (Ja) (WonderWitch) (Unl).wsc|BOM Danna||0|1
+wsc/Bury (World) (WonderWitch) (Unl).wsc|Bury||0|1
+wsc/Canon Hockey (World) (WonderWitch) (Unl).wsc|Canon Hockey||0|1
+wsc/Cardinal Sins - Recycle Edition (World) (Ja) (v1.00) (WonderWitch) (Aftermarket) (Unl).wsc|Cardinal Sins - Recycle Edition||0|1
+wsc/Chains (World) (WonderWitch) (Unl).wsc|Chains||0|1
+wsc/Charaga (World) (WonderWitch) (Unl).wsc|Charaga||0|1
+wsc/CNLink (World) (Ja) (WonderWitch) (Unl).wsc|CNLink||0|1
+wsc/collo (World) (WonderWitch) (Unl).wsc|collo||0|1
+wsc/Course Out 2 (World) (Ja) (v0.0.1) (WonderWitch) (Unl).wsc|Course Out 2||0|1
+wsc/Dai Meikyuu (World) (Ja) (WonderWitch) (Unl).wsc|Dai Meikyuu||0|1
+wsc/Darkhero Figment 2 (World) (Ja) (WonderWitch) (Unl).wsc|Darkhero Figment 2||0|1
+wsc/Darkhero Figment - Calibur Edition (World) (Ja) (WonderWitch) (Unl).wsc|Darkhero Figment - Calibur Edition||0|1
+wsc/Darkhero Figment - Doris Edition (World) (Ja) (WonderWitch) (Unl).wsc|Darkhero Figment - Doris Edition||0|1
+wsc/Doukyuu Tantei Oke Solo (World) (Ja) (WonderWitch) (Unl).wsc|Doukyuu Tantei Oke Solo||0|1
+wsc/Es=Loss Zero Side (World) (Ja) (WonderWitch) (Unl).wsc|Es=Loss Zero Side||0|1
+wsc/Evil Dragon (World) (WonderWitch) (Unl).wsc|Evil Dragon||0|1
+wsc/Features (World) (WonderWitch) (Unl).wsc|Features||0|1
+wsc/Flash Masta Firmware (World) (2016-05-13) (Aftermarket) (Unl).wsc|Flash Masta Firmware||0|1
+wsc/Gansaku Shuu Watch (World) (Ja) (WonderWitch) (Unl).wsc|Gansaku Shuu Watch||0|1
+wsc/GPS TOOL for WonderSwan (World) (Ja) (WonderWitch) (Unl).wsc|GPS TOOL for WonderSwan||0|1
+wsc/Guruguru Ringuru (World) (WonderWitch) (Unl).wsc|Guruguru Ringuru||0|1
+wsc/Hebi (World) (Ja) (WonderWitch) (Unl).wsc|Hebi||0|1
+wsc/Hirotte, Yokete!! (World) (WonderWitch) (Unl).wsc|Hirotte, Yokete!!||0|1
+wsc/Hoippuru for WonderSwan (World) (Ja) (v1.00) (WonderWitch) (Unl).wsc|Hoippuru for WonderSwan||0|1
+wsc/House Keeper (World) (Ja) (WonderWitch) (Unl).wsc|House Keeper||0|1
+wsc/Hurry Up! (World) (WonderWitch) (Unl).wsc|Hurry Up!||0|1
+wsc/Ice Cream Shop (World) (WonderWitch) (Unl).wsc|Ice Cream Shop||0|1
+wsc/Illusion Garden (World) (Ja) (WonderWitch) (Unl).wsc|Illusion Garden||0|1
+wsc/Inu Renda 2 (World) (Ja) (WonderWitch) (Unl).wsc|Inu Renda 2||0|1
+wsc/Isomon - Get Oh No!! (World) (Ja) (WonderWitch) (Unl).wsc|Isomon - Get Oh No!!||0|1
+wsc/Judgement Silversword (World) (Ja) (WonderWitch) (Unl).wsc|Judgement Silversword||0|1
+wsc/Juicy Crew (World) (WonderWitch) (Unl).wsc|Juicy Crew||0|1
+wsc/Kaikon (World) (Ja) (WonderWitch) (Unl).wsc|Kaikon||0|1
+wsc/Kanain (World) (Ja) (WonderWitch) (Unl).wsc|Kanain||0|1
+wsc/Kasanegasane (World) (Ja) (WonderWitch) (Unl).wsc|Kasanegasane||0|1
+wsc/Kuttsuke Su (World) (Ja) (WonderWitch) (Unl).wsc|Kuttsuke Su||0|1
+wsc/Lolita Queen (World) (WonderWitch) (Unl).wsc|Lolita Queen||0|1
+wsc/Magical Harvest (World) (v0.99) (WonderWitch) (Unl).wsc|Magical Harvest||0|1
+wsc/Mahha de Tsuugaku!! (World) (WonderWitch) (Unl).wsc|Mahha de Tsuugaku!!||0|1
+wsc/Mawase Mawase WonderSwan Mawase (World) (WonderWitch) (Unl).wsc|Mawase Mawase WonderSwan Mawase||0|1
+wsc/Maze Maze (World) (WonderWitch) (Unl).wsc|Maze Maze||0|1
+wsc/Mini Tennis (World) (WonderWitch) (Unl).wsc|Mini Tennis||0|1
+wsc/Monmon Gunner (World) (Ja) (WonderWitch) (Unl).wsc|Monmon Gunner||0|1
+wsc/Moverang (World) (WonderWitch) (Unl).wsc|Moverang||0|1
+wsc/Multi-BoaRD (World) (WonderWitch) (Unl).wsc|Multi-BoaRD||0|1
+wsc/Nametry (World) (v1.00) (WonderWitch) (WWGP2001) (Unl).wsc|Nametry||0|1
+wsc/Neko no Kurubushi (World) (WonderWitch) (Unl).wsc|Neko no Kurubushi||0|1
+wsc/Neojan (World) (WonderWitch) (Unl).wsc|Neojan||0|1
+wsc/Nijiiro Dandodan (World) (Ja) (WonderWitch) (Unl).wsc|Nijiiro Dandodan||0|1
+wsc/Not Found (World) (WonderWitch) (Unl).wsc|Not Found||0|1
+wsc/Ougon (World) (WonderWitch) (Unl).wsc|Ougon||0|1
+wsc/Panic Wonder (World) (WonderWitch) (Unl).wsc|Panic Wonder||0|1
+wsc/Pastel Fantasy Deluxe (World) (WonderWitch) (Unl).wsc|Pastel Fantasy Deluxe||0|1
+wsc/Patto Golf (World) (WonderWitch) (Unl).wsc|Patto Golf||0|1
+wsc/Petit Balls (World) (WonderWitch) (Unl).wsc|Petit Balls||0|1
+wsc/Petit PazzLe (World) (Ja) (WonderWitch) (Unl).wsc|Petit PazzLe||0|1
+wsc/Petit Shooo (World) (WonderWitch) (Unl).wsc|Petit Shooo||0|1
+wsc/Pittari! (World) (Ja) (WonderWitch) (Unl).wsc|Pittari!||0|1
+wsc/Pladel 2 (World) (WonderWitch) (Unl).wsc|Pladel 2||0|1
+wsc/Poker (World) (Ja) (WonderWitch) (Unl).wsc|Poker||0|1
+wsc/Putipati (World) (v1.11) (WonderWitch) (WWGP2002) (Unl).wsc|Putipati||0|1
+wsc/Rave Hunter (World) (WonderWitch) (Unl).wsc|Rave Hunter||0|1
+wsc/Real Cheese (World) (Ja) (WonderWitch) (Unl).wsc|Real Cheese||0|1
+wsc/Rect for WonderSwan (World) (WonderWitch) (Unl).wsc|Rect for WonderSwan||0|1
+wsc/Reversi (World) (Ja) (WonderWitch) (Unl).wsc|Reversi||0|1
+wsc/Rhythmin (World) (Ja) (WonderWitch) (Unl).wsc|Rhythmin||0|1
+wsc/Samegame for WSC (World) (WonderWitch) (Unl).wsc|Samegame for WSC||0|1
+wsc/Samoner (World) (Ja) (WonderWitch) (Unl).wsc|Samoner||0|1
+wsc/Satori - WonderSwan Remix (World) (WonderWitch) (Unl).wsc|Satori - WonderSwan Remix||0|1
+wsc/Shokaku 80186 (World) (WonderWitch) (Unl).wsc|Shokaku 80186||0|1
+wsc/Solfege (World) (WonderWitch) (Unl).wsc|Solfege||0|1
+wsc/Star Ochi (World) (WonderWitch) (Unl).wsc|Star Ochi||0|1
+wsc/Tank Island (World) (WonderWitch) (Unl).wsc|Tank Island||0|1
+wsc/Tank Move Color (World) (WonderWitch) (Unl).wsc|Tank Move Color||0|1
+wsc/Octopus Mahjong, The (World) (Ja) (v0.92) (WonderWitch) (Unl).wsc|The Octopus Mahjong||0|1
+wsc/Tonde Stone (World) (WonderWitch) (Unl).wsc|Tonde Stone||0|1
+wsc/UnderBabel (Main Data) (World) (Ja) (WonderWitch) (Unl).wsc|UnderBabel||0|1
+wsc/Well-being (World) (WonderWitch) (Unl).wsc|Well-being||0|1
+wsc/Witch Typing (World) (Ja) (WonderWitch) (Unl).wsc|Witch Typing||0|1
+wsc/Witches! (World) (WonderWitch) (Unl).wsc|Witches!||0|1
+wsc/Wonder Racer (World) (WonderWitch) (Unl).wsc|Wonder Racer||0|1
+wsc/WonderCell (World) (v0.2) (Aftermarket) (Unl).wsc|WonderCell||0|1
+wsc/Yokeru Kamo (World) (v1.0) (WonderWitch) (WWGP2002).wsc|Yokeru Kamo||0|1
+wsc/Yuuki Paint (World) (v1.01) (WonderWitch) (WWGP2001) (Unl).wsc|Yuuki Paint||0|1
+pico8/a_dreams_command_v2.p8.png|a_dreams_command_v2||0|1
+pico8/barp_the_balldragon.p8.png|barp_the_balldragon||0|1
+pico8/boulder_run.p8.png|boulder_run||0|1
+pico8/bunny_envmap.p8.png|bunny_envmap||0|1
+pico8/cake_factory.p8.png|cake_factory||0|1
+pico8/celeste_classic_2.p8.png|celeste_classic_2||0|1
+pico8/crowded_dungeon_crawler.p8.png|crowded_dungeon_crawler||0|1
+pico8/desert_lead.p8.png|desert_lead||0|1
+pico8/dominion_ex.p8.png|dominion_ex||0|1
+pico8/explorers.p8.png|explorers||0|1
+pico8/flip_knight.p8.png|flip_knight||0|1
+pico8/grippy.p8.png|grippy||0|1
+pico8/high_climb.p8.png|high_climb||0|1
+pico8/high_stakes.p8.png|high_stakes||0|1
+pico8/impossible_mission_rt.p8.png|impossible_mission_rt||0|1
+pico8/islander.p8.png|islander||0|1
+pico8/kelins_delivery.p8.png|kelins_delivery||0|1
+pico8/little_space_rangers.p8.png|little_space_rangers||0|1
+pico8/low_knight.p8.png|low_knight||0|1
+pico8/mellow.p8.png|mellow||0|1
+pico8/nemonic_crypt.p8.png|nemonic_crypt||0|1
+pico8/ninja_cat.p8.png|ninja_cat||0|1
+pico8/null.p8.png|null||0|1
+pico8/peral.p8.png|peral||0|1
+pico8/perisher.p8.png|perisher||0|1
+pico8/pico_1k_jam_invitation.p8.png|pico_1k_jam_invitation||0|1
+pico8/pico_arcade.p8.png|pico_arcade||0|1
+pico8/pico_lake.p8.png|pico_lake||0|1
+pico8/pico_night_funkin.p8.png|pico_night_funkin||0|1
+pico8/pico_offroad.p8.png|Pico Off Road||0|0
+pico8/pico_pico_hippo.p8.png|pico_pico_hippo||0|1
+pico8/pico8adventcalendar2020-21.p8.png|pico8adventcalendar2020-21||0|1
+pico8/picodino.p8.png|picodino||0|1
+pico8/picolumia.p8.png|picolumia||0|1
+pico8/piconiccc.p8.png|piconiccc||0|1
+pico8/picross.p8.png|picross||0|1
+pico8/pigments.p8.png|pigments||0|1
+pico8/pirates_trial.p8.png|pirates_trial||0|1
+pico8/pullfrog.p8.png|pullfrog||0|1
+pico8/slimey_jump.p8.png|slimey_jump||0|1
+pico8/snail.p8.png|snail||0|1
+pico8/sonic_2-5_sage.p8.png|sonic_2-5_sage||0|1
+pico8/space_station_demo.p8.png|space_station_demo||0|1
+pico8/starjump.p8.png|starjump||0|1
+pico8/steps.p8.png|steps||0|1
+pico8/tetyis.p8.png|tetyis||0|1
+pico8/the_chamber_scrolls.p8.png|the_chamber_scrolls||0|1
+pico8/trail_of_the_sorcerer.p8.png|trail_of_the_sorcerer||0|1
+pico8/willo.p8.png|willo||0|1
+pico8/winterwood.p8.png|winterwood||0|1
+pico8/yarn.p8.png|yarn||0|1
+pico8/zombie_garden.p8.png|zombie_garden||0|1
+megadrive/Al Michaels Announces HardBall III (USA, Europe).md|Al Michaels Announces HardBall III||0|1
+megadrive/Arcade Legends Sega Mega Drive (World).md|Arcade Legends Sega Mega Drive||0|1
+megadrive/Arcade Legends Street Fighter II' - Special Champion Edition (World).md|Arcade Legends Street Fighter II' - Special Champion Edition||0|1
+megadrive/Awesome Possum (Japan) (En,Ja).md|Awesome Possum||0|1
+megadrive/Awesome Possum Kicks Dr. Machino's Butt (USA).md|Awesome Possum Kicks Dr. Machino's Butt||0|1
+megadrive/Baby's Day Out (USA) (Proto 1).md|Baby's Day Out||0|1
+megadrive/Ballz (USA, Europe) (Beta 1).md|Ballz||0|1
+megadrive/Ballz 3D - The Battle of the Ballz (USA, Europe).md|Ballz 3D - The Battle of the Ballz||0|1
+megadrive/Barbie Vacation Adventure (USA) (Proto).md|Barbie Vacation Adventure|https://db.hfsplay.fr/files/2020/11/21/e9ae3395-7b14-479b-907e-d1892b763285_BfrAA4P.jpg|0|1
+megadrive/Barney's Hide & Seek Game (USA).md|Barney's Hide & Seek Game||0|1
+megadrive/Beauty and the Beast - Belle's Quest (USA).md|Beauty and the Beast - Belle's Quest||0|1
+megadrive/Bible Adventures (USA) (Unl).md|Bible Adventures|https://db.hfsplay.fr/files/2020/11/22/55e7f006-d60f-44fb-94e9-160da857e463_pZXg8SR.png|0|1
+megadrive/Bram Stoker's Dracula (USA).md|Bram Stoker's Dracula|https://db.hfsplay.fr/files/2020/05/02/genesis_bramstokersdracula_Dkm4NhU.jpg|0|1
+megadrive/Chi Chi's Pro Challenge Golf (USA).md|Chi Chi's Pro Challenge Golf||0|1
+megadrive/Chuck Rock II (Japan) (En).md|Chuck Rock II||0|1
+megadrive/College Football's National Championship (USA).md|College Football's National Championship|https://db.hfsplay.fr/files/2018/10/06/8e16d904-468b-4da3-909b-85dc0b8a65c6.png|0|1
+megadrive/College Football's National Championship II (USA).md|College Football's National Championship II||0|1
+megadrive/Crystal's Pony Tale (USA).md|Crystal's Pony Tale||0|1
+megadrive/Daana (Korea).md|Daana||0|1
+megadrive/Darius - Extra Version (USA, Europe) (Strictly Limited Games).md|Darius - Extra Version||0|1
+megadrive/David Crane's Amazing Tennis (USA).md|David Crane's Amazing Tennis|https://db.hfsplay.fr/files/2020/11/23/67a38bfd-4add-4cc9-8062-b34cb062140d_KgBFbfn.jpg|0|1
+megadrive/David Robinson's Supreme Court (USA, Europe).md|David Robinson's Supreme Court|https://db.hfsplay.fr/files/2018/10/06/9e404867-934e-4112-83a6-27553bebf5cb.png|0|1
+megadrive/Desert Strike - Wangan Sakusen (Japan, Korea) (Ja).md|Desert Strike - Wangan Sakusen||0|1
+megadrive/Devi to Pii (Japan) (Mega Drive Mini 2).md|Devi to Pii||0|1
+megadrive/Dick Vitale's 'Awesome, Baby!' College Hoops (USA).md|Dick Vitale's "Awesome, Baby!" College Hoops|https://db.hfsplay.fr/files/2018/10/06/23ea1fb2-e47a-48e2-b756-38f25f723f46.png|0|1
+megadrive/Dino Dini's Soccer (Europe) (En,Fr,De).md|Dino Dini's Soccer|https://db.hfsplay.fr/files/2020/11/23/df0bae6c-a957-4231-8622-7ba6300e250a_5EbD4by.jpg|0|1
+megadrive/Disney Collection, The - QuackShot Starring Donald Duck + Castle of Illusion Starring Mickey Mouse (Europe).md|Disney Collection, The - QuackShot Starring Donald Duck + Castle of Illusion Starring Mickey Mouse||0|1
+megadrive/Dominus (USA) (Proto).md|Dominus|https://db.hfsplay.fr/files/2020/01/20/Dominus_USA_Proto_1WsOj7l.png|0|1
+megadrive/Dr. Robotnik's Mean Bean Machine (USA).md|Dr. Robotnik's Mean Bean Machine||0|1
+megadrive/Dragon's Eye Plus - Shanghai III (Japan).md|Dragon's Eye Plus - Shanghai III||0|1
+megadrive/Dragon's Fury (USA, Europe).md|Dragon's Fury||0|1
+megadrive/Dragon's Revenge (USA, Europe).md|Dragon's Revenge||0|1
+megadrive/Elite (Europe) (Demo 1) (Game).md|Elite||0|1
+megadrive/Evander Holyfield's 'Real Deal' Boxing (World).md|Evander Holyfield's 'Real Deal' Boxing||0|1
+megadrive/F-22 Interceptor - Advanced Tactical Fighter (USA, Europe) (F-202).md|F-22 Interceptor - Advanced Tactical Fighter||0|1
+megadrive/Fantasy Zone (World) (Mega Drive Mini 2, Genesis Mini 2).md|Fantasy Zone||0|1
+megadrive/Forca Alienigena (Brazil).md|Forca Alienigena||0|1
+megadrive/Futari de Puyo Puyo Sun (Japan) (Mega Drive Mini 2).md|Futari de Puyo Puyo Sun||0|1
+megadrive/Garry Kitchen's Super Battletank - War in the Gulf (USA).md|Garry Kitchen's Super Battletank - War in the Gulf||0|1
+megadrive/George Foreman's KO Boxing (USA).md|George Foreman's KO Boxing||0|1
+megadrive/Go Net (Japan).md|Go Net||0|1
+megadrive/HardBall! (USA, Europe) (Unl).md|HardBall!|https://db.hfsplay.fr/files/2018/10/06/d8eee6fc-1682-4c0d-bf44-6bd86879538b.png|0|1
+megadrive/I Love Mickey and Donald - Fushigi na Magic Box (Japan).md|I Love Mickey and Donald - Fushigi na Magic Box||0|1
+megadrive/I Love Mickey Mouse - Fushigi no Oshiro Daibouken (Japan).md|I Love Mickey Mouse - Fushigi no Oshiro Daibouken||0|1
+megadrive/International Sensible Soccer (Europe) (En,Fr,De,It).md|International Sensible Soccer||0|1
+megadrive/Izzy's Quest for the Olympic Rings (USA, Europe).md|Izzy's Quest for the Olympic Rings|https://db.hfsplay.fr/files/2020/12/02/6dd8e7c9-be41-4463-b169-5614f2095048_tSlsWIF.jpg|0|1
+megadrive/James Pond II (Japan, Korea) (Ja).md|James Pond II||0|1
+megadrive/James Pond 3 (USA, Europe).md|James Pond 3||0|1
+megadrive/Jelly Boy (Europe) (Proto).md|Jelly Boy|https://db.hfsplay.fr/files/2020/12/02/b70142f0-251e-431f-b738-79baf9d787f1_Lady5Cf.jpg|0|1
+megadrive/Jerry Glanville's Pigskin Footbrawl (USA).md|Jerry Glanville's Pigskin Footbrawl||0|1
+megadrive/Jim Power - The Lost Dimension in 3D (World).md|Jim Power - The Lost Dimension in 3D||0|1
+megadrive/Jimmy White's Whirlwind Snooker (Europe).md|Jimmy White's Whirlwind Snooker||0|1
+megadrive/Journey from Darkness - Strider Returns (USA).md|Journey from Darkness - Strider Returns||0|1
+megadrive/Junker's High (Japan) (En) (Beta 1).md|Junker's High||0|1
+megadrive/King's Bounty - The Conqueror's Quest (USA, Europe).md|King's Bounty - The Conqueror's Quest||0|1
+megadrive/Krusty's Super Fun House (USA, Europe).md|Krusty's Super Fun House||0|1
+megadrive/Legende de Thor, La (France).md|Legende de Thor, La||0|1
+megadrive/Link Dragon (Taiwan) (En) (Unl).md|Link Dragon|https://db.hfsplay.fr/files/2018/10/06/0680dfde-388b-4eff-85ae-f07f8c3227c5.png|0|1
+megadrive/Mad Stalker - Full Metal Forth (USA, Europe) (Strictly Limited Games).md|Mad Stalker - Full Metal Forth||0|1
+megadrive/Magic School Bus, The - Space Exploration Game (USA).md|Magic School Bus, The - Space Exploration Game||0|1
+megadrive/Marko's Magic Football (Europe) (En,Fr,De,Es).md|Marko's Magic Football|https://db.hfsplay.fr/files/2020/12/12/83e87e48-9650-4c4e-9ad3-3e5775d91e67_Moi2D9l.jpg|0|1
+megadrive/Mary Shelley's Frankenstein (USA).md|Mary Shelley's Frankenstein|https://db.hfsplay.fr/files/2020/12/12/6cc31499-12d9-44bd-8b5f-2fb0063963db_wfMUiW8.png|0|1
+megadrive/Maximum Carnage (World).md|Maximum Carnage||0|1
+megadrive/Mega 6 Vol. 3 (Europe).md|Mega 6 Vol. 3||0|1
+megadrive/Mega Games 6 (Europe).md|Mega Games 6||0|1
+megadrive/Mega Games I (USA, Europe).md|Mega Games I||0|1
+megadrive/Mega Turrican - Director's Cut (USA, Europe).md|Mega Turrican - Director's Cut||0|1
+megadrive/Mickey Mania (Europe).md|Mickey Mania||0|1
+megadrive/Mickey's Ultimate Challenge (USA).md|Mickey's Ultimate Challenge|https://db.hfsplay.fr/files/2020/12/12/4c7f96d8-a5f0-4f40-b423-138d0b7410d0_uCaCjR4.jpg|0|1
+megadrive/Midway Presents Arcade's Greatest Hits (Europe).md|Midway Presents Arcade's Greatest Hits||0|1
+megadrive/Mulan (Taiwan) (Unl).md|Mulan|https://db.hfsplay.fr/files/2018/10/06/e58e2ed9-5af0-42cd-868f-3c02a552b4f0.png|0|1
+megadrive/Musha Aleste (Japan).md|Musha Aleste||0|1
+megadrive/NBA Live Nong-gu 95 (Korea).md|NBA Live Nong-gu 95||0|1
+megadrive/NBA Pro Basketball - Bulls vs Lakers and the NBA Playoffs (Japan).md|NBA Pro Basketball - Bulls vs Lakers and the NBA Playoffs||0|1
+megadrive/NFL Pro Football '94 (Japan).md|NFL Pro Football '94||0|1
+megadrive/Nigel Mansell's World Championship Racing (USA).md|Nigel Mansell's World Championship Racing||0|1
+megadrive/Nobunaga's Ambition (USA).md|Nobunaga's Ambition|https://db.hfsplay.fr/files/2021/05/18/dd95ff76-db81-4495-98c9-96555bb29747_dahggmd.jpg|0|1
+megadrive/Normy's Beach Babe-O-Rama (USA, Europe).md|Normy's Beach Babe-O-Rama||0|1
+megadrive/Onslaught (USA, Europe) (Unl).md|Onslaught|https://db.hfsplay.fr/files/2018/10/06/4b9a5943-7bc0-4e18-b9ae-84e6066eb5aa.png|0|1
+megadrive/Outback Joey (USA).md|Outback Joey||0|1
+megadrive/Outworld 2375 A.D. (USA) (HeartBeat Catalyst).md|Outworld 2375 A.D.||0|1
+megadrive/Payne Stewart Pro Golf (USA) (Proto 1).md|Payne Stewart Pro Golf||0|1
+megadrive/Phantasy Star II - Amia's Adventure (Japan) (Sega Game Toshokan).md|Phantasy Star II - Amia's Adventure||0|1
+megadrive/Phantasy Star II - Anne's Adventure (Japan) (Sega Game Toshokan).md|Phantasy Star II - Anne's Adventure||0|1
+megadrive/Phantasy Star II - Huey's Adventure (Japan) (Sega Game Toshokan).md|Phantasy Star II - Huey's Adventure||0|1
+megadrive/Phantasy Star II - Kinds's Adventure (Japan) (Sega Game Toshokan).md|Phantasy Star II - Kinds's Adventure||0|1
+megadrive/Phantasy Star Fukkokuban (Japan).md|Phantasy Star Fukkokuban||0|1
+megadrive/Gouketsuji Ichizoku (Japan).md|Power Instinct|https://db.hfsplay.fr/files/2020/12/01/e6460655-550c-44f1-804d-396c1a6143a9_FWArQ60.png|0|0
+megadrive/Pro Moves Soccer (USA).md|Pro Moves Soccer||0|1
+megadrive/Putty Squad (Europe) (Proto 1).md|Putty Squad||0|1
+megadrive/Puyo Puyo Tsuu (Japan).md|Puyo Puyo Tsuu||0|1
+megadrive/Ren & Stimpy Show Presents, The - Stimpy's Invention (USA).md|Ren & Stimpy Show Presents, The - Stimpy's Invention||0|1
+megadrive/Richard Scarry's Busytown (USA).md|Richard Scarry's Busytown|https://db.hfsplay.fr/files/2018/10/06/7094b19a-b36f-4a9c-84eb-93fad4f78955.png|0|1
+megadrive/Sanrin San-chan - Spatter (Japan, USA) (En) (Mega Drive Mini 2, Genesis Mini 2).md|Sanrin San-chan - Spatter||0|1
+megadrive/Schtroumpfs Autour du Monde, Les (Europe) (En,Fr,De,Es).md|Schtroumpfs Autour du Monde, Les||0|1
+megadrive/Scrabble (Europe) (Proto).md|Scrabble|https://db.hfsplay.fr/files/2018/10/06/e048eb40-1248-40de-b82d-a29505646be5.png|0|1
+megadrive/Separation Anxiety (USA, Europe).md|Separation Anxiety||0|1
+megadrive/Shanghai II - Dragon's Eye (USA).md|Shanghai II - Dragon's Eye||0|1
+megadrive/Shin Changsegi - Ragnacenty (Korea).md|Shin Changsegi - Ragnacenty||0|1
+megadrive/Simpsons, The - Bart's Nightmare (USA, Europe).md|Simpsons, The - Bart's Nightmare||0|1
+megadrive/Sonic 3 (Europe).md|Sonic 3||0|1
+megadrive/Sorcerer's Kingdom (USA).md|Sorcerer's Kingdom||0|1
+megadrive/Spider-Man X-Men - Arcade's Revenge (USA, Europe).md|Spider-Man X-Men - Arcade's Revenge||0|1
+megadrive/Spiritual Warfare (USA) (Unl).md|Spiritual Warfare|https://db.hfsplay.fr/files/2021/05/17/4ba7be3e-da4a-446f-b699-208d4004ac42_uB7438J.jpg|0|1
+megadrive/Star Mobile (USA, Europe) (Mega Drive Mini 2, Genesis Mini 2).md|Star Mobile||0|1
+megadrive/Star Odyssey (USA) (Super Fighter Team).md|Star Odyssey||0|1
+megadrive/Stone Protectors (World) (Steam).md|Stone Protectors||0|1
+megadrive/Story of Thor, The - Hikari o Tsugumono (Japan).md|Story of Thor, The - Hikari o Tsugumono||0|1
+megadrive/Sumisei Home Tanmatsu (Japan).md|Sumisei Home Tanmatsu||0|1
+megadrive/Summer Challenge (USA, Europe) (Unl).md|Summer Challenge|https://db.hfsplay.fr/files/2018/10/06/8a1c8891-eb93-4530-be32-ede9b1334c93.png|0|1
+megadrive/Super Battleship - The Classic Naval Combat Game (USA).md|Super Battleship - The Classic Naval Combat Game||0|1
+megadrive/Super Locomotive (World) (Mega Drive Mini 2, Genesis Mini 2).md|Super Locomotive||0|1
+megadrive/Super Street Fighter II (USA).md|Super Street Fighter II||0|1
+megadrive/Superman - The Man of Steel (Europe).md|Superman - The Man of Steel||0|1
+megadrive/Talmit's Adventure (Europe).md|Talmit's Adventure|https://db.hfsplay.fr/files/2018/10/06/af279ddd-d7c4-4db3-ae47-29973b5d3dad.png|0|1
+megadrive/Thunder Force II MD (Japan) (En).md|Thunder Force II MD||0|1
+megadrive/Tintin in Tibet (Europe) (En,Fr,De,Es,Nl,Sv).md|Tintin in Tibet|https://romsportugues.com/wp-content/uploads/2018/11/Tintin-in-Tibet-PTBR-Mega-Drive.webp|0|0
+megadrive/Tiny Toon Adventures - Buster's Hidden Treasure (USA).md|Tiny Toon Adventures - Buster's Hidden Treasure||0|1
+megadrive/Todd's Adventures in Slime World (USA).md|Todd's Adventures in Slime World|https://db.hfsplay.fr/files/2018/10/06/2ba6b27d-6cf6-474b-99df-21fe1b9cca4f.png|0|1
+megadrive/ToeJam & Earl in Panik auf Funkotron (Germany).md|ToeJam & Earl in Panik auf Funkotron||0|1
+megadrive/Tom and Jerry (Japan) (En).md|Tom and Jerry||0|1
+megadrive/Tom Mason's Dinosaurs for Hire (USA).md|Tom Mason's Dinosaurs for Hire||0|1
+megadrive/Toys - Let the Toy Wars begin! (USA).md|Toys - Let the Toy Wars begin!||0|1
+megadrive/Turrican (USA, Europe) (Unl).md|Turrican|https://db.hfsplay.fr/files/2020/01/23/164668_oivzgZR.jpg|0|1
+megadrive/Twisted Flipper (USA, Europe) (Beta 1).md|Twisted Flipper||0|1
+megadrive/VS Puyo Puyo Sun (USA, Europe) (Mega Drive Mini 2, Genesis Mini 2).md|VS Puyo Puyo Sun||0|1
+megadrive/Wayne's World (USA).md|Wayne's World|https://db.hfsplay.fr/files/2020/05/02/genesis_waynesworld_SbXvb2r.jpg|0|1
+megadrive/Williams Arcade's Greatest Hits (USA).md|Williams Arcade's Greatest Hits||0|1
+megadrive/Wimbledon (Europe).md|Wimbledon||0|1
+megadrive/Winter Olympic Games (USA) (En,Fr,De,Es,It,Pt,Sv,No).md|Winter Olympic Games||0|1
+megadrive/World Cup Soccer (Japan) (En).md|World Cup Soccer||0|1
+megadrive/Zool (World) (Evercade).md|Zool|https://db.hfsplay.fr/files/2020/05/01/genesis_zool_eu_3DQi3yS.jpg|0|1
+pcenginecd/1552 Tenka Tairan (JP).chd|1552 Tenka Tairan|https://db.hfsplay.fr/files/2019/09/15/b14e6bf1-52af-4ec0-a082-e48d87482398_DxZtzKq.png|0|1
+pcenginecd/3x3 Eyes - Sanjiyan Henjou (JP).chd|3x3 Eyes - Sanjiyan Henjou||0|1
+pcenginecd/A Ressha de Ikou 3 (JP).chd|A Ressha de Ikou 3||0|1
+pcenginecd/Advanced V.G (JP).chd|Advanced V.G.|https://db.hfsplay.fr/files/2019/09/15/846afa13-3cd7-498d-9a30-bb13c3178d4e_pVOLIe7.png|0|1
+pcenginecd/Adventure Quiz - Capcom World + Hatena no Daibouken (JP).chd|Adventure Quiz - Capcom World + Hatena no Daibouken||0|1
+pcenginecd/Ai Chou Aniki (JP).chd|Ai Chou Aniki|https://db.hfsplay.fr/files/2019/09/14/f3e4e282-d6b3-4729-9ba6-9a3aa2a372bf_wklcMuv.png|0|1
+pcenginecd/Akumajou Dracula X - Chi no Rondo (JP).chd|Akumajou Dracula X: Chi no Rondo|https://db.hfsplay.fr/files/2019/09/14/9caf8948-42f0-4f29-bdb7-54d1820f6c9d_4D0Eima.png|0|1
+pcenginecd/Alnam no Kiba - Juuzoku Juuni Shinto Densetsu (JP).chd|Alnam no Kiba: Juuzoku Juuni Shinto Densetsu|https://db.hfsplay.fr/files/2019/09/15/f315a723-2b9a-484d-91bf-c728b23d32a2_A45z4UC.png|0|1
+pcenginecd/Alshark (JP).chd|Alshark|https://db.hfsplay.fr/files/2019/09/15/05855cd0-99f9-4787-a5df-c187d9dc149f_KFlJzmN.png|0|1
+pcenginecd/Ane-san (JP).chd|Ane-san|https://db.hfsplay.fr/files/2019/09/15/cda2d8da-17e9-4281-8515-038dcd9bbc18_C51vqlm.png|0|1
+pcenginecd/Aoki Ookami to Shiroki Mejika - Genchou Hishi (JP).chd|Aoki Ookami to Shiroki Mejika: Genchou Hishi|https://db.hfsplay.fr/files/2019/09/15/1e3d221d-7bba-45c5-82b8-46604c0bab56_fYs1WWI.png|0|1
+pcenginecd/Asuka 120% Maxima - Burning Fest. Maxima (JP).chd|Asuka 120% Maxima BURNING Fest|https://db.hfsplay.fr/files/2019/09/14/7670ba22-9b1c-47aa-82c7-c97eda6ed52d_wKeqSzl.png|0|1
+pcenginecd/The Atlas - Renaissance Voyager (JP).chd|Atlas, The - Renaissance Voyager||0|1
+pcenginecd/Aurora Quest - Otaku no Seiza in Another World (JP).chd|Aurora Quest: Otaku no Seiza in Another World|https://db.hfsplay.fr/files/2019/09/15/0964ea60-6707-4ee1-826b-7fe9b9f3aa44_9Y4MdBB.png|0|1
+pcenginecd/AV Tanjou (JP).chd|AV Tanjou|https://db.hfsplay.fr/files/2019/09/15/1381a931-747a-4694-a2d6-4052844c1feb_STqrkhB.png|0|1
+pcenginecd/Avenger (JP).chd|Avenger|https://db.hfsplay.fr/files/2019/09/15/66e85a2c-6c83-4ccd-a31c-39e4fcc0a826_QYE3VN8.png|0|1
+pcenginecd/Babel (JP).chd|Babel|https://db.hfsplay.fr/files/2019/09/15/a1662f5a-74f6-40ee-a6c9-958e05f933e7_w2p4xGp.png|0|1
+pcenginecd/Baby Jo - The Super Hero (JP).chd|Baby Jo - The Super Hero||0|1
+pcenginecd/Bakuden - Unbalance Zone (JP).chd|Bakuden: Unbalance Zone|https://db.hfsplay.fr/files/2019/09/15/c80d2704-6d7c-430a-aba5-646e8234d4c2_5xCMw3b.png|0|1
+pcenginecd/Bakushou Yoshimoto Shinkigeki (JP).chd|Bakushou Yoshimoto Shinkigeki|https://db.hfsplay.fr/files/2019/09/15/583dec3e-1a50-42d0-a1e9-73b334082bae_aSpL59f.png|0|1
+pcenginecd/Basted (JP).chd|Basted|https://db.hfsplay.fr/files/2019/09/15/ef3afba9-f52c-40ee-be52-9435e236e0e9_KxUtsfy.jpg|0|1
+pcenginecd/Battle Shanghai - Dragons Eye - Shanghai 3 - Dragons Eye (JP).chd|Battle Shanghai - Dragon's Eye ~ Shanghai III - Dragon's Eye||0|1
+pcenginecd/Bazar de Gozarre no Game de Gozarre (JP).chd|Bazar de Gozarre no Game de Gozarre||0|1
+pcenginecd/Beyond Shadowgate (US).chd|Beyond Shadowgate|https://db.hfsplay.fr/files/2019/09/14/0aa91fef-e037-4de5-a94e-fb25c3c06930_azspALx.png|0|1
+pcenginecd/Bikkuriman Daijikai (JP).chd|Bikkuriman Daijikai|https://db.hfsplay.fr/files/2019/11/16/482193-bikkuriman-daijikai-turbografx-cd-screenshot-and-more-and_nN9XDA6.png|0|1
+pcenginecd/Bishoujo Janshi Idol Pai (JP).chd|Bishoujo Janshi Idol Pai||0|1
+pcenginecd/Bishoujo Senshi Sailor Moon (JP).chd|Bishoujo Senshi Sailor Moon|https://db.hfsplay.fr/files/2019/09/14/215bb51c-728d-449d-b2a2-31558fc71183_K7ZHEa9.jpg|0|1
+pcenginecd/Bishoujo Senshi Sailor Moon - Collection (JP).chd|Bishoujo Senshi Sailor Moon Collection|https://db.hfsplay.fr/files/2019/11/21/Bishoujo_Senshi_Sailor_Moon_Collection_J_BACD4004_xoDhbs6.png|0|1
+pcenginecd/Black Hole Assault (JP).chd|Black Hole Assault|https://db.hfsplay.fr/files/2019/09/15/2812ae9c-0985-4a2d-b8da-6fb73ffd6e65_5IxUSUG.png|0|1
+pcenginecd/Blood Gear (JP).chd|Blood Gear|https://db.hfsplay.fr/files/2019/09/15/73827608-f8b3-47af-8eed-e4a3fd45c2d6_TGYA25r.jpg|0|1
+pcenginecd/Bomberman - Panic Bomber (JP).chd|Bomberman: Panic Bomber|https://db.hfsplay.fr/files/2019/09/15/90f677fb-6721-489c-aab8-d8406594e3cd_qaPGzoi.jpg|0|1
+pcenginecd/Bonanza Bros (JP).chd|Bonanza Bros.|https://db.hfsplay.fr/files/2019/09/15/d9ba87f3-27df-447b-b402-edb41e48775f_D5Kg8vC.jpg|0|1
+pcenginecd/Bonk 3 - Bonk Big Adventure (US).chd|Bonk III - Bonk's Big Adventure||0|1
+pcenginecd/Brandish (JP).chd|Brandish|https://db.hfsplay.fr/files/2019/10/22/Brandish_J_X1d1FWl.png|0|1
+pcenginecd/Browning (JP).chd|Browning|https://db.hfsplay.fr/files/2019/09/15/49a13439-9be8-433a-9453-42724134f069_uoeTMo6.png|0|1
+pcenginecd/BuilderLand - The Story of Melba (JP).chd|Builderland: The Story of Melba|https://db.hfsplay.fr/files/2019/09/15/426e733b-7b0e-48d4-95f5-9948b28cd87e_rVtudCc.png|0|1
+pcenginecd/Burai 2 - Yami Koutei no Gyakushuu (JP).chd|Burai II: Yami Koutei no Gyakushuu|https://db.hfsplay.fr/files/2019/12/11/2892_gFLHWGS.jpg|0|1
+pcenginecd/Burai - Yatsudama no Yuushi Densetsu (JP).chd|Burai: Yatsudama no Yuushi Densetsu|https://db.hfsplay.fr/files/2019/09/15/faf7cacf-4a58-4bb7-8ed5-6115645ee93f_Jij4YMB.jpg|0|1
+pcenginecd/Buster Bros (US).chd|Buster Bros.|https://db.hfsplay.fr/files/2019/09/14/916ab988-e0de-46f4-be24-9e020e01023d_WR0NKZD.png|0|1
+pcenginecd/Cal 2 (JP).chd|CAL II|https://db.hfsplay.fr/files/2019/10/31/2952_TAIDZwM.jpg|0|1
+pcenginecd/Cal 3 - Kanketsu-hen (JP).chd|CAL III: Kanketsu-hen|https://db.hfsplay.fr/files/2019/10/30/40763-cal-iii-turbografx-cd-front-cover_JPjoBfA.jpg|0|1
+pcenginecd/Camp California (US).chd|Camp California|https://db.hfsplay.fr/files/2019/09/14/19245e28-a148-4012-a53b-aa2932945e29_ZBJ6SQO.jpg|0|1
+pcenginecd/Campaign Version - Daisenryaku 2 (JP).chd|Campaign Version - Daisenryaku II||0|1
+pcenginecd/Cardangels (JP).chd|Cardangels|https://db.hfsplay.fr/files/2019/09/15/3bd989d0-dce1-4e69-9f0f-1b8208e56ada_63ZpmWO.png|0|1
+pcenginecd/CD Battle - Hikari no Yuusha-tachi (JP).chd|CD Battle - Hikari no Yuusha-tachi||0|1
+pcenginecd/CD Bishoujo Pachinko - Kyuuma Yon Shimai (JP).chd|CD Bishoujo Pachinko Kyuuma Yon Shimai|https://db.hfsplay.fr/files/2019/09/15/da38e5af-f644-4b7a-9f60-7784d23917c0_TF58r4j.png|0|1
+pcenginecd/CD Denjin - Rockabilly Tengoku (JP).chd|CD Denjin - Rockabilly Tengoku||0|1
+pcenginecd/CD Hanafuda - Bishoujo Fan Club (JP).chd|CD Hanafuda Bishoujo Fan Club|https://db.hfsplay.fr/files/2019/09/15/25bdeb51-0851-49c5-ab3f-259aaa269db6_lRvKRDN.jpg|0|1
+pcenginecd/CD Mahjong - Bishoujo Chuushinha (JP).chd|CD Mahjong - Bishoujo Chuushinha||0|1
+pcenginecd/CD Pachi-Slot - Bishoujo Gambler (JP).chd|CD Pachi-Slot - Bishoujo Gambler||0|1
+pcenginecd/Chiki Chiki Boys (JP).chd|Chiki Chiki Boys||0|1
+pcenginecd/Chou Aniki (JP).chd|Chou Aniki||0|1
+pcenginecd/Chou Eiyuu Densetsu - Dynastic Hero (JP).chd|Chou Eiyuu Densetsu - Dynastic Hero||0|1
+pcenginecd/Chou Jikuu Yousai Macross 2036 (JP).chd|Chou Jikuu Yousai Macross 2036||0|1
+pcenginecd/Chou Jikuu Yousai Macross - Eien no Love Song (JP).chd|Chou Jikuu Yousai Macross - Eien no Love Song||0|1
+pcenginecd/Color Wars (JP).chd|Color Wars|https://db.hfsplay.fr/files/2019/09/15/4815952e-25ca-4f0d-8c57-42d25e3afba1_xmjUJrX.png|0|1
+pcenginecd/Cosmic Fantasy 2 (US).chd|Cosmic Fantasy 2||0|1
+pcenginecd/Cosmic Fantasy 2 - Bouken Shounen Ban (JP).chd|Cosmic Fantasy 2: Bouken Shounen Ban|https://db.hfsplay.fr/files/2019/09/14/a6275ec1-2f88-4ce1-9941-1fec227a85ae_JtjdRBf.jpg|0|1
+pcenginecd/Cosmic Fantasy 3 - Bouken Shounen Rei (JP).chd|Cosmic Fantasy 3: Bouken Shounen Rei|https://db.hfsplay.fr/files/2019/09/15/a976ce3e-46eb-43f3-86a4-f228b4241d18_BOcxrpL.jpg|0|1
+pcenginecd/Cosmic Fantasy 4 - Ginga Shounen Densetsu - Gekitou-hen (JP).chd|Cosmic Fantasy 4: Ginga Shounen Densetsu Gekitou Hen|https://db.hfsplay.fr/files/2019/10/30/image_7hrF0AG.png|0|1
+pcenginecd/Cosmic Fantasy 4 - Ginga Shounen Densetsu - Totsunyuu-hen (JP).chd|Cosmic Fantasy 4: Ginga Shounen Densetsu Totsunyuu Hen|https://db.hfsplay.fr/files/2019/10/30/466200-cosmic-fantasy-4-ginga-shonen-densetsu-totsunyu-hen-turbografx-cd-back_qwxAlwa.jpg|0|1
+pcenginecd/Cosmic Fantasy - Bouken Shounen Yuu (JP).chd|Cosmic Fantasy: Bouken Shounen Yuu|https://db.hfsplay.fr/files/2019/09/15/aae7d226-0fa0-4903-9abd-3a3f31d49a92_YkkKj7U.jpg|0|1
+pcenginecd/Cotton Fantastic Night Dreams (JP).chd|Cotton Fantastic Night Dreams||0|1
+pcenginecd/Cyber City Oedo 808 - Kemono no Alignment (JP).chd|Cyber City Oedo 808 - Kemono no Alignment||0|1
+pcenginecd/Daisenpuu Custom (JP).chd|Daisenpuu Custom||0|1
+pcenginecd/De-Ja (JP).chd|De-Ja|https://db.hfsplay.fr/files/2019/09/15/d232c198-6754-467a-a3c3-7b604fea9746_0ppBqd9.jpg|0|1
+pcenginecd/Dead of the Brain 1 and 2 (JP).chd|Dead of the Brain 1 & 2|https://db.hfsplay.fr/files/2019/09/15/eae66f5a-2a00-4bf3-96d4-2b9414ee1b31_YU8236s.jpg|0|1
+pcenginecd/Death Bringer - The Knight of Darkness (JP).chd|Death Bringer: The Knight of Darkness|https://db.hfsplay.fr/files/2019/09/15/56a6a96f-ef38-43bc-9171-eea52f28617c_gQ35GZZ.jpg|0|1
+pcenginecd/Dekoboko Densetsu - Hashiru Wagamanmaa (JP).chd|Dekoboko Densetsu - Hashiru Wagamanmaa||0|1
+pcenginecd/Dennou Tenshi - Digital Ange (JP).chd|Dennou Tenshi - Digital Ange||0|1
+pcenginecd/Dennou Tenshi Digital Angel (JP).chd|Dennou Tenshi Digital Angel||0|1
+pcenginecd/Develo Magazine Vol. 1 (JP).chd|Develo Magazine Vol. 1||0|1
+pcenginecd/Develo Magazine Volume 1 (JP).chd|Develo Magazine Volume 1||0|1
+pcenginecd/Develo - Starter Kit - Assembler-hen (JP).chd|Develo - Starter Kit - Assembler-hen||0|1
+pcenginecd/Develo - Starter Kit - BASIC-hen (JP).chd|Develo - Starter Kit - BASIC-hen||0|1
+pcenginecd/Doraemon - Nobita no Dorabian Night (JP).chd|Doraemon: Nobita no Dorabian Night|https://db.hfsplay.fr/files/2019/09/15/a41c2e9a-e391-4462-bd6d-6f544a5519c6_PQkOJRM.png|0|1
+pcenginecd/Double Dragon 2 The Revenge (JP).chd|Double Dragon II: The Revenge|https://db.hfsplay.fr/files/2019/09/14/93bce24f-5a32-4c8f-a18f-1ecddf9d3f5c_zykIc4c.png|0|1
+pcenginecd/Double Dragon 2 - The Revenge (JP).chd|Double Dragon II: The Revenge|https://db.hfsplay.fr/files/2019/09/14/93bce24f-5a32-4c8f-a18f-1ecddf9d3f5c_zykIc4c.png|0|0
+pcenginecd/Doukyuusei (JP).chd|Doukyuusei|https://db.hfsplay.fr/files/2019/09/15/852c497e-57c8-40e2-ad91-e8c49877663b_yVYlilU.jpg|0|1
+pcenginecd/Down Load 2 (JP).chd|Down Load 2||0|1
+pcenginecd/Downtown Nekketsu Koushinkyoku - Soreyuke Daiundoukai (JP).chd|Downtown Nekketsu Koushinkyoku: Soreyuke Daiundoukai|https://db.hfsplay.fr/files/2019/09/14/806f2137-af05-4c7f-9e5c-5928a1183d96_8PFBPde.png|0|1
+pcenginecd/Downtown Nekketsu Monogatari (JP).chd|Downtown Nekketsu Monogatari|https://db.hfsplay.fr/files/2019/09/14/e8e0621f-daa9-4e40-a2bc-98eb3159908d_ScX20ED.png|0|1
+pcenginecd/Dragonball Z Idainaru Son Gokuu Densetsu (JP).chd|Dragon Ball Z - Idainaru Son Gokuu Densetsu||0|1
+pcenginecd/Dragon Ball Z - Idainaru Son Gokuu Densetsu (JP).chd|Dragon Ball Z - Idainaru Son Gokuu Densetsu||0|0
+pcenginecd/Dragon Half (JP).chd|Dragon Half|https://db.hfsplay.fr/files/2019/10/31/4539_WLRisTM.jpg|0|1
+pcenginecd/Dragon Knight 2 (JP).chd|Dragon Knight II||0|1
+pcenginecd/Dragon Knight 3 (JP).chd|Dragon Knight III||0|1
+pcenginecd/Dragon Knight and Graffiti (JP).chd|Dragon Knight & Graffiti||0|1
+pcenginecd/Dragon Slayer Eiyuu Densetsu (JP).chd|Dragon Slayer Eiyuu Densetsu||0|1
+pcenginecd/Dragon Slayer - The Legend of Heroes (US).chd|Dragon Slayer: The Legend of Heroes|https://db.hfsplay.fr/files/2019/09/14/99e7b698-721b-44e2-8b1c-cd8fdf7a67c3_akNWrhC.png|0|1
+pcenginecd/Dragon Slayer - The Legend of Heroes (JP).chd|Dragon Slayer: The Legend of Heroes|https://db.hfsplay.fr/files/2019/09/14/99e7b698-721b-44e2-8b1c-cd8fdf7a67c3_akNWrhC.png|0|0
+pcenginecd/Dragon Slayer - The Legend of Heroes 2 (JP).chd|Dragon Slayer - The Legend of Heroes II||0|1
+pcenginecd/Dungeon Explorer 2 (US).chd|Dungeon Explorer II|https://db.hfsplay.fr/files/2019/09/14/775879f5-4220-4a37-a14d-9d9d7b01a941_gbEeppT.png|0|1
+pcenginecd/Dungeon Explorer 2 (JP).chd|Dungeon Explorer II|https://db.hfsplay.fr/files/2019/09/14/775879f5-4220-4a37-a14d-9d9d7b01a941_gbEeppT.png|0|0
+pcenginecd/Dungeon Master Theron Quest (US).chd|Dungeon Master Theron Quest||0|1
+pcenginecd/Dungeon Master Theron Quest (JP).chd|Dungeon Master Theron Quest||0|0
+pcenginecd/Dungeon Master - Therons Quest (US).chd|Dungeon Master: Theron's Quest|https://db.hfsplay.fr/files/2019/09/14/3d346b64-cebb-43eb-951f-e4c38f32a027_oJaOhEO.png|0|1
+pcenginecd/Dungeon Master - Therons Quest (JP).chd|Dungeon Master: Theron's Quest|https://db.hfsplay.fr/files/2019/09/14/3d346b64-cebb-43eb-951f-e4c38f32a027_oJaOhEO.png|0|0
+pcenginecd/Duo Comic - Bakuretsu Hunter (JP).chd|Duo Comic: Bakuretsu Hunter|https://db.hfsplay.fr/files/2019/09/15/141c3289-58c2-4712-ab9e-436e1aa1b98b_dKIU8S3.jpg|0|1
+pcenginecd/Efera and Jiliora - The Emblem from Darkness (JP).chd|Efera & Jiliora: The Emblem From Darkness|https://db.hfsplay.fr/files/2019/09/15/7ebe2505-5b8a-44ab-afa9-0a47af309158_dbYytys.jpg|0|1
+pcenginecd/Eikan ha Kimini Koukou Yakyuu Zenkoku Taikai (JP).chd|Eikan ha Kimini Koukou Yakyuu Zenkoku Taikai||0|1
+pcenginecd/Eikan wa Kimi ni - Koukou Yakyuu Zenkoku Taikai (JP).chd|Eikan wa Kimi ni - Koukou Yakyuu Zenkoku Taikai||0|1
+pcenginecd/Eiyuu Sangokushi (JP).chd|Eiyuu Sangokushi||0|1
+pcenginecd/Emerald Dragon (JP).chd|Emerald Dragon|https://db.hfsplay.fr/files/2019/09/15/e2a3a6f0-ff62-4a86-ab85-5b04002ea097_E7DabAn.jpg|0|1
+pcenginecd/Exile (US).chd|Exile|https://db.hfsplay.fr/files/2019/09/14/c65a1745-4e4d-470d-938a-ecc187be5fd6_A6rytuy.jpg|0|1
+pcenginecd/Exile 2 - Janen no Jishou (JP).chd|Exile II: Janen no Jishou|https://db.hfsplay.fr/files/2019/09/15/4274e712-dc08-4867-be35-2b5b8702a43d_hEkMgmN.jpg|0|1
+pcenginecd/Exile - Toki no Hasama e (JP).chd|Exile - Toki no Hasama e||0|1
+pcenginecd/Exile - Wicked Phenomenon (US).chd|Exile: Wicked Phenomenon|https://db.hfsplay.fr/files/2019/09/14/389fd540-75d9-434c-bc6b-0a0bbeeacc33_AWJJsMB.jpg|0|1
+pcenginecd/F1 Circus Special - Pole to Win (JP).chd|F1 Circus Special: Pole to Win|https://db.hfsplay.fr/files/2019/09/15/0b45bba6-3a9d-4091-8ab5-ad07d8b6b144_bWfu7xF.png|0|1
+pcenginecd/F1 Team Simulation - Project F (JP).chd|F1 Team Simulation Project F|https://db.hfsplay.fr/files/2019/09/15/5b7d9b5c-7baa-46cf-83f5-5bd1986f20e7_XAn4HqL.jpg|0|1
+pcenginecd/Faceball (JP).chd|Faceball|https://db.hfsplay.fr/files/2019/09/15/ff30b370-3c63-4398-b942-729e9f52688d_F2prc4T.png|0|1
+pcenginecd/Faerie Dust Story - Meikyuu no Elfeene (JP).chd|Faerie Dust Story: Meikyuu no Elfeene|https://db.hfsplay.fr/files/2020/04/03/Faerie_Dust_Story_-_Meikyuu_no_Elfeene_J_2ybk5Ah.png|0|1
+pcenginecd/Fantastic Night Dreams - Cotton (US).chd|Fantastic Night Dreams: Cotton|https://db.hfsplay.fr/files/2019/09/14/69c280df-61c2-41ed-b181-aa30a503f5a1_A9yiLjO.jpg|0|1
+pcenginecd/Fantastic Night Dreams - Cotton (JP).chd|Fantastic Night Dreams: Cotton|https://db.hfsplay.fr/files/2019/09/14/69c280df-61c2-41ed-b181-aa30a503f5a1_A9yiLjO.jpg|0|0
+pcenginecd/Far East of Eden - Tengai Makyou 2 - Manji Maru (JP).chd|Far East of Eden - Tengai Makyou II - Manji Maru||0|1
+pcenginecd/Far East of Eden - Tengai Makyou - Fuun Kabuki-den (JP).chd|Far East of Eden - Tengai Makyou - Fuun Kabuki-den||0|1
+pcenginecd/Far East of Eden - Tengai Makyou - Ziria (JP).chd|Far East of Eden - Tengai Makyou - Ziria||0|1
+pcenginecd/Farjius no Jakoutei - Neo Metal Fantasy (JP).chd|Farjius no Jakoutei: Neo Metal Fantasy|https://db.hfsplay.fr/files/2019/09/15/7d6056e2-2901-462a-95bc-1f0e3a7224f4_4VP1buv.jpg|0|1
+pcenginecd/Faussete Amour (JP).chd|Faussete Amour||0|1
+pcenginecd/Fiend Hunter (JP).chd|Fiend Hunter|https://db.hfsplay.fr/files/2019/09/15/a3b9ba29-21c8-4e11-8740-2b861c23b093_aWonRdc.png|0|1
+pcenginecd/Fighting Street (JP).chd|Fighting Street|https://db.hfsplay.fr/files/2019/09/14/948f931c-37c8-46a7-840a-23b1f7ead9d6_lGIZwPZ.png|0|1
+pcenginecd/Final Zone 2 (US).chd|Final Zone II|https://db.hfsplay.fr/files/2019/09/14/7c1ed2d2-20af-40cb-b7e0-0db1d69182ab_RTTJNEi.png|0|1
+pcenginecd/Final Zone 2 (JP).chd|Final Zone II|https://db.hfsplay.fr/files/2019/09/14/7c1ed2d2-20af-40cb-b7e0-0db1d69182ab_RTTJNEi.png|0|0
+pcenginecd/Flash Hiders (JP).chd|Flash Hiders|https://db.hfsplay.fr/files/2019/09/15/35f68e2e-5da8-4654-983d-5a9dd03d6ec9_Q0XaA29.jpg|0|1
+pcenginecd/Forgotten Worlds (US).chd|Forgotten Worlds|https://db.hfsplay.fr/files/2019/09/14/f2dfc9f7-a2eb-4446-9203-dac4eefcfade_S3qmiAo.png|0|1
+pcenginecd/Forgotten Worlds (JP).chd|Forgotten Worlds|https://db.hfsplay.fr/files/2019/09/14/f2dfc9f7-a2eb-4446-9203-dac4eefcfade_S3qmiAo.png|0|0
+pcenginecd/Formation Soccer 95 - Della Serie A (JP).chd|Formation Soccer '95: Della Serie A|https://db.hfsplay.fr/files/2019/09/15/5346a63e-7203-4165-9727-3cdb2f9643eb_mpyq9ZH.jpg|0|1
+pcenginecd/Fushigi no Umi no Nadia - The Secret of Blue Water (JP).chd|Fushigi no Umi no Nadia: The Secret of Blue Water|https://db.hfsplay.fr/files/2019/09/15/8195d6ae-645c-4f65-a02a-d2b7815c6fe4_FGoHJk7.jpg|0|1
+pcenginecd/FX Unit Yuki - The Henshin Engine (US).chd|FX Unit Yuki - The Henshin Engine||0|1
+pcenginecd/Gain Ground SX (JP).chd|Gain Ground SX|https://db.hfsplay.fr/files/2019/09/14/22e81c5b-d87d-431b-99e0-a6b65224af3c_R9AAAE8.jpg|0|1
+pcenginecd/Galaxy Deka Gayvan (JP).chd|Galaxy Deka Gayvan|https://db.hfsplay.fr/files/2019/09/15/e0dc614a-5f7d-46b7-8a40-8a55c9cdf7bd_fFXSReU.png|0|1
+pcenginecd/Garou Densetsu 2 - Aratanaru Tatakai (JP).chd|Garou Densetsu 2: Aratanaru Tatakai|https://db.hfsplay.fr/files/2019/09/15/b94dc6a4-dd4d-447b-88e8-23ddc4c1e11f_oCQT22x.png|0|1
+pcenginecd/Garou Densetsu - Special (JP).chd|Garou Densetsu: Special|https://db.hfsplay.fr/files/2019/09/15/fe8acc67-c2a8-4381-b3f5-c7fa1d8ba31f_Pw6z3LT.png|0|1
+pcenginecd/Gate of Thunder (JP).chd|Gate of Thunder|https://db.hfsplay.fr/files/2019/09/14/df296685-0101-4358-aa3e-66bae17fd4e4_TR1JmTM.png|0|1
+pcenginecd/Gate of Thunder + Bonks Adventure + Bonks Revenge (US).chd|Gate of Thunder + Bonk's Adventure + Bonk's Revenge||0|1
+pcenginecd/Genocide (JP).chd|Genocide|https://db.hfsplay.fr/files/2019/09/15/b0908f4d-f6e9-4b2e-b817-ea9582d5fd25_BbyKfQt.jpg|0|1
+pcenginecd/Gensou Tairiku Auleria (JP).chd|Gensou Tairiku Auleria|https://db.hfsplay.fr/files/2019/09/15/3e69e6a9-eca9-473c-9011-d5fb1adebbab_rPbFKY4.jpg|0|1
+pcenginecd/Ginga Fukei Densetsu Sapphire (JP).chd|Ginga Fukei Densetsu: Sapphire|https://db.hfsplay.fr/files/2019/09/14/00bf2bb5-17f0-48bd-ab9f-67f8245ad2d8_3a8Wuix.png|0|1
+pcenginecd/Ginga Ojousama Densetsu Yuna (JP).chd|Ginga Ojousama Densetsu Yuna||0|1
+pcenginecd/Ginga Ojousama Densetsu Yuna 2 (JP).chd|Ginga Ojousama Densetsu Yuna 2||0|1
+pcenginecd/Ginga Ojousama Densetsu Yuna 2 - Eien no Princess (JP).chd|Ginga Ojousama Densetsu Yuna 2 - Eien no Princess||0|1
+pcenginecd/Go! Go! Birdie Chance (JP).chd|Go! Go! Birdie Chance|https://db.hfsplay.fr/files/2019/09/15/75c3802c-cfd2-4c6c-a984-fa4039bf0730_CKjz8Gl.jpg|0|1
+pcenginecd/God Panic - Shijou Saikyou no Gundan (JP).chd|God Panic - Shijou Saikyou no Gundan||0|1
+pcenginecd/Godzilla (US).chd|Godzilla||0|1
+pcenginecd/Godzilla Bakutou Retsuden (JP).chd|Godzilla Bakutou Retsuden|https://db.hfsplay.fr/files/2019/09/14/6cb310bd-79c0-4b07-b879-42ccf5e85207_ZhgEHeV.png|0|1
+pcenginecd/Goetzendiener (JP).chd|Goetzendiener||0|1
+pcenginecd/Golden Axe (JP).chd|Golden Axe|https://db.hfsplay.fr/files/2019/09/14/4430bd3b-f25e-4f56-b9ac-5bd342d77b8f_Sj1EO54.png|0|1
+pcenginecd/Gradius 2 - Gofer no Yabou (JP).chd|Gradius II: Gofer no Yabou|https://db.hfsplay.fr/files/2019/09/14/554f1429-d895-4c7b-8fc7-620d9e24d483_FKu2eYG.png|0|1
+pcenginecd/GS (Ghost Sweeper) Mikami (JP).chd|GS Mikami||0|1
+pcenginecd/Gulclight TDF 2 (JP).chd|Gulclight TDF 2||0|1
+pcenginecd/Gyuwambler Jiko Chuushinha - Gekitou 36 Janshi (JP).chd|Gyuwambler Jiko Chuushinha - Gekitou 36 Janshi||0|1
+pcenginecd/Gyuwambler Jiko Chuushinha - Mahjong Puzzle Collection (JP).chd|Gyuwambler Jiko Chuushinha - Mahjong Puzzle Collection||0|1
+pcenginecd/Hataraku Shoujo - Tekipaki Working Love (JP).chd|Hataraku Shoujo - Tekipaki Working Love||0|1
+pcenginecd/Hatsukoi Monogatari (JP).chd|Hatsukoi Monogatari|https://db.hfsplay.fr/files/2019/09/15/41b6ece9-3744-44db-9ccb-36cd19a4236f_rYWqRcR.jpg|0|1
+pcenginecd/Hawaiian Island Girls (US).chd|Hawaiian Island Girls||0|1
+pcenginecd/Hawk F-123 (JP).chd|Hawk F-123|https://db.hfsplay.fr/files/2019/09/15/72e43f59-7c54-4681-a5b6-bf77f81edc3b_YKeEq3W.jpg|0|1
+pcenginecd/Hellfire S - The Another Story (JP).chd|Hellfire S - The Another Story||0|1
+pcenginecd/Hi-Leg Fantasy (JP).chd|Hi-Leg Fantasy|https://db.hfsplay.fr/files/2019/09/15/7879ffc6-2bea-4c90-bc78-d702a1b6244a_anMA2Pi.jpg|0|1
+pcenginecd/High Grenadier (JP).chd|High Grenadier|https://db.hfsplay.fr/files/2019/09/15/9a08676f-6485-4b02-9e91-45c3dd75b73a_42vMshv.png|0|1
+pcenginecd/Hihou Densetsu - Chris no Bouken (JP).chd|Hihou Densetsu: Chris no Bouken|https://db.hfsplay.fr/files/2019/09/15/3f5b91d9-762b-4bca-95e6-9cf5230b3d90_0JBOtbC.jpg|0|1
+pcenginecd/Himitsu no Hanazono (JP).chd|Himitsu no Hanazono|https://db.hfsplay.fr/files/2019/09/15/2f9097eb-b280-4bba-9d6a-4ac32c23705b_1G22OcF.jpg|0|1
+pcenginecd/Horror Story (JP).chd|Horror Story|https://db.hfsplay.fr/files/2019/09/15/3657ee11-dc56-4e03-b5ba-ee49a1ae2e4a_7lXqQ9I.png|0|1
+pcenginecd/Hu PGA Tour - PowerGolf 2 - Golfer (JP).chd|Hu PGA Tour - PowerGolf 2 - Golfer||0|1
+pcenginecd/Human Sports Festival (JP).chd|Human Sports Festival|https://db.hfsplay.fr/files/2019/09/15/dae06186-1080-4f80-bf77-5739c32045ef_nmLKDDt.png|0|1
+pcenginecd/Hyaku Monogatari - Honto ni Atta Kowai Hanashi (JP).chd|Hyaku Monogatari - Honto ni Atta Kowai Hanashi||0|1
+pcenginecd/Hyper Dyne - SideArms Special (JP).chd|Hyper Dyne - SideArms Special||0|1
+pcenginecd/Hyper Wars (JP).chd|Hyper Wars|https://db.hfsplay.fr/files/2019/09/15/6527311c-de3b-42a0-9ef8-4b29534fb0a0_NZ5A6QC.png|0|1
+pcenginecd/Hypernova Blast (US).chd|Hypernova Blast||0|1
+pcenginecd/Iga Ninden Gaiou (JP).chd|Iga Ninden Gaiou|https://db.hfsplay.fr/files/2019/09/15/d1015a2a-3b1e-4f5c-99d8-b48fc0bd3af7_TE6ghbp.png|0|1
+pcenginecd/ImageFight 2 - Operation Deepstriker (JP).chd|ImageFight II - Operation Deepstriker||0|1
+pcenginecd/Implode (US).chd|Implode|https://db.hfsplay.fr/files/2019/09/14/5245d04c-dece-4c38-933a-34c6960f6b5f_KaxD6gR.jpg|0|1
+pcenginecd/In Magical Adventure - Fray CD - Xak Gaiden (JP).chd|In Magical Adventure - Fray CD - Xak Gaiden||0|1
+pcenginecd/Inoue Mami - Kono Hoshi ni Tatta Hitori no Kimi (JP).chd|Inoue Mami: Kono Hoshi ni Tatta Hitori no Kimi|https://db.hfsplay.fr/files/2019/09/15/e3d2f51e-1a62-416d-88db-9e716bd3c33d_0dLaUym.jpg|0|1
+pcenginecd/Insanity (US).chd|Insanity|https://db.hfsplay.fr/files/2019/09/15/757ab007-41e6-4865-a4b1-c4b7897f448e_TiaQcVl.jpg|0|1
+pcenginecd/IQ Panic (JP).chd|IQ Panic|https://db.hfsplay.fr/files/2019/09/15/dece1748-3f0f-428f-a0b1-3e1e0a0095d3_dhcjJ6V.jpg|0|1
+pcenginecd/It Came from the Desert (US).chd|It Came From The Desert|https://db.hfsplay.fr/files/2019/09/14/3706df48-0176-4eb7-bba4-02bb6eecf305_HJuwEym.jpg|0|1
+pcenginecd/J. B. Harold Murder Club (US).chd|J.B. Harold Murder Club|https://db.hfsplay.fr/files/2019/09/14/9aa24f58-546c-46e0-aa39-e9401801fc8a_THsLKP4.jpg|0|1
+pcenginecd/J. B. Harold Series 1 - Murder Club (JP).chd|J. B. Harold Series 1 - Murder Club||0|1
+pcenginecd/J.League Tremendous Soccer 94 (JP).chd|J.League Tremendous Soccer '94|https://db.hfsplay.fr/files/2019/09/15/1e3c4bc8-a7dc-4198-a5c0-ae008a8d912a_H1Xr7SS.png|0|1
+pcenginecd/J.Thunder (JP).chd|J.Thunder||0|1
+pcenginecd/J-Thunder - Tsumetai Hada wa Shoujo o Nurasu (JP).chd|J-Thunder - Tsumetai Hada wa Shoujo o Nurasu||0|1
+pcenginecd/Jack Nicklaus Turbo Golf (US).chd|Jack Nicklaus: Turbo Golf|https://db.hfsplay.fr/files/2019/09/15/2efc57e8-c778-427c-818f-8e09293de719_nFlI01B.png|0|1
+pcenginecd/Jack Nicklaus World Tour Golf - 162 Holes (JP).chd|Jack Nicklaus' World Tour Golf - 162 Holes||0|1
+pcenginecd/Jantei Monogatari (JP).chd|Jantei Monogatari|https://db.hfsplay.fr/files/2019/09/15/13d916ef-4423-45a7-8c9e-6193ad4b1800_f4zzSyQ.jpg|0|1
+pcenginecd/Jantei Monogatari 2 - Uchuu Tantei Diban - Kanketsu-hen (JP).chd|Jantei Monogatari 2: Uchuu Tantei Diban Kanketsu Hen|https://db.hfsplay.fr/files/2019/09/15/5b2e69e7-eddb-4e30-9eca-171014516bc0_I9pxeSm.jpg|0|1
+pcenginecd/Jantei Monogatari 2 - Uchuu Tantei Diban - Shutsudou-hen (JP).chd|Jantei Monogatari 2: Uchuu Tantei Diban Shutsudou Hen|https://db.hfsplay.fr/files/2019/09/15/d9f2a460-ebe4-42b2-a9ad-8aa34ceb64e4_A4ElSST.jpg|0|1
+pcenginecd/Jantei Monogatari 3 - Saver Angels (JP).chd|Jantei Monogatari 3: Saver Angels|https://db.hfsplay.fr/files/2019/09/15/e0ba2145-1914-4ab2-afab-76a7cd85ab95_hl8qyPV.jpg|0|1
+pcenginecd/Jim Power in Mutant Planet (JP).chd|Jim Power in Mutant Planet|https://db.hfsplay.fr/files/2019/09/14/57b3ea03-afd3-4d20-9395-fb14ca208066_VdxbT9g.png|0|1
+pcenginecd/John Madden Duo CD Football (US).chd|John Madden: Duo CD Football|https://db.hfsplay.fr/files/2019/09/14/c049fc3d-baa3-4185-9965-cb5106aef6e8_4nGxRqI.jpg|0|1
+pcenginecd/Juuouki (JP).chd|Juuouki|https://db.hfsplay.fr/files/2019/09/15/120bbb53-d5a7-44cb-a76b-af3ca671784c_wBgThki.png|0|1
+pcenginecd/Kabuki Ittouryoudan (JP).chd|Kabuki Ittouryoudan||0|1
+pcenginecd/Kagami no Kuni no Legend (JP).chd|Kagami no Kuni no Legend|https://db.hfsplay.fr/files/2019/09/15/39522eae-1546-4ffb-bb2a-33319045d9c1_ga1PQJV.jpg|0|1
+pcenginecd/Kaizou Choujin Shubibinman 3 Ikai no Princess (JP).chd|Kaizou Choujin Shubibinman 3: Ikai no Princess|https://db.hfsplay.fr/files/2019/09/14/23bfa34f-e95f-415e-bcef-4d43a69c7625_ZU26f0v.jpg|0|1
+pcenginecd/Kaizou Choujin Shubibinman 3 - Ikai no Princess (JP).chd|Kaizou Choujin Shubibinman 3: Ikai no Princess|https://db.hfsplay.fr/files/2019/09/14/23bfa34f-e95f-415e-bcef-4d43a69c7625_ZU26f0v.jpg|0|0
+pcenginecd/Kakutou Haou Densetsu - Algunos (JP).chd|Kakutou Haou Densetsu Algunos|https://db.hfsplay.fr/files/2019/09/15/20035891-be61-478c-a358-3de53443069b_DohXraA.jpg|0|1
+pcenginecd/Kawa no Nushitsuri - Shizen-ha (JP).chd|Kawa no Nushitsuri - Shizen-ha||0|1
+pcenginecd/Kaze Kiri - Ninja Action (JP).chd|Kaze Kiri: Ninja Action|https://db.hfsplay.fr/files/2019/09/14/cb43474b-27f6-43c6-86f8-d1295624f9a4_caRDVpl.png|0|1
+pcenginecd/Kiaidan 00 (JP).chd|Kiaidan 00|https://db.hfsplay.fr/files/2019/09/15/310d619e-2dd3-4b98-a2f0-7c842ba7ed2f_zw1fbSf.jpg|0|1
+pcenginecd/Kidou Keisatsu Patlabor Griffon Hen (JP).chd|Kidou Keisatsu Patlabor Griffon Hen||0|1
+pcenginecd/Kisou Louga (JP).chd|Kisou Louga|https://db.hfsplay.fr/files/2019/09/15/9571fd31-d259-4f0e-a11d-374fe873c8db_d59BzoV.jpg|0|1
+pcenginecd/Kisou Louga 2 - The Ends of Shangrila (JP).chd|Kisou Louga II - The Ends of Shangrila||0|1
+pcenginecd/KO Seiki Beast Gaia Fukkatsu Kanketsu Hen (JP).chd|KO Seiki Beast Gaia Fukkatsu Kanketsu Hen||0|1
+pcenginecd/KO Seiki Beast Sanjuushi - Gaia Fukkatsu - Kanketsu-hen (JP).chd|KO Seiki Beast Sanjuushi: Gaia Fukkatsu Kanketsu Hen|https://db.hfsplay.fr/files/2019/09/15/7ae7f407-53e5-4016-b815-741cde517e99_9l5ea5X.jpg|0|1
+pcenginecd/Kuusou Kagaku Sekai Gulliver Boy (JP).chd|Kuusou Kagaku Sekai: Gulliver Boy|https://db.hfsplay.fr/files/2019/09/15/69c4eba0-e2c2-466d-a1bf-ca2829ca5fa6_TbBVjPy.jpg|0|1
+pcenginecd/L Dis (JP).chd|L-Dis|https://db.hfsplay.fr/files/2019/09/14/7caa863a-f7bc-41a2-88ce-5ae17e8815b1_FvcOWAB.jpg|0|1
+pcenginecd/L-Dis (JP).chd|L-Dis|https://db.hfsplay.fr/files/2019/09/14/7caa863a-f7bc-41a2-88ce-5ae17e8815b1_FvcOWAB.jpg|0|0
+pcenginecd/Lady Phantom (JP).chd|Lady Phantom|https://db.hfsplay.fr/files/2019/09/15/c373096a-2602-4d33-b87d-11a70e933216_KWU4mi5.jpg|0|1
+pcenginecd/Langrisser Hikari no Matsuei (JP).chd|Langrisser - Hikari no Matsuei||0|1
+pcenginecd/Langrisser - Hikari no Matsuei (JP).chd|Langrisser - Hikari no Matsuei||0|0
+pcenginecd/Laplace no Ma (JP).chd|Laplace no Ma|https://db.hfsplay.fr/files/2019/09/15/0076588b-3a17-4743-b2c0-a8fdd56dc885_3Phkxhi.jpg|0|1
+pcenginecd/Laser Soft Visual Collection Vol. 1 - Cosmic Fantasy Visual-shuu (JP).chd|Laser Soft Visual Collection Vol. 1 - Cosmic Fantasy Visual-shuu||0|1
+pcenginecd/Laser Soft Visual Collection Vol. 2 - Valis Visual-shuu (JP).chd|Laser Soft Visual Collection Vol. 2 - Valis Visual-shuu||0|1
+pcenginecd/Last Alert (US).chd|Last Alert|https://db.hfsplay.fr/files/2019/09/14/ad0e8ac6-d0ff-459c-b111-ae2389aeb929_SFrUds4.png|0|1
+pcenginecd/Last Armageddon (JP).chd|Last Armageddon|https://db.hfsplay.fr/files/2019/09/15/14c43727-588c-4635-91a8-294774bdc144_PWMDlnX.jpg|0|1
+pcenginecd/Legend of Xanadu - Kaze no Densetsu Xanadu (JP).chd|Legend of Xanadu - Kaze no Densetsu Xanadu||0|1
+pcenginecd/Legend of Xanadu - Kaze no Densetsu Xanadu 2 (JP).chd|Legend of Xanadu - Kaze no Densetsu Xanadu II||0|1
+pcenginecd/Legion (JP).chd|Legion|https://db.hfsplay.fr/files/2019/09/15/4c2c083e-cf6e-4a71-bc14-22c2a23d7317_z4uMyDP.png|0|1
+pcenginecd/Lemmings (JP).chd|Lemmings|https://db.hfsplay.fr/files/2019/09/14/5bc18bb8-6cfe-4002-b3ee-a6e8f75987d7_YuiPclH.jpg|0|1
+pcenginecd/Linda 3 (JP).chd|Linda^3||0|1
+pcenginecd/Loom (US).chd|Loom|https://db.hfsplay.fr/files/2019/09/14/361a9911-3ae9-48d5-bf8b-2d46549952ca_TRBrGwL.jpg|0|1
+pcenginecd/Loom (JP).chd|Loom|https://db.hfsplay.fr/files/2019/09/14/361a9911-3ae9-48d5-bf8b-2d46549952ca_TRBrGwL.jpg|0|0
+pcenginecd/Lord of Wars (JP).chd|Lord of Wars|https://db.hfsplay.fr/files/2019/09/15/9aaf3e64-92d8-4cbb-a658-4695d30d0e6b_3CSUl3r.jpg|0|1
+pcenginecd/Lords of the Rising Sun (US).chd|Lords of the Rising Sun|https://db.hfsplay.fr/files/2019/09/14/41b2c3e1-fb4b-4fd9-a8ec-e3c810e65811_ufNAuwg.jpg|0|1
+pcenginecd/Lords of Thunder (US).chd|Lords of Thunder|https://db.hfsplay.fr/files/2019/09/14/c54ed27b-3db0-4f7f-ad50-4d0d5169efe2_4kBlDIa.jpg|0|1
+pcenginecd/Macross 2036 (JP).chd|Macross 2036||0|1
+pcenginecd/Macross Eien no Love Song (JP).chd|Macross Eien no Love Song||0|1
+pcenginecd/Mad Stalker Full Metal Force (JP).chd|Mad Stalker: Full Metal Force|https://db.hfsplay.fr/files/2019/09/14/9d36a47d-9511-4351-8283-9dd5728d7bab_rLBUB0J.jpg|0|1
+pcenginecd/Mad Stalker - Full Metal Force (JP).chd|Mad Stalker: Full Metal Force|https://db.hfsplay.fr/files/2019/09/14/9d36a47d-9511-4351-8283-9dd5728d7bab_rLBUB0J.jpg|0|0
+pcenginecd/Madou Monogatari I - Honoo no Sotsuenji (JP).chd|Madou Monogatari I - Honoo no Sotsuenji||0|1
+pcenginecd/Magical Dinosaur Tour (US).chd|Magical Dinosaur Tour|https://db.hfsplay.fr/files/2019/09/14/e41a654e-e5fa-4220-9b05-f82dd83fcfca_cc04TZi.jpg|0|1
+pcenginecd/Magical Fantasy Adventure Popful Mail (JP).chd|Magical Fantasy Adventure Popful Mail||0|1
+pcenginecd/Magical Saurus Tour (JP).chd|Magical Saurus Tour||0|1
+pcenginecd/Magicoal (JP).chd|Magicoal|https://db.hfsplay.fr/files/2019/09/15/65f9c710-8e2f-4208-9b06-d53629abbb88_NVXHkzr.jpg|0|1
+pcenginecd/Mahjong Clinic Special (JP).chd|Mahjong Clinic Special|https://db.hfsplay.fr/files/2019/09/15/5419408d-3ee2-46e0-90ac-8cf61839bd14_vMweIFY.jpg|0|1
+pcenginecd/Mahjong Lemon Angel (JP).chd|Mahjong Lemon Angel|https://db.hfsplay.fr/files/2019/09/15/689cd602-8372-472f-8e25-1eef5f10a9d0_XvNT3kE.jpg|0|1
+pcenginecd/Mahjong on the Beach (JP).chd|Mahjong on the Beach|https://db.hfsplay.fr/files/2019/09/15/263e995c-7f78-4cd8-ae40-a411a80eed85_t7FPqWC.jpg|0|1
+pcenginecd/Mahjong Sword - Princess Quest Gaiden (JP).chd|Mahjong Sword - Princess Quest Gaiden||0|1
+pcenginecd/Mahjong Vanilla Syndrome (JP).chd|Mahjong Vanilla Syndrome||0|1
+pcenginecd/Makai Eiyuuden - Shape Shifter (JP).chd|Makai Eiyuuden - Shape Shifter||0|1
+pcenginecd/Mamono Hunter Youko - Makai kara no Tenkousei (JP).chd|Mamono Hunter Youko: Makai Kara no Tenkousei|https://db.hfsplay.fr/files/2019/09/15/5ab45e2c-181c-4988-91d8-1712ad5f76cf_igCJEx4.jpg|0|1
+pcenginecd/Mamono Hunter Youko Tooki Yobigoe (JP).chd|Mamono Hunter Youko: Tooki Yobigoe|https://db.hfsplay.fr/files/2019/09/15/13cf3c2c-16c8-458b-a793-7421f7c06726_0sOyAM1.jpg|0|1
+pcenginecd/Mamono Hunter Youko - Tooki Yobigoe (JP).chd|Mamono Hunter Youko: Tooki Yobigoe|https://db.hfsplay.fr/files/2019/09/15/13cf3c2c-16c8-458b-a793-7421f7c06726_0sOyAM1.jpg|0|0
+pcenginecd/Martial Champion (JP).chd|Martial Champion|https://db.hfsplay.fr/files/2019/09/15/2044ad86-3e72-4cfa-98c8-2fa74f105c52_Z4bCABS.png|0|1
+pcenginecd/Mashou Denki La Valeur (JP).chd|Mashou Denki: La Valeur|https://db.hfsplay.fr/files/2019/09/15/4289fadb-b13d-4202-8390-32aad3617d85_R0NFAkS.jpg|0|1
+pcenginecd/Mashou Denki - La Valeur (JP).chd|Mashou Denki: La Valeur|https://db.hfsplay.fr/files/2019/09/15/4289fadb-b13d-4202-8390-32aad3617d85_R0NFAkS.jpg|0|0
+pcenginecd/Master of Monsters (JP).chd|Master of Monsters|https://db.hfsplay.fr/files/2019/09/15/2ea77066-62ab-48fc-aeb2-043f2b8a375d_I3Y4JP8.jpg|0|1
+pcenginecd/Mateki Densetsu Astralius (JP).chd|Mateki Densetsu Astralius|https://db.hfsplay.fr/files/2019/09/15/aefc0704-cb7b-4b94-9124-1fdb643ad51d_Lm5FlAG.jpg|0|1
+pcenginecd/Megami Paradise (JP).chd|Megami Paradise||0|1
+pcenginecd/Metal Angel (JP).chd|Metal Angel|https://db.hfsplay.fr/files/2019/09/14/1637bb27-521f-4789-b02d-74c7c9602a41_lxFsexI.jpg|0|1
+pcenginecd/Metal Angel 2 (JP).chd|Metal Angel 2||0|1
+pcenginecd/Metamor Jupiter (JP).chd|Metamor Jupiter|https://db.hfsplay.fr/files/2019/09/14/b3efaf55-06fd-413f-a374-62b99974920c_5hSwIrb.jpg|0|1
+pcenginecd/Meteor Blaster DX (US).chd|Meteor Blaster DX|https://db.hfsplay.fr/files/2019/09/15/c83d2c3d-e88a-465e-b57e-a7bc1a735ebf_j183qHi.png|0|1
+pcenginecd/Might and Magic (JP).chd|Might and Magic|https://db.hfsplay.fr/files/2019/09/15/c0fe15bf-a08c-4dd8-9f9e-dfe3ab448b55_u6RWDkv.jpg|0|1
+pcenginecd/Might and Magic 3 - Isles of Terra (US).chd|Might and Magic III: Isles of Terra|https://db.hfsplay.fr/files/2019/09/14/cf3cc968-304f-46da-9a7a-5b4754efc4bb_lXY3AKg.jpg|0|1
+pcenginecd/Might and Magic 3 Isles of Terra (JP).chd|Might and Magic III: Isles of Terra|https://db.hfsplay.fr/files/2019/09/14/cf3cc968-304f-46da-9a7a-5b4754efc4bb_lXY3AKg.jpg|0|0
+pcenginecd/Might and Magic 3 - Isles of Terra (JP).chd|Might and Magic III: Isles of Terra|https://db.hfsplay.fr/files/2019/09/14/cf3cc968-304f-46da-9a7a-5b4754efc4bb_lXY3AKg.jpg|0|0
+pcenginecd/Minesweeper (JP).chd|Minesweeper|https://db.hfsplay.fr/files/2019/09/15/74114b56-f428-4354-8a99-dbabbd524455_J4S7zRx.png|0|1
+pcenginecd/Mine Sweeper (JP).chd|Minesweeper|https://db.hfsplay.fr/files/2019/09/15/74114b56-f428-4354-8a99-dbabbd524455_J4S7zRx.png|0|0
+pcenginecd/Mirai Shonen Conan (JP).chd|Mirai Shonen Conan||0|1
+pcenginecd/Mirai Shounen Conan (JP).chd|Mirai Shounen Conan|https://db.hfsplay.fr/files/2019/09/15/641c5e31-e83c-43ba-91be-879991996892_joiBB7n.jpg|0|1
+pcenginecd/Mitsubachi Gakuen (JP).chd|Mitsubachi Gakuen|https://db.hfsplay.fr/files/2019/09/15/73682c22-7965-431e-b0c0-6153e1671c9a_W3rONw8.jpg|0|1
+pcenginecd/Monster Lair (US).chd|Monster Lair|https://db.hfsplay.fr/files/2019/09/14/2d1f7078-a3e7-4d27-818e-f54c96bf3786_opcsMMR.jpg|0|1
+pcenginecd/Monster Lair Wonderboy 3 (JP).chd|Monster Lair Wonderboy 3||0|1
+pcenginecd/Monster Maker - Yami no Ryuukishi (JP).chd|Monster Maker - Yami no Ryuukishi||0|1
+pcenginecd/Moonlight Lady (JP).chd|Moonlight Lady|https://db.hfsplay.fr/files/2019/09/15/5a43cc79-13d2-483e-aa7d-c20930365abe_6esnMUB.jpg|0|1
+pcenginecd/Motoroader MC (JP).chd|Motoroader MC|https://db.hfsplay.fr/files/2019/09/14/f62b9ac5-3060-4ac3-a266-08771f7b50fd_pntAd0k.jpg|0|1
+pcenginecd/Motteke Tamago (JP).chd|Motteke Tamago|https://db.hfsplay.fr/files/2019/09/14/da8b26db-ed0a-4ac4-9ed2-d1e4993f76a0_5Ba7DwP.jpg|0|1
+pcenginecd/Mugen Senshi Valis - The Legend of a Fantasm Soldier (JP).chd|Mugen Senshi Valis: The Legend of A Fantasm Soldier|https://db.hfsplay.fr/files/2019/09/14/a49216e0-0e80-4f16-b46e-874ba44905db_z7JOXzX.jpg|0|1
+pcenginecd/Mysterious Song (US).chd|Mysterious Song|https://db.hfsplay.fr/files/2019/09/15/c112600d-eca7-4dbd-a822-d28605a0362e_yYi5pUG.jpg|0|1
+pcenginecd/Mystic Formula (JP).chd|Mystic Formula|https://db.hfsplay.fr/files/2019/09/15/6692446b-f67e-4885-bee7-d196e4e36c9d_rPym3EF.png|0|1
+pcenginecd/Nekketsu Koukou Dodgeball-bu CD - Soccer-hen (JP).chd|Nekketsu Koukou Dodgeball Bu: CD Soccer Hen|https://db.hfsplay.fr/files/2019/09/14/58d691e2-8b00-4cb2-92d0-e722e14bd0c8_xRk7TUp.jpg|0|1
+pcenginecd/Nekketsu Legend - Baseballer (JP).chd|Nekketsu Legend - Baseballer||0|1
+pcenginecd/Nemurenu Yoru no Chiisana Ohanashi (JP).chd|Nemurenu Yoru no Chiisana Ohanashi||0|1
+pcenginecd/Neo Nectaris (JP).chd|Neo Nectaris|https://db.hfsplay.fr/files/2019/09/15/030f13de-a6d9-44ed-87b8-0f7a513dcf91_pvo9Obj.jpg|0|1
+pcenginecd/Nexzr (JP).chd|Nexzr|https://db.hfsplay.fr/files/2019/09/14/17d62fac-7528-449f-8a42-0bef4a12ea94_yg1mgas.png|0|1
+pcenginecd/Nishimura Kyoutarou Mystery - Hokutosei no Onna (JP).chd|Nishimura Kyoutarou Mystery: Hokutosei no Onna|https://db.hfsplay.fr/files/2019/09/15/c228328c-b8b5-4d5d-9c67-88d0c86bc89a_MoPNpa8.jpg|0|1
+pcenginecd/No-Ri-Ko (JP).chd|No-Ri-Ko|https://db.hfsplay.fr/files/2019/09/15/5e938008-68e2-4135-a690-a40883090400_7I7NAHO.jpg|0|1
+pcenginecd/Nobunaga no Yabou - Bushou Fuuunroku (JP).chd|Nobunaga no Yabou - Bushou Fuuunroku||0|1
+pcenginecd/Nobunaga no Yabou - Zenkokuban (JP).chd|Nobunaga no Yabou: Zenkokuban|https://db.hfsplay.fr/files/2019/09/15/6e84a719-7aaf-45fa-b4de-81b644909c43_SRceKVO.jpg|0|1
+pcenginecd/Ookami-teki Monshou - Crest of Wolf (JP).chd|Ookami-teki Monshou - Crest of Wolf||0|1
+pcenginecd/Pachio-kun 3 - Pachi-Slot and Pachinko (JP).chd|Pachio-kun 3 - Pachi-Slot & Pachinko||0|1
+pcenginecd/Pachio-kun - Maboroshi no Densetsu (JP).chd|Pachio-kun - Maboroshi no Densetsu||0|1
+pcenginecd/Pachio-kun - Warau Uchuu (JP).chd|Pachio-kun - Warau Uchuu||0|1
+pcenginecd/Palladion - Auto Crusher Palladium (JP).chd|Palladion - Auto Crusher Palladium||0|1
+pcenginecd/Pastel Lime (JP).chd|Pastel Lime|https://db.hfsplay.fr/files/2019/09/15/30cd9e39-c752-4b1d-a8e0-6db72604cca3_lCJNZwh.jpg|0|1
+pcenginecd/Patlabor - Chapter of Griffon (JP).chd|Patlabor - Chapter of Griffon||0|1
+pcenginecd/Police Connection (JP).chd|Police Connection|https://db.hfsplay.fr/files/2019/09/15/4a3d863f-350c-4921-8d25-70ec6e1305c4_xGqiq4Y.jpg|0|1
+pcenginecd/Pomping World (JP).chd|Pomping World||0|1
+pcenginecd/Pop n Magic (JP).chd|Pop 'n Magic|https://db.hfsplay.fr/files/2019/09/15/8339d720-63b4-4d39-a808-19007a486866_OA646Yv.jpg|0|1
+pcenginecd/Popful Mail (JP).chd|PopfulMail||0|1
+pcenginecd/Populous - The Promised Lands (JP).chd|Populous: The Promised Lands|https://db.hfsplay.fr/files/2019/09/15/2874e540-328a-4b86-bcb4-20bc5ffd259e_8XhJipj.png|0|1
+pcenginecd/Prince of Persia (US).chd|Prince of Persia|https://db.hfsplay.fr/files/2019/09/14/2e6aa609-9a5e-450a-acaf-201c508148cc_Ur03C4b.png|0|1
+pcenginecd/Prince of Persia (JP).chd|Prince of Persia|https://db.hfsplay.fr/files/2019/09/14/2e6aa609-9a5e-450a-acaf-201c508148cc_Ur03C4b.png|0|0
+pcenginecd/Princess Maker 1 (JP).chd|Princess Maker 1|https://db.hfsplay.fr/files/2019/09/15/54f7e5f0-ea0f-4616-afde-d9ac31a4367c_ek9Uhly.jpg|0|1
+pcenginecd/Princess Maker 2 (JP).chd|Princess Maker 2|https://db.hfsplay.fr/files/2019/09/15/c364b6e2-4dbc-40de-bc48-da99b567e836_bfVA6Ap.jpg|0|1
+pcenginecd/Princess Minerva (JP).chd|Princess Minerva|https://db.hfsplay.fr/files/2019/09/15/aeb32535-0670-4bb8-b446-c8d05ca0c97b_xh1F3TT.jpg|0|1
+pcenginecd/Private Eye dol (JP).chd|Private Eye dol|https://db.hfsplay.fr/files/2019/09/15/b03c1d21-1d7f-4e59-a89d-c9906c511975_tHqrqSN.jpg|0|1
+pcenginecd/Psychic Detective Series Vol. 3 - Aya (JP).chd|Psychic Detective Series Vol. 3 - Aya||0|1
+pcenginecd/Psychic Detective Series Vol. 4 - Orgel (JP).chd|Psychic Detective Series Vol. 4 - Orgel||0|1
+pcenginecd/Psychic Storm (JP).chd|Psychic Storm|https://db.hfsplay.fr/files/2019/09/14/4c8ebfe3-9fb6-4c70-a1c9-bd502f95137c_1EWyx6U.jpg|0|1
+pcenginecd/Puyo Puyo CD (JP).chd|Puyo Puyo CD|https://db.hfsplay.fr/files/2019/09/15/9f70f311-cc4d-4379-becf-d4c99fcc9974_w8UnRan.jpg|0|1
+pcenginecd/Puyo Puyo CD Tsuu (JP).chd|Puyo Puyo CD Tsuu||0|1
+pcenginecd/Pyramid Plunder (US).chd|Pyramid Plunder|https://db.hfsplay.fr/files/2019/09/15/8e5d402b-1b4f-44db-8644-6b04f1921f19_zcvGnXQ.jpg|0|1
+pcenginecd/Quest of Jongmaster - Janshin Densetsu (JP).chd|Quest of Jongmaster - Janshin Densetsu||0|1
+pcenginecd/Quiz Avenue (JP).chd|Quiz Avenue|https://db.hfsplay.fr/files/2019/09/15/863994fa-89c1-4b82-9e3f-a7c1dc6d8334_LzFJA30.jpg|0|1
+pcenginecd/Quiz Avenue 2 (JP).chd|Quiz Avenue II||0|1
+pcenginecd/Quiz Avenue 3 (JP).chd|Quiz Avenue III||0|1
+pcenginecd/Quiz Caravan Cult Q (JP).chd|Quiz Caravan Cult Q|https://db.hfsplay.fr/files/2019/09/15/391612ae-9cee-4003-8734-1ec62c939ff4_Yhd2pk5.jpg|0|1
+pcenginecd/Quiz de Gakuensai (JP).chd|Quiz de Gakuensai|https://db.hfsplay.fr/files/2019/09/15/f989d637-63fe-4969-a69e-dfbe7d225ef9_STOEpiY.jpg|0|1
+pcenginecd/Quiz Marugoto the World (JP).chd|Quiz Marugoto the World|https://db.hfsplay.fr/files/2019/09/15/d26c6f7b-1838-458a-9602-ebf41f79e2ae_1G9rLSS.jpg|0|1
+pcenginecd/Quiz Marugoto the World 2 - Time Machine ni Onegai! (JP).chd|Quiz Marugoto the World 2: Time Machine ni Onegai!|https://db.hfsplay.fr/files/2019/09/15/121a113a-9703-4bd2-a2b2-2c692cb00264_cLnIuOs.jpg|0|1
+pcenginecd/Quiz no Hoshi - Star of Quiz (JP).chd|Quiz no Hoshi - Star of Quiz||0|1
+pcenginecd/Quiz Tonosama no Yabou (JP).chd|Quiz Tonosama no Yabou||0|1
+pcenginecd/R-Type Complete CD (JP).chd|R-Type Complete CD|https://db.hfsplay.fr/files/2019/09/14/5a36fd33-564d-4ee4-8834-c3a7aa973559_p9W0OJp.png|0|1
+pcenginecd/Rainbow Islands - The Story of Bubble Bobble 2 (JP).chd|Rainbow Islands - The Story of Bubble Bobble 2||0|1
+pcenginecd/Rally Championship (JP).chd|Rally Championship||0|1
+pcenginecd/Ranma 1-2 (JP).chd|Ranma 1-2||0|1
+pcenginecd/Ranma 1-2 - Datou - Ganso Musabetsu Kakutou-ryuu! (JP).chd|Ranma 1-2 - Datou, Ganso Musabetsu Kakutou-ryuu!||0|1
+pcenginecd/Ranma 1-2 - Toraware no Hanayome (JP).chd|Ranma 1/2: Toraware no Hanayome|https://db.hfsplay.fr/files/2019/09/15/ff7eab23-1103-4178-9138-c6a97e362179_cJrn6hQ.jpg|0|1
+pcenginecd/Rayxanber 2 (JP).chd|Rayxanber II|https://db.hfsplay.fr/files/2019/09/14/a3787ce8-36d9-4d54-b440-4d607d690f1f_hFiRofM.jpg|0|1
+pcenginecd/Rayxanber 3 (JP).chd|Rayxanber III|https://db.hfsplay.fr/files/2019/09/14/24acd1e3-c5cd-49cb-9868-c7b6b80b5043_i7XvNaJ.jpg|0|1
+pcenginecd/Record of Lodoss War (JP).chd|Record of Lodoss War|https://db.hfsplay.fr/files/2019/09/15/7d4e183f-35b9-4ca3-a550-0ca28ea60a01_iCQsJM5.png|0|1
+pcenginecd/Record of Lodoss War 2 (JP).chd|Record of Lodoss War II|https://db.hfsplay.fr/files/2019/09/15/81b9b86a-9569-43e2-94f6-d7d5d7ec24f6_tYUSSJr.jpg|0|1
+pcenginecd/Red Alert (JP).chd|Red Alert||0|1
+pcenginecd/Renny Blaster (JP).chd|Renny Blaster|https://db.hfsplay.fr/files/2019/09/15/c8222a60-8e86-47db-be63-68277dcac377_9Kdjtn7.png|0|1
+pcenginecd/Revival Chase (US).chd|Revival Chase|https://db.hfsplay.fr/files/2019/09/15/22ffce19-5d67-4853-84a0-93d5c61d0a1e_rXch4mw.jpg|0|1
+pcenginecd/Riot Zone (US).chd|Riot Zone|https://db.hfsplay.fr/files/2019/09/14/3d8f7667-5d10-4104-95b0-ce7d9be7ce4d_QG7NUoz.png|0|1
+pcenginecd/Rising Sun (JP).chd|Rising Sun||0|1
+pcenginecd/Road Spirits (JP).chd|Road Spirits|https://db.hfsplay.fr/files/2019/09/15/42509c2d-fb49-4cd8-b986-7f76250ed0cb_tdu0OBO.png|0|1
+pcenginecd/ROM2 Karaoke Vol. 1 - Suteki ni Standard (JP).chd|ROM^2 Karaoke Vol. 1 - Suteki ni Standard||0|1
+pcenginecd/ROM2 Karaoke Vol. 2 - Nattoku Idol (JP).chd|ROM^2 Karaoke Vol. 2 - Nattoku Idol||0|1
+pcenginecd/ROM2 Karaoke Vol. 3 - Yappashi Band (JP).chd|ROM^2 Karaoke Vol. 3 - Yappashi Band||0|1
+pcenginecd/ROM2 Karaoke Vol. 4 - Choito Otona! (JP).chd|ROM^2 Karaoke Vol. 4 - Choito Otona!||0|1
+pcenginecd/ROM2 Karaoke Vol. 5 - Karaoke Maku no Uchi (JP).chd|ROM^2 Karaoke Vol. 5 - Karaoke Maku no Uchi||0|1
+pcenginecd/ROM2 Karaoke Volume 1 (JP).chd|ROM^2 Karaoke Volume 1||0|1
+pcenginecd/ROM2 Karaoke Volume 2 (JP).chd|ROM^2 Karaoke Volume 2||0|1
+pcenginecd/ROM2 Karaoke Volume 3 (JP).chd|ROM^2 Karaoke Volume 3||0|1
+pcenginecd/ROM2 Karaoke Volume 4 (JP).chd|ROM^2 Karaoke Volume 4||0|1
+pcenginecd/ROM2 Karaoke Volume 5 (JP).chd|ROM^2 Karaoke Volume 5||0|1
+pcenginecd/ROM ROM Stadium (JP).chd|Rom Rom Stadium|https://db.hfsplay.fr/files/2019/09/15/0c1298e6-40cb-4400-b9b8-eb628922b410_RG69NDD.jpg|0|1
+pcenginecd/Rom2 Karaoke Volume 1 Suteki ni Standard (JP).chd|Rom2 Karaoke Volume 1 Suteki ni Standard||0|1
+pcenginecd/Ruin - Kami no Isan (JP).chd|Ruin: Kami no Isan|https://db.hfsplay.fr/files/2019/09/15/ad1b2305-9d35-4c32-8e22-5b47a2d25d8b_gZjPONy.jpg|0|1
+pcenginecd/Ryuuko no Ken (JP).chd|Ryuuko no Ken|https://db.hfsplay.fr/files/2019/09/14/ee312a78-35aa-4c1e-8a22-2ef4023a6e5e_J2OqrNb.png|0|1
+pcenginecd/Sangokushi 3 (JP).chd|Sangokushi III||0|1
+pcenginecd/Sangokushi Eiketsu Tenka ni Nozomu (JP).chd|Sangokushi: Eiketsu Tenka ni Nozomu|https://db.hfsplay.fr/files/2019/09/15/fa4c78d7-2458-473e-8d84-6ecacfee3191_H6Vgrxd.jpg|0|1
+pcenginecd/Sangokushi - Eiketsu Tenka ni Nozomu (JP).chd|Sangokushi: Eiketsu Tenka ni Nozomu|https://db.hfsplay.fr/files/2019/09/15/fa4c78d7-2458-473e-8d84-6ecacfee3191_H6Vgrxd.jpg|0|0
+pcenginecd/Seirei Senshi Spriggan (JP).chd|Seirei Senshi Spriggan|https://db.hfsplay.fr/files/2019/09/14/dff96fbb-7cee-4ef9-9333-8a998fe0023f_UZvXsjf.png|0|1
+pcenginecd/Seiryuu Densetsu - Monbit (JP).chd|Seiryuu Densetsu Monbit|https://db.hfsplay.fr/files/2019/09/15/309654fa-3a3c-49cb-a578-16ee51ad561b_3LYXmhN.jpg|0|1
+pcenginecd/Seisenshi Denshou - Jantaku no Kishi (JP).chd|Seisenshi Denshou: Jantaku no Kishi|https://db.hfsplay.fr/files/2019/09/15/2ade7551-6230-41e7-828b-6e4dbf62b578_xlkrYE0.jpg|0|1
+pcenginecd/Seiya Monogatari - Anearth Fantasy Stories (JP).chd|Seiya Monogatari: Anearth Fantasy Stories|https://db.hfsplay.fr/files/2019/09/15/e4db7d4f-2b2a-46e8-9b03-53a9a8647739_9qizHeL.jpg|0|1
+pcenginecd/Sengoku Kantou Sangokushi (JP).chd|Sengoku Kantou Sangokushi|https://db.hfsplay.fr/files/2019/09/15/ff1a412d-4c58-4d19-a827-a4975aa164c6_HNJU2rI.jpg|0|1
+pcenginecd/Sexy Idol Mahjong (JP).chd|Sexy Idol Mahjong|https://db.hfsplay.fr/files/2019/09/15/f5119530-5277-4304-a7e8-30353e057ed8_ZV6lIQV.jpg|0|1
+pcenginecd/Sexy Idol Mahjong - Fashion Monogatari (JP).chd|Sexy Idol Mahjong : Fashion Monogatari|https://db.hfsplay.fr/files/2019/09/15/07ea97d3-1c3d-4523-913a-8a8b822794c4_8TI1V6Y.jpg|0|1
+pcenginecd/Sexy Idol Mahjong - Yakyuuken no Uta (JP).chd|Sexy Idol Mahjong : Yakyuuken no Uta|https://db.hfsplay.fr/files/2019/09/15/29ee7588-42a1-46d6-b0ed-9e5f545eb7d9_GO7UvVu.jpg|0|1
+pcenginecd/Shadow of the Beast (US).chd|Shadow of the Beast|https://db.hfsplay.fr/files/2019/09/14/9c43b50b-e760-41ee-b04a-c56ff2d8b5da_bMtaix3.png|0|1
+pcenginecd/Shadow of the Beast - Mashou no Okite (JP).chd|Shadow of the Beast - Mashou no Okite||0|1
+pcenginecd/Shanghai 2 (JP).chd|Shanghai II|https://db.hfsplay.fr/files/2019/09/15/c8e576ca-d562-4451-ad73-2f47e2e50c02_26cim0A.png|0|1
+pcenginecd/Shanghai 3 Dragons Eye (JP).chd|Shanghai 3 Dragons Eye||0|1
+pcenginecd/Shape Shifter (US).chd|Shape Shifter|https://db.hfsplay.fr/files/2019/09/14/5a32d370-d829-485b-8bc4-b7ed47200997_HHoMxb4.png|0|1
+pcenginecd/Sherlock Holmes - Consulting Detective (US).chd|Sherlock Holmes: Consulting Detective|https://db.hfsplay.fr/files/2019/09/14/18512f9d-ad23-467e-aaab-7d431d2792d0_s10mh06.png|0|1
+pcenginecd/Sherlock Holmes - Consulting Detective (JP).chd|Sherlock Holmes: Consulting Detective|https://db.hfsplay.fr/files/2019/09/14/18512f9d-ad23-467e-aaab-7d431d2792d0_s10mh06.png|0|0
+pcenginecd/Sherlock Holmes - Consulting Detective - Volume 2 (US).chd|Sherlock Holmes - Consulting Detective Vol. II||0|1
+pcenginecd/Sherlock Holmes - Consulting Detective - Volume 2 (JP).chd|Sherlock Holmes - Consulting Detective Vol. II||0|0
+pcenginecd/Shiawase Usagi 2 - Toraware Usagi Sailor Z (JP).chd|Shiawase Usagi II - Toraware Usagi Sailor Z||0|1
+pcenginecd/Shiawase Usagi - Nureta Bishoujo - Hajimete Nanoni (JP).chd|Shiawase Usagi - Nureta Bishoujo - Hajimete Nanoni...||0|1
+pcenginecd/Shin Megami Tensei (JP).chd|Shin Megami Tensei|https://db.hfsplay.fr/files/2019/09/15/c991628c-8117-4482-8a4c-f4154a9b0c80_joDzTPb.jpg|0|1
+pcenginecd/Shin Nihon Pro Wrestling - 94 Battlefield in Tokyo Dome (JP).chd|Shin Nihon Pro Wrestling '94: Battlefield in Tokyo Dome|https://db.hfsplay.fr/files/2019/09/14/e1c12c2a-8333-4894-b63d-9ad69b885374_2kzsoxW.jpg|0|1
+pcenginecd/Shin Onryou Senki (JP).chd|Shin Onryou Senki|https://db.hfsplay.fr/files/2019/09/15/0e457fc2-8606-4350-9f28-3d88db1eb992_QlFSZF3.jpg|0|1
+pcenginecd/Shinsetsu Shiawase Usagi (JP).chd|Shinsetsu Shiawase Usagi|https://db.hfsplay.fr/files/2019/09/15/8ff959c3-bf6e-4f0c-b65c-2f0d1912d421_KFgBFi5.png|0|1
+pcenginecd/Shinsetsu Shiawase Usagi 2 - Kairaku e no Invitation (JP).chd|Shinsetsu Shiawase Usagi 2: Kairaku e no Invitation|https://db.hfsplay.fr/files/2019/09/15/147d5bca-7279-4069-aecc-bc943a07ccad_3SIlV9y.jpg|0|1
+pcenginecd/Shougi Database Kiyuu (JP).chd|Shougi Database Kiyuu|https://db.hfsplay.fr/files/2019/09/15/5e996ef5-a4be-4aeb-adb3-0033eeeebc0c_HiLYX2t.jpg|0|1
+pcenginecd/SimEarth - The Living Planet (US).chd|SimEarth: The Living Planet|https://db.hfsplay.fr/files/2019/09/14/4df01cda-d712-46b2-bd07-107d7ba88a8e_iSwVrta.jpg|0|1
+pcenginecd/SimEarth - The Living Planet (JP).chd|SimEarth: The Living Planet|https://db.hfsplay.fr/files/2019/09/14/4df01cda-d712-46b2-bd07-107d7ba88a8e_iSwVrta.jpg|0|0
+pcenginecd/Slot Gambler (JP).chd|Slot Gambler||0|1
+pcenginecd/Snatcher CD-ROMantic (JP).chd|Snatcher CD-ROMantic||0|1
+pcenginecd/Snatcher CD-ROMantic - Pilot Disk (JP).chd|Snatcher CD-ROMantic - Pilot Disk||0|1
+pcenginecd/Sol Bianca (JP).chd|Sol Bianca|https://db.hfsplay.fr/files/2019/09/15/7acada0e-a742-4761-8442-8d3d7b21e181_OFhjuUb.jpg|0|1
+pcenginecd/Sol Moonarge (JP).chd|Sol Moonarge|https://db.hfsplay.fr/files/2019/09/15/76587908-1fd0-4d0e-8159-aa974c9da649_EsEysum.jpg|0|1
+pcenginecd/Solid Force (JP).chd|Solid Force|https://db.hfsplay.fr/files/2019/09/15/0e6cafda-2291-413e-8572-4d59ff512ae7_Iu11Et8.jpg|0|1
+pcenginecd/Sorcerian (JP).chd|Sorcerian|https://db.hfsplay.fr/files/2019/09/15/000138f6-4e61-47b0-8100-c1f3570c04d6_bmcrFQk.jpg|0|1
+pcenginecd/Sotsugyou 2 - Neo Generation (JP).chd|Sotsugyou II - Neo Generation||0|1
+pcenginecd/Sotsugyou - Graduation (JP).chd|Sotsugyou: Graduation|https://db.hfsplay.fr/files/2019/09/15/ff4a636b-680b-45fb-b048-dda52f56fa41_5cjE9BS.jpg|0|1
+pcenginecd/Sotsugyou Shashin - Miki (JP).chd|Sotsugyou Shashin: Miki|https://db.hfsplay.fr/files/2019/09/15/afca5018-325e-49dd-b680-49c2cd4729f3_HwH7v5I.jpg|0|1
+pcenginecd/Space Adventure Cobra 2 - Densetsu no Otoko (JP).chd|Space Adventure Cobra II - Densetsu no Otoko||0|1
+pcenginecd/Space Adventure Cobra - Kokuryuuou no Densetsu (JP).chd|Space Adventure Cobra - Kokuryuuou no Densetsu||0|1
+pcenginecd/Space Fantasy Zone (JP).chd|Space Fantasy Zone||0|1
+pcenginecd/Space Invaders - The Original Game (JP).chd|Space Invaders: The Original Game|https://db.hfsplay.fr/files/2019/09/15/21f6aed2-74cd-4b08-9ce3-60e43c83f309_LAUdW9N.png|0|1
+pcenginecd/Splash Lake (US).chd|Splash Lake|https://db.hfsplay.fr/files/2019/09/14/d55c8868-e320-4b3a-b8a3-4ff1481e69b1_ntYmJHY.png|0|1
+pcenginecd/Splash Lake (JP).chd|Splash Lake|https://db.hfsplay.fr/files/2019/09/14/d55c8868-e320-4b3a-b8a3-4ff1481e69b1_ntYmJHY.png|0|0
+pcenginecd/Splash Lake - Ostrich Daibouken (JP).chd|Splash Lake - Ostrich Daibouken||0|1
+pcenginecd/Spriggan Mark 2 Re Terraform Project (JP).chd|Spriggan Mark 2: Re-Terraform Project|https://db.hfsplay.fr/files/2019/09/14/12edb3f1-1e47-4906-97e9-3ff61081d013_NyGZwig.jpg|0|1
+pcenginecd/Spriggan Mark 2 - Re Terraform Project (JP).chd|Spriggan Mark 2: Re-Terraform Project|https://db.hfsplay.fr/files/2019/09/14/12edb3f1-1e47-4906-97e9-3ff61081d013_NyGZwig.jpg|0|0
+pcenginecd/Star Breaker (JP).chd|Star Breaker|https://db.hfsplay.fr/files/2019/09/15/1b31b47c-483e-4d3b-8b69-526ea59be0c0_w6pY0Gc.jpg|0|1
+pcenginecd/Star Mobile (JP).chd|Star Mobile|https://db.hfsplay.fr/files/2019/09/15/853dd24c-87f3-45ef-94c8-f853b2d41ea8_SgOmZ5j.png|0|1
+pcenginecd/Star Parodier (JP) (US).chd|Star Parodier|https://db.hfsplay.fr/files/2019/09/14/d8014e5b-e580-44fb-8c69-6ca35428c179_2oXxSkb.jpg|0|1
+pcenginecd/Star Parodier (JP).chd|Star Parodier|https://db.hfsplay.fr/files/2019/09/14/d8014e5b-e580-44fb-8c69-6ca35428c179_2oXxSkb.jpg|0|0
+pcenginecd/Startling Odyssey (JP).chd|Startling Odyssey|https://db.hfsplay.fr/files/2019/09/15/37171634-0024-4d68-92d9-6832f536495c_7CkJnEI.jpg|0|1
+pcenginecd/Startling Odyssey 2 - Maryuu Sensou (JP).chd|Startling Odyssey II - Maryuu Sensou||0|1
+pcenginecd/Steam Heart (JP).chd|Steam-Heart's|https://db.hfsplay.fr/files/2019/09/14/f691f153-aca2-442f-9d97-4e428e95e2e1_WJiZ8KJ.jpg|0|1
+pcenginecd/Steam-Heart (JP).chd|Steam-Heart's|https://db.hfsplay.fr/files/2019/09/14/f691f153-aca2-442f-9d97-4e428e95e2e1_WJiZ8KJ.jpg|0|0
+pcenginecd/Strider Hiryuu (JP).chd|Strider Hiryuu||0|1
+pcenginecd/Sugoroku 92 Nari Tore Nariagari Trendy (JP).chd|Sugoroku 92 Nari Tore Nariagari Trendy||0|1
+pcenginecd/Summer Carnival 92 - Alzadick (JP).chd|Summer Carnival '92: Alzadick|https://db.hfsplay.fr/files/2019/09/15/937568be-ec5b-4ba3-967a-55804cc4abaf_uLp5CYX.jpg|0|1
+pcenginecd/Summer Carnival 93 - NEXZR Special (JP).chd|Summer Carnival '93: Nexzr Special|https://db.hfsplay.fr/files/2019/09/15/d9bf6146-8ff4-4117-ba3b-9bc896a14c1d_MHUaDAE.jpg|0|1
+pcenginecd/Super Air Zonk - Rockabilly-Paradise (US).chd|Super Air Zonk - Rockabilly-Paradise||0|1
+pcenginecd/Super Albatross (JP).chd|Super Albatross|https://db.hfsplay.fr/files/2019/09/15/a7b564d9-061a-4de2-a3cd-1b3f4f41edb0_Ke8NVh4.png|0|1
+pcenginecd/Super CD-ROM2 Taiken Soft Shuu (JP).chd|Super CD-ROM^2 Taiken Soft Shuu||0|1
+pcenginecd/Super Daisenryaku (JP).chd|Super Daisenryaku|https://db.hfsplay.fr/files/2019/09/15/63ae9bb5-26a5-4cbb-b05c-53a3df43e723_KZN9u7p.jpg|0|1
+pcenginecd/Super Darius (JP).chd|Super Darius|https://db.hfsplay.fr/files/2019/09/14/94ada3b4-7692-41b2-b3ed-a956be82814d_sh4iY80.png|0|1
+pcenginecd/Super Darius 2 (JP).chd|Super Darius II|https://db.hfsplay.fr/files/2019/09/14/983467aa-06d3-4c70-98ed-1ff7f0d7e85f_zhevlhv.png|0|1
+pcenginecd/Super Mahjong Taikai (JP).chd|Super Mahjong Taikai|https://db.hfsplay.fr/files/2019/09/15/033c7924-d921-41ad-98d8-d620033447f1_hqEiDRJ.jpg|0|1
+pcenginecd/Super Raiden (JP).chd|Super Raiden|https://db.hfsplay.fr/files/2019/09/14/ae815f80-6634-4177-a6b3-ee74ecdc0b72_DBPcAA7.png|0|1
+pcenginecd/Super Real Mahjong P5 Custom (JP).chd|Super Real Mahjong P.V Custom||0|1
+pcenginecd/Super Real Mahjong P2-3 Custom (JP).chd|Super Real Mahjong PII-III Custom||0|1
+pcenginecd/Super Real Mahjong P4 Custom (JP).chd|Super Real Mahjong PIV Custom||0|1
+pcenginecd/Super Real Mahjong Special - Miki Kasumi Shouko no Omoide yori (JP).chd|Super Real Mahjong Special - Miki Kasumi Shouko no Omoide yori||0|1
+pcenginecd/Super Schwarzschild (JP).chd|Super Schwarzschild|https://db.hfsplay.fr/files/2019/09/15/6a3e3d58-3979-435e-9670-2c98fa049f13_aoiPgFt.jpg|0|1
+pcenginecd/Super Schwarzschild 2 (JP).chd|Super Schwarzschild 2|https://db.hfsplay.fr/files/2019/09/15/fb2e9073-7eb9-4ee1-8811-03a3b6bb40d0_cTyJMZs.jpg|0|1
+pcenginecd/Sword Master (JP).chd|Sword Master|https://db.hfsplay.fr/files/2019/09/15/658218df-fdf1-4e2b-8810-198e42e3455a_e6ekLgY.jpg|0|1
+pcenginecd/SydMead TerraForming (US).chd|SydMead TerraForming||0|1
+pcenginecd/Sylphia (JP).chd|Sylphia|https://db.hfsplay.fr/files/2019/09/14/9eb5fa04-e793-400e-bcff-9888cf9323ef_YpPp38d.jpg|0|1
+pcenginecd/Tadaima Yuusha Boshuu-chuu (JP).chd|Tadaima Yuusha Boshuu-chuu||0|1
+pcenginecd/Taiheiki (JP).chd|Taiheiki|https://db.hfsplay.fr/files/2019/09/15/d12b858b-08d1-4d2e-9e6d-9cc67f3cd60e_yST9GHe.jpg|0|1
+pcenginecd/Tanjou - Debut (JP).chd|Tanjou Debut|https://db.hfsplay.fr/files/2019/09/15/ed33e06b-4a9d-45e7-a662-856c4c822c64_eaIITkT.jpg|0|1
+pcenginecd/Tecmo World Cup Super Soccer (JP).chd|Tecmo World Cup Super Soccer|https://db.hfsplay.fr/files/2019/09/15/13048a99-f5fe-4c86-9e0a-c5683219d9cb_aNbsZBY.png|0|1
+pcenginecd/Tenchi Muyou! Ryououki (JP).chd|Tenchi Muyou!: Ryououki|https://db.hfsplay.fr/files/2019/09/15/51bbfa56-0031-4e31-bc93-d566264ccdda_1FtrsIs.jpg|0|1
+pcenginecd/Tenchi o Kurau (JP).chd|Tenchi o Kurau||0|1
+pcenginecd/Tengai Makyou - Deden no Kabuki-den (JP).chd|Tengai Makyou - Deden no Kabuki-den||0|1
+pcenginecd/Tenshi no Uta (JP).chd|Tenshi no Uta|https://db.hfsplay.fr/files/2019/09/15/009ebcc3-46c1-46f8-b3a8-5a5b37d47327_mRnzcFU.jpg|0|1
+pcenginecd/Tenshi no Uta 2 - Datenshi no Sentaku (JP).chd|Tenshi no Uta II - Datenshi no Sentaku||0|1
+pcenginecd/TerraForming (JP).chd|TerraForming||0|1
+pcenginecd/The Addams Family (US).chd|The Addams Family||0|1
+pcenginecd/The Davis Cup Tennis (JP).chd|The Davis Cup Tennis||0|1
+pcenginecd/The Dynastic Hero (US).chd|The Dynastic Hero||0|1
+pcenginecd/The Kick Boxing (JP).chd|The Kick Boxing||0|1
+pcenginecd/The Local Girls of Hawaii (US).chd|The Local Girls of Hawaii||0|1
+pcenginecd/The Manhole (JP).chd|The Manhole||0|1
+pcenginecd/The Pro Yakyuu (JP).chd|The Pro Yakyuu||0|1
+pcenginecd/The Pro Yakyuu Super (JP).chd|The Pro Yakyuu Super||0|1
+pcenginecd/The Pro Yakyuu Super 94 (JP).chd|The Pro Yakyuu Super '94||0|1
+pcenginecd/The Sugoroku 92 - Nari Tore - Nariagari Trendy (JP).chd|The Sugoroku 92 - Nari Tore - Nariagari Trendy||0|1
+pcenginecd/The TV Show (JP).chd|The TV Show||0|1
+pcenginecd/Todd Adventures in Slime World (JP).chd|Todd's Adventures in Slime World||0|1
+pcenginecd/Tokimeki Memorial (JP).chd|Tokimeki Memorial|https://db.hfsplay.fr/files/2019/09/15/0238e7b6-58be-4b32-8c55-87ba0cdea6b3_rm9YWWJ.jpg|0|1
+pcenginecd/Top o Nerae! GunBuster Vol. 1 (JP).chd|Top o Nerae! GunBuster Vol. 1||0|1
+pcenginecd/Top o Nerae! GunBuster Vol. 2 (JP).chd|Top o Nerae! GunBuster Vol. 2||0|1
+pcenginecd/Travel Eple (JP).chd|Travel Eple|https://db.hfsplay.fr/files/2019/09/15/0c5cbce6-7772-4d88-8c8b-87a3570e7e43_DRuV0Oj.jpg|0|1
+pcenginecd/Travellers! Densetsu o Buttobase (JP).chd|Travellers! Densetsu o Buttobase||0|1
+pcenginecd/Uchuu Senkan Yamato (JP).chd|Uchuu Senkan Yamato|https://db.hfsplay.fr/files/2019/09/15/6139521c-52b0-4636-9b45-1f8f0f385a69_3IyPVhD.jpg|0|1
+pcenginecd/Ultra Box 2-gou (JP).chd|Ultra Box 2-gou||0|1
+pcenginecd/Ultra Box 3-gou (JP).chd|Ultra Box 3-gou||0|1
+pcenginecd/Ultra Box 4-gou (JP).chd|Ultra Box 4-gou||0|1
+pcenginecd/Ultra Box 5-gou (JP).chd|Ultra Box 5-gou||0|1
+pcenginecd/Ultra Box 6-gou (JP).chd|Ultra Box 6-gou||0|1
+pcenginecd/Ultra Box Soukan-gou (JP).chd|Ultra Box Soukan-gou||0|1
+pcenginecd/Urusei Yatsura - Stay with You (JP).chd|Urusei Yatsura: Stay With You|https://db.hfsplay.fr/files/2019/09/15/99f7d205-3833-4cba-ae97-3f2bac0fc54e_4iCY4Ws.jpg|0|1
+pcenginecd/Valis 2 (US).chd|Valis II|https://db.hfsplay.fr/files/2019/09/14/3d858227-b0c1-4a12-a354-34082ee9ef79_7Ym4Qpw.png|0|1
+pcenginecd/Valis 2 (JP).chd|Valis II|https://db.hfsplay.fr/files/2019/09/14/3d858227-b0c1-4a12-a354-34082ee9ef79_7Ym4Qpw.png|0|0
+pcenginecd/Valis 3 (US).chd|Valis III|https://db.hfsplay.fr/files/2019/09/14/7b7cf9f7-0d34-44ce-a326-72e7360562d9_6V61afB.png|0|1
+pcenginecd/Valis 3 (JP).chd|Valis III|https://db.hfsplay.fr/files/2019/09/14/7b7cf9f7-0d34-44ce-a326-72e7360562d9_6V61afB.png|0|0
+pcenginecd/Valis 4 (JP).chd|Valis IV|https://db.hfsplay.fr/files/2019/09/14/d12e7744-42f7-428c-9170-8635a5d4b0da_COUGAKr.png|0|1
+pcenginecd/Vasteel (US).chd|Vasteel|https://db.hfsplay.fr/files/2019/09/14/cb30f5d3-510d-4a77-a1a3-f06b3d552d93_LLVhrEc.jpg|0|1
+pcenginecd/Vasteel (JP).chd|Vasteel|https://db.hfsplay.fr/files/2019/09/14/cb30f5d3-510d-4a77-a1a3-f06b3d552d93_LLVhrEc.jpg|0|0
+pcenginecd/Vasteel 2 (JP).chd|Vasteel 2|https://db.hfsplay.fr/files/2019/09/15/3772b8d8-95df-459a-819e-c3d642deb322_aC1jwaX.jpg|0|1
+pcenginecd/Virgin Dream (JP).chd|Virgin Dream|https://db.hfsplay.fr/files/2019/09/15/b7eb8a6a-9703-4d9b-8134-97eecda88b81_jm99ITR.jpg|0|1
+pcenginecd/Where in the World Is Carmen Sandiego (JP).chd|Where in the World is Carmen Sandiego?|https://db.hfsplay.fr/files/2019/09/15/372f08c2-28e9-4c5a-90a1-6aabbc11012d_2Rgu9ij.png|0|1
+pcenginecd/Winds of Thunder (JP).chd|Winds of Thunder||0|1
+pcenginecd/Wizardry 3 and 4 (JP).chd|Wizardry 3 and 4||0|1
+pcenginecd/Wizardry 5 - Heart of the Maelstrom (JP).chd|Wizardry V: Heart of the Maelstrom|https://db.hfsplay.fr/files/2019/09/15/9c9f43d8-ccea-49d9-9121-4946679add9e_qwzXmA5.jpg|0|1
+pcenginecd/Wizardry 1 and 2 (JP).chd|Wizardry I?II|https://db.hfsplay.fr/files/2019/09/15/ee8dca03-560d-43f9-b2c7-4f6e662cdb08_wLlJ2Cb.jpg|0|1
+pcenginecd/Wonder Boy 3 - Monster Lair (JP).chd|Wonder Boy III - Monster Lair||0|1
+pcenginecd/World Heroes 2 (JP).chd|World Heroes 2|https://db.hfsplay.fr/files/2019/09/15/66a6fc12-95da-409f-a60e-2e38c66cc60d_xLCTbCH.png|0|1
+pcenginecd/Wrestle Angels - Double Impact (JP).chd|Wrestle Angels: Double Impact|https://db.hfsplay.fr/files/2019/09/14/d3446d9a-d7f7-4cc2-b2ea-6f0a3f609b4a_wKrnJcU.jpg|0|1
+pcenginecd/Wrestling Universe - Fire Pro Joshi - Dome Choujo Taisen - Zenjo vs JWP (JP).chd|Wrestling Universe - Fire Pro Joshi - Dome Choujo Taisen - Zenjo vs. JWP||0|1
+pcenginecd/Xak (JP).chd|Xak||0|1
+pcenginecd/Xak 3 - The Eternal Recurrence (JP).chd|Xak III: The Eternal Recurrence|https://db.hfsplay.fr/files/2019/09/14/7df11c90-6738-46c5-abd8-0875bba40611_ZumUYfe.jpg|0|1
+pcenginecd/Yamamura Misa Suspense - Kinsenka Kyouezara Satsujin Jiken (JP).chd|Yamamura Misa Suspense - Kinsenka Kyouezara Satsujin Jiken||0|1
+pcenginecd/Yami no Ketsuzoku - Harukanaru Kioku (JP).chd|Yami no Ketsuzoku: Harukanaru Kioku|https://db.hfsplay.fr/files/2019/09/15/5d7ac511-aa5a-4133-898f-5b8a42e39f13_0jR6QUY.jpg|0|1
+pcenginecd/YaWaRa! 2 - A Fashionable Judo Girl! (JP).chd|YaWaRa! 2 - A Fashionable Judo Girl!||0|1
+pcenginecd/YaWaRa! A Fashionable Judo Girl! (JP).chd|YaWaRa! A Fashionable Judo Girl!||0|1
+pcenginecd/Yokoyama Mitsuteru Shin Sangokushi - Tenka wa Ware ni (JP).chd|Yokoyama Mitsuteru Shin Sangokushi: Tenka wa Ware ni|https://db.hfsplay.fr/files/2019/09/15/419c790c-10a2-49f0-9062-fa11cc983475_xadAzJF.jpg|0|1
+pcenginecd/Ys 1 and 2 (JP).chd|Ys 1 and 2||0|1
+pcenginecd/Ys 3 (JP).chd|Ys III||0|1
+pcenginecd/Ys 3 - Wanderers from Ys (US).chd|Ys III: Wanderers from Ys|https://db.hfsplay.fr/files/2019/09/14/e01fd9cf-cf0a-4167-a5bf-bb403c07f15a_KvOAFKx.png|0|1
+pcenginecd/Ys 4 The Dawn of Ys (JP).chd|Ys IV: The Dawn of Ys|https://db.hfsplay.fr/files/2019/09/14/1e2b292a-ff8a-4579-88df-1f72b6e16cb6_UuFpWzx.png|0|1
+pcenginecd/Ys 4 - The Dawn of Ys (JP).chd|Ys IV: The Dawn of Ys|https://db.hfsplay.fr/files/2019/09/14/1e2b292a-ff8a-4579-88df-1f72b6e16cb6_UuFpWzx.png|0|0
+pcenginecd/Ys Book 1 and 2 (US).chd|Ys Book 1 and 2||0|1
+pcenginecd/Yu Yu Hakusho (JP).chd|Yu Yu Hakusho||0|1
+pcenginecd/Yuu Yuu Hakusho - Yami Shoubu!! Ankoku Bujutsu-kai (JP).chd|Yuu Yuu Hakusho - Yami Shoubu!! Ankoku Bujutsu-kai||0|1
+pcenginecd/Zan - Kagerou no Toki (JP).chd|Zan: Kagerou no Toki|https://db.hfsplay.fr/files/2019/09/15/7ee0913d-6364-446f-805e-8c7e3eeaedbb_5cCeQFS.jpg|0|1
+pcenginecd/Zero 4 Champ 2 (JP).chd|Zero 4 Champ II||0|1
+pcenginecd/Zero Wing (JP).chd|Zero Wing|https://db.hfsplay.fr/files/2019/09/14/04f99a74-09e6-49ed-a4a9-fd13311244c4_LXih80S.jpg|0|1
+atarist/10th Frame (1987)(Access)[cr Blue Adept].st|10th Frame||0|1
+atarist/1943.st|1943||0|1
+atarist/500cc Grand Prix (Europe).ipf|500cc Grand Prix||0|1
+atarist/5th Gear (1988)(Hewson)[cr Replicants][t].st|5th Gear||0|1
+atarist/9 Lives (1990)(Frames)[!].stx|9 Lives||0|1
+atarist/Prehistoric Tale, A (1990)(Thalion).stx|A Prehistoric Tale||0|1
+atarist/Aaargh! (1989)(Melbourne House)[one disk].st|Aaargh!||0|1
+atarist/Academy - Tau Ceti II (Europe).ipf|Academy - Tau Ceti II||0|1
+atarist/Action Fighter (1989)(Sega).stx|Action Fighter||0|1
+atarist/Action Service (Europe).ipf|Action Service||0|1
+atarist/Addictaball (Europe).ipf|Addictaball||0|1
+atarist/Adidas Championship Tie Break (Europe).ipf|Adidas Championship Tie Break||0|1
+atarist/Advanced Destroyer Simulator (1990)(Futura)(fr).stx|Advanced Destroyer Simulator||0|1
+atarist/Advanced Dungeons & Dragons - Heroes of the Lance - A DragonLance Action Game (Europe) (Disk 1).ipf|Advanced Dungeons & Dragons - Heroes of the Lance - A DragonLance Action Game||0|1
+atarist/Advanced Dungeons & Dragons - Heroes of the Lance - A DragonLance Action Game (Europe) (Disk 2).ipf|Advanced Dungeons & Dragons - Heroes of the Lance - A DragonLance Action Game||0|0
+atarist/Advanced Dungeons & Dragons - Heroes of the Lance - A DragonLance Action Game (Europe) (Disk 3).ipf|Advanced Dungeons & Dragons - Heroes of the Lance - A DragonLance Action Game||0|0
+atarist/Advanced Fruit Machine Simulator (Europe).ipf|Advanced Fruit Machine Simulator||0|1
+atarist/Advanced Rugby Simulator (Europe).ipf|Advanced Rugby Simulator||0|1
+atarist/Afterburner (1988)(Activision).st|Afterburner||0|1
+atarist/Afterburner (1988)(Activision)(Disk 1 of 2)[!].stx|Afterburner||0|0
+atarist/Airball (1987)(Microdeal).stx|Airball||0|1
+atarist/Alcatraz (1992)(Infogrames)(Disk 1 of 2)[protected].stx|Alcatraz||0|1
+atarist/Alcon (1987)(Taito).stx|Alcon||0|1
+atarist/Alien Storm (1991)(U.S. Gold).stx|Alien Storm||0|1
+atarist/Alien World (1992)(HiTEC Software).stx|Alien World||0|1
+atarist/AlteredB.st|AlteredB||0|1
+atarist/Alternate Reality - The City (Europe) (v3.0).ipf|Alternate Reality - The City||0|1
+atarist/Anarchy (19xx)(Psygnosis).stx|Anarchy||0|1
+atarist/Another World (Europe) (Disk A).ipf|Another World||0|1
+atarist/Another World (Europe) (Disk B).ipf|Another World||0|0
+atarist/Antago (1990)(Art of Dreams)[!].stx|Antago||0|1
+atarist/Apprentice (Europe).ipf|Apprentice||0|1
+atarist/Archipel (1989)(Logotron).stx|Archipel||0|1
+atarist/Archipelagos (Europe).ipf|Archipelagos||0|1
+atarist/Archon (19xx)(Delta Force)[b].st|Archon||0|1
+atarist/Arctic Fox (1986)(Electronic Arts)[!].stx|Arctic Fox||0|1
+atarist/Arkanoid (1987)(Taito).stx|Arkanoid||0|1
+atarist/Armalyte.st|Armalyte||0|1
+atarist/Artificial Dreams (Europe).ipf|Artificial Dreams||0|1
+atarist/Artura (1988)(Gremlin).stx|Artura||0|1
+atarist/Astaroth (1989)(Hewson)[cr Delight].st|Astaroth||0|1
+atarist/Astate (1990)(New Deal Productions)[m MCA].st|Astate||0|1
+atarist/Asterix und Operation Hinkelstein (1989)(Coktel Vision)(de)(Disk 1 of 2).st|Asterix und Operation Hinkelstein||0|1
+atarist/Atax (Europe).ipf|Atax||0|1
+atarist/Atomix (1990)(U.S. Gold).st|Atomix||0|1
+atarist/B17 - Flying Fortress (1993)(MicroProse)(Disk 1 of 2)[cr Cynix].st|B17 - Flying Fortress||0|1
+atarist/Back To The Future II (1990)(MirrorSoft)[cr Empire][t +2 V8].st|Back To The Future II||0|1
+atarist/Back to the Future III (1991)(Image Works)[cr BBC][one disk].st|Back to the Future III||0|1
+atarist/Backgammon Royale (Europe) (En,Fr,De) (v2.50 4 Jan 91).ipf|Backgammon Royale||0|1
+atarist/Backlash (1987)(Novagen)[cr Speedlink][b].st|Backlash||0|1
+atarist/Badlands (1990)(Domark).stx|Badlands||0|1
+atarist/Badlands Pete (1990)(Arc).st|Badlands Pete||0|1
+atarist/Balance of Power - The 1990 Edition (Europe).ipf|Balance of Power - The 1990 Edition||0|1
+atarist/Ballistix (1989)(Psyclapse)[!].stx|Ballistix||0|1
+atarist/Barbarian (1987)(Palace).stx|Barbarian||0|1
+atarist/Barbarian II (1988)(Palace)(Disk 1 of 3)[b][!].stx|Barbarian II||0|1
+atarist/Barbarian II (1988)(Palace)(Disk 2 of 3)[b][!].stx|Barbarian II||0|0
+atarist/Barbarian - The Ultimate Warrior (Europe).ipf|Barbarian - The Ultimate Warrior||0|1
+atarist/Batman - The Caped Crusader (1988)(Ocean)(Disk 1 of 2)[!].stx|Batman - The Caped Crusader||0|1
+atarist/Battle Chess (1989)(Interplay).st|Battle Chess||0|1
+atarist/Battle Command (1990)(Ocean)(M3)[cr Empire].st|Battle Command||0|1
+atarist/Battle Hawks 1942 (1988)(LucasFilm Games)[Password TMC].st|Battle Hawks 1942||0|1
+atarist/Battle Master (1990)(PSS)[cr Empire].st|Battle Master||0|1
+atarist/Battle Probe (Europe).ipf|Battle Probe||0|1
+atarist/Beach Volley (Europe) (Disk 1).ipf|Beach Volley||0|1
+atarist/Beach Volley (Europe) (Disk 2).ipf|Beach Volley||0|0
+atarist/Beastlord (Europe) (Disk 1).ipf|Beastlord||0|1
+atarist/Beastlord (Europe) (Disk 2).ipf|Beastlord||0|0
+atarist/Beyond the Ice Palace (1988)(Elite)[!].stx|Beyond the Ice Palace||0|1
+atarist/Bionic Commando (1987)(Software Creations)[cr Bladerunners].st|Bionic Commando||0|1
+atarist/Black Tiger (1989)(U.S. Gold)[!].stx|Black Tiger||0|1
+atarist/Blasteroids (1987)(Image Works)(Disk 1 of 2)[!].stx|Blasteroids||0|1
+atarist/Blazing Thunder (Europe).ipf|Blazing Thunder||0|1
+atarist/Blinky_s Scary School (1990)(Zeppelin)[cr Medway Boys].st|Blinky_s Scary School||0|1
+atarist/Blinky's Scary School (1990)(Zeppelin)[cr Medway Boys].st|Blinky's Scary School||0|1
+atarist/BlLamp.st|BlLamp||0|1
+atarist/Blockout (Europe).ipf|Block Out|https://db.hfsplay.fr/files/2020/02/28/Block_Out_USA_f2VseZS.png|0|1
+atarist/Block Out (1990)(California Dreams)[cr Replicants].st|Block Out|https://db.hfsplay.fr/files/2020/02/28/Block_Out_USA_f2VseZS.png|0|0
+atarist/BloMoney.st|BloMoney||0|1
+atarist/Blood Money (Europe) (Budget - Sizzlers) (Disk 1).ipf|Blood Money||0|1
+atarist/Blood Money (Europe) (Budget - Sizzlers) (Disk 2).ipf|Blood Money||0|0
+atarist/Bloodwych (1989)(MirrorSoft)[b].st|Bloodwych||0|1
+atarist/Bloodwych - The extended Levels (1989)(MirrorSoft)[cr Replicants].st|Bloodwych - The extended Levels||0|1
+atarist/Blue Angel 69 (1989)(Magic Bytes).st|Blue Angel 69||0|1
+atarist/BMX Simulator (1988)(ECS Distribution)[cr Axel Follet].st|BMX Simulator||0|1
+atarist/Bob Winner (Europe).ipf|Bob Winner||0|1
+atarist/Bobo (1988)(Infogrames).st|Bobo||0|1
+atarist/Bombjack (1988)(Elite).st|Bombjack||0|1
+atarist/Bombuzal (1988)(Image Works).stx|Bombuzal||0|1
+atarist/Borrowed Time (1986)(Interplay)[cr GMC].st|Borrowed Time||0|1
+atarist/Boston Bomb Club (1991)(Silmarils).stx|Boston Bomb Club||0|1
+atarist/Boulder Dash Construction Kit (1987)(First Star Software)[!].stx|Boulder Dash Construction Kit||0|1
+atarist/Brataccas (1987)(Psygnosis)[!].stx|Brataccas||0|1
+atarist/Brides of Dracula (1991)(Gonzo Games)(M4)[cr Fuzion][b].st|Brides of Dracula||0|1
+atarist/Bridge Master (Europe).ipf|Bridge Master||0|1
+atarist/Bridge Player 2000 with Tutor (Europe).ipf|Bridge Player 2000 with Tutor||0|1
+atarist/Bubble Bobble (1987)(Firebird)[!].stx|Bubble Bobble||0|1
+atarist/Bubble Bobble 2 - Extended Screens (1987)(Firebird)[h].st|Bubble Bobble 2 - Extended Screens||0|1
+atarist/Bubble Ghost (1987)(ERE)[!].stx|Bubble Ghost||0|1
+atarist/Bubble Trouble (1987)(Poffel Products).st|Bubble Trouble||0|1
+atarist/Buggy Boy (1988)(Elite)[!].stx|Buggy Boy||0|1
+atarist/Bully_s Sporting Darts (1993) (Alternative Software)[cr Atarilegend].st|Bully_s Sporting Darts||0|1
+atarist/Bumpy (Europe).ipf|Bumpy||0|1
+atarist/Burger Man (Europe).ipf|Burger Man||0|1
+atarist/Cabal (1988)(Ocean)[cr Empire][t].st|Cabal|https://db.hfsplay.fr/files/2020/02/28/Cabal_Europe_8pViuAd.png|0|1
+atarist/Cadaver - The Pay Off (1991)(Renegade)(M3)[cr Elite].stx|Cadaver - The Pay Off||0|1
+atarist/California Games (1989)(Epyx - U.S. Gold)[cr V8].st|California Games|https://db.hfsplay.fr/files/2020/02/28/California_Games_USA_B7ffTRx.png|0|1
+atarist/Cannon Fodder (1994)(Virgin)(fr)(Disk 3 of 3).stx|Cannon Fodder||0|1
+atarist/Captain Blood (1988)(ERE)(Disk 1 of 2).stx|Captain Blood||0|1
+atarist/Captain Fizz (1989)(Psyclapse)(M3)[!].stx|Captain Fizz||0|1
+atarist/Captain Fizz Meets the Blaster-Trons (Europe) (En,Fr,De).ipf|Captain Fizz Meets the Blaster-Trons||0|1
+atarist/Captive (1990)(Mindscape)[b].st|Captive||0|1
+atarist/Carrier Command (1988)(Rainbird).st|Carrier Command||0|1
+atarist/Cartoon Capers (Europe) (Disk 1).ipf|Cartoon Capers||0|1
+atarist/Cartoon Capers (Europe) (Disk 2).ipf|Cartoon Capers||0|0
+atarist/Castle Master (1990)(Domark)(M3).st|Castle Master||0|1
+atarist/Castle Master II - The Crypt (1990)(New Dimensions).st|Castle Master II - The Crypt||0|1
+atarist/Catch 23 (Europe).ipf|Catch 23||0|1
+atarist/Cauldron.st|Cauldron||0|1
+atarist/Chambers of Shaolin (1989)(Grandslam)(Disk 1 of 2)[!].stx|Chambers of Shaolin||0|1
+atarist/Championship Baseball (1987)(Activision)[!].stx|Championship Baseball||0|1
+atarist/Championship Cricket (Europe).ipf|Championship Cricket||0|1
+atarist/Championship Wrestling (1986)(Epyx).stx|Championship Wrestling||0|1
+atarist/Chariots of Wrath (1989)(Impressions).st|Chariots of Wrath||0|1
+atarist/Chase (Europe).ipf|Chase||0|1
+atarist/Chase HQ (1989)(Ocean).stx|Chase HQ||0|1
+atarist/Chess Player 2150 (Europe).ipf|Chess Player 2150||0|1
+atarist/Chess Player 2150 (Europe) (Compilation - TenStar Pack).ipf|Chess Player 2150||0|0
+atarist/Chess Simulator (1990)(Infogrames)[cr Empire].st|Chess Simulator||0|1
+atarist/Chicago 30's (Europe).ipf|Chicago 30's||0|1
+atarist/Chip's Challenge (Europe).ipf|Chip's Challenge|https://db.hfsplay.fr/files/2020/02/28/Chips_Challenge_Europe_NaCD3Gy.png|0|1
+atarist/Chrono Quest II (Europe) (Dual Sided) (Disk 1).ipf|Chrono Quest II||0|1
+atarist/Chrono Quest II (Europe) (Dual Sided) (Disk 2).ipf|Chrono Quest II||0|0
+atarist/Chrono Quest II (Europe) (Dual Sided) (Disk 3).ipf|Chrono Quest II||0|0
+atarist/Chuck Rock (1991)(Core Design)(Disk 1 of 2).stx|Chuck Rock||0|1
+atarist/Chuckie Egg (Europe).ipf|Chuckie Egg||0|1
+atarist/Chuckie Egg II (Europe).ipf|Chuckie Egg II||0|1
+atarist/Cisco Heat (1991)(Jaleco).stx|Cisco Heat||0|1
+atarist/Cloud Kingdoms (Europe).ipf|Cloud Kingdoms||0|1
+atarist/Colorado (1990)(Silmarils)(de-en)[!].stx|Colorado||0|1
+atarist/Combo Racer (1990)(Gremlin)[m].st|Combo Racer||0|1
+atarist/Conflict Europe (1989)(PSS).stx|Conflict Europe||0|1
+atarist/Conflict Europe (1989)(PSS)(Disk 1 of 2).stx|Conflict Europe||0|0
+atarist/Conqueror (1989)(Rainbow Arts)[!].stx|Conqueror||0|1
+atarist/Conquests of Camelot - The Search for the Grail (Europe) (v1.019) (Disk 1).ipf|Conquests of Camelot - The Search for the Grail||0|1
+atarist/Conquests of Camelot - The Search for the Grail (Europe) (v1.019) (Disk 2).ipf|Conquests of Camelot - The Search for the Grail||0|0
+atarist/Conquests of Camelot - The Search for the Grail (Europe) (v1.019) (Disk 3).ipf|Conquests of Camelot - The Search for the Grail||0|0
+atarist/Conquests of Camelot - The Search for the Grail (Europe) (v1.019) (Disk 4).ipf|Conquests of Camelot - The Search for the Grail||0|0
+atarist/Continental Circus (Europe) (Disk 1).ipf|Continental Circus||0|1
+atarist/Continental Circus (Europe) (Disk 2).ipf|Continental Circus||0|0
+atarist/Corruption (Europe) (v1.9).ipf|Corruption||0|1
+atarist/Crack Down (Europe) (Budget - Kixx).ipf|Crack Down||0|1
+atarist/CrCarsII.st|CrCarsII||0|1
+atarist/Creatures (1992)(Thalamus)[cr Cynix].st|Creatures||0|1
+atarist/Cricket Captain (Europe) (v1.5 1991).ipf|Cricket Captain||0|1
+atarist/Crime City (1991)(If)[cr Elite].st|Crime City||0|1
+atarist/Crystal Castles (Europe).ipf|Crystal Castles||0|1
+atarist/Cyberball (Europe) (Disk 1).ipf|Cyberball||0|1
+atarist/Cyberball (Europe) (Disk 2).ipf|Cyberball||0|0
+atarist/Cybercon III (1991)(U.S. Gold).st|Cybercon III||0|1
+atarist/Cybernoid II (1989)(Hewson)[cr Neil of Cor Blimey][t].st|Cybernoid II||0|1
+atarist/Dames Simulator (France).ipf|Dames Simulator||0|1
+atarist/Dangimere II - The Dungeon (preview) (1994-03-06)(Billger, Jeffrey).st|Dangimere II - The Dungeon||0|1
+atarist/Darius+ (Europe) (Disk 1).ipf|Darius+||0|1
+atarist/Darius+ (Europe) (Disk 2).ipf|Darius+||0|0
+atarist/Dark Castle (1987)(Three-Sixty)(Disk 1 of 3).stx|Dark Castle||0|1
+atarist/Darkman.st|Darkman||0|1
+atarist/Day of the Viper (1989)(Accolade).st|Day of the Viper||0|1
+atarist/Death Sword (1987)(Palace)[aka Barbarian][!].stx|Death Sword||0|1
+atarist/Death Trap (1990)(Anco).stx|Death Trap||0|1
+atarist/Defender of the Crown (1987)(Cinemaware)(Disk 1 of 2)[!].stx|Defender of the Crown||0|1
+atarist/Deflektor (1988)(Gremlin)[h Splatterass].st|Deflektor||0|1
+atarist/Deja Vu - A Nightmare Comes True! (Europe) (Disk 1).ipf|Deja Vu - A Nightmare Comes True!||0|1
+atarist/Deja Vu - A Nightmare Comes True! (Europe) (Disk 2).ipf|Deja Vu - A Nightmare Comes True!||0|0
+atarist/Deliverance (Europe) (Disk 1).ipf|Deliverance||0|1
+atarist/Deliverance (Europe) (Disk 2).ipf|Deliverance||0|0
+atarist/Demon Blue (Europe).ipf|Demon Blue||0|1
+atarist/Demoniak (Europe) (v1.0).ipf|Demoniak||0|1
+atarist/Devious Designs (1991)(Image Works)(Disk 1 of 2)[cr Elite][t].st|Devious Designs||0|1
+atarist/Dick Tracy (1990)(Titus)(Disk 2 of 2).st|Dick Tracy||0|1
+atarist/Die Hard 2 (1992)(Grandslam)[cr Cynix].st|Die Hard 2||0|1
+atarist/Diosa de Cozumel (1990)(Aventuras AD)(es).st|Diosa de Cozumel||0|1
+atarist/Disc (Europe) (Budget - Action Sixteen).ipf|Disc||0|1
+atarist/Dizzy Dice (Europe) (Budget - Smash 16).ipf|Dizzy Dice||0|1
+atarist/DooBug.st|DooBug||0|1
+atarist/Double Dragon (1988)(Tradewest)(Disk 1 of 2)[!].stx|Double Dragon||0|1
+atarist/Double Dragon II - The Revenge (1989)(Tradewest)(Disk 1 of 2).stx|Double Dragon II - The Revenge||0|1
+atarist/DragBre.st|DragBre||0|1
+atarist/Dragon Spirit (Europe) (Disk 1).ipf|Dragon Spirit||0|1
+atarist/Dragon Spirit (Europe) (Disk 2).ipf|Dragon Spirit||0|0
+atarist/Dragonflight (1990)(Thalion)(de)(Backupdisk B)[!].stx|Dragonflight||0|1
+atarist/Dragons Breath (1990)(Palace)(fr)(Disk 1 of 2)[protected].stx|Dragons Breath||0|1
+atarist/Dragons of Flame (1989)(U.S. Gold).st|Dragons of Flame||0|1
+atarist/Drakkhen (1989)(Infogrames)(fr)(Disk 1 of 3)[!].stx|Drakkhen||0|1
+atarist/Drakkhen (1989)(Infogrames)(fr)(Disk 2 of 3)[!].stx|Drakkhen||0|0
+atarist/Drakkhen (1989)(Infogrames)(fr)(Disk 3 of 3)[!].stx|Drakkhen||0|0
+atarist/Driller (1988)(Incentive Software).st|Driller||0|1
+atarist/Drivin_ Force (1990)(Digital Magic).stx|Drivin_ Force||0|1
+atarist/Dungeon Master (1987)(FTL)[!].stx|Dungeon Master||0|1
+atarist/Dungeon Master 2 - Legend of Skulldeep (19xx)(FTL)[cr Atarilegend].st|Dungeon Master 2 - Legend of Skulldeep||0|1
+atarist/Dynasty Wars (Europe) (Compilation - Les Chevaliers).ipf|Dynasty Wars||0|1
+atarist/E-Motion (1990)(U.S. Gold)[!].stx|E-Motion||0|1
+atarist/East vs. West Berlin 1948 (Europe) (Disk 1).ipf|East vs. West Berlin 1948||0|1
+atarist/East vs. West Berlin 1948 (Europe) (Disk 2).ipf|East vs. West Berlin 1948||0|0
+atarist/EddDuck.st|EddDuck||0|1
+atarist/Elemental (Europe) (En,Fr,De).ipf|Elemental||0|1
+atarist/Elf (Europe) (MicroValue).ipf|Elf||0|1
+atarist/Elite (1988)(Firebird).st|Elite||0|1
+atarist/Emlyn Hughes International Soccer (1990)(Audiogenic).stx|Emlyn Hughes International Soccer||0|1
+atarist/Enchanted Land (1990)(Thalion).st|Enchanted Land||0|1
+atarist/Enterprise (Europe).ipf|Enterprise||0|1
+atarist/Erik (Europe).ipf|Erik||0|1
+atarist/Exolon (1987)(Hewson).stx|Exolon||0|1
+atarist/Eye of Horus (Europe).ipf|Eye of Horus||0|1
+atarist/F-15 Strike Eagle 2 (1991)(MicroProse)(Disk 1 of 2)[protected].stx|F-15 Strike Eagle 2||0|1
+atarist/F-15 Strike Eagle 2 (1991)(MicroProse)(Disk 1 of 2)[cr Superior][f Elite][b].st|F-15 Strike Eagle 2||0|0
+atarist/F-16 Combat Pilot (1989)(Digital Integration)(Disk 1 of 2).stx|F-16 Combat Pilot||0|1
+atarist/F-19 Stealth Fighter (Europe) (v1.02) (Disk A).ipf|F-19 Stealth Fighter||0|1
+atarist/F-19 Stealth Fighter (Europe) (v1.02) (Disk B).ipf|F-19 Stealth Fighter||0|0
+atarist/F-19 Stealth Fighter (Europe) (v1.02) (Disk C).ipf|F-19 Stealth Fighter||0|0
+atarist/F-19 Stealth Fighter v1.02 (1988)(MicroProse)(Disk 1 of 3)[protected].stx|F-19 Stealth Fighter v1.02||0|1
+atarist/F-29 Retaliator (1989)(Ocean)[b].st|F-29 Retaliator||0|1
+atarist/Face-Off Ice Hockey (Europe) (En,Fr,De,Es,It).ipf|Face-Off Ice Hockey||0|1
+atarist/FaceOff.st|FaceOff||0|1
+atarist/Falcon Mission Disk Volume II v1.3 (1990)(Sphere Inc.)[!].stx|Falcon Mission Disk Volume II v1.3||0|1
+atarist/Falcon Mission Disk Volume I v1.1 (1989)(Sphere Inc.)[!].stx|Falcon Mission Disk Volume I v1.1||0|1
+atarist/Fantasy World Dizzy (19xx)(Codemasters).stx|Fantasy World Dizzy||0|1
+atarist/Fast Food Dizzy (19xx)(Codemasters).stx|Fast Food Dizzy||0|1
+atarist/Fate - Gates of Dawn (1991)(ReLINE Software)(Disk 1 of 2).st|Fate - Gates of Dawn||0|1
+atarist/Federation of free Traders (1989)(Gremlin)[cr Spectre].st|Federation of free Traders||0|1
+atarist/Fernandez Must Die (1988)(Image Works).stx|Fernandez Must Die||0|1
+atarist/Ferrari Formula One (1989)(Electronic Arts)[cr Medway Boys].st|Ferrari Formula One||0|1
+atarist/Fighting Soccer (1989)(Activision)[!].stx|Fighting Soccer||0|1
+atarist/Final Assault (1988)(Epyx).st|Final Assault||0|1
+atarist/Final Battle (1990)(Mirrorsoft)(fr).stx|Final Battle||0|1
+atarist/Fire and Brimstones (1990)(MicroProse)(Disk 1 of 2).stx|Fire and Brimstones||0|1
+atarist/Fire and Forget II - The Death Convoy (Europe).ipf|Fire and Forget II - The Death Convoy||0|1
+atarist/Firestar (1991)(Trojan).stx|Firestar||0|1
+atarist/Flight of the Intruder (1991)(Spectrum Holobyte)[cr H-Soft].st|Flight of the Intruder||0|1
+atarist/Flight Simulator II (1987)(Sublogic).stx|Flight Simulator II||0|1
+atarist/Flight Simulator II (1987)(Sublogic)[cr DMA].st|Flight Simulator II||0|0
+atarist/Flight Simulator II - Scenery Disk Western Europe (1986)(Sublogic).st|Flight Simulator II - Scenery Disk Western Europe||0|1
+atarist/Flimbo_s Quest (1990)(System 3 Software)[!].stx|Flimbo_s Quest||0|1
+atarist/Football Manager 2 (Europe).ipf|Football Manager 2||0|1
+atarist/Forgotten Worlds (1989)(U.S. Gold)(Disk 1 of 2)[!].stx|Forgotten Worlds||0|1
+atarist/Foundation's Waste (Europe) (Budget - Klassix).ipf|Foundation's Waste||0|1
+atarist/Foundation's Waste (Europe) (Coverdisk - The One - Issue 22) (Amiga + ST).ipf|Foundation's Waste||0|0
+atarist/Frankenstein (1992)(Zeppelin).stx|Frankenstein||0|1
+atarist/Frenetic (1991)(Core Design).stx|Frenetic||0|1
+atarist/Frogger.st|Frogger||0|1
+atarist/Full Metal Planete (1989)(HiTEC Software).st|Full Metal Planete||0|1
+atarist/Future Basketball (1990)(Hewson)[cr Replicants].st|Future Basketball||0|1
+atarist/Future Wars - Time Travellers (Europe) (Disk 1).ipf|Future Wars - Time Travellers||0|1
+atarist/Future Wars - Time Travellers (Europe) (Disk 2).ipf|Future Wars - Time Travellers||0|0
+atarist/Future Wars - Time Travellers (Europe) (Disk 3).ipf|Future Wars - Time Travellers||0|0
+atarist/Galaxy Force II (Europe) (Disk A).ipf|Galaxy Force II||0|1
+atarist/Galaxy Force II (Europe) (Disk B).ipf|Galaxy Force II||0|0
+atarist/Game Over II (Europe).ipf|Game Over II||0|1
+atarist/Garfield - Big, Fat, Hairy Deal (1988)(Softek)[b].st|Garfield - Big, Fat, Hairy Deal||0|1
+atarist/gauntlet_ii_us_gold_a.STX|gauntlet_ii_us_gold_a||0|1
+atarist/gauntlet_ii_us_gold_b.STX|gauntlet_ii_us_gold_b||0|1
+atarist/Gazza's Super Soccer (Europe) (En,Fr,It,Gd).ipf|Gazza's Super Soccer||0|1
+atarist/GConq.st|GConq||0|1
+atarist/Gemini Wing (Europe) (Disk 1).ipf|Gemini Wing||0|1
+atarist/Gemini Wing (Europe) (Disk 2).ipf|Gemini Wing||0|0
+atarist/Get Dexter (Europe) (En,Fr,De,Es).ipf|Get Dexter||0|1
+atarist/GFL Championship Football (1987)(Activision)[!].stx|GFL Championship Football||0|1
+atarist/GForceII.st|GForceII||0|1
+atarist/Ghosts'n Goblins (Europe) (Compilation - Finale).ipf|Ghosts'n Goblins||0|1
+atarist/Ghouls _n_ Ghosts (1988)(U.S. Gold)(Disk 1 of 2)[!].stx|Ghouls _n_ Ghosts||0|1
+atarist/Go-Moku + Renju (Europe).ipf|Go-Moku + Renju||0|1
+atarist/GoldAxe.st|GoldAxe||0|1
+atarist/Goldrunner (1987)(Microdeal)[cr 42-Crew].st|Goldrunner||0|1
+atarist/Goofy's Railway Express (Europe) (En,Fr,De,Es,It).ipf|Goofy's Railway Express||0|1
+atarist/Gravity (Europe) (Disk 1).ipf|Gravity||0|1
+atarist/Gravity (Europe) (Disk 2).ipf|Gravity||0|0
+atarist/Growth (Europe).ipf|Growth||0|1
+atarist/Guardian Angel (Europe).ipf|Guardian Angel||0|1
+atarist/Hacker II - The Doomsday Papers (Europe).ipf|Hacker II - The Doomsday Papers||0|1
+atarist/Hades Nebula (1987)(Nexus Software)[cr 42-Crew][t].st|Hades Nebula||0|1
+atarist/Hammerfist (Europe).ipf|Hammerfist||0|1
+atarist/Hard Drivin_ (1989)(Domark)[cr Mad].st|Hard Drivin_||0|1
+atarist/Hard Nova (Europe) (Earth Disk).ipf|Hard Nova||0|1
+atarist/Hard Nova (Europe) (Install Disk).ipf|Hard Nova||0|0
+atarist/HardBall! (Europe) (Compilation - Accolade All Time Favourites).ipf|HardBall!||0|1
+atarist/Harlequin (1992)(Gremlin)[cr Elite].st|Harlequin||0|1
+atarist/Harley Davidson (1990)(Mindscape)[cr Gors Soft].st|Harley Davidson||0|1
+atarist/Harley-Davidson - The Road to Sturgis (Europe) (Disk 1).ipf|Harley-Davidson - The Road to Sturgis||0|1
+atarist/Harley-Davidson - The Road to Sturgis (Europe) (Disk 2).ipf|Harley-Davidson - The Road to Sturgis||0|0
+atarist/Heavy Metal (1990)(Access).st|Heavy Metal||0|1
+atarist/Heimdall (1992)(Core Design)(Disk 1 of 4)[b].st|Heimdall||0|1
+atarist/Hellraider (Europe).ipf|Hellraider||0|1
+atarist/Heroes of the Lance v1.0 (1988)(SSI)(Disk 1 of 3).st|Heroes of the Lance v1.0||0|1
+atarist/Highway Patrol II (1990)(Titus)(fr)[!].stx|Highway Patrol II||0|1
+atarist/Hill Street Blues (Europe) (En,Fr,De,Es,It) (v1.11 26.3.1991) (Budget - Buzz).ipf|Hill Street Blues||0|1
+atarist/Hillsfar v1.0 (1989)(SSI)(de).st|Hillsfar v1.0||0|1
+atarist/Hollywood Hijinx (1986)(Infocom).st|Hollywood Hijinx||0|1
+atarist/Hostages (1988)(Infogrames).stx|Hostages||0|1
+atarist/Hotshot (Europe).ipf|Hotshot||0|1
+atarist/Hunter Killer (Europe) (v1.01) (Budget - 16 Blitz).ipf|Hunter Killer||0|1
+atarist/Hydra.st|Hydra||0|1
+atarist/Hyperbowl (Europe).ipf|Hyperbowl||0|1
+atarist/HZombies.st|HZombies||0|1
+atarist/I, Ball (Europe).ipf|I, Ball||0|1
+atarist/Ice Hockey aka Face Off (Europe).ipf|Ice Hockey aka Face Off||0|1
+atarist/Imperium (1990)(Electronic Arts)[b].stx|Imperium||0|1
+atarist/Impossamole (1990)(Core Design)[TOS 1.06].stx|Impossamole||0|1
+atarist/Impossible Mission II (1988)(Epyx)[!].stx|Impossible Mission II||0|1
+atarist/Indiana Jones and the Temple of Doom (1989)(Mindscape).stx|Indiana Jones and the Temple of Doom||0|1
+atarist/Indiana Jones et la Derniere Croisade (1989)(LucasFilm Games)(fr)(Disk 1 of 6)[!].stx|Indiana Jones et la Derniere Croisade||0|1
+atarist/Infestation (1990)(Psygnosis)(M3)[!].stx|Infestation||0|1
+atarist/International 3D Tennis (1990)(Palace Software).st|International 3D Tennis||0|1
+atarist/International Ninja Rabbits (19xx)(Micro Value)[cr Cynix].st|International Ninja Rabbits||0|1
+atarist/International Truck Racing (Europe).ipf|International Truck Racing||0|1
+atarist/Interphase (1990)(Image Works).st|Interphase||0|1
+atarist/Iron Lord (1989)(UBI Soft)[budget}.stx|Iron Lord[budget}||0|1
+atarist/Ishar II - Messengers of Doom (1993)(Silmarils)(fr)(Disk 1 of 3).stx|Ishar II - Messengers of Doom||0|1
+atarist/Ishar - Legend of the Fortress (1992)(Silmarils)(fr)(Disk 1 of 2).stx|Ishar - Legend of the Fortress||0|1
+atarist/Italy 1990 (1990)(U.S. Gold)(Disk 1 of 2).stx|Italy 1990||0|1
+atarist/Ivanhoe.st|Ivanhoe||0|1
+atarist/James Pond II - Codename Robocod (1992)(Vectordean).stx|James Pond II - Codename Robocod||0|1
+atarist/James Pond - Underwater Agent (Europe).ipf|James Pond - Underwater Agent||0|1
+atarist/Jewels of Darkness (Europe).ipf|Jewels of Darkness||0|1
+atarist/Joust (1986)(Atari Corp.)[cr LSD].st|Joust||0|1
+atarist/Kick Off (1989)(Anco).stx|Kick Off||0|1
+atarist/Kick Off 2 (1991)(Anco).stx|Kick Off 2||0|1
+atarist/Kick Off 2 - Final Whistle (1991)(Anco).stx|Kick Off 2 - Final Whistle||0|1
+atarist/Kick Off 2 - Return to Europe (Europe) (v2.1e).ipf|Kick Off 2 - Return to Europe||0|1
+atarist/Kick Off 2 - The Final Whistle (Europe) (v2.1e).ipf|Kick Off 2 - The Final Whistle||0|1
+atarist/Kick Off 2 - Winning Tactics (Europe).ipf|Kick Off 2 - Winning Tactics||0|1
+atarist/Kid Gloves (19xx)(Millennium)[cr ACF][t].st|Kid Gloves||0|1
+atarist/King_s Quest (1986)(Sierra)(Disk 1 of 2)[!].stx|King_s Quest||0|1
+atarist/King's Quest III - To Heir is Human (Europe) (v1.02 11.18.86) (Disk 1).ipf|King's Quest III - To Heir is Human||0|1
+atarist/King's Quest III - To Heir is Human (Europe) (v1.02 11.18.86) (Disk 2).ipf|King's Quest III - To Heir is Human||0|0
+atarist/King's Quest III - To Heir is Human (Europe) (v1.02 11.18.86) (Disk 3).ipf|King's Quest III - To Heir is Human||0|0
+atarist/Klax (1990)(Atari).stx|Klax||0|1
+atarist/KniForce.st|KniForce||0|1
+atarist/Knightmare (1991)(Mindscape)(Disk 1 of 2).stx|Knightmare||0|1
+atarist/Knightmare (1991)(Mindscape)(Disk 2 of 2).stx|Knightmare||0|0
+atarist/Laser Squad (1989)(Blade Software).stx|Laser Squad||0|1
+atarist/Last Ninja 2 (1990)(System 3)[!].stx|Last Ninja 2||0|1
+atarist/Last Ninja 3 (Europe) (Budget - Kixx) (Disk 1).ipf|Last Ninja 3||0|1
+atarist/Last Ninja 3 (Europe) (Budget - Kixx) (Disk 2).ipf|Last Ninja 3||0|0
+atarist/Leader Board (Europe).ipf|Leader Board||0|1
+atarist/Leader Board Tournament (Europe) (Compilation - Leader Board Birdie) (Disk 2).ipf|Leader Board Tournament||0|1
+atarist/Leather Goddesses of Phobos (1986)(Activision)[b].st|Leather Goddesses of Phobos||0|1
+atarist/Leatherneck (1988)(Microdeal).st|Leatherneck||0|1
+atarist/Legend of Faerghail (1990)(ReLINE Software)(Disk 1 of 4).stx|Legend of Faerghail||0|1
+atarist/Legend of the Sword (1988)(Silicon Soft).st|Legend of the Sword||0|1
+atarist/Leisure Suit Larry 2 - Leisure Suit Larry Goes Looking For Love - In Several Wrong Places - (1988)(Sierra)(Disk 1 of 3)[!].stx|Leisure Suit Larry 2 - Leisure Suit Larry Goes Looking For Love - In Several Wrong Places -||0|1
+atarist/Leisure Suit Larry in - The Land of the Lounge Lizards (Europe) (v1.04 6.18.87) (Disk 1).ipf|Leisure Suit Larry in - The Land of the Lounge Lizards||0|1
+atarist/Leisure Suit Larry in - The Land of the Lounge Lizards (Europe) (v1.04 6.18.87) (Disk 2).ipf|Leisure Suit Larry in - The Land of the Lounge Lizards||0|0
+atarist/Lemmings (1990)(Psygnosis)[!].stx|Lemmings|https://db.hfsplay.fr/files/2020/02/28/Lemmings_Europe_Al3V5Dj.png|0|1
+atarist/Lethal Weapon (1992)(Ocean)[cr ICS][t +4].st|Lethal Weapon||0|1
+atarist/Lethal Xcess - Wings of Death II (Europe) (Disk B).ipf|Lethal Xcess - Wings of Death II||0|1
+atarist/Lethal Xcess - Wings of Death II (Europe) (Amiga + ST) (Disk A).ipf|Lethal Xcess - Wings of Death II||0|0
+atarist/Licence to Kill (1989)(Domark).stx|Licence to Kill||0|1
+atarist/Locomotion (Europe) (Byte Back).ipf|Locomotion||0|1
+atarist/Lode Runner (1989)(Broderbund)[cr Empire].st|Lode Runner|https://db.hfsplay.fr/files/2020/02/28/Lode_Runner_USA_lnsVDXL.png|0|1
+atarist/Logical (Europe).ipf|Logical||0|1
+atarist/Loopz (1990)(Audiogenic)[cr Empire].st|Loopz|https://db.hfsplay.fr/files/2020/02/28/Loopz_Europe_5uGHXuP.png|0|1
+atarist/Lord of Chaos (1991)(UBI Soft)(M3)[cr Empire].st|Lord of Chaos||0|1
+atarist/Lotus III - The Ultimate Challenge (1992)(Gremlin).stx|Lotus III - The Ultimate Challenge||0|1
+atarist/Lotus Esprit Turbo Challenge (1990)(Gremlin).stx|Lotus Esprit Turbo Challenge||0|1
+atarist/Lotus Turbo Challenge II (1991)(Gremlin).stx|Lotus Turbo Challenge II||0|1
+atarist/Lure of the Temptress (France) (17.6.1992) (Disk A).ipf|Lure of the Temptress||0|1
+atarist/Lure of the Temptress (France) (17.6.1992) (Disk B).ipf|Lure of the Temptress||0|0
+atarist/Lure of the Temptress (France) (17.6.1992) (Disk C).ipf|Lure of the Temptress||0|0
+atarist/Lure of the Temptress (France) (17.6.1992) (Boot Disk).ipf|Lure of the Temptress||0|0
+atarist/M1 Tank Platoom v749.01 (1990)(MicroProse)(Disk 1 of 2).st|M1 Tank Platoom v749.01||0|1
+atarist/Mach 3 (Europe) (Disk A).ipf|Mach 3||0|1
+atarist/Mach 3 (Europe) (Disk B).ipf|Mach 3||0|0
+atarist/Mafdet and the Book of the Dead (Europe).ipf|Mafdet and the Book of the Dead||0|1
+atarist/Magic Boy (1993)(Empire)[cr Euroswap][t].st|Magic Boy||0|1
+atarist/Magic Fly (1990)(Electronic Arts).st|Magic Fly||0|1
+atarist/Magic Lines (1990)(Thalion).stx|Magic Lines||0|1
+atarist/Magicland Dizzy (1991)(Codemasters).stx|Magicland Dizzy||0|1
+atarist/Major Motion (1985)(MichTron).st|Major Motion||0|1
+atarist/Manchester United - The Official Computer Game (Europe) (En,Fr,De,Es,It,Sv) (Disk 1).ipf|Manchester United - The Official Computer Game||0|1
+atarist/Manchester United - The Official Computer Game (Europe) (En,Fr,De,Es,It,Sv) (Disk 2).ipf|Manchester United - The Official Computer Game||0|0
+atarist/Manhattan Dealers (19xx)(Silmarils)(fr)[cr 42-Crew][one disk].st|Manhattan Dealers||0|1
+atarist/Manhunter 2 - San Francisco v1.0 (1989-07-29)(Sierra)(Disk 1 of 3).st|Manhunter 2 - San Francisco v1.0||0|1
+atarist/Manhunter - New York v1.03 (1988-10-20)(Sierra)(Disk 1 of 2)[cr].st|Manhunter - New York v1.03||0|1
+atarist/Maniac Mansion (1988)(LucasFilm Games)[cr MCA].st|Maniac Mansion||0|1
+atarist/Manix (1990)(Millennium)(M3)[!].stx|Manix||0|1
+atarist/Manoir de Mortevielle, Le (France) (Disk 1).ipf|Manoir de Mortevielle, Le||0|1
+atarist/Manoir de Mortevielle, Le (France) (Disk 2).ipf|Manoir de Mortevielle, Le||0|0
+atarist/Marble Madness (1986)(Electronic Arts)[cr STCS].st|Marble Madness|https://db.hfsplay.fr/files/2020/02/28/Marble_Madness_Europe_Kloe2X1.png|0|1
+atarist/Masterblazer (1990)(Rainbow Arts)[cr Empire].st|Masterblazer||0|1
+atarist/Matrix Marauders (19xx)(Psyclapse).stx|Matrix Marauders||0|1
+atarist/Maupiti Island (1990)(Lankhor)(fr)(Disk 1 of 2).stx|Maupiti Island||0|1
+atarist/Mayday Squad (1989)(Tynesoft)(Disk 1 of 2).stx|Mayday Squad||0|1
+atarist/Mean 18 (Europe) (Compilation - Accolade All Time Favourites) (Program Disk).ipf|Mean 18||0|1
+atarist/Mean 18 (Europe) (Compilation - Accolade All Time Favourites) (Famous Courses Disk - Volume I).ipf|Mean 18||0|0
+atarist/Mean 18 (Europe) (Compilation - Accolade All Time Favourites) (Famous Courses Disk - Volume II).ipf|Mean 18||0|0
+atarist/Mega Phoenix (1991)(Dinamic).st|Mega Phoenix||0|1
+atarist/Mega Twins (1991)(U.S. Gold)(Disk 1 of 2).stx|Mega Twins||0|1
+atarist/Mercenary - Escape from Targ & The Second City (Europe) (Compilation - Premier Collection II).ipf|Mercenary - Escape from Targ & The Second City||0|1
+atarist/Metal Mutant (1991)(Silmarils).stx|Metal Mutant||0|1
+atarist/Metro-Cross (1985)(Probe Software).stx|Metro-Cross||0|1
+atarist/Microprose Soccer (1989)(MicroProse)(Disk 1 of 2).stx|Microprose Soccer||0|1
+atarist/Midnight Resistance (1990)(Ocean)(Disk 1 of 2)[!].stx|Midnight Resistance||0|1
+atarist/Midwinter II (1991)(Maelstrom Games)(fr)(Disk 1 of 3)[protected].stx|Midwinter II||0|1
+atarist/Mighty Bomb Jack (1990)(Tecmo)(M3).stx|Mighty Bomb Jack||0|1
+atarist/Mindwheel (Europe).ipf|Mindwheel||0|1
+atarist/Mine Sweeper - The Directors Cut (1994)(Top Notch).st|Mine Sweeper - The Directors Cut||0|1
+atarist/Missing - One Droid (Europe).ipf|Missing - One Droid||0|1
+atarist/Mission Genocide (Europe).ipf|Mission Genocide||0|1
+atarist/Monster Business (1991)(Eclipse)[cr Elite][t +5].st|Monster Business||0|1
+atarist/MontyPyt.st|MontyPyt||0|1
+atarist/Moonpatrol (1987)(Williams).st|Moonpatrol||0|1
+atarist/Moonwalker (1989)(U.S. Gold)(Disk 1 of 2)[!].stx|Moonwalker||0|1
+atarist/MouseT.st|MouseT||0|1
+atarist/Murder (1990)(U.S. Gold)[!].stx|Murder||0|1
+atarist/Murders in Venice (1989)(Cobra Soft)(M3)[cr MCA].st|Murders in Venice||0|1
+atarist/Mystical.st|Mystical||0|1
+atarist/Narco Police (1990)(Dinamic)[!].stx|Narco Police||0|1
+atarist/NavySeal.st|NavySeal||0|1
+atarist/Nebulus (1988)(Hewson)[cr Atarilegend].st|Nebulus||0|1
+atarist/Necromancien, Le (1989)(UBI Soft)[b].st|Necromancien, Le||0|1
+atarist/Never Mind (Europe) (Disk 1).ipf|Never Mind||0|1
+atarist/Never Mind (Europe) (Disk 2).ipf|Never Mind||0|0
+atarist/Nigel Mansell's World Championship (Europe).ipf|Nigel Mansell's World Championship||0|1
+atarist/Night Shift (1990)(LucasFilm Games)(Disk 1 of 2).stx|Night Shift||0|1
+atarist/Night Walk (Europe).ipf|Night Walk||0|1
+atarist/Ninja Mission (1987)(Mastertronics).st|Ninja Mission||0|1
+atarist/Ninja Rabbits (Europe) (Disk 1).ipf|Ninja Rabbits||0|1
+atarist/Ninja Rabbits (Europe) (Disk 2).ipf|Ninja Rabbits||0|0
+atarist/Nitro Boost Challenge (Europe).ipf|Nitro Boost Challenge||0|1
+atarist/No Excuses (Europe) (En,Fr,De,It).ipf|No Excuses||0|1
+atarist/No Second Price (1993)(Thalion)[cr ICS].st|No Second Price||0|1
+atarist/North and South (1989)(Infogrames)(M5).stx|North and South||0|1
+atarist/Obliterator (1988)(Psygnosis)(Disk 1 of 2).stx|Obliterator||0|1
+atarist/Onslaught (1989)(Realms).stx|Onslaught||0|1
+atarist/Operation- Cleanstreets (1988)(Broderbund)(Disk 1 of 2).stx|Operation- Cleanstreets||0|1
+atarist/Operation Harrier (Europe).ipf|Operation Harrier||0|1
+atarist/Operation Stealth (1990)(U.S. Gold)(fr)(Disk 1 of 3)[protected].stx|Operation Stealth||0|1
+atarist/Operation Thunderbolt (1988)(Ocean)(Disk 1 of 3).stx|Operation Thunderbolt||0|1
+atarist/Operation Wolf (1988)(Ocean)(Disk 1 of 3)[!].stx|Operation Wolf||0|1
+atarist/Orbit 2000 (Europe).ipf|Orbit 2000||0|1
+atarist/Oriental Games (1990)(Micro Style)(Disk 1 of 2).stx|Oriental Games||0|1
+atarist/Out Run (1987)(U.S. Gold).stx|Out Run||0|1
+atarist/Outcast (Europe).ipf|Outcast||0|1
+atarist/Outlands (1989)(Pandora).st|Outlands||0|1
+atarist/Outzone (1991)(Lankhor)[cr Elite][t].st|Outzone||0|1
+atarist/Overlander (1988)(Elite).stx|Overlander||0|1
+atarist/Pac-land (1989)(Namco).stx|Pac-land||0|1
+atarist/Pac-Mania (Europe).ipf|Pac-Mania||0|1
+atarist/Pandora (1987)(Firebird).stx|Pandora||0|1
+atarist/Pang (1990)(Ocean)[cr Empire][t].st|Pang||0|1
+atarist/Panza Kick Boxing (1990)(Loriciel)(fr)(Disk 1 of 2)[!].stx|Panza Kick Boxing||0|1
+atarist/Paperboy (Europe) (Compilation - Finale).ipf|Paperboy|https://db.hfsplay.fr/files/2020/02/28/Paperboy_Europe_IvwjFAt.png|0|1
+atarist/Paradroid _90 (1990)(Graftgold)(Disk 1 of 2).stx|Paradroid _90||0|1
+atarist/Passengers on the Wind 2 (Europe).ipf|Passengers on the Wind 2||0|1
+atarist/Passing Shot (1988)(Image Works).stx|Passing Shot||0|1
+atarist/Pegasus (1991)(Gremlin)(Disk 1 of 2).stx|Pegasus||0|1
+atarist/Personal Nightmare (1989)(Horrorsoft)(Disk 1 of 5).st|Personal Nightmare||0|1
+atarist/Phantasie II v1.0 (1987)(SSI)[one disk].st|Phantasie II v1.0||0|1
+atarist/Phantasie III - The Wrath of Nikademus (1987)(SSI).st|Phantasie III - The Wrath of Nikademus||0|1
+atarist/Pharaoh III (Europe).ipf|Pharaoh III||0|1
+atarist/Pick_n Pile (1990)(UBI Soft).stx|Pick_n Pile||0|1
+atarist/Pictionary - The Game of Quick Draw (Europe).ipf|Pictionary - The Game of Quick Draw||0|1
+atarist/Pink Panther (19xx)(Magic Bytes).stx|Pink Panther||0|1
+atarist/Pirates of the Barbary Coast (Europe).ipf|Pirates of the Barbary Coast||0|1
+atarist/Plan 9 from Outer Space (1992)(Gremlin)(M3)(Disk 1 of 4)[protected].stx|Plan 9 from Outer Space||0|1
+atarist/Platoon (1988)(Ocean)[b].st|Platoon||0|1
+atarist/Player Manager (Europe) (Compilation - Football Crazy Challenge).ipf|Player Manager||0|1
+atarist/Plutos (1987)(Tynesoft).stx|Plutos||0|1
+atarist/Police Quest II (1989-01-16)(Sierra)(Disk 1 of 2)[cr SXE].st|Police Quest II||0|1
+atarist/Police Quest - In Pursuit of the Death Angel (Europe) (v2.0G 12.3.87) (Disk 1).ipf|Police Quest - In Pursuit of the Death Angel||0|1
+atarist/Police Quest - In Pursuit of the Death Angel (Europe) (v2.0G 12.3.87) (Disk 2).ipf|Police Quest - In Pursuit of the Death Angel||0|0
+atarist/Police Quest - In Pursuit of the Death Angel (Europe) (v2.0G 12.3.87) (Disk 3).ipf|Police Quest - In Pursuit of the Death Angel||0|0
+atarist/Populous (1989)(Bullfrog)[!].stx|Populous||0|1
+atarist/Populous _ Populous - The promised Lands (1989)(Bullfrog)[m Delight].st|Populous _ Populous - The promised Lands||0|1
+atarist/Populous - The Promised Lands (Europe) (Amiga + ST) (Addon).ipf|Populous - The Promised Lands||0|1
+atarist/Powerdrome (1989)(Electronic Arts).st|Powerdrome||0|1
+atarist/Powermonger (1990)(Bullfrog).stx|Powermonger||0|1
+atarist/Predator (1987)(Activision)[cr Noid].st|Predator||0|1
+atarist/Prince (Europe).ipf|Prince||0|1
+atarist/Prince of Persia (1990)(Broderbund)(fr)(Disk 1 of 2)[!].stx|Prince of Persia||0|1
+atarist/Prison (Europe) (En,Fr,De,It) (Disk 1).ipf|Prison||0|1
+atarist/Prison (Europe) (En,Fr,De,It) (Disk 2).ipf|Prison||0|0
+atarist/Pro Boxing Simulator (1991)(Codemasters).stx|Pro Boxing Simulator||0|1
+atarist/Prohibition (1987)(Infogrames).st|Prohibition||0|1
+atarist/Projectyle (1990)(Electronic Arts)[!].stx|Projectyle||0|1
+atarist/Prophecy I - The Viking Child (1990)(Wired)(Disk 1 of 3).stx|Prophecy I - The Viking Child||0|1
+atarist/Protector (1989)(Virgin - Mastertronic).st|Protector||0|1
+atarist/Purple Saturn Day (1989)(Exxos)[cr 42-Crew].st|Purple Saturn Day||0|1
+atarist/Puzznic (1990)(Ocean).stx|Puzznic||0|1
+atarist/Quink (USA).ipf|Quink||0|1
+atarist/Raffles (Europe).ipf|Raffles||0|1
+atarist/Rally Cross Challenge (Europe).ipf|Rally Cross Challenge||0|1
+atarist/Rampage (1986)(Activision)[!].stx|Rampage||0|1
+atarist/Rampart (1993)(Domark)[cr Cynix].st|Rampart|https://db.hfsplay.fr/files/2020/02/28/Rampart_Europe_OYhsf84.png|0|1
+atarist/Red Heat (1989)(Ocean)[cr TDA].st|Red Heat||0|1
+atarist/Red Storm Rising (1988)(MicroProse)[cr Replicants].st|Red Storm Rising||0|1
+atarist/Renegade.st|Renegade||0|1
+atarist/Resolution 101 (1990)(Millennium).st|Resolution 101||0|1
+atarist/Return to Genesis (1988)(Firebird).stx|Return to Genesis||0|1
+atarist/Revenge II - Revenge of the Mutant Camels II (Europe).ipf|Revenge II - Revenge of the Mutant Camels II||0|1
+atarist/Rick Dangerous (1989)(Core Design - Firebird)[!].stx|Rick Dangerous||0|1
+atarist/Rick Dangerous II (1990)(Micro Style).stx|Rick Dangerous II||0|1
+atarist/Rings of Medusa (19xx)(Starbyte)[cr MCA].st|Rings of Medusa||0|1
+atarist/Roadwars (Europe).ipf|Roadwars||0|1
+atarist/Robocop.st|Robocop||0|1
+atarist/Robozone (1991)(MirrorSoft).stx|Robozone||0|1
+atarist/Rock Star Ate My Hamster (Europe).ipf|Rock Star Ate My Hamster||0|1
+atarist/Rocket Ranger (1989)(Cinemaware)[cr 16-bit Crew].st|Rocket Ranger||0|1
+atarist/Rockford (1988)(Melbourne House).stx|Rockford||0|1
+atarist/Rodland.st|Rodland||0|1
+atarist/Rody et Mastico III (France).ipf|Rody et Mastico III||0|1
+atarist/Rogue (1986)(Epyx).st|Rogue||0|1
+atarist/Rolling Thunder (1986)(U.S. Gold).st|Rolling Thunder||0|1
+atarist/RollThun.st|RollThun||0|1
+atarist/Rotor (1989)(Arcana)[!].stx|Rotor||0|1
+atarist/RVF Honda (1989)(MicroProse)[cr Medway Boys].st|RVF Honda||0|1
+atarist/Sargon III (Europe).ipf|Sargon III||0|1
+atarist/SAS Combat Simulator (Europe).ipf|SAS Combat Simulator||0|1
+atarist/Scooby Doo and Scrappy (1991)(HiTEC Software)[cr BBC][t].st|Scooby Doo and Scrappy||0|1
+atarist/SDragon.st|SDragon||0|1
+atarist/Seconds Out (1988)(Tynesoft).stx|Seconds Out||0|1
+atarist/Sensible Soccer (1992)(Renegade)(M4)(Disk 1 of 2).stx|Sensible Soccer||0|1
+atarist/Shadow of the Beast (1990)(Psygnosis)(Disk 1 of 2).stx|Shadow of the Beast||0|1
+atarist/Shadow of the Beast (1990)(Psygnosis)(Disk 2 of 2).stx|Shadow of the Beast||0|0
+atarist/Shadowgate (Europe) (Disk 1).ipf|Shadowgate||0|1
+atarist/Shadowgate (Europe) (Disk 2).ipf|Shadowgate||0|0
+atarist/Shufflepuck Cafe (1989)(Broderbund)(Disk 1 of 2).stx|Shufflepuck Cafe||0|1
+atarist/Sidewinder (1988)(Mastertronics)(Disk 2 of 2)[!].stx|Sidewinder||0|1
+atarist/Silent Service (1986)(MicroProse).stx|Silent Service||0|1
+atarist/Silicon Dreams (1986)(Level 9 Computing).st|Silicon Dreams||0|1
+atarist/Silkworm (Europe).ipf|Silkworm||0|1
+atarist/Simpsons, The - Bart vs the Space Mutants (1991)(Ocean)[cr Elite].st|Simpsons, The - Bart vs the Space Mutants||0|1
+atarist/Simulcra (1990)(MicroProse)[cr BBC].st|Simulcra||0|1
+atarist/Sinbad and the Throne of the Falcon (1988)(Cinemaware)(Disk 1 of 3).stx|Sinbad and the Throne of the Falcon||0|1
+atarist/Skidz (1990)(Gremlin).stx|Skidz||0|1
+atarist/Skrull.st|Skrull||0|1
+atarist/Skweek (1989)(Loriciel).st|Skweek||0|1
+atarist/Skyfox (1986)(Electronic Arts)[!].stx|Skyfox||0|1
+atarist/SlapFigh.st|SlapFigh||0|1
+atarist/Snoopy and Peanuts (1989)(Edge - Softek).stx|Snoopy and Peanuts||0|1
+atarist/Snowhell (1991)(Atlantis).st|Snowhell||0|1
+atarist/SotBeast1.st|SotBeast1||0|1
+atarist/Space Harrier (Europe) (Compilation - Finale).ipf|Space Harrier||0|1
+atarist/Space Harrier (Europe) (Disk 1).ipf|Space Harrier||0|0
+atarist/Space Harrier (Europe) (Disk 2).ipf|Space Harrier||0|0
+atarist/Space Harrier II (Europe) (Disk 1).ipf|Space Harrier II||0|1
+atarist/Space Harrier II (Europe) (Disk 2).ipf|Space Harrier II||0|0
+atarist/Space Quest II - Vohaul_s Revenge (1987)(Sierra)(Disk 1 of 3)[!].stx|Space Quest II - Vohaul_s Revenge||0|1
+atarist/Space Quest - The Serien Encounter v1.1a (1986)(Sierra)[cr Ace].st|Space Quest - The Serien Encounter v1.1a||0|1
+atarist/Space Racer (1988)(Loriciel)(fr).st|Space Racer||0|1
+atarist/Space Station Oblivion (1988)(Epyx)[!].stx|Space Station Oblivion||0|1
+atarist/Speedball (1988)(Image Works)[!].stx|Speedball||0|1
+atarist/SpHarrier.st|SpHarrier||0|1
+atarist/Spherical (1989)(Rainbow Arts).st|Spherical||0|1
+atarist/Spidertronic (Europe).ipf|Spidertronic||0|1
+atarist/Spindizzy Worlds (1989)(Activision)[cr Empire].st|Spindizzy Worlds||0|1
+atarist/Spitfire 40 (Europe).ipf|Spitfire 40||0|1
+atarist/Spitting Image (Europe).ipf|Spitting Image||0|1
+atarist/Star Raiders (1986)(Atari Corp.).st|Star Raiders||0|1
+atarist/Star Trap (1988)(Loriciel)(fr)(Disk 3 of 3).st|Star Trap||0|1
+atarist/Star Trek - The Rebel Universe (1987)(Simon _ Shuster).st|Star Trek - The Rebel Universe||0|1
+atarist/Star Wars (1987)(Domark).stx|Star Wars||0|1
+atarist/Star Wars - Return of the Jedi (1987)(LucasFilm Ltd)(Disk 1 of 3).stx|Star Wars - Return of the Jedi||0|1
+atarist/Star Wars - The Empire Strikes Back (Europe) (Compilation - The Star Wars Trilogy).ipf|Star Wars - The Empire Strikes Back||0|1
+atarist/Star Wrek (Europe).ipf|Star Wrek||0|1
+atarist/Starblade (1990)(Silmarils)[!].stx|Starblade||0|1
+atarist/Starblaze (Europe).ipf|Starblaze||0|1
+atarist/StarFlight (Europe) (Disk A).ipf|StarFlight||0|1
+atarist/StarFlight (Europe) (Disk B).ipf|StarFlight||0|0
+atarist/Starglider (1987)(Rainbird).stx|Starglider||0|1
+atarist/Starglider 2 (Europe) (En,Fr,De) (Amiga + ST).ipf|Starglider 2||0|1
+atarist/Starquake (Europe).ipf|Starquake||0|1
+atarist/Starray (1988)(Logotron)[!].stx|Starray||0|1
+atarist/Stationfall (1987)(Infocom)[!].stx|Stationfall||0|1
+atarist/Steel (Europe).ipf|Steel||0|1
+atarist/Stone Age (1993)(Eclipse).st|Stone Age||0|1
+atarist/Storm Master (Europe).ipf|Storm Master||0|1
+atarist/Street Fighter (1988)(Capcom).stx|Street Fighter||0|1
+atarist/Strider (1989)(U.S. Gold).stx|Strider||0|1
+atarist/Strike (Europe).ipf|Strike||0|1
+atarist/Stryx (1989)(Psyclapse)[m EMT][b].st|Stryx||0|1
+atarist/Sttrooper.st|Sttrooper||0|1
+atarist/Stunt Car Racer (1989)(Micro Style).stx|Stunt Car Racer||0|1
+atarist/Sub Battle Simulator (1987)(Epyx)[!].stx|Sub Battle Simulator||0|1
+atarist/Summer Olympiad (1988)(Tynesoft).st|Summer Olympiad||0|1
+atarist/Sundog - Frozen Legacy (Europe).ipf|Sundog - Frozen Legacy||0|1
+atarist/Super Cars (1990)(Gremlin).stx|Super Cars||0|1
+atarist/Super Hang-On (1988)(Sega)(Disk 1 of 2).stx|Super Hang-On||0|1
+atarist/Super Skweek (1990)(Loriciel)[cr Superior][one disk].st|Super Skweek||0|1
+atarist/Superman - The Man of Steel (1990)(Tynesoft)[cr Bladerunners][t MCA].st|Superman - The Man of Steel||0|1
+atarist/Superstars Ice Hockey (1988)(Sportime).st|Superstars Ice Hockey||0|1
+atarist/Suspicious Cargo (1992)(Gremlin)(Disk 1 of 2)[cr Elite].st|Suspicious Cargo||0|1
+atarist/Swap (Europe) (Budget - Fox Hits).ipf|Swap||0|1
+atarist/Switchblade (1989)(Core Design)[cr MCA].st|Switchblade||0|1
+atarist/Switchblade II (1991)(Gremlin).stx|Switchblade II||0|1
+atarist/T-Bird (1989)(Mastertronic)[b].st|T-Bird||0|1
+atarist/Tai-Pan (Europe).ipf|Tai-Pan||0|1
+atarist/Tass Times in Tonetown (Europe) (Disk 1).ipf|Tass Times in Tonetown||0|1
+atarist/Tass Times in Tonetown (Europe) (Disk 2).ipf|Tass Times in Tonetown||0|0
+atarist/Tau Ceti (1986)(CRL)[b].st|Tau Ceti||0|1
+atarist/TDrive II.st|TDrive II||0|1
+atarist/Teenage Mutant Hero Turtles (1990)(Image Works)[cr Empire][t].st|Teenage Mutant Hero Turtles||0|1
+atarist/Tennis Cup (Europe) (Budget - Action Sixteen).ipf|Tennis Cup||0|1
+atarist/Terminator II - Judgemant Day (1992)(Ocean)(Disk 1 of 2).stx|Terminator II - Judgemant Day||0|1
+atarist/Terramex (1987)(Argus Press)[b].st|Terramex||0|1
+atarist/Test Drive (1987)(Accolade)[cr Delta Force].st|Test Drive||0|1
+atarist/ThBlade.st|ThBlade||0|1
+atarist/Adventures of Robin Hood, The (Europe) (En,Fr,De,It).ipf|The Adventures of Robin Hood||0|1
+atarist/Amazing Spiderman, The (1990)(Empire)[cr Empire].st|The Amazing Spiderman||0|1
+atarist/Black Cauldron, The (1985)(Sierra)(Disk 1 of 2)[!].stx|The Black Cauldron||0|1
+atarist/Blues Brothers, The (Europe).ipf|The Blues Brothers||0|1
+atarist/Chessmaster 2000, The (Europe).ipf|The Chessmaster 2000||0|1
+atarist/Chessmaster 2000, The (Europe) (Games Disk).ipf|The Chessmaster 2000||0|0
+atarist/Colonel_s Bequest, The (1989)(Sierra)(Disk 1 of 4)[protected].stx|The Colonel_s Bequest||0|1
+atarist/Corporation, The (1990)(Core Design)[!].stx|The Corporation||0|1
+atarist/Curse of Ra, The (1990)(Rainbow Arts)[cr Empire].st|The Curse of Ra||0|1
+atarist/The Deep (Europe) (Disk 1).ipf|The Deep||0|1
+atarist/The Deep (Europe) (Disk 2).ipf|The Deep||0|0
+atarist/Great Giana Sisters, The (1988)(Time Warp)[cr Bladerunners].st|The Great Giana Sisters||0|1
+atarist/Guild of Thieves, The (1987)(Magnetic Scrolls)[!].stx|The Guild of Thieves||0|1
+atarist/Hi-Tec Hanna-Barbera Cartoon Character Collection, The (Europe).ipf|The Hi-Tec Hanna-Barbera Cartoon Character Collection||0|1
+atarist/Hound of Shadow, The (Europe) (Disk C - Data Disk).ipf|The Hound of Shadow||0|1
+atarist/Hound of Shadow, The (Europe) (Disk B - Scenario Disk).ipf|The Hound of Shadow||0|0
+atarist/Hound of Shadow, The (Europe) (Disk A - Character Generation Disk).ipf|The Hound of Shadow||0|0
+atarist/Immortal, The (1990)(Electronic Arts)[cr Delight][one disk].st|The Immortal||0|1
+atarist/Killing Cloud, The (Europe) (En,Fr,De) (Disk A).ipf|The Killing Cloud||0|1
+atarist/Killing Cloud, The (Europe) (En,Fr,De) (Disk B).ipf|The Killing Cloud||0|0
+atarist/Light Corridor, The (Europe).ipf|The Light Corridor||0|1
+atarist/Lurking Horror, The (Europe) (r203).ipf|The Lurking Horror||0|1
+atarist/New Zealand Story, The (1989)[cr BBC].stx|The New Zealand Story||0|1
+atarist/Ninja Warriors, The (19xx)(Sales Curve)(Disk 1 of 3).stx|The Ninja Warriors||0|1
+atarist/Official Everton F.C. Intelligensia, The (Europe).ipf|The Official Everton F.C. Intelligensia||0|1
+atarist/Oxford Softworks Go Player, The (Europe) (En,Fr,De).ipf|The Oxford Softworks Go Player||0|1
+atarist/Pawn, The (Europe) (v2.1).ipf|The Pawn||0|1
+atarist/President is Missing, The (Europe).ipf|The President is Missing||0|1
+atarist/Real Ghostbusters, The (Europe).ipf|The Real Ghostbusters||0|1
+atarist/Running Man, The (1989)(Grandslam)[cr Replicants].st|The Running Man||0|1
+atarist/Secret of Monkey Island, The (1991)(LucasFilm Games)(fr)(Disk 1 of 4)[protected].stx|The Secret of Monkey Island||0|1
+atarist/Sentinel, The (1987)(Rainbird).stx|The Sentinel||0|1
+atarist/Seven Gates of Jambala, The (19xx)(Thalion)(STE)(Disk 1 of 2).stx|The Seven Gates of Jambala||0|1
+atarist/Untouchables, The (Europe) (Disk 1).ipf|The Untouchables||0|1
+atarist/Untouchables, The (Europe) (Disk 2).ipf|The Untouchables||0|0
+atarist/Untouchables, The (Europe) (Disk 3).ipf|The Untouchables||0|0
+atarist/Theme Park Mystery (Europe).ipf|Theme Park Mystery||0|1
+atarist/Thrust (Europe).ipf|Thrust||0|1
+atarist/Thunder Burner (Europe).ipf|Thunder Burner||0|1
+atarist/Thunder Jaws (1991)(Domark).stx|Thunder Jaws||0|1
+atarist/ThunderCats (Europe) (Budget - Encore).ipf|ThunderCats||0|1
+atarist/ThunderStrike (1990)(Millennium)[!].stx|ThunderStrike||0|1
+atarist/ThunderWing (Europe).ipf|ThunderWing||0|1
+atarist/Time and Magik (1988)(Datasoft).st|Time and Magik||0|1
+atarist/Time Bandit (1985)(MichTron)[!].stx|Time Bandit||0|1
+atarist/Time Machine (1990)(Vivid Image)[cr Automation].st|Time Machine||0|1
+atarist/Time Scanner (1989)(Activision)[cr Empire].st|Time Scanner||0|1
+atarist/Timeblast (Europe).ipf|Timeblast||0|1
+atarist/Times of Lore (1988)(Origin)(M3)[cr Bladerunners].st|Times of Lore||0|1
+atarist/Tintin on the Moon (1989)(Infogrames)(M3)(Disk 1 of 2).stx|Tintin on the Moon||0|1
+atarist/Titus.st|Titus||0|1
+atarist/Toki (1991)(Ocean)[!].stx|Toki||0|1
+atarist/Toobin' (Europe).ipf|Toobin'||0|1
+atarist/Top Cat Starring in Beverly Hills Cats (Europe).ipf|Top Cat Starring in Beverly Hills Cats||0|1
+atarist/Torvak1.st|Torvak1||0|1
+atarist/Total Eclipse (1989)(MicroProse).stx|Total Eclipse||0|1
+atarist/Total Recall (1990)(Ocean)(Disk 1 of 2).stx|Total Recall||0|1
+atarist/Tower of Babel (Europe).ipf|Tower of Babel||0|1
+atarist/Tower Toppler (1988)(Hewson)[aka Nebulus].stx|Tower Toppler||0|1
+atarist/Tracksuit Manager (19xx)(-).stx|Tracksuit Manager||0|1
+atarist/Trail Blazers (19xx)(Gremlin).st|Trail Blazers||0|1
+atarist/Trailblazer (Europe).ipf|Trailblazer||0|1
+atarist/Trash Heap (Europe) (Disk 1).ipf|Trash Heap||0|1
+atarist/Trash Heap (Europe) (Disk 2).ipf|Trash Heap||0|0
+atarist/Trauma (Europe) (Disk 1).ipf|Trauma||0|1
+atarist/Trauma (Europe) (Disk 2).ipf|Trauma||0|0
+atarist/Treasure Island Dizzy (1989)(Codemasters).stx|Treasure Island Dizzy||0|1
+atarist/Treble Champions (Europe) (v1.0).ipf|Treble Champions||0|1
+atarist/Trinity (Europe) (r11).ipf|Trinity||0|1
+atarist/Trivial Pursuit - A new Beginning (1984)(Domark).st|Trivial Pursuit - A new Beginning||0|1
+atarist/TSoldier.st|TSoldier||0|1
+atarist/Turbo GT (Europe).ipf|Turbo GT||0|1
+atarist/Turbo OutRun (Europe) (Budget - Kixx).ipf|Turbo OutRun||0|1
+atarist/Turrican (1990)(Rainbow Arts).stx|Turrican||0|1
+atarist/Turrican II (1991)(Rainbow Arts).stx|Turrican II||0|1
+atarist/Turrican II - The Final Fight (Europe) (Budget - Kixx).ipf|Turrican II - The Final Fight||0|1
+atarist/Tusker.st|Tusker||0|1
+atarist/TV Sports Football (1988)(Cinemaware)(Disk 1 of 2).stx|TV Sports Football||0|1
+atarist/TwinWo.st|TwinWo||0|1
+atarist/Twylyte (Europe).ipf|Twylyte||0|1
+atarist/Ultima IV - Quest of the Avatar (1987)(Origin)(Disk 1 of 2)[!].stx|Ultima IV - Quest of the Avatar||0|1
+atarist/Ultima V - Warriors of Destiny (1988)(Origin)(Disk 1 of 3)(Boot).st|Ultima V - Warriors of Destiny||0|1
+atarist/Ultima VI - The False Prophet (1990)(Origin)(Disk 1 of 4)[cr ICS].st|Ultima VI - The False Prophet||0|1
+atarist/UMS - The Universal Military Simulator (Europe).ipf|UMS - The Universal Military Simulator||0|1
+atarist/Universe 3 (Europe) (v1.0) (Data Disk).ipf|Universe 3||0|1
+atarist/Universe 3 (Europe) (v1.0) (Game Disk).ipf|Universe 3||0|0
+atarist/Vectorball (Europe).ipf|Vectorball||0|1
+atarist/Venus - The Flytrap (1990)(Gremlin)(Disk 1 of 2)[!].stx|Venus - The Flytrap||0|1
+atarist/VictoryRo.st|VictoryRo||0|1
+atarist/Vindicators (1989)(Domark)(Disk 1 of 2)[b].st|Vindicators||0|1
+atarist/Virus (Europe).ipf|Virus||0|1
+atarist/Voyager (1989)(Ocean)(M3).st|Voyager||0|1
+atarist/Vroom (1991)(Lankhor).stx|Vroom||0|1
+atarist/Vroom Multiplayer (1993)(Lankhor).stx|Vroom Multiplayer||0|1
+atarist/Wanderer 3D (Europe) (Budget - Encore).ipf|Wanderer 3D||0|1
+atarist/Wanted (Europe) (Disk 1).ipf|Wanted||0|1
+atarist/Wanted (Europe) (Disk 2).ipf|Wanted||0|0
+atarist/War in Middle Earth (19xx)(Melbourne House)(Disk 1 of 2)[disk 2 missing].st|War in Middle Earth||0|1
+atarist/Warhawk (Europe).ipf|Warhawk||0|1
+atarist/Warlock (Europe) (The Edge).ipf|Warlock||0|1
+atarist/Warlock's Quest (Europe) (Budget - Pocket Soft).ipf|Warlock's Quest||0|1
+atarist/Weird Dreams (1989)(Rainbird)[cr V8].st|Weird Dreams||0|1
+atarist/Where Time Stood Still (Europe) (En,De).ipf|Where Time Stood Still||0|1
+atarist/Whirligig (Europe).ipf|Whirligig||0|1
+atarist/Wild Streets (1990)(Titus)[!].stx|Wild Streets||0|1
+atarist/Winter Olympiad _88 (1988)(Tynesoft)(Disk 1 of 2).stx|Winter Olympiad _88||0|1
+atarist/Wizball (1987)(Ocean).stx|Wizball||0|1
+atarist/Wolfchil.st|Wolfchil||0|1
+atarist/Wolfpack (1991)(Novalogic)[cr Elite].st|Wolfpack||0|1
+atarist/Wonderboy in Monsterland (1989)(Activision)(Disk 1 of 2)[!].stx|Wonderboy in Monsterland||0|1
+atarist/Wonderland (1990)(Magnetic Scrolls)(Disk 1 of 4)[cr BBC].st|Wonderland||0|1
+atarist/World Championship Boxing Manager (Europe) (Disk 1).ipf|World Championship Boxing Manager||0|1
+atarist/World Championship Boxing Manager (Europe) (Disk 2).ipf|World Championship Boxing Manager||0|0
+atarist/World Class Leader Board (Europe) (Budget - Klassix).ipf|World Class Leader Board||0|1
+atarist/World Games (1986)(Epyx).st|World Games||0|1
+atarist/Wrangler (Europe).ipf|Wrangler||0|1
+atarist/Wrestle1.st|Wrestle1||0|1
+atarist/X-Out (1990)(Rainbow Arts).stx|X-Out||0|1
+atarist/Xenon.st|Xenon||0|1
+atarist/Xenon 2 - Megablast (1989)(Image Works)(Disk 1 of 2)[!].stx|Xenon 2 - Megablast||0|1
+atarist/Xiphos (1990)(Electronic Zoo)(M3).st|Xiphos||0|1
+atarist/Xybots (1989)(Domark)[cr].st|Xybots||0|1
+atarist/Yolanda (19xx)(Vectordean).stx|Yolanda||0|1
+atarist/ZoneWarr.st|ZoneWarr||0|1
+atarist/Zool.st|Zool||0|1
+atarist/Zork - The undiscovered Underground (1997)(Activision)[cr Atariforce].st|Zork - The undiscovered Underground||0|1
+atarist/Zynaps (1988)(Hewson).st|Zynaps||0|1

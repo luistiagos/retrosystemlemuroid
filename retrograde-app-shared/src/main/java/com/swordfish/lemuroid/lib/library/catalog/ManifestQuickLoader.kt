@@ -166,7 +166,10 @@ class ManifestQuickLoader(
         //   v43  +1.184 jogos (gba 507, snes 164, megadrive 135, nes 128, sms 54, gbc 49, nds 45, gb 27,
         //          n64 21, psx 19, dc 14, psp 9, gc 8, saturn 4; commit 48d861f). O manifest mudou sem
         //          bump naquele commit; este força a passada completa que os insere em instalações existentes.
-        private const val MANIFEST_SCHEMA_VERSION = 43
+        //   v44  psp: adição de Mortal Kombat - Unchained (USA).iso.
+        //   v45  gc: adição de Mario Kart - Double Dash!! (Europe) (En,Fr,De,Es,It).rvz.
+        //   v46  expansão dos sistemas leves (pcenginecd +492, atarist +734, megadrive +132, wsc +91, pico8 +52, msx +15).
+        private const val MANIFEST_SCHEMA_VERSION = 46
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(
