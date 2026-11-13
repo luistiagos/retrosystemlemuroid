@@ -2,7 +2,7 @@
 
 ## Status
 
-**Em retest desde 2026-11-13.** O dono decidiu fechar o bug sem a T9 (redesenho do layout de toque), que virou o backlog `docs/backlogs/2026-11-13-3ds-layout-toque-padrao-imagem-1.md`.
+**Em retest desde 2026-11-13.** O dono decidiu fechar o bug sem a T9 (redesenho do layout de toque), que virou o backlog `docs/backlogs/arquivados/2026-11-13-3ds-layout-toque-padrao-imagem-1.md`.
 
 **Commits**
 
