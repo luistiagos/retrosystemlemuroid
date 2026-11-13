@@ -92,6 +92,7 @@ class GameViewModelRetroGameView(
     private val singleScreenLayout = MutableStateFlow(false)
 
     // A proporcao escolhida em Ajustes, para voltar a ela quando a tela unica deixa de esticar.
+    // Ja filtrada por effectiveScreenAspectRatio: no 3DS e sempre AUTO.
     private var userTargetAspectRatio = ScreenAspectRatio.AUTO.targetAspectRatio
 
     fun getGameState(): Flow<GameState> {
@@ -129,7 +130,7 @@ class GameViewModelRetroGameView(
         val enableRumble = settingsManager.enableRumble()
         val directLoad = settingsManager.allowDirectGameLoad()
         val enableImmersiveMode = settingsManager.enableImmersiveMode()
-        val screenAspectRatio = settingsManager.screenAspectRatio()
+        val screenAspectRatio = effectiveScreenAspectRatio(systemCoreConfig, settingsManager.screenAspectRatio())
         userTargetAspectRatio = screenAspectRatio.targetAspectRatio
 
         val hasMicrophonePermission =
@@ -539,5 +540,17 @@ class GameViewModelRetroGameView(
         private const val FDS_BYTES_PER_SIDE = 65_500L
         private const val FDS_HEADER_SIZE = 16
         private const val FDS_MAX_SIDES = 8
+
+        /**
+         * A proporcao de Ajustes que vale para este sistema. No 3DS ela e ignorada: cada tela tem
+         * proporcao fixa, e qualquer alvo diferente do core a deforma (T6 de
+         * docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
+         */
+        internal fun effectiveScreenAspectRatio(
+            systemCoreConfig: SystemCoreConfig,
+            userChoice: ScreenAspectRatio,
+        ): ScreenAspectRatio {
+            return if (systemCoreConfig.ignoresScreenAspectRatio) ScreenAspectRatio.AUTO else userChoice
+        }
     }
 }

@@ -1,10 +1,13 @@
 package com.swordfish.lemuroid.app.shared.game
 
+import com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView.Companion.effectiveScreenAspectRatio
+import com.swordfish.lemuroid.app.shared.settings.ScreenAspectRatio
 import com.swordfish.lemuroid.lib.core.CoreVariable
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.SystemID
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -42,6 +45,26 @@ class GameSystemSingleScreenTest {
         assertTrue(config3ds.isSingleScreenLayout(single))
         assertFalse(config3ds.isSingleScreenLayout(topBottom))
         assertFalse(config3ds.isSingleScreenLayout(sideBySide))
+    }
+
+    @Test
+    fun threeDsIgnoresTheGlobalAspectRatio() {
+        // T6: "Esticar" ou 16:9 de Ajustes deformavam cada tela de Superior — inferior e
+        // Esquerda — direita. A tela unica em paisagem estica por outro caminho (setStretchToFill).
+        assertTrue(config3ds.ignoresScreenAspectRatio)
+        for (choice in ScreenAspectRatio.entries) {
+            assertEquals(ScreenAspectRatio.AUTO, effectiveScreenAspectRatio(config3ds, choice))
+        }
+    }
+
+    @Test
+    fun otherSystemsKeepTheGlobalAspectRatio() {
+        val nes = GameSystem.findById(SystemID.NES.dbname).systemCoreConfigs.first()
+
+        assertFalse(nes.ignoresScreenAspectRatio)
+        for (choice in ScreenAspectRatio.entries) {
+            assertEquals(choice, effectiveScreenAspectRatio(nes, choice))
+        }
     }
 
     @Test

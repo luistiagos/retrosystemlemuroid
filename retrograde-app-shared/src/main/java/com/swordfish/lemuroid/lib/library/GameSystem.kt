@@ -1926,6 +1926,9 @@ data class GameSystem(
                             // fill, the owner's choice (2026-11-08). Must match the exposed value
                             // above; GameSystemSingleScreenTest guards that.
                             singleScreenLayout = CoreVariable("citra_layout_option", "single_screen"),
+                            // "Stretch" or 16:9 from Settings deformed each screen of top-bottom and
+                            // side by side (bug doc above, T6).
+                            ignoresScreenAspectRatio = true,
                         ),
                     ),
                     uniqueExtensions = listOf("3ds"),

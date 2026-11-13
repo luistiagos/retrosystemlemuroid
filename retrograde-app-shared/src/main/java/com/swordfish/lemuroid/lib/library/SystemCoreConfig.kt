@@ -26,6 +26,13 @@ data class SystemCoreConfig(
      * ratio say. The key and value must be the ones the menu writes (an [ExposedSetting.Value]).
      */
     val singleScreenLayout: CoreVariable? = null,
+    /**
+     * The picture is made of screens with a fixed shape (3DS top-bottom / side by side), so any
+     * target aspect ratio other than the core's own deforms each screen. When set, the global
+     * aspect ratio preference is ignored and the core's ratio is used; [singleScreenLayout] still
+     * stretches in mobile landscape.
+     */
+    val ignoresScreenAspectRatio: Boolean = false,
 ) : Serializable {
     /** Whether [variables] (defaults + the user's choices) put the core in [singleScreenLayout]. */
     fun isSingleScreenLayout(variables: Iterable<CoreVariable>): Boolean {

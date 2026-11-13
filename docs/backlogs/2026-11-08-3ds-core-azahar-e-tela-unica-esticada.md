@@ -1,7 +1,7 @@
 # [BACKLOG] 3DS: trocar o core pelo Azahar (OpenGL) e oferecer tela única esticada com controles sobre o jogo
 
 **Data:** 2026-11-08
-**Status:** em andamento. **T7 feita e publicada em 2026-11-12** (core Azahar 2126.2, tag `1.23.0`, migração de saves e prefs validada no moto). Faltam as provas em Adreno e de corrida jogada antes de um APK para clientes. **T2 feita em 2026-11-12** ("Tela única" no menu; `large_screen` medido e não exposto). **T4 + T5 feitas em 2026-11-12:** na tela única em paisagem, os controles ficam sobre o jogo e a imagem estica até preencher; validadas no moto. T3, T6, T8 e T9 seguem abertas; a próxima é a T6. A passagem de bastão está no bug doc, seção "Próximo passo (passagem de bastão, 2026-11-12, depois da T4 + T5)".
+**Status:** em andamento. **T7 feita e publicada em 2026-11-12** (core Azahar 2126.2, tag `1.23.0`, migração de saves e prefs validada no moto). Faltam as provas em Adreno e de corrida jogada antes de um APK para clientes. **T2 feita em 2026-11-12** ("Tela única" no menu; `large_screen` medido e não exposto). **T4 + T5 feitas em 2026-11-12:** na tela única em paisagem, os controles ficam sobre o jogo e a imagem estica até preencher; validadas no moto. **T6 feita em 2026-11-12:** o 3DS ignora a proporção de Ajustes (fica na do core), e só a tela única em paisagem estica; validada no moto. T3, T8 e T9 seguem abertas; a próxima é a T3. A passagem de bastão está no bug doc, seção "Próximo passo (passagem de bastão, 2026-11-12, depois da T6)".
 **Origem:** chamado #330. Uma cliente com Galaxy S20 FE pediu reembolso porque o 3DS não tem tela única e a imagem sai deformada. Bug doc: [`docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`](../bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
 **Tipo:** correção + troca de core · **Esforço:** grande (8 tasks; T7 é Alta)
 
@@ -55,7 +55,7 @@ Especificação completa (o que entra, o que não entra, símbolos e prova) no b
 | T2 ✅ (2026-11-12) | Expor `single_screen` em `citra_layout_option`, com pt-BR (`large_screen` medido e não exposto) | Baixa | T7 (mesmo bloco de `GameSystem.kt`) |
 | T4 ✅ (2026-11-12) | Controles sobre o jogo na tela única; os outros layouts mantêm as colunas | Média | — |
 | T5 ✅ (2026-11-12) | Tela única esticada sem bordas (FILL), sem mudar a proporção dos outros sistemas. Só em paisagem: em retrato a área é alta e esticar achataria a imagem | Média | T2, T4 |
-| T6 | Top-Bottom e Side by Side sem deformação com `Esticar` | Média | T5 |
+| T6 ✅ (2026-11-12) | Top-Bottom e Side by Side sem deformação com `Esticar`. O 3DS ignora toda a proporção de Ajustes, também em retrato (`SystemCoreConfig.ignoresScreenAspectRatio`) | Média | T5 |
 | T3 | Botão de troca de tela, para jogos que exigem toque na tela de baixo. O Azahar usa L3 (`Toggle`); alternativa: `citra_swap_screen` no menu | Média | T7 |
 | T9 | Layout de toque como o do print: L/R nos cantos, direcional e analógico à esquerda, ABXY à direita, Select/Start no centro | Média | T4 |
 | T8 | Resolução 2x por padrão, se o Azahar sustentar ~55 fps | Baixa / Média | T7 |
