@@ -1,5 +1,7 @@
 # [BACKLOG] 3DS: redesenhar o layout de toque no padrão do emulador da imagem 1 (antiga T9)
 
+**Status:** pendente — nenhum commit de código; `Nintendo3DS.kt` ainda é o radial padrão, verificado em 2026-11-13 (T29)
+
 - **Data:** 2026-11-13
 - **Origem:** T9 do bug `docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`. O dono decidiu fechar o bug sem ela (2026-11-13), porque o que levou ao reembolso já está corrigido: tela única, controles sobre o jogo, imagem preenchendo a tela e troca de telas.
 - **Complexidade:** Média.

@@ -1,8 +1,10 @@
 # [BACKLOG] Nova Aba "Instalados" no Lemuroid (Estilo ARMSX2-forkv2)
 
+**Status:** implementado — commit `78b7ff2` (2026-10-08), fechado em `6b4aadc` (1.17.26); `InstalledGamesScreen.kt`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-08  
 **Autor:** Antigravity  
-**Status:** Concluído e Publicado (Build 257 / v1.17.26 em produção)  
+**Status anterior (escrito antes da T29, não verificado):** Concluído e Publicado (Build 257 / v1.17.26 em produção)  
 **Origem:** Demanda de usabilidade — eliminar a necessidade de o usuário navegar por `Sistemas → [Sistema] → [Jogo]` a cada nova sessão para jogar títulos já presentes no aparelho.  
 **Referência de Implementação:** Padrão de biblioteca local e aba `Salvos` do `ARMSX2-forkv2` (`HomeTab.Saved` / `HomeScreen.kt`).
 

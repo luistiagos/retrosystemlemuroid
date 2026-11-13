@@ -1,5 +1,7 @@
 # Guia de Tradução — Retro Game System
 
+**Status:** não é demanda — guia de tradução, verificado em 2026-11-13 (T29)
+
 > **Regra de ouro:** Todo texto visível ao usuário DEVE ser declarado como resource de string. Nunca coloque texto em português ou em qualquer idioma diretamente em arquivos Kotlin/XML de layout.
 
 ---

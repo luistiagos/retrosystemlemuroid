@@ -1,5 +1,7 @@
 # Proporção da tela
 
+**Status:** implementado — commit `5743485` (2026-08-29); `ScreenAspectRatio.kt` e `libretrodroid-patched.aar`; sem prova em aparelho registrada, verificado em 2026-11-13 (T29)
+
 Preferência que escolhe **com que proporção a imagem do jogo é desenhada**: `Automática (do jogo)`,
 `4:3`, `16:9`, `19:9`, `20:9`, `21:9` ou `Esticar para preencher`.
 

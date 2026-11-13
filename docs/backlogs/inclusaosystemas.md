@@ -1,5 +1,7 @@
 # Backlog: Avaliação de Inclusão de Novos Sistemas
 
+**Status:** não é demanda — levantamento; 14 sistemas da lista entraram (`a29ad4c`, `73e0aee`, `f579f88`), verificado em 2026-11-13 (T29)
+
 > Avaliação de viabilidade de inclusão dos sistemas abaixo no Lemuroid, segundo o critério central de
 > [`docs/prompts/adicionar-novo-sistema-libretro.md`](../prompts/adicionar-novo-sistema-libretro.md):
 > **só é possível incluir um sistema que tenha um core Libretro com `.so` Android compilado para as 4 ABIs.**

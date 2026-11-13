@@ -1,5 +1,7 @@
 # [FEATURE] Redesenho visual — entrega 2.1: tela Sistemas
 
+**Status:** implementado — commit `06c7911` (2026-10-14); `LemuroidSystemImage`, `MetaSystemScreen`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-13
 **Branch:** version10
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md)

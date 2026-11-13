@@ -1,7 +1,9 @@
 # [BACKLOG] `./gradlew ktlintCheck` vermelho: baseline por posição + violações novas desde 2026-10-07
 
+**Status:** implementado — commit `ddf3267` (2026-10-17), verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-17
-**Status:** resolvido em 2026-10-17 (ver "Resolução" no fim)
+**Status anterior (escrito antes da T29, não verificado):** resolvido em 2026-10-17 (ver "Resolução" no fim)
 **Origem:** verificação 1 da passagem de bastão da Fase 3 do redesenho
 (`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`, entrada "2026-10-16 (passagem de bastão: Fase 3 fechada)")
 

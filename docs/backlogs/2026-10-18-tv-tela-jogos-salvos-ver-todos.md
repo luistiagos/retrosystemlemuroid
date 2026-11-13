@@ -1,7 +1,9 @@
 # [BACKLOG] Tela "Jogos salvos" na TV, aberta pelo "Ver todos" da fileira da Início
 
+**Status:** implementado — commit `7d0272a` (2026-10-18); `TVSavedGamesFragment.kt`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-18
-**Status:** em andamento — aprovado pelo dono em 2026-10-18
+**Status anterior (escrito antes da T29, não verificado):** em andamento — aprovado pelo dono em 2026-10-18
 **Origem:** fora do escopo da entrega 3.6 (`docs/funcionalidades/2026-10-15-tv-fileira-jogos-salvos.md`, seção
 "Fora do escopo") e "Próximos itens do plano" da passagem de bastão da Fase 3 em
 `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` (Andamento, 2026-10-16)

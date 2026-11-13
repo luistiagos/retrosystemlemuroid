@@ -1,7 +1,9 @@
 # [BACKLOG] Estudo: Pegasus Frontend como interface do Lemuroid
 
+**Status:** não é demanda — estudo (`91593e4`); o caminho escolhido virou o plano `2026-10-13-redesenho-visual-inspirado-pegasus`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-13
-**Status:** estudo concluído. O dono escolheu o caminho C (redesenho nativo), planejado em
+**Status anterior (escrito antes da T29, não verificado):** estudo concluído. O dono escolheu o caminho C (redesenho nativo), planejado em
 [`2026-10-13-redesenho-visual-inspirado-pegasus.md`](2026-10-13-redesenho-visual-inspirado-pegasus.md).
 Os caminhos A e B não serão feitos agora.
 **Origem:** pedido do dono para avaliar a troca do frontend do Lemuroid pelo

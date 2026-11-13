@@ -1,7 +1,9 @@
 # [BACKLOG] Suporte a Nintendo Switch — viabilidade
 
+**Status:** obsoleto — encerrado em 2026-10-29 (core libretro a ~20 fps); nada em `version10`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-27
-**Status:** encerrado no Lemuroid (2026-10-29). A Fase 0 mostrou que o core libretro roda o LIMBO a ~20 fps, contra 60 fps no Eden standalone no mesmo aparelho. Decisão do dono: app próprio, fork do Eden, no molde do ARMSX2-forkv2. Ver `docs/backlogs/2026-10-29-app-switch-fork-eden.md`.
+**Status anterior (escrito antes da T29, não verificado):** encerrado no Lemuroid (2026-10-29). A Fase 0 mostrou que o core libretro roda o LIMBO a ~20 fps, contra 60 fps no Eden standalone no mesmo aparelho. Decisão do dono: app próprio, fork do Eden, no molde do ARMSX2-forkv2. Ver `docs/backlogs/2026-10-29-app-switch-fork-eden.md`.
 **Origem:** pedido do dono ("Verifique a possibilidade de adicionarmos o console switch no Lemuroid, nesta etapa não
 implemente nada, apenas verifique a possibilidade"), sessão de planejamento.
 **Tipo:** feature

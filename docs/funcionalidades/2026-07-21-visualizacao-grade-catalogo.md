@@ -1,7 +1,9 @@
 # Visualização em Grade no Catálogo por Sistema
 
+**Status:** implementado — commit `fc6e94c` (2026-07-21); a grade de 3 colunas fixas virou `CoverGridCells` adaptativo no redesenho (`06c7911`), verificado em 2026-11-13 (T29)
+
 - **Data**: 2026-07-21
-- **Status**: Implementado
+- **Status anterior (escrito antes da T29, não verificado):** Implementado
 - **Autor**: Antigravity
 
 ---

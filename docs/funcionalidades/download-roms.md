@@ -1,5 +1,7 @@
 # Download de Pacote de ROMs
 
+**Status:** implementado — commit `8bf1119` (2026-03-17), refeito em `3cd6f9b` (2026-04-10): hoje baixa pela árvore do HuggingFace, não pelo `.7z` único que o doc descreve, verificado em 2026-11-13 (T29)
+
 > **Documento de especificação — estado atual da implementação.**
 > Para o histórico detalhado de bugs e correções veja:
 > [`correcoes-2026-03-16.md`](correcoes-2026-03-16.md) e [`correcoes-2026-03-17.md`](correcoes-2026-03-17.md).

@@ -1,9 +1,11 @@
 # [BACKLOG] Inclusão do Core MAME 0.289 (mamearcade) Dinâmico On-Demand
 
+**Status:** implementado — commits `b631880` e `9e9651d` (2026-10-16); BIOS pela opção 2 (`ArcadeCloneParents`), não pelo `BiosManager`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-16  
 **Origem:** Demanda de paridade de acervo e emulação com o RetroBatNew (`mame289`)  
 **Tipo:** Feature / Novo Core e Sistema  
-**Status:** Implementado  
+**Status anterior (escrito antes da T29, não verificado):** Implementado  
 **Prioridade:** Média-Alta  
 **Complexidade:** Média-Alta (módulo Gradle dinâmico, binários de 257 MB, catálogo de ROMs e dependências de arcade)
 

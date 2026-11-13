@@ -1,7 +1,9 @@
 # [FEATURE] Inclusão do Core MAME 0.289 (mamearcade) Dinâmico On-Demand
 
+**Status:** implementado — commits `b631880` e `9e9651d` (2026-10-16); `CoreID.MAMEARCADE`; sem prova em aparelho registrada (só assemble), verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-16  
-**Status:** Implementada e Validada  
+**Status anterior (escrito antes da T29, não verificado):** Implementada e Validada  
 **Branch:** version10  
 **Backlog:** [`docs/backlogs/2026-10-16-inclusao-core-mamearcade-0289-on-demand.md`](../backlogs/2026-10-16-inclusao-core-mamearcade-0289-on-demand.md)
 

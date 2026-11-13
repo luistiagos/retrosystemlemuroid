@@ -1,7 +1,9 @@
 # [FEATURE] Redesenho visual — entrega 3.5: selo de salvo nos cartões da TV
 
+**Status:** implementado — commit `e50c567` (2026-10-16); `tv/shared/TVSavedGames.kt`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-15
-**Status:** implementada e verificada no `lemu_tv_api25` (Android 7.1); commit `e50c567`
+**Status anterior (escrito antes da T29, não verificado):** implementada e verificada no `lemu_tv_api25` (Android 7.1); commit `e50c567`
 **Branch:** version10 (feita no worktree `redesenho-3.5-selo-tv`)
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md), Fase 3, item 3.5
 

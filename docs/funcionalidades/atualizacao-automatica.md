@@ -1,5 +1,7 @@
 # Atualização Automática do Aplicativo
 
+**Status:** implementado — commits `efe2057` (2026-04-15) e `5743485` (2026-08-29); `AppUpdateManager.kt`; seguem abertas as pendências 4 (`Installing` sem saída) e 5 (ignora "só Wi-Fi"), verificado em 2026-11-13 (T29)
+
 ## Visão Geral
 
 O app verifica e instala novas versões do APK sozinho, sem loja externa. Os dados do usuário (ROMs, saves, states, preferências) são preservados.

@@ -1,8 +1,10 @@
 # Performance e Memória em Dispositivos Fracos (TV box / Smart TV)
 
+**Status:** implementado — commit `f7ac9b6` (2026-06-27); `CoverUtils.kt::isLowRamDevice`; o §3.1 (`maxSize` do Paging) foi revertido de propósito pelo bug 2026-06-19, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-06-13
 **Tipo:** Otimização de performance / memória
-**Status:** implementado
+**Status anterior (escrito antes da T29, não verificado):** implementado
 **Alvo:** aparelhos de 1–2 GB de RAM (TV box, Smart TV, tablets antigos)
 
 ---

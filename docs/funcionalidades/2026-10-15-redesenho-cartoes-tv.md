@@ -1,7 +1,9 @@
 # [FEATURE] Redesenho visual — entrega 3.2: cartões e diálogo de salvar da TV
 
+**Status:** implementado — commit `773dbe2` (2026-10-15, junto com o tema da TV); `tv/shared/TVCovers.kt`; falta só conferir numa TV box real, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-15
-**Status:** implementada e verificada no `lemu_tv_api25` (Android 7.1), **sem commit**
+**Status anterior (escrito antes da T29, não verificado):** implementada e verificada no `lemu_tv_api25` (Android 7.1), **sem commit**
 **Branch:** version10
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md), Fase 3, item 3.2
 

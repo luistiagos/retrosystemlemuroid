@@ -1,5 +1,7 @@
 # [BACKLOG] Subir o padkit de 1.0.0-beta1 para 1.0.0 — exige subir Compose e Kotlin juntos
 
+**Status:** pendente — nenhum commit; `deps.kt` segue com `padkit 1.0.0-beta1` e `kotlin 2.0.21`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-05
 **Origem:** hipótese descartada de
 `docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`

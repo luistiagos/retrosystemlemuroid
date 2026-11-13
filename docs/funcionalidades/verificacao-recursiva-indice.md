@@ -1,7 +1,9 @@
 # Índice — Verificação Recursiva de Bugs
 
+**Status:** não é demanda — índice dos relatórios `correcoes-verificacao-recursiva-*` em `docs/bugs/done/`, verificado em 2026-11-13 (T29)
+
 Data: 2026-05-31  
-Status: **CONCLUÍDO** — zero bugs residuais confirmados
+**Status anterior (escrito antes da T29, não verificado):** **CONCLUÍDO** — zero bugs residuais confirmados
 
 ---
 

@@ -1,6 +1,8 @@
 # Backlog: sistemas adicionáveis via libretro (que ainda não temos)
 
-**Status:** backlog / levantamento (a priorizar)
+**Status:** não é demanda — levantamento anterior ao `inclusaosystemas`, em parte superado, verificado em 2026-11-13 (T29)
+
+**Status anterior (escrito antes da T29, não verificado):** backlog / levantamento (a priorizar)
 **Objetivo:** catalogar quais consoles/computadores **ainda não suportados** dá pra adicionar ao Lemuroid usando cores libretro (do buildbot Android), com viabilidade, core a usar, custo e observações.
 
 ---

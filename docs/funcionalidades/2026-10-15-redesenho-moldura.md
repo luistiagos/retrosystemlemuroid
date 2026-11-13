@@ -1,7 +1,9 @@
 # [FEATURE] Redesenho visual — Moldura (entrega 2.6)
 
+**Status:** implementado — commit `31cab86` (2026-10-15; o doc nasceu no mesmo commit, por isso dizia "sem commit"); `LemuroidBottomSheet.kt`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-15
-**Status:** implementada e verificada no moto g86 5G, sem commit
+**Status anterior (escrito antes da T29, não verificado):** implementada e verificada no moto g86 5G, sem commit
 **Branch:** version10
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md) (Fase 2, item 2.6)
 

@@ -1,7 +1,9 @@
 # [FEATURE] Redesenho visual — entrega 3.1: tema da TV
 
+**Status:** implementado — commit `773dbe2` (2026-10-15, junto com os cartões da TV); `leanback-colors.xml`, `TVTypography.kt`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-15
-**Status:** implementada e verificada no `lemu_tv_api25` (Android 7.1), **sem commit**
+**Status anterior (escrito antes da T29, não verificado):** implementada e verificada no `lemu_tv_api25` (Android 7.1), **sem commit**
 **Branch:** version10
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md), Fase 3, item 3.1
 

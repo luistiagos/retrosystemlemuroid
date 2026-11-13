@@ -1,5 +1,7 @@
 # [FEATURE] Redesenho visual — entrega 2.3: Início (Home) e moldura deitada
 
+**Status:** implementado — commit `df706f4` (2026-10-14); `HomeLayouts.kt`; as limitações conhecidas foram resolvidas em `31cab86`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-14
 **Branch:** version10
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md)

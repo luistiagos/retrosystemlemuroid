@@ -1,5 +1,7 @@
 # Fix: controles wireless genéricos não funcionam em TV Box (MXQ 4K)
 
+**Status:** implementado — commit `b91cc7b` (2026-07-20); `LemuroidInputDeviceGamePad::hasGamepadEvidence`, verificado em 2026-11-13 (T29)
+
 > **Plano pronto para execução por um modelo menor.** Siga as edições na ordem, sem
 > improvisar além do descrito. Cada edição tem o código ANTES e DEPOIS.
 

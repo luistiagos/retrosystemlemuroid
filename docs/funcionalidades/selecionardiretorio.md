@@ -1,5 +1,7 @@
 # Selecionar Diretório de ROMs
 
+**Status:** implementado — commit `8bf1119` (2026-03-17); `StorageFrameworkPickerLauncher::moveRomsAndFinish`; saves e states não são movidos (o doc já diz), verificado em 2026-11-13 (T29)
+
 ## Descrição
 
 Ao selecionar um novo diretório de ROMs (via SAF — Storage Access Framework), caso já exista um diretório anteriormente configurado com arquivos, o app pergunta ao usuário se deseja mover todos os arquivos para o novo local — incluindo saves, caso estejam presentes.

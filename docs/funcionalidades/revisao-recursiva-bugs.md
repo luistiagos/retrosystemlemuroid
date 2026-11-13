@@ -1,5 +1,7 @@
 # Revisão Recursiva de Bugs — 15/Abr/2026
 
+**Status:** não é demanda — registro de correções já aplicadas (`efe2057`, 2026-04-15), verificado em 2026-11-13 (T29)
+
 ## Processo
 
 Três rodadas de verificação foram executadas até que nenhum bug fosse encontrado:

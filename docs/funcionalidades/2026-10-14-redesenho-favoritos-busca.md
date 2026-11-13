@@ -1,5 +1,7 @@
 # [FEATURE] Redesenho visual — entrega 2.5: Favoritos e Busca
 
+**Status:** implementado — commit `5d8725f` (2026-10-15); `FavoritesScreen`, `SearchScreen`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-14
 **Branch:** version10
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md)

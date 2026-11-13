@@ -1,5 +1,7 @@
 # [BACKLOG] GameCube: expor opções do core Dolphin no menu do jogo
 
+**Status:** pendente — nenhum commit; o bloco `GAMECUBE` do `GameSystem.kt` não tem `exposedSettings` nem chave `dolphin_*`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-09-03
 **Origem:** observado durante a validação em device dos bugs abertos (Moto G86 5G, *Need for
 Speed - Underground 2*)

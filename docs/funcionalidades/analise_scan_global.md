@@ -1,5 +1,7 @@
 # Análise Técnica: Scan Global de ROMs no Lemuroid
 
+**Status:** implementado — commit `f5da52d` (2026-03-22, refinado em `7faca63`); o veredito virou `AllFilesStorageProvider.kt`, verificado em 2026-11-13 (T29)
+
 Esta funcionalidade propõe que o aplicativo localize automaticamente jogos em qualquer lugar do dispositivo, sem exigir que o usuário selecione uma pasta específica. Abaixo está a análise de viabilidade, complexidade e performance.
 
 ## 1. Viabilidade Técnica

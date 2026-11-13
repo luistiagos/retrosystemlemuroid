@@ -1,7 +1,9 @@
 # [BACKLOG] Redesenho visual do Lemuroid inspirado nos temas do Pegasus
 
+**Status:** parcial — Fases 1 a 3 entregues (`06c7911` a `77a8306`, 2026-10-14 a 16); faltam a Fase 4 (opcional) e a verificação 3 (TV box real e `gfxinfo`), verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-13
-**Status:** Fase 1, Fase 2 (2.1–2.6) e entregas 3.1–3.2 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`,
+**Status anterior (escrito antes da T29, não verificado):** Fase 1, Fase 2 (2.1–2.6) e entregas 3.1–3.2 commitadas (`06c7911`, `df706f4`, `0f2962c`, `5d8725f`,
 2.6 em `31cab86`, 3.1 + 3.2 em `773dbe2`). 3.3 (fundo ambiente da TV) em `2dc9412`; 3.4 (painel do item em foco, opção A) em `18cf57d`. Pendente: abrir o menu do jogo à mão.
 **Origem:** caminho C do estudo [`2026-10-13-estudo-pegasus-frontend.md`](2026-10-13-estudo-pegasus-frontend.md).
 Pedido do dono: visual mais moderno e atraente, sem alterar funcionalidade nem o core.

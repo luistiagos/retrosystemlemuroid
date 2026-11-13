@@ -1,5 +1,7 @@
 # Funcionalidades — Índice
 
+**Status:** não é demanda — índice das funcionalidades, verificado em 2026-11-13 (T29)
+
 Documentação das funcionalidades implementadas no Lemuroid.
 
 ---

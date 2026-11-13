@@ -1,8 +1,10 @@
 # Manifest-First Catalog Loader
 
+**Status:** implementado — commit `9fd5d08` (2026-05-06); `ManifestQuickLoader.kt`; os números do doc (entradas, sistemas, schema) estão defasados, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-05-06
 **Tipo:** Refatoração de performance / arquitetura de carga do catálogo
-**Status:** implementado
+**Status anterior (escrito antes da T29, não verificado):** implementado
 
 ---
 

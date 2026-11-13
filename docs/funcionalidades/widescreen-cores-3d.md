@@ -1,5 +1,7 @@
 # Widescreen nos cores 3D
 
+**Status:** implementado — commit `5743485` (2026-08-29); N64 `mupen64plus-aspect`, Dreamcast `reicast_widescreen_*`; GameCube fora (backlog próprio), verificado em 2026-11-13 (T29)
+
 Expõe, no menu de opções do jogo, as opções que fazem o **core renderizar imagem mais larga** —
 em vez de esticar ou cortar a imagem 4:3 depois de pronta.
 

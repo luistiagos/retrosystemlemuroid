@@ -1,8 +1,10 @@
 # Análise de Oportunidades de Performance (TV box / Smart TV)
 
+**Status:** parcial — análise; aplicados 1.1, 2.1 e 2.2 em `f7ac9b6` (2026-06-27); faltam 1.2, 2.3, 3.1, 3.2, 4.1 e 5.1, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-06-13
 **Tipo:** Análise / backlog de performance
-**Status:** análise (nenhuma alteração de código aplicada nesta análise)
+**Status anterior (escrito antes da T29, não verificado):** análise (nenhuma alteração de código aplicada nesta análise)
 **Base:** version9 (= version8 + correções de 2026-06-13, ver
 [`performance-dispositivos-fracos.md`](performance-dispositivos-fracos.md))
 

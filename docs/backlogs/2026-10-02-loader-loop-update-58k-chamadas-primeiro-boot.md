@@ -1,5 +1,7 @@
 # [BACKLOG] Primeiro boot: o loop de `updateManifestFieldsWithTitle` custa ~15 s (58 mil chamadas ao Room)
 
+**Status:** pendente — nenhum commit; `ManifestQuickLoader.kt` ainda faz um UPDATE por linha existente, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-02
 **Origem:** custo residual de
 `docs/bugs/done/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`

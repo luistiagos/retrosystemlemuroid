@@ -1,5 +1,7 @@
 # Canais de Catálogo e Atualização
 
+**Status:** implementado — commits `a29ad4c` (2026-06-08) e `5743485` (2026-08-29); `build.gradle.kts::appUpdateEndpointForChannel`; canal diferente de `default` nunca publicado, verificado em 2026-11-13 (T29)
+
 ## Objetivo
 
 Permitir gerar APKs com catálogos diferentes, por exemplo um APK com `catalog_manifest.txt` completo e outro com um manifest reduzido ou temático, mantendo um fluxo de atualização próprio para cada edição.

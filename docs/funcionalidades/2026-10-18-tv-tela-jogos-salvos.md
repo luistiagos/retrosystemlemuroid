@@ -1,7 +1,9 @@
 # [FEATURE] Tela "Jogos salvos" em grade e "Ver todos" na TV
 
+**Status:** implementado — commit `7d0272a` (2026-10-18); `tv/saved/TVSavedGamesFragment.kt`; a grade tem 5 colunas (`TV_GAME_GRID_COLUMNS`), não 6, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-18  
-**Status:** implementado e validado; aguarda aval do dono para commit  
+**Status anterior (escrito antes da T29, não verificado):** implementado e validado; aguarda aval do dono para commit  
 **Branch:** `redesenho-tv-jogos-salvos-tela` (a partir de `version10`)  
 **Backlog:** `docs/backlogs/2026-10-18-tv-tela-jogos-salvos-ver-todos.md`  
 **Plano Geral:** `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` (Fase 3, item 3.6 / backlog da TV)

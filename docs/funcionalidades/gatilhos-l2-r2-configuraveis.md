@@ -1,5 +1,7 @@
 # Gatilhos L2/R2 configuráveis
 
+**Status:** implementado — commit `b1cd88d` (2026-09-04); `InputClass.AXIS_PRESS_THRESHOLD`, `GameViewModelInput::resolveBoundKeyCode`; sem prova em aparelho registrada, verificado em 2026-11-13 (T29)
+
 Faz as linhas **L2** e **R2** aparecerem em *Configurações → Controles* para qualquer controle,
 e faz o binding delas valer de verdade — inclusive quando o gatilho é um **eixo analógico**,
 que é o caso da maioria dos controles modernos (Xbox, DualShock, 8BitDo, ipega).

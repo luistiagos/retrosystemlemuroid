@@ -1,7 +1,9 @@
 # [BACKLOG] App de Switch próprio, fork do Eden (molde do ARMSX2-forkv2)
 
+**Status:** obsoleto — para o Lemuroid: virou o projeto RGS Switch, fora deste repo, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-29
-**Status:** etapa analítica **concluída em 2026-10-30**. O projeto agora é o **RGS Switch**, em
+**Status anterior (escrito antes da T29, não verificado):** etapa analítica **concluída em 2026-10-30**. O projeto agora é o **RGS Switch**, em
 `D:\projects\switch\rgsswitch`. A documentação viva está em `D:\projects\switch\rgsswitch\docs\rgsswitch\`
 (`arquitetura.md`, `riscos.md`), e a passagem de bastão atual é o §17 do `arquitetura.md`. Este doc fica como
 registro da origem.

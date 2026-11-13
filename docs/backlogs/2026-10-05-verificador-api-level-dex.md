@@ -1,5 +1,7 @@
 # [BACKLOG] Verificador de build: API acima do `minSdk` no bytecode das dependências
 
+**Status:** parcial — só o protótipo `audit_dex_api_level.py`; faltam a task Gradle, o baseline e o gate no release, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-05
 **Origem:** lição de `docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`
 (pitfall 16 do `CLAUDE.md`)

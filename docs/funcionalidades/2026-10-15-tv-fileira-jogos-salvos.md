@@ -1,7 +1,9 @@
 # [FEATURE] Fileira "Jogos salvos" na Início da TV (redesenho, entrega 3.6)
 
+**Status:** implementado — commit `77a8306` (2026-10-16); `TVHomeViewModel.savedGames`, `SavedGamePresenter`; a tela "Ver todos" veio em `7d0272a`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-15
-**Status:** implementado e validado no `lemu_tv_api25`; sem commit (aguarda o aval do dono)
+**Status anterior (escrito antes da T29, não verificado):** implementado e validado no `lemu_tv_api25`; sem commit (aguarda o aval do dono)
 **Branch:** `redesenho-3.6-jogos-salvos-tv` (worktree `.claude/worktrees/jogos-salvos-tv`, a partir de `cf6b120`)
 **Plano:** `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md` (Fase 3, item 3.6; aval do dono na
 entrada "passagem de bastão: 3.5 e 3.6" do Andamento)

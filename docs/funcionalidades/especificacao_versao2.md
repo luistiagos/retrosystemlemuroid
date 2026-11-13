@@ -1,7 +1,9 @@
 # Especificação v2 — Download Sob Demanda de ROMs
 
+**Status:** implementado — commit `3cd6f9b` (2026-04-10); `RomOnDemandManager`, `DownloadedRom`; com desvios do spec (mapa em `mnemonico_map.json`, PK `(systemId, fileName)`, deletar no menu de contexto), verificado em 2026-11-13 (T29)
+
 **Última atualização:** 06/04/2026  
-**Status:** Em validação — ver Seção 8 para decisões pendentes restantes
+**Status anterior (escrito antes da T29, não verificado):** Em validação — ver Seção 8 para decisões pendentes restantes
 
 ### Decisões já tomadas
 

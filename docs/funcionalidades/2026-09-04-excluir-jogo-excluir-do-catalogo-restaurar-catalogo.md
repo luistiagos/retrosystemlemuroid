@@ -1,5 +1,7 @@
 # [FEATURE] Excluir ROM, excluir do catálogo e restaurar catálogo
 
+**Status:** implementado — commit `b1cd88d` (2026-09-04); `RomOnDemandManager::deleteFromCatalog`, `CatalogRemovals`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-09-04
 **Branch:** version9
 

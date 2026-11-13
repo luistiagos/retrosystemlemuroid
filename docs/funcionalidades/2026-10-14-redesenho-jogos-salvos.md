@@ -1,5 +1,7 @@
 # [FEATURE] Redesenho visual — entrega 2.4: Jogos salvos
 
+**Status:** implementado — commit `0f2962c` (2026-10-14), ktlint em `63828f2`; `SavedGameBadges.kt`, verificado em 2026-11-13 (T29)
+
 **Data:** 2026-10-14
 **Branch:** version10
 **Plano:** [`docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`](../backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md)
