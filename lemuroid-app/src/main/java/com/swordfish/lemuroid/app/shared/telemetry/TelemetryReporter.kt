@@ -68,6 +68,23 @@ object TelemetryReporter {
 
     fun isEnabled(): Boolean = enabled
 
+    /** Para a [MedidaReporter]: contexto de [init] (null = telemetria nao iniciada). */
+    internal fun contexto(): Context? = appContext
+
+    /** Para a [MedidaReporter]: o endpoint de erro em uso (padrao ou override). */
+    internal fun endpointConfigurado(): String = endpoint
+
+    /** Para a [MedidaReporter]: `versionName`, ou `"unknown"`. */
+    internal fun versaoDoApp(): String = safeVersion()
+
+    /** Para a [MedidaReporter]: envio em thread daemon que o [awaitPending] tambem espera. */
+    internal fun iniciarEnvio(
+        name: String,
+        block: () -> Unit,
+    ) {
+        workers.start(name, block)
+    }
+
     /**
      * Reports a Java throwable. Sent synchronously when [terminal] because crash paths are about to
      * kill the process and a detached thread would die before finishing. Never throws.
