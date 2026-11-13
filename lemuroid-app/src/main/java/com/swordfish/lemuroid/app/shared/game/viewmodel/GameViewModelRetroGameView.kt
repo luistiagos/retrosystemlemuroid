@@ -44,6 +44,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.filterNotNull
@@ -91,6 +92,16 @@ class GameViewModelRetroGameView(
     // quando o usuario troca o layout pelo menu: a volta do menu relê as variaveis no RESUMED.
     private val singleScreenLayout = MutableStateFlow(false)
 
+    // Telas trocadas pelo botao do pad (SystemCoreConfig.screenSwap). Nao e persistido: cada jogo
+    // abre com a tela de cima, como o L3 do core. A volta do menu nao desfaz a troca: a variavel
+    // nao esta nas options do updateCoreVariables, e o LibretroDroid grava variavel por chave.
+    private val screenSwapped = MutableStateFlow(false)
+
+    // Uma instancia so: a tela coleta com collectAsState, e um combine novo a cada chamada
+    // reiniciaria a coleta em toda recomposicao.
+    private val singleTopScreen: Flow<Boolean> =
+        combine(singleScreenLayout, screenSwapped) { single, swapped -> isSingleTopScreen(single, swapped) }
+
     // A proporcao escolhida em Ajustes, para voltar a ela quando a tela unica deixa de esticar.
     // Ja filtrada por effectiveScreenAspectRatio: no 3DS e sempre AUTO.
     private var userTargetAspectRatio = ScreenAspectRatio.AUTO.targetAspectRatio
@@ -99,7 +110,31 @@ class GameViewModelRetroGameView(
         return gameState.debounce(200)
     }
 
-    fun isSingleScreenLayout(): Flow<Boolean> = singleScreenLayout
+    /**
+     * Tela unica mostrando a tela de cima: so nela os controles vao por cima do jogo e a imagem
+     * estica em paisagem. Com as telas trocadas, a tela visivel e a de toque, e valem as colunas
+     * e a proporcao do core, como em Superior — inferior.
+     */
+    fun isSingleScreenLayout(): Flow<Boolean> = singleTopScreen
+
+    /** Se o botao de troca de telas do pad e tratado aqui ([SystemCoreConfig.screenSwap]). */
+    fun handlesScreenSwap(): Boolean = systemCoreConfig.screenSwap != null
+
+    /**
+     * Inverte as telas: grava a variavel do core, que aplica no quadro seguinte, pelo mesmo caminho
+     * da troca de layout pelo menu. Sem a GLRetroView ainda, ignora sem inverter, para o estado do
+     * app nao divergir do core. T3 de
+     * docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
+     */
+    fun toggleScreenSwap() {
+        val screenSwap = systemCoreConfig.screenSwap ?: return
+        val view = retroGameView ?: return
+        val swapped = !screenSwapped.value
+        val variable = screenSwap.variable(swapped)
+        Timber.i("Updating core variable: ${variable.key} ${variable.value}")
+        view.updateVariables(Variable(variable.key, variable.value))
+        screenSwapped.value = swapped
+    }
 
     /**
      * Estica a imagem ate preencher a area de jogo, ou devolve a proporcao de Ajustes. Quem decide
@@ -552,5 +587,15 @@ class GameViewModelRetroGameView(
         ): ScreenAspectRatio {
             return if (systemCoreConfig.ignoresScreenAspectRatio) ScreenAspectRatio.AUTO else userChoice
         }
+
+        /**
+         * Tela unica com a tela de cima visivel. Trocada para a de baixo (a de toque), ela nao
+         * pode ficar sob os controles: o padkit nao consome o toque, e cada botao apertado seria
+         * tambem um toque na tela do 3DS (T3 do bug doc acima).
+         */
+        internal fun isSingleTopScreen(
+            singleScreenLayout: Boolean,
+            screenSwapped: Boolean,
+        ): Boolean = singleScreenLayout && !screenSwapped
     }
 }

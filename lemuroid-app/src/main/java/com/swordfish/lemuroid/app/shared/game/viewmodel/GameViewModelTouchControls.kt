@@ -180,6 +180,14 @@ class GameViewModelTouchControls(
             return
         }
 
+        // 3DS: o THUMBL do pad e o botao de troca de telas, tratado pelo app, que precisa saber
+        // qual tela esta visivel. Nunca vai ao core, nem a soltura: o L3 do core trocaria de novo.
+        // O padkit emite o botao so quando muda, entao pressed = true chega uma vez por toque.
+        if (event.id == KeyEvent.KEYCODE_BUTTON_THUMBL && retroGameView.handlesScreenSwap()) {
+            if (event.pressed) retroGameView.toggleScreenSwap()
+            return
+        }
+
         val action = if (event.pressed) KeyEvent.ACTION_DOWN else KeyEvent.ACTION_UP
         sendVirtualKeyEvent(action, event.id)
     }

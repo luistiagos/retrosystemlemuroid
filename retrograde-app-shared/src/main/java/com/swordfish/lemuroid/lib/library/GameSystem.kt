@@ -1929,6 +1929,9 @@ data class GameSystem(
                             // "Stretch" or 16:9 from Settings deformed each screen of top-bottom and
                             // side by side (bug doc above, T6).
                             ignoresScreenAspectRatio = true,
+                            // The pad's swap button (T3). Values declared by Azahar 2126.2
+                            // ("Prominent 3DS Screen"); the core's own L3 toggle is relative to it.
+                            screenSwap = ScreenSwap("citra_swap_screen", "Top", "Bottom"),
                         ),
                     ),
                     uniqueExtensions = listOf("3ds"),

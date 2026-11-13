@@ -33,10 +33,30 @@ data class SystemCoreConfig(
      * stretches in mobile landscape.
      */
     val ignoresScreenAspectRatio: Boolean = false,
+    /**
+     * Core variable that swaps which screen is shown first (3DS: the bottom one in place of the
+     * top one). The touch pad's swap button flips it through the app, never as a raw key to the
+     * core, so the app knows which screen is visible: with the bottom (touch) screen in
+     * [singleScreenLayout] the controls go back to the side columns and the picture keeps its
+     * shape. Not persisted and not in the menu: every game starts with [ScreenSwap.normalValue].
+     */
+    val screenSwap: ScreenSwap? = null,
 ) : Serializable {
     /** Whether [variables] (defaults + the user's choices) put the core in [singleScreenLayout]. */
     fun isSingleScreenLayout(variables: Iterable<CoreVariable>): Boolean {
         val target = singleScreenLayout ?: return false
         return variables.any { it.key == target.key && it.value == target.value }
     }
+}
+
+/**
+ * See [SystemCoreConfig.screenSwap]. [normalValue] and [swappedValue] must be values the core
+ * declares for [key], or the core ignores them.
+ */
+data class ScreenSwap(
+    val key: String,
+    val normalValue: String,
+    val swappedValue: String,
+) : Serializable {
+    fun variable(swapped: Boolean): CoreVariable = CoreVariable(key, if (swapped) swappedValue else normalValue)
 }

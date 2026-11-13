@@ -1,7 +1,7 @@
 # [BUG] 3DS no celular: não dá para jogar em tela única, os controles ocupam colunas laterais e a imagem sai deformada
 
 - **Data:** 2026-11-07
-- **Status:** aberto. **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. **T2 feita em 2026-11-12** (opção "Tela única" no menu, validada no moto). **T4 + T5 feitas em 2026-11-12:** na tela única em paisagem, os controles ficam sobre o jogo e a imagem estica até preencher; validadas no moto. **T6 feita em 2026-11-12:** o 3DS ignora a proporção de Ajustes, e só a tela única em paisagem estica; validada no moto. T3, T8 e T9 estão abertas; a próxima é a T3. Ver "Próximo passo (passagem de bastão, 2026-11-12, depois da T6)".
+- **Status:** aberto. **T7 implementada e publicada em 2026-11-12:** o core 3DS é o Azahar 2126.2 (tag `1.23.0` do `lemuroid-cores`), com migração de saves e prefs validada no moto g86. A T7 ainda depende das provas em Adreno, de uma corrida jogada e do crash de shader antes de ir num APK para clientes. **T2 feita em 2026-11-12** (opção "Tela única" no menu, validada no moto). **T4 + T5 feitas em 2026-11-12:** na tela única em paisagem, os controles ficam sobre o jogo e a imagem estica até preencher; validadas no moto. **T6 feita em 2026-11-12:** o 3DS ignora a proporção de Ajustes, e só a tela única em paisagem estica; validada no moto. T3, T8 e T9 estão abertas. **T3 implementada em 2026-11-12, sem commit e sem a prova no aparelho:** um botão no pad, tratado pelo app por `citra_swap_screen`, com colunas e `AUTO` quando a tela de baixo está visível. O analógico deixou de mandar L3 no duplo toque. Os testes, o ktlint e o build passam. Ver "Próximo passo (passagem de bastão, 2026-11-12, depois da implementação da T3)".
 - **Severidade:** Alta para 3DS. Levou uma cliente a pedir reembolso do pacote poucas horas depois da compra.
 - **Complexidade:** Média (uma opção de core é trivial; troca de tela, overlay e proporção por layout mexem em touch e na tela do jogo)
 - **Branch:** redesenho-tv-jogos-salvos-tela (onde foi investigado; a correção ainda não tem branch)
@@ -95,7 +95,7 @@ Tabela atualizada em 2026-11-07 ~22h45 com o que T1, T5 e T7 provaram. T1, T5 (m
 |---|---|---|---|
 | T1 | ✅ **Feito.** Deformação = `Esticar` com colunas; core sem culpa. Print 3 sem gatilho (falta split screen e janela flutuante) | — | "Tabela de geometria" |
 | T2 | ✅ **Feito em 2026-11-12** (`single_screen`; `large_screen` medido e não exposto). Expor `Single Screen Only` (avaliar `Large Screen, Small Screen`) com tradução pt-BR. **O core atual já aceita o valor** (400×240 medido via prefs), e o Azahar também (`GetLayoutOption`) | `GameSystem.kt`, `strings.xml` | Opção aparece e a tela muda em Mario Kart 7 |
-| T3 | Botão de troca de tela (L3) no layout de toque | `Nintendo3DS.kt` | Tela de baixo acessível e tocável; confirmar se o toque responde com a tela trocada |
+| T3 | ✅ **Feito em 2026-11-12** (`SystemCoreConfig.screenSwap`, botão `SecondaryButtonSwapScreens`; provado no moto, ver "T3: implementação e validação"). Botão de troca de tela (L3) no layout de toque | `Nintendo3DS.kt` | Tela de baixo acessível e tocável; confirmar se o toque responde com a tela trocada |
 | T4 | ✅ **Feito em 2026-11-12** (`SystemCoreConfig.singleScreenLayout`; ver "T4 + T5: implementação e validação"). Controles sobre o jogo em tela única; colunas só onde o toque na tela de baixo precisa da área livre | `allowTouchOverlay` hoje é fixo por `ControllerConfig`; precisa depender do layout | Print igual à imagem 1 e toque sem disparo acidental |
 | T5 | ✅ **Feito em 2026-11-12**, forma (a) generalizada pelo layout: FILL só na tela única em paisagem; em retrato e nos outros layouts, a pref global. Tela única com o jogo ocupando a tela: **Single Screen + `Esticar`, com overlay (T4)** reproduz a imagem 1 (Stretch 1,27× no moto, 1,34× no S20 FE). `Automática` dá 5:3 sem distorção com barras laterais. **Dono (2026-11-08): esticado, sem bordas.** `ScreenAspectRatio` é global, então para o 3DS ter o seu é preciso preferência por sistema ou por layout | `ScreenAspectRatio`, `SettingsManager` | Logo do MK7 em ~6,7 (Stretch) ou 5,27 (sem distorção) no S20 FE, conforme a escolha, sem colunas |
 | T6 | ✅ **Feito em 2026-11-12** (`SystemCoreConfig.ignoresScreenAspectRatio`; ver "T6: implementação e validação"). A deformação de Top-Bottom e Side by Side é **só** `Esticar` aplicado à coluna central (1,35× no moto, 1,90× no S20 FE, 2,68× na vertical em Side by Side). Candidatos: ignorar `Esticar` para o 3DS quando há colunas, ou proporção por sistema (a mesma de T5). Não mexe no core | `GameViewModelRetroGameView` / `ScreenAspectRatio` | Top-Bottom e Side by Side com 5:3 por tela (logo do MK7 em 5,27) com `Esticar` ligado |
@@ -473,6 +473,165 @@ Iniciada a pedido do dono ("continue o desenvolvimento desse backlog"). Registro
 
 **Estado do aparelho:** o debug da T6 está instalado. A pref voltou para `auto`, o layout do 3DS para `single_screen` (como estava ao começar) e a rotação para `free`. O app está parado.
 
+### T3: análise (2026-11-12, antes da primeira edição)
+
+**Símbolos abertos, no app e no padkit:**
+
+- `Nintendo3DS.kt` (`lemuroid-touchinput/.../radial/layouts/`):
+  - pad esquerdo: cruz, `SecondaryButtonL` (120°), `SecondaryButtonSelect(position = 2)` (60°), `SecondaryButtonMenuPlaceholder` e `SecondaryAnalogLeft()` (-80°, escala 2,0);
+  - pad direito: ABXY, `SecondaryButtonR` (60°), `SecondaryButtonStart(position = 2)` (120°), um `Box` vazio em -100° (espelho do analógico) e `SecondaryButtonMenu`;
+  - não há botão L3. **O slot de 90° está livre nos dois pads.** O `PSXDualShock.kt` põe o L1 em 90° ao lado de L2, Select e analógico, então o slot convive com o analógico.
+- `Controls.kt::SecondaryAnalogLeft`: passa `analogPressId = Id.Key(KEYCODE_BUTTON_THUMBL)`. Isso vale para todo layout que o usa, o do 3DS inclusive.
+- **padkit 1.0.0-beta1, bytecode** (`javap -c` sobre o `classes.jar` de `lib-release.aar` no cache do Gradle):
+  - `AnalogPointerHandler`: num toque novo, `pressed = (agora - lastDownEvent) < DOUBLE_TAP_INTERVAL`;
+  - `Constants.DOUBLE_TAP_INTERVAL` = `sipush 200` ms;
+  - `pressed` vira `setDigitalKeyIfPressed(analogPressId)` enquanto o dedo fica.
+  - **Logo, dois toques no analógico do 3DS em menos de 200 ms já mandam L3 ao core**, e o core troca a tela (ver abaixo). É um gesto escondido. Numa corrida do MK7, levantar o polegar e voltar a tocar em menos de 200 ms é plausível. O stick do 3DS nem tem clique. **Provado no bytecode, não reproduzido no aparelho.**
+- `PadKitKt$PadKit$3$1$1` (padkit): o único `pointerInput` da biblioteca. Usa `awaitPointerEvent` no passe padrão (Main), lê `getChanges()` e **não chama `consume`**. Em `lemuroid-touchinput` não há nenhum `pointerInput`, `clickable` nem `pointerInteropFilter` (`grep` vazio).
+- `MobileGameScreen`:
+  - a `AndroidView` da `GLRetroView` é `fillMaxSize` e filha do `PadKit`;
+  - os pads ficam num `ConstraintLayout` irmão, por cima;
+  - sem nó de ponteiro nos pads, o hit-test do Compose segue para o irmão de baixo.
+  - **Conclusão:** todo toque, inclusive o toque *num botão do pad*, chega também à `GLRetroView`.
+- `GLRetroView.onTouchEvent` (`LibretroDroid-patched`): trata `ACTION_DOWN`/`MOVE` com `event.x`/`event.y`, ou seja, só o ponteiro de índice 0. `ACTION_UP` vira "fora". `ACTION_POINTER_DOWN`/`UP` são ignorados.
+- `VideoLayout::getRelativePosition`: normaliza o toque sobre o quad desenhado e devolve (-10, -10) fora dele. Em `input.cpp`, fora = `POINTER_PRESSED` 0. O mapeamento é linear sobre o quad, então **FILL não desalinha o toque**.
+- `GameViewModelTouchControls`:
+  - `handleVirtualInputButton` → `sendVirtualKeyEvent` → `retroView.sendKeyEvent(action, keyCode)` com o keycode Android cru. `input.cpp:156` faz `AKEYCODE_BUTTON_THUMBL` → `RETRO_DEVICE_ID_JOYPAD_L3`;
+  - o `KEYCODE_BUTTON_MODE` já é interceptado antes (menu). **É o molde para um botão que age no app.** A classe já recebe o `GameViewModelRetroGameView`.
+- `GameViewModelRetroGameView`:
+  - `singleScreenLayout` (`MutableStateFlow`) é recalculado no `GameState.Loaded` e em `updateCoreVariables(options)`, a partir de `systemCoreConfig.isSingleScreenLayout(options)`;
+  - `updateCoreVariables` chama `retroGameView?.updateVariables(...)`;
+  - as `options` vêm de `CoreVariablesManager.getOptionsForCore`: defaults + prefs, só das chaves expostas.
+- `GLRetroView.updateVariables` → `queueCoreEvent { LibretroDroid.updateVariable }`. Em `Environment::updateVariable`, a gravação é **por chave** num mapa (merge), e só marca `dirtyVariables` se o valor mudou. Uma variável gravada em runtime e ausente das `options` sobrevive à volta do menu.
+- `GameSystem.kt`, bloco 3DS: `citra_enable_touch_touchscreen = enabled` e `citra_enable_mouse_touchscreen = disabled` em `defaultSettings`. Não expõe `citra_swap_screen`.
+
+**Fonte do Azahar 2126.2 lida** (`gh api …?ref=2126.2`, cópias em `azahar/` do scratchpad `bba7f1c9…`):
+
+- `citra_libretro.cpp::retro_run`:
+  - se `HasUpdatedConfig()`, roda `ParseCoreOptions()` + `ApplySettings()` + `UpdateLayout()`;
+  - depois lê L3 (`screen_swap_btn`). No modo `Toggle`, a borda de descida inverte o estático `screens_swapped`, e então `swap_screen = screens_swapped ? (citra_swap_screen != "Bottom") : (citra_swap_screen == "Bottom")`. No modo `Hold`, vale enquanto segura. Nos dois, seguem `ApplySettings()` + `UpdateLayout()`.
+  - **A troca é sempre relativa à variável `citra_swap_screen`.**
+- `core_settings.cpp`:
+  - `citra_swap_screen` ("Prominent 3DS Screen"): valores `Top`/`Bottom`, padrão `Top`;
+  - `citra_swap_screen_mode`: `Toggle`/`Hold`, padrão `Toggle`;
+  - `ParseLayoutOptions` grava `Settings::values.swap_screen = (citra_swap_screen == "Bottom")` a cada `ParseCoreOptions`.
+- `libretro_window.cpp::ComputeLayoutGeometry`, caso `SingleScreen`:
+  - **com `swapped`, 320×240 e `emulated_pointer` continua `true`**: o toque volta;
+  - sem `swapped`, 400×240 e ponteiro desligado.
+  - `UpdateLayout` reporta a geometria nova (`SetGeometry`) e grava `enableEmulatedPointer`.
+- `mouse_tracker.cpp::Update`: com `enable_touch_touchscreen`, lê `RETRO_DEVICE_POINTER` (-0x7fff..0x7fff), mapeia linearmente sobre o framebuffer inteiro e prende a `layout.bottom_screen`.
+- **L3 também é o HOME do 3DS emulado** (`buttons[Home] = "button:14"`). Mas `AppletManager::ButtonUpdateEvent` só manda `HomeButtonSingle` se o slot do HOME Menu estiver registrado. O comentário no fonte explica: evitar que o jogo congele. Abrindo o jogo direto, como nós fazemos, **L3 só troca a tela**.
+
+**Decisões (respondem às três perguntas da passagem de bastão):**
+
+1. **Com a tela única trocada para a de baixo, o core religa o ponteiro**: 320×240, com toque. Lido no fonte do Azahar, não no do Citra antigo.
+2. **A tela de baixo na tela única NÃO pode ficar com overlay e FILL.** O toque num botão do pad chega à `GLRetroView` (padkit não consome). Com a tela de toque debaixo dos pads, cada A/B/direcional apertado seria também um toque na tela do 3DS. Além disso, 4:3 esticado a 2,22:1 é 1,67× de deformação. Regra: **overlay + FILL só na tela única mostrando a tela de cima.** Com a de baixo visível, valem colunas + `AUTO`, como Superior — inferior. É o que a spec da T4 já dizia: "colunas só onde o toque na tela de baixo precisa da área livre". Em retrato nada muda.
+3. **Botão no pad, tratado pelo app, e não L3 cru.**
+   - Um L3 enviado ao core deixaria o app sem saber da troca, e a tela de baixo ficaria sob o overlay esticado (item 2).
+   - O botão alterna a variável `citra_swap_screen` (`Top`/`Bottom`) por `updateVariables`. O core aplica no quadro seguinte, pelo mesmo caminho que a troca de layout pelo menu já usa (T2). O app guarda o estado e decide overlay e proporção.
+   - O estado **não é persistido**: cada jogo abre com a tela de cima, como o L3 nativo.
+   - O estado também **não volta sozinho** ao trocar de layout pelo menu. Em Superior — inferior trocado, a tela de baixo fica em cima, como o L3 faz no core.
+4. **A opção no menu (`ExposedSetting` de `citra_swap_screen`) fica de fora.** Chegar nela leva pressão longa + Configurações + diálogo a cada toque necessário, e ela persistiria por sistema. O botão resolve o mesmo com um toque.
+5. **O analógico do 3DS deixa de mandar L3 no duplo toque** (`analogPressId = null`). O stick do 3DS não clica, o gesto é acidental (ver acima) e dessincronizaria o estado do app. Os outros layouts continuam iguais.
+
+**Hipóteses descartadas:**
+
+- **Botão que manda `THUMBL` ao core, como o do `MelonDS.kt`:** barato, mas cai no item 2. O app não sabe da troca, e a tela de toque fica sob o overlay, esticada, recebendo toque dos botões.
+- **Seguir o L3 do core para inferir o estado:** o `screens_swapped` é estático dentro do core e não é exposto. Contar bordas no app quebraria com o duplo toque no analógico e com o L3 do gamepad.
+- **Manter overlay com `AUTO` na tela de baixo:** em 2712×1220, 4:3 dá 1627×1220 no centro, e os pads (~0,31 da largura de cada lado) cobririam ~300 px de cada borda da tela de toque. Volta o toque acidental.
+- **Esconder o botão fora da tela única:** obrigaria a passar estado de layout para dentro dos composables do pad, que hoje só recebem `settings`. Em Superior — inferior e Esquerda — direita, o botão inverte a ordem das telas, o que é inofensivo. A T9 pode refinar.
+- **Ícone `button_close_screen`:** é uma tela com um X ("fechar tela", do DS). Para trocar telas, entra um vetor novo de setas (`swap_vert` do Material).
+
+**Fora desta task (registrado):**
+
+- **L3 do gamepad** continua indo cru ao core. Na tela única em paisagem com gamepad, a tela de baixo sai com FILL (sem pad na tela, só a deformação). Rotear o L3 do gamepad pelo mesmo toggle é uma extensão em `GameViewModelInput.sendKeyEvent`, a fazer só se houver pedido.
+- **Multitoque:** a `GLRetroView` só lê o ponteiro 0. Segurando um botão do pad, um segundo dedo na tela de toque não registra, em nenhum layout. Já é assim hoje em Superior — inferior. Importa para jogos de mira por toque (Kid Icarus), e não para a T3.
+
+**O que fazer:**
+
+1. `retrograde-app-shared`:
+   - `SystemCoreConfig.screenSwap: ScreenSwap? = null`, com KDoc;
+   - `data class ScreenSwap(key, normalValue, swappedValue) : Serializable`;
+   - no 3DS, `ScreenSwap("citra_swap_screen", "Top", "Bottom")`.
+2. `GameViewModelRetroGameView`:
+   - `screenSwapped: MutableStateFlow(false)`;
+   - o flag atual vira "layout de tela única", e `isSingleScreenLayout()` passa a devolver `combine(layout, screenSwapped) { single, swapped -> single && !swapped }`, por uma função pura no `companion`, para teste;
+   - `handlesScreenSwap()`;
+   - `toggleScreenSwap()`: sem `retroGameView`, ignora sem inverter; com ela, inverte, chama `updateVariables(Variable(key, valor))` e loga `Updating core variable`.
+   - O `MobileGameScreen` não muda: com a tela de baixo, o flag fica `false`, e daí saem colunas e `setStretchToFill(false)` = `AUTO` (T6).
+3. `BaseGameScreenViewModel`: delega se for preciso; o `GameViewModelTouchControls` já tem o `retroGameView`.
+4. `GameViewModelTouchControls.handleVirtualInputButton`: `THUMBL` com `retroGameView.handlesScreenSwap()` vira `toggleScreenSwap()` na borda de descida. **Nunca é repassado ao core**, senão a troca seria dupla.
+5. `lemuroid-touchinput`:
+   - `SecondaryAnalogLeft(analogPressId: Id.Key? = Id.Key(KEYCODE_BUTTON_THUMBL))`, que deixa os outros layouts iguais;
+   - `SecondaryButtonSwapScreens()` em `radialPosition(90f)`, `Id.Key(KEYCODE_BUTTON_THUMBL)`, ícone `button_swap_screens.xml` novo;
+   - `Nintendo3DSLeft` usa os dois, com `analogPressId = null`.
+6. **Testes** em `GameSystemSingleScreenTest`:
+   - a função pura dá `true` em tela única sem troca, `false` em tela única trocada e `false` em Superior — inferior com ou sem troca;
+   - o `screenSwap` do 3DS é `citra_swap_screen` / `Top` / `Bottom`, os valores que o core declara.
+7. **Prova no moto** (MK7 e SM3DL, paisagem, pref global `Automática`):
+   - **antes da mudança**, com o debug atual: dois toques rápidos no analógico em Superior — inferior trocam as telas. Isso prova o achado do padkit; usar `sendevent` se `input tap` não couber em 200 ms;
+   - tela única → botão → log `Updating core variable: citra_swap_screen Bottom`. A captura mostra colunas e a tela de baixo em 4:3 entre elas;
+   - um toque na tela de baixo responde. Conferir com o SM3DL (item de reserva) ou com algo visível na tela de baixo do MK7;
+   - botão de novo → `… Top`. Volta overlay + FILL, com o "O" em ~1,827 (`letra_o2.py`);
+   - depois da mudança, dois toques no analógico não trocam mais a tela;
+   - Superior — inferior + botão: as telas invertem a ordem, sem overlay e sem deformação;
+   - voltar do menu sem mudar nada mantém a troca;
+   - `logcat -b crash` vazio, `ktlintCheck` completo e `assembleFreeBundleDebug`.
+
+### T3: implementação e validação (2026-11-12)
+
+**Verificado antes da primeira edição** (complementa a análise, sem mudar decisão):
+
+- **padkit, `AnalogPointerHandler.updateInputState`** (`javap -c`): `getfield analogPressId` → `ifnull 34` pula o `setDigitalKeyIfPressed`. Com `analogPressId = null`, o duplo toque no analógico não marca tecla nenhuma, e o direcional continua.
+- **padkit, `InputEventsGenerator.onInputStateChanged`**: devolve lista vazia se o estado não mudou. Botões saem de `addButtonPresses` (`current − previous`, `pressed = true`) e `addButtonReleases` (`previous − current`). Logo, o `InputEvent.Button` com `pressed = true` chega **uma vez por toque**, e o `toggleScreenSwap()` não precisa de detector de borda próprio.
+- `GLRetroView.updateVariables` → `queueCoreEvent` (GLThread, `catchExceptions` + `coreWorkGuard`). Pode ser chamado da main antes do primeiro quadro, como o `initializeCoreVariablesFlow` já faz.
+- `GameActivity` declara `configChanges="orientation|screenSize|…"`. Girar o aparelho não recria a `GLRetroView` nem o ViewModel, então o estado da troca sobrevive à rotação.
+- `BaseGameScreenViewModel` não precisa de delegação nova: `isSingleScreenLayout()` já delega, e o `GameViewModelTouchControls` recebe o `GameViewModelRetroGameView`.
+- **Prova "antes da mudança" não rodou:** `adb devices` vazio no início da sessão (o moto não estava conectado).
+
+**Feito no código** (branch `version10`, sem commit), conforme "O que fazer", itens 1 a 6, sem desvio de decisão:
+
+- `SystemCoreConfig.screenSwap: ScreenSwap? = null`, com KDoc. `data class ScreenSwap(key, normalValue, swappedValue) : Serializable`, no mesmo arquivo, com `variable(swapped): CoreVariable`. No 3DS: `ScreenSwap("citra_swap_screen", "Top", "Bottom")`.
+- `GameViewModelRetroGameView`:
+  - `screenSwapped` (`MutableStateFlow(false)`);
+  - `isSingleScreenLayout()` devolve `singleTopScreen`, um `combine(singleScreenLayout, screenSwapped)` **guardado numa `val`**. O `MobileGameScreen` coleta com `collectAsState`, e um `combine` novo a cada chamada reiniciaria a coleta em toda recomposição;
+  - a regra fica em `isSingleTopScreen(single, swapped)` (`companion`, `internal`);
+  - `handlesScreenSwap()` = `screenSwap != null`;
+  - `toggleScreenSwap()`: sem `retroGameView`, retorna sem inverter. Com ela, loga `Updating core variable: <key> <valor>`, chama `updateVariables` e só então inverte o estado.
+- `GameViewModelTouchControls.handleVirtualInputButton`: `THUMBL` com `handlesScreenSwap()` chama `toggleScreenSwap()` quando `pressed` e retorna nos dois sentidos. Nem o aperto nem a soltura chegam ao core.
+- `BaseGameScreenViewModel` e `MobileGameScreen`: sem mudança, como a análise previa.
+- `lemuroid-touchinput`:
+  - `SecondaryAnalogLeft(analogPressId: Id.Key? = Id.Key(KEYCODE_BUTTON_THUMBL))`. Os outros layouts não mudam;
+  - `SecondaryButtonSwapScreens()` em `radialPosition(90f)`, com `THUMBL` e o ícone novo `button_swap_screens.xml` (path do `swap_vert` do Material, no mesmo formato do `button_close_screen`);
+  - `Nintendo3DSLeft`: o botão novo entre L (120°) e Select (60°), e `SecondaryAnalogLeft(analogPressId = null)`. `TouchControllerID.NINTENDO_3DS` só é usado pelo `ControllerConfigs.NINTENDO_3DS`, então nenhum outro sistema muda.
+- `GameSystemSingleScreenTest` ganhou três testes. São 9, todos passando (`tests="9" failures="0" errors="0"`):
+  - `onlyTheTopScreenGoesUnderTheControls`: os quatro casos de `isSingleTopScreen`;
+  - `threeDsSwapsScreensThroughTheCoreVariable`: a chave e os dois valores. Confere também que `citra_swap_screen` **não** está nos `exposedSettings` nem nos `defaultSettings`, porque, se estivesse, a volta do menu regravaria `Top` e desfaria a troca;
+  - `otherSystemsDoNotSwapScreens`: o NES não tem `screenSwap`, e o `THUMBL` dele segue para o core.
+- `ktlintCheck` completo passa. O baseline de `retrograde-app-shared` foi regenerado, e o diff só desloca as 5 entradas de `GameSystem.kt` em +3 linhas. `lemuroid-cores` ficou limpo. `:lemuroid-app:assembleFreeBundleDebug` passa.
+
+**Validado no moto (item 7 inteiro), 2026-11-12, 22h10–22h25.** MK7 (`play-game/id/1165`), paisagem travada por `cmd window user-rotation lock 1`, pref `screen_aspect_ratio` = `auto`.
+
+| Passo | Build | Resultado |
+|---|---|---|
+| Antes: Superior — inferior, duplo toque no analógico | debug de 20:36 (vc 261, pré-T3) | **as telas trocam** (o diálogo dos Mii, da tela de baixo, sobe). Confirma a causa da T3: o L3 chegava ao core |
+| Duplo toque no analógico, Superior — inferior | APK da T3 (22h03) | não troca; nenhum `Updating core variable` no log |
+| Botão novo, Superior — inferior | T3 | `citra_swap_screen Bottom`; telas invertidas, mesmo tamanho, sem deformação |
+| Toque na tela de toque (agora em cima): OK do diálogo | T3 | aceito, o diálogo fecha |
+| Botão de novo | T3 | `citra_swap_screen Top` |
+| Tela única pelo menu, botão | T3 | `… Bottom`; voltam as colunas e a tela de baixo fica em **1627×1220 = 1,334 (4:3)** em y 300/600/900 (`vp.py`) |
+| Toque na tela de baixo: "Time Trials" | T3 | aceito, abre a seleção de personagem |
+| Botão de novo | T3 | `… Top`; volta o overlay e a imagem ocupa a área inteira. O "O" não foi medido: a cena (seleção de personagem) não tem o logo |
+| Botão (`… Bottom`), abre e fecha o menu | T3 | a volta regrava 5 variáveis (`citra_layout_option single_screen` etc.), **não** `citra_swap_screen`; segue na tela de baixo, 1,334 |
+| `logcat -b crash` | T3 | vazio; `:game` vivo (pid 16538) do começo ao fim |
+
+**Receitas e armadilhas desta rodada:**
+
+- **Pareamento sem fio:** `adb pair` respondeu `protocol fault (couldn't read status message)` duas vezes, mas o aparelho apareceu no `adb mdns services` (`_adb-tls-connect`, porta 43669, diferente da de pareamento). O primeiro `adb connect` deu timeout; depois de `adb kill-server` + novo `pair`, conectou.
+- **`sendevent` não funciona no moto:** `/dev/input/event8` (`goodix_ts`) dá `Permission denied` ao shell, mesmo no grupo `input` (SELinux). Duplo toque < 200 ms saiu com dois `input swipe x y x y+1 40` no **mesmo** `adb shell`, o segundo em background 0,12 s depois: `"input swipe … 40 & sleep 0.12; input swipe … 40 & wait"`. A latência de partida de cada `input` é parecida, então a defasagem se mantém.
+- O botão novo fica em (243, 89) em paisagem; o analógico em (312, 780) com o botão novo, e em (324, 772) no layout antigo.
+- A pref Harmony estava em `single_screen` ao chegar; foi para `default` por JSON (app parado) para o passo "antes" e terminou em `single_screen` pelo menu, igual ao estado inicial. Rotação devolvida (`user-rotation free`).
+
 ## Comparação T7 + T1 (registro de 2026-11-07)
 
 > **Estado (atualizado ~22h45):** T1, T5 e T7 medidos no moto (braços A1, B, A2, C e C2). Conclusão em "Conclusão de T7": trocar o core por desempenho, com GL obrigatório; imagem e layout não dependem do core. Antes disso (~21h): T7 só com o braço A1, conclusão provisória "manter o core". Abaixo, o estado anterior. Análise sem aparelho concluída. T1 medido em parte no moto: a deformação é a preferência `Esticar para preencher`, não o core (ver "Tabela de geometria"). O print 3 não foi reproduzido. Comparação de core (T7) e Azahar standalone (T5) **não feitas**. Nenhum código foi alterado. **Trocar ou manter o core ainda não está decidido.** A sessão de 2026-11-07 parou aqui e passou o bastão: a continuação está em "Próximo passo".
@@ -679,6 +838,51 @@ Fps do core por bloco de 180 quadros (`dist.py`, mesma janela do timestats): no 
 - O Azahar libretro reporta a mesma geometria e também não tem proporção própria (ver "Core Azahar").
 
 Logo, T2, T4, T5 e T9 valem para qualquer um dos dois cores. **Decisão provisória: manter o core** para o problema de imagem e layout. T7 decide só desempenho e crash. Se o Azahar GL não ganhar com folga em fps ou estabilidade, a troca custa a migração das chaves (tabela acima) e o risco do GL forçado sem ganho visível. **Fechar a decisão depois de B/A2/C.**
+
+## Próximo passo (passagem de bastão, 2026-11-12 ~22h30, depois da prova da T3)
+
+**Feito: a prova da T3 no moto**, item 7 inteiro, sem desvio (ver tabela em "T3: implementação e validação"). Commit da T3 com os caminhos listados abaixo. **Abertas:** T8 (resolução acima de 1x, medir 2x no moto e num Adreno) e T9 (redesenho do layout de toque no padrão da imagem 1). A T7 ainda pede, antes de publicar, a repetição num Adreno, a conferência do crash de shader e uma corrida inteira. A escolha da próxima é do dono.
+
+## Próximo passo (registro anterior, 2026-11-12, depois da implementação da T3)
+
+**Feito: o código da T3**, itens 1 a 6 de "T3: análise ▸ O que fazer". Ver "T3: implementação e validação". Os testes, o `ktlintCheck` completo e o `assembleFreeBundleDebug` passam. **Nada foi commitado**, e a prova no moto não rodou, porque o aparelho não estava conectado.
+
+**Próximo: a prova no moto** (item 7), na ordem:
+
+1. **Antes de instalar o APK novo**, se o aparelho ainda estiver com o debug da T6: MK7 (`play-game/id/1165`) em Superior — inferior, paisagem, e dois toques no analógico em menos de 200 ms. O esperado é as telas trocarem. `input tap` sobe um processo por chamada e pode não caber em 200 ms; nesse caso, usar `sendevent` (ver "Abrir um jogo e tocar no pad" no `CLAUDE.md`).
+2. `adb install -r -t` do APK listado em "T3: implementação e validação". Depois, os itens do 7: botão → `Updating core variable: citra_swap_screen Bottom` com colunas e a tela de baixo em 4:3; toque na tela de baixo responde; botão de novo → `… Top`, com o "O" em ~1,827; duplo toque no analógico não troca mais; Superior — inferior + botão inverte as telas sem deformar; voltar do menu mantém a troca; `logcat -b crash` vazio.
+3. As coordenadas do botão novo (90° do pad esquerdo, entre L e Select) saem de uma captura em paisagem. O menu fica em (2612, 628), com pressão longa.
+
+**Depois da prova:** commitar só os caminhos desta task. `lemuroid-app/build.gradle.kts`, `.claude/settings.json` e o bug doc do som do SM3DL estão staged por outra sessão:
+
+```
+git add lemuroid-touchinput/src/main/res/drawable/button_swap_screens.xml
+git commit -- retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/SystemCoreConfig.kt \
+  retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/GameSystem.kt \
+  retrograde-app-shared/config/ktlint/baseline.xml \
+  lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/viewmodel/GameViewModelRetroGameView.kt \
+  lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/game/viewmodel/GameViewModelTouchControls.kt \
+  lemuroid-app/src/test/java/com/swordfish/lemuroid/app/shared/game/GameSystemSingleScreenTest.kt \
+  lemuroid-touchinput/src/main/java/com/swordfish/touchinput/radial/layouts/Nintendo3DS.kt \
+  lemuroid-touchinput/src/main/java/com/swordfish/touchinput/radial/layouts/shared/Controls.kt \
+  lemuroid-touchinput/src/main/res/drawable/button_swap_screens.xml \
+  docs/bugs/open/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md
+```
+
+Se a prova desmentir algo, por exemplo se o core não religar o toque na tela de baixo, corrigir esta seção e a "T3: análise", e não só o código.
+
+## Próximo passo (passagem de bastão, 2026-11-12, depois da análise da T3)
+
+**Feito: a etapa analítica da T3.** Ver "T3: análise". Nenhum código foi alterado, e o aparelho não foi tocado nesta sessão. As provas pendentes da T7 continuam valendo.
+
+**Próximo: implementar a T3** conforme "T3: análise ▸ O que fazer", itens 1 a 7, sem refazer a pesquisa.
+
+- **Primeiro passo exato:** rodar a prova "antes da mudança" do item 7 (duplo toque no analógico troca as telas no debug atual). Depois, reabrir os símbolos que serão editados: `SystemCoreConfig`, `GameViewModelRetroGameView` (o `singleScreenLayout` e o `updateCoreVariables`), `GameViewModelTouchControls.handleVirtualInputButton`, `Controls.kt::SecondaryAnalogLeft` e `Nintendo3DS.kt`. Só então editar.
+- **Cuidados:**
+  - o `THUMBL` do pad do 3DS **não** pode chegar ao core, ou a troca sai dupla;
+  - quem edita `GameSystem.kt` regenera o baseline do ktlint de `retrograde-app-shared` no mesmo commit;
+  - commitar só os caminhos desta task (`git commit -- <caminhos>`). `lemuroid-app/build.gradle.kts`, `.claude/settings.json` e o bug doc do som do SM3DL estão staged por outra sessão.
+- **Receitas no moto:** "T4 + T5: implementação e validação", com o menu em (2612, 628) por pressão longa. Com o botão novo, tirar as coordenadas dele de uma captura em paisagem.
 
 ## Próximo passo (passagem de bastão, 2026-11-12, depois da T6)
 

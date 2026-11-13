@@ -15,6 +15,7 @@ import com.swordfish.touchinput.radial.layouts.shared.SecondaryButtonMenuPlaceho
 import com.swordfish.touchinput.radial.layouts.shared.SecondaryButtonR
 import com.swordfish.touchinput.radial.layouts.shared.SecondaryButtonSelect
 import com.swordfish.touchinput.radial.layouts.shared.SecondaryButtonStart
+import com.swordfish.touchinput.radial.layouts.shared.SecondaryButtonSwapScreens
 import com.swordfish.touchinput.radial.settings.TouchControllerSettingsManager
 import com.swordfish.touchinput.radial.ui.LemuroidButtonForeground
 import gg.padkit.PadKitScope
@@ -34,8 +35,11 @@ fun PadKitScope.Nintendo3DSLeft(
         secondaryDials = {
             SecondaryButtonL()
             SecondaryButtonSelect(position = 2)
+            SecondaryButtonSwapScreens()
             SecondaryButtonMenuPlaceholder(settings)
-            SecondaryAnalogLeft()
+            // The 3DS stick does not click, and a double tap sent L3: the core swapped the
+            // screens behind the app's back. Swapping is the button above.
+            SecondaryAnalogLeft(analogPressId = null)
         },
     )
 }

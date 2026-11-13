@@ -129,16 +129,34 @@ fun SecondaryButtonKeyboard(
     )
 }
 
+/**
+ * [analogPressId] is the key a double tap on the stick holds (padkit: two touches < 200 ms apart).
+ * `null` turns the gesture off, for sticks that do not click (3DS).
+ */
 context(PadKitScope, LayoutRadialSecondaryDialsScope)
 @Composable
-fun SecondaryAnalogLeft() {
+fun SecondaryAnalogLeft(analogPressId: Id.Key? = Id.Key(KeyEvent.KEYCODE_BUTTON_THUMBL)) {
     LemuroidControlAnalog(
         modifier =
             Modifier
                 .radialPosition(-80f)
                 .radialScale(2.0f),
         id = Id.ContinuousDirection(ComposeTouchLayouts.MOTION_SOURCE_LEFT_STICK),
-        analogPressId = Id.Key(KeyEvent.KEYCODE_BUTTON_THUMBL),
+        analogPressId = analogPressId,
+    )
+}
+
+/**
+ * Swaps the screens of a two-screen system. Sends THUMBL, which the app handles itself when the
+ * system has `SystemCoreConfig.screenSwap` (3DS) and never forwards to the core.
+ */
+context(PadKitScope, LayoutRadialSecondaryDialsScope)
+@Composable
+fun SecondaryButtonSwapScreens() {
+    LemuroidControlButton(
+        modifier = Modifier.radialPosition(90f),
+        id = Id.Key(KeyEvent.KEYCODE_BUTTON_THUMBL),
+        icon = R.drawable.button_swap_screens,
     )
 }
 
