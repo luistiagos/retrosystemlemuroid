@@ -73,3 +73,18 @@ Provas (lane wt-1):
 - Com a mudança: mesmo comando -> **EXIT=0**, relatórios `lemuroid-app/build/reports/ktlint/*/*.txt` vazios.
 - `build --bug TASK-0003` -> BUILD SUCCESSFUL; `testFreeBundleDebugUnitTest`: 96 testes, 0 falhas, 0 erros, 1 pulado.
 - `git diff` do `.kt`: +16/-4, só quebra de linha, indentação e `,` final.
+
+## Teste (pipeline 20261114-1912, rodada 1) — aprovado
+
+- **Diff** (`git diff origin/version10...HEAD`): só os 2 arquivos reservados; `.kt` +16/-4 apenas quebra de linha,
+  indentação e `,` final (os `catch (ignored: Throwable)` seguem engolindo tudo); baseline: só o `<file>` de
+  `TelemetryReporter.kt` removido (18 `<error>`), nada adicionado.
+- **Controle positivo** (base `origin/version10` @ ee90baa, os 2 arquivos restaurados da base na lane):
+  `./gradlew :lemuroid-app:ktlintCheck -q` -> EXIT=1, 18 apontamentos em `TelemetryReporter.kt`.
+  Evidência: `evidencias/ktlint-base-relatorio.txt`.
+- **Com a mudança**: mesmo comando -> EXIT=0, relatórios `lemuroid-app/build/reports/ktlint/*/*.txt` vazios.
+  Evidência: `evidencias/ktlint-fix.txt` (saída vazia).
+- **T2 (UI)**: dispensado pelo Plano de teste (gate de estilo, sem caminho de usuário); sem instalação no aparelho.
+- **T3**: `build --bug TASK-0003` após `sync` (base ee90baa) -> BUILD SUCCESSFUL; `testFreeBundleDebugUnitTest`
+  96 testes / 0 falhas / 0 erros / 1 pulado (igual à rodada do dev).
+- **T4**: sem aparelho, sem logcat (sem mudança de comportamento).
