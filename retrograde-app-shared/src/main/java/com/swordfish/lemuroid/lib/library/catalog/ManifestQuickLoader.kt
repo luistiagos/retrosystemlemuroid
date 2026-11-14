@@ -169,7 +169,9 @@ class ManifestQuickLoader(
         //   v44  psp: adição de Mortal Kombat - Unchained (USA).iso.
         //   v45  gc: adição de Mario Kart - Double Dash!! (Europe) (En,Fr,De,Es,It).rvz.
         //   v46  expansão dos sistemas leves (pcenginecd +492, atarist +734, megadrive +132, wsc +91, pico8 +52, msx +15).
-        private const val MANIFEST_SCHEMA_VERSION = 46
+        //   v47  gc: +175 títulos/correções verificados no Archive.org (RVZ/ISO, source_id=1).
+        //   v48  gc: +24 ROM hacks verificados no Archive.org (RVZ/ISO/GCZ, source_id=1).
+        private const val MANIFEST_SCHEMA_VERSION = 48
 
         // Arcade sub-systems split out of the generic `fbneo` system by the v24 reclassification.
         private val ARCADE_SUBSYSTEMS = setOf(

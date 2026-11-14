@@ -26631,7 +26631,7 @@ gc/Nickelodeon Jimmy Neutron - Boy Genius - Attack of the Twonkies.rvz|Nickelode
 gc/Nickelodeon Jimmy Neutron - Der mutige Erfinder.rvz|Nickelodeon Jimmy Neutron - Der mutige Erfinder||0|1
 gc/Nickelodeon Les Razmoket - La Rancon Royale.rvz|Nickelodeon Les Razmoket - La Rancon Royale||0|1
 gc/Nickelodeon Party Blast.rvz|Nickelodeon Party Blast||0|1
-gc/Nickelodeon Rocket Power - Beach Bandits.zip (1).rvz|Nickelodeon Rocket Power - Beach Bandits||0|1
+gc/Nickelodeon Rocket Power - Beach Bandits.zip (1).rvz|Nickelodeon Rocket Power - Beach Bandits||0|0
 gc/Nickelodeon Rugrats - Royal Ransom.rvz|Nickelodeon Rugrats - Royal Ransom||0|1
 gc/Nickelodeon SpongeBob Schwammkopf - Der Film.rvz|Nickelodeon SpongeBob Schwammkopf - Der Film||0|1
 gc/Nickelodeon SpongeBob Schwammkopf - Film ab!.rvz|Nickelodeon SpongeBob Schwammkopf - Film ab!||0|1
@@ -26662,7 +26662,7 @@ gc/One Piece - Grand Battle! Rush..rvz|One Piece - Grand Battle! Rush.||0|1
 gc/One Piece - Pirates Carnival..rvz|One Piece - Pirates Carnival.||0|1
 gc/Open Season..rvz|Open Season.||0|1
 gc/Outlaw Golf..rvz|Outlaw Golf.||0|1
-gc/P.N. 03..rvz|P.N. 03.||0|1
+gc/P.N. 03..rvz|P.N. 03.||0|0
 gc/Pac-Man Fever..rvz|Pac-Man Fever.||0|1
 gc/Pac-Man Vs...rvz|Pac-Man Vs..||0|1
 gc/Pac-Man World 2..rvz|Pac-Man World 2.||0|1
@@ -26995,48 +26995,48 @@ gc/Walt Disney Pictures Presents Meet the Robinsons.rvz|Walt Disney Pictures Pre
 gc/Wario World.rvz|Wario World||0|1
 gc/WarioWare, Inc. - Mega Party Game.rvz|WarioWare, Inc. - Mega Party Game||0|1
 gc/Warrior Blade - Rastan vs. Barbarian.rvz|Warrior Blade - Rastan vs. Barbarian||0|1
-gc/Wave Race - Blue Storm.zip (1).rvz|Wave Race - Blue Storm||0|1
-gc/Whirl Tour.zip (1).rvz|Whirl Tour||0|1
-gc/World Racing.zip (1).rvz|World Racing||0|1
-gc/World Series of Poker.zip (1).rvz|World Series of Poker||0|1
-gc/World Soccer Winning Eleven 6 - Final Evolution.zip (1).rvz|World Soccer Winning Eleven 6 - Final Evolution||0|1
-gc/Worms 3D.zip (1).rvz|Worms 3D||0|1
-gc/Worms Blast.zip (1).rvz|Worms Blast||0|1
-gc/Wreckless - The Yakuza Missions.zip (1).rvz|Wreckless - The Yakuza Missions||0|1
-gc/WTA Tour Tennis.zip (1).rvz|WTA Tour Tennis||0|1
-gc/WTA Tour Tennis Pro Evolution.zip (1).rvz|WTA Tour Tennis Pro Evolution||0|1
-gc/WWE Crush Hour.zip (1).rvz|WWE Crush Hour||0|1
-gc/WWE Day of Reckoning.zip (1).rvz|WWE Day of Reckoning||0|1
-gc/WWE Day of Reckoning 2.zip (1).rvz|WWE Day of Reckoning 2||0|1
-gc/WWE WrestleMania X8.zip (1).rvz|WWE WrestleMania X8||0|1
-gc/WWE WrestleMania XIX.zip (1).rvz|WWE WrestleMania XIX||0|1
-gc/X-Men - Next Dimension.zip (1).rvz|X-Men - Next Dimension||0|1
+gc/Wave Race - Blue Storm.zip (1).rvz|Wave Race - Blue Storm||0|0
+gc/Whirl Tour.zip (1).rvz|Whirl Tour||0|0
+gc/World Racing.zip (1).rvz|World Racing||0|0
+gc/World Series of Poker.zip (1).rvz|World Series of Poker||0|0
+gc/World Soccer Winning Eleven 6 - Final Evolution.zip (1).rvz|World Soccer Winning Eleven 6 - Final Evolution||0|0
+gc/Worms 3D.zip (1).rvz|Worms 3D||0|0
+gc/Worms Blast.zip (1).rvz|Worms Blast||0|0
+gc/Wreckless - The Yakuza Missions.zip (1).rvz|Wreckless - The Yakuza Missions||0|0
+gc/WTA Tour Tennis.zip (1).rvz|WTA Tour Tennis||0|0
+gc/WTA Tour Tennis Pro Evolution.zip (1).rvz|WTA Tour Tennis Pro Evolution||0|0
+gc/WWE Crush Hour.zip (1).rvz|WWE Crush Hour||0|0
+gc/WWE Day of Reckoning.zip (1).rvz|WWE Day of Reckoning||0|0
+gc/WWE Day of Reckoning 2.zip (1).rvz|WWE Day of Reckoning 2||0|0
+gc/WWE WrestleMania X8.zip (1).rvz|WWE WrestleMania X8||0|0
+gc/WWE WrestleMania XIX.zip (1).rvz|WWE WrestleMania XIX||0|0
+gc/X-Men - Next Dimension.zip (1).rvz|X-Men - Next Dimension||0|0
 gc/X-Men - The Official Game.zip (1).rvz|X-Men - The Official Game||0|1
-gc/X-Men 2 - Wolverine's Revenge.zip (1).rvz|X-Men 2 - Wolverine's Revenge||0|1
-gc/X-Men Legends.zip (1).rvz|X-Men Legends||0|1
-gc/X-Men Legends II - El Ascenso de Apocalipsis.zip (1).rvz|X-Men Legends II - El Ascenso de Apocalipsis||0|1
-gc/X-Men Legends II - Rise of Apocalypse.zip (1).rvz|X-Men Legends II - Rise of Apocalypse||0|1
-gc/X2 - Wolverine's Revenge.zip (1).rvz|X2 - Wolverine's Revenge||0|1
+gc/X-Men 2 - Wolverine's Revenge.zip (1).rvz|X-Men 2 - Wolverine's Revenge||0|0
+gc/X-Men Legends.zip (1).rvz|X-Men Legends||0|0
+gc/X-Men Legends II - El Ascenso de Apocalipsis.zip (1).rvz|X-Men Legends II - El Ascenso de Apocalipsis||0|0
+gc/X-Men Legends II - Rise of Apocalypse.zip (1).rvz|X-Men Legends II - Rise of Apocalypse||0|0
+gc/X2 - Wolverine's Revenge.zip (1).rvz|X2 - Wolverine's Revenge||0|0
 gc/Xeno Crisis.zip (1).rvz|Xeno Crisis||0|1
-gc/XGIII - Extreme G Racing.zip (1).rvz|XGIII - Extreme G Racing||0|1
-gc/XGRA - Extreme G Racing Association.zip (1).rvz|XGRA - Extreme G Racing Association||0|1
-gc/XIII.zip (1).rvz|XIII||0|1
-gc/Yu-Gi-Oh! Falsebound Kingdom - Kyokou ni Tozasareta Oukoku.zip (1).rvz|Yu-Gi-Oh! Falsebound Kingdom - Kyokou ni Tozasareta Oukoku||0|1
-gc/Yu-Gi-Oh! The Falsebound Kingdom.zip (1).rvz|Yu-Gi-Oh! The Falsebound Kingdom||0|1
-gc/Zapper.zip (1).rvz|Zapper||0|1
-gc/Zatch Bell! Mamodo Battles.zip (1).rvz|Zatch Bell! Mamodo Battles||0|1
-gc/Zatch Bell! Mamodo Fury.zip (1).rvz|Zatch Bell! Mamodo Fury||0|1
-gc/Zelda Collection.zip (1).rvz|Zelda Collection||0|1
-gc/Zelda no Densetsu - 4-tsu no Tsurugi+.zip (1).rvz|Zelda no Densetsu - 4-tsu no Tsurugi+||0|1
+gc/XGIII - Extreme G Racing.zip (1).rvz|XGIII - Extreme G Racing||0|0
+gc/XGRA - Extreme G Racing Association.zip (1).rvz|XGRA - Extreme G Racing Association||0|0
+gc/XIII.zip (1).rvz|XIII||0|0
+gc/Yu-Gi-Oh! Falsebound Kingdom - Kyokou ni Tozasareta Oukoku.zip (1).rvz|Yu-Gi-Oh! Falsebound Kingdom - Kyokou ni Tozasareta Oukoku||0|0
+gc/Yu-Gi-Oh! The Falsebound Kingdom.zip (1).rvz|Yu-Gi-Oh! The Falsebound Kingdom||0|0
+gc/Zapper.zip (1).rvz|Zapper||0|0
+gc/Zatch Bell! Mamodo Battles.zip (1).rvz|Zatch Bell! Mamodo Battles||0|0
+gc/Zatch Bell! Mamodo Fury.zip (1).rvz|Zatch Bell! Mamodo Fury||0|0
+gc/Zelda Collection.zip (1).rvz|Zelda Collection||0|0
+gc/Zelda no Densetsu - 4-tsu no Tsurugi+.zip (1).rvz|Zelda no Densetsu - 4-tsu no Tsurugi+||0|0
 gc/Zelda no Densetsu - Kaze no Takt.zip (1).rvz|Zelda no Densetsu - Kaze no Takt||0|1
-gc/Zelda no Densetsu - Toki no Ocarina GC.zip (1).rvz|Zelda no Densetsu - Toki no Ocarina GC||0|1
-gc/Zelda no Densetsu - Twilight Princess.zip (1).rvz|Zelda no Densetsu - Twilight Princess||0|1
-gc/Zoids - Battle Legends.zip (1).rvz|Zoids - Battle Legends||0|1
-gc/Zoids - Full Metal Crash.zip (1).rvz|Zoids - Full Metal Crash||0|1
-gc/Zoids Vs..zip (1).rvz|Zoids Vs.||0|1
-gc/Zoids Vs. II.zip (1).rvz|Zoids Vs. II||0|1
-gc/Zoids Vs. III.zip (1).rvz|Zoids Vs. III||0|1
-gc/ZooCube.zip (1).rvz|ZooCube||0|1
+gc/Zelda no Densetsu - Toki no Ocarina GC.zip (1).rvz|Zelda no Densetsu - Toki no Ocarina GC||0|0
+gc/Zelda no Densetsu - Twilight Princess.zip (1).rvz|Zelda no Densetsu - Twilight Princess||0|0
+gc/Zoids - Battle Legends.zip (1).rvz|Zoids - Battle Legends||0|0
+gc/Zoids - Full Metal Crash.zip (1).rvz|Zoids - Full Metal Crash||0|0
+gc/Zoids Vs..zip (1).rvz|Zoids Vs.||0|0
+gc/Zoids Vs. II.zip (1).rvz|Zoids Vs. II||0|0
+gc/Zoids Vs. III.zip (1).rvz|Zoids Vs. III||0|0
+gc/ZooCube.zip (1).rvz|ZooCube||0|0
 gc/Lord of the Rings - Futatsu no Tou (Japan).rvz|||0|0
 gc/Speed%20Kings%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.zip.rvz|||0|0
 gc/Sphinx%20and%20the%20Cursed%20Mummy%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.zip.rvz|||0|0
@@ -75152,7 +75152,7 @@ dc/Shenmue Disco 3 (BR) (T1.3).zip|Shenmue|https://romsportugues.com/wp-content/
 dc/Soul Reaver (Dublado) (BR).cdi|Legacy of Kain – Soul Reaver (Dreamcast) (Dublado)|https://romsportugues.com/wp-content/uploads/2022/05/Legacy-of-Kain-Soul-Reaver-Dreamcast-Dublado-PTBR.webp|0|1
 dc/Toy Story 2 (Dublado).cdi|Toy Story 2 (Dreamcast) (Dublado)|https://romsportugues.com/wp-content/uploads/2023/02/Toy-Story-2-Dreamcast-Dublado-PTBR-DreamCast.webp|0|1
 dc/What's Shenmue (BR).zip|What’s Shenmue?|https://romsportugues.com/wp-content/uploads/2019/04/Whats-Shenmue-PTBR-Dreamcast.webp|0|1
-gc/Marvel Nemesis Rise of the Imperfects (BR) (T1.0).iso|Marvel Nemesis: Rise of the Imperfects|https://romsportugues.com/wp-content/uploads/2026/06/Marvel-Nemesis-Rise-of-the-Imperfects-PTBR-Gamecube.webp|0|1
+gc/Marvel Nemesis Rise of the Imperfects (BR) (T1.0).iso|Marvel Nemesis: Rise of the Imperfects|https://romsportugues.com/wp-content/uploads/2026/06/Marvel-Nemesis-Rise-of-the-Imperfects-PTBR-Gamecube.webp|0|0
 gc/Resident Evil (Disco 1) (BR-U) (Somente DUB).rvz|Resident Evil (GameCube) (Dublado)|https://romsportugues.com/wp-content/uploads/2026/08/Resident-Evil-Gamecube-PTBR.webp|0|1
 gc/Resident Evil (Disco 2) (BR-U) (Somente DUB).rvz|Resident Evil (GameCube) (Dublado)|https://romsportugues.com/wp-content/uploads/2026/08/Resident-Evil-Gamecube-PTBR.webp|0|1
 gc/Resident Evil Zero (Disco 1) (BR) (DUB) (T1.1).rvz|Resident Evil Zero (Dublado)|https://romsportugues.com/wp-content/uploads/2026/09/Resident-Evil-Zero-PTBR-Gamecube.webp|0|1
@@ -77866,5 +77866,204 @@ gc/Prince of Persia - The Sands of Time (US).rvz|Prince of Persia - The Sands of
 gc/Prince of Persia - The Two Thrones (US).rvz|Prince of Persia - The Two Thrones|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Prince%20of%20Persia%20-%20The%20Two%20Thrones%20%28USA%29.png|0|1
 gc/Spyro - Enter the Dragonfly (US).rvz|Spyro - Enter the Dragonfly|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Spyro%20-%20Enter%20the%20Dragonfly%20%28USA%29.png|0|1
 gc/Tony Hawk Pro Skater 3 (US).rvz|Tony Hawk's Pro Skater 3|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Tony%20Hawk%27s%20Pro%20Skater%203%20%28USA%29.png|0|1
-gc/Speed Kings (Europe) (En,Fr,De,Es,It).zip.rvz|Speed Kings (Europe) (En,Fr,De,Es,It)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Speed%20Kings%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0|1
-gc/Sphinx and the Cursed Mummy (Europe) (En,Fr,De,Es,It).zip.rvz|Sphinx and the Cursed Mummy (Europe) (En,Fr,De,Es,It)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Sphinx%20and%20the%20Cursed%20Mummy%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0|1
+gc/Speed Kings (Europe) (En,Fr,De,Es,It).zip.rvz|Speed Kings (Europe) (En,Fr,De,Es,It)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Speed%20Kings%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0|0
+gc/Sphinx and the Cursed Mummy (Europe) (En,Fr,De,Es,It).zip.rvz|Sphinx and the Cursed Mummy (Europe) (En,Fr,De,Es,It)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Sphinx%20and%20the%20Cursed%20Mummy%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0|0
+gc/Big Air Freestyle (US).rvz|Big Air Freestyle|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Big%20Air%20Freestyle%20%28USA%29.png|0|1
+gc/Big Mutha Truckers (US).rvz|Big Mutha Truckers|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Big%20Mutha%20Truckers%20%28USA%29.png|0|1
+gc/Billy Hatcher and the Giant Egg (US).rvz|Billy Hatcher and the Giant Egg|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Billy%20Hatcher%20and%20the%20Giant%20Egg%20%28USA%29.png|0|1
+gc/Biohazard (Disc 1).iso|Biohazard (Disc 1)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Biohazard (Disc 2).iso|Biohazard (Disc 2)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Biohazard 2 (Collector's Box).iso|Biohazard 2|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%202%20%28Japan%29.png|0|1
+gc/Biohazard 4 (Disc 1).iso|Biohazard 4 (Disc 1)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%204%20%28Japan%29%20%28Disc%201%29.png|0|1
+gc/Biohazard 4 (Disc 2).iso|Biohazard 4 (Disc 2)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%204%20%28Japan%29%20%28Disc%201%29.png|0|1
+gc/Biohazard Zero (Collector's Box) (Disc 2).iso|Biohazard Zero (Disc 2)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%20Zero%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Bionicle (US).rvz|Bionicle|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bionicle%20%28USA%29.png|0|1
+gc/Bionicle Heroes (US).rvz|Bionicle Heroes|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bionicle%20Heroes%20%28USA%29.png|0|1
+gc/Black and Bruised (US).rvz|Black & Bruised|https://db.hfsplay.fr/files/2019/07/24/Black__Bruised_USA_EDGxZrh.png|0|1
+gc/Bleach GC - Tasogare ni Mamieru Shinigami (Japan).rvz|Bleach GC - Tasogare Ni Mamieru Shinigami|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bleach%20GC%20-%20Tasogare%20ni%20Mamieru%20Shinigami%20%28Japan%29.png|0|1
+gc/Blood Omen 2 - The Legacy of Kain Series (US).rvz|Blood Omen 2 - The Legacy of Kain Series|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Blood%20Omen%202%20-%20The%20Legacy%20of%20Kain%20Series%20%28USA%29.png|0|1
+gc/BloodRayne (US).rvz|BloodRayne|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/BloodRayne%20%28USA%29.png|0|1
+gc/Bloody Roar - Extreme.iso|Bloody Roar - Extreme|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bloody%20Roar%20-%20Extreme%20%28Japan%29.png|0|1
+gc/Bloody Roar - Primal Fury (US).rvz|Bloody Roar - Primal Fury|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bloody%20Roar%20-%20Primal%20Fury%20%28USA%29.png|0|1
+gc/Blowout (US).rvz|Blowout|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Blowout%20%28USA%29.png|0|1
+gc/Bobobo-bo Bo-bobo Dassutsu! Hajike Royale.iso|Boboboubo Boubobo - Dasshutsu!! Hajike Royale||0|1
+gc/Bokujou Monogatari - Shiawase no Uta.iso|Bokujou Monogatari - Shiawase no Uta|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bokujou%20Monogatari%20-%20Shiawase%20no%20Uta%20%28Japan%29.png|0|1
+gc/Bokujou Monogatari - Shiawase no Uta for World.iso|Bokujou Monogatari - Shiawase no Uta for World|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bokujou%20Monogatari%20-%20Shiawase%20no%20Uta%20for%20World%20%28Japan%29.png|0|1
+gc/Bokujou Monogatari - Wonderful Life.iso|Bokujou Monogatari - Wonderful Life|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bokujou%20Monogatari%20-%20Wonderful%20Life%20%28Japan%29.png|0|1
+gc/Bokujou Monogatari - Wonderful Life for Girls.iso|Bokujou Monogatari - Wonderful Life for Girl|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bokujou%20Monogatari%20-%20Wonderful%20Life%20for%20Girl%20%28Japan%29.png|0|1
+gc/Bomberman Generation (US).rvz|Bomberman Generation|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bomberman%20Generation%20%28USA%29.png|0|1
+gc/Bomberman Jetters (US).rvz|Bomberman Jetters|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bomberman%20Jetters%20%28USA%29.png|0|1
+gc/Bomberman Land 2.iso|Bomberman Land 2|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bomberman%20Land%202%20%28Japan%29.png|0|1
+gc/Bratz - Forever Diamondz (US).rvz|Bratz - Forever Diamondz|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bratz%20-%20Forever%20Diamondz%20%28USA%29.png|0|1
+gc/Bratz - Rock Angelz (US).rvz|Bratz - Rock Angelz|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bratz%20-%20Rock%20Angelz%20%28USA%29.png|0|1
+gc/Buffy the Vampire Slayer - Chaos Bleeds (US).rvz|Buffy the Vampire Slayer - Chaos Bleeds|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Buffy%20the%20Vampire%20Slayer%20-%20Chaos%20Bleeds%20%28USA%29.png|0|1
+gc/Bust-A-Move 3000 (US).rvz|Bust-A-Move 3000|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Bust-A-Move%203000%20%28USA%29.png|0|1
+gc/Butt-Ugly Martians - Zoom or Doom! (EU).iso|Butt-Ugly Martians - Zoom or Doom!|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Butt-Ugly%20Martians%20-%20Zoom%20or%20Doom%21%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0|1
+gc/Disney - Pixar Ratatouille (US).rvz|Disney-Pixar Ratatouille|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Disney-Pixar%20Ratatouille%20%28USA%29.png|0|1
+gc/Disney - Pixar The Incredibles (US).rvz|Disney-Pixar The Incredibles|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Disney-Pixar%20The%20Incredibles%20%28USA%29.png|0|1
+gc/FIFA 2003.iso|FIFA 2003|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/FIFA%202003%20%28Japan%29.png|0|1
+gc/Harry Potter and the Chamber of Secrets (US).rvz|Harry Potter and the Chamber of Secrets|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Harry%20Potter%20and%20the%20Chamber%20of%20Secrets%20%28USA%29.png|0|1
+gc/Lord of the Rings - Nakatsu Kuni Daisanki (Disc 1).iso|Lord of the Rings - Nakatsu Kuni Daisanki (Disc 1)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lord%20of%20the%20Rings%20-%20Nakatsu%20Kuni%20Daisanki%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Lord of the Rings - Nakatsu Kuni Daisanki (Disc 2).iso|Lord of the Rings - Nakatsu Kuni Daisanki (Disc 2)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lord%20of%20the%20Rings%20-%20Nakatsu%20Kuni%20Daisanki%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Lord of the Rings - Ou no Kikan.iso|Lord of the Rings - Ou no Kikan|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lord%20of%20the%20Rings%20-%20Ou%20no%20Kikan%20%28Japan%29.png|0|1
+gc/The Lord of the Rings - The Return of the King (US).rvz|Lord of the Rings, The - The Return of the King|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lord%20of%20the%20Rings%2C%20The%20-%20The%20Return%20of%20the%20King%20%28USA%29.png|0|1
+gc/The Lord of the Rings - The Third Age (US) (MD-1).rvz|Lord of the Rings, The - The Third Age (Disc 1)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lord%20of%20the%20Rings%2C%20The%20-%20The%20Third%20Age%20%28USA%29%20%28Disc%201%29.png|0|1
+gc/The Lord of the Rings - The Third Age (US) (MD-2).rvz|Lord of the Rings, The - The Third Age (Disc 2)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lord%20of%20the%20Rings%2C%20The%20-%20The%20Third%20Age%20%28USA%29%20%28Disc%201%29.png|0|1
+gc/The Lord of the Rings - The Two Towers (US).rvz|Lord of the Rings, The - The Two Towers|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lord%20of%20the%20Rings%2C%20The%20-%20The%20Two%20Towers%20%28USA%29.png|0|1
+gc/Lost Kingdoms (USA).rvz|Lost Kingdoms|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lost%20Kingdoms%20%28USA%29.png|0|1
+gc/Lost Kingdoms II.iso|Lost Kingdoms II|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lost%20Kingdoms%20II%20%28USA%29.png|0|1
+gc/Lotus Challenge (US).rvz|Lotus Challenge|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lotus%20Challenge%20%28USA%29.png|0|1
+gc/Lupin III - Umi ni Kieta Hihou (Disc 1).iso|Lupin III - Umi ni Kieta Hihou (Disc 1)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lupin%20III%20-%20Umi%20ni%20Kieta%20Hihou%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Lupin III - Umi ni Kieta Hihou (Disc 2).iso|Lupin III - Umi ni Kieta Hihou (Disc 2)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Lupin%20III%20-%20Umi%20ni%20Kieta%20Hihou%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/MC Groovz Dance Craze (US).rvz|MC Groovz Dance Craze|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/MC%20Groovz%20Dance%20Craze%20%28USA%29.png|0|1
+gc/MLB SlugFest 2003 (US).rvz|MLB SlugFest 2003|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/MLB%20SlugFest%202003%20%28USA%29.png|0|1
+gc/MLB SlugFest 2004 (US).rvz|MLB SlugFest 2004|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/MLB%20SlugFest%202004%20%28USA%29.png|0|1
+gc/MVP Baseball 2004 (US).rvz|MVP Baseball 2004|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/MVP%20Baseball%202004%20%28USA%29.png|0|1
+gc/MVP Baseball 2005 (US).rvz|MVP Baseball 2005|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/MVP%20Baseball%202005%20%28USA%29.png|0|1
+gc/MX SuperFly (EU).iso|MX SuperFly|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/MX%20SuperFly%20%28USA%29.png|0|1
+gc/Madden NFL 06 (US).rvz|Madden NFL 06|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Madden%20NFL%2006%20%28USA%29.png|0|1
+gc/Madden NFL 07 (US).rvz|Madden NFL 07|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Madden%20NFL%2007%20%28USA%29.png|0|1
+gc/Madden NFL 08 (US).rvz|Madden NFL 08|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Madden%20NFL%2008%20%28USA%29.png|0|1
+gc/Madden NFL 2002 (US).rvz|Madden NFL 2002|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Madden%20NFL%202002%20%28USA%29.png|0|1
+gc/Madden NFL 2003 (US).rvz|Madden NFL 2003|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Madden%20NFL%202003%20%28USA%29.png|0|1
+gc/Madden NFL 2004 (US).rvz|Madden NFL 2004|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Madden%20NFL%202004%20%28USA%29.png|0|1
+gc/Madden NFL 2005 (US).rvz|Madden NFL 2005|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Madden%20NFL%202005%20%28USA%29.png|0|1
+gc/Mahou no Pumpkin - An to Greg no Daibouken.iso|Mahou no Pumpkin - An to Greg no Daibouken|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mahou%20no%20Pumpkin%20-%20An%20to%20Greg%20no%20Daibouken%20%28Japan%29.png|0|1
+gc/Major League Baseball 2K6 (US).rvz|Major League Baseball 2K6|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Major%20League%20Baseball%202K6%20%28USA%29.png|0|1
+gc/Mario Golf - Family Tour.iso|Mario Golf - Family Tour|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mario%20Golf%20-%20Family%20Tour%20%28Japan%29.png|0|1
+gc/Mario Smash Football (EU).iso|Mario Smash Football|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mario%20Smash%20Football%20%28Europe%29.png|0|1
+gc/Mario Tennis GC (v1.00).iso|Mario Tennis GC|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mario%20Tennis%20GC%20%28Japan%29.png|0|1
+gc/Mark Davis Pro Bass Challenge (US).rvz|Mark Davis Pro Bass Challenge|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mark%20Davis%20Pro%20Bass%20Challenge%20%28USA%29.png|0|1
+gc/Marvel Nemesis - Rise of the Imperfects (US).rvz|Marvel Nemesis: Rise of the Imperfects|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Marvel%20Nemesis%20-%20Rise%20of%20the%20Imperfects%20%28USA%29.png|0|1
+gc/Mary-Kate and Ashley - Sweet 16 - Licensed to Drive (US).rvz|Mary-Kate and Ashley - Sweet 16 - Licensed to Drive|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mary-Kate%20and%20Ashley%20-%20Sweet%2016%20-%20Licensed%20to%20Drive%20%28USA%29.png|0|1
+gc/Mat Hoffman's Pro BMX 2.iso|Mat Hoffman's Pro BMX 2|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mat%20Hoffman%27s%20Pro%20BMX%202%20%28USA%29.png|0|1
+gc/Medabots Infinity (US).rvz|Medabots Infinity|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Medabots%20Infinity%20%28USA%29.png|0|1
+gc/Medal of Honor - Europa Kyoushuu.iso|Medal of Honor - Europa Kyoushuu|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Medal%20of%20Honor%20-%20Europa%20Kyoushuu%20%28Japan%29.png|0|1
+gc/Medal of Honor - European Assault (US).rvz|Medal of Honor - European Assault|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Medal%20of%20Honor%20-%20European%20Assault%20%28USA%29.png|0|1
+gc/Medal of Honor - Frontline (US).rvz|Medal of Honor - Frontline|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Medal%20of%20Honor%20-%20Frontline%20%28USA%29.png|0|1
+gc/Medal of Honor - Rising Sun (US) (MD-1).rvz|Medal of Honor - Rising Sun (Disc 1)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Medal%20of%20Honor_%20Rising%20Sun%20%28USA%29.png|0|1
+gc/Medal of Honor - Rising Sun (US) (MD-2).rvz|Medal of Honor - Rising Sun (Disc 2)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Medal%20of%20Honor_%20Rising%20Sun%20%28USA%29.png|0|1
+gc/Medarot Brave.iso|Medarot Brave|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Medarot%20Brave%20%28Japan%29%20%28Rev%201%29.png|0|1
+gc/Mega Man - Network Transmission (US).rvz|Mega Man - Network Transmission|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mega%20Man%20Network%20Transmission%20%28USA%29.png|0|1
+gc/Mega Man - Anniversary Collection (US).rvz|Mega Man Anniversary Collection|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mega%20Man%20Anniversary%20Collection%20%28USA%29%20%28Rev%201%29.png|0|1
+gc/Mega Man X - Command Mission (US).rvz|Mega Man X - Command Mission|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mega%20Man%20X%20-%20Command%20Mission%20%28USA%29.png|0|1
+gc/Mega Man X - Collection (US).rvz|Mega Man X Collection|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mega%20Man%20X%20Collection%20%28USA%29.png|0|1
+gc/Men in Black II - Alien Escape.iso|Men in Black II - Alien Escape|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Men%20in%20Black%20II%20-%20Alien%20Escape%20%28USA%29.png|0|1
+gc/Metal Arms - Glitch in the System (US).rvz|Metal Arms - Glitch in the System|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Metal%20Arms%20-%20Glitch%20in%20the%20System%20%28USA%29.png|0|1
+gc/Metal Gear Solid - The Twin Snakes - Special Disc (Japan).rvz|Metal Gear Solid - The Twin Snakes - Special Disc|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Metal%20Gear%20Solid%20-%20The%20Twin%20Snakes%20-%20Special%20Disc%20%28Japan%29.png|0|1
+gc/Metroid Prime 2 - Dark Echoes.iso|Metroid Prime 2 - Dark Echoes|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Metroid%20Prime%202%20-%20Dark%20Echoes%20%28Japan%29.png|0|1
+gc/Micro Machines (EU).iso|Micro Machines|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Micro%20Machines%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0|1
+gc/Midway Arcade Treasures (US).rvz|Midway Arcade Treasures|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Midway%20Arcade%20Treasures%20%28USA%29.png|0|1
+gc/Midway Arcade Treasures 2 (US).rvz|Midway Arcade Treasures 2|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Midway%20Arcade%20Treasures%202%20%28USA%29.png|0|1
+gc/Midway Arcade Treasures 3 (US).rvz|Midway Arcade Treasures 3|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Midway%20Arcade%20Treasures%203%20%28USA%29.png|0|1
+gc/Minority Report - Everybody Runs (US).rvz|Minority Report - Everybody Runs|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Minority%20Report%20-%20Everybody%20Runs%20%28USA%29.png|0|1
+gc/Mission Impossible - Operation Surma (US).rvz|Mission: Impossible - Operation Surma|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mission%20-%20Impossible%20-%20Operation%20Surma%20%28USA%29.png|0|1
+gc/Momotaro Dentetsu 11 - Black Bombee Shutsugen! no Kan.iso|Momotarou Dentetsu 11 - Black Bombee Shutsugen! no Maki||0|1
+gc/Momotaro Dentetsu 12 - Nishi Nihon hen mo Arimasse!.iso|Momotarou Dentetsu 12 - Nishi Nihon-hen mo Arimasse!|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Momotarou%20Dentetsu%2012%20-%20Nishi%20Nihon-hen%20mo%20Arimasse%21%20%28Japan%29.png|0|1
+gc/Monopoly Party (US).rvz|Monopoly Party|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Monopoly%20Party%20%28USA%29.png|0|1
+gc/Monster 4x4 - Masters of Metal (US).rvz|Monster 4x4 - Masters of Metal|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Monster%204x4%20-%20Masters%20of%20Metal%20%28USA%29.png|0|1
+gc/Monster House (US).rvz|Monster House|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Monster%20House%20%28USA%29%20%28En%2CFr%29.png|0|1
+gc/Monster Jam - Maximum Destruction (US).rvz|Monster Jam - Maximum Destruction|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Monster%20Jam%20-%20Maximum%20Destruction%20%28USA%29.png|0|1
+gc/Mortal Kombat - Deadly Alliance (US).rvz|Mortal Kombat - Deadly Alliance|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mortal%20Kombat%20-%20Deadly%20Alliance%20%28USA%29.png|0|1
+gc/Mortal Kombat - Deception (US).rvz|Mortal Kombat - Deception|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mortal%20Kombat%20-%20Deception%20%28USA%29.png|0|1
+gc/Mr.Driller Drill Land (Japan).rvz|Mr. Driller - Drill Land|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mr.%20Driller%20-%20Drill%20Land%20%28Japan%29.png|0|1
+gc/Muppets - Party Cruise (US).rvz|Muppets - Party Cruise|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Muppets%20-%20Party%20Cruise%20%28USA%29.png|0|1
+gc/Muscle Champion - Kinnikutou no Kessen.iso|Muscle Champion - Kinniku-jima no Kessen||0|1
+gc/Mutsu to Nohohon.iso|Mutsu to Nohohon|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mutsu%20to%20Nohohon%20%28Japan%29.png|0|1
+gc/Mystic Heroes (US).rvz|Mystic Heroes|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Mystic%20Heroes%20%28USA%29.png|0|1
+gc/NASCAR - Dirt to Daytona (US).rvz|NASCAR - Dirt to Daytona|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NASCAR%20-%20Dirt%20to%20Daytona%20%28USA%29.png|0|1
+gc/NASCAR 2005 - Chase for the Cup (US).rvz|NASCAR 2005 - Chase for the Cup|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NASCAR%202005%20-%20Chase%20for%20the%20Cup%20%28USA%29.png|0|1
+gc/NASCAR Thunder 2003 (US).rvz|NASCAR Thunder 2003|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NASCAR%20Thunder%202003%20%28USA%29.png|0|1
+gc/NBA 2K2 (US).rvz|NBA 2K2|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%202K2%20%28USA%29.png|0|1
+gc/NBA 2K3 (US).rvz|NBA 2K3|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%202K3%20%28USA%29.png|0|1
+gc/NBA Courtside 2002 (US).rvz|NBA Courtside 2002|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%20Courtside%202002%20%28USA%29.png|0|1
+gc/NBA Live 06 (US).rvz|NBA Live 06|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%20Live%2006%20%28USA%29.png|0|1
+gc/NBA Live 2003 (US).rvz|NBA Live 2003|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%20Live%202003%20%28USA%29.png|0|1
+gc/NBA Live 2004 (US).rvz|NBA Live 2004|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%20Live%202004%20%28USA%29.png|0|1
+gc/NBA Live 2005 (US).rvz|NBA Live 2005|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%20Live%202005%20%28USA%29.png|0|1
+gc/NBA Street V3 (US).rvz|NBA Street V3|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%20Street%20V3%20%28USA%29.png|0|1
+gc/Namco Museum (US).rvz|Namco Museum|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Namco%20Museum%20%28USA%29.png|0|1
+gc/Namco Museum - 50th Anniversary (US).rvz|Namco Museum 50th Anniversary|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Namco%20Museum%2050th%20Anniversary%20%28USA%29.png|0|1
+gc/Naruto - Clash of Ninja (US).rvz|Naruto - Clash of Ninja|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Naruto%20-%20Clash%20of%20Ninja%20%28USA%29.png|0|1
+gc/Naruto - Clash of Ninja 2 (US).rvz|Naruto - Clash of Ninja 2|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Naruto%20-%20Clash%20of%20Ninja%202%20%28USA%29.png|0|1
+gc/Naruto - Gekitou Ninja Taisen!.iso|Naruto - Gekitou Ninja Taisen!|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Naruto%20-%20Gekitou%20Ninja%20Taisen%21%20%28Japan%29.png|0|1
+gc/Naruto - Gekitou Ninja Taisen! 2 (v1.00).iso|Naruto - Gekitou Ninja Taisen! 2|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Naruto%20-%20Gekitou%20Ninja%20Taisen%21%202%20%28Japan%29.png|0|1
+gc/Naruto - Gekitou Ninja Taisen! 3 (Japan) (Rev 1).rvz|Naruto - Gekitou Ninja Taisen! 3|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Naruto%20-%20Gekitou%20Ninja%20Taisen%21%203%20%28Japan%29.png|0|1
+gc/Naruto - Gekitou Ninja Taisen! 4.iso|Naruto - Gekitou Ninja Taisen! 4|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Naruto%20-%20Gekitou%20Ninja%20Taisen%21%204%20%28Japan%29.png|0|1
+gc/Nickelodeon Rocket Power - Beach Bandits (US).rvz|Nickelodeon Rocket Power - Beach Bandits|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Nickelodeon%20Rocket%20Power%20-%20Beach%20Bandits%20%28USA%29.png|0|1
+gc/P.N. 03 (US).rvz|P.N.03|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/P.N.03%20%28USA%29.png|0|1
+gc/Phantasy Star Online Episode I & II (USA).rvz|Phantasy Star Online Episode I & II|https://db.hfsplay.fr/files/2019/07/30/d775b437-0fd9-400e-b6c2-f103c1b3ac85_kjjqqiF.png|0|1
+gc/Phantasy Star Online Episode III - C.A.R.D. Revolution.iso|Phantasy Star Online Episode III - C.A.R.D. Revolution|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Phantasy%20Star%20Online%20Episode%20III%20-%20C.A.R.D.%20Revolution%20%28USA%29%20%28En%2CJa%29.png|0|1
+gc/Pokemon Colosseum (US).rvz|Pokemon Colosseum|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Pokemon%20Colosseum%20%28USA%29.png|0|1
+gc/Speed Kings (US).rvz|Speed Kings|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Speed%20Kings%20%28USA%29.png|0|1
+gc/Sphinx and the Cursed Mummy (US).rvz|Sphinx and the Cursed Mummy|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Sphinx%20and%20the%20Cursed%20Mummy%20%28USA%29.png|0|1
+gc/WTA Tour Tennis (US).rvz|WTA Tour Tennis|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/WTA%20Tour%20Tennis%20%28USA%29.png|0|1
+gc/WTA Tour Tennis - Pro Evolution.iso|WTA Tour Tennis Pro Evolution|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/WTA%20Tour%20Tennis%20Pro%20Evolution%20%28Japan%29.png|0|1
+gc/WWE Crush Hour (US).rvz|WWE Crush Hour|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/WWE%20Crush%20Hour%20%28USA%29.png|0|1
+gc/WWE Day of Reckoning (US).rvz|WWE Day of Reckoning|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/WWE%20Day%20of%20Reckoning%20%28USA%29.png|0|1
+gc/WWE Day of Reckoning 2 (US).rvz|WWE Day of Reckoning 2|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/WWE%20Day%20of%20Reckoning%202%20%28USA%29.png|0|1
+gc/WWE Wrestlemania X8 (US).rvz|WWE WrestleMania X8|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/WWE%20WrestleMania%20X8%20%28USA%29.png|0|1
+gc/WWE WrestleMania XIX.iso|WWE WrestleMania XIX|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/WWE%20WrestleMania%20XIX%20%28USA%29.png|0|1
+gc/Wave Race - Blue Storm (US).rvz|Wave Race - Blue Storm|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Wave%20Race%20-%20Blue%20Storm%20%28USA%29.png|0|1
+gc/Whirl Tour (US).rvz|Whirl Tour|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Whirl%20Tour%20%28USA%29.png|0|1
+gc/World Racing.iso|World Racing|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/World%20Racing%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29.png|0|1
+gc/World Series of Poker (US).rvz|World Series of Poker|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/World%20Series%20of%20Poker%20%28USA%29%20%28Rev%201%29.png|0|1
+gc/World Soccer Winning Eleven 6 - Final Evolution.iso|World Soccer Winning Eleven 6 - Final Evolution|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/World%20Soccer%20Winning%20Eleven%206%20-%20Final%20Evolution%20%28Japan%29.png|0|1
+gc/Worms 3D.rvz|Worms 3D|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Worms%203D%20%28USA%29%20%28En%2CFr%29.png|0|1
+gc/Worms Blast (US).rvz|Worms Blast|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Worms%20Blast%20%28USA%29%20%28En%2CFr%2CEs%29.png|0|1
+gc/Wreckless - The Yakuza Missions (US).rvz|Wreckless - The Yakuza Missions|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Wreckless%20-%20The%20Yakuza%20Missions%20%28USA%29.png|0|1
+gc/X-Men - Next Dimension (US).rvz|X-Men - Next Dimension|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/X-Men%20-%20Next%20Dimension%20%28USA%29.png|0|1
+gc/X-Men 2 - Wolverine's Revenge.iso|X-Men 2 - Wolverine's Revenge|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/X-Men%202%20-%20Wolverine%27s%20Revenge%20%28Europe%29.png|0|1
+gc/X-Men Legends (US).rvz|X-Men Legends|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/X-Men%20Legends%20%28USA%29.png|0|1
+gc/X-Men Legends II - El Ascenso de Apocalipsis (Spain).iso|X-Men Legends II - El Ascenso de Apocalipsis|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/X-Men%20Legends%20II%20-%20El%20Ascenso%20de%20Apocalipsis%20%28Spain%29.png|0|1
+gc/X-Men Legends II - Rise of Apocalypse.iso|X-Men Legends II - Rise of Apocalypse|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/X-Men%20Legends%20II%20-%20Rise%20of%20Apocalypse%20%28USA%29.png|0|1
+gc/X2 - Wolverine's Revenge.iso|X2 - Wolverine's Revenge|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/X2%20-%20Wolverine%27s%20Revenge%20%28USA%29.png|0|1
+gc/XGIII - Extreme G Racing (US).rvz|XGIII - Extreme G Racing|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/XGIII%20-%20Extreme%20G%20Racing%20%28USA%29.png|0|1
+gc/XGRA - Extreme G Racing Association (US).rvz|XGRA - Extreme G Racing Association|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/XGRA%20-%20Extreme%20G%20Racing%20Association%20%28USA%29.png|0|1
+gc/XIII (US).rvz|XIII|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/XIII%20%28USA%29%20%28En%2CFr%2CEs%29.png|0|1
+gc/Yu-Gi-Oh! Kyokou ni Tozasareta Oukoku.iso|Yu-Gi-Oh! Falsebound Kingdom - Kyokou ni Tozasareta Oukoku|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Yu-Gi-Oh%21%20The%20Falsebound%20Kingdom%20%28USA%29.png|0|1
+gc/Yu-Gi-Oh! - The Falsebound Kingdom (US).rvz|Yu-Gi-Oh! The Falsebound Kingdom|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Yu-Gi-Oh%21%20The%20Falsebound%20Kingdom%20%28USA%29.png|0|1
+gc/Zapper.iso|Zapper|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zapper%20%28USA%29.png|0|1
+gc/Zatch Bell! - Mamodo Battles (US).rvz|Zatch Bell! Mamodo Battles|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zatch%20Bell%21%20Mamodo%20Battles%20%28USA%29.png|0|1
+gc/Zatch Bell! - Mamodo Fury (US).rvz|Zatch Bell! Mamodo Fury|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zatch%20Bell%21%20Mamodo%20Fury%20%28USA%29.png|0|1
+gc/Zelda Collection (Limited Edition).iso|Zelda Collection|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zelda%20Collection%20%28Japan%29.png|0|1
+gc/Zelda no Densetsu - 4tsu no Tsurugi Plus.iso|Zelda no Densetsu - 4-tsu no Tsurugi+|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Legend%20of%20Zelda%2C%20The%20-%20Four%20Swords%20Adventures%20%28USA%29.png|0|1
+gc/Zelda no Densetsu - Kaze no Takuto.iso|Zelda no Densetsu - Kaze no Takuto|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zelda%20no%20Densetsu_%20Kaze%20no%20Takuto%20%28Japan%29.png|0|1
+gc/Zelda no Densetsu - Toki no Ocarina GC (Limited Edition).iso|Zelda no Densetsu - Toki no Ocarina GC|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zelda%20no%20Densetsu%20-%20Toki%20no%20Ocarina%20GC%20%28Japan%29.png|0|1
+gc/Zelda no Densetsu - Twilight Princess.iso|Zelda no Densetsu - Twilight Princess|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zelda%20no%20Densetsu_%20Twilight%20Princess%20%28Japan%29.png|0|1
+gc/Zoids - Battle Legends (US).rvz|Zoids - Battle Legends|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zoids%20-%20Battle%20Legends%20%28USA%29.png|0|1
+gc/Zoids - Full Metal Crash.iso|Zoids - Full Metal Crash|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zoids%20-%20Full%20Metal%20Crash%20%28Japan%29.png|0|1
+gc/Zoids vs. II.iso|Zoids Vs. II|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zoids%20Vs.%20II%20%28Japan%29.png|0|1
+gc/Zoids vs. III.iso|Zoids Vs. III|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zoids%20Vs.%20III%20%28Japan%29.png|0|1
+gc/Zoids vs..iso|Zoids vs.|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Zoids%20Vs.%20%28Japan%29%20%28Rev%201%29.png|0|1
+gc/ZooCube (US).rvz|ZooCube|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/ZooCube%20%28USA%29.png|0|1
+gc/Biohazard - Code - Veronica - Kanzenban (Collector's Box) (Disc 1).iso|Biohazard - Code - Veronica - Kanzenban (Disc 1)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%20-%20Code%20-%20Veronica%20-%20Kanzenban%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Biohazard - Code - Veronica - Kanzenban (Collector's Box) (Disc 2).iso|Biohazard - Code - Veronica - Kanzenban (Disc 2)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%20-%20Code%20-%20Veronica%20-%20Kanzenban%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Biohazard Zero (Collector's Box) (Disc 1).iso|Biohazard Zero (Disc 1)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%20Zero%20%28Japan%29%20%28Disc%202%29.png|0|1
+gc/Biohazard 3 - Last Escape (Collector's Box).iso|Biohazard 3 - Last Escape|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Biohazard%203%20-%20Last%20Escape%20%28Japan%29.png|0|1
+gc/Monopoly - Mezase!! Daifugou Jinsei!!.iso|Monopoly - Mezase!! Daifugou Jinsei!!|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Monopoly%20-%20Mezase%21%21%20Daifugou%20Jinsei%21%21%20%28Japan%29%20%28Rev%201%29.png|0|1
+gc/NBA Street V3 - Mario de Dunk.iso|NBA Street V3 - Mario de Dunk|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/NBA%20Street%20V3%20-%20Mario%20de%20Dunk%20%28Japan%29.png|0|1
+gc/Friday Night Funkin' - Friday Night Pikmin (Hack).rvz|Friday Night Funkin' - Friday Night Pikmin (Hack)|https://db.hfsplay.fr/files/2019/08/01/Pikmin_GPIE01_DgcuIEU.png|0|1
+gc/Luigi's Mansion - Halloween Haunt (v1.0) (Hack).rvz|Luigi's Mansion - Halloween Haunt (v1.0) (Hack)|https://db.hfsplay.fr/files/2019/07/29/Luigis_Mansion_USA_DvE5mjo.png|0|1
+gc/Luigi's Mansion - Sweet Home (v1.01) (Hack).rvz|Luigi's Mansion - Sweet Home (v1.01) (Hack)|https://db.hfsplay.fr/files/2019/07/29/Luigis_Mansion_USA_DvE5mjo.png|0|1
+gc/Metroid Prime - Trial of Strength (v1.2) (Hack).rvz|Metroid Prime - Trial of Strength (v1.2) (Hack)|https://db.hfsplay.fr/files/2019/07/29/Metroid_Prime_USA_0iWjos8.jpg|0|1
+gc/Metroid Prime - Samus Goes to the Fridge to Get a Glass of Milk 3D (v1.00) (Hack).rvz|Metroid Prime - Samus Goes to the Fridge to Get a Glass of Milk 3D (v1.00) (Hack)|https://db.hfsplay.fr/files/2019/07/29/Metroid_Prime_USA_0iWjos8.jpg|0|1
+gc/Paper Mario - The Tower of Trials (v2.03.1) (Hack).rvz|Paper Mario - The Tower of Trials (v2.03.1) (Hack)|https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/master/Named_Boxarts/Paper%20Mario%20-%20The%20Thousand-Year%20Door%20%28USA%29.png|0|1
+gc/Pikmin 216 (v1.3) (Hack).rvz|Pikmin 216 (v1.3) (Hack)|https://db.hfsplay.fr/files/2019/08/01/Pikmin_2_USA_41941ye.jpg|0|1
+gc/Pikmin 2 - Pikmin 251 (v2.3.1) (Hack).rvz|Pikmin 2 - Pikmin 251 (v2.3.1) (Hack)|https://db.hfsplay.fr/files/2019/08/01/Pikmin_2_USA_41941ye.jpg|0|1
+gc/Resident Evil 2 - Zombie Crisis (Hack).rvz|Resident Evil 2 - Zombie Crisis (Hack)|https://db.hfsplay.fr/files/2019/08/03/Resident_Evil_2_USA_7T2xWAx.png|0|1
+gc/Shadow the Hedgehog - Reloaded (v1.2) (Hack).rvz|Shadow the Hedgehog - Reloaded (v1.2) (Hack)|https://db.hfsplay.fr/files/2019/08/07/Shadow_the_Hedgehog_USA_TuJTQQv.png|0|1
+gc/Super Mario Eclipse (v1.0.4) (Hack).rvz|Super Mario Eclipse (v1.0.4) (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Mario_Sunshine_GMSP01_1Is8uyR.png|0|1
+gc/Super Mario Sunshine Arcade 2 (v1.1) (Hack).rvz|Super Mario Sunshine Arcade 2 (v1.1) (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Mario_Sunshine_GMSP01_1Is8uyR.png|0|1
+gc/Naruto - Gekitou Ninja Taisen! 4 (English) (Hack).iso|Naruto - Gekitou Ninja Taisen! 4 (English) (Hack)|https://db.hfsplay.fr/files/2019/07/30/Naruto_-_Gekitou_Ninja_Taisen_4_Japan_1_Znb1Xui.png|0|1
+gc/Naruto - GNT4 Remastered (v1.01 + English) (Hack).iso|Naruto - GNT4 Remastered (v1.01 + English) (Hack)|https://db.hfsplay.fr/files/2019/07/30/Naruto_-_Gekitou_Ninja_Taisen_4_Japan_1_Znb1Xui.png|0|1
+gc/Naruto - Gekitou Ninja Taisen! 4 (Combo Breaker 2019) (Hack).iso|Naruto - Gekitou Ninja Taisen! 4 (Combo Breaker 2019) (Hack)|https://db.hfsplay.fr/files/2019/07/30/Naruto_-_Gekitou_Ninja_Taisen_4_Japan_1_Znb1Xui.png|0|1
+gc/Naruto - GNT4 Remix (v3) (Hack).iso|Naruto - GNT4 Remix (v3) (Hack)|https://db.hfsplay.fr/files/2019/07/30/Naruto_-_Gekitou_Ninja_Taisen_4_Japan_1_Znb1Xui.png|0|1
+gc/Naruto - GNT4EX (Hack).iso|Naruto - GNT4EX (Hack)|https://db.hfsplay.fr/files/2019/07/30/Naruto_-_Gekitou_Ninja_Taisen_4_Japan_1_Znb1Xui.png|0|1
+gc/Naruto - GNT4RAVE Final (Hack).iso|Naruto - GNT4RAVE Final (Hack)|https://db.hfsplay.fr/files/2019/07/30/Naruto_-_Gekitou_Ninja_Taisen_4_Japan_1_Znb1Xui.png|0|1
+gc/Super Smash Bros. Melee - Beyond Melee (v1.1.1) (Hack).gcz|Super Smash Bros. Melee - Beyond Melee (v1.1.1) (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Smash_Bros_Melee_GALP01_r5Cn0C4.png|0|1
+gc/Super Smash Bros. Melee - Melee Mayhem (Hack).gcz|Super Smash Bros. Melee - Melee Mayhem (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Smash_Bros_Melee_GALP01_r5Cn0C4.png|0|1
+gc/Super Smash Bros. Melee - Akaneia Build (v0.82) (Hack).gcz|Super Smash Bros. Melee - Akaneia Build (v0.82) (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Smash_Bros_Melee_GALP01_r5Cn0C4.png|0|1
+gc/Super Smash Bros. Melee - 20XXHP (v5.0.1) (Hack).gcz|Super Smash Bros. Melee - 20XXHP (v5.0.1) (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Smash_Bros_Melee_GALP01_r5Cn0C4.png|0|1
+gc/Super Smash Bros. Melee - Silly Melee (v1.01) (Hack).gcz|Super Smash Bros. Melee - Silly Melee (v1.01) (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Smash_Bros_Melee_GALP01_r5Cn0C4.png|0|1
+gc/Yoshi Party 7 (Hack).gcz|Yoshi Party 7 (Hack)|https://db.hfsplay.fr/files/2019/07/29/Mario_Party_7_USA_vSIszNV.png|0|1
