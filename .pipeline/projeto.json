@@ -1,0 +1,64 @@
+{
+  "_leia": {
+    "o que e": "adaptador do projeto para o motor pipeline-global, lido a cada comando (--projeto <repo>). Criado pelo `init`, que nunca o sobrescreve: edite e versione. O que a SESSAO precisa saber esta no projeto.md ao lado.",
+    "base": "fluxo principal (<remoto>/<branch>): as lanes partem dele e o motor integra nele",
+    "build": "compile-check + testes de unidade numa lane ({wt} = a lane, {root} = a raiz). Povoa o submodulo lemuroid-cores a partir do clone da arvore principal (sem rede): numa worktree nova ele vem vazio. O -Command termina no gradlew: as `flags` (--emulador) entram como argumentos dele",
+    "testes": "null: o build ja roda :lemuroid-app:testFreeBundleDebugUnitTest",
+    "entradas_ignoradas": "ignorados pelo git que a publicacao le da lane: build.properties (HF_TOKEN, R2_*) e release.jks (assinatura do release.ps1)",
+    "gerados": "nunca vao para commit: o ponteiro do submodulo (pitfall 15 do CLAUDE.md) e o settings.local.json",
+    "e2e": "teto do slot de teste; o aparelho/emulador e segurado pelo lock do `aparelho-instalar`, nao por processo",
+    "publicacao": "o build-and-upload.ps1 sobe a versao e publica (HF + R2); o motor commita o arquivo do bump",
+    "android": "A12 de teste RX8R90G1D6E; sem ele, o emulador lemu_3ds_api34 (x86_64, pede o build --emulador)",
+    "telemetria": "componente retrogamesystem/<comp>; user_agent `RetroGameSystem/<comp> <versao>` (TelemetryReporter.kt)",
+    "tipos": "tipos de demanda, em docs/<tipo>/<estado>/<id>/"
+  },
+  "nome": "Lemuroid",
+  "remoto": "origin",
+  "base": "origin/version10",
+  "rodizio_contas": false,
+  "commit_docs": "docs",
+  "build": {
+    "cmd": ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
+            "Set-Location -LiteralPath '{wt}'; git -c protocol.file.allow=always -c 'submodule.lemuroid-cores.url={root}/lemuroid-cores' submodule update --init lemuroid-cores; if ($LASTEXITCODE) { exit $LASTEXITCODE }; & .\\gradlew.bat :lemuroid-app:assembleFreeBundleDebug :lemuroid-app:testFreeBundleDebugUnitTest"],
+    "flags": {"--emulador": ["-PdevAbi=x86_64"]},
+    "lock": "lemuroid-build",
+    "timeout_h": 1
+  },
+  "testes": null,
+  "gerados": [
+    "^lemuroid-cores$",
+    "^\\.claude/settings\\.local\\.json$"
+  ],
+  "entradas_ignoradas": ["build.properties", "release.jks"],
+  "e2e": {"teto_slot_min": 60},
+  "preflight": [
+    {"cmd": ["cmd", "/c", "%JAVA_HOME%\\bin\\java.exe", "-version"], "msg": "JAVA_HOME aponta para um JDK (o gradlew.bat precisa dele antes de ler o gradle.properties)",
+     "fix": "JAVA_HOME no escopo do usuario (CLAUDE.md do repo, 'Ambiente de build': D:\\DevCaches\\jdk-17)"},
+    {"cmd": ["where", "adb"], "msg": "adb no PATH (o teste roda no aparelho ou no emulador)"},
+    {"existe": "lemuroid-cores/bundled-cores/build.gradle.kts", "msg": "submodulo lemuroid-cores povoado na arvore principal (as lanes clonam dele, sem rede)",
+     "fix": "git submodule update --init lemuroid-cores na arvore principal"},
+    {"existe": "build.properties", "msg": "build.properties na raiz (a publicacao le o HF_TOKEN dele; copiado para a lane)",
+     "fix": "copie build.properties.example para build.properties e preencha"},
+    {"existe": "release.jks", "msg": "release.jks na raiz (o release.ps1 assina com ele; copiado para a lane)"}
+  ],
+  "proibido_na_sessao": "`gradlew` de build/assemble nem de testes de unidade fora do helper (`ktlintCheck` e `lint` sao permitidos: manual, secao Dev)",
+  "publicacao": {
+    "cmd": ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "{wt}\\build-and-upload.ps1"],
+    "versao_de": {"arquivo": "lemuroid-app/build.gradle.kts", "re": "versionName\\s*=\\s*\"([^\"]+)\""},
+    "arquivos_do_bump": ["lemuroid-app/build.gradle.kts"],
+    "timeout_h": 2
+  },
+  "android": {
+    "pacote_teste": "app.retrogamesystem.debug",
+    "serial": "RX8R90G1D6E",
+    "avd": "lemu_3ds_api34",
+    "boot_min": 8,
+    "flag_emulador": ["-PdevAbi=x86_64"],
+    "apk": "lemuroid-app/build/outputs/apk/freeBundle/debug/lemuroid-app-free-bundle-{abi}-debug.apk"
+  },
+  "telemetria": {
+    "prefixo": "retrogamesystem",
+    "versao_re": "RetroGameSystem/\\S+ (\\d+\\.\\d+\\.\\d+)"
+  },
+  "tipos": ["bugs", "features", "manutencao"]
+}
