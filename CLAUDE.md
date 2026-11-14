@@ -6,18 +6,17 @@ Emulador Android multi-sistema baseado em Libretro. Este arquivo documenta a arq
 
 ## Workflow de Documentação (obrigatório)
 
-Roteamento por prefixo do pedido do usuário. Cada item vira **um arquivo Markdown** na pasta indicada.
+Os docs seguem o layout do pipeline global (desde 2026-11-14): cada demanda é uma pasta `docs/<tipo>/<estado>/<id>/<id>.md`, e a pasta de estado é a única fonte do estado. Roteamento por prefixo do pedido do usuário:
 
-| Prefixo | Onde documentar | Ciclo de vida |
-|---------|-----------------|---------------|
-| `[BUG]` | `docs/bugs/open/` ao **iniciar**; mover para `docs/bugs/retest/` quando corrigido e testado aqui, e para `docs/bugs/done/` com a versão publicada e a prova do cliente | criar em `open` no começo da investigação; ciclo, template e critério de complexidade em `docs/bugs/open/README.md`; o `## Status` do retest em `docs/bugs/retest/README.md` |
-| `[FEATURE]` | `docs/funcionalidades/` | documentar a funcionalidade implementada |
-| `[BACKLOG]` | `docs/backlogs/` | registrar a ideia/tarefa para o futuro |
+| Prefixo | Como documentar | Onde nasce |
+|---------|-----------------|------------|
+| `[BUG]` | `/pipeline-global bug` (roteiro do motor; template do projeto em `.pipeline/projeto.md`, `## Template de bug`) | `docs/bugs/aberto/<id>/<id>.md`; ciclo, template e critério de complexidade em `docs/bugs/aberto/README.md` |
+| `[FEATURE]` | `/pipeline-global feature` (spec, design e tasks; template em `.pipeline/projeto.md`, `## Template de feature`) | `docs/features/aberto/<id>/` |
+| `[BACKLOG]` | um arquivo Markdown, sem pasta de estado | `docs/backlog/` |
 
-- Nome de arquivo: `YYYY-MM-DD-slug-curto.md` (ex.: `2026-07-01-catalogo-some-scan-biblioteca.md`).
-- Bugs seguem o formato dos arquivos existentes em `bugs/done/`: título com prefixo `[BUG]`, e blocos **Data / Status / Severidade / Branch**, depois **Sintoma / Causa-raiz / Correção / Validação / Lição**.
-- "Mover" = `git mv` do `.md` entre as pastas de `docs/bugs/` (não duplicar).
-- **Bugs moram em `docs/bugs/`** (é o que o pipeline `pipeline-correcao-bugs` lê). Toda a documentação do repo mora em `docs/` (bugs, funcionalidades, backlogs, prompts). A antiga pasta `documentacao/` foi removida em 2026-10-09: era cópia de `docs/` por uma *junction* e o git guardava tudo em dobro (`docs/bugs/done/2026-10-09-documentacao-duplicada-junction-docs.md`). Não recrie `documentacao/` nem junction; commite só o caminho `docs/...`.
+- Id (nome da pasta e do arquivo): `YYYY-MM-DD-slug-curto` (ex.: `2026-07-01-catalogo-some-scan-biblioteca`); nunca muda depois de criado.
+- Quem muda a pasta de estado é o motor do pipeline (`/pipeline-global iniciar` corrige; publicação e telemetria fecham). Movimento à mão só a pedido do dono, com o carimbo `movido_por` no frontmatter (ver `docs/bugs/aberto/README.md`). Nunca escreva `Status:` à mão numa demanda nova.
+- Toda a documentação do repo mora em `docs/` (bugs, features, backlog, prompts). A antiga pasta `documentacao/` foi removida em 2026-10-09: era cópia de `docs/` por uma *junction* e o git guardava tudo em dobro (`docs/bugs/concluido/2026-10-09-documentacao-duplicada-junction-docs/2026-10-09-documentacao-duplicada-junction-docs.md`). Não recrie `documentacao/` nem junction; commite só o caminho `docs/...`.
 
 ---
 
@@ -97,7 +96,7 @@ Isso elimina toda a lógica de agrupamento em runtime: o app só lê o campo e m
 1. **`CatalogCoverProvider`** — lê e parseia `catalog_manifest.txt` em `Map<String, ManifestEntry>` (lazy, uma vez por processo).
 2. **`ManifestQuickLoader.load()`** — roda no startup via `MainProcessInitializer` (50 ms após a app iniciar):
    - **URI rewrite**: substitui o prefixo sentinela `file:///lemuroid_prebuilt` pelo `romsDir` real em uma única SQL UPDATE (~100ms). No-op se o DB não veio do asset.
-   - **Fast-path**: se `gameDao().countAll() >= expectedSize - expectedSize/50` **e** `loadedSchema == MANIFEST_SCHEMA_VERSION`, marca prefs e pula tudo. **Não vale para instalação nova**: lá `loadedSchema = -1`, então o primeiro boot sempre faz a passada completa, mesmo com o prebuilt (~25 s no AVD de 2 GB, ~15 s disso no loop de `updateManifestFieldsWithTitle` — ver `docs/backlogs/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`).
+   - **Fast-path**: se `gameDao().countAll() >= expectedSize - expectedSize/50` **e** `loadedSchema == MANIFEST_SCHEMA_VERSION`, marca prefs e pula tudo. **Não vale para instalação nova**: lá `loadedSchema = -1`, então o primeiro boot sempre faz a passada completa, mesmo com o prebuilt (~25 s no AVD de 2 GB, ~15 s disso no loop de `updateManifestFieldsWithTitle` — ver `docs/backlog/2026-10-02-loader-loop-update-58k-chamadas-primeiro-boot.md`).
    - **Skip por versão+schema**: só pula se o `versionCode` do app E o `MANIFEST_SCHEMA_VERSION` salvos batem com os atuais. Bumpar `MANIFEST_SCHEMA_VERSION` força um reload one-time em todos os usuários (usado quando o formato do manifest muda).
    - `INSERT OR IGNORE` de todos os `Game` no banco (não sobrescreve dados enriquecidos pelo LibretroDB).
    - **Batch UPDATE de título, `popularityIndex`, `isRepresentative` e capa** via `updateManifestFieldsWithTitle()` em transação para jogos que já existiam (sincroniza mudanças no manifest após app update / schema bump). A capa só entrou na v42: até ali, capa trocada ou apagada no manifest **não chegava a quem já tinha o app** (o passe v31 só valeu para instalação nova). Capa vazia no manifest apaga só URL do arcadeitalia; outra capa no banco (ex.: achada pelo scan do LibretroDB) fica.
@@ -135,7 +134,7 @@ Para eliminar a tela "preparando ambiente" no primeiro startup pós-instalação
 3. Cria SQLite via sqlite-jdbc (Kotlin, sem dependência Android)
 4. Aplica schema das entities + FTS4 (CREATE VIRTUAL TABLE + triggers)
 5. Cria `room_master_table` com `id=42, identity_hash=<do JSON>`
-6. Bulk INSERT de todos os games com `fileUri = "file:///lemuroid_prebuilt/<systemId>/<fileName>"` (placeholder — o app reescreve no primeiro boot). **O caminho vai percent-encoded exatamente como `File.toUri()` do Android** (`encodeUriPath`, cópia do `Uri.encode(path, "/")`): o rewrite troca só o prefixo, e `fileUri` é a chave única — sufixo em outra forma faz a passada completa apagar e reinserir a linha (foram 53 mil, ver `docs/bugs/done/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`). Nem `URLEncoder` nem `java.net.URI` produzem essa forma.
+6. Bulk INSERT de todos os games com `fileUri = "file:///lemuroid_prebuilt/<systemId>/<fileName>"` (placeholder — o app reescreve no primeiro boot). **O caminho vai percent-encoded exatamente como `File.toUri()` do Android** (`encodeUriPath`, cópia do `Uri.encode(path, "/")`): o rewrite troca só o prefixo, e `fileUri` é a chave única — sufixo em outra forma faz a passada completa apagar e reinserir a linha (foram 53 mil, ver `docs/bugs/concluido/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo.md`). Nem `URLEncoder` nem `java.net.URI` produzem essa forma.
 7. Bulk populate `INSERT INTO fts_games SELECT id, title FROM games` (1 statement em vez de 29k inserts com tokenization individual)
 8. Cria trigger `games_ai` DEPOIS dos inserts (para que futuros inserts no Android disparem normalmente)
 9. **Build-time validation**: re-verifica que `user_version`, `identity_hash`, contagens de `games` e `fts_games`, tabelas e triggers existem; que `encodeUriPath` reproduz os pares de `URI_PATH_KNOWN_ANSWERS` (tirados de `File.toUri()` num aparelho); e que toda `fileUri` está codificada e decodifica de volta para `systemId/fileName`. Falha o build se algo divergir.
@@ -509,9 +508,9 @@ Ao detectar versão antiga, reseta `PREF_DOWNLOAD_DONE` e reenfileira o `Streami
 
 `./gradlew ktlintCheck` **passa** e volta a falhar em violação **nova**. O passivo (1.750 apontamentos, ~900 só no `main` de `lemuroid-app`) está congelado em `<modulo>/config/ktlint/baseline.xml`, configurado no [build.gradle.kts](build.gradle.kts) raiz junto com o `apply` do plugin. Regenerar com `./gradlew ktlintGenerateBaseline` — **depois de corrigir** algo, nunca para calar apontamento recém-criado.
 
-> ⚠️ **O baseline casa por `linha:coluna:regra`.** Inserir uma linha num arquivo com passivo faz todo o passivo abaixo dela "reaparecer" — foi o que deixou o check vermelho de 10-07 a 10-17 (`docs/backlogs/2026-10-17-ktlintcheck-vermelho-baseline-por-linha.md`). Quem edita arquivo com passivo regenera o baseline no mesmo commit, depois de corrigir o que é novo. E a verificação de fechamento é o `ktlintCheck` **completo**: o `ktlintMainSourceSetCheck` por módulo não roda o `ktlintKotlinScriptCheck` (`build.gradle.kts`) nem o `ktlintTestSourceSetCheck`.
+> ⚠️ **O baseline casa por `linha:coluna:regra`.** Inserir uma linha num arquivo com passivo faz todo o passivo abaixo dela "reaparecer" — foi o que deixou o check vermelho de 10-07 a 10-17 (`docs/backlog/2026-10-17-ktlintcheck-vermelho-baseline-por-linha.md`). Quem edita arquivo com passivo regenera o baseline no mesmo commit, depois de corrigir o que é novo. E a verificação de fechamento é o `ktlintCheck` **completo**: o `ktlintMainSourceSetCheck` por módulo não roda o `ktlintKotlinScriptCheck` (`build.gradle.kts`) nem o `ktlintTestSourceSetCheck`.
 
-> ⚠️ **Módulos cujo diretório mora no submódulo `lemuroid-cores` (`:bundled-cores`, `:lemuroid_core_*`) não têm baseline.** O `ktlintGenerateBaseline` grava o arquivo no repo de cores, fora de qualquer commit do Lemuroid, e o `ktlintCheck` passa só neste disco. Nesses módulos a violação se **corrige** (com commit no `lemuroid-cores`), não se congela. Depois de rodar a task, conferir `git -C lemuroid-cores status`. Ver `docs/bugs/done/2026-09-25-ktlint-baseline-bundled-cores-nao-versionado.md`.
+> ⚠️ **Módulos cujo diretório mora no submódulo `lemuroid-cores` (`:bundled-cores`, `:lemuroid_core_*`) não têm baseline.** O `ktlintGenerateBaseline` grava o arquivo no repo de cores, fora de qualquer commit do Lemuroid, e o `ktlintCheck` passa só neste disco. Nesses módulos a violação se **corrige** (com commit no `lemuroid-cores`), não se congela. Depois de rodar a task, conferir `git -C lemuroid-cores status`. Ver `docs/bugs/concluido/2026-09-25-ktlint-baseline-bundled-cores-nao-versionado/2026-09-25-ktlint-baseline-bundled-cores-nao-versionado.md`.
 
 Duas coisas medidas antes de escolher o baseline, para não repetir a tentativa:
 
@@ -520,7 +519,7 @@ Duas coisas medidas antes de escolher o baseline, para não repetir a tentativa:
 
 ### Design system (redesenho visual, direção A)
 
-Fundação em `mobile/shared/compose/ui/` (Fase 1 de `docs/backlogs/2026-10-13-redesenho-visual-inspirado-pegasus.md`,
+Fundação em `mobile/shared/compose/ui/` (Fase 1 de `docs/backlog/2026-10-13-redesenho-visual-inspirado-pegasus.md`,
 cuja seção "Especificação visual" é a referência dos valores):
 
 | Arquivo | O que tem |
@@ -540,7 +539,7 @@ Regras:
 4. **Chave de item em lista paginada** continua `"id_$id"`/`"idx_$it"` (colisão = crash).
 5. `colorScheme.error` é cor de **texto** (Ajustes); o vermelho de selo da especificação (`#B3261E`) é `errorContainer`/`LemuroidColors.ErrorBadge`.
 6. Arte `game_system_*` decodificada à mão: `inScaled = false` (os PNGs estão em `drawable/` sem densidade e seriam ampliados 3×).
-7. Arte `game_system_*` na UI mobile só por `LemuroidSystemImage`: o PNG traz moldura branca embutida (cortada ali) e 10 sistemas têm arte em outra proporção (ver `docs/funcionalidades/2026-10-13-redesenho-sistemas.md`).
+7. Arte `game_system_*` na UI mobile só por `LemuroidSystemImage`: o PNG traz moldura branca embutida (cortada ali) e 10 sistemas têm arte em outra proporção (ver `docs/features/concluido/2026-10-13-redesenho-sistemas/2026-10-13-redesenho-sistemas.md`).
 8. **Contagem de jogos mostra sempre o total, com as variantes** (decisão do dono, 14/10/2026). Fonte: `GameDao.selectSystemsWithCount()` (ex.: `GamesViewModel.totalGames`), nunca o `itemCount` do paging agrupado (`selectGrouped*`), que conta só os representantes.
 9. **TV (Leanback):** cor só pelos tokens de `res/values/leanback-colors.xml` (os mesmos de `LemuroidColors`), **nunca
    `main_color`** — ele é também o fundo do ícone e da splash, e o debug o pinta de vermelho. Fonte só por código,
@@ -549,7 +548,7 @@ Regras:
    diálogo no visual novo passa o tema pelo id (`AlertDialog.Builder(activity, R.style.LemuroidTVDialog)`) — com
    `ContextThemeWrapper` o `Builder` ignora o tema. O `browseRowsMarginTop` do tema (espaço do painel de foco da
    Início, `TVFocusPanel`) é também o `paddingTop` das grades Leanback: elas o fixam por `itemsVerticalGridStyle`
-   (`docs/funcionalidades/2026-10-15-redesenho-painel-foco-tv.md`).
+   (`docs/features/concluido/2026-10-15-redesenho-painel-foco-tv/2026-10-15-redesenho-painel-foco-tv.md`).
 
 ---
 
@@ -606,9 +605,9 @@ if (!exists) { ... }
 
 Este espaço já produziu dois bugs de produção — ambos de empacotamento, ambos invisíveis até um aparelho crashar em código nativo.
 
-**6a — sem `libandroid.so` no DT_NEEDED (2026-07-07).** Todo jogo de Dreamcast crasha com SIGSEGV ~1–2 s após o boot. O `.so` do buildbot libretro não linka `libandroid.so`; o símbolo weak `ASharedMemory_create` fica nulo → fallback `open("/dev/ashmem")` → EACCES com targetSdk ≥ 29 (o app usa 35) → fastmem desliga (`[VMEM] ... errno 13` no logcat) → o caminho fallback do dynarec trunca o pointer tag (`0xb4…`) do Android 11+ → SIGSEGV. Corrigido por `python patch_flycast_libandroid.py` (raiz do repo, requer `pip install lief`). Detalhes em `docs/bugs/done/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.
+**6a — sem `libandroid.so` no DT_NEEDED (2026-07-07).** Todo jogo de Dreamcast crasha com SIGSEGV ~1–2 s após o boot. O `.so` do buildbot libretro não linka `libandroid.so`; o símbolo weak `ASharedMemory_create` fica nulo → fallback `open("/dev/ashmem")` → EACCES com targetSdk ≥ 29 (o app usa 35) → fastmem desliga (`[VMEM] ... errno 13` no logcat) → o caminho fallback do dynarec trunca o pointer tag (`0xb4…`) do Android 11+ → SIGSEGV. Corrigido por `python patch_flycast_libandroid.py` (raiz do repo, requer `pip install lief`). Detalhes em `docs/bugs/concluido/2026-07-07-dreamcast-crash-boot-ashmem-libandroid/2026-07-07-dreamcast-crash-boot-ashmem-libandroid.md`.
 
-**6b — core compilado à mão no lugar do buildbot (2026-09-02).** O `.so` de **arm64-v8a** (só essa ABI) tinha virado o build local de `E:/projects/lemuroid/flycast_src` — o fork antigo `libretro/flycast`, sem o patch. Resultado: SIGTRAP `TRAP_BRKPT` na `GLThread` (`os_DebugBreak` do handler de sinal do dynarec) em **todo** aparelho arm64, por seis semanas. Detalhes em `docs/bugs/done/2026-09-02-flycast-arm64-core-hand-build-sigtrap.md`.
+**6b — core compilado à mão no lugar do buildbot (2026-09-02).** O `.so` de **arm64-v8a** (só essa ABI) tinha virado o build local de `E:/projects/lemuroid/flycast_src` — o fork antigo `libretro/flycast`, sem o patch. Resultado: SIGTRAP `TRAP_BRKPT` na `GLThread` (`os_DebugBreak` do handler de sinal do dynarec) em **todo** aparelho arm64, por seis semanas. Detalhes em `docs/bugs/concluido/2026-09-02-flycast-arm64-core-hand-build-sigtrap/2026-09-02-flycast-arm64-core-hand-build-sigtrap.md`.
 
 **Regra:** rodar o script continua valendo, mas **a instrução em documento não é o guard** — ela já falhou uma vez. O guard é a task Gradle `verifyFlycastCore` ([FlycastCoreVerifier.kt](buildSrc/src/main/kotlin/FlycastCoreVerifier.kt)), pendurada em `merge*NativeLibs` / `package*` / `bundle*`: o build **falha** se algum `.so` de Flycast (2 módulos × 4 ABIs) não listar `libandroid.so` no DT_NEEDED, ou se embutir um caminho de fonte absoluto (marca de core compilado à mão — os binários do buildbot não embutem nenhum). Se a task acusar, **não desabilite**: restaure o binário do buildbot e rode o patch.
 
@@ -624,7 +623,7 @@ Este espaço já produziu dois bugs de produção — ambos de empacotamento, am
 3. Não enfileire toast/diálogo durante o boot do jogo. Se o aviso é sobre o jogo, espere `waitGLEvent<FrameRendered>()` — precedente em `GameViewModelInput.initializeControllerConfigsFlow`.
 4. `minSdkVersion` é **21** e a build armeabi-v7a é distribuída para TV box velha: qualquer API nova precisa de guard, e qualquer bug conhecido de Android 5–7 é bug nosso na prática.
 
-Detalhes em `docs/bugs/done/2026-08-16-tvbox-mxq-crash-toast-badtoken.md`.
+Detalhes em `docs/bugs/concluido/2026-08-16-tvbox-mxq-crash-toast-badtoken/2026-08-16-tvbox-mxq-crash-toast-badtoken.md`.
 
 ### 8. A tela de crash não pode acusar o núcleo por qualquer exceção
 
@@ -652,7 +651,7 @@ Detalhes em `docs/bugs/done/2026-08-16-tvbox-mxq-crash-toast-badtoken.md`.
 3. Quando a Intent existe para **conceder algo** (permissão), falhar em abri-la exige desfazer o estado otimista da UI — o switch de "acesso a todos os arquivos" volta para desligado, senão mente.
 4. Numa cadeia de fallback, só a última tentativa recebe `fallbackMessage`; as anteriores passam `null`.
 
-Detalhes em `docs/bugs/done/2026-09-02-intents-sistema-sem-resolve-crasham-tv.md`.
+Detalhes em `docs/bugs/concluido/2026-09-02-intents-sistema-sem-resolve-crasham-tv/2026-09-02-intents-sistema-sem-resolve-crasham-tv.md`.
 
 ### 10. `tmpfile()` não funciona em processo de app — e o core não checa o retorno
 
@@ -666,7 +665,7 @@ Detalhes em `docs/bugs/done/2026-09-02-intents-sistema-sem-resolve-crasham-tv.md
 3. Ao adicionar um core novo, conferir `llvm-nm -D --undefined-only` por `tmpfile`/`mkstemp`/`tmpnam`. Já importam: `yabasanshiro`, `libppsspp`, `atari800`, `hatari`, `libfake08`. `tmpnam` usa `P_tmpdir` = `/tmp` e ignora `TMPDIR` — segue quebrado, sem correção possível do lado do app.
 4. Com o `.so` no repo, `llvm-objdump -d --start-address=…` (NDK) responde o que "não temos as fontes do core" sugere ser impossível: os quadros do tombstone levam à instrução exata.
 
-Detalhes em `docs/bugs/done/2026-09-02-saturn-yabasanshiro-serializestate-fwrite-null.md`.
+Detalhes em `docs/bugs/concluido/2026-09-02-saturn-yabasanshiro-serializestate-fwrite-null/2026-09-02-saturn-yabasanshiro-serializestate-fwrite-null.md`.
 
 ### 11. Nada que dependa do estado emulado pode rodar antes do **primeiro frame**
 
@@ -690,7 +689,7 @@ qualquer chamada nova ao core, decidir se ela entra nessa guarda.
 ninguém a captura — mata o processo. Só as chamadas bloqueantes (`runOnGLThread`) podem lançar; as
 fire-and-forget ignoram e logam.
 
-Detalhes em `docs/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
+Detalhes em `docs/bugs/aberto/2026-08-09-anr-inicializar-jogo-runongl-thread/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
 
 ### 12. API acima do `minSdkVersion` é `NoSuchMethodError` — e `SDK_INT` mente nas TV Box
 
@@ -706,8 +705,8 @@ Detalhes em `docs/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
 5. **O lint agora passa — e volta a falhar em achado novo.** `lemuroid-app/lint-baseline.xml` congela o passivo já analisado (19 `NewApi` falso-positivo de `CrashTelemetry`/`CoreCrashFallback`, 13 `RestrictedApi`, 58 warnings); `:lemuroid-app:lintFreeBundleDebug` termina **BUILD SUCCESSFUL**. **Se falhar, o achado é seu** — não acrescente ao baseline para calar. Ao corrigir um item da lista, apague o arquivo e rode a task para regenerar.
 6. **`removed="23"` no `api-versions.xml` do SDK não é "sumiu do aparelho", é "subiu de classe".** `FrameLayout.setForeground` existe desde a API 1 mas saiu do `android.jar` de `FrameLayout` na 23 — compilando contra a 35, o cast para `FrameLayout` ainda resolve em `View.setForeground` (API 23) e o `NoSuchMethodError` continua. Nesse formato, o caminho legado é reflexão. Conferir o nível em `<SDK>/platforms/android-35/data/api-versions.xml`, nunca de memória.
 
-Detalhes em `docs/bugs/done/2026-09-22-gameactivity-nosuchmethoderror-setshowwhenlocked.md` e
-`docs/bugs/done/2026-09-22-newapi-sem-guard-android-5x-inicia-mainactivity.md` (os outros 13 sites da mesma família).
+Detalhes em `docs/bugs/concluido/2026-09-22-gameactivity-nosuchmethoderror-setshowwhenlocked/2026-09-22-gameactivity-nosuchmethoderror-setshowwhenlocked.md` e
+`docs/bugs/concluido/2026-09-22-newapi-sem-guard-android-5x-inicia-mainactivity/2026-09-22-newapi-sem-guard-android-5x-inicia-mainactivity.md` (os outros 13 sites da mesma família).
 
 ### 13. O LibretroDroid nunca descarrega um core — e o build garante isso
 
@@ -744,8 +743,8 @@ descarregada em uso**, não ponteiro selvagem.
    do `GLSurfaceView` patchado é estático. Comparar o nome da thread entre famílias de crash antes
    de atribuir a causa ao binário.
 
-Detalhes em `docs/bugs/done/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md` e
-`docs/bugs/done/2026-09-28-investigacoes-baixa-confianca-triagem.md`.
+Detalhes em `docs/bugs/concluido/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado/2026-09-03-investigacao-sigsegv-glthread-pc-desmapeado.md` e
+`docs/bugs/concluido/2026-09-28-investigacoes-baixa-confianca-triagem/2026-09-28-investigacoes-baixa-confianca-triagem.md`.
 
 ### 14. Core empacotado sem o prefixo `lib` não é extraído — e o build debug esconde isso
 
@@ -769,7 +768,7 @@ desenvolvimento passava.
 3. Validação de empacotamento (o que o instalador extrai) se faz no **release**, ou num aparelho/AVD
    com Android ≤ 12, onde o filtro vale até para debug (`lemu_api25_2gb`). Um debug em Android 13+ mente.
 
-Detalhes em `docs/bugs/done/2026-09-25-cores-sem-prefixo-lib-nao-extraidos-no-release.md`.
+Detalhes em `docs/bugs/concluido/2026-09-25-cores-sem-prefixo-lib-nao-extraidos-no-release/2026-09-25-cores-sem-prefixo-lib-nao-extraidos-no-release.md`.
 
 ### 15. O `lemuroid-cores` é a fonte dos binários do APK: tem que estar commitado, enviado e com tag
 
@@ -796,8 +795,8 @@ um caminho de outra máquina.
 4. URL no `.gitmodules` é sempre a do remoto (`https://github.com/luistiagos/libretrocores.git`),
    nunca caminho de disco.
 
-Detalhes em `docs/bugs/done/2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado.md`
-e `docs/bugs/done/2026-09-25-gitmodules-url-drive-e-inexistente.md`.
+Detalhes em `docs/bugs/concluido/2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado/2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado.md`
+e `docs/bugs/concluido/2026-09-25-gitmodules-url-drive-e-inexistente/2026-09-25-gitmodules-url-drive-e-inexistente.md`.
 
 ### 16. Biblioteca que chama API acima do `minSdk` passa calada pelo build — o lint não lê bytecode de dependência
 
@@ -823,17 +822,17 @@ nada); e o R8 só faz *outlining* de API (pitfall 12), não reescreve a chamada.
    Android 5.0–5.1. Corrigido sem fork, por instrumentação de bytecode no build: `PadkitGetSystemServiceCompat`,
    no fim do [build.gradle.kts](lemuroid-app/build.gradle.kts), troca a chamada por
    `ContextCompat.getSystemService` só em `gg.padkit.*`
-   (`docs/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md`). **Não remover ao
+   (`docs/bugs/concluido/2026-10-05-padkit-haptics-getsystemservice-android-5/2026-10-05-padkit-haptics-getsystemservice-android-5.md`). **Não remover ao
    subir o padkit** — a 1.0.0 tem o mesmo código. É o molde para API de framework sem guarda numa
    dependência: trocar pela chamada `*Compat` de mesma pilha; fork/AAR local é o último recurso.
    Ao **adicionar ou subir dependência**, rodar `audit_dex_api_level.py` (raiz) no APK de release com
    `--mapping` — e de novo com `--android --skip Landroidx/ --skip 'Lj$/'` — e triar toda classe que não
    esteja na triagem do bug doc. Ainda não há verificador de build para isso — backlog
-   `docs/backlogs/2026-10-05-verificador-api-level-dex.md`.
+   `docs/backlog/2026-10-05-verificador-api-level-dex.md`.
 3. `desugar_jdk_libs` 2.1.x exige AGP ≥ 8.0. O AGP efetivo é o **8.7.1** que o `com.android.test` do bloco
    `plugins` raiz puxa, não o 8.4.0 do `deps.kt`.
 
-Detalhes em `docs/bugs/done/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`.
+Detalhes em `docs/bugs/concluido/2026-10-05-padkit-kotlinx-datetime-java-time-android-7/2026-10-05-padkit-kotlinx-datetime-java-time-android-7.md`.
 
 ### 17. A saída do `:game` não pode depender só do `System.exit` — nem voltar ao handler
 
@@ -855,7 +854,7 @@ sem sair. A exceção da corrotina de saída caía no handler default do `:game`
    `DefaultExecutor` recria a thread depois de 1 s ocioso) nem o envio da telemetria. Por isso a regra 2:
    qualquer falha dessas no caminho de saída tem de terminar em `killProcess`, nunca em outra volta.
 
-Detalhes em `docs/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5.md`.
+Detalhes em `docs/bugs/concluido/2026-10-05-padkit-haptics-getsystemservice-android-5/2026-10-05-padkit-haptics-getsystemservice-android-5.md`.
 
 ### 18. O core 3DS é o Azahar, com nome e chaves herdados do Citra
 
@@ -873,7 +872,7 @@ Detalhes em `docs/bugs/done/2026-10-05-padkit-haptics-getsystemservice-android-5
    `LemuroidCoreOption.getCorrectExposedSettings` descarta o resto, e a opção some do menu sem erro.
    O Azahar declara chaves curtas (`default`, `single_screen`, `side_by_side`; resolução `1..18`).
 
-Detalhes em `docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`
+Detalhes em `docs/bugs/no-ar/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md`
 (seções "T7: análise de implementação" e "T7: implementação e validação").
 
 ---
