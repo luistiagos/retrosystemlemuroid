@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-10-25-busca-gamecube-traz-neo-geo-pocket-color]
 depende_de: []
+integrado_em: 1298414100696ca5e0263182cc5e019da3da959d
 ---
 # Busca de jogos instalados: apelido "gamecube" aponta para o GameCube (gc), não para o Neo Geo Pocket Color (ngc)
 

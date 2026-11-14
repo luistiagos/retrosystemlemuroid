@@ -2,6 +2,7 @@
 tipo: prova
 demandas: [2026-10-25-busca-gamecube-traz-neo-geo-pocket-color]
 depende_de: [TASK-0001]
+integrado_em: 5817c70b743a92b9e241f61433fffb79573e3e35
 ---
 # Aceitação de 2026-10-25-busca-gamecube-traz-neo-geo-pocket-color
 
