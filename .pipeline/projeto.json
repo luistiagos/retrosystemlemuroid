@@ -7,7 +7,7 @@
     "entradas_ignoradas": "ignorados pelo git que a publicacao le da lane: build.properties (HF_TOKEN, R2_*) e release.jks (assinatura do release.ps1)",
     "gerados": "nunca vao para commit: o ponteiro do submodulo (pitfall 15 do CLAUDE.md) e o settings.local.json",
     "e2e": "teto do slot de teste; o aparelho/emulador e segurado pelo lock do `aparelho-instalar`, nao por processo",
-    "publicacao": "o build-and-upload.ps1 sobe a versao e publica (HF + R2); o motor commita o arquivo do bump",
+    "publicacao": "o build-and-upload.ps1 sobe a versao e publica (HF + R2); o motor commita o arquivo do bump. Povoa o lemuroid-cores antes, como o build: a publicacao roda na wt-planning, que nunca passa pelo build (bug 2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores)",
     "android": "A12 de teste RX8R90G1D6E; sem ele, o emulador lemu_3ds_api34 (x86_64, pede o build --emulador)",
     "telemetria": "componente retrogamesystem/<comp>; user_agent `RetroGameSystem/<comp> <versao>` (TelemetryReporter.kt)",
     "tipos": "tipos de demanda, em docs/<tipo>/<estado>/<id>/"
@@ -43,7 +43,8 @@
   ],
   "proibido_na_sessao": "`gradlew` de build/assemble nem de testes de unidade fora do helper (`ktlintCheck` e `lint` sao permitidos: manual, secao Dev)",
   "publicacao": {
-    "cmd": ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "{wt}\\build-and-upload.ps1"],
+    "cmd": ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
+            "Set-Location -LiteralPath '{wt}'; git -c protocol.file.allow=always -c 'submodule.lemuroid-cores.url={root}/lemuroid-cores' submodule update --init lemuroid-cores; if ($LASTEXITCODE) { exit $LASTEXITCODE }; try { & '{wt}\\build-and-upload.ps1' } catch { $_ | Out-String | Write-Host; exit 1 }; exit 0"],
     "versao_de": {"arquivo": "lemuroid-app/build.gradle.kts", "re": "versionName\\s*=\\s*\"([^\"]+)\""},
     "arquivos_do_bump": ["lemuroid-app/build.gradle.kts"],
     "timeout_h": 2

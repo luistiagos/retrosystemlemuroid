@@ -3,7 +3,7 @@
 
 Gerado em 2026-11-14. O estado de cada demanda é a pasta dela (`docs/<tipo>/<estado>/<id>/`). A **idade** conta os dias desde o primeiro commit do doc da demanda, seguindo as mudanças de pasta, ou desde a data com que o id começa ou termina, se for mais antiga. As tasks de cada demanda estão no `README.md` dela.
 
-137 demandas: 12 em aberto, 1 em testado, 7 em no-ar, 117 em concluido. 2 tasks: 2 em implementado.
+138 demandas: 12 em aberto, 1 em implementado, 1 em testado, 7 em no-ar, 117 em concluido. 2 tasks: 2 em implementado.
 
 ## aberto (12)
 
@@ -24,11 +24,13 @@ _registrada; inclui as demandas com tasks em execução._
 | 4d | bug | [2026-11-10-tv-android14-game-process-could-not-be-restarted](bugs/aberto/2026-11-10-tv-android14-game-process-could-not-be-restarted/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 0d | bug | [2026-11-14-ktlint-vermelho-telemetryreporter](bugs/aberto/2026-11-14-ktlint-vermelho-telemetryreporter/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 
-## implementado (0)
+## implementado (1)
 
 _toda task de implementação concluída e integrada no ramo principal; falta a Aceitação._
 
-Nenhuma.
+| idade | tipo | demanda | tasks |
+|---:|---|---|---|
+| 0d | bug | [2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores](bugs/implementado/2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-14 - "corrigido no adaptador (.pipeline/projeto.json, publicacao.cmd povoa o lemuroid-cores) na T24 do pipeline-global; prova local sem upload saiu 0") |
 
 ## testado (1)
 

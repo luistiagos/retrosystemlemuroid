@@ -1,3 +1,6 @@
+---
+movido_por: Luis Tiago - 2026-11-14 - "corrigido no adaptador (.pipeline/projeto.json, publicacao.cmd povoa o lemuroid-cores) na T24 do pipeline-global; prova local sem upload saiu 0"
+---
 # [BUG] Publicação do pipeline falha: a lane `wt-planning` não tem o submódulo `lemuroid-cores` (`:bundled-cores` sem variantes)
 
 **Data:** 2026-11-14
@@ -56,3 +59,11 @@ worktree nova ele vem vazio"), mas o `publicacao.cmd` chama direto `{wt}\build-a
 - Republicar o que ficou pendente: a correção do apelido "gamecube" (TASK-0001, `f2a17e8`) está em `origin/version10`
   mas fora de qualquer versão publicada.
 - Prova: o próximo `final-publicar` passa do `assembleFreeBundleRelease` e grava a tag `publicado/<versao>`.
+
+## Correção (2026-11-14, T24 do pipeline-global)
+
+`.pipeline/projeto.json`: o `publicacao.cmd` passou a `powershell -Command` que faz o mesmo `submodule update --init
+lemuroid-cores` do `build.cmd` (sai com o código dele) e roda o `build-and-upload.ps1` num `try/catch` (`throw` ->
+`exit 1`). Prova local: o comando novo com `-NoBump -SkipHF -SkipR2 -SkipPublicVerify` numa worktree descartável de
+`origin/version10` (submódulo vazio antes) saiu 0, com `dist/retro-game-system-{arm64,armv7}.apk` e nada publicado. A
+prova real é a publicação da próxima execução do pipeline.
