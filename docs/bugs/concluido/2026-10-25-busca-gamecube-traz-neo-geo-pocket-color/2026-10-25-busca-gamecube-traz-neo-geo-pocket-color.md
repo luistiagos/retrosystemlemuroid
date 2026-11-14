@@ -1,6 +1,7 @@
 ---
 fecha_por: prova
 tasks: [TASK-0001, TASK-0002]
+versao_minima: 1.17.35
 ---
 # [BUG] Buscar "gamecube" nos jogos instalados/salvos traz jogos de Neo Geo Pocket Color, não de GameCube
 
@@ -101,3 +102,8 @@ Apelido de busca aponta para o **dbname** do `SystemID`, não para a sigla popul
 
 - dev: effort low, ultrathink não — troca localizada + teste simples.
 - teste: effort medium, ultrathink não — precisa baixar um jogo de NGPC no aparelho e comparar dois prints.
+
+## Concluída pela prova em 2026-11-14
+
+- `fecha_por: prova`: a Aceitação passou na máquina (`evidencias/aceitacao.md`) e a versão 1.17.35 (tag `publicado/1.17.35`) contém todas as tasks; conclui ao entrar no ar, sem esperar telemetria.
+- Sem `casador`: nada a reabre sozinha; um erro novo vira bug novo na triagem.

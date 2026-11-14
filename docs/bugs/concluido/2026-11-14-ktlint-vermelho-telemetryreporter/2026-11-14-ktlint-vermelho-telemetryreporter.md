@@ -1,6 +1,7 @@
 ---
 fecha_por: prova
 tasks: [TASK-0003, TASK-0004]
+versao_minima: 1.17.35
 ---
 # `:lemuroid-app:ktlintCheck` vermelho na base: 18 apontamentos novos em `TelemetryReporter.kt` (commit 3145b78)
 
@@ -103,3 +104,8 @@ baseline casa por `linha:coluna:regra`).
 
 - dev: effort low, ultrathink não — troca mecânica de formatação em 4 pontos + remoção de um bloco XML.
 - teste: effort low, ultrathink não — rodar `ktlintCheck` na base e no fix e comparar os relatórios.
+
+## Concluída pela prova em 2026-11-14
+
+- `fecha_por: prova`: a Aceitação passou na máquina (`evidencias/aceitacao.md`) e a versão 1.17.35 (tag `publicado/1.17.35`) contém todas as tasks; conclui ao entrar no ar, sem esperar telemetria.
+- Sem `casador`: nada a reabre sozinha; um erro novo vira bug novo na triagem.

@@ -3,7 +3,7 @@
 
 Gerado em 2026-11-14. O estado de cada demanda é a pasta dela (`docs/<tipo>/<estado>/<id>/`). A **idade** conta os dias desde o primeiro commit do doc da demanda, seguindo as mudanças de pasta, ou desde a data com que o id começa ou termina, se for mais antiga. As tasks de cada demanda estão no `README.md` dela.
 
-138 demandas: 11 em aberto, 1 em implementado, 2 em testado, 7 em no-ar, 117 em concluido. 4 tasks: 4 em implementado.
+138 demandas: 11 em aberto, 1 em implementado, 7 em no-ar, 119 em concluido. 4 tasks: 4 em no-ar.
 
 ## aberto (11)
 
@@ -31,14 +31,11 @@ _toda task de implementação concluída e integrada no ramo principal; falta a 
 |---:|---|---|---|
 | 0d | bug | [2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores](bugs/implementado/2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-14 - "corrigido no adaptador (.pipeline/projeto.json, publicacao.cmd povoa o lemuroid-cores) na T24 do pipeline-global; prova local sem upload saiu 0") |
 
-## testado (2)
+## testado (0)
 
 _a Aceitação passou; falta publicar._
 
-| idade | tipo | demanda | tasks |
-|---:|---|---|---|
-| 20d | bug | [2026-10-25-busca-gamecube-traz-neo-geo-pocket-color](bugs/testado/2026-10-25-busca-gamecube-traz-neo-geo-pocket-color/README.md) | 2/2 |
-| 0d | bug | [2026-11-14-ktlint-vermelho-telemetryreporter](bugs/testado/2026-11-14-ktlint-vermelho-telemetryreporter/README.md) | 2/2 |
+Nenhuma.
 
 ## no-ar (7)
 
@@ -54,7 +51,7 @@ _a versão publicada contém a solução; espera o fechamento (a medida do caso 
 | 7d | bug | [2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada](bugs/no-ar/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 4d | bug | [2026-11-10-chaves-do-r2-na-linha-de-comando-do-rclone](bugs/no-ar/2026-11-10-chaves-do-r2-na-linha-de-comando-do-rclone/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 
-## concluido (117)
+## concluido (119)
 
 _fechada: pela prova na máquina, pela medida do caso ou pelo dono._
 
@@ -176,7 +173,9 @@ _fechada: pela prova na máquina, pela medida do caso ou pelo dono._
 | 29d | bug | [2026-10-16-arcade-split-set-dependencias-e-falsa-corrupcao](bugs/concluido/2026-10-16-arcade-split-set-dependencias-e-falsa-corrupcao/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 29d | feature | [2026-10-16-inclusao-core-mamearcade-0289-on-demand](features/concluido/2026-10-16-inclusao-core-mamearcade-0289-on-demand/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 27d | feature | [2026-10-18-tv-tela-jogos-salvos](features/concluido/2026-10-18-tv-tela-jogos-salvos/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
+| 20d | bug | [2026-10-25-busca-gamecube-traz-neo-geo-pocket-color](bugs/concluido/2026-10-25-busca-gamecube-traz-neo-geo-pocket-color/README.md) | 2/2 |
 | 20d | bug | [2026-10-25-neogeo-cd-jogo-nao-inicia](bugs/concluido/2026-10-25-neogeo-cd-jogo-nao-inicia/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
+| 0d | bug | [2026-11-14-ktlint-vermelho-telemetryreporter](bugs/concluido/2026-11-14-ktlint-vermelho-telemetryreporter/README.md) | 2/2 |
 
 ## bloqueado (0)
 
