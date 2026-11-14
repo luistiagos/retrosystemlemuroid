@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-11-14-ktlint-vermelho-telemetryreporter]
 depende_de: []
+integrado_em: 09dbea7c1c8ca1bcc5503c4adaef5c091fe68f03
 ---
 # Corrigir o estilo das 4 construções do TelemetryReporter e tirar o bloco dele do baseline do ktlint
 

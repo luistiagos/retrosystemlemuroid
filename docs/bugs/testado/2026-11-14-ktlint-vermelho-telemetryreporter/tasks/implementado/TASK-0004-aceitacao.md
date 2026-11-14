@@ -2,6 +2,7 @@
 tipo: prova
 demandas: [2026-11-14-ktlint-vermelho-telemetryreporter]
 depende_de: [TASK-0003]
+integrado_em: 1897b5c4d258ca6261aac6f3880bb35d32c34c1a
 ---
 # Aceitação de 2026-11-14-ktlint-vermelho-telemetryreporter
 

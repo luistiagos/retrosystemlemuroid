@@ -3,9 +3,9 @@
 
 Gerado em 2026-11-14. O estado de cada demanda é a pasta dela (`docs/<tipo>/<estado>/<id>/`). A **idade** conta os dias desde o primeiro commit do doc da demanda, seguindo as mudanças de pasta, ou desde a data com que o id começa ou termina, se for mais antiga. As tasks de cada demanda estão no `README.md` dela.
 
-138 demandas: 12 em aberto, 1 em implementado, 1 em testado, 7 em no-ar, 117 em concluido. 2 tasks: 2 em implementado.
+138 demandas: 11 em aberto, 1 em implementado, 2 em testado, 7 em no-ar, 117 em concluido. 4 tasks: 4 em implementado.
 
-## aberto (12)
+## aberto (11)
 
 _registrada; inclui as demandas com tasks em execução._
 
@@ -22,7 +22,6 @@ _registrada; inclui as demandas com tasks em execução._
 | 25d | bug | [2026-10-20-tvbox-hd-usb-download-continua-no-interno-espaco-insuficiente](bugs/aberto/2026-10-20-tvbox-hd-usb-download-continua-no-interno-espaco-insuficiente/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 20d | bug | [2026-10-25-gamecube-32-bits-tenta-baixar-core-inexistente](bugs/aberto/2026-10-25-gamecube-32-bits-tenta-baixar-core-inexistente/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 4d | bug | [2026-11-10-tv-android14-game-process-could-not-be-restarted](bugs/aberto/2026-11-10-tv-android14-game-process-could-not-be-restarted/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
-| 0d | bug | [2026-11-14-ktlint-vermelho-telemetryreporter](bugs/aberto/2026-11-14-ktlint-vermelho-telemetryreporter/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 
 ## implementado (1)
 
@@ -32,13 +31,14 @@ _toda task de implementação concluída e integrada no ramo principal; falta a 
 |---:|---|---|---|
 | 0d | bug | [2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores](bugs/implementado/2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-14 - "corrigido no adaptador (.pipeline/projeto.json, publicacao.cmd povoa o lemuroid-cores) na T24 do pipeline-global; prova local sem upload saiu 0") |
 
-## testado (1)
+## testado (2)
 
 _a Aceitação passou; falta publicar._
 
 | idade | tipo | demanda | tasks |
 |---:|---|---|---|
 | 20d | bug | [2026-10-25-busca-gamecube-traz-neo-geo-pocket-color](bugs/testado/2026-10-25-busca-gamecube-traz-neo-geo-pocket-color/README.md) | 2/2 |
+| 0d | bug | [2026-11-14-ktlint-vermelho-telemetryreporter](bugs/testado/2026-11-14-ktlint-vermelho-telemetryreporter/README.md) | 2/2 |
 
 ## no-ar (7)
 
