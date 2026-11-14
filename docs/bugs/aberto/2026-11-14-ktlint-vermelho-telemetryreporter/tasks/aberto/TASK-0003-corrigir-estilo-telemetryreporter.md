@@ -81,9 +81,9 @@ Provas (lane wt-1):
   `TelemetryReporter.kt` removido (18 `<error>`), nada adicionado.
 - **Controle positivo** (base `origin/version10` @ ee90baa, os 2 arquivos restaurados da base na lane):
   `./gradlew :lemuroid-app:ktlintCheck -q` -> EXIT=1, 18 apontamentos em `TelemetryReporter.kt`.
-  Evidência: `evidencias/ktlint-base-relatorio.txt`.
+  Evidência: `reports/TASK-0003-evidencias/ktlint-base-relatorio.txt`.
 - **Com a mudança**: mesmo comando -> EXIT=0, relatórios `lemuroid-app/build/reports/ktlint/*/*.txt` vazios.
-  Evidência: `evidencias/ktlint-fix.txt` (saída vazia).
+  Evidência: `reports/TASK-0003-evidencias/ktlint-fix.txt` (saída vazia).
 - **T2 (UI)**: dispensado pelo Plano de teste (gate de estilo, sem caminho de usuário); sem instalação no aparelho.
 - **T3**: `build --bug TASK-0003` após `sync` (base ee90baa) -> BUILD SUCCESSFUL; `testFreeBundleDebugUnitTest`
   96 testes / 0 falhas / 0 erros / 1 pulado (igual à rodada do dev).
