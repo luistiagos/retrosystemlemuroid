@@ -41,7 +41,7 @@ UI (nenhum jogo de GC instalado; ISO grande demais para o teto de download), e f
 
 ## 3. Logs (T4)
 
-`aceitacao/logcat-pid10318.txt` (`logcat -d --pid 10318`, 331 linhas): sem `AndroidRuntime`/`FATAL`/ANR; buffer
+`aceitacao/t4-logcat-pid10318.txt` (`logcat -d --pid 10318`, 331 linhas): sem `AndroidRuntime`/`FATAL`/ANR; buffer
 `crash` sem entrada do PID. Os unicos `E` sao 7 `OpenGLRenderer: Unable to match the desired swap behavior`, ruido do
 emulador que aparece igual na base da TASK-0001. As 4 linhas com "libc" sao `D StrictMode ... libcore.io`, nao erro.
 
