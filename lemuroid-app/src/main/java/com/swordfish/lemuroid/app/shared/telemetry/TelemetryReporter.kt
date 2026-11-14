@@ -205,7 +205,10 @@ object TelemetryReporter {
         } catch (e: Throwable) {
             false
         } finally {
-            try { conn?.disconnect() } catch (ignored: Throwable) {}
+            try {
+                conn?.disconnect()
+            } catch (ignored: Throwable) {
+            }
         }
     }
 
@@ -225,7 +228,10 @@ object TelemetryReporter {
         } catch (ignored: Throwable) {
             // offline tolerated
         } finally {
-            try { conn?.disconnect() } catch (ignored: Throwable) {}
+            try {
+                conn?.disconnect()
+            } catch (ignored: Throwable) {
+            }
         }
     }
 
@@ -245,10 +251,16 @@ object TelemetryReporter {
         return sw.toString()
     }
 
-    private fun cap(s: String, max: Int): String = if (s.length <= max) s else s.substring(0, max)
+    private fun cap(
+        s: String,
+        max: Int,
+    ): String = if (s.length <= max) s else s.substring(0, max)
 
     /** Keep the TAIL — the end of a trace is what matters for diagnosis. */
-    private fun capTail(s: String, maxBytes: Int): String {
+    private fun capTail(
+        s: String,
+        maxBytes: Int,
+    ): String {
         val b = s.toByteArray(StandardCharsets.UTF_8)
         if (b.size <= maxBytes) return s
         val marker = "...[truncated ${b.size - maxBytes} bytes]...\n"

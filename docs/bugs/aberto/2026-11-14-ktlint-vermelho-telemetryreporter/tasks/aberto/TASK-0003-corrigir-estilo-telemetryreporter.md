@@ -58,3 +58,18 @@ Arquivo: `lemuroid-app/config/ktlint/baseline.xml`
 - **T2 (UI):** dispensado. É gate de estilo do build, sem caminho de usuário.
 - **T3:** testes de unidade do `build` (`lemuroid-app/build/test-results/testFreeBundleDebugUnitTest/*.xml`) sem `fail`
   novo. Sem aparelho: não há mudança de comportamento.
+
+## Correcao (pipeline 20261114-1912, rodada 1)
+
+- `TelemetryReporter::postJson` e `::getFallback` (finally): `try { conn?.disconnect() } catch (ignored: Throwable) {}`
+  quebrado em várias linhas; continua engolindo qualquer `Throwable`.
+- `TelemetryReporter::cap` e `::capTail`: um parâmetro por linha com vírgula final; corpos intactos.
+- `lemuroid-app/config/ktlint/baseline.xml`: removido o `<file>` de `TelemetryReporter.kt` (18 `<error>`); nenhum outro bloco tocado.
+
+Provas (lane wt-1):
+- Controle positivo, antes da edição: `./gradlew :lemuroid-app:ktlintCheck -q` -> EXIT=1, 18 apontamentos, todos em
+  `TelemetryReporter.kt` (try-catch-finally-spacing 8, function-signature 6, statement-wrapping 4).
+  Log: `reports/TASK-0003-ktlint-antes.log`.
+- Com a mudança: mesmo comando -> **EXIT=0**, relatórios `lemuroid-app/build/reports/ktlint/*/*.txt` vazios.
+- `build --bug TASK-0003` -> BUILD SUCCESSFUL; `testFreeBundleDebugUnitTest`: 96 testes, 0 falhas, 0 erros, 1 pulado.
+- `git diff` do `.kt`: +16/-4, só quebra de linha, indentação e `,` final.
