@@ -1,6 +1,6 @@
 ---
 fecha_por: prova
-tasks: [TASK-0001]
+tasks: [TASK-0001, TASK-0002]
 ---
 # [BUG] Buscar "gamecube" nos jogos instalados/salvos traz jogos de Neo Geo Pocket Color, não de GameCube
 
