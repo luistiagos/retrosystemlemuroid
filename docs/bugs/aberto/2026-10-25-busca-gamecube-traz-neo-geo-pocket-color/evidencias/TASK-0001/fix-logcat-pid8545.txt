@@ -1,0 +1,400 @@
+--------- beginning of main
+11-14 16:13:04.237  8545  8545 I amesystem.debug: Late-enabling -Xcheck:jni
+11-14 16:13:04.251  8545  8545 I amesystem.debug: Using CollectorTypeCC GC.
+11-14 16:13:04.252  8545  8545 W amesystem.debug: Unexpected CPU variant for x86: x86_64.
+11-14 16:13:04.252  8545  8545 W amesystem.debug: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+11-14 16:13:04.384  8545  8545 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10190; state: ENABLED
+11-14 16:13:04.385  8545  8545 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 10190; state: ENABLED
+11-14 16:13:04.398  8545  8545 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-14 16:13:04.398  8545  8545 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-14 16:13:04.399  8545  8545 W ziparchive: Unable to open '/data/app/~~flJqAGOtFJcwr1KK5C-bmw==/app.retrogamesystem.debug-W2z57mRhFk0Mirzsp3Cu8Q==/base.dm': No such file or directory
+11-14 16:13:04.399  8545  8545 W ziparchive: Unable to open '/data/app/~~flJqAGOtFJcwr1KK5C-bmw==/app.retrogamesystem.debug-W2z57mRhFk0Mirzsp3Cu8Q==/base.dm': No such file or directory
+11-14 16:13:05.022  8545  8545 D nativeloader: Configuring clns-6 for other apk /data/app/~~flJqAGOtFJcwr1KK5C-bmw==/app.retrogamesystem.debug-W2z57mRhFk0Mirzsp3Cu8Q==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~flJqAGOtFJcwr1KK5C-bmw==/app.retrogamesystem.debug-W2z57mRhFk0Mirzsp3Cu8Q==/lib/x86_64:/data/app/~~flJqAGOtFJcwr1KK5C-bmw==/app.retrogamesystem.debug-W2z57mRhFk0Mirzsp3Cu8Q==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/app.retrogamesystem.debug
+11-14 16:13:05.076  8545  8545 V GraphicsEnvironment: Currently set values for:
+11-14 16:13:05.076  8545  8545 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-14 16:13:05.076  8545  8545 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-14 16:13:05.077  8545  8545 V GraphicsEnvironment: ANGLE GameManagerService for app.retrogamesystem.debug: false
+11-14 16:13:05.077  8545  8545 V GraphicsEnvironment: app.retrogamesystem.debug is not listed in per-application setting
+11-14 16:13:05.077  8545  8545 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-14 16:13:05.405  8545  8545 I NativeTempDir: Native TMPDIR set to /data/user/0/app.retrogamesystem.debug/files/tmp
+11-14 16:13:05.412  8545  8545 D WM-WrkMgrInitializer: Initializing WorkManager with default configuration.
+11-14 16:13:05.475  8545  8545 D WM-PackageManagerHelper: Skipping component enablement for androidx.work.impl.background.systemjob.SystemJobService
+11-14 16:13:05.475  8545  8545 D WM-Schedulers: Created SystemJobScheduler and enabled SystemJobService
+11-14 16:13:05.490  8545  8545 D CompatibilityChangeReporter: Compat change id reported: 3400644; UID 10190; state: ENABLED
+11-14 16:13:05.490  8545  8545 I MainProcessInitializer: Requested initialization of main process tasks
+11-14 16:13:05.535  8545  8574 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10190; state: ENABLED
+11-14 16:13:05.595  8545  8545 D StrictMode: StrictMode policy violation; ~duration=90 ms: android.os.strictmode.DiskReadViolation
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager$Companion.markCatalogPopulated(StreamingRomsManager.kt:123)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:29)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:18)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-14 16:13:05.595  8545  8545 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-14 16:13:05.598  8545  8545 D StrictMode: StrictMode policy violation; ~duration=89 ms: android.os.strictmode.DiskReadViolation
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.app.SharedPreferencesImpl.edit(SharedPreferencesImpl.java:368)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager$Companion.markCatalogPopulated(StreamingRomsManager.kt:124)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:29)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:18)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-14 16:13:05.598  8545  8545 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-14 16:13:05.644  8545  8588 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-14 16:13:05.658  8545  8588 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-14 16:13:05.662  8545  8588 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-14 16:13:05.696  8545  8579 D SmartStoragePicker: SmartStoragePicker: ROMs dir /storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms
+11-14 16:13:05.699  8545  8587 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10190; state: ENABLED
+11-14 16:13:05.699  8545  8587 D CompatibilityChangeReporter: Compat change id reported: 253665015; UID 10190; state: ENABLED
+11-14 16:13:05.823  8545  8577 D CompatibilityChangeReporter: Compat change id reported: 263076149; UID 10190; state: ENABLED
+11-14 16:13:05.838  8545  8545 W amesystem.debug: Accessing hidden method Ljava/lang/invoke/MethodHandles$Lookup;-><init>(Ljava/lang/Class;I)V (unsupported, reflection, allowed)
+11-14 16:13:05.960  8545  8571 V NativeCrypto: Registering org/conscrypt/NativeCrypto's 288 native methods...
+11-14 16:13:05.972  8545  8571 W amesystem.debug: Accessing hidden method Ljava/security/spec/ECParameterSpec;->getCurveName()Ljava/lang/String; (unsupported, reflection, allowed)
+11-14 16:13:05.981  8545  8571 D LemuroidApplication: Conscrypt provider installed
+11-14 16:13:06.074  8545  8545 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10190; state: DISABLED
+11-14 16:13:06.076  8545  8545 W OpenGLRenderer: Unknown dataspace 0
+11-14 16:13:06.088  8545  8545 D StrictMode: StrictMode policy violation; ~duration=33 ms: android.os.strictmode.DiskReadViolation
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.prefs_delegate$lambda$0(AppUpdateManager.kt:70)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.$r8$lambda$NltxSQYBvDhxDNRQ1nb8DutaMa4(Unknown Source:0)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:74)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.getPrefs(AppUpdateManager.kt:70)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.shouldCheckNow(AppUpdateManager.kt:88)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel.checkOnStartup(AppUpdateViewModel.kt:48)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity.onCreate(MainActivity.kt:208)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-14 16:13:06.088  8545  8545 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-14 16:13:06.090  8545  8545 D StrictMode: StrictMode policy violation; ~duration=32 ms: android.os.strictmode.DiskReadViolation
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.SharedPreferencesImpl.getLong(SharedPreferencesImpl.java:328)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.shouldCheckNow(AppUpdateManager.kt:88)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel.checkOnStartup(AppUpdateViewModel.kt:48)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity.onCreate(MainActivity.kt:208)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-14 16:13:06.090  8545  8545 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-14 16:13:07.603  8545  8584 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-14 16:13:07.603  8545  8584 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-14 16:13:07.682  8545  8584 I Gralloc4: mapper 4.x is not supported
+11-14 16:13:07.717  8545  8584 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-14 16:13:07.828  8545  8561 I OpenGLRenderer: Davey! duration=1722ms; Flags=1, FrameTimelineVsyncId=253495, IntendedVsync=549086284348, Vsync=549086284348, InputEventId=0, HandleInputStart=549099367100, AnimationStart=549099392100, PerformTraversalsStart=549099427200, DrawStart=550721965000, FrameDeadline=549102951014, FrameInterval=549099328800, FrameStartTime=16666666, SyncQueued=550766595100, SyncStart=550779892600, IssueDrawCommandsStart=550781160700, SwapBuffers=550812072800, FrameCompleted=550822355500, DequeueBufferDuration=258800, QueueBufferDuration=313100, GpuCompleted=550822355500, SwapBuffersCompleted=550813522600, DisplayPresentTime=0, CommandSubmissionCompleted=550812072800, 
+11-14 16:13:07.832  8545  8574 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=5d8920c4-b305-47e6-98f0-a548c42d1907, tags={ com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork } ]
+11-14 16:13:07.891  8545  8545 I Choreographer: Skipped 102 frames!  The application may be doing too much work on its main thread.
+11-14 16:13:08.245  8545  8561 I OpenGLRenderer: Davey! duration=2050ms; Flags=0, FrameTimelineVsyncId=253552, IntendedVsync=549186284344, Vsync=550886284276, InputEventId=0, HandleInputStart=550892396100, AnimationStart=550892459500, PerformTraversalsStart=551176997100, DrawStart=551177981200, FrameDeadline=550852950944, FrameInterval=550891566600, FrameStartTime=16666666, SyncQueued=551221357500, SyncStart=551222349900, IssueDrawCommandsStart=551222530300, SwapBuffers=551231350000, FrameCompleted=551237664400, DequeueBufferDuration=52600, QueueBufferDuration=346300, GpuCompleted=551237664400, SwapBuffersCompleted=551233167200, DisplayPresentTime=0, CommandSubmissionCompleted=551231350000, 
+11-14 16:13:08.970  8545  8578 D ConscryptOkHttpHelper: Conscrypt provider installed: Conscrypt 1.0
+11-14 16:13:08.990  8545  8625 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-14 16:13:08.991  8545  8625 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-14 16:13:09.001  8545  8545 I Choreographer: Skipped 35 frames!  The application may be doing too much work on its main thread.
+11-14 16:13:09.030  8545  8578 D ConscryptOkHttpHelper: OkHttp configured with Conscrypt TLS (trust-all)
+11-14 16:13:09.092  8545  8626 D TrafficStats: tagSocket(144) with statsTag=0xffffffff, statsUid=-1
+11-14 16:13:09.242  8545  8584 D EGL_emulation: app_time_stats: avg=357.25ms min=85.11ms max=810.53ms count=4
+11-14 16:13:09.285  8545  8561 I OpenGLRenderer: Davey! duration=887ms; Flags=0, FrameTimelineVsyncId=254774, IntendedVsync=551269617594, Vsync=551386284256, InputEventId=0, HandleInputStart=551400097100, AnimationStart=551400177200, PerformTraversalsStart=551582986400, DrawStart=551583217500, FrameDeadline=551369617590, FrameInterval=551398990600, FrameStartTime=16666666, SyncQueued=551977533800, SyncStart=551977836100, IssueDrawCommandsStart=551977992700, SwapBuffers=552124829500, FrameCompleted=552157727700, DequeueBufferDuration=32300, QueueBufferDuration=1053000, GpuCompleted=552157535600, SwapBuffersCompleted=552157727700, DisplayPresentTime=0, CommandSubmissionCompleted=552124829500, 
+11-14 16:13:09.309  8545  8561 I OpenGLRenderer: Davey! duration=900ms; Flags=0, FrameTimelineVsyncId=254893, IntendedVsync=551402950922, Vsync=551986284232, InputEventId=0, HandleInputStart=552013649300, AnimationStart=552013819900, PerformTraversalsStart=552075417300, DrawStart=552075638600, FrameDeadline=552186284224, FrameInterval=552001889100, FrameStartTime=16666666, SyncQueued=552204141200, SyncStart=552204595900, IssueDrawCommandsStart=552204942100, SwapBuffers=552209745600, FrameCompleted=552304039900, DequeueBufferDuration=42828800, QueueBufferDuration=396100, GpuCompleted=552304039900, SwapBuffersCompleted=552285790000, DisplayPresentTime=0, CommandSubmissionCompleted=552209745600, 
+11-14 16:13:14.573  8545  8545 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-14 16:13:14.573  8545  8545 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-14 16:13:14.783  8545  8545 D CompatibilityChangeReporter: Compat change id reported: 289878283; UID 10190; state: ENABLED
+11-14 16:13:14.922  8545  8584 D EGL_emulation: app_time_stats: avg=503.30ms min=2.10ms max=5446.10ms count=11
+11-14 16:13:19.108  8545  8584 D EGL_emulation: app_time_stats: avg=89.88ms min=1.61ms max=3401.24ms count=41
+11-14 16:13:30.537  8545  8545 I ImeTracker: app.retrogamesystem.debug:4256ae84: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:13:30.537  8545  8545 D InsetsController: show(ime(), fromIme=false)
+11-14 16:13:30.538  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:13:30.556  8545  8584 D EGL_emulation: app_time_stats: avg=11447.24ms min=11447.24ms max=11447.24ms count=1
+11-14 16:13:30.564  8545  8545 I AssistStructure: Flattened final assist data: 520 bytes, containing 1 windows, 3 views
+11-14 16:13:30.582  8545  8545 I ImeTracker: app.retrogamesystem.debug:ddc18dea: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-14 16:13:30.583  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-14 16:13:30.775  8545  8545 D Autofill Status: Autofill popup isn't shown because autofill is not available.
+11-14 16:13:30.775  8545  8545 D Autofill Status: 
+11-14 16:13:30.775  8545  8545 D Autofill Status: Did you set up autofill?
+11-14 16:13:30.775  8545  8545 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced > Autofill Service
+11-14 16:13:30.775  8545  8545 D Autofill Status: 2. Pick a service
+11-14 16:13:30.775  8545  8545 D Autofill Status: 
+11-14 16:13:30.775  8545  8545 D Autofill Status: Did you add an account?
+11-14 16:13:30.775  8545  8545 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced
+11-14 16:13:30.775  8545  8545 D Autofill Status: 2. Click on the settings icon next to the Autofill Service
+11-14 16:13:30.775  8545  8545 D Autofill Status: 3. Add your account
+11-14 16:13:30.799  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:13:31.125  8545  8545 I ImeTracker: app.retrogamesystem.debug:ddc18dea: onShown
+11-14 16:13:31.596  8545  8584 D EGL_emulation: app_time_stats: avg=24.13ms min=1.79ms max=452.09ms count=29
+11-14 16:13:32.605  8545  8584 D EGL_emulation: app_time_stats: avg=126.07ms min=49.61ms max=291.78ms count=8
+11-14 16:13:33.687  8545  8584 D EGL_emulation: app_time_stats: avg=90.08ms min=9.84ms max=131.98ms count=12
+11-14 16:13:34.724  8545  8584 D EGL_emulation: app_time_stats: avg=103.63ms min=96.10ms max=119.42ms count=10
+11-14 16:13:35.975  8545  8584 D EGL_emulation: app_time_stats: avg=55.93ms min=3.71ms max=265.40ms count=21
+11-14 16:13:36.599  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@29195200 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@d09ca73
+11-14 16:13:36.891  8545  8545 I ImeTracker: app.retrogamesystem.debug:16a35e04: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-14 16:13:36.892  8545  8545 I ImeTracker: app.retrogamesystem.debug:1a4e12c6: onHidden
+11-14 16:13:36.976  8545  8584 D EGL_emulation: app_time_stats: avg=33.64ms min=1.78ms max=500.37ms count=22
+11-14 16:13:37.977  8545  8584 D EGL_emulation: app_time_stats: avg=500.17ms min=498.99ms max=501.35ms count=2
+11-14 16:13:38.991  8545  8584 D EGL_emulation: app_time_stats: avg=507.06ms min=498.34ms max=515.78ms count=2
+11-14 16:13:39.995  8545  8584 D EGL_emulation: app_time_stats: avg=501.25ms min=499.46ms max=503.05ms count=2
+11-14 16:13:41.508  8545  8584 D EGL_emulation: app_time_stats: avg=504.41ms min=497.98ms max=515.94ms count=3
+11-14 16:13:42.509  8545  8584 D EGL_emulation: app_time_stats: avg=500.21ms min=500.13ms max=500.29ms count=2
+11-14 16:13:43.258  8545  8545 I ImeTracker: app.retrogamesystem.debug:16f4072f: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:13:43.258  8545  8545 D InsetsController: show(ime(), fromIme=false)
+11-14 16:13:43.259  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:13:43.276  8545  8545 I ImeTracker: app.retrogamesystem.debug:ea3ea944: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-14 16:13:43.276  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-14 16:13:43.345  8545  8545 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-14 16:13:43.345  8545  8545 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-14 16:13:43.418  8545  8584 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-14 16:13:43.511  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:13:43.512  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:13:43.513  8545  8545 I ImeTracker: app.retrogamesystem.debug:ea3ea944: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-14 16:13:43.537  8545  8584 D EGL_emulation: app_time_stats: avg=205.63ms min=32.88ms max=500.58ms count=5
+11-14 16:13:43.841  8545  8545 I ImeTracker: app.retrogamesystem.debug:16f4072f: onShown
+11-14 16:13:44.607  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@229153e
+11-14 16:13:44.640  8545  8584 D EGL_emulation: app_time_stats: avg=38.39ms min=1.85ms max=501.49ms count=22
+11-14 16:13:45.657  8545  8584 D EGL_emulation: app_time_stats: avg=69.58ms min=10.33ms max=150.83ms count=14
+11-14 16:13:46.674  8545  8584 D EGL_emulation: app_time_stats: avg=71.74ms min=8.19ms max=123.95ms count=14
+11-14 16:13:47.686  8545  8584 D EGL_emulation: app_time_stats: avg=101.15ms min=96.38ms max=114.16ms count=10
+11-14 16:13:48.717  8545  8584 D EGL_emulation: app_time_stats: avg=37.79ms min=6.89ms max=149.44ms count=26
+11-14 16:13:49.959  8545  8584 D EGL_emulation: app_time_stats: avg=85.77ms min=6.50ms max=516.99ms count=14
+11-14 16:13:50.080  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@29195200 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@aaae8a0
+11-14 16:13:50.374  8545  8545 I ImeTracker: app.retrogamesystem.debug:fa5ca4ef: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-14 16:13:50.376  8545  8545 I ImeTracker: app.retrogamesystem.debug:cefd582e: onHidden
+11-14 16:13:51.459  8545  8584 D EGL_emulation: app_time_stats: avg=54.12ms min=1.80ms max=500.99ms count=23
+11-14 16:13:52.960  8545  8584 D EGL_emulation: app_time_stats: avg=500.14ms min=498.98ms max=501.78ms count=3
+11-14 16:13:53.976  8545  8584 D EGL_emulation: app_time_stats: avg=508.24ms min=501.61ms max=514.88ms count=2
+11-14 16:13:54.976  8545  8584 D EGL_emulation: app_time_stats: avg=499.93ms min=498.84ms max=501.02ms count=2
+11-14 16:13:56.476  8545  8584 D EGL_emulation: app_time_stats: avg=499.78ms min=498.68ms max=501.50ms count=3
+11-14 16:13:56.652  8545  8545 I ImeTracker: app.retrogamesystem.debug:7cd8621d: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:13:56.652  8545  8545 D InsetsController: show(ime(), fromIme=false)
+11-14 16:13:56.654  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:13:56.675  8545  8545 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-14 16:13:56.675  8545  8545 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-14 16:13:56.705  8545  8584 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-14 16:13:56.755  8545  8545 I ImeTracker: app.retrogamesystem.debug:f4d80609: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-14 16:13:56.756  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-14 16:13:56.895  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:13:56.918  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:13:56.919  8545  8545 I ImeTracker: app.retrogamesystem.debug:f4d80609: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-14 16:13:57.223  8545  8545 I ImeTracker: app.retrogamesystem.debug:7cd8621d: onShown
+11-14 16:13:57.761  8545  8584 D EGL_emulation: app_time_stats: avg=49.12ms min=3.45ms max=517.01ms count=25
+11-14 16:13:57.960  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@e8e4bc4
+11-14 16:13:58.888  8545  8584 D EGL_emulation: app_time_stats: avg=85.94ms min=12.87ms max=193.18ms count=13
+11-14 16:13:59.962  8545  8584 D EGL_emulation: app_time_stats: avg=44.97ms min=4.86ms max=147.41ms count=22
+11-14 16:14:01.018  8545  8584 D EGL_emulation: app_time_stats: avg=63.56ms min=2.12ms max=128.78ms count=16
+11-14 16:14:02.020  8545  8584 D EGL_emulation: app_time_stats: avg=75.54ms min=5.51ms max=117.47ms count=13
+11-14 16:14:03.291  8545  8584 D EGL_emulation: app_time_stats: avg=95.08ms min=10.85ms max=497.64ms count=13
+11-14 16:14:03.457  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@29195200 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@4829da4
+11-14 16:14:03.759  8545  8545 I ImeTracker: app.retrogamesystem.debug:26f2d71e: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:03.761  8545  8545 I ImeTracker: app.retrogamesystem.debug:383cea13: onHidden
+11-14 16:14:04.299  8545  8584 D EGL_emulation: app_time_stats: avg=33.82ms min=1.82ms max=505.07ms count=22
+11-14 16:14:05.309  8545  8584 D EGL_emulation: app_time_stats: avg=505.12ms min=493.65ms max=516.60ms count=2
+11-14 16:14:06.310  8545  8584 D EGL_emulation: app_time_stats: avg=499.99ms min=497.98ms max=502.00ms count=2
+11-14 16:14:07.825  8545  8584 D EGL_emulation: app_time_stats: avg=505.07ms min=498.11ms max=515.63ms count=3
+11-14 16:14:08.375  8545  8556 W amesystem.debug: Cleared Reference was only reachable from finalizer (only reported once)
+11-14 16:14:08.408  8545  8558 W System  : A resource failed to call release. 
+11-14 16:14:08.408  8545  8558 W System  : A resource failed to call release. 
+11-14 16:14:08.409  8545  8558 W System  : A resource failed to call release. 
+11-14 16:14:08.826  8545  8584 D EGL_emulation: app_time_stats: avg=500.49ms min=499.63ms max=501.34ms count=2
+11-14 16:14:10.090  8545  8545 I ImeTracker: app.retrogamesystem.debug:24ae4ca6: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:10.090  8545  8545 D InsetsController: show(ime(), fromIme=false)
+11-14 16:14:10.091  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:10.104  8545  8584 D EGL_emulation: app_time_stats: avg=425.93ms min=278.60ms max=499.79ms count=3
+11-14 16:14:10.107  8545  8545 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-14 16:14:10.107  8545  8545 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-14 16:14:10.140  8545  8584 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-14 16:14:10.170  8545  8545 I ImeTracker: app.retrogamesystem.debug:395b1b65: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-14 16:14:10.170  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-14 16:14:10.294  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:14:10.318  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:14:10.318  8545  8545 I ImeTracker: app.retrogamesystem.debug:395b1b65: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-14 16:14:10.624  8545  8545 I ImeTracker: app.retrogamesystem.debug:24ae4ca6: onShown
+11-14 16:14:11.361  8545  8584 D EGL_emulation: app_time_stats: avg=42.89ms min=1.79ms max=501.22ms count=23
+11-14 16:14:11.421  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@271432b
+11-14 16:14:12.390  8545  8584 D EGL_emulation: app_time_stats: avg=59.00ms min=6.43ms max=151.48ms count=17
+11-14 16:14:13.416  8545  8584 D EGL_emulation: app_time_stats: avg=70.21ms min=2.53ms max=130.98ms count=14
+11-14 16:14:14.448  8545  8584 D EGL_emulation: app_time_stats: avg=85.97ms min=10.45ms max=116.98ms count=12
+11-14 16:14:15.474  8545  8584 D EGL_emulation: app_time_stats: avg=99.31ms min=5.93ms max=264.51ms count=10
+11-14 16:14:16.123  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@29195200 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@a14ccfa
+11-14 16:14:16.423  8545  8545 I ImeTracker: app.retrogamesystem.debug:9f73d4a3: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:16.426  8545  8545 I ImeTracker: app.retrogamesystem.debug:1a2650fc: onHidden
+11-14 16:14:16.475  8545  8584 D EGL_emulation: app_time_stats: avg=34.66ms min=2.03ms max=500.83ms count=22
+11-14 16:14:17.477  8545  8584 D EGL_emulation: app_time_stats: avg=500.91ms min=500.88ms max=500.93ms count=2
+11-14 16:14:18.491  8545  8584 D EGL_emulation: app_time_stats: avg=506.86ms min=498.35ms max=515.38ms count=2
+11-14 16:14:19.494  8545  8584 D EGL_emulation: app_time_stats: avg=501.25ms min=500.64ms max=501.86ms count=2
+11-14 16:14:20.993  8545  8584 D EGL_emulation: app_time_stats: avg=499.59ms min=497.25ms max=501.25ms count=3
+11-14 16:14:22.010  8545  8584 D EGL_emulation: app_time_stats: avg=508.21ms min=497.89ms max=518.54ms count=2
+11-14 16:14:22.725  8545  8545 I ImeTracker: app.retrogamesystem.debug:2b5d1200: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:22.725  8545  8545 D InsetsController: show(ime(), fromIme=false)
+11-14 16:14:22.726  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:22.752  8545  8545 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-14 16:14:22.752  8545  8545 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-14 16:14:22.786  8545  8584 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-14 16:14:22.817  8545  8545 I ImeTracker: app.retrogamesystem.debug:b5dc571: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-14 16:14:22.817  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-14 16:14:22.941  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:14:22.943  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:14:22.943  8545  8545 I ImeTracker: app.retrogamesystem.debug:b5dc571: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-14 16:14:23.021  8545  8584 D EGL_emulation: app_time_stats: avg=141.46ms min=3.13ms max=499.14ms count=7
+11-14 16:14:23.275  8545  8545 I ImeTracker: app.retrogamesystem.debug:2b5d1200: onShown
+11-14 16:14:24.035  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@c1d2db9
+11-14 16:14:24.063  8545  8584 D EGL_emulation: app_time_stats: avg=45.35ms min=1.93ms max=534.10ms count=18
+11-14 16:14:25.082  8545  8584 D EGL_emulation: app_time_stats: avg=83.26ms min=5.27ms max=160.50ms count=12
+11-14 16:14:26.133  8545  8584 D EGL_emulation: app_time_stats: avg=87.48ms min=11.63ms max=116.87ms count=12
+11-14 16:14:27.217  8545  8584 D EGL_emulation: app_time_stats: avg=90.10ms min=41.63ms max=115.95ms count=12
+11-14 16:14:28.608  8545  8584 D EGL_emulation: app_time_stats: avg=96.69ms min=5.95ms max=498.80ms count=14
+11-14 16:14:28.795  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@29195200 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@cfaf827
+11-14 16:14:29.090  8545  8545 I ImeTracker: app.retrogamesystem.debug:4fe98f14: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:29.093  8545  8545 I ImeTracker: app.retrogamesystem.debug:b2a46d4c: onHidden
+11-14 16:14:29.626  8545  8584 D EGL_emulation: app_time_stats: avg=33.99ms min=1.88ms max=499.36ms count=22
+11-14 16:14:30.627  8545  8584 D EGL_emulation: app_time_stats: avg=500.25ms min=499.88ms max=500.62ms count=2
+11-14 16:14:32.145  8545  8584 D EGL_emulation: app_time_stats: avg=505.84ms min=497.47ms max=520.24ms count=3
+11-14 16:14:33.641  8545  8584 D EGL_emulation: app_time_stats: avg=498.81ms min=497.53ms max=500.90ms count=3
+11-14 16:14:34.643  8545  8584 D EGL_emulation: app_time_stats: avg=500.36ms min=499.70ms max=501.02ms count=2
+11-14 16:14:35.440  8545  8545 I ImeTracker: app.retrogamesystem.debug:347c9948: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:35.440  8545  8545 D InsetsController: show(ime(), fromIme=false)
+11-14 16:14:35.441  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:35.458  8545  8545 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-14 16:14:35.458  8545  8545 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-14 16:14:35.489  8545  8584 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-14 16:14:35.520  8545  8545 I ImeTracker: app.retrogamesystem.debug:6e43c2ce: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-14 16:14:35.521  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-14 16:14:35.655  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:14:35.665  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:14:35.665  8545  8545 I ImeTracker: app.retrogamesystem.debug:6e43c2ce: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-14 16:14:35.668  8545  8584 D EGL_emulation: app_time_stats: avg=197.82ms min=14.60ms max=498.68ms count=5
+11-14 16:14:35.981  8545  8545 I ImeTracker: app.retrogamesystem.debug:347c9948: onShown
+11-14 16:14:36.770  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@525f62a
+11-14 16:14:36.798  8545  8584 D EGL_emulation: app_time_stats: avg=40.17ms min=2.06ms max=501.44ms count=22
+11-14 16:14:37.867  8545  8584 D EGL_emulation: app_time_stats: avg=63.14ms min=6.25ms max=118.03ms count=16
+11-14 16:14:38.901  8545  8584 D EGL_emulation: app_time_stats: avg=103.31ms min=96.76ms max=117.44ms count=10
+11-14 16:14:39.932  8545  8584 D EGL_emulation: app_time_stats: avg=85.80ms min=39.85ms max=116.96ms count=12
+11-14 16:14:41.159  8545  8584 D EGL_emulation: app_time_stats: avg=92.07ms min=6.79ms max=500.03ms count=13
+11-14 16:14:41.343  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@29195200 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@cf9ddb6
+11-14 16:14:41.639  8545  8545 I ImeTracker: app.retrogamesystem.debug:337fbed: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:41.640  8545  8545 I ImeTracker: app.retrogamesystem.debug:e7fb3eac: onHidden
+11-14 16:14:42.159  8545  8584 D EGL_emulation: app_time_stats: avg=33.00ms min=1.96ms max=484.22ms count=22
+11-14 16:14:43.674  8545  8584 D EGL_emulation: app_time_stats: avg=504.77ms min=497.52ms max=516.10ms count=3
+11-14 16:14:44.678  8545  8584 D EGL_emulation: app_time_stats: avg=501.94ms min=500.11ms max=503.76ms count=2
+11-14 16:14:46.176  8545  8584 D EGL_emulation: app_time_stats: avg=499.14ms min=497.94ms max=500.52ms count=3
+11-14 16:14:47.194  8545  8584 D EGL_emulation: app_time_stats: avg=508.37ms min=502.05ms max=514.70ms count=2
+11-14 16:14:47.856  8545  8545 I ImeTracker: app.retrogamesystem.debug:f2bda0f5: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:47.857  8545  8545 D InsetsController: show(ime(), fromIme=false)
+11-14 16:14:47.859  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:47.874  8545  8545 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-14 16:14:47.874  8545  8545 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-14 16:14:47.902  8545  8584 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-14 16:14:47.939  8545  8545 I ImeTracker: app.retrogamesystem.debug:da13e554: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-14 16:14:47.939  8545  8545 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{d4da7e1 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-14 16:14:48.452  8545  8584 D EGL_emulation: app_time_stats: avg=419.19ms min=182.94ms max=576.90ms count=3
+11-14 16:14:48.507  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:14:48.528  8545  8545 D InsetsController: show(ime(), fromIme=true)
+11-14 16:14:48.529  8545  8545 I ImeTracker: app.retrogamesystem.debug:da13e554: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-14 16:14:48.850  8545  8545 I ImeTracker: app.retrogamesystem.debug:f2bda0f5: onShown
+11-14 16:14:49.167  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@65dea25
+11-14 16:14:49.479  8545  8584 D EGL_emulation: app_time_stats: avg=22.77ms min=2.01ms max=214.63ms count=30
+11-14 16:14:50.517  8545  8584 D EGL_emulation: app_time_stats: avg=77.53ms min=4.44ms max=138.10ms count=13
+11-14 16:14:51.565  8545  8584 D EGL_emulation: app_time_stats: avg=94.95ms min=10.15ms max=116.59ms count=11
+11-14 16:14:52.630  8545  8584 D EGL_emulation: app_time_stats: avg=88.65ms min=24.11ms max=133.77ms count=12
+11-14 16:14:53.741  8545  8584 D EGL_emulation: app_time_stats: avg=107.50ms min=5.46ms max=496.50ms count=10
+11-14 16:14:53.935  8545  8545 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@29195200 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@44d4404
+11-14 16:14:54.241  8545  8545 I ImeTracker: app.retrogamesystem.debug:c6ce336a: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-14 16:14:54.242  8545  8545 I ImeTracker: app.retrogamesystem.debug:85bcc9c7: onHidden
+11-14 16:14:54.745  8545  8584 D EGL_emulation: app_time_stats: avg=47.20ms min=12.78ms max=495.64ms count=21
+11-14 16:14:55.757  8545  8584 D EGL_emulation: app_time_stats: avg=506.10ms min=499.52ms max=512.67ms count=2
+11-14 16:14:56.758  8545  8584 D EGL_emulation: app_time_stats: avg=499.96ms min=499.93ms max=500.00ms count=2
+11-14 16:14:57.759  8545  8584 D EGL_emulation: app_time_stats: avg=500.51ms min=500.33ms max=500.69ms count=2
+11-14 16:14:59.258  8545  8584 D EGL_emulation: app_time_stats: avg=499.63ms min=499.06ms max=500.35ms count=3
+11-14 16:15:00.276  8545  8584 D EGL_emulation: app_time_stats: avg=508.73ms min=501.16ms max=516.30ms count=2
+11-14 16:15:00.578  8545  8558 W System  : A resource failed to call release. 
+11-14 16:15:00.578  8545  8558 W System  : A resource failed to call release. 
+11-14 16:15:00.579  8545  8558 W System  : A resource failed to call release. 
+11-14 16:15:00.580  8545  8558 W System  : A resource failed to call release. 
+11-14 16:15:01.279  8545  8584 D EGL_emulation: app_time_stats: avg=501.46ms min=496.95ms max=505.97ms count=2
+11-14 16:15:02.279  8545  8584 D EGL_emulation: app_time_stats: avg=499.96ms min=498.46ms max=501.45ms count=2
+11-14 16:15:03.292  8545  8584 D EGL_emulation: app_time_stats: avg=506.11ms min=499.46ms max=512.77ms count=2
+11-14 16:15:04.293  8545  8584 D EGL_emulation: app_time_stats: avg=500.42ms min=499.16ms max=501.67ms count=2
+11-14 16:15:05.733  8545  8578 D ConscryptOkHttpHelper: OkHttp configured with Conscrypt TLS (trust-all)
+11-14 16:15:05.733  8545  8578 I CoreUpdateWork: Starting core update/install work
+11-14 16:15:05.755  8545  8574 I WM-Processor: Moving WorkSpec (feafe1cd-8546-4879-8337-cc1464a9530e) to the foreground
+11-14 16:15:05.771  8545  8545 I WM-SystemFgDispatcher: Started foreground service Intent { act=ACTION_START_FOREGROUND cmp=app.retrogamesystem.debug/androidx.work.impl.foreground.SystemForegroundService (has extras) }
+11-14 16:15:05.794  8545  8584 D EGL_emulation: app_time_stats: avg=500.38ms min=498.52ms max=502.45ms count=3
+11-14 16:15:06.411  8545  8576 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=feafe1cd-8546-4879-8337-cc1464a9530e, tags={ com.swordfish.lemuroid.app.shared.library.CoreUpdateWork } ]
+11-14 16:15:06.418  8545  8545 I WM-SystemFgDispatcher: Stopping foreground service
+11-14 16:15:06.809  8545  8584 D EGL_emulation: app_time_stats: avg=507.23ms min=496.65ms max=517.81ms count=2
+11-14 16:15:07.809  8545  8584 D EGL_emulation: app_time_stats: avg=499.78ms min=499.42ms max=500.14ms count=2
+11-14 16:15:09.308  8545  8584 D EGL_emulation: app_time_stats: avg=499.55ms min=496.12ms max=501.44ms count=3
+11-14 16:15:10.324  8545  8584 D EGL_emulation: app_time_stats: avg=507.65ms min=499.60ms max=515.69ms count=2
+11-14 16:15:11.324  8545  8584 D EGL_emulation: app_time_stats: avg=500.20ms min=499.19ms max=501.20ms count=2
+11-14 16:15:12.342  8545  8584 D EGL_emulation: app_time_stats: avg=508.62ms min=500.75ms max=516.49ms count=2
+11-14 16:15:13.843  8545  8584 D EGL_emulation: app_time_stats: avg=500.18ms min=499.03ms max=501.41ms count=3
+11-14 16:15:15.341  8545  8584 D EGL_emulation: app_time_stats: avg=499.22ms min=498.24ms max=500.26ms count=3
+11-14 16:15:16.358  8545  8584 D EGL_emulation: app_time_stats: avg=508.39ms min=498.37ms max=518.40ms count=2
+11-14 16:15:17.363  8545  8584 D EGL_emulation: app_time_stats: avg=502.63ms min=501.83ms max=503.43ms count=2
