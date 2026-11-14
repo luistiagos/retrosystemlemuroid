@@ -5,7 +5,9 @@ import com.swordfish.lemuroid.lib.library.GameSystem
 import java.text.Normalizer
 import java.util.Locale
 
-class SystemSearchResolver(private val context: Context) {
+class SystemSearchResolver(private val stringOf: (Int) -> String) {
+    constructor(context: Context) : this({ id -> context.getString(id) })
+
     private val commonAliases: Map<String, List<String>> =
         mapOf(
             "snes" to listOf("snes"),
@@ -49,7 +51,9 @@ class SystemSearchResolver(private val context: Context) {
             "atari 2600" to listOf("atari2600"),
             "atari 5200" to listOf("atari5200"),
             "atari 7800" to listOf("atari7800"),
-            "gamecube" to listOf("ngc"),
+            // GameCube e "gc"; "ngc" e o Neo Geo Pocket Color [[2026-10-25-busca-gamecube-traz-neo-geo-pocket-color]]
+            "gamecube" to listOf("gc"),
+            "game cube" to listOf("gc"),
             "wonderswan" to listOf("ws", "wsc"),
             "pc engine" to listOf("pce", "pcecd"),
             "turbografx" to listOf("pce", "pcecd"),
@@ -81,8 +85,8 @@ class SystemSearchResolver(private val context: Context) {
         }
 
         for (system in GameSystem.all()) {
-            val title = runCatching { normalize(context.getString(system.titleResId)) }.getOrDefault("")
-            val shortTitle = runCatching { normalize(context.getString(system.shortTitleResId)) }.getOrDefault("")
+            val title = runCatching { normalize(stringOf(system.titleResId)) }.getOrDefault("")
+            val shortTitle = runCatching { normalize(stringOf(system.shortTitleResId)) }.getOrDefault("")
             val dbname = system.id.dbname.lowercase(Locale.ROOT)
 
             if (dbname == cleanQuery ||

@@ -56,3 +56,11 @@ baseline).
   `gamecube`. Print. Base (controle positivo): o jogo de NGPC aparece. Fix: o NGPC **não** aparece (o GC aparece, se
   houver). Repetir `nintendo gamecube` (fix: só GC) e `ngc` (fix: NGPC aparece).
 - **T3:** na mesma tela, `snes`, `neo geo` e o título de um jogo instalado continuam achando o que achavam.
+
+## Correcao (pipeline 20261114-1244, rodada 1)
+
+- `SystemSearchResolver.kt::commonAliases`: `"gamecube"` → `gc` (era `ngc`, o Neo Geo Pocket Color) e novo `"game cube"` → `gc`.
+- `SystemSearchResolver` passa a receber `stringOf: (Int) -> String`; construtor secundário com `Context` mantém os três call-sites intactos. `runCatching` preservado.
+- Teste novo `SystemSearchResolverTest` (2 testes, ids via `GameSystem.findById(...).titleResId/shortTitleResId`): `gamecube`/`game cube`/`nintendo gamecube` → `{gc}`; `ngc` → `{ngc}`; `gc` → `{gc}`. `build` do helper: BUILD SUCCESSFUL, suíte nova 2 testes 0 falhas.
+- ktlint (`ktlintMainSourceSetCheck`/`ktlintTestSourceSetCheck` de `:lemuroid-app`): nenhum apontamento nos dois arquivos.
+- Plano de teste sem ajuste (T2/T3 como acima).
