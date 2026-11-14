@@ -1,6 +1,6 @@
 ---
 fecha_por: prova
-tasks: [TASK-0003]
+tasks: [TASK-0003, TASK-0004]
 ---
 # `:lemuroid-app:ktlintCheck` vermelho na base: 18 apontamentos novos em `TelemetryReporter.kt` (commit 3145b78)
 
