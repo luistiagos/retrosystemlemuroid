@@ -20,6 +20,7 @@
     <string name="core_name_mednafen_ngp" translatable="false">mednafen_ngp</string>
     <string name="core_name_mednafen_wswan" translatable="false">mednafen_wswan</string>
     <string name="core_name_citra" translatable="false">citra</string>
+    <string name="core_name_citra_legacy" translatable="false">citra_legacy</string>
     <string name="core_name_fmsx" translatable="false">fmsx</string>
     <string name="core_name_mednafen_vb" translatable="false">mednafen_vb</string>
     <string name="core_name_vice_x64sc" translatable="false">vice_x64sc</string>

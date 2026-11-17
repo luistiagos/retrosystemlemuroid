@@ -47,6 +47,7 @@ import timber.log.Timber
  */
 object CoreCrashFallback {
     private const val PREF_HW_SHADERS_FALLBACK_APPLIED = "core_fallback_3ds_hw_shaders_applied"
+    private const val PREF_LEGACY_HW_SHADERS_FALLBACK_APPLIED = "core_fallback_3ds_legacy_hw_shaders_applied"
 
     /** Serialized [Notice] waiting to be shown. Survives the app being killed before it is read. */
     private const val PREF_PENDING_NOTICE = "core_crash_pending_notice"
@@ -55,9 +56,12 @@ object CoreCrashFallback {
     private const val PREF_LAST_NOTIFIED_EXIT_AT = "core_crash_last_notified_exit_at"
 
     private const val SYSTEM_3DS = "3ds"
+    private const val CORE_CITRA_LEGACY = "citra_legacy"
+    private const val NAMESPACE_CITRA_LEGACY = "3ds_citra_legacy"
 
     // Azahar's name. The old core's `citra_use_hw_shaders` is renamed by AzaharMigrationHandler.
     private const val CITRA_HW_SHADERS = "citra_use_hw_shader"
+    private const val CITRA_LEGACY_HW_SHADERS = "citra_use_hw_shaders"
 
     /** What to tell the user about the session that died. */
     data class Notice(
@@ -144,15 +148,19 @@ object CoreCrashFallback {
         session: String,
     ): Boolean {
         if (!session.contains("system=$SYSTEM_3DS")) return false
-        if (preferences.getBoolean(PREF_HW_SHADERS_FALLBACK_APPLIED, false)) return false
+        val isLegacy = fieldOf(session, "core") == CORE_CITRA_LEGACY
+        val appliedKey = if (isLegacy) PREF_LEGACY_HW_SHADERS_FALLBACK_APPLIED else PREF_HW_SHADERS_FALLBACK_APPLIED
+        if (preferences.getBoolean(appliedKey, false)) return false
 
-        val optionKey = CoreVariablesManager.computeSharedPreferenceKey(CITRA_HW_SHADERS, SYSTEM_3DS)
+        val varName = if (isLegacy) CITRA_LEGACY_HW_SHADERS else CITRA_HW_SHADERS
+        val namespace = if (isLegacy) NAMESPACE_CITRA_LEGACY else SYSTEM_3DS
+        val optionKey = CoreVariablesManager.computeSharedPreferenceKey(varName, namespace)
         preferences.edit()
             .putBoolean(optionKey, false)
-            .putBoolean(PREF_HW_SHADERS_FALLBACK_APPLIED, true)
+            .putBoolean(appliedKey, true)
             .apply()
 
-        Timber.w("3DS died in native code last session; disabled $CITRA_HW_SHADERS as fallback")
+        Timber.w("3DS died in native code last session; disabled $varName as fallback")
         return true
     }
 

@@ -33,10 +33,11 @@ class CoreVariablesManager(private val sharedPreferences: Lazy<SharedPreferences
         withContext(Dispatchers.IO) {
             val exposedKeys = systemCoreConfig.exposedSettings
             val exposedAdvancedKeys = systemCoreConfig.exposedAdvancedSettings
+            val namespace = systemCoreConfig.variablesNamespace(systemID.dbname)
 
             val requestedKeys =
                 (exposedKeys + exposedAdvancedKeys).map { it.key }
-                    .map { computeSharedPreferenceKey(it, systemID.dbname) }
+                    .map { computeSharedPreferenceKey(it, namespace) }
 
             sharedPreferences.get().all.filter { it.key in requestedKeys }
                 .mapNotNull { (key, value) ->
@@ -47,7 +48,7 @@ class CoreVariablesManager(private val sharedPreferences: Lazy<SharedPreferences
                             is String -> value
                             else -> return@mapNotNull null
                         }
-                    CoreVariable(computeOriginalKey(key, systemID.dbname), result)
+                    CoreVariable(computeOriginalKey(key, namespace), result)
                 }
         }
 

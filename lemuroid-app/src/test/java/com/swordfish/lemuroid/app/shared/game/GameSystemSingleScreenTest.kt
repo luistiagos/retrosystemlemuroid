@@ -19,7 +19,29 @@ import org.junit.Test
  * docs/bugs/retest/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada.md).
  */
 class GameSystemSingleScreenTest {
-    private val config3ds = GameSystem.findById(SystemID.NINTENDO_3DS.dbname).systemCoreConfigs.single()
+    private val system3ds = GameSystem.findById(SystemID.NINTENDO_3DS.dbname)
+    private val config3ds = system3ds.systemCoreConfigs.first { it.coreID == CoreID.CITRA }
+    private val config3dsLegacy = system3ds.systemCoreConfigs.first { it.coreID == CoreID.CITRA_LEGACY }
+
+    @Test
+    fun threeDsTriesAzaharFirstAndFallsBackToCitraLegacy() {
+        assertEquals(listOf(CoreID.CITRA, CoreID.CITRA_LEGACY), system3ds.systemCoreConfigs.map { it.coreID })
+        assertEquals("3ds", config3ds.variablesNamespace("3ds"))
+        assertEquals("3ds_citra_legacy", config3dsLegacy.variablesNamespace("3ds"))
+    }
+
+    @Test
+    fun legacyCitraSingleScreenValueIsOneTheMenuCanWrite() {
+        val target = checkNotNull(config3dsLegacy.singleScreenLayout)
+        val exposed = config3dsLegacy.exposedSettings.single { it.key == target.key }
+
+        assertTrue(exposed.values.any { it.key == target.value })
+        assertTrue(config3dsLegacy.isSingleScreenLayout(config3dsLegacy.defaultSettings + target))
+        assertFalse(config3dsLegacy.isSingleScreenLayout(config3dsLegacy.defaultSettings))
+        assertTrue(config3dsLegacy.ignoresScreenAspectRatio)
+        assertEquals(CoreVariable("citra_swap_screen", "Top"), config3dsLegacy.screenSwap?.variable(false))
+        assertEquals(CoreVariable("citra_swap_screen", "Bottom"), config3dsLegacy.screenSwap?.variable(true))
+    }
 
     @Test
     fun singleScreenValueIsOneTheMenuCanWrite() {

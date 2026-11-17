@@ -41,7 +41,16 @@ data class SystemCoreConfig(
      * shape. Not persisted and not in the menu: every game starts with [ScreenSwap.normalValue].
      */
     val screenSwap: ScreenSwap? = null,
+    /**
+     * Optional override for the system segment in `CoreVariablesManager` preference keys
+     * (`cv_<namespace>_<var>`). Used when two cores for the same system share option keys
+     * with incompatible values (Azahar vs. legacy Citra on 3DS).
+     */
+    val variablesNamespace: String? = null,
 ) : Serializable {
+    /** Preference namespace segment used by `CoreVariablesManager` for this core. */
+    fun variablesNamespace(systemID: String): String = variablesNamespace ?: systemID
+
     /** Whether [variables] (defaults + the user's choices) put the core in [singleScreenLayout]. */
     fun isSingleScreenLayout(variables: Iterable<CoreVariable>): Boolean {
         val target = singleScreenLayout ?: return false

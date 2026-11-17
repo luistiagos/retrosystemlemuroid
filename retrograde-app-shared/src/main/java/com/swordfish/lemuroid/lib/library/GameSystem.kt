@@ -1933,6 +1933,64 @@ data class GameSystem(
                             // ("Prominent 3DS Screen"); the core's own L3 toggle is relative to it.
                             screenSwap = ScreenSwap("citra_swap_screen", "Top", "Bottom"),
                         ),
+                        SystemCoreConfig(
+                            CoreID.CITRA_LEGACY,
+                            controllerConfigs =
+                                hashMapOf(
+                                    0 to arrayListOf(ControllerConfigs.NINTENDO_3DS),
+                                ),
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("citra_use_libretro_save_path", "LibRetro Default"),
+                                    CoreVariable("citra_resolution_factor", "1x (Native)"),
+                                    CoreVariable("citra_use_acc_mul", "disabled"),
+                                    CoreVariable("citra_touch_touchscreen", "enabled"),
+                                    CoreVariable("citra_mouse_touchscreen", "disabled"),
+                                    CoreVariable("citra_render_touchscreen", "disabled"),
+                                    CoreVariable("citra_use_hw_shader_cache", "disabled"),
+                                    CoreVariable("citra_use_hw_shaders", "enabled"),
+                                ),
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "citra_layout_option",
+                                        R.string.setting_citra_layout_option,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "Default Top-Bottom Screen",
+                                                R.string.value_citra_layout_option_topbottom,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "Single Screen Only",
+                                                R.string.value_citra_layout_option_singlescreen,
+                                            ),
+                                            ExposedSetting.Value(
+                                                "Side by Side",
+                                                R.string.value_citra_layout_option_sidebyside,
+                                            ),
+                                        ),
+                                    ),
+                                    ExposedSetting(
+                                        "citra_resolution_factor",
+                                        R.string.setting_citra_resolution_factor,
+                                    ),
+                                    ExposedSetting(
+                                        "citra_use_acc_mul",
+                                        R.string.setting_citra_use_acc_mul,
+                                    ),
+                                    ExposedSetting(
+                                        "citra_use_hw_shaders",
+                                        R.string.setting_citra_use_hw_shaders,
+                                    ),
+                                ),
+                            statesSupported = false,
+                            supportsLibretroVFS = true,
+                            supportedOnlyArchitectures = setOf("arm64-v8a"),
+                            singleScreenLayout = CoreVariable("citra_layout_option", "Single Screen Only"),
+                            ignoresScreenAspectRatio = true,
+                            screenSwap = ScreenSwap("citra_swap_screen", "Top", "Bottom"),
+                            variablesNamespace = "3ds_citra_legacy",
+                        ),
                     ),
                     uniqueExtensions = listOf("3ds"),
                     hasTouchScreen = true,

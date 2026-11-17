@@ -35,11 +35,11 @@
         <error line="87" column="27" source="standard:multiline-expression-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/lib/library/GameSystem.kt">
-        <error line="2464" column="1" source="standard:no-blank-line-in-list" />
-        <error line="2520" column="1" source="standard:no-blank-line-in-list" />
-        <error line="2548" column="1" source="standard:no-blank-line-in-list" />
+        <error line="2522" column="1" source="standard:no-blank-line-in-list" />
         <error line="2578" column="1" source="standard:no-blank-line-in-list" />
-        <error line="3233" column="1" source="standard:no-blank-line-in-list" />
+        <error line="2606" column="1" source="standard:no-blank-line-in-list" />
+        <error line="2636" column="1" source="standard:no-blank-line-in-list" />
+        <error line="3291" column="1" source="standard:no-blank-line-in-list" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/lib/library/HeavySystemFilter.kt">
         <error line="23" column="1" source="standard:no-empty-first-line-in-class-body" />
@@ -77,21 +77,21 @@
     <file name="src/main/java/com/swordfish/lemuroid/lib/library/catalog/ManifestQuickLoader.kt">
         <error line="3" column="1" source="standard:import-ordering" />
         <error line="45" column="1" source="standard:no-empty-first-line-in-class-body" />
-        <error line="172" column="41" source="standard:multiline-expression-wrapping" />
-        <error line="179" column="40" source="standard:multiline-expression-wrapping" />
-        <error line="205" column="34" source="standard:multiline-expression-wrapping" />
-        <error line="206" column="36" source="standard:multiline-expression-wrapping" />
-        <error line="250" column="38" source="standard:multiline-expression-wrapping" />
-        <error line="250" column="38" source="standard:function-signature" />
-        <error line="321" column="36" source="standard:multiline-expression-wrapping" />
-        <error line="376" column="29" source="standard:multiline-expression-wrapping" />
-        <error line="395" column="73" source="standard:string-template" />
-        <error line="423" column="22" source="standard:multiline-expression-wrapping" />
-        <error line="442" column="29" source="standard:multiline-expression-wrapping" />
-        <error line="465" column="40" source="standard:multiline-expression-wrapping" />
-        <error line="471" column="28" source="standard:multiline-expression-wrapping" />
-        <error line="576" column="44" source="standard:multiline-expression-wrapping" />
-        <error line="576" column="44" source="standard:function-signature" />
+        <error line="177" column="41" source="standard:multiline-expression-wrapping" />
+        <error line="184" column="40" source="standard:multiline-expression-wrapping" />
+        <error line="210" column="34" source="standard:multiline-expression-wrapping" />
+        <error line="211" column="36" source="standard:multiline-expression-wrapping" />
+        <error line="255" column="38" source="standard:multiline-expression-wrapping" />
+        <error line="255" column="38" source="standard:function-signature" />
+        <error line="326" column="36" source="standard:multiline-expression-wrapping" />
+        <error line="381" column="29" source="standard:multiline-expression-wrapping" />
+        <error line="400" column="73" source="standard:string-template" />
+        <error line="428" column="22" source="standard:multiline-expression-wrapping" />
+        <error line="447" column="29" source="standard:multiline-expression-wrapping" />
+        <error line="470" column="40" source="standard:multiline-expression-wrapping" />
+        <error line="476" column="28" source="standard:multiline-expression-wrapping" />
+        <error line="581" column="44" source="standard:multiline-expression-wrapping" />
+        <error line="581" column="44" source="standard:function-signature" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/lib/library/db/dao/DownloadedRomDao.kt">
         <error line="12" column="1" source="standard:no-empty-first-line-in-class-body" />

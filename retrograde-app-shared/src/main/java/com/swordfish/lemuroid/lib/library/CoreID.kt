@@ -115,6 +115,11 @@ enum class CoreID(
         "Azahar",
         "libcitra_libretro_android.so",
     ),
+    CITRA_LEGACY(
+        "citra_legacy",
+        "Citra",
+        "libcitra_legacy_libretro_android.so",
+    ),
     DOSBOX_PURE(
         "dosbox_pure",
         "DosBox Pure",

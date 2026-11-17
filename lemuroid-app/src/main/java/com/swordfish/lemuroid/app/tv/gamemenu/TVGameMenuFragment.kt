@@ -97,7 +97,7 @@ class TVGameMenuFragment : LeanbackPreferenceFragmentCompat() {
 
         CoreOptionsPreferenceHelper.addPreferences(
             coreOptionsScreen,
-            request.game.systemId,
+            request.systemCoreConfig.variablesNamespace(request.game.systemId),
             request.coreOptions.toList(),
             request.advancedCoreOptions.toList(),
         )

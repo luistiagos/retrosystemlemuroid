@@ -11,14 +11,14 @@
         <error line="56" column="25" source="standard:multiline-expression-wrapping" />
         <error line="59" column="27" source="standard:multiline-expression-wrapping" />
         <error line="62" column="32" source="standard:multiline-expression-wrapping" />
-        <error line="182" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="388" column="35" source="standard:multiline-expression-wrapping" />
-        <error line="406" column="26" source="standard:multiline-expression-wrapping" />
-        <error line="411" column="22" source="standard:multiline-expression-wrapping" />
-        <error line="414" column="24" source="standard:multiline-expression-wrapping" />
-        <error line="419" column="29" source="standard:multiline-expression-wrapping" />
-        <error line="481" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="491" column="25" source="standard:multiline-expression-wrapping" />
+        <error line="183" column="27" source="standard:multiline-expression-wrapping" />
+        <error line="389" column="35" source="standard:multiline-expression-wrapping" />
+        <error line="407" column="26" source="standard:multiline-expression-wrapping" />
+        <error line="412" column="22" source="standard:multiline-expression-wrapping" />
+        <error line="415" column="24" source="standard:multiline-expression-wrapping" />
+        <error line="420" column="29" source="standard:multiline-expression-wrapping" />
+        <error line="482" column="27" source="standard:multiline-expression-wrapping" />
+        <error line="492" column="25" source="standard:multiline-expression-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/LemuroidApplication.kt">
         <error line="119" column="17" source="standard:multiline-expression-wrapping" />

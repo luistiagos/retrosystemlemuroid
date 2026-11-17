@@ -38,15 +38,20 @@ fun GameMenuCoreOptionsScreen(
             gameMenuRequest.coreOptions + gameMenuRequest.advancedCoreOptions
         }
 
+    val preferenceNamespace =
+        remember(gameMenuRequest) {
+            gameMenuRequest.coreConfig.variablesNamespace(gameMenuRequest.game.systemId)
+        }
+
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-        CoreOptions(gameMenuRequest.game.systemId, allOptions, context)
+        CoreOptions(preferenceNamespace, allOptions, context)
         ControllersOptions(gameMenuRequest, maxOf(1, connectedGamePads), context)
     }
 }
 
 @Composable
 private fun CoreOptions(
-    systemID: String,
+    preferenceNamespace: String,
     coreOptions: List<LemuroidCoreOption>,
     context: Context,
 ) {
@@ -59,7 +64,7 @@ private fun CoreOptions(
             LemuroidSettingsSwitch(
                 state =
                     booleanPreferenceState(
-                        CoreVariablesManager.computeSharedPreferenceKey(coreOption.getKey(), systemID),
+                        CoreVariablesManager.computeSharedPreferenceKey(coreOption.getKey(), preferenceNamespace),
                         coreOption.getCurrentValue() == "enabled",
                     ),
                 title = { Text(text = coreOption.getDisplayName(context)) },
@@ -72,7 +77,7 @@ private fun CoreOptions(
                 items = coreOption.getEntries(context),
                 state =
                     indexPreferenceState(
-                        CoreVariablesManager.computeSharedPreferenceKey(coreOption.getKey(), systemID),
+                        CoreVariablesManager.computeSharedPreferenceKey(coreOption.getKey(), preferenceNamespace),
                         entriesValues.first(),
                         entriesValues,
                     ),
