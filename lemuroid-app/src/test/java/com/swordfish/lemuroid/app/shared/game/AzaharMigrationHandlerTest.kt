@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.app.shared.game
 
 import android.content.SharedPreferences
 import com.swordfish.lemuroid.lib.migration.AzaharMigrationHandler
+import com.swordfish.lemuroid.lib.migration.ThreeDsMiiProvisioner
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -137,6 +138,78 @@ class AzaharMigrationHandlerTest {
 
         assertFalse(File(folder.root, "Azahar").exists())
         assertNull(folder.root.listFiles()?.firstOrNull())
+    }
+
+    @Test
+    fun defaultMiiDatabaseIsProvisionedWhenMissing() {
+        val saves = folder.root
+        AzaharMigrationHandler.ensureAzaharMiiDatabase(saves)
+
+        val dbFile = ThreeDsMiiProvisioner.cflDatabaseFile(File(saves, "Azahar"))
+        assertTrue(dbFile.isFile)
+        val bytes = dbFile.readBytes()
+        assertEquals(ThreeDsMiiProvisioner.CFL_DB_SIZE, bytes.size)
+        assertEquals("CFOG", String(bytes, 0, 4))
+        assertEquals("CFHE", String(bytes, ThreeDsMiiProvisioner.CFHE_OFFSET, 4))
+        assertEquals("CFRA", String(bytes, ThreeDsMiiProvisioner.CFRA_OFFSET, 4))
+
+        // Slot 0 has a valid non-zero Mii ID with bit 31 set (non-special Mii).
+        val idOffset = ThreeDsMiiProvisioner.MIIMAKER_SLOTS_OFFSET + ThreeDsMiiProvisioner.MII_ID_OFFSET_IN_SLOT
+        assertTrue((bytes[idOffset].toInt() and 0x80) != 0)
+
+        // Checksums at 0xC81E and 0xE4BE match big-endian CRC-16/XMODEM.
+        val expectedCfogCrc = ThreeDsMiiProvisioner.crc16Xmodem(bytes, 0, ThreeDsMiiProvisioner.CFOG_CHECKSUM_OFFSET)
+        val actualCfogCrc =
+            ((bytes[ThreeDsMiiProvisioner.CFOG_CHECKSUM_OFFSET].toInt() and 0xFF) shl 8) or
+                (bytes[ThreeDsMiiProvisioner.CFOG_CHECKSUM_OFFSET + 1].toInt() and 0xFF)
+        assertEquals(expectedCfogCrc, actualCfogCrc)
+
+        val expectedCfraCrc =
+            ThreeDsMiiProvisioner.crc16Xmodem(
+                bytes,
+                ThreeDsMiiProvisioner.CFRA_OFFSET,
+                ThreeDsMiiProvisioner.CFRA_CHECKSUM_OFFSET,
+            )
+        val actualCfraCrc =
+            ((bytes[ThreeDsMiiProvisioner.CFRA_CHECKSUM_OFFSET].toInt() and 0xFF) shl 8) or
+                (bytes[ThreeDsMiiProvisioner.CFRA_CHECKSUM_OFFSET + 1].toInt() and 0xFF)
+        assertEquals(expectedCfraCrc, actualCfraCrc)
+    }
+
+    @Test
+    fun existingMiiDatabaseWithMiiIsPreserved() {
+        val azaharDir = File(folder.root, "Azahar")
+        val dbFile = ThreeDsMiiProvisioner.cflDatabaseFile(azaharDir)
+        val customDb = ThreeDsMiiProvisioner.buildDefaultCflDatabase()
+        // Mark slot 1 as occupied with a custom marker and verify it isn't overwritten.
+        val slot1Offset = ThreeDsMiiProvisioner.MIIMAKER_SLOTS_OFFSET + ThreeDsMiiProvisioner.MII_DATA_SIZE
+        customDb[slot1Offset + ThreeDsMiiProvisioner.MII_ID_OFFSET_IN_SLOT] = 0x99.toByte()
+        writeFile(dbFile, customDb)
+
+        assertFalse(ThreeDsMiiProvisioner.ensureDefaultMiiDatabase(azaharDir))
+        assertEquals(0x99.toByte(), dbFile.readBytes()[slot1Offset + ThreeDsMiiProvisioner.MII_ID_OFFSET_IN_SLOT])
+    }
+
+    @Test
+    fun emptyCfogDatabaseGetsDefaultMiiAndValidChecksum() {
+        val azaharDir = File(folder.root, "Azahar")
+        val dbFile = ThreeDsMiiProvisioner.cflDatabaseFile(azaharDir)
+        val emptyDb = ThreeDsMiiProvisioner.buildDefaultCflDatabase()
+        // Zero out all 100 owned Mii slots to simulate an empty Mii database.
+        for (i in ThreeDsMiiProvisioner.MIIMAKER_SLOTS_OFFSET until ThreeDsMiiProvisioner.CFHE_OFFSET) {
+            emptyDb[i] = 0
+        }
+        writeFile(dbFile, emptyDb)
+
+        assertTrue(ThreeDsMiiProvisioner.ensureDefaultMiiDatabase(azaharDir))
+        val updated = dbFile.readBytes()
+        val idOffset = ThreeDsMiiProvisioner.MIIMAKER_SLOTS_OFFSET + ThreeDsMiiProvisioner.MII_ID_OFFSET_IN_SLOT
+        assertTrue((updated[idOffset].toInt() and 0x80) != 0)
+        val expectedCrc = ThreeDsMiiProvisioner.crc16Xmodem(updated, 0, ThreeDsMiiProvisioner.CFOG_CHECKSUM_OFFSET)
+        val actualCrc =
+            ((updated[ThreeDsMiiProvisioner.CFOG_CHECKSUM_OFFSET].toInt() and 0xFF) shl 8) or
+                (updated[ThreeDsMiiProvisioner.CFOG_CHECKSUM_OFFSET + 1].toInt() and 0xFF)
+        assertEquals(expectedCrc, actualCrc)
     }
 
     private fun writeFile(

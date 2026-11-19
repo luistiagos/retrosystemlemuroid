@@ -38,10 +38,27 @@ class AzaharMigrationHandler(
         } catch (e: Throwable) {
             Timber.e(e, "Azahar migration: preferences failed")
         }
+        val savesDir = directoriesManager.getSavesDirectory()
         try {
-            migrateUserDirectory(directoriesManager.getSavesDirectory())
+            migrateUserDirectory(savesDir)
         } catch (e: Throwable) {
             Timber.e(e, "Azahar migration: user directory failed")
+        }
+        try {
+            ensureAzaharMiiDatabase(savesDir)
+        } catch (e: Throwable) {
+            Timber.e(e, "Azahar migration: default Mii provisioning failed")
+        }
+    }
+
+    fun ensureLegacyMiiDatabase() {
+        try {
+            val legacyDir = File(directoriesManager.getSavesDirectory(), OLD_USER_DIR)
+            if (ThreeDsMiiProvisioner.ensureDefaultMiiDatabase(legacyDir)) {
+                Timber.i("Legacy Citra: provisioned default Mii database")
+            }
+        } catch (e: Throwable) {
+            Timber.e(e, "Legacy Citra: default Mii provisioning failed")
         }
     }
 
@@ -144,6 +161,12 @@ class AzaharMigrationHandler(
             }
             // The old folder stays: it is the backup, and what a rollback to the old core reads.
             Timber.i("Azahar migration: copied $source to $target")
+        }
+
+        fun ensureAzaharMiiDatabase(savesDirectory: File) {
+            if (ThreeDsMiiProvisioner.ensureDefaultMiiDatabase(File(savesDirectory, NEW_USER_DIR))) {
+                Timber.i("Azahar migration: provisioned default Mii database")
+            }
         }
 
         private fun copyTree(

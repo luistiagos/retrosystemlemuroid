@@ -107,8 +107,11 @@ class GameLoader(
 
                 // Before the core variables are read below and before the core sees the saves
                 // dir: Azahar uses other option keys and <saves>/Azahar instead of <saves>/Citra.
-                if (systemCoreConfig.coreID == CoreID.CITRA) {
-                    withContext(Dispatchers.IO) { azaharMigrationHandler.migrate() }
+                when (systemCoreConfig.coreID) {
+                    CoreID.CITRA -> withContext(Dispatchers.IO) { azaharMigrationHandler.migrate() }
+                    CoreID.CITRA_LEGACY ->
+                        withContext(Dispatchers.IO) { azaharMigrationHandler.ensureLegacyMiiDatabase() }
+                    else -> Unit
                 }
 
                 // Run independent I/O tasks in parallel to reduce total wall-clock time
