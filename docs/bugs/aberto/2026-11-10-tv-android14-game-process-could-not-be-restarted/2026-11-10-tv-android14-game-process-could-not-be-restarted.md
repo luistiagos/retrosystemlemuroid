@@ -72,3 +72,9 @@ Foram identificadas três falhas combinadas no ciclo de vida de inicialização 
 - **Recriação de Activity durante o boot não é segunda sessão de core.** O motivo pelo qual o `:game` não pode hospedar duas sessões é o estado estático do `.so` nativo após `GLRetroView` (`dlopen`/`retro_init`/`retro_deinit`). Bloquear recriação da Activity antes mesmo de `createRetroView` transforma qualquer mudança de configuração de janela no boot (como `grammaticalGender` na API 34) num loop infinito de reinicialização de processo.
 - **Nunca liberar em Java um `FileLock` usado como sentinela de vida de processo.** O `fcntl` lock deve permanecer aberto até que o próprio kernel Linux feche a tabela de descritores do processo em `do_exit()`, combinado com `Os.kill(pid, 0)` para verificar a existência do processo na tabela de tasks do kernel independentemente do `ActivityManager`.
 
+## Ocorrência — chamado #348 (2026-11-17)
+
+- **Sessão:** `142369794072707@lid` (`chamado #348`), aberto em `2026-11-09T22:12:57Z`.
+- **Mensagem:** `[173837]` (`2026-11-09T22:12:55Z`): foto da tela de erro em **Multilaser Android TV (Android 14)** exibindo `"O aplicativo teve um erro interno e precisou fechar o jogo..."` e `"Game process could not be restarted (2 attempts)"` (esta é a foto que originou este doc na versão `1.17.28`).
+- **Situação:** a correção (`325bab6`, `2026-11-10`) já entrou em `publicado/1.17.35` (`2026-11-14`) e `1.17.36` (`2026-11-17`), após o relato do cliente. O cliente não recebeu resposta humana após a escalada (`[173839]`, `operador=0`) e ainda não confirmou na versão corrigida.
+
