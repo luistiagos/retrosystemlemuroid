@@ -1130,3 +1130,17 @@ GLThread 1 state=RUNNABLE
 
 **Diagnóstico confirmado:** A `GLThread` não está morta, em deadlock de mutex Java ou aguardando monitor — seu estado é `RUNNABLE` executando continuamente dentro de `LibretroDroid.step(Native Method)` (ou seja, o loop de emulação nativa do core). Como o loop nativo nunca retorna para o frame handler do `GLSurfaceView`, os eventos enfileirados por `queueEvent` para `serializeSRAM` não são processados, estourando o timeout de 30s.
 
+---
+
+## Ocorrência — chamado #330 (2026-11-13 a 2026-11-16, até `1.17.35`)
+
+- **Chamado / cliente:** `#330` (`45861677588562@lid`), `samsung SM-G780G` (Galaxy S20 FE Snapdragon 865 / Adreno 650, `abi=arm64-v8a`, `Android 13 (sdk 33)`).
+- **Versões do app observadas:** `1.17.33`, `1.17.34` e `1.17.35` (publicada até `2026-11-17T18:20Z`).
+- **Sintoma na conversa:** Em `[180192]` (`2026-11-13T23:24Z`), `[180573]` (`2026-11-14T02:26Z`), `[182048]`/`[182052]` (`2026-11-14T23:30Z–23:47Z`) e `[183997]` (`2026-11-16T04:02:44Z`), a cliente enviou prints de *Mario Kart: Double Dash!!* (GameCube) travado no logotipo da Nintendo com OSD `Video Info: Qualcomm, Adreno (TM) 650, OpenGL ES 3.2`, relatando que o jogo *"não está pegando"* / *"não entra"*.
+- **Telemetria correspondente (`errors`):** **15 ocorrências** seguidas de `GLRetroView$GLThreadTimeoutException: GLThread did not answer in 30000 ms` em `phase=exit-save` / `background-save`, `call=serializeSRAM`, `system=gc`, no mesmo aparelho:
+  - `id=13776` (`2026-11-13T22:49:16Z`, `app=1.17.33`, `Mario Kart - Double Dash!!`)
+  - `id=13779`, `13781`, `13783..13787`, `13796`, `13806`, `13813`, `13839`, `13856`, `13889` (`2026-11-13T22:55Z..2026-11-14T23:30Z`, `app=1.17.34`, *Mario Kart - Double Dash!!* e *Mario Kart Double Dash (Retro Track Grand Prix v2.1)*)
+  - `id=13991` (`2026-11-16T04:02:46Z`, `app=1.17.35`, `Mario Kart - Double Dash!!` — 2 s após `[183997]`)
+- **Nota:** O mesmo aparelho já havia registrado `id=13033` (`2026-11-09T01:17Z`, `app=1.17.28`, `gc`, *Donkey Kong Jungle Beat*) e `id=12835..12836` (`2026-11-07T04:01Z–04:07Z`, `app=1.17.28`, `3ds`, *Super Mario 3D Land*). Confirma a assinatura já diagnosticada do Dolphin congelando o loop nativo na `GLThread` e estourando o `serializeSRAM` ao tentar sair.
+
+
