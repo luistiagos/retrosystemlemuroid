@@ -95,7 +95,7 @@ sem apontamento em `NotificationsManager.kt`.
 Ambiente: `emulator-5554` = `lemu_3ds_api34` (Android 14, x86_64), escolhido pelo `aparelho-instalar` (o moto g86
 `ZY32LMNN9B` estava `offline`/ausente no adb). Uma 1a tentativa saiu com 19 (emulador nao subiu em 8 min) e voltou a fila
 sem contar reprovacao. `sync`: base `origin/version10` = `0f50dd1` (ja com a TASK-0006: notificacao fora da main e com
-throttle de 1 s, e a TASK-0007). Evidencia em `../evidencias/TASK-0005/` (APKs fora do git por `*.apk`).
+throttle de 1 s, e a TASK-0007). Evidencia em `../../evidencias/TASK-0005/` (APKs fora do git por `*.apk`).
 
 **Offline:** a diff toca so `NotificationsManager.kt` e `lemuroid-app/config/ktlint/baseline.xml` (reservados): guarda
 nas duas funcoes privadas de canal, flags `@Volatile` no `companion object`, resto formatacao; baseline sem o bloco do
