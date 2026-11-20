@@ -3,9 +3,9 @@
 
 Gerado em 2026-11-20. O estado de cada demanda é a pasta dela (`docs/<tipo>/<estado>/<id>/`). A **idade** conta os dias desde o primeiro commit do doc da demanda, seguindo as mudanças de pasta, ou desde a data com que o id começa ou termina, se for mais antiga. As tasks de cada demanda estão no `README.md` dela.
 
-143 demandas: 12 em aberto, 1 em implementado, 2 em testado, 7 em no-ar, 119 em concluido, 1 em bloqueado, 1 em descartado. 10 tasks: 6 em implementado, 4 em no-ar.
+144 demandas: 14 em aberto, 2 em implementado, 7 em no-ar, 119 em concluido, 1 em bloqueado, 1 em descartado. 4 tasks: 4 em no-ar.
 
-## aberto (12)
+## aberto (14)
 
 _registrada; inclui as demandas com tasks em execução._
 
@@ -13,33 +13,33 @@ _registrada; inclui as demandas com tasks em execução._
 |---:|---|---|---|
 | 135d | bug | [2026-07-08-dreamcast-subset-jogos-travam-9fps](bugs/aberto/2026-07-08-dreamcast-subset-jogos-travam-9fps/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 103d | bug | [2026-08-09-anr-inicializar-jogo-runongl-thread](bugs/aberto/2026-08-09-anr-inicializar-jogo-runongl-thread/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
+| 53d | bug | [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service](bugs/aberto/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 51d | bug | [2026-09-30-picodrive-e-anr-home-aguardando-trace](bugs/aberto/2026-09-30-picodrive-e-anr-home-aguardando-trace/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
+| 46d | bug | [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread](bugs/aberto/2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 44d | bug | [2026-10-07-audio-engasgando-gba-nds-moto-g86-sem-diagnostico](bugs/aberto/2026-10-07-audio-engasgando-gba-nds-moto-g86-sem-diagnostico/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 31d | bug | [2026-10-20-tvbox-hd-usb-download-continua-no-interno-espaco-insuficiente](bugs/aberto/2026-10-20-tvbox-hd-usb-download-continua-no-interno-espaco-insuficiente/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 26d | bug | [2026-10-25-gamecube-32-bits-tenta-baixar-core-inexistente](bugs/aberto/2026-10-25-gamecube-32-bits-tenta-baixar-core-inexistente/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 10d | bug | [2026-11-10-tv-android14-game-process-could-not-be-restarted](bugs/aberto/2026-11-10-tv-android14-game-process-could-not-be-restarted/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 3d | bug | [2026-11-17-apk-nao-instala-fire-stick-e-tv-tcl](bugs/aberto/2026-11-17-apk-nao-instala-fire-stick-e-tv-tcl/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
-| 2d | bug | [2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy](bugs/aberto/2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 2d | bug | [2026-11-18-marvel-vs-capcom-2-sem-audio-e-sem-start](bugs/aberto/2026-11-18-marvel-vs-capcom-2-sem-audio-e-sem-start/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
+| 1d | bug | [2026-11-19-msx-sem-resposta-controles-travado-demo](bugs/aberto/2026-11-19-msx-sem-resposta-controles-travado-demo/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 1d | bug | [2026-11-19-retomar-download-pausado-sem-foreground-service](bugs/aberto/2026-11-19-retomar-download-pausado-sem-foreground-service/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 1d | bug | [2026-11-19-saturn-yabasanshiro-fwrite-null-reincide](bugs/aberto/2026-11-19-saturn-yabasanshiro-fwrite-null-reincide/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 
-## implementado (1)
+## implementado (2)
 
 _toda task de implementação concluída e integrada no ramo principal; falta a Aceitação._
 
 | idade | tipo | demanda | tasks |
 |---:|---|---|---|
 | 6d | bug | [2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores](bugs/implementado/2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-14 - "corrigido no adaptador (.pipeline/projeto.json, publicacao.cmd povoa o lemuroid-cores) na T24 do pipeline-global; prova local sem upload saiu 0") |
+| 2d | bug | [2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy](bugs/implementado/2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-19 - "após corrigir , testar e validar mova o bug") |
 
-## testado (2)
+## testado (0)
 
 _a Aceitação passou; falta publicar._
 
-| idade | tipo | demanda | tasks |
-|---:|---|---|---|
-| 53d | bug | [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service](bugs/testado/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service/README.md) | 3/3 |
-| 46d | bug | [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread](bugs/testado/2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread/README.md) | 3/3 |
+Nenhuma.
 
 ## no-ar (7)
 
