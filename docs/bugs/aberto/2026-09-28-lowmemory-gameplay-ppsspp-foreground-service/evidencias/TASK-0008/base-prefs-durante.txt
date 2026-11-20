@@ -1,0 +1,25 @@
+Save em 11:56:26
+== 11:56:30 pid=18991 servico=3
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <long name="telemetry_last_exit_ts" value="1795185805529" />
+    <boolean name="telemetry_error_reporting" value="false" />
+</map>
+== 11:56:35 pid=18991 servico=3
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <long name="telemetry_last_exit_ts" value="1795185805529" />
+    <boolean name="telemetry_error_reporting" value="false" />
+</map>
+== 11:56:40 pid=18991 servico=3
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <long name="telemetry_last_exit_ts" value="1795185805529" />
+    <boolean name="telemetry_error_reporting" value="false" />
+</map>
+== 11:56:45 pid=18991 servico=3
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <long name="telemetry_last_exit_ts" value="1795185805529" />
+    <boolean name="telemetry_error_reporting" value="false" />
+</map>

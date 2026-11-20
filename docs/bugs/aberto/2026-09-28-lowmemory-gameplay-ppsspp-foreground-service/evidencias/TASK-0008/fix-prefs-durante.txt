@@ -1,0 +1,33 @@
+Save em 12:02:26
+== 12:02:31 pid=19559 servico=3
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <long name="telemetry_last_exit_ts" value="1795186741096" />
+    <string name="telemetry_fgs_tags">download</string>
+    <boolean name="telemetry_error_reporting" value="false" />
+    <int name="telemetry_fgs_pid" value="19559" />
+</map>
+== 12:02:36 pid=19559 servico=3
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <long name="telemetry_last_exit_ts" value="1795186741096" />
+    <string name="telemetry_fgs_tags">download</string>
+    <boolean name="telemetry_error_reporting" value="false" />
+    <int name="telemetry_fgs_pid" value="19559" />
+</map>
+== 12:02:41 pid=19559 servico=3
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <long name="telemetry_last_exit_ts" value="1795186741096" />
+    <string name="telemetry_fgs_tags">download</string>
+    <boolean name="telemetry_error_reporting" value="false" />
+    <int name="telemetry_fgs_pid" value="19559" />
+</map>
+== 12:02:46 pid=19559 servico=3
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <long name="telemetry_last_exit_ts" value="1795186741096" />
+    <string name="telemetry_fgs_tags">download</string>
+    <boolean name="telemetry_error_reporting" value="false" />
+    <int name="telemetry_fgs_pid" value="19559" />
+</map>

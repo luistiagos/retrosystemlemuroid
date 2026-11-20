@@ -1,0 +1,6 @@
+Save (Adventure Island II, GB) em 12:05:38
+== 12:05:39 fg=4
+    <string name="telemetry_fgs_tags"></string>
+== 12:05:47 fg=0
+    <string name="telemetry_fgs_tags"></string>
+dialogo em 12:05:52

@@ -1,0 +1,7 @@
+Save Tekken 3 Unlocked em 12:06:54
+== 12:07:00 antes do X fg=1
+    <string name="telemetry_fgs_tags">download</string>
+    <int name="telemetry_fgs_pid" value="19559" />
+== 12:07:05 3 s apos X fg=0
+    <string name="telemetry_fgs_tags"></string>
+    <int name="telemetry_fgs_pid" value="19559" />

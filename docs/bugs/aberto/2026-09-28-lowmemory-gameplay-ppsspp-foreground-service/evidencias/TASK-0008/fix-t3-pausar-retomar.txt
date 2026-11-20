@@ -1,0 +1,12 @@
+== 12:03:15 apos pausar servico=0 fg=0
+    <string name="telemetry_fgs_tags"></string>
+    <int name="telemetry_fgs_pid" value="19559" />
+text="Paused"
+== 12:03:27 apos retomar servico=0 fg=0
+    <string name="telemetry_fgs_tags"></string>
+    <int name="telemetry_fgs_pid" value="19559" />
+text="Saving… 15%"
+(servico ausente apos retomar = bug ja registrado 2026-11-19-retomar-download-pausado-sem-foreground-service)
+== 12:04:30 apos X na fila
+    <string name="telemetry_fgs_tags"></string>
+    <int name="telemetry_fgs_pid" value="19559" />

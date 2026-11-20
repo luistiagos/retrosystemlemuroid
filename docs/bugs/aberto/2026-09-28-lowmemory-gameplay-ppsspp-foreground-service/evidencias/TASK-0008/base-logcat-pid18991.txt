@@ -1,0 +1,390 @@
+--------- beginning of main
+11-20 14:54:05.764 I/amesystem.debug(18991): Late-enabling -Xcheck:jni
+11-20 14:54:05.827 I/amesystem.debug(18991): Using CollectorTypeCC GC.
+11-20 14:54:05.838 W/amesystem.debug(18991): Unexpected CPU variant for x86: x86_64.
+11-20 14:54:05.838 W/amesystem.debug(18991): Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+11-20 14:54:06.209 D/CompatibilityChangeReporter(18991): Compat change id reported: 171979766; UID 10190; state: ENABLED
+11-20 14:54:06.215 D/CompatibilityChangeReporter(18991): Compat change id reported: 242716250; UID 10190; state: ENABLED
+11-20 14:54:06.248 D/ApplicationLoaders(18991): Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-20 14:54:06.249 D/ApplicationLoaders(18991): Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-20 14:54:06.251 W/ziparchive(18991): Unable to open '/data/app/~~Lc-yyaaflFxKRm0qrf_GaA==/app.retrogamesystem.debug-8O1Zs7hewZtu5gOOiYonvQ==/base.dm': No such file or directory
+11-20 14:54:06.251 W/ziparchive(18991): Unable to open '/data/app/~~Lc-yyaaflFxKRm0qrf_GaA==/app.retrogamesystem.debug-8O1Zs7hewZtu5gOOiYonvQ==/base.dm': No such file or directory
+11-20 14:54:07.864 D/nativeloader(18991): Configuring clns-6 for other apk /data/app/~~Lc-yyaaflFxKRm0qrf_GaA==/app.retrogamesystem.debug-8O1Zs7hewZtu5gOOiYonvQ==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~Lc-yyaaflFxKRm0qrf_GaA==/app.retrogamesystem.debug-8O1Zs7hewZtu5gOOiYonvQ==/lib/x86_64:/data/app/~~Lc-yyaaflFxKRm0qrf_GaA==/app.retrogamesystem.debug-8O1Zs7hewZtu5gOOiYonvQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/app.retrogamesystem.debug
+11-20 14:54:07.879 V/GraphicsEnvironment(18991): Currently set values for:
+11-20 14:54:07.879 V/GraphicsEnvironment(18991):   angle_gl_driver_selection_pkgs=[]
+11-20 14:54:07.879 V/GraphicsEnvironment(18991):   angle_gl_driver_selection_values=[]
+11-20 14:54:07.880 V/GraphicsEnvironment(18991): ANGLE GameManagerService for app.retrogamesystem.debug: false
+11-20 14:54:07.880 V/GraphicsEnvironment(18991): app.retrogamesystem.debug is not listed in per-application setting
+11-20 14:54:07.880 V/GraphicsEnvironment(18991): Neither updatable production driver nor prerelease driver is supported.
+11-20 14:54:08.347 I/NativeTempDir(18991): Native TMPDIR set to /data/user/0/app.retrogamesystem.debug/files/tmp
+11-20 14:54:08.366 D/WM-WrkMgrInitializer(18991): Initializing WorkManager with default configuration.
+11-20 14:54:08.478 D/WM-PackageManagerHelper(18991): Skipping component enablement for androidx.work.impl.background.systemjob.SystemJobService
+11-20 14:54:08.478 D/WM-Schedulers(18991): Created SystemJobScheduler and enabled SystemJobService
+11-20 14:54:08.498 D/CompatibilityChangeReporter(18991): Compat change id reported: 3400644; UID 10190; state: ENABLED
+11-20 14:54:08.498 I/MainProcessInitializer(18991): Requested initialization of main process tasks
+11-20 14:54:08.575 D/CompatibilityChangeReporter(18991): Compat change id reported: 160794467; UID 10190; state: ENABLED
+11-20 14:54:08.626 D/CompatibilityChangeReporter(18991): Compat change id reported: 194532703; UID 10190; state: ENABLED
+11-20 14:54:08.628 D/CompatibilityChangeReporter(18991): Compat change id reported: 253665015; UID 10190; state: ENABLED
+11-20 14:54:08.658 D/StrictMode(18991): StrictMode policy violation; ~duration=135 ms: android.os.strictmode.DiskReadViolation
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:54:08.658 D/StrictMode(18991): 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:54:08.658 D/StrictMode(18991): 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:54:08.658 D/StrictMode(18991): 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:54:08.658 D/StrictMode(18991): 	at java.io.File.exists(File.java:813)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 14:54:08.658 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager$Companion.markCatalogPopulated(StreamingRomsManager.kt:123)
+11-20 14:54:08.658 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:29)
+11-20 14:54:08.658 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:18)
+11-20 14:54:08.658 D/StrictMode(18991): 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 14:54:08.658 D/StrictMode(18991): 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 14:54:08.658 D/StrictMode(18991): 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 14:54:08.658 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:54:08.658 D/StrictMode(18991): 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:54:08.658 D/StrictMode(18991): 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:54:08.658 D/StrictMode(18991): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:54:08.658 D/StrictMode(18991): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:54:08.663 D/StrictMode(18991): StrictMode policy violation; ~duration=134 ms: android.os.strictmode.DiskReadViolation
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.app.SharedPreferencesImpl.edit(SharedPreferencesImpl.java:368)
+11-20 14:54:08.663 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager$Companion.markCatalogPopulated(StreamingRomsManager.kt:124)
+11-20 14:54:08.663 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:29)
+11-20 14:54:08.663 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:18)
+11-20 14:54:08.663 D/StrictMode(18991): 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 14:54:08.663 D/StrictMode(18991): 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 14:54:08.663 D/StrictMode(18991): 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 14:54:08.663 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:54:08.663 D/StrictMode(18991): 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:54:08.663 D/StrictMode(18991): 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:54:08.663 D/StrictMode(18991): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:54:08.663 D/StrictMode(18991): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:54:08.751 D/libEGL  (18991): loaded /vendor/lib64/egl/libEGL_emulation.so
+11-20 14:54:08.767 D/SmartStoragePicker(18991): SmartStoragePicker: ROMs dir /storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms
+11-20 14:54:08.777 D/libEGL  (18991): loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-20 14:54:08.786 D/libEGL  (18991): loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-20 14:54:09.076 W/WM-Processor(18991): Didn't find WorkSpec for id WorkGenerationalId(workSpecId=abd8f19f-3c46-4aa2-8083-787a0439108e, generation=0)
+11-20 14:54:09.081 W/amesystem.debug(18991): Accessing hidden method Ljava/lang/invoke/MethodHandles$Lookup;-><init>(Ljava/lang/Class;I)V (unsupported, reflection, allowed)
+11-20 14:54:09.105 D/CompatibilityChangeReporter(18991): Compat change id reported: 263076149; UID 10190; state: ENABLED
+11-20 14:54:09.128 V/NativeCrypto(18991): Registering org/conscrypt/NativeCrypto's 288 native methods...
+11-20 14:54:09.144 W/amesystem.debug(18991): Accessing hidden method Ljava/security/spec/ECParameterSpec;->getCurveName()Ljava/lang/String; (unsupported, reflection, allowed)
+11-20 14:54:09.157 D/LemuroidApplication(18991): Conscrypt provider installed
+11-20 14:54:09.434 D/CompatibilityChangeReporter(18991): Compat change id reported: 237531167; UID 10190; state: DISABLED
+11-20 14:54:09.436 W/OpenGLRenderer(18991): Unknown dataspace 0
+11-20 14:54:09.451 D/StrictMode(18991): StrictMode policy violation; ~duration=40 ms: android.os.strictmode.DiskReadViolation
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:54:09.451 D/StrictMode(18991): 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:54:09.451 D/StrictMode(18991): 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:54:09.451 D/StrictMode(18991): 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:54:09.451 D/StrictMode(18991): 	at java.io.File.exists(File.java:813)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.prefs_delegate$lambda$0(AppUpdateManager.kt:70)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.$r8$lambda$NltxSQYBvDhxDNRQ1nb8DutaMa4(Unknown Source:0)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+11-20 14:54:09.451 D/StrictMode(18991): 	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:74)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.getPrefs(AppUpdateManager.kt:70)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.shouldCheckNow(AppUpdateManager.kt:88)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel.checkOnStartup(AppUpdateViewModel.kt:48)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity.onCreate(MainActivity.kt:208)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:54:09.451 D/StrictMode(18991): 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:54:09.451 D/StrictMode(18991): 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:54:09.451 D/StrictMode(18991): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:54:09.453 D/StrictMode(18991): StrictMode policy violation; ~duration=39 ms: android.os.strictmode.DiskReadViolation
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.SharedPreferencesImpl.getLong(SharedPreferencesImpl.java:328)
+11-20 14:54:09.453 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.shouldCheckNow(AppUpdateManager.kt:88)
+11-20 14:54:09.453 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel.checkOnStartup(AppUpdateViewModel.kt:48)
+11-20 14:54:09.453 D/StrictMode(18991): 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity.onCreate(MainActivity.kt:208)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:54:09.453 D/StrictMode(18991): 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:54:09.453 D/StrictMode(18991): 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:54:09.453 D/StrictMode(18991): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:54:09.453 D/StrictMode(18991): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:54:11.726 W/OpenGLRenderer(18991): Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 14:54:11.727 W/OpenGLRenderer(18991): Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 14:54:11.867 I/Gralloc4(18991): mapper 4.x is not supported
+11-20 14:54:11.916 E/OpenGLRenderer(18991): Unable to match the desired swap behavior.
+11-20 14:54:12.328 I/OpenGLRenderer(18991): Davey! duration=2742ms; Flags=1, FrameTimelineVsyncId=664674, IntendedVsync=5944772447408, Vsync=5944805780740, InputEventId=0, HandleInputStart=5944806555440, AnimationStart=5944806602340, PerformTraversalsStart=5944806663740, DrawStart=5947238222240, FrameDeadline=5944789114074, FrameInterval=5944806411640, FrameStartTime=16666666, SyncQueued=5947335120440, SyncStart=5947384277340, IssueDrawCommandsStart=5947387288140, SwapBuffers=5947518653440, FrameCompleted=5947564339840, DequeueBufferDuration=698900, QueueBufferDuration=4349600, GpuCompleted=5947564339840, SwapBuffersCompleted=5947536080840, DisplayPresentTime=0, CommandSubmissionCompleted=5947518653440, 
+11-20 14:54:12.496 I/WM-WorkerWrapper(18991): Worker result SUCCESS for Work [ id=b8177ba9-3ab6-4d7d-8206-38bb8e084083, tags={ com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork } ]
+11-20 14:54:12.614 I/Choreographer(18991): Skipped 179 frames!  The application may be doing too much work on its main thread.
+11-20 14:54:14.610 I/Choreographer(18991): Skipped 34 frames!  The application may be doing too much work on its main thread.
+11-20 14:54:14.734 I/OpenGLRenderer(18991): Davey! duration=4809ms; Flags=0, FrameTimelineVsyncId=664689, IntendedVsync=5944939114068, Vsync=5947922447282, InputEventId=0, HandleInputStart=5947936881740, AnimationStart=5947936991440, PerformTraversalsStart=5949410461740, DrawStart=5949411247040, FrameDeadline=5947589113962, FrameInterval=5947934066040, FrameStartTime=16666666, SyncQueued=5949662944440, SyncStart=5949666579940, IssueDrawCommandsStart=5949667349240, SwapBuffers=5949740244240, FrameCompleted=5949752004040, DequeueBufferDuration=138900, QueueBufferDuration=3236100, GpuCompleted=5949748170140, SwapBuffersCompleted=5949752004040, DisplayPresentTime=0, CommandSubmissionCompleted=5949740244240, 
+11-20 14:54:16.451 I/amesystem.debug(18991): Background concurrent copying GC freed 112258(6583KB) AllocSpace objects, 30(1964KB) LOS objects, 49% free, 7410KB/14MB, paused 8.691ms,184us total 522.200ms
+11-20 14:54:17.730 D/EGL_emulation(18991): app_time_stats: avg=2757.03ms min=2212.51ms max=3301.54ms count=2
+11-20 14:54:17.754 I/OpenGLRenderer(18991): Davey! duration=3693ms; Flags=0, FrameTimelineVsyncId=664982, IntendedVsync=5949355780558, Vsync=5949922447202, InputEventId=0, HandleInputStart=5949931654440, AnimationStart=5949931797740, PerformTraversalsStart=5951355998740, DrawStart=5951356804940, FrameDeadline=5949772447208, FrameInterval=5949930250340, FrameStartTime=16666666, SyncQueued=5952979919540, SyncStart=5952980778140, IssueDrawCommandsStart=5952981004840, SwapBuffers=5953030088640, FrameCompleted=5953050591840, DequeueBufferDuration=73500, QueueBufferDuration=1140300, GpuCompleted=5953050078840, SwapBuffersCompleted=5953050591840, DisplayPresentTime=72057628414509145, CommandSubmissionCompleted=5953030088640, 
+11-20 14:54:17.771 I/Choreographer(18991): Skipped 189 frames!  The application may be doing too much work on its main thread.
+11-20 14:54:17.869 W/OpenGLRenderer(18991): Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 14:54:17.870 W/OpenGLRenderer(18991): Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 14:54:18.341 I/OpenGLRenderer(18991): Davey! duration=3685ms; Flags=0, FrameTimelineVsyncId=665013, IntendedVsync=5949939113868, Vsync=5953089113742, InputEventId=0, HandleInputStart=5953092703340, AnimationStart=5953092746540, PerformTraversalsStart=5953233696940, DrawStart=5953235165840, FrameDeadline=5953072447076, FrameInterval=5953091559940, FrameStartTime=16666666, SyncQueued=5953271920840, SyncStart=5953272443040, IssueDrawCommandsStart=5953272603340, SwapBuffers=5953603953640, FrameCompleted=5953624896540, DequeueBufferDuration=61400, QueueBufferDuration=2086600, GpuCompleted=5953624896540, SwapBuffersCompleted=5953608403340, DisplayPresentTime=0, CommandSubmissionCompleted=5953603953640, 
+11-20 14:54:27.244 D/EGL_emulation(18991): app_time_stats: avg=944.38ms min=4.89ms max=8623.91ms count=10
+11-20 14:54:40.445 D/EGL_emulation(18991): app_time_stats: avg=13200.15ms min=13200.15ms max=13200.15ms count=1
+11-20 14:54:40.775 W/WindowOnBackDispatcher(18991): OnBackInvokedCallback is not enabled for the application.
+11-20 14:54:40.775 W/WindowOnBackDispatcher(18991): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:54:41.495 E/OpenGLRenderer(18991): Unable to match the desired swap behavior.
+11-20 14:54:41.574 D/EGL_emulation(18991): app_time_stats: avg=19.69ms min=4.70ms max=129.08ms count=37
+11-20 14:54:41.665 I/Choreographer(18991): Skipped 59 frames!  The application may be doing too much work on its main thread.
+11-20 14:54:41.685 I/OpenGLRenderer(18991): Davey! duration=946ms; Flags=1, FrameTimelineVsyncId=665334, IntendedVsync=5975972446160, Vsync=5975972446160, InputEventId=0, HandleInputStart=5975979629540, AnimationStart=5975979692640, PerformTraversalsStart=5976139288140, DrawStart=5976821281740, FrameDeadline=5975989112826, FrameInterval=5975979214540, FrameStartTime=16666666, SyncQueued=5976885773040, SyncStart=5976942228640, IssueDrawCommandsStart=5976942497240, SwapBuffers=5976963955740, FrameCompleted=5976975429340, DequeueBufferDuration=120600, QueueBufferDuration=517200, GpuCompleted=5976975429340, SwapBuffersCompleted=5976967429340, DisplayPresentTime=-4294967296, CommandSubmissionCompleted=5976963955740, 
+11-20 14:54:41.997 I/OpenGLRenderer(18991): Davey! duration=1180ms; Flags=0, FrameTimelineVsyncId=665341, IntendedVsync=5975989112826, Vsync=5976972446120, InputEventId=0, HandleInputStart=5976986379140, AnimationStart=5976986521640, PerformTraversalsStart=5976999077040, DrawStart=5977014456640, FrameDeadline=5977005779452, FrameInterval=5976985055040, FrameStartTime=16666666, SyncQueued=5977120532840, SyncStart=5977169328440, IssueDrawCommandsStart=5977169516640, SwapBuffers=5977185572440, FrameCompleted=5977218678140, DequeueBufferDuration=66600, QueueBufferDuration=11457200, GpuCompleted=5977218353440, SwapBuffersCompleted=5977218678140, DisplayPresentTime=-1, CommandSubmissionCompleted=5977185572440, 
+11-20 14:54:47.807 D/EGL_emulation(18991): app_time_stats: avg=2053.05ms min=169.45ms max=5738.62ms count=3
+11-20 14:54:58.136 W/WindowOnBackDispatcher(18991): sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@70eab7b
+11-20 14:55:16.003 W/WindowOnBackDispatcher(18991): OnBackInvokedCallback is not enabled for the application.
+11-20 14:55:16.003 W/WindowOnBackDispatcher(18991): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:55:16.206 D/CompatibilityChangeReporter(18991): Compat change id reported: 289878283; UID 10190; state: ENABLED
+11-20 14:55:16.557 D/EGL_emulation(18991): app_time_stats: avg=3164.69ms min=27.48ms max=34304.46ms count=11
+11-20 14:55:16.696 I/Choreographer(18991): Skipped 40 frames!  The application may be doing too much work on its main thread.
+11-20 14:55:16.885 I/ImeTracker(18991): app.retrogamesystem.debug:d4e44f94: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 14:55:16.886 D/InsetsController(18991): show(ime(), fromIme=false)
+11-20 14:55:16.893 D/InputMethodManager(18991): showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{f8b9148 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 14:55:16.991 I/AssistStructure(18991): Flattened final assist data: 520 bytes, containing 1 windows, 3 views
+11-20 14:55:17.018 I/OpenGLRenderer(18991): Davey! duration=963ms; Flags=0, FrameTimelineVsyncId=666265, IntendedVsync=6011339111412, Vsync=6012005778052, InputEventId=0, HandleInputStart=6012018732540, AnimationStart=6012018791640, PerformTraversalsStart=6012227934040, DrawStart=6012229308740, FrameDeadline=6012305778040, FrameInterval=6012016583740, FrameStartTime=16666666, SyncQueued=6012262687040, SyncStart=6012279876640, IssueDrawCommandsStart=6012280319540, SwapBuffers=6012283568540, FrameCompleted=6012319512240, DequeueBufferDuration=32277100, QueueBufferDuration=1220100, GpuCompleted=6012315608240, SwapBuffersCompleted=6012319512240, DisplayPresentTime=0, CommandSubmissionCompleted=6012283568540, 
+11-20 14:55:17.089 I/ImeTracker(18991): app.retrogamesystem.debug:5fd87af3: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-20 14:55:17.090 D/InputMethodManager(18991): showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{f8b9148 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-20 14:55:17.574 D/EGL_emulation(18991): app_time_stats: avg=32.71ms min=7.00ms max=175.38ms count=23
+11-20 14:55:17.755 D/InsetsController(18991): show(ime(), fromIme=true)
+11-20 14:55:17.760 D/InsetsController(18991): show(ime(), fromIme=true)
+11-20 14:55:17.761 I/ImeTracker(18991): app.retrogamesystem.debug:5fd87af3: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 14:55:18.094 I/ImeTracker(18991): app.retrogamesystem.debug:d4e44f94: onShown
+11-20 14:55:18.750 D/EGL_emulation(18991): app_time_stats: avg=54.83ms min=4.15ms max=525.70ms count=18
+11-20 14:55:20.243 D/EGL_emulation(18991): app_time_stats: avg=497.55ms min=484.58ms max=513.60ms count=3
+11-20 14:55:21.248 D/EGL_emulation(18991): app_time_stats: avg=501.72ms min=498.85ms max=504.59ms count=2
+11-20 14:55:22.399 D/EGL_emulation(18991): app_time_stats: avg=575.20ms min=535.88ms max=614.52ms count=2
+11-20 14:55:23.856 D/EGL_emulation(18991): app_time_stats: avg=484.78ms min=451.01ms max=502.02ms count=3
+11-20 14:55:24.890 D/EGL_emulation(18991): app_time_stats: avg=516.32ms min=510.74ms max=521.90ms count=2
+11-20 14:55:26.374 D/EGL_emulation(18991): app_time_stats: avg=494.68ms min=470.38ms max=515.24ms count=3
+11-20 14:55:27.376 D/EGL_emulation(18991): app_time_stats: avg=500.63ms min=500.04ms max=501.23ms count=2
+11-20 14:55:28.379 D/EGL_emulation(18991): app_time_stats: avg=501.45ms min=500.54ms max=502.36ms count=2
+11-20 14:55:29.394 D/EGL_emulation(18991): app_time_stats: avg=507.22ms min=492.22ms max=522.22ms count=2
+11-20 14:55:30.417 D/EGL_emulation(18991): app_time_stats: avg=511.67ms min=503.24ms max=520.10ms count=2
+11-20 14:55:31.927 D/EGL_emulation(18991): app_time_stats: avg=502.82ms min=475.28ms max=518.03ms count=3
+11-20 14:55:33.445 D/EGL_emulation(18991): app_time_stats: avg=505.56ms min=495.40ms max=518.50ms count=3
+11-20 14:55:34.272 I/amesystem.debug(18991): JIT allocated 61KB for compiled code of void com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1.invoke(androidx.compose.runtime.Composer, int)
+11-20 14:55:34.274 I/amesystem.debug(18991): Compiler allocated 7894KB to compile void com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1.invoke(androidx.compose.runtime.Composer, int)
+11-20 14:55:34.432 W/System  (18991): A resource failed to call release. 
+11-20 14:55:34.513 D/EGL_emulation(18991): app_time_stats: avg=177.53ms min=29.02ms max=368.03ms count=6
+11-20 14:55:35.532 D/EGL_emulation(18991): app_time_stats: avg=36.66ms min=2.41ms max=162.96ms count=22
+11-20 14:55:35.915 D/ConscryptOkHttpHelper(18991): Conscrypt provider installed: Conscrypt 1.0
+11-20 14:55:36.010 D/ConscryptOkHttpHelper(18991): OkHttp configured with Conscrypt TLS (trust-all)
+11-20 14:55:36.289 D/TrafficStats(18991): tagSocket(116) with statsTag=0xffffffff, statsUid=-1
+11-20 14:55:36.677 D/EGL_emulation(18991): app_time_stats: avg=58.66ms min=5.65ms max=310.32ms count=17
+11-20 14:55:38.177 D/EGL_emulation(18991): app_time_stats: avg=299.49ms min=16.87ms max=499.92ms count=5
+11-20 14:55:39.192 D/EGL_emulation(18991): app_time_stats: avg=507.76ms min=498.87ms max=516.66ms count=2
+11-20 14:55:40.695 D/EGL_emulation(18991): app_time_stats: avg=500.82ms min=499.20ms max=502.92ms count=3
+11-20 14:55:41.723 D/EGL_emulation(18991): app_time_stats: avg=513.51ms min=499.99ms max=527.03ms count=2
+11-20 14:55:43.213 D/EGL_emulation(18991): app_time_stats: avg=496.37ms min=488.37ms max=502.43ms count=3
+11-20 14:55:44.239 D/EGL_emulation(18991): app_time_stats: avg=513.05ms min=498.53ms max=527.56ms count=2
+11-20 14:55:45.286 D/EGL_emulation(18991): app_time_stats: avg=521.93ms min=515.65ms max=528.22ms count=2
+11-20 14:55:46.759 D/EGL_emulation(18991): app_time_stats: avg=490.09ms min=477.55ms max=508.75ms count=3
+11-20 14:55:47.760 D/EGL_emulation(18991): app_time_stats: avg=499.90ms min=499.80ms max=499.99ms count=2
+11-20 14:55:48.782 D/EGL_emulation(18991): app_time_stats: avg=510.65ms min=510.37ms max=510.94ms count=2
+11-20 14:55:49.799 D/EGL_emulation(18991): app_time_stats: avg=508.02ms min=499.41ms max=516.63ms count=2
+11-20 14:55:50.851 D/EGL_emulation(18991): app_time_stats: avg=523.02ms min=510.03ms max=536.00ms count=2
+11-20 14:55:51.992 D/EGL_emulation(18991): app_time_stats: avg=568.62ms min=348.04ms max=789.20ms count=2
+11-20 14:55:53.015 D/EGL_emulation(18991): app_time_stats: avg=511.36ms min=493.02ms max=529.70ms count=2
+11-20 14:55:54.025 D/EGL_emulation(18991): app_time_stats: avg=503.73ms min=498.56ms max=508.90ms count=2
+11-20 14:55:55.528 D/EGL_emulation(18991): app_time_stats: avg=499.43ms min=489.46ms max=504.69ms count=3
+11-20 14:55:56.528 D/EGL_emulation(18991): app_time_stats: avg=499.89ms min=497.76ms max=502.03ms count=2
+11-20 14:55:57.533 D/EGL_emulation(18991): app_time_stats: avg=501.71ms min=500.13ms max=503.29ms count=2
+11-20 14:55:58.548 D/EGL_emulation(18991): app_time_stats: avg=506.67ms min=502.37ms max=510.96ms count=2
+11-20 14:55:59.555 D/EGL_emulation(18991): app_time_stats: avg=503.32ms min=498.38ms max=508.26ms count=2
+11-20 14:56:00.566 D/EGL_emulation(18991): app_time_stats: avg=505.34ms min=486.96ms max=523.73ms count=2
+11-20 14:56:01.540 W/WindowOnBackDispatcher(18991): OnBackInvokedCallback is not enabled for the application.
+11-20 14:56:01.540 W/WindowOnBackDispatcher(18991): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:56:01.574 D/EGL_emulation(18991): app_time_stats: avg=160.92ms min=9.13ms max=499.41ms count=6
+11-20 14:56:02.091 E/OpenGLRenderer(18991): Unable to match the desired swap behavior.
+11-20 14:56:02.180 I/Choreographer(18991): Skipped 43 frames!  The application may be doing too much work on its main thread.
+11-20 14:56:02.213 I/OpenGLRenderer(18991): Davey! duration=704ms; Flags=1, FrameTimelineVsyncId=669374, IntendedVsync=6056755776262, Vsync=6056755776262, InputEventId=0, HandleInputStart=6056770808740, AnimationStart=6056771106840, PerformTraversalsStart=6056962788140, DrawStart=6057412202640, FrameDeadline=6056772442928, FrameInterval=6056770780140, FrameStartTime=16666666, SyncQueued=6057425697940, SyncStart=6057475625440, IssueDrawCommandsStart=6057476351140, SwapBuffers=6057493470540, FrameCompleted=6057510358140, DequeueBufferDuration=65900, QueueBufferDuration=629300, GpuCompleted=6057510358140, SwapBuffersCompleted=6057496300840, DisplayPresentTime=-4294967296, CommandSubmissionCompleted=6057493470540, 
+11-20 14:56:02.296 I/OpenGLRenderer(18991): Davey! duration=804ms; Flags=0, FrameTimelineVsyncId=669381, IntendedVsync=6056772442928, Vsync=6057489109566, InputEventId=0, HandleInputStart=6057502995240, AnimationStart=6057503128540, PerformTraversalsStart=6057515022840, DrawStart=6057538584540, FrameDeadline=6057589109562, FrameInterval=6057500658940, FrameStartTime=16666666, SyncQueued=6057545095240, SyncStart=6057558812340, IssueDrawCommandsStart=6057559201940, SwapBuffers=6057566201540, FrameCompleted=6057590677340, DequeueBufferDuration=3278800, QueueBufferDuration=504200, GpuCompleted=6057590677340, SwapBuffersCompleted=6057578586040, DisplayPresentTime=0, CommandSubmissionCompleted=6057566201540, 
+11-20 14:56:02.462 W/WindowOnBackDispatcher(18991): sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@a2ef476
+11-20 14:56:02.582 W/WindowOnBackDispatcher(18991): sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@a2ef476
+11-20 14:56:02.596 D/EGL_emulation(18991): app_time_stats: avg=27.86ms min=5.44ms max=145.54ms count=21
+11-20 14:56:02.631 W/RemoteInputConnectionImpl(18991): requestCursorAnchorInfo on inactive InputConnection
+11-20 14:56:02.634 I/ImeTracker(18991): app.retrogamesystem.debug:e98e4030: onCancelled at PHASE_CLIENT_ANIMATION_CANCEL
+11-20 14:56:02.641 I/ImeTracker(18991): app.retrogamesystem.debug:1bf4ec08: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 14:56:02.642 I/ImeTracker(18991): app.retrogamesystem.debug:1bf4ec08: onFailed at PHASE_CLIENT_VIEW_SERVED
+11-20 14:56:06.231 D/EGL_emulation(18991): app_time_stats: avg=1351.69ms min=133.61ms max=3666.22ms count=3
+11-20 14:56:08.984 D/ConscryptOkHttpHelper(18991): OkHttp configured with Conscrypt TLS (trust-all)
+11-20 14:56:08.985 I/CoreUpdateWork(18991): Starting core update/install work
+11-20 14:56:09.078 I/WM-Processor(18991): Moving WorkSpec (3c624904-9928-427d-b545-b7d2170688ce) to the foreground
+11-20 14:56:09.140 I/WM-SystemFgDispatcher(18991): Started foreground service Intent { act=ACTION_START_FOREGROUND cmp=app.retrogamesystem.debug/androidx.work.impl.foreground.SystemForegroundService (has extras) }
+11-20 14:56:11.129 I/WM-WorkerWrapper(18991): Worker result SUCCESS for Work [ id=3c624904-9928-427d-b545-b7d2170688ce, tags={ com.swordfish.lemuroid.app.shared.library.CoreUpdateWork } ]
+11-20 14:56:11.145 I/WM-SystemFgDispatcher(18991): Stopping foreground service
+11-20 14:56:21.493 W/WindowOnBackDispatcher(18991): sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@2cd46f0
+11-20 14:56:21.652 D/EGL_emulation(18991): app_time_stats: avg=3163.97ms min=18.58ms max=18876.43ms count=6
+11-20 14:56:21.723 D/SaveQueueManager(18991): SaveQueueManager: starting save for Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip
+11-20 14:56:21.817 D/CompatibilityChangeReporter(18991): Compat change id reported: 247079863; UID 10190; state: ENABLED
+11-20 14:56:21.821 D/RomOnDemandManager$downloadRom(18991): On-demand lookup: https://emuladores.pythonanywhere.com/find_by_file?path=Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR%20ISO%20PS1.zip&source_id=1&system=psx
+11-20 14:56:21.845 D/ConscryptOkHttpHelper(18991): OkHttp configured with Conscrypt TLS (trust-all)
+11-20 14:56:22.102 W/WindowOnBackDispatcher(18991): OnBackInvokedCallback is not enabled for the application.
+11-20 14:56:22.102 W/WindowOnBackDispatcher(18991): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:56:22.252 W/WindowOnBackDispatcher(18991): OnBackInvokedCallback is not enabled for the application.
+11-20 14:56:22.252 W/WindowOnBackDispatcher(18991): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:56:22.393 D/TrafficStats(18991): tagSocket(137) with statsTag=0xffffffff, statsUid=-1
+11-20 14:56:22.507 E/OpenGLRenderer(18991): Unable to match the desired swap behavior.
+11-20 14:56:22.724 I/OpenGLRenderer(18991): Davey! duration=974ms; Flags=1, FrameTimelineVsyncId=671108, IntendedVsync=6076939108788, Vsync=6077055775450, InputEventId=0, HandleInputStart=6077056649140, AnimationStart=6077056719340, PerformTraversalsStart=6077471946040, DrawStart=6077828712840, FrameDeadline=6076955775454, FrameInterval=6077055954240, FrameStartTime=16666666, SyncQueued=6077870245740, SyncStart=6077965288440, IssueDrawCommandsStart=6077966128040, SwapBuffers=6077967389340, FrameCompleted=6078008629040, DequeueBufferDuration=490600, QueueBufferDuration=1003300, GpuCompleted=6078008629040, SwapBuffersCompleted=6077996594240, DisplayPresentTime=288234774265332736, CommandSubmissionCompleted=6077967389340, 
+11-20 14:56:22.729 D/DownloadForegroundService(18991): DownloadForegroundService: WakeLock acquired
+11-20 14:56:22.803 I/Choreographer(18991): Skipped 42 frames!  The application may be doing too much work on its main thread.
+11-20 14:56:22.955 I/amesystem.debug(18991): Background young concurrent copying GC freed 47471(3213KB) AllocSpace objects, 4(80KB) LOS objects, 24% free, 10MB/14MB, paused 5.260ms,1.402ms total 117.739ms
+11-20 14:56:23.066 D/EGL_emulation(18991): app_time_stats: avg=706.17ms min=605.73ms max=806.62ms count=2
+11-20 14:56:23.216 I/OpenGLRenderer(18991): Davey! duration=951ms; Flags=0, FrameTimelineVsyncId=671190, IntendedVsync=6077422442102, Vsync=6078122442074, InputEventId=0, HandleInputStart=6078126149540, AnimationStart=6078126313040, PerformTraversalsStart=6078208165840, DrawStart=6078209128140, FrameDeadline=6077622442094, FrameInterval=6078123639440, FrameStartTime=16666666, SyncQueued=6078319020840, SyncStart=6078336131240, IssueDrawCommandsStart=6078338693340, SwapBuffers=6078371615040, FrameCompleted=6078390904640, DequeueBufferDuration=173300, QueueBufferDuration=10482000, GpuCompleted=6078386666240, SwapBuffersCompleted=6078390904640, DisplayPresentTime=0, CommandSubmissionCompleted=6078371615040, 
+11-20 14:56:23.289 I/OpenGLRenderer(18991): Davey! duration=935ms; Flags=0, FrameTimelineVsyncId=671190, IntendedVsync=6077422442102, Vsync=6078122442074, InputEventId=0, HandleInputStart=6078126149540, AnimationStart=6078126313040, PerformTraversalsStart=6078208165840, DrawStart=6078344866740, FrameDeadline=6078039108744, FrameInterval=6078123639440, FrameStartTime=16666666, SyncQueued=6078345402340, SyncStart=6078484522140, IssueDrawCommandsStart=6078486926540, SwapBuffers=6078487410440, FrameCompleted=6078497154840, DequeueBufferDuration=143700, QueueBufferDuration=4495400, GpuCompleted=6078496563740, SwapBuffersCompleted=6078497154840, DisplayPresentTime=288234774265332736, CommandSubmissionCompleted=6078487410440, 
+11-20 14:56:23.350 I/Choreographer(18991): Skipped 31 frames!  The application may be doing too much work on its main thread.
+11-20 14:56:23.723 D/RomOnDemandManager$downloadRom(18991): On-demand download URL for Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip: https://huggingface.co/datasets/Emuladores/psxmods/resolve/main/Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR%20ISO%20PS1.zip
+11-20 14:56:23.799 W/RemoteInputConnectionImpl(18991): requestCursorAnchorInfo on inactive InputConnection
+11-20 14:56:23.839 I/OpenGLRenderer(18991): Davey! duration=951ms; Flags=0, FrameTimelineVsyncId=671371, IntendedVsync=6078139108740, Vsync=6078655775386, InputEventId=0, HandleInputStart=6078673372140, AnimationStart=6078673944040, PerformTraversalsStart=6078872600840, DrawStart=6078876214340, FrameDeadline=6078405775396, FrameInterval=6078670566040, FrameStartTime=16666666, SyncQueued=6079063767840, SyncStart=6079068043640, IssueDrawCommandsStart=6079068409040, SwapBuffers=6079079476940, FrameCompleted=6079094909240, DequeueBufferDuration=93000, QueueBufferDuration=5778900, GpuCompleted=6079093568540, SwapBuffersCompleted=6079094909240, DisplayPresentTime=0, CommandSubmissionCompleted=6079079476940, 
+11-20 14:56:23.898 I/OpenGLRenderer(18991): Davey! duration=1014ms; Flags=0, FrameTimelineVsyncId=671371, IntendedVsync=6078139108740, Vsync=6078655775386, InputEventId=0, HandleInputStart=6078673372140, AnimationStart=6078673944040, PerformTraversalsStart=6078872600840, DrawStart=6079086998140, FrameDeadline=6078522442058, FrameInterval=6078670566040, FrameStartTime=16666666, SyncQueued=6079106183640, SyncStart=6079111815540, IssueDrawCommandsStart=6079113532440, SwapBuffers=6079115626940, FrameCompleted=6079159566840, DequeueBufferDuration=254400, QueueBufferDuration=2248800, GpuCompleted=6079159566840, SwapBuffersCompleted=6079123212940, DisplayPresentTime=288234774265332736, CommandSubmissionCompleted=6079115626940, 
+11-20 14:56:24.197 D/EGL_emulation(18991): app_time_stats: avg=241.69ms min=8.52ms max=624.76ms count=6
+11-20 14:56:24.204 D/TrafficStats(18991): tagSocket(158) with statsTag=0xffffffff, statsUid=-1
+11-20 14:56:25.199 D/EGL_emulation(18991): app_time_stats: avg=38.91ms min=6.60ms max=191.29ms count=16
+11-20 14:56:25.956 D/TrafficStats(18991): tagSocket(150) with statsTag=0xffffffff, statsUid=-1
+11-20 14:56:26.202 D/EGL_emulation(18991): app_time_stats: avg=16.96ms min=4.10ms max=76.09ms count=26
+11-20 14:56:26.993 D/RomOnDemandManager(18991): downloadToFile HTTP 200 contentLength=467632200 url=https://huggingface.co/datasets/Emuladores/psxmods/resolve/main/Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR%20ISO%20PS1.zip
+11-20 14:56:27.145 D/EGL_emulation(18991): app_time_stats: avg=1358.76ms min=118.92ms max=3251.68ms count=3
+11-20 14:56:27.203 D/EGL_emulation(18991): app_time_stats: avg=29.22ms min=5.20ms max=63.59ms count=25
+11-20 14:56:28.230 D/EGL_emulation(18991): app_time_stats: avg=76.23ms min=32.83ms max=100.11ms count=14
+11-20 14:56:28.301 D/EGL_emulation(18991): app_time_stats: avg=72.54ms min=30.77ms max=102.01ms count=15
+11-20 14:56:29.165 I/amesystem.debug(18991): Background concurrent copying GC freed 70528(4839KB) AllocSpace objects, 3(204KB) LOS objects, 49% free, 10MB/21MB, paused 25.181ms,378us total 818.776ms
+11-20 14:56:29.283 D/EGL_emulation(18991): app_time_stats: avg=130.00ms min=90.10ms max=256.01ms count=8
+11-20 14:56:29.362 D/EGL_emulation(18991): app_time_stats: avg=131.68ms min=76.16ms max=258.96ms count=8
+11-20 14:56:30.310 D/EGL_emulation(18991): app_time_stats: avg=127.89ms min=54.22ms max=256.05ms count=8
+11-20 14:56:30.485 D/EGL_emulation(18991): app_time_stats: avg=139.77ms min=82.99ms max=249.51ms count=8
+11-20 14:56:31.372 D/EGL_emulation(18991): app_time_stats: avg=150.03ms min=66.98ms max=294.56ms count=7
+11-20 14:56:31.512 D/EGL_emulation(18991): app_time_stats: avg=112.20ms min=63.51ms max=225.41ms count=9
+11-20 14:56:32.417 D/EGL_emulation(18991): app_time_stats: avg=79.75ms min=39.57ms max=121.02ms count=13
+11-20 14:56:32.567 D/EGL_emulation(18991): app_time_stats: avg=75.01ms min=31.43ms max=124.10ms count=14
+11-20 14:56:33.495 D/EGL_emulation(18991): app_time_stats: avg=76.45ms min=46.78ms max=124.81ms count=14
+11-20 14:56:33.607 D/EGL_emulation(18991): app_time_stats: avg=73.79ms min=46.93ms max=123.85ms count=14
+11-20 14:56:34.523 D/EGL_emulation(18991): app_time_stats: avg=73.09ms min=43.08ms max=95.68ms count=14
+11-20 14:56:34.667 D/EGL_emulation(18991): app_time_stats: avg=75.35ms min=54.80ms max=103.68ms count=14
+11-20 14:56:35.532 D/EGL_emulation(18991): app_time_stats: avg=77.30ms min=52.78ms max=115.24ms count=13
+11-20 14:56:35.701 D/EGL_emulation(18991): app_time_stats: avg=68.14ms min=36.41ms max=135.86ms count=15
+11-20 14:56:36.610 D/EGL_emulation(18991): app_time_stats: avg=75.96ms min=56.88ms max=108.75ms count=14
+11-20 14:56:36.735 D/EGL_emulation(18991): app_time_stats: avg=73.37ms min=35.64ms max=100.15ms count=14
+11-20 14:56:37.777 D/EGL_emulation(18991): app_time_stats: avg=105.30ms min=43.32ms max=226.97ms count=11
+11-20 14:56:37.798 D/EGL_emulation(18991): app_time_stats: avg=105.81ms min=51.71ms max=188.58ms count=10
+11-20 14:56:38.851 D/EGL_emulation(18991): app_time_stats: avg=152.49ms min=48.54ms max=360.19ms count=7
+11-20 14:56:38.926 D/EGL_emulation(18991): app_time_stats: avg=133.10ms min=13.03ms max=384.04ms count=8
+11-20 14:56:39.935 D/EGL_emulation(18991): app_time_stats: avg=120.00ms min=53.69ms max=244.78ms count=9
+11-20 14:56:40.031 D/EGL_emulation(18991): app_time_stats: avg=100.23ms min=43.63ms max=188.37ms count=11
+11-20 14:56:41.028 D/EGL_emulation(18991): app_time_stats: avg=120.45ms min=80.14ms max=153.24ms count=9
+11-20 14:56:41.075 D/EGL_emulation(18991): app_time_stats: avg=114.79ms min=68.20ms max=151.96ms count=9
+11-20 14:56:42.111 D/EGL_emulation(18991): app_time_stats: avg=128.98ms min=60.94ms max=229.63ms count=8
+11-20 14:56:42.199 D/EGL_emulation(18991): app_time_stats: avg=145.77ms min=66.08ms max=270.30ms count=8
+11-20 14:56:43.140 D/EGL_emulation(18991): app_time_stats: avg=170.50ms min=115.71ms max=254.70ms count=6
+11-20 14:56:43.241 D/EGL_emulation(18991): app_time_stats: avg=172.11ms min=92.12ms max=212.20ms count=6
+11-20 14:56:44.148 D/EGL_emulation(18991): app_time_stats: avg=83.50ms min=41.05ms max=132.03ms count=12
+11-20 14:56:44.348 D/EGL_emulation(18991): app_time_stats: avg=110.36ms min=61.45ms max=151.88ms count=10
+11-20 14:56:45.163 D/EGL_emulation(18991): app_time_stats: avg=143.80ms min=77.79ms max=264.19ms count=7
+11-20 14:56:45.422 D/EGL_emulation(18991): app_time_stats: avg=178.30ms min=108.29ms max=242.84ms count=6
+11-20 14:56:46.238 D/EGL_emulation(18991): app_time_stats: avg=153.16ms min=79.73ms max=212.75ms count=7
+11-20 14:56:46.351 I/amesystem.debug(18991): Background young concurrent copying GC freed 71334(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/21MB, paused 6.016ms,848us total 113.573ms
+11-20 14:56:46.482 D/EGL_emulation(18991): app_time_stats: avg=148.90ms min=73.08ms max=279.69ms count=7
+11-20 14:56:47.294 D/EGL_emulation(18991): app_time_stats: avg=74.69ms min=43.16ms max=123.36ms count=14
+11-20 14:56:47.508 D/EGL_emulation(18991): app_time_stats: avg=78.31ms min=49.01ms max=135.94ms count=13
+11-20 14:56:48.374 D/EGL_emulation(18991): app_time_stats: avg=82.70ms min=47.42ms max=121.01ms count=13
+11-20 14:56:48.561 D/EGL_emulation(18991): app_time_stats: avg=74.71ms min=29.18ms max=131.32ms count=14
+11-20 14:56:49.406 D/EGL_emulation(18991): app_time_stats: avg=55.37ms min=24.37ms max=92.66ms count=18
+11-20 14:56:49.574 D/EGL_emulation(18991): app_time_stats: avg=66.00ms min=45.57ms max=111.40ms count=15
+11-20 14:56:50.430 D/EGL_emulation(18991): app_time_stats: avg=62.22ms min=28.31ms max=98.81ms count=16
+11-20 14:56:50.486 I/amesystem.debug(18991): Background young concurrent copying GC freed 64331(10MB) AllocSpace objects, 0(0B) LOS objects, 50% free, 10MB/21MB, paused 3.829ms,335us total 140.284ms
+11-20 14:56:50.599 D/EGL_emulation(18991): app_time_stats: avg=77.95ms min=36.55ms max=127.94ms count=13
+11-20 14:56:51.485 D/EGL_emulation(18991): app_time_stats: avg=131.49ms min=70.29ms max=199.53ms count=8
+11-20 14:56:51.696 D/EGL_emulation(18991): app_time_stats: avg=135.65ms min=75.01ms max=200.01ms count=8
+11-20 14:56:52.535 D/EGL_emulation(18991): app_time_stats: avg=148.65ms min=117.81ms max=200.19ms count=7
+11-20 14:56:52.830 D/EGL_emulation(18991): app_time_stats: avg=161.49ms min=119.67ms max=266.31ms count=7
+11-20 14:56:53.548 D/EGL_emulation(18991): app_time_stats: avg=100.69ms min=20.86ms max=156.55ms count=10
+11-20 14:56:53.854 D/EGL_emulation(18991): app_time_stats: avg=101.77ms min=47.23ms max=172.16ms count=10
+11-20 14:56:54.638 D/EGL_emulation(18991): app_time_stats: avg=83.46ms min=39.81ms max=130.31ms count=13
+11-20 14:56:54.882 D/EGL_emulation(18991): app_time_stats: avg=78.37ms min=53.51ms max=148.54ms count=13
+11-20 14:56:55.709 D/EGL_emulation(18991): app_time_stats: avg=81.57ms min=56.84ms max=115.19ms count=13
+11-20 14:56:56.009 D/EGL_emulation(18991): app_time_stats: avg=101.67ms min=62.05ms max=150.20ms count=11
+11-20 14:56:56.782 D/EGL_emulation(18991): app_time_stats: avg=115.03ms min=18.87ms max=212.38ms count=9
+11-20 14:56:56.798 I/amesystem.debug(18991): Background young concurrent copying GC freed 64688(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/21MB, paused 17.466ms,957us total 260.057ms
+11-20 14:56:57.055 D/EGL_emulation(18991): app_time_stats: avg=147.88ms min=86.96ms max=202.54ms count=7
+11-20 14:56:57.790 D/EGL_emulation(18991): app_time_stats: avg=110.30ms min=64.30ms max=154.96ms count=9
+11-20 14:56:58.075 D/EGL_emulation(18991): app_time_stats: avg=144.62ms min=77.88ms max=209.96ms count=7
+11-20 14:56:58.850 D/EGL_emulation(18991): app_time_stats: avg=61.94ms min=30.85ms max=124.79ms count=17
+11-20 14:56:59.098 D/EGL_emulation(18991): app_time_stats: avg=72.55ms min=41.71ms max=147.08ms count=14
+11-20 14:56:59.991 D/EGL_emulation(18991): app_time_stats: avg=86.64ms min=35.60ms max=158.58ms count=13
+11-20 14:57:00.147 D/EGL_emulation(18991): app_time_stats: avg=104.32ms min=47.34ms max=207.49ms count=10
+11-20 14:57:01.047 D/EGL_emulation(18991): app_time_stats: avg=95.27ms min=68.49ms max=139.92ms count=11
+11-20 14:57:01.155 D/EGL_emulation(18991): app_time_stats: avg=91.13ms min=54.47ms max=127.03ms count=11
+11-20 14:57:01.701 I/amesystem.debug(18991): Background young concurrent copying GC freed 61169(10MB) AllocSpace objects, 0(0B) LOS objects, 48% free, 11MB/21MB, paused 11.011ms,1.188ms total 209.258ms
+11-20 14:57:02.099 D/EGL_emulation(18991): app_time_stats: avg=87.13ms min=67.24ms max=128.21ms count=12
+11-20 14:57:02.241 D/EGL_emulation(18991): app_time_stats: avg=89.61ms min=50.61ms max=124.78ms count=12
+11-20 14:57:03.178 D/EGL_emulation(18991): app_time_stats: avg=97.32ms min=74.21ms max=158.59ms count=11
+11-20 14:57:03.241 D/EGL_emulation(18991): app_time_stats: avg=90.35ms min=56.50ms max=128.68ms count=11
+11-20 14:57:04.217 D/EGL_emulation(18991): app_time_stats: avg=79.23ms min=50.71ms max=116.03ms count=13
+11-20 14:57:04.243 D/EGL_emulation(18991): app_time_stats: avg=90.59ms min=63.12ms max=129.34ms count=11
+11-20 14:57:05.292 D/EGL_emulation(18991): app_time_stats: avg=107.15ms min=69.65ms max=188.64ms count=10
+11-20 14:57:05.315 D/EGL_emulation(18991): app_time_stats: avg=106.08ms min=65.16ms max=150.12ms count=10
+11-20 14:57:06.360 D/EGL_emulation(18991): app_time_stats: avg=105.88ms min=45.76ms max=193.46ms count=10
+11-20 14:57:06.462 D/EGL_emulation(18991): app_time_stats: avg=126.47ms min=46.02ms max=257.43ms count=9
+11-20 14:57:07.240 I/amesystem.debug(18991): Background young concurrent copying GC freed 64182(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/21MB, paused 13.601ms,103us total 133.185ms
+11-20 14:57:07.491 D/EGL_emulation(18991): app_time_stats: avg=122.62ms min=26.74ms max=200.49ms count=9
+11-20 14:57:07.564 D/EGL_emulation(18991): app_time_stats: avg=135.40ms min=93.51ms max=208.76ms count=8
+11-20 14:57:08.574 D/EGL_emulation(18991): app_time_stats: avg=176.78ms min=137.21ms max=239.39ms count=6
+11-20 14:57:08.611 D/EGL_emulation(18991): app_time_stats: avg=168.87ms min=105.86ms max=207.96ms count=6
+11-20 14:57:09.587 D/EGL_emulation(18991): app_time_stats: avg=136.80ms min=54.77ms max=223.79ms count=7
+11-20 14:57:09.730 D/EGL_emulation(18991): app_time_stats: avg=222.89ms min=139.24ms max=300.61ms count=5
+11-20 14:57:10.626 D/EGL_emulation(18991): app_time_stats: avg=127.51ms min=58.67ms max=161.88ms count=8
+11-20 14:57:10.810 D/EGL_emulation(18991): app_time_stats: avg=119.17ms min=36.19ms max=228.18ms count=9
+11-20 14:57:11.703 D/EGL_emulation(18991): app_time_stats: avg=117.98ms min=63.95ms max=156.49ms count=9
+11-20 14:57:11.834 D/EGL_emulation(18991): app_time_stats: avg=144.86ms min=84.43ms max=236.57ms count=7
+11-20 14:57:12.739 D/EGL_emulation(18991): app_time_stats: avg=93.02ms min=71.25ms max=122.43ms count=11
+11-20 14:57:12.911 D/EGL_emulation(18991): app_time_stats: avg=97.11ms min=64.27ms max=141.12ms count=11
+11-20 14:57:13.807 D/EGL_emulation(18991): app_time_stats: avg=132.24ms min=83.50ms max=187.71ms count=8
+11-20 14:57:13.972 D/EGL_emulation(18991): app_time_stats: avg=131.83ms min=48.11ms max=189.22ms count=8
+11-20 14:57:14.395 D/DownloadForegroundService$observeQueue(18991): DownloadForegroundService: queue empty, stopping self
+11-20 14:57:14.502 D/SaveQueueManager(18991): SaveQueueManager: Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip cancelled
+11-20 14:57:14.763 D/DownloadForegroundService(18991): DownloadForegroundService: destroyed, WakeLock released
+11-20 14:57:15.061 D/EGL_emulation(18991): app_time_stats: avg=135.04ms min=65.17ms max=344.85ms count=8

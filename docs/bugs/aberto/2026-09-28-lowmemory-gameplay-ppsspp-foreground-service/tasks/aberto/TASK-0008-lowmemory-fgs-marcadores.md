@@ -149,3 +149,54 @@ Ajustes ao Plano de teste:
 - Falta: teste E2E (sessao de teste): download pela Home com `telemetry_fgs_tags=download` durante e vazio depois;
   reescanear biblioteca com `library`; controle positivo na base.
 - Proximo passo: `enqueue-test --bug TASK-0008`.
+
+## Teste
+
+### Teste rodada 1 — aprovado (pipeline 20261119-2228, 2026-11-20)
+
+Ambiente: `emulator-5554` = `lemu_3ds_api34` (Android 14, x86_64), escolhido pelo `aparelho-instalar` (o moto g86 nao
+estava no adb). `sync`: base `origin/version10` = `e3e2d95` (so docs sobre `1ba98c9`, com TASK-0005/0007 integradas);
+branch `085f74c`. Evidencia em `../../evidencias/TASK-0008/` (APKs fora do git por `*.apk`).
+
+**Offline:** a diff toca so arquivos reservados e implementa o Planejamento (helper `runInForeground` /
+`runMarkedInForeground` / `ForegroundTagCounter` + `ForegroundWorkTag`; 5 Workers com a tag de cada um; servico marca
+depois do `startForeground` que voltou e desmarca em `stopForegroundCompat`/`onDestroy`; `RomsDownloadWork`/
+`StreamingRomsWork` relancam a falha do `setForeground` como antes). Testes de unidade do `build`: 123 / 0 falhas /
+1 pulado (linha de base 54/0/1, sem falha nova); `RunMarkedInForegroundTest` 7/7. `gradlew :lemuroid-app:ktlintCheck`:
+`ktlintMainSourceSetCheck` e `ktlintTestSourceSetCheck` verdes; so `ktlintKotlinScriptCheck` vermelho no
+`lemuroid-app/build.gradle.kts` (vermelho conhecido da base, manual secao Dev).
+
+**Binarios.** Base: `git checkout --detach e3e2d95` + `build --bug TASK-0008 --emulador` -> `base-e3e2d95.apk` (x86_64)
+sha256 `682073b3…032177`, igual ao `base.apk` instalado (`lastUpdateTime 2026-11-20 14:53:16`). Fix: `build --emulador`
+em `085f74c` (BUILD SUCCESSFUL) -> `fix-085f74c.apk` sha256 `2443bfbd…a0da558`, igual ao `base.apk` instalado
+(`lastUpdateTime 2026-11-20 14:59:01`). `versionName 1.17.36-DEBUG` nos dois.
+
+**Caminho (o mesmo nas duas versoes, pela UI):** Inicio -> Busca -> "tekken 3" -> *Tekken 3 Unlocked Edition Traduzido
+PT-BR* (PSX, nao baixado) -> **Save** -> download correndo na fila -> `run-as ... cat shared_prefs/telemetry_prefs.xml`
+a cada ~5 s.
+
+| | Base `e3e2d95` (PID 18991) | Fix `085f74c` (PID 19559) |
+|---|---|---|
+| `DownloadForegroundService` (`dumpsys activity services`) | `isForeground=true` (`base-servico.txt`) | `isForeground=true` (`fix-servico.txt`) |
+| `telemetry_prefs.xml` durante o download | **sem** `telemetry_fgs_*` (4 amostras, `base-prefs-durante.txt`) | `telemetry_fgs_tags=download`, `telemetry_fgs_pid=19559` = `pidof` (4 amostras, `fix-prefs-durante.txt`) |
+| fila | `base-fila-baixando.png` (5%) | `fix-fila-baixando.png` |
+
+- **T2: aprovado.** Sinal do sintoma (processo em `FOREGROUND_SERVICE` sem marcador do trabalho) presente na base,
+  ausente no fix; marcador correto (`download` + pid do processo principal) presente.
+- **T3 (aparelho):**
+  - Cancelar ativo (`fix-t3-cancelar-ativo.txt`): antes do X `download`/`isForeground=true`; 3 s depois do X
+    `telemetry_fgs_tags` vazio, servico fora.
+  - Download ate o fim (`fix-t3-download-completo.txt`, `fix-t3-jogar-agora.png`): *Adventure Island II* (GB) baixou em
+    ~14 s, dialogo "Download Complete ... Play now?" apareceu; marcador vazio no fim. (O download pequeno foi rapido
+    demais para a amostragem pegar `download` no meio; a marcacao em si esta provada pelo Tekken.)
+  - Pausar/retomar (`fix-t3-pausar-retomar.txt`): pausar -> servico sai, `telemetry_fgs_tags` vazio, item "Paused";
+    retomar -> item volta a "Saving… 15%", **servico nao volta** (e o marcador continua vazio, coerente). Isso e o bug ja
+    registrado `2026-11-19-retomar-download-pausado-sem-foreground-service` (resumeActive nao chama
+    `DownloadForegroundService.start`), nao desta mudanca: o marcador reflete corretamente a ausencia do FGS.
+  - Ajustes ▸ ROMs ▸ Rescan (`fix-t3-reescanear.txt`, laco de 0,5 s no aparelho): `telemetry_fgs_tags=library` com
+    `SystemForegroundService` ativo, depois vazio quando o servico do WorkManager sai; reescaneamento terminou.
+  - Testes de unidade e ktlint: acima (offline). `gradlew :lemuroid-app:lintFreeBundleDebug` na lane: BUILD SUCCESSFUL
+    (7m26s), sem achado novo fora do baseline.
+- **T4** (`fix-logcat-pid19559.txt`, `base-logcat-pid18991.txt`, filtrados pelo PID): nenhum `AndroidRuntime`/`FATAL`/
+  `ANR`; buffer `crash` vazio. Unicos `E/`: `OpenGLRenderer: Unable to match the desired swap behavior` (tambem na
+  base). `WM-SystemFgDispatcher` Started/Stopping foreground service normais.

@@ -1,0 +1,2 @@
+  * ServiceRecord{3982cd6 u0 app.retrogamesystem.debug/com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService}
+    isForeground=true foregroundId=5 types=00000001 foregroundNoti=Notification(channel=DOWNLOAD_CHANNEL_ID shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 vis=PRIVATE)
