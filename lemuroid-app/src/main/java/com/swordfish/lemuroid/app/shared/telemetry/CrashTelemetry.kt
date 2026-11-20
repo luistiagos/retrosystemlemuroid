@@ -266,6 +266,11 @@ object CrashTelemetry {
                     TelemetryContext.gameSessionForExit(context, info.processName, info.timestamp)
                         .takeIf { it.isNotEmpty() }
                         ?.let { append("; ").append(it) }
+                    // Qual servico de primeiro plano segurava o processo principal
+                    // ([[2026-09-28-lowmemory-gameplay-ppsspp-foreground-service]]).
+                    TelemetryContext.foregroundWorkForExit(context, info.processName, info.pid)
+                        .takeIf { it.isNotEmpty() }
+                        ?.let { append("; ").append(it) }
                 }
 
             val logs =

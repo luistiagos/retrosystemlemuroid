@@ -21,6 +21,9 @@ import java.util.Locale
 object TelemetryContext {
     private const val PREF_SESSION = "telemetry_last_session"
     private const val PREF_SESSION_STARTED_AT = "telemetry_last_session_started_at"
+    private const val PREF_FGS_PID = "telemetry_fgs_pid"
+    private const val PREF_FGS_TAGS = "telemetry_fgs_tags"
+    private const val FGS_SEPARATOR = "+"
 
     /**
      * Records the game about to run. Called from the `:game` process; read back from whichever
@@ -100,6 +103,105 @@ object TelemetryContext {
         exitTimestamp: Long,
         sessionStartedAt: Long,
     ): Boolean = processName.orEmpty().endsWith(":game") && sessionStartedAt in 1..exitTimestamp
+
+    /**
+     * Marca que este processo pos um trabalho em primeiro plano ([tag]: `download`, `library`...).
+     *
+     * O `lowmemory` do processo PRINCIPAL chega com `importance=125` (`FOREGROUND_SERVICE`) e sem
+     * jogo, e o `ApplicationExitInfo` nao diz qual servico o segurava: o download de ROM ou um
+     * Worker do WorkManager em foreground. Este marcador, lido por [foregroundWorkForExit] no scan
+     * do proximo cold start, responde isso ([[2026-09-28-lowmemory-gameplay-ppsspp-foreground-service]]).
+     *
+     * O conjunto vale so para o pid que o gravou: se o pid gravado for outro (o processo anterior
+     * morreu sem desmarcar — que e justamente o caso do low-memory), o conjunto recomeca so com a
+     * tag nova. Assim um marcador preso nunca contamina o processo seguinte, sem limpeza no boot.
+     */
+    fun markForegroundWork(
+        context: Context,
+        tag: String,
+    ) = updateForegroundWork(context, tag, active = true)
+
+    /** Desfaz [markForegroundWork] ao fim do trabalho. */
+    fun clearForegroundWork(
+        context: Context,
+        tag: String,
+    ) = updateForegroundWork(context, tag, active = false)
+
+    private fun updateForegroundWork(
+        context: Context,
+        tag: String,
+        active: Boolean,
+    ) {
+        try {
+            // Servico e Workers marcam de threads diferentes: o read-modify-write e serializado.
+            synchronized(this) {
+                val prefs = prefs(context)
+                val pid = Process.myPid()
+                val tags =
+                    updatedForegroundTags(
+                        storedPid = prefs.getInt(PREF_FGS_PID, 0),
+                        storedTags = parseForegroundTags(prefs.getString(PREF_FGS_TAGS, "")),
+                        currentPid = pid,
+                        tag = tag,
+                        active = active,
+                    )
+                prefs.edit()
+                    .putInt(PREF_FGS_PID, pid)
+                    .putString(PREF_FGS_TAGS, tags.sorted().joinToString(FGS_SEPARATOR))
+                    .apply()
+            }
+        } catch (ignored: Throwable) {
+            // telemetry never affects app behavior
+        }
+    }
+
+    /**
+     * `fgs=<tags>` se o exit e do processo principal que gravou o marcador e ele tinha trabalho em
+     * primeiro plano; senao vazio. Nunca lanca.
+     */
+    fun foregroundWorkForExit(
+        context: Context,
+        processName: String?,
+        exitPid: Int,
+    ): String =
+        try {
+            val prefs = prefs(context)
+            foregroundWorkOf(
+                processName = processName,
+                exitPid = exitPid,
+                storedPid = prefs.getInt(PREF_FGS_PID, 0),
+                storedTags = parseForegroundTags(prefs.getString(PREF_FGS_TAGS, "")),
+            )
+        } catch (e: Throwable) {
+            ""
+        }
+
+    /** Decisao de [foregroundWorkForExit], sem `Context`. */
+    internal fun foregroundWorkOf(
+        processName: String?,
+        exitPid: Int,
+        storedPid: Int,
+        storedTags: Set<String>,
+    ): String {
+        val isMainProcess = !processName.isNullOrEmpty() && !processName.contains(':')
+        if (!isMainProcess || storedPid <= 0 || exitPid != storedPid || storedTags.isEmpty()) return ""
+        return "fgs=" + storedTags.sorted().joinToString(FGS_SEPARATOR)
+    }
+
+    /** Conjunto apos marcar/desmarcar [tag] no processo [currentPid]; pid novo recomeca do zero. */
+    internal fun updatedForegroundTags(
+        storedPid: Int,
+        storedTags: Set<String>,
+        currentPid: Int,
+        tag: String,
+        active: Boolean,
+    ): Set<String> {
+        val base = if (storedPid == currentPid) storedTags else emptySet()
+        return if (active) base + tag else base - tag
+    }
+
+    internal fun parseForegroundTags(raw: String?): Set<String> =
+        raw.orEmpty().split(FGS_SEPARATOR).filter { it.isNotBlank() }.toSet()
 
     fun processName(context: Context?): String =
         try {

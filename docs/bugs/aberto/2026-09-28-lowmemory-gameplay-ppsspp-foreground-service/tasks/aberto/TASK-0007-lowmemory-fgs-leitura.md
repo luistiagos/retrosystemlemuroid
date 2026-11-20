@@ -47,3 +47,24 @@ sobre a função pura): pid igual + `{download}` → `fgs=download`; pid diferen
   apontamento novo em `TelemetryContext.kt`/`CrashTelemetry.kt`.
 - No aparelho esta task sozinha não muda nada visível (ninguém marca ainda); a prova E2E é da task
   `lowmemory-fgs-marcadores`.
+
+## Correcao (pipeline 20261119-2228, rodada 1)
+
+- `TelemetryContext::markForegroundWork` / `clearForegroundWork` (publicas, para a TASK-0008 chamar) →
+  `updateForegroundWork`: `synchronized`, le `telemetry_fgs_pid` (Int) e `telemetry_fgs_tags` (String, tags
+  ordenadas separadas por `+`) das mesmas prefs (`TelemetryReporter.PREFS_NAME`), grava pid atual + conjunto via
+  `apply()`; `catch Throwable` engole tudo.
+- Funcoes puras `internal`: `updatedForegroundTags(storedPid, storedTags, currentPid, tag, active)` (pid
+  diferente → base vazia; depois `+tag`/`-tag`), `foregroundWorkOf(processName, exitPid, storedPid, storedTags)`
+  (principal = nome nao vazio sem `:`; `storedPid > 0`, igual ao `exitPid`, conjunto nao vazio → `fgs=a+b`
+  ordenado; senao `""`) e `parseForegroundTags`.
+- `TelemetryContext::foregroundWorkForExit(context, processName, exitPid)` — le as prefs e delega; nunca lanca.
+- `CrashTelemetry::reportOneExit` — depois do `gameSessionForExit`, anexa `; fgs=...` quando nao vazio, dentro
+  do `try` existente; vale para qualquer `reason`.
+- Teste novo `ForegroundWorkForExitTest` (8 casos: pid igual, pid diferente, `:game`/null, ordem estavel,
+  vazio/pid 0, pid novo recomeca, marcar/desmarcar no mesmo pid, parse).
+- Plano de teste sem ajuste. Nota para a TASK-0008: tag nao pode conter `+` (e o separador).
+
+## Estado
+
+- Feito: codigo + teste desta task. Falta: build do helper verde, ktlint dos 3 arquivos, `enqueue-test`.
