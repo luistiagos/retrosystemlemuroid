@@ -5,10 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Memory
 import androidx.compose.material.icons.filled.Sensors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,6 +23,7 @@ import com.swordfish.lemuroid.app.shared.GameMenuContract
 import com.swordfish.lemuroid.app.utils.android.settings.LemuroidSettingsList
 import com.swordfish.lemuroid.app.utils.android.settings.LemuroidSettingsMenuLink
 import com.swordfish.lemuroid.app.utils.android.settings.LemuroidSettingsSwitch
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.SystemID
 import kotlin.reflect.KFunction1
 
@@ -30,6 +33,11 @@ fun GameMenuHomeScreen(
     gameMenuRequest: GameMenuActivity.GameMenuRequest,
     onResult: KFunction1<Intent.() -> Unit, Unit>,
 ) {
+    val availableCores =
+        remember(gameMenuRequest.game.systemId) {
+            GameSystem.findByIdOrNull(gameMenuRequest.game.systemId)?.systemCoreConfigs.orEmpty()
+        }
+
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         if (gameMenuRequest.coreConfig.statesSupported) {
             LemuroidSettingsMenuLink(
@@ -80,6 +88,31 @@ fun GameMenuHomeScreen(
                 onResult { putExtra(GameMenuContract.RESULT_RESET, true) }
             },
         )
+
+        if (availableCores.size > 1) {
+            val currentCoreIndex =
+                availableCores
+                    .indexOfFirst { it.coreID == gameMenuRequest.coreConfig.coreID }
+                    .coerceAtLeast(0)
+            LemuroidSettingsList(
+                title = { Text(text = stringResource(id = R.string.game_menu_switch_core)) },
+                items = availableCores.map { it.coreID.coreDisplayName },
+                useSelectedValueAsSubtitle = true,
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Memory,
+                        contentDescription = stringResource(id = R.string.game_menu_switch_core),
+                    )
+                },
+                state = rememberMemoryIntSettingState(currentCoreIndex),
+                onItemSelected = { index, _ ->
+                    val selected = availableCores[index]
+                    if (selected.coreID != gameMenuRequest.coreConfig.coreID) {
+                        onResult { putExtra(GameMenuContract.RESULT_SWITCH_CORE, selected.coreID.coreName) }
+                    }
+                },
+            )
+        }
 
         LemuroidSettingsSwitch(
             title = { Text(text = stringResource(id = R.string.game_menu_mute_audio)) },

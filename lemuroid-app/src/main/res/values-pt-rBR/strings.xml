@@ -104,6 +104,10 @@
     <string name="game_context_menu_remove_from_favorites">Remover dos favoritos</string>
     <string name="game_context_menu_resume">Continuar</string>
     <string name="game_context_menu_restart">Reiniciar</string>
+    <string name="game_context_menu_change_core">Núcleo: %1$s</string>
+    <string name="game_context_menu_select_core">Alterar núcleo</string>
+    <string name="game_core_picker_title">Escolher núcleo para %1$s</string>
+    <string name="game_core_changed_toast">Núcleo alterado para %1$s</string>
     <string name="game_context_menu_create_shortcut">Fixar na tela inicial</string>
     <string name="home_notification_title">Ativar notificações</string>
     <string name="home_notification_message">O Retro Game System usa notificações para informar quando um jogo ou uma operação está rodando em segundo plano.</string>
@@ -122,6 +126,7 @@
     <string name="game_menu_restart">Reiniciar</string>
     <string name="game_menu_quit">Sair</string>
     <string name="game_menu_settings">Configurações</string>
+    <string name="game_menu_switch_core">Trocar núcleo</string>
     <string name="game_menu_state">Estado %1$s</string>
     <string name="game_menu_change_disk_button">Alterar Disco</string>
     <string name="game_menu_edit_touch_controls">Editar Controles</string>
@@ -138,6 +143,15 @@
     <string name="core_crash_notice_title">O jogo fechou inesperadamente</string>
     <string name="core_crash_notice_message">%1$s parou porque o núcleo %2$s travou. Se continuar acontecendo, tente outro núcleo para este sistema nas Configurações.</string>
     <string name="core_crash_notice_message_option_disabled">%1$s parou porque o núcleo %2$s travou. Os shaders de hardware foram desligados para este sistema para que ele volte a rodar — você pode religá-los nas configurações dentro do jogo.</string>
+    <string name="game_core_fallback_relaunching">%1$s falhou. Tentando com %2$s…</string>
+    <string name="game_core_stalled_relaunching">%1$s parou de responder. Tentando com %2$s…</string>
+    <string name="game_core_fallback_prompt_title">Problema ao abrir este jogo?</string>
+    <string name="game_core_fallback_prompt_stalled">%1$s parou de responder no núcleo %2$s. Deseja tentar abrir com %3$s?</string>
+    <string name="game_core_fallback_prompt_no_frame">%1$s não chegou a iniciar no núcleo %2$s. Deseja tentar abrir com %3$s?</string>
+    <string name="game_core_fallback_prompt_short_session">%1$s travou ou ficou preso no núcleo %2$s? Você pode tentar abrir com %3$s.</string>
+    <string name="game_core_fallback_prompt_try_other">Abrir com %1$s</string>
+    <string name="game_core_fallback_prompt_not_now">Agora não</string>
+    <string name="game_core_fallback_prompt_was_fine">Estava normal</string>
     <string name="game_toast_quick_save_loaded">Carregamento rápido</string>
     <string name="game_toast_quick_save_saved">Salvamento rapido</string>
     <string name="game_toast_state_while_loading">O jogo ainda está carregando. Tente de novo daqui a pouco.</string>
@@ -405,10 +419,20 @@
     <string name="update_no_update_title">Sem atualizações</string>
     <string name="update_no_update_message">Não há atualizações disponíveis no momento.</string>
     <string name="update_error_title">Erro na atualização</string>
+    <string name="update_error_insufficient_storage">Espaço interno insuficiente para atualizar. Necessário: %1$d MB, disponível: %2$d MB. Libere espaço na memória interna e tente novamente.</string>
+    <string name="update_error_install_storage">Espaço insuficiente no aparelho para instalar a atualização. Libere espaço na memória interna e tente novamente.</string>
+    <string name="update_error_install_conflict">Não foi possível atualizar por cima da versão instalada (assinatura incompatível). Faça backup dos seus saves e desinstale a versão anterior antes de instalar a nova.</string>
+    <string name="update_error_install_incompatible">O pacote de atualização não é compatível com este aparelho.</string>
+    <string name="update_error_install_invalid">O pacote de atualização baixado está inválido ou corrompido. Tente novamente.</string>
+    <string name="update_error_install_blocked">O sistema bloqueou a instalação da atualização. Verifique a permissão de fontes desconhecidas nas configurações do aparelho.</string>
+    <string name="update_error_install_generic">Falha na instalação (código %1$d): %2$s</string>
+    <string name="update_error_install_generic_no_detail">Falha na instalação (código %1$d).</string>
+    <string name="update_error_no_installer">Este aparelho não conseguiu abrir o instalador de aplicativos automaticamente. Atualize manualmente usando o APK.</string>
     <string name="update_checking">Procurando atualizações…</string>
     <string name="update_permission_title">Permissão necessária</string>
     <string name="update_permission_message">Para instalar a atualização, permita que este app instale apps de fontes desconhecidas. Você será levado à tela de configurações do sistema.</string>
     <string name="update_permission_action">Abrir configurações</string>
+    <string name="update_permission_settings_unavailable">Não foi possível abrir a tela de permissão automaticamente. Abra as Configurações do aparelho e permita instalar apps desconhecidos para o Retro Game System.</string>
     <string name="settings_title_check_update">Verificar atualizações</string>
     <string name="settings_description_check_update">Verificar se há uma nova versão disponível</string>
 

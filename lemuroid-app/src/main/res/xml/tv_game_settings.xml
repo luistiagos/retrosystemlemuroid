@@ -39,6 +39,12 @@
         app:isPreferenceVisible="false"
         app:icon="@drawable/ic_menu_disk"/>
 
+    <ListPreference
+        android:key="pref_game_section_switch_core"
+        android:title="@string/game_menu_switch_core"
+        app:isPreferenceVisible="false"
+        app:icon="@drawable/ic_menu_settings"/>
+
     <PreferenceScreen
         android:key="pref_game_section_core_options"
         android:title="@string/game_menu_settings"

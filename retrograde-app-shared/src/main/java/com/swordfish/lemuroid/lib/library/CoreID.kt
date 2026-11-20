@@ -14,6 +14,7 @@ enum class CoreID(
     // name stays inside the release APK and the core gets downloaded again (Android 13+ skips
     // that filter for debuggable APKs, so debug builds hide it). verifyBundledCores enforces it.
     val libretroFileName: String,
+    val isDeprecated: Boolean = false,
 ) {
     STELLA(
         "stella",
@@ -74,6 +75,7 @@ enum class CoreID(
         "desmume",
         "DeSmuME (Deprecated)",
         "libdesmume_libretro_android.so",
+        isDeprecated = true,
     ),
     MELONDS(
         "melonds",

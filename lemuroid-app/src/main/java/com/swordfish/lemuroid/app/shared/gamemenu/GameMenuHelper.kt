@@ -62,6 +62,35 @@ object GameMenuHelper {
             ).any { it }
     }
 
+    fun setupSwitchCoreOption(
+        activity: Activity?,
+        screen: PreferenceScreen,
+        availableCores: List<SystemCoreConfig>,
+        currentCore: SystemCoreConfig,
+    ) {
+        val switchCorePreference = screen.findPreference<ListPreference>(SECTION_SWITCH_CORE) ?: return
+        if (availableCores.size <= 1) {
+            switchCorePreference.isVisible = false
+            return
+        }
+        switchCorePreference.isVisible = true
+        switchCorePreference.entries = availableCores.map { it.coreID.coreDisplayName }.toTypedArray()
+        switchCorePreference.entryValues = availableCores.map { it.coreID.coreName }.toTypedArray()
+        switchCorePreference.value = currentCore.coreID.coreName
+        switchCorePreference.summary = currentCore.coreID.coreDisplayName
+        switchCorePreference.setOnPreferenceChangeListener { _, newValue ->
+            val targetCore = newValue as? String
+            if (!targetCore.isNullOrBlank() && targetCore != currentCore.coreID.coreName) {
+                val resultIntent =
+                    Intent().apply {
+                        putExtra(GameMenuContract.RESULT_SWITCH_CORE, targetCore)
+                    }
+                setResultAndFinish(activity, resultIntent)
+            }
+            false
+        }
+    }
+
     fun setupChangeDiskOption(
         activity: Activity?,
         screen: PreferenceScreen,
@@ -245,6 +274,7 @@ object GameMenuHelper {
 
     const val FAST_FORWARD = "pref_game_fast_forward"
     const val MUTE = "pref_game_mute"
+    const val SECTION_SWITCH_CORE = "pref_game_section_switch_core"
     const val SECTION_CORE_OPTIONS = "pref_game_section_core_options"
     const val SECTION_CHANGE_DISK = "pref_game_section_change_disk"
     const val SECTION_SAVE_GAME = "pref_game_section_save"

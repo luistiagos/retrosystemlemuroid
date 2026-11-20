@@ -241,6 +241,8 @@ class BaseGameScreenViewModel(
         return retroGameView.isSingleScreenLayout()
     }
 
+    fun isFirstFrameRendered(): Boolean = retroGameView.firstFrameRendered
+
     suspend fun setStretchToFill(fill: Boolean) {
         retroGameView.setStretchToFill(fill)
     }
@@ -314,20 +316,35 @@ class BaseGameScreenViewModel(
      * jeito. Ver `docs/bugs/open/2026-08-09-anr-inicializar-jogo-runongl-thread.md`.
      */
     fun requestFinish() {
+        finishWithSave(fastFailIfStalled = false) { savesFailed ->
+            sideEffects.requestSuccessfulFinish(savesFailed = savesFailed)
+        }
+    }
+
+    fun requestSwitchCore(targetCoreName: String) {
+        finishWithSave(fastFailIfStalled = true) { savesFailed ->
+            sideEffects.requestSwitchCoreFinish(targetCoreName, savesFailed = savesFailed)
+        }
+    }
+
+    private fun finishWithSave(
+        fastFailIfStalled: Boolean,
+        onDone: (savesFailed: Boolean) -> Unit,
+    ) {
         if (loadingState.value) return
         loadingState.value = true
         viewModelScope.launch {
             withLoading {
                 val saved =
                     try {
-                        saves.saveOnExit(game)
+                        saves.saveOnExit(game, fastFailIfStalled = fastFailIfStalled)
                     } catch (e: kotlinx.coroutines.CancellationException) {
                         throw e
                     } catch (e: Throwable) {
                         Timber.e(e, "Unexpected error while saving on exit")
                         false
                     }
-                sideEffects.requestSuccessfulFinish(savesFailed = !saved)
+                onDone(!saved)
             }
         }
     }

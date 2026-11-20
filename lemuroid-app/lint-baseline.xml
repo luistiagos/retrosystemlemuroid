@@ -3,17 +3,6 @@
 
     <issue
         id="InlinedApi"
-        message="Field requires API level 26 (current min is 21): `android.provider.Settings#ACTION_MANAGE_UNKNOWN_APP_SOURCES`"
-        errorLine1="        Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {"
-        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/com/swordfish/lemuroid/app/shared/updates/AppUpdateManager.kt"
-            line="180"
-            column="16"/>
-    </issue>
-
-    <issue
-        id="InlinedApi"
         message="Field requires API level 30 (current min is 21): `android.app.ApplicationExitInfo#REASON_CRASH_NATIVE`"
         errorLine1="                info.reason == ApplicationExitInfo.REASON_CRASH_NATIVE &amp;&amp;"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">

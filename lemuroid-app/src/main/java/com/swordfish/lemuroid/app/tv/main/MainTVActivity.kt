@@ -35,6 +35,7 @@ import com.swordfish.lemuroid.app.tv.shared.TVAppUpdateDialog
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
+import com.swordfish.lemuroid.lib.core.CoresSelection
 import kotlinx.coroutines.launch
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerFragment
@@ -172,6 +173,7 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                 shortcutsGenerator: ShortcutsGenerator,
                 gameLauncher: GameLauncher,
                 romOnDemandManager: RomOnDemandManager,
+                coresSelection: CoresSelection,
             ) = GameInteractor(
                 activity,
                 retrogradeDb,
@@ -182,6 +184,7 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                     TVRomDownloadDialog(activity, romOnDemandManager).show(game, onComplete)
                 },
                 romOnDemandManager = romOnDemandManager,
+                coresSelection = coresSelection,
             )
         }
     }

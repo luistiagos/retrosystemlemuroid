@@ -88,6 +88,10 @@ class GameViewModelRetroGameView(
     var fdsSideCount: Int? = null
         private set
 
+    @Volatile
+    var firstFrameRendered: Boolean = false
+        private set
+
     // Layout de tela unica do core (SystemCoreConfig.singleScreenLayout). Muda com o jogo aberto
     // quando o usuario troca o layout pelo menu: a volta do menu relê as variaveis no RESUMED.
     private val singleScreenLayout = MutableStateFlow(false)
@@ -454,6 +458,13 @@ class GameViewModelRetroGameView(
 
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
+
+        owner.launchOnState(Lifecycle.State.STARTED) {
+            if (!firstFrameRendered) {
+                waitGLEvent<GLRetroView.GLRetroEvents.FrameRendered>()
+                firstFrameRendered = true
+            }
+        }
 
         owner.launchOnState(Lifecycle.State.STARTED) {
             initializeRetroGameViewErrorsFlow()

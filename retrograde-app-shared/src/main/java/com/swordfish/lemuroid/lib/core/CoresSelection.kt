@@ -7,6 +7,7 @@ import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.SystemID
+import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.migration.DesmumeMigrationHandler
 import dagger.Lazy
 import kotlinx.coroutines.Dispatchers
@@ -59,10 +60,87 @@ class CoresSelection(
         return getSelectedCoreConfigForSystem(system).first()
     }
 
+    /**
+     * Resolves the core to launch [game] with: a per-game override saved for [game.downloadKey]
+     * takes precedence over the system-wide default so switching a problematic game to an
+     * alternative core (e.g. Azahar -> legacy Citra) does not alter other games of the same system.
+     */
+    suspend fun getCoreConfigForGame(
+        system: GameSystem,
+        game: Game,
+    ): SystemCoreConfig {
+        if (system.systemCoreConfigs.size <= 1) {
+            return system.systemCoreConfigs.first()
+        }
+        val gameOverrideName =
+            withContext(Dispatchers.IO) {
+                sharedPreferences.getString(computeGamePreferenceKey(game.downloadKey), null)
+            }
+        if (gameOverrideName != null) {
+            system.systemCoreConfigs.firstOrNull { it.coreID.coreName == gameOverrideName }
+                ?.let { return it }
+        }
+        return getCoreConfigForSystem(system)
+    }
+
+    suspend fun updateCoreConfigForGame(
+        game: Game,
+        coreID: CoreID,
+    ) = withContext(Dispatchers.IO) {
+        sharedPreferences.edit()
+            .putString(computeGamePreferenceKey(game.downloadKey), coreID.coreName)
+            .commit()
+    }
+
+    suspend fun clearCoreConfigForGame(game: Game) =
+        withContext(Dispatchers.IO) {
+            sharedPreferences.edit()
+                .remove(computeGamePreferenceKey(game.downloadKey))
+                .commit()
+        }
+
+    suspend fun isFallbackPromptDismissed(
+        game: Game,
+        coreName: String,
+    ): Boolean =
+        withContext(Dispatchers.IO) {
+            sharedPreferences.getBoolean(computeFallbackDismissedKey(game.downloadKey, coreName), false)
+        }
+
+    suspend fun dismissFallbackPrompt(
+        game: Game,
+        coreName: String,
+    ) = withContext(Dispatchers.IO) {
+        sharedPreferences.edit()
+            .putBoolean(computeFallbackDismissedKey(game.downloadKey, coreName), true)
+            .commit()
+    }
+
+    suspend fun clearFallbackPromptDismissed(
+        game: Game,
+        coreName: String,
+    ) = withContext(Dispatchers.IO) {
+        sharedPreferences.edit()
+            .remove(computeFallbackDismissedKey(game.downloadKey, coreName))
+            .commit()
+    }
+
+    suspend fun clearAllFallbackPromptsDismissed(game: Game) {
+        val system = GameSystem.findByIdOrNull(game.systemId) ?: return
+        withContext(Dispatchers.IO) {
+            val editor = sharedPreferences.edit()
+            system.systemCoreConfigs.forEach { config ->
+                editor.remove(computeFallbackDismissedKey(game.downloadKey, config.coreID.coreName))
+            }
+            editor.commit()
+        }
+    }
+
     private fun getSelectedCoreConfigForSystem(system: GameSystem): Flow<SystemCoreConfig> {
         return getSelectedCoreNameForSystem(system)
             .map { coreName ->
-                system.systemCoreConfigs.first { it.coreID.coreName == coreName }
+                system.systemCoreConfigs.firstOrNull { it.coreID.coreName == coreName }
+                    ?: system.systemCoreConfigs.first()
             }
     }
 
@@ -103,8 +181,17 @@ class CoresSelection(
 
     companion object {
         private const val CORE_SELECTION_BINDING_PREFERENCE_BASE_KEY = "pref_key_core_selection"
+        private const val GAME_CORE_SELECTION_PREFERENCE_BASE_KEY = "pref_key_game_core_selection"
+        private const val CORE_FALLBACK_DISMISSED_BASE_KEY = "pref_key_core_fallback_dismissed"
 
         fun computeSystemPreferenceKey(systemID: SystemID) =
             "${CORE_SELECTION_BINDING_PREFERENCE_BASE_KEY}_${systemID.dbname}"
+
+        fun computeGamePreferenceKey(gameKey: String) = "${GAME_CORE_SELECTION_PREFERENCE_BASE_KEY}_$gameKey"
+
+        fun computeFallbackDismissedKey(
+            gameKey: String,
+            coreName: String,
+        ) = "${CORE_FALLBACK_DISMISSED_BASE_KEY}_${coreName}_$gameKey"
     }
 }

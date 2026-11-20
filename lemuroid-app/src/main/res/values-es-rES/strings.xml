@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_home">Inicio</string>
     <string name="title_search">Búsqueda</string>
@@ -351,10 +351,20 @@
     <string name="update_no_update_title">Sin actualizaciones</string>
     <string name="update_no_update_message">No hay actualizaciones disponibles en este momento.</string>
     <string name="update_error_title">Error de actualización</string>
+    <string name="update_error_insufficient_storage">Espacio interno insuficiente para actualizar. Necesario: %1$d MB, disponible: %2$d MB. Libera espacio e inténtalo de nuevo.</string>
+    <string name="update_error_install_storage">No hay suficiente espacio en el dispositivo para instalar la actualización. Libera espacio interno e inténtalo de nuevo.</string>
+    <string name="update_error_install_conflict">No se pudo actualizar sobre la versión instalada (firma incompatible). Haz una copia de seguridad de tus partidas y desinstala la versión anterior antes de instalar la nueva.</string>
+    <string name="update_error_install_incompatible">El paquete de actualización no es compatible con este dispositivo.</string>
+    <string name="update_error_install_invalid">El paquete de actualización descargado no es válido o está dañado. Inténtalo de nuevo.</string>
+    <string name="update_error_install_blocked">El sistema bloqueó la instalación de la actualización. Revisa el permiso de orígenes desconocidos en la configuración del dispositivo.</string>
+    <string name="update_error_install_generic">Error de instalación (código %1$d): %2$s</string>
+    <string name="update_error_install_generic_no_detail">Error de instalación (código %1$d).</string>
+    <string name="update_error_no_installer">Este dispositivo no pudo abrir el instalador de aplicaciones automáticamente. Actualiza manualmente usando el APK.</string>
     <string name="update_checking">Buscando actualizaciones…</string>
     <string name="update_permission_title">Permiso necesario</string>
     <string name="update_permission_message">Para instalar la actualización, permite que esta aplicación instale aplicaciones de orígenes desconocidos. Se abrirá la pantalla de configuración del sistema.</string>
     <string name="update_permission_action">Abrir configuración</string>
+    <string name="update_permission_settings_unavailable">No se pudo abrir la pantalla de permisos automáticamente. Abre la Configuración del dispositivo y permite instalar aplicaciones desconocidas para Retro Game System.</string>
     <string name="settings_title_check_update">Buscar actualizaciones</string>
     <string name="settings_description_check_update">Comprueba si hay una versión nueva de la aplicación</string>
     <string name="transfer_title">Transferir juegos</string>

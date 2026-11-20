@@ -64,6 +64,8 @@ import com.swordfish.touchinput.radial.layouts.Genesis6Left
 import com.swordfish.touchinput.radial.layouts.Genesis6Right
 import com.swordfish.touchinput.radial.layouts.LynxLeft
 import com.swordfish.touchinput.radial.layouts.LynxRight
+import com.swordfish.touchinput.radial.layouts.MSXLeft
+import com.swordfish.touchinput.radial.layouts.MSXRight
 import com.swordfish.touchinput.radial.layouts.MelonDSLeft
 import com.swordfish.touchinput.radial.layouts.MelonDSRight
 import com.swordfish.touchinput.radial.layouts.N64Left
@@ -144,6 +146,7 @@ enum class TouchControllerID {
     PCFX,
     GAME_WATCH,
     ATARI_ST,
+    MSX,
     ;
 
     class Config(
@@ -440,6 +443,12 @@ enum class TouchControllerID {
                     Config(
                         { modifier, settings -> AtariSTLeft(modifier, settings) },
                         { modifier, settings -> AtariSTRight(modifier, settings) },
+                    )
+
+                MSX ->
+                    Config(
+                        { modifier, settings -> MSXLeft(modifier, settings) },
+                        { modifier, settings -> MSXRight(modifier, settings) },
                     )
             }
         }

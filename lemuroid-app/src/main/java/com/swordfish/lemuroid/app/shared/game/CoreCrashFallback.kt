@@ -55,6 +55,8 @@ object CoreCrashFallback {
     /** Timestamp of the newest native death already reported to the user, so it is told once. */
     private const val PREF_LAST_NOTIFIED_EXIT_AT = "core_crash_last_notified_exit_at"
 
+    private const val NATIVE_CRASH_CLOCK_SLOP_MS = 1_000L
+
     private const val SYSTEM_3DS = "3ds"
     private const val CORE_CITRA_LEGACY = "citra_legacy"
     private const val NAMESPACE_CITRA_LEGACY = "3ds_citra_legacy"
@@ -164,6 +166,36 @@ object CoreCrashFallback {
         return true
     }
 
+    /** Marks a native exit timestamp as already handled (e.g. by immediate core fallback). */
+    fun markExitHandled(
+        context: Context,
+        exitTimestamp: Long,
+    ) {
+        if (exitTimestamp <= 0L) return
+        try {
+            val preferences = SharedPreferencesHelper.getSharedPreferences(context)
+            val existing = preferences.getLong(PREF_LAST_NOTIFIED_EXIT_AT, 0L)
+            if (exitTimestamp > existing) {
+                preferences.edit()
+                    .putLong(PREF_LAST_NOTIFIED_EXIT_AT, exitTimestamp)
+                    .apply()
+            }
+        } catch (ignored: Throwable) {
+        }
+    }
+
+    /**
+     * Timestamp of a `:game` native crash exit recorded at or after [startedAtMs] (allowing small
+     * clock/recording skew via [NATIVE_CRASH_CLOCK_SLOP_MS]), or null when unavailable/absent.
+     */
+    fun findNativeCrashSince(
+        context: Context,
+        startedAtMs: Long,
+    ): Long? {
+        if (startedAtMs <= 0L) return null
+        return findNativeCrash(context, startedAtMs - NATIVE_CRASH_CLOCK_SLOP_MS)
+    }
+
     /**
      * Timestamp of the `:game` process dying of a native crash at or after the start of the session
      * [TelemetryContext] recorded, or null when it did not. The timestamp comparison is what keeps
@@ -172,18 +204,29 @@ object CoreCrashFallback {
     private fun nativeCrashDuringLastSession(context: Context): Long? {
         val startedAt = TelemetryContext.lastGameSessionStartedAt(context)
         if (startedAt <= 0L) return null
+        return findNativeCrash(context, startedAt)
+    }
 
-        val activityManager =
-            context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager ?: return null
-        val exits = activityManager.getHistoricalProcessExitReasons(context.packageName, 0, 0)
+    private fun findNativeCrash(
+        context: Context,
+        minTimestamp: Long,
+    ): Long? {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) return null
+        return try {
+            val activityManager =
+                context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager ?: return null
+            val exits = activityManager.getHistoricalProcessExitReasons(context.packageName, 0, 0)
 
-        return exits.orEmpty()
-            .filter { info ->
-                info.reason == ApplicationExitInfo.REASON_CRASH_NATIVE &&
-                    info.timestamp >= startedAt &&
-                    info.processName.orEmpty().endsWith(":game")
-            }
-            .maxOfOrNull { it.timestamp }
+            exits.orEmpty()
+                .filter { info ->
+                    info.reason == ApplicationExitInfo.REASON_CRASH_NATIVE &&
+                        info.timestamp >= minTimestamp &&
+                        info.processName.orEmpty().endsWith(":game")
+                }
+                .maxOfOrNull { it.timestamp }
+        } catch (ignored: Throwable) {
+            null
+        }
     }
 
     /** Reads `key=value` out of the `system=…; core=…; game=…` breadcrumb [TelemetryContext] writes. */

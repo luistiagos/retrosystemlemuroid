@@ -35,13 +35,13 @@
         <error line="237" column="27" source="standard:multiline-expression-wrapping" />
         <error line="318" column="13" source="standard:function-signature" />
         <error line="318" column="30" source="standard:function-signature" />
-        <error line="553" column="1" source="standard:max-line-length" />
-        <error line="553" column="13" source="standard:function-signature" />
-        <error line="553" column="32" source="standard:argument-list-wrapping" />
-        <error line="553" column="41" source="standard:argument-list-wrapping" />
-        <error line="553" column="80" source="standard:argument-list-wrapping" />
-        <error line="553" column="110" source="standard:argument-list-wrapping" />
-        <error line="553" column="128" source="standard:argument-list-wrapping" />
+        <error line="560" column="1" source="standard:max-line-length" />
+        <error line="560" column="13" source="standard:function-signature" />
+        <error line="560" column="32" source="standard:argument-list-wrapping" />
+        <error line="560" column="41" source="standard:argument-list-wrapping" />
+        <error line="560" column="80" source="standard:argument-list-wrapping" />
+        <error line="560" column="110" source="standard:argument-list-wrapping" />
+        <error line="560" column="128" source="standard:argument-list-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/mobile/feature/gamemenu/GameMenuActivity.kt">
         <error line="91" column="63" source="standard:statement-wrapping" />
@@ -49,7 +49,7 @@
         <error line="91" column="80" source="standard:statement-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/mobile/feature/gamemenu/GameMenuHomeScreen.kt">
-        <error line="115" column="29" source="standard:multiline-expression-wrapping" />
+        <error line="148" column="29" source="standard:multiline-expression-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/mobile/feature/input/GamePadBindingActivity.kt">
         <error line="40" column="26" source="standard:statement-wrapping" />
@@ -222,19 +222,19 @@
         <error line="270" column="25" source="standard:multiline-expression-wrapping" />
         <error line="275" column="27" source="standard:multiline-expression-wrapping" />
         <error line="344" column="36" source="standard:multiline-expression-wrapping" />
-        <error line="389" column="1" source="standard:max-line-length" />
-        <error line="389" column="94" source="standard:argument-list-wrapping" />
-        <error line="389" column="106" source="standard:argument-list-wrapping" />
-        <error line="389" column="125" source="standard:argument-list-wrapping" />
-        <error line="410" column="1" source="standard:max-line-length" />
-        <error line="410" column="31" source="standard:multiline-expression-wrapping" />
-        <error line="414" column="31" source="standard:multiline-expression-wrapping" />
-        <error line="419" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="486" column="5" source="standard:blank-line-before-declaration" />
-        <error line="486" column="5" source="standard:no-consecutive-comments" />
-        <error line="535" column="36" source="standard:function-signature" />
-        <error line="535" column="53" source="standard:function-signature" />
-        <error line="535" column="86" source="standard:function-signature" />
+        <error line="391" column="1" source="standard:max-line-length" />
+        <error line="391" column="94" source="standard:argument-list-wrapping" />
+        <error line="391" column="106" source="standard:argument-list-wrapping" />
+        <error line="391" column="125" source="standard:argument-list-wrapping" />
+        <error line="412" column="1" source="standard:max-line-length" />
+        <error line="412" column="31" source="standard:multiline-expression-wrapping" />
+        <error line="416" column="31" source="standard:multiline-expression-wrapping" />
+        <error line="421" column="27" source="standard:multiline-expression-wrapping" />
+        <error line="510" column="5" source="standard:blank-line-before-declaration" />
+        <error line="510" column="5" source="standard:no-consecutive-comments" />
+        <error line="559" column="36" source="standard:function-signature" />
+        <error line="559" column="53" source="standard:function-signature" />
+        <error line="559" column="86" source="standard:function-signature" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/game/ExternalGameLauncherActivity.kt">
         <error line="19" column="1" source="standard:no-unused-imports" />
@@ -256,9 +256,9 @@
         <error line="366" column="178" source="standard:argument-list-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/game/viewmodel/GameViewModelSideEffects.kt">
-        <error line="65" column="30" source="standard:function-signature" />
-        <error line="65" column="47" source="standard:function-signature" />
-        <error line="65" column="80" source="standard:function-signature" />
+        <error line="79" column="30" source="standard:function-signature" />
+        <error line="79" column="47" source="standard:function-signature" />
+        <error line="79" column="80" source="standard:function-signature" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/input/InputBindingUpdater.kt">
         <error line="3" column="1" source="standard:import-ordering" />
@@ -302,10 +302,6 @@
         <error line="8" column="28" source="standard:function-signature" />
         <error line="8" column="46" source="standard:function-signature" />
         <error line="8" column="60" source="standard:function-signature" />
-    </file>
-    <file name="src/main/java/com/swordfish/lemuroid/app/shared/main/GameLaunchTaskHandler.kt">
-        <error line="58" column="1" source="standard:max-line-length" />
-        <error line="64" column="1" source="standard:max-line-length" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/shared/roms/RomOnDemandManager.kt">
         <error line="448" column="1" source="standard:max-line-length" />
@@ -612,42 +608,6 @@
         <error line="134" column="1" source="standard:max-line-length" />
         <error line="138" column="1" source="standard:max-line-length" />
     </file>
-    <file name="src/main/java/com/swordfish/lemuroid/app/shared/updates/AppUpdateManager.kt">
-        <error line="41" column="1" source="standard:no-empty-first-line-in-class-body" />
-        <error line="99" column="54" source="standard:function-signature" />
-        <error line="102" column="49" source="standard:multiline-expression-wrapping" />
-        <error line="102" column="49" source="standard:function-signature" />
-        <error line="108" column="1" source="standard:max-line-length" />
-        <error line="118" column="23" source="standard:multiline-expression-wrapping" />
-        <error line="142" column="23" source="standard:multiline-expression-wrapping" />
-        <error line="146" column="26" source="standard:multiline-expression-wrapping" />
-        <error line="148" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="239" column="23" source="standard:multiline-expression-wrapping" />
-        <error line="255" column="25" source="standard:multiline-expression-wrapping" />
-        <error line="288" column="27" source="standard:function-signature" />
-        <error line="288" column="45" source="standard:function-signature" />
-        <error line="288" column="54" source="standard:function-signature" />
-        <error line="342" column="33" source="standard:multiline-expression-wrapping" />
-        <error line="356" column="19" source="standard:multiline-expression-wrapping" />
-        <error line="361" column="22" source="standard:multiline-expression-wrapping" />
-        <error line="368" column="30" source="standard:function-signature" />
-    </file>
-    <file name="src/main/java/com/swordfish/lemuroid/app/shared/updates/AppUpdateViewModel.kt">
-        <error line="15" column="1" source="standard:no-empty-first-line-in-class-body" />
-        <error line="23" column="9" source="standard:blank-line-before-declaration" />
-        <error line="24" column="9" source="standard:blank-line-before-declaration" />
-        <error line="25" column="9" source="standard:blank-line-before-declaration" />
-        <error line="32" column="9" source="standard:blank-line-before-declaration" />
-        <error line="33" column="9" source="standard:blank-line-before-declaration" />
-        <error line="34" column="9" source="standard:blank-line-before-declaration" />
-        <error line="51" column="28" source="standard:multiline-expression-wrapping" />
-        <error line="68" column="28" source="standard:multiline-expression-wrapping" />
-    </file>
-    <file name="src/main/java/com/swordfish/lemuroid/app/shared/updates/UpdateInstallReceiver.kt">
-        <error line="11" column="28" source="standard:function-signature" />
-        <error line="11" column="46" source="standard:function-signature" />
-        <error line="11" column="60" source="standard:function-signature" />
-    </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/tv/gamemenu/TVGameMenuActivity.kt">
         <error line="21" column="59" source="standard:statement-wrapping" />
         <error line="21" column="68" source="standard:statement-wrapping" />
@@ -673,18 +633,6 @@
         <error line="32" column="33" source="standard:multiline-expression-wrapping" />
         <error line="35" column="42" source="standard:trailing-comma-on-declaration-site" />
         <error line="37" column="42" source="standard:trailing-comma-on-declaration-site" />
-    </file>
-    <file name="src/main/java/com/swordfish/lemuroid/app/tv/shared/TVAppUpdateDialog.kt">
-        <error line="26" column="1" source="standard:no-empty-first-line-in-class-body" />
-        <error line="108" column="26" source="standard:multiline-expression-wrapping" />
-        <error line="111" column="27" source="standard:multiline-expression-wrapping" />
-        <error line="114" column="28" source="standard:multiline-expression-wrapping" />
-        <error line="119" column="22" source="standard:multiline-expression-wrapping" />
-        <error line="126" column="22" source="standard:multiline-expression-wrapping" />
-        <error line="140" column="43" source="standard:multiline-expression-wrapping" />
-        <error line="156" column="29" source="standard:function-signature" />
-        <error line="156" column="44" source="standard:function-signature" />
-        <error line="156" column="59" source="standard:function-signature" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/app/utils/games/GameUtils.kt">
         <error line="27" column="39" source="standard:multiline-expression-wrapping" />

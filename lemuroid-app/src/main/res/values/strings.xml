@@ -117,6 +117,10 @@
     <string name="game_context_menu_remove_from_favorites">Remove from favorites</string>
     <string name="game_context_menu_resume">Resume</string>
     <string name="game_context_menu_restart">Restart</string>
+    <string name="game_context_menu_change_core">Core: %1$s</string>
+    <string name="game_context_menu_select_core">Change Core</string>
+    <string name="game_core_picker_title">Choose core for %1$s</string>
+    <string name="game_core_changed_toast">Core set to %1$s</string>
     <string name="game_context_menu_create_shortcut">Pin to launcher</string>
     <string name="game_context_menu_delete_rom">Delete downloaded ROM</string>
     <string name="game_context_menu_delete_from_catalog">Remove from catalog</string>
@@ -273,6 +277,7 @@
     <string name="game_menu_restart">Restart</string>
     <string name="game_menu_quit">Quit</string>
     <string name="game_menu_settings">Settings</string>
+    <string name="game_menu_switch_core">Switch Core</string>
     <string name="game_menu_state">State %1$s</string>
     <string name="game_menu_change_disk_button">Change Disk</string>
     <string name="game_menu_edit_touch_controls">Edit Controls</string>
@@ -291,6 +296,15 @@
     <string name="core_crash_notice_title">The game closed unexpectedly</string>
     <string name="core_crash_notice_message">%1$s stopped because the %2$s emulator core crashed. If it keeps happening, try another core for this system in Settings.</string>
     <string name="core_crash_notice_message_option_disabled">%1$s stopped because the %2$s emulator core crashed. Hardware shaders were turned off for this system so it can run again — you can turn them back on in the in-game settings.</string>
+    <string name="game_core_fallback_relaunching">%1$s failed. Trying %2$s…</string>
+    <string name="game_core_stalled_relaunching">%1$s stopped responding. Trying %2$s…</string>
+    <string name="game_core_fallback_prompt_title">Problem running this game?</string>
+    <string name="game_core_fallback_prompt_stalled">%1$s stopped responding on %2$s. Try opening it with %3$s?</string>
+    <string name="game_core_fallback_prompt_no_frame">%1$s did not start on %2$s. Try opening it with %3$s?</string>
+    <string name="game_core_fallback_prompt_short_session">Did %1$s freeze or get stuck on %2$s? You can try opening it with %3$s instead.</string>
+    <string name="game_core_fallback_prompt_try_other">Open with %1$s</string>
+    <string name="game_core_fallback_prompt_not_now">Not now</string>
+    <string name="game_core_fallback_prompt_was_fine">It worked fine</string>
     <string name="game_toast_quick_save_loaded">Quick loaded</string>
     <string name="game_toast_quick_save_saved">Quick saved</string>
     <string name="game_toast_state_while_loading">The game is still loading. Try again in a moment.</string>
@@ -435,10 +449,20 @@
     <string name="update_no_update_title">No updates</string>
     <string name="update_no_update_message">No updates are available right now.</string>
     <string name="update_error_title">Update error</string>
+    <string name="update_error_insufficient_storage">Not enough internal storage to update. Needed: %1$d MB, available: %2$d MB. Free up space and try again.</string>
+    <string name="update_error_install_storage">Not enough storage on the device to install the update. Free up internal space and try again.</string>
+    <string name="update_error_install_conflict">Could not update over the installed version (incompatible signature). Back up your saves and uninstall the previous version before installing the new one.</string>
+    <string name="update_error_install_incompatible">This update package is not compatible with this device.</string>
+    <string name="update_error_install_invalid">The downloaded update package is invalid or corrupted. Try again.</string>
+    <string name="update_error_install_blocked">The system blocked the update installation. Check the unknown sources permission in device settings.</string>
+    <string name="update_error_install_generic">Installation failed (code %1$d): %2$s</string>
+    <string name="update_error_install_generic_no_detail">Installation failed (code %1$d).</string>
+    <string name="update_error_no_installer">This device could not open the app installer automatically. Update manually using the APK.</string>
     <string name="update_checking">Checking for updates…</string>
     <string name="update_permission_title">Permission required</string>
     <string name="update_permission_message">To install the update, allow this app to install apps from unknown sources. You will be taken to the system settings screen.</string>
     <string name="update_permission_action">Open settings</string>
+    <string name="update_permission_settings_unavailable">Could not open the permission screen automatically. Open your device Settings and allow installing unknown apps for Retro Game System.</string>
     <string name="settings_title_check_update">Check for updates</string>
     <string name="settings_description_check_update">Check whether a new app version is available</string>
 

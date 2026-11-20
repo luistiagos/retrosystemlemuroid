@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class AppUpdateViewModel(context: Context) : ViewModel() {
-
     class Factory(private val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T =
             AppUpdateViewModel(context.applicationContext) as T
@@ -20,8 +19,11 @@ class AppUpdateViewModel(context: Context) : ViewModel() {
 
     sealed class State {
         object Idle : State()
+
         object Checking : State()
+
         data class UpdateAvailable(val info: AppUpdateManager.UpdateInfo) : State()
+
         object NoUpdate : State()
 
         /**
@@ -29,14 +31,44 @@ class AppUpdateViewModel(context: Context) : ViewModel() {
          * Perguntamos antes de baixar 100 MB que o sistema jogaria fora.
          */
         data class PermissionRequired(val info: AppUpdateManager.UpdateInfo) : State()
+
         data class Downloading(val progress: Float) : State()
+
         object Installing : State()
+
         data class Error(val message: String) : State()
     }
 
     private val manager = AppUpdateManager(context.applicationContext)
     private val _state = MutableStateFlow<State>(State.Idle)
     val state: StateFlow<State> = _state.asStateFlow()
+    private var activeSessionId: Int? = null
+    private var lastCompletedSessionId: Int? = null
+
+    init {
+        viewModelScope.launch {
+            UpdateInstallEvents.results.collect { result ->
+                val target = activeSessionId
+                if (target != null && result.sessionId != -1 && result.sessionId != target) {
+                    return@collect
+                }
+                activeSessionId = null
+                lastCompletedSessionId = result.sessionId
+                when (result) {
+                    is UpdateInstallResult.Success,
+                    is UpdateInstallResult.Aborted,
+                    -> {
+                        if (_state.value is State.Installing) {
+                            _state.value = State.Idle
+                        }
+                    }
+                    is UpdateInstallResult.Failed -> {
+                        _state.value = State.Error(result.message)
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Checagem ao abrir o app: silenciosa, no maximo 1x a cada 12h, e respeita
@@ -48,15 +80,16 @@ class AppUpdateViewModel(context: Context) : ViewModel() {
         if (!manager.shouldCheckNow()) return
         viewModelScope.launch {
             _state.value = State.Checking
-            _state.value = try {
-                manager.checkForUpdate()
-                    ?.takeIf { !manager.isVersionSkipped(it.versionCode) }
-                    ?.let { State.UpdateAvailable(it) }
-                    ?: State.Idle
-            } catch (e: Exception) {
-                Timber.w(e, "Startup update check failed")
-                State.Idle
-            }
+            _state.value =
+                try {
+                    manager.checkForUpdate()
+                        ?.takeIf { !manager.isVersionSkipped(it.versionCode) }
+                        ?.let { State.UpdateAvailable(it) }
+                        ?: State.Idle
+                } catch (e: Exception) {
+                    Timber.w(e, "Startup update check failed")
+                    State.Idle
+                }
         }
     }
 
@@ -65,11 +98,12 @@ class AppUpdateViewModel(context: Context) : ViewModel() {
         if (_state.value is State.Downloading || _state.value is State.Installing) return
         viewModelScope.launch {
             _state.value = State.Checking
-            _state.value = try {
-                manager.checkForUpdate()?.let { State.UpdateAvailable(it) } ?: State.NoUpdate
-            } catch (e: Exception) {
-                State.Error(e.message ?: "Unknown error")
-            }
+            _state.value =
+                try {
+                    manager.checkForUpdate()?.let { State.UpdateAvailable(it) } ?: State.NoUpdate
+                } catch (e: Exception) {
+                    State.Error(e.message ?: "Unknown error")
+                }
         }
     }
 
@@ -79,20 +113,36 @@ class AppUpdateViewModel(context: Context) : ViewModel() {
             return
         }
         viewModelScope.launch {
+            lastCompletedSessionId = null
             _state.value = State.Downloading(0f)
             try {
-                manager.downloadAndInstall(info) { progress ->
-                    _state.value = State.Downloading(progress)
+                val dispatch =
+                    manager.downloadAndInstall(info) { progress ->
+                        _state.value = State.Downloading(progress)
+                    }
+                when (dispatch) {
+                    is AppUpdateManager.InstallDispatch.PackageInstallerSession -> {
+                        if (lastCompletedSessionId != dispatch.sessionId) {
+                            activeSessionId = dispatch.sessionId
+                            _state.value = State.Installing
+                        }
+                    }
+                    AppUpdateManager.InstallDispatch.SystemIntent -> {
+                        activeSessionId = null
+                        _state.value = State.Idle
+                    }
                 }
-                _state.value = State.Installing
             } catch (e: Exception) {
                 Timber.w(e, "Update download failed")
+                activeSessionId = null
                 _state.value = State.Error(e.message ?: "Unknown error")
             }
         }
     }
 
     fun buildAllowInstallIntent(): Intent = manager.buildAllowInstallIntent()
+
+    fun openAllowInstallSettings(hostContext: Context): Boolean = manager.openAllowInstallSettings(hostContext)
 
     /** "Agora nao": nao insiste nesta versao ate sair uma mais nova. */
     fun dismissUpdate() {

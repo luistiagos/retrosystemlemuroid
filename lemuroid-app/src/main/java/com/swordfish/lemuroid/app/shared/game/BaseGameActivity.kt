@@ -386,6 +386,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                     is GameViewModelSideEffects.UiEffect.ShowToast -> displayToast(it.message)
                     is GameViewModelSideEffects.UiEffect.SuccessfulFinish ->
                         performSuccessfulActivityFinish(it.savesFailed)
+                    is GameViewModelSideEffects.UiEffect.SwitchCoreFinish ->
+                        performSwitchCoreFinish(it.targetCoreName, it.savesFailed)
                     is GameViewModelSideEffects.UiEffect.FailureFinish -> performErrorFinish(it.message, it.isRomLoadFailure)
                     is GameViewModelSideEffects.UiEffect.SaveQuickSave -> performSaveQuickSave()
                     is GameViewModelSideEffects.UiEffect.LoadQuickSave -> performLoadQuickSave()
@@ -470,9 +472,31 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 putExtra(PLAY_GAME_RESULT_GAME, intent.getSerializableExtra(EXTRA_GAME))
                 putExtra(PLAY_GAME_RESULT_LEANBACK, intent.getBooleanExtra(EXTRA_LEANBACK, false))
                 putExtra(PLAY_GAME_RESULT_SAVES_FAILED, savesFailed)
+                putExtra(PLAY_GAME_RESULT_FIRST_FRAME_RENDERED, baseGameScreenViewModel.isFirstFrameRendered())
+                if (::systemCoreConfig.isInitialized) {
+                    putExtra(PLAY_GAME_RESULT_CORE_ID, systemCoreConfig.coreID.coreName)
+                }
+                putStringArrayListExtra(PLAY_GAME_RESULT_TRIED_CORES, buildUpdatedTriedCores())
             }
 
         setResult(Activity.RESULT_OK, resultIntent)
+        finishAndExitProcess()
+    }
+
+    private fun performSwitchCoreFinish(
+        targetCoreName: String,
+        savesFailed: Boolean = false,
+    ) {
+        TelemetryContext.clearGameSession(applicationContext)
+        val resultIntent =
+            Intent().apply {
+                putExtra(PLAY_GAME_RESULT_GAME, intent.getSerializableExtra(EXTRA_GAME))
+                putExtra(PLAY_GAME_RESULT_LEANBACK, intent.getBooleanExtra(EXTRA_LEANBACK, false))
+                putExtra(PLAY_GAME_RESULT_TARGET_CORE_ID, targetCoreName)
+                putExtra(PLAY_GAME_RESULT_SAVES_FAILED, savesFailed)
+            }
+
+        setResult(RESULT_SWITCH_CORE, resultIntent)
         finishAndExitProcess()
     }
 
@@ -698,6 +722,13 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                         ?: return
                 baseGameScreenViewModel.changeTiltConfiguration(tiltConfig)
             }
+            val targetCore = data?.getStringExtra(GameMenuContract.RESULT_SWITCH_CORE)
+            if (!targetCore.isNullOrBlank() &&
+                ::systemCoreConfig.isInitialized &&
+                targetCore != systemCoreConfig.coreID.coreName
+            ) {
+                baseGameScreenViewModel.requestSwitchCore(targetCore)
+            }
         }
     }
 
@@ -767,6 +798,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         const val PLAY_GAME_RESULT_IS_EMULATOR_FAILURE = "PLAY_GAME_RESULT_IS_EMULATOR_FAILURE"
         const val PLAY_GAME_RESULT_IS_CORE_STALL = "PLAY_GAME_RESULT_IS_CORE_STALL"
         const val PLAY_GAME_RESULT_CORE_ID = "PLAY_GAME_RESULT_CORE_ID"
+        const val PLAY_GAME_RESULT_FIRST_FRAME_RENDERED = "PLAY_GAME_RESULT_FIRST_FRAME_RENDERED"
+        const val PLAY_GAME_RESULT_TARGET_CORE_ID = "PLAY_GAME_RESULT_TARGET_CORE_ID"
 
         private const val LIBRETRODROID_PACKAGE = "com.swordfish.libretrodroid"
         private const val MAX_CAUSE_DEPTH = 10
@@ -787,6 +820,9 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         /** O `:game` ja tinha hospedado uma sessao; relancar em processo novo. Ver [GameProcessSession]. */
         const val RESULT_RESTART_IN_FRESH_PROCESS = Activity.RESULT_FIRST_USER + 4
+
+        /** Usuario pediu troca de nucleo pelo menu dentro do jogo. */
+        const val RESULT_SWITCH_CORE = Activity.RESULT_FIRST_USER + 5
 
         fun launchGame(
             activity: Activity,

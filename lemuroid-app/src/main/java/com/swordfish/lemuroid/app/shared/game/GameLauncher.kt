@@ -49,7 +49,7 @@ class GameLauncher(
                     return@launch
                 }
                 val system = GameSystem.findByIdOrNull(launchGame.systemId) ?: return@launch
-                val coreConfig = coresSelection.getCoreConfigForSystem(system)
+                val coreConfig = coresSelection.getCoreConfigForGame(system, launchGame)
                 withContext(Dispatchers.IO) {
                     gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
                     runCatching {
@@ -59,6 +59,7 @@ class GameLauncher(
                     }
                     GameProcessSession.awaitGameProcessExit(activity.applicationContext)
                 }
+                gameLaunchTaskHandler.recordActiveLaunch(launchGame, coreConfig, emptyList(), leanback)
                 BaseGameActivity.launchGame(activity, coreConfig, launchGame, loadSave, leanback)
             } finally {
                 isLaunching.set(false)

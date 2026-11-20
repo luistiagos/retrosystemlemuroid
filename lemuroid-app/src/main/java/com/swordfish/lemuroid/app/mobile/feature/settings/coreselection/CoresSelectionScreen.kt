@@ -7,7 +7,9 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -48,17 +50,23 @@ fun CoresSelectionScreen(
         }
         LemuroidCardSettingsGroup {
             cores.forEach { (system, core) ->
-                val state = rememberMemoryIntSettingState(system.systemCoreConfigs.indexOf(core))
+                key(system.id) {
+                    val coreIndex = system.systemCoreConfigs.indexOf(core).coerceAtLeast(0)
+                    val state = rememberMemoryIntSettingState(coreIndex)
+                    LaunchedEffect(core.coreID) {
+                        state.value = coreIndex
+                    }
 
-                LemuroidSettingsList(
-                    state = state,
-                    title = { Text(text = stringResource(system.titleResId)) },
-                    items = system.systemCoreConfigs.map { it.coreID.coreDisplayName },
-                    enabled = !indexingInProgress,
-                    onItemSelected = { index, _ ->
-                        viewModel.changeCore(system, system.systemCoreConfigs[index], applicationContext)
-                    },
-                )
+                    LemuroidSettingsList(
+                        state = state,
+                        title = { Text(text = stringResource(system.titleResId)) },
+                        items = system.systemCoreConfigs.map { it.coreID.coreDisplayName },
+                        enabled = !indexingInProgress,
+                        onItemSelected = { index, _ ->
+                            viewModel.changeCore(system, system.systemCoreConfigs[index], applicationContext)
+                        },
+                    )
+                }
             }
         }
     }

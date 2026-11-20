@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Memory
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.RestartAlt
 import androidx.compose.material3.BottomSheetDefaults
@@ -59,6 +60,7 @@ import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameImage
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LocalLemuroidTypography
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SheetMargin
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.SystemChip
+import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,6 +75,9 @@ fun MainGameContextActions(
     onCreateShortcut: (Game) -> Unit,
     onDeleteRom: ((Game) -> Unit)? = null,
     onDeleteFromCatalog: ((Game) -> Unit)? = null,
+    availableCores: List<SystemCoreConfig> = emptyList(),
+    selectedCoreConfig: SystemCoreConfig? = null,
+    onChangeCore: ((Game) -> Unit)? = null,
 ) {
     val modalSheetState = rememberModalBottomSheetState(true)
     val selectedGame = selectedGameState.value
@@ -101,6 +106,9 @@ fun MainGameContextActions(
                 isGameDownloaded = isGameDownloaded,
                 onDeleteRom = onDeleteRom,
                 onDeleteFromCatalog = onDeleteFromCatalog,
+                availableCores = availableCores,
+                selectedCoreConfig = selectedCoreConfig,
+                onChangeCore = onChangeCore,
             )
         }
     }
@@ -118,6 +126,9 @@ private fun ContextActionContent(
     isGameDownloaded: Boolean = true,
     onDeleteRom: ((Game) -> Unit)? = null,
     onDeleteFromCatalog: ((Game) -> Unit)? = null,
+    availableCores: List<SystemCoreConfig> = emptyList(),
+    selectedCoreConfig: SystemCoreConfig? = null,
+    onChangeCore: ((Game) -> Unit)? = null,
 ) {
     Column(
         modifier =
@@ -143,6 +154,20 @@ private fun ContextActionContent(
                 selectedGameState.value = null
             },
         )
+
+        if (availableCores.size > 1 && onChangeCore != null) {
+            val currentName =
+                selectedCoreConfig?.coreID?.coreDisplayName
+                    ?: availableCores.first().coreID.coreDisplayName
+            ContextActionEntry(
+                label = stringResource(id = R.string.game_context_menu_change_core, currentName),
+                icon = Icons.Default.Memory,
+                onClick = {
+                    onChangeCore(selectedGame)
+                    selectedGameState.value = null
+                },
+            )
+        }
 
         if (selectedGame.isFavorite) {
             ContextActionEntry(

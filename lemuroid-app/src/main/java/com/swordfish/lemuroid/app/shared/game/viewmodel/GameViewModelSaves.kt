@@ -102,7 +102,10 @@ class GameViewModelSaves(
      *
      * @return false quando algo nao pode ser gravado, para o chamador avisar o usuario.
      */
-    suspend fun saveOnExit(game: Game): Boolean = persistSession(game, PHASE_EXIT)
+    suspend fun saveOnExit(
+        game: Game,
+        fastFailIfStalled: Boolean = false,
+    ): Boolean = persistSession(game, PHASE_EXIT, fastFailIfStalled)
 
     /**
      * O jogo saiu da tela sem ser fechado (Home, troca de app, tela bloqueada). Dali em diante o
@@ -123,9 +126,15 @@ class GameViewModelSaves(
     private suspend fun persistSession(
         game: Game,
         phase: String,
+        fastFailIfStalled: Boolean = false,
     ): Boolean =
         persistMutex.withLock {
             val view = retroGameView.retroGameView ?: return@withLock true
+
+            if (fastFailIfStalled && !glThreadResponds(view)) {
+                Timber.w("Skipping exit save ($phase): GL thread is not draining its event queue")
+                return@withLock false
+            }
 
             val sramSaved = trySaveSRAM(view, game, phase)
 

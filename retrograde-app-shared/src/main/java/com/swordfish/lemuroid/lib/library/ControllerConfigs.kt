@@ -394,8 +394,15 @@ object ControllerConfigs {
         ControllerConfig(
             "default",
             R.string.controller_default,
-            TouchControllerID.SMS,
+            TouchControllerID.MSX,
             mergeDPADAndLeftStickEvents = true,
+            // fMSX initialises port 0's device variable to 0 (RETRO_DEVICE_NONE) and skips all
+            // port 0 input in retro_run until retro_set_controller_port_device(0, ...) is called.
+            // Matching "Joystick + Emulated Keyboard" (0x101) forces setControllerType on port 0,
+            // enabling Joystick (D-pad, Fire A/B) plus Space (Y), F1-F5 (Start/Select/X/L/R), and
+            // Enter (L3). Port 1 only registers "Joystick" and is read unconditionally by fMSX.
+            // See docs/bugs/aberto/2026-11-19-msx-sem-resposta-controles-travado-demo/.
+            libretroDescriptor = "Joystick + Emulated Keyboard",
             tiltConfigurations =
                 listOf(
                     TILT_CONFIGURATION_DISABLED,

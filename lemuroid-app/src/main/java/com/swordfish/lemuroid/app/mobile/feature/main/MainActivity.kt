@@ -19,11 +19,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.Text
@@ -34,9 +39,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -107,7 +114,9 @@ import com.swordfish.lemuroid.lib.android.RetrogradeComponentActivity
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.injection.PerActivity
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.MetaSystemID
+import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -840,6 +849,24 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 }
             }
 
+            val pendingCorePickerGame = remember { mutableStateOf<Game?>(null) }
+            val contextMenuAvailableCores =
+                remember(contextMenuGame) {
+                    contextMenuGame?.let {
+                        GameSystem.findByIdOrNull(it.systemId)?.systemCoreConfigs.orEmpty()
+                    }.orEmpty()
+                }
+            val contextMenuCoreConfig = remember(contextMenuGame) { mutableStateOf<SystemCoreConfig?>(null) }
+            LaunchedEffect(contextMenuGame, contextMenuAvailableCores) {
+                contextMenuCoreConfig.value =
+                    if (contextMenuGame != null && contextMenuAvailableCores.size > 1) {
+                        val system = GameSystem.findByIdOrNull(contextMenuGame.systemId)
+                        system?.let { coresSelection.getCoreConfigForGame(it, contextMenuGame) }
+                    } else {
+                        null
+                    }
+            }
+
             MainGameContextActions(
                 selectedGameState = selectedGameState,
                 shortcutSupported = gameInteractor.supportShortcuts(),
@@ -870,7 +897,74 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
                 onDeleteRom = { game -> pendingDeleteRomGame.value = game },
                 onDeleteFromCatalog = { game -> pendingDeleteCatalogGame.value = game },
+                availableCores = contextMenuAvailableCores,
+                selectedCoreConfig = contextMenuCoreConfig.value,
+                onChangeCore = { game -> pendingCorePickerGame.value = game },
             )
+
+            pendingCorePickerGame.value?.let { game ->
+                val system = remember(game) { GameSystem.findByIdOrNull(game.systemId) }
+                val cores = system?.systemCoreConfigs.orEmpty()
+                val selectedCore = remember(game) { mutableStateOf<SystemCoreConfig?>(null) }
+                LaunchedEffect(game, system) {
+                    selectedCore.value = system?.let { coresSelection.getCoreConfigForGame(it, game) }
+                }
+                if (cores.size > 1) {
+                    AlertDialog(
+                        onDismissRequest = { pendingCorePickerGame.value = null },
+                        title = { Text(stringResource(R.string.game_core_picker_title, game.title)) },
+                        text = {
+                            Column(modifier = Modifier.selectableGroup()) {
+                                cores.forEach { coreConfig ->
+                                    val isSelected = selectedCore.value?.coreID == coreConfig.coreID
+                                    Row(
+                                        modifier =
+                                            Modifier
+                                                .fillMaxWidth()
+                                                .height(56.dp)
+                                                .selectable(
+                                                    selected = isSelected,
+                                                    role = Role.RadioButton,
+                                                    onClick = {
+                                                        pendingCorePickerGame.value = null
+                                                        lifecycleScope.launch {
+                                                            coresSelection.updateCoreConfigForGame(
+                                                                game,
+                                                                coreConfig.coreID,
+                                                            )
+                                                            coresSelection.clearAllFallbackPromptsDismissed(game)
+                                                            displayToast(
+                                                                getString(
+                                                                    R.string.game_core_changed_toast,
+                                                                    coreConfig.coreID.coreDisplayName,
+                                                                ),
+                                                            )
+                                                        }
+                                                    },
+                                                ),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                    ) {
+                                        RadioButton(selected = isSelected, onClick = null)
+                                        Text(
+                                            text = coreConfig.coreID.coreDisplayName,
+                                            style = MaterialTheme.typography.bodyLarge,
+                                            modifier = Modifier.padding(start = 16.dp),
+                                        )
+                                    }
+                                }
+                            }
+                        },
+                        confirmButton = {},
+                        dismissButton = {
+                            androidx.compose.material3.TextButton(
+                                onClick = { pendingCorePickerGame.value = null },
+                            ) {
+                                Text(stringResource(R.string.cancel))
+                            }
+                        },
+                    )
+                }
+            }
 
             pendingDeleteRomGame.value?.let { game ->
                 AlertDialog(
@@ -1088,8 +1182,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             androidx.compose.material3.TextButton(
                                 onClick = {
                                     updateViewModel.resetState()
-                                    runCatching { startActivity(updateViewModel.buildAllowInstallIntent()) }
-                                        .onFailure { Timber.w(it, "Could not open install-permission settings") }
+                                    if (!updateViewModel.openAllowInstallSettings(this@MainActivity)) {
+                                        displayToast(R.string.update_permission_settings_unavailable)
+                                    }
                                 },
                             ) {
                                 Text(stringResource(R.string.update_permission_action))

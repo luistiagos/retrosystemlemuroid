@@ -541,7 +541,14 @@ abstract class LemuroidApplicationModule {
             retrogradeDatabase: RetrogradeDatabase,
             romOnDemandManager: RomOnDemandManager,
             biosManager: BiosManager,
-        ) = GameLaunchTaskHandler(ReviewManager(), retrogradeDatabase, romOnDemandManager, biosManager)
+            coresSelection: CoresSelection,
+        ) = GameLaunchTaskHandler(
+            ReviewManager(),
+            retrogradeDatabase,
+            romOnDemandManager,
+            biosManager,
+            coresSelection,
+        )
 
         @Provides
         @PerApp

@@ -18,6 +18,11 @@ class GameViewModelSideEffects(private val scope: CoroutineScope) {
 
         data class SuccessfulFinish(val savesFailed: Boolean = false) : UiEffect
 
+        data class SwitchCoreFinish(
+            val targetCoreName: String,
+            val savesFailed: Boolean = false,
+        ) : UiEffect
+
         data class FailureFinish(val message: String, val isRomLoadFailure: Boolean = false) : UiEffect
 
         data object LoadQuickSave : UiEffect
@@ -59,6 +64,15 @@ class GameViewModelSideEffects(private val scope: CoroutineScope) {
     fun requestSuccessfulFinish(savesFailed: Boolean = false) {
         scope.launch {
             uiEffects.emit(UiEffect.SuccessfulFinish(savesFailed))
+        }
+    }
+
+    fun requestSwitchCoreFinish(
+        targetCoreName: String,
+        savesFailed: Boolean = false,
+    ) {
+        scope.launch {
+            uiEffects.emit(UiEffect.SwitchCoreFinish(targetCoreName, savesFailed))
         }
     }
 

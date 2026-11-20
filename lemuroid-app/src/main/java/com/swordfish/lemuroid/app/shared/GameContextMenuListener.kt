@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared
 import android.view.ContextMenu
 import android.view.View
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 class GameContextMenuListener(
@@ -22,6 +23,15 @@ class GameContextMenuListener(
         menu.add(R.string.game_context_menu_restart).setOnMenuItemClickListener {
             gameInteractor.onGameRestart(game)
             true
+        }
+
+        if (gameInteractor.supportsCoreSelection() &&
+            GameSystem.findByIdOrNull(game.systemId)?.systemCoreConfigs.orEmpty().size > 1
+        ) {
+            menu.add(R.string.game_context_menu_select_core).setOnMenuItemClickListener {
+                gameInteractor.onChangeCore(game)
+                true
+            }
         }
 
         if (game.isFavorite) {

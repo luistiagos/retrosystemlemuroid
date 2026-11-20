@@ -138,8 +138,17 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
                     if (isLeanback) {
                         ChannelUpdateWork.enqueue(applicationContext)
                     }
-                    gameLaunchTaskHandler.handleGameFinish(false, this@ExternalGameLauncherActivity, resultCode, data)
-                    finish()
+                    val keepAlive =
+                        gameLaunchTaskHandler.handleGameFinish(
+                            false,
+                            this@ExternalGameLauncherActivity,
+                            resultCode,
+                            data,
+                            onPromptDismissed = { finish() },
+                        )
+                    if (!keepAlive) {
+                        finish()
+                    }
                 }
             }
         }

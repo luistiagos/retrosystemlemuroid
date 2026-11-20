@@ -14,6 +14,8 @@ import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.roms.RomOnDemandManager
 import com.swordfish.lemuroid.common.displayToast
+import com.swordfish.lemuroid.lib.core.CoresSelection
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.launch
@@ -30,6 +32,7 @@ class GameInteractor(
     // to reach the deletion actions. The mobile UI drives RomOnDemandManager straight from
     // MainActivity, where the confirmation is a Compose AlertDialog.
     private val romOnDemandManager: RomOnDemandManager? = null,
+    private val coresSelection: CoresSelection? = null,
 ) {
     fun onGamePlay(game: Game) {
         if (!ensureNotBusy()) {
@@ -94,6 +97,51 @@ class GameInteractor(
 
     /** True when there is an actual ROM on disk, i.e. not a 0-byte catalog placeholder. */
     fun isRomDownloaded(game: Game): Boolean = !isGamePlaceholder(game)
+
+    /** True when the TV core-selection action is wired. */
+    fun supportsCoreSelection(): Boolean = coresSelection != null
+
+    /** Opens a per-game core picker dialog for multi-core systems (TV context menu). */
+    fun onChangeCore(game: Game) {
+        val selection = coresSelection ?: return
+        val hostActivity = activity.activity()
+        if (hostActivity.isFinishing || hostActivity.isDestroyed) return
+        val lifecycleOwner = hostActivity as? LifecycleOwner ?: return
+        val system = GameSystem.findByIdOrNull(game.systemId) ?: return
+        val configs = system.systemCoreConfigs
+        if (configs.size <= 1) return
+
+        lifecycleOwner.lifecycleScope.launch {
+            val currentConfig = selection.getCoreConfigForGame(system, game)
+            if (hostActivity.isFinishing || hostActivity.isDestroyed) return@launch
+            val checkedIndex = configs.indexOfFirst { it.coreID == currentConfig.coreID }.coerceAtLeast(0)
+            val names = configs.map { it.coreID.coreDisplayName }.toTypedArray()
+            val builder =
+                if (useLeanback) {
+                    AlertDialog.Builder(hostActivity, R.style.LemuroidTVDialog)
+                } else {
+                    AlertDialog.Builder(hostActivity)
+                }
+            builder
+                .setTitle(hostActivity.getString(R.string.game_core_picker_title, game.title))
+                .setSingleChoiceItems(names, checkedIndex) { dialog, index ->
+                    val picked = configs[index]
+                    dialog.dismiss()
+                    lifecycleOwner.lifecycleScope.launch {
+                        selection.updateCoreConfigForGame(game, picked.coreID)
+                        selection.clearAllFallbackPromptsDismissed(game)
+                        hostActivity.displayToast(
+                            hostActivity.getString(
+                                R.string.game_core_changed_toast,
+                                picked.coreID.coreDisplayName,
+                            ),
+                        )
+                    }
+                }
+                .setNegativeButton(R.string.cancel, null)
+                .show()
+        }
+    }
 
     /** Deletes the downloaded file only — the game stays in the catalog as a placeholder. */
     fun onDeleteRom(game: Game) {

@@ -6,11 +6,18 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withResumed
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.updates.AppUpdateManager
+import com.swordfish.lemuroid.app.shared.updates.UpdateInstallEvents
+import com.swordfish.lemuroid.app.shared.updates.UpdateInstallResult
 import com.swordfish.lemuroid.common.displayToast
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 /**
  * Atualizacao in-app na interface de TV.
@@ -23,7 +30,6 @@ import timber.log.Timber
  * sem isto esses aparelhos nunca ficariam sabendo de uma versao nova.
  */
 class TVAppUpdateDialog(private val activity: FragmentActivity) {
-
     private val manager = AppUpdateManager(activity.applicationContext)
 
     /** Checagem ao abrir o app: silenciosa, no maximo 1x a cada 12h. */
@@ -94,8 +100,12 @@ class TVAppUpdateDialog(private val activity: FragmentActivity) {
                 .setTitle(R.string.update_permission_title)
                 .setMessage(R.string.update_permission_message)
                 .setPositiveButton(R.string.update_permission_action) { _, _ ->
-                    runCatching { activity.startActivity(manager.buildAllowInstallIntent()) }
-                        .onFailure { Timber.w(it, "Could not open install-permission settings") }
+                    if (!manager.openAllowInstallSettings(activity)) {
+                        showMessage(
+                            activity.getString(R.string.update_permission_title),
+                            activity.getString(R.string.update_permission_settings_unavailable),
+                        )
+                    }
                 }
                 .setNegativeButton(R.string.update_dialog_no, null)
                 .show()
@@ -105,55 +115,94 @@ class TVAppUpdateDialog(private val activity: FragmentActivity) {
         val density = activity.resources.displayMetrics.density
         val padding = (24 * density).toInt()
 
-        val statusText = TextView(activity).apply {
-            text = activity.getString(R.string.update_downloading_message, 0)
-        }
-        val progressBar = ProgressBar(activity, null, android.R.attr.progressBarStyleHorizontal).apply {
-            max = 100
-            isIndeterminate = true
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-            ).also { it.topMargin = (8 * density).toInt() }
-        }
-        val layout = LinearLayout(activity).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(padding, padding / 2, padding, 0)
-            addView(statusText)
-            addView(progressBar)
-        }
+        val statusText =
+            TextView(activity).apply {
+                text = activity.getString(R.string.update_downloading_message, 0)
+            }
+        val progressBar =
+            ProgressBar(activity, null, android.R.attr.progressBarStyleHorizontal).apply {
+                max = 100
+                isIndeterminate = true
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                    ).also { it.topMargin = (8 * density).toInt() }
+            }
+        val layout =
+            LinearLayout(activity).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(padding, padding / 2, padding, 0)
+                addView(statusText)
+                addView(progressBar)
+            }
 
-        val dialog = AlertDialog.Builder(activity)
-            .setTitle(R.string.update_downloading_title)
-            .setView(layout)
-            .setCancelable(false)
-            .show()
+        val dialog =
+            AlertDialog.Builder(activity)
+                .setTitle(R.string.update_downloading_title)
+                .setView(layout)
+                .setCancelable(false)
+                .show()
 
         activity.lifecycleScope.launch {
-            try {
-                manager.downloadAndInstall(info) { progress ->
-                    activity.runOnUiThread {
-                        progressBar.isIndeterminate = progress == 0f
-                        if (!progressBar.isIndeterminate) {
-                            progressBar.progress = (progress * 100).toInt()
+            val installResult = CompletableDeferred<UpdateInstallResult>()
+            var expectedSessionId: Int? = null
+            val collectorJob =
+                launch(start = CoroutineStart.UNDISPATCHED) {
+                    UpdateInstallEvents.results.collect { result ->
+                        val target = expectedSessionId
+                        if (target == null || result.sessionId == -1 || result.sessionId == target) {
+                            installResult.complete(result)
                         }
-                        statusText.text = activity.getString(
-                            R.string.update_downloading_message,
-                            (progress * 100).toInt(),
-                        )
                     }
                 }
+            try {
+                val dispatch =
+                    manager.downloadAndInstall(info) { progress ->
+                        activity.runOnUiThread {
+                            progressBar.isIndeterminate = progress == 0f
+                            if (!progressBar.isIndeterminate) {
+                                progressBar.progress = (progress * 100).toInt()
+                            }
+                            statusText.text =
+                                activity.getString(
+                                    R.string.update_downloading_message,
+                                    (progress * 100).toInt(),
+                                )
+                        }
+                    }
                 if (dialog.isShowing) dialog.dismiss()
+
+                if (dispatch is AppUpdateManager.InstallDispatch.PackageInstallerSession) {
+                    expectedSessionId = dispatch.sessionId
+                    val outcome =
+                        withTimeoutOrNull(INSTALL_RESULT_TIMEOUT_MS) {
+                            installResult.await()
+                        }
+                    if (outcome is UpdateInstallResult.Failed) {
+                        activity.lifecycle.withResumed {
+                            showMessage(
+                                activity.getString(R.string.update_error_title),
+                                outcome.message,
+                            )
+                        }
+                    }
+                }
             } catch (e: Exception) {
                 Timber.w(e, "TV update download failed")
                 if (dialog.isShowing) dialog.dismiss()
                 if (activity.isFinishing || activity.isDestroyed) return@launch
                 showMessage(activity.getString(R.string.update_error_title), e.message ?: "")
+            } finally {
+                collectorJob.cancel()
             }
         }
     }
 
-    private fun showMessage(title: String, message: String) {
+    private fun showMessage(
+        title: String,
+        message: String,
+    ) {
         // O ramo de erro do `check()` chama isto antes do guard de isFinishing que existe no caminho
         // feliz — e a checagem é de rede, com segundos de janela para o usuário sair da tela.
         if (activity.isFinishing || activity.isDestroyed) return
@@ -163,5 +212,9 @@ class TVAppUpdateDialog(private val activity: FragmentActivity) {
             .setMessage(message)
             .setPositiveButton(android.R.string.ok, null)
             .show()
+    }
+
+    companion object {
+        private val INSTALL_RESULT_TIMEOUT_MS = TimeUnit.MINUTES.toMillis(5)
     }
 }

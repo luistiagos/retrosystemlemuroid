@@ -14,6 +14,7 @@ import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.tv.gamemenu.TVGameMenuActivity.GameMenuRequest
 import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
@@ -64,6 +65,13 @@ class TVGameMenuFragment : LeanbackPreferenceFragmentCompat() {
             request.fastForwardSupported,
         )
         GameMenuHelper.setupSaveOption(preferenceScreen, request.systemCoreConfig)
+        val availableCores = GameSystem.findByIdOrNull(request.game.systemId)?.systemCoreConfigs.orEmpty()
+        GameMenuHelper.setupSwitchCoreOption(
+            activity,
+            preferenceScreen,
+            availableCores,
+            request.systemCoreConfig,
+        )
 
         if (request.numDisks > 1) {
             GameMenuHelper.setupChangeDiskOption(
