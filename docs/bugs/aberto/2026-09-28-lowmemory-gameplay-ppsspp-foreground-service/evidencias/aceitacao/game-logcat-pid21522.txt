@@ -1,0 +1,937 @@
+--------- beginning of main
+11-20 15:31:00.033 21522 21522 I stem.debug:game: Late-enabling -Xcheck:jni
+11-20 15:31:00.088 21522 21522 I stem.debug:game: Using CollectorTypeCC GC.
+11-20 15:31:00.091 21522 21522 W stem.debug:game: Unexpected CPU variant for x86: x86_64.
+11-20 15:31:00.091 21522 21522 W stem.debug:game: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+11-20 15:31:00.248 21522 21522 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10190; state: ENABLED
+11-20 15:31:00.254 21522 21522 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 10190; state: ENABLED
+11-20 15:31:00.308 21522 21522 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-20 15:31:00.308 21522 21522 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-20 15:31:00.312 21522 21522 W ziparchive: Unable to open '/data/app/~~jKd954mcPbufxGB0k-8rKw==/app.retrogamesystem.debug-dL8bGCDhfp5OU7RjCcDPTA==/base.dm': No such file or directory
+11-20 15:31:00.312 21522 21522 W ziparchive: Unable to open '/data/app/~~jKd954mcPbufxGB0k-8rKw==/app.retrogamesystem.debug-dL8bGCDhfp5OU7RjCcDPTA==/base.dm': No such file or directory
+11-20 15:31:01.805 21522 21522 D nativeloader: Configuring clns-6 for other apk /data/app/~~jKd954mcPbufxGB0k-8rKw==/app.retrogamesystem.debug-dL8bGCDhfp5OU7RjCcDPTA==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~jKd954mcPbufxGB0k-8rKw==/app.retrogamesystem.debug-dL8bGCDhfp5OU7RjCcDPTA==/lib/x86_64:/data/app/~~jKd954mcPbufxGB0k-8rKw==/app.retrogamesystem.debug-dL8bGCDhfp5OU7RjCcDPTA==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/app.retrogamesystem.debug
+11-20 15:31:01.823 21522 21522 V GraphicsEnvironment: Currently set values for:
+11-20 15:31:01.823 21522 21522 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-20 15:31:01.823 21522 21522 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-20 15:31:01.824 21522 21522 V GraphicsEnvironment: ANGLE GameManagerService for app.retrogamesystem.debug: false
+11-20 15:31:01.825 21522 21522 V GraphicsEnvironment: app.retrogamesystem.debug is not listed in per-application setting
+11-20 15:31:01.825 21522 21522 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-20 15:31:02.327 21522 21522 I NativeTempDir: Native TMPDIR set to /data/user/0/app.retrogamesystem.debug/files/tmp
+11-20 15:31:02.339 21522 21522 D CompatibilityChangeReporter: Compat change id reported: 3400644; UID 10190; state: ENABLED
+11-20 15:31:02.342 21522 21522 I GameProcessInitializer: Requested initialization of game process tasks
+11-20 15:31:02.373 21522 21522 D StrictMode: StrictMode policy violation; ~duration=21 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.ContextImpl.getFilesDir(ContextImpl.java:826)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.content.ContextWrapper.getFilesDir(ContextWrapper.java:286)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.373 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.378 21522 21522 D StrictMode: StrictMode policy violation; ~duration=20 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:269)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:8063)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at java.io.RandomAccessFile.<init>(RandomAccessFile.java:289)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.acquireProcessLock(GameProcessSession.kt:128)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.378 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.383 21522 21522 D StrictMode: StrictMode policy violation; ~duration=20 ms: android.os.strictmode.DiskWriteViolation
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onWriteToDisk(StrictMode.java:1622)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:272)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:563)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:8063)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at java.io.RandomAccessFile.<init>(RandomAccessFile.java:289)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.acquireProcessLock(GameProcessSession.kt:128)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.383 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.386 21522 21522 D StrictMode: StrictMode policy violation; ~duration=20 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.fstat(BlockGuardOs.java:194)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.fstat(ForwardingOs.java:261)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at libcore.io.IoBridge.open(IoBridge.java:563)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at java.io.RandomAccessFile.<init>(RandomAccessFile.java:289)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.acquireProcessLock(GameProcessSession.kt:128)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.386 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.391 21522 21522 D StrictMode: StrictMode policy violation; ~duration=20 ms: android.os.strictmode.DiskWriteViolation
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onWriteToDisk(StrictMode.java:1622)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at sun.nio.ch.FileDispatcherImpl.lock(FileDispatcherImpl.java:114)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at sun.nio.ch.FileChannelImpl.tryLock(FileChannelImpl.java:1181)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.acquireProcessLock(GameProcessSession.kt:132)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.391 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.395 21522 21522 D StrictMode: StrictMode policy violation; ~duration=20 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at sun.nio.ch.FileDispatcherImpl.size(FileDispatcherImpl.java:106)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at sun.nio.ch.FileChannelImpl.truncate(FileChannelImpl.java:390)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.acquireProcessLock(GameProcessSession.kt:142)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.395 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.399 21522 21522 D StrictMode: StrictMode policy violation; ~duration=20 ms: android.os.strictmode.DiskWriteViolation
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onWriteToDisk(StrictMode.java:1622)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at sun.nio.ch.FileDispatcherImpl.truncate(FileDispatcherImpl.java:100)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at sun.nio.ch.FileChannelImpl.truncate(FileChannelImpl.java:406)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.acquireProcessLock(GameProcessSession.kt:142)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.399 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.403 21522 21522 D StrictMode: StrictMode policy violation; ~duration=19 ms: android.os.strictmode.DiskWriteViolation
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onWriteToDisk(StrictMode.java:1622)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at sun.nio.ch.FileDispatcherImpl.write(FileDispatcherImpl.java:72)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:93)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at sun.nio.ch.IOUtil.write(IOUtil.java:65)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:249)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.acquireProcessLock(GameProcessSession.kt:145)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.403 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.407 21522 21522 D StrictMode: StrictMode policy violation; ~duration=18 ms: android.os.strictmode.DiskWriteViolation
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onWriteToDisk(StrictMode.java:1622)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at sun.nio.ch.FileDispatcherImpl.force(FileDispatcherImpl.java:94)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at sun.nio.ch.FileChannelImpl.force(FileChannelImpl.java:437)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.acquireProcessLock(GameProcessSession.kt:146)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.onProcessStarted(GameProcessSession.kt:73)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:11)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer.create(GameProcessInitializer.kt:8)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:02.407 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:02.443 21522 21549 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-20 15:31:02.450 21522 21549 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-20 15:31:02.458 21522 21549 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-20 15:31:02.929 21522 21546 V NativeCrypto: Registering org/conscrypt/NativeCrypto's 288 native methods...
+11-20 15:31:02.945 21522 21546 W stem.debug:game: Accessing hidden method Ljava/security/spec/ECParameterSpec;->getCurveName()Ljava/lang/String; (unsupported, reflection, allowed)
+11-20 15:31:02.957 21522 21546 D LemuroidApplication: Conscrypt provider installed
+11-20 15:31:03.110 21522 21522 D TiltSensor: Setting tilt sensitivity max angle: 11.249999459286125
+11-20 15:31:03.283 21522 21522 I BaseGameScreenViewModel: Calling load game: Game(id=38226, fileName=Kirbys Adventure (US).nes, fileUri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/nes/Kirbys%20Adventure%20(US).nes, title=Kirbys Adventure, systemId=nes, developer=null, coverFrontUrl=null, lastIndexedAt=1795187246344, lastPlayedAt=1795184684272, isFavorite=false, popularityIndex=195, isRepresentative=false)
+11-20 15:31:03.446 21522 21522 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 15:31:03.446 21522 21522 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 15:31:03.461 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:03.462 21522 21522 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10190; state: DISABLED
+11-20 15:31:03.464 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.466 21522 21522 W OpenGLRenderer: Unknown dataspace 0
+11-20 15:31:03.469 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.471 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.474 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.476 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.479 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.479 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.482 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.484 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.484 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.486 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.491 21522 21522 D StrictMode: StrictMode policy violation; ~duration=565 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.ContextImpl.getFilesDir(ContextImpl.java:826)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.content.ContextWrapper.getFilesDir(ContextWrapper.java:286)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.GameProcessSession.tryClaim(GameProcessSession.kt:89)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate(BaseGameActivity.kt:117)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:03.491 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:03.494 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.496 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.498 21522 21522 D StrictMode: StrictMode policy violation; ~duration=531 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.ContextImpl.getFilesDir(ContextImpl.java:826)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.content.ContextWrapper.getFilesDir(ContextWrapper.java:286)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.harmonyPrefsFolder(Harmony.kt:1171)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.access$harmonyPrefsFolder(Harmony.kt:1)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.frybits.harmony.HarmonyImpl.<init>(Harmony.kt:84)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.getHarmonySharedPreferences(Harmony.kt:1209)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.getSharedPreferences(Harmony.kt:1229)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper.getSharedPreferences(SharedPreferencesHelper.kt:12)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule$Companion.sharedPreferences(LemuroidApplicationModule.kt:603)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule.sharedPreferences(Unknown Source:2)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.proxySharedPreferences(LemuroidApplicationModule_SharedPreferencesFactory.java:38)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.provideInstance(LemuroidApplicationModule_SharedPreferencesFactory.java:28)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.get(LemuroidApplicationModule_SharedPreferencesFactory.java:24)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.get(LemuroidApplicationModule_SharedPreferencesFactory.java:10)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at dagger.internal.DoubleCheck.get(DoubleCheck.java:47)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate$lambda$3(BaseGameActivity.kt:142)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.$r8$lambda$U_7rhg2ar2kLFR3-OhXLLPds1So(Unknown Source:0)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at androidx.lifecycle.ViewModelLazy.getValue(ViewModelLazy.kt:48)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at androidx.lifecycle.ViewModelLazy.getValue(ViewModelLazy.kt:35)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate$lambda$4(BaseGameActivity.kt:133)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate(BaseGameActivity.kt:151)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:03.498 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:03.499 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:03.504 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.505 21522 21522 D StrictMode: StrictMode policy violation; ~duration=531 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.harmonyPrefsFolder(Harmony.kt:1171)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.access$harmonyPrefsFolder(Harmony.kt:1)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.frybits.harmony.HarmonyImpl.<init>(Harmony.kt:84)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.getHarmonySharedPreferences(Harmony.kt:1209)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.getSharedPreferences(Harmony.kt:1229)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper.getSharedPreferences(SharedPreferencesHelper.kt:12)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule$Companion.sharedPreferences(LemuroidApplicationModule.kt:603)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule.sharedPreferences(Unknown Source:2)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.proxySharedPreferences(LemuroidApplicationModule_SharedPreferencesFactory.java:38)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.provideInstance(LemuroidApplicationModule_SharedPreferencesFactory.java:28)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.get(LemuroidApplicationModule_SharedPreferencesFactory.java:24)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.get(LemuroidApplicationModule_SharedPreferencesFactory.java:10)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at dagger.internal.DoubleCheck.get(DoubleCheck.java:47)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate$lambda$3(BaseGameActivity.kt:142)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.$r8$lambda$U_7rhg2ar2kLFR3-OhXLLPds1So(Unknown Source:0)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at androidx.lifecycle.ViewModelLazy.getValue(ViewModelLazy.kt:48)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at androidx.lifecycle.ViewModelLazy.getValue(ViewModelLazy.kt:35)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate$lambda$4(BaseGameActivity.kt:133)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate(BaseGameActivity.kt:151)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:03.505 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:03.509 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.510 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.512 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.512 21522 21522 D StrictMode: StrictMode policy violation; ~duration=530 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.frybits.harmony.HarmonyImpl.<init>(Harmony.kt:84)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.getHarmonySharedPreferences(Harmony.kt:1209)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.frybits.harmony.Harmony.getSharedPreferences(Harmony.kt:1229)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper.getSharedPreferences(SharedPreferencesHelper.kt:12)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule$Companion.sharedPreferences(LemuroidApplicationModule.kt:603)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule.sharedPreferences(Unknown Source:2)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.proxySharedPreferences(LemuroidApplicationModule_SharedPreferencesFactory.java:38)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.provideInstance(LemuroidApplicationModule_SharedPreferencesFactory.java:28)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.get(LemuroidApplicationModule_SharedPreferencesFactory.java:24)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplicationModule_SharedPreferencesFactory.get(LemuroidApplicationModule_SharedPreferencesFactory.java:10)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at dagger.internal.DoubleCheck.get(DoubleCheck.java:47)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate$lambda$3(BaseGameActivity.kt:142)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.$r8$lambda$U_7rhg2ar2kLFR3-OhXLLPds1So(Unknown Source:0)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at androidx.lifecycle.ViewModelLazy.getValue(ViewModelLazy.kt:48)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at androidx.lifecycle.ViewModelLazy.getValue(ViewModelLazy.kt:35)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate$lambda$4(BaseGameActivity.kt:133)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.BaseGameActivity.onCreate(BaseGameActivity.kt:151)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:03.512 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:03.513 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.514 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.515 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.517 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.519 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.522 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.524 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.526 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.527 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.530 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:03.532 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.537 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.540 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.542 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.544 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.545 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.547 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.550 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.555 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.555 21522 21522 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10190; state: ENABLED
+11-20 15:31:03.555 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.557 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.558 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.559 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.560 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:03.562 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.563 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.564 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.565 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.567 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.567 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.569 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.570 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.571 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.572 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.572 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.574 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.575 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.577 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:03.578 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.579 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.582 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.584 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.586 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.587 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.589 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.591 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.593 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.595 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.596 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.598 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.601 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.605 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:03.607 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.610 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.611 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.614 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.616 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.617 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.619 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.620 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.622 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.623 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.626 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.627 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:03.628 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:05.194 21522 21547 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 15:31:05.195 21522 21547 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 15:31:05.335 21522 21547 I Gralloc4: mapper 4.x is not supported
+11-20 15:31:05.396 21522 21547 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 15:31:05.540 21522 21538 I OpenGLRenderer: Davey! duration=1994ms; Flags=1, FrameTimelineVsyncId=726674, IntendedVsync=8158805692180, Vsync=8158905692176, InputEventId=0, HandleInputStart=8158920552940, AnimationStart=8158920652340, PerformTraversalsStart=8158920723840, DrawStart=8160717308740, FrameDeadline=8158822358846, FrameInterval=8158918879640, FrameStartTime=16666666, SyncQueued=8160732990340, SyncStart=8160757930640, IssueDrawCommandsStart=8160760826640, SwapBuffers=8160812883340, FrameCompleted=8160825040340, DequeueBufferDuration=38000, QueueBufferDuration=315700, GpuCompleted=8160825040340, SwapBuffersCompleted=8160820683640, DisplayPresentTime=0, CommandSubmissionCompleted=8160812883340, 
+11-20 15:31:05.638 21522 21522 I Choreographer: Skipped 114 frames!  The application may be doing too much work on its main thread.
+11-20 15:31:06.384 21522 21554 W stem.debug:game: Accessing hidden field Landroid/content/pm/ApplicationInfo;->primaryCpuAbi:Ljava/lang/String; (unsupported, reflection, allowed)
+11-20 15:31:06.418 21522 21562 D BiosManager: Found game labels: []
+11-20 15:31:06.419 21522 21562 D BiosManager: Required regional files for game: []
+11-20 15:31:06.634 21522 21522 D CompatibilityChangeReporter: Compat change id reported: 247079863; UID 10190; state: ENABLED
+11-20 15:31:06.635 21522 21522 I GameViewModelRetroGameView$initialize: Setting state to loaded
+11-20 15:31:06.642 21522 21522 I ShaderChooser: Choosing shader for this config: screenFilter= auto hdMode=false hdModeQuality=MEDIUM
+11-20 15:31:06.659 21522 21522 D StrictMode: StrictMode policy violation; ~duration=10 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.app.ContextImpl.getFilesDir(ContextImpl.java:826)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.content.ContextWrapper.getFilesDir(ContextWrapper.java:286)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at com.swordfish.libretrodroid.GLRetroViewData.<init>(GLRetroViewData.kt:27)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView.buildRetroViewData(GameViewModelRetroGameView.kt:351)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView.access$buildRetroViewData(GameViewModelRetroGameView.kt:58)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView$initialize$3.emit(GameViewModelRetroGameView.kt:256)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView$initialize$3.emit(GameViewModelRetroGameView.kt:247)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.flow.FlowKt__DelayKt$debounceInternal$1$3$2.invokeSuspend(Delay.kt:236)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.flow.FlowKt__DelayKt$debounceInternal$1$3$2.invoke-WpGqRn0(Unknown Source:12)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.flow.FlowKt__DelayKt$debounceInternal$1$3$2.invoke(Unknown Source:10)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation$ClauseData.invokeBlock(Select.kt:827)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.complete(Select.kt:698)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.doSelectSuspend(Select.kt:441)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.access$doSelectSuspend(Select.kt:239)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation$doSelectSuspend$1.invokeSuspend(Unknown Source:14)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.DispatchedTaskKt.resumeUnconfined(DispatchedTask.kt:187)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:159)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:470)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.CancellableContinuationImpl.completeResume(CancellableContinuationImpl.kt:586)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectKt.tryResume(Select.kt:848)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectKt.access$tryResume(Select.kt:1)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.trySelectInternal(Select.kt:630)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.trySelect(Select.kt:607)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.resumeWaiterOnClosedChannel(BufferedChannel.kt:2182)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.resumeReceiverOnClosedChannel(BufferedChannel.kt:2168)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.cancelSuspendedReceiveRequests(BufferedChannel.kt:2161)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.completeClose(BufferedChannel.kt:1938)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.isClosed(BufferedChannel.kt:2217)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.isClosedForSend0(BufferedChannel.kt:2192)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.isClosedForSend(BufferedChannel.kt:2189)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.completeCloseOrCancel(BufferedChannel.kt:1910)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.closeOrCancelImpl(BufferedChannel.kt:1803)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.close(BufferedChannel.kt:1762)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.SendChannel$DefaultImpls.close$default(Channel.kt:95)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.ProducerCoroutine.onCompleted(Produce.kt:140)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.ProducerCoroutine.onCompleted(Produce.kt:133)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.AbstractCoroutine.onCompletionInternal(AbstractCoroutine.kt:90)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.JobSupport.tryFinalizeSimpleState(JobSupport.kt:293)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.JobSupport.tryMakeCompleting(JobSupport.kt:857)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.JobSupport.makeCompletingOnce$kotlinx_coroutines_core(JobSupport.kt:829)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.AbstractCoroutine.resumeWith(AbstractCoroutine.kt:97)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:46)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.internal.ScopeCoroutine.afterResume(Scopes.kt:28)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.AbstractCoroutine.resumeWith(AbstractCoroutine.kt:99)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:46)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:06.659 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:06.670 21522 21522 D StrictMode: StrictMode policy violation; ~duration=10 ms: android.os.strictmode.DiskReadViolation
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.app.ContextImpl.getFilesDir(ContextImpl.java:826)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.content.ContextWrapper.getFilesDir(ContextWrapper.java:286)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at com.swordfish.libretrodroid.GLRetroViewData.<init>(GLRetroViewData.kt:28)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView.buildRetroViewData(GameViewModelRetroGameView.kt:351)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView.access$buildRetroViewData(GameViewModelRetroGameView.kt:58)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView$initialize$3.emit(GameViewModelRetroGameView.kt:256)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelRetroGameView$initialize$3.emit(GameViewModelRetroGameView.kt:247)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.flow.FlowKt__DelayKt$debounceInternal$1$3$2.invokeSuspend(Delay.kt:236)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.flow.FlowKt__DelayKt$debounceInternal$1$3$2.invoke-WpGqRn0(Unknown Source:12)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.flow.FlowKt__DelayKt$debounceInternal$1$3$2.invoke(Unknown Source:10)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation$ClauseData.invokeBlock(Select.kt:827)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.complete(Select.kt:698)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.doSelectSuspend(Select.kt:441)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.access$doSelectSuspend(Select.kt:239)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation$doSelectSuspend$1.invokeSuspend(Unknown Source:14)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.DispatchedTaskKt.resumeUnconfined(DispatchedTask.kt:187)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:159)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:470)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.CancellableContinuationImpl.completeResume(CancellableContinuationImpl.kt:586)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectKt.tryResume(Select.kt:848)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectKt.access$tryResume(Select.kt:1)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.trySelectInternal(Select.kt:630)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.selects.SelectImplementation.trySelect(Select.kt:607)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.resumeWaiterOnClosedChannel(BufferedChannel.kt:2182)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.resumeReceiverOnClosedChannel(BufferedChannel.kt:2168)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.cancelSuspendedReceiveRequests(BufferedChannel.kt:2161)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.completeClose(BufferedChannel.kt:1938)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.isClosed(BufferedChannel.kt:2217)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.isClosedForSend0(BufferedChannel.kt:2192)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.isClosedForSend(BufferedChannel.kt:2189)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.completeCloseOrCancel(BufferedChannel.kt:1910)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.closeOrCancelImpl(BufferedChannel.kt:1803)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.BufferedChannel.close(BufferedChannel.kt:1762)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.SendChannel$DefaultImpls.close$default(Channel.kt:95)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.ProducerCoroutine.onCompleted(Produce.kt:140)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.channels.ProducerCoroutine.onCompleted(Produce.kt:133)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.AbstractCoroutine.onCompletionInternal(AbstractCoroutine.kt:90)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.JobSupport.tryFinalizeSimpleState(JobSupport.kt:293)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.JobSupport.tryMakeCompleting(JobSupport.kt:857)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.JobSupport.makeCompletingOnce$kotlinx_coroutines_core(JobSupport.kt:829)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.AbstractCoroutine.resumeWith(AbstractCoroutine.kt:97)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:46)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.internal.ScopeCoroutine.afterResume(Scopes.kt:28)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.AbstractCoroutine.resumeWith(AbstractCoroutine.kt:99)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:46)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 15:31:06.670 21522 21522 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 15:31:06.814 21522 21547 D EGL_emulation: app_time_stats: avg=33.69ms min=2.69ms max=294.78ms count=24
+11-20 15:31:07.350 21522 21522 I GLRetroView: EGL config selected: ES3 RGB888 Depth16 (3 matches)
+11-20 15:31:07.467 21522 21576 I GLRetroView: Core created on GLThread 1 in 82 ms
+11-20 15:31:07.530 21522 21522 W CCL     : Nothing to measure for widget: leftPad
+11-20 15:31:07.532 21522 21522 W CCL     : Nothing to measure for widget: rightPad
+11-20 15:31:07.532 21522 21522 W CCL     : Nothing to measure for widget: gameContainer
+11-20 15:31:07.536 21522 21522 W CCL     : Nothing to measure for widget: bottomContainer
+11-20 15:31:07.544 21522 21522 W CCL     : Nothing to measure for widget: leftPad
+11-20 15:31:07.544 21522 21522 W CCL     : Nothing to measure for widget: rightPad
+11-20 15:31:07.545 21522 21522 W CCL     : Nothing to measure for widget: bottomContainer
+11-20 15:31:07.691 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:07.699 21522 21538 I OpenGLRenderer: Davey! duration=786ms; Flags=0, FrameTimelineVsyncId=727469, IntendedVsync=8162172358712, Vsync=8162189025378, InputEventId=0, HandleInputStart=8162205350340, AnimationStart=8162205667140, PerformTraversalsStart=8162309921840, DrawStart=8162934723640, FrameDeadline=8162255692042, FrameInterval=8162204073640, FrameStartTime=16666666, SyncQueued=8162938841140, SyncStart=8162939290540, IssueDrawCommandsStart=8162940907340, SwapBuffers=8162942736040, FrameCompleted=8162959116940, DequeueBufferDuration=48400, QueueBufferDuration=1201900, GpuCompleted=8162959116940, SwapBuffersCompleted=8162946356540, DisplayPresentTime=72057628414509829, CommandSubmissionCompleted=8162942736040, 
+11-20 15:31:07.700 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.709 21522 21522 I Choreographer: Skipped 48 frames!  The application may be doing too much work on its main thread.
+11-20 15:31:07.710 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.714 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.717 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.720 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.723 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.726 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.728 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.732 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.734 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.738 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.740 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.744 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.756 21522 21522 W CCL     : Nothing to measure for widget: leftPad
+11-20 15:31:07.756 21522 21522 W CCL     : Nothing to measure for widget: rightPad
+11-20 15:31:07.758 21522 21522 W CCL     : Nothing to measure for widget: gameContainer
+11-20 15:31:07.758 21522 21522 W CCL     : Nothing to measure for widget: bottomContainer
+11-20 15:31:07.765 21522 21522 W CCL     : Nothing to measure for widget: leftPad
+11-20 15:31:07.766 21522 21522 W CCL     : Nothing to measure for widget: rightPad
+11-20 15:31:07.767 21522 21522 W CCL     : Nothing to measure for widget: bottomContainer
+11-20 15:31:07.813 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:07.819 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.834 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.835 21522 21576 I Libretro Core: Frontend supports RGB565 - will use that instead of XRGB1555.
+11-20 15:31:07.838 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.842 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.843 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.848 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.851 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.853 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.856 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.859 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.864 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.866 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.870 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:07.882 21522 21538 I OpenGLRenderer: Davey! duration=928ms; Flags=0, FrameTimelineVsyncId=727484, IntendedVsync=8162222358710, Vsync=8163022358678, InputEventId=0, HandleInputStart=8163033068040, AnimationStart=8163033213040, PerformTraversalsStart=8163067597140, DrawStart=8163094409340, FrameDeadline=8162989025346, FrameInterval=8163029643340, FrameStartTime=16666666, SyncQueued=8163096387740, SyncStart=8163096928740, IssueDrawCommandsStart=8163097889840, SwapBuffers=8163098114140, FrameCompleted=8163151551840, DequeueBufferDuration=64000, QueueBufferDuration=3514600, GpuCompleted=8163151551840, SwapBuffersCompleted=8163102799240, DisplayPresentTime=0, CommandSubmissionCompleted=8163098114140, 
+11-20 15:31:07.943 21522 21576 I Libretro Core:  FCEU_MakeFName: /data/user/0/app.retrogamesystem.debug/files/system/nes.pal
+11-20 15:31:07.947 21522 21576 I libretrodroid: Audio initialization has been called with input sample rate 48080
+11-20 15:31:07.953 21522 21576 I libretrodroid: Using low latency stream: 0
+11-20 15:31:07.953 21522 21576 I libretrodroid: Average audio latency set to: 66.555933 ms
+11-20 15:31:07.953 21522 21576 W OboeAudio: `openManagedStream` is deprecated. Use openStream(std::shared_ptr<oboe::AudioStream> &stream) instead.
+11-20 15:31:07.953 21522 21576 W OboeAudio: Passing AudioStream pointer deprecated, Use openStream(std::shared_ptr<oboe::AudioStream> &stream) instead.
+11-20 15:31:07.954 21522 21576 I OboeAudio: openStreamInternal() OUTPUT -------- OboeVersion1.9.3 --------
+11-20 15:31:07.958 21522 21576 I AAudio  : AAudioStreamBuilder_openStream() called ----------------------------------------
+11-20 15:31:07.958 21522 21576 I AudioStreamBuilder: rate   =      0, channels  = 2, channelMask = 0x80000003, format   = 1, sharing = SH, dir = OUTPUT
+11-20 15:31:07.958 21522 21576 I AudioStreamBuilder: device =      0, sessionId = -1, perfMode = 10, callback: ON with frames = 1280
+11-20 15:31:07.958 21522 21576 I AudioStreamBuilder: usage  =      1, contentType = 2, inputPreset = 6, allowedCapturePolicy = 0
+11-20 15:31:07.958 21522 21576 I AudioStreamBuilder: privacy sensitive = false, opPackageName = (null), attributionTag = (null)
+11-20 15:31:07.985 21522 21576 D AudioStreamBuilder: build() MMAP not used because AAUDIO_PERFORMANCE_MODE_LOW_LATENCY not requested.
+11-20 15:31:07.987 21522 21576 D stem.debug:game: PlayerBase::PlayerBase()
+11-20 15:31:08.070 21522 21576 D AudioStreamTrack: open(), request notificationFrames = 0, frameCount = 0
+11-20 15:31:08.103 21522 21522 W CCL     : Nothing to measure for widget: leftPad
+11-20 15:31:08.104 21522 21522 W CCL     : Nothing to measure for widget: rightPad
+11-20 15:31:08.104 21522 21522 W CCL     : Nothing to measure for widget: gameContainer
+11-20 15:31:08.105 21522 21522 W CCL     : Nothing to measure for widget: bottomContainer
+11-20 15:31:08.107 21522 21522 W CCL     : Nothing to measure for widget: leftPad
+11-20 15:31:08.107 21522 21522 W CCL     : Nothing to measure for widget: rightPad
+11-20 15:31:08.108 21522 21522 W CCL     : Nothing to measure for widget: bottomContainer
+11-20 15:31:08.112 21522 21547 D EGL_emulation: app_time_stats: avg=241.89ms min=3.98ms max=711.04ms count=5
+11-20 15:31:08.127 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:08.130 21522 21576 D AAudioStream: setState(s#1) from 0 to 2
+11-20 15:31:08.130 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.135 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.138 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.138 21522 21576 I AAudio  : AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
+11-20 15:31:08.138 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.139 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.139 21522 21576 I libretrodroid: GL Version = OpenGL ES 3.1 (4.5.0 NVIDIA 621.24)
+11-20 15:31:08.139 21522 21576 I libretrodroid: GL Vendor = Google (NVIDIA Corporation)
+11-20 15:31:08.139 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.139 21522 21576 I libretrodroid: GL Renderer = Android Emulator OpenGL ES Translator (NVIDIA GeForce GTX 1650/PCIe/SSE2)
+11-20 15:31:08.139 21522 21576 I libretrodroid: GL Extensions = GL_EXT_debug_marker GL_EXT_robustness GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_packed_depth_stencil GL_OES_vertex_half_float GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_OVR_multiview2 GL_EXT_multiview_texture_multisample GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 GL_EXT_texture_buffer ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_native_sync_v3 ANDROID_EMU_native_sync_v4 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requireme
+11-20 15:31:08.140 21522 21576 I libretrodroid: Initializing graphics
+11-20 15:31:08.140 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.141 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.142 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.142 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.142 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.143 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:08.145 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:09.308 21522 21576 D EGL_emulation: app_time_stats: avg=5.04ms min=1.32ms max=19.43ms count=25
+11-20 15:31:09.867 21522 21576 D AAudio  : AAudioStream_requestStart(s#1) called --------------
+11-20 15:31:09.867 21522 21576 D AAudioStream: setState(s#1) from 2 to 3
+11-20 15:31:09.883 21522 21538 D AudioStreamLegacy: onAudioDeviceUpdate(deviceId = 2)
+11-20 15:31:09.885 21522 21576 D AAudio  : AAudioStream_requestStart(s#1) returned 0 ---------
+11-20 15:31:09.927 21522 21577 D AAudioStream: setState(s#1) from 3 to 4
+11-20 15:31:09.948 21522 21547 D EGL_emulation: app_time_stats: avg=1835.04ms min=1835.04ms max=1835.04ms count=1
+11-20 15:31:09.978 21522 21538 I OpenGLRenderer: Davey! duration=1795ms; Flags=0, FrameTimelineVsyncId=727542, IntendedVsync=8163472358660, Vsync=8163472358660, InputEventId=0, HandleInputStart=8163474122640, AnimationStart=8163474161040, PerformTraversalsStart=8163844162440, DrawStart=8163844702540, FrameDeadline=8163489025326, FrameInterval=8163474092240, FrameStartTime=16666666, SyncQueued=8165137593440, SyncStart=8165143394840, IssueDrawCommandsStart=8165163120340, SwapBuffers=8165264354340, FrameCompleted=8165274128240, DequeueBufferDuration=1172800, QueueBufferDuration=1261100, GpuCompleted=8165274128240, SwapBuffersCompleted=8165269627140, DisplayPresentTime=0, CommandSubmissionCompleted=8165264354340, 
+11-20 15:31:10.015 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:31:10.018 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.027 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.030 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.034 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.039 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.041 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.044 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.048 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.052 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.054 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.055 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.057 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.059 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:31:10.238 21522 21532 I stem.debug:game: Background concurrent copying GC freed 123491(7063KB) AllocSpace objects, 24(1844KB) LOS objects, 49% free, 6599KB/12MB, paused 3.104ms,177us total 127.842ms
+11-20 15:31:10.311 21522 21576 D EGL_emulation: app_time_stats: avg=15.74ms min=2.29ms max=93.11ms count=25
+11-20 15:31:11.339 21522 21576 D EGL_emulation: app_time_stats: avg=26.13ms min=6.89ms max=83.89ms count=15
+11-20 15:31:12.355 21522 21576 D EGL_emulation: app_time_stats: avg=30.88ms min=7.13ms max=69.76ms count=17
+11-20 15:31:13.406 21522 21576 D EGL_emulation: app_time_stats: avg=26.58ms min=6.01ms max=72.23ms count=18
+11-20 15:31:14.414 21522 21576 D EGL_emulation: app_time_stats: avg=16.99ms min=4.13ms max=43.25ms count=28
+11-20 15:31:15.446 21522 21576 D EGL_emulation: app_time_stats: avg=11.80ms min=3.47ms max=27.22ms count=35
+11-20 15:31:16.471 21522 21576 D EGL_emulation: app_time_stats: avg=16.88ms min=4.64ms max=59.46ms count=25
+11-20 15:31:17.490 21522 21576 D EGL_emulation: app_time_stats: avg=16.72ms min=4.70ms max=41.49ms count=29
+11-20 15:31:17.596 21522 21576 E libretrodroid: VIDEOFRAMES 180 data=0x71f5db425380 size=256x224
+11-20 15:31:17.598 21522 21576 E libretrodroid: EMUFPS 23.37 frames/s (180 frames in 7.70s)
+11-20 15:31:18.499 21522 21576 D EGL_emulation: app_time_stats: avg=13.07ms min=3.40ms max=43.14ms count=35
+11-20 15:31:19.537 21522 21576 D EGL_emulation: app_time_stats: avg=13.59ms min=4.05ms max=46.70ms count=30
+11-20 15:31:20.561 21522 21576 D EGL_emulation: app_time_stats: avg=17.89ms min=5.13ms max=46.68ms count=25
+11-20 15:31:21.613 21522 21576 D EGL_emulation: app_time_stats: avg=25.44ms min=8.16ms max=58.64ms count=22
+11-20 15:31:22.660 21522 21576 D EGL_emulation: app_time_stats: avg=20.34ms min=8.06ms max=44.00ms count=22
+11-20 15:31:23.698 21522 21576 D EGL_emulation: app_time_stats: avg=28.82ms min=7.76ms max=82.88ms count=17
+11-20 15:31:24.711 21522 21576 D EGL_emulation: app_time_stats: avg=18.03ms min=6.19ms max=46.46ms count=25
+11-20 15:31:25.004 21522 21576 E libretrodroid: VIDEOFRAMES 360 data=0x71f5db425380 size=256x224
+11-20 15:31:25.010 21522 21576 E libretrodroid: EMUFPS 24.29 frames/s (180 frames in 7.41s)
+11-20 15:31:25.725 21522 21576 D EGL_emulation: app_time_stats: avg=15.06ms min=4.64ms max=33.26ms count=30
+11-20 15:31:26.746 21522 21576 D EGL_emulation: app_time_stats: avg=11.43ms min=3.34ms max=25.42ms count=37
+11-20 15:31:27.750 21522 21576 D EGL_emulation: app_time_stats: avg=8.38ms min=2.70ms max=27.37ms count=41
+11-20 15:31:28.752 21522 21576 D EGL_emulation: app_time_stats: avg=9.11ms min=2.68ms max=22.47ms count=40
+11-20 15:31:29.641 21522 21576 E libretrodroid: VIDEOFRAMES 540 data=0x71f5db425380 size=256x224
+11-20 15:31:29.641 21522 21576 E libretrodroid: EMUFPS 38.87 frames/s (180 frames in 4.63s)
+11-20 15:31:29.775 21522 21576 D EGL_emulation: app_time_stats: avg=6.70ms min=2.35ms max=24.86ms count=45
+11-20 15:31:30.779 21522 21576 D EGL_emulation: app_time_stats: avg=12.17ms min=3.02ms max=38.66ms count=37
+11-20 15:31:31.808 21522 21576 D EGL_emulation: app_time_stats: avg=19.68ms min=3.41ms max=74.04ms count=27
+11-20 15:31:32.850 21522 21576 D EGL_emulation: app_time_stats: avg=24.85ms min=3.47ms max=68.44ms count=22
+11-20 15:31:33.865 21522 21576 D EGL_emulation: app_time_stats: avg=16.34ms min=6.00ms max=37.99ms count=24
+11-20 15:31:34.875 21522 21576 D EGL_emulation: app_time_stats: avg=9.69ms min=3.03ms max=28.93ms count=40
+11-20 15:31:35.440 21522 21576 E libretrodroid: VIDEOFRAMES 720 data=0x71f5db425380 size=256x224
+11-20 15:31:35.441 21522 21576 E libretrodroid: EMUFPS 31.04 frames/s (180 frames in 5.80s)
+11-20 15:31:35.879 21522 21576 D EGL_emulation: app_time_stats: avg=8.83ms min=2.62ms max=24.71ms count=42
+11-20 15:31:36.911 21522 21576 D EGL_emulation: app_time_stats: avg=11.12ms min=3.51ms max=28.54ms count=38
+11-20 15:31:37.931 21522 21576 D EGL_emulation: app_time_stats: avg=10.44ms min=3.29ms max=25.90ms count=38
+11-20 15:31:38.934 21522 21576 D EGL_emulation: app_time_stats: avg=10.13ms min=3.28ms max=25.70ms count=36
+11-20 15:31:39.939 21522 21576 D EGL_emulation: app_time_stats: avg=10.87ms min=2.67ms max=23.17ms count=40
+11-20 15:31:40.226 21522 21576 E libretrodroid: VIDEOFRAMES 900 data=0x71f5db425380 size=256x224
+11-20 15:31:40.226 21522 21576 E libretrodroid: EMUFPS 37.61 frames/s (180 frames in 4.79s)
+11-20 15:31:41.002 21522 21576 D EGL_emulation: app_time_stats: avg=12.48ms min=2.82ms max=39.36ms count=34
+11-20 15:31:42.052 21522 21576 D EGL_emulation: app_time_stats: avg=24.78ms min=7.76ms max=75.64ms count=14
+11-20 15:31:43.062 21522 21576 D EGL_emulation: app_time_stats: avg=19.22ms min=4.96ms max=57.02ms count=21
+11-20 15:31:44.062 21522 21576 D EGL_emulation: app_time_stats: avg=19.41ms min=4.42ms max=46.12ms count=24
+11-20 15:31:45.077 21522 21576 D EGL_emulation: app_time_stats: avg=14.74ms min=8.16ms max=34.38ms count=22
+11-20 15:31:46.123 21522 21576 D EGL_emulation: app_time_stats: avg=23.12ms min=10.12ms max=64.59ms count=19
+11-20 15:31:47.130 21522 21576 D EGL_emulation: app_time_stats: avg=14.97ms min=4.62ms max=36.69ms count=26
+11-20 15:31:48.180 21522 21576 D EGL_emulation: app_time_stats: avg=20.44ms min=5.95ms max=51.33ms count=26
+11-20 15:31:48.305 21522 21576 E libretrodroid: VIDEOFRAMES 1080 data=0x71f5db425380 size=256x224
+11-20 15:31:48.306 21522 21576 E libretrodroid: EMUFPS 22.28 frames/s (180 frames in 8.08s)
+11-20 15:31:49.087 21522 21547 D EGL_emulation: app_time_stats: avg=13045.78ms min=78.60ms max=38967.26ms count=3
+11-20 15:31:49.184 21522 21576 D EGL_emulation: app_time_stats: avg=11.34ms min=3.40ms max=29.89ms count=31
+11-20 15:31:50.206 21522 21576 D EGL_emulation: app_time_stats: avg=12.25ms min=3.62ms max=36.52ms count=37
+11-20 15:31:51.234 21522 21576 D EGL_emulation: app_time_stats: avg=13.58ms min=3.33ms max=44.65ms count=32
+11-20 15:31:51.400 21522 21547 D EGL_emulation: app_time_stats: avg=2311.84ms min=2311.84ms max=2311.84ms count=1
+11-20 15:31:52.270 21522 21576 D EGL_emulation: app_time_stats: avg=10.31ms min=2.51ms max=33.85ms count=38
+11-20 15:31:53.330 21522 21576 D EGL_emulation: app_time_stats: avg=13.92ms min=3.26ms max=34.18ms count=30
+11-20 15:31:53.863 21522 21576 E libretrodroid: VIDEOFRAMES 1260 data=0x71f5db425380 size=256x224
+11-20 15:31:53.863 21522 21576 E libretrodroid: EMUFPS 32.39 frames/s (180 frames in 5.56s)
+11-20 15:31:54.338 21522 21576 D EGL_emulation: app_time_stats: avg=13.08ms min=3.69ms max=26.94ms count=32
+11-20 15:31:54.703 21522 21576 D AAudio  : AAudioStream_requestStop(s#1) called
+11-20 15:31:54.703 21522 21576 D AAudioStream: setState(s#1) from 4 to 9
+11-20 15:31:54.703 21522 21576 D AudioTrack: stop(19): called with 2118960 frames delivered
+11-20 15:31:56.161 21522 21522 I GameViewModelSaves: Stored sram file with size: 8192
+11-20 15:31:56.377 21522 21522 I GameViewModelSaves: Stored autosave file with size: 13805
+11-20 15:32:05.526 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:32:05.532 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.550 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.571 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.576 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.581 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.585 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.594 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.597 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.608 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.625 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.663 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.665 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.689 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.720 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:32:05.727 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.739 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.754 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.767 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.793 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.804 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.835 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.843 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.871 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.886 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.894 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.914 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.921 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.935 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:32:05.946 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.988 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:32:05.995 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.017 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.026 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.044 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.051 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.062 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.076 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.099 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.109 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.124 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.131 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.146 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:32:06.149 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.161 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.165 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.168 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.173 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.178 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.187 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.194 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.198 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.202 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.207 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.211 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.216 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.223 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:32:06.229 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.239 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.246 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.248 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.277 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.280 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.284 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.287 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.292 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.298 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.304 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.307 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.315 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.323 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:32:06.334 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.341 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.346 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.353 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.357 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.370 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.374 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.378 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.380 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.383 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.388 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.397 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.404 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.411 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:32:06.419 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.433 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.451 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.457 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.461 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.466 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.471 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.480 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.482 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.487 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.493 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.501 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.511 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.523 21522 21560 D INPUT_DIAG: rejected device name=Virtual sources=769 isVirtual=true supported=false blacklisted=false
+11-20 15:32:06.529 21522 21560 D INPUT_DIAG: rejected device name=qwerty2 sources=769 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.535 21522 21560 D INPUT_DIAG: rejected device name=Power Button sources=257 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.538 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_1 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.541 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_2 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.543 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_3 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.549 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_4 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.553 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_5 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.559 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_6 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.575 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_7 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.578 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_8 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.582 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_9 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.587 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_10 sources=-2147462909 isVirtual=false supported=false blacklisted=false
+11-20 15:32:06.588 21522 21560 D INPUT_DIAG: rejected device name=virtio_input_multi_touch_11 sources=-2147462909 isVirtual=false supported=false blacklisted=false

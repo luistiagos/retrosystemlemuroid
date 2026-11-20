@@ -25,8 +25,8 @@ abrir o app -> "Continue playing" -> **Play** -> modal de versoes -> *(US)*.
 
 | Ciclo | Antes do Home | Log do `:game` apos o Home | Reaberto apos o kill |
 |---|---|---|---|
-| 1 (PID 21522) | `c1-jogo-antes-home.png` (tutorial "The B button makes him inhale enemies!") | 15:31:54 Home -> 15:31:56.161 `Stored sram file with size: 8192` + 15:31:56.377 `Stored autosave file with size: 13805` (`logcat-game-21522.txt`); `.srm` e `.nes.state` com mtime 15:31:56 (`arquivos-apos-home.txt`) | `c1-reaberto-apos-kill.png`: mesmo cenario, passo seguinte do tutorial |
-| 2 (PID 21717) | `c2-jogo-antes-home.png` ("Right or Left makes Kirby walk or dash!") | 15:36:06.437 `Stored sram` + 15:36:06.573 `Stored autosave` (`logcat-game-21717.txt`) | `c2-reaberto-primeiros-quadros.png`: 5 capturas desde o `Core created` (PID 21944): o 1o quadro ja e o mesmo cenario, no passo seguinte ("Press the A Button, and Kirby jumps!"); nenhum logo HAL nem tela-titulo |
+| 1 (PID 21522) | `c1-jogo-antes-home.png` (tutorial "The B button makes him inhale enemies!") | 15:31:54 Home -> 15:31:56.161 `Stored sram file with size: 8192` + 15:31:56.377 `Stored autosave file with size: 13805` (`game-logcat-pid21522.txt`); `.srm` e `.nes.state` com mtime 15:31:56 (`arquivos-apos-home.txt`) | `c1-reaberto-apos-kill.png`: mesmo cenario, passo seguinte do tutorial |
+| 2 (PID 21717) | `c2-jogo-antes-home.png` ("Right or Left makes Kirby walk or dash!") | 15:36:06.437 `Stored sram` + 15:36:06.573 `Stored autosave` (`game-logcat-pid21717.txt`) | `c2-reaberto-primeiros-quadros.png`: 5 capturas desde o `Core created` (PID 21944): o 1o quadro ja e o mesmo cenario, no passo seguinte ("Press the A Button, and Kirby jumps!"); nenhum logo HAL nem tela-titulo |
 
 - **Sinal do sintoma ausente:** um boot limpo do Kirby passa por logo e tela-titulo (visto ao apertar Start no
   mesmo teste); a reabertura apos o kill volta direto no ponto do Home -> a sessao foi restaurada do autosave
@@ -34,7 +34,7 @@ abrir o app -> "Continue playing" -> **Play** -> modal de versoes -> *(US)*.
 - **Comportamento certo presente:** um par `Stored sram`/`Stored autosave` em cada Home, ~2 s depois.
 - **Item 3 pendente da "Validacao" do doc (saida por Back grava uma vez so): confirmado.** PID 21944, Back as
   15:38:06: **um** par (`Stored sram` 15:38:06.397, `Stored autosave` 15:38:06.999), depois `VM exiting with result
-  code 0` (`logcat-game-21944.txt`); app volta a Inicio (`c2-apos-back-home.png`).
+  code 0` (`game-logcat-pid21944.txt`); app volta a Inicio (`c2-apos-back-home.png`).
 - Controle positivo: nao ha (a correcao do grupo A ja estava na base desde 2026-09-30, como diz o Planejamento).
 
 ## 2. TASK-0007/0008: o processo principal em `FOREGROUND_SERVICE` registra qual trabalho o segura
@@ -58,7 +58,7 @@ abrir o app -> "Continue playing" -> **Play** -> modal de versoes -> *(US)*.
 
 - Testes de unidade: acima (123/0/1).
 - Jogo abre, sai por Back sem crash; download completa e oferece jogar; cancelar e reescanear terminam.
-- `logcat-principal-21392.txt` (PID do processo principal, a janela inteira) e `logcat-game-{21522,21717,21944}.txt`:
+- `principal-logcat-pid21392.txt` (PID do processo principal, a janela inteira) e `game-logcat-pid{21522,21717,21944}.txt`:
   nenhum `AndroidRuntime` de erro, `FATAL`, `ANR` ou `libc`; buffer `crash` vazio. Unicos `E/`: `OpenGLRenderer` e
   `SurfaceSyncGroup` (sistema) e `libretrodroid VIDEOFRAMES/EMUFPS` (contador de quadros, logado em nivel E).
 
