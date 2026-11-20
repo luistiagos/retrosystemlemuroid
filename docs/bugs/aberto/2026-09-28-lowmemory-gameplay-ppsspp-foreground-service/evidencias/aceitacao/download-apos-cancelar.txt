@@ -1,0 +1,4 @@
+--- apos cancelar (X na fila) 15:41:02 pidof principal=21392
+    <string name="telemetry_fgs_tags"></string>
+    <int name="telemetry_fgs_pid" value="21392" />
+servicos:

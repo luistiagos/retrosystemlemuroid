@@ -1,0 +1,5 @@
+15:42:40 <stringname="telemetry_fgs_tags"></string> fgs=0
+15:42:44 <stringname="telemetry_fgs_tags">download</string> fgs=1
+15:42:49 <stringname="telemetry_fgs_tags">download</string> fgs=1
+15:42:53 <stringname="telemetry_fgs_tags">download</string> fgs=1
+15:42:56 <stringname="telemetry_fgs_tags"></string> fgs=0

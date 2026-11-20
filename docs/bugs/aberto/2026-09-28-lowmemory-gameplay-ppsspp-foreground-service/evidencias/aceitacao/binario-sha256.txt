@@ -1,0 +1,6 @@
+apk lane: lemuroid-app/build/outputs/apk/freeBundle/debug/lemuroid-app-free-bundle-x86_64-debug.apk
+lane HEAD: 1b3defd2ca08f1aae4f2c7f5b947513d241bfd0a
+local sha256: 71048b22dd90b8a56da859099c35f3bbf6248853f6bfb9d88c32661a08076f02
+instalado /data/app/~~jKd954mcPbufxGB0k-8rKw==/app.retrogamesystem.debug-dL8bGCDhfp5OU7RjCcDPTA==/base.apk: 71048b22dd90b8a56da859099c35f3bbf6248853f6bfb9d88c32661a08076f02
+    versionName=1.17.36-DEBUG
+    lastUpdateTime=2026-11-20 15:29:18

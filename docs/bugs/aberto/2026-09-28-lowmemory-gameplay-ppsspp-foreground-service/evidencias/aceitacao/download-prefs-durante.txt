@@ -1,0 +1,25 @@
+--- 15:39:58 pidof principal=21392
+    <string name="telemetry_fgs_tags">download</string>
+    <int name="telemetry_fgs_pid" value="21392" />
+  * ServiceRecord{d902729 u0 app.retrogamesystem.debug/com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService}
+    isForeground=true foregroundId=5 types=00000001 foregroundNoti=Notification(channel=DOWNLOAD_CHANNEL_ID shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x42 color=0x00000000 vis=PRIVATE)
+--- 15:40:04 pidof principal=21392
+    <string name="telemetry_fgs_tags">download</string>
+    <int name="telemetry_fgs_pid" value="21392" />
+  * ServiceRecord{d902729 u0 app.retrogamesystem.debug/com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService}
+    isForeground=true foregroundId=5 types=00000001 foregroundNoti=Notification(channel=DOWNLOAD_CHANNEL_ID shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 vis=PRIVATE)
+--- 15:40:11 pidof principal=21392
+    <string name="telemetry_fgs_tags">download</string>
+    <int name="telemetry_fgs_pid" value="21392" />
+  * ServiceRecord{d902729 u0 app.retrogamesystem.debug/com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService}
+    isForeground=true foregroundId=5 types=00000001 foregroundNoti=Notification(channel=DOWNLOAD_CHANNEL_ID shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 vis=PRIVATE)
+--- 15:40:19 pidof principal=21392
+    <string name="telemetry_fgs_tags">download</string>
+    <int name="telemetry_fgs_pid" value="21392" />
+  * ServiceRecord{d902729 u0 app.retrogamesystem.debug/com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService}
+    isForeground=true foregroundId=5 types=00000001 foregroundNoti=Notification(channel=DOWNLOAD_CHANNEL_ID shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 vis=PRIVATE)
+--- 15:40:30 pidof principal=21392
+    <string name="telemetry_fgs_tags">download</string>
+    <int name="telemetry_fgs_pid" value="21392" />
+  * ServiceRecord{d902729 u0 app.retrogamesystem.debug/com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService}
+    isForeground=true foregroundId=5 types=00000001 foregroundNoti=Notification(channel=DOWNLOAD_CHANNEL_ID shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 vis=PRIVATE)

@@ -1,0 +1,12 @@
+/sdcard/Android/data/app.retrogamesystem.debug/files/saves:
+total 28
+drwxrws--- 2 u0_a190 ext_data_rw 4096 2026-11-20 15:31:56.148000000 +0000 .
+drwxrws--- 5 u0_a190 ext_data_rw 4096 2026-11-20 14:24:49.660000000 +0000 ..
+-rw-rw---- 1 u0_a190 ext_data_rw 8192 2026-11-20 15:31:56.148000000 +0000 Kirbys Adventure (US).srm
+
+/sdcard/Android/data/app.retrogamesystem.debug/files/states/fceumm:
+total 36
+drwxrws--- 2 u0_a190 ext_data_rw 4096 2026-11-20 15:31:56.372000000 +0000 .
+drwxrws--- 4 u0_a190 ext_data_rw 4096 2026-11-20 14:41:01.644000000 +0000 ..
+-rw-rw---- 1 u0_a190 ext_data_rw 4293 2026-11-20 15:31:56.336000000 +0000 Kirbys Adventure (US).nes.state
+-rw-rw---- 1 u0_a190 ext_data_rw    2 2026-11-20 15:31:56.372000000 +0000 Kirbys Adventure (US).nes.state.metadata
