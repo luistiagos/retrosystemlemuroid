@@ -1,0 +1,4 @@
+X em 14:39:08.266
++1s 14:39:09: notif do pacote no canal DOWNLOAD=0 servico=0
++5s 14:39:15: notif do pacote no canal DOWNLOAD=0 servico=0
++15s 14:39:24: notif do pacote no canal DOWNLOAD=0 servico=0

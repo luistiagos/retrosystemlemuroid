@@ -1,0 +1,10 @@
+antes 14:38:02
+      key='app.retrogamesystem.debug',
+      numEnqueuedByApp=7036,
+      numPostedByApp=19,
+      numUpdatedByApp=2028,
+depois 14:38:36
+      key='app.retrogamesystem.debug',
+      numEnqueuedByApp=7051,
+      numPostedByApp=19,
+      numUpdatedByApp=2043,

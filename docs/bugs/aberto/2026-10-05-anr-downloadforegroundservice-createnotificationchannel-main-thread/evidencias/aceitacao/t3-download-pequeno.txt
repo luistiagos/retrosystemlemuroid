@@ -1,0 +1,7 @@
+Save em 14:40:11
+14:40:15 notifDOWNLOAD=0 servico=2
+14:40:20 notifDOWNLOAD=0 servico=0
+14:40:25 notifDOWNLOAD=0 servico=0
+14:40:31 notifDOWNLOAD=0 servico=0
+14:40:37 notifDOWNLOAD=0 servico=0
+14:40:43 notifDOWNLOAD=0 servico=0

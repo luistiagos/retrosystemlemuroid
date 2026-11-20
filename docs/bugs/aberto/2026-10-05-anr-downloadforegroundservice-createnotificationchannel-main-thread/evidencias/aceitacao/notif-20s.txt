@@ -1,0 +1,3 @@
+                android.title=String (Set a screen lock)
+                android.text=String (For added security, set a PIN, pattern, or password for this device.)
+                android.title=String (Metal Gear Solid - Special Missions)
