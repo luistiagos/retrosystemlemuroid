@@ -100,7 +100,7 @@ Escreva o arquivo, **nao commite** (o checkout e compartilhado; o helper commita
   criterio e nenhum apontamento novo nos arquivos que a mudanca tocou (`gradlew :lemuroid-app:ktlintCheck` na lane e
   procurar os seus arquivos no relatorio). Mudanca que chama API de framework: `gradlew :lemuroid-app:lintFreeBundleDebug`
   passa (`CLAUDE.md`, pitfall 12, item 5) e o achado novo e seu. Estes dois a sessao pode rodar direto na lane, um por vez.
-- **Versao:** a mudanca NAO sobe `versionCode`/`versionName`; isso e da publicacao (`final-publicar`).
+- **Versao:** a mudanca NAO sobe `versionCode`/`versionName`; isso e do `build-and-upload.ps1`, que so o dono roda (secao Finalizacao).
 - **Commit:** `TASK-NNNN: <tipo>(<area>): <resumo>` (o prefixo do motor e depois a convencao do repo), com as areas que
   o repo ja usa (`catalog`, `core`, `padkit`, `tv`, `library`, `variants`, `ppsspp`, `telemetria`, `cores`,
   `controles`, `publicacao`; area nova so se nenhuma servir); comentario no codigo, quando explicar a mudanca, cita o id
@@ -157,10 +157,12 @@ Falha de ambiente (aparelho sai do adb, emulador nao sobe, rede do aparelho fora
 
 ## Finalizacao
 
-- `final-publicar` roda o `build-and-upload.ps1` da lane (sobe `versionCode`/`versionName` em
-  `lemuroid-app/build.gradle.kts`, compila o release assinado com o `release.jks`, publica no HF e no R2); o motor
-  commita o bump e grava a tag `publicado/<versao>`. O `build.properties` (HF_TOKEN, R2_*) e o `release.jks` vem da
-  arvore principal (`entradas_ignoradas`). Falha de credencial = pendencia do dono no relatorio.
+- **O pipeline NAO publica** (decisao do dono, 2026-11-20; `publicacao: null` no `projeto.json`). A finalizacao para no
+  ramo principal integrado; quem publica e sempre o dono, rodando o `build-and-upload.ps1` na arvore principal (ele
+  sobe `versionCode`/`versionName`, compila o release, publica no HF e no R2 e grava o `version.json`), e quem commita
+  o bump e a tag `publicado/<versao>` e o dono. Nenhuma sessao de etapa roda o `build-and-upload.ps1` nem o
+  `release.ps1`. Motivo: a publicacao do pipeline 20261119-2228 parou entre os APKs e o `version.json` e deixou a
+  atualizacao quebrada em producao (`docs/bugs/aberto/2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio/`).
 - O codigo que outras sessoes deixaram sem commit so e publicado se o build do `projeto.json` sair 0 numa lane. O
   ponteiro do `lemuroid-cores` e o `.claude/settings.local.json` ficam de fora (`gerados`).
 - O que so o cliente prova (TV box, aparelho que nao temos) vai no `verificacao:` da demanda e fecha pela medida ou
