@@ -84,4 +84,6 @@ sem apontamento em `NotificationsManager.kt`.
 - Feito: fix + ktlint do arquivo + baseline (commit 3085a37); `:lemuroid-app:ktlintMainSourceSetCheck` e
   `ktlintTestSourceSetCheck` BUILD SUCCESSFUL.
 - 2026-11-20: o `build --bug TASK-0005` foi morto pelo Claude Code por falta de memoria na maquina (nao e falha do
-  build). Proximo: rodar de novo `build --bug TASK-0005` e, verde, `enqueue-test --bug TASK-0005`.
+  build).
+- 2026-11-20: `build --bug TASK-0005` refeito: BUILD SUCCESSFUL (assembleFreeBundleDebug + testFreeBundleDebugUnitTest).
+  Proximo: `enqueue-test --bug TASK-0005` (sessao de teste: Plano de teste da task, T2/T3 no aparelho).
