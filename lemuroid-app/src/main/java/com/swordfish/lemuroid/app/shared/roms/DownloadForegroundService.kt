@@ -8,6 +8,7 @@ import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
+import android.os.SystemClock
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
@@ -19,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -43,7 +45,17 @@ class DownloadForegroundService : Service() {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     private var wakeLock: PowerManager.WakeLock? = null
-    private var foregroundPromotionFailed = false
+
+    // Lidos no Dispatchers.IO por publishQueueNotification; escritos na main.
+    @Volatile private var foregroundPromotionFailed = false
+
+    /**
+     * Liga antes de o serviço sair do foreground (fila vazia, `onTimeout`, `onDestroy`) e não
+     * desliga: nenhum desses pontos tem volta. A fila vazia chama `stopSelf()`; depois do
+     * `onTimeout` o tempo do tipo `dataSync` acabou e o sistema para o serviço rebaixado
+     * (javadoc de `Service.onTimeout(int, int)`).
+     */
+    @Volatile private var stopping = false
 
     override fun onCreate() {
         AndroidInjection.inject(this)
@@ -83,8 +95,19 @@ class DownloadForegroundService : Service() {
         return START_NOT_STICKY
     }
 
+    /**
+     * Um coletor só, sequencial: enquanto uma publicação está no IO ele fica suspenso, o
+     * `StateFlow` conflaciona as emissões, e o ramo "fila vazia" nunca corre junto com um
+     * `notify` deste coletor.
+     *
+     * Antes, cada emissão (uma por `read()` do download) montava e postava a notificação na main
+     * — Binder síncrono por tick, ANR com o IPC lento
+     * (demanda 2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread).
+     */
     private fun observeQueue() {
         scope.launch {
+            var lastPublished: DownloadNotificationState? = null
+            var lastPublishedAtMs = 0L
             saveQueueManager.entries.collect { entries ->
                 val hasWork =
                     entries.any {
@@ -92,14 +115,57 @@ class DownloadForegroundService : Service() {
                     }
                 if (!hasWork) {
                     Timber.d("DownloadForegroundService: queue empty, stopping self")
+                    stopping = true
                     stopForegroundCompat()
                     stopSelf()
                     return@collect
                 }
-                val saving = entries.firstOrNull { it.state == SaveQueueState.SAVING }
-                val queued = entries.count { it.state == SaveQueueState.QUEUED }
-                updateNotification(buildNotification(saving?.title, saving?.progress ?: 0f, queued))
+                val state = DownloadNotificationState.from(entries)
+                val nowMs = SystemClock.elapsedRealtime()
+                if (!DownloadNotificationThrottle.shouldPublish(lastPublished, state, lastPublishedAtMs, nowMs)) {
+                    return@collect
+                }
+                lastPublished = state
+                lastPublishedAtMs = nowMs
+                // O desenho usa o progresso cru: `percent / 100f` reconvertido erra (53% viraria 52%).
+                val progress = entries.firstOrNull { it.state == SaveQueueState.SAVING }?.progress ?: 0f
+                withContext(Dispatchers.IO) { publishQueueNotification(state, progress) }
             }
+        }
+    }
+
+    /**
+     * Monta e posta a notificação da fila. Roda no [Dispatchers.IO]: a montagem tem Binder
+     * (`PendingIntent`, canal) e o `notify` também.
+     *
+     * O Binder não é cancelável e pode voltar depois que a main tirou o serviço do foreground
+     * (`onTimeout`, `onDestroy`): uma notificação *ongoing* postada aí fica presa na cortina.
+     * Por isso [stopping] é olhado antes (não posta) e depois (desfaz): só a checagem de antes
+     * deixa a janela até o `system_server` processar o `enqueue`, que é justamente o caso de IPC
+     * lento. O `cancel` sai depois do `notify` voltar, então chega depois dele; e um `cancel` do
+     * app não remove a notificação de um serviço em foreground (a de uma instância nova).
+     *
+     * As checagens ficam aqui dentro, não depois do `withContext`: o `scope.cancel()` do
+     * `onDestroy` não interrompe o Binder, mas faria a continuação pular o que viesse depois.
+     */
+    private fun publishQueueNotification(
+        state: DownloadNotificationState,
+        progress: Float,
+    ) {
+        if (stopping) return
+        val notification = buildNotification(state.title, progress, state.queuedCount)
+        if (stopping) return
+        updateNotification(notification)
+        if ((notification.flags and Notification.FLAG_ONGOING_EVENT) == 0) return
+        when {
+            // A promoção a foreground falhou enquanto este notify estava no ar: o fallback quer a
+            // notificação comum (updateNotification tira o ongoing), não esta.
+            foregroundPromotionFailed -> updateNotification(notification)
+            stopping ->
+                runCatching {
+                    NotificationManagerCompat.from(this)
+                        .cancel(NotificationsManager.ROMS_DOWNLOAD_NOTIFICATION_ID)
+                }
         }
     }
 
@@ -154,6 +220,7 @@ class DownloadForegroundService : Service() {
     }
 
     override fun onDestroy() {
+        stopping = true
         scope.cancel()
         runCatching { wakeLock?.takeIf { it.isHeld }?.release() }
         wakeLock = null
@@ -171,6 +238,7 @@ class DownloadForegroundService : Service() {
             fgsType,
         )
         saveQueueManager.pauseActive()
+        stopping = true
         stopForegroundCompat()
         stopSelfResult(startId)
     }
