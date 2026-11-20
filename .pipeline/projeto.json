@@ -8,14 +8,14 @@
     "gerados": "nunca vao para commit: o ponteiro do submodulo (pitfall 15 do CLAUDE.md) e o settings.local.json",
     "e2e": "teto do slot de teste; o aparelho/emulador e segurado pelo lock do `aparelho-instalar`, nao por processo",
     "publicacao": "o build-and-upload.ps1 sobe a versao e publica (HF + R2); o motor commita o arquivo do bump. Povoa o lemuroid-cores antes, como o build: a publicacao roda na wt-planning, que nunca passa pelo build (bug 2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores)",
-    "android": "A12 de teste RX8R90G1D6E; sem ele, o emulador lemu_3ds_api34 (x86_64, pede o build --emulador)",
+    "android": "moto g86 5G de teste ZY32LMNN9B (A12 RX8R90G1D6E fora desde 2026-11-19); sem ele, o emulador lemu_3ds_api34 (x86_64, pede o build --emulador)",
     "telemetria": "componente retrogamesystem/<comp>; user_agent `RetroGameSystem/<comp> <versao>` (TelemetryReporter.kt)",
     "tipos": "tipos de demanda, em docs/<tipo>/<estado>/<id>/"
   },
   "nome": "Lemuroid",
   "remoto": "origin",
   "base": "origin/version10",
-  "rodizio_contas": false,
+  "rodizio_contas": true,
   "commit_docs": "docs",
   "build": {
     "cmd": ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
@@ -51,7 +51,7 @@
   },
   "android": {
     "pacote_teste": "app.retrogamesystem.debug",
-    "serial": "RX8R90G1D6E",
+    "serial": "ZY32LMNN9B",
     "avd": "lemu_3ds_api34",
     "boot_min": 8,
     "flag_emulador": ["-PdevAbi=x86_64"],

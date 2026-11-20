@@ -109,8 +109,8 @@ Escreva o arquivo, **nao commite** (o checkout e compartilhado; o helper commita
 
 ## Teste (E2E)
 
-**Onde o teste roda:** no aparelho que o `aparelho-instalar` escolher: o Galaxy A12 de teste (`RX8R90G1D6E`,
-SM-A127M, Android 13, arm64) quando conectado e autorizado; sem ele, o emulador `lemu_3ds_api34` (Android 14, x86_64),
+**Onde o teste roda:** no aparelho que o `aparelho-instalar` escolher: o moto g86 5G de teste (`ZY32LMNN9B`,
+Android 16, arm64; antes, o Galaxy A12 `RX8R90G1D6E`) quando conectado e autorizado; sem ele, o emulador `lemu_3ds_api34` (Android 14, x86_64),
 que o motor sobe. Um teste por vez (o slot). O APK e o debug que o `build` deixou na SUA lane; para o emulador o build
 tem de ser `build --emulador` (sem ele o APK x86_64 nao existe e o `aparelho-instalar` recusa dizendo isso).
 
