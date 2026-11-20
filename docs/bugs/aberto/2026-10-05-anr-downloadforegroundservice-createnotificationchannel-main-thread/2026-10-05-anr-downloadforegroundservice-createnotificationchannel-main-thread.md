@@ -1,6 +1,6 @@
 ---
 fecha_por: prova
-tasks: [TASK-0005, TASK-0006]
+tasks: [TASK-0005, TASK-0006, TASK-0009]
 ---
 # [BUG] ANR na `MainActivity` — `DownloadForegroundService` bloqueia main thread com `createNotificationChannels` no IPC Binder a cada progresso de download
 
