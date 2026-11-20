@@ -2,6 +2,7 @@
 tipo: prova
 demandas: [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread]
 depende_de: [TASK-0005, TASK-0006]
+integrado_em: e3e2d95480daf3b873aa13de05871bfae48a3067
 ---
 # Aceitação de 2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread
 

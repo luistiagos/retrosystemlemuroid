@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service]
 depende_de: []
+integrado_em: 0f50dd1446585be37592ac21153c9123425cb9f0
 ---
 # lowmemory: o relatório do processo principal diz qual serviço de primeiro plano o segurava
 

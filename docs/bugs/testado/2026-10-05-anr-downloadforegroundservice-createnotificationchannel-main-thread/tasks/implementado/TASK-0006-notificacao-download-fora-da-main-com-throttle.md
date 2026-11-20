@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread]
 depende_de: []
+integrado_em: d18e5387ec18e244a7863f52e033daf95246e733
 ---
 # Notificação de progresso do download: só quando muda o que aparece, no máximo ~1/s, e fora da main thread
 

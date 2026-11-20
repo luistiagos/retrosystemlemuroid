@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread]
 depende_de: []
+integrado_em: 4b665113a8315c9d1b82e9e7879b212750352700
 ---
 # Criar os canais de notificação uma vez por processo, não a cada notificação
 

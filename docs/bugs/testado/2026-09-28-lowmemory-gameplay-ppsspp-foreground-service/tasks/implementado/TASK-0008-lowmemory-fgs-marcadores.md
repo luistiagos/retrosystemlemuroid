@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service]
 depende_de: [TASK-0007]
+integrado_em: 8093fa8de4e698e6b8dc18eaccd04f2ab97a7949
 ---
 # lowmemory: DownloadForegroundService e Workers em foreground gravam o marcador de serviço ativo
 
