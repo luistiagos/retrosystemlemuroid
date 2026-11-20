@@ -67,4 +67,6 @@ sobre a função pura): pid igual + `{download}` → `fgs=download`; pid diferen
 
 ## Estado
 
-- Feito: codigo + teste desta task. Falta: build do helper verde, ktlint dos 3 arquivos, `enqueue-test`.
+- Feito (commit b026c50): codigo + teste. `build --bug TASK-0007` → BUILD SUCCESSFUL (8m26s); testes 109/0 falhas/1
+  pulado, `ForegroundWorkForExitTest` 8/8; `gradlew :lemuroid-app:ktlintCheck` → exit 0, nenhum apontamento nos
+  arquivos tocados. Proximo: `enqueue-test --bug TASK-0007` (teste: so offline + campos existentes; E2E e da TASK-0008).
