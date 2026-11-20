@@ -96,12 +96,8 @@ arquivos novos nascem limpos no ktlint.
   máquina** (4,8 GB livres de 31,4 GB; a lane `wt-1` estava com o Gradle dela rodando). O helper ainda esperava a trava
   `lemuroid-build`: o log ficou vazio, nenhum Gradle da `wt-3` chegou a subir nem ficou órfão. O harness proíbe religar
   sozinho ("start it again only when asked"), então **o build não foi refeito nesta sessão**.
-- **Próximo passo exato** (com memória livre): `python "C:\projects\pipeline-global\skill\scripts\pipeline.py" --projeto
-  "C:\projects\lemuroid\Lemuroid" build --bug TASK-0006` (background) → conferir
-  `lemuroid-app/build/test-results/testFreeBundleDebugUnitTest/TEST-com.swordfish.lemuroid.app.shared.roms.DownloadNotificationThrottleTest.xml`
-  (7 testes, 0 falhas) e a linha de base (54/0/1 + 7) → `gradlew :lemuroid-app:ktlintCheck` (sem apontamento nos 3
-  arquivos) → `gradlew :lemuroid-app:lintFreeBundleDebug` (BUILD SUCCESSFUL) → preencher "Resultado do compile-check"
-  em `## Correcao` → commit `TASK-0006: estado: ...` → `enqueue-test --bug TASK-0006`.
+- 2026-11-20 (retomada pelo pipeline): build refeito e verde, ktlint e lint verdes (números em `## Correcao`).
+  Próximo passo: `enqueue-test --bug TASK-0006` (feito nesta sessão).
 
 ## Análise da implementação (dev, pipeline 20261119-2228, 2026-11-20)
 
@@ -208,5 +204,7 @@ Commit `7afc802` (`TASK-0006: fix(download): ...`).
   ticks em 10 s → 10 publicações, percentual estritamente crescente, último ≥ 89).
 - **Ajustes ao Plano de teste:** nenhum. O T2 da task continua valendo como está (contagem de
   `enqueueNotificationWithTag` ≤ ~35 em 30 s, em `DefaultDispatcher-worker`; a notificação some ao cancelar pelo X).
-- **Resultado do compile-check:** pendente — ver `## Estado` (build encerrado por falta de memória da máquina, não
-  refeito nesta sessão).
+- **Resultado do compile-check (2026-11-20, 2º `build --bug TASK-0006`):** `BUILD SUCCESSFUL in 6m 27s`;
+  `TEST-...DownloadNotificationThrottleTest.xml` 7 testes, 0 falhas; total da lane 108 testes, 0 falhas, 0 erros,
+  1 pulado (a linha de base de 54 do manual é de 2026-10-09 e cresceu desde então). `gradlew :lemuroid-app:ktlintCheck`
+  `BUILD SUCCESSFUL`, nenhum apontamento nos 3 arquivos; `gradlew :lemuroid-app:lintFreeBundleDebug` `BUILD SUCCESSFUL`.
