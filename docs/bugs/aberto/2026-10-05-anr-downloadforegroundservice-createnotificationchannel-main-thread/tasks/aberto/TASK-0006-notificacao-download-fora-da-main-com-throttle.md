@@ -88,9 +88,20 @@ arquivos novos nascem limpos no ktlint.
 
 ## Estado
 
-- 2026-11-20: análise da implementação registrada (seção abaixo). Falta: código (`DownloadNotificationThrottle.kt`,
-  `DownloadForegroundService::observeQueue`/`publishQueueNotification`), teste `DownloadNotificationThrottleTest`,
-  `build --bug TASK-0006`, ktlint, `## Correcao`, `enqueue-test --bug TASK-0006`.
+- 2026-11-20: análise da implementação registrada (seção abaixo).
+- 2026-11-20: **código e teste commitados** (`7afc802`): `DownloadNotificationThrottle.kt` (novo),
+  `DownloadForegroundService::observeQueue`/`::publishQueueNotification`/`stopping`, `DownloadNotificationThrottleTest`
+  (7 testes). Seção `## Correcao` abaixo.
+- 2026-11-20: o 1º `build --bug TASK-0006` (em background) foi **encerrado pelo Claude Code por falta de memória na
+  máquina** (4,8 GB livres de 31,4 GB; a lane `wt-1` estava com o Gradle dela rodando). O helper ainda esperava a trava
+  `lemuroid-build`: o log ficou vazio, nenhum Gradle da `wt-3` chegou a subir nem ficou órfão. O harness proíbe religar
+  sozinho ("start it again only when asked"), então **o build não foi refeito nesta sessão**.
+- **Próximo passo exato** (com memória livre): `python "C:\projects\pipeline-global\skill\scripts\pipeline.py" --projeto
+  "C:\projects\lemuroid\Lemuroid" build --bug TASK-0006` (background) → conferir
+  `lemuroid-app/build/test-results/testFreeBundleDebugUnitTest/TEST-com.swordfish.lemuroid.app.shared.roms.DownloadNotificationThrottleTest.xml`
+  (7 testes, 0 falhas) e a linha de base (54/0/1 + 7) → `gradlew :lemuroid-app:ktlintCheck` (sem apontamento nos 3
+  arquivos) → `gradlew :lemuroid-app:lintFreeBundleDebug` (BUILD SUCCESSFUL) → preencher "Resultado do compile-check"
+  em `## Correcao` → commit `TASK-0006: estado: ...` → `enqueue-test --bug TASK-0006`.
 
 ## Análise da implementação (dev, pipeline 20261119-2228, 2026-11-20)
 
@@ -135,6 +146,11 @@ arquivos novos nascem limpos no ktlint.
 2. **`stopping` não é desligado.** Cada ponto que o liga é seguido da morte da instância (`stopSelf()`; no
    `onTimeout`, `stopSelfResult` do único start que a instância recebe; `onDestroy`). Desligar no `onStartCommand`
    abriria uma janela de publicação numa instância já derrubada.
+   - *Correção (2026-11-20, na implementação):* "único start" não vale sempre: se o usuário enfileira no instante em que
+     o processador acaba, o `start` cai na instância ainda viva (o coletor vê a fila já com item e não para). A
+     conclusão continua: no `onTimeout` o javadoc de `Service.onTimeout(int, int)` (SDK 35) diz que o serviço
+     rebaixado por `stopForeground` "will soon be stopped by the system", e o tempo do `dataSync` acabou; na fila vazia
+     é `stopSelf()` incondicional. Nenhum dos pontos tem volta ao foreground.
 3. **Corrida nova com o fallback sem foreground:** antes, tudo na main, o notify comum do `showRegularNotification`
    sempre vinha por último. Com o IO, um `notify` *ongoing* montado antes de `foregroundPromotionFailed` ligar pode
    chegar depois. Depois do `notify`, se o postado é *ongoing* e `foregroundPromotionFailed` ligou, republica a mesma
@@ -152,3 +168,45 @@ arquivos novos nascem limpos no ktlint.
 - Lock entre o IO e a main em volta do `notify`: a main esperaria o Binder do IO — o ANR de volta.
 - `launch` por emissão no IO: publicações concorrentes e fora de ordem; o ramo "fila vazia" correria junto com um
   `notify`.
+
+## Correcao (pipeline 20261119-2228, rodada 1)
+
+Commit `7afc802` (`TASK-0006: fix(download): ...`).
+
+- `DownloadNotificationThrottle.kt` (novo, sem Android):
+  - `DownloadNotificationState(title, percent, queuedCount)` + `DownloadNotificationState.from(entries)`: título e
+    `(progress * 100).toInt()` do 1º `SAVING`, contagem de `QUEUED`; sem `SAVING`, `title = null` e `percent = 0`.
+  - `DownloadNotificationThrottle.shouldPublish(last, next, lastPublishedAtMs, nowMs)`: `last == null` → publica;
+    igual → não; `title`/`queuedCount` mudou → publica na hora; só o percentual → publica com
+    `nowMs - lastPublishedAtMs >= PROGRESS_INTERVAL_MS` (`1_000L`).
+- `DownloadForegroundService.kt`:
+  - `observeQueue`: continua um coletor sequencial na main; deriva o estado, aplica `shouldPublish`
+    (`SystemClock.elapsedRealtime()`), guarda `lastPublished`/`lastPublishedAtMs` (locais do coletor) e chama
+    `withContext(Dispatchers.IO) { publishQueueNotification(state, progress) }`. O ramo "fila vazia" liga `stopping`
+    antes de `stopForegroundCompat()` + `stopSelf()`, no contexto do coletor como antes.
+  - `publishQueueNotification` (novo, roda no IO): `stopping` → não monta; monta (`buildNotification`, inalterado:
+    canal + `PendingIntent` + builder); `stopping` → não posta; `updateNotification`; se o postado era *ongoing*:
+    `foregroundPromotionFailed` ligou no meio → republica sem o ongoing (`updateNotification` tira); senão `stopping`
+    ligou no meio → `NotificationManagerCompat.cancel(ROMS_DOWNLOAD_NOTIFICATION_ID)`.
+  - `@Volatile stopping` (novo): ligado no ramo vazio, no `onTimeout` (antes do `stopForegroundCompat`) e no
+    `onDestroy` (antes do `scope.cancel()`); nunca desligado (decisão 2 da análise).
+  - `foregroundPromotionFailed` agora `@Volatile`.
+  - `onStartCommand`, `companion.start`, `stopForegroundCompat`, `updateNotification`, `showRegularNotification`: sem
+    mudança.
+- **Qual das duas guardas da corrida (pedido da task): as duas** — não postar se já parou (checado no IO, logo antes
+  do `notify`) **e** cancelar o *ongoing* se parou enquanto o `notify` estava no ar. Motivo na decisão 1 da análise:
+  a checagem de antes, sozinha, deixa a janela de IPC lento, que é o próprio cenário do ANR; o cancelamento, sozinho,
+  faria Binder inútil depois de parar. O `cancel` do app não derruba notificação de serviço em foreground (javadoc de
+  `NotificationManager.cancel`, SDK 35: só remove "if the notification does not currently represent a foreground
+  service"), então não apaga a da instância seguinte.
+- **Diferença visível esperada:** o percentual na cortina anda de ~1 em ~1 s, e o 100% pode não aparecer antes de a
+  notificação sumir no fim do item (decisão 5).
+- `DownloadNotificationThrottleTest.kt` (novo, JUnit 4): `firstPublicationAlwaysGoesOut` (a),
+  `sameStateIsNotRepublished` (b), `percentOnlyWaitsForTheInterval` (c: 200 ms → não; d: 1000 ms → sim),
+  `titleChangeIsImmediate` (e), `queueChangeIsImmediate` (f), `stateComesFromTheSavingEntryAndTheQueuedCount` (g:
+  `("X", 42, 2)`; sem `SAVING` → `title == null`), `thousandProgressTicksInTenSecondsPublishAboutOncePerSecond` (1.000
+  ticks em 10 s → 10 publicações, percentual estritamente crescente, último ≥ 89).
+- **Ajustes ao Plano de teste:** nenhum. O T2 da task continua valendo como está (contagem de
+  `enqueueNotificationWithTag` ≤ ~35 em 30 s, em `DefaultDispatcher-worker`; a notificação some ao cancelar pelo X).
+- **Resultado do compile-check:** pendente — ver `## Estado` (build encerrado por falta de memória da máquina, não
+  refeito nesta sessão).
