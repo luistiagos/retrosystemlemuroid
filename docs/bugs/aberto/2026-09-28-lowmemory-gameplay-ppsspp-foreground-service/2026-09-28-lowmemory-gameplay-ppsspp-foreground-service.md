@@ -1,6 +1,6 @@
 ---
 fecha_por: prova
-tasks: [TASK-0007, TASK-0008]
+tasks: [TASK-0007, TASK-0008, TASK-0010]
 ---
 # [BUG] Low-memory kills em primeiro plano — PPSSPP (mesmo aparelho, 2x) + serviço de foreground sem sessão de jogo
 
