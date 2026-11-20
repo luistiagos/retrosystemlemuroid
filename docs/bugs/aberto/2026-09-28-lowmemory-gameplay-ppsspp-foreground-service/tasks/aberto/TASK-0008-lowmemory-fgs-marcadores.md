@@ -99,3 +99,53 @@ Teste: `lemuroid-app/src/test/java/com/swordfish/lemuroid/app/utils/android/RunM
 funcao pura `runMarkedInForeground` (lambdas falsas): sucesso marca antes e desmarca depois; falha engolida nao
 marca e roda o bloco; falha relancada nao roda o bloco; bloco que lanca (inclusive `CancellationException`)
 desmarca; dois donos da mesma tag marcam uma vez e desmarcam so no ultimo.
+
+## Correcao (pipeline 20261119-2228, rodada 1)
+
+Commit `68eff36`.
+
+- `WorkManagerUtils.kt`:
+  - `ForegroundWorkTag` — `download`, `core`, `library`, `savesync`, `romsdownload`, `streaming` (nenhuma com `+`).
+  - `CoroutineWorker::runInForeground(tag, foregroundInfo, onPromotionFailed, block)` → `runMarkedInForeground`
+    (internal, sem `Context`): `setForeground`; se lancou `Exception`, `onPromotionFailed(e)` decide (logar e rodar o
+    bloco sem marcador, ou relancar sem rodar o bloco); se deu certo, `ForegroundTagCounter.acquire` (marca no 0→1),
+    bloco, `release` no `finally` (desmarca no 1→0; cobre excecao e `CancellationException`).
+  - `ForegroundTagCounter` — contagem por tag, `@Synchronized`, mark/clear dentro do lock.
+- `CoreUpdateWork::doWork` → `runInForeground(CORE, ..., loga)` em volta do novo `downloadCores()` (o mesmo
+  `try/catch` de antes, devolve `hadFailure`). `LibraryIndexWork::doWork` → `LIBRARY`, em volta do
+  `withContext(IO) { runCatching { indexLibrary() } }`. `SaveSyncWork::doWork` → `SAVE_SYNC`, em volta do novo
+  `syncSaves()`; `displayNotification()` saiu (foi para dentro do `doWork`). Os tres seguem sem notificacao quando o
+  `setForeground` falha, com a mesma mensagem de log.
+- `RomsDownloadWork::doWork` (`ROMS_DOWNLOAD`) e `StreamingRomsWork::doWork` (`STREAMING`): `onPromotionFailed =
+  { throw it }` — a falha do `setForeground` continua indo para o `catch` geral (`Result.failure`), como antes.
+- `DownloadForegroundService`: `onStartCommand` marca `DOWNLOAD` logo depois do `ServiceCompat.startForeground` que
+  voltou (o ramo `isForegroundServiceStartNotAllowed` nao marca); `stopForegroundCompat()` desmarca (fila vazia e
+  `onTimeout`); `onDestroy` desmarca de novo (idempotente).
+- ktlint: as linhas andaram e o passivo de `CoreUpdateWork`, `RomsDownloadWork`, `StreamingRomsWork` reapareceu
+  (baseline casa por linha). Corrigido (2 imports nao usados, `if` multilinha, linha em branco no inicio da classe,
+  chaves no `if`, trailing comma, assinatura de `enqueue`) e as 3 entradas sairam de
+  `lemuroid-app/config/ktlint/baseline.xml` (claim). `gradlew :lemuroid-app:ktlintCheck`: `ktlintMainSourceSetCheck` e
+  `ktlintTestSourceSetCheck` verdes; so o `ktlintKotlinScriptCheck` falha, no `lemuroid-app/build.gradle.kts`
+  (vermelho conhecido da base, manual secao Dev).
+- Teste novo: `lemuroid-app/src/test/java/com/swordfish/lemuroid/app/utils/android/RunMarkedInForegroundTest.kt`
+  (7 casos; claim).
+- `lintFreeBundleDebug` nao rodado: a mudanca nao chama API de framework nova (so `TelemetryContext`, ja integrado, e
+  `setForeground` do WorkManager que ja era chamado).
+
+Ajustes ao Plano de teste:
+
+- As chaves sao `telemetry_fgs_pid` (int) e `telemetry_fgs_tags` (string) em `shared_prefs/telemetry_prefs.xml`.
+  "A tag some" = `telemetry_fgs_tags` fica vazio (`<string name="telemetry_fgs_tags"></string>`); o pid fica.
+- O download de jogo pela Home passa pelo `DownloadForegroundService` (tag `download`). Na base (`1ba98c9`, ja com a
+  TASK-0007) as chaves `telemetry_fgs_*` nao aparecem: e o controle positivo.
+- Reescanear biblioteca: `LibraryIndexWork` → `library`; pode durar pouco, entao ler o arquivo logo apos o toque (ou
+  em laco curto de `run-as cat`).
+
+## Estado
+
+- Feito (commit `68eff36` + este): codigo, teste e ktlint. `build --bug TASK-0008 --emulador` → BUILD SUCCESSFUL
+  (4m53s); testes 123 / 0 falhas / 1 pulado (linha de base 54/0/1 sem falha nova); `RunMarkedInForegroundTest` 7/7.
+  APKs arm64-v8a, armeabi-v7a e x86_64 na lane.
+- Falta: teste E2E (sessao de teste): download pela Home com `telemetry_fgs_tags=download` durante e vazio depois;
+  reescanear biblioteca com `library`; controle positivo na base.
+- Proximo passo: `enqueue-test --bug TASK-0008`.
