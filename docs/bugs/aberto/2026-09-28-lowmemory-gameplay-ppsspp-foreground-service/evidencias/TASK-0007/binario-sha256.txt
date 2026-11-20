@@ -1,0 +1,2 @@
+sha256 base.apk instalado = sha256 APK da lane (x86_64)
+e883aebac978a11a51e922c60b345b3180119e7afe69aa2a210e216019ca4918

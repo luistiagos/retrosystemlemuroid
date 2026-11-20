@@ -70,3 +70,27 @@ sobre a função pura): pid igual + `{download}` → `fgs=download`; pid diferen
 - Feito (commit b026c50): codigo + teste. `build --bug TASK-0007` → BUILD SUCCESSFUL (8m26s); testes 109/0 falhas/1
   pulado, `ForegroundWorkForExitTest` 8/8; `gradlew :lemuroid-app:ktlintCheck` → exit 0, nenhum apontamento nos
   arquivos tocados. Proximo: `enqueue-test --bug TASK-0007` (teste: so offline + campos existentes; E2E e da TASK-0008).
+
+## Teste
+
+Rodada 1 (pipeline 20261119-2228) — **aprovado**. Evidencia em
+`docs/bugs/aberto/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service/evidencias/TASK-0007/`.
+
+- **Offline:** diff `origin/version10...HEAD` toca so os 3 arquivos reservados + este doc. `build --bug TASK-0007`
+  (antes do sync) e `build --bug TASK-0007 --emulador` (depois do sync sobre `d18e538`, com a TASK-0006) →
+  BUILD SUCCESSFUL; testes 116 / 0 falhas / 1 pulado (linha de base do manual 54/0/1, sem falha nova);
+  `ForegroundWorkForExitTest` 8/8, `CrashTelemetryMemoryTest` 2/2, `GameSessionForExitTest` 5/5.
+  `gradlew :lemuroid-app:ktlintCheck` → exit 0, nenhum apontamento em `TelemetryContext.kt`/`CrashTelemetry.kt`.
+- **T2 (controle positivo): impossivel nesta task, justificado.** Ninguem grava o marcador ainda (os call-sites
+  sao da TASK-0008), entao base e fix produzem o mesmo relatorio sem `fgs=`. Alem disso, o `reportOneExit` so roda
+  para `native`/`anr`/`lowmemory` e o `TelemetryReporter.report` retorna cedo com a telemetria desligada pelo
+  `aparelho-instalar`: a linha nao e observavel no aparelho. A prova do conteudo e o teste JVM acima; o E2E com
+  sinal e da TASK-0008.
+- **T3 (caminho vizinho no aparelho):** emulador `emulator-5554` (Android 14, x86_64; o A12/moto estava offline).
+  `aparelho-instalar` instalou o APK x86_64 da lane; `sha256sum` do `base.apk` instalado = do APK da lane
+  (`e883aeba…4918`); `lastUpdateTime` 05:29:46 → 05:56:09. Cold start (`force-stop` + launcher), que roda o
+  scan de `ApplicationExitInfo` com o codigo novo: `MainActivity` em `topResumedActivity`, Home renderizada
+  (`fix-home.png`). `telemetry_prefs.xml` sem chaves `telemetry_fgs_*` (esperado: nada marca).
+- **T4:** `logcat --pid=15568` (o meu launch): nenhum `AndroidRuntime`/`FATAL`/`ANR`/`libc`; buffer `crash` vazio.
+  So `StrictMode DiskReadViolation` de debug, sem frame de telemetria.
+- Nao testado: o relatorio real com `fgs=` (depende da TASK-0008 e de um `lowmemory` real).
