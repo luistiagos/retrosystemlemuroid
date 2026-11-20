@@ -1,0 +1,47 @@
+Binder transaction traces for all processes.
+
+Traces for process: app.retrogamesystem.debug
+Count: 16
+Trace: java.lang.Throwable
+	at android.os.BinderProxy.transact(BinderProxy.java:553)
+	at android.app.INotificationManager$Stub$Proxy.enqueueNotificationWithTag(INotificationManager.java:3065)
+	at android.app.NotificationManager.notifyAsUser(NotificationManager.java:693)
+	at android.app.NotificationManager.notify(NotificationManager.java:643)
+	at androidx.core.app.NotificationManagerCompat.notify(NotificationManagerCompat.java:290)
+	at androidx.core.app.NotificationManagerCompat.notify(NotificationManagerCompat.java:271)
+	at com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService.updateNotification(DownloadForegroundService.kt:203)
+	at com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService.publishQueueNotification(DownloadForegroundService.kt:158)
+	at com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService.access$publishQueueNotification(DownloadForegroundService.kt:43)
+	at com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService$observeQueue$1$1$1.invokeSuspend(DownloadForegroundService.kt:132)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:111)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:99)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:585)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:802)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:706)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:693)
+
+
+Count: 16
+Trace: java.lang.Throwable
+	at android.os.BinderProxy.transact(BinderProxy.java:553)
+	at android.app.IActivityManager$Stub$Proxy.getIntentSenderWithFeature(IActivityManager.java:6567)
+	at android.app.PendingIntent.getActivityAsUser(PendingIntent.java:549)
+	at android.app.PendingIntent.getActivity(PendingIntent.java:530)
+	at android.app.PendingIntent.getActivity(PendingIntent.java:494)
+	at com.swordfish.lemuroid.app.mobile.shared.NotificationsManager.romQueueNotification(NotificationsManager.kt:154)
+	at com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService.buildNotification(DownloadForegroundService.kt:195)
+	at com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService.publishQueueNotification(DownloadForegroundService.kt:156)
+	at com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService.access$publishQueueNotification(DownloadForegroundService.kt:43)
+	at com.swordfish.lemuroid.app.shared.roms.DownloadForegroundService$observeQueue$1$1$1.invokeSuspend(DownloadForegroundService.kt:132)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:111)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:99)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:585)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:802)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:706)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:693)
+
+

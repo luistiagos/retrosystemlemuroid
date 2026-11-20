@@ -1,0 +1,5 @@
+    NotificationRecord(0x08560cc4: pkg=app.retrogamesystem.debug user=UserHandle{0} id=5 tag=null importance=2 key=0|app.retrogamesystem.debug|5|null|10190: Notification(channel=DOWNLOAD_CHANNEL_ID shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 vis=PRIVATE))
+      uid=10190 userId=0
+--
+                android.title=String (Tekken 3 Unlocked Edition Traduzido PT-BR)
+                android.text=String (Downloading… 36%)

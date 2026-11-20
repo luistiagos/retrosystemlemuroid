@@ -1,0 +1,1198 @@
+--------- beginning of main
+11-20 14:21:20.091 16661 16661 I amesystem.debug: Late-enabling -Xcheck:jni
+11-20 14:21:20.166 16661 16661 I amesystem.debug: Using CollectorTypeCC GC.
+11-20 14:21:20.167 16661 16661 W amesystem.debug: Unexpected CPU variant for x86: x86_64.
+11-20 14:21:20.167 16661 16661 W amesystem.debug: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+11-20 14:21:20.296 16661 16661 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10190; state: ENABLED
+11-20 14:21:20.297 16661 16661 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 10190; state: ENABLED
+11-20 14:21:20.308 16661 16661 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-20 14:21:20.308 16661 16661 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-20 14:21:20.308 16661 16661 W ziparchive: Unable to open '/data/app/~~9N9cFzlmpVolh-kQe_jyWA==/app.retrogamesystem.debug-b_8jCyybbqL93T_uIwHEkQ==/base.dm': No such file or directory
+11-20 14:21:20.308 16661 16661 W ziparchive: Unable to open '/data/app/~~9N9cFzlmpVolh-kQe_jyWA==/app.retrogamesystem.debug-b_8jCyybbqL93T_uIwHEkQ==/base.dm': No such file or directory
+11-20 14:21:20.956 16661 16661 D nativeloader: Configuring clns-6 for other apk /data/app/~~9N9cFzlmpVolh-kQe_jyWA==/app.retrogamesystem.debug-b_8jCyybbqL93T_uIwHEkQ==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~9N9cFzlmpVolh-kQe_jyWA==/app.retrogamesystem.debug-b_8jCyybbqL93T_uIwHEkQ==/lib/x86_64:/data/app/~~9N9cFzlmpVolh-kQe_jyWA==/app.retrogamesystem.debug-b_8jCyybbqL93T_uIwHEkQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/app.retrogamesystem.debug
+11-20 14:21:20.980 16661 16661 V GraphicsEnvironment: Currently set values for:
+11-20 14:21:20.980 16661 16661 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-20 14:21:20.980 16661 16661 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-20 14:21:20.984 16661 16661 V GraphicsEnvironment: ANGLE GameManagerService for app.retrogamesystem.debug: false
+11-20 14:21:20.984 16661 16661 V GraphicsEnvironment: app.retrogamesystem.debug is not listed in per-application setting
+11-20 14:21:20.985 16661 16661 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-20 14:21:21.340 16661 16661 I NativeTempDir: Native TMPDIR set to /data/user/0/app.retrogamesystem.debug/files/tmp
+11-20 14:21:21.349 16661 16661 D WM-WrkMgrInitializer: Initializing WorkManager with default configuration.
+11-20 14:21:21.411 16661 16661 D WM-PackageManagerHelper: Skipping component enablement for androidx.work.impl.background.systemjob.SystemJobService
+11-20 14:21:21.411 16661 16661 D WM-Schedulers: Created SystemJobScheduler and enabled SystemJobService
+11-20 14:21:21.430 16661 16661 D CompatibilityChangeReporter: Compat change id reported: 3400644; UID 10190; state: ENABLED
+11-20 14:21:21.430 16661 16661 I MainProcessInitializer: Requested initialization of main process tasks
+11-20 14:21:21.491 16661 16691 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10190; state: ENABLED
+11-20 14:21:21.553 16661 16661 D StrictMode: StrictMode policy violation; ~duration=104 ms: android.os.strictmode.DiskReadViolation
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager$Companion.markCatalogPopulated(StreamingRomsManager.kt:123)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:29)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:18)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:21:21.553 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:21:21.556 16661 16661 D StrictMode: StrictMode policy violation; ~duration=102 ms: android.os.strictmode.DiskReadViolation
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.app.SharedPreferencesImpl.edit(SharedPreferencesImpl.java:368)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager$Companion.markCatalogPopulated(StreamingRomsManager.kt:124)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:29)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:18)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:21:21.556 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:21:21.602 16661 16706 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-20 14:21:21.615 16661 16706 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-20 14:21:21.627 16661 16706 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-20 14:21:21.636 16661 16694 D SmartStoragePicker: SmartStoragePicker: ROMs dir /storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms
+11-20 14:21:21.700 16661 16699 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10190; state: ENABLED
+11-20 14:21:21.701 16661 16699 D CompatibilityChangeReporter: Compat change id reported: 253665015; UID 10190; state: ENABLED
+11-20 14:21:21.767 16661 16661 W amesystem.debug: Accessing hidden method Ljava/lang/invoke/MethodHandles$Lookup;-><init>(Ljava/lang/Class;I)V (unsupported, reflection, allowed)
+11-20 14:21:21.809 16661 16697 W WM-Processor: Didn't find WorkSpec for id WorkGenerationalId(workSpecId=1fd6f3d0-21cd-49d8-b7f8-67454515eefb, generation=0)
+11-20 14:21:21.824 16661 16699 D CompatibilityChangeReporter: Compat change id reported: 263076149; UID 10190; state: ENABLED
+11-20 14:21:21.842 16661 16688 V NativeCrypto: Registering org/conscrypt/NativeCrypto's 288 native methods...
+11-20 14:21:21.857 16661 16688 W amesystem.debug: Accessing hidden method Ljava/security/spec/ECParameterSpec;->getCurveName()Ljava/lang/String; (unsupported, reflection, allowed)
+11-20 14:21:21.865 16661 16688 D LemuroidApplication: Conscrypt provider installed
+11-20 14:21:22.054 16661 16661 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10190; state: DISABLED
+11-20 14:21:22.056 16661 16661 W OpenGLRenderer: Unknown dataspace 0
+11-20 14:21:22.073 16661 16661 D StrictMode: StrictMode policy violation; ~duration=39 ms: android.os.strictmode.DiskReadViolation
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.prefs_delegate$lambda$0(AppUpdateManager.kt:70)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.$r8$lambda$NltxSQYBvDhxDNRQ1nb8DutaMa4(Unknown Source:0)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:74)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.getPrefs(AppUpdateManager.kt:70)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.shouldCheckNow(AppUpdateManager.kt:88)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel.checkOnStartup(AppUpdateViewModel.kt:48)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity.onCreate(MainActivity.kt:208)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:21:22.073 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:21:22.074 16661 16661 D StrictMode: StrictMode policy violation; ~duration=37 ms: android.os.strictmode.DiskReadViolation
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.SharedPreferencesImpl.getLong(SharedPreferencesImpl.java:328)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.shouldCheckNow(AppUpdateManager.kt:88)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel.checkOnStartup(AppUpdateViewModel.kt:48)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity.onCreate(MainActivity.kt:208)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:21:22.074 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:21:23.862 16661 16702 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 14:21:23.862 16661 16702 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 14:21:23.982 16661 16702 I Gralloc4: mapper 4.x is not supported
+11-20 14:21:24.022 16661 16702 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 14:21:24.175 16661 16677 I OpenGLRenderer: Davey! duration=2082ms; Flags=1, FrameTimelineVsyncId=585266, IntendedVsync=3977389192770, Vsync=3977405859436, InputEventId=0, HandleInputStart=3977408567740, AnimationStart=3977408605340, PerformTraversalsStart=3977408651940, DrawStart=3979343032840, FrameDeadline=3977405859436, FrameInterval=3977408497040, FrameStartTime=16666666, SyncQueued=3979419750340, SyncStart=3979423187440, IssueDrawCommandsStart=3979425799740, SwapBuffers=3979459877040, FrameCompleted=3979474984640, DequeueBufferDuration=29500, QueueBufferDuration=315500, GpuCompleted=3979474984640, SwapBuffersCompleted=3979464341640, DisplayPresentTime=0, CommandSubmissionCompleted=3979459877040, 
+11-20 14:21:24.194 16661 16691 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=1fc73721-c063-47eb-bbaa-a4d13f86b227, tags={ com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork } ]
+11-20 14:21:24.279 16661 16661 I Choreographer: Skipped 126 frames!  The application may be doing too much work on its main thread.
+11-20 14:21:24.878 16661 16675 I OpenGLRenderer: Davey! duration=2700ms; Flags=0, FrameTimelineVsyncId=585281, IntendedVsync=3977489192766, Vsync=3979589192682, InputEventId=0, HandleInputStart=3979600376540, AnimationStart=3979600435340, PerformTraversalsStart=3980126447540, DrawStart=3980127066940, FrameDeadline=3979505859352, FrameInterval=3979599531340, FrameStartTime=16666666, SyncQueued=3980166206840, SyncStart=3980166858240, IssueDrawCommandsStart=3980167066740, SwapBuffers=3980176439940, FrameCompleted=3980190254040, DequeueBufferDuration=32600, QueueBufferDuration=1014300, GpuCompleted=3980190254040, SwapBuffersCompleted=3980178636340, DisplayPresentTime=0, CommandSubmissionCompleted=3980176439940, 
+11-20 14:21:25.565 16661 16729 D ConscryptOkHttpHelper: Conscrypt provider installed: Conscrypt 1.0
+11-20 14:21:25.691 16661 16661 I Choreographer: Skipped 45 frames!  The application may be doing too much work on its main thread.
+11-20 14:21:25.713 16661 16729 D ConscryptOkHttpHelper: OkHttp configured with Conscrypt TLS (trust-all)
+11-20 14:21:25.787 16661 16742 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 14:21:25.787 16661 16742 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 14:21:25.839 16661 16677 I OpenGLRenderer: Davey! duration=983ms; Flags=0, FrameTimelineVsyncId=585607, IntendedVsync=3980105859328, Vsync=3980239192656, InputEventId=0, HandleInputStart=3980246694140, AnimationStart=3980246748440, PerformTraversalsStart=3980427966240, DrawStart=3980428226840, FrameDeadline=3980222525990, FrameInterval=3980245856440, FrameStartTime=16666666, SyncQueued=3980942340540, SyncStart=3980942844640, IssueDrawCommandsStart=3980943048340, SwapBuffers=3981082985840, FrameCompleted=3981089464340, DequeueBufferDuration=44600, QueueBufferDuration=4447000, GpuCompleted=3981088583040, SwapBuffersCompleted=3981089464340, DisplayPresentTime=0, CommandSubmissionCompleted=3981082985840, 
+11-20 14:21:26.028 16661 16702 D EGL_emulation: app_time_stats: avg=627.86ms min=258.64ms max=910.69ms count=3
+11-20 14:21:26.059 16661 16677 I OpenGLRenderer: Davey! duration=1101ms; Flags=0, FrameTimelineVsyncId=585638, IntendedVsync=3980255859322, Vsync=3981005859292, InputEventId=0, HandleInputStart=3981013122340, AnimationStart=3981013181540, PerformTraversalsStart=3981180981640, DrawStart=3981181230640, FrameDeadline=3981105859288, FrameInterval=3981010796140, FrameStartTime=16666666, SyncQueued=3981239804540, SyncStart=3981240204140, IssueDrawCommandsStart=3981240770040, SwapBuffers=3981346195540, FrameCompleted=3981357667640, DequeueBufferDuration=65400, QueueBufferDuration=728100, GpuCompleted=3981357667640, SwapBuffersCompleted=3981348446940, DisplayPresentTime=0, CommandSubmissionCompleted=3981346195540, 
+11-20 14:21:26.067 16661 16741 D TrafficStats: tagSocket(126) with statsTag=0xffffffff, statsUid=-1
+11-20 14:21:26.067 16661 16740 D TrafficStats: tagSocket(125) with statsTag=0xffffffff, statsUid=-1
+11-20 14:21:26.068 16661 16739 D TrafficStats: tagSocket(141) with statsTag=0xffffffff, statsUid=-1
+11-20 14:21:27.349 16661 16702 D EGL_emulation: app_time_stats: avg=146.41ms min=20.71ms max=883.03ms count=9
+11-20 14:21:29.718 16661 16702 D EGL_emulation: app_time_stats: avg=385.15ms min=7.47ms max=2191.18ms count=6
+11-20 14:21:31.836 16661 16661 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 14:21:31.836 16661 16661 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:21:32.082 16661 16661 D CompatibilityChangeReporter: Compat change id reported: 289878283; UID 10190; state: ENABLED
+11-20 14:21:32.226 16661 16702 D EGL_emulation: app_time_stats: avg=2507.58ms min=2507.58ms max=2507.58ms count=1
+11-20 14:21:32.378 16661 16661 I ImeTracker: app.retrogamesystem.debug:f59ae7eb: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 14:21:32.379 16661 16661 D InsetsController: show(ime(), fromIme=false)
+11-20 14:21:32.381 16661 16661 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{f8b9148 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 14:21:32.434 16661 16661 I AssistStructure: Flattened final assist data: 520 bytes, containing 1 windows, 3 views
+11-20 14:21:32.525 16661 16661 I ImeTracker: app.retrogamesystem.debug:d4570cd1: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-20 14:21:32.525 16661 16661 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{f8b9148 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-20 14:21:32.527 16661 16661 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 14:21:32.584 16661 16661 D Autofill Status: Autofill popup isn't shown because autofill is not available.
+11-20 14:21:32.584 16661 16661 D Autofill Status: 
+11-20 14:21:32.584 16661 16661 D Autofill Status: Did you set up autofill?
+11-20 14:21:32.584 16661 16661 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced > Autofill Service
+11-20 14:21:32.584 16661 16661 D Autofill Status: 2. Pick a service
+11-20 14:21:32.584 16661 16661 D Autofill Status: 
+11-20 14:21:32.584 16661 16661 D Autofill Status: Did you add an account?
+11-20 14:21:32.584 16661 16661 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced
+11-20 14:21:32.584 16661 16661 D Autofill Status: 2. Click on the settings icon next to the Autofill Service
+11-20 14:21:32.584 16661 16661 D Autofill Status: 3. Add your account
+11-20 14:21:32.776 16661 16661 D InsetsController: show(ime(), fromIme=true)
+11-20 14:21:32.778 16661 16661 D InsetsController: show(ime(), fromIme=true)
+11-20 14:21:32.779 16661 16661 I ImeTracker: app.retrogamesystem.debug:d4570cd1: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 14:21:33.149 16661 16661 I ImeTracker: app.retrogamesystem.debug:f59ae7eb: onShown
+11-20 14:21:33.541 16661 16702 D EGL_emulation: app_time_stats: avg=36.46ms min=3.24ms max=366.04ms count=25
+11-20 14:21:34.091 16661 16661 I ImeTracker: app.retrogamesystem.debug:6bd4d2a2: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 14:21:34.091 16661 16661 D InsetsController: show(ime(), fromIme=false)
+11-20 14:21:34.092 16661 16661 I ImeTracker: app.retrogamesystem.debug:6bd4d2a2: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 14:21:34.108 16661 16661 I ImeTracker: app.retrogamesystem.debug:79f21bf5: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-20 14:21:34.109 16661 16661 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{f8b9148 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-20 14:21:34.117 16661 16661 D InsetsController: show(ime(), fromIme=true)
+11-20 14:21:34.118 16661 16661 I ImeTracker: app.retrogamesystem.debug:79f21bf5: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 14:21:34.543 16661 16702 D EGL_emulation: app_time_stats: avg=333.64ms min=66.55ms max=499.53ms count=3
+11-20 14:21:35.614 16661 16702 D EGL_emulation: app_time_stats: avg=178.43ms min=21.07ms max=482.69ms count=6
+11-20 14:21:35.811 16661 16670 I amesystem.debug: JIT allocated 61KB for compiled code of void com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1.invoke(androidx.compose.runtime.Composer, int)
+11-20 14:21:35.812 16661 16670 I amesystem.debug: Compiler allocated 8073KB to compile void com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1.invoke(androidx.compose.runtime.Composer, int)
+11-20 14:21:36.786 16661 16702 D EGL_emulation: app_time_stats: avg=35.59ms min=3.17ms max=224.49ms count=23
+11-20 14:21:36.967 16661 16741 D TrafficStats: tagSocket(5) with statsTag=0xffffffff, statsUid=-1
+11-20 14:21:38.076 16661 16702 D EGL_emulation: app_time_stats: avg=73.96ms min=3.96ms max=517.64ms count=15
+11-20 14:21:39.076 16661 16702 D EGL_emulation: app_time_stats: avg=249.54ms min=17.34ms max=497.65ms count=4
+11-20 14:21:40.576 16661 16702 D EGL_emulation: app_time_stats: avg=499.84ms min=497.44ms max=501.45ms count=3
+11-20 14:21:41.595 16661 16702 D EGL_emulation: app_time_stats: avg=509.14ms min=498.74ms max=519.53ms count=2
+11-20 14:21:42.581 16661 16661 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 14:21:42.581 16661 16661 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:21:42.616 16661 16702 D EGL_emulation: app_time_stats: avg=141.79ms min=5.57ms max=499.19ms count=7
+11-20 14:21:42.838 16661 16702 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 14:21:43.156 16661 16661 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@2ae274c
+11-20 14:21:43.289 16661 16661 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@2ae274c
+11-20 14:21:43.290 16661 16661 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 14:21:43.294 16661 16661 I ImeTracker: app.retrogamesystem.debug:2c3461b1: onCancelled at PHASE_CLIENT_ANIMATION_CANCEL
+11-20 14:21:43.297 16661 16661 I ImeTracker: app.retrogamesystem.debug:509f1b80: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 14:21:43.298 16661 16661 I ImeTracker: app.retrogamesystem.debug:509f1b80: onFailed at PHASE_CLIENT_VIEW_SERVED
+11-20 14:21:45.959 16661 16702 D EGL_emulation: app_time_stats: avg=1019.03ms min=37.79ms max=2768.29ms count=3
+11-20 14:22:00.098 16661 16661 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@d78e816
+11-20 14:22:00.169 16661 16724 D SaveQueueManager: SaveQueueManager: starting save for Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip
+11-20 14:22:00.192 16661 16724 D CompatibilityChangeReporter: Compat change id reported: 247079863; UID 10190; state: ENABLED
+11-20 14:22:00.192 16661 16724 D RomOnDemandManager$downloadRom: On-demand lookup: https://emuladores.pythonanywhere.com/find_by_file?path=Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR%20ISO%20PS1.zip&source_id=1&system=psx
+11-20 14:22:00.196 16661 16724 D ConscryptOkHttpHelper: OkHttp configured with Conscrypt TLS (trust-all)
+11-20 14:22:00.274 16661 16661 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 14:22:00.274 16661 16661 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:22:00.304 16661 16661 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 14:22:00.304 16661 16661 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:22:00.518 16661 16702 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 14:22:00.651 16661 16724 D TrafficStats: tagSocket(81) with statsTag=0xffffffff, statsUid=-1
+11-20 14:22:00.670 16661 16661 D DownloadForegroundService: DownloadForegroundService: WakeLock acquired
+11-20 14:22:00.680 16661 16702 D EGL_emulation: app_time_stats: avg=844.89ms min=7.14ms max=17093.97ms count=21
+11-20 14:22:01.756 16661 16702 D EGL_emulation: app_time_stats: avg=32.33ms min=2.57ms max=197.20ms count=23
+11-20 14:22:01.881 16661 16724 D RomOnDemandManager$downloadRom: On-demand download URL for Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip: https://huggingface.co/datasets/Emuladores/psxmods/resolve/main/Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR%20ISO%20PS1.zip
+11-20 14:22:02.382 16661 16724 D TrafficStats: tagSocket(152) with statsTag=0xffffffff, statsUid=-1
+11-20 14:22:02.784 16661 16702 D EGL_emulation: app_time_stats: avg=9.72ms min=2.53ms max=32.90ms count=31
+11-20 14:22:03.813 16661 16702 D EGL_emulation: app_time_stats: avg=13.57ms min=2.47ms max=33.56ms count=30
+11-20 14:22:04.068 16661 16724 D TrafficStats: tagSocket(141) with statsTag=0xffffffff, statsUid=-1
+11-20 14:22:04.826 16661 16702 D EGL_emulation: app_time_stats: avg=13.73ms min=2.54ms max=38.08ms count=31
+11-20 14:22:05.415 16661 16724 D RomOnDemandManager: downloadToFile HTTP 200 contentLength=467632200 url=https://huggingface.co/datasets/Emuladores/psxmods/resolve/main/Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR%20ISO%20PS1.zip
+11-20 14:22:05.553 16661 16702 D EGL_emulation: app_time_stats: avg=806.45ms min=32.33ms max=4431.07ms count=6
+11-20 14:22:05.949 16661 16702 D EGL_emulation: app_time_stats: avg=26.53ms min=2.35ms max=122.80ms count=27
+11-20 14:22:06.439 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 153462(6430KB) AllocSpace objects, 10(200KB) LOS objects, 34% free, 11MB/17MB, paused 2.317ms,291us total 133.057ms
+11-20 14:22:06.467 16661 16673 W System  : A resource failed to call release. 
+11-20 14:22:06.590 16661 16702 D EGL_emulation: app_time_stats: avg=93.92ms min=37.66ms max=126.84ms count=11
+11-20 14:22:07.029 16661 16702 D EGL_emulation: app_time_stats: avg=97.55ms min=62.36ms max=132.98ms count=11
+11-20 14:22:07.650 16661 16702 D EGL_emulation: app_time_stats: avg=80.93ms min=48.91ms max=135.51ms count=13
+11-20 14:22:08.071 16661 16702 D EGL_emulation: app_time_stats: avg=69.06ms min=41.37ms max=102.38ms count=15
+11-20 14:22:08.716 16661 16702 D EGL_emulation: app_time_stats: avg=66.38ms min=44.13ms max=94.58ms count=16
+11-20 14:22:08.717 16661 16671 I amesystem.debug: Background concurrent copying GC freed 64894(7570KB) AllocSpace objects, 7(284KB) LOS objects, 49% free, 10MB/20MB, paused 1.845ms,67us total 136.151ms
+11-20 14:22:09.110 16661 16702 D EGL_emulation: app_time_stats: avg=57.43ms min=32.66ms max=102.34ms count=18
+11-20 14:22:09.805 16661 16702 D EGL_emulation: app_time_stats: avg=77.41ms min=48.17ms max=117.20ms count=14
+11-20 14:22:10.171 16661 16702 D EGL_emulation: app_time_stats: avg=81.08ms min=53.70ms max=128.43ms count=13
+11-20 14:22:10.833 16661 16702 D EGL_emulation: app_time_stats: avg=85.42ms min=59.30ms max=157.37ms count=12
+11-20 14:22:11.233 16661 16702 D EGL_emulation: app_time_stats: avg=81.29ms min=47.55ms max=164.90ms count=13
+11-20 14:22:11.907 16661 16702 D EGL_emulation: app_time_stats: avg=89.13ms min=41.81ms max=221.96ms count=12
+11-20 14:22:11.982 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 51951(10118KB) AllocSpace objects, 0(0B) LOS objects, 48% free, 10MB/20MB, paused 5.551ms,3.068ms total 103.677ms
+11-20 14:22:12.298 16661 16702 D EGL_emulation: app_time_stats: avg=81.74ms min=61.54ms max=129.31ms count=13
+11-20 14:22:12.908 16661 16702 D EGL_emulation: app_time_stats: avg=62.12ms min=21.26ms max=90.31ms count=16
+11-20 14:22:13.329 16661 16702 D EGL_emulation: app_time_stats: avg=60.38ms min=32.20ms max=87.73ms count=17
+11-20 14:22:13.919 16661 16702 D EGL_emulation: app_time_stats: avg=77.53ms min=53.80ms max=111.61ms count=13
+11-20 14:22:14.342 16661 16702 D EGL_emulation: app_time_stats: avg=71.60ms min=40.89ms max=113.14ms count=14
+11-20 14:22:14.971 16661 16702 D EGL_emulation: app_time_stats: avg=74.12ms min=48.62ms max=139.07ms count=14
+11-20 14:22:15.077 16661 16671 I amesystem.debug: Background concurrent copying GC freed 61077(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 5.552ms,212us total 279.254ms
+11-20 14:22:15.358 16661 16702 D EGL_emulation: app_time_stats: avg=72.41ms min=47.98ms max=127.62ms count=14
+11-20 14:22:16.042 16661 16702 D EGL_emulation: app_time_stats: avg=76.04ms min=37.16ms max=117.54ms count=14
+11-20 14:22:16.362 16661 16702 D EGL_emulation: app_time_stats: avg=76.65ms min=46.10ms max=133.89ms count=13
+11-20 14:22:17.049 16661 16702 D EGL_emulation: app_time_stats: avg=100.39ms min=47.49ms max=149.41ms count=10
+11-20 14:22:17.413 16661 16702 D EGL_emulation: app_time_stats: avg=116.32ms min=66.72ms max=148.77ms count=9
+11-20 14:22:18.080 16661 16702 D EGL_emulation: app_time_stats: avg=93.55ms min=34.72ms max=142.49ms count=11
+11-20 14:22:18.502 16661 16702 D EGL_emulation: app_time_stats: avg=69.76ms min=11.40ms max=112.73ms count=15
+11-20 14:22:19.089 16661 16702 D EGL_emulation: app_time_stats: avg=66.53ms min=43.89ms max=117.55ms count=15
+11-20 14:22:19.509 16661 16702 D EGL_emulation: app_time_stats: avg=62.55ms min=30.87ms max=87.61ms count=16
+11-20 14:22:20.091 16661 16702 D EGL_emulation: app_time_stats: avg=76.42ms min=58.20ms max=119.73ms count=13
+11-20 14:22:20.587 16661 16702 D EGL_emulation: app_time_stats: avg=58.28ms min=7.89ms max=89.59ms count=18
+11-20 14:22:21.166 16661 16702 D EGL_emulation: app_time_stats: avg=62.25ms min=35.58ms max=102.40ms count=17
+11-20 14:22:21.642 16661 16702 D EGL_emulation: app_time_stats: avg=58.40ms min=21.75ms max=100.13ms count=18
+11-20 14:22:21.963 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 55844(10MB) AllocSpace objects, 0(0B) LOS objects, 48% free, 10MB/20MB, paused 3.694ms,3.053ms total 162.882ms
+11-20 14:22:22.194 16661 16702 D EGL_emulation: app_time_stats: avg=68.28ms min=43.30ms max=123.47ms count=15
+11-20 14:22:22.646 16661 16702 D EGL_emulation: app_time_stats: avg=61.78ms min=34.08ms max=119.46ms count=16
+11-20 14:22:23.238 16661 16702 D EGL_emulation: app_time_stats: avg=64.97ms min=38.17ms max=97.14ms count=16
+11-20 14:22:23.665 16661 16702 D EGL_emulation: app_time_stats: avg=62.57ms min=20.63ms max=107.36ms count=16
+11-20 14:22:24.275 16661 16702 D EGL_emulation: app_time_stats: avg=73.68ms min=41.12ms max=156.13ms count=14
+11-20 14:22:24.750 16661 16702 D EGL_emulation: app_time_stats: avg=83.23ms min=51.56ms max=116.33ms count=13
+11-20 14:22:25.197 16661 16671 I amesystem.debug: Background concurrent copying GC freed 62289(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 3.283ms,526us total 302.590ms
+11-20 14:22:25.346 16661 16702 D EGL_emulation: app_time_stats: avg=68.47ms min=14.73ms max=112.71ms count=15
+11-20 14:22:25.814 16661 16702 D EGL_emulation: app_time_stats: avg=66.23ms min=36.96ms max=83.36ms count=16
+11-20 14:22:26.427 16661 16702 D EGL_emulation: app_time_stats: avg=82.84ms min=53.78ms max=124.12ms count=13
+11-20 14:22:26.825 16661 16702 D EGL_emulation: app_time_stats: avg=65.44ms min=12.03ms max=139.15ms count=15
+11-20 14:22:27.457 16661 16702 D EGL_emulation: app_time_stats: avg=63.60ms min=30.57ms max=125.06ms count=16
+11-20 14:22:27.837 16661 16702 D EGL_emulation: app_time_stats: avg=56.64ms min=26.07ms max=82.41ms count=17
+11-20 14:22:28.545 16661 16702 D EGL_emulation: app_time_stats: avg=94.50ms min=48.27ms max=130.33ms count=11
+11-20 14:22:28.882 16661 16702 D EGL_emulation: app_time_stats: avg=85.21ms min=56.51ms max=131.36ms count=12
+11-20 14:22:29.427 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 69232(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 10.486ms,560us total 112.419ms
+11-20 14:22:29.578 16661 16702 D EGL_emulation: app_time_stats: avg=73.33ms min=43.85ms max=144.61ms count=14
+11-20 14:22:29.908 16661 16702 D EGL_emulation: app_time_stats: avg=59.32ms min=31.12ms max=95.08ms count=17
+11-20 14:22:30.633 16661 16702 D EGL_emulation: app_time_stats: avg=75.04ms min=43.80ms max=133.74ms count=14
+11-20 14:22:30.933 16661 16702 D EGL_emulation: app_time_stats: avg=67.60ms min=42.84ms max=120.35ms count=15
+11-20 14:22:31.658 16661 16702 D EGL_emulation: app_time_stats: avg=72.79ms min=42.86ms max=138.54ms count=14
+11-20 14:22:31.941 16661 16702 D EGL_emulation: app_time_stats: avg=60.84ms min=29.32ms max=101.48ms count=16
+11-20 14:22:32.779 16661 16702 D EGL_emulation: app_time_stats: avg=74.25ms min=42.18ms max=124.22ms count=15
+11-20 14:22:33.028 16661 16702 D EGL_emulation: app_time_stats: avg=65.22ms min=23.79ms max=115.88ms count=16
+11-20 14:22:33.416 16661 16671 I amesystem.debug: Background concurrent copying GC freed 66736(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 7.619ms,3.242ms total 318.419ms
+11-20 14:22:33.789 16661 16702 D EGL_emulation: app_time_stats: avg=90.48ms min=30.86ms max=148.79ms count=11
+11-20 14:22:34.089 16661 16702 D EGL_emulation: app_time_stats: avg=87.80ms min=29.06ms max=123.04ms count=12
+11-20 14:22:34.891 16661 16702 D EGL_emulation: app_time_stats: avg=98.90ms min=77.26ms max=155.72ms count=11
+11-20 14:22:35.162 16661 16702 D EGL_emulation: app_time_stats: avg=88.79ms min=54.46ms max=150.59ms count=12
+11-20 14:22:35.917 16661 16702 D EGL_emulation: app_time_stats: avg=72.91ms min=44.99ms max=122.79ms count=14
+11-20 14:22:36.169 16661 16702 D EGL_emulation: app_time_stats: avg=55.27ms min=31.38ms max=86.30ms count=17
+11-20 14:22:36.952 16661 16702 D EGL_emulation: app_time_stats: avg=85.28ms min=43.08ms max=121.45ms count=12
+11-20 14:22:37.205 16661 16702 D EGL_emulation: app_time_stats: avg=50.26ms min=9.06ms max=95.29ms count=19
+11-20 14:22:37.434 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 61889(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 1.655ms,3.242ms total 137.981ms
+11-20 14:22:37.992 16661 16702 D EGL_emulation: app_time_stats: avg=78.93ms min=41.93ms max=163.06ms count=13
+11-20 14:22:38.222 16661 16702 D EGL_emulation: app_time_stats: avg=61.67ms min=13.70ms max=99.78ms count=16
+11-20 14:22:39.015 16661 16702 D EGL_emulation: app_time_stats: avg=57.84ms min=34.84ms max=108.97ms count=17
+11-20 14:22:39.262 16661 16702 D EGL_emulation: app_time_stats: avg=64.63ms min=48.79ms max=119.10ms count=16
+11-20 14:22:40.072 16661 16702 D EGL_emulation: app_time_stats: avg=69.07ms min=22.37ms max=130.39ms count=15
+11-20 14:22:40.272 16661 16702 D EGL_emulation: app_time_stats: avg=52.01ms min=9.65ms max=76.26ms count=18
+11-20 14:22:40.939 16661 16671 I amesystem.debug: Background concurrent copying GC freed 65644(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/21MB, paused 913us,655us total 267.027ms
+11-20 14:22:41.118 16661 16702 D EGL_emulation: app_time_stats: avg=63.51ms min=13.49ms max=106.77ms count=16
+11-20 14:22:41.323 16661 16702 D EGL_emulation: app_time_stats: avg=46.68ms min=8.68ms max=85.62ms count=21
+11-20 14:22:42.186 16661 16702 D EGL_emulation: app_time_stats: avg=62.57ms min=33.71ms max=122.53ms count=17
+11-20 14:22:42.385 16661 16702 D EGL_emulation: app_time_stats: avg=53.34ms min=22.63ms max=82.44ms count=19
+11-20 14:22:43.268 16661 16702 D EGL_emulation: app_time_stats: avg=75.20ms min=36.71ms max=150.62ms count=14
+11-20 14:22:43.392 16661 16702 D EGL_emulation: app_time_stats: avg=83.51ms min=65.36ms max=110.61ms count=12
+11-20 14:22:44.319 16661 16702 D EGL_emulation: app_time_stats: avg=69.63ms min=57.69ms max=85.54ms count=15
+11-20 14:22:44.431 16661 16702 D EGL_emulation: app_time_stats: avg=68.83ms min=53.62ms max=96.51ms count=15
+11-20 14:22:44.534 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 66336(10MB) AllocSpace objects, 0(0B) LOS objects, 51% free, 10MB/21MB, paused 2.893ms,2.601ms total 125.263ms
+11-20 14:22:45.323 16661 16702 D EGL_emulation: app_time_stats: avg=65.81ms min=19.26ms max=112.02ms count=15
+11-20 14:22:45.446 16661 16702 D EGL_emulation: app_time_stats: avg=50.93ms min=25.26ms max=102.18ms count=19
+11-20 14:22:46.367 16661 16702 D EGL_emulation: app_time_stats: avg=57.51ms min=38.02ms max=109.83ms count=18
+11-20 14:22:46.482 16661 16702 D EGL_emulation: app_time_stats: avg=54.23ms min=30.00ms max=76.29ms count=19
+11-20 14:22:47.379 16661 16702 D EGL_emulation: app_time_stats: avg=62.22ms min=32.06ms max=125.21ms count=16
+11-20 14:22:47.509 16661 16702 D EGL_emulation: app_time_stats: avg=51.48ms min=20.39ms max=95.10ms count=18
+11-20 14:22:47.961 16661 16671 I amesystem.debug: Background concurrent copying GC freed 71103(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 4.392ms,656us total 163.654ms
+11-20 14:22:48.419 16661 16702 D EGL_emulation: app_time_stats: avg=55.69ms min=15.13ms max=96.86ms count=18
+11-20 14:22:48.524 16661 16702 D EGL_emulation: app_time_stats: avg=49.20ms min=26.89ms max=76.24ms count=20
+11-20 14:22:49.282 16661 16661 D StrictMode: StrictMode policy violation; ~duration=1 ms: android.os.strictmode.DiskWriteViolation
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onWriteToDisk(StrictMode.java:1622)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.write(BlockGuardOs.java:447)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.write(ForwardingOs.java:943)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at libcore.io.IoBridge.write(IoBridge.java:646)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at java.io.FileOutputStream.write(FileOutputStream.java:406)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at com.android.internal.util.FastPrintWriter.flushBytesLocked(FastPrintWriter.java:354)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at com.android.internal.util.FastPrintWriter.flushLocked(FastPrintWriter.java:377)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at com.android.internal.util.FastPrintWriter.flush(FastPrintWriter.java:412)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.os.TransactionTracker.writeTracesToFile(TransactionTracker.java:70)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.app.ActivityThread.handleStopBinderTrackingAndDump(ActivityThread.java:4168)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleStopBinderTrackingAndDump(Unknown Source:0)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2423)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:22:49.282 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:22:49.438 16661 16702 D EGL_emulation: app_time_stats: avg=67.22ms min=24.87ms max=145.29ms count=15
+11-20 14:22:49.525 16661 16702 D EGL_emulation: app_time_stats: avg=57.21ms min=40.44ms max=76.05ms count=17
+11-20 14:22:50.439 16661 16702 D EGL_emulation: app_time_stats: avg=63.47ms min=13.29ms max=95.94ms count=15
+11-20 14:22:50.574 16661 16702 D EGL_emulation: app_time_stats: avg=51.16ms min=17.75ms max=76.50ms count=20
+11-20 14:22:51.440 16661 16702 D EGL_emulation: app_time_stats: avg=65.34ms min=23.76ms max=120.96ms count=15
+11-20 14:22:51.595 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 66207(10062KB) AllocSpace objects, 1(20KB) LOS objects, 48% free, 10MB/20MB, paused 2.117ms,725us total 123.694ms
+11-20 14:22:51.622 16661 16702 D EGL_emulation: app_time_stats: avg=51.65ms min=5.21ms max=80.55ms count=19
+11-20 14:22:52.538 16661 16702 D EGL_emulation: app_time_stats: avg=71.83ms min=36.03ms max=133.00ms count=15
+11-20 14:22:52.637 16661 16702 D EGL_emulation: app_time_stats: avg=57.27ms min=28.50ms max=82.17ms count=17
+11-20 14:22:53.571 16661 16702 D EGL_emulation: app_time_stats: avg=64.36ms min=36.34ms max=85.78ms count=16
+11-20 14:22:53.711 16661 16702 D EGL_emulation: app_time_stats: avg=52.82ms min=26.64ms max=90.86ms count=20
+11-20 14:22:54.608 16661 16702 D EGL_emulation: app_time_stats: avg=79.12ms min=44.76ms max=128.96ms count=13
+11-20 14:22:54.731 16661 16702 D EGL_emulation: app_time_stats: avg=62.72ms min=35.55ms max=94.74ms count=16
+11-20 14:22:55.665 16661 16671 I amesystem.debug: Background concurrent copying GC freed 68910(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 9.421ms,1.023ms total 300.191ms
+11-20 14:22:55.680 16661 16702 D EGL_emulation: app_time_stats: avg=88.78ms min=64.47ms max=133.26ms count=12
+11-20 14:22:55.794 16661 16702 D EGL_emulation: app_time_stats: avg=88.21ms min=64.39ms max=125.07ms count=12
+11-20 14:22:56.703 16661 16702 D EGL_emulation: app_time_stats: avg=72.75ms min=42.58ms max=104.77ms count=14
+11-20 14:22:56.836 16661 16702 D EGL_emulation: app_time_stats: avg=74.03ms min=46.46ms max=110.42ms count=14
+11-20 14:22:57.733 16661 16702 D EGL_emulation: app_time_stats: avg=73.02ms min=38.47ms max=133.44ms count=14
+11-20 14:22:57.857 16661 16702 D EGL_emulation: app_time_stats: avg=56.44ms min=22.25ms max=177.51ms count=17
+11-20 14:22:58.778 16661 16702 D EGL_emulation: app_time_stats: avg=56.20ms min=38.67ms max=79.87ms count=18
+11-20 14:22:58.915 16661 16702 D EGL_emulation: app_time_stats: avg=58.22ms min=37.13ms max=81.19ms count=18
+11-20 14:22:59.563 16661 16671 W amesystem.debug: Suspending all threads took: 11.306ms
+11-20 14:22:59.597 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 67424(10MB) AllocSpace objects, 0(0B) LOS objects, 50% free, 10MB/20MB, paused 1.678ms,11.722ms total 82.933ms
+11-20 14:22:59.816 16661 16702 D EGL_emulation: app_time_stats: avg=78.84ms min=39.94ms max=180.19ms count=13
+11-20 14:22:59.944 16661 16702 D EGL_emulation: app_time_stats: avg=68.22ms min=37.72ms max=107.06ms count=15
+11-20 14:23:00.867 16661 16702 D EGL_emulation: app_time_stats: avg=66.21ms min=32.85ms max=146.59ms count=15
+11-20 14:23:00.947 16661 16702 D EGL_emulation: app_time_stats: avg=67.07ms min=22.34ms max=221.22ms count=14
+11-20 14:23:01.885 16661 16702 D EGL_emulation: app_time_stats: avg=59.88ms min=9.10ms max=114.47ms count=16
+11-20 14:23:01.973 16661 16702 D EGL_emulation: app_time_stats: avg=57.00ms min=24.18ms max=126.25ms count=17
+11-20 14:23:02.897 16661 16702 D EGL_emulation: app_time_stats: avg=57.50ms min=6.92ms max=90.18ms count=17
+11-20 14:23:02.974 16661 16702 D EGL_emulation: app_time_stats: avg=61.79ms min=36.22ms max=99.77ms count=16
+11-20 14:23:03.938 16661 16702 D EGL_emulation: app_time_stats: avg=74.10ms min=36.85ms max=164.90ms count=14
+11-20 14:23:04.003 16661 16702 D EGL_emulation: app_time_stats: avg=72.81ms min=29.92ms max=142.30ms count=14
+11-20 14:23:04.990 16661 16702 D EGL_emulation: app_time_stats: avg=65.16ms min=31.66ms max=122.87ms count=16
+11-20 14:23:05.034 16661 16702 D EGL_emulation: app_time_stats: avg=59.06ms min=23.14ms max=105.16ms count=17
+11-20 14:23:06.001 16661 16702 D EGL_emulation: app_time_stats: avg=62.35ms min=31.86ms max=94.06ms count=16
+11-20 14:23:06.079 16661 16702 D EGL_emulation: app_time_stats: avg=54.84ms min=25.70ms max=111.90ms count=18
+11-20 14:23:07.016 16661 16702 D EGL_emulation: app_time_stats: avg=84.37ms min=36.56ms max=149.38ms count=12
+11-20 14:23:07.155 16661 16702 D EGL_emulation: app_time_stats: avg=54.72ms min=4.93ms max=80.26ms count=18
+11-20 14:23:08.046 16661 16702 D EGL_emulation: app_time_stats: avg=85.43ms min=50.17ms max=117.82ms count=12
+11-20 14:23:08.211 16661 16702 D EGL_emulation: app_time_stats: avg=67.33ms min=25.30ms max=93.20ms count=15
+11-20 14:23:08.854 16661 16671 W amesystem.debug: Suspending all threads took: 7.816ms
+11-20 14:23:08.887 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 72459(10MB) AllocSpace objects, 0(0B) LOS objects, 48% free, 10MB/20MB, paused 5.550ms,8.662ms total 322.091ms
+11-20 14:23:09.094 16661 16702 D EGL_emulation: app_time_stats: avg=79.68ms min=46.07ms max=205.03ms count=13
+11-20 14:23:09.245 16661 16702 D EGL_emulation: app_time_stats: avg=79.00ms min=41.72ms max=186.77ms count=13
+11-20 14:23:10.104 16661 16702 D EGL_emulation: app_time_stats: avg=66.19ms min=21.51ms max=128.43ms count=15
+11-20 14:23:10.290 16661 16702 D EGL_emulation: app_time_stats: avg=48.44ms min=8.57ms max=89.24ms count=20
+11-20 14:23:11.117 16661 16702 D EGL_emulation: app_time_stats: avg=83.79ms min=57.81ms max=124.39ms count=12
+11-20 14:23:11.317 16661 16702 D EGL_emulation: app_time_stats: avg=59.83ms min=8.72ms max=113.93ms count=15
+11-20 14:23:12.191 16661 16702 D EGL_emulation: app_time_stats: avg=66.14ms min=16.55ms max=118.64ms count=16
+11-20 14:23:12.328 16661 16702 D EGL_emulation: app_time_stats: avg=50.35ms min=22.03ms max=89.31ms count=18
+11-20 14:23:12.711 16661 16671 I amesystem.debug: Background concurrent copying GC freed 71421(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 3.875ms,558us total 330.142ms
+11-20 14:23:13.215 16661 16702 D EGL_emulation: app_time_stats: avg=59.92ms min=32.55ms max=101.88ms count=17
+11-20 14:23:13.342 16661 16702 D EGL_emulation: app_time_stats: avg=59.34ms min=34.48ms max=128.70ms count=17
+11-20 14:23:14.218 16661 16702 D EGL_emulation: app_time_stats: avg=54.14ms min=18.59ms max=101.92ms count=18
+11-20 14:23:14.371 16661 16702 D EGL_emulation: app_time_stats: avg=45.11ms min=12.56ms max=73.58ms count=20
+11-20 14:23:15.274 16661 16702 D EGL_emulation: app_time_stats: avg=69.17ms min=20.53ms max=138.73ms count=15
+11-20 14:23:15.449 16661 16702 D EGL_emulation: app_time_stats: avg=46.39ms min=17.42ms max=87.81ms count=20
+11-20 14:23:16.123 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 66187(10MB) AllocSpace objects, 0(0B) LOS objects, 51% free, 10MB/20MB, paused 8.596ms,5.050ms total 100.435ms
+11-20 14:23:16.284 16661 16702 D EGL_emulation: app_time_stats: avg=76.93ms min=49.93ms max=118.79ms count=13
+11-20 14:23:16.489 16661 16702 D EGL_emulation: app_time_stats: avg=64.89ms min=13.07ms max=102.48ms count=15
+11-20 14:23:17.350 16661 16702 D EGL_emulation: app_time_stats: avg=81.20ms min=38.51ms max=117.96ms count=13
+11-20 14:23:17.498 16661 16702 D EGL_emulation: app_time_stats: avg=60.27ms min=32.78ms max=87.00ms count=16
+11-20 14:23:18.407 16661 16702 D EGL_emulation: app_time_stats: avg=95.10ms min=53.87ms max=145.94ms count=11
+11-20 14:23:18.559 16661 16702 D EGL_emulation: app_time_stats: avg=74.32ms min=48.19ms max=123.83ms count=14
+11-20 14:23:19.482 16661 16702 D EGL_emulation: app_time_stats: avg=89.23ms min=42.67ms max=157.63ms count=12
+11-20 14:23:19.594 16661 16702 D EGL_emulation: app_time_stats: avg=61.99ms min=37.46ms max=86.75ms count=16
+11-20 14:23:20.513 16661 16702 D EGL_emulation: app_time_stats: avg=85.28ms min=50.57ms max=137.25ms count=12
+11-20 14:23:20.642 16661 16702 D EGL_emulation: app_time_stats: avg=62.57ms min=12.02ms max=87.65ms count=16
+11-20 14:23:21.546 16661 16671 I amesystem.debug: Background young concurrent copying GC freed 74033(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 20.049ms,2.553ms total 212.466ms
+11-20 14:23:21.558 16661 16702 D EGL_emulation: app_time_stats: avg=79.81ms min=30.94ms max=123.41ms count=13
+11-20 14:23:21.728 16661 16702 D EGL_emulation: app_time_stats: avg=76.85ms min=39.63ms max=124.93ms count=14
+11-20 14:23:22.247 16661 16725 D ConscryptOkHttpHelper: OkHttp configured with Conscrypt TLS (trust-all)
+11-20 14:23:22.247 16661 16725 I CoreUpdateWork: Starting core update/install work
+11-20 14:23:22.324 16661 16691 I WM-Processor: Moving WorkSpec (f2929356-8979-4ad1-a15a-166843a4a7c1) to the foreground
+11-20 14:23:22.464 16661 16661 I WM-SystemFgDispatcher: Started foreground service Intent { act=ACTION_START_FOREGROUND cmp=app.retrogamesystem.debug/androidx.work.impl.foreground.SystemForegroundService (has extras) }
+11-20 14:23:22.563 16661 16702 D EGL_emulation: app_time_stats: avg=99.21ms min=32.99ms max=143.40ms count=10
+11-20 14:23:22.796 16661 16702 D EGL_emulation: app_time_stats: avg=61.35ms min=6.57ms max=115.23ms count=16
+11-20 14:23:23.610 16661 16702 D EGL_emulation: app_time_stats: avg=92.21ms min=27.01ms max=187.02ms count=11
+11-20 14:23:23.870 16661 16702 D EGL_emulation: app_time_stats: avg=89.07ms min=54.96ms max=133.02ms count=12
+11-20 14:23:24.767 16661 16702 D EGL_emulation: app_time_stats: avg=100.40ms min=55.15ms max=156.88ms count=11
+11-20 14:23:24.949 16661 16702 D EGL_emulation: app_time_stats: avg=89.45ms min=35.30ms max=128.22ms count=12
+11-20 14:23:25.847 16661 16702 D EGL_emulation: app_time_stats: avg=88.31ms min=59.25ms max=139.32ms count=12
+11-20 14:23:26.046 16661 16702 D EGL_emulation: app_time_stats: avg=90.63ms min=60.30ms max=156.32ms count=12
+11-20 14:23:26.904 16661 16702 D EGL_emulation: app_time_stats: avg=87.63ms min=55.87ms max=159.09ms count=12
+11-20 14:23:27.134 16661 16702 D EGL_emulation: app_time_stats: avg=70.28ms min=27.70ms max=94.13ms count=15
+11-20 14:23:27.168 16661 16697 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=f2929356-8979-4ad1-a15a-166843a4a7c1, tags={ com.swordfish.lemuroid.app.shared.library.CoreUpdateWork } ]
+11-20 14:23:27.263 16661 16671 I amesystem.debug: Background concurrent copying GC freed 125995(12MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 11MB/22MB, paused 33.482ms,418us total 841.370ms
+11-20 14:23:27.370 16661 16661 I WM-SystemFgDispatcher: Stopping foreground service
+11-20 14:23:27.978 16661 16702 D EGL_emulation: app_time_stats: avg=106.95ms min=61.73ms max=181.54ms count=10
+11-20 14:23:28.161 16661 16702 D EGL_emulation: app_time_stats: avg=92.76ms min=31.88ms max=190.28ms count=11
+11-20 14:23:28.775 16661 16724 D SaveQueueManager: SaveQueueManager: Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip cancelled
+11-20 14:23:29.101 16661 16661 D DownloadForegroundService$observeQueue: DownloadForegroundService: queue empty, stopping self
+11-20 14:23:29.104 16661 16702 D EGL_emulation: app_time_stats: avg=112.12ms min=47.47ms max=272.33ms count=10
+11-20 14:23:29.167 16661 16702 D EGL_emulation: app_time_stats: avg=67.60ms min=6.54ms max=187.16ms count=14
+11-20 14:23:29.270 16661 16661 D DownloadForegroundService: DownloadForegroundService: destroyed, WakeLock released
+11-20 14:24:30.407 16661 16702 D EGL_emulation: app_time_stats: avg=61239.42ms min=61239.42ms max=61239.42ms count=1
+11-20 14:24:30.766 16661 16661 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@8a93018
+11-20 14:24:30.943 16661 16702 D EGL_emulation: app_time_stats: avg=12364.41ms min=27.19ms max=61263.88ms count=5
+11-20 14:24:31.946 16661 16702 D EGL_emulation: app_time_stats: avg=321.62ms min=32.20ms max=502.31ms count=3
+11-20 14:24:32.966 16661 16702 D EGL_emulation: app_time_stats: avg=510.30ms min=504.35ms max=516.25ms count=2
+11-20 14:24:34.466 16661 16702 D EGL_emulation: app_time_stats: avg=499.54ms min=497.01ms max=500.87ms count=3
+11-20 14:24:35.484 16661 16702 D EGL_emulation: app_time_stats: avg=508.82ms min=499.42ms max=518.22ms count=2
+11-20 14:24:37.128 16661 16702 D EGL_emulation: app_time_stats: avg=548.03ms min=495.74ms max=645.53ms count=3
+11-20 14:24:37.244 16661 16661 I ImeTracker: app.retrogamesystem.debug:fba6443e: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 14:24:37.246 16661 16661 I ImeTracker: app.retrogamesystem.debug:fba6443e: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 14:24:37.748 16661 16661 I Choreographer: Skipped 36 frames!  The application may be doing too much work on its main thread.
+11-20 14:24:37.812 16661 16679 I OpenGLRenderer: Davey! duration=715ms; Flags=0, FrameTimelineVsyncId=606807, IntendedVsync=4172372518304, Vsync=4172439184968, InputEventId=0, HandleInputStart=4172453431340, AnimationStart=4172453466340, PerformTraversalsStart=4172571252840, DrawStart=4172571755540, FrameDeadline=4173072518276, FrameInterval=4172453385140, FrameStartTime=16666666, SyncQueued=4173024071040, SyncStart=4173044071740, IssueDrawCommandsStart=4173045455340, SwapBuffers=4173047174740, FrameCompleted=4173107860840, DequeueBufferDuration=45313900, QueueBufferDuration=1933000, GpuCompleted=4173107860840, SwapBuffersCompleted=4173097005240, DisplayPresentTime=0, CommandSubmissionCompleted=4173047174740, 
+11-20 14:24:37.915 16661 16677 I OpenGLRenderer: Davey! duration=736ms; Flags=0, FrameTimelineVsyncId=606822, IntendedVsync=4172455851634, Vsync=4173055851610, InputEventId=0, HandleInputStart=4173069662240, AnimationStart=4173069730640, PerformTraversalsStart=4173120476240, DrawStart=4173121442240, FrameDeadline=4173205851604, FrameInterval=4173067893540, FrameStartTime=16666666, SyncQueued=4173145060140, SyncStart=4173162818740, IssueDrawCommandsStart=4173163222240, SwapBuffers=4173181321740, FrameCompleted=4173210247540, DequeueBufferDuration=51900, QueueBufferDuration=2236000, GpuCompleted=4173210247540, SwapBuffersCompleted=4173202927640, DisplayPresentTime=0, CommandSubmissionCompleted=4173181321740, 
+11-20 14:24:38.151 16661 16702 D EGL_emulation: app_time_stats: avg=23.21ms min=6.56ms max=41.52ms count=27
+11-20 14:24:44.044 16661 16702 D EGL_emulation: app_time_stats: avg=729.21ms min=9.24ms max=5654.38ms count=8
+11-20 14:24:44.729 16661 16742 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 14:24:44.730 16661 16742 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 14:24:45.045 16661 16702 D EGL_emulation: app_time_stats: avg=36.65ms min=4.13ms max=188.76ms count=18
+11-20 14:24:49.494 16661 16661 D LemuroidApplication: onTrimMemory level=20 — UI hidden, clearing Coil memory cache
+11-20 14:25:46.467 16661 16661 D CompatibilityChangeReporter: Compat change id reported: 78294732; UID 10190; state: ENABLED
+11-20 14:25:46.648 16661 16702 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 14:25:47.370 16661 17068 I CacheCleaner$clean: Running cache cleanup lru task
+11-20 14:25:47.646 16661 17068 I CacheCleaner$clean: Space used by cache: 0 B / 128 MB
+11-20 14:25:47.651 16661 17068 I CacheCleaner$clean: Freeing cache space: 0 B
+11-20 14:25:47.661 16661 16699 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=c3565bb8-0127-4622-a4ac-b0d4737a8582, tags={ com.swordfish.lemuroid.app.shared.storage.cache.CacheCleanerWork } ]
+11-20 14:26:07.651 16661 16661 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 14:26:07.651 16661 16661 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 14:26:08.217 16661 16702 D EGL_emulation: app_time_stats: avg=1411.36ms min=11.35ms max=20716.97ms count=15
+11-20 14:26:08.222 16661 16661 D StrictMode: StrictMode policy violation; ~duration=435 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at android.app.ContextImpl.getDataDir(ContextImpl.java:3196)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:735)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$RomsSettings$1.invoke(SettingsScreen.kt:379)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$RomsSettings$1.invoke(SettingsScreen.kt:326)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1$1$1.invoke(Components.kt:123)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1$1$1.invoke(Components.kt:119)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt$Card$1.invoke(Card.kt:888)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt$Card$1.invoke(Card.kt:96)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:126)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:108)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt.Surface-T9BRK9s(Surface.kt:105)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt.Card(Card.kt:89)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt.OutlinedCard(Card.kt:304)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1.invoke(Components.kt:119)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1.invoke(Components.kt:112)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:126)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:108)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt.Surface-T9BRK9s(Surface.kt:105)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt.LemuroidCardSettingsGroup(Components.kt:112)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.RomsSettings(SettingsScreen.kt:326)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.access$RomsSettings(SettingsScreen.kt:1)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$SettingsScreen$3.invoke(SettingsScreen.kt:89)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$SettingsScreen$3.invoke(SettingsScreen.kt:88)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt.LemuroidSettingsPage(Components.kt:41)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.SettingsScreen(SettingsScreen.kt:88)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5$1$1$7.invoke(MainActivity.kt:657)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5$1$1$7.invoke(MainActivity.kt:656)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:142)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13$1.invoke(NavHost.kt:307)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13$1.invoke(NavHost.kt:305)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:384)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.saveable.SaveableStateHolderImpl.SaveableStateProvider(SaveableStateHolder.kt:79)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.SaveableStateProvider(NavBackStackEntryProvider.kt:65)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.access$SaveableStateProvider(NavBackStackEntryProvider.kt:1)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt$LocalOwnersProvider$1.invoke(NavBackStackEntryProvider.kt:52)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt$LocalOwnersProvider$1.invoke(NavBackStackEntryProvider.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.LocalOwnersProvider(NavBackStackEntryProvider.kt:47)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13.invoke(NavHost.kt:305)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13.invoke(NavHost.kt:289)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:142)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1$5.invoke(AnimatedContent.kt:862)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1$5.invoke(AnimatedContent.kt:852)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedVisibilityKt.AnimatedEnterExitImpl(AnimatedVisibility.kt:755)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1.invoke(AnimatedContent.kt:834)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1.invoke(AnimatedContent.kt:817)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt.AnimatedContent(AnimatedContent.kt:872)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt.NavHost(NavHost.kt:274)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt.NavHost(NavHost.kt:128)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5.invoke(MainActivity.kt:479)
+11-20 14:26:08.222 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5.invoke(MainActivity.kt:478)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$2.invoke(ComposableLambda.kt:132)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$2.invoke(ComposableLambda.kt:131)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.RecomposeScopeImpl.compose(RecomposeScopeImpl.kt:235)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.recomposeToGroupEnd(Composer.kt:2838)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.skipCurrentGroup(Composer.kt:3158)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.doCompose-aFTiNEg(Composer.kt:3706)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.recompose-aFTiNEg$runtime_release(Composer.kt:3648)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionImpl.recompose(Composition.kt:1002)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer.performRecompose(Recomposer.kt:1266)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer.access$performRecompose(Recomposer.kt:142)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer$runRecomposeAndApplyChanges$2$1.invoke(Recomposer.kt:620)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer$runRecomposeAndApplyChanges$2$1.invoke(Recomposer.kt:591)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiFrameClock$withFrameNanos$2$callback$1.doFrame(AndroidUiFrameClock.android.kt:39)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performFrameDispatch(AndroidUiDispatcher.android.kt:108)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performFrameDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.doFrame(AndroidUiDispatcher.android.kt:69)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1337)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1348)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.view.Choreographer.doCallbacks(Choreographer.java:952)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.view.Choreographer.doFrame(Choreographer.java:878)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1322)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.223 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.237 16661 16661 D StrictMode: StrictMode policy violation; ~duration=435 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$RomsSettings$1.invoke(SettingsScreen.kt:379)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$RomsSettings$1.invoke(SettingsScreen.kt:326)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1$1$1.invoke(Components.kt:123)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1$1$1.invoke(Components.kt:119)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt$Card$1.invoke(Card.kt:888)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt$Card$1.invoke(Card.kt:96)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:126)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:108)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt.Surface-T9BRK9s(Surface.kt:105)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt.Card(Card.kt:89)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt.OutlinedCard(Card.kt:304)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1.invoke(Components.kt:119)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1.invoke(Components.kt:112)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:126)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:108)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt.Surface-T9BRK9s(Surface.kt:105)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt.LemuroidCardSettingsGroup(Components.kt:112)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.RomsSettings(SettingsScreen.kt:326)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.access$RomsSettings(SettingsScreen.kt:1)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$SettingsScreen$3.invoke(SettingsScreen.kt:89)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$SettingsScreen$3.invoke(SettingsScreen.kt:88)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt.LemuroidSettingsPage(Components.kt:41)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.SettingsScreen(SettingsScreen.kt:88)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5$1$1$7.invoke(MainActivity.kt:657)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5$1$1$7.invoke(MainActivity.kt:656)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:142)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13$1.invoke(NavHost.kt:307)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13$1.invoke(NavHost.kt:305)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:384)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.saveable.SaveableStateHolderImpl.SaveableStateProvider(SaveableStateHolder.kt:79)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.SaveableStateProvider(NavBackStackEntryProvider.kt:65)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.access$SaveableStateProvider(NavBackStackEntryProvider.kt:1)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt$LocalOwnersProvider$1.invoke(NavBackStackEntryProvider.kt:52)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt$LocalOwnersProvider$1.invoke(NavBackStackEntryProvider.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.LocalOwnersProvider(NavBackStackEntryProvider.kt:47)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13.invoke(NavHost.kt:305)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13.invoke(NavHost.kt:289)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:142)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1$5.invoke(AnimatedContent.kt:862)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1$5.invoke(AnimatedContent.kt:852)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedVisibilityKt.AnimatedEnterExitImpl(AnimatedVisibility.kt:755)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1.invoke(AnimatedContent.kt:834)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1.invoke(AnimatedContent.kt:817)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt.AnimatedContent(AnimatedContent.kt:872)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt.NavHost(NavHost.kt:274)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt.NavHost(NavHost.kt:128)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5.invoke(MainActivity.kt:479)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5.invoke(MainActivity.kt:478)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$2.invoke(ComposableLambda.kt:132)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$2.invoke(ComposableLambda.kt:131)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.RecomposeScopeImpl.compose(RecomposeScopeImpl.kt:235)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.recomposeToGroupEnd(Composer.kt:2838)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.skipCurrentGroup(Composer.kt:3158)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.doCompose-aFTiNEg(Composer.kt:3706)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.recompose-aFTiNEg$runtime_release(Composer.kt:3648)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionImpl.recompose(Composition.kt:1002)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer.performRecompose(Recomposer.kt:1266)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer.access$performRecompose(Recomposer.kt:142)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer$runRecomposeAndApplyChanges$2$1.invoke(Recomposer.kt:620)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer$runRecomposeAndApplyChanges$2$1.invoke(Recomposer.kt:591)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiFrameClock$withFrameNanos$2$callback$1.doFrame(AndroidUiFrameClock.android.kt:39)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performFrameDispatch(AndroidUiDispatcher.android.kt:108)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performFrameDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.doFrame(AndroidUiDispatcher.android.kt:69)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1337)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1348)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.view.Choreographer.doCallbacks(Choreographer.java:952)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.view.Choreographer.doFrame(Choreographer.java:878)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1322)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.237 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.246 16661 16661 D StrictMode: StrictMode policy violation; ~duration=412 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$RomsSettings$1.invoke(SettingsScreen.kt:421)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$RomsSettings$1.invoke(SettingsScreen.kt:326)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1$1$1.invoke(Components.kt:123)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1$1$1.invoke(Components.kt:119)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt$Card$1.invoke(Card.kt:888)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt$Card$1.invoke(Card.kt:96)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:126)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:108)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt.Surface-T9BRK9s(Surface.kt:105)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt.Card(Card.kt:89)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.CardKt.OutlinedCard(Card.kt:304)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1.invoke(Components.kt:119)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt$LemuroidCardSettingsGroup$1.invoke(Components.kt:112)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:126)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt$Surface$1.invoke(Surface.kt:108)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at androidx.compose.material3.SurfaceKt.Surface-T9BRK9s(Surface.kt:105)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt.LemuroidCardSettingsGroup(Components.kt:112)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.RomsSettings(SettingsScreen.kt:326)
+11-20 14:26:08.246 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.access$RomsSettings(SettingsScreen.kt:1)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$SettingsScreen$3.invoke(SettingsScreen.kt:89)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt$SettingsScreen$3.invoke(SettingsScreen.kt:88)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.utils.android.settings.ComponentsKt.LemuroidSettingsPage(Components.kt:41)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreenKt.SettingsScreen(SettingsScreen.kt:88)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5$1$1$7.invoke(MainActivity.kt:657)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5$1$1$7.invoke(MainActivity.kt:656)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:142)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13$1.invoke(NavHost.kt:307)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13$1.invoke(NavHost.kt:305)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:384)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.saveable.SaveableStateHolderImpl.SaveableStateProvider(SaveableStateHolder.kt:79)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.SaveableStateProvider(NavBackStackEntryProvider.kt:65)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.access$SaveableStateProvider(NavBackStackEntryProvider.kt:1)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt$LocalOwnersProvider$1.invoke(NavBackStackEntryProvider.kt:52)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt$LocalOwnersProvider$1.invoke(NavBackStackEntryProvider.kt:51)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(CompositionLocal.kt:364)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavBackStackEntryProviderKt.LocalOwnersProvider(NavBackStackEntryProvider.kt:47)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13.invoke(NavHost.kt:305)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt$NavHost$13.invoke(NavHost.kt:289)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:142)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1$5.invoke(AnimatedContent.kt:862)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1$5.invoke(AnimatedContent.kt:852)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedVisibilityKt.AnimatedEnterExitImpl(AnimatedVisibility.kt:755)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1.invoke(AnimatedContent.kt:834)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt$AnimatedContent$6$1.invoke(AnimatedContent.kt:817)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:121)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:51)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.animation.AnimatedContentKt.AnimatedContent(AnimatedContent.kt:872)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt.NavHost(NavHost.kt:274)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.navigation.compose.NavHostKt.NavHost(NavHost.kt:128)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5.invoke(MainActivity.kt:479)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1$5$5.invoke(MainActivity.kt:478)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl.invoke(ComposableLambda.kt:130)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$2.invoke(ComposableLambda.kt:132)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$2.invoke(ComposableLambda.kt:131)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.RecomposeScopeImpl.compose(RecomposeScopeImpl.kt:235)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.recomposeToGroupEnd(Composer.kt:2838)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.skipCurrentGroup(Composer.kt:3158)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.doCompose-aFTiNEg(Composer.kt:3706)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.ComposerImpl.recompose-aFTiNEg$runtime_release(Composer.kt:3648)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.CompositionImpl.recompose(Composition.kt:1002)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer.performRecompose(Recomposer.kt:1266)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer.access$performRecompose(Recomposer.kt:142)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer$runRecomposeAndApplyChanges$2$1.invoke(Recomposer.kt:620)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.runtime.Recomposer$runRecomposeAndApplyChanges$2$1.invoke(Recomposer.kt:591)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiFrameClock$withFrameNanos$2$callback$1.doFrame(AndroidUiFrameClock.android.kt:39)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performFrameDispatch(AndroidUiDispatcher.android.kt:108)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performFrameDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.doFrame(AndroidUiDispatcher.android.kt:69)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1337)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1348)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.view.Choreographer.doCallbacks(Choreographer.java:952)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.view.Choreographer.doFrame(Choreographer.java:878)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1322)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.247 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.270 16661 16661 D StrictMode: StrictMode policy violation; ~duration=12 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensureExternalDirsExistOrFilter(ContextImpl.java:3587)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDirs(ContextImpl.java:872)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDir(ContextImpl.java:861)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getExternalFilesDir(ContextWrapper.java:306)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.getVolumeInfoList(SmartStoragePicker.kt:87)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:220)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.270 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.273 16661 16661 D StrictMode: StrictMode policy violation; ~duration=12 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at java.io.File.canWrite(File.java:788)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensureExternalDirsExistOrFilter(ContextImpl.java:3602)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDirs(ContextImpl.java:872)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDir(ContextImpl.java:861)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getExternalFilesDir(ContextWrapper.java:306)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.getVolumeInfoList(SmartStoragePicker.kt:87)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:220)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.273 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.277 16661 16661 D StrictMode: StrictMode policy violation; ~duration=10 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensureExternalDirsExistOrFilter(ContextImpl.java:3587)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDirs(ContextImpl.java:872)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getExternalFilesDirs(ContextWrapper.java:311)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.getVolumeInfoList(SmartStoragePicker.kt:89)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:220)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.277 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.282 16661 16661 D StrictMode: StrictMode policy violation; ~duration=10 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at java.io.File.canWrite(File.java:788)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensureExternalDirsExistOrFilter(ContextImpl.java:3602)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDirs(ContextImpl.java:872)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getExternalFilesDirs(ContextWrapper.java:311)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.getVolumeInfoList(SmartStoragePicker.kt:89)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:220)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.282 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.285 16661 16661 D StrictMode: StrictMode policy violation; ~duration=9 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.getVolumeInfoList(SmartStoragePicker.kt:91)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:220)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.285 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.288 16661 16661 D StrictMode: StrictMode policy violation; ~duration=9 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.statvfs(BlockGuardOs.java:426)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.statvfs(ForwardingOs.java:852)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.system.Os.statvfs(Os.java:909)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.os.StatFs.doStat(StatFs.java:51)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.os.StatFs.<init>(StatFs.java:43)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.freeBytes(SmartStoragePicker.kt:125)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.getVolumeInfoList(SmartStoragePicker.kt:95)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:220)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.288 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.291 16661 16661 D StrictMode: StrictMode policy violation; ~duration=8 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.statvfs(BlockGuardOs.java:426)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.statvfs(ForwardingOs.java:852)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.system.Os.statvfs(Os.java:909)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.os.StatFs.doStat(StatFs.java:51)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.os.StatFs.<init>(StatFs.java:43)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.totalBytes(SmartStoragePicker.kt:132)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.getVolumeInfoList(SmartStoragePicker.kt:96)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:220)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.291 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.294 16661 16661 D StrictMode: StrictMode policy violation; ~duration=7 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensureExternalDirsExistOrFilter(ContextImpl.java:3587)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDirs(ContextImpl.java:872)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDir(ContextImpl.java:861)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getExternalFilesDir(ContextWrapper.java:306)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.isUsingRemovableStorage(SmartStoragePicker.kt:108)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:221)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.294 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:08.297 16661 16661 D StrictMode: StrictMode policy violation; ~duration=7 ms: android.os.strictmode.DiskReadViolation
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at java.io.File.canWrite(File.java:788)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.app.ContextImpl.ensureExternalDirsExistOrFilter(ContextImpl.java:3602)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDirs(ContextImpl.java:872)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.app.ContextImpl.getExternalFilesDir(ContextImpl.java:861)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.content.ContextWrapper.getExternalFilesDir(ContextWrapper.java:306)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.lib.storage.SmartStoragePicker.isUsingRemovableStorage(SmartStoragePicker.kt:108)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1$2.emit(Emitters.kt:221)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.StateFlowImpl.collect(StateFlow.kt:392)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at kotlinx.coroutines.flow.ReadonlyStateFlow.collect(Unknown Source:2)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel$special$$inlined$map$1.collect(SafeCollector.common.kt:112)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invokeSuspend(SnapshotFlow.kt:67)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:8)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1.invoke(Unknown Source:4)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at androidx.compose.runtime.SnapshotStateKt__ProduceStateKt$produceState$3$1.invokeSuspend(ProduceState.kt:138)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:104)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.performTrampolineDispatch(AndroidUiDispatcher.android.kt:79)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher.access$performTrampolineDispatch(AndroidUiDispatcher.android.kt:41)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at androidx.compose.ui.platform.AndroidUiDispatcher$dispatchCallback$1.run(AndroidUiDispatcher.android.kt:57)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 14:26:08.297 16661 16661 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 14:26:26.548 16661 16702 D EGL_emulation: app_time_stats: avg=1071.67ms min=2.09ms max=17485.72ms count=17
+11-20 14:26:26.739 16661 16693 I WM-Processor: Moving WorkSpec (f9488ab5-e676-46e7-bb2b-c1343ade228e) to the foreground
+11-20 14:26:26.760 16661 16661 I WM-SystemFgDispatcher: Started foreground service Intent { act=ACTION_START_FOREGROUND cmp=app.retrogamesystem.debug/androidx.work.impl.foreground.SystemForegroundService (has extras) }
+11-20 14:26:26.808 16661 17070 D LibretroDBManager: LibretroDBManager pre-warm completed in 24ms
+11-20 14:26:26.817 16661 17513 D StorageProviderRegistry: StorageProviderRegistry: total providers injected = 3
+11-20 14:26:26.818 16661 17513 D StorageProviderRegistry: StorageProviderRegistry: provider access_framework enabled? true
+11-20 14:26:26.818 16661 17513 D StorageProviderRegistry: StorageProviderRegistry: provider local enabled? true
+11-20 14:26:26.818 16661 17513 D StorageProviderRegistry: StorageProviderRegistry: provider all_files enabled? false
+11-20 14:26:26.888 16661 17514 D LemuroidLibrary: Retrieving scan entry for uri: BaseStorageFile(name=Sonic The Hedgehog - Pocket Adventure (WR).ngc, size=2097152, uri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/ngc/Sonic%20The%20Hedgehog%20-%20Pocket%20Adventure%20(WR).ngc, path=/storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/ngc/Sonic The Hedgehog - Pocket Adventure (WR).ngc)
+11-20 14:26:26.897 16661 17514 D LemuroidLibrary: Retrieving scan entry for uri: BaseStorageFile(name=Castlevania - Symphony of the Night (Europe).chd, size=384249945, uri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Castlevania%20-%20Symphony%20of%20the%20Night%20(Europe).chd, path=/storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Castlevania - Symphony of the Night (Europe).chd)
+11-20 14:26:26.905 16661 17514 D LemuroidLibrary: Retrieving scan entry for uri: BaseStorageFile(name=Crash Bandicoot - Warped (USA).chd, size=104137161, uri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Crash%20Bandicoot%20-%20Warped%20(USA).chd, path=/storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Crash Bandicoot - Warped (USA).chd)
+11-20 14:26:26.910 16661 17514 D LemuroidLibrary: Retrieving scan entry for uri: BaseStorageFile(name=Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip, size=0, uri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR%20ISO%20PS1.zip, path=/storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip)
+11-20 14:26:26.915 16661 17514 D LemuroidLibrary: Retrieving scan entry for uri: BaseStorageFile(name=Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (EDC).chd, size=136501802, uri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Crash%20Bandicoot%202%20-%20Cortex%20Strikes%20Back%20(Europe)%20(En%2CFr%2CDe%2CEs%2CIt)%20(EDC).chd, path=/storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (EDC).chd)
+11-20 14:26:26.921 16661 17514 D LemuroidLibrary: Retrieving scan entry for uri: BaseStorageFile(name=Kirbys Adventure (US).nes, size=786448, uri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/nes/Kirbys%20Adventure%20(US).nes, path=/storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/nes/Kirbys Adventure (US).nes)
+11-20 14:26:26.926 16661 17514 D LemuroidLibrary: Retrieving scan entry for uri: BaseStorageFile(name=Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd, size=0, uri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/dc/Resident%20Evil%202%20(Europe)%20(En%2CFr)%20(Disc%201).chd, path=/storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/dc/Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd)
+11-20 14:26:26.930 16661 17513 D LemuroidLibrary: Updating game: Game(id=39706, fileName=Sonic The Hedgehog - Pocket Adventure (WR).ngc, fileUri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/ngc/Sonic%20The%20Hedgehog%20-%20Pocket%20Adventure%20(WR).ngc, title=Sonic The Hedgehog - Pocket Adventure, systemId=ngc, developer=null, coverFrontUrl=https://images.igdb.com/igdb/image/upload/t_cover_big/co4se0.jpg, lastIndexedAt=1795184786770, lastPlayedAt=null, isFavorite=false, popularityIndex=13, isRepresentative=true)
+11-20 14:26:26.931 16661 17513 D LemuroidLibrary: Updating game: Game(id=42736, fileName=Castlevania - Symphony of the Night (Europe).chd, fileUri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Castlevania%20-%20Symphony%20of%20the%20Night%20(Europe).chd, title=Castlevania: Symphony of the Night, systemId=psx, developer=null, coverFrontUrl=https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Castlevania%20-%20Symphony%20of%20the%20Night%20%28Europe%29.png, lastIndexedAt=1795184786770, lastPlayedAt=null, isFavorite=false, popularityIndex=816, isRepresentative=true)
+11-20 14:26:26.933 16661 17513 D LemuroidLibrary: Updating game: Game(id=42818, fileName=Crash Bandicoot - Warped (USA).chd, fileUri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Crash%20Bandicoot%20-%20Warped%20(USA).chd, title=Crash Bandicoot - Warped, systemId=psx, developer=null, coverFrontUrl=https://images.igdb.com/igdb/image/upload/t_cover_big/co873w.jpg, lastIndexedAt=1795184786770, lastPlayedAt=null, isFavorite=false, popularityIndex=0, isRepresentative=true)
+11-20 14:26:26.933 16661 17513 D LemuroidLibrary: Updating game: Game(id=60840, fileName=Tekken 3 Unlocked Edition Traduzido PT-BR ISO PS1.zip, fileUri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR%20ISO%20PS1.zip, title=Tekken 3 Unlocked Edition Traduzido PT-BR, systemId=psx, developer=null, coverFrontUrl=https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Tekken%203%20Unlocked%20Edition%20Traduzido%20PT-BR.png, lastIndexedAt=1795184786770, lastPlayedAt=null, isFavorite=false, popularityIndex=0, isRepresentative=true)
+11-20 14:26:26.933 16661 17513 D LemuroidLibrary: Updating game: Game(id=42819, fileName=Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (EDC).chd, fileUri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/psx/Crash%20Bandicoot%202%20-%20Cortex%20Strikes%20Back%20(Europe)%20(En%2CFr%2CDe%2CEs%2CIt)%20(EDC).chd, title=Crash Bandicoot 2: Cortex Strikes Back, systemId=psx, developer=null, coverFrontUrl=https://raw.githubusercontent.com/libretro-thumbnails/Sony_-_PlayStation/master/Named_Boxarts/Crash%20Bandicoot%202%20-%20Cortex%20Strikes%20Back%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29%20%28EDC%29.png, lastIndexedAt=1795184786770, lastPlayedAt=null, isFavorite=false, popularityIndex=527, isRepresentative=true)
+11-20 14:26:26.934 16661 17513 D LemuroidLibrary: Updating game: Game(id=38226, fileName=Kirbys Adventure (US).nes, fileUri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/nes/Kirbys%20Adventure%20(US).nes, title=Kirbys Adventure, systemId=nes, developer=null, coverFrontUrl=null, lastIndexedAt=1795184786770, lastPlayedAt=1795184684272, isFavorite=false, popularityIndex=195, isRepresentative=false)
+11-20 14:26:26.934 16661 17513 D LemuroidLibrary: Updating game: Game(id=16719, fileName=Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd, fileUri=file:///storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms/dc/Resident%20Evil%202%20(Europe)%20(En%2CFr)%20(Disc%201).chd, title=Resident Evil 2, systemId=dc, developer=null, coverFrontUrl=https://raw.githubusercontent.com/libretro-thumbnails/Sega_-_dc/master/Named_Boxarts/Resident%20Evil%202%20%28Europe%29%20%28En%2CFr%29%20%28Disc%201%29.png, lastIndexedAt=1795184786770, lastPlayedAt=null, isFavorite=false, popularityIndex=581, isRepresentative=true)
+11-20 14:26:27.172 16661 17516 I BiosManager: Pruning old bios files
+11-20 14:26:27.178 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/scph101.bin
+11-20 14:26:27.180 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/scph7001.bin
+11-20 14:26:27.184 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/scph5501.bin
+11-20 14:26:27.186 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/scph1001.bin
+11-20 14:26:27.187 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/lynxboot.img
+11-20 14:26:27.188 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/bios_CD_E.bin
+11-20 14:26:27.189 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/bios_CD_J.bin
+11-20 14:26:27.190 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/bios_CD_U.bin
+11-20 14:26:27.191 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/bios7.bin
+11-20 14:26:27.192 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/bios9.bin
+11-20 14:26:27.192 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/firmware.bin
+11-20 14:26:27.194 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/gba_bios.bin
+11-20 14:26:27.195 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/MSX.ROM
+11-20 14:26:27.196 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/MSX2.ROM
+11-20 14:26:27.198 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/MSX2EXT.ROM
+11-20 14:26:27.199 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/MSX2P.ROM
+11-20 14:26:27.201 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/MSX2PEXT.ROM
+11-20 14:26:27.202 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/MSXDOS2.ROM
+11-20 14:26:27.204 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/neogeo.zip
+11-20 14:26:27.206 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/pgm.zip
+11-20 14:26:27.206 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/coleco.rom
+11-20 14:26:27.207 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/exec.bin
+11-20 14:26:27.210 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/grom.bin
+11-20 14:26:27.211 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/panafz1.bin
+11-20 14:26:27.214 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/dc/dc_boot.bin
+11-20 14:26:27.218 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/dc/dc_flash.bin
+11-20 14:26:27.219 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/dc/naomi.zip
+11-20 14:26:27.221 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/dc/naomi2.zip
+11-20 14:26:27.222 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/dc/awbios.zip
+11-20 14:26:27.223 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/disksys.rom
+11-20 14:26:27.224 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/sl31253.bin
+11-20 14:26:27.225 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/sl31254.bin
+11-20 14:26:27.226 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/saturn_bios.bin
+11-20 14:26:27.228 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/o2rom.bin
+11-20 14:26:27.229 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/neocd/neocd_z.rom
+11-20 14:26:27.230 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/kick34005.A500
+11-20 14:26:27.232 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/kick40068.A1200
+11-20 14:26:27.234 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/kick40060.CD32
+11-20 14:26:27.235 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/kick40060.CD32.ext
+11-20 14:26:27.236 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/kick34005.CDTV
+11-20 14:26:27.237 16661 17516 D BiosManager: Pruning old bios file: /data/user/0/app.retrogamesystem.debug/files/system/pcfx.rom
+11-20 14:26:27.238 16661 17516 D LemuroidLibrary: Deleting games from db before: 1795184786770
+11-20 14:26:27.546 16661 17514 D LemuroidLibrary: Deleting data files from db before: 1795184786770
+11-20 14:26:27.563 16661 17514 I LemuroidLibrary: Library indexing completed in: 790 ms
+11-20 14:26:27.576 16661 16693 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=f9488ab5-e676-46e7-bb2b-c1343ade228e, tags={ com.swordfish.lemuroid.app.shared.library.LibraryIndexWork } ]
+11-20 14:26:27.804 16661 16661 I WM-SystemFgDispatcher: Stopping foreground service
+11-20 14:26:27.988 16661 16702 D EGL_emulation: app_time_stats: avg=69.53ms min=6.80ms max=1031.99ms count=18
