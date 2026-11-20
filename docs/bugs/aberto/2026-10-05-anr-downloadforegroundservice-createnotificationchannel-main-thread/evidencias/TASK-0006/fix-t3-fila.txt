@@ -1,0 +1,21 @@
+05:33:42.037 
+save kirby 05:33:42
+05:33:43.062 
+05:33:43.645 
+05:33:44.383 
+05:33:45.084 
+05:33:45.885 
+05:33:46.582 
+# T3(2) fila com 2 jogos: RE2 (DC) baixando, Crash 2 (PSX) entra na fila
+05:39:16.594 |  android.title=String (Resident Evil 2)  android.text=String (Downloading… 10%) 
+save crash2 05:39:17
+05:39:17.973 |  android.title=String (Resident Evil 2)  android.text=String (+ 1 more in queue) 
+05:39:18.922 |  android.title=String (Resident Evil 2)  android.text=String (+ 1 more in queue) 
+05:39:19.868 |  android.title=String (Resident Evil 2)  android.text=String (+ 1 more in queue) 
+05:39:20.753 |  android.title=String (Resident Evil 2)  android.text=String (+ 1 more in queue) 
+cancel RE2 05:39:52.831
+05:39:53.138 |  android.title=String (Crash Bandicoot 2: Cortex Strikes Back)  android.text=String (Downloading… 0%) 
+05:39:53.914 |  android.title=String (Crash Bandicoot 2: Cortex Strikes Back)  android.text=String (Downloading… 0%) 
+05:39:54.571 |  android.title=String (Crash Bandicoot 2: Cortex Strikes Back)  android.text=String (Downloading… 0%) 
+05:39:55.172 |  android.title=String (Crash Bandicoot 2: Cortex Strikes Back)  android.text=String (Downloading… 0%) 
+05:39:55.993 |  android.title=String (Crash Bandicoot 2: Cortex Strikes Back)  android.text=String (Downloading… 0%) 

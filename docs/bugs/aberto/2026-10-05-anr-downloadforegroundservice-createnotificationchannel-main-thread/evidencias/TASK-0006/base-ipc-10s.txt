@@ -1,0 +1,4 @@
+Binder transaction traces for all processes.
+
+Traces for process: app.retrogamesystem.debug
+Failure while dumping IPC traces from ProcessRecord{57f35ed 6127:app.retrogamesystem.debug/u0a190}.  Exception: java.io.IOException: Timeout

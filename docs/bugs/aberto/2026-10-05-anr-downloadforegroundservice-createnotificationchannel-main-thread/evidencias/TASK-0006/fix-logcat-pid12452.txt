@@ -1,0 +1,1497 @@
+11-20 05:29:58.205 12452 12452 I amesystem.debug: Late-enabling -Xcheck:jni
+11-20 05:29:58.254 12452 12452 I amesystem.debug: Using CollectorTypeCC GC.
+11-20 05:29:58.255 12452 12452 W amesystem.debug: Unexpected CPU variant for x86: x86_64.
+11-20 05:29:58.255 12452 12452 W amesystem.debug: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+11-20 05:29:58.383 12452 12452 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10190; state: ENABLED
+11-20 05:29:58.384 12452 12452 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 10190; state: ENABLED
+11-20 05:29:58.397 12452 12452 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-20 05:29:58.397 12452 12452 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-20 05:29:58.398 12452 12452 W ziparchive: Unable to open '/data/app/~~d47iGzrovkEyd0jLRIVWeA==/app.retrogamesystem.debug-puy9mbn1436-yctJuowxAA==/base.dm': No such file or directory
+11-20 05:29:58.398 12452 12452 W ziparchive: Unable to open '/data/app/~~d47iGzrovkEyd0jLRIVWeA==/app.retrogamesystem.debug-puy9mbn1436-yctJuowxAA==/base.dm': No such file or directory
+11-20 05:29:59.058 12452 12452 D nativeloader: Configuring clns-6 for other apk /data/app/~~d47iGzrovkEyd0jLRIVWeA==/app.retrogamesystem.debug-puy9mbn1436-yctJuowxAA==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~d47iGzrovkEyd0jLRIVWeA==/app.retrogamesystem.debug-puy9mbn1436-yctJuowxAA==/lib/x86_64:/data/app/~~d47iGzrovkEyd0jLRIVWeA==/app.retrogamesystem.debug-puy9mbn1436-yctJuowxAA==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/app.retrogamesystem.debug
+11-20 05:29:59.074 12452 12452 V GraphicsEnvironment: Currently set values for:
+11-20 05:29:59.074 12452 12452 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-20 05:29:59.074 12452 12452 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-20 05:29:59.075 12452 12452 V GraphicsEnvironment: ANGLE GameManagerService for app.retrogamesystem.debug: false
+11-20 05:29:59.075 12452 12452 V GraphicsEnvironment: app.retrogamesystem.debug is not listed in per-application setting
+11-20 05:29:59.075 12452 12452 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-20 05:29:59.419 12452 12452 I NativeTempDir: Native TMPDIR set to /data/user/0/app.retrogamesystem.debug/files/tmp
+11-20 05:29:59.441 12452 12452 D WM-WrkMgrInitializer: Initializing WorkManager with default configuration.
+11-20 05:29:59.514 12452 12452 D WM-PackageManagerHelper: Skipping component enablement for androidx.work.impl.background.systemjob.SystemJobService
+11-20 05:29:59.514 12452 12452 D WM-Schedulers: Created SystemJobScheduler and enabled SystemJobService
+11-20 05:29:59.529 12452 12452 D CompatibilityChangeReporter: Compat change id reported: 3400644; UID 10190; state: ENABLED
+11-20 05:29:59.530 12452 12452 I MainProcessInitializer: Requested initialization of main process tasks
+11-20 05:29:59.582 12452 12481 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10190; state: ENABLED
+11-20 05:29:59.635 12452 12452 D StrictMode: StrictMode policy violation; ~duration=91 ms: android.os.strictmode.DiskReadViolation
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager$Companion.markCatalogPopulated(StreamingRomsManager.kt:123)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:29)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:18)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 05:29:59.635 12452 12452 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 05:29:59.638 12452 12452 D StrictMode: StrictMode policy violation; ~duration=90 ms: android.os.strictmode.DiskReadViolation
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.app.SharedPreferencesImpl.edit(SharedPreferencesImpl.java:368)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.roms.StreamingRomsManager$Companion.markCatalogPopulated(StreamingRomsManager.kt:124)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:29)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer.create(MainProcessInitializer.kt:18)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:138)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at androidx.startup.AppInitializer.initializeComponent(AppInitializer.java:117)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.LemuroidApplication.onCreate(LemuroidApplication.kt:99)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.app.Instrumentation.callApplicationOnCreate(Instrumentation.java:1316)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6998)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleBindApplication(Unknown Source:0)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2236)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 05:29:59.638 12452 12452 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 05:29:59.676 12452 12494 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-20 05:29:59.681 12452 12494 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-20 05:29:59.698 12452 12494 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-20 05:29:59.733 12452 12496 D CompatibilityChangeReporter: Compat change id reported: 194532703; UID 10190; state: ENABLED
+11-20 05:29:59.734 12452 12496 D CompatibilityChangeReporter: Compat change id reported: 253665015; UID 10190; state: ENABLED
+11-20 05:29:59.746 12452 12484 D SmartStoragePicker: SmartStoragePicker: ROMs dir /storage/emulated/0/Android/data/app.retrogamesystem.debug/files/roms
+11-20 05:29:59.835 12452 12452 W amesystem.debug: Accessing hidden method Ljava/lang/invoke/MethodHandles$Lookup;-><init>(Ljava/lang/Class;I)V (unsupported, reflection, allowed)
+11-20 05:29:59.861 12452 12487 D CompatibilityChangeReporter: Compat change id reported: 263076149; UID 10190; state: ENABLED
+11-20 05:29:59.977 12452 12478 V NativeCrypto: Registering org/conscrypt/NativeCrypto's 288 native methods...
+11-20 05:29:59.997 12452 12478 W amesystem.debug: Accessing hidden method Ljava/security/spec/ECParameterSpec;->getCurveName()Ljava/lang/String; (unsupported, reflection, allowed)
+11-20 05:30:00.010 12452 12478 D LemuroidApplication: Conscrypt provider installed
+11-20 05:30:00.103 12452 12452 I wm_on_create_called: [65413754,com.swordfish.lemuroid.app.mobile.feature.main.MainActivity,performCreate,341]
+11-20 05:30:00.108 12452 12452 I wm_on_start_called: [65413754,com.swordfish.lemuroid.app.mobile.feature.main.MainActivity,handleStartActivity,0]
+11-20 05:30:00.113 12452 12452 I wm_on_resume_called: [65413754,com.swordfish.lemuroid.app.mobile.feature.main.MainActivity,RESUME_ACTIVITY,0]
+11-20 05:30:00.119 12452 12452 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10190; state: DISABLED
+11-20 05:30:00.121 12452 12452 W OpenGLRenderer: Unknown dataspace 0
+11-20 05:30:00.133 12452 12452 D StrictMode: StrictMode policy violation; ~duration=35 ms: android.os.strictmode.DiskReadViolation
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at libcore.io.BlockGuardOs.access(BlockGuardOs.java:74)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at libcore.io.ForwardingOs.access(ForwardingOs.java:128)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ActivityThread$AndroidOs.access(ActivityThread.java:8054)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at java.io.UnixFileSystem.checkAccess(UnixFileSystem.java:313)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at java.io.File.exists(File.java:813)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:790)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ContextImpl.ensurePrivateDirExists(ContextImpl.java:781)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ContextImpl.getPreferencesDir(ContextImpl.java:737)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ContextImpl.getSharedPreferencesPath(ContextImpl.java:962)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ContextImpl.getSharedPreferences(ContextImpl.java:583)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.content.ContextWrapper.getSharedPreferences(ContextWrapper.java:221)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.prefs_delegate$lambda$0(AppUpdateManager.kt:70)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.$r8$lambda$NltxSQYBvDhxDNRQ1nb8DutaMa4(Unknown Source:0)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:74)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.getPrefs(AppUpdateManager.kt:70)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.shouldCheckNow(AppUpdateManager.kt:88)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel.checkOnStartup(AppUpdateViewModel.kt:48)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity.onCreate(MainActivity.kt:208)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 05:30:00.133 12452 12452 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 05:30:00.135 12452 12452 D StrictMode: StrictMode policy violation; ~duration=35 ms: android.os.strictmode.DiskReadViolation
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1666)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.SharedPreferencesImpl.getLong(SharedPreferencesImpl.java:328)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateManager.shouldCheckNow(AppUpdateManager.kt:88)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.shared.updates.AppUpdateViewModel.checkOnStartup(AppUpdateViewModel.kt:48)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at com.swordfish.lemuroid.app.mobile.feature.main.MainActivity.onCreate(MainActivity.kt:208)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8595)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.Activity.performCreate(Activity.java:8573)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1456)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3764)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3922)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:103)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:139)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:96)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2443)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 05:30:00.135 12452 12452 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 05:30:00.135 12452 12452 I wm_on_top_resumed_gained_called: [65413754,com.swordfish.lemuroid.app.mobile.feature.main.MainActivity,topStateChangedWhenResumed]
+11-20 05:30:01.489 12452 12490 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 05:30:01.489 12452 12490 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 05:30:01.575 12452 12490 I Gralloc4: mapper 4.x is not supported
+11-20 05:30:01.607 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:30:01.695 12452 12470 I OpenGLRenderer: Davey! duration=1538ms; Flags=1, FrameTimelineVsyncId=389256, IntendedVsync=1556139289620, Vsync=1556139289620, InputEventId=0, HandleInputStart=1556144679800, AnimationStart=1556144713500, PerformTraversalsStart=1556144755600, DrawStart=1557608345900, FrameDeadline=1556155956286, FrameInterval=1556144635000, FrameStartTime=16666666, SyncQueued=1557640542600, SyncStart=1557652939200, IssueDrawCommandsStart=1557653823300, SwapBuffers=1557684093400, FrameCompleted=1557689961500, DequeueBufferDuration=26600, QueueBufferDuration=238900, GpuCompleted=1557689961500, SwapBuffersCompleted=1557686516100, DisplayPresentTime=0, CommandSubmissionCompleted=1557684093400, 
+11-20 05:30:01.711 12452 12481 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=f0998a56-4869-488e-b58e-8262cc7fcc3e, tags={ com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork } ]
+11-20 05:30:01.738 12452 12452 I Choreographer: Skipped 89 frames!  The application may be doing too much work on its main thread.
+11-20 05:30:02.163 12452 12470 I OpenGLRenderer: Davey! duration=1918ms; Flags=0, FrameTimelineVsyncId=389271, IntendedVsync=1556239289616, Vsync=1557722622890, InputEventId=0, HandleInputStart=1557739235900, AnimationStart=1557739273300, PerformTraversalsStart=1558069826600, DrawStart=1558070138700, FrameDeadline=1557722622890, FrameInterval=1557738406900, FrameStartTime=16666666, SyncQueued=1558138074400, SyncStart=1558138377900, IssueDrawCommandsStart=1558138539600, SwapBuffers=1558149436300, FrameCompleted=1558158165100, DequeueBufferDuration=35200, QueueBufferDuration=555500, GpuCompleted=1558158165100, SwapBuffersCompleted=1558151070400, DisplayPresentTime=0, CommandSubmissionCompleted=1558149436300, 
+11-20 05:30:02.788 12452 12524 D ConscryptOkHttpHelper: Conscrypt provider installed: Conscrypt 1.0
+11-20 05:30:02.794 12452 12452 I Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
+11-20 05:30:02.825 12452 12468 I OpenGLRenderer: Davey! duration=750ms; Flags=0, FrameTimelineVsyncId=389501, IntendedVsync=1558055956210, Vsync=1558222622870, InputEventId=0, HandleInputStart=1558239232600, AnimationStart=1558239262000, PerformTraversalsStart=1558420607100, DrawStart=1558420833100, FrameDeadline=1558189289538, FrameInterval=1558238673100, FrameStartTime=16666666, SyncQueued=1558753733600, SyncStart=1558754255600, IssueDrawCommandsStart=1558754385900, SwapBuffers=1558799823900, FrameCompleted=1558807213800, DequeueBufferDuration=57300, QueueBufferDuration=510100, GpuCompleted=1558807213800, SwapBuffersCompleted=1558801527500, DisplayPresentTime=72057628414509145, CommandSubmissionCompleted=1558799823900, 
+11-20 05:30:02.850 12452 12524 D ConscryptOkHttpHelper: OkHttp configured with Conscrypt TLS (trust-all)
+11-20 05:30:02.925 12452 12533 D TrafficStats: tagSocket(124) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:02.926 12452 12529 D TrafficStats: tagSocket(130) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:02.926 12452 12528 D TrafficStats: tagSocket(129) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:02.931 12452 12531 D TrafficStats: tagSocket(131) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:02.962 12452 12468 I OpenGLRenderer: Davey! duration=700ms; Flags=0, FrameTimelineVsyncId=389681, IntendedVsync=1558255956202, Vsync=1558789289514, InputEventId=0, HandleInputStart=1558795133600, AnimationStart=1558795166300, PerformTraversalsStart=1558895512000, DrawStart=1558896157000, FrameDeadline=1558839289512, FrameInterval=1558794257500, FrameStartTime=16666666, SyncQueued=1558939765600, SyncStart=1558940504300, IssueDrawCommandsStart=1558940631500, SwapBuffers=1558944459300, FrameCompleted=1558957592000, DequeueBufferDuration=32000, QueueBufferDuration=699200, GpuCompleted=1558957592000, SwapBuffersCompleted=1558946154100, DisplayPresentTime=0, CommandSubmissionCompleted=1558944459300, 
+11-20 05:30:03.051 12452 12530 D TrafficStats: tagSocket(125) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:03.061 12452 12532 D TrafficStats: tagSocket(132) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:03.180 12452 12490 D EGL_emulation: app_time_stats: avg=298.76ms min=85.29ms max=650.54ms count=5
+11-20 05:30:03.199 12452 12562 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 05:30:03.202 12452 12562 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 05:30:05.914 12452 12490 D EGL_emulation: app_time_stats: avg=114.41ms min=2.24ms max=1865.98ms count=23
+11-20 05:30:15.101 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:30:15.101 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:30:15.396 12452 12452 D CompatibilityChangeReporter: Compat change id reported: 289878283; UID 10190; state: ENABLED
+11-20 05:30:15.540 12452 12490 D EGL_emulation: app_time_stats: avg=9625.82ms min=9625.82ms max=9625.82ms count=1
+11-20 05:30:15.708 12452 12452 I ImeTracker: app.retrogamesystem.debug:b5449ebc: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:30:15.708 12452 12452 D InsetsController: show(ime(), fromIme=false)
+11-20 05:30:15.714 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:30:15.759 12452 12452 I AssistStructure: Flattened final assist data: 520 bytes, containing 1 windows, 3 views
+11-20 05:30:15.794 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:30:15.798 12452 12452 I ImeTracker: app.retrogamesystem.debug:abc84e4a: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-20 05:30:15.799 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-20 05:30:15.894 12452 12452 D Autofill Status: Autofill popup isn't shown because autofill is not available.
+11-20 05:30:15.894 12452 12452 D Autofill Status: 
+11-20 05:30:15.894 12452 12452 D Autofill Status: Did you set up autofill?
+11-20 05:30:15.894 12452 12452 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced > Autofill Service
+11-20 05:30:15.894 12452 12452 D Autofill Status: 2. Pick a service
+11-20 05:30:15.894 12452 12452 D Autofill Status: 
+11-20 05:30:15.894 12452 12452 D Autofill Status: Did you add an account?
+11-20 05:30:15.894 12452 12452 D Autofill Status: 1. Go to Settings > System > Languages&input > Advanced
+11-20 05:30:15.894 12452 12452 D Autofill Status: 2. Click on the settings icon next to the Autofill Service
+11-20 05:30:15.894 12452 12452 D Autofill Status: 3. Add your account
+11-20 05:30:16.773 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:30:16.802 12452 12613 I jank_cuj_events_begin_request: [69,1795152616801452000,1572801487300,1572801518200,0@1@app.retrogamesystem.debug]
+11-20 05:30:16.814 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:30:16.817 12452 12452 I ImeTracker: app.retrogamesystem.debug:abc84e4a: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 05:30:16.818 12452 12490 D EGL_emulation: app_time_stats: avg=21.01ms min=2.39ms max=343.78ms count=44
+11-20 05:30:17.131 12452 12613 I jank_cuj_events_end_request: [69,1795152617128108000,1573128145200,1573128184600]
+11-20 05:30:17.137 12452 12452 I ImeTracker: app.retrogamesystem.debug:b5449ebc: onShown
+11-20 05:30:17.857 12452 12490 D EGL_emulation: app_time_stats: avg=64.62ms min=4.45ms max=503.46ms count=13
+11-20 05:30:18.901 12452 12490 D EGL_emulation: app_time_stats: avg=348.00ms min=62.86ms max=494.73ms count=3
+11-20 05:30:19.348 12452 12462 I amesystem.debug: JIT allocated 61KB for compiled code of void com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1.invoke(androidx.compose.runtime.Composer, int)
+11-20 05:30:19.349 12452 12462 I amesystem.debug: Compiler allocated 8073KB to compile void com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1.invoke(androidx.compose.runtime.Composer, int)
+11-20 05:30:19.964 12452 12490 D EGL_emulation: app_time_stats: avg=61.93ms min=18.20ms max=114.44ms count=17
+11-20 05:30:20.964 12452 12490 D EGL_emulation: app_time_stats: avg=25.63ms min=1.98ms max=78.64ms count=32
+11-20 05:30:22.462 12452 12490 D EGL_emulation: app_time_stats: avg=36.97ms min=1.75ms max=515.62ms count=32
+11-20 05:30:23.462 12452 12490 D EGL_emulation: app_time_stats: avg=499.90ms min=499.49ms max=500.31ms count=2
+11-20 05:30:24.962 12452 12490 D EGL_emulation: app_time_stats: avg=500.03ms min=496.35ms max=503.17ms count=3
+11-20 05:30:25.978 12452 12490 D EGL_emulation: app_time_stats: avg=507.84ms min=500.47ms max=515.21ms count=2
+11-20 05:30:26.984 12452 12490 D EGL_emulation: app_time_stats: avg=502.82ms min=500.51ms max=505.13ms count=2
+11-20 05:30:28.500 12452 12490 D EGL_emulation: app_time_stats: avg=504.87ms min=493.01ms max=520.58ms count=3
+11-20 05:30:29.997 12452 12490 D EGL_emulation: app_time_stats: avg=498.96ms min=497.42ms max=499.93ms count=3
+11-20 05:30:31.011 12452 12490 D EGL_emulation: app_time_stats: avg=506.81ms min=496.98ms max=516.64ms count=2
+11-20 05:30:32.021 12452 12490 D EGL_emulation: app_time_stats: avg=505.03ms min=503.45ms max=506.61ms count=2
+11-20 05:30:33.028 12452 12490 D EGL_emulation: app_time_stats: avg=503.17ms min=495.02ms max=511.32ms count=2
+11-20 05:30:33.408 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:30:33.408 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:30:33.536 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:30:33.681 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@80b21d8
+11-20 05:30:33.733 12452 12613 I jank_cuj_events_begin_request: [69,1795152633733288000,1589733317600,1589733341500,1@1@app.retrogamesystem.debug]
+11-20 05:30:33.738 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@80b21d8
+11-20 05:30:33.739 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:30:33.803 12452 12452 I ImeTracker: app.retrogamesystem.debug:cbf269c2: onCancelled at PHASE_CLIENT_ANIMATION_CANCEL
+11-20 05:30:33.804 12452 12613 I jank_cuj_events_cancel_request: [69,1795152633803782000,1589803817100,1589803831700]
+11-20 05:30:33.804 12452 12613 I jank_cuj_events_end_request: [69,1795152633803976000,1589803994200,1589804008200]
+11-20 05:30:33.807 12452 12452 I ImeTracker: app.retrogamesystem.debug:9e3356f7: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 05:30:33.808 12452 12452 I ImeTracker: app.retrogamesystem.debug:9e3356f7: onFailed at PHASE_CLIENT_VIEW_SERVED
+11-20 05:30:34.039 12452 12490 D EGL_emulation: app_time_stats: avg=25.86ms min=4.95ms max=301.94ms count=36
+11-20 05:30:36.862 12452 12490 D EGL_emulation: app_time_stats: avg=1092.61ms min=42.47ms max=3140.14ms count=3
+11-20 05:30:50.046 12452 12521 D SaveQueueManager: SaveQueueManager: starting save for Castlevania - Symphony of the Night (Europe).chd
+11-20 05:30:50.063 12452 12521 D CompatibilityChangeReporter: Compat change id reported: 247079863; UID 10190; state: ENABLED
+11-20 05:30:50.063 12452 12521 D RomOnDemandManager$downloadRom: On-demand lookup: https://emuladores.pythonanywhere.com/find_by_file?path=Castlevania%20-%20Symphony%20of%20the%20Night%20(Europe).chd&source_id=1&system=psx
+11-20 05:30:50.066 12452 12521 D ConscryptOkHttpHelper: OkHttp configured with Conscrypt TLS (trust-all)
+11-20 05:30:50.100 12452 12521 D TrafficStats: tagSocket(146) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:50.124 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@692a842
+11-20 05:30:50.214 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:30:50.214 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:30:50.238 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:30:50.238 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:30:50.382 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:30:50.524 12452 12452 D DownloadForegroundService: DownloadForegroundService: WakeLock acquired
+11-20 05:30:50.525 12452 12490 D EGL_emulation: app_time_stats: avg=1372.62ms min=10.70ms max=16312.32ms count=12
+11-20 05:30:51.298 12452 12521 D RomOnDemandManager$downloadRom: On-demand download URL for Castlevania - Symphony of the Night (Europe).chd: https://huggingface.co/datasets/luistiagos/psxchd/resolve/main/Castlevania%20-%20Symphony%20of%20the%20Night%20%28Europe%29.chd?download=true
+11-20 05:30:51.375 12452 12465 W System  : A resource failed to call release. 
+11-20 05:30:51.599 12452 12490 D EGL_emulation: app_time_stats: avg=10.67ms min=1.67ms max=117.79ms count=52
+11-20 05:30:51.798 12452 12521 D TrafficStats: tagSocket(151) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:52.614 12452 12490 D EGL_emulation: app_time_stats: avg=2.33ms min=1.66ms max=4.26ms count=61
+11-20 05:30:53.479 12452 12521 D TrafficStats: tagSocket(135) with statsTag=0xffffffff, statsUid=-1
+11-20 05:30:53.631 12452 12490 D EGL_emulation: app_time_stats: avg=2.39ms min=1.68ms max=6.15ms count=61
+11-20 05:30:54.634 12452 12490 D EGL_emulation: app_time_stats: avg=2.46ms min=1.59ms max=4.95ms count=60
+11-20 05:30:54.927 12452 12521 D RomOnDemandManager: downloadToFile HTTP 200 contentLength=384249945 url=https://huggingface.co/datasets/luistiagos/psxchd/resolve/main/Castlevania%20-%20Symphony%20of%20the%20Night%20%28Europe%29.chd?download=true
+11-20 05:30:54.985 12452 12490 D EGL_emulation: app_time_stats: avg=405.24ms min=11.26ms max=4078.90ms count=11
+11-20 05:30:55.685 12452 12490 D EGL_emulation: app_time_stats: avg=23.64ms min=1.83ms max=83.15ms count=33
+11-20 05:30:56.032 12452 12490 D EGL_emulation: app_time_stats: avg=57.89ms min=26.04ms max=93.51ms count=18
+11-20 05:30:56.717 12452 12490 D EGL_emulation: app_time_stats: avg=68.50ms min=42.03ms max=108.81ms count=15
+11-20 05:30:57.038 12452 12490 D EGL_emulation: app_time_stats: avg=71.60ms min=49.02ms max=128.56ms count=14
+11-20 05:30:57.720 12452 12490 D EGL_emulation: app_time_stats: avg=66.21ms min=45.38ms max=95.98ms count=15
+11-20 05:30:58.077 12452 12490 D EGL_emulation: app_time_stats: avg=60.84ms min=39.76ms max=85.52ms count=17
+11-20 05:30:58.448 12452 12463 I amesystem.debug: Background concurrent copying GC freed 65686(7913KB) AllocSpace objects, 19(524KB) LOS objects, 49% free, 10MB/20MB, paused 1.919ms,1.090ms total 151.670ms
+11-20 05:30:58.720 12452 12490 D EGL_emulation: app_time_stats: avg=58.60ms min=40.39ms max=89.44ms count=17
+11-20 05:30:59.129 12452 12490 D EGL_emulation: app_time_stats: avg=58.17ms min=40.56ms max=82.53ms count=18
+11-20 05:30:59.754 12452 12490 D EGL_emulation: app_time_stats: avg=54.18ms min=43.50ms max=75.99ms count=19
+11-20 05:31:00.197 12452 12490 D EGL_emulation: app_time_stats: avg=58.59ms min=43.17ms max=110.60ms count=18
+11-20 05:31:00.806 12452 12490 D EGL_emulation: app_time_stats: avg=58.12ms min=42.96ms max=96.28ms count=18
+11-20 05:31:00.862 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 58182(10085KB) AllocSpace objects, 0(0B) LOS objects, 48% free, 10MB/20MB, paused 2.591ms,2.309ms total 114.051ms
+11-20 05:31:01.215 12452 12490 D EGL_emulation: app_time_stats: avg=50.73ms min=32.96ms max=78.75ms count=20
+11-20 05:31:01.848 12452 12490 D EGL_emulation: app_time_stats: avg=49.49ms min=33.42ms max=79.67ms count=21
+11-20 05:31:02.230 12452 12490 D EGL_emulation: app_time_stats: avg=50.55ms min=37.16ms max=75.25ms count=20
+11-20 05:31:02.863 12452 12490 D EGL_emulation: app_time_stats: avg=53.16ms min=38.33ms max=65.88ms count=19
+11-20 05:31:02.990 12452 12463 I amesystem.debug: Background concurrent copying GC freed 56127(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 4.218ms,989us total 167.377ms
+11-20 05:31:03.233 12452 12490 D EGL_emulation: app_time_stats: avg=55.31ms min=31.49ms max=82.42ms count=18
+11-20 05:31:03.876 12452 12490 D EGL_emulation: app_time_stats: avg=55.99ms min=41.07ms max=85.56ms count=18
+11-20 05:31:04.259 12452 12490 D EGL_emulation: app_time_stats: avg=50.75ms min=33.97ms max=77.92ms count=20
+11-20 05:31:04.891 12452 12490 D EGL_emulation: app_time_stats: avg=45.80ms min=32.89ms max=68.40ms count=22
+11-20 05:31:05.046 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 57364(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 2.600ms,8.066ms total 98.548ms
+11-20 05:31:05.337 12452 12490 D EGL_emulation: app_time_stats: avg=50.73ms min=30.46ms max=87.87ms count=21
+11-20 05:31:05.904 12452 12490 D EGL_emulation: app_time_stats: avg=59.08ms min=44.00ms max=108.60ms count=17
+11-20 05:31:06.346 12452 12490 D EGL_emulation: app_time_stats: avg=62.83ms min=28.06ms max=112.72ms count=16
+11-20 05:31:06.935 12452 12490 D EGL_emulation: app_time_stats: avg=64.19ms min=34.51ms max=96.72ms count=16
+11-20 05:31:07.380 12452 12490 D EGL_emulation: app_time_stats: avg=57.11ms min=34.46ms max=74.87ms count=18
+11-20 05:31:07.773 12452 12463 I amesystem.debug: Background concurrent copying GC freed 63491(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 1.729ms,178us total 166.081ms
+11-20 05:31:07.970 12452 12490 D EGL_emulation: app_time_stats: avg=60.11ms min=36.76ms max=107.63ms count=17
+11-20 05:31:08.458 12452 12490 D EGL_emulation: app_time_stats: avg=63.02ms min=34.45ms max=129.72ms count=17
+11-20 05:31:08.981 12452 12490 D EGL_emulation: app_time_stats: avg=62.87ms min=29.91ms max=123.85ms count=16
+11-20 05:31:09.477 12452 12490 D EGL_emulation: app_time_stats: avg=63.46ms min=29.87ms max=118.97ms count=16
+11-20 05:31:10.002 12452 12490 D EGL_emulation: app_time_stats: avg=53.34ms min=27.14ms max=101.43ms count=19
+11-20 05:31:10.486 12452 12490 D EGL_emulation: app_time_stats: avg=55.65ms min=41.39ms max=99.51ms count=18
+11-20 05:31:10.520 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 61607(10MB) AllocSpace objects, 0(0B) LOS objects, 50% free, 10MB/20MB, paused 7.317ms,5.159ms total 77.740ms
+11-20 05:31:11.027 12452 12490 D EGL_emulation: app_time_stats: avg=53.67ms min=39.71ms max=72.57ms count=19
+11-20 05:31:11.504 12452 12490 D EGL_emulation: app_time_stats: avg=52.56ms min=35.36ms max=74.45ms count=19
+11-20 05:31:12.072 12452 12490 D EGL_emulation: app_time_stats: avg=47.26ms min=28.82ms max=61.68ms count=22
+11-20 05:31:12.538 12452 12490 D EGL_emulation: app_time_stats: avg=48.81ms min=33.35ms max=84.40ms count=21
+11-20 05:31:12.894 12452 12463 I amesystem.debug: Background concurrent copying GC freed 66352(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 2.813ms,1.595ms total 135.167ms
+11-20 05:31:13.086 12452 12490 D EGL_emulation: app_time_stats: avg=48.05ms min=38.79ms max=63.69ms count=21
+11-20 05:31:13.554 12452 12490 D EGL_emulation: app_time_stats: avg=48.16ms min=32.90ms max=70.16ms count=21
+11-20 05:31:14.121 12452 12490 D EGL_emulation: app_time_stats: avg=54.05ms min=40.65ms max=92.34ms count=19
+11-20 05:31:14.591 12452 12490 D EGL_emulation: app_time_stats: avg=51.65ms min=28.28ms max=113.22ms count=20
+11-20 05:31:15.123 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 60886(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 3.254ms,140us total 101.749ms
+11-20 05:31:15.125 12452 12490 D EGL_emulation: app_time_stats: avg=47.57ms min=25.91ms max=72.94ms count=21
+11-20 05:31:15.591 12452 12490 D EGL_emulation: app_time_stats: avg=52.39ms min=38.41ms max=76.36ms count=19
+11-20 05:31:16.149 12452 12490 D EGL_emulation: app_time_stats: avg=59.69ms min=30.61ms max=86.76ms count=17
+11-20 05:31:16.598 12452 12490 D EGL_emulation: app_time_stats: avg=71.40ms min=32.89ms max=94.95ms count=14
+11-20 05:31:17.167 12452 12490 D EGL_emulation: app_time_stats: avg=62.27ms min=36.16ms max=99.86ms count=16
+11-20 05:31:17.614 12452 12490 D EGL_emulation: app_time_stats: avg=63.28ms min=28.02ms max=132.48ms count=16
+11-20 05:31:18.230 12452 12490 D EGL_emulation: app_time_stats: avg=52.88ms min=31.47ms max=85.58ms count=20
+11-20 05:31:18.266 12452 12463 I amesystem.debug: Background concurrent copying GC freed 65410(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 2.132ms,213us total 311.218ms
+11-20 05:31:18.671 12452 12490 D EGL_emulation: app_time_stats: avg=58.46ms min=37.65ms max=99.53ms count=18
+11-20 05:31:19.250 12452 12490 D EGL_emulation: app_time_stats: avg=72.45ms min=31.39ms max=189.98ms count=14
+11-20 05:31:19.710 12452 12490 D EGL_emulation: app_time_stats: avg=57.30ms min=25.71ms max=192.35ms count=18
+11-20 05:31:20.275 12452 12490 D EGL_emulation: app_time_stats: avg=56.74ms min=30.74ms max=153.43ms count=18
+11-20 05:31:20.714 12452 12490 D EGL_emulation: app_time_stats: avg=62.57ms min=33.39ms max=150.60ms count=16
+11-20 05:31:21.110 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 63492(10MB) AllocSpace objects, 0(0B) LOS objects, 50% free, 10MB/20MB, paused 2.019ms,91us total 102.823ms
+11-20 05:31:21.291 12452 12490 D EGL_emulation: app_time_stats: avg=52.88ms min=35.51ms max=86.74ms count=19
+11-20 05:31:21.740 12452 12490 D EGL_emulation: app_time_stats: avg=53.01ms min=10.95ms max=85.09ms count=19
+11-20 05:31:22.296 12452 12490 D EGL_emulation: app_time_stats: avg=47.57ms min=29.33ms max=80.08ms count=21
+11-20 05:31:22.755 12452 12490 D EGL_emulation: app_time_stats: avg=45.84ms min=32.72ms max=66.71ms count=22
+11-20 05:31:23.301 12452 12490 D EGL_emulation: app_time_stats: avg=43.48ms min=34.42ms max=53.37ms count=23
+11-20 05:31:23.398 12452 12463 I amesystem.debug: Background concurrent copying GC freed 66830(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 3.307ms,752us total 145.861ms
+11-20 05:31:23.767 12452 12490 D EGL_emulation: app_time_stats: avg=43.82ms min=27.04ms max=90.01ms count=23
+11-20 05:31:24.349 12452 12490 D EGL_emulation: app_time_stats: avg=45.20ms min=25.66ms max=71.62ms count=23
+11-20 05:31:24.807 12452 12490 D EGL_emulation: app_time_stats: avg=49.38ms min=32.30ms max=88.46ms count=21
+11-20 05:31:25.377 12452 12490 D EGL_emulation: app_time_stats: avg=51.10ms min=29.76ms max=92.81ms count=20
+11-20 05:31:25.836 12452 12490 D EGL_emulation: app_time_stats: avg=51.05ms min=17.80ms max=76.29ms count=20
+11-20 05:31:26.387 12452 12490 D EGL_emulation: app_time_stats: avg=50.24ms min=24.30ms max=89.24ms count=20
+11-20 05:31:26.878 12452 12490 D EGL_emulation: app_time_stats: avg=46.90ms min=28.82ms max=69.60ms count=22
+11-20 05:31:27.411 12452 12490 D EGL_emulation: app_time_stats: avg=45.85ms min=28.19ms max=67.56ms count=22
+11-20 05:31:27.895 12452 12490 D EGL_emulation: app_time_stats: avg=43.94ms min=27.21ms max=65.77ms count=23
+11-20 05:31:28.069 12452 12463 I amesystem.debug: Background concurrent copying GC freed 67464(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 4.177ms,275us total 253.200ms
+11-20 05:31:28.466 12452 12490 D EGL_emulation: app_time_stats: avg=49.83ms min=27.63ms max=70.42ms count=21
+11-20 05:31:28.894 12452 12452 D StrictMode: StrictMode policy violation; ~duration=1 ms: android.os.strictmode.DiskWriteViolation
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onWriteToDisk(StrictMode.java:1622)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at libcore.io.BlockGuardOs.write(BlockGuardOs.java:447)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at libcore.io.ForwardingOs.write(ForwardingOs.java:943)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at libcore.io.IoBridge.write(IoBridge.java:646)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at java.io.FileOutputStream.write(FileOutputStream.java:406)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at com.android.internal.util.FastPrintWriter.flushBytesLocked(FastPrintWriter.java:354)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at com.android.internal.util.FastPrintWriter.flushLocked(FastPrintWriter.java:377)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at com.android.internal.util.FastPrintWriter.flush(FastPrintWriter.java:412)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.os.TransactionTracker.writeTracesToFile(TransactionTracker.java:70)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.app.ActivityThread.handleStopBinderTrackingAndDump(ActivityThread.java:4168)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.app.ActivityThread.-$$Nest$mhandleStopBinderTrackingAndDump(Unknown Source:0)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2423)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.os.Looper.loop(Looper.java:294)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at java.lang.reflect.Method.invoke(Native Method)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-20 05:31:28.894 12452 12452 D StrictMode: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+11-20 05:31:28.961 12452 12490 D EGL_emulation: app_time_stats: avg=57.74ms min=9.07ms max=105.42ms count=18
+11-20 05:31:29.499 12452 12490 D EGL_emulation: app_time_stats: avg=53.48ms min=27.62ms max=76.46ms count=19
+11-20 05:31:29.990 12452 12490 D EGL_emulation: app_time_stats: avg=56.90ms min=33.42ms max=77.35ms count=18
+11-20 05:31:30.537 12452 12490 D EGL_emulation: app_time_stats: avg=68.35ms min=39.13ms max=100.01ms count=15
+11-20 05:31:31.058 12452 12490 D EGL_emulation: app_time_stats: avg=81.78ms min=58.91ms max=112.17ms count=13
+11-20 05:31:31.594 12452 12490 D EGL_emulation: app_time_stats: avg=75.05ms min=36.64ms max=115.94ms count=14
+11-20 05:31:31.994 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 71555(10MB) AllocSpace objects, 1(20KB) LOS objects, 50% free, 10MB/20MB, paused 2.018ms,680us total 124.799ms
+11-20 05:31:32.093 12452 12490 D EGL_emulation: app_time_stats: avg=73.26ms min=54.77ms max=105.89ms count=14
+11-20 05:31:32.623 12452 12490 D EGL_emulation: app_time_stats: avg=56.14ms min=40.59ms max=83.02ms count=18
+11-20 05:31:33.103 12452 12490 D EGL_emulation: app_time_stats: avg=55.59ms min=33.45ms max=108.33ms count=18
+11-20 05:31:33.675 12452 12490 D EGL_emulation: app_time_stats: avg=58.06ms min=32.65ms max=111.54ms count=18
+11-20 05:31:34.109 12452 12490 D EGL_emulation: app_time_stats: avg=47.37ms min=26.21ms max=79.21ms count=21
+11-20 05:31:34.705 12452 12490 D EGL_emulation: app_time_stats: avg=44.18ms min=26.25ms max=68.70ms count=23
+11-20 05:31:35.134 12452 12463 I amesystem.debug: Background concurrent copying GC freed 75737(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/21MB, paused 12.908ms,10.816ms total 366.556ms
+11-20 05:31:35.145 12452 12490 D EGL_emulation: app_time_stats: avg=46.70ms min=30.22ms max=78.79ms count=22
+11-20 05:31:35.710 12452 12490 D EGL_emulation: app_time_stats: avg=45.41ms min=26.59ms max=73.01ms count=22
+11-20 05:31:36.167 12452 12490 D EGL_emulation: app_time_stats: avg=42.25ms min=23.10ms max=69.90ms count=24
+11-20 05:31:36.757 12452 12490 D EGL_emulation: app_time_stats: avg=38.47ms min=17.23ms max=54.14ms count=27
+11-20 05:31:37.190 12452 12490 D EGL_emulation: app_time_stats: avg=44.25ms min=25.67ms max=101.58ms count=23
+11-20 05:31:37.794 12452 12490 D EGL_emulation: app_time_stats: avg=44.78ms min=25.75ms max=96.02ms count=23
+11-20 05:31:38.202 12452 12490 D EGL_emulation: app_time_stats: avg=47.86ms min=29.36ms max=89.13ms count=21
+11-20 05:31:38.845 12452 12490 D EGL_emulation: app_time_stats: avg=55.01ms min=26.28ms max=79.70ms count=19
+11-20 05:31:39.278 12452 12490 D EGL_emulation: app_time_stats: avg=66.95ms min=47.60ms max=97.30ms count=16
+11-20 05:31:39.872 12452 12490 D EGL_emulation: app_time_stats: avg=67.28ms min=48.40ms max=92.44ms count=15
+11-20 05:31:40.331 12452 12490 D EGL_emulation: app_time_stats: avg=74.74ms min=43.36ms max=130.57ms count=14
+11-20 05:31:40.912 12452 12490 D EGL_emulation: app_time_stats: avg=63.96ms min=28.94ms max=92.61ms count=16
+11-20 05:31:41.346 12452 12490 D EGL_emulation: app_time_stats: avg=67.32ms min=39.56ms max=93.93ms count=15
+11-20 05:31:41.969 12452 12490 D EGL_emulation: app_time_stats: avg=65.61ms min=40.07ms max=108.23ms count=16
+11-20 05:31:42.365 12452 12490 D EGL_emulation: app_time_stats: avg=67.42ms min=31.96ms max=135.60ms count=15
+11-20 05:31:42.995 12452 12490 D EGL_emulation: app_time_stats: avg=56.12ms min=22.74ms max=84.96ms count=18
+11-20 05:31:43.386 12452 12490 D EGL_emulation: app_time_stats: avg=63.16ms min=31.46ms max=87.91ms count=16
+11-20 05:31:43.997 12452 12490 D EGL_emulation: app_time_stats: avg=58.43ms min=30.57ms max=82.69ms count=17
+11-20 05:31:44.427 12452 12490 D EGL_emulation: app_time_stats: avg=64.66ms min=31.56ms max=123.18ms count=16
+11-20 05:31:45.036 12452 12490 D EGL_emulation: app_time_stats: avg=78.81ms min=54.36ms max=131.96ms count=13
+11-20 05:31:45.203 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 70683(11MB) AllocSpace objects, 0(0B) LOS objects, 51% free, 10MB/21MB, paused 15.623ms,1.354ms total 105.689ms
+11-20 05:31:45.538 12452 12490 D EGL_emulation: app_time_stats: avg=92.05ms min=51.09ms max=166.13ms count=12
+11-20 05:31:46.078 12452 12490 D EGL_emulation: app_time_stats: avg=73.56ms min=40.52ms max=149.55ms count=14
+11-20 05:31:46.548 12452 12490 D EGL_emulation: app_time_stats: avg=49.74ms min=22.73ms max=120.88ms count=20
+11-20 05:31:47.094 12452 12490 D EGL_emulation: app_time_stats: avg=35.71ms min=16.57ms max=52.22ms count=28
+11-20 05:31:47.589 12452 12490 D EGL_emulation: app_time_stats: avg=41.36ms min=26.05ms max=68.54ms count=25
+11-20 05:31:48.114 12452 12490 D EGL_emulation: app_time_stats: avg=40.49ms min=13.72ms max=74.47ms count=25
+11-20 05:31:48.259 12452 12463 I amesystem.debug: Background concurrent copying GC freed 82163(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 844us,2.405ms total 187.889ms
+11-20 05:31:48.601 12452 12490 D EGL_emulation: app_time_stats: avg=41.68ms min=25.24ms max=69.63ms count=24
+11-20 05:31:49.136 12452 12490 D EGL_emulation: app_time_stats: avg=40.10ms min=23.49ms max=80.75ms count=25
+11-20 05:31:49.627 12452 12490 D EGL_emulation: app_time_stats: avg=40.63ms min=26.57ms max=87.48ms count=25
+11-20 05:31:50.159 12452 12490 D EGL_emulation: app_time_stats: avg=37.11ms min=15.34ms max=56.82ms count=27
+11-20 05:31:50.281 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 63612(10093KB) AllocSpace objects, 0(0B) LOS objects, 50% free, 10MB/20MB, paused 6.524ms,203us total 83.007ms
+11-20 05:31:50.654 12452 12490 D EGL_emulation: app_time_stats: avg=40.65ms min=19.34ms max=80.11ms count=25
+11-20 05:31:51.191 12452 12490 D EGL_emulation: app_time_stats: avg=38.38ms min=22.43ms max=72.41ms count=26
+11-20 05:31:51.681 12452 12490 D EGL_emulation: app_time_stats: avg=37.74ms min=26.00ms max=68.71ms count=27
+11-20 05:31:52.240 12452 12490 D EGL_emulation: app_time_stats: avg=38.61ms min=24.31ms max=51.87ms count=27
+11-20 05:31:52.692 12452 12490 D EGL_emulation: app_time_stats: avg=40.08ms min=26.50ms max=58.97ms count=25
+11-20 05:31:53.270 12452 12490 D EGL_emulation: app_time_stats: avg=39.26ms min=27.48ms max=60.23ms count=26
+11-20 05:31:53.716 12452 12490 D EGL_emulation: app_time_stats: avg=37.58ms min=24.52ms max=63.07ms count=27
+11-20 05:31:54.271 12452 12490 D EGL_emulation: app_time_stats: avg=31.29ms min=2.77ms max=55.67ms count=30
+11-20 05:31:54.663 12452 12463 I amesystem.debug: Background concurrent copying GC freed 71478(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 3.858ms,498us total 240.351ms
+11-20 05:31:54.748 12452 12490 D EGL_emulation: app_time_stats: avg=39.36ms min=25.06ms max=91.97ms count=26
+11-20 05:31:55.308 12452 12490 D EGL_emulation: app_time_stats: avg=49.12ms min=33.82ms max=86.27ms count=21
+11-20 05:31:55.771 12452 12490 D EGL_emulation: app_time_stats: avg=46.20ms min=25.04ms max=65.97ms count=22
+11-20 05:31:56.323 12452 12490 D EGL_emulation: app_time_stats: avg=45.78ms min=30.14ms max=89.48ms count=22
+11-20 05:31:56.785 12452 12490 D EGL_emulation: app_time_stats: avg=43.33ms min=16.92ms max=94.26ms count=23
+11-20 05:31:57.346 12452 12490 D EGL_emulation: app_time_stats: avg=40.18ms min=21.78ms max=97.75ms count=25
+11-20 05:31:57.371 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 73555(10MB) AllocSpace objects, 0(0B) LOS objects, 51% free, 10MB/20MB, paused 8.825ms,328us total 64.840ms
+11-20 05:31:57.797 12452 12490 D EGL_emulation: app_time_stats: avg=45.70ms min=31.35ms max=98.42ms count=22
+11-20 05:31:58.380 12452 12490 D EGL_emulation: app_time_stats: avg=40.35ms min=24.08ms max=62.38ms count=25
+11-20 05:31:58.797 12452 12490 D EGL_emulation: app_time_stats: avg=46.92ms min=24.78ms max=78.05ms count=21
+11-20 05:31:59.395 12452 12490 D EGL_emulation: app_time_stats: avg=38.72ms min=22.40ms max=58.95ms count=26
+11-20 05:31:59.810 12452 12490 D EGL_emulation: app_time_stats: avg=37.27ms min=27.50ms max=57.51ms count=27
+11-20 05:31:59.893 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 75626(10MB) AllocSpace objects, 0(0B) LOS objects, 50% free, 10MB/20MB, paused 10.442ms,2.518ms total 76.177ms
+11-20 05:31:59.946 12452 12763 D ConscryptOkHttpHelper: OkHttp configured with Conscrypt TLS (trust-all)
+11-20 05:31:59.948 12452 12763 I CoreUpdateWork: Starting core update/install work
+11-20 05:31:59.966 12452 12496 I WM-Processor: Moving WorkSpec (086b0598-911f-44a8-adbe-abc66c6ba984) to the foreground
+11-20 05:32:00.035 12452 12452 I WM-SystemFgDispatcher: Started foreground service Intent { act=ACTION_START_FOREGROUND cmp=app.retrogamesystem.debug/androidx.work.impl.foreground.SystemForegroundService (has extras) }
+11-20 05:32:00.424 12452 12490 D EGL_emulation: app_time_stats: avg=42.74ms min=30.81ms max=77.48ms count=24
+11-20 05:32:00.851 12452 12490 D EGL_emulation: app_time_stats: avg=40.99ms min=8.71ms max=85.20ms count=25
+11-20 05:32:01.443 12452 12490 D EGL_emulation: app_time_stats: avg=31.82ms min=13.80ms max=52.34ms count=31
+11-20 05:32:01.867 12452 12490 D EGL_emulation: app_time_stats: avg=32.22ms min=10.68ms max=51.93ms count=31
+11-20 05:32:01.999 12452 12481 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=086b0598-911f-44a8-adbe-abc66c6ba984, tags={ com.swordfish.lemuroid.app.shared.library.CoreUpdateWork } ]
+11-20 05:32:02.072 12452 12452 I WM-SystemFgDispatcher: Stopping foreground service
+11-20 05:32:02.448 12452 12490 D EGL_emulation: app_time_stats: avg=30.62ms min=15.87ms max=52.73ms count=32
+11-20 05:32:02.894 12452 12490 D EGL_emulation: app_time_stats: avg=37.81ms min=17.50ms max=63.63ms count=27
+11-20 05:32:03.451 12452 12490 D EGL_emulation: app_time_stats: avg=43.12ms min=26.57ms max=65.13ms count=23
+11-20 05:32:03.929 12452 12490 D EGL_emulation: app_time_stats: avg=46.36ms min=21.86ms max=91.20ms count=22
+11-20 05:32:04.439 12452 12463 W amesystem.debug: Suspending all threads took: 16.727ms
+11-20 05:32:04.530 12452 12490 D EGL_emulation: app_time_stats: avg=41.52ms min=16.66ms max=109.81ms count=25
+11-20 05:32:04.570 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 70151(10MB) AllocSpace objects, 0(0B) LOS objects, 48% free, 10MB/20MB, paused 5.342ms,17.251ms total 241.986ms
+11-20 05:32:04.958 12452 12490 D EGL_emulation: app_time_stats: avg=60.27ms min=29.17ms max=160.92ms count=17
+11-20 05:32:05.586 12452 12490 D EGL_emulation: app_time_stats: avg=69.78ms min=32.10ms max=125.48ms count=15
+11-20 05:32:05.974 12452 12490 D EGL_emulation: app_time_stats: avg=63.04ms min=38.90ms max=96.57ms count=16
+11-20 05:32:06.598 12452 12490 D EGL_emulation: app_time_stats: avg=47.80ms min=28.35ms max=75.80ms count=21
+11-20 05:32:07.003 12452 12490 D EGL_emulation: app_time_stats: avg=46.47ms min=30.37ms max=105.22ms count=22
+11-20 05:32:07.667 12452 12490 D EGL_emulation: app_time_stats: avg=48.21ms min=31.96ms max=74.19ms count=22
+11-20 05:32:08.038 12452 12490 D EGL_emulation: app_time_stats: avg=49.90ms min=14.95ms max=78.97ms count=20
+11-20 05:32:08.310 12452 12463 I amesystem.debug: Background concurrent copying GC freed 88965(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 8.320ms,4.088ms total 280.492ms
+11-20 05:32:08.671 12452 12490 D EGL_emulation: app_time_stats: avg=49.82ms min=30.02ms max=87.43ms count=20
+11-20 05:32:09.113 12452 12490 D EGL_emulation: app_time_stats: avg=62.15ms min=16.05ms max=107.80ms count=17
+11-20 05:32:09.706 12452 12490 D EGL_emulation: app_time_stats: avg=52.84ms min=23.46ms max=91.78ms count=19
+11-20 05:32:10.158 12452 12490 D EGL_emulation: app_time_stats: avg=48.44ms min=15.87ms max=88.63ms count=21
+11-20 05:32:10.725 12452 12490 D EGL_emulation: app_time_stats: avg=53.29ms min=30.60ms max=87.65ms count=19
+11-20 05:32:11.193 12452 12490 D EGL_emulation: app_time_stats: avg=48.63ms min=28.78ms max=76.61ms count=21
+11-20 05:32:11.778 12452 12490 D EGL_emulation: app_time_stats: avg=45.26ms min=25.52ms max=61.84ms count=23
+11-20 05:32:12.234 12452 12490 D EGL_emulation: app_time_stats: avg=57.35ms min=38.82ms max=93.65ms count=18
+11-20 05:32:12.811 12452 12490 D EGL_emulation: app_time_stats: avg=79.06ms min=37.88ms max=171.91ms count=13
+11-20 05:32:13.249 12452 12490 D EGL_emulation: app_time_stats: avg=84.14ms min=48.00ms max=133.56ms count=12
+11-20 05:32:13.846 12452 12490 D EGL_emulation: app_time_stats: avg=63.95ms min=39.90ms max=112.81ms count=16
+11-20 05:32:14.287 12452 12490 D EGL_emulation: app_time_stats: avg=64.29ms min=33.69ms max=114.30ms count=16
+11-20 05:32:14.873 12452 12490 D EGL_emulation: app_time_stats: avg=56.61ms min=32.47ms max=95.73ms count=18
+11-20 05:32:15.313 12452 12490 D EGL_emulation: app_time_stats: avg=63.90ms min=35.86ms max=99.51ms count=16
+11-20 05:32:15.885 12452 12490 D EGL_emulation: app_time_stats: avg=55.69ms min=31.58ms max=89.44ms count=18
+11-20 05:32:16.348 12452 12490 D EGL_emulation: app_time_stats: avg=56.84ms min=32.48ms max=89.73ms count=18
+11-20 05:32:16.906 12452 12490 D EGL_emulation: app_time_stats: avg=52.70ms min=18.39ms max=94.96ms count=19
+11-20 05:32:17.373 12452 12490 D EGL_emulation: app_time_stats: avg=53.61ms min=32.87ms max=102.74ms count=19
+11-20 05:32:17.671 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 65565(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 5.277ms,729us total 90.895ms
+11-20 05:32:17.946 12452 12490 D EGL_emulation: app_time_stats: avg=54.40ms min=30.71ms max=75.23ms count=19
+11-20 05:32:18.425 12452 12490 D EGL_emulation: app_time_stats: avg=52.34ms min=29.35ms max=82.05ms count=20
+11-20 05:32:18.981 12452 12490 D EGL_emulation: app_time_stats: avg=48.97ms min=27.88ms max=74.14ms count=21
+11-20 05:32:19.482 12452 12490 D EGL_emulation: app_time_stats: avg=65.56ms min=42.38ms max=98.62ms count=16
+11-20 05:32:20.006 12452 12490 D EGL_emulation: app_time_stats: avg=72.72ms min=37.87ms max=114.91ms count=14
+11-20 05:32:20.602 12452 12490 D EGL_emulation: app_time_stats: avg=92.70ms min=55.69ms max=170.73ms count=12
+11-20 05:32:21.036 12452 12490 D EGL_emulation: app_time_stats: avg=65.90ms min=7.37ms max=128.19ms count=15
+11-20 05:32:21.377 12452 12463 W amesystem.debug: Suspending all threads took: 6.352ms
+11-20 05:32:21.419 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 68325(10199KB) AllocSpace objects, 0(0B) LOS objects, 47% free, 10MB/20MB, paused 3.250ms,7.241ms total 186.956ms
+11-20 05:32:21.649 12452 12490 D EGL_emulation: app_time_stats: avg=63.75ms min=37.14ms max=108.81ms count=16
+11-20 05:32:22.054 12452 12490 D EGL_emulation: app_time_stats: avg=43.12ms min=13.63ms max=116.87ms count=23
+11-20 05:32:22.673 12452 12490 D EGL_emulation: app_time_stats: avg=38.82ms min=21.25ms max=62.05ms count=26
+11-20 05:32:23.078 12452 12490 D EGL_emulation: app_time_stats: avg=42.08ms min=28.23ms max=62.89ms count=24
+11-20 05:32:23.718 12452 12490 D EGL_emulation: app_time_stats: avg=54.42ms min=25.78ms max=125.46ms count=19
+11-20 05:32:24.026 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@4a282f7
+11-20 05:32:24.681 12452 12463 I amesystem.debug: Background concurrent copying GC freed 86670(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 3.734ms,4.361ms total 393.314ms
+11-20 05:32:24.734 12452 12490 D EGL_emulation: app_time_stats: avg=34.46ms min=7.79ms max=204.96ms count=27
+11-20 05:32:25.121 12452 12452 I ImeTracker: app.retrogamesystem.debug:f8e282de: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:32:25.121 12452 12452 D InsetsController: show(ime(), fromIme=false)
+11-20 05:32:25.127 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:32:25.319 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:32:25.319 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:32:25.405 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:32:25.444 12452 12452 I ImeTracker: app.retrogamesystem.debug:1a619993: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-20 05:32:25.448 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-20 05:32:25.769 12452 12490 D EGL_emulation: app_time_stats: avg=60.68ms min=7.29ms max=238.74ms count=16
+11-20 05:32:26.017 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:32:26.027 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:32:26.030 12452 12452 I ImeTracker: app.retrogamesystem.debug:1a619993: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 05:32:26.059 12452 12613 I jank_cuj_events_begin_request: [69,1795152746058473000,1702058739000,1702058907000,0@1@app.retrogamesystem.debug]
+11-20 05:32:26.404 12452 12452 I ImeTracker: app.retrogamesystem.debug:f8e282de: onShown
+11-20 05:32:26.419 12452 12613 I jank_cuj_events_end_request: [69,1795152746401192000,1702401749000,1702401844900]
+11-20 05:32:26.666 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@7860088
+11-20 05:32:26.837 12452 12490 D EGL_emulation: app_time_stats: avg=56.64ms min=6.76ms max=203.74ms count=18
+11-20 05:32:27.888 12452 12490 D EGL_emulation: app_time_stats: avg=43.89ms min=7.32ms max=181.62ms count=23
+11-20 05:32:28.275 12452 12463 W amesystem.debug: Cleared Reference was only reachable from finalizer (only reported once)
+11-20 05:32:28.312 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 77135(10MB) AllocSpace objects, 0(0B) LOS objects, 48% free, 10MB/20MB, paused 4.209ms,1.357ms total 116.353ms
+11-20 05:32:28.362 12452 12465 W System  : A resource failed to call release. 
+11-20 05:32:28.950 12452 12490 D EGL_emulation: app_time_stats: avg=34.54ms min=5.41ms max=148.66ms count=27
+11-20 05:32:29.696 12452 12462 I amesystem.debug: JIT allocated 61KB for compiled code of void com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1.invoke(androidx.compose.runtime.Composer, int)
+11-20 05:32:29.699 12452 12462 I amesystem.debug: Compiler allocated 7881KB to compile void com.swordfish.lemuroid.app.mobile.feature.main.MainActivity$MainScreen$1.invoke(androidx.compose.runtime.Composer, int)
+11-20 05:32:29.955 12452 12490 D EGL_emulation: app_time_stats: avg=35.80ms min=6.29ms max=105.01ms count=26
+11-20 05:32:30.963 12452 12490 D EGL_emulation: app_time_stats: avg=37.90ms min=7.24ms max=148.14ms count=24
+11-20 05:32:31.730 12452 12463 I amesystem.debug: Background concurrent copying GC freed 101628(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 4.329ms,1.054ms total 278.565ms
+11-20 05:32:32.024 12452 12490 D EGL_emulation: app_time_stats: avg=34.17ms min=5.10ms max=200.79ms count=27
+11-20 05:32:33.050 12452 12490 D EGL_emulation: app_time_stats: avg=27.48ms min=5.57ms max=127.47ms count=31
+11-20 05:32:34.094 12452 12490 D EGL_emulation: app_time_stats: avg=27.51ms min=2.61ms max=162.05ms count=31
+11-20 05:32:35.379 12452 12562 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 05:32:35.405 12452 12562 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 05:32:35.493 12452 12452 I Choreographer: Skipped 39 frames!  The application may be doing too much work on its main thread.
+11-20 05:32:35.494 12452 12490 D EGL_emulation: app_time_stats: avg=45.60ms min=5.98ms max=655.57ms count=28
+11-20 05:32:35.630 12452 12602 I OpenGLRenderer: Davey! duration=716ms; Flags=0, FrameTimelineVsyncId=422551, IntendedVsync=1710839283432, Vsync=1711489283406, InputEventId=0, HandleInputStart=1711501434100, AnimationStart=1711501572100, PerformTraversalsStart=1711529115500, DrawStart=1711529654400, FrameDeadline=1711522616738, FrameInterval=1711493159000, FrameStartTime=16666666, SyncQueued=1711545068300, SyncStart=1711546971700, IssueDrawCommandsStart=1711547197800, SwapBuffers=1711551003300, FrameCompleted=1711557984200, DequeueBufferDuration=41300, QueueBufferDuration=1472100, GpuCompleted=1711557984200, SwapBuffersCompleted=1711554908600, DisplayPresentTime=0, CommandSubmissionCompleted=1711551003300, 
+11-20 05:32:36.498 12452 12490 D EGL_emulation: app_time_stats: avg=28.52ms min=7.05ms max=108.50ms count=31
+11-20 05:32:36.871 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 54539(9534KB) AllocSpace objects, 7(140KB) LOS objects, 42% free, 11MB/20MB, paused 18.723ms,1.394ms total 241.993ms
+11-20 05:32:37.509 12452 12490 D EGL_emulation: app_time_stats: avg=21.91ms min=7.03ms max=68.63ms count=35
+11-20 05:32:38.510 12452 12490 D EGL_emulation: app_time_stats: avg=20.91ms min=6.18ms max=83.51ms count=38
+11-20 05:32:39.235 12452 12463 I amesystem.debug: Background concurrent copying GC freed 85975(10208KB) AllocSpace objects, 11(220KB) LOS objects, 49% free, 11MB/22MB, paused 3.289ms,387us total 356.343ms
+11-20 05:32:39.556 12452 12490 D EGL_emulation: app_time_stats: avg=20.48ms min=7.33ms max=61.74ms count=40
+11-20 05:32:40.570 12452 12490 D EGL_emulation: app_time_stats: avg=27.66ms min=11.31ms max=51.86ms count=35
+11-20 05:32:41.554 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 135961(11MB) AllocSpace objects, 0(0B) LOS objects, 51% free, 11MB/22MB, paused 1.545ms,2.425ms total 106.501ms
+11-20 05:32:41.585 12452 12490 D EGL_emulation: app_time_stats: avg=16.00ms min=4.76ms max=61.53ms count=48
+11-20 05:32:42.633 12452 12490 D EGL_emulation: app_time_stats: avg=17.84ms min=5.10ms max=47.14ms count=43
+11-20 05:32:43.640 12452 12490 D EGL_emulation: app_time_stats: avg=37.50ms min=14.27ms max=55.95ms count=25
+11-20 05:32:44.675 12452 12490 D EGL_emulation: app_time_stats: avg=36.97ms min=14.95ms max=51.62ms count=27
+11-20 05:32:45.200 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 97876(11MB) AllocSpace objects, 0(0B) LOS objects, 51% free, 11MB/22MB, paused 4.520ms,1.961ms total 128.029ms
+11-20 05:32:45.695 12452 12490 D EGL_emulation: app_time_stats: avg=22.07ms min=7.42ms max=58.02ms count=38
+11-20 05:32:46.707 12452 12490 D EGL_emulation: app_time_stats: avg=16.22ms min=4.93ms max=41.52ms count=46
+11-20 05:32:47.711 12452 12490 D EGL_emulation: app_time_stats: avg=13.45ms min=5.13ms max=30.22ms count=51
+11-20 05:32:47.925 12452 12463 I amesystem.debug: Background concurrent copying GC freed 118023(12MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/21MB, paused 9.012ms,226us total 240.913ms
+11-20 05:32:48.713 12452 12490 D EGL_emulation: app_time_stats: avg=11.65ms min=4.53ms max=23.84ms count=57
+11-20 05:32:49.718 12452 12490 D EGL_emulation: app_time_stats: avg=13.32ms min=5.88ms max=37.02ms count=51
+11-20 05:32:50.738 12452 12490 D EGL_emulation: app_time_stats: avg=18.99ms min=5.04ms max=49.11ms count=41
+11-20 05:32:51.742 12452 12490 D EGL_emulation: app_time_stats: avg=33.54ms min=11.42ms max=61.80ms count=27
+11-20 05:32:52.751 12452 12490 D EGL_emulation: app_time_stats: avg=17.76ms min=6.90ms max=44.07ms count=42
+11-20 05:32:53.729 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 109875(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/21MB, paused 6.723ms,302us total 115.206ms
+11-20 05:32:53.755 12452 12490 D EGL_emulation: app_time_stats: avg=13.83ms min=3.87ms max=32.18ms count=51
+11-20 05:32:54.837 12452 12490 D EGL_emulation: app_time_stats: avg=28.62ms min=7.01ms max=126.31ms count=32
+11-20 05:32:55.853 12452 12490 D EGL_emulation: app_time_stats: avg=31.10ms min=5.57ms max=98.32ms count=29
+11-20 05:32:56.869 12452 12490 D EGL_emulation: app_time_stats: avg=18.99ms min=3.78ms max=204.44ms count=42
+11-20 05:32:57.888 12452 12490 D EGL_emulation: app_time_stats: avg=14.06ms min=3.33ms max=36.02ms count=53
+11-20 05:32:58.251 12452 12463 W amesystem.debug: Suspending all threads took: 6.354ms
+11-20 05:32:58.278 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 70713(10MB) AllocSpace objects, 0(0B) LOS objects, 47% free, 11MB/21MB, paused 3.505ms,6.556ms total 80.020ms
+11-20 05:32:58.900 12452 12490 D EGL_emulation: app_time_stats: avg=15.76ms min=5.63ms max=45.05ms count=48
+11-20 05:32:59.907 12452 12490 D EGL_emulation: app_time_stats: avg=13.25ms min=2.85ms max=30.30ms count=50
+11-20 05:33:00.804 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 77641(10MB) AllocSpace objects, 0(0B) LOS objects, 46% free, 11MB/21MB, paused 6.758ms,1.499ms total 99.746ms
+11-20 05:33:00.933 12452 12490 D EGL_emulation: app_time_stats: avg=15.86ms min=3.17ms max=58.80ms count=45
+11-20 05:33:01.955 12452 12490 D EGL_emulation: app_time_stats: avg=15.04ms min=3.86ms max=36.58ms count=49
+11-20 05:33:02.956 12452 12490 D EGL_emulation: app_time_stats: avg=13.30ms min=4.89ms max=37.35ms count=52
+11-20 05:33:03.028 12452 12490 W amesystem.debug: Weak pointer dereference blocked for 11 milliseconds.
+11-20 05:33:03.075 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 96955(10MB) AllocSpace objects, 0(0B) LOS objects, 47% free, 11MB/21MB, paused 3.872ms,1.056ms total 132.407ms
+11-20 05:33:03.994 12452 12490 D EGL_emulation: app_time_stats: avg=25.83ms min=10.17ms max=63.82ms count=34
+11-20 05:33:04.999 12452 12490 D EGL_emulation: app_time_stats: avg=26.98ms min=13.56ms max=55.54ms count=33
+11-20 05:33:06.017 12452 12490 D EGL_emulation: app_time_stats: avg=14.39ms min=3.74ms max=64.30ms count=49
+11-20 05:33:06.572 12452 12463 W amesystem.debug: Suspending all threads took: 15.633ms
+11-20 05:33:06.592 12452 12463 I amesystem.debug: Background concurrent copying GC freed 109829(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 10MB/20MB, paused 2.095ms,16.588ms total 226.312ms
+11-20 05:33:07.042 12452 12490 D EGL_emulation: app_time_stats: avg=16.80ms min=5.68ms max=64.24ms count=46
+11-20 05:33:08.044 12452 12490 D EGL_emulation: app_time_stats: avg=14.47ms min=3.75ms max=41.43ms count=51
+11-20 05:33:09.054 12452 12490 D EGL_emulation: app_time_stats: avg=12.59ms min=4.37ms max=42.37ms count=51
+11-20 05:33:10.063 12452 12490 D EGL_emulation: app_time_stats: avg=19.31ms min=5.61ms max=37.98ms count=36
+11-20 05:33:11.077 12452 12490 D EGL_emulation: app_time_stats: avg=25.49ms min=5.99ms max=76.61ms count=33
+11-20 05:33:12.085 12452 12490 D EGL_emulation: app_time_stats: avg=26.53ms min=10.70ms max=50.83ms count=34
+11-20 05:33:13.119 12452 12490 D EGL_emulation: app_time_stats: avg=19.76ms min=4.05ms max=41.45ms count=42
+11-20 05:33:13.319 12452 12521 D RomOnDemandManager: downloadToFile complete: bytesWritten=384249945 contentLength=384249945
+11-20 05:33:13.333 12452 12521 D RomOnDemandManager$downloadRom: ROM downloaded successfully: Castlevania - Symphony of the Night (Europe).chd (384249945 bytes)
+11-20 05:33:13.386 12452 12521 D SaveQueueManager: SaveQueueManager: Castlevania - Symphony of the Night (Europe).chd saved successfully
+11-20 05:33:13.418 12452 12452 D DownloadForegroundService$observeQueue: DownloadForegroundService: queue empty, stopping self
+11-20 05:33:13.470 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:33:13.470 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:33:13.567 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:33:13.612 12452 12452 D DownloadForegroundService: DownloadForegroundService: destroyed, WakeLock released
+11-20 05:33:13.707 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:33:13.707 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:33:13.771 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:33:13.771 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:33:13.883 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:33:14.133 12452 12490 D EGL_emulation: app_time_stats: avg=28.28ms min=2.32ms max=145.47ms count=29
+11-20 05:33:14.154 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@df3e48d
+11-20 05:33:14.210 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@df3e48d
+11-20 05:33:14.235 12452 12613 I jank_cuj_events_begin_request: [69,1795152794233923000,1750234065700,1750234090100,1@1@app.retrogamesystem.debug]
+11-20 05:33:14.240 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:33:14.244 12452 12452 I ImeTracker: app.retrogamesystem.debug:37354367: onCancelled at PHASE_CLIENT_ANIMATION_CANCEL
+11-20 05:33:14.247 12452 12613 I jank_cuj_events_cancel_request: [69,1795152794244958000,1750245040500,1750245073800]
+11-20 05:33:14.249 12452 12613 I jank_cuj_events_end_request: [69,1795152794246882000,1750246974900,1750247000500]
+11-20 05:33:14.250 12452 12452 I ImeTracker: app.retrogamesystem.debug:fc3ac94a: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 05:33:14.251 12452 12452 I ImeTracker: app.retrogamesystem.debug:fc3ac94a: onFailed at PHASE_CLIENT_VIEW_SERVED
+11-20 05:33:17.231 12452 12490 D EGL_emulation: app_time_stats: avg=121.62ms min=2.00ms max=2633.79ms count=25
+11-20 05:33:27.277 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@d30a7b2
+11-20 05:33:27.326 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:33:27.326 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:33:27.471 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:33:42.496 12452 12521 D SaveQueueManager: SaveQueueManager: starting save for Kirbys Adventure (US).nes
+11-20 05:33:42.506 12452 12521 D RomOnDemandManager$downloadRom: On-demand lookup: https://emuladores.pythonanywhere.com/find_by_file?path=Kirbys%20Adventure%20(US).nes&source_id=1&system=nes
+11-20 05:33:42.524 12452 12521 D TrafficStats: tagSocket(146) with statsTag=0xffffffff, statsUid=-1
+11-20 05:33:42.543 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@1bcd386
+11-20 05:33:42.578 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:33:42.578 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:33:42.625 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:33:42.625 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:33:42.878 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:33:43.052 12452 12490 D EGL_emulation: app_time_stats: avg=1700.60ms min=13.67ms max=28468.92ms count=17
+11-20 05:33:43.061 12452 12452 D DownloadForegroundService: DownloadForegroundService: WakeLock acquired
+11-20 05:33:43.082 12452 12452 I Choreographer: Skipped 31 frames!  The application may be doing too much work on its main thread.
+11-20 05:33:43.487 12452 12521 D RomOnDemandManager$downloadRom: On-demand download URL for Kirbys Adventure (US).nes: https://huggingface.co/datasets/luistiagos/roms/resolve/main/nes/Kirbys%20Adventure%20%28US%29.nes
+11-20 05:33:44.129 12452 12490 D EGL_emulation: app_time_stats: avg=15.76ms min=2.64ms max=132.42ms count=43
+11-20 05:33:44.297 12452 12521 D RomOnDemandManager: downloadToFile HTTP 200 contentLength=786448 url=https://huggingface.co/datasets/luistiagos/roms/resolve/main/nes/Kirbys%20Adventure%20%28US%29.nes
+11-20 05:33:44.412 12452 12490 D EGL_emulation: app_time_stats: avg=169.71ms min=25.26ms max=960.73ms count=8
+11-20 05:33:44.687 12452 12521 D RomOnDemandManager: downloadToFile complete: bytesWritten=786448 contentLength=786448
+11-20 05:33:44.698 12452 12521 D RomOnDemandManager$downloadRom: ROM downloaded successfully: Kirbys Adventure (US).nes (786448 bytes)
+11-20 05:33:44.801 12452 12522 D SaveQueueManager: SaveQueueManager: Kirbys Adventure (US).nes saved successfully
+11-20 05:33:44.913 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:33:44.920 12452 12452 D DownloadForegroundService$observeQueue: DownloadForegroundService: queue empty, stopping self
+11-20 05:33:45.630 12452 12490 D EGL_emulation: app_time_stats: avg=173.44ms min=42.44ms max=770.61ms count=7
+11-20 05:33:45.640 12452 12490 D EGL_emulation: app_time_stats: avg=68.72ms min=3.21ms max=766.37ms count=20
+11-20 05:33:45.663 12452 12452 D DownloadForegroundService: DownloadForegroundService: destroyed, WakeLock released
+11-20 05:33:45.672 12452 12452 I Choreographer: Skipped 42 frames!  The application may be doing too much work on its main thread.
+11-20 05:33:45.694 12452 12698 I OpenGLRenderer: Davey! duration=704ms; Flags=0, FrameTimelineVsyncId=440889, IntendedVsync=1780822613966, Vsync=1780955947294, InputEventId=0, HandleInputStart=1780964865300, AnimationStart=1780964909400, PerformTraversalsStart=1781005247200, DrawStart=1781516083800, FrameDeadline=1780905947296, FrameInterval=1780964123400, FrameStartTime=16666666, SyncQueued=1781519119500, SyncStart=1781635293200, IssueDrawCommandsStart=1781635516600, SwapBuffers=1781637823400, FrameCompleted=1781642970200, DequeueBufferDuration=120300, QueueBufferDuration=1024700, GpuCompleted=1781642970200, SwapBuffersCompleted=1781640677000, DisplayPresentTime=288234774265332736, CommandSubmissionCompleted=1781637823400, 
+11-20 05:33:45.723 12452 12698 I OpenGLRenderer: Davey! duration=860ms; Flags=0, FrameTimelineVsyncId=440889, IntendedVsync=1780822613966, Vsync=1780955947294, InputEventId=0, HandleInputStart=1780964865300, AnimationStart=1780964909400, PerformTraversalsStart=1781005247200, DrawStart=1781651782700, FrameDeadline=1780989280626, FrameInterval=1780964123400, FrameStartTime=16666666, SyncQueued=1781653356600, SyncStart=1781654350700, IssueDrawCommandsStart=1781654511700, SwapBuffers=1781656788200, FrameCompleted=1781683819800, DequeueBufferDuration=24150600, QueueBufferDuration=1100500, GpuCompleted=1781659429800, SwapBuffersCompleted=1781683819800, DisplayPresentTime=288234774265332736, CommandSubmissionCompleted=1781656788200, 
+11-20 05:33:45.787 12452 12793 I OpenGLRenderer: Davey! duration=794ms; Flags=0, FrameTimelineVsyncId=440965, IntendedVsync=1780972613960, Vsync=1781672613932, InputEventId=0, HandleInputStart=1781676347200, AnimationStart=1781676437600, PerformTraversalsStart=1781711642600, DrawStart=1781712095800, FrameDeadline=1781655947266, FrameInterval=1781672655800, FrameStartTime=16666666, SyncQueued=1781732615600, SyncStart=1781735029500, IssueDrawCommandsStart=1781735471400, SwapBuffers=1781744353800, FrameCompleted=1781769934700, DequeueBufferDuration=55100, QueueBufferDuration=13315400, GpuCompleted=1781769576500, SwapBuffersCompleted=1781769934700, DisplayPresentTime=0, CommandSubmissionCompleted=1781744353800, 
+11-20 05:33:47.972 12452 12490 D EGL_emulation: app_time_stats: avg=2331.93ms min=2331.93ms max=2331.93ms count=1
+11-20 05:34:24.732 12452 12490 D EGL_emulation: app_time_stats: avg=12247.36ms min=5.67ms max=36302.63ms count=3
+11-20 05:34:25.058 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@96503ec
+11-20 05:34:25.932 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@b23dbd0
+11-20 05:34:26.088 12452 12490 D EGL_emulation: app_time_stats: avg=4477.86ms min=7.30ms max=39912.72ms count=9
+11-20 05:34:27.095 12452 12490 D EGL_emulation: app_time_stats: avg=16.99ms min=2.62ms max=245.76ms count=41
+11-20 05:34:28.103 12452 12490 D EGL_emulation: app_time_stats: avg=8.88ms min=2.73ms max=52.96ms count=51
+11-20 05:34:29.108 12452 12490 D EGL_emulation: app_time_stats: avg=11.71ms min=2.55ms max=71.09ms count=45
+11-20 05:34:30.117 12452 12490 D EGL_emulation: app_time_stats: avg=20.35ms min=3.38ms max=138.24ms count=34
+11-20 05:34:30.622 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:34:30.652 12452 12613 I jank_cuj_events_begin_request: [69,1795152870650616000,1826650667500,1826650711600,0@1@app.retrogamesystem.debug]
+11-20 05:34:31.014 12452 12613 I jank_cuj_events_end_request: [69,1795152871013693000,1827013879500,1827013937700]
+11-20 05:34:31.019 12452 12452 I ImeTracker: app.retrogamesystem.debug:cc5f8524: onShown
+11-20 05:34:31.137 12452 12490 D EGL_emulation: app_time_stats: avg=76.93ms min=21.65ms max=170.61ms count=13
+11-20 05:34:32.160 12452 12490 D EGL_emulation: app_time_stats: avg=38.25ms min=3.29ms max=136.84ms count=25
+11-20 05:34:33.277 12452 12490 D EGL_emulation: app_time_stats: avg=25.11ms min=2.69ms max=210.10ms count=31
+11-20 05:34:34.297 12452 12490 D EGL_emulation: app_time_stats: avg=25.82ms min=2.76ms max=462.14ms count=29
+11-20 05:34:35.314 12452 12490 D EGL_emulation: app_time_stats: avg=508.29ms min=499.29ms max=517.30ms count=2
+11-20 05:34:36.812 12452 12490 D EGL_emulation: app_time_stats: avg=499.28ms min=498.27ms max=501.22ms count=3
+11-20 05:34:37.813 12452 12490 D EGL_emulation: app_time_stats: avg=500.23ms min=499.21ms max=501.26ms count=2
+11-20 05:34:38.865 12452 12490 D EGL_emulation: app_time_stats: avg=525.75ms min=516.80ms max=534.69ms count=2
+11-20 05:34:40.346 12452 12490 D EGL_emulation: app_time_stats: avg=492.99ms min=468.41ms max=525.33ms count=3
+11-20 05:34:41.348 12452 12490 D EGL_emulation: app_time_stats: avg=501.26ms min=498.62ms max=503.90ms count=2
+11-20 05:34:42.851 12452 12490 D EGL_emulation: app_time_stats: avg=500.58ms min=497.53ms max=505.52ms count=3
+11-20 05:34:43.871 12452 12490 D EGL_emulation: app_time_stats: avg=509.48ms min=502.49ms max=516.47ms count=2
+11-20 05:34:45.364 12452 12490 D EGL_emulation: app_time_stats: avg=496.99ms min=495.01ms max=499.49ms count=3
+11-20 05:34:46.400 12452 12490 D EGL_emulation: app_time_stats: avg=517.21ms min=515.93ms max=518.50ms count=2
+11-20 05:34:47.403 12452 12490 D EGL_emulation: app_time_stats: avg=501.05ms min=486.35ms max=515.75ms count=2
+11-20 05:34:48.896 12452 12490 D EGL_emulation: app_time_stats: avg=497.28ms min=496.69ms max=498.36ms count=3
+11-20 05:34:49.437 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:34:49.437 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:34:49.602 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:34:49.876 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@c1790a3
+11-20 05:34:49.929 12452 12490 D EGL_emulation: app_time_stats: avg=67.23ms min=8.34ms max=578.06ms count=14
+11-20 05:34:50.163 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@c1790a3
+11-20 05:34:50.166 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:34:50.182 12452 12613 I jank_cuj_events_begin_request: [69,1795152890179342000,1846179545700,1846179636200,1@1@app.retrogamesystem.debug]
+11-20 05:34:50.210 12452 12452 I ImeTracker: app.retrogamesystem.debug:30bacb08: onCancelled at PHASE_CLIENT_ANIMATION_CANCEL
+11-20 05:34:50.217 12452 12613 I jank_cuj_events_cancel_request: [69,1795152890212814000,1846212974300,1846215868400]
+11-20 05:34:50.226 12452 12613 I jank_cuj_events_end_request: [69,1795152890221557000,1846222110300,1846222216400]
+11-20 05:34:50.247 12452 12452 I ImeTracker: app.retrogamesystem.debug:857d3a85: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 05:34:50.259 12452 12452 I ImeTracker: app.retrogamesystem.debug:857d3a85: onFailed at PHASE_CLIENT_VIEW_SERVED
+11-20 05:34:53.215 12452 12490 D EGL_emulation: app_time_stats: avg=1177.69ms min=132.43ms max=2908.71ms count=3
+11-20 05:35:04.914 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@5f39a1f
+11-20 05:35:05.003 12452 12766 D SaveQueueManager: SaveQueueManager: starting save for Crash Bandicoot - Warped (USA).chd
+11-20 05:35:05.035 12452 12766 D RomOnDemandManager$downloadRom: On-demand lookup: https://emuladores.pythonanywhere.com/find_by_file?path=Crash%20Bandicoot%20-%20Warped%20(USA).chd&source_id=1&system=psx
+11-20 05:35:05.079 12452 12766 D TrafficStats: tagSocket(5) with statsTag=0xffffffff, statsUid=-1
+11-20 05:35:05.123 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:35:05.123 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:35:05.179 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:35:05.179 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:35:05.357 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:35:05.508 12452 12490 D EGL_emulation: app_time_stats: avg=1707.68ms min=10.28ms max=15113.71ms count=9
+11-20 05:35:05.515 12452 12452 D DownloadForegroundService: DownloadForegroundService: WakeLock acquired
+11-20 05:35:05.930 12452 12766 D RomOnDemandManager$downloadRom: On-demand download URL for Crash Bandicoot - Warped (USA).chd: https://huggingface.co/datasets/luistiagos/psxchd/resolve/main/Crash%20Bandicoot%20-%20Warped%20%28USA%29.chd?download=true
+11-20 05:35:06.250 12452 12766 D TrafficStats: tagSocket(146) with statsTag=0xffffffff, statsUid=-1
+11-20 05:35:06.602 12452 12490 D EGL_emulation: app_time_stats: avg=15.66ms min=2.56ms max=162.98ms count=45
+11-20 05:35:07.619 12452 12490 D EGL_emulation: app_time_stats: avg=6.63ms min=2.90ms max=24.08ms count=55
+11-20 05:35:07.845 12452 12766 D RomOnDemandManager: downloadToFile HTTP 200 contentLength=104137161 url=https://huggingface.co/datasets/luistiagos/psxchd/resolve/main/Crash%20Bandicoot%20-%20Warped%20%28USA%29.chd?download=true
+11-20 05:35:07.934 12452 12490 D EGL_emulation: app_time_stats: avg=344.94ms min=16.43ms max=2024.15ms count=7
+11-20 05:35:09.079 12452 12490 D EGL_emulation: app_time_stats: avg=50.11ms min=2.48ms max=500.01ms count=25
+11-20 05:35:09.115 12452 12490 D EGL_emulation: app_time_stats: avg=142.36ms min=28.19ms max=415.19ms count=8
+11-20 05:35:10.120 12452 12490 D EGL_emulation: app_time_stats: avg=79.20ms min=49.04ms max=167.97ms count=13
+11-20 05:35:10.163 12452 12490 D EGL_emulation: app_time_stats: avg=94.61ms min=50.43ms max=175.14ms count=11
+11-20 05:35:11.146 12452 12490 D EGL_emulation: app_time_stats: avg=170.22ms min=124.06ms max=251.37ms count=6
+11-20 05:35:11.495 12452 12490 D EGL_emulation: app_time_stats: avg=264.75ms min=81.82ms max=548.76ms count=5
+11-20 05:35:12.209 12452 12490 D EGL_emulation: app_time_stats: avg=170.34ms min=71.47ms max=362.84ms count=6
+11-20 05:35:12.505 12452 12490 D EGL_emulation: app_time_stats: avg=124.96ms min=63.35ms max=209.19ms count=8
+11-20 05:35:13.211 12452 12490 D EGL_emulation: app_time_stats: avg=57.31ms min=11.64ms max=110.19ms count=17
+11-20 05:35:13.540 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@e0a6e14
+11-20 05:35:13.604 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 104207(7908KB) AllocSpace objects, 0(0B) LOS objects, 35% free, 13MB/20MB, paused 7.670ms,2.054ms total 316.903ms
+11-20 05:35:13.674 12452 12490 D EGL_emulation: app_time_stats: avg=83.03ms min=55.57ms max=188.94ms count=14
+11-20 05:35:14.686 12452 12490 D EGL_emulation: app_time_stats: avg=43.84ms min=14.40ms max=83.99ms count=21
+11-20 05:35:14.841 12452 12452 I ImeTracker: app.retrogamesystem.debug:444fd69b: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:35:14.842 12452 12452 D InsetsController: show(ime(), fromIme=false)
+11-20 05:35:14.846 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:35:15.019 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:35:15.019 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:35:15.237 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:35:15.324 12452 12452 I Choreographer: Skipped 31 frames!  The application may be doing too much work on its main thread.
+11-20 05:35:15.409 12452 12452 I ImeTracker: app.retrogamesystem.debug:cd5d0a0c: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-20 05:35:15.413 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-20 05:35:15.703 12452 12490 D EGL_emulation: app_time_stats: avg=111.64ms min=27.59ms max=391.85ms count=9
+11-20 05:35:16.753 12452 12490 D EGL_emulation: app_time_stats: avg=139.04ms min=37.23ms max=266.40ms count=7
+11-20 05:35:16.818 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:35:16.870 12452 12613 I jank_cuj_events_begin_request: [69,1795152916868498000,1872868597600,1872868626200,0@1@app.retrogamesystem.debug]
+11-20 05:35:16.892 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:35:16.899 12452 12452 I ImeTracker: app.retrogamesystem.debug:cd5d0a0c: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 05:35:17.231 12452 12613 I jank_cuj_events_end_request: [69,1795152917224873000,1873224981700,1873225279800]
+11-20 05:35:17.240 12452 12452 I ImeTracker: app.retrogamesystem.debug:444fd69b: onShown
+11-20 05:35:17.822 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@3ee530a
+11-20 05:35:17.975 12452 12490 D EGL_emulation: app_time_stats: avg=74.80ms min=24.64ms max=301.08ms count=16
+11-20 05:35:19.103 12452 12490 D EGL_emulation: app_time_stats: avg=225.33ms min=146.05ms max=358.51ms count=5
+11-20 05:35:19.337 12452 12463 I amesystem.debug: Background concurrent copying GC freed 120741(10081KB) AllocSpace objects, 1(260KB) LOS objects, 49% free, 11MB/23MB, paused 32.484ms,286us total 790.435ms
+11-20 05:35:19.623 12452 12465 W System  : A resource failed to call release. 
+11-20 05:35:20.107 12452 12490 D EGL_emulation: app_time_stats: avg=88.53ms min=5.84ms max=225.40ms count=11
+11-20 05:35:21.158 12452 12490 D EGL_emulation: app_time_stats: avg=46.73ms min=7.27ms max=227.39ms count=19
+11-20 05:35:22.203 12452 12490 D EGL_emulation: app_time_stats: avg=43.16ms min=6.00ms max=194.53ms count=20
+11-20 05:35:23.216 12452 12490 D EGL_emulation: app_time_stats: avg=49.60ms min=9.19ms max=157.48ms count=19
+11-20 05:35:24.265 12452 12490 D EGL_emulation: app_time_stats: avg=53.87ms min=14.15ms max=184.48ms count=19
+11-20 05:35:25.279 12452 12490 D EGL_emulation: app_time_stats: avg=49.91ms min=13.55ms max=204.35ms count=19
+11-20 05:35:25.859 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 106151(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 11MB/23MB, paused 1.717ms,4.368ms total 295.306ms
+11-20 05:35:26.290 12452 12490 D EGL_emulation: app_time_stats: avg=76.98ms min=19.82ms max=163.66ms count=12
+11-20 05:35:27.295 12452 12490 D EGL_emulation: app_time_stats: avg=60.15ms min=7.92ms max=152.74ms count=15
+11-20 05:35:28.298 12452 12490 D EGL_emulation: app_time_stats: avg=40.60ms min=7.95ms max=126.01ms count=23
+11-20 05:35:29.333 12452 12490 D EGL_emulation: app_time_stats: avg=43.78ms min=10.31ms max=148.80ms count=22
+11-20 05:35:30.334 12452 12490 D EGL_emulation: app_time_stats: avg=47.91ms min=6.47ms max=127.99ms count=19
+11-20 05:35:30.663 12452 12463 I amesystem.debug: Background concurrent copying GC freed 110432(12MB) AllocSpace objects, 12(240KB) LOS objects, 49% free, 11MB/22MB, paused 2.575ms,2.540ms total 275.780ms
+11-20 05:35:31.389 12452 12490 D EGL_emulation: app_time_stats: avg=115.65ms min=20.44ms max=253.39ms count=9
+11-20 05:35:32.461 12452 12490 D EGL_emulation: app_time_stats: avg=105.22ms min=21.42ms max=243.89ms count=10
+11-20 05:35:32.803 12452 12452 W RemoteInputConnectionImpl: sendKeyEvent on inactive InputConnection
+11-20 05:35:32.875 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:35:32.877 12452 12452 W RemoteInputConnectionImpl: getSurroundingText on inactive InputConnection
+11-20 05:35:33.078 12452 12452 W RemoteInputConnectionImpl: commitText on inactive InputConnection
+11-20 05:35:33.082 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:35:33.088 12452 12452 I ImeTracker: app.retrogamesystem.debug:5d644a06: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 05:35:33.091 12452 12452 W RemoteInputConnectionImpl: sendKeyEvent on inactive InputConnection
+11-20 05:35:33.207 12452 12452 W RemoteInputConnectionImpl: commitText on inactive InputConnection
+11-20 05:35:34.173 12452 12490 D EGL_emulation: app_time_stats: avg=45.84ms min=6.51ms max=720.75ms count=34
+11-20 05:35:34.189 12452 12452 I Choreographer: Skipped 44 frames!  The application may be doing too much work on its main thread.
+11-20 05:35:34.206 12452 12602 I OpenGLRenderer: Davey! duration=767ms; Flags=0, FrameTimelineVsyncId=454220, IntendedVsync=1889422609622, Vsync=1889439276288, InputEventId=0, HandleInputStart=1889450114600, AnimationStart=1889450437600, PerformTraversalsStart=1889478037100, DrawStart=1889478439400, FrameDeadline=1889472609620, FrameInterval=1889450057300, FrameStartTime=16666666, SyncQueued=1890162793000, SyncStart=1890164205200, IssueDrawCommandsStart=1890167304600, SwapBuffers=1890171237100, FrameCompleted=1890191579000, DequeueBufferDuration=66600, QueueBufferDuration=722600, GpuCompleted=1890191579000, SwapBuffersCompleted=1890174927300, DisplayPresentTime=0, CommandSubmissionCompleted=1890171237100, 
+11-20 05:35:34.239 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:35:34.240 12452 12452 I ImeTracker: app.retrogamesystem.debug:56086e5a: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 05:35:34.278 12452 12793 I OpenGLRenderer: Davey! duration=793ms; Flags=0, FrameTimelineVsyncId=454235, IntendedVsync=1889455942954, Vsync=1890189276258, InputEventId=0, HandleInputStart=1890191446300, AnimationStart=1890191642500, PerformTraversalsStart=1890225122200, DrawStart=1890225625400, FrameDeadline=1890222609590, FrameInterval=1890189277500, FrameStartTime=16666666, SyncQueued=1890235165200, SyncStart=1890236356000, IssueDrawCommandsStart=1890237214300, SwapBuffers=1890241336600, FrameCompleted=1890250412600, DequeueBufferDuration=50200, QueueBufferDuration=7598700, GpuCompleted=1890249975300, SwapBuffersCompleted=1890250412600, DisplayPresentTime=0, CommandSubmissionCompleted=1890241336600, 
+11-20 05:35:34.425 12452 12522 D OpenGLRenderer: --- Failed to create image decoder with message 'unimplemented'
+11-20 05:35:34.442 12452 12522 D OpenGLRenderer: --- Failed to create image decoder with message 'unimplemented'
+11-20 05:35:34.534 12452 12463 W amesystem.debug: Suspending all threads took: 12.981ms
+11-20 05:35:34.838 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 107128(10217KB) AllocSpace objects, 9(180KB) LOS objects, 38% free, 13MB/22MB, paused 6.129ms,13.416ms total 648.535ms
+11-20 05:35:35.201 12452 12490 D EGL_emulation: app_time_stats: avg=39.43ms min=17.59ms max=119.88ms count=23
+11-20 05:35:36.203 12452 12490 D EGL_emulation: app_time_stats: avg=30.01ms min=13.79ms max=60.45ms count=28
+11-20 05:35:37.236 12452 12490 D EGL_emulation: app_time_stats: avg=38.65ms min=18.15ms max=96.26ms count=24
+11-20 05:35:38.246 12452 12490 D EGL_emulation: app_time_stats: avg=39.07ms min=11.80ms max=77.08ms count=24
+11-20 05:35:39.108 12452 12452 W amesystem.debug: Weak pointer dereference blocked for 12 milliseconds.
+11-20 05:35:39.170 12452 12463 I amesystem.debug: Background concurrent copying GC freed 105642(10MB) AllocSpace objects, 12(240KB) LOS objects, 49% free, 11MB/23MB, paused 5.237ms,5.546ms total 588.861ms
+11-20 05:35:39.251 12452 12490 D EGL_emulation: app_time_stats: avg=36.38ms min=12.87ms max=85.05ms count=25
+11-20 05:35:40.266 12452 12490 D EGL_emulation: app_time_stats: avg=37.87ms min=17.65ms max=84.55ms count=25
+11-20 05:35:41.271 12452 12490 D EGL_emulation: app_time_stats: avg=43.03ms min=27.05ms max=71.42ms count=23
+11-20 05:35:42.281 12452 12490 D EGL_emulation: app_time_stats: avg=58.77ms min=19.23ms max=107.79ms count=17
+11-20 05:35:43.054 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 138463(11MB) AllocSpace objects, 0(0B) LOS objects, 47% free, 12MB/23MB, paused 7.405ms,2.154ms total 244.982ms
+11-20 05:35:43.301 12452 12490 D EGL_emulation: app_time_stats: avg=59.39ms min=37.27ms max=84.47ms count=17
+11-20 05:35:44.313 12452 12490 D EGL_emulation: app_time_stats: avg=29.92ms min=8.95ms max=62.44ms count=29
+11-20 05:35:45.354 12452 12490 D EGL_emulation: app_time_stats: avg=30.64ms min=10.48ms max=61.04ms count=30
+11-20 05:35:46.365 12452 12490 D EGL_emulation: app_time_stats: avg=18.27ms min=8.00ms max=39.02ms count=42
+11-20 05:35:47.296 12452 12463 I amesystem.debug: Background concurrent copying GC freed 138835(12MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 11MB/22MB, paused 14.897ms,394us total 201.601ms
+11-20 05:35:47.425 12452 12490 D EGL_emulation: app_time_stats: avg=28.58ms min=12.31ms max=72.06ms count=34
+11-20 05:35:48.441 12452 12490 D EGL_emulation: app_time_stats: avg=21.98ms min=9.94ms max=52.53ms count=38
+11-20 05:35:49.451 12452 12490 D EGL_emulation: app_time_stats: avg=34.51ms min=12.15ms max=75.94ms count=27
+11-20 05:35:50.483 12452 12490 D EGL_emulation: app_time_stats: avg=35.42ms min=14.76ms max=64.00ms count=27
+11-20 05:35:51.497 12452 12490 D EGL_emulation: app_time_stats: avg=39.62ms min=14.25ms max=115.70ms count=24
+11-20 05:35:52.366 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 127545(11MB) AllocSpace objects, 0(0B) LOS objects, 50% free, 11MB/22MB, paused 14.069ms,869us total 66.143ms
+11-20 05:35:52.506 12452 12490 D EGL_emulation: app_time_stats: avg=25.98ms min=8.27ms max=59.16ms count=33
+11-20 05:35:53.526 12452 12490 D EGL_emulation: app_time_stats: avg=24.49ms min=6.37ms max=55.41ms count=34
+11-20 05:35:54.530 12452 12490 D EGL_emulation: app_time_stats: avg=27.97ms min=8.43ms max=67.04ms count=31
+11-20 05:35:55.542 12452 12490 D EGL_emulation: app_time_stats: avg=26.65ms min=8.11ms max=57.57ms count=34
+11-20 05:35:56.322 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 115122(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 11MB/22MB, paused 8.989ms,5.444ms total 80.061ms
+11-20 05:35:56.561 12452 12490 D EGL_emulation: app_time_stats: avg=22.51ms min=10.19ms max=50.76ms count=36
+11-20 05:35:57.561 12452 12490 D EGL_emulation: app_time_stats: avg=46.58ms min=20.94ms max=136.87ms count=21
+11-20 05:35:58.563 12452 12490 D EGL_emulation: app_time_stats: avg=44.92ms min=31.58ms max=64.38ms count=22
+11-20 05:35:59.603 12452 12490 D EGL_emulation: app_time_stats: avg=26.54ms min=9.17ms max=85.81ms count=34
+11-20 05:35:59.638 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 136297(10MB) AllocSpace objects, 0(0B) LOS objects, 47% free, 11MB/22MB, paused 7.466ms,722us total 160.068ms
+11-20 05:36:00.627 12452 12490 D EGL_emulation: app_time_stats: avg=41.33ms min=11.95ms max=105.04ms count=23
+11-20 05:36:01.630 12452 12490 D EGL_emulation: app_time_stats: avg=41.13ms min=15.38ms max=85.71ms count=22
+11-20 05:36:02.662 12452 12490 D EGL_emulation: app_time_stats: avg=51.26ms min=8.66ms max=107.13ms count=17
+11-20 05:36:03.694 12452 12490 D EGL_emulation: app_time_stats: avg=30.52ms min=10.31ms max=92.72ms count=29
+11-20 05:36:04.694 12452 12490 D EGL_emulation: app_time_stats: avg=26.89ms min=10.70ms max=90.04ms count=32
+11-20 05:36:04.966 12452 12463 I amesystem.debug: Background concurrent copying GC freed 110042(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 11MB/23MB, paused 5.332ms,174us total 496.147ms
+11-20 05:36:05.732 12452 12490 D EGL_emulation: app_time_stats: avg=27.71ms min=7.30ms max=58.91ms count=31
+11-20 05:36:06.739 12452 12490 D EGL_emulation: app_time_stats: avg=31.87ms min=9.88ms max=79.27ms count=24
+11-20 05:36:07.761 12452 12490 D EGL_emulation: app_time_stats: avg=38.51ms min=12.74ms max=99.38ms count=25
+11-20 05:36:08.763 12452 12490 D EGL_emulation: app_time_stats: avg=48.68ms min=28.13ms max=72.57ms count=20
+11-20 05:36:09.768 12452 12490 D EGL_emulation: app_time_stats: avg=38.87ms min=19.79ms max=61.31ms count=23
+11-20 05:36:10.787 12452 12490 D EGL_emulation: app_time_stats: avg=20.84ms min=8.87ms max=52.64ms count=39
+11-20 05:36:11.806 12452 12490 D EGL_emulation: app_time_stats: avg=35.66ms min=13.83ms max=81.87ms count=25
+11-20 05:36:12.854 12452 12490 D EGL_emulation: app_time_stats: avg=26.79ms min=11.68ms max=76.17ms count=33
+11-20 05:36:13.902 12452 12490 D EGL_emulation: app_time_stats: avg=36.75ms min=12.11ms max=93.08ms count=27
+11-20 05:36:14.932 12452 12490 D EGL_emulation: app_time_stats: avg=26.44ms min=10.41ms max=64.29ms count=34
+11-20 05:36:15.949 12452 12490 D EGL_emulation: app_time_stats: avg=22.21ms min=5.03ms max=70.83ms count=37
+11-20 05:36:16.120 12452 12766 D RomOnDemandManager: downloadToFile complete: bytesWritten=104137161 contentLength=104137161
+11-20 05:36:16.130 12452 12766 D RomOnDemandManager$downloadRom: ROM downloaded successfully: Crash Bandicoot - Warped (USA).chd (104137161 bytes)
+11-20 05:36:16.207 12452 12524 D SaveQueueManager: SaveQueueManager: Crash Bandicoot - Warped (USA).chd saved successfully
+11-20 05:36:16.351 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:36:16.351 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:36:17.115 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:36:17.174 12452 12452 D DownloadForegroundService$observeQueue: DownloadForegroundService: queue empty, stopping self
+11-20 05:36:17.188 12452 12470 I OpenGLRenderer: Davey! duration=999ms; Flags=1, FrameTimelineVsyncId=466562, IntendedVsync=1932155941246, Vsync=1932289274574, InputEventId=0, HandleInputStart=1932301371400, AnimationStart=1932301443400, PerformTraversalsStart=1932378743300, DrawStart=1933117598900, FrameDeadline=1932172607912, FrameInterval=1932300366800, FrameStartTime=16666666, SyncQueued=1933123156700, SyncStart=1933137306500, IssueDrawCommandsStart=1933138070500, SwapBuffers=1933143788600, FrameCompleted=1933169171600, DequeueBufferDuration=46400, QueueBufferDuration=2070300, GpuCompleted=1933165336000, SwapBuffersCompleted=1933169171600, DisplayPresentTime=1, CommandSubmissionCompleted=1933143788600, 
+11-20 05:36:17.228 12452 12452 I Choreographer: Skipped 52 frames!  The application may be doing too much work on its main thread.
+11-20 05:36:17.367 12452 12490 D EGL_emulation: app_time_stats: avg=103.36ms min=3.58ms max=966.62ms count=13
+11-20 05:36:17.398 12452 12470 I OpenGLRenderer: Davey! duration=1007ms; Flags=0, FrameTimelineVsyncId=466614, IntendedVsync=1932355941238, Vsync=1933222607870, InputEventId=0, HandleInputStart=1933232636200, AnimationStart=1933233300200, PerformTraversalsStart=1933281260700, DrawStart=1933282996200, FrameDeadline=1932439274568, FrameInterval=1933228052700, FrameStartTime=16666666, SyncQueued=1933343409000, SyncStart=1933355046300, IssueDrawCommandsStart=1933355646200, SwapBuffers=1933360839400, FrameCompleted=1933374945400, DequeueBufferDuration=441100, QueueBufferDuration=1109100, GpuCompleted=1933374945400, SwapBuffersCompleted=1933368602400, DisplayPresentTime=0, CommandSubmissionCompleted=1933360839400, 
+11-20 05:36:17.454 12452 12698 I OpenGLRenderer: Davey! duration=1068ms; Flags=0, FrameTimelineVsyncId=466614, IntendedVsync=1932355941238, Vsync=1933222607870, InputEventId=0, HandleInputStart=1933232636200, AnimationStart=1933233300200, PerformTraversalsStart=1933281260700, DrawStart=1933372363800, FrameDeadline=1933189274538, FrameInterval=1933228052700, FrameStartTime=16666666, SyncQueued=1933383179900, SyncStart=1933384866100, IssueDrawCommandsStart=1933385235600, SwapBuffers=1933390948100, FrameCompleted=1933426495300, DequeueBufferDuration=831200, QueueBufferDuration=3278700, GpuCompleted=1933426495300, SwapBuffersCompleted=1933423980900, DisplayPresentTime=125301222918135, CommandSubmissionCompleted=1933390948100, 
+11-20 05:36:17.463 12452 12452 D DownloadForegroundService: DownloadForegroundService: destroyed, WakeLock released
+11-20 05:36:17.572 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@ab680f6
+11-20 05:36:17.771 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@ab680f6
+11-20 05:36:17.776 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:36:17.803 12452 12613 I jank_cuj_events_begin_request: [69,1795152977788946000,1933789119000,1933789147500,1@1@app.retrogamesystem.debug]
+11-20 05:36:17.913 12452 12452 I ImeTracker: app.retrogamesystem.debug:7cee0eb7: onCancelled at PHASE_CLIENT_ANIMATION_CANCEL
+11-20 05:36:17.918 12452 12613 I jank_cuj_events_cancel_request: [69,1795152977914569000,1933914649000,1933914680900]
+11-20 05:36:17.922 12452 12613 I jank_cuj_events_end_request: [69,1795152977918178000,1933918625800,1933918659400]
+11-20 05:36:17.928 12452 12452 I ImeTracker: app.retrogamesystem.debug:cf92012b: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 05:36:17.931 12452 12452 I ImeTracker: app.retrogamesystem.debug:cf92012b: onFailed at PHASE_CLIENT_VIEW_SERVED
+11-20 05:36:32.788 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@915ea5b
+11-20 05:36:33.188 12452 12490 D EGL_emulation: app_time_stats: avg=3163.88ms min=68.29ms max=15197.99ms count=5
+11-20 05:36:34.239 12452 12490 D EGL_emulation: app_time_stats: avg=349.38ms min=50.14ms max=505.10ms count=3
+11-20 05:36:35.729 12452 12490 D EGL_emulation: app_time_stats: avg=492.50ms min=476.77ms max=501.56ms count=3
+11-20 05:36:36.748 12452 12490 D EGL_emulation: app_time_stats: avg=509.49ms min=503.42ms max=515.56ms count=2
+11-20 05:36:37.770 12452 12490 D EGL_emulation: app_time_stats: avg=510.05ms min=501.18ms max=518.93ms count=2
+11-20 05:36:38.770 12452 12490 D EGL_emulation: app_time_stats: avg=498.91ms min=488.29ms max=509.53ms count=2
+11-20 05:36:40.280 12452 12490 D EGL_emulation: app_time_stats: avg=502.12ms min=494.87ms max=513.55ms count=3
+11-20 05:36:41.288 12452 12490 D EGL_emulation: app_time_stats: avg=503.22ms min=501.54ms max=504.90ms count=2
+11-20 05:36:42.305 12452 12490 D EGL_emulation: app_time_stats: avg=506.84ms min=492.62ms max=521.07ms count=2
+11-20 05:36:43.314 12452 12490 D EGL_emulation: app_time_stats: avg=504.02ms min=497.88ms max=510.16ms count=2
+11-20 05:36:44.319 12452 12490 D EGL_emulation: app_time_stats: avg=502.48ms min=497.01ms max=507.95ms count=2
+11-20 05:36:45.812 12452 12490 D EGL_emulation: app_time_stats: avg=497.01ms min=491.56ms max=500.41ms count=3
+11-20 05:36:46.829 12452 12490 D EGL_emulation: app_time_stats: avg=507.76ms min=507.45ms max=508.07ms count=2
+11-20 05:36:47.829 12452 12490 D EGL_emulation: app_time_stats: avg=500.18ms min=499.17ms max=501.18ms count=2
+11-20 05:36:48.833 12452 12490 D EGL_emulation: app_time_stats: avg=501.72ms min=500.39ms max=503.04ms count=2
+11-20 05:36:49.835 12452 12490 D EGL_emulation: app_time_stats: avg=500.58ms min=500.16ms max=500.99ms count=2
+11-20 05:36:50.848 12452 12490 D EGL_emulation: app_time_stats: avg=505.18ms min=499.26ms max=511.10ms count=2
+11-20 05:36:51.850 12452 12490 D EGL_emulation: app_time_stats: avg=499.22ms min=495.92ms max=502.51ms count=2
+11-20 05:36:53.344 12452 12490 D EGL_emulation: app_time_stats: avg=498.08ms min=495.22ms max=500.64ms count=3
+11-20 05:36:54.363 12452 12490 D EGL_emulation: app_time_stats: avg=509.56ms min=502.90ms max=516.22ms count=2
+11-20 05:36:55.862 12452 12490 D EGL_emulation: app_time_stats: avg=499.41ms min=497.88ms max=500.72ms count=3
+11-20 05:36:56.884 12452 12490 D EGL_emulation: app_time_stats: avg=510.42ms min=507.00ms max=513.85ms count=2
+11-20 05:36:58.380 12452 12490 D EGL_emulation: app_time_stats: avg=498.04ms min=490.87ms max=502.27ms count=3
+11-20 05:36:58.537 12452 12452 I ImeTracker: app.retrogamesystem.debug:35922dfe: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:36:58.537 12452 12452 D InsetsController: show(ime(), fromIme=false)
+11-20 05:36:58.540 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:36:58.574 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:36:58.574 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:36:58.638 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:36:58.714 12452 12452 I ImeTracker: app.retrogamesystem.debug:914ffb4f: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-20 05:36:58.714 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-20 05:36:58.980 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:36:59.008 12452 12613 I jank_cuj_events_begin_request: [69,1795153019003576000,1975003638100,1975003694400,0@1@app.retrogamesystem.debug]
+11-20 05:36:59.071 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:36:59.075 12452 12452 I ImeTracker: app.retrogamesystem.debug:914ffb4f: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 05:36:59.322 12452 12613 I jank_cuj_events_end_request: [69,1795153019312604000,1975320072000,1975321184900]
+11-20 05:36:59.322 12452 12452 I ImeTracker: app.retrogamesystem.debug:35922dfe: onShown
+11-20 05:36:59.422 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@6a5a9db
+11-20 05:36:59.485 12452 12490 D EGL_emulation: app_time_stats: avg=41.32ms min=3.45ms max=231.90ms count=22
+11-20 05:37:00.514 12452 12490 D EGL_emulation: app_time_stats: avg=10.92ms min=2.38ms max=52.26ms count=53
+11-20 05:37:01.520 12452 12490 D EGL_emulation: app_time_stats: avg=8.68ms min=2.59ms max=49.57ms count=53
+11-20 05:37:02.538 12452 12490 D EGL_emulation: app_time_stats: avg=9.34ms min=2.32ms max=64.58ms count=51
+11-20 05:37:03.944 12452 12490 D EGL_emulation: app_time_stats: avg=54.55ms min=3.61ms max=500.01ms count=23
+11-20 05:37:04.945 12452 12490 D EGL_emulation: app_time_stats: avg=499.82ms min=499.36ms max=500.27ms count=2
+11-20 05:37:05.963 12452 12490 D EGL_emulation: app_time_stats: avg=508.72ms min=501.40ms max=516.04ms count=2
+11-20 05:37:06.771 12452 12613 I jank_cuj_events_begin_request: [69,1795153026769912000,1982770011900,1982770052100,1@1@app.retrogamesystem.debug]
+11-20 05:37:06.787 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@a96a0c9
+11-20 05:37:06.969 12452 12490 D EGL_emulation: app_time_stats: avg=69.01ms min=2.88ms max=497.99ms count=13
+11-20 05:37:07.094 12452 12613 I jank_cuj_events_end_request: [69,1795153027093975000,1983094053800,1983094076400]
+11-20 05:37:07.096 12452 12452 I ImeTracker: app.retrogamesystem.debug:bd366229: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 05:37:07.102 12452 12452 I ImeTracker: app.retrogamesystem.debug:54b42fae: onHidden
+11-20 05:37:07.996 12452 12490 D EGL_emulation: app_time_stats: avg=91.86ms min=2.94ms max=530.01ms count=10
+11-20 05:37:09.478 12452 12490 D EGL_emulation: app_time_stats: avg=493.99ms min=487.08ms max=498.48ms count=3
+11-20 05:37:10.494 12452 12490 D EGL_emulation: app_time_stats: avg=507.56ms min=497.44ms max=517.69ms count=2
+11-20 05:37:11.500 12452 12490 D EGL_emulation: app_time_stats: avg=503.02ms min=501.80ms max=504.24ms count=2
+11-20 05:37:12.519 12452 12490 D EGL_emulation: app_time_stats: avg=506.59ms min=495.91ms max=517.26ms count=2
+11-20 05:37:14.064 12452 12490 D EGL_emulation: app_time_stats: avg=514.53ms min=495.45ms max=545.77ms count=3
+11-20 05:37:15.529 12452 12490 D EGL_emulation: app_time_stats: avg=488.09ms min=466.68ms max=499.00ms count=3
+11-20 05:37:16.530 12452 12490 D EGL_emulation: app_time_stats: avg=500.42ms min=500.15ms max=500.70ms count=2
+11-20 05:37:17.551 12452 12490 D EGL_emulation: app_time_stats: avg=509.99ms min=497.52ms max=522.47ms count=2
+11-20 05:37:19.063 12452 12490 D EGL_emulation: app_time_stats: avg=503.66ms min=496.06ms max=515.24ms count=3
+11-20 05:37:20.414 12452 12490 D EGL_emulation: app_time_stats: avg=449.73ms min=351.61ms max=499.94ms count=3
+11-20 05:37:20.651 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:37:20.738 12452 12613 I jank_cuj_events_begin_request: [69,1795153040738341000,1996738447700,1996738467000,0@1@app.retrogamesystem.debug]
+11-20 05:37:21.059 12452 12613 I jank_cuj_events_end_request: [69,1795153041058983000,1997059008300,1997059029900]
+11-20 05:37:21.089 12452 12452 I ImeTracker: app.retrogamesystem.debug:5504ebe3: onShown
+11-20 05:37:21.338 12452 12465 W System  : A resource failed to call release. 
+11-20 05:37:21.438 12452 12490 D EGL_emulation: app_time_stats: avg=36.72ms min=3.43ms max=142.00ms count=25
+11-20 05:37:22.438 12452 12490 D EGL_emulation: app_time_stats: avg=20.85ms min=3.61ms max=265.10ms count=35
+11-20 05:37:23.880 12452 12490 D EGL_emulation: app_time_stats: avg=66.07ms min=2.78ms max=500.34ms count=19
+11-20 05:37:24.874 12452 12613 I jank_cuj_events_begin_request: [69,1795153044873442000,2000873605200,2000873626400,1@1@app.retrogamesystem.debug]
+11-20 05:37:24.886 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@ec9a0ed
+11-20 05:37:24.893 12452 12490 D EGL_emulation: app_time_stats: avg=506.64ms min=500.88ms max=512.40ms count=2
+11-20 05:37:25.192 12452 12613 I jank_cuj_events_end_request: [69,1795153045192127000,2001192218400,2001192253500]
+11-20 05:37:25.195 12452 12452 I ImeTracker: app.retrogamesystem.debug:4a3cd2: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 05:37:25.199 12452 12452 I ImeTracker: app.retrogamesystem.debug:fc87cc7f: onHidden
+11-20 05:37:25.901 12452 12490 D EGL_emulation: app_time_stats: avg=37.67ms min=3.94ms max=501.39ms count=21
+11-20 05:37:26.912 12452 12490 D EGL_emulation: app_time_stats: avg=505.00ms min=493.28ms max=516.73ms count=2
+11-20 05:37:27.923 12452 12490 D EGL_emulation: app_time_stats: avg=505.66ms min=501.25ms max=510.08ms count=2
+11-20 05:37:28.931 12452 12490 D EGL_emulation: app_time_stats: avg=503.52ms min=501.82ms max=505.21ms count=2
+11-20 05:37:29.942 12452 12490 D EGL_emulation: app_time_stats: avg=505.46ms min=502.31ms max=508.61ms count=2
+11-20 05:37:30.949 12452 12490 D EGL_emulation: app_time_stats: avg=502.92ms min=497.44ms max=508.41ms count=2
+11-20 05:37:32.447 12452 12490 D EGL_emulation: app_time_stats: avg=499.28ms min=498.60ms max=499.93ms count=3
+11-20 05:37:33.963 12452 12490 D EGL_emulation: app_time_stats: avg=504.93ms min=497.56ms max=518.23ms count=3
+11-20 05:37:34.973 12452 12490 D EGL_emulation: app_time_stats: avg=504.73ms min=502.37ms max=507.09ms count=2
+11-20 05:37:35.981 12452 12490 D EGL_emulation: app_time_stats: avg=503.49ms min=497.81ms max=509.18ms count=2
+11-20 05:37:37.478 12452 12490 D EGL_emulation: app_time_stats: avg=498.87ms min=496.28ms max=500.23ms count=3
+11-20 05:37:38.478 12452 12490 D EGL_emulation: app_time_stats: avg=499.86ms min=498.48ms max=501.24ms count=2
+11-20 05:37:39.502 12452 12490 D EGL_emulation: app_time_stats: avg=511.71ms min=500.93ms max=522.49ms count=2
+11-20 05:37:40.505 12452 12490 D EGL_emulation: app_time_stats: avg=500.92ms min=499.28ms max=502.55ms count=2
+11-20 05:37:42.013 12452 12490 D EGL_emulation: app_time_stats: avg=502.52ms min=493.92ms max=513.09ms count=3
+11-20 05:37:43.014 12452 12490 D EGL_emulation: app_time_stats: avg=500.34ms min=499.79ms max=500.89ms count=2
+11-20 05:37:44.513 12452 12490 D EGL_emulation: app_time_stats: avg=499.39ms min=497.85ms max=500.18ms count=3
+11-20 05:37:45.538 12452 12490 D EGL_emulation: app_time_stats: avg=512.48ms min=499.00ms max=525.96ms count=2
+11-20 05:37:46.966 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:37:46.966 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:37:46.987 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:37:46.987 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:37:46.990 12452 12490 D EGL_emulation: app_time_stats: avg=483.63ms min=457.07ms max=507.38ms count=3
+11-20 05:37:47.108 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:37:47.420 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:37:50.472 12452 12490 D EGL_emulation: app_time_stats: avg=155.67ms min=2.22ms max=2775.43ms count=20
+11-20 05:37:59.763 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@54d169a
+11-20 05:37:59.799 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:37:59.799 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:37:59.894 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:38:16.600 12452 12766 D SaveQueueManager: SaveQueueManager: starting save for Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd
+11-20 05:38:16.609 12452 12766 D RomOnDemandManager$downloadRom: On-demand lookup: https://emuladores.pythonanywhere.com/find_by_file?path=Resident%20Evil%202%20(Europe)%20(En%2CFr)%20(Disc%201).chd&source_id=1&system=dreamcast
+11-20 05:38:16.648 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@5ec5687
+11-20 05:38:16.692 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:38:16.692 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:38:16.738 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:38:16.738 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:38:16.922 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:38:17.036 12452 12766 D TrafficStats: tagSocket(5) with statsTag=0xffffffff, statsUid=-1
+11-20 05:38:17.102 12452 12490 D EGL_emulation: app_time_stats: avg=884.52ms min=8.87ms max=29270.51ms count=34
+11-20 05:38:17.108 12452 12452 D DownloadForegroundService: DownloadForegroundService: WakeLock acquired
+11-20 05:38:18.183 12452 12766 D RomOnDemandManager$downloadRom: On-demand download URL for Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd: https://archive.org/download/sega-dreamcast-redump-collection/Resident%20Evil%202%20%28Europe%29%20%28En%2CFr%29%20%28Disc%201%29.chd
+11-20 05:38:18.184 12452 12490 D EGL_emulation: app_time_stats: avg=11.74ms min=2.06ms max=153.80ms count=51
+11-20 05:38:18.410 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@8c3412c
+11-20 05:38:18.566 12452 12490 D EGL_emulation: app_time_stats: avg=144.84ms min=12.97ms max=1082.49ms count=10
+11-20 05:38:18.689 12452 12766 D TrafficStats: tagSocket(126) with statsTag=0xffffffff, statsUid=-1
+11-20 05:38:19.416 12452 12452 I ImeTracker: app.retrogamesystem.debug:dd5641fc: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:38:19.416 12452 12452 D InsetsController: show(ime(), fromIme=false)
+11-20 05:38:19.421 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F....ID 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT_BY_INSETS_API
+11-20 05:38:19.467 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:38:19.467 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:38:19.555 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:38:19.673 12452 12452 I ImeTracker: app.retrogamesystem.debug:953e831c: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+11-20 05:38:19.674 12452 12452 D InputMethodManager: showSoftInput() view=androidx.compose.ui.platform.AndroidComposeView{cc39341 VFED..... .F...... 0,0-1080,2400 aid=1073741824} flags=0 reason=SHOW_SOFT_INPUT
+11-20 05:38:19.693 12452 12490 D EGL_emulation: app_time_stats: avg=281.40ms min=20.00ms max=492.46ms count=4
+11-20 05:38:19.751 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:38:19.761 12452 12613 I jank_cuj_events_begin_request: [69,1795153099760481000,2055760525800,2055760543800,0@1@app.retrogamesystem.debug]
+11-20 05:38:19.805 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:38:19.807 12452 12452 I ImeTracker: app.retrogamesystem.debug:953e831c: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+11-20 05:38:20.083 12452 12613 I jank_cuj_events_end_request: [69,1795153100083463000,2056083542800,2056083572900]
+11-20 05:38:20.088 12452 12452 I ImeTracker: app.retrogamesystem.debug:dd5641fc: onShown
+11-20 05:38:20.207 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@e2ea42c
+11-20 05:38:20.481 12452 12766 D TrafficStats: tagSocket(153) with statsTag=0xffffffff, statsUid=-1
+11-20 05:38:20.702 12452 12490 D EGL_emulation: app_time_stats: avg=22.67ms min=6.32ms max=129.82ms count=34
+11-20 05:38:21.708 12452 12490 D EGL_emulation: app_time_stats: avg=14.07ms min=2.66ms max=77.97ms count=48
+11-20 05:38:22.059 12452 12766 D RomOnDemandManager: downloadToFile HTTP 200 contentLength=779107143 url=https://archive.org/download/sega-dreamcast-redump-collection/Resident%20Evil%202%20%28Europe%29%20%28En%2CFr%29%20%28Disc%201%29.chd
+11-20 05:38:22.825 12452 12490 D EGL_emulation: app_time_stats: avg=19.66ms min=2.39ms max=250.63ms count=42
+11-20 05:38:23.871 12452 12490 D EGL_emulation: app_time_stats: avg=42.74ms min=6.98ms max=119.36ms count=22
+11-20 05:38:24.877 12452 12490 D EGL_emulation: app_time_stats: avg=37.24ms min=7.22ms max=152.91ms count=23
+11-20 05:38:25.947 12452 12490 D EGL_emulation: app_time_stats: avg=32.22ms min=7.78ms max=106.03ms count=28
+11-20 05:38:26.093 12452 12463 W amesystem.debug: Suspending all threads took: 9.961ms
+11-20 05:38:26.153 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 293731(9345KB) AllocSpace objects, 0(0B) LOS objects, 38% free, 14MB/23MB, paused 6.440ms,10.820ms total 260.359ms
+11-20 05:38:26.416 12452 12465 W System  : A resource failed to call release. 
+11-20 05:38:27.055 12452 12490 D EGL_emulation: app_time_stats: avg=77.09ms min=24.41ms max=190.39ms count=14
+11-20 05:38:28.263 12452 12490 D EGL_emulation: app_time_stats: avg=39.96ms min=6.13ms max=261.01ms count=27
+11-20 05:38:29.105 12452 12562 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-20 05:38:29.110 12452 12562 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-20 05:38:29.364 12452 12490 D EGL_emulation: app_time_stats: avg=36.79ms min=10.00ms max=112.54ms count=22
+11-20 05:38:30.373 12452 12490 D EGL_emulation: app_time_stats: avg=19.71ms min=8.70ms max=46.90ms count=39
+11-20 05:38:30.834 12452 12613 I jank_cuj_events_begin_request: [69,1795153110830630000,2066831531400,2066831599600,1@1@app.retrogamesystem.debug]
+11-20 05:38:30.939 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@57105f2
+11-20 05:38:31.186 12452 12613 I jank_cuj_events_end_request: [69,1795153111185969000,2067186051500,2067186088500]
+11-20 05:38:31.196 12452 12452 I ImeTracker: app.retrogamesystem.debug:6d4e8fef: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 05:38:31.201 12452 12452 I ImeTracker: app.retrogamesystem.debug:6cd57e6d: onHidden
+11-20 05:38:31.374 12452 12490 D EGL_emulation: app_time_stats: avg=23.29ms min=7.72ms max=65.84ms count=34
+11-20 05:38:32.400 12452 12490 D EGL_emulation: app_time_stats: avg=29.86ms min=7.17ms max=80.73ms count=30
+11-20 05:38:33.409 12452 12490 D EGL_emulation: app_time_stats: avg=37.31ms min=8.56ms max=72.86ms count=25
+11-20 05:38:34.435 12452 12490 D EGL_emulation: app_time_stats: avg=29.72ms min=13.14ms max=66.12ms count=28
+11-20 05:38:35.438 12452 12490 D EGL_emulation: app_time_stats: avg=25.97ms min=8.84ms max=70.31ms count=33
+11-20 05:38:36.510 12452 12490 D EGL_emulation: app_time_stats: avg=22.02ms min=7.59ms max=82.31ms count=38
+11-20 05:38:37.546 12452 12490 D EGL_emulation: app_time_stats: avg=31.37ms min=10.50ms max=55.57ms count=29
+11-20 05:38:38.082 12452 12463 I amesystem.debug: Background concurrent copying GC freed 308391(11MB) AllocSpace objects, 5(340KB) LOS objects, 49% free, 11MB/22MB, paused 19.742ms,1.285ms total 759.317ms
+11-20 05:38:38.559 12452 12490 D EGL_emulation: app_time_stats: avg=39.74ms min=18.74ms max=70.54ms count=23
+11-20 05:38:39.559 12452 12490 D EGL_emulation: app_time_stats: avg=21.68ms min=7.27ms max=45.10ms count=34
+11-20 05:38:40.577 12452 12490 D EGL_emulation: app_time_stats: avg=17.29ms min=7.75ms max=26.35ms count=40
+11-20 05:38:41.583 12452 12490 D EGL_emulation: app_time_stats: avg=18.28ms min=4.88ms max=46.06ms count=37
+11-20 05:38:42.598 12452 12490 D EGL_emulation: app_time_stats: avg=37.79ms min=17.66ms max=63.67ms count=25
+11-20 05:38:43.613 12452 12490 D EGL_emulation: app_time_stats: avg=27.73ms min=11.26ms max=60.23ms count=28
+11-20 05:38:44.619 12452 12490 D EGL_emulation: app_time_stats: avg=37.58ms min=8.61ms max=129.48ms count=20
+11-20 05:38:45.640 12452 12490 D EGL_emulation: app_time_stats: avg=34.77ms min=13.86ms max=85.17ms count=26
+11-20 05:38:46.668 12452 12490 D EGL_emulation: app_time_stats: avg=27.19ms min=9.18ms max=68.63ms count=31
+11-20 05:38:47.681 12452 12490 D EGL_emulation: app_time_stats: avg=18.60ms min=4.29ms max=76.20ms count=39
+11-20 05:38:48.705 12452 12490 D EGL_emulation: app_time_stats: avg=15.23ms min=3.87ms max=35.80ms count=44
+11-20 05:38:49.562 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:38:49.562 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:38:49.605 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:38:49.605 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:38:49.712 12452 12490 D EGL_emulation: app_time_stats: avg=17.30ms min=4.50ms max=109.12ms count=41
+11-20 05:38:49.789 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:38:50.287 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:38:50.771 12452 12490 D EGL_emulation: app_time_stats: avg=34.56ms min=10.15ms max=142.33ms count=27
+11-20 05:38:51.798 12452 12490 D EGL_emulation: app_time_stats: avg=24.87ms min=5.67ms max=44.69ms count=33
+11-20 05:38:52.807 12452 12490 D EGL_emulation: app_time_stats: avg=15.45ms min=3.87ms max=43.79ms count=41
+11-20 05:38:53.645 12452 12490 D EGL_emulation: app_time_stats: avg=416.62ms min=42.92ms max=2970.19ms count=9
+11-20 05:38:53.831 12452 12490 D EGL_emulation: app_time_stats: avg=24.90ms min=7.22ms max=67.44ms count=34
+11-20 05:38:54.862 12452 12490 D EGL_emulation: app_time_stats: avg=26.95ms min=10.01ms max=64.28ms count=34
+11-20 05:38:55.935 12452 12490 D EGL_emulation: app_time_stats: avg=28.75ms min=6.18ms max=77.87ms count=30
+11-20 05:38:57.015 12452 12490 D EGL_emulation: app_time_stats: avg=44.41ms min=13.71ms max=79.75ms count=19
+11-20 05:38:58.093 12452 12490 D EGL_emulation: app_time_stats: avg=52.64ms min=18.80ms max=90.23ms count=18
+11-20 05:38:58.837 12452 12463 W amesystem.debug: Suspending all threads took: 9.402ms
+11-20 05:38:58.880 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 335204(10MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 11MB/22MB, paused 6.461ms,11.385ms total 120.487ms
+11-20 05:38:59.143 12452 12490 D EGL_emulation: app_time_stats: avg=50.95ms min=18.89ms max=125.51ms count=19
+11-20 05:39:00.153 12452 12490 D EGL_emulation: app_time_stats: avg=21.45ms min=5.46ms max=53.01ms count=36
+11-20 05:39:01.171 12452 12490 D EGL_emulation: app_time_stats: avg=31.14ms min=7.13ms max=92.84ms count=26
+11-20 05:39:02.207 12452 12490 D EGL_emulation: app_time_stats: avg=57.35ms min=13.37ms max=174.92ms count=17
+11-20 05:39:03.211 12452 12490 D EGL_emulation: app_time_stats: avg=39.53ms min=8.79ms max=94.75ms count=23
+11-20 05:39:04.229 12452 12490 D EGL_emulation: app_time_stats: avg=41.45ms min=10.20ms max=77.34ms count=23
+11-20 05:39:05.301 12452 12490 D EGL_emulation: app_time_stats: avg=50.26ms min=13.25ms max=116.32ms count=20
+11-20 05:39:06.384 12452 12490 D EGL_emulation: app_time_stats: avg=73.22ms min=27.15ms max=210.31ms count=14
+11-20 05:39:07.408 12452 12490 D EGL_emulation: app_time_stats: avg=47.54ms min=24.77ms max=87.26ms count=21
+11-20 05:39:08.427 12452 12490 D EGL_emulation: app_time_stats: avg=33.70ms min=7.04ms max=69.10ms count=26
+11-20 05:39:09.437 12452 12490 D EGL_emulation: app_time_stats: avg=26.81ms min=11.55ms max=66.51ms count=33
+11-20 05:39:10.447 12452 12490 D EGL_emulation: app_time_stats: avg=22.78ms min=7.03ms max=46.18ms count=35
+11-20 05:39:10.794 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@c62e05b
+11-20 05:39:10.985 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:39:10.985 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:39:11.264 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:39:11.496 12452 12490 D EGL_emulation: app_time_stats: avg=74.88ms min=10.96ms max=471.44ms count=13
+11-20 05:39:12.518 12452 12490 D EGL_emulation: app_time_stats: avg=24.87ms min=5.97ms max=48.81ms count=35
+11-20 05:39:13.539 12452 12490 D EGL_emulation: app_time_stats: avg=14.66ms min=4.99ms max=36.21ms count=45
+11-20 05:39:14.551 12452 12490 D EGL_emulation: app_time_stats: avg=19.04ms min=7.23ms max=47.23ms count=38
+11-20 05:39:14.943 12452 12490 D EGL_emulation: app_time_stats: avg=1810.65ms min=139.25ms max=3482.06ms count=2
+11-20 05:39:15.553 12452 12490 D EGL_emulation: app_time_stats: avg=17.43ms min=5.48ms max=44.84ms count=41
+11-20 05:39:16.569 12452 12490 D EGL_emulation: app_time_stats: avg=17.58ms min=7.54ms max=51.48ms count=40
+11-20 05:39:17.389 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@c1ebb03
+11-20 05:39:17.628 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:39:17.628 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:39:17.675 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:39:17.675 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:39:17.863 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:39:18.095 12452 12490 D EGL_emulation: app_time_stats: avg=35.55ms min=4.67ms max=551.54ms count=35
+11-20 05:39:19.094 12452 12490 D EGL_emulation: app_time_stats: avg=85.62ms min=55.40ms max=140.27ms count=13
+11-20 05:39:19.167 12452 12490 D EGL_emulation: app_time_stats: avg=96.90ms min=56.99ms max=143.01ms count=11
+11-20 05:39:20.138 12452 12490 D EGL_emulation: app_time_stats: avg=68.77ms min=34.25ms max=103.03ms count=15
+11-20 05:39:20.182 12452 12490 D EGL_emulation: app_time_stats: avg=72.03ms min=50.00ms max=103.99ms count=14
+11-20 05:39:21.161 12452 12490 D EGL_emulation: app_time_stats: avg=63.51ms min=34.82ms max=106.14ms count=16
+11-20 05:39:21.199 12452 12490 D EGL_emulation: app_time_stats: avg=62.83ms min=32.51ms max=139.03ms count=16
+11-20 05:39:22.178 12452 12490 D EGL_emulation: app_time_stats: avg=66.04ms min=14.74ms max=128.65ms count=15
+11-20 05:39:22.215 12452 12490 D EGL_emulation: app_time_stats: avg=82.16ms min=21.28ms max=124.94ms count=12
+11-20 05:39:23.279 12452 12490 D EGL_emulation: app_time_stats: avg=72.07ms min=31.94ms max=123.66ms count=15
+11-20 05:39:23.303 12452 12490 D EGL_emulation: app_time_stats: avg=82.70ms min=52.94ms max=129.83ms count=13
+11-20 05:39:24.322 12452 12490 D EGL_emulation: app_time_stats: avg=51.73ms min=35.30ms max=81.82ms count=20
+11-20 05:39:24.338 12452 12490 D EGL_emulation: app_time_stats: avg=50.81ms min=32.65ms max=76.23ms count=20
+11-20 05:39:25.343 12452 12490 D EGL_emulation: app_time_stats: avg=42.24ms min=28.71ms max=62.40ms count=24
+11-20 05:39:25.354 12452 12490 D EGL_emulation: app_time_stats: avg=42.01ms min=27.16ms max=55.86ms count=24
+11-20 05:39:26.383 12452 12490 D EGL_emulation: app_time_stats: avg=47.01ms min=32.30ms max=76.66ms count=22
+11-20 05:39:26.395 12452 12490 D EGL_emulation: app_time_stats: avg=48.91ms min=27.16ms max=92.46ms count=21
+11-20 05:39:27.413 12452 12490 D EGL_emulation: app_time_stats: avg=44.21ms min=26.76ms max=73.95ms count=23
+11-20 05:39:27.426 12452 12490 D EGL_emulation: app_time_stats: avg=48.58ms min=21.63ms max=102.87ms count=21
+11-20 05:39:28.446 12452 12490 D EGL_emulation: app_time_stats: avg=63.45ms min=30.26ms max=99.10ms count=16
+11-20 05:39:28.502 12452 12490 D EGL_emulation: app_time_stats: avg=66.63ms min=16.48ms max=116.73ms count=16
+11-20 05:39:29.499 12452 12490 D EGL_emulation: app_time_stats: avg=77.84ms min=20.30ms max=137.76ms count=13
+11-20 05:39:29.531 12452 12490 D EGL_emulation: app_time_stats: avg=85.17ms min=42.62ms max=185.89ms count=12
+11-20 05:39:30.510 12452 12490 D EGL_emulation: app_time_stats: avg=45.23ms min=27.03ms max=94.78ms count=22
+11-20 05:39:30.566 12452 12490 D EGL_emulation: app_time_stats: avg=46.68ms min=26.96ms max=89.51ms count=22
+11-20 05:39:31.539 12452 12490 D EGL_emulation: app_time_stats: avg=56.72ms min=31.12ms max=178.50ms count=18
+11-20 05:39:31.581 12452 12490 D EGL_emulation: app_time_stats: avg=56.00ms min=24.40ms max=175.88ms count=18
+11-20 05:39:32.555 12452 12490 D EGL_emulation: app_time_stats: avg=47.63ms min=27.22ms max=114.11ms count=21
+11-20 05:39:32.588 12452 12490 D EGL_emulation: app_time_stats: avg=52.78ms min=27.13ms max=137.90ms count=19
+11-20 05:39:33.617 12452 12490 D EGL_emulation: app_time_stats: avg=43.28ms min=20.63ms max=143.24ms count=24
+11-20 05:39:33.643 12452 12490 D EGL_emulation: app_time_stats: avg=49.85ms min=24.77ms max=133.21ms count=21
+11-20 05:39:34.644 12452 12490 D EGL_emulation: app_time_stats: avg=48.61ms min=27.84ms max=84.41ms count=21
+11-20 05:39:34.665 12452 12490 D EGL_emulation: app_time_stats: avg=50.13ms min=25.27ms max=76.47ms count=20
+11-20 05:39:34.720 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 327802(10MB) AllocSpace objects, 0(0B) LOS objects, 46% free, 12MB/22MB, paused 11.588ms,2.513ms total 105.863ms
+11-20 05:39:35.666 12452 12490 D EGL_emulation: app_time_stats: avg=50.66ms min=24.79ms max=88.67ms count=20
+11-20 05:39:35.702 12452 12490 D EGL_emulation: app_time_stats: avg=51.27ms min=20.50ms max=95.31ms count=20
+11-20 05:39:36.678 12452 12490 D EGL_emulation: app_time_stats: avg=55.51ms min=30.77ms max=105.90ms count=18
+11-20 05:39:36.703 12452 12490 D EGL_emulation: app_time_stats: avg=75.72ms min=51.28ms max=101.53ms count=13
+11-20 05:39:37.692 12452 12490 D EGL_emulation: app_time_stats: avg=48.48ms min=15.98ms max=72.87ms count=20
+11-20 05:39:37.730 12452 12490 D EGL_emulation: app_time_stats: avg=59.34ms min=26.66ms max=95.94ms count=17
+11-20 05:39:38.694 12452 12490 D EGL_emulation: app_time_stats: avg=49.61ms min=25.00ms max=98.01ms count=20
+11-20 05:39:38.757 12452 12490 D EGL_emulation: app_time_stats: avg=50.73ms min=27.50ms max=133.78ms count=20
+11-20 05:39:39.720 12452 12490 D EGL_emulation: app_time_stats: avg=42.29ms min=17.09ms max=71.01ms count=24
+11-20 05:39:39.759 12452 12490 D EGL_emulation: app_time_stats: avg=44.86ms min=20.05ms max=89.70ms count=22
+11-20 05:39:40.791 12452 12490 D EGL_emulation: app_time_stats: avg=37.70ms min=18.62ms max=74.18ms count=28
+11-20 05:39:40.834 12452 12490 D EGL_emulation: app_time_stats: avg=42.25ms min=18.85ms max=100.04ms count=25
+11-20 05:39:41.809 12452 12490 D EGL_emulation: app_time_stats: avg=43.07ms min=12.98ms max=139.67ms count=22
+11-20 05:39:41.834 12452 12490 D EGL_emulation: app_time_stats: avg=57.49ms min=18.88ms max=125.07ms count=17
+11-20 05:39:42.816 12452 12490 D EGL_emulation: app_time_stats: avg=49.34ms min=12.11ms max=83.04ms count=20
+11-20 05:39:42.838 12452 12490 D EGL_emulation: app_time_stats: avg=48.41ms min=10.60ms max=99.49ms count=20
+11-20 05:39:43.823 12452 12490 D EGL_emulation: app_time_stats: avg=52.85ms min=11.60ms max=128.65ms count=18
+11-20 05:39:43.843 12452 12490 D EGL_emulation: app_time_stats: avg=62.15ms min=26.21ms max=171.03ms count=16
+11-20 05:39:44.838 12452 12490 D EGL_emulation: app_time_stats: avg=47.02ms min=21.76ms max=97.14ms count=21
+11-20 05:39:44.860 12452 12490 D EGL_emulation: app_time_stats: avg=50.53ms min=24.84ms max=90.05ms count=20
+11-20 05:39:45.848 12452 12490 D EGL_emulation: app_time_stats: avg=46.61ms min=15.81ms max=76.23ms count=21
+11-20 05:39:45.861 12452 12490 D EGL_emulation: app_time_stats: avg=49.45ms min=26.89ms max=75.99ms count=20
+11-20 05:39:46.869 12452 12490 D EGL_emulation: app_time_stats: avg=67.46ms min=26.80ms max=106.30ms count=15
+11-20 05:39:46.956 12452 12490 D EGL_emulation: app_time_stats: avg=89.68ms min=38.25ms max=147.26ms count=12
+11-20 05:39:47.932 12452 12490 D EGL_emulation: app_time_stats: avg=80.91ms min=30.38ms max=173.14ms count=13
+11-20 05:39:48.019 12452 12490 D EGL_emulation: app_time_stats: avg=95.86ms min=51.78ms max=245.67ms count=11
+11-20 05:39:48.944 12452 12490 D EGL_emulation: app_time_stats: avg=77.23ms min=50.51ms max=148.20ms count=13
+11-20 05:39:49.120 12452 12490 D EGL_emulation: app_time_stats: avg=78.08ms min=47.59ms max=156.80ms count=14
+11-20 05:39:50.024 12452 12490 D EGL_emulation: app_time_stats: avg=97.16ms min=46.45ms max=215.31ms count=11
+11-20 05:39:50.142 12452 12490 D EGL_emulation: app_time_stats: avg=113.16ms min=72.17ms max=149.61ms count=9
+11-20 05:39:51.048 12452 12490 D EGL_emulation: app_time_stats: avg=92.36ms min=40.39ms max=127.26ms count=11
+11-20 05:39:51.164 12452 12490 D EGL_emulation: app_time_stats: avg=81.75ms min=13.38ms max=141.71ms count=12
+11-20 05:39:52.097 12452 12490 D EGL_emulation: app_time_stats: avg=51.26ms min=22.91ms max=82.63ms count=20
+11-20 05:39:52.168 12452 12463 W amesystem.debug: Suspending all threads took: 11.727ms
+11-20 05:39:52.207 12452 12490 D EGL_emulation: app_time_stats: avg=64.89ms min=35.31ms max=174.87ms count=16
+11-20 05:39:52.232 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 329063(10MB) AllocSpace objects, 0(0B) LOS objects, 46% free, 12MB/22MB, paused 2.293ms,15.530ms total 176.860ms
+11-20 05:39:52.610 12452 12766 D SaveQueueManager: SaveQueueManager: Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd cancelled
+11-20 05:39:52.655 12452 12766 D SaveQueueManager: SaveQueueManager: starting save for Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (EDC).chd
+11-20 05:39:52.698 12452 12766 D RomOnDemandManager$downloadRom: On-demand lookup: https://emuladores.pythonanywhere.com/find_by_file?path=Crash%20Bandicoot%202%20-%20Cortex%20Strikes%20Back%20(Europe)%20(En%2CFr%2CDe%2CEs%2CIt)%20(EDC).chd&source_id=1&system=psx
+11-20 05:39:52.740 12452 12766 D TrafficStats: tagSocket(132) with statsTag=0xffffffff, statsUid=-1
+11-20 05:39:53.116 12452 12490 D EGL_emulation: app_time_stats: avg=34.76ms min=4.51ms max=128.28ms count=26
+11-20 05:39:53.765 12452 12766 D RomOnDemandManager$downloadRom: On-demand download URL for Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (EDC).chd: https://huggingface.co/datasets/luistiagos/psxchd/resolve/main/Crash%20Bandicoot%202%20-%20Cortex%20Strikes%20Back%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29%20%28EDC%29.chd?download=true
+11-20 05:39:54.143 12452 12490 D EGL_emulation: app_time_stats: avg=9.65ms min=3.88ms max=26.78ms count=53
+11-20 05:39:54.299 12452 12766 D TrafficStats: tagSocket(149) with statsTag=0xffffffff, statsUid=-1
+11-20 05:39:55.149 12452 12490 D EGL_emulation: app_time_stats: avg=8.76ms min=2.58ms max=23.41ms count=57
+11-20 05:39:55.945 12452 12766 D TrafficStats: tagSocket(5) with statsTag=0xffffffff, statsUid=-1
+11-20 05:39:56.170 12452 12490 D EGL_emulation: app_time_stats: avg=10.06ms min=2.88ms max=54.86ms count=51
+11-20 05:39:57.183 12452 12490 D EGL_emulation: app_time_stats: avg=7.35ms min=2.25ms max=37.80ms count=52
+11-20 05:39:57.554 12452 12766 D RomOnDemandManager: downloadToFile HTTP 200 contentLength=136501802 url=https://huggingface.co/datasets/luistiagos/psxchd/resolve/main/Crash%20Bandicoot%202%20-%20Cortex%20Strikes%20Back%20%28Europe%29%20%28En%2CFr%2CDe%2CEs%2CIt%29%20%28EDC%29.chd?download=true
+11-20 05:39:57.685 12452 12490 D EGL_emulation: app_time_stats: avg=606.83ms min=22.31ms max=4823.77ms count=9
+11-20 05:39:58.247 12452 12490 D EGL_emulation: app_time_stats: avg=41.84ms min=9.73ms max=155.76ms count=21
+11-20 05:39:58.753 12452 12490 D EGL_emulation: app_time_stats: avg=96.56ms min=36.18ms max=194.94ms count=11
+11-20 05:39:59.275 12452 12490 D EGL_emulation: app_time_stats: avg=84.46ms min=32.47ms max=177.92ms count=12
+11-20 05:39:59.797 12452 12490 D EGL_emulation: app_time_stats: avg=74.08ms min=34.32ms max=136.48ms count=14
+11-20 05:40:00.310 12452 12490 D EGL_emulation: app_time_stats: avg=79.08ms min=32.21ms max=198.34ms count=13
+11-20 05:40:00.828 12452 12490 D EGL_emulation: app_time_stats: avg=55.79ms min=10.74ms max=169.75ms count=18
+11-20 05:40:01.311 12452 12490 D EGL_emulation: app_time_stats: avg=39.29ms min=16.09ms max=74.66ms count=25
+11-20 05:40:01.858 12452 12490 D EGL_emulation: app_time_stats: avg=38.86ms min=18.45ms max=99.57ms count=26
+11-20 05:40:02.341 12452 12490 D EGL_emulation: app_time_stats: avg=42.49ms min=23.77ms max=98.65ms count=24
+11-20 05:40:02.914 12452 12490 D EGL_emulation: app_time_stats: avg=47.65ms min=33.92ms max=81.37ms count=22
+11-20 05:40:03.345 12452 12490 D EGL_emulation: app_time_stats: avg=44.79ms min=20.04ms max=87.99ms count=22
+11-20 05:40:03.771 12452 12463 I amesystem.debug: Background concurrent copying GC freed 150738(10MB) AllocSpace objects, 5(340KB) LOS objects, 49% free, 12MB/25MB, paused 17.743ms,798us total 408.096ms
+11-20 05:40:03.958 12452 12490 D EGL_emulation: app_time_stats: avg=51.55ms min=28.92ms max=97.43ms count=20
+11-20 05:40:04.352 12452 12490 D EGL_emulation: app_time_stats: avg=37.17ms min=18.92ms max=60.46ms count=26
+11-20 05:40:04.974 12452 12490 D EGL_emulation: app_time_stats: avg=41.35ms min=21.25ms max=89.44ms count=24
+11-20 05:40:05.400 12452 12490 D EGL_emulation: app_time_stats: avg=41.19ms min=5.01ms max=92.15ms count=24
+11-20 05:40:05.989 12452 12490 D EGL_emulation: app_time_stats: avg=45.33ms min=25.82ms max=94.44ms count=22
+11-20 05:40:06.408 12452 12490 D EGL_emulation: app_time_stats: avg=34.37ms min=5.57ms max=52.27ms count=28
+11-20 05:40:07.014 12452 12490 D EGL_emulation: app_time_stats: avg=50.88ms min=23.41ms max=84.44ms count=20
+11-20 05:40:07.391 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 93579(12MB) AllocSpace objects, 0(0B) LOS objects, 51% free, 12MB/25MB, paused 984us,1.254ms total 169.308ms
+11-20 05:40:07.426 12452 12490 D EGL_emulation: app_time_stats: avg=42.92ms min=15.83ms max=68.30ms count=23
+11-20 05:40:08.041 12452 12490 D EGL_emulation: app_time_stats: avg=50.19ms min=23.73ms max=71.41ms count=20
+11-20 05:40:08.464 12452 12490 D EGL_emulation: app_time_stats: avg=48.56ms min=26.15ms max=73.11ms count=21
+11-20 05:40:09.159 12452 12490 D EGL_emulation: app_time_stats: avg=61.33ms min=32.22ms max=146.78ms count=18
+11-20 05:40:09.538 12452 12490 D EGL_emulation: app_time_stats: avg=63.80ms min=11.52ms max=120.13ms count=16
+11-20 05:40:10.214 12452 12490 D EGL_emulation: app_time_stats: avg=104.58ms min=76.21ms max=136.17ms count=10
+11-20 05:40:10.607 12452 12490 D EGL_emulation: app_time_stats: avg=86.37ms min=24.30ms max=136.21ms count=12
+11-20 05:40:11.278 12452 12490 D EGL_emulation: app_time_stats: avg=101.44ms min=67.32ms max=138.17ms count=10
+11-20 05:40:11.729 12452 12490 D EGL_emulation: app_time_stats: avg=92.16ms min=49.56ms max=148.95ms count=12
+11-20 05:40:12.397 12452 12490 D EGL_emulation: app_time_stats: avg=184.69ms min=140.12ms max=265.84ms count=6
+11-20 05:40:12.806 12452 12490 D EGL_emulation: app_time_stats: avg=107.75ms min=23.78ms max=181.57ms count=8
+11-20 05:40:13.420 12452 12490 D EGL_emulation: app_time_stats: avg=144.98ms min=93.48ms max=256.13ms count=7
+11-20 05:40:13.934 12452 12490 D EGL_emulation: app_time_stats: avg=112.04ms min=46.20ms max=154.70ms count=10
+11-20 05:40:14.475 12452 12490 D EGL_emulation: app_time_stats: avg=116.01ms min=68.15ms max=147.09ms count=9
+11-20 05:40:14.977 12452 12490 D EGL_emulation: app_time_stats: avg=73.66ms min=33.00ms max=119.35ms count=14
+11-20 05:40:15.480 12452 12490 D EGL_emulation: app_time_stats: avg=90.59ms min=46.27ms max=153.75ms count=11
+11-20 05:40:15.650 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 96557(12MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 12MB/25MB, paused 44.370ms,236us total 262.818ms
+11-20 05:40:15.984 12452 12490 D EGL_emulation: app_time_stats: avg=64.43ms min=17.58ms max=177.47ms count=15
+11-20 05:40:16.515 12452 12490 D EGL_emulation: app_time_stats: avg=64.17ms min=35.14ms max=100.10ms count=16
+11-20 05:40:17.043 12452 12490 D EGL_emulation: app_time_stats: avg=54.08ms min=19.94ms max=77.11ms count=19
+11-20 05:40:17.536 12452 12490 D EGL_emulation: app_time_stats: avg=69.55ms min=28.97ms max=138.39ms count=14
+11-20 05:40:18.052 12452 12490 D EGL_emulation: app_time_stats: avg=61.16ms min=9.23ms max=89.28ms count=16
+11-20 05:40:18.631 12452 12490 D EGL_emulation: app_time_stats: avg=67.89ms min=26.82ms max=120.26ms count=16
+11-20 05:40:19.121 12452 12490 D EGL_emulation: app_time_stats: avg=65.38ms min=45.52ms max=89.11ms count=16
+11-20 05:40:19.636 12452 12490 D EGL_emulation: app_time_stats: avg=62.19ms min=44.54ms max=89.17ms count=16
+11-20 05:40:20.145 12452 12490 D EGL_emulation: app_time_stats: avg=56.28ms min=29.36ms max=106.07ms count=18
+11-20 05:40:20.715 12452 12490 D EGL_emulation: app_time_stats: avg=70.97ms min=45.88ms max=107.25ms count=15
+11-20 05:40:21.147 12452 12490 D EGL_emulation: app_time_stats: avg=61.03ms min=11.45ms max=114.13ms count=16
+11-20 05:40:21.725 12452 12490 D EGL_emulation: app_time_stats: avg=66.74ms min=34.03ms max=154.31ms count=15
+11-20 05:40:21.896 12452 12463 I amesystem.debug: Background concurrent copying GC freed 109663(13MB) AllocSpace objects, 16(320KB) LOS objects, 49% free, 11MB/23MB, paused 20.477ms,373us total 324.908ms
+11-20 05:40:22.193 12452 12490 D EGL_emulation: app_time_stats: avg=51.01ms min=16.66ms max=74.75ms count=20
+11-20 05:40:22.739 12452 12490 D EGL_emulation: app_time_stats: avg=62.50ms min=33.15ms max=117.23ms count=16
+11-20 05:40:23.223 12452 12490 D EGL_emulation: app_time_stats: avg=77.85ms min=22.61ms max=180.96ms count=13
+11-20 05:40:23.781 12452 12490 D EGL_emulation: app_time_stats: avg=94.13ms min=28.19ms max=177.59ms count=11
+11-20 05:40:24.255 12452 12490 D EGL_emulation: app_time_stats: avg=71.78ms min=40.56ms max=152.46ms count=14
+11-20 05:40:24.842 12452 12490 D EGL_emulation: app_time_stats: avg=80.00ms min=16.44ms max=155.15ms count=13
+11-20 05:40:25.307 12452 12490 D EGL_emulation: app_time_stats: avg=69.54ms min=33.62ms max=84.61ms count=15
+11-20 05:40:25.915 12452 12490 D EGL_emulation: app_time_stats: avg=81.96ms min=37.47ms max=147.47ms count=13
+11-20 05:40:26.344 12452 12490 D EGL_emulation: app_time_stats: avg=68.77ms min=40.25ms max=101.17ms count=15
+11-20 05:40:26.972 12452 12490 D EGL_emulation: app_time_stats: avg=92.58ms min=46.67ms max=146.62ms count=11
+11-20 05:40:27.411 12452 12490 D EGL_emulation: app_time_stats: avg=94.61ms min=54.82ms max=130.29ms count=11
+11-20 05:40:27.978 12452 12490 D EGL_emulation: app_time_stats: avg=90.20ms min=55.02ms max=153.54ms count=11
+11-20 05:40:28.486 12452 12490 D EGL_emulation: app_time_stats: avg=75.90ms min=41.78ms max=180.35ms count=14
+11-20 05:40:28.568 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 88780(11MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 11MB/23MB, paused 2.648ms,1.192ms total 185.662ms
+11-20 05:40:29.025 12452 12490 D EGL_emulation: app_time_stats: avg=80.16ms min=56.18ms max=138.54ms count=13
+11-20 05:40:29.515 12452 12490 D EGL_emulation: app_time_stats: avg=85.20ms min=52.83ms max=136.25ms count=12
+11-20 05:40:30.093 12452 12490 D EGL_emulation: app_time_stats: avg=118.14ms min=65.82ms max=174.11ms count=9
+11-20 05:40:30.551 12452 12490 D EGL_emulation: app_time_stats: avg=93.68ms min=58.26ms max=153.24ms count=11
+11-20 05:40:31.115 12452 12490 D EGL_emulation: app_time_stats: avg=63.29ms min=26.57ms max=93.63ms count=16
+11-20 05:40:31.615 12452 12490 D EGL_emulation: app_time_stats: avg=75.32ms min=20.98ms max=172.77ms count=14
+11-20 05:40:32.186 12452 12490 D EGL_emulation: app_time_stats: avg=102.39ms min=43.61ms max=210.46ms count=10
+11-20 05:40:32.627 12452 12490 D EGL_emulation: app_time_stats: avg=77.07ms min=36.50ms max=107.39ms count=13
+11-20 05:40:33.211 12452 12490 D EGL_emulation: app_time_stats: avg=101.91ms min=56.99ms max=139.49ms count=10
+11-20 05:40:33.670 12452 12490 D EGL_emulation: app_time_stats: avg=78.44ms min=26.36ms max=150.00ms count=13
+11-20 05:40:34.217 12452 12490 D EGL_emulation: app_time_stats: avg=71.61ms min=45.07ms max=112.64ms count=14
+11-20 05:40:34.685 12452 12490 D EGL_emulation: app_time_stats: avg=58.73ms min=22.69ms max=100.17ms count=17
+11-20 05:40:34.954 12452 12463 W amesystem.debug: Suspending all threads took: 18.463ms
+11-20 05:40:35.014 12452 12463 I amesystem.debug: Background concurrent copying GC freed 88986(12MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 12MB/24MB, paused 5.228ms,18.691ms total 708.305ms
+11-20 05:40:35.303 12452 12490 D EGL_emulation: app_time_stats: avg=79.23ms min=41.97ms max=168.83ms count=13
+11-20 05:40:35.745 12452 12490 D EGL_emulation: app_time_stats: avg=64.01ms min=38.75ms max=114.12ms count=16
+11-20 05:40:36.316 12452 12490 D EGL_emulation: app_time_stats: avg=62.87ms min=36.85ms max=97.20ms count=16
+11-20 05:40:36.761 12452 12490 D EGL_emulation: app_time_stats: avg=46.81ms min=18.68ms max=67.27ms count=21
+11-20 05:40:37.353 12452 12490 D EGL_emulation: app_time_stats: avg=53.70ms min=30.74ms max=90.86ms count=19
+11-20 05:40:37.771 12452 12490 D EGL_emulation: app_time_stats: avg=44.65ms min=15.57ms max=69.95ms count=22
+11-20 05:40:38.371 12452 12490 D EGL_emulation: app_time_stats: avg=47.89ms min=29.00ms max=111.77ms count=21
+11-20 05:40:38.789 12452 12490 D EGL_emulation: app_time_stats: avg=41.35ms min=25.05ms max=68.61ms count=24
+11-20 05:40:39.406 12452 12490 D EGL_emulation: app_time_stats: avg=56.94ms min=24.97ms max=90.47ms count=18
+11-20 05:40:39.831 12452 12490 D EGL_emulation: app_time_stats: avg=61.24ms min=21.29ms max=107.51ms count=16
+11-20 05:40:40.027 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 96139(12MB) AllocSpace objects, 0(0B) LOS objects, 51% free, 11MB/24MB, paused 2.164ms,971us total 122.301ms
+11-20 05:40:40.422 12452 12490 D EGL_emulation: app_time_stats: avg=99.12ms min=57.47ms max=140.09ms count=10
+11-20 05:40:40.899 12452 12490 D EGL_emulation: app_time_stats: avg=105.99ms min=34.76ms max=184.53ms count=10
+11-20 05:40:41.502 12452 12490 D EGL_emulation: app_time_stats: avg=97.36ms min=55.87ms max=188.36ms count=11
+11-20 05:40:41.929 12452 12490 D EGL_emulation: app_time_stats: avg=83.30ms min=22.02ms max=136.20ms count=12
+11-20 05:40:42.530 12452 12490 D EGL_emulation: app_time_stats: avg=101.54ms min=59.09ms max=137.65ms count=10
+11-20 05:40:42.959 12452 12490 D EGL_emulation: app_time_stats: avg=91.56ms min=63.39ms max=139.37ms count=11
+11-20 05:40:43.534 12452 12490 D EGL_emulation: app_time_stats: avg=90.37ms min=43.79ms max=124.58ms count=11
+11-20 05:40:44.027 12452 12490 D EGL_emulation: app_time_stats: avg=69.32ms min=32.52ms max=95.04ms count=15
+11-20 05:40:44.691 12452 12490 D EGL_emulation: app_time_stats: avg=114.92ms min=53.27ms max=197.37ms count=10
+11-20 05:40:45.066 12452 12490 D EGL_emulation: app_time_stats: avg=115.03ms min=41.75ms max=233.49ms count=9
+11-20 05:40:45.708 12452 12490 D EGL_emulation: app_time_stats: avg=167.50ms min=68.35ms max=260.69ms count=6
+11-20 05:40:46.112 12452 12490 D EGL_emulation: app_time_stats: avg=92.63ms min=17.18ms max=153.04ms count=11
+11-20 05:40:46.778 12452 12490 D EGL_emulation: app_time_stats: avg=96.67ms min=61.01ms max=159.97ms count=11
+11-20 05:40:47.116 12452 12490 D EGL_emulation: app_time_stats: avg=82.89ms min=35.98ms max=115.09ms count=12
+11-20 05:40:47.515 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 82312(12MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 12MB/24MB, paused 12.132ms,4.586ms total 294.146ms
+11-20 05:40:47.797 12452 12490 D EGL_emulation: app_time_stats: avg=72.37ms min=39.50ms max=96.96ms count=14
+11-20 05:40:48.127 12452 12490 D EGL_emulation: app_time_stats: avg=49.89ms min=22.24ms max=96.79ms count=20
+11-20 05:40:48.534 12452 12452 D DownloadForegroundService$observeQueue: DownloadForegroundService: queue empty, stopping self
+11-20 05:40:48.571 12452 12452 D DownloadForegroundService$observeQueue: DownloadForegroundService: queue empty, stopping self
+11-20 05:40:48.803 12452 12452 D DownloadForegroundService: DownloadForegroundService: destroyed, WakeLock released
+11-20 05:40:48.803 12452 12490 D EGL_emulation: app_time_stats: avg=83.28ms min=45.76ms max=369.43ms count=12
+11-20 05:41:16.779 12452 12490 D EGL_emulation: app_time_stats: avg=2603.64ms min=22.12ms max=27945.01ms count=11
+11-20 05:41:16.837 12452 12490 D EGL_emulation: app_time_stats: avg=28033.05ms min=28033.05ms max=28033.05ms count=1
+11-20 05:41:17.637 12452 12463 I amesystem.debug: Background concurrent copying GC freed 59148(10MB) AllocSpace objects, 4(80KB) LOS objects, 49% free, 13MB/27MB, paused 3.062ms,1.978ms total 472.276ms
+11-20 05:41:17.795 12452 12490 D EGL_emulation: app_time_stats: avg=59.16ms min=31.56ms max=90.21ms count=17
+11-20 05:41:17.857 12452 12490 D EGL_emulation: app_time_stats: avg=59.75ms min=34.46ms max=97.57ms count=17
+11-20 05:41:18.812 12452 12490 D EGL_emulation: app_time_stats: avg=41.83ms min=25.13ms max=82.14ms count=24
+11-20 05:41:18.882 12452 12490 D EGL_emulation: app_time_stats: avg=45.22ms min=23.99ms max=73.65ms count=22
+11-20 05:41:19.817 12452 12490 D EGL_emulation: app_time_stats: avg=47.00ms min=13.20ms max=93.92ms count=21
+11-20 05:41:19.907 12452 12490 D EGL_emulation: app_time_stats: avg=56.42ms min=33.01ms max=121.97ms count=18
+11-20 05:41:20.861 12452 12490 D EGL_emulation: app_time_stats: avg=69.13ms min=41.92ms max=111.55ms count=15
+11-20 05:41:20.966 12452 12490 D EGL_emulation: app_time_stats: avg=69.32ms min=41.25ms max=115.18ms count=15
+11-20 05:41:21.893 12452 12490 D EGL_emulation: app_time_stats: avg=52.66ms min=15.19ms max=87.23ms count=19
+11-20 05:41:21.971 12452 12490 D EGL_emulation: app_time_stats: avg=61.99ms min=43.08ms max=124.35ms count=16
+11-20 05:41:22.899 12452 12490 D EGL_emulation: app_time_stats: avg=65.59ms min=15.03ms max=116.97ms count=15
+11-20 05:41:22.997 12452 12490 D EGL_emulation: app_time_stats: avg=72.43ms min=41.73ms max=115.49ms count=14
+11-20 05:41:23.914 12452 12490 D EGL_emulation: app_time_stats: avg=55.86ms min=20.97ms max=92.02ms count=18
+11-20 05:41:24.035 12452 12490 D EGL_emulation: app_time_stats: avg=60.65ms min=35.20ms max=105.43ms count=17
+11-20 05:41:24.938 12452 12490 D EGL_emulation: app_time_stats: avg=59.24ms min=29.08ms max=105.17ms count=17
+11-20 05:41:25.041 12452 12490 D EGL_emulation: app_time_stats: avg=61.81ms min=28.30ms max=111.75ms count=16
+11-20 05:41:25.963 12452 12490 D EGL_emulation: app_time_stats: avg=62.44ms min=15.32ms max=146.49ms count=16
+11-20 05:41:26.052 12452 12490 D EGL_emulation: app_time_stats: avg=75.89ms min=27.35ms max=173.58ms count=13
+11-20 05:41:26.964 12452 12490 D EGL_emulation: app_time_stats: avg=58.57ms min=33.52ms max=86.41ms count=17
+11-20 05:41:27.159 12452 12490 D EGL_emulation: app_time_stats: avg=64.59ms min=39.33ms max=111.34ms count=17
+11-20 05:41:27.937 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 95699(13MB) AllocSpace objects, 0(0B) LOS objects, 50% free, 13MB/27MB, paused 5.649ms,343us total 106.212ms
+11-20 05:41:28.030 12452 12490 D EGL_emulation: app_time_stats: avg=61.86ms min=28.97ms max=159.27ms count=17
+11-20 05:41:28.167 12452 12490 D EGL_emulation: app_time_stats: avg=70.99ms min=40.11ms max=218.88ms count=14
+11-20 05:41:29.050 12452 12490 D EGL_emulation: app_time_stats: avg=60.64ms min=36.49ms max=79.63ms count=16
+11-20 05:41:29.231 12452 12490 D EGL_emulation: app_time_stats: avg=74.22ms min=35.54ms max=119.12ms count=14
+11-20 05:41:30.052 12452 12490 D EGL_emulation: app_time_stats: avg=69.59ms min=20.32ms max=139.93ms count=14
+11-20 05:41:30.296 12452 12490 D EGL_emulation: app_time_stats: avg=81.36ms min=44.57ms max=134.37ms count=13
+11-20 05:41:31.055 12452 12490 D EGL_emulation: app_time_stats: avg=56.93ms min=17.57ms max=107.17ms count=17
+11-20 05:41:31.315 12452 12490 D EGL_emulation: app_time_stats: avg=67.29ms min=40.39ms max=101.15ms count=15
+11-20 05:41:32.079 12452 12490 D EGL_emulation: app_time_stats: avg=67.70ms min=34.53ms max=114.14ms count=15
+11-20 05:41:32.325 12452 12490 D EGL_emulation: app_time_stats: avg=83.31ms min=34.58ms max=124.44ms count=12
+11-20 05:41:33.124 12452 12490 D EGL_emulation: app_time_stats: avg=39.39ms min=9.42ms max=88.13ms count=25
+11-20 05:41:33.379 12452 12490 D EGL_emulation: app_time_stats: avg=53.97ms min=18.20ms max=127.08ms count=19
+11-20 05:41:34.125 12452 12490 D EGL_emulation: app_time_stats: avg=66.30ms min=30.93ms max=155.60ms count=15
+11-20 05:41:34.383 12452 12490 D EGL_emulation: app_time_stats: avg=58.48ms min=33.31ms max=131.55ms count=17
+11-20 05:41:34.861 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 106915(13MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 13MB/27MB, paused 17.677ms,2.189ms total 167.992ms
+11-20 05:41:35.148 12452 12490 D EGL_emulation: app_time_stats: avg=72.84ms min=34.71ms max=125.82ms count=14
+11-20 05:41:35.457 12452 12490 D EGL_emulation: app_time_stats: avg=82.25ms min=39.86ms max=143.98ms count=13
+11-20 05:41:36.155 12452 12490 D EGL_emulation: app_time_stats: avg=96.42ms min=21.04ms max=197.57ms count=10
+11-20 05:41:36.461 12452 12490 D EGL_emulation: app_time_stats: avg=143.19ms min=115.03ms max=213.01ms count=7
+11-20 05:41:37.317 12452 12490 D EGL_emulation: app_time_stats: avg=96.06ms min=36.97ms max=247.92ms count=12
+11-20 05:41:37.532 12452 12490 D EGL_emulation: app_time_stats: avg=105.99ms min=50.90ms max=357.81ms count=10
+11-20 05:41:38.341 12452 12490 D EGL_emulation: app_time_stats: avg=80.83ms min=43.52ms max=95.15ms count=12
+11-20 05:41:38.640 12452 12490 D EGL_emulation: app_time_stats: avg=109.98ms min=70.73ms max=171.90ms count=10
+11-20 05:41:39.374 12452 12490 D EGL_emulation: app_time_stats: avg=101.88ms min=41.37ms max=129.62ms count=10
+11-20 05:41:39.701 12452 12490 D EGL_emulation: app_time_stats: avg=117.25ms min=70.85ms max=173.13ms count=9
+11-20 05:41:40.415 12452 12490 D EGL_emulation: app_time_stats: avg=63.12ms min=20.03ms max=137.13ms count=16
+11-20 05:41:40.732 12452 12490 D EGL_emulation: app_time_stats: avg=93.05ms min=59.14ms max=145.75ms count=11
+11-20 05:41:41.431 12452 12490 D EGL_emulation: app_time_stats: avg=75.95ms min=19.83ms max=116.52ms count=13
+11-20 05:41:41.776 12452 12490 D EGL_emulation: app_time_stats: avg=74.12ms min=41.71ms max=102.97ms count=14
+11-20 05:41:42.341 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 87467(13MB) AllocSpace objects, 0(0B) LOS objects, 49% free, 13MB/27MB, paused 3.132ms,856us total 175.545ms
+11-20 05:41:42.499 12452 12490 D EGL_emulation: app_time_stats: avg=88.24ms min=33.76ms max=180.65ms count=12
+11-20 05:41:42.778 12452 12490 D EGL_emulation: app_time_stats: avg=110.27ms min=49.61ms max=187.11ms count=9
+11-20 05:41:43.532 12452 12490 D EGL_emulation: app_time_stats: avg=72.19ms min=20.35ms max=144.48ms count=14
+11-20 05:41:43.797 12452 12490 D EGL_emulation: app_time_stats: avg=84.33ms min=19.73ms max=168.41ms count=12
+11-20 05:41:44.555 12452 12490 D EGL_emulation: app_time_stats: avg=77.91ms min=53.27ms max=96.64ms count=13
+11-20 05:41:44.846 12452 12490 D EGL_emulation: app_time_stats: avg=80.30ms min=44.73ms max=135.83ms count=13
+11-20 05:41:45.596 12452 12490 D EGL_emulation: app_time_stats: avg=49.68ms min=13.48ms max=97.94ms count=20
+11-20 05:41:45.895 12452 12490 D EGL_emulation: app_time_stats: avg=52.45ms min=16.80ms max=180.42ms count=19
+11-20 05:41:46.637 12452 12490 D EGL_emulation: app_time_stats: avg=40.99ms min=25.57ms max=56.22ms count=25
+11-20 05:41:46.880 12452 12766 D RomOnDemandManager: downloadToFile complete: bytesWritten=136501802 contentLength=136501802
+11-20 05:41:46.886 12452 12766 D RomOnDemandManager$downloadRom: ROM downloaded successfully: Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (EDC).chd (136501802 bytes)
+11-20 05:41:46.894 12452 12522 D SaveQueueManager: SaveQueueManager: Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (EDC).chd saved successfully
+11-20 05:41:46.897 12452 12490 D EGL_emulation: app_time_stats: avg=42.60ms min=18.45ms max=77.82ms count=23
+11-20 05:41:46.985 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:41:46.985 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:41:47.103 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:41:49.927 12452 12490 D EGL_emulation: app_time_stats: avg=364.91ms min=19.42ms max=2753.80ms count=9
+11-20 05:41:58.282 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@79ecff6
+11-20 05:41:59.521 12452 12490 D EGL_emulation: app_time_stats: avg=4788.72ms min=4.65ms max=9572.80ms count=2
+11-20 05:41:59.845 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@caa2318
+11-20 05:41:59.993 12452 12490 D EGL_emulation: app_time_stats: avg=1002.99ms min=3.45ms max=12494.32ms count=13
+11-20 05:42:00.993 12452 12490 D EGL_emulation: app_time_stats: avg=19.42ms min=3.68ms max=148.53ms count=36
+11-20 05:42:02.001 12452 12490 D EGL_emulation: app_time_stats: avg=9.44ms min=2.55ms max=41.02ms count=52
+11-20 05:42:03.009 12452 12490 D EGL_emulation: app_time_stats: avg=11.77ms min=2.94ms max=71.66ms count=46
+11-20 05:42:04.017 12452 12490 D EGL_emulation: app_time_stats: avg=40.63ms min=4.80ms max=211.87ms count=21
+11-20 05:42:04.311 12452 12452 D InsetsController: show(ime(), fromIme=true)
+11-20 05:42:04.350 12452 12613 I jank_cuj_events_begin_request: [69,1795153324349527000,2280349750700,2280349790700,0@1@app.retrogamesystem.debug]
+11-20 05:42:04.711 12452 12613 I jank_cuj_events_end_request: [69,1795153324710396000,2280710434900,2280710454600]
+11-20 05:42:04.711 12452 12452 I ImeTracker: app.retrogamesystem.debug:5f3977c8: onShown
+11-20 05:42:05.018 12452 12490 D EGL_emulation: app_time_stats: avg=49.82ms min=15.57ms max=161.51ms count=19
+11-20 05:42:06.310 12452 12490 D EGL_emulation: app_time_stats: avg=24.61ms min=3.69ms max=334.08ms count=42
+11-20 05:42:07.331 12452 12490 D EGL_emulation: app_time_stats: avg=37.99ms min=4.04ms max=499.09ms count=22
+11-20 05:42:08.331 12452 12490 D EGL_emulation: app_time_stats: avg=499.90ms min=498.25ms max=501.54ms count=2
+11-20 05:42:08.787 12452 12613 I jank_cuj_events_begin_request: [69,1795153328784706000,2284784939700,2284784990800,1@1@app.retrogamesystem.debug]
+11-20 05:42:08.835 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=ImeCallback=ImeOnBackInvokedCallback@259913507 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@6b87e4e
+11-20 05:42:09.093 12452 12613 I jank_cuj_events_end_request: [69,1795153329093297000,2285093338900,2285093376700]
+11-20 05:42:09.098 12452 12452 I ImeTracker: app.retrogamesystem.debug:411b67f: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+11-20 05:42:09.107 12452 12452 I ImeTracker: app.retrogamesystem.debug:dda18dd2: onHidden
+11-20 05:42:09.367 12452 12490 D EGL_emulation: app_time_stats: avg=43.70ms min=3.99ms max=475.38ms count=20
+11-20 05:42:10.373 12452 12490 D EGL_emulation: app_time_stats: avg=502.85ms min=498.65ms max=507.06ms count=2
+11-20 05:42:11.385 12452 12490 D EGL_emulation: app_time_stats: avg=505.41ms min=500.87ms max=509.96ms count=2
+11-20 05:42:12.897 12452 12490 D EGL_emulation: app_time_stats: avg=503.83ms min=495.68ms max=512.52ms count=3
+11-20 05:42:13.903 12452 12490 D EGL_emulation: app_time_stats: avg=502.71ms min=500.20ms max=505.23ms count=2
+11-20 05:42:14.919 12452 12490 D EGL_emulation: app_time_stats: avg=507.04ms min=501.44ms max=512.64ms count=2
+11-20 05:42:16.414 12452 12490 D EGL_emulation: app_time_stats: avg=498.11ms min=496.62ms max=499.65ms count=3
+11-20 05:42:17.936 12452 12490 D EGL_emulation: app_time_stats: avg=506.94ms min=499.34ms max=521.87ms count=3
+11-20 05:42:19.431 12452 12490 D EGL_emulation: app_time_stats: avg=497.77ms min=493.12ms max=500.72ms count=3
+11-20 05:42:20.454 12452 12490 D EGL_emulation: app_time_stats: avg=511.35ms min=506.91ms max=515.79ms count=2
+11-20 05:42:21.951 12452 12490 D EGL_emulation: app_time_stats: avg=498.43ms min=494.70ms max=503.28ms count=3
+11-20 05:42:22.420 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:42:22.420 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:42:22.455 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:42:22.455 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:42:22.615 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:42:22.954 12452 12490 D EGL_emulation: app_time_stats: avg=65.60ms min=10.43ms max=420.52ms count=14
+11-20 05:42:23.281 12452 12452 W RemoteInputConnectionImpl: requestCursorAnchorInfo on inactive InputConnection
+11-20 05:42:24.690 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@acbb546
+11-20 05:42:24.720 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:42:24.720 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:42:24.826 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:42:40.020 12452 12452 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@c313794
+11-20 05:42:40.067 12452 12766 D SaveQueueManager: SaveQueueManager: starting save for Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd
+11-20 05:42:40.084 12452 12522 D RomOnDemandManager$downloadRom: On-demand lookup: https://emuladores.pythonanywhere.com/find_by_file?path=Resident%20Evil%202%20(Europe)%20(En%2CFr)%20(Disc%201).chd&source_id=1&system=dreamcast
+11-20 05:42:40.123 12452 12522 D TrafficStats: tagSocket(121) with statsTag=0xffffffff, statsUid=-1
+11-20 05:42:40.149 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:42:40.149 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:42:40.187 12452 12452 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-20 05:42:40.187 12452 12452 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-20 05:42:40.363 12452 12490 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-20 05:42:40.579 12452 12490 D EGL_emulation: app_time_stats: avg=760.81ms min=8.30ms max=16970.67ms count=23
+11-20 05:42:40.583 12452 12452 D DownloadForegroundService: DownloadForegroundService: WakeLock acquired
+11-20 05:42:41.178 12452 12522 D RomOnDemandManager$downloadRom: On-demand download URL for Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd: https://archive.org/download/sega-dreamcast-redump-collection/Resident%20Evil%202%20%28Europe%29%20%28En%2CFr%29%20%28Disc%201%29.chd
+11-20 05:42:41.671 12452 12522 D TrafficStats: tagSocket(192) with statsTag=0xffffffff, statsUid=-1
+11-20 05:42:41.738 12452 12490 D EGL_emulation: app_time_stats: avg=17.68ms min=2.27ms max=259.71ms count=45
+11-20 05:42:42.751 12452 12490 D EGL_emulation: app_time_stats: avg=3.33ms min=2.05ms max=8.07ms count=61
+11-20 05:42:43.371 12452 12522 D TrafficStats: tagSocket(199) with statsTag=0xffffffff, statsUid=-1
+11-20 05:42:43.766 12452 12490 D EGL_emulation: app_time_stats: avg=3.01ms min=2.15ms max=6.94ms count=61
+11-20 05:42:44.768 12452 12490 D EGL_emulation: app_time_stats: avg=2.89ms min=1.95ms max=6.19ms count=60
+11-20 05:42:45.044 12452 12522 D RomOnDemandManager: downloadToFile HTTP 200 contentLength=779107143 url=https://archive.org/download/sega-dreamcast-redump-collection/Resident%20Evil%202%20%28Europe%29%20%28En%2CFr%29%20%28Disc%201%29.chd
+11-20 05:42:45.092 12452 12490 D EGL_emulation: app_time_stats: avg=900.88ms min=27.50ms max=4131.30ms count=5
+11-20 05:42:45.789 12452 12490 D EGL_emulation: app_time_stats: avg=29.00ms min=2.28ms max=181.67ms count=27
+11-20 05:42:46.102 12452 12490 D EGL_emulation: app_time_stats: avg=71.90ms min=21.63ms max=191.34ms count=14
+11-20 05:42:46.823 12452 12490 D EGL_emulation: app_time_stats: avg=43.79ms min=18.76ms max=68.16ms count=23
+11-20 05:42:47.114 12452 12490 D EGL_emulation: app_time_stats: avg=49.24ms min=26.56ms max=98.44ms count=20
+11-20 05:42:47.831 12452 12490 D EGL_emulation: app_time_stats: avg=52.61ms min=40.67ms max=65.84ms count=19
+11-20 05:42:48.168 12452 12490 D EGL_emulation: app_time_stats: avg=52.19ms min=37.65ms max=76.90ms count=20
+11-20 05:42:48.857 12452 12490 D EGL_emulation: app_time_stats: avg=50.80ms min=31.84ms max=68.78ms count=20
+11-20 05:42:49.100 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 367511(11MB) AllocSpace objects, 0(0B) LOS objects, 41% free, 16MB/27MB, paused 6.060ms,169us total 162.770ms
+11-20 05:42:49.219 12452 12490 D EGL_emulation: app_time_stats: avg=51.83ms min=31.37ms max=69.35ms count=20
+11-20 05:42:49.898 12452 12490 D EGL_emulation: app_time_stats: avg=60.77ms min=44.23ms max=83.25ms count=17
+11-20 05:42:50.237 12452 12490 D EGL_emulation: app_time_stats: avg=67.28ms min=33.22ms max=98.86ms count=15
+11-20 05:42:50.909 12452 12490 D EGL_emulation: app_time_stats: avg=55.51ms min=22.72ms max=99.93ms count=18
+11-20 05:42:51.242 12452 12490 D EGL_emulation: app_time_stats: avg=54.62ms min=15.93ms max=105.93ms count=18
+11-20 05:42:51.934 12452 12490 D EGL_emulation: app_time_stats: avg=40.27ms min=15.20ms max=81.76ms count=25
+11-20 05:42:52.335 12452 12490 D EGL_emulation: app_time_stats: avg=51.65ms min=29.33ms max=114.67ms count=21
+11-20 05:42:52.965 12452 12490 D EGL_emulation: app_time_stats: avg=53.86ms min=23.97ms max=105.75ms count=19
+11-20 05:42:53.352 12452 12490 D EGL_emulation: app_time_stats: avg=63.14ms min=41.97ms max=86.30ms count=16
+11-20 05:42:53.990 12452 12490 D EGL_emulation: app_time_stats: avg=63.59ms min=36.31ms max=84.92ms count=16
+11-20 05:42:54.363 12452 12490 D EGL_emulation: app_time_stats: avg=70.95ms min=35.27ms max=115.50ms count=14
+11-20 05:42:55.033 12452 12490 D EGL_emulation: app_time_stats: avg=72.74ms min=28.01ms max=147.34ms count=14
+11-20 05:42:55.434 12452 12490 D EGL_emulation: app_time_stats: avg=74.43ms min=18.86ms max=112.38ms count=14
+11-20 05:42:56.046 12452 12490 D EGL_emulation: app_time_stats: avg=76.53ms min=45.77ms max=179.32ms count=13
+11-20 05:42:56.488 12452 12490 D EGL_emulation: app_time_stats: avg=80.38ms min=36.99ms max=159.97ms count=13
+11-20 05:42:57.080 12452 12490 D EGL_emulation: app_time_stats: avg=73.20ms min=40.29ms max=112.40ms count=14
+11-20 05:42:57.541 12452 12490 D EGL_emulation: app_time_stats: avg=60.92ms min=29.89ms max=108.34ms count=17
+11-20 05:42:58.110 12452 12490 D EGL_emulation: app_time_stats: avg=56.74ms min=36.22ms max=97.24ms count=18
+11-20 05:42:58.569 12452 12490 D EGL_emulation: app_time_stats: avg=63.75ms min=35.13ms max=105.87ms count=16
+11-20 05:42:59.125 12452 12490 D EGL_emulation: app_time_stats: avg=46.74ms min=12.50ms max=84.81ms count=20
+11-20 05:42:59.595 12452 12490 D EGL_emulation: app_time_stats: avg=56.65ms min=27.95ms max=95.48ms count=18
+11-20 05:43:00.156 12452 12490 D EGL_emulation: app_time_stats: avg=63.75ms min=40.43ms max=91.33ms count=16
+11-20 05:43:00.598 12452 12490 D EGL_emulation: app_time_stats: avg=76.65ms min=47.00ms max=110.58ms count=13
+11-20 05:43:01.210 12452 12490 D EGL_emulation: app_time_stats: avg=61.22ms min=35.77ms max=96.80ms count=17
+11-20 05:43:01.646 12452 12490 D EGL_emulation: app_time_stats: avg=54.20ms min=34.33ms max=87.66ms count=19
+11-20 05:43:02.219 12452 12490 D EGL_emulation: app_time_stats: avg=52.55ms min=28.26ms max=85.00ms count=19
+11-20 05:43:02.680 12452 12490 D EGL_emulation: app_time_stats: avg=56.94ms min=25.85ms max=88.72ms count=18
+11-20 05:43:03.229 12452 12490 D EGL_emulation: app_time_stats: avg=55.04ms min=29.68ms max=91.69ms count=18
+11-20 05:43:03.739 12452 12490 D EGL_emulation: app_time_stats: avg=52.45ms min=23.86ms max=85.70ms count=20
+11-20 05:43:04.234 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 346458(11MB) AllocSpace objects, 0(0B) LOS objects, 41% free, 16MB/27MB, paused 8.041ms,670us total 64.459ms
+11-20 05:43:04.248 12452 12490 D EGL_emulation: app_time_stats: avg=50.33ms min=27.06ms max=60.77ms count=20
+11-20 05:43:04.791 12452 12490 D EGL_emulation: app_time_stats: avg=54.69ms min=41.45ms max=64.57ms count=19
+11-20 05:43:05.257 12452 12490 D EGL_emulation: app_time_stats: avg=58.43ms min=44.25ms max=83.20ms count=17
+11-20 05:43:05.848 12452 12490 D EGL_emulation: app_time_stats: avg=65.21ms min=47.11ms max=87.01ms count=16
+11-20 05:43:06.302 12452 12490 D EGL_emulation: app_time_stats: avg=49.54ms min=9.37ms max=83.06ms count=20
+11-20 05:43:06.882 12452 12490 D EGL_emulation: app_time_stats: avg=78.01ms min=36.11ms max=162.77ms count=13
+11-20 05:43:07.350 12452 12490 D EGL_emulation: app_time_stats: avg=68.34ms min=19.13ms max=122.32ms count=15
+11-20 05:43:07.885 12452 12490 D EGL_emulation: app_time_stats: avg=90.80ms min=54.35ms max=119.14ms count=11
+11-20 05:43:08.382 12452 12490 D EGL_emulation: app_time_stats: avg=77.92ms min=12.38ms max=113.58ms count=13
+11-20 05:43:08.949 12452 12490 D EGL_emulation: app_time_stats: avg=87.69ms min=40.07ms max=125.58ms count=12
+11-20 05:43:09.384 12452 12490 D EGL_emulation: app_time_stats: avg=71.30ms min=35.19ms max=132.71ms count=14
+11-20 05:43:09.991 12452 12490 D EGL_emulation: app_time_stats: avg=72.99ms min=53.36ms max=124.42ms count=14
+11-20 05:43:10.411 12452 12490 D EGL_emulation: app_time_stats: avg=52.93ms min=19.98ms max=90.37ms count=19
+11-20 05:43:11.015 12452 12490 D EGL_emulation: app_time_stats: avg=45.96ms min=27.98ms max=70.51ms count=22
+11-20 05:43:11.469 12452 12490 D EGL_emulation: app_time_stats: avg=47.82ms min=31.25ms max=67.24ms count=22
+11-20 05:43:12.069 12452 12490 D EGL_emulation: app_time_stats: avg=65.39ms min=43.54ms max=104.46ms count=16
+11-20 05:43:12.496 12452 12490 D EGL_emulation: app_time_stats: avg=67.89ms min=31.98ms max=98.12ms count=15
+11-20 05:43:13.071 12452 12490 D EGL_emulation: app_time_stats: avg=55.13ms min=28.93ms max=133.56ms count=18
+11-20 05:43:13.519 12452 12490 D EGL_emulation: app_time_stats: avg=52.91ms min=27.61ms max=129.08ms count=19
+11-20 05:43:14.095 12452 12490 D EGL_emulation: app_time_stats: avg=77.40ms min=35.16ms max=192.43ms count=13
+11-20 05:43:14.525 12452 12490 D EGL_emulation: app_time_stats: avg=62.62ms min=23.60ms max=255.32ms count=16
+11-20 05:43:15.123 12452 12490 D EGL_emulation: app_time_stats: avg=51.09ms min=30.92ms max=82.66ms count=20
+11-20 05:43:15.541 12452 12490 D EGL_emulation: app_time_stats: avg=72.09ms min=30.82ms max=138.19ms count=14
+11-20 05:43:16.137 12452 12490 D EGL_emulation: app_time_stats: avg=90.07ms min=20.73ms max=132.45ms count=11
+11-20 05:43:16.563 12452 12490 D EGL_emulation: app_time_stats: avg=67.72ms min=37.83ms max=144.94ms count=15
+11-20 05:43:17.178 12452 12490 D EGL_emulation: app_time_stats: avg=60.80ms min=38.02ms max=113.74ms count=17
+11-20 05:43:17.570 12452 12490 D EGL_emulation: app_time_stats: avg=70.56ms min=42.23ms max=115.90ms count=14
+11-20 05:43:18.239 12452 12490 D EGL_emulation: app_time_stats: avg=80.95ms min=47.32ms max=113.38ms count=13
+11-20 05:43:18.623 12452 12490 D EGL_emulation: app_time_stats: avg=59.32ms min=26.72ms max=111.67ms count=17
+11-20 05:43:19.262 12452 12490 D EGL_emulation: app_time_stats: avg=92.21ms min=55.63ms max=166.51ms count=11
+11-20 05:43:19.681 12452 12490 D EGL_emulation: app_time_stats: avg=87.07ms min=57.60ms max=112.14ms count=12
+11-20 05:43:20.318 12452 12490 D EGL_emulation: app_time_stats: avg=80.83ms min=54.70ms max=121.43ms count=13
+11-20 05:43:20.688 12452 12490 D EGL_emulation: app_time_stats: avg=83.05ms min=60.70ms max=160.58ms count=12
+11-20 05:43:21.430 12452 12490 D EGL_emulation: app_time_stats: avg=107.14ms min=61.70ms max=242.00ms count=10
+11-20 05:43:21.497 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 345757(11MB) AllocSpace objects, 0(0B) LOS objects, 41% free, 16MB/27MB, paused 8.545ms,1.342ms total 77.040ms
+11-20 05:43:21.759 12452 12490 D EGL_emulation: app_time_stats: avg=96.81ms min=58.30ms max=274.87ms count=11
+11-20 05:43:22.456 12452 12490 D EGL_emulation: app_time_stats: avg=60.07ms min=29.78ms max=106.76ms count=17
+11-20 05:43:22.781 12452 12490 D EGL_emulation: app_time_stats: avg=55.97ms min=30.81ms max=100.51ms count=18
+11-20 05:43:23.458 12452 12490 D EGL_emulation: app_time_stats: avg=55.38ms min=29.75ms max=91.22ms count=18
+11-20 05:43:23.813 12452 12490 D EGL_emulation: app_time_stats: avg=50.29ms min=13.81ms max=64.84ms count=20
+11-20 05:43:24.484 12452 12490 D EGL_emulation: app_time_stats: avg=53.16ms min=37.17ms max=70.38ms count=19
+11-20 05:43:24.877 12452 12490 D EGL_emulation: app_time_stats: avg=55.23ms min=39.47ms max=74.10ms count=19
+11-20 05:43:25.508 12452 12490 D EGL_emulation: app_time_stats: avg=53.48ms min=26.54ms max=85.12ms count=19
+11-20 05:43:25.883 12452 12490 D EGL_emulation: app_time_stats: avg=47.10ms min=27.50ms max=71.84ms count=21
+11-20 05:43:26.544 12452 12490 D EGL_emulation: app_time_stats: avg=46.90ms min=29.31ms max=79.48ms count=22
+11-20 05:43:26.890 12452 12490 D EGL_emulation: app_time_stats: avg=55.26ms min=33.69ms max=119.96ms count=18
+11-20 05:43:27.555 12452 12490 D EGL_emulation: app_time_stats: avg=58.92ms min=31.58ms max=151.18ms count=17
+11-20 05:43:27.896 12452 12490 D EGL_emulation: app_time_stats: avg=47.41ms min=31.92ms max=105.00ms count=21
+11-20 05:43:28.578 12452 12490 D EGL_emulation: app_time_stats: avg=44.24ms min=27.27ms max=58.24ms count=23
+11-20 05:43:28.899 12452 12490 D EGL_emulation: app_time_stats: avg=47.34ms min=29.59ms max=75.78ms count=21
+11-20 05:43:29.609 12452 12490 D EGL_emulation: app_time_stats: avg=44.14ms min=30.62ms max=66.54ms count=23
+11-20 05:43:29.965 12452 12490 D EGL_emulation: app_time_stats: avg=42.26ms min=23.72ms max=84.88ms count=25
+11-20 05:43:30.614 12452 12490 D EGL_emulation: app_time_stats: avg=42.93ms min=21.88ms max=80.98ms count=23
+11-20 05:43:31.015 12452 12490 D EGL_emulation: app_time_stats: avg=49.12ms min=33.26ms max=70.66ms count=21
+11-20 05:43:31.618 12452 12490 D EGL_emulation: app_time_stats: avg=49.84ms min=28.06ms max=69.53ms count=20
+11-20 05:43:32.028 12452 12490 D EGL_emulation: app_time_stats: avg=35.55ms min=6.99ms max=59.40ms count=27
+11-20 05:43:32.627 12452 12490 D EGL_emulation: app_time_stats: avg=41.77ms min=26.11ms max=52.08ms count=24
+11-20 05:43:33.030 12452 12490 D EGL_emulation: app_time_stats: avg=45.04ms min=26.62ms max=65.88ms count=22
+11-20 05:43:33.630 12452 12490 D EGL_emulation: app_time_stats: avg=45.19ms min=28.97ms max=70.63ms count=22
+11-20 05:43:33.825 12452 12463 I amesystem.debug: Background young concurrent copying GC freed 344905(11MB) AllocSpace objects, 0(0B) LOS objects, 40% free, 16MB/27MB, paused 7.673ms,1.028ms total 110.080ms
+11-20 05:43:34.070 12452 12490 D EGL_emulation: app_time_stats: avg=48.89ms min=28.40ms max=99.94ms count=21
+11-20 05:43:34.648 12452 12490 D EGL_emulation: app_time_stats: avg=72.07ms min=44.02ms max=104.71ms count=14
+11-20 05:43:35.090 12452 12490 D EGL_emulation: app_time_stats: avg=58.55ms min=13.98ms max=101.76ms count=17
+11-20 05:43:35.735 12452 12490 D EGL_emulation: app_time_stats: avg=50.83ms min=20.42ms max=108.10ms count=21
+11-20 05:43:36.157 12452 12490 D EGL_emulation: app_time_stats: avg=55.13ms min=26.13ms max=92.13ms count=19
+11-20 05:43:36.756 12452 12490 D EGL_emulation: app_time_stats: avg=59.56ms min=35.17ms max=100.73ms count=17
+11-20 05:43:37.225 12452 12490 D EGL_emulation: app_time_stats: avg=58.70ms min=28.88ms max=95.81ms count=18
+11-20 05:43:37.780 12452 12490 D EGL_emulation: app_time_stats: avg=78.28ms min=39.97ms max=106.76ms count=13
+11-20 05:43:38.251 12452 12490 D EGL_emulation: app_time_stats: avg=84.51ms min=70.75ms max=104.36ms count=12
+11-20 05:43:38.791 12452 12490 D EGL_emulation: app_time_stats: avg=76.85ms min=44.65ms max=115.43ms count=13
+11-20 05:43:39.278 12452 12490 D EGL_emulation: app_time_stats: avg=56.64ms min=30.85ms max=95.40ms count=18
+11-20 05:43:39.824 12452 12490 D EGL_emulation: app_time_stats: avg=56.92ms min=27.85ms max=78.67ms count=18
+11-20 05:43:40.346 12452 12490 D EGL_emulation: app_time_stats: avg=62.06ms min=42.35ms max=80.80ms count=17
+11-20 05:43:40.827 12452 12490 D EGL_emulation: app_time_stats: avg=66.38ms min=34.26ms max=102.93ms count=15
+11-20 05:43:41.383 12452 12490 D EGL_emulation: app_time_stats: avg=48.69ms min=17.88ms max=83.64ms count=21
+11-20 05:43:41.834 12452 12522 D SaveQueueManager: SaveQueueManager: Resident Evil 2 (Europe) (En,Fr) (Disc 1).chd cancelled
+11-20 05:43:41.835 12452 12452 D DownloadForegroundService$observeQueue: DownloadForegroundService: queue empty, stopping self
+11-20 05:43:41.851 12452 12490 D EGL_emulation: app_time_stats: avg=52.73ms min=33.22ms max=111.15ms count=19
+11-20 05:43:41.910 12452 12452 D DownloadForegroundService: DownloadForegroundService: destroyed, WakeLock released

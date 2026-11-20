@@ -208,3 +208,63 @@ Commit `7afc802` (`TASK-0006: fix(download): ...`).
   `TEST-...DownloadNotificationThrottleTest.xml` 7 testes, 0 falhas; total da lane 108 testes, 0 falhas, 0 erros,
   1 pulado (a linha de base de 54 do manual é de 2026-10-09 e cresceu desde então). `gradlew :lemuroid-app:ktlintCheck`
   `BUILD SUCCESSFUL`, nenhum apontamento nos 3 arquivos; `gradlew :lemuroid-app:lintFreeBundleDebug` `BUILD SUCCESSFUL`.
+
+## Teste
+
+### Teste rodada 1 — aprovado (pipeline 20261119-2228, 2026-11-20)
+
+Ambiente: `emulator-5554` = `lemu_3ds_api34` (Android 14, x86_64), escolhido pelo `aparelho-instalar` porque o moto g86
+(`ZY32LMNN9B`) estava `offline` no adb. `sync`: base `origin/version10` = `daec972`, sem mudança. Evidência em
+`../../evidencias/TASK-0006/` (os APKs ficam fora do git por `*.apk`; os logcat brutos em
+`<pasta do pipeline>/reports/TASK-0006-evidencias-brutas/`, e os commitados são filtrados pelo PID do meu launch e pelo
+`NotificationService`).
+
+**Binários.** Base: `git checkout --detach daec972` + `build --bug TASK-0006 --emulador` → `base-daec972-x86_64.apk`
+sha256 `25aba79e…b6dbd6`, igual ao `base.apk` instalado (`lastUpdateTime 05:06:47` UTC). Fix: `build --emulador` em
+`1ab01e2` (BUILD SUCCESSFUL, 108 testes / 0 falhas / 1 pulado; `DownloadNotificationThrottleTest` 7/7) →
+`fix-1ab01e2-x86_64.apk` sha256 `8020f7fc…8b1eb3`, igual ao `base.apk` instalado (`lastUpdateTime 05:29:46` UTC).
+`versionName 1.17.36-DEBUG` nos dois.
+
+**Caminho (o mesmo nas duas versões, pela UI):** Início → Busca → "symphony of the night" → *Castlevania: Symphony of
+the Night* (PSX, 384.249.945 bytes, não baixado) → **Save** → folha da fila aberta, download correndo.
+
+| | Base `daec972` (PID 6127) | Fix `1ab01e2` (PID 12452) |
+|---|---|---|
+| `dumpsys notification`, `numEnqueuedByApp` em ~32 s de download | 4588 → 5312 (**+724**, ~22/s) | 6693 → 6718 (**+25**) |
+| `numUpdatedByApp` no mesmo intervalo | +198 (~73% dos enqueues descartados) | +24 (nada descartado) |
+| `NotificationService: Package enqueue rate is … Shedding … package=app.retrogamesystem.debug` | **46** em ~4 min | **0** em ~14 min e 5 downloads |
+| `am trace-ipc` 30 s | dump do processo do app falha 2× com `IOException: Timeout`; o logcat mostra por quê: o dump roda na **main** (`ActivityThread$H` → `handleStopBinderTrackingAndDump`) e só começou ~5 s depois do stop (`EPIPE` às 05:22:39) | dump sai: **28** `enqueueNotificationWithTag` (+28 `createNotificationChannels`, +28 `getIntentSenderWithFeature`), todos com pilha `publishQueueNotification` ← `observeQueue$1$1$1.invokeSuspend` ← `LimitedDispatcher$Worker` ← `CoroutineScheduler$Worker.run` (IO); 0 na main |
+| `Choreographer: Skipped N frames` na main do app | **110** eventos, 7.820 frames, máx. 492 (~8 s), 05:21:28–05:25:42 | **8** eventos, 360 frames, máx. 89 (abertura do app e começo de cada serviço) |
+| cortina | barra andando (`base-cortina-10s.png`) | ~10% aos 10 s, ~19% aos 20 s (`fix-cortina-10s.png`, `fix-cortina-20s.png`) |
+
+O `trace-ipc` não despeja o processo na base, mas o plano aceita o `Shedding events` como sinal quando ele aparece.
+Ele apareceu, e os contadores do `NotificationManagerService` dão os números das duas versões. Sem root no emulador
+(`ro.debuggable=0`, `debuggerd: root is required`) não há amostra de pilha da main na base. O `createNotificationChannels`
+ainda aparece no fix, como esperado: a guarda do canal é a TASK-0005, que esta lane não contém. No fix ele sai a ~1/s e no IO.
+
+- **T2: aprovado.** Na base o sintoma aparece (centenas de enqueue/30 s, `Shedding`, a main não atende nem o dump). No fix
+  ele some: 25–28 enqueue/30 s (≤ ~35), em thread de IO, sem `Shedding`, e o percentual continua subindo.
+- **T2, cancelar pelo X** (`fix-cancelar.txt`, `fix-cortina-5s-apos-cancelar.png`): Resident Evil 2 (DC) baixando com a
+  notificação na cortina; X às 05:43:42.014 → 05:43:42.282 sem notificação do pacote e sem serviço. Conferido de novo
+  aos +8 s e +19 s e no print aos 5 s: a notificação não volta. Na base, o mesmo X às 05:25:43 também a removia.
+- **T3(1) download que termina:** Castlevania (384 MB) terminou às 05:33:13 e Kirby's Adventure (US) (NES, 786 KB)
+  às 05:33:44. Nos dois casos: `queue empty, stopping self` → `destroyed`, 0 notificação do pacote e item como salvo.
+- **T3(2) dois jogos na fila** (`fix-t3-fila.txt`): RE2 baixando (`Downloading… 10%`) + Crash Bandicoot 2 salvo às
+  05:39:17 → às 05:39:17.973 o texto já é `+ 1 more in queue`. X no RE2 às 05:39:52.831 → às 05:39:53.138 o título é
+  `Crash Bandicoot 2: Cortex Strikes Back`. As duas trocas foram publicadas em < 1 s, sem esperar a janela de 1 s.
+- **T3(3) pausar e retomar com um item** (`fix-t3-pausa.txt`): Pause às 05:40:48 → serviço e notificação somem e a
+  folha mostra `Paused`. Resume às 05:41:17 → download continua (71% → 84%) sem serviço e sem notificação. É o que o
+  plano dá como comportamento da base (achado lateral `2026-11-19-retomar-download-pausado-sem-foreground-service`,
+  `ensureProcessorRunning` não religa o serviço), não regressão. Não refiz pausar/retomar no APK da base nesta rodada.
+- **T3 testes de unidade:** 108 / 0 falhas / 1 pulado (lane, depois do `build` do fix), `DownloadNotificationThrottleTest` 7/7.
+- **T3 ktlint/lint:** `gradlew :lemuroid-app:ktlintCheck` BUILD SUCCESSFUL (41 s), nenhum apontamento nos 3 arquivos; `gradlew :lemuroid-app:lintFreeBundleDebug` BUILD SUCCESSFUL (3m27s), sem achado novo.
+- **T4 logcat do PID 12452 (05:29:57–05:44:11):** nenhum `AndroidRuntime`/`FATAL`/`am_anr`/`am_crash` do app (as linhas
+  `AndroidRuntime` da janela são do monkey/uiautomator, uid 2000). Os `E` do app são só
+  `OpenGLRenderer: Unable to match the desired swap behavior`, que também aparecem na base. Nenhuma exceção vinda de
+  `DownloadForegroundService`.
+- **Observação (não é defeito desta task):** nos primeiros ~10 s depois do start do serviço o `dumpsys notification` não
+  tem a notificação do pacote (RE2: ausente aos 8 s, presente aos 32 s). É o adiamento de exibição de notificação de
+  foreground service do Android 12+. Ele vale para o `startForeground` do `onStartCommand`, que esta task não mudou, e
+  por isso o Kirby (2 s de download) nunca apareceu na cortina.
+- **Falta para fechar a demanda** (fora desta task): o ANR em si não se provoca sob demanda (depende da latência do
+  `system_server`), e o que se provou foi a saída do Binder por tick da main. A guarda do canal é da TASK-0005.

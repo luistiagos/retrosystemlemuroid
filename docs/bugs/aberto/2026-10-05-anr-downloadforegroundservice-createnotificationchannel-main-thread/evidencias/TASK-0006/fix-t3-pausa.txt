@@ -1,0 +1,8 @@
+# T3(3) pausar/retomar (item unico)
+05:40:24 svc=2 notif=4 ui=t='Saving… 33%'
+pause 05:40:48
+05:40:51 svc=0 notif=0 ui=t='Paused'
+05:40:58 svc=0 notif=0 ui=t='Paused'
+resume 05:41:17
+05:41:20 svc=0 notif=0 ui=t='Saving… 71%'
+05:41:30 svc=0 notif=0 ui=t='Saving… 84%'
