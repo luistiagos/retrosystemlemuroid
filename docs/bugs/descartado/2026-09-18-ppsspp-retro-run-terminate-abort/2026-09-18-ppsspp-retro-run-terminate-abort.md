@@ -1,3 +1,6 @@
+---
+motivo: "Ja corrigido e no ar: o core PPSSPP patchado (lemuroid1, lemuroid-cores 55d29c2, tag 1.21.0) e o empacotado na base (cores 1.24.0, app 1.17.36) e a telemetria nao tem nenhum SIGABRT terminating em retro_run desde a 1.17.24 (14 SIGABRT nativos lidos, todos de outros bugs); nada a fazer neste repo."
+---
 # [BUG] Crash nativo no core PSP (PPSSPP) — SIGABRT / `std::terminate()` dentro de `retro_run`
 
 **Data:** 2026-09-18
@@ -482,3 +485,69 @@ passam.
 2. Na telemetria, depois do release: `libppsspp_libretro_android.so` + `terminating` em versão
    ≥ 1.17.24 = o patch não cobriu algum caminho — comparar o frame com `retro_run+1056`.
 3. Sem reincidência → mover para `done`.
+
+## Planejamento (pipeline 20261119-2228, 2026-11-19)
+
+**Veredito:** zero tasks, `descartado` — a correção já está no ar: o core PPSSPP com o patch
+(`v1.19.3-987-geab2cc85bc-lemuroid1`, `lemuroid-cores` `55d29c2`, tag `1.21.0`) é o que a base
+empacota hoje (cores `1.24.0`, app `1.17.36`), e a telemetria não traz nenhuma reincidência do
+`terminating` em `retro_run` desde a 1.17.24 (6 semanas). Não há código a mudar neste repo; o
+estado real é "concluído" — `descartado` é o destino que o planning tem para "nada a fazer".
+Se o dono quiser o bug em `concluido/`, é movimento à mão com `movido_por`.
+**Complexidade:** n/a (sem task) — o fix, quando foi feito, era `alta` (dentro do core).
+**Severidade:** alto (histórico: todo jogo de PSP podia abortar o `:game` durante a partida).
+**Arquivos a alterar (reserva da onda):** nenhum.
+
+### Causa raiz
+Já registrada acima ("Verificação da reabertura" e "Execução (B)"): `EmuThreadStart` inline em
+`retro_run` recriava `std::thread` com a anterior viva → `std::thread::operator=` → `std::terminate`.
+Corrigida no fonte do core e publicada. Nada novo nesta passada.
+
+### Provas (comando literal -> resultado)
+1. **O core empacotado é o corrigido** (árvore principal, só leitura):
+   `md5sum lemuroid-cores/bundled-cores/src/main/jniLibs/{arm64-v8a,armeabi-v7a}/libppsspp_libretro_android.so`
+   → `1526855f4da0713e0c05cde8e807d62e` e `c828161e17301d899f008c336ebe6685` — exatamente os md5 do
+   binário final da "Execução (B)"; `grep -a -o "v1\.19\.3-987-geab2cc85bc[-a-z0-9]*"` nos dois →
+   `v1.19.3-987-geab2cc85bc-lemuroid1`. `git -C lemuroid-cores tag --contains 55d29c2` →
+   `1.21.0 1.22.0 1.23.0 1.24.0`; `git log -- …/arm64-v8a/libppsspp_libretro_android.so` → último
+   commit é o `55d29c2` (nenhum core posterior trocou o binário). Ponteiro do submódulo na base:
+   `9893de6` (= tag `1.24.0`); `CoreDownloader.CORES_VERSION = "1.24.0"`; `versionName = "1.17.36"`.
+2. **Zero reincidência na telemetria:**
+   `python ~/.claude/skills/triagem-bugs-prod/scripts/telemetria.py todos --prefixo retrogamesystem --desde 2026-10-05`
+   → 263 erros, 65 em `retrogamesystem/native`; nenhuma `message` cita ppsspp (a message nativa é
+   genérica: `Native crash — signal 6 (SIGABRT), code SI_QUEUE`). Baixados os logs de **todos** os 14
+   SIGABRT com versão ≥ 1.17.24 (`telemetria.py logs 9435 10421 10435 10663 10694 10721 12058 12059
+   12398 12401 12876 13032 13093 13638`) e lido o `Abort message` + frames de cada um:
+   - 7 × `terminating due to uncaught exception of type std::runtime_error: Cannot create framebuffer`
+     em `liblibretrodroid.so` (`ES3Utils::createFramebuffer` ← `LibretroGLContext::SetRenderTarget`
+     do PPSSPP) — **outro bug, já aberto**: `docs/bugs/aberto/2026-10-05-ppsspp-libretrodroid-cannot-create-framebuffer-abort/`;
+   - 7 × `FORTIFY: fwrite: null FILE*` no `libyabasanshiro_libretro_android.so` (Saturn) — achado
+     lateral registrado (abaixo).
+   - **0** com `Abort message: terminating` puro + `retro_run` no PPSSPP.
+3. **Havia exposição a PSP no período** (a ausência não é falta de uso): os 5 tombstones de
+   "Cannot create framebuffer" com símbolos (9435 em 1.17.25; 10663, 10721, 12059, 13093 em
+   1.17.25–1.17.28) têm `libppsspp_libretro_android.so` na pilha — jogos de PSP rodando nas versões
+   com o fix. Antes do fix: 11 ocorrências de produção em ~2,5 semanas (até a 1.17.23); depois: 0 em
+   ~6 semanas.
+
+### Hipóteses descartadas
+- **"O patch não cobriu algum caminho"** (o item 2 do "Próximo passo"): nenhum SIGABRT ≥ 1.17.24 tem
+  o frame `retro_run+…` com `terminating` puro.
+- **"O core foi substituído depois do 1.21.0"** (ex.: atualização de cores 1.22–1.24 trazendo outro
+  PPSSPP): md5 e string de versão do `.so` atual são os do binário corrigido.
+
+### Tarefas
+Nenhuma.
+
+### Plano de teste
+- **Offline:** as provas 1–3 acima (já executadas nesta passada).
+- **T2 / controle positivo / T3:** não se aplicam — não há mudança. A reprodução determinística
+  (instrumentação `sleep_ms(50)`, antes/depois) já foi feita em 2026-10-05 no SM-A127M.
+
+### Achado lateral
+- `docs/bugs/aberto/2026-11-19-saturn-yabasanshiro-fwrite-null-reincide/` — o abort do yabasanshiro
+  ao salvar estado (bug concluído `2026-09-02-saturn-yabasanshiro-serializestate-fwrite-null`) voltou
+  em 1.17.27/1.17.28 (7 ocorrências: 10694, 12058, 12398, 12401, 12876, 13032, 13638).
+
+### Sessões seguintes
+Nenhuma (sem task).

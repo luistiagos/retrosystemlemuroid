@@ -1,3 +1,7 @@
+---
+fecha_por: prova
+tasks: [TASK-0007, TASK-0008]
+---
 # [BUG] Low-memory kills em primeiro plano — PPSSPP (mesmo aparelho, 2x) + serviço de foreground sem sessão de jogo
 
 **Data:** 2026-09-28
@@ -214,3 +218,120 @@ aparelho estava sem memória". `ApplicationExitInfo.getPss()/getRss()` (API 30, 
       do mesmo download pesado.
 - [ ] Sem stack disponível pela API, não há mais profundidade possível só com telemetria —
       qualquer avanço real precisa de reprodução em device com profiler de memória.
+
+## Planejamento (pipeline 20261119-2228, 2026-11-19)
+
+**Veredito:** corrigir — 2 tasks de `implementacao`: `lowmemory-fgs-leitura` (o relatório de low-memory do
+processo principal passa a dizer QUAL serviço de primeiro plano o segurava) e `lowmemory-fgs-marcadores`
+(o `DownloadForegroundService` e os workers em foreground gravam esse marcador). A correção original deste doc
+(salvar ao sair da tela, escrita atômica, `pss/rss/ram`) **já está integrada e publicada** (commit `2c02594`,
+2026-09-30; `ram=` chega desde a 1.17.23); a Aceitação prova o defeito original pelo caminho do usuário.
+**Complexidade:** media — breadcrumb novo de telemetria + chamadas num serviço e em 5 Workers (critério "Worker"
+do `docs/bugs/aberto/README.md`); não toca Room, fila nem o ciclo do `:game`.
+**Severidade:** medio — o grupo A (sessão perdida) já está corrigido; o que sobra é o grupo B, sem perda de
+dado (download interrompido volta como `QUEUED` no próximo start), mas é 85% do `lowmemory` e não dá para
+atribuir.
+
+**Arquivos a alterar (reserva, por task no plan.json):**
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/telemetry/TelemetryContext.kt` — marcador `fgs` por pid
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/telemetry/CrashTelemetry.kt` — `fgs=` no contexto do exit
+- `lemuroid-app/src/test/java/com/swordfish/lemuroid/app/shared/telemetry/ForegroundWorkForExitTest.kt` — novo
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/roms/DownloadForegroundService.kt`
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/utils/android/WorkManagerUtils.kt`
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/library/CoreUpdateWork.kt` e `LibraryIndexWork.kt`
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/roms/RomsDownloadWork.kt` e `StreamingRomsWork.kt`
+- `lemuroid-app/src/main/java/com/swordfish/lemuroid/app/shared/savesync/SaveSyncWork.kt`
+
+### Causa raiz (símbolos abertos)
+
+- `BaseGameScreenViewModel::onStop` — com `isFinishing != false` retorna; senão `saves.saveOnBackground(game)`
+  num `viewModelScope.launch` com `catch Throwable`. **Integrado.**
+- `BaseGameScreenViewModel::requestFinish` → `saveOnExit` → `sideEffects.requestSuccessfulFinish` →
+  `BaseGameActivity::performSuccessfulActivityFinish` → `finishAndExitProcess` → `finish()`. A gravação de saída
+  acontece ANTES do `finish()`; o `onStop` seguinte vê `isFinishing == true` e não grava. Os dois chamadores de
+  `requestFinish` (`OnBackPressedCallback` e `RESULT_QUIT` do menu, `BaseGameActivity.kt:177/657`) seguem esse
+  caminho. **Isso resolve por leitura o item 3 pendente da "Validação"**: a saída grava uma vez só. Único caso de
+  duas gravações: Home apertado DURANTE a gravação de saída — `persistMutex` serializa, mesmos arquivos, escrita
+  atômica: inofensivo.
+- `GameViewModelSaves::persistSession` — `persistMutex.withLock`; SRAM → autosave; nunca lança.
+- `CrashTelemetry::isLowMemoryWorthReporting` — `importance <= IMPORTANCE_VISIBLE` (200): 125 passa.
+  `reportOneExit` monta `process/pid/importance/when/device` + `memoryContext` (low-memory) +
+  `TelemetryContext.gameSessionForExit` (só `:game`, por `isSessionOfExit`). **Nada diz que serviço de
+  primeiro plano o processo principal tinha** — é o buraco que impede fechar o grupo B. Todo o corpo está num
+  `try { } catch (ignored: Throwable)`: falha ao ler o marcador não pode impedir o relatório.
+- `TelemetryContext` — breadcrumb em `SharedPreferences(TelemetryReporter.PREFS_NAME)` via `apply()`; um slot
+  de sessão + `startedAt`.
+- Quem põe o processo PRINCIPAL em `FOREGROUND_SERVICE` (manifesto, sem `android:process`):
+  `DownloadForegroundService` (`dataSync`, `START_NOT_STICKY`, para sozinho sem `QUEUED`/`SAVING`) e o
+  `SystemForegroundService` do WorkManager, acionado por `setForeground` em `CoreUpdateWork`, `LibraryIndexWork`,
+  `SaveSyncWork` (só com sync configurado), `RomsDownloadWork`, `StreamingRomsWork`. `GameService` é do `:game`
+  e é ligado pelo próprio `:game` (`GameActivity` → `GameService.startService(applicationContext)`): nenhum
+  binding entre processos herda importância.
+
+### Provas (comando → resultado)
+
+- `git log --oneline -S"saveOnBackground" -- lemuroid-app/src/main` → `2c02594` (2026-09-30, `versionName`
+  1.17.22 na árvore); `git tag --contains 2c02594` → `publicado/1.17.35`.
+- `python ~/.claude/skills/triagem-bugs-prod/scripts/telemetria.py todos --prefixo retrogamesystem/lowmemory
+  --desde 2026-10-01` → **54** eventos (18 em out., 36 em nov.); contexto completo lido por `fetch_all`
+  (campo `page_url`):
+  - **54/54 com `importance=125`**; nenhum 100 desde outubro → os grupos C/D (jogo na tela) não voltaram.
+  - **`:game` = 8** (todos com o jogo fora da tela): 3DS/citra `pss` 457–570 MB em 5,6 GB; PSP 169 MB; FBNeo
+    148–159 MB; PSX, GBA. Proporcional ao core: é o LMK agindo; a perda está coberta pelo `ON_STOP`.
+  - **processo principal = 46**, `pss` 55–226 MB / `rss` 82–330 MB em 0,9–7,3 GB: nada desproporcional.
+    Repetição por aparelho: Xiaomi 2409BRN2CA 12× (1.17.28, 02–12/11; `12872`/`12873` com 13 s), SM-A105M 10×
+    (preso na 1.17.22), moto g35 4×, moto g54 3× em 15 min. Sem jogo. **Qual serviço, a telemetria não diz.**
+  - Correção do Sintoma: `9801` (CPS1, SM-A105M) foi `process=app.retrogamesystem`, não `:game`; o `system=`
+    era breadcrumb velho (1.17.22, antes do filtro `isSessionOfExit`).
+
+### Hipóteses descartadas
+
+- **Gravação dupla na saída por Back/menu** — descartada por leitura do call-site (acima).
+- **`:game` em segundo plano grande demais (entrada no `HeavySystemFilter`)** — `pss` proporcional ao core,
+  aparelhos de 3,5–5,6 GB; nenhum caso de tier errado.
+- **Flush periódico de SRAM para os grupos C/D** — sem ocorrência com `importance=100` em 54 eventos; não
+  justifica mexer na coerência SRAM×autosave (`SavesCoherencyEngine`).
+- **Processo principal herdando 125 de um binding do `:game`** — o `GameService` é do `:game` e ligado por ele
+  mesmo; nenhum provider/serviço do principal é usado pelo `:game`.
+- **`SaveQueueManager` religando a fila sozinho a cada start** — só nasce injetado (MainActivity,
+  `SaveQueueViewModel`, o próprio serviço); `ERROR`/`SAVED` são apagados do banco, não voltam como `QUEUED`.
+- **Filtrar 125 do `lowmemory`** — esconderia o único sinal do grupo B antes de saber quem o causa.
+
+### Tarefas
+
+- [ ] `lowmemory-fgs-leitura` (implementacao) — `TelemetryContext` ganha o marcador de foreground por pid e
+  `foregroundWorkForExit`; `CrashTelemetry::reportOneExit` anexa `fgs=`. Teste `ForegroundWorkForExitTest`.
+- [ ] `lowmemory-fgs-marcadores` (implementacao, depende da anterior) — `DownloadForegroundService` e os 5
+  Workers marcam/desmarcam. Prova no aparelho pelo arquivo de prefs durante um download.
+
+### Plano de teste
+
+- **Offline:** `build` do helper; `ForegroundWorkForExitTest` (pid igual → `fgs=download`; pid diferente → vazio;
+  `:game` → vazio; dois marcadores → os dois, ordem estável; desmarcar o último → vazio). Linha de base 54/0/1 sem
+  falha nova; `ktlintCheck` sem apontamento novo nos arquivos tocados.
+- **T2 reprodução como o usuário (Aceitação, defeito original):** aparelho do slot, app debug, jogo já baixado de
+  core com autosave (ex.: SNES ou FBNeo); salvamento automático ligado. Abrir pela Home ▸ sistema ▸ jogo; jogar
+  até mudar o estado (créditos, menu); apertar **Home** do aparelho. Sinal 1: `logcat` do PID do `:game` com
+  `Stored sram file` + `Stored autosave file` após o Home. Matar o `:game`
+  (`adb shell run-as app.retrogamesystem.debug kill -9 <pid do :game>`, simula o LMK). Reabrir o jogo pela UI:
+  volta no estado de antes do Home. Depois, sair pelo **Back** (ou menu ▸ Sair): **um** par `Stored sram`/
+  `Stored autosave` só (fecha o item 3 da Validação).
+- **T2 das tasks novas:** fila de download com 1 jogo grande (PSX/Dreamcast) pela UI (tocar no jogo ▸ confirmar);
+  durante o download `adb shell run-as app.retrogamesystem.debug cat shared_prefs/<PREFS_NAME>.xml` mostra o
+  marcador com `download` e o pid do processo principal (`pidof app.retrogamesystem.debug`); ao terminar (ou
+  cancelar na fila) o marcador some. Ajustes ▸ reescanear biblioteca → marcador `library` enquanto o
+  `LibraryIndexWork` roda.
+- **Controle positivo:** na base `19cacda` o arquivo de prefs não tem marcador nenhum durante o download. Para o
+  defeito original não há controle na base (o fix já está nela); a prova é o comportamento correto.
+- **T3:** download completa e o jogo abre ("jogar agora?"); pausar/retomar na fila; sair do jogo sem crash; os
+  campos existentes do `lowmemory`/`crash` seguem iguais (`CrashTelemetryMemoryTest`, `GameSessionForExitTest`).
+- **Falta para done (só o cliente prova, não é critério de fechamento):** os próximos `lowmemory` do processo
+  principal em produção chegam com `fgs=`; aí se decide o grupo B (download de ROM vs. worker de biblioteca/core).
+
+### Sessões seguintes
+
+- dev `lowmemory-fgs-leitura`: effort medium, ultrathink não — função pura + uma linha no `reportOneExit`.
+- dev `lowmemory-fgs-marcadores`: effort high, ultrathink sim — 6 call-sites com caminhos de erro distintos
+  (`setForeground` que lança, `CancellationException`, `onTimeout`, `startForeground` recusado) e o marcador não
+  pode ficar preso nem derrubar o worker.
+- teste: effort medium, ultrathink não.
