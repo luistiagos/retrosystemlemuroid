@@ -5,7 +5,9 @@ import androidx.work.CoroutineWorker
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.utils.android.ForegroundWorkTag
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
+import com.swordfish.lemuroid.app.utils.android.runInForeground
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
 import com.swordfish.lemuroid.lib.library.LemuroidLibrary
@@ -36,16 +38,21 @@ class LibraryIndexWork(context: Context, workerParams: WorkerParameters) :
 
         // On Android 16+, DATA_SYNC FGS type was removed; setForeground may throw.
         // Proceed without a notification rather than crashing.
-        try {
-            setForeground(foregroundInfo)
-        } catch (e: Exception) {
-            Timber.w(e, "LibraryIndexWork: setForeground failed (${e.message}), continuing without notification")
-        }
-
         val result =
-            withContext(Dispatchers.IO) {
-                kotlin.runCatching {
-                    lemuroidLibrary.indexLibrary()
+            runInForeground(
+                ForegroundWorkTag.LIBRARY,
+                foregroundInfo,
+                onPromotionFailed = { e ->
+                    Timber.w(
+                        e,
+                        "LibraryIndexWork: setForeground failed (${e.message}), continuing without notification",
+                    )
+                },
+            ) {
+                withContext(Dispatchers.IO) {
+                    kotlin.runCatching {
+                        lemuroidLibrary.indexLibrary()
+                    }
                 }
             }
 

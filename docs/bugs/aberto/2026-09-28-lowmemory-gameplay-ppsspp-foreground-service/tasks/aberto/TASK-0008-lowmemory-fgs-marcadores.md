@@ -47,3 +47,55 @@ plano e desmarca ao sair, para o próximo `lowmemory`/ANR do processo principal 
 - T3: download conclui e o "jogar agora?" aparece; pausar/retomar; reescanear biblioteca termina; nenhum crash
   ou ANR no `logcat` do PID; `ktlintCheck` sem apontamento novo nos arquivos tocados; `lintFreeBundleDebug`
   passa.
+
+## Analise do dev (pipeline 20261119-2228, 2026-11-20)
+
+Simbolos abertos (base `1ba98c9`, ja com TASK-0005 e TASK-0007 integradas):
+
+- `TelemetryContext::markForegroundWork`/`clearForegroundWork` (TASK-0007) — `synchronized`, `apply()` nas
+  `telemetry_prefs`, `catch Throwable`: nunca lancam. Conjunto por pid; tag nao pode ter `+`.
+- `DownloadForegroundService::onStartCommand` — `ServiceCompat.startForeground` num `try`; o `catch` so engole
+  `isForegroundServiceStartNotAllowed` (resto relanca). Pontos de saida do foreground: `observeQueue` (fila vazia →
+  `stopForegroundCompat()` + `stopSelf()`), `onTimeout` (API 35+, `stopForegroundCompat()` + `stopSelfResult`) e
+  `onDestroy`. Todos na main (o `scope` e `Dispatchers.Main`).
+- Workers, caminho de erro do `setForeground` HOJE:
+  - `CoreUpdateWork::doWork`, `LibraryIndexWork::doWork`, `SaveSyncWork::displayNotification`:
+    `try { setForeground } catch (e: Exception) { Timber.w }` → seguem sem notificacao.
+  - `RomsDownloadWork::doWork`, `StreamingRomsWork::doWork`: `setForeground` DENTRO do `try` geral → falha cai no
+    `catch Throwable` → `Result.failure` (ou `CancellationException` se o job ja nao esta ativo). **Nao** seguem sem
+    notificacao. O helper tem de preservar os dois comportamentos (tarefa diz: nao mudar comportamento) →
+    parametro `onPromotionFailed: (Exception) -> Unit` (engole e loga, ou relanca).
+  - `SaveSyncWork`: o `setForeground` esta em `displayNotification()`, separado do `sync`: o bloco marcado passa a
+    envolver `displayNotification + sync`.
+- Processo: `LemuroidApplication.workManagerConfiguration` nao define `defaultProcessName`; no bytecode do
+  `work-runtime-2.9.0` (`ProcessUtils.isDefaultProcess`) o default e `applicationInfo.processName` = processo
+  principal. `SystemForegroundService` e `DownloadForegroundService` sem `android:process`. `CoreUpdateBroadcastReceiver`
+  sem `android:process`. Logo todo marcador e gravado pelo pid do principal (o que `foregroundWorkOf` espera).
+- `CoroutineWorker.setForeground(ForegroundInfo)` e `public final suspend` (javap) → chamavel de extensao.
+
+Decisoes:
+
+- **Contagem por tag no helper dos Workers** (`ForegroundTagCounter`, em memoria, por processo): `CoreUpdateWork`
+  urgente (`CORE_UPDATE_URGENT_WORK_ID`, REPLACE) e o de fundo (`CORE_UPDATE_WORK_ID`) rodam ao mesmo tempo com a
+  mesma tag `core`; sem contagem, o que termina primeiro apagaria o marcador do outro. Marcar/desmarcar acontece
+  dentro do lock da contagem (senao `release`→`acquire` concorrentes podiam terminar com o marcador apagado e o
+  trabalho rodando). Processo morto zera a contagem junto com o pid — nada fica preso.
+- Tags num lugar so (`ForegroundWorkTag` em `WorkManagerUtils.kt`): `download`, `core`, `library`, `savesync`,
+  `romsdownload`, `streaming`.
+- Servico: marca so depois do `startForeground` que deu certo; desmarca dentro de `stopForegroundCompat()` (cobre fila
+  vazia e `onTimeout`) e em `onDestroy`. O ramo `isForegroundServiceStartNotAllowed` nao marca nem desmarca (se uma
+  promocao anterior valeu, o servico segue em foreground ate o `onDestroy`).
+- Custo na main do servico: um `apply()` de prefs pequenas no inicio e no fim do download (o `waitToFinish` do
+  `ActivityThread` apos `onStartCommand`/`onDestroy` espera essa escrita). Mesmo padrao do `setGameSession`; mover
+  para outra thread nao evita a espera (o `apply` cai antes do `waitToFinish` do mesmo jeito). Aceito.
+
+Hipoteses descartadas:
+
+- Worker rodando no `:game` gravaria pid errado e zeraria o conjunto do principal — descartada pelo bytecode acima.
+- Um helper que sempre engole a falha do `setForeground` — mudaria `RomsDownloadWork`/`StreamingRomsWork` de
+  "falha" para "segue sem notificacao"; fora do escopo.
+
+Teste: `lemuroid-app/src/test/java/com/swordfish/lemuroid/app/utils/android/RunMarkedInForegroundTest.kt` sobre a
+funcao pura `runMarkedInForeground` (lambdas falsas): sucesso marca antes e desmarca depois; falha engolida nao
+marca e roda o bloco; falha relancada nao roda o bloco; bloco que lanca (inclusive `CancellationException`)
+desmarca; dois donos da mesma tag marcam uma vez e desmarcam so no ultimo.

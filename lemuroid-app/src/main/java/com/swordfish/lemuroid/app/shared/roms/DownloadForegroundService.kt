@@ -13,6 +13,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.shared.telemetry.TelemetryContext
+import com.swordfish.lemuroid.app.utils.android.ForegroundWorkTag
 import com.swordfish.lemuroid.app.utils.android.isForegroundServiceStartNotAllowed
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.CoroutineScope
@@ -85,6 +87,8 @@ class DownloadForegroundService : Service() {
                 notification,
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
             )
+            // Só a promoção que deu certo marca: é ela que põe o processo em FOREGROUND_SERVICE.
+            TelemetryContext.markForegroundWork(applicationContext, ForegroundWorkTag.DOWNLOAD)
         } catch (exception: RuntimeException) {
             if (!exception.isForegroundServiceStartNotAllowed()) throw exception
 
@@ -177,8 +181,12 @@ class DownloadForegroundService : Service() {
      *
      * Existe de propósito num só lugar: o arquivo já teve o mesmo `stopForeground` guardado num
      * ponto e cru no outro.
+     *
+     * Desmarca também o trabalho em primeiro plano da telemetria (fila vazia e `onTimeout` saem
+     * do foreground por aqui; o `onDestroy` desmarca de novo, sem efeito se já desmarcou).
      */
     private fun stopForegroundCompat() {
+        TelemetryContext.clearForegroundWork(applicationContext, ForegroundWorkTag.DOWNLOAD)
         try {
             ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         } catch (e: NoSuchMethodError) {
@@ -221,6 +229,7 @@ class DownloadForegroundService : Service() {
 
     override fun onDestroy() {
         stopping = true
+        TelemetryContext.clearForegroundWork(applicationContext, ForegroundWorkTag.DOWNLOAD)
         scope.cancel()
         runCatching { wakeLock?.takeIf { it.isHeld }?.release() }
         wakeLock = null

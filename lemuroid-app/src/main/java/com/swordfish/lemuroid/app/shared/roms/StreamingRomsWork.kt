@@ -8,7 +8,9 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.utils.android.ForegroundWorkTag
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
+import com.swordfish.lemuroid.app.utils.android.runInForeground
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
@@ -16,27 +18,30 @@ import kotlinx.coroutines.withContext
 
 class StreamingRomsWork(context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
-
     override suspend fun doWork(): Result {
         val notificationsManager = NotificationsManager(applicationContext)
         val manager = StreamingRomsManager(applicationContext, autoRestart = false)
         return try {
-            setForeground(
+            // A falha do setForeground segue para o catch abaixo (falha do trabalho), como antes.
+            runInForeground(
+                ForegroundWorkTag.STREAMING,
                 createSyncForegroundInfo(
                     NotificationsManager.ROMS_DOWNLOAD_NOTIFICATION_ID,
                     notificationsManager.downloadingRomsNotification(),
                 ),
-            )
-            withContext(Dispatchers.IO) {
-                manager.doStreamingDownload { progress, currentFile, downloaded, total ->
-                    setProgress(
-                        workDataOf(
-                            KEY_PROGRESS to progress,
-                            KEY_CURRENT_FILE to currentFile,
-                            KEY_DOWNLOADED_FILES to downloaded,
-                            KEY_TOTAL_FILES to total,
+                onPromotionFailed = { throw it },
+            ) {
+                withContext(Dispatchers.IO) {
+                    manager.doStreamingDownload { progress, currentFile, downloaded, total ->
+                        setProgress(
+                            workDataOf(
+                                KEY_PROGRESS to progress,
+                                KEY_CURRENT_FILE to currentFile,
+                                KEY_DOWNLOADED_FILES to downloaded,
+                                KEY_TOTAL_FILES to total,
+                            ),
                         )
-                    )
+                    }
                 }
             }
             Result.success()
@@ -69,7 +74,10 @@ class StreamingRomsWork(context: Context, workerParams: WorkerParameters) :
          *                      never cancel an in-progress download just because the ViewModel
          *                      was recreated (rotation, navigation, etc.).
          */
-        fun enqueue(context: Context, replace: Boolean = false) {
+        fun enqueue(
+            context: Context,
+            replace: Boolean = false,
+        ) {
             val policy = if (replace) ExistingWorkPolicy.REPLACE else ExistingWorkPolicy.KEEP
             WorkManager.getInstance(context.applicationContext).enqueueUniqueWork(
                 UNIQUE_WORK_ID,

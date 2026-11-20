@@ -8,7 +8,9 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.utils.android.ForegroundWorkTag
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
+import com.swordfish.lemuroid.app.utils.android.runInForeground
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
@@ -16,20 +18,23 @@ import kotlinx.coroutines.withContext
 
 class RomsDownloadWork(context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
-
     override suspend fun doWork(): Result {
         val notificationsManager = NotificationsManager(applicationContext)
         val manager = RomsDownloadManager(applicationContext)
         return try {
-            setForeground(
+            // A falha do setForeground segue para o catch abaixo (falha do trabalho), como antes.
+            runInForeground(
+                ForegroundWorkTag.ROMS_DOWNLOAD,
                 createSyncForegroundInfo(
                     NotificationsManager.ROMS_DOWNLOAD_NOTIFICATION_ID,
                     notificationsManager.downloadingRomsNotification(),
                 ),
-            )
-            withContext(Dispatchers.IO) {
-                manager.doDownload { phase, progress ->
-                    setProgress(workDataOf(KEY_PHASE to phase, KEY_PROGRESS to progress))
+                onPromotionFailed = { throw it },
+            ) {
+                withContext(Dispatchers.IO) {
+                    manager.doDownload { phase, progress ->
+                        setProgress(workDataOf(KEY_PHASE to phase, KEY_PROGRESS to progress))
+                    }
                 }
             }
             Result.success()
@@ -73,13 +78,18 @@ class RomsDownloadWork(context: Context, workerParams: WorkerParameters) :
                 if (msg.contains("ENOSPC", ignoreCase = true) ||
                     msg.contains("No space left on device", ignoreCase = true) ||
                     msg.contains("no space left", ignoreCase = true)
-                ) return true
+                ) {
+                    return true
+                }
                 current = current.cause
             }
             return false
         }
 
-        fun enqueue(context: Context, replace: Boolean = false) {
+        fun enqueue(
+            context: Context,
+            replace: Boolean = false,
+        ) {
             val policy = if (replace) ExistingWorkPolicy.REPLACE else ExistingWorkPolicy.KEEP
             WorkManager.getInstance(context.applicationContext).enqueueUniqueWork(
                 UNIQUE_WORK_ID,

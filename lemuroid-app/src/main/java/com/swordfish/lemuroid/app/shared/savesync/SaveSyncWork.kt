@@ -15,7 +15,9 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.utils.android.ForegroundWorkTag
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
+import com.swordfish.lemuroid.app.utils.android.runInForeground
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
 import com.swordfish.lemuroid.lib.library.findByName
@@ -44,8 +46,26 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
             return Result.success()
         }
 
-        displayNotification()
+        val notificationsManager = NotificationsManager(applicationContext)
+        val foregroundInfo =
+            createSyncForegroundInfo(
+                NotificationsManager.SAVE_SYNC_NOTIFICATION_ID,
+                notificationsManager.saveSyncNotification(),
+            )
+        // On Android 16+, DATA_SYNC FGS type was removed; setForeground may throw.
+        // Proceed without a notification rather than crashing.
+        runInForeground(
+            ForegroundWorkTag.SAVE_SYNC,
+            foregroundInfo,
+            onPromotionFailed = { e ->
+                Timber.w(e, "SaveSyncWork: setForeground failed (${e.message}), continuing without notification")
+            },
+        ) { syncSaves() }
 
+        return Result.success()
+    }
+
+    private suspend fun syncSaves() {
         val coresToSync =
             settingsManager.syncStatesCores()
                 .mapNotNull { findByName(it) }
@@ -58,8 +78,6 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
         } catch (e: Throwable) {
             Timber.e(e, "Error in saves sync")
         }
-
-        return Result.success()
     }
 
     private suspend fun shouldPerformSaveSync(): Boolean {
@@ -78,23 +96,6 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
         val isAutoSync = inputData.getBoolean(IS_AUTO, false)
         val isManualSync = !isAutoSync
         return settingsManager.autoSaveSync() && isAutoSync || isManualSync
-    }
-
-    private suspend fun displayNotification() {
-        val notificationsManager = NotificationsManager(applicationContext)
-
-        val foregroundInfo =
-            createSyncForegroundInfo(
-                NotificationsManager.SAVE_SYNC_NOTIFICATION_ID,
-                notificationsManager.saveSyncNotification(),
-            )
-        // On Android 16+, DATA_SYNC FGS type was removed; setForeground may throw.
-        // Proceed without a notification rather than crashing.
-        try {
-            setForeground(foregroundInfo)
-        } catch (e: Exception) {
-            Timber.w(e, "SaveSyncWork: setForeground failed (${e.message}), continuing without notification")
-        }
     }
 
     companion object {

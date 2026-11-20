@@ -5,7 +5,9 @@ import androidx.work.CoroutineWorker
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.utils.android.ForegroundWorkTag
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
+import com.swordfish.lemuroid.app.utils.android.runInForeground
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
@@ -17,9 +19,7 @@ import dagger.Binds
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -49,26 +49,35 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
 
         // Attempt to show a progress notification. On Android 16+, DATA_SYNC FGS was removed:
         // if setForeground() throws, we still want the download to proceed.
-        try {
-            setForeground(foregroundInfo)
-        } catch (e: Exception) {
-            Timber.w(e, "CoreUpdateWork: setForeground failed (${e.message}), continuing without notification")
-        }
+        val hadFailure =
+            runInForeground(
+                ForegroundWorkTag.CORE,
+                foregroundInfo,
+                onPromotionFailed = { e ->
+                    Timber.w(e, "CoreUpdateWork: setForeground failed (${e.message}), continuing without notification")
+                },
+            ) { downloadCores() }
 
+        return if (hadFailure) Result.retry() else Result.success()
+    }
+
+    /** Baixa os cores pedidos; `true` se falhou (o Worker pede retry). */
+    private suspend fun downloadCores(): Boolean {
         var hadFailure = false
         try {
             // If a specific coreID was requested (e.g. triggered from the game screen),
             // only download that one core instead of all cores — much faster.
             val specificCoreId = inputData.getString(KEY_CORE_ID)
-            val cores = if (specificCoreId != null) {
-                Timber.i("Downloading specific core: $specificCoreId")
-                listOf(CoreID.valueOf(specificCoreId))
-            } else {
-                retrogradeDatabase.gameDao().selectSystems()
-                    .mapNotNull { GameSystem.findByIdOrNull(it) }
-                    .map { coresSelection.getCoreConfigForSystem(it) }
-                    .map { it.coreID }
-            }
+            val cores =
+                if (specificCoreId != null) {
+                    Timber.i("Downloading specific core: $specificCoreId")
+                    listOf(CoreID.valueOf(specificCoreId))
+                } else {
+                    retrogradeDatabase.gameDao().selectSystems()
+                        .mapNotNull { GameSystem.findByIdOrNull(it) }
+                        .map { coresSelection.getCoreConfigForSystem(it) }
+                        .map { it.coreID }
+                }
 
             coreUpdater.downloadCores(applicationContext, cores)
         } catch (e: CancellationException) {
@@ -80,8 +89,7 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
             Timber.e(e, "Core update work failed with exception: ${e.message}")
             hadFailure = true
         }
-
-        return if (hadFailure) Result.retry() else Result.success()
+        return hadFailure
     }
 
     companion object {
