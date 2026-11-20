@@ -11,10 +11,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
+import com.swordfish.lemuroid.app.mobile.feature.main.MainActivity
 import com.swordfish.lemuroid.app.shared.library.CoreUpdateBroadcastReceiver
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexBroadcastReceiver
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import com.swordfish.lemuroid.app.mobile.feature.main.MainActivity
 
 class NotificationsManager(private val applicationContext: Context) {
     fun gameRunningNotification(game: Game?): Notification {
@@ -139,36 +139,47 @@ class NotificationsManager(private val applicationContext: Context) {
      * @param progress   Download progress in [0.0, 1.0]. Ignored when gameTitle is null.
      * @param queuedCount Number of items still waiting in QUEUED state (excluding the active one).
      */
-    fun romQueueNotification(gameTitle: String?, progress: Float, queuedCount: Int): Notification {
+    fun romQueueNotification(
+        gameTitle: String?,
+        progress: Float,
+        queuedCount: Int,
+    ): Notification {
         createDownloadNotificationChannel()
 
-        val mainIntent = Intent(applicationContext, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
-        val contentIntent = PendingIntent.getActivity(
-            applicationContext, 0, mainIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-        )
+        val mainIntent =
+            Intent(applicationContext, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+        val contentIntent =
+            PendingIntent.getActivity(
+                applicationContext,
+                0,
+                mainIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
 
-        val title = gameTitle
-            ?: applicationContext.getString(R.string.notification_rom_queue_title)
+        val title =
+            gameTitle
+                ?: applicationContext.getString(R.string.notification_rom_queue_title)
         val progressPct = (progress * 100).toInt()
-        val text = when {
-            gameTitle != null && queuedCount > 0 ->
-                applicationContext.getString(R.string.notification_rom_queue_more, queuedCount)
-            gameTitle != null ->
-                applicationContext.getString(R.string.notification_rom_queue_downloading, progressPct)
-            else ->
-                applicationContext.getString(R.string.notification_rom_queue_waiting)
-        }
+        val text =
+            when {
+                gameTitle != null && queuedCount > 0 ->
+                    applicationContext.getString(R.string.notification_rom_queue_more, queuedCount)
+                gameTitle != null ->
+                    applicationContext.getString(R.string.notification_rom_queue_downloading, progressPct)
+                else ->
+                    applicationContext.getString(R.string.notification_rom_queue_waiting)
+            }
 
-        val builder = NotificationCompat.Builder(applicationContext, DOWNLOAD_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_lemuroid_tiny)
-            .setContentTitle(title)
-            .setContentText(text)
-            .setOngoing(true)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
-            .setContentIntent(contentIntent)
+        val builder =
+            NotificationCompat.Builder(applicationContext, DOWNLOAD_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_lemuroid_tiny)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setOngoing(true)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setContentIntent(contentIntent)
 
         if (gameTitle != null && progress > 0f) {
             builder.setProgress(100, progressPct, false)
@@ -194,7 +205,13 @@ class NotificationsManager(private val applicationContext: Context) {
         return builder.build()
     }
 
+    // createNotificationChannel e um Binder sincrono para o system_server, e o
+    // DownloadForegroundService monta uma notificacao a cada tick de progresso na main
+    // thread: o canal e idempotente, entao basta cria-lo uma vez por processo. A flag
+    // so liga depois que a chamada retornou; se lancar, a proxima tenta de novo.
+    // [[2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread]]
     private fun createDefaultNotificationChannel() {
+        if (defaultChannelCreated) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = applicationContext.getString(R.string.notification_channel_name)
             val importance = NotificationManager.IMPORTANCE_MIN
@@ -203,27 +220,32 @@ class NotificationsManager(private val applicationContext: Context) {
                 ContextCompat.getSystemService(applicationContext, NotificationManager::class.java)
             notificationManager?.createNotificationChannel(mChannel)
         }
+        defaultChannelCreated = true
     }
 
     // Dedicated channel for the ROM download foreground service. Uses IMPORTANCE_LOW so
     // the notification icon appears in the status bar — required on OEM firmwares (Motorola,
     // Xiaomi etc.) that treat IMPORTANCE_MIN as a non-persistent notification and kill the
     // foreground service when the app is backgrounded.
+    // Criado uma vez por processo, como o canal padrao acima.
     private fun createDownloadNotificationChannel() {
+        if (downloadChannelCreated) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = applicationContext.getString(R.string.notification_download_roms_title)
-            val mChannel = NotificationChannel(
-                DOWNLOAD_CHANNEL_ID,
-                name,
-                NotificationManager.IMPORTANCE_LOW,
-            ).apply {
-                setSound(null, null)
-                enableVibration(false)
-            }
+            val mChannel =
+                NotificationChannel(
+                    DOWNLOAD_CHANNEL_ID,
+                    name,
+                    NotificationManager.IMPORTANCE_LOW,
+                ).apply {
+                    setSound(null, null)
+                    enableVibration(false)
+                }
             val notificationManager =
                 ContextCompat.getSystemService(applicationContext, NotificationManager::class.java)
             notificationManager?.createNotificationChannel(mChannel)
         }
+        downloadChannelCreated = true
     }
 
     companion object {
@@ -235,5 +257,12 @@ class NotificationsManager(private val applicationContext: Context) {
         const val GAME_RUNNING_NOTIFICATION_ID = 3
         const val CORE_INSTALL_NOTIFICATION_ID = 4
         const val ROMS_DOWNLOAD_NOTIFICATION_ID = 5
+
+        // Por processo, nao por instancia: a classe e instanciada de novo a cada notificacao.
+        @Volatile
+        private var defaultChannelCreated = false
+
+        @Volatile
+        private var downloadChannelCreated = false
     }
 }

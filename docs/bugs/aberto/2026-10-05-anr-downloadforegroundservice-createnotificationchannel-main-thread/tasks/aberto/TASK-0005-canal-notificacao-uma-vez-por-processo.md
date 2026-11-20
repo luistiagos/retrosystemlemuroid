@@ -63,3 +63,22 @@ sem apontamento em `NotificationsManager.kt`.
   seção Teste (E2E).
 - **T3:** as outras notificações que usam o canal padrão continuam aparecendo — indexar biblioteca
   (Ajustes ▸ reescanear) mostra a notificação de indexação; abrir um jogo mostra "jogo em execução".
+
+## Correcao (pipeline 20261119-2228, rodada 1)
+
+- `NotificationsManager::createDefaultNotificationChannel` e `::createDownloadNotificationChannel`: retornam cedo
+  quando a flag do canal ja esta ligada; a flag liga **depois** do bloco `if (SDK_INT >= O)` (so se
+  `createNotificationChannel` retornou sem lancar; abaixo da API 26 liga direto, nao ha o que criar).
+- `companion object`: `@Volatile private var defaultChannelCreated` / `downloadChannelCreated` (por processo; a
+  classe e instanciada a cada notificacao — `DownloadForegroundService.buildNotification`).
+- Id, nome, importancia, som e vibracao dos canais inalterados.
+- ktlint: os 13 apontamentos do baseline corrigidos (import `MainActivity` na ordem; assinatura do
+  `romQueueNotification` quebrada por parametro; `multiline-expression-wrapping` nas atribuicoes de
+  `mainIntent`/`contentIntent`/`title`/`text`/`builder`/`mChannel`; `argument-list-wrapping` do `getActivity`) e o
+  bloco `<file name=".../NotificationsManager.kt">` apagado a mao de `lemuroid-app/config/ktlint/baseline.xml`.
+  So formatacao, sem mudanca de comportamento.
+- Plano de teste: sem ajuste.
+
+## Estado
+
+- Feito: fix + ktlint do arquivo + baseline. Proximo: `build --bug TASK-0005`, depois `enqueue-test --bug TASK-0005`.
