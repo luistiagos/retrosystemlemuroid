@@ -220,3 +220,35 @@ mesmo harness com o `build-and-upload.ps1` da base: S1/S2 FAIL.
 - Falha **dentro** do passo 4 depois do upload do json (purga/verificacao publica do json lancam) sai sem o lembrete de
   commit da TASK-0012. O anuncio, ai, ja aponta para objetos versionados e verificados (o app funciona); o que falta e
   so o lembrete. E a regiao da demanda `2026-11-20-publicacao-manual-sem-commit-versao-duplicada`; nao alterado aqui.
+
+## Teste
+
+Rodada 1 (2026-11-20), aprovada. Evidencia em `C:\projects\lemuroid\.bugfix-pipeline-Lemuroid\reports\TASK-0014-evidencia\`.
+
+- **Diff:** `git diff ed30205..HEAD` so em `build-and-upload.ps1`, `tests/test-publicacao-anuncio.ps1` (reservados) e docs
+  (esta task + nota na demanda `2026-11-20-harness-publicacao-sem-publish-guard`). Nenhuma linha +/- com
+  `HfCli|HF_|bump|aapt|UPDATE_CHANNEL|Assert-Publish|Get-Announced`: HF, bump, trava e canal intactos. Simbolos que o
+  trecho novo usa (`$apkSha256`, `$apkSizes`, `$dest`, `Invoke-R2Rclone`, `Purge-EdgeCache`) abertos e existentes no escopo.
+- **Offline:** parser = 0 erros em `build-and-upload.ps1`, `tests/test-publicacao-anuncio.ps1`, `tests/fake-rclone.ps1`.
+  `build` do helper na lane: exit 0, testes de unidade 22 suites / 138 testes / 0 falhas / 1 pulado (nenhum Kotlin mudou).
+- **Controle positivo:** o harness desta task contra `git show ed30205:build-and-upload.ps1` (raiz temporaria com
+  `build-env.ps1`, `publish-guard.ps1`, `build.gradle.kts`, `tests/*.ps1`; APKs debug da lane): **0/5**, exit 1;
+  `cache-velho`, `falha-upload-armv7` e `falha-link-fixo` com "invariante QUEBRADA: o anuncio nao bate com o objeto
+  para o qual aponta" (`controle-base-ed30205.log`). Sinal do bug presente na base.
+- **T2 (o caminho do dono, sem app):** o `build-and-upload.ps1` real, rodado pelo harness contra o bucket falso, depois
+  do `sync` (lane `513e82f` sobre `8a0215f`, base andou so em docs): **5/5 PASS**, exit 0 (`harness-fix-pos-sync-513e82f.log`;
+  antes do sync tambem 5/5, `harness-fix-pre-sync.log`). Cenarios `sucesso` e `falha-link-fixo` rodados de novo com
+  `-ManterRaiz` (pastas `sucesso/`, `falha-link-fixo/`: logs, `version-harness.json`, `bucket-ls.txt`):
+  - `sucesso`: `rclone.log` na ordem `dist->arm64-269`, `dist->armv7-269`, `lsjson`, `version-harness.json`, `lsjson`,
+    `:s3:arm64-269 -> arm64.apk`, `.sha256`, idem armv7, `lsjson`; json com `apkUrl` `.../retro-game-system-arm64-269.apk?v=269`;
+    links fixos com os bytes novos (237381577 / 194763687 B); saida `PASSO 1/5`..`PASSO 5/5` e o lembrete de commit.
+  - `falha-link-fixo`: `FALHA-INJETADA` no `copyto ...armv7-269.apk -> ...armv7.apk`; saida com `PASSO 5 FALHOU: anuncio OK;
+    link manual desatualizado`, `DESATUALIZADO` no resumo, lembrete de commit e `PUBLICACAO INCOMPLETA`, exit 1; json
+    anuncia 269 nas URLs versionadas, armv7 fixo ainda da semente (5120 B).
+  - Aparelho nao usado: o app nao muda (T2 no app dispensado pelo Plano de teste).
+- **T3:** S1-S3 sem afrouxar (anuncio e links fixos da semente intactos nas falhas); `-SkipR2` (S5) nao chama o rclone e
+  gera o json local com as URLs versionadas; testes de unidade sem falha nova.
+- **T4:** `script.err.log` vazio no `sucesso`; no `falha-link-fixo` so a linha da falha injetada. Sem restos
+  (`lemuroid-harness-*`/`lemuroid-publish-*` em `%TEMP%` = 0; nenhum `http.server` vivo).
+- **Falta para done (dono, `fecha_por: dono`):** na proxima publicacao real, `curl` do `version.json` publico, download
+  dos dois APKs pelas URLs versionadas dele conferindo tamanho/sha, e o link fixo entregando a versao nova.
