@@ -3,9 +3,9 @@
 
 Gerado em 2026-11-20. O estado de cada demanda é a pasta dela (`docs/<tipo>/<estado>/<id>/`). A **idade** conta os dias desde o primeiro commit do doc da demanda, seguindo as mudanças de pasta, ou desde a data com que o id começa ou termina, se for mais antiga. As tasks de cada demanda estão no `README.md` dela.
 
-149 demandas: 16 em aberto, 2 em implementado, 2 em testado, 7 em no-ar, 119 em concluido, 1 em bloqueado, 2 em descartado. 10 tasks: 6 em implementado, 4 em no-ar.
+150 demandas: 17 em aberto, 2 em implementado, 2 em testado, 7 em no-ar, 119 em concluido, 1 em bloqueado, 2 em descartado. 10 tasks: 10 em no-ar.
 
-## aberto (16)
+## aberto (17)
 
 _registrada; inclui as demandas com tasks em execução._
 
@@ -13,9 +13,7 @@ _registrada; inclui as demandas com tasks em execução._
 |---:|---|---|---|
 | 135d | bug | [2026-07-08-dreamcast-subset-jogos-travam-9fps](bugs/aberto/2026-07-08-dreamcast-subset-jogos-travam-9fps/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 103d | bug | [2026-08-09-anr-inicializar-jogo-runongl-thread](bugs/aberto/2026-08-09-anr-inicializar-jogo-runongl-thread/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
-| 53d | bug | [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service](bugs/aberto/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 51d | bug | [2026-09-30-picodrive-e-anr-home-aguardando-trace](bugs/aberto/2026-09-30-picodrive-e-anr-home-aguardando-trace/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
-| 46d | bug | [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread](bugs/aberto/2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 44d | bug | [2026-10-07-audio-engasgando-gba-nds-moto-g86-sem-diagnostico](bugs/aberto/2026-10-07-audio-engasgando-gba-nds-moto-g86-sem-diagnostico/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 31d | bug | [2026-10-20-tvbox-hd-usb-download-continua-no-interno-espaco-insuficiente](bugs/aberto/2026-10-20-tvbox-hd-usb-download-continua-no-interno-espaco-insuficiente/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 26d | bug | [2026-10-25-gamecube-32-bits-tenta-baixar-core-inexistente](bugs/aberto/2026-10-25-gamecube-32-bits-tenta-baixar-core-inexistente/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
@@ -27,6 +25,9 @@ _registrada; inclui as demandas com tasks em execução._
 | 1d | bug | [2026-11-19-saturn-yabasanshiro-fwrite-null-reincide](bugs/aberto/2026-11-19-saturn-yabasanshiro-fwrite-null-reincide/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 0d | bug | [2026-11-20-harness-publicacao-sem-publish-guard](bugs/aberto/2026-11-20-harness-publicacao-sem-publish-guard/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 0d | bug | [2026-11-20-pixel5-cannot-create-framebuffer-ao-abrir-jogo](bugs/aberto/2026-11-20-pixel5-cannot-create-framebuffer-ao-abrir-jogo/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
+| 0d | bug | [2026-11-20-publicacao-manual-sem-commit-versao-duplicada](bugs/aberto/2026-11-20-publicacao-manual-sem-commit-versao-duplicada/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
+| 0d | bug | [2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio](bugs/aberto/2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
+| 0d | bug | [2026-11-20-redmi-a1-apk-pacote-invalido](bugs/aberto/2026-11-20-redmi-a1-apk-pacote-invalido/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 
 ## implementado (2)
 
@@ -43,8 +44,8 @@ _a Aceitação passou; falta publicar._
 
 | idade | tipo | demanda | tasks |
 |---:|---|---|---|
-| 0d | bug | [2026-11-20-publicacao-manual-sem-commit-versao-duplicada](bugs/testado/2026-11-20-publicacao-manual-sem-commit-versao-duplicada/README.md) | 3/3 |
-| 0d | bug | [2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio](bugs/testado/2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio/README.md) | 3/3 |
+| 53d | bug | [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service](bugs/testado/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service/README.md) | 3/3 |
+| 46d | bug | [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread](bugs/testado/2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread/README.md) | 3/3 |
 
 ## no-ar (7)
 
@@ -201,6 +202,6 @@ _duplicada, não reproduz ou sem código._
 | idade | tipo | demanda | tasks |
 |---:|---|---|---|
 | 63d | bug | [2026-09-18-ppsspp-retro-run-terminate-abort](bugs/descartado/2026-09-18-ppsspp-retro-run-terminate-abort/README.md) | 0 tasks: Ja corrigido e no ar: o core PPSSPP patchado (lemuroid1, lemuroid-cores 55d29c2, tag 1.21.0) e o empacotado na base (cores 1.24.0, app 1.17.36) e a telemetria nao tem nenhum SIGABRT terminating em retro_run desde a 1.17.24 (14 SIGABRT nativos lidos, todos de outros bugs); nada a fazer neste repo. |
-| 0d | bug | [2026-11-20-telemetria-volume-cai-depois-1-17-28](bugs/descartado/2026-11-20-telemetria-volume-cai-depois-1-17-28/README.md) | 0 tasks: motivo não registrado (campo `motivo:` da demanda) |
+| 0d | bug | [2026-11-20-telemetria-volume-cai-depois-1-17-28](bugs/descartado/2026-11-20-telemetria-volume-cai-depois-1-17-28/README.md) | 0 tasks: Sem codigo a corrigir: o envio funciona nas versoes 1.17.33+ (game, native e lowmemory chegam pelos tres caminhos) e a queda de volume e de populacao, versoes que ficaram 1 a 3 dias no ar; ver Analise. |
 
 Pastas fora do layout (não entram aqui): `docs/bugs/img`, `docs/features/img`.
