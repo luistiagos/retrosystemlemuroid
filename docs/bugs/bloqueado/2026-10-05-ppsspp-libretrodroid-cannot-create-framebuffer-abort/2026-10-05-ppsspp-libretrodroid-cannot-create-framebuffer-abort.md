@@ -106,6 +106,32 @@ Nenhuma (bloqueado). A correção é nativa, no AAR.
 - **Controle positivo:** o APK da base (AAR atual) tem de abortar na troca de resolução. Pela análise vale em qualquer GPU, emulador incluso.
 - **T3, regressão:** Saturn (YabaSanshiro): trocar o modo de vídeo e confirmar que a tela não fica preta (regressão do bug de 2026-08-13). PSP com shader padrão e com HD alto. Um core GL de thread única (N64 ou Dreamcast) abrindo e saindo.
 
+### Frequência na telemetria (2026-11-20)
+
+O cabeçalho diz "1 ocorrência", mas são **5** com esta assinatura, mais 2 de outra causa. Comandos (skill
+`triagem-bugs-prod`, `RETROBAT_ROOT=C:/projects/retrobatnew`):
+`telemetria.py todos --prefixo retrogamesystem/native --desde 2026-08-01` → 206 crashes nativos (2026-08-13 a
+2026-11-19), 53 SIGABRT. Em seguida `telemetria.py logs <os 53>` e `grep -a -l "Cannot create framebuffer" err*.log` → 7.
+
+| Erro | Data | App | Aparelho (fingerprint) | Thread | Esta causa? |
+|---|---|---|---|---|---|
+| 9435 | 2026-10-05 | 1.17.25 | CUBOT KINGKONG 9, Android 14 (Mali-G57) | EmuThread, `SetRenderTarget` | sim |
+| 10663 | 2026-10-18 | 1.17.27 | Samsung `pa3q`, Android 16 | EmuThread, `SetRenderTarget` | sim |
+| 10721 | 2026-10-19 | 1.17.27 | Samsung `m3q` (SM-S948B), Android 17 | EmuThread, `SetRenderTarget` | sim |
+| 12059 | 2026-10-29 | 1.17.25 | Motorola `paros_g`, Android 16 | EmuThread, `SetRenderTarget` | sim |
+| 13093 | 2026-11-09 | 1.17.28 | Samsung `r8q` (SM-G780G), Android 13 | EmuThread, `SetRenderTarget` | sim |
+| 10421 | 2026-10-16 | 1.17.27 | Google Pixel 5 (`redfin`), Android 12, APK 32-bit (`lib/arm`) | **GLThread 1** | **não** |
+| 10435 | 2026-10-16 | 1.17.27 | o mesmo Pixel 5, 33 min depois | **GLThread 1** | **não** |
+
+- Os 5 da EmuThread têm a pilha do Sintoma e estão em 5 aparelhos e fabricantes diferentes (Mali e Adreno). Isso
+  reforça o descarte de "driver Mali".
+- **Os 2 do Pixel 5 são outro defeito.** A pilha é `GLRetroView` → `LibretroDroid::onSurfaceCreated` →
+  `Video::Video` → `Video::initializeRenderer` → `FramebufferRenderer` → `createFramebuffer` → `throw`, na GLThread
+  (com contexto), ao **criar** a superfície, sem PPSSPP na pilha. A correção desta demanda (item 3, `createFramebuffer`
+  sem `throw`) evita o abort também ali, mas a razão do FBO incompleto com contexto não está explicada.
+- Última ocorrência em 1.17.28. A ausência depois disso **não** prova nada: a telemetria nativa de 1.17.29+ tem só
+  3 relatos no total (1.17.34: 1, 1.17.35: 2) contra 18–30 por versão antes.
+
 ### Sessões seguintes
 
 Não há: bloqueado. Quando destravar, dev effort `xhigh` com ultrathink (threading nativo GL/EGL entre core e frontend) e teste `high`.
