@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio]
 depende_de: []
+integrado_em: 54291d11de32a6e3eacc5f00f3c359a8c46c06a9
 ---
 # Harness offline da publicação: build-and-upload.ps1 contra um bucket R2 falso, provando que o anúncio sempre bate com o APK
 

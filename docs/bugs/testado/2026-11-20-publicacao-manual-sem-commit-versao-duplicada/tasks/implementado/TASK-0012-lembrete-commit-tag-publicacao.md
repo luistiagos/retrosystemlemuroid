@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-11-20-publicacao-manual-sem-commit-versao-duplicada]
 depende_de: [TASK-0011]
+integrado_em: 8aec970a7d525de314498601be1941b727be38b2
 ---
 # Lembrete no fim do build-and-upload.ps1: comandos exatos de commit, tag e push do bump publicado
 

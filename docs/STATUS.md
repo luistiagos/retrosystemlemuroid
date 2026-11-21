@@ -3,9 +3,9 @@
 
 Gerado em 2026-11-20. O estado de cada demanda é a pasta dela (`docs/<tipo>/<estado>/<id>/`). A **idade** conta os dias desde o primeiro commit do doc da demanda, seguindo as mudanças de pasta, ou desde a data com que o id começa ou termina, se for mais antiga. As tasks de cada demanda estão no `README.md` dela.
 
-144 demandas: 14 em aberto, 2 em implementado, 7 em no-ar, 119 em concluido, 1 em bloqueado, 1 em descartado. 4 tasks: 4 em no-ar.
+149 demandas: 16 em aberto, 2 em implementado, 2 em testado, 7 em no-ar, 119 em concluido, 1 em bloqueado, 2 em descartado. 10 tasks: 6 em implementado, 4 em no-ar.
 
-## aberto (14)
+## aberto (16)
 
 _registrada; inclui as demandas com tasks em execução._
 
@@ -25,6 +25,8 @@ _registrada; inclui as demandas com tasks em execução._
 | 1d | bug | [2026-11-19-msx-sem-resposta-controles-travado-demo](bugs/aberto/2026-11-19-msx-sem-resposta-controles-travado-demo/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 1d | bug | [2026-11-19-retomar-download-pausado-sem-foreground-service](bugs/aberto/2026-11-19-retomar-download-pausado-sem-foreground-service/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 1d | bug | [2026-11-19-saturn-yabasanshiro-fwrite-null-reincide](bugs/aberto/2026-11-19-saturn-yabasanshiro-fwrite-null-reincide/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
+| 0d | bug | [2026-11-20-harness-publicacao-sem-publish-guard](bugs/aberto/2026-11-20-harness-publicacao-sem-publish-guard/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
+| 0d | bug | [2026-11-20-pixel5-cannot-create-framebuffer-ao-abrir-jogo](bugs/aberto/2026-11-20-pixel5-cannot-create-framebuffer-ao-abrir-jogo/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 
 ## implementado (2)
 
@@ -35,11 +37,14 @@ _toda task de implementação concluída e integrada no ramo principal; falta a 
 | 6d | bug | [2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores](bugs/implementado/2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-14 - "corrigido no adaptador (.pipeline/projeto.json, publicacao.cmd povoa o lemuroid-cores) na T24 do pipeline-global; prova local sem upload saiu 0") |
 | 2d | bug | [2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy](bugs/implementado/2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-19 - "após corrigir , testar e validar mova o bug") |
 
-## testado (0)
+## testado (2)
 
 _a Aceitação passou; falta publicar._
 
-Nenhuma.
+| idade | tipo | demanda | tasks |
+|---:|---|---|---|
+| 0d | bug | [2026-11-20-publicacao-manual-sem-commit-versao-duplicada](bugs/testado/2026-11-20-publicacao-manual-sem-commit-versao-duplicada/README.md) | 3/3 |
+| 0d | bug | [2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio](bugs/testado/2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio/README.md) | 3/3 |
 
 ## no-ar (7)
 
@@ -189,12 +194,13 @@ _depende de algo externo; o motivo diz o que destrava._
 |---:|---|---|---|
 | 46d | bug | [2026-10-05-ppsspp-libretrodroid-cannot-create-framebuffer-abort](bugs/bloqueado/2026-10-05-ppsspp-libretrodroid-cannot-create-framebuffer-abort/README.md) | 0 tasks: Causa no nativo do libretrodroid-patched.aar: FramebufferRenderer::getFramebuffer (patch do Saturn) realoca FBOs na EmuThread do PPSSPP, sem contexto EGL, e createFramebuffer lanca std::runtime_error -> SIGABRT; destrava com o dono aplicando o fix nativo descrito no doc (realocar so com contexto GL corrente / no step, sem throw) e rebuildando o AAR. |
 
-## descartado (1)
+## descartado (2)
 
 _duplicada, não reproduz ou sem código._
 
 | idade | tipo | demanda | tasks |
 |---:|---|---|---|
 | 63d | bug | [2026-09-18-ppsspp-retro-run-terminate-abort](bugs/descartado/2026-09-18-ppsspp-retro-run-terminate-abort/README.md) | 0 tasks: Ja corrigido e no ar: o core PPSSPP patchado (lemuroid1, lemuroid-cores 55d29c2, tag 1.21.0) e o empacotado na base (cores 1.24.0, app 1.17.36) e a telemetria nao tem nenhum SIGABRT terminating em retro_run desde a 1.17.24 (14 SIGABRT nativos lidos, todos de outros bugs); nada a fazer neste repo. |
+| 0d | bug | [2026-11-20-telemetria-volume-cai-depois-1-17-28](bugs/descartado/2026-11-20-telemetria-volume-cai-depois-1-17-28/README.md) | 0 tasks: motivo não registrado (campo `motivo:` da demanda) |
 
 Pastas fora do layout (não entram aqui): `docs/bugs/img`, `docs/features/img`.

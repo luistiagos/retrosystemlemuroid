@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-11-20-publicacao-manual-sem-commit-versao-duplicada]
 depende_de: []
+integrado_em: 24e15cbc61f70dd64ced8ed6b8d3ef98440f5faa
 ---
 # Trava no build-and-upload.ps1: abortar antes do bump se a versão gerada não passa da anunciada
 

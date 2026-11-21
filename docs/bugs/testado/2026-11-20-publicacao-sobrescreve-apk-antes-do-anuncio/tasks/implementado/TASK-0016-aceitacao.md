@@ -2,6 +2,7 @@
 tipo: prova
 demandas: [2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio]
 depende_de: [TASK-0013, TASK-0014]
+integrado_em: 7de4484b495d227a33857dbb6a14ef128007a48a
 ---
 # Aceitação de 2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio
 

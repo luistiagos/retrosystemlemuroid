@@ -2,6 +2,7 @@
 tipo: prova
 demandas: [2026-11-20-publicacao-manual-sem-commit-versao-duplicada]
 depende_de: [TASK-0011, TASK-0012]
+integrado_em: 8a0215fcc647f4ae7c216242f9a9c796aa448658
 ---
 # Aceitação de 2026-11-20-publicacao-manual-sem-commit-versao-duplicada
 

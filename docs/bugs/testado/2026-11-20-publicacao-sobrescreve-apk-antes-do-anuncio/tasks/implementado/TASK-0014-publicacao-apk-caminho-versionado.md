@@ -2,6 +2,7 @@
 tipo: implementacao
 demandas: [2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio]
 depende_de: [TASK-0013]
+integrado_em: 04b5435742b0921dbae3a55d3faf325af5bec090
 ---
 # Publicação sobe o APK para um caminho versionado, anuncia esse caminho e só depois atualiza os links fixos
 
