@@ -767,5 +767,40 @@ if (-not $SkipR2) {
     Write-Host "  NAO publicado (-SkipR2): ninguem sera avisado desta versao." -ForegroundColor Yellow
 }
 
+# Lembrete de commit/tag/push do bump (demanda 2026-11-20-publicacao-manual-sem-commit-versao-duplicada):
+# bump publicado sem commit se perde para outra arvore, que repete o versionCode. So depois do
+# anuncio (sem -SkipR2); sem git cada consulta vira $null, nunca throw.
+if (-not $SkipR2) {
+    $gitBranch = $null; $gitDirty = $true; $gitTag = $null
+    if (Get-Command git -ErrorAction SilentlyContinue) {
+        $savedEap = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        try {
+            $out = & git -C $PROJECT_ROOT rev-parse --abbrev-ref HEAD 2>$null
+            if ($LASTEXITCODE -eq 0 -and $out) { $gitBranch = ([string]$out).Trim() }
+            $out = & git -C $PROJECT_ROOT status --porcelain -- lemuroid-app/build.gradle.kts 2>$null
+            if ($LASTEXITCODE -eq 0) { $gitDirty = [bool]$out }
+            $out = & git -C $PROJECT_ROOT tag -l "publicado/$VERSION_NAME" 2>$null
+            if ($LASTEXITCODE -eq 0 -and $out) { $gitTag = ([string]$out).Trim() }
+        } catch {
+            # sem git utilizavel: o lembrete mostra todos os comandos
+        } finally {
+            $ErrorActionPreference = $savedEap
+        }
+    }
+    $reminder = Get-PublishCommitReminder -VersionName $VERSION_NAME -Branch $gitBranch `
+        -GradleDirty $gitDirty -TagExists ([bool]$gitTag)
+    Write-Host ""
+    if ($reminder.Pending) {
+        Write-Host "==================================================" -ForegroundColor Red
+        Write-Host "  FALTA COMMITAR A VERSAO PUBLICADA ($VERSION_NAME)" -ForegroundColor Red
+        Write-Host "==================================================" -ForegroundColor Red
+        foreach ($line in $reminder.Lines) { Write-Host $line -ForegroundColor Yellow }
+        Write-Host "==================================================" -ForegroundColor Red
+    } else {
+        foreach ($line in $reminder.Lines) { Write-Host $line -ForegroundColor Green }
+    }
+}
+
 Write-Host ""
 Write-Host "Todos os passos concluidos com sucesso!" -ForegroundColor Green

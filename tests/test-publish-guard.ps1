@@ -149,6 +149,35 @@ Assert-True 'anuncio lido antes da trava do bump' ($iRead -ge 0 -and $iRead -lt 
 Assert-True 'trava do bump antes do WriteAllText' ($iGate -ge 0 -and $iWrite -gt $iGate) "gate=$iGate write=$iWrite"
 Assert-True 'trava NoBump/SkipBuild antes do passo 1' ($iSkip -gt $iWrite -and $iSkip -lt $iStep1) "skip=$iSkip passo1=$iStep1"
 
+Write-Host '--- Get-PublishCommitReminder ---'
+function Assert-Lines([string]$Name, $Reminder, [bool]$Pending, [string[]]$Expected) {
+    $got = @($Reminder.Lines | Where-Object { $_ -like '  git *' } | ForEach-Object { $_.Trim() })
+    $ok = ($Reminder.Pending -eq $Pending) -and ($got.Count -eq $Expected.Count)
+    if ($ok) { for ($i = 0; $i -lt $Expected.Count; $i++) { if ($got[$i] -cne $Expected[$i]) { $ok = $false } } }
+    Assert-True $Name $ok "pending=$($Reminder.Pending) linhas:`n$($Reminder.Lines -join "`n")"
+}
+$v = '1.17.39'
+Assert-Lines 'dirty + sem tag: os 4 comandos em ordem' (Get-PublishCommitReminder -VersionName $v -Branch 'version10' -GradleDirty $true -TagExists $false) $true @(
+    'git add lemuroid-app/build.gradle.kts', 'git commit -m "chore(versao): publicado/1.17.39"', 'git tag publicado/1.17.39', 'git push origin version10 publicado/1.17.39')
+Assert-Lines 'limpo + sem tag: tag e push' (Get-PublishCommitReminder -VersionName $v -Branch 'version10' -GradleDirty $false -TagExists $false) $true @(
+    'git tag publicado/1.17.39', 'git push origin version10 publicado/1.17.39')
+Assert-Lines 'dirty + com tag: add, commit e push' (Get-PublishCommitReminder -VersionName $v -Branch 'version10' -GradleDirty $true -TagExists $true) $true @(
+    'git add lemuroid-app/build.gradle.kts', 'git commit -m "chore(versao): publicado/1.17.39"', 'git push origin version10 publicado/1.17.39')
+$done = Get-PublishCommitReminder -VersionName $v -Branch 'version10' -GradleDirty $false -TagExists $true
+Assert-Lines 'nada pendente: nenhum comando' $done $false @()
+Assert-True 'nada pendente: linha ja commitada e com tag' (($done.Lines -join ' ') -like '*1.17.39 ja commitada e com tag*') ($done.Lines -join ' ')
+$dirtyText = (Get-PublishCommitReminder -VersionName $v -Branch 'x' -GradleDirty $true -TagExists $false).Lines -join "`n"
+Assert-True 'aviso de nunca git add -A' ($dirtyText -like '*nunca git add -A*') $dirtyText
+foreach ($br in @('HEAD', '', $null)) {
+    $r = Get-PublishCommitReminder -VersionName $v -Branch $br -GradleDirty $false -TagExists $false
+    $t = $r.Lines -join "`n"
+    Assert-True "branch '$br': <branch> literal e aviso" (($t -like '*git push origin <branch> publicado/1.17.39*') -and ($t -like '*AVISO*nao esta num branch*')) $t
+}
+$iRem = $scriptText.IndexOf('Get-PublishCommitReminder -VersionName')
+$iEnd = $scriptText.IndexOf('Todos os passos concluidos com sucesso!')
+$iSum = $scriptText.IndexOf('Print-Step "RESUMO"')
+Assert-True 'lembrete no resumo, antes da mensagem final' ($iRem -gt $iSum -and $iRem -lt $iEnd -and $iSum -ge 0) "sum=$iSum rem=$iRem end=$iEnd"
+
 if ($Offline) {
     Write-Host '--- Get-AnnouncedVersion: PULADO (-Offline) ---' -ForegroundColor Yellow
 } else {

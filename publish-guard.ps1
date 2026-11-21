@@ -248,3 +248,45 @@ function Assert-PublishVersionGate {
     throw (Format-PublishGateMessage -Reason $reason -Announced $Announced -AnnouncementUrl $AnnouncementUrl `
             -TargetCode $TargetCode -TargetName $TargetName -Mode $Mode -Commit $state.Commit -FileDirty $state.FileDirty)
 }
+
+function Get-PublishCommitReminder {
+    <#
+    .SYNOPSIS
+    Funcao pura: linhas do lembrete de commit/tag/push do bump publicado.
+
+    .DESCRIPTION
+    O script nao commita (a arvore do dono e compartilhada com outras sessoes); ele so diz o que
+    falta. Demanda 2026-11-20-publicacao-manual-sem-commit-versao-duplicada: o bump da 268 ficou
+    ~35 h sem commit e a proxima publicacao repetiu o numero.
+    Devolve [PSCustomObject] @{ Pending = [bool]; Lines = [string[]] }.
+    #>
+    param(
+        [Parameter(Mandatory = $true)][string]$VersionName,
+        [AllowNull()][AllowEmptyString()][string]$Branch = '',
+        [bool]$GradleDirty = $false,
+        [bool]$TagExists = $false
+    )
+    $tag = "publicado/$VersionName"
+    $lines = New-Object System.Collections.Generic.List[string]
+    $pending = $GradleDirty -or (-not $TagExists)
+    if (-not $pending) {
+        $lines.Add("versao $VersionName ja commitada e com tag $tag.")
+        return [PSCustomObject]@{ Pending = $false; Lines = [string[]]$lines.ToArray() }
+    }
+
+    $b = if ($null -eq $Branch) { '' } else { $Branch.Trim() }
+    if (-not $b -or $b -eq 'HEAD') {
+        $lines.Add("AVISO: o checkout nao esta num branch (detached ou sem git); troque <branch> pelo branch de publicacao.")
+        $b = '<branch>'
+    }
+    if ($GradleDirty) {
+        $lines.Add("Commite SO o build.gradle.kts (nunca git add -A: a arvore tem trabalho de outras sessoes):")
+        $lines.Add("  git add lemuroid-app/build.gradle.kts")
+        $lines.Add("  git commit -m `"chore(versao): publicado/$VersionName`"")
+    }
+    if (-not $TagExists) {
+        $lines.Add("  git tag $tag")
+    }
+    $lines.Add("  git push origin $b $tag")
+    return [PSCustomObject]@{ Pending = $true; Lines = [string[]]$lines.ToArray() }
+}

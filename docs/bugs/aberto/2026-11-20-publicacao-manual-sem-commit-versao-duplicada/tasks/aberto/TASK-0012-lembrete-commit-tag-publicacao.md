@@ -50,3 +50,22 @@ da 268 duplicada. O script não deve commitar (a árvore do dono é compartilhad
 - **Controle positivo:** `git show <base>:build-and-upload.ps1 | Select-String "git "` não acha nenhum comando git.
 - **T3:** a receita T2 da task `trava-versao-anunciada` (cópia de rascunho, `-SkipHF -SkipR2`) continua com o mesmo
   resultado: o lembrete não aparece com `-SkipR2` e a ausência de git não lança.
+
+## Correcao (pipeline 20261120-2117, rodada 1)
+
+- `publish-guard.ps1::Get-PublishCommitReminder` (novo, puro): devolve `{Pending; Lines}`. Dirty -> aviso "nunca git add -A",
+  `git add lemuroid-app/build.gradle.kts`, `git commit -m "chore(versao): publicado/<v>"`; sem tag -> `git tag publicado/<v>`;
+  havendo algo -> `git push origin <branch> publicado/<v>`; nada pendente -> "versao <v> ja commitada e com tag".
+  Branch vazio/`HEAD`/`$null` -> `<branch>` literal + AVISO.
+- `build-and-upload.ps1` (RESUMO, antes de "Todos os passos concluidos"): so com `-not $SkipR2`; `rev-parse --abbrev-ref HEAD`,
+  `status --porcelain -- lemuroid-app/build.gradle.kts`, `tag -l publicado/<v>` com EAP=Continue e try/catch (sem git:
+  branch `$null`, dirty assumido `$true`, tag ausente -> mostra todos os comandos). Bloco vermelho
+  "FALTA COMMITAR A VERSAO PUBLICADA" quando pendente.
+- `tests/test-publish-guard.ps1`: casos dirty+sem tag (4 comandos, ordem, string exata `chore(versao): publicado/1.17.39`),
+  limpo+sem tag, dirty+com tag, nada pendente, aviso `git add -A`, branch `HEAD`/''/$null, e posicao do lembrete no script.
+  Resultado: `-Offline` 48/48, com rede 51/51 (Windows PowerShell 5.1); `ParseFile` do `build-and-upload.ps1` sem erros.
+
+## Estado
+
+Feito: as 3 partes; testes offline/online verdes. Falta: nada alem do teste (T2 = leitura do diff; prova real na proxima
+publicacao do dono).
