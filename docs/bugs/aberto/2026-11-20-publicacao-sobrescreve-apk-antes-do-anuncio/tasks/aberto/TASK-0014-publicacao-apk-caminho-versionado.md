@@ -76,3 +76,54 @@ S2 falhavam — o mesmo harness é o controle positivo.
   mudaram.
 - **Falta para done (dono):** na próxima publicação real, `curl` do `version.json` público e download dos dois APKs
   pelas URLs dele, conferindo tamanho e sha (como foi feito para a 1.17.38), e o link fixo entregando a versão nova.
+
+## Analise do dev (pipeline 20261120-2117, antes da primeira edicao)
+
+Base da lane: `ed30205` (origin/version10). O script mudou desde o planning (TASK-0011/0012 integradas): as linhas
+citadas no "O que mudar" estao deslocadas. Simbolos abertos nesta base:
+
+- `build-and-upload.ps1` (806 linhas, UTF-8 com BOM, CRLF):
+  - `:97` dot-source de `publish-guard.ps1`; `:164-170` le o anuncio no ar (`Get-AnnouncedVersion`) ANTES do bump;
+    `:247-256` trava em `-SkipBuild`: mesmo versionCode so passa com `dist\` arm64 de sha igual ao anunciado.
+  - `:473-479` `$r2PublicUrls`/`$r2BareUrls` (mesmo objeto fixo); `:506-526` payload; `:529-535` sidecars em `dist\`.
+  - `:538-683` passo 3: `copy` para o nome fixo (`:566`), `lsjson` (`:576`), sidecars (`:603-610`), purga dos
+    `$r2BareUrls` (`:619-621`), verificacao publica `?v=` (`:638-657`, `throw`) e do link fixo (`:660-675`, so AVISO).
+  - `:685-734` passo 4: `copyto` do json, `lsjson`, purga, `Invoke-RestMethod` confere `versionCode` e `sha256`; o
+    `catch [System.Net.WebException]` so pega erro de rede, o `throw` de texto dentro do `try` propaga.
+  - `:735-740` ramo `-SkipR2`; `:742-768` RESUMO; `:770-803` lembrete de commit/tag (TASK-0012) so sem `-SkipR2`, e so
+    se nada lancou antes; `:806` fim.
+  - `Purge-EdgeCache` `:281-306`: sem `CF_*` devolve `$false`; com, `throw` se a API recusar.
+- `tests/test-publicacao-anuncio.ps1` (TASK-0013): `New-HarnessRoot` `:157-230` copia so `build-and-upload.ps1` e
+  `build-env.ps1` -> na base atual o script morre no dot-source do `publish-guard.ps1` (demanda achada pela TASK-0012:
+  `2026-11-20-harness-publicacao-sem-publish-guard`). Sem essa copia nenhum cenario roda; a linha entra aqui (o arquivo
+  e reservado desta task) e o doc daquela demanda ganha a nota.
+  `Invoke-Cenario` `:350-426` exige log do rclone falso nao vazio e a linha `rclone : <falso>` -> com `-SkipR2` o
+  preflight nao resolve rclone (`:349`), entao S5 precisa de um campo do cenario que inverta essa exigencia.
+- `tests/fake-rclone.ps1`: `copyto` aceita origem `:s3:` (copia dentro do bucket); falha injetada casa QUALQUER
+  argumento (`Contains`).
+
+Decisoes e desvios do plano (com o motivo):
+
+1. **S4: o texto da injecao nao pode ser `retro-game-system-armv7.apk`.** O upload versionado do passo 3 tem como
+   ORIGEM `dist\retro-game-system-armv7.apk`, que contem esse texto: a falha cairia no passo 3, nao no link fixo.
+   Usado `RetroGameSystem/retro-game-system-armv7.apk` (com a barra do caminho remoto): casa so o destino fixo e o
+   `.sha256` fixo (`.../retro-game-system-armv7.apk.sha256`); o versionado e `.../retro-game-system-armv7-<code>.apk`.
+2. **Link fixo = copia dentro do bucket a partir do versionado** (`copyto :s3:<bucket>/RetroGameSystem/<versionado>
+   <dest>/<fixo>`): o link fixo recebe exatamente os bytes ja verificados e nao ha 2o upload de ~360 MB.
+3. **Falha no passo 5 nao sai na hora:** grava a mensagem, segue para o RESUMO e o lembrete de commit/tag da TASK-0012
+   (o anuncio JA esta no ar, entao o bump tem de ser commitado do mesmo jeito) e so no fim sai 1. Comando para refazer:
+   `.\build-and-upload.ps1 -SkipBuild -SkipHF` (a trava aceita: mesmo versionCode e mesmo sha do anunciado; o
+   versionado recebe os mesmos bytes e o anuncio e regravado igual).
+4. `?v=<code>` mantido na URL versionada (inofensivo; a chave de cache fica como hoje).
+5. Purga do passo 3 = as URLs versionadas (o que o app e a verificacao buscam); purga dos `$r2BareUrls` vai para o passo 5.
+6. Residual coberto pela trava da TASK-0011, nao por esta task: republicar o MESMO versionCode com bytes diferentes
+   sobrescreveria o versionado que o anuncio aponta; a trava ja recusa isso (`SkipBuild` exige sha igual; `Bump`/`NoBump`
+   exigem code maior que o anunciado).
+
+Tarefas: `build-and-upload.ps1` (passos 3/4/5, URLs, cabecalho, RESUMO); harness: copia do `publish-guard.ps1`, S3 com
+URL versionada + links fixos + ordem no log, S4 `falha-link-fixo`, S5 `skip-r2`. Prova: harness S1-S5 PASS na lane; o
+mesmo harness com o `build-and-upload.ps1` da base: S1/S2 FAIL.
+
+## Estado
+
+- **2026-11-20 (dev):** analise gravada; build do helper rodando. Proximo: editar `build-and-upload.ps1` e o harness.
