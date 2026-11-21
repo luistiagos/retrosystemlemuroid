@@ -69,3 +69,20 @@ da 268 duplicada. O script não deve commitar (a árvore do dono é compartilhad
 
 Feito: as 3 partes; testes offline/online verdes. Falta: nada alem do teste (T2 = leitura do diff; prova real na proxima
 publicacao do dono).
+
+## Teste
+
+Rodada 1 (2026-11-20), aprovada. Evidencia em `C:\projects\lemuroid\.bugfix-pipeline-Lemuroid\reports\TASK-0012-evidencia\`.
+
+- **Offline:** `tests/test-publish-guard.ps1 -Offline` 48/48; sem `-Offline` 51/51. Diff so nos 3 arquivos reservados (+ esta task).
+- **Controle positivo:** `git show origin/version10:build-and-upload.ps1 | grep -c "git "` = 0 (a base nao diz nada sobre commit/tag).
+- **T2:** `build-and-upload.ps1` REAL rodado pelo harness da TASK-0013 (cenario `sucesso`, bucket R2 falso, `-SkipBuild -SkipHF`,
+  raiz temporaria sem git) com uma copia do harness que tambem copia o `publish-guard.ps1` (ver achado abaixo): PASS, exit 0, e a
+  saida (`script.out.sucesso.log`) termina com o bloco "FALTA COMMITAR A VERSAO PUBLICADA (1.17.38-DEBUG)", aviso de checkout
+  sem branch, `git add lemuroid-app/build.gradle.kts`, `git commit -m "chore(versao): publicado/1.17.38-DEBUG"`, `git tag`,
+  `git push origin <branch> ...`, ANTES de "Todos os passos concluidos com sucesso!". Ausencia de git nao lancou.
+- **T3:** com `-SkipR2` o bloco nao roda (o `if (-not $SkipR2)` envolve tudo; caso "lembrete no resumo" do teste confere a
+  posicao); cenario de sucesso do harness segue com anuncio coerente.
+- **T4:** `script.err.log` do cenario sem erro novo.
+- **Achado lateral:** `2026-11-20-harness-publicacao-sem-publish-guard` (o harness nao copia o `publish-guard.ps1`; quebra na base).
+- Prova no terminal do dono: proxima publicacao real (`fecha_por: dono`).
