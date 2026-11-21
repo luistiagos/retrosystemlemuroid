@@ -98,3 +98,10 @@ nenhum processo `rclone.exe` real).
 - **T2 (usuário):** dispensado — é ferramenta de teste da publicação, não há caminho no app.
 - **Controle positivo:** é o próprio resultado na base (S1/S2 FAIL).
 - **T3:** nenhum arquivo do app ou do script muda; `git diff --stat` só em `tests/` (os dois arquivos do harness).
+
+## Estado
+
+- **2026-11-20 (dev, pipeline 20261120-2117):** `tests/fake-rclone.ps1` e `tests/test-publicacao-anuncio.ps1` escritos;
+  o rclone falso foi exercitado isolado (copy/copyto/lsjson/deletefile, falha injetada sai 1 sem escrever, bucket com
+  outro nome sai 2). Falta: rodar o harness com os APKs debug do `build` da lane (S3 PASS, S1/S2 FAIL), rodar 2x,
+  registrar a secao `## Correcao` e `enqueue-test --bug TASK-0013`.
