@@ -164,4 +164,6 @@ console do 5.1 (o texto do `throw` e o `FullyQualifiedErrorId` que o PowerShell 
 
 - Feito: as tres partes da task (publish-guard.ps1, build-and-upload.ps1, tests/test-publish-guard.ps1), teste
   offline e online verdes no 5.1, ensaio T2 dos 4 casos.
+- Compile-check: `build --bug TASK-0011` -> BUILD SUCCESSFUL in 3m 13s, exit 0 (a mudanca nao toca entrada do Gradle;
+  rodado porque o roteiro manda).
 - Falta: nada de codigo. Proximo passo: `enqueue-test --bug TASK-0011` (sessao de teste roda a receita T2/T3 da task).
