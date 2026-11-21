@@ -3,7 +3,7 @@
 
 Gerado em 2026-11-20. O estado de cada demanda é a pasta dela (`docs/<tipo>/<estado>/<id>/`). A **idade** conta os dias desde o primeiro commit do doc da demanda, seguindo as mudanças de pasta, ou desde a data com que o id começa ou termina, se for mais antiga. As tasks de cada demanda estão no `README.md` dela.
 
-150 demandas: 17 em aberto, 2 em implementado, 2 em testado, 7 em no-ar, 119 em concluido, 1 em bloqueado, 2 em descartado. 10 tasks: 10 em no-ar.
+150 demandas: 17 em aberto, 2 em implementado, 7 em no-ar, 121 em concluido, 1 em bloqueado, 2 em descartado. 10 tasks: 10 em no-ar.
 
 ## aberto (17)
 
@@ -38,14 +38,11 @@ _toda task de implementação concluída e integrada no ramo principal; falta a 
 | 6d | bug | [2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores](bugs/implementado/2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-14 - "corrigido no adaptador (.pipeline/projeto.json, publicacao.cmd povoa o lemuroid-cores) na T24 do pipeline-global; prova local sem upload saiu 0") |
 | 2d | bug | [2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy](bugs/implementado/2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-19 - "após corrigir , testar e validar mova o bug") |
 
-## testado (2)
+## testado (0)
 
 _a Aceitação passou; falta publicar._
 
-| idade | tipo | demanda | tasks |
-|---:|---|---|---|
-| 53d | bug | [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service](bugs/testado/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service/README.md) | 3/3 |
-| 46d | bug | [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread](bugs/testado/2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread/README.md) | 3/3 |
+Nenhuma.
 
 ## no-ar (7)
 
@@ -61,7 +58,7 @@ _a versão publicada contém a solução; espera o fechamento (a medida do caso 
 | 13d | bug | [2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada](bugs/no-ar/2026-11-07-3ds-sem-tela-unica-controles-em-coluna-e-imagem-deformada/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 10d | bug | [2026-11-10-chaves-do-r2-na-linha-de-comando-do-rclone](bugs/no-ar/2026-11-10-chaves-do-r2-na-linha-de-comando-do-rclone/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 
-## concluido (119)
+## concluido (121)
 
 _fechada: pela prova na máquina, pela medida do caso ou pelo dono._
 
@@ -156,9 +153,11 @@ _fechada: pela prova na máquina, pela medida do caso ou pelo dono._
 | 56d | bug | [2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado](bugs/concluido/2026-09-25-lemuroid-cores-submodulo-divergente-commit-nao-publicado/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 56d | bug | [2026-09-25-roms-comerciais-staged-tmp-test-roms](bugs/concluido/2026-09-25-roms-comerciais-staged-tmp-test-roms/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 53d | bug | [2026-09-28-investigacoes-baixa-confianca-triagem](bugs/concluido/2026-09-28-investigacoes-baixa-confianca-triagem/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
+| 53d | bug | [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service](bugs/concluido/2026-09-28-lowmemory-gameplay-ppsspp-foreground-service/README.md) | 3/3 |
 | 49d | bug | [2026-10-02-amiga500-gameandwatch-sem-alias-somem-do-catalogo](bugs/concluido/2026-10-02-amiga500-gameandwatch-sem-alias-somem-do-catalogo/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 49d | bug | [2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo](bugs/concluido/2026-10-02-prebuilt-fileuri-sem-encoding-recria-catalogo/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 49d | bug | [2026-10-02-smartstoragepicker-pasta-roms-alterna-entre-volumes](bugs/concluido/2026-10-02-smartstoragepicker-pasta-roms-alterna-entre-volumes/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
+| 46d | bug | [2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread](bugs/concluido/2026-10-05-anr-downloadforegroundservice-createnotificationchannel-main-thread/README.md) | 3/3 |
 | 46d | bug | [2026-10-05-catalogo-sf2-champion-edition-aponta-rom-nao-hospedada-rom-not-found](bugs/concluido/2026-10-05-catalogo-sf2-champion-edition-aponta-rom-nao-hospedada-rom-not-found/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 46d | bug | [2026-10-05-lint-ktlint-gates-falhando-passivo-novo](bugs/concluido/2026-10-05-lint-ktlint-gates-falhando-passivo-novo/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |
 | 46d | bug | [2026-10-05-logos-vetoriais-improvisados-sistemas-sem-hover](bugs/concluido/2026-10-05-logos-vetoriais-improvisados-sistemas-sem-hover/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-13 - "migracao do layout antigo para o pipeline global (T23); estado decidido na T29") |

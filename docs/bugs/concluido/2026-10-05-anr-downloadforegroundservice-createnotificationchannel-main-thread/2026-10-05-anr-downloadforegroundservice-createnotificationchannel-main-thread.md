@@ -1,6 +1,7 @@
 ---
 fecha_por: prova
 tasks: [TASK-0005, TASK-0006, TASK-0009]
+versao_minima: 1.17.38
 ---
 # [BUG] ANR na `MainActivity` — `DownloadForegroundService` bloqueia main thread com `createNotificationChannels` no IPC Binder a cada progresso de download
 
@@ -141,3 +142,8 @@ Confirmada no código-fonte em:
 ### Achado lateral
 
 - `docs/bugs/aberto/2026-11-19-retomar-download-pausado-sem-foreground-service/` — pausar o único download da fila e retomar deixa o download sem foreground service, sem notificação e sem wake lock (`SaveQueueManager::resumeActive` não chama `DownloadForegroundService.start`). Fora desta execução.
+
+## Concluída pela prova em 2026-11-20
+
+- `fecha_por: prova`: a Aceitação passou na máquina (`evidencias/aceitacao.md`) e a versão 1.17.38 (tag `publicado/1.17.38`) contém todas as tasks; conclui ao entrar no ar, sem esperar telemetria.
+- Sem `casador`: nada a reabre sozinha; um erro novo vira bug novo na triagem.

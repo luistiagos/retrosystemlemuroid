@@ -1,6 +1,7 @@
 ---
 fecha_por: prova
 tasks: [TASK-0007, TASK-0008, TASK-0010]
+versao_minima: 1.17.38
 ---
 # [BUG] Low-memory kills em primeiro plano — PPSSPP (mesmo aparelho, 2x) + serviço de foreground sem sessão de jogo
 
@@ -335,3 +336,8 @@ atribuir.
   (`setForeground` que lança, `CancellationException`, `onTimeout`, `startForeground` recusado) e o marcador não
   pode ficar preso nem derrubar o worker.
 - teste: effort medium, ultrathink não.
+
+## Concluída pela prova em 2026-11-20
+
+- `fecha_por: prova`: a Aceitação passou na máquina (`evidencias/aceitacao.md`) e a versão 1.17.38 (tag `publicado/1.17.38`) contém todas as tasks; conclui ao entrar no ar, sem esperar telemetria.
+- Sem `casador`: nada a reabre sozinha; um erro novo vira bug novo na triagem.

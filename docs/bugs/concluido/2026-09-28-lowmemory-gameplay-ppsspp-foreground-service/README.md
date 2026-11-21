@@ -1,7 +1,7 @@
 <!-- gerado por `pipeline.py gerar` (pipeline-global): não edite, o gerador reescreve este arquivo -->
 # 2026-09-28-lowmemory-gameplay-ppsspp-foreground-service
 
-Bug em `testado/`. Doc: [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service.md](2026-09-28-lowmemory-gameplay-ppsspp-foreground-service.md).
+Bug em `concluido/`. Doc: [2026-09-28-lowmemory-gameplay-ppsspp-foreground-service.md](2026-09-28-lowmemory-gameplay-ppsspp-foreground-service.md).
 
 Tasks concluídas: 3/3.
 
