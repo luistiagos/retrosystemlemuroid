@@ -1,5 +1,6 @@
 ---
 fecha_por: dono
+tasks: [TASK-0013, TASK-0014]
 ---
 
 # [BUG] Atualização pelo app falha sempre depois de uma publicação interrompida: o `version.json` anuncia um APK que não está mais no ar
@@ -81,3 +82,50 @@ efetivada. Não muda a correção.
 Prova: rodar a publicação com uma falha forçada depois do upload (ex.: `throw` temporário antes do passo 4, num canal
 de teste `APP_UPDATE_CHANNEL=teste`, que grava `version-teste.json`) e conferir que o `version-teste.json` público
 continua batendo com o APK para o qual aponta.
+
+## Planejamento (pipeline 20261120-2117, 2026-11-20)
+
+**Veredito:** corrigir — duas tasks: `harness-publicacao-bucket-falso` (implementacao, teste novo: roda o `build-and-upload.ps1` real contra um bucket local e prova a invariante; vermelho na base) e `publicacao-apk-caminho-versionado` (a correção no script, verde no harness).
+**Complexidade:** media — script de publicação, sem código do app; a parte delicada é a ordem das escritas e os caminhos de falha.
+**Severidade:** alto — quando acontece, a atualização in-app fica inutilizável para todo cliente atrasado (contorno: link manual pelo suporte).
+**Arquivos a alterar (reserva da onda, por task no plan.json):**
+- `tests/test-publicacao-anuncio.ps1` e `tests/fake-rclone.ps1` — novos (task 1; task 2 acrescenta cenários).
+- `build-and-upload.ps1` — passos 3/4 + passo novo dos links fixos (task 2). O bug `2026-11-20-publicacao-manual-sem-commit-versao-duplicada`, desta execução, reserva o mesmo arquivo (bump e fim): a onda serializa; sem `depende_de`, as regiões são diferentes.
+
+### Causa raiz (símbolos abertos)
+Confirma a seção "Causa-raiz" acima, conferida na worktree (base `f363183`):
+- `build-and-upload.ps1` `:426-432` — `$r2PublicUrls[abi]` = `<base>/RetroGameSystem/retro-game-system-<abi>.apk?v=<code>`; `$r2BareUrls` = o mesmo sem query. Os dois apontam para o **mesmo objeto**.
+- `:462-481` — `version.json` com `apkUrl`/`apkUrls` = `$r2PublicUrls`, sha/tamanho do `dist\`.
+- `:519-526` — `rclone copy <dist> $dest` sobrescreve o objeto fixo. A partir daqui, até `:659` (upload do json), todo `throw` deixa o anúncio de produção descrevendo o binário anterior no objeto já sobrescrito: `:524`, `:542`, `:546`, `:563` (sidecar), `:230` (purga), `:599` (`Invoke-WebRequest` lança), `:605` (a verificação pública — o caso de 2026-11-20).
+- `Purge-EdgeCache` `:209-234` — sem `CF_API_TOKEN`/`CF_ZONE_ID` só avisa e devolve `$false`; com eles, `throw` se a API recusar.
+- `Find-Rclone` `:259-268` — `Get-Command rclone` -> `.Source`; `Invoke-R2Rclone` `:242-257` põe as chaves no ambiente e chama `& $exe @args` (o harness usa isso: rclone falso primeiro no `PATH`).
+- `AppUpdateManager.fetchVersionInfo` (`lemuroid-app/.../updates/AppUpdateManager.kt:152-202`) — `apkUrls[abi]` lido como string (`optString`), fallback `apkUrl`; `downloadAndInstall` `:253-280` grava sempre em `cacheDir/updates/lemuroid-update.apk`; `downloadApk` `:351` usa a URL crua no OkHttp; `verifyApk` `:400-416` compara tamanho e sha. **URL com outro nome de arquivo funciona no app já instalado** (item 3 do "O que fazer": conferido, sem mudança no app).
+
+### Provas
+- `git grep -n "retro-game-system-\|RetroGameSystem/" -- ':!docs'` -> só `build-and-upload.ps1` publica no R2 (`release.ps1:65` e `build_apk.ps1:203-205` só nomeiam arquivos em `dist\`).
+- `grep -rn "retro-game-system-arm\|retro-game-system-armv7" C:/projects/digitalstoregamesproject` -> o link fixo (`.../RetroGameSystem/retro-game-system-arm64.apk` / `-armv7.apk`) aparece em conversas de chamados (#106, #112, #123, #127, #129): o suporte o manda aos clientes, então ele continua existindo, atualizado por último.
+- `git check-ignore -v dist/x.apk build.properties r2-config.json` -> os três ignorados: o harness pode criá-los numa raiz temporária sem sujar o repo.
+- `python pipeline.py status` -> o irmão `2026-11-20-publicacao-manual-sem-commit-versao-duplicada` está nesta execução e mexe no mesmo script (bump `:106-160` e fim).
+
+### Hipóteses descartadas
+- **Só reordenar (json antes do APK)**: inverte o defeito — o anúncio novo aponta para o binário velho até o upload terminar, e uma falha no upload deixa o mesmo estado quebrado. Só caminho novo por versão separa os dois objetos.
+- **Mudar o app** (aceitar sha divergente, reconsultar): o app está certo ao recusar; e o app em campo não muda.
+- **Retenção de APKs versionados** (item 4, opcional): fora. ~360 MB por versão no R2 custa centavos por mês; apagar objeto em produção é risco que a correção não precisa. Se um dia pesar, vira backlog.
+- **Prova pela publicação real num canal de teste** (proposta original no "Prova"): nenhuma sessão do pipeline roda o `build-and-upload.ps1` contra o R2 (manual, Finalização). Trocado pelo harness com bucket local, que roda o script real e reproduz o incidente (servidor HTTP servindo uma cópia velha = cache de borda velho).
+- `.part` do `AppUpdateManager` retomado entre versões diferentes: o `verifyApk` pega e o retry recomeça do zero; não é este bug e não muda com a correção.
+
+### Tarefas
+- [ ] `harness-publicacao-bucket-falso` (implementacao) — `tests/test-publicacao-anuncio.ps1` + rclone falso; cenários S1 `cache-velho`, S2 `falha-upload-armv7`, S3 `sucesso` — prova: na base S3 PASS, S1/S2 FAIL com a divergência impressa.
+- [ ] `publicacao-apk-caminho-versionado` (implementacao, depende da anterior) — `build-and-upload.ps1`: upload versionado `retro-game-system-<abi>-<code>.apk`, anúncio aponta para ele, links fixos + `.sha256` só depois do anúncio verificado; harness ganha S4 `falha-link-fixo` e S5 `skip-r2` — prova: S1–S5 PASS.
+
+### Plano de teste
+- **Offline (sem slot):** tudo. `build` do helper na lane para ter os APKs debug (arm64 e armv7, versionCode da base); harness com eles. Parser do PowerShell sem erro no script.
+- **T2 reprodução como o usuário:** dispensada — o defeito é da publicação (script que só o dono roda), não há caminho no app e o app não muda. O harness reproduz o caminho que produziu o incidente (upload -> verificação pública vê bytes velhos -> `throw` antes do anúncio) e confere o que o cliente veria: o anúncio do bucket contra o objeto para o qual aponta.
+- **Controle positivo:** harness contra o `build-and-upload.ps1` da base: S1 e S2 FAIL (anunciado = sha anterior, encontrado = sha novo no mesmo objeto).
+- **T3 regressão:** S3 `sucesso` (links fixos com os bytes novos, anúncio coerente), S5 `-SkipR2`; diff sem mudança em HF/bump/aapt2/canal; testes de unidade do `build` sem falha nova.
+- **Falta para done (dono, `fecha_por: dono`):** na próxima publicação real, ler o `version.json` público e baixar os dois APKs pelas URLs dele conferindo tamanho e sha, e o link fixo entregando a versão nova.
+
+### Sessões seguintes
+- dev `harness-publicacao-bucket-falso`: effort high, ultrathink não — PowerShell com processo filho, `PATH`, servidor local e emulação do rclone; trabalhoso, mas sem decisão de desenho aberta.
+- dev `publicacao-apk-caminho-versionado`: effort high, ultrathink sim — ordem de escritas e o que cada falha deixa no ar.
+- teste (as duas): effort medium, ultrathink não — rodar o harness e ler PASS/FAIL.
