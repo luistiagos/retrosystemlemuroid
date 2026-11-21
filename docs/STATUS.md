@@ -3,9 +3,9 @@
 
 Gerado em 2026-11-20. O estado de cada demanda é a pasta dela (`docs/<tipo>/<estado>/<id>/`). A **idade** conta os dias desde o primeiro commit do doc da demanda, seguindo as mudanças de pasta, ou desde a data com que o id começa ou termina, se for mais antiga. As tasks de cada demanda estão no `README.md` dela.
 
-150 demandas: 17 em aberto, 2 em implementado, 7 em no-ar, 121 em concluido, 1 em bloqueado, 2 em descartado. 10 tasks: 10 em no-ar.
+150 demandas: 15 em aberto, 2 em implementado, 2 em testado, 7 em no-ar, 121 em concluido, 1 em bloqueado, 2 em descartado. 16 tasks: 6 em implementado, 10 em no-ar.
 
-## aberto (17)
+## aberto (15)
 
 _registrada; inclui as demandas com tasks em execução._
 
@@ -25,8 +25,6 @@ _registrada; inclui as demandas com tasks em execução._
 | 1d | bug | [2026-11-19-saturn-yabasanshiro-fwrite-null-reincide](bugs/aberto/2026-11-19-saturn-yabasanshiro-fwrite-null-reincide/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 0d | bug | [2026-11-20-harness-publicacao-sem-publish-guard](bugs/aberto/2026-11-20-harness-publicacao-sem-publish-guard/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 0d | bug | [2026-11-20-pixel5-cannot-create-framebuffer-ao-abrir-jogo](bugs/aberto/2026-11-20-pixel5-cannot-create-framebuffer-ao-abrir-jogo/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
-| 0d | bug | [2026-11-20-publicacao-manual-sem-commit-versao-duplicada](bugs/aberto/2026-11-20-publicacao-manual-sem-commit-versao-duplicada/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
-| 0d | bug | [2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio](bugs/aberto/2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 | 0d | bug | [2026-11-20-redmi-a1-apk-pacote-invalido](bugs/aberto/2026-11-20-redmi-a1-apk-pacote-invalido/README.md) | 0 tasks: aguardando o planning (nenhuma task gerada ainda) |
 
 ## implementado (2)
@@ -38,11 +36,14 @@ _toda task de implementação concluída e integrada no ramo principal; falta a 
 | 6d | bug | [2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores](bugs/implementado/2026-11-14-publicacao-pipeline-lane-sem-submodulo-lemuroid-cores/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-14 - "corrigido no adaptador (.pipeline/projeto.json, publicacao.cmd povoa o lemuroid-cores) na T24 do pipeline-global; prova local sem upload saiu 0") |
 | 2d | bug | [2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy](bugs/implementado/2026-11-18-3ds-azahar-trava-sem-crash-nao-aciona-fallback-citra-legacy/README.md) | 0 tasks: pasta escolhida à mão (movido_por: Luis Tiago - 2026-11-19 - "após corrigir , testar e validar mova o bug") |
 
-## testado (0)
+## testado (2)
 
 _a Aceitação passou; falta publicar._
 
-Nenhuma.
+| idade | tipo | demanda | tasks |
+|---:|---|---|---|
+| 0d | bug | [2026-11-20-publicacao-manual-sem-commit-versao-duplicada](bugs/testado/2026-11-20-publicacao-manual-sem-commit-versao-duplicada/README.md) | 3/3 |
+| 0d | bug | [2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio](bugs/testado/2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio/README.md) | 3/3 |
 
 ## no-ar (7)
 
