@@ -1,6 +1,6 @@
 ---
 fecha_por: dono
-tasks: [TASK-0011, TASK-0012]
+tasks: [TASK-0011, TASK-0012, TASK-0015]
 ---
 
 # [BUG] Duas versões 1.17.37 (versionCode 268) diferentes foram publicadas: quem instalou a primeira nunca receberia a segunda
