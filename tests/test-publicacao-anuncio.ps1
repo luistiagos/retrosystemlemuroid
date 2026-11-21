@@ -50,14 +50,18 @@ Nao apaga a raiz temporaria de cada cenario (para inspecao).
 #>
 [CmdletBinding()]
 param(
-    [string]$ApkArm64 = "$PSScriptRoot/../lemuroid-app/build/outputs/apk/freeBundle/debug/lemuroid-app-free-bundle-arm64-v8a-debug.apk",
-    [string]$ApkArmv7 = "$PSScriptRoot/../lemuroid-app/build/outputs/apk/freeBundle/debug/lemuroid-app-free-bundle-armeabi-v7a-debug.apk",
+    [string]$ApkArm64 = '',
+    [string]$ApkArmv7 = '',
     [string]$Cenario = '',
     [switch]$ManterRaiz
 )
 
 $ErrorActionPreference = 'Stop'
+# $PSScriptRoot fica vazio nos defaults do param() no Windows PowerShell 5.1: os padroes sao resolvidos aqui.
 $repoRoot = [IO.Path]::GetFullPath("$PSScriptRoot/..")
+$debugApkDir = Join-Path $repoRoot 'lemuroid-app\build\outputs\apk\freeBundle\debug'
+if (-not $ApkArm64) { $ApkArm64 = Join-Path $debugApkDir 'lemuroid-app-free-bundle-arm64-v8a-debug.apk' }
+if (-not $ApkArmv7) { $ApkArmv7 = Join-Path $debugApkDir 'lemuroid-app-free-bundle-armeabi-v7a-debug.apk' }
 $fakeRcloneSrc = Join-Path $PSScriptRoot 'fake-rclone.ps1'
 $R2Folder = 'RetroGameSystem'
 $Channel = 'harness'
@@ -150,8 +154,11 @@ function New-RandomFile([string]$Path, [int]$Size) {
 }
 
 # Monta a raiz temporaria do cenario e devolve um objeto com os caminhos e a URL publica.
-function New-HarnessRoot([string]$Nome) {
-    $raiz = Join-Path $env:TEMP ("lemuroid-harness-publicacao-$Nome-" + [guid]::NewGuid().ToString('N').Substring(0, 8))
+function New-HarnessRoot([string]$Nome, [string]$FalharEm) {
+    # O nome do cenario NAO entra no caminho: FAKE_RCLONE_FALHAR_EM casa com qualquer argumento, e
+    # "falha-upload-armv7" no caminho da raiz faria a falha cair ja no upload do arm64.
+    $raiz = Join-Path $env:TEMP ("lemuroid-harness-publicacao-" + [guid]::NewGuid().ToString('N').Substring(0, 8))
+    if ($FalharEm -and $raiz.Contains($FalharEm)) { throw "a raiz $raiz contem o texto da falha injetada '$FalharEm'" }
     $bucketFolder = Join-Path $raiz "bucket\$R2Folder"
     foreach ($d in @($raiz, (Join-Path $raiz 'lemuroid-app'), (Join-Path $raiz 'dist'), $bucketFolder,
                      (Join-Path $raiz 'bin'), (Join-Path $raiz 'tmp'))) {
@@ -346,7 +353,8 @@ function Invoke-Cenario([string]$Nome, $Cfg) {
     $motivos = @()
     $exit = $null
     try {
-        $H = New-HarnessRoot $Nome
+        $H = New-HarnessRoot $Nome $Cfg.FalharEm
+        Write-Host "[$Nome] raiz: $($H.Raiz)" -ForegroundColor DarkGray
         $servir = if ($Cfg.Servir -eq 'cdn-velho') { Join-Path $H.Raiz 'cdn-velho' } else { $H.Bucket }
         $srv = Start-HttpServer $servir $H.Port $H.Raiz
         $exit = Invoke-PublishScript $H $Cfg
@@ -360,6 +368,9 @@ function Invoke-Cenario([string]$Nome, $Cfg) {
         # Quem rodou foi o falso?
         $log = Get-UltimasLinhas $H.RcloneLog 1000
         if ($log.Count -eq 0) { $motivos += 'o rclone falso nao foi chamado (log vazio)' }
+        if ($Cfg.FalharEm -and -not ($log | Where-Object { $_ -match "`tFALHA-INJETADA`t" })) {
+            $motivos += "a falha injetada ('$($Cfg.FalharEm)') nao disparou: o cenario nao testou o que diz"
+        }
         $out = if (Test-Path -LiteralPath (Join-Path $H.Raiz 'script.out.log')) { Get-Content -LiteralPath (Join-Path $H.Raiz 'script.out.log') -Raw } else { '' }
         if (-not $out.Contains("rclone : $($H.FakeRclone)")) {
             $motivos += "o script nao resolveu o rclone para o falso ($($H.FakeRclone))"
