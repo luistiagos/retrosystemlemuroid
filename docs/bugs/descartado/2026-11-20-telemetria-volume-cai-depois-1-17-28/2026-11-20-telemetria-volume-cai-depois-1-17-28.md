@@ -1,5 +1,7 @@
 ---
 fecha_por: dono
+motivo: "Sem codigo a corrigir: o envio funciona nas versoes 1.17.33+ (game, native e lowmemory chegam pelos tres caminhos) e a queda de volume e de populacao, versoes que ficaram 1 a 3 dias no ar; ver Analise."
+movido_por: Luis Tiago - 2026-11-20 - "feche o bug então, já que não temos o que corrigir"
 ---
 
 # [BUG] A telemetria quase não recebe relatos das versões 1.17.29 em diante: não dá para saber se um bug nativo ainda acontece
