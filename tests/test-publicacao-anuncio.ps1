@@ -12,7 +12,7 @@ depois de sucesso OU de falha no meio da publicacao:
 
 Isolamento (nada toca o R2/Cloudflare de producao):
   - cada cenario monta uma raiz nova em $env:TEMP com copias do build-and-upload.ps1, build-env.ps1,
-    lemuroid-app\build.gradle.kts (versionCode/versionName reescritos para os do APK), dist\*.apk e um
+    publish-guard.ps1, lemuroid-app\build.gradle.kts (versionCode/versionName reescritos para os do APK), dist\*.apk e um
     build.properties com R2 falso (endpoint 127.0.0.1:9, chave "fake", bucket "fakebucket"), sem
     CF_API_TOKEN/CF_ZONE_ID (a purga so avisa) e sem HF_TOKEN;
   - o script roda num powershell filho com -SkipBuild -SkipHF, APP_UPDATE_CHANNEL=harness e o PATH
@@ -24,10 +24,16 @@ Isolamento (nada toca o R2/Cloudflare de producao):
 
 Cenarios:
   cache-velho         servidor serve a copia velha do bucket (o incidente de 2026-11-20 15:59 UTC);
-                      esperado: script sai != 0 e a invariante vale.
-  falha-upload-armv7  o rclone falso falha na chamada que contem "armv7"; esperado: script != 0 e invariante.
-  sucesso             sem falha; esperado: exit 0, invariante, o json anuncia o versionCode dos APKs e o link
-                      fixo retro-game-system-<abi>.apk (+ .sha256) tem os bytes novos.
+                      esperado: script sai != 0, invariante vale, anuncio e links fixos da semente intactos.
+  falha-upload-armv7  o rclone falso falha na chamada que contem "armv7"; esperado: script != 0, invariante,
+                      anuncio e links fixos intactos.
+  sucesso             sem falha; esperado: exit 0, invariante, o json anuncia o versionCode dos APKs nas URLs
+                      versionadas (retro-game-system-<abi>-<code>.apk), o link fixo retro-game-system-<abi>.apk
+                      (+ .sha256) tem os bytes novos, e no log do rclone: versionados < json < nomes fixos.
+  falha-link-fixo     o rclone falha ao gravar o nome fixo do armv7 (passo 5, depois do anuncio); esperado:
+                      script != 0 com "anuncio OK; link manual desatualizado", invariante, anuncio novo.
+  skip-r2             -SkipR2; esperado: exit 0, rclone nunca chamado, bucket intacto, dist\version-harness.json
+                      com as URLs versionadas.
 
 Saida: uma linha PASS/FAIL por cenario com o motivo; exit 0 so se todos passarem.
 
@@ -69,22 +75,48 @@ $JsonName = "version-$Channel.json"
 $AbiMap = [ordered]@{ 'arm64-v8a' = 'arm64'; 'armeabi-v7a' = 'armv7' }
 $TimeoutScriptSec = 900
 
-# Cada cenario: Servir = pasta que o servidor HTTP serve ('bucket' ou 'cdn-velho'); FalharEm = valor de
-# FAKE_RCLONE_FALHAR_EM ($null = sem falha); Saida = 'falha' (exit != 0) ou 'sucesso' (exit 0);
-# ArgsExtras = parametros a mais para o build-and-upload.ps1; ConfereLinksFixos = o link fixo e o .sha256
-# tem de ter os bytes novos (so faz sentido quando a publicacao termina).
+# Cada cenario:
+#   Servir        pasta que o servidor HTTP serve ('bucket' ou 'cdn-velho')
+#   FalharEm      valor de FAKE_RCLONE_FALHAR_EM ($null = sem falha)
+#   Saida         'falha' (exit != 0) ou 'sucesso' (exit 0)
+#   ArgsExtras    parametros a mais para o build-and-upload.ps1
+#   UsaR2         $false = o script nao pode chamar o rclone (-SkipR2)
+#   Anuncio       'novo' = o json do bucket anuncia o versionCode dos APKs com URLs versionadas
+#                 (retro-game-system-<abi>-<code>.apk); 'semente' = o json do bucket nao mudou; $null = nao confere
+#   LinksFixos    'novos' = retro-game-system-<abi>.apk (+ .sha256) com os bytes novos; 'semente' = intactos; $null
+#   Mensagem      texto que tem de aparecer na saida do script ($null = nenhum)
+#   ConfereOrdem  no log do rclone falso: uploads versionados < version-harness.json < escritas nos nomes fixos
+#   BucketIntacto nenhum arquivo do bucket mudou
+#   DistJson      dist\version-harness.json gerado com URLs versionadas e sha/tamanho dos APKs
+# A invariante (anuncio do bucket bate com o objeto para o qual aponta) e conferida em todos.
 $Cenarios = [ordered]@{
     'cache-velho' = @{
         Descricao = 'cache de borda servindo os bytes antigos (incidente 2026-11-20)'
-        Servir = 'cdn-velho'; FalharEm = $null; Saida = 'falha'; ArgsExtras = @(); ConfereLinksFixos = $false
+        Servir = 'cdn-velho'; FalharEm = $null; Saida = 'falha'; ArgsExtras = @(); UsaR2 = $true
+        Anuncio = 'semente'; LinksFixos = 'semente'; Mensagem = $null; ConfereOrdem = $false; BucketIntacto = $false; DistJson = $false
     }
     'falha-upload-armv7' = @{
         Descricao = 'rclone falha no upload do armv7, depois do arm64'
-        Servir = 'bucket'; FalharEm = 'armv7'; Saida = 'falha'; ArgsExtras = @(); ConfereLinksFixos = $false
+        Servir = 'bucket'; FalharEm = 'armv7'; Saida = 'falha'; ArgsExtras = @(); UsaR2 = $true
+        Anuncio = 'semente'; LinksFixos = 'semente'; Mensagem = $null; ConfereOrdem = $false; BucketIntacto = $false; DistJson = $false
     }
     'sucesso' = @{
         Descricao = 'publicacao completa, cache coerente'
-        Servir = 'bucket'; FalharEm = $null; Saida = 'sucesso'; ArgsExtras = @(); ConfereLinksFixos = $true
+        Servir = 'bucket'; FalharEm = $null; Saida = 'sucesso'; ArgsExtras = @(); UsaR2 = $true
+        Anuncio = 'novo'; LinksFixos = 'novos'; Mensagem = $null; ConfereOrdem = $true; BucketIntacto = $false; DistJson = $false
+    }
+    # A injecao tem a barra do caminho remoto de proposito: "retro-game-system-armv7.apk" sozinho casaria tambem a
+    # ORIGEM do upload versionado (dist\retro-game-system-armv7.apk) e a falha cairia no passo 3, nao no link fixo.
+    'falha-link-fixo' = @{
+        Descricao = 'rclone falha ao gravar o link fixo do armv7, depois do anuncio'
+        Servir = 'bucket'; FalharEm = "$R2Folder/retro-game-system-armv7.apk"; Saida = 'falha'; ArgsExtras = @(); UsaR2 = $true
+        Anuncio = 'novo'; LinksFixos = $null; Mensagem = 'anuncio OK; link manual desatualizado'; ConfereOrdem = $false
+        BucketIntacto = $false; DistJson = $false
+    }
+    'skip-r2' = @{
+        Descricao = '-SkipR2: so gera o json local, o bucket nao muda'
+        Servir = 'bucket'; FalharEm = $null; Saida = 'sucesso'; ArgsExtras = @('-SkipR2'); UsaR2 = $false
+        Anuncio = 'semente'; LinksFixos = 'semente'; Mensagem = $null; ConfereOrdem = $false; BucketIntacto = $true; DistJson = $true
     }
 }
 
@@ -169,6 +201,8 @@ function New-HarnessRoot([string]$Nome, [string]$FalharEm) {
 
     Copy-Item -LiteralPath (Join-Path $repoRoot 'build-and-upload.ps1') -Destination $raiz
     Copy-Item -LiteralPath (Join-Path $repoRoot 'build-env.ps1') -Destination $raiz
+    # Dot-source do build-and-upload.ps1 (trava de versao, TASK-0011); sem ele o script morre na linha do ". ".
+    Copy-Item -LiteralPath (Join-Path $repoRoot 'publish-guard.ps1') -Destination $raiz
     Copy-Item -LiteralPath $fakeRcloneSrc -Destination (Join-Path $raiz 'bin\rclone.ps1')
 
     # O script confere o versionCode do build.gradle.kts contra o do APK (aapt2): reescreve para o do APK.
@@ -325,20 +359,99 @@ function Test-AnuncioCoerente($H) {
     return $erros
 }
 
-# Link fixo (o que o suporte manda) e sidecar com os bytes novos.
-function Test-LinksFixos($H) {
+# Link fixo (o que o suporte manda) e sidecar: $Esperado = 'novos' (bytes dos APKs) ou 'semente' (intactos).
+function Test-LinksFixos($H, [string]$Esperado) {
     $erros = @()
     foreach ($abi in $AbiMap.Keys) {
+        $alvo = if ($Esperado -eq 'novos') { $ApkInfo[$abi].Sha256 } else { $H.Seed[$abi].Sha256 }
+        $rotulo = if ($Esperado -eq 'novos') { 'APK novo' } else { 'semente' }
         $nome = "retro-game-system-$($AbiMap[$abi]).apk"
         $arq = Join-Path $H.BucketFolder $nome
         if (-not (Test-Path -LiteralPath $arq)) { $erros += "$($nome): ausente"; continue }
         $sha = Get-Sha256 $arq
-        if ($sha -ne $ApkInfo[$abi].Sha256) { $erros += "$($nome): $sha, esperado $($ApkInfo[$abi].Sha256) (APK novo)" }
+        if ($sha -ne $alvo) { $erros += "$($nome): $sha, esperado $alvo ($rotulo)" }
         $side = "$arq.sha256"
         if (-not (Test-Path -LiteralPath $side)) { $erros += "$nome.sha256: ausente"; continue }
         $sideSha = ((Get-Content -LiteralPath $side -Raw).Trim() -split '\s+')[0].ToLower()
-        if ($sideSha -ne $ApkInfo[$abi].Sha256) { $erros += "$nome.sha256: $sideSha, esperado $($ApkInfo[$abi].Sha256)" }
+        if ($sideSha -ne $alvo) { $erros += "$nome.sha256: $sideSha, esperado $alvo ($rotulo)" }
     }
+    return $erros
+}
+
+# Caminho relativo -> sha256 de todo arquivo sob $Dir.
+function Get-DirSnapshot([string]$Dir) {
+    $snap = @{}
+    $base = (Resolve-Path -LiteralPath $Dir).ProviderPath.TrimEnd('\') + '\'
+    foreach ($f in (Get-ChildItem -LiteralPath $Dir -Recurse -File)) {
+        $snap[$f.FullName.Substring($base.Length)] = Get-Sha256 $f.FullName
+    }
+    return $snap
+}
+
+function Compare-DirSnapshot($Antes, $Depois) {
+    $erros = @()
+    foreach ($k in $Antes.Keys) {
+        if (-not $Depois.ContainsKey($k)) { $erros += "$($k): apagado" }
+        elseif ($Depois[$k] -ne $Antes[$k]) { $erros += "$($k): mudou ($($Antes[$k]) -> $($Depois[$k]))" }
+    }
+    foreach ($k in $Depois.Keys) { if (-not $Antes.ContainsKey($k)) { $erros += "$($k): criado" } }
+    return $erros
+}
+
+# URL versionada que o anuncio desta publicacao tem de usar (sem a query).
+function Get-UrlVersionada($H, [string]$Abi) {
+    return "$($H.PublicBase)/$R2Folder/retro-game-system-$($AbiMap[$Abi])-$ApkCode.apk"
+}
+
+# Anuncio (do bucket ou o gerado em dist\) e o desta publicacao: versionCode dos APKs, URLs versionadas e
+# sha/tamanho dos APKs. A invariante confere os bytes; aqui se confere PARA ONDE ele aponta.
+function Test-AnuncioNovo($H, [string]$JsonPath) {
+    if (-not (Test-Path -LiteralPath $JsonPath)) { return @("$JsonPath ausente") }
+    $json = Get-Content -LiteralPath $JsonPath -Raw | ConvertFrom-Json
+    $erros = @()
+    if ([int]$json.versionCode -ne $ApkCode) { $erros += "versionCode $($json.versionCode), esperado $ApkCode" }
+    $pares = @()
+    foreach ($abi in $AbiMap.Keys) {
+        $pares += @{ Rotulo = "apkUrls[$abi]"; Abi = $abi; Url = $json.apkUrls.$abi; Sha = $json.apkSha256.$abi; Size = $json.apkSizes.$abi }
+    }
+    $pares += @{ Rotulo = 'apkUrl (legado)'; Abi = 'arm64-v8a'; Url = $json.apkUrl; Sha = $json.sha256; Size = $json.size }
+    foreach ($p in $pares) {
+        $esperada = Get-UrlVersionada $H $p.Abi
+        $semQuery = ([string]$p.Url).Split('?')[0]
+        if ($semQuery -ne $esperada) { $erros += "$($p.Rotulo) = '$($p.Url)', esperado '$esperada[?v=...]' (URL versionada)" }
+        if (([string]$p.Sha).ToLower() -ne $ApkInfo[$p.Abi].Sha256) { $erros += "$($p.Rotulo): sha $($p.Sha), esperado $($ApkInfo[$p.Abi].Sha256)" }
+        if ([long]$p.Size -ne [long]$ApkInfo[$p.Abi].Size) { $erros += "$($p.Rotulo): size $($p.Size), esperado $($ApkInfo[$p.Abi].Size)" }
+    }
+    return $erros
+}
+
+# Ordem das escritas no log do rclone falso: os dois uploads versionados antes do anuncio, e toda escrita no
+# nome fixo (APK e .sha256) depois dele. Linha do log: hora <TAB> resultado <TAB> args separados por " | ".
+function Test-OrdemEscritas($H) {
+    $linhas = @(Get-UltimasLinhas $H.RcloneLog 100000)
+    $versionados = @(); $json = @(); $fixos = @()
+    for ($i = 0; $i -lt $linhas.Count; $i++) {
+        $campos = $linhas[$i] -split "`t", 3
+        if ($campos.Count -lt 3 -or $campos[1] -ne 'OK') { continue }
+        $pos = @($campos[2] -split ' \| ' | Where-Object { -not $_.StartsWith('--') })
+        if ($pos.Count -lt 3 -or $pos[0] -notin @('copy', 'copyto')) { continue }
+        $destino = $pos[$pos.Count - 1]
+        foreach ($abi in $AbiMap.Keys) {
+            $s = $AbiMap[$abi]
+            if ($destino.EndsWith("/retro-game-system-$s-$ApkCode.apk")) { $versionados += $i }
+            if ($destino.EndsWith("/retro-game-system-$s.apk") -or $destino.EndsWith("/retro-game-system-$s.apk.sha256")) { $fixos += $i }
+        }
+        if ($destino.EndsWith("/$JsonName")) { $json += $i }
+    }
+    $erros = @()
+    if ($versionados.Count -ne 2) { $erros += "uploads versionados no log: $($versionados.Count), esperado 2" }
+    if ($json.Count -ne 1) { $erros += "escritas do $JsonName no log: $($json.Count), esperado 1" }
+    if ($fixos.Count -ne 4) { $erros += "escritas nos nomes fixos (APK + .sha256) no log: $($fixos.Count), esperado 4" }
+    if ($erros.Count -gt 0) { return $erros }
+    $ultimoVersionado = ($versionados | Measure-Object -Maximum).Maximum
+    $primeiroFixo = ($fixos | Measure-Object -Minimum).Minimum
+    if ($ultimoVersionado -gt $json[0]) { $erros += "upload versionado (linha $($ultimoVersionado + 1)) DEPOIS do $JsonName (linha $($json[0] + 1))" }
+    if ($primeiroFixo -lt $json[0]) { $erros += "escrita no nome fixo (linha $($primeiroFixo + 1)) ANTES do $JsonName (linha $($json[0] + 1))" }
     return $erros
 }
 
@@ -352,9 +465,11 @@ function Invoke-Cenario([string]$Nome, $Cfg) {
     $srv = $null
     $motivos = @()
     $exit = $null
+    $antes = $null
     try {
         $H = New-HarnessRoot $Nome $Cfg.FalharEm
         Write-Host "[$Nome] raiz: $($H.Raiz)" -ForegroundColor DarkGray
+        $antes = Get-DirSnapshot $H.Bucket   # so a semente (alguns KB)
         $servir = if ($Cfg.Servir -eq 'cdn-velho') { Join-Path $H.Raiz 'cdn-velho' } else { $H.Bucket }
         $srv = Start-HttpServer $servir $H.Port $H.Raiz
         $exit = Invoke-PublishScript $H $Cfg
@@ -365,15 +480,20 @@ function Invoke-Cenario([string]$Nome, $Cfg) {
     }
 
     if ($H -and $null -ne $exit) {
-        # Quem rodou foi o falso?
-        $log = Get-UltimasLinhas $H.RcloneLog 1000
-        if ($log.Count -eq 0) { $motivos += 'o rclone falso nao foi chamado (log vazio)' }
-        if ($Cfg.FalharEm -and -not ($log | Where-Object { $_ -match "`tFALHA-INJETADA`t" })) {
-            $motivos += "a falha injetada ('$($Cfg.FalharEm)') nao disparou: o cenario nao testou o que diz"
-        }
+        $log = Get-UltimasLinhas $H.RcloneLog 100000
         $out = if (Test-Path -LiteralPath (Join-Path $H.Raiz 'script.out.log')) { Get-Content -LiteralPath (Join-Path $H.Raiz 'script.out.log') -Raw } else { '' }
-        if (-not $out.Contains("rclone : $($H.FakeRclone)")) {
-            $motivos += "o script nao resolveu o rclone para o falso ($($H.FakeRclone))"
+        if ($null -eq $out) { $out = '' }
+        if ($Cfg.UsaR2) {
+            # Quem rodou foi o falso?
+            if ($log.Count -eq 0) { $motivos += 'o rclone falso nao foi chamado (log vazio)' }
+            if ($Cfg.FalharEm -and -not ($log | Where-Object { $_ -match "`tFALHA-INJETADA`t" })) {
+                $motivos += "a falha injetada ('$($Cfg.FalharEm)') nao disparou: o cenario nao testou o que diz"
+            }
+            if (-not $out.Contains("rclone : $($H.FakeRclone)")) {
+                $motivos += "o script nao resolveu o rclone para o falso ($($H.FakeRclone))"
+            }
+        } elseif ($log.Count -gt 0) {
+            $motivos += "o rclone foi chamado $($log.Count) vez(es), esperado nenhuma (sem R2)"
         }
 
         if ($Cfg.Saida -eq 'sucesso' -and $exit -ne 0) { $motivos += "script saiu $exit, esperado 0" }
@@ -385,15 +505,53 @@ function Invoke-Cenario([string]$Nome, $Cfg) {
             $motivos += @($div | ForEach-Object { "  $_" })
         }
 
-        if ($Cfg.Saida -eq 'sucesso') {
-            $json = Get-Content -LiteralPath (Join-Path $H.BucketFolder $JsonName) -Raw | ConvertFrom-Json
-            if ([int]$json.versionCode -ne $ApkCode) { $motivos += "o anuncio diz versionCode $($json.versionCode), esperado $ApkCode" }
+        $jsonRel = "$R2Folder\$JsonName"
+        if ($Cfg.Anuncio -eq 'novo') {
+            $an = @(Test-AnuncioNovo $H (Join-Path $H.BucketFolder $JsonName))
+            if ($an.Count -gt 0) {
+                $motivos += 'o anuncio do bucket nao e o desta publicacao (versionCode/URL versionada/sha/tamanho):'
+                $motivos += @($an | ForEach-Object { "  $_" })
+            }
+        } elseif ($Cfg.Anuncio -eq 'semente') {
+            $jsonPath = Join-Path $H.BucketFolder $JsonName
+            if (-not (Test-Path -LiteralPath $jsonPath) -or (Get-Sha256 $jsonPath) -ne $antes[$jsonRel]) {
+                $motivos += "o $JsonName do bucket mudou; esperado o da semente (nada anunciado)"
+            }
         }
-        if ($Cfg.ConfereLinksFixos) {
-            $fix = @(Test-LinksFixos $H)
+
+        if ($Cfg.LinksFixos) {
+            $fix = @(Test-LinksFixos $H $Cfg.LinksFixos)
             if ($fix.Count -gt 0) {
-                $motivos += 'link fixo sem os bytes novos:'
+                $motivos += "link fixo diferente do esperado ($($Cfg.LinksFixos)):"
                 $motivos += @($fix | ForEach-Object { "  $_" })
+            }
+        }
+
+        if ($Cfg.Mensagem -and -not $out.Contains($Cfg.Mensagem)) {
+            $motivos += "a saida do script nao traz '$($Cfg.Mensagem)'"
+        }
+
+        if ($Cfg.ConfereOrdem) {
+            $ord = @(Test-OrdemEscritas $H)
+            if ($ord.Count -gt 0) {
+                $motivos += 'ordem das escritas no bucket errada:'
+                $motivos += @($ord | ForEach-Object { "  $_" })
+            }
+        }
+
+        if ($Cfg.BucketIntacto) {
+            $dif = @(Compare-DirSnapshot $antes (Get-DirSnapshot $H.Bucket))
+            if ($dif.Count -gt 0) {
+                $motivos += 'o bucket mudou:'
+                $motivos += @($dif | ForEach-Object { "  $_" })
+            }
+        }
+
+        if ($Cfg.DistJson) {
+            $dj = @(Test-AnuncioNovo $H (Join-Path $H.Raiz "dist\$JsonName"))
+            if ($dj.Count -gt 0) {
+                $motivos += "dist\$JsonName nao e o anuncio desta publicacao:"
+                $motivos += @($dj | ForEach-Object { "  $_" })
             }
         }
     }

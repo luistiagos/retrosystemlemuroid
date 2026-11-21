@@ -9,3 +9,8 @@
   "Nao e possivel chamar um metodo em uma expressao de valor nulo".
 - Evidencia: acrescentando so `Copy-Item (Join-Path $repoRoot 'publish-guard.ps1') -Destination $raiz` numa copia, o cenario
   `sucesso` passa (1/1). Correcao: essa linha no harness.
+
+- **2026-11-20 (pipeline 20261120-2117, TASK-0014):** a linha foi acrescentada no `tests/test-publicacao-anuncio.ps1`
+  (`New-HarnessRoot`, ao lado das copias de `build-and-upload.ps1`/`build-env.ps1`; o arquivo era reservado da TASK-0014,
+  que precisava do harness rodando para provar a correcao). Com ela o harness roda S1-S5 na lane (5/5 PASS). Quando o
+  branch da TASK-0014 for integrado, esta demanda fica so para conferir e fechar.

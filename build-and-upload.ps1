@@ -15,12 +15,12 @@
        - Arquivos: retro-game-system-<versionName>-arm64.apk / -armv7.apk
        - Token: lido do build.properties (HF_TOKEN) ou variavel de ambiente HF_TOKEN
 
-    3. UPLOAD PARA R2 (distribuicao - sempre sobrescreve, sem numero de versao)
+    3. UPLOAD PARA R2 (caminho VERSIONADO, o que o anuncio aponta)
        - Mesmo bucket "versions" usado pelo GODSend, pasta propria RetroGameSystem/
-       - Envia retro-game-system-arm64.apk / -armv7.apk via rclone
-       - Sidecars .sha256 (suporte descarta download corrompido na hora)
+       - Envia retro-game-system-arm64-<versionCode>.apk / -armv7-<versionCode>.apk
+         via rclone: objeto NOVO por versao, nunca o que o anuncio no ar aponta
        - Verificacao pela API S3, purga do cache de borda e verificacao pela URL
-         publica (a unica que prova o que o cliente baixa)
+         publica versionada (a unica que prova o que o cliente baixa)
        - Credenciais: build.properties/r2-config.json locais, com fallback para
          E:\projects\GODSend\r2-config.json (mesma conta R2)
 
@@ -28,14 +28,24 @@
        - E o mecanismo de atualizacao: o AppUpdateManager do app le esta URL,
          compara o versionCode e oferece a atualizacao a quem esta atrasado.
        - Gerado a partir dos APKs recem-publicados (versionCode/versionName/
-         channel/apkUrls por ABI/sha256/size), entao nunca anuncia uma versao
-         que nao esta no ar.
-       - ULTIMA escrita da publicacao, de proposito: so vai ao ar depois que os
-         APKs passaram na verificacao pela URL publica.
+         channel/apkUrls por ABI = URLs versionadas/sha256/size), entao nunca
+         anuncia uma versao que nao esta no ar.
+       - So vai ao ar depois que os APKs versionados passaram na verificacao
+         pela URL publica.
        - Ate 2026-08-13 o app consultava https://emuladores.pythonanywhere.com/app_version,
          que responde 404 - por isso ninguem nunca recebeu aviso de versao nova.
          Aquele JSON era so impresso no fim deste script para ser colado a mao
          naquela rota, passo manual que nunca aconteceu.
+
+    5. LINKS FIXOS (o link manual que o suporte manda)
+       - Copia cada APK versionado para retro-game-system-arm64.apk / -armv7.apk
+         (sem numero de versao), sobe os sidecars .sha256, purga e confere.
+       - ULTIMO passo, de proposito: falha aqui nao quebra a atualizacao in-app
+         (o anuncio ja aponta para o versionado); o script avisa e sai != 0.
+       - Ordem decidida em 2026-11-20 (demanda
+         2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio): sobrescrever o
+         nome fixo antes do anuncio deixava o version.json no ar descrevendo
+         bytes que nao eram mais os dele, e todo download in-app falhava.
 
 .PARAMETER SkipBuild
     Pula o build (usa APKs existentes em dist\).
@@ -340,7 +350,7 @@ function Find-Rclone {
 }
 
 # ─── PREFLIGHT ──────────────────────────────────────
-# Resolve AGORA as ferramentas dos passos 2-4. O build leva minutos e nao serve de nada
+# Resolve AGORA as ferramentas dos passos 2-5. O build leva minutos e nao serve de nada
 # se o upload for morrer em seguida por falta de um executavel: ja se perdeu uma rodada
 # inteira com "the term 'hf' is not recognized" depois de um build completo.
 # Falha em segundos, e nao no fim.
@@ -363,13 +373,13 @@ if (-not ($SkipHF -and $SkipR2)) {
 
 # ─── STEP 1: BUILD ──────────────────────────────────
 if (-not $SkipBuild) {
-    Print-Step "PASSO 1/4: Build release v$VERSION_NAME (celular + smart TV)"
+    Print-Step "PASSO 1/5: Build release v$VERSION_NAME (celular + smart TV)"
     & (Join-Path $PROJECT_ROOT "release.ps1")
     if ($LASTEXITCODE -ne 0 -and $null -ne $LASTEXITCODE) {
         throw "release.ps1 falhou com exit code $LASTEXITCODE"
     }
 } else {
-    Print-Step "PASSO 1/4: Build (SKIPPED - usando APKs existentes em dist\)"
+    Print-Step "PASSO 1/5: Build (SKIPPED - usando APKs existentes em dist\)"
 }
 
 $DistApks = @{}
@@ -421,7 +431,7 @@ app entraria em loop de atualizacao. Rode o build (sem -SkipBuild) antes.
 
 # ─── STEP 2: HUGGINGFACE UPLOAD (versionado) ───────
 if (-not $SkipHF) {
-    Print-Step "PASSO 2/4: Upload para HuggingFace (versionado)"
+    Print-Step "PASSO 2/5: Upload para HuggingFace (versionado)"
 
     # Ja resolvido no preflight; refeito aqui so para o caso de o script ser editado
     # e o preflight deixar de rodar.
@@ -458,7 +468,7 @@ if (-not $SkipHF) {
         Write-Host "  OK: $($hfUrls[$abi])" -ForegroundColor Green
     }
 } else {
-    Print-Step "PASSO 2/4: Upload para HuggingFace (SKIPPED)"
+    Print-Step "PASSO 2/5: Upload para HuggingFace (SKIPPED)"
 }
 
 # $cfg, $publicBase e a URL do anuncio ($versionJsonUrl) foram resolvidos antes
@@ -470,12 +480,24 @@ if (-not $SkipHF) {
 # ARMSX2 em 2026-08-10: o anuncio de versao ja dizia 1.0.9 enquanto a URL do
 # APK ainda entregava o binario 1.0.8. A query string muda a chave de cache,
 # entao cada release busca bytes frescos. Sem isso o app baixa a versao errada.
-$r2PublicUrls = @{}   # com ?v= : e o que vai no JSON, o app usa isso
-$r2BareUrls   = @{}   # sem query: o link que circula para download manual
+#
+# [[2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio]]: a query muda so a
+# chave de cache, nao o objeto. Enquanto o app baixava do nome fixo, o upload da
+# versao nova sobrescrevia o objeto que o version.json NO AR descrevia, e qualquer
+# falha antes do anuncio novo (foi a propria verificacao publica, em 2026-11-20)
+# deixava todo cliente com download recusado por tamanho/sha. Por isso o anuncio
+# aponta para um nome POR VERSAO, que nenhum anuncio anterior conhece; o nome fixo
+# (link do suporte) so e atualizado no ultimo passo, depois do anuncio verificado.
+# O ?v= continua na URL versionada: inofensivo, e a chave de cache fica como era.
+$r2FixedNames     = @{}   # retro-game-system-<abi>.apk: link fixo do suporte (passo 5)
+$r2VersionedNames = @{}   # retro-game-system-<abi>-<code>.apk: o objeto que o anuncio aponta
+$r2PublicUrls     = @{}   # versionada com ?v= : e o que vai no JSON, o app usa isso
+$r2BareUrls       = @{}   # fixa, sem query: o link que circula para download manual
 foreach ($abi in $AbiMap.Keys) {
-    $fileName = "retro-game-system-$($AbiMap[$abi]).apk"
-    $r2BareUrls[$abi]   = "$publicBase/$R2_FOLDER/$fileName"
-    $r2PublicUrls[$abi] = "$publicBase/$R2_FOLDER/$($fileName)?v=$($VERSION_CODE)"
+    $r2FixedNames[$abi]     = "retro-game-system-$($AbiMap[$abi]).apk"
+    $r2VersionedNames[$abi] = "retro-game-system-$($AbiMap[$abi])-$($VERSION_CODE).apk"
+    $r2BareUrls[$abi]       = "$publicBase/$R2_FOLDER/$($r2FixedNames[$abi])"
+    $r2PublicUrls[$abi]     = "$publicBase/$R2_FOLDER/$($r2VersionedNames[$abi])?v=$($VERSION_CODE)"
 }
 
 # ─── ANUNCIO DA VERSAO (version.json) ───────────────
@@ -525,18 +547,23 @@ $versionPayload = [ordered]@{
 } | ConvertTo-Json -Depth 5
 $versionPayload | Out-File -FilePath $versionJsonFile -Encoding ascii -Force
 
-# Sidecar de hash por ABI: deixa o suporte descartar download corrompido em segundos.
+# Sidecar de hash por ABI, do link FIXO (sobe no passo 5): deixa o suporte
+# descartar download corrompido em segundos.
 $shaFiles = @{}
 foreach ($abi in $AbiMap.Keys) {
-    $apkName  = "retro-game-system-$($AbiMap[$abi]).apk"
+    $apkName  = $r2FixedNames[$abi]
     $shaPath  = Join-Path $DIST_DIR "$apkName.sha256"
     "$($apkSha256[$abi])  $apkName" | Out-File -FilePath $shaPath -Encoding ascii -Force
     $shaFiles[$abi] = $shaPath
 }
 
-# ─── STEP 3: R2 UPLOAD (distribuicao, sem versao) ──
+# Preenchido se o passo 5 (links fixos) falhar: o anuncio ja esta no ar e certo,
+# entao o script segue ate o resumo e o lembrete de commit e so no fim sai 1.
+$fixedLinksError = $null
+
+# ─── STEP 3: R2 UPLOAD (caminho versionado) ──
 if (-not $SkipR2) {
-    Print-Step "PASSO 3/4: Upload para R2 (distribuicao)"
+    Print-Step "PASSO 3/5: Upload para R2 (caminho versionado, o que o anuncio aponta)"
 
     if (-not $cfg) {
         throw "Credenciais R2 nao encontradas. Defina R2_* no build.properties, crie r2-config.json (veja r2-config.example.json), ou garanta que $GODSEND_R2_CONFIG existe."
@@ -560,12 +587,17 @@ if (-not $SkipR2) {
         "--s3-no-check-bucket"
     )
 
+    # Daqui ate o anuncio, NADA escreve no nome fixo nem no version.json: o anuncio
+    # no ar continua apontando para o objeto dele, intacto. Qualquer throw neste
+    # passo deixa so um objeto versionado orfao, que nenhum anuncio cita.
+    # [[2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio]]
     foreach ($abi in $AbiMap.Keys) {
         $localFile = $DistApks[$abi]
-        Write-Host "Enviando $(Split-Path $localFile -Leaf) -> bucket '$($cfg.bucket)/$R2_FOLDER'..." -ForegroundColor Yellow
-        Invoke-R2Rclone $rclone $cfg copy $localFile $dest @s3Flags --progress
+        $remoteName = $r2VersionedNames[$abi]
+        Write-Host "Enviando $(Split-Path $localFile -Leaf) -> bucket '$($cfg.bucket)/$R2_FOLDER/$remoteName'..." -ForegroundColor Yellow
+        Invoke-R2Rclone $rclone $cfg copyto $localFile "$dest/$remoteName" @s3Flags --progress
         if ($LASTEXITCODE -ne 0) {
-            throw "rclone copy falhou ($abi) com exit code $LASTEXITCODE"
+            throw "rclone copyto falhou ($abi -> $remoteName) com exit code $LASTEXITCODE"
         }
     }
 
@@ -580,7 +612,7 @@ if (-not $SkipR2) {
     }
 
     foreach ($abi in $AbiMap.Keys) {
-        $fileName = "retro-game-system-$($AbiMap[$abi]).apk"
+        $fileName = $r2VersionedNames[$abi]
         $localSize = (Get-Item -LiteralPath $DistApks[$abi]).Length
         if (-not $remoteByName.ContainsKey($fileName)) {
             throw "VERIFICACAO FALHOU: $fileName nao encontrado no remoto."
@@ -593,54 +625,50 @@ if (-not $SkipR2) {
     }
     Write-Host "Verificacao passou." -ForegroundColor Green
 
-    # ─── Sidecars .sha256 ───────────────────────────
-    Write-Host ""
-    Write-Host "Enviando sidecars .sha256..." -ForegroundColor Yellow
-    $txtHeaders = @(
-        "--header-upload=Content-Type: text/plain; charset=utf-8",
-        "--header-upload=Cache-Control: max-age=300"
-    )
-    foreach ($abi in $AbiMap.Keys) {
-        $shaName = "retro-game-system-$($AbiMap[$abi]).apk.sha256"
-        Invoke-R2Rclone $rclone $cfg copyto $shaFiles[$abi] "$dest/$shaName" @s3Flags @txtHeaders
-        if ($LASTEXITCODE -ne 0) {
-            throw "rclone copyto falhou no sidecar $shaName (exit code $LASTEXITCODE)"
-        }
-        Write-Host "  OK: $shaName" -ForegroundColor Green
-    }
-
-    # ─── Purga do cache de borda ────────────────────
-    # Sem isto o link que circula com os clientes continua entregando o APK da
-    # versao anterior por tempo indeterminado. Precisa de CF_API_TOKEN e
-    # CF_ZONE_ID no build.properties. A permissao no token e de ZONA:
-    # "Cache" -> acao "Purge"; token com escopo de conta inteira nem enxerga
-    # essa permissao e falha com erro 10000.
+    # ─── Purga do cache de borda (URLs versionadas) ──
+    # Objeto novo raramente esta em cache, mas a URL e exatamente a que o app e a
+    # verificacao abaixo buscam: purgar custa uma chamada. Precisa de
+    # CF_API_TOKEN e CF_ZONE_ID no build.properties. A permissao no token e de
+    # ZONA: "Cache" -> acao "Purge"; token com escopo de conta inteira nem
+    # enxerga essa permissao e falha com erro 10000.
     Write-Host ""
     $purgeUrls = @()
-    foreach ($abi in $AbiMap.Keys) { $purgeUrls += $r2BareUrls[$abi] }
+    foreach ($abi in $AbiMap.Keys) { $purgeUrls += $r2PublicUrls[$abi] }
     if (Purge-EdgeCache $purgeUrls) { Start-Sleep -Seconds 5 }
 
     # ─── Verificacao pela URL PUBLICA ───────────────
     # A verificacao acima fala com o R2 pela API S3 e PULA o cache de borda:
-    # ela pode passar enquanto o cliente ainda recebe a versao anterior. Esta
-    # aqui e a unica que prova o que o usuario final baixa. Custa ~200 MB de
-    # download por publicacao (os dois APKs); use -SkipPublicVerify pra pular.
+    # ela pode passar enquanto o cliente ainda recebe outra coisa. Esta aqui e
+    # a unica que prova o que o usuario final baixa, na URL que vai no anuncio.
+    # Custa ~200 MB de download por publicacao (os dois APKs); use
+    # -SkipPublicVerify pra pular.
     if ($SkipPublicVerify) {
         Write-Host ""
         Write-Host "Verificacao pela URL publica: SKIPPED (-SkipPublicVerify)" -ForegroundColor Yellow
     } else {
         Write-Host ""
-        Write-Host "Verificando pela URL publica (o que o cliente recebe)..." -ForegroundColor Yellow
+        Write-Host "Verificando pela URL publica versionada (o que o cliente recebera)..." -ForegroundColor Yellow
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         $savedProgress = $ProgressPreference
         $ProgressPreference = 'SilentlyContinue'
         try {
             foreach ($abi in $AbiMap.Keys) {
-                $localSha = (Get-FileHash -LiteralPath $DistApks[$abi] -Algorithm SHA256).Hash.ToLower()
-                $localSize = (Get-Item -LiteralPath $DistApks[$abi]).Length
+                $localSha = $apkSha256[$abi]
+                $localSize = $apkSizes[$abi]
 
                 $probe = Join-Path $env:TEMP "lemuroid-publish-probe-$($AbiMap[$abi]).apk"
-                Invoke-WebRequest -Uri $r2PublicUrls[$abi] -OutFile $probe -TimeoutSec 600 -Headers @{ 'Cache-Control' = 'no-cache' }
+                try {
+                    Invoke-WebRequest -Uri $r2PublicUrls[$abi] -OutFile $probe -TimeoutSec 600 -Headers @{ 'Cache-Control' = 'no-cache' }
+                } catch {
+                    throw @"
+VERIFICACAO FALHOU: nao foi possivel baixar a URL publica de $abi.
+  url:  $($r2PublicUrls[$abi])
+  erro: $($_.Exception.Message)
+Nada foi anunciado: o version.json no ar e o link fixo continuam como estavam.
+Objeto recem-enviado ainda nao servido costuma ser propagacao do R2/borda:
+espere alguns minutos e repita.
+"@
+                }
                 $probeSha = (Get-FileHash -LiteralPath $probe -Algorithm SHA256).Hash.ToLower()
                 $probeSize = (Get-Item -LiteralPath $probe).Length
                 Remove-Item $probe -Force -ErrorAction SilentlyContinue
@@ -651,28 +679,12 @@ VERIFICACAO FALHOU: a URL publica de $abi entregou bytes DIFERENTES do publicado
   esperado: $localSha ($localSize bytes)
   recebido: $probeSha ($probeSize bytes)
   url:      $($r2PublicUrls[$abi])
-O app baixaria a versao errada. Normalmente e cache de borda servindo o APK
-anterior: purgue o cache do Cloudflare para $publicBase/$R2_FOLDER/* e repita.
+O app baixaria a versao errada. Nada foi anunciado: o version.json no ar e o
+link fixo continuam como estavam. Purgue o cache do Cloudflare para
+$publicBase/$R2_FOLDER/* e repita.
 "@
                 }
                 Write-Host "  OK: $($DeviceLabel[$abi]) entrega os bytes certos ($probeSize bytes)" -ForegroundColor Green
-
-                # Link sem query = o que circula para download manual. Se estiver
-                # velho nao quebra a atualizacao in-app (que usa ?v=), mas quem
-                # clicar no link baixa a versao anterior.
-                try {
-                    $bare = Join-Path $env:TEMP "lemuroid-publish-bare-$($AbiMap[$abi]).apk"
-                    Invoke-WebRequest -Uri $r2BareUrls[$abi] -OutFile $bare -TimeoutSec 600
-                    $bareSha = (Get-FileHash -LiteralPath $bare -Algorithm SHA256).Hash.ToLower()
-                    Remove-Item $bare -Force -ErrorAction SilentlyContinue
-                    if ($bareSha -ne $localSha) {
-                        Write-Host "  AVISO: o link manual de $abi ainda serve a versao anterior (cache de borda)." -ForegroundColor Yellow
-                        Write-Host "         $($r2BareUrls[$abi])" -ForegroundColor Yellow
-                        Write-Host "         Purgue o cache no painel Cloudflare para o link manual atualizar." -ForegroundColor Yellow
-                    }
-                } catch {
-                    Write-Host "  AVISO: nao foi possivel conferir o link manual de ${abi}: $($_.Exception.Message)" -ForegroundColor Yellow
-                }
             }
         } finally {
             $ProgressPreference = $savedProgress
@@ -680,15 +692,15 @@ anterior: purgue o cache do Cloudflare para $publicBase/$R2_FOLDER/* e repita.
     }
 
     Write-Host ""
-    Write-Host "Upload para R2 concluido!" -ForegroundColor Green
+    Write-Host "APKs versionados no ar e verificados." -ForegroundColor Green
 
     # ─── STEP 4: ANUNCIO DA VERSAO ──────────────────
-    # Ultima escrita da publicacao, de proposito: e este arquivo que dispara a
-    # atualizacao em todos os apps instalados. So vai ao ar depois que os APKs
-    # subiram, foram conferidos pela API S3 E provados pela URL publica - assim
-    # nenhum cliente ve "versao nova" apontando para bytes que ainda nao estao
-    # servidos corretamente.
-    Print-Step "PASSO 4/4: Anuncio da versao ($VERSION_JSON_NAME)"
+    # E este arquivo que dispara a atualizacao em todos os apps instalados. So vai
+    # ao ar depois que os APKs versionados subiram, foram conferidos pela API S3 E
+    # provados pela URL publica - assim nenhum cliente ve "versao nova" apontando
+    # para bytes que ainda nao estao servidos corretamente. Depois dele so vem o
+    # passo 5 (links fixos), que nenhum anuncio cita.
+    Print-Step "PASSO 4/5: Anuncio da versao ($VERSION_JSON_NAME)"
 
     Write-Host "Conteudo:" -ForegroundColor Yellow
     Write-Host $versionPayload -ForegroundColor White
@@ -728,13 +740,123 @@ anterior: purgue o cache do Cloudflare para $publicBase/$R2_FOLDER/* e repita.
         if ($publicJson.sha256 -ne $apkSha256["arm64-v8a"]) {
             throw "VERIFICACAO FALHOU: $VERSION_JSON_NAME publico anuncia sha256 $($publicJson.sha256), esperado $($apkSha256['arm64-v8a'])"
         }
+        # O anuncio tem de apontar para os objetos versionados DESTA publicacao (os
+        # que o passo 3 verificou), nunca para o nome fixo.
+        if ($publicJson.apkUrl -ne $r2PublicUrls["arm64-v8a"]) {
+            throw "VERIFICACAO FALHOU: $VERSION_JSON_NAME publico anuncia apkUrl $($publicJson.apkUrl), esperado $($r2PublicUrls['arm64-v8a'])"
+        }
+        foreach ($abi in $AbiMap.Keys) {
+            if ($publicJson.apkUrls.$abi -ne $r2PublicUrls[$abi]) {
+                throw "VERIFICACAO FALHOU: $VERSION_JSON_NAME publico anuncia apkUrls[$abi] $($publicJson.apkUrls.$abi), esperado $($r2PublicUrls[$abi])"
+            }
+        }
         Write-Host "  OK: o app vera a versao $($publicJson.versionName) (code $($publicJson.versionCode))" -ForegroundColor Green
     } catch [System.Net.WebException] {
         throw "VERIFICACAO FALHOU: nao foi possivel ler $versionJsonUrl - $($_.Exception.Message)"
     }
+
+    # ─── STEP 5: LINKS FIXOS ────────────────────────
+    # [[2026-11-20-publicacao-sobrescreve-apk-antes-do-anuncio]]: o nome fixo
+    # (retro-game-system-<abi>.apk, o link que o suporte manda no WhatsApp) so e
+    # tocado DEPOIS do anuncio verificado. Nenhum anuncio aponta para ele, entao
+    # falhar aqui deixa o link manual desatualizado, nunca a atualizacao in-app
+    # quebrada. Por isso o erro nao lanca: vai para $fixedLinksError, o resumo e o
+    # lembrete de commit rodam (o anuncio JA esta no ar) e o script sai 1 no fim.
+    Print-Step "PASSO 5/5: Links fixos (download manual do suporte)"
+    try {
+        $txtHeaders = @(
+            "--header-upload=Content-Type: text/plain; charset=utf-8",
+            "--header-upload=Cache-Control: max-age=300"
+        )
+        foreach ($abi in $AbiMap.Keys) {
+            $fixedName = $r2FixedNames[$abi]
+            # Copia dentro do bucket a partir do versionado: o link fixo recebe
+            # exatamente os bytes ja verificados, sem segundo upload.
+            Write-Host "Copiando $($r2VersionedNames[$abi]) -> $fixedName (dentro do bucket)..." -ForegroundColor Yellow
+            Invoke-R2Rclone $rclone $cfg copyto "$dest/$($r2VersionedNames[$abi])" "$dest/$fixedName" @s3Flags
+            if ($LASTEXITCODE -ne 0) {
+                throw "rclone copyto falhou ($($r2VersionedNames[$abi]) -> $fixedName) com exit code $LASTEXITCODE"
+            }
+            # Sidecar .sha256 do link fixo, depois do APK que ele descreve.
+            $shaName = "$fixedName.sha256"
+            Invoke-R2Rclone $rclone $cfg copyto $shaFiles[$abi] "$dest/$shaName" @s3Flags @txtHeaders
+            if ($LASTEXITCODE -ne 0) {
+                throw "rclone copyto falhou no sidecar $shaName (exit code $LASTEXITCODE)"
+            }
+            Write-Host "  OK: $fixedName + $shaName" -ForegroundColor Green
+        }
+
+        $fixedEntries = Invoke-R2Rclone $rclone $cfg lsjson $dest @s3Flags | ConvertFrom-Json
+        $fixedByName = @{}
+        foreach ($e in $fixedEntries) {
+            if (-not $e.IsDir) { $fixedByName[$e.Name] = $e.Size }
+        }
+        foreach ($abi in $AbiMap.Keys) {
+            $fixedName = $r2FixedNames[$abi]
+            if (-not $fixedByName.ContainsKey($fixedName)) {
+                throw "VERIFICACAO FALHOU: $fixedName nao encontrado no remoto."
+            }
+            if ($fixedByName[$fixedName] -ne $apkSizes[$abi]) {
+                throw "VERIFICACAO FALHOU: tamanho diferente para $fixedName (local: $($apkSizes[$abi]) bytes, remoto: $($fixedByName[$fixedName]) bytes)"
+            }
+        }
+
+        # Sem a purga o link que circula com os clientes continua entregando o
+        # APK da versao anterior por tempo indeterminado.
+        Write-Host ""
+        $purgeUrls = @()
+        foreach ($abi in $AbiMap.Keys) { $purgeUrls += $r2BareUrls[$abi] }
+        if (Purge-EdgeCache $purgeUrls) { Start-Sleep -Seconds 5 }
+
+        # Link fixo velho na borda nao quebra nada no app: so AVISO, como sempre foi.
+        if (-not $SkipPublicVerify) {
+            Write-Host ""
+            Write-Host "Conferindo o link manual pela URL publica..." -ForegroundColor Yellow
+            $savedProgress = $ProgressPreference
+            $ProgressPreference = 'SilentlyContinue'
+            try {
+                foreach ($abi in $AbiMap.Keys) {
+                    try {
+                        $bare = Join-Path $env:TEMP "lemuroid-publish-bare-$($AbiMap[$abi]).apk"
+                        Invoke-WebRequest -Uri $r2BareUrls[$abi] -OutFile $bare -TimeoutSec 600
+                        $bareSha = (Get-FileHash -LiteralPath $bare -Algorithm SHA256).Hash.ToLower()
+                        Remove-Item $bare -Force -ErrorAction SilentlyContinue
+                        if ($bareSha -ne $apkSha256[$abi]) {
+                            Write-Host "  AVISO: o link manual de $abi ainda serve a versao anterior (cache de borda)." -ForegroundColor Yellow
+                            Write-Host "         $($r2BareUrls[$abi])" -ForegroundColor Yellow
+                            Write-Host "         Purgue o cache no painel Cloudflare para o link manual atualizar." -ForegroundColor Yellow
+                        } else {
+                            Write-Host "  OK: link manual de $($DeviceLabel[$abi]) com a versao nova" -ForegroundColor Green
+                        }
+                    } catch {
+                        Write-Host "  AVISO: nao foi possivel conferir o link manual de ${abi}: $($_.Exception.Message)" -ForegroundColor Yellow
+                    }
+                }
+            } finally {
+                $ProgressPreference = $savedProgress
+            }
+        }
+        Write-Host ""
+        Write-Host "Links fixos atualizados." -ForegroundColor Green
+    } catch {
+        $fixedLinksError = $_.Exception.Message
+        Write-Host ""
+        Write-Host "==================================================" -ForegroundColor Red
+        Write-Host "  PASSO 5 FALHOU: anuncio OK; link manual desatualizado" -ForegroundColor Red
+        Write-Host "==================================================" -ForegroundColor Red
+        Write-Host "  Erro: $fixedLinksError" -ForegroundColor Red
+        Write-Host "  A atualizacao pelo app NAO foi afetada: o $VERSION_JSON_NAME no ar aponta para os" -ForegroundColor Yellow
+        Write-Host "  APKs versionados desta publicacao, ja verificados." -ForegroundColor Yellow
+        Write-Host "  O link fixo (o que o suporte manda) pode continuar com a versao anterior:" -ForegroundColor Yellow
+        foreach ($abi in $AbiMap.Keys) { Write-Host "    $($r2BareUrls[$abi])" -ForegroundColor Yellow }
+        Write-Host "  Para refazer (republica o mesmo binario; a trava de versao aceita):" -ForegroundColor Yellow
+        Write-Host "    .\build-and-upload.ps1 -SkipBuild -SkipHF" -ForegroundColor Yellow
+        Write-Host "==================================================" -ForegroundColor Red
+    }
 } else {
-    Print-Step "PASSO 3/4: Upload para R2 (SKIPPED)"
-    Print-Step "PASSO 4/4: Anuncio da versao (SKIPPED)"
+    Print-Step "PASSO 3/5: Upload para R2 (SKIPPED)"
+    Print-Step "PASSO 4/5: Anuncio da versao (SKIPPED)"
+    Print-Step "PASSO 5/5: Links fixos (SKIPPED)"
     Write-Host "Sem o upload do $VERSION_JSON_NAME nenhum usuario e avisado desta versao." -ForegroundColor Yellow
     Write-Host "Gerado localmente em: $versionJsonFile" -ForegroundColor Yellow
 }
@@ -753,9 +875,18 @@ if (-not $SkipHF) {
 }
 
 Write-Host ""
+Write-Host "R2 (versionado) - APK para o qual o anuncio aponta:" -ForegroundColor Cyan
+foreach ($abi in $AbiMap.Keys) {
+    Write-Host "  $($DeviceLabel[$abi]): $($r2PublicUrls[$abi])" -ForegroundColor Cyan
+}
+
+Write-Host ""
 Write-Host "R2 (distribuicao) - link para download manual:" -ForegroundColor Cyan
 foreach ($abi in $AbiMap.Keys) {
     Write-Host "  $($DeviceLabel[$abi]): $($r2BareUrls[$abi])" -ForegroundColor Cyan
+}
+if ($fixedLinksError) {
+    Write-Host "  DESATUALIZADO: o passo 5 falhou (ver abaixo)." -ForegroundColor Red
 }
 
 Write-Host ""
@@ -803,4 +934,11 @@ if (-not $SkipR2) {
 }
 
 Write-Host ""
+if ($fixedLinksError) {
+    # Sai != 0 para o dono ver; o anuncio esta no ar e certo (passo 4 verificado).
+    Write-Host "PUBLICACAO INCOMPLETA: anuncio OK; link manual desatualizado." -ForegroundColor Red
+    Write-Host "  Erro no passo 5: $fixedLinksError" -ForegroundColor Red
+    Write-Host "  Para refazer os links fixos: .\build-and-upload.ps1 -SkipBuild -SkipHF" -ForegroundColor Yellow
+    exit 1
+}
 Write-Host "Todos os passos concluidos com sucesso!" -ForegroundColor Green
