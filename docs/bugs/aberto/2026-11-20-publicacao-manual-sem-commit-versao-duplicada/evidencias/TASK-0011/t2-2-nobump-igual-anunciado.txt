@@ -1,0 +1,33 @@
+﻿=== t2-2-nobump-igual-anunciado  2026-11-20T21:39:56.6552100-03:00  canal=  args=-NoBump
+kts antes:         versionCode = 269 |         versionName = "1.17.38" // Always remember to update Cores Tag!
+Lendo a versao no ar: https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  no ar: versionCode 269 (1.17.38)
+Bump de versao: PULADO (-NoBump)
+TRAVA DE VERSAO: -NoBump recompilaria o versionCode 269, que nao passa do 269 que ja esta no ar (mesmo numero com 
+bytes novos e o que o app nunca oferece).
+  no ar:                  versionCode 269 (1.17.38) em 
+https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  seria gerada/publicada: versionCode 269 (1.17.38)
+  commit de partida:      desconhecido
+  lemuroid-app/build.gradle.kts com mudanca nao commitada: desconhecido
+Nada foi escrito: o build.gradle.kts e o dist\ estao como estavam.
+Rode sem -NoBump depois de trazer o commit 'chore(versao): publicado/1.17.38' (git pull),
+ou edite lemuroid-app/build.gradle.kts para um versionCode acima de 269 e um versionName acima de 1.17.38.
+No C:\Users\luist\.claude\jobs\cc7e448e\tmp\t2-bc3c6ed9\publish-guard.ps1:248 caractere:5
++     throw (Format-PublishGateMessage -Reason $reason -Announced $Anno ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (TRAVA DE VERSAO...ima de 1.17.38.:String) [], RuntimeException
+    + FullyQualifiedErrorId : TRAVA DE VERSAO: -NoBump recompilaria o versionCode 269, que nao passa do 269 que ja est 
+   a no ar (mesmo numero com bytes novos e o que o app nunca oferece).
+      no ar:                  versionCode 269 (1.17.38) em https://versions.digitalstoregames.com/RetroGameSystem/vers 
+   ion.json
+  seria gerada/publicada: versionCode 269 (1.17.38)
+  commit de partida:      desconhecido
+  lemuroid-app/build.gradle.kts com mudanca nao commitada: desconhecido
+Nada foi escrito: o build.gradle.kts e o dist\ estao como estavam.
+Rode sem -NoBump depois de trazer o commit 'chore(versao): publicado/1.17.38' (git pull),
+ou edite lemuroid-app/build.gradle.kts para um versionCode acima de 269 e um versionName acima de 1.17.38.
+ 
+exit: 1
+kts depois:         versionCode = 269 |         versionName = "1.17.38" // Always remember to update Cores Tag!
+dist existe: False

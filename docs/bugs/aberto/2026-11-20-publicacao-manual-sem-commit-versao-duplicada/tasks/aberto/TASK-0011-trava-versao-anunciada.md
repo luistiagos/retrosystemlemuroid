@@ -167,3 +167,42 @@ console do 5.1 (o texto do `throw` e o `FullyQualifiedErrorId` que o PowerShell 
 - Compile-check: `build --bug TASK-0011` -> BUILD SUCCESSFUL in 3m 13s, exit 0 (a mudanca nao toca entrada do Gradle;
   rodado porque o roteiro manda).
 - Falta: nada de codigo. Proximo passo: `enqueue-test --bug TASK-0011` (sessao de teste roda a receita T2/T3 da task).
+
+## Teste
+
+### Teste rodada 1 — aprovado (2026-11-20, pipeline 20261120-2117)
+
+Sessao de teste, lane `wt-1` sincronizada sobre `origin/version10` @ `713b9cf` (sem mudanca na base). Windows PowerShell
+5.1. Sem aparelho: o "usuario" desta task e o dono rodando o `build-and-upload.ps1`. Evidencia em
+`../../evidencias/TASK-0011/` (pasta da demanda).
+
+- **Diff:** `git diff origin/version10...HEAD` toca so `build-and-upload.ps1`, `publish-guard.ps1`,
+  `tests/test-publish-guard.ps1` (reservados) e o doc desta task.
+- **Offline (T1):** `tests/test-publish-guard.ps1 -Offline` -> "Todos os 38 casos passaram.", exit 0
+  (`t1-offline.txt`); sem `-Offline` -> "Todos os 41 casos passaram.", exit 0, no ar 269 / 1.17.38, canal inexistente
+  -> `$null`, host invalido lanca (`t1-online.txt`).
+- **Controle positivo (estatico, como o Plano manda):** na base `713b9cf` o `WriteAllText` do bump esta em `:160`, o
+  "PASSO 1/4" em `:294` e o `$versionJsonUrl` so em `:460` — o script escrevia o `.kts` e compilava sem nunca ler o
+  anuncio (`controle-positivo-base.txt`). Base nao executada (dispararia Gradle release fora do helper).
+- **T2** (rascunho sem `release.ps1` em `%CLAUDE_JOB_DIR%\tmp\t2-*`, copia de `build-and-upload.ps1`, `build-env.ps1`,
+  `publish-guard.ps1` e do `.kts` da lane com o numero trocado; sempre `-SkipHF -SkipR2`; pastas apagadas no fim; no ar
+  no momento: 269 / 1.17.38, `no-ar.txt`):
+  1. `.kts` 268/1.17.37, sem flag -> "TRAVA DE VERSAO: o bump geraria o versionCode 269, que nao passa do 269 que ja
+     esta no ar.", no ar 269 (1.17.38) + URL, seria gerada 269 (1.17.38), commit "desconhecido"; exit 1; **sem** "PASSO
+     1/4"; `.kts` continua 268; `dist\` nao criado (`t2-1-bump-repete-numero.txt`).
+  2. `.kts` 269/1.17.38 com `-NoBump` -> "TRAVA DE VERSAO: -NoBump recompilaria o versionCode 269..."; exit 1; sem
+     "PASSO 1/4"; `.kts` intacto (`t2-2-nobump-igual-anunciado.txt`).
+  3. `.kts` 269/1.17.38 sem flag -> trava passa, "versionCode: 269 -> 270", `.kts` vira 270/1.17.39, para no PASSO
+     1/4 por falta do `release.ps1` (`t2-3-bump-passa.txt`).
+  4. `APP_UPDATE_CHANNEL=canalteste-inexistente`, `.kts` 268 -> "canal canalteste-inexistente sem anuncio em
+     .../version-canalteste-inexistente.json: seguindo (canal novo)", bump 268 -> 269, para no PASSO 1/4
+     (`t2-4-canal-sem-anuncio.txt`).
+  Sinal do sintoma (numero repetido gerado) ausente; comportamento correto (aborta antes de escrever, segue quando o
+  numero passa ou o canal nao tem anuncio) presente.
+- **T3:** diff do `build-and-upload.ps1` = dot-source do guard, blocos `$R2_FOLDER`/`$UPDATE_CHANNEL`/CONFIG R2/URLs
+  PUBLICAS/`$versionJsonUrl` movidos para antes do bump (cada atribuicao aparece 1 vez no arquivo), leitura do anuncio
+  e as duas chamadas da trava. `-SkipBuild` com sha igual ao anunciado (inclusive em maiusculas) passa e com sha
+  diferente/sem APK/anuncio sem sha aborta: casos do teste offline, verdes. Sem efeito no Gradle (script fora do build).
+- **T4:** sem log de app (nada roda no aparelho). Saida das 4 rodadas sem erro alem do esperado (o `throw` da trava e
+  o `release.ps1` ausente de proposito). A mensagem da trava aparece duas vezes no console do 5.1 (texto + 
+  `FullyQualifiedErrorId`), comportamento normal do `throw` com string, ja registrado pelo dev.

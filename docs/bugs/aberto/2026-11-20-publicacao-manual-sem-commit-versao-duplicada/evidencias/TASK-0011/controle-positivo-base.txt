@@ -1,0 +1,9 @@
+# Controle positivo estatico (base 713b9cf)
+160:    [System.IO.File]::WriteAllText($GRADLE_FILE, $bumpUpdated, (New-Object System.Text.UTF8Encoding($false)))
+294:    Print-Step "PASSO 1/4: Build release v$VERSION_NAME (celular + smart TV)"
+300:    Print-Step "PASSO 1/4: Build (SKIPPED - usando APKs existentes em dist\)"
+460:$versionJsonUrl  = "$publicBase/$R2_FOLDER/$VERSION_JSON_NAME"
+672:    if (Purge-EdgeCache @($versionJsonUrl)) { Start-Sleep -Seconds 5 }
+680:        $publicJson = Invoke-RestMethod -Uri $versionJsonUrl -TimeoutSec 60 -Headers @{ 'Cache-Control' = 'no-cache' }
+689:        throw "VERIFICACAO FALHOU: nao foi possivel ler $versionJsonUrl - $($_.Exception.Message)"
+719:Write-Host "  $versionJsonUrl" -ForegroundColor Cyan

@@ -1,0 +1,23 @@
+﻿=== t2-3-bump-passa  2026-11-20T21:39:58.0890188-03:00  canal=  args=
+kts antes:         versionCode = 269 |         versionName = "1.17.38" // Always remember to update Cores Tag!
+Lendo a versao no ar: https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  no ar: versionCode 269 (1.17.38)
+Subindo versao:
+  versionCode: 269 -> 270
+  versionName: 1.17.38 -> 1.17.39
+  build.gradle.kts atualizado
+
+========================================
+  PASSO 1/4: Build release v1.17.39 (celular + smart TV)
+========================================
+C:\Users\luist\.claude\jobs\cc7e448e\tmp\t2-10bfcef1\build-and-upload.ps1 : O termo 
+'C:\Users\luist\.claude\jobs\cc7e448e\tmp\t2-10bfcef1\release.ps1' não é reconhecido como nome de cmdlet, função, 
+arquivo de script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver sido incluído, veja se o 
+caminho está correto e tente novamente.
+    + CategoryInfo          : ObjectNotFound: (C:\Users\luist\...ef1\release.ps1:String) [build-and-upload.ps1], Comma 
+   ndNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException,build-and-upload.ps1
+ 
+exit: 1
+kts depois:         versionCode = 270 |         versionName = "1.17.39" // Always remember to update Cores Tag!
+dist existe: False

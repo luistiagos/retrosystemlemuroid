@@ -1,0 +1,52 @@
+﻿--- Test-PublishVersionGate: canal sem anuncio ($null) ---
+ok   Bump sem anuncio segue
+ok   NoBump sem anuncio segue
+ok   SkipBuild sem anuncio segue
+--- Test-PublishVersionGate: Bump (TargetCode ja com o +1) ---
+ok   Bump 268 com 269 no ar aborta (a 268 duplicada)
+ok   Bump 269 com 269 no ar aborta (limite ==)
+ok   Bump 270 com 269 no ar segue (limite +1)
+ok   Bump 1 com 269 no ar aborta
+--- Test-PublishVersionGate: NoBump ---
+ok   NoBump 268 com 269 no ar aborta
+ok   NoBump 269 com 269 no ar aborta (limite ==: mesmo numero, bytes novos)
+ok   NoBump 269 aborta mesmo com sha igual
+ok   NoBump 270 com 269 no ar segue (limite +1)
+--- Test-PublishVersionGate: SkipBuild ---
+ok   SkipBuild 268 com 269 no ar aborta
+ok   SkipBuild 269 com o mesmo binario segue (republicacao)
+ok   SkipBuild 269 com o mesmo binario em maiusculas segue
+ok   SkipBuild 269 com outro binario aborta
+ok   SkipBuild 269 sem APK em dist\ aborta
+ok   SkipBuild 269 com anuncio sem sha256 aborta
+ok   SkipBuild 270 com 269 no ar segue (limite +1)
+--- ConvertFrom-AnnouncementJson ---
+ok   JSON valido vira objeto com versionCode [int]
+ok   JSON com BOM e aceito
+ok   JSON sem versionCode lanca
+ok   versionCode string lanca
+ok   versionCode decimal lanca
+ok   versionCode zero lanca
+ok   JSON invalido lanca
+ok   conteudo vazio lanca
+--- Get-PublishCheckoutState / Assert-PublishVersionGate ---
+ok   fora do git: commit desconhecido
+ok   Assert lanca no caso da 268 duplicada
+ok   mensagem cita 'versionCode 269 (1.17.38) em https://versions.example/RetroGameSystem/version.json'
+ok   mensagem cita 'versionCode 269 (1.17.38)'
+ok   mensagem cita 'commit de partida:      desconhecido'
+ok   mensagem cita 'publicado/1.17.38'
+ok   mensagem cita 'Nada foi escrito'
+ok   Assert nao lanca quando a trava deixa seguir
+ok   no repo: commit curto e estado do .kts
+--- build-and-upload.ps1: a trava vem antes de qualquer escrita ---
+ok   anuncio lido antes da trava do bump
+ok   trava do bump antes do WriteAllText
+ok   trava NoBump/SkipBuild antes do passo 1
+--- Get-AnnouncedVersion (rede) ---
+ok   anuncio real tem versionCode inteiro > 0
+     (no ar: 269 / 1.17.38)
+ok   canal inexistente (404) devolve $null
+ok   host que nao resolve lanca
+
+Todos os 41 casos passaram.
