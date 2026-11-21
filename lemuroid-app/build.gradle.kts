@@ -164,6 +164,13 @@ android {
             // Stripping created some issues with some libretro cores such as ppsspp
             keepDebugSymbols += setOf("*/*/*_libretro_android.so")
             useLegacyPackaging = true
+            // -PexcludeCores=mamearcade[,outro]: build de teste sem esses cores no APK (o app
+            // tenta baixa-los sob demanda). Sem a propriedade nada muda.
+            readGradleProperty("excludeCores")
+                ?.split(",")
+                ?.map { it.trim() }
+                ?.filter { it.isNotEmpty() }
+                ?.forEach { core -> excludes += "**/lib${core}_libretro_android.so" }
         }
         resources {
             excludes += setOf("META-INF/DEPENDENCIES", "META-INF/library_release.kotlin_module")
@@ -214,7 +221,7 @@ android {
             isShrinkResources = true
             signingConfig = signingConfigs["release"]
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            resValue("string", "lemuroid_name", "Retro Game System")
+            resValue("string", "lemuroid_name", readGradleProperty("appLabel") ?: "Retro Game System")
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
