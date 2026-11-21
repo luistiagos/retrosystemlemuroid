@@ -150,3 +150,27 @@ Resultado na base (`713b9cf` + esta task), APKs debug do `build` da lane (versio
 
 Ajuste ao Plano de teste: nenhum. Para o teste: rodar o comando acima na lane (precisa dos APKs do `build`);
 `-Cenario <nome>` roda um so, `-ManterRaiz` guarda a raiz (bucket, `rclone.log`, `script.out/err.log`) para inspecao.
+
+## Teste
+
+**Rodada 1 (sessao de teste, pipeline 20261120-2117): aprovado.** So fase offline: a task e ferramenta de teste da
+publicacao, sem caminho no app (T2 dispensado pelo Plano de teste), entao nao houve slot nem aparelho.
+
+- **Diff** (`git diff --stat origin/version10...HEAD`): `tests/fake-rclone.ps1` (+138), `tests/test-publicacao-anuncio.ps1`
+  (+441) e este doc. `build-and-upload.ps1` e o app intactos; so arquivos reservados.
+- **Offline / controle positivo** (`powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-publicacao-anuncio.ps1`,
+  APKs debug da lane, versionCode 269, arm64 `3a0301df...` 237381577 B, armv7 `a3ed1ce2...` 194763687 B), duas rodadas
+  completas (21:39:44-21:40:20 e 21:40:28-21:41:02), resultado identico, harness exit 1 (`1/3 cenario(s) passaram`):
+  - `FAIL cache-velho`: script exit 1 (`VERIFICACAO FALHOU: a URL publica de arm64-v8a entregou bytes DIFERENTES`);
+    invariante quebrada em `apkUrls[arm64-v8a]`, `apkUrls[armeabi-v7a]` e `apkUrl`: anunciado = sha da semente
+    (4096/5120 B), encontrado = sha do APK novo. Sinal do bug presente na base.
+  - `FAIL falha-upload-armv7`: script exit 1 (`rclone copy falhou (armeabi-v7a)`); invariante quebrada em
+    `apkUrls[arm64-v8a]` e `apkUrl` (arm64 ja sobrescrito).
+  - `PASS sucesso`: exit 0, anuncio coerente, versionCode 269, links fixos e `.sha256` com os bytes novos.
+- **Isolamento** (3a rodada, `-Cenario falha-upload-armv7 -ManterRaiz`, raiz inspecionada e apagada): `rclone.log` com
+  `OK copy ... arm64.apk | :s3:fakebucket/RetroGameSystem | --s3-endpoint=http://127.0.0.1:9` e
+  `FALHA-INJETADA copy ... armv7.apk`; `script.out.log` com `rclone : <raiz>\bin\rclone.ps1` (o falso);
+  `build.properties` so com R2 falso e sem `CF_*`/`HF_TOKEN` (purga `PULADA`, HF `SKIPPED`).
+- **Restos:** nenhuma `lemuroid-harness-*`/`lemuroid-publish-*` em `%TEMP%`; nenhum `rclone.exe` nem `http.server`
+  vivo (`Win32_Process`); `git status` da lane limpo.
+- **T3:** nenhum arquivo do app ou do script mudou (diff acima). **T4:** nao se aplica (sem app em execucao).
