@@ -1,6 +1,6 @@
 ---
 fecha_por: dono
-tasks: [TASK-0013, TASK-0014]
+tasks: [TASK-0013, TASK-0014, TASK-0016]
 ---
 
 # [BUG] Atualização pelo app falha sempre depois de uma publicação interrompida: o `version.json` anuncia um APK que não está mais no ar
