@@ -89,3 +89,79 @@ foi commitado e outra árvore, partindo do origin, gerou o mesmo número.
 - **T3:** `git diff <base> -- build-and-upload.ps1`: só a mudança de posição dos blocos de config e a chamada da trava;
   `-SkipBuild` com sha igual ao anunciado passa (teste offline). O `build` do helper não é afetado (script fora do
   Gradle); rodar `ktlintCheck` não é necessário.
+
+## Correcao (pipeline 20261120-2117, rodada 1)
+
+**O que mudou:**
+
+- `publish-guard.ps1` (novo, raiz; ASCII puro, CRLF: o PowerShell 5.1 le `.ps1` sem BOM como ANSI):
+  - `ConvertFrom-AnnouncementJson` — texto do `version.json` -> `{versionCode [int], versionName, sha256}`. Lanca em
+    conteudo vazio, JSON invalido e `versionCode` que nao seja inteiro > 0 (string `"269"`, `269.5`, `0`, ausente).
+    Tira BOM antes do parse.
+  - `Get-AnnouncedVersion -Url [-TimeoutSec 30]` — `Invoke-WebRequest -UseBasicParsing` com `?t=<ticks>` (ou `&t=`)
+    e `Cache-Control`/`Pragma: no-cache`. `$null` so quando `[int]$_.Exception.Response.StatusCode -eq 404` (vale
+    para `WebException` no 5.1 e `HttpResponseException` no 7; nunca pelo texto da mensagem). Qualquer outra falha
+    lanca "Nao foi possivel ler o anuncio da versao em <url> (HTTP n | mensagem)...". Conteudo `byte[]` e decodificado
+    como UTF-8.
+  - `Test-PublishVersionGate -TargetCode -Mode Bump|NoBump|SkipBuild -Announced [-DistSha]` — pura, tabela da task.
+    `SkipBuild` com `==`: segue so se `DistSha` e o `sha256` anunciado existem e batem (sem diferenca de caixa);
+    `DistSha` ausente ou anuncio sem `sha256` = diferente = aborta.
+  - `Get-PublishCheckoutState -RepoRoot` — `git rev-parse --short HEAD` e `git status --porcelain -- lemuroid-app/
+    build.gradle.kts`; `desconhecido` sem git, se `RepoRoot` nao for a raiz do repositorio (copia de rascunho dentro
+    de outra arvore nao herda o commit dela) ou se o git falhar. EAP local `Continue` (no 5.1 stderr de nativo com
+    `Stop` vira excecao). Nunca lanca.
+  - `Format-PublishGateMessage` — motivo, versao no ar (code/name + URL), a que seria gerada, commit de partida,
+    `.kts` com mudanca nao commitada (sim/nao/desconhecido), "Nada foi escrito" e o que fazer por modo (Bump: trazer
+    `chore(versao): publicado/<v>` ou editar o `versionCode` do `.kts` para >= anunciado e passar `-VersionName`;
+    NoBump: rodar sem `-NoBump` ou `.kts` acima; SkipBuild: rodar sem `-SkipBuild`).
+    *Ajuste ao texto da task:* `-VersionName` so muda o nome, nao o `versionCode`; a mensagem diz isso em vez de
+    "suba com `-VersionName`" sozinho.
+  - `Assert-PublishVersionGate` — junta os tres e lanca a mensagem.
+- `build-and-upload.ps1`:
+  - dot-source do `publish-guard.ps1` logo depois do `build-env.ps1`;
+  - **movidos** (nao duplicados) para logo depois do `build.properties` e antes do "BUMP DE VERSAO": `$R2_FOLDER`,
+    `$UPDATE_CHANNEL`, `$LOCAL_R2_CONFIG`/`$GODSEND_R2_CONFIG`, "CONFIG R2" (`$cfg`, `$usingGodsendFallback`),
+    "URLs PUBLICAS" (`$PUBLIC_BASE_DEFAULT`, `$publicBase`) e `$VERSION_JSON_NAME`/`$versionJsonFile`/
+    `$versionJsonUrl`. Nos lugares antigos ficou um comentario de uma linha apontando para cima;
+  - novo bloco "VERSAO NO AR": `$announcedVersion = Get-AnnouncedVersion -Url $versionJsonUrl`; `$null` -> amarelo
+    "canal <c> sem anuncio em <url>: seguindo (canal novo)"; senao imprime a versao no ar. Comentario cita
+    `[[2026-11-20-publicacao-manual-sem-commit-versao-duplicada]]`;
+  - ramo do bump: `Assert-PublishVersionGate -TargetCode $bumpNewCode -TargetName $bumpNewName -Mode Bump` depois de
+    calcular o numero/nome novos e ANTES do "Subindo versao" e do `WriteAllText`;
+  - depois da leitura de `$VERSION_CODE`/`$VERSION_NAME`, com `-SkipBuild` ou `-NoBump`: a mesma trava em modo
+    `SkipBuild` (precede `-NoBump` se os dois vierem, como no bump) ou `NoBump`; `DistSha` = sha256 de
+    `dist\retro-game-system-arm64.apk` se existir, senao `$null`. Antes do preflight e do passo 1;
+  - vale com `-SkipR2`/`-SkipHF` (a leitura do anuncio nao depende deles).
+- `tests/test-publish-guard.ps1` (novo, ASCII/CRLF, `param([switch]$Offline)`, `exit 1` na 1a falha): 41 casos —
+  tabela completa (3 modos x sem anuncio, `<`, `==`, `+1`; SkipBuild com sha igual, igual em maiusculas, diferente,
+  sem APK, anuncio sem sha), parse do JSON (6 casos), mensagem de aborto (cita no ar + URL, gerada, commit
+  `desconhecido`, `publicado/1.17.38`, "Nada foi escrito"), `Get-PublishCheckoutState` fora do git e no repo, ordem
+  estatica no `build-and-upload.ps1` (leitura do anuncio < trava Bump < `WriteAllText`; trava NoBump/SkipBuild antes
+  do "PASSO 1/4") e, sem `-Offline`, os 3 casos de rede.
+
+**Provas rodadas na lane (Windows PowerShell 5.1; nao ha `pwsh` nesta maquina):**
+
+- `powershell -NoProfile -ExecutionPolicy Bypass -File tests/test-publish-guard.ps1` -> "Todos os 41 casos passaram.",
+  exit 0 (no ar no dia: 269 / 1.17.38; canal `version-canalinexistente-<guid>.json` -> `$null`;
+  `https://invalido.invalid/version.json` -> lanca).
+- Mesmo com `-Offline` -> "Todos os 38 casos passaram.", exit 0.
+- Ensaio da receita T2 numa pasta de rascunho **sem `release.ps1`** (copia de `build-and-upload.ps1`, `build-env.ps1`,
+  `publish-guard.ps1` e do `.kts`), sempre com `-SkipHF -SkipR2`, pasta apagada no fim. Feito so para pegar erro de
+  parse/ordem antes de mandar para teste; a T2 oficial e da sessao de teste.
+  1. `.kts` 268/1.17.37 -> "TRAVA DE VERSAO: o bump geraria o versionCode 269, que nao passa do 269 que ja esta no
+     ar.", "commit de partida: desconhecido", exit 1, sem "PASSO 1/4", `.kts` continua 268.
+  2. `.kts` 269 com `-NoBump` -> "TRAVA DE VERSAO: -NoBump recompilaria o versionCode 269...", exit 1.
+  3. `.kts` 269 sem flag -> passa, "versionCode: 269 -> 270", `.kts` vira 270, morre no passo 1 por falta do
+     `release.ps1`.
+  4. `APP_UPDATE_CHANNEL=canalteste-inexistente`, `.kts` 268 -> "canal canalteste-inexistente sem anuncio em
+     .../version-canalteste-inexistente.json: seguindo (canal novo)", bump 268 -> 269, morre no passo 1.
+
+**Ajustes ao Plano de teste:** nenhum na receita. Observacao para a T2: a mensagem de aborto sai duas vezes no
+console do 5.1 (o texto do `throw` e o `FullyQualifiedErrorId` que o PowerShell imprime) — e o comportamento normal do
+`throw` com string, igual aos outros `throw` do script.
+
+## Estado
+
+- Feito: as tres partes da task (publish-guard.ps1, build-and-upload.ps1, tests/test-publish-guard.ps1), teste
+  offline e online verdes no 5.1, ensaio T2 dos 4 casos.
+- Falta: nada de codigo. Proximo passo: `enqueue-test --bug TASK-0011` (sessao de teste roda a receita T2/T3 da task).

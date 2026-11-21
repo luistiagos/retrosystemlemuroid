@@ -93,6 +93,9 @@ $GRADLE_FILE = Join-Path $PROJECT_ROOT "lemuroid-app\build.gradle.kts"
 . (Join-Path $PROJECT_ROOT "build-env.ps1")
 Initialize-BuildEnv
 
+# Trava de versao (Get-AnnouncedVersion / Assert-PublishVersionGate), usada antes do bump.
+. (Join-Path $PROJECT_ROOT "publish-guard.ps1")
+
 # Load build.properties
 if (Test-Path -LiteralPath $ENV_FILE) {
     Get-Content -LiteralPath $ENV_FILE -Encoding UTF8 | ForEach-Object {
@@ -102,6 +105,68 @@ if (Test-Path -LiteralPath $ENV_FILE) {
             Set-Variable -Name $k -Value $v -Scope Script
         }
     }
+}
+
+# R2 (mesmo bucket "versions" do GODSend, pasta propria)
+$R2_FOLDER = "RetroGameSystem"
+
+# Canal de atualizacao. Precisa bater com BuildConfig.APP_UPDATE_CHANNEL
+# (lemuroid-app/build.gradle.kts) - o app recusa um version.json de canal
+# diferente. Canal != default publica version-<canal>.json, entao um build de
+# teste nunca dispara atualizacao nos clientes do canal estavel.
+$UPDATE_CHANNEL = if ($env:APP_UPDATE_CHANNEL) { $env:APP_UPDATE_CHANNEL } else { "default" }
+$LOCAL_R2_CONFIG = Join-Path $PROJECT_ROOT "r2-config.json"
+$GODSEND_R2_CONFIG = "E:\projects\GODSend\r2-config.json"
+
+# ─── CONFIG R2 (resolvida sempre, e antes do bump: a trava de versao precisa
+# da URL do anuncio, e o JSON do anuncio e gerado mesmo com -SkipR2) ──
+# So le arquivos locais; sem nenhum, $cfg fica $null e quem precisa dele
+# (passo 3) lanca la.
+$usingGodsendFallback = $false
+if ($Script:R2_ACCESS_KEY_ID -and $Script:R2_SECRET_ACCESS_KEY -and $Script:R2_ENDPOINT -and $Script:R2_BUCKET) {
+    $cfg = [PSCustomObject]@{
+        accessKeyId     = $Script:R2_ACCESS_KEY_ID
+        secretAccessKey = $Script:R2_SECRET_ACCESS_KEY
+        endpoint        = $Script:R2_ENDPOINT
+        bucket          = $Script:R2_BUCKET
+        publicBaseUrl   = if ($Script:R2_PUBLIC_URL) { $Script:R2_PUBLIC_URL } else { "" }
+    }
+} elseif (Test-Path -LiteralPath $LOCAL_R2_CONFIG) {
+    $cfg = Get-Content -LiteralPath $LOCAL_R2_CONFIG -Raw -Encoding UTF8 | ConvertFrom-Json
+} elseif (Test-Path -LiteralPath $GODSEND_R2_CONFIG) {
+    $cfg = Get-Content -LiteralPath $GODSEND_R2_CONFIG -Raw -Encoding UTF8 | ConvertFrom-Json
+    $usingGodsendFallback = $true
+} else {
+    $cfg = $null
+}
+
+# ─── URLs PUBLICAS ──────────────────────────────────
+# O bucket "versions" e servido em versions.digitalstoregames.com. Antes isso
+# so saia se publicBaseUrl/R2_PUBLIC_URL estivesse preenchido - e nao esta em
+# lugar nenhum, entao o JSON do /app_version nunca era gerado e as URLs eram
+# montadas na mao. O fallback abaixo resolve.
+$PUBLIC_BASE_DEFAULT = "https://versions.digitalstoregames.com"
+$publicBase = if ($cfg -and $cfg.publicBaseUrl) { $cfg.publicBaseUrl.TrimEnd('/') } else { $PUBLIC_BASE_DEFAULT }
+
+$VERSION_JSON_NAME = if ($UPDATE_CHANNEL -eq "default") { "version.json" } else { "version-$UPDATE_CHANNEL.json" }
+$versionJsonFile = Join-Path $DIST_DIR $VERSION_JSON_NAME
+$versionJsonUrl  = "$publicBase/$R2_FOLDER/$VERSION_JSON_NAME"
+
+# ─── VERSAO NO AR (trava de versao) ─────────────────
+# [[2026-11-20-publicacao-manual-sem-commit-versao-duplicada]]: o bump abaixo nao
+# e commitado por este script. Quando ele se perde (outra arvore, outra maquina,
+# lane que parte do origin), a proxima publicacao repete o numero - foi assim que
+# sairam duas 1.17.37 / 268 com bytes diferentes, e o app compara so o versionCode.
+# Por isso le o anuncio no ar AQUI, antes de escrever qualquer coisa, e recusa um
+# versionCode que nao passe dele. Vale com -SkipR2/-SkipHF: a trava protege o
+# numero, nao o upload. So o 404 (canal sem anuncio) segue sem comparar; qualquer
+# outra falha de leitura lanca dentro do Get-AnnouncedVersion.
+Write-Host "Lendo a versao no ar: $versionJsonUrl" -ForegroundColor Yellow
+$announcedVersion = Get-AnnouncedVersion -Url $versionJsonUrl
+if ($null -eq $announcedVersion) {
+    Write-Host "  canal $UPDATE_CHANNEL sem anuncio em ${versionJsonUrl}: seguindo (canal novo)" -ForegroundColor Yellow
+} else {
+    Write-Host "  no ar: versionCode $($announcedVersion.versionCode) ($($announcedVersion.versionName))" -ForegroundColor DarkGray
 }
 
 # ─── BUMP DE VERSAO ─────────────────────────────────
@@ -149,6 +214,10 @@ if ($SkipBuild) {
         throw "versionName '$bumpOldName' nao segue X.Y.Z; passe -VersionName <valor> para definir a nova versao."
     }
 
+    # Trava ANTES do WriteAllText: abortar aqui deixa o .kts intacto.
+    Assert-PublishVersionGate -TargetCode $bumpNewCode -TargetName $bumpNewName -Mode Bump `
+        -Announced $announcedVersion -AnnouncementUrl $versionJsonUrl -RepoRoot $PROJECT_ROOT
+
     Write-Host "Subindo versao:" -ForegroundColor Yellow
     Write-Host "  versionCode: $bumpOldCode -> $bumpNewCode" -ForegroundColor White
     Write-Host "  versionName: $bumpOldName -> $bumpNewName" -ForegroundColor White
@@ -172,22 +241,25 @@ if ($gradleContent -notmatch 'versionName\s*=\s*"([^"]+)"') {
 }
 $VERSION_NAME = $matches[1]
 
+# Sem bump o numero vem do .kts como esta: a trava vale igual (recompilar o
+# numero no ar gera bytes novos com o mesmo versionCode - a 268 duplicada).
+# -SkipBuild so pode republicar o numero no ar se dist\ tiver o MESMO binario.
+if ($SkipBuild -or $NoBump) {
+    $gateMode = if ($SkipBuild) { "SkipBuild" } else { "NoBump" }
+    $gateDistSha = $null
+    $gateDistArm64 = Join-Path $DIST_DIR "retro-game-system-arm64.apk"
+    if ($SkipBuild -and (Test-Path -LiteralPath $gateDistArm64)) {
+        $gateDistSha = (Get-FileHash -LiteralPath $gateDistArm64 -Algorithm SHA256).Hash.ToLower()
+    }
+    Assert-PublishVersionGate -TargetCode ([int]$VERSION_CODE) -TargetName $VERSION_NAME -Mode $gateMode `
+        -Announced $announcedVersion -DistSha $gateDistSha -AnnouncementUrl $versionJsonUrl -RepoRoot $PROJECT_ROOT
+}
+
 # HuggingFace
 $HF_REPO = if ($env:HF_REPO) { $env:HF_REPO } elseif ($Script:HF_REPO) { $Script:HF_REPO } else { "luisluis123/versions" }
 $HF_REPO_TYPE = "dataset"
 $HF_FOLDER = "RetroGameSystem"
 $HF_TOKEN = if ($env:HF_TOKEN) { $env:HF_TOKEN } elseif ($Script:HF_TOKEN) { $Script:HF_TOKEN } else { "" }
-
-# R2 (mesmo bucket "versions" do GODSend, pasta propria)
-$R2_FOLDER = "RetroGameSystem"
-
-# Canal de atualizacao. Precisa bater com BuildConfig.APP_UPDATE_CHANNEL
-# (lemuroid-app/build.gradle.kts) - o app recusa um version.json de canal
-# diferente. Canal != default publica version-<canal>.json, entao um build de
-# teste nunca dispara atualizacao nos clientes do canal estavel.
-$UPDATE_CHANNEL = if ($env:APP_UPDATE_CHANNEL) { $env:APP_UPDATE_CHANNEL } else { "default" }
-$LOCAL_R2_CONFIG = Join-Path $PROJECT_ROOT "r2-config.json"
-$GODSEND_R2_CONFIG = "E:\projects\GODSend\r2-config.json"
 
 # ABIs distribuidas (celular = arm64-v8a, smart TV / TV box antiga = armeabi-v7a)
 $AbiMap = [ordered]@{ "arm64-v8a" = "arm64"; "armeabi-v7a" = "armv7" }
@@ -389,33 +461,8 @@ if (-not $SkipHF) {
     Print-Step "PASSO 2/4: Upload para HuggingFace (SKIPPED)"
 }
 
-# ─── CONFIG R2 (resolvida sempre — usada tambem pra gerar o JSON do
-# app_version mesmo com -SkipR2, ja que so entao sabemos o publicBaseUrl) ──
-$usingGodsendFallback = $false
-if ($Script:R2_ACCESS_KEY_ID -and $Script:R2_SECRET_ACCESS_KEY -and $Script:R2_ENDPOINT -and $Script:R2_BUCKET) {
-    $cfg = [PSCustomObject]@{
-        accessKeyId     = $Script:R2_ACCESS_KEY_ID
-        secretAccessKey = $Script:R2_SECRET_ACCESS_KEY
-        endpoint        = $Script:R2_ENDPOINT
-        bucket          = $Script:R2_BUCKET
-        publicBaseUrl   = if ($Script:R2_PUBLIC_URL) { $Script:R2_PUBLIC_URL } else { "" }
-    }
-} elseif (Test-Path -LiteralPath $LOCAL_R2_CONFIG) {
-    $cfg = Get-Content -LiteralPath $LOCAL_R2_CONFIG -Raw -Encoding UTF8 | ConvertFrom-Json
-} elseif (Test-Path -LiteralPath $GODSEND_R2_CONFIG) {
-    $cfg = Get-Content -LiteralPath $GODSEND_R2_CONFIG -Raw -Encoding UTF8 | ConvertFrom-Json
-    $usingGodsendFallback = $true
-} else {
-    $cfg = $null
-}
-
-# ─── URLs PUBLICAS ──────────────────────────────────
-# O bucket "versions" e servido em versions.digitalstoregames.com. Antes isso
-# so saia se publicBaseUrl/R2_PUBLIC_URL estivesse preenchido - e nao esta em
-# lugar nenhum, entao o JSON do /app_version nunca era gerado e as URLs eram
-# montadas na mao. O fallback abaixo resolve.
-$PUBLIC_BASE_DEFAULT = "https://versions.digitalstoregames.com"
-$publicBase = if ($cfg -and $cfg.publicBaseUrl) { $cfg.publicBaseUrl.TrimEnd('/') } else { $PUBLIC_BASE_DEFAULT }
+# $cfg, $publicBase e a URL do anuncio ($versionJsonUrl) foram resolvidos antes
+# do bump, junto da trava de versao.
 
 # O "?v=<versionCode>" NAO e enfeite. O cache de borda na frente do R2 continua
 # servindo os bytes ANTIGOS na URL canonica por tempo indeterminado depois do
@@ -455,10 +502,7 @@ foreach ($abi in $AbiMap.Keys) {
     $apkSizes[$abi]  = (Get-Item -LiteralPath $DistApks[$abi]).Length
 }
 
-$VERSION_JSON_NAME = if ($UPDATE_CHANNEL -eq "default") { "version.json" } else { "version-$UPDATE_CHANNEL.json" }
-$versionJsonFile = Join-Path $DIST_DIR $VERSION_JSON_NAME
-$versionJsonUrl  = "$publicBase/$R2_FOLDER/$VERSION_JSON_NAME"
-
+# $VERSION_JSON_NAME / $versionJsonFile / $versionJsonUrl: resolvidos antes do bump.
 $versionPayload = [ordered]@{
     versionCode = [int]$VERSION_CODE
     versionName = $VERSION_NAME
