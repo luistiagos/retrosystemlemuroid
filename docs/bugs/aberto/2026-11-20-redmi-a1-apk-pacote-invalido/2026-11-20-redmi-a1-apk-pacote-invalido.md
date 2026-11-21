@@ -93,9 +93,64 @@ O que o emulador **não** cobre: ARM real, ROM da Xiaomi, `low_ram`, instalaçã
 PackageInstaller). Uma falha do armv7 no aparelho do cliente tem de vir de uma dessas diferenças ou do lado do
 aparelho (arquivo, pacote homônimo).
 
-## Hipóteses — nenhuma verificada
+### Hardware do cliente (prints do Device Info HW, 2026-11-20 ~23:50 UTC, repassados pelo dono)
 
-1. **PS2 e Retro arm64 nunca instalam neste aparelho (ABI).** O Redmi A1 é Android 12 **Go** com Helio A22
+| Campo | Valor |
+|---|---|
+| Modelo | Xiaomi `220733SG` (Redmi A1), plataforma `mt6761` |
+| Android / kernel | 12 / `4.19.191-perf` (build de 2024-09-02) |
+| SoC | MediaTek Helio A22 (MT6761V/WBB), 4× Cortex-A53, 850–2001 MHz |
+| **Modo / suportado** | **32-bit** / 64-bit (a CPU é 64-bit, o sistema é 32-bit) |
+| Máquina | `armv7l` |
+| **ABIs suportadas** | **`armeabi-v7a armeabi`** (sem `arm64-v8a`) |
+| GPU | PowerVR Rogue GE8300, OpenGL ES 3.2 |
+| RAM | 2 GB |
+
+**Hipótese 1 confirmada** (o ABI, não o texto da mensagem): neste aparelho o `retro-game-system-arm64.apk` e o PS2
+(`come.nanodata.armsx2`, só `arm64-v8a`) **nunca** instalam, em nenhuma versão. O único arquivo possível é o
+`retro-game-system-armv7.apk`. O ABI não explica a falha do armv7, que tem `lib/armeabi-v7a/` e instalou no AVD
+Android 12 32-bit. Continua faltando o código exato da falha do armv7 (pedido ao cliente via SAI).
+
+### Build de teste para o cliente: armv7 sem MAME e com pacote próprio (2026-11-20, pedido do dono, NÃO publicado)
+
+Objetivo: testar duas hipóteses de uma vez, sem depender do SAI: conflito de pacote (hipótese 3) e tamanho (`lib/` de
+350 MiB extraído num Android Go de 2 GB).
+
+- **Pacote:** `-PcatalogApplicationIdSuffix=<sufixo>` já existe em `lemuroid-app/build.gradle.kts` (`applicationId =
+  "app.retrogamesystem$catalogApplicationIdSuffix"`). Os providers do manifesto usam `${applicationId}`
+  (`.update_provider`, `.androidx-startup`), então não há `CONFLICTING_PROVIDER` com o app padrão.
+- **Atualização:** `-PappUpdateChannel=<canal>` faz o app ler `version-<canal>.json`. Se o arquivo não existe, `AppUpdateManager.fetchVersionInfo`
+  lança `IOException`. `AppUpdateViewModel.checkOnStartup` engole a exceção e volta a `Idle`, sem popup. Sem isso o app ofereceria
+  "atualizar" para o APK padrão, que é outro pacote.
+- **Sem MAME:** propriedade nova `-PexcludeCores=mamearcade` → `packaging.jniLibs.excludes`. O `BundledCoresVerifier` lê
+  a pasta-fonte `bundled-cores/src/main/jniLibs`, não o APK, então não acusa.
+- **Efeito colateral:** os jogos MAME 0.289 não abrem nessa build. `GameLoader.findLibrary` não acha o core, e
+  `GameViewModelRetroGameView` chama `CoreDownloader.downloadCore` (tag `1.24.0`). Esse arquivo está em **Git LFS**:
+  `curl -sIL https://raw.githubusercontent.com/luistiagos/libretrocores/1.24.0/lemuroid_core_mamearcade/src/main/jniLibs/armeabi-v7a/libmamearcade_libretro_android.so`
+  → `Content-Length: 134` (o ponteiro LFS, `oid sha256:6812…`, `size 177130180`). Abaixo de `MIN_VALID_CORE_SIZE`
+  (10 KiB) → falha de núcleo. **Achado à parte:** o download sob demanda do MAME (flavor `dynamic` e fallback)
+  está quebrado para todos. Registrar como bug próprio.
+
+**Gerado** (BUILD SUCCESSFUL, 6m42s):
+`./gradlew :lemuroid-app:assembleFreeBundleRelease -PcatalogApplicationIdSuffix=lite32 -PappUpdateChannel=lite32
+-PexcludeCores=mamearcade "-PappLabel=Retro Game System Lite"`.
+Cópia local fora do repo, não publicada: `C:\projects\lemuroid\apk-teste-cliente\retro-game-system-lite-armv7.apk`.
+
+| Campo | Valor |
+|---|---|
+| Pacote | `app.retrogamesystem.lite32`, `1.17.38` (269), label "Retro Game System Lite" |
+| ABI | só `armeabi-v7a`, 54 `.so`, sem `libmamearcade` (o `libmame2003_plus`, 24 MB, continua) |
+| Tamanho | 106.039.283 B (o armv7 publicado tem 158.513.870 B); 318 MB descomprimido |
+| Assinatura | v1+v2+v3 OK (`debug.keystore`) |
+| SHA-256 | `c62911ce64b07ea53029d22343e5a95df2e132004f8f5df6df873abbc458b78b` |
+
+Como ler o resultado: **instala** → a causa é conflito de pacote ou tamanho (o SAI no armv7 normal separa as duas).
+**Mesmo "inválido"** → nem o pacote nem o MAME são a causa. Sobram parse/assinatura/dexopt no aparelho, e só se esclarece
+com o código detalhado (SAI).
+
+## Hipóteses
+
+1. **(CONFIRMADA quanto ao ABI) PS2 e Retro arm64 nunca instalam neste aparelho.** O Redmi A1 é Android 12 **Go** com Helio A22
    ([mi.com](https://www.mi.com/global/redmi-a1/specs/)). Na mesma linha, a Xiaomi documenta o Redmi A3 como 32-bit
    ([FAQ KA-189890](https://www.mi.com/global/support/faq/details/KA-189890)). Se o `ro.product.cpu.abilist` for só
    `armeabi-v7a,armeabi`, o PS2 (só arm64, sem build 32-bit) é impossível, e o arm64 do Retro também. Contra: o texto
@@ -115,12 +170,12 @@ aparelho (arquivo, pacote homônimo).
      `retro-game-system-armv7.apk`, **158,5 MB**; apagar todos os outros antes;
    - em Configurações > Apps, procurar "Retro Game System", "RetroSystem PS2", "ARMSX2", "Lemuroid" ou apps da compra
      anterior. Desinstalar o homônimo e tentar o armv7 de novo (hipótese 3);
-   - opcional: instalar um app de informação de hardware (ex.: "Device Info HW") e mandar a linha **ABI/Instruction sets**.
-     Decide a hipótese 1.
+   - ~~opcional: instalar um app de informação de hardware e mandar a linha **ABI**~~ feito: `armeabi-v7a armeabi`;
+   - **pendente:** instalar o armv7 pelo SAI (Split APKs Installer) e mandar o print do erro detalhado (`INSTALL_FAILED_*`).
 2. **Se o armv7 de 158,5 MB, recém-baixado e sem homônimo instalado, ainda falhar**: reproduzir num Android 12 Go
    32-bit (aparelho ou AVD `android-31` Go, se houver imagem 32-bit) com `adb install -r` e logcat de
    `PackageManager`/`PackageInstallerSession`/`NativeLibraryHelper`, para ter o `INSTALL_FAILED_*` exato.
-3. **PS2 no Redmi A1:** se a hipótese 1 se confirmar, não há "versão específica" possível. O ARMSX2 é só arm64, e
+3. **PS2 no Redmi A1:** hipótese 1 confirmada pelo ABI (2026-11-20): não há "versão específica" possível. O ARMSX2 é só arm64, e
    PS2 num Helio A22 com 2–3 GB não roda. Decisão do dono: como responder ao cliente/reembolso (fora deste repo).
 4. **Infra (`versions.digitalstoregames.com`):** responder `412` a `If-Match` divergente e/ou publicar com nome
    versionado + troca atômica do link. Defeito secundário, não provado como causa aqui (registrar no repo do
