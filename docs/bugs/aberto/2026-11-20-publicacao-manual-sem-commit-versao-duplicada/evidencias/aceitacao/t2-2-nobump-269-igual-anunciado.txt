@@ -1,0 +1,40 @@
+﻿# t2-2-nobump-269-igual-anunciado  (2026-11-20T21:51:03.8584012-03:00)
+args: -SkipHF -SkipR2 -NoBump  canal: (padrao)  dist apk: False
+copias (sha256, iguais as da lane em binario-lane.txt):
+BA3F8171DE89D74EE5895BD7F1690E56B31C85CD08B83CB725C0FD07743D81D2  build-and-upload.ps1
+03C95730EF2E08A58CAA7DFD7B66FF7B72E959AA40C4EF7FC5EBC70495A03072  build-env.ps1
+53D261D8678153C05656B1858E1C3858E571395883385FF5F5D6709B7297B058  publish-guard.ps1
+.kts antes : versionCode = 269 | versionName = "1.17.38" // Always remember to update Cores Tag!
+.kts depois: versionCode = 269 | versionName = "1.17.38" // Always remember to update Cores Tag!
+exit: 1
+apareceu 'PASSO 1/4': False
+dist existe depois: False
+--- saida ---
+Lendo a versao no ar: https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  no ar: versionCode 269 (1.17.38)
+Bump de versao: PULADO (-NoBump)
+TRAVA DE VERSAO: -NoBump recompilaria o versionCode 269, que nao passa do 269 que ja esta no ar (mesmo numero com 
+bytes novos e o que o app nunca oferece).
+  no ar:                  versionCode 269 (1.17.38) em 
+https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  seria gerada/publicada: versionCode 269 (1.17.38)
+  commit de partida:      desconhecido
+  lemuroid-app/build.gradle.kts com mudanca nao commitada: desconhecido
+Nada foi escrito: o build.gradle.kts e o dist\ estao como estavam.
+Rode sem -NoBump depois de trazer o commit 'chore(versao): publicado/1.17.38' (git pull),
+ou edite lemuroid-app/build.gradle.kts para um versionCode acima de 269 e um versionName acima de 1.17.38.
+No C:\Users\luist\.claude\jobs\96dc9bd4\tmp\t2-2-nobump-269-igual-anunciado\publish-guard.ps1:248 caractere:5
++     throw (Format-PublishGateMessage -Reason $reason -Announced $Anno ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (TRAVA DE VERSAO...ima de 1.17.38.:String) [], RuntimeException
+    + FullyQualifiedErrorId : TRAVA DE VERSAO: -NoBump recompilaria o versionCode 269, que nao passa do 269 que ja est 
+   a no ar (mesmo numero com bytes novos e o que o app nunca oferece).
+      no ar:                  versionCode 269 (1.17.38) em https://versions.digitalstoregames.com/RetroGameSystem/vers 
+   ion.json
+  seria gerada/publicada: versionCode 269 (1.17.38)
+  commit de partida:      desconhecido
+  lemuroid-app/build.gradle.kts com mudanca nao commitada: desconhecido
+Nada foi escrito: o build.gradle.kts e o dist\ estao como estavam.
+Rode sem -NoBump depois de trazer o commit 'chore(versao): publicado/1.17.38' (git pull),
+ou edite lemuroid-app/build.gradle.kts para um versionCode acima de 269 e um versionName acima de 1.17.38.
+ 

@@ -1,0 +1,34 @@
+﻿# t2-6-git-checkout-kts-sujo: repo git temporario, HEAD 0044290 com .kts 267 commitado e 268 nao commitado (versionName 1.17.36)
+exit: 1
+apareceu 'PASSO 1/4': False
+.kts depois: versionCode = 268
+git status:  M lemuroid-app/build.gradle.kts
+--- saida ---
+Lendo a versao no ar: https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  no ar: versionCode 269 (1.17.38)
+TRAVA DE VERSAO: o bump geraria o versionCode 269, que nao passa do 269 que ja esta no ar.
+  no ar:                  versionCode 269 (1.17.38) em 
+https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  seria gerada/publicada: versionCode 269 (1.17.37)
+  commit de partida:      0044290
+  lemuroid-app/build.gradle.kts com mudanca nao commitada: sim
+Nada foi escrito: o build.gradle.kts e o dist\ estao como estavam.
+O bump da versao no ar nao esta neste checkout: traga o commit 'chore(versao): publicado/1.17.38' (git pull),
+ou edite o versionCode de lemuroid-app/build.gradle.kts para 269 ou mais (o bump soma 1)
+e passe -VersionName com um nome acima de 1.17.38.
+No C:\Users\luist\.claude\jobs\96dc9bd4\tmp\t2-6-git\publish-guard.ps1:248 caractere:5
++     throw (Format-PublishGateMessage -Reason $reason -Announced $Anno ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (TRAVA DE VERSAO...ima de 1.17.38.:String) [], RuntimeException
+    + FullyQualifiedErrorId : TRAVA DE VERSAO: o bump geraria o versionCode 269, que nao passa do 269 que ja esta no a 
+   r.
+      no ar:                  versionCode 269 (1.17.38) em https://versions.digitalstoregames.com/RetroGameSystem/vers 
+   ion.json
+  seria gerada/publicada: versionCode 269 (1.17.37)
+  commit de partida:      0044290
+  lemuroid-app/build.gradle.kts com mudanca nao commitada: sim
+Nada foi escrito: o build.gradle.kts e o dist\ estao como estavam.
+O bump da versao no ar nao esta neste checkout: traga o commit 'chore(versao): publicado/1.17.38' (git pull),
+ou edite o versionCode de lemuroid-app/build.gradle.kts para 269 ou mais (o bump soma 1)
+e passe -VersionName com um nome acima de 1.17.38.
+ 

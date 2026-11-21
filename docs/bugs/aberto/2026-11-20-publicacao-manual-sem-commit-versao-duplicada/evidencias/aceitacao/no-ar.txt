@@ -1,0 +1,21 @@
+﻿{
+    "versionCode":  269,
+    "versionName":  "1.17.38",
+    "channel":  "default",
+    "apkUrl":  "https://versions.digitalstoregames.com/RetroGameSystem/retro-game-system-arm64.apk?v=269",
+    "sha256":  "aa24ca6d9a579bf11c29344fff43d2a4b2332dd35686df73308a9b2786745ef8",
+    "size":  200382907,
+    "apkUrls":  {
+                    "arm64-v8a":  "https://versions.digitalstoregames.com/RetroGameSystem/retro-game-system-arm64.apk?v=269",
+                    "armeabi-v7a":  "https://versions.digitalstoregames.com/RetroGameSystem/retro-game-system-armv7.apk?v=269"
+                },
+    "apkSha256":  {
+                      "arm64-v8a":  "aa24ca6d9a579bf11c29344fff43d2a4b2332dd35686df73308a9b2786745ef8",
+                      "armeabi-v7a":  "9cf25463040c0441f06f89eff0690d2b04f4e2ebdf003206f6f772b4c1f3bd77"
+                  },
+    "apkSizes":  {
+                     "arm64-v8a":  200382907,
+                     "armeabi-v7a":  163572953
+                 }
+}
+

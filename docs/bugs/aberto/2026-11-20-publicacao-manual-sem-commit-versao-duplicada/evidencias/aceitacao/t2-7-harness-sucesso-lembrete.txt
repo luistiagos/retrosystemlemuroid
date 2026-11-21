@@ -1,0 +1,11 @@
+﻿# harness TASK-0013 (copia com +1 linha copiando publish-guard.ps1), cenario sucesso, build-and-upload.ps1 da lane
+exit: 0
+APKs: versionCode 269 (1.17.38-DEBUG)
+  arm64-v8a : b441a9bf4b91b3a583fa39939c8a74c8f20543079a43d95c74dea437599c87bc (237381562 B)  C:\projects\lemuroid\.bugfix-pipeline-Lemuroid\lanes\wt-1\lemuroid-app\build\outputs\apk\freeBundle\debug\lemuroid-app-free-bundle-arm64-v8a-debug.apk
+  armeabi-v7a : f6f4966a905d4f9faef082d80da29c03795135b21c5d9880d92b5f09754d30f1 (194763670 B)  C:\projects\lemuroid\.bugfix-pipeline-Lemuroid\lanes\wt-1\lemuroid-app\build\outputs\apk\freeBundle\debug\lemuroid-app-free-bundle-armeabi-v7a-debug.apk
+
+[sucesso] raiz: C:\Users\luist\AppData\Local\Temp\lemuroid-harness-publicacao-42c46be8
+PASS sucesso (publicacao completa, cache coerente): script exit 0, anuncio coerente
+  raiz mantida: C:\Users\luist\AppData\Local\Temp\lemuroid-harness-publicacao-42c46be8
+
+1/1 cenario(s) passaram.

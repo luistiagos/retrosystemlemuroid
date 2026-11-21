@@ -1,0 +1,18 @@
+# controle positivo estatico: build-and-upload.ps1 no plano (713b9cf, antes das tasks) x HEAD (ed30205)
+== 713b9cf
+160:    [System.IO.File]::WriteAllText($GRADLE_FILE, $bumpUpdated, (New-Object System.Text.UTF8Encoding($false)))
+294:    Print-Step "PASSO 1/4: Build release v$VERSION_NAME (celular + smart TV)"
+300:    Print-Step "PASSO 1/4: Build (SKIPPED - usando APKs existentes em dist\)"
+linhas com 'git ': 0
+== ed30205
+96:# Trava de versao (Get-AnnouncedVersion / Assert-PublishVersionGate), usada antes do bump.
+163:# outra falha de leitura lanca dentro do Get-AnnouncedVersion.
+165:$announcedVersion = Get-AnnouncedVersion -Url $versionJsonUrl
+217:    # Trava ANTES do WriteAllText: abortar aqui deixa o .kts intacto.
+218:    Assert-PublishVersionGate -TargetCode $bumpNewCode -TargetName $bumpNewName -Mode Bump `
+229:    [System.IO.File]::WriteAllText($GRADLE_FILE, $bumpUpdated, (New-Object System.Text.UTF8Encoding($false)))
+254:    Assert-PublishVersionGate -TargetCode ([int]$VERSION_CODE) -TargetName $VERSION_NAME -Mode $gateMode `
+366:    Print-Step "PASSO 1/4: Build release v$VERSION_NAME (celular + smart TV)"
+372:    Print-Step "PASSO 1/4: Build (SKIPPED - usando APKs existentes em dist\)"
+796:        Write-Host "  FALTA COMMITAR A VERSAO PUBLICADA ($VERSION_NAME)" -ForegroundColor Red
+linhas com 'git ': 6

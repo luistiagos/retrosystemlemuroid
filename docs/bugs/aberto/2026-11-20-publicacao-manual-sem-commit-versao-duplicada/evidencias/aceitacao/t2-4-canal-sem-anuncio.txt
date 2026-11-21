@@ -1,0 +1,30 @@
+﻿# t2-4-canal-sem-anuncio  (2026-11-20T21:51:06.6922012-03:00)
+args: -SkipHF -SkipR2  canal: canalteste-inexistente  dist apk: False
+copias (sha256, iguais as da lane em binario-lane.txt):
+BA3F8171DE89D74EE5895BD7F1690E56B31C85CD08B83CB725C0FD07743D81D2  build-and-upload.ps1
+03C95730EF2E08A58CAA7DFD7B66FF7B72E959AA40C4EF7FC5EBC70495A03072  build-env.ps1
+53D261D8678153C05656B1858E1C3858E571395883385FF5F5D6709B7297B058  publish-guard.ps1
+.kts antes : versionCode = 268 | versionName = "1.17.37" // Always remember to update Cores Tag!
+.kts depois: versionCode = 269 | versionName = "1.17.38" // Always remember to update Cores Tag!
+exit: 1
+apareceu 'PASSO 1/4': True
+dist existe depois: False
+--- saida ---
+Lendo a versao no ar: https://versions.digitalstoregames.com/RetroGameSystem/version-canalteste-inexistente.json
+  canal canalteste-inexistente sem anuncio em https://versions.digitalstoregames.com/RetroGameSystem/version-canalteste-inexistente.json: seguindo (canal novo)
+Subindo versao:
+  versionCode: 268 -> 269
+  versionName: 1.17.37 -> 1.17.38
+  build.gradle.kts atualizado
+
+========================================
+  PASSO 1/4: Build release v1.17.38 (celular + smart TV)
+========================================
+C:\Users\luist\.claude\jobs\96dc9bd4\tmp\t2-4-canal-sem-anuncio\build-and-upload.ps1 : O termo 
+'C:\Users\luist\.claude\jobs\96dc9bd4\tmp\t2-4-canal-sem-anuncio\release.ps1' não é reconhecido como nome de cmdlet, 
+função, arquivo de script ou programa operável. Verifique a grafia do nome ou, se um caminho tiver sido incluído, veja 
+se o caminho está correto e tente novamente.
+    + CategoryInfo          : ObjectNotFound: (C:\Users\luist\...cio\release.ps1:String) [build-and-upload.ps1], Comma 
+   ndNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException,build-and-upload.ps1
+ 

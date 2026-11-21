@@ -1,0 +1,43 @@
+﻿# t3-5-skipbuild-269-apk-diferente  (2026-11-20T21:51:08.1928847-03:00)
+args: -SkipHF -SkipR2 -SkipBuild  canal: (padrao)  dist apk: True
+copias (sha256, iguais as da lane em binario-lane.txt):
+BA3F8171DE89D74EE5895BD7F1690E56B31C85CD08B83CB725C0FD07743D81D2  build-and-upload.ps1
+03C95730EF2E08A58CAA7DFD7B66FF7B72E959AA40C4EF7FC5EBC70495A03072  build-env.ps1
+53D261D8678153C05656B1858E1C3858E571395883385FF5F5D6709B7297B058  publish-guard.ps1
+.kts antes : versionCode = 269 | versionName = "1.17.38" // Always remember to update Cores Tag!
+.kts depois: versionCode = 269 | versionName = "1.17.38" // Always remember to update Cores Tag!
+exit: 1
+apareceu 'PASSO 1/4': False
+dist existe depois: True
+--- saida ---
+Lendo a versao no ar: https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  no ar: versionCode 269 (1.17.38)
+Bump de versao: PULADO (-SkipBuild usa os APKs que ja existem)
+TRAVA DE VERSAO: -SkipBuild republicaria o versionCode 269, que ja esta no ar com OUTRO binario (anunciado sha256 
+aa24ca6d9a579bf11c29344fff43d2a4b2332dd35686df73308a9b2786745ef8; dist\ arm64 
+b441a9bf4b91b3a583fa39939c8a74c8f20543079a43d95c74dea437599c87bc).
+  no ar:                  versionCode 269 (1.17.38) em 
+https://versions.digitalstoregames.com/RetroGameSystem/version.json
+  seria gerada/publicada: versionCode 269 (1.17.38)
+  commit de partida:      desconhecido
+  lemuroid-app/build.gradle.kts com mudanca nao commitada: desconhecido
+Nada foi escrito: o build.gradle.kts e o dist\ estao como estavam.
+dist\ nao tem o binario que esta no ar com esse numero. Rode sem -SkipBuild (com o bump) para
+publicar uma versao acima de 269; se o .kts estiver para tras, traga antes o commit 'chore(versao): publicado/1.17.38'.
+No C:\Users\luist\.claude\jobs\96dc9bd4\tmp\t3-5-skipbuild-269-apk-diferente\publish-guard.ps1:248 caractere:5
++     throw (Format-PublishGateMessage -Reason $reason -Announced $Anno ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (TRAVA DE VERSAO...icado/1.17.38'.:String) [], RuntimeException
+    + FullyQualifiedErrorId : TRAVA DE VERSAO: -SkipBuild republicaria o versionCode 269, que ja esta no ar com OUTRO  
+   binario (anunciado sha256 aa24ca6d9a579bf11c29344fff43d2a4b2332dd35686df73308a9b2786745ef8; dist\ arm64 b441a9bf4b  
+  91b3a583fa39939c8a74c8f20543079a43d95c74dea437599c87bc).
+      no ar:                  versionCode 269 (1.17.38) em https://versions.digitalstoregames.com/RetroGameSystem/vers 
+   ion.json
+  seria gerada/publicada: versionCode 269 (1.17.38)
+  commit de partida:      desconhecido
+  lemuroid-app/build.gradle.kts com mudanca nao commitada: desconhecido
+Nada foi escrito: o build.gradle.kts e o dist\ estao como estavam.
+dist\ nao tem o binario que esta no ar com esse numero. Rode sem -SkipBuild (com o bump) para
+    publicar uma versao acima de 269; se o .kts estiver para tras, traga antes o commit 'chore(versao): publicado/1.17 
+   .38'.
+ 
