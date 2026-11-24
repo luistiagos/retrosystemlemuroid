@@ -189,6 +189,12 @@ Constante em `ManifestQuickLoader` para controle de versão do **esquema/conteú
 | 41 | MAME 0.289: remoção de 89 títulos 3D pesados sem core alternativo |
 | 42 | MAME 0.289: capas pretas e genéricas do arcadeitalia esvaziadas; passada completa passa a sincronizar a capa das linhas existentes |
 | 43 | +1.184 jogos (GBA, SNES, Mega Drive, NES, SMS, GBC, NDS e outros) do commit `48d861f`, que mudou o manifest sem bump |
+| 44 | PSP: Mortal Kombat - Unchained (USA) |
+| 45 | GameCube: Mario Kart - Double Dash!! (Europe) |
+| 46 | Expansão dos sistemas leves (PC Engine CD +492, Atari ST +734, Mega Drive +132, WonderSwan Color +91, PICO-8 +52, MSX +15) |
+| 47 | GameCube: +175 títulos/correções do Archive.org |
+| 48 | GameCube: +24 ROM hacks do Archive.org |
+| 49 | FBNeo/Neo Geo: The King of Fighters 2002 Magic Plus II, publicado na 1.17.39/1.17.40 sem bump |
 
 ### Backfill de capas (`super_scrapper`)
 
