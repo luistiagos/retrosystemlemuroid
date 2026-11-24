@@ -78067,3 +78067,5 @@ gc/Super Smash Bros. Melee - Akaneia Build (v0.82) (Hack).gcz|Super Smash Bros. 
 gc/Super Smash Bros. Melee - 20XXHP (v5.0.1) (Hack).gcz|Super Smash Bros. Melee - 20XXHP (v5.0.1) (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Smash_Bros_Melee_GALP01_r5Cn0C4.png|0|1
 gc/Super Smash Bros. Melee - Silly Melee (v1.01) (Hack).gcz|Super Smash Bros. Melee - Silly Melee (v1.01) (Hack)|https://db.hfsplay.fr/files/2019/08/28/Super_Smash_Bros_Melee_GALP01_r5Cn0C4.png|0|1
 gc/Yoshi Party 7 (Hack).gcz|Yoshi Party 7 (Hack)|https://db.hfsplay.fr/files/2019/07/29/Mario_Party_7_USA_vSIszNV.png|0|1
+fbneo/kf2k2mp2.zip|The King of Fighters 2002 Magic Plus II|https://adb.arcadeitalia.net/?mame=kof2002&type=title&resize=0|0|1
+neogeo/kf2k2mp2.zip|The King of Fighters 2002 Magic Plus II|https://adb.arcadeitalia.net/?mame=kof2002&type=title&resize=0|0|1
