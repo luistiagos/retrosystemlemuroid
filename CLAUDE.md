@@ -345,42 +345,42 @@ when {
 A seção **Descubra** exibe até 10 jogos populares com cover, um por sistema, escolhidos aleatoriamente a cada carregamento.
 
 **Algoritmo (`HomeViewModel.discoveryGames`):**
-1. Consulta um pool de até 300 jogos com `coverFrontUrl IS NOT NULL AND popularityIndex > 0`, ordenados por `popularityIndex DESC`, excluindo sistemas bloqueados pelo filtro de RAM do dispositivo.
+1. Consulta um pool de até 300 jogos com `coverFrontUrl IS NOT NULL AND popularityIndex > 0`, ordenados por `popularityIndex DESC`. Nenhum sistema é excluído (ver "Sem filtro de sistemas").
 2. Agrupa por `systemId`.
 3. Para cada sistema, pega os top-10 mais populares do pool e sorteia 1 aleatório.
 4. Embaralha os representantes de cada sistema.
 5. Limita a `CAROUSEL_MAX_ITEMS = 10`.
 
-**Resultado**: sempre mostra jogos conhecidos/populares com imagem, com variedade entre sistemas, e nunca exibe sistemas que o dispositivo não suporta (ex.: PSP/3DS em dispositivos ≤ 2 GB de RAM).
+**Resultado**: sempre mostra jogos conhecidos/populares com imagem, com variedade entre sistemas.
 
 ### Queries SQL (GameDao)
 
 | Método | Quando usar |
 |--------|-------------|
-| `selectTopPopularWithCovers(limit)` | Dispositivos NORMAL (sem restrição de sistemas) |
-| `selectTopPopularWithCoversExcluding(limit, excludedSystemIds)` | Dispositivos WEAK / ULTRA_WEAK |
+| `selectTopPopularWithCovers(limit)` | Sempre. As variantes `*Excluding` do `GameDao` ficaram sem chamador desde 2026-11-24. |
 
 ---
 
-## Filtro de Sistemas por RAM (`HeavySystemFilter`)
+## Sem filtro de sistemas (`HeavySystemFilter` só ajusta memória)
 
-| Tier | RAM | Sistemas ocultos |
-|------|-----|-----------------|
-| `NORMAL` | > 2 GB | nenhum |
-| `WEAK` | 1–2 GB | PSP, 3DS, GameCube |
-| `ULTRA_WEAK` | ≤ 1 GB | PSP, 3DS, GameCube, NDS, N64, DOS, Sega CD, Dreamcast, 3DO, Saturn, Amiga (x4), PC-FX, Atari ST |
+**Desde 2026-11-24, todo sistema com jogos aparece em todo aparelho**, mobile e TV (decisão do dono). Antes, o tier de
+RAM escondia PSP/3DS/GameCube (≤ 2 GB) e mais 15 sistemas (≤ 1 GB ou `isLowRamDevice`), e a TV escondia PSP e 3DS. Um
+celular Android Go de 2 GB (Redmi A1, APK armeabi-v7a) perdia PSP, NDS, N64, Dreamcast e Saturn
+(`docs/bugs/aberto/2026-11-24-android-go-2gb-esconde-sistemas-moderados/`).
 
-O `excludedDbNames` é calculado uma vez no `init` do `HomeViewModel` e repassado para todas as queries que precisam de filtragem (recentes, favoritos, descubra).
+O `HeavySystemFilter.deviceTier` continua, mas **só para tuning de memória**: PRAGMAs do SQLite
+(`LemuroidApplicationModule.retrogradeDb`), tamanho de decodificação das capas (`CoverUtils.isLowRamDevice`) e shaders
+(`ShaderChooser`, via `isWeakDevice`).
 
-> ⚠️ **PSX não está em nenhum tier** (removido em 2026-09-05). O PCSX-ReARMed roda
-> aceitavelmente em set-top box de 1 GB, e a classificação `am.isLowRamDevice || totalGb <= 1.0`
-> derruba em `ULTRA_WEAK` **qualquer** aparelho ≤ 2 GB com `ro.config.low_ram=true` — o padrão de
-> TV box barata. Resultado: o catálogo inteiro de PlayStation sumia numa BTV de 2 GB.
->
-> 💡 O filtro só existe na UI **mobile** (`MetaSystemsViewModel`). `TVHomeViewModel` **não**
-> chama `HeavySystemFilter` — esconde apenas PSP e 3DS. A busca também não filtra por sistema.
-> Portanto, sistema ausente na lista mas achado pela busca = filtro de RAM (e UI mobile);
-> ausente também na busca = linhas fora do banco, outro problema.
+| Tier | Critério |
+|------|----------|
+| `NORMAL` | > 2 GB |
+| `WEAK` | > 1 GB e ≤ 2 GB |
+| `ULTRA_WEAK` | ≤ 1 GB ou `isLowRamDevice` (todo Android Go) |
+
+> ⚠️ **Não reintroduzir filtro de sistema por tier.** O `low_ram` é sinal certo para economizar memória e errado para
+> decidir o que o usuário vê: ele joga um aparelho de 2 GB no tier de 1 GB. Foi assim que o PSX sumiu em TV box
+> (2026-09-05) e o PSP/NDS/N64 sumiram num celular Go (2026-11-24). Sistema ausente na lista hoje = linhas fora do banco.
 
 ---
 

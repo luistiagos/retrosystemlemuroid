@@ -5,7 +5,6 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
-import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -299,15 +298,12 @@ class StreamingRomsManager(context: Context, autoRestart: Boolean = true) {
      * Reads the embedded catalog manifest from assets. Returns a list of relative paths
      * like "arcade/acrobatm.zip", or null if the asset is not present.
      *
-     * On weak devices, entries for heavy systems (PSP, 3DS, NDS, N64, DOS, Sega CD, ...)
-     * are excluded so their placeholder files are never created.
+     * Every system is included on every device (no RAM-based exclusion since 2026-11-24).
      */
     private fun loadCatalogFromAssets(): List<String>? {
-        val excludedPrefixes = HeavySystemFilter.excludedCatalogPrefixes(HeavySystemFilter.deviceTier(appContext))
         return try {
             appContext.assets.open(BuildConfig.CATALOG_MANIFEST_ASSET).bufferedReader().useLines { seq ->
                 seq.filter { it.isNotBlank() }
-                    .filter { line -> excludedPrefixes.none { prefix -> line.startsWith(prefix) } }
                     // The manifest format is "path|imageUrl". Extract only the file path so
                     // that placeholder files are created with valid names (the pipe character
                     // is illegal in Android file names and the URL is not needed here).

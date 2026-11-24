@@ -5,10 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
-import com.swordfish.lemuroid.app.utils.android.isTvDevice
 import com.swordfish.lemuroid.lib.library.GameSystem
-import com.swordfish.lemuroid.lib.library.HeavySystemFilter
-import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.metaSystemID
 import kotlinx.coroutines.flow.SharingStarted
@@ -26,13 +23,8 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
         }
     }
 
-    private val tvHiddenSystems = setOf(MetaSystemID.PSP, MetaSystemID.NINTENDO_3DS)
-
-    private val deviceTier = HeavySystemFilter.deviceTier(appContext)
-    private val hiddenSystems: Set<MetaSystemID> = HeavySystemFilter.excludedSystems(deviceTier)
-        .mapNotNull { systemId ->
-            GameSystem.findByIdOrNull(systemId.dbname)?.let { it.metaSystemID() }
-        }.toSet()
+    // Every system with games is listed, on every device (owner decision, 2026-11-24):
+    // there is no RAM-tier or TV filter anymore.
 
     // null = loading (Room query not yet emitted), emptyList = genuinely no systems.
     // StateFlow with SharingStarted.Eagerly starts collecting immediately upon ViewModel
@@ -43,7 +35,6 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
         retrogradeDb.gameDao()
             .selectSystemsWithCount()
             .map { systemCounts ->
-                val hideSystems = appContext.isTvDevice()
                 systemCounts.asSequence()
                     .filter { (_, count) -> count > 0 }
                     // findByIdOrNull: skips rows with system IDs not recognised by GameSystem,
@@ -51,8 +42,6 @@ class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context
                     .mapNotNull { (systemId, count) ->
                         GameSystem.findByIdOrNull(systemId)?.let { it.metaSystemID() to count }
                     }
-                    .filter { (metaSystemId, _) -> !hideSystems || metaSystemId !in tvHiddenSystems }
-                    .filter { (metaSystemId, _) -> metaSystemId !in hiddenSystems }
                     .groupBy { (metaSystemId, _) -> metaSystemId }
                     .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumOf { it.second }) }
                     .sortedBy { it.getName(appContext) }

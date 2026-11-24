@@ -9,10 +9,8 @@ import com.swordfish.lemuroid.app.mobile.feature.installed.InstalledGameGroupUiM
 import com.swordfish.lemuroid.app.mobile.feature.installed.StorageAvailabilityMonitor
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
-import com.swordfish.lemuroid.app.utils.android.isTvDevice
 import com.swordfish.lemuroid.common.coroutines.debounceAfterFirst
 import com.swordfish.lemuroid.lib.library.GameSystem
-import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.library.metaSystemID
@@ -43,8 +41,6 @@ class TVHomeViewModel(
     companion object {
         const val CAROUSEL_MAX_ITEMS = 10
         const val DEBOUNCE_TIME = 100L
-
-        private val TV_HIDDEN_SYSTEMS = setOf(MetaSystemID.PSP, MetaSystemID.NINTENDO_3DS)
     }
 
     class Factory(
@@ -166,13 +162,11 @@ class TVHomeViewModel(
     ) = retrogradeDb.gameDao()
         .selectSystemsWithCount()
         .map { systemCounts ->
-            val hideSystems = appContext.isTvDevice()
             systemCounts.asSequence()
                 .filter { (_, count) -> count > 0 }
                 .mapNotNull { (systemId, count) ->
                     GameSystem.findByIdOrNull(systemId)?.let { it.metaSystemID() to count }
                 }
-                .filter { (metaSystemId, _) -> !hideSystems || metaSystemId !in TV_HIDDEN_SYSTEMS }
                 .groupBy { (metaSystemId, _) -> metaSystemId }
                 .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumOf { it.second }) }
                 .sortedBy { it.getName(appContext) }

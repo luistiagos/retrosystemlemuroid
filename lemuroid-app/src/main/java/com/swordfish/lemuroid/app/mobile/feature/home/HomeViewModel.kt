@@ -29,7 +29,6 @@ import com.swordfish.lemuroid.common.coroutines.combine
 import com.swordfish.lemuroid.common.coroutines.debounceAfterFirst
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.CoreID
-import com.swordfish.lemuroid.lib.library.HeavySystemFilter
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.catalog.ManifestQuickLoader
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
@@ -137,7 +136,6 @@ class HomeViewModel(
     private val romsDownloadManager = RomsDownloadManager(appContext)
     private val streamingRomsManager = StreamingRomsManager(appContext)
     private val downloadDialogDismissed = MutableStateFlow(false)
-    private val excludedDbNames = HeavySystemFilter.excludedDbNames(HeavySystemFilter.deviceTier(appContext))
 
     // Emits the mobile network label (e.g. "4G", "5G") when WiFi is lost during an active download
     private val _mobileSwitchEvent = MutableSharedFlow<String>(extraBufferCapacity = 1)
@@ -393,23 +391,18 @@ class HomeViewModel(
      *
      * Algorithm:
      * 1. Queries up to [DISCOVER_POOL_SIZE] games that have a cover image and a non-zero
-     *    popularity index, ordered by popularity DESC. Systems excluded by the device's RAM
-     *    tier ([HeavySystemFilter]) are filtered out at query time.
+     *    popularity index, ordered by popularity DESC. No system is excluded: every system
+     *    is offered on every device (owner decision, 2026-11-24).
      * 2. Groups the pool by [Game.systemId].
      * 3. From each system's group, takes the top [DISCOVER_TOP_PER_SYSTEM] most popular games
      *    and picks one at random — ensuring variety across systems.
      * 4. Shuffles the selected representatives and caps the result at [CAROUSEL_MAX_ITEMS].
      *
      * The result is a diverse, randomised selection of well-known games that always have
-     * artwork, and never includes systems the current device cannot run.
+     * artwork.
      */
     private fun discoveryGames(retrogradeDb: RetrogradeDatabase): Flow<List<Game>> {
-        val candidatesFlow =
-            if (excludedDbNames.isNotEmpty()) {
-                retrogradeDb.gameDao().selectTopPopularWithCoversExcluding(DISCOVER_POOL_SIZE, excludedDbNames)
-            } else {
-                retrogradeDb.gameDao().selectTopPopularWithCovers(DISCOVER_POOL_SIZE)
-            }
+        val candidatesFlow = retrogradeDb.gameDao().selectTopPopularWithCovers(DISCOVER_POOL_SIZE)
 
         return candidatesFlow.map { games ->
             // Games arrive sorted by popularityIndex DESC from the query.
@@ -425,18 +418,10 @@ class HomeViewModel(
     }
 
     private fun recentGames(retrogradeDb: RetrogradeDatabase) =
-        if (excludedDbNames.isNotEmpty()) {
-            retrogradeDb.gameDao().selectFirstUnfavoriteRecentsExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
-        } else {
-            retrogradeDb.gameDao().selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS)
-        }
+        retrogradeDb.gameDao().selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS)
 
     private fun favoritesGames(retrogradeDb: RetrogradeDatabase) =
-        if (excludedDbNames.isNotEmpty()) {
-            retrogradeDb.gameDao().selectFirstFavoritesExcluding(CAROUSEL_MAX_ITEMS, excludedDbNames)
-        } else {
-            retrogradeDb.gameDao().selectFirstFavorites(CAROUSEL_MAX_ITEMS)
-        }
+        retrogradeDb.gameDao().selectFirstFavorites(CAROUSEL_MAX_ITEMS)
 
     private fun dsGamesCount(retrogradeDb: RetrogradeDatabase): Flow<Int> {
         return retrogradeDb.gameDao().selectSystemsWithCount()

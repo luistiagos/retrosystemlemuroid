@@ -41,15 +41,6 @@
         <error line="2636" column="1" source="standard:no-blank-line-in-list" />
         <error line="3291" column="1" source="standard:no-blank-line-in-list" />
     </file>
-    <file name="src/main/java/com/swordfish/lemuroid/lib/library/HeavySystemFilter.kt">
-        <error line="23" column="1" source="standard:no-empty-first-line-in-class-body" />
-        <error line="27" column="53" source="standard:multiline-expression-wrapping" />
-        <error line="39" column="51" source="standard:multiline-expression-wrapping" />
-        <error line="76" column="60" source="standard:multiline-expression-wrapping" />
-        <error line="76" column="60" source="standard:function-signature" />
-        <error line="83" column="57" source="standard:function-signature" />
-        <error line="87" column="65" source="standard:function-signature" />
-    </file>
     <file name="src/main/java/com/swordfish/lemuroid/lib/library/LemuroidLibrary.kt">
         <error line="91" column="1" source="standard:max-line-length" />
     </file>
