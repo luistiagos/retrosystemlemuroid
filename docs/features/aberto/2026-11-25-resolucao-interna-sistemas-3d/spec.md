@@ -39,19 +39,19 @@ detalhe com resolução interna; para eles já existe o Modo HD.
    valores curtos ("1x (nativa)", "2x", "3x"…), do mesmo tamanho dos de Dreamcast e PSP que já cabem.
 3. **Android 5 com 1 GB?** O padrão continua a resolução nativa, então nada muda para quem não mexer. Quem
    escolher 2x ou mais num aparelho fraco pode ver o jogo ficar lento ou, no Saturn e no GameCube, faltar
-   memória — exatamente como já acontece hoje no PSP e no Dreamcast. Como limitar isso está em "Decisões do dono
-   pendentes".
+   memória — exatamente como já acontece hoje no PSP e no Dreamcast. Por decisão do dono, nenhum valor é escondido
+   por aparelho: o padrão nativo é a proteção.
 4. **pt-BR e inglês?** Todo título e valor novo nos dois idiomas.
 
-## Decisões do dono pendentes
+## Decisões do dono
 
-1. **Teto por sistema.** Oferecer tudo o que o core aceita (Saturn até 4k, N64 até 3840x2880, DS até 10x) ou
-   cortar em 4x, como o Dreamcast? Proposta: até 4x em todos, porque acima disso nenhum aparelho do público roda.
-2. **Aparelho fraco.** Mostrar todos os valores também no tier `ULTRA_WEAK`, ou só 1x/2x lá? O `CLAUDE.md` proíbe
-   esconder **sistema** por tier, mas não fala de valor de opção. Proposta: mostrar tudo (a escolha é do usuário e
-   o padrão é nativo).
-3. **Dreamcast em pt-BR.** Os valores da resolução do Dreamcast ("Native (640x480)", "2x (1280x960)"…) não têm
-   tradução e aparecem em inglês no app em português. Corrigir junto (são 4 textos)? Proposta: sim.
+Tomadas em 2026-11-25 ("1 - Não teremos teto, 2 - Mostrar tudo, 3 - Corrije junto"):
+
+1. **Sem teto.** Cada opção oferece todos os valores que o core declara (Saturn até 4k, N64 até 3840x2880, DS
+   até 10x).
+2. **Mostrar tudo em todo aparelho**, inclusive no tier `ULTRA_WEAK`. A escolha é do usuário e o padrão é nativo.
+3. **Dreamcast em pt-BR corrigido junto:** os 4 valores da resolução do Dreamcast ("Native (640x480)",
+   "2x (1280x960)"…) ganham tradução.
 
 ## Critérios de aceite
 
@@ -77,8 +77,8 @@ resolução escolhida.
 - Saturn: e2e evidencias/aceitacao.md::saturn-2x-print-antes-depois
 - 3DO: e2e evidencias/aceitacao.md::3do-2x-print-antes-depois
 
-EARS-4. O SISTEMA DEVE oferecer em cada opção de resolução somente valores que o core daquele sistema declara, de
-modo que nenhum valor oferecido seja descartado em silêncio e a opção nunca suma do menu.
+EARS-4. O SISTEMA DEVE oferecer em cada opção de resolução todos os valores que o core daquele sistema declara, e
+somente eles, de modo que nenhum valor oferecido seja descartado em silêncio e a opção nunca suma do menu.
 *prova: teste ...GameSystemResolutionSettingTest.kt::valoresContidosNosDeclaradosPeloCore (lista declarada
 capturada do core em execução e congelada no teste), e2e evidencias/aceitacao.md::contagem-de-valores-por-sistema*
 
@@ -102,6 +102,10 @@ EARS-9. QUANDO o usuário de TV abre Opções do core pelo controle, O SISTEMA D
 interna só com D-pad e OK, com foco visível em cada item.
 *prova: e2e evidencias/aceitacao.md::tv-dpad-resolucao (AVD `lemu_tv_api25`)*
 
+EARS-10. ENQUANTO o app está em português, O SISTEMA DEVE mostrar em português os valores da resolução interna do
+Dreamcast, Naomi e Atomiswave ("Nativa (640x480)", "2x (1280x960)"…).
+*prova: teste ...GameSystemResolutionSettingTest.kt::rotulosDeResolucaoTraduzidosPtBr, e2e evidencias/aceitacao.md::dreamcast-valores-pt-br*
+
 ## Superfícies
 
 | superfície | decisão | onde |
@@ -122,4 +126,4 @@ interna só com D-pad e OK, com foco visível em cada item.
 - melonDS (core alternativo do DS): não tem a opção.
 - Mudar o padrão de qualquer sistema para acima de nativo.
 - Opção global de resolução em Ajustes: a escolha continua por sistema, no menu do jogo.
-- Esconder valores ou sistemas por tier de RAM (ver decisão pendente 2).
+- Teto de resolução e esconder valores ou sistemas por tier de RAM (decisões 1 e 2 do dono).
