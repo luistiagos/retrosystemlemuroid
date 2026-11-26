@@ -1,6 +1,6 @@
 ---
 criado_em: 2026-11-25
-aprovado_por: --
+aprovado_por: Luis Tiago - 2026-11-25 21:50 - "pode seguir"
 verificacao: |
   Na versão publicada instalada no moto g86 (e no AVD de TV `lemu_tv_api25` para a navegação por controle):
   abrir um jogo de cada um dos cinco sistemas (PS1, GameCube, Nintendo DS, Saturn, 3DO), menu do jogo ▸
