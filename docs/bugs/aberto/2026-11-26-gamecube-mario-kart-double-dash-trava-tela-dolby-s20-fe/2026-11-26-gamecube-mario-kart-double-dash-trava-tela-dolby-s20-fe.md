@@ -88,3 +88,65 @@ O print de hoje para numa tela **anterior** ao logo da Nintendo dos prints de 11
   tinha `TRIAGEM_TOKEN`; rodar `telemetria.py conta …` da skill `triagem-bugs-prod`).
 - Reprodução: não há S20 FE nem Adreno 650 disponível. O que diferencia os dois aparelhos (GPU/driver Adreno × Mali,
   Android 13 × 16, Snapdragon × MediaTek) só se separa no aparelho da cliente.
+
+## Causa-raiz
+
+**Não provada.** Não reproduz em nenhum aparelho disponível (seção acima), então esta passada não fecha a causa: ela
+planeja um teste que **a cliente** roda no aparelho dela para separar as duas hipóteses que sobraram.
+
+1. **Deadlock CPU↔GPU do modo dual-core** (`dolphin_main_cpu_thread=enabled`, padrão do core, sem
+   `defaultSettings` no GC). Precedente medido no Wii (SMG: GLThread, CPU thread e DVD thread em `futex` no mesmo
+   objeto; passa com dual-core desligado). Coerente com "trava de vez" e com o ponto de parada variar entre dois boots
+   (logo Nintendo × logo Dolby): uma corrida de threads não para sempre no mesmo lugar. Num aparelho mais rápido
+   (g86) a janela da corrida pode simplesmente não abrir.
+2. **Driver GLES do Adreno 650** travando dentro de uma chamada GL do Dolphin (compilação de shader, sync). A
+   telemetria já disse que a `GLThread` fica `RUNNABLE` dentro de `LibretroDroid.step` (não em monitor Java), o que
+   serve para as duas hipóteses. Fix aqui seria dentro do core: fora do alcance deste repo (`bloqueado`).
+
+## Hipóteses descartadas
+
+- **Mudança de resolução interna (`68316e8`, TASK-0017):** posterior às ocorrências de 11-13..11-16.
+- **Falta da pasta `Sys`/`GameSettings` do Dolphin:** os INIs do MKDD (`GM4.ini`, `GM4P01.ini`) não mudam opção de
+  núcleo nem de vídeo (seção Evidência).
+- **Lentidão (FPS baixo) confundida com trava:** a cliente diz que trava de vez; a telemetria mostra a GLThread sem
+  responder por 30 s.
+- **Defeito do jogo/ROM ou das opções do app:** a mesma ROM (Europe `.rvz`), com as mesmas opções, passa da abertura
+  no moto g86.
+
+## O que fazer
+
+Uma task, complexidade **baixa** (pelo critério do README: opção do core exposta; nada de Room, `:game`, JNI):
+
+**T1 — expor "Modo dual-core" no menu do jogo do GameCube.**
+- `retrograde-app-shared/src/main/java/com/swordfish/lemuroid/lib/library/GameSystem.kt`, bloco
+  `SystemID.GAMECUBE` / `CoreID.DOLPHIN`: acrescentar a `exposedSettings` um
+  `ExposedSetting("dolphin_main_cpu_thread", R.string.setting_dolphin_dual_core)` **sem `values`**.
+  - Símbolos abertos: `ExposedSetting` (`values` default vazio); `LemuroidCoreOption.getEntriesValues` (sem `values`
+    usa os valores do core, `enabled|disabled`); `CoreOptionsPreferenceHelper.convertToPreference` (conjunto igual a
+    `BOOLEAN_SET = {enabled, disabled}` → `SwitchPreference`). Vale para o menu mobile e o da TV (mesmo helper).
+  - **Não** mudar o padrão: continua `enabled` (o core já manda assim). Desligar para todos custa ~20% de FPS
+    (medido no MKW do Wii, seção "Decisão para a Fase 1" do backlog do Wii).
+- Strings: `setting_dolphin_dual_core` em `retrograde-app-shared/src/main/res/values/strings.xml` ("Dual-core mode")
+  e `values-pt-rBR/strings.xml` ("Modo dual-core"), ao lado de `setting_dolphin_internal_resolution`.
+- Teste de unidade: em `lemuroid-app/src/test/java/com/swordfish/lemuroid/app/shared/game/GameSystemResolutionSettingTest.kt`
+  (ou arquivo irmão), `gamecubeExpoeDualCore`: `dolphin_main_cpu_thread` está em `exposedSettings` do
+  GAMECUBE/DOLPHIN **e não** em `defaultSettings`.
+- E2E no g86: abrir o MKDD, menu ▸ opções: o switch aparece ligado; desligar, sair, reabrir; no logcat do `:game`
+  o boot do Dolphin traz `CPU Thread separate = No` (a mesma linha usada no Wii) e o jogo passa da abertura.
+- **Conflito de reserva:** a feature `docs/features/aberto/2026-11-25-resolucao-interna-sistemas-3d/` (TASK-0018)
+  mexe no mesmo bloco do `GameSystem.kt` e nas mesmas `strings.xml`.
+
+**Por que o menu abre com o core travado** (verificado, senão o teste da cliente não existe):
+`BaseGameActivity.displayOptionsDialog` só retorna cedo com `loadingState` (ligado apenas durante save/load,
+`BaseGameScreenViewModel.withLoading`); `getCoreOptions` → `GLRetroView.getVariables` roda na thread que chama (não na
+GLThread) e `Environment::getVariables` (`LibretroDroid-patched/.../environment.cpp:467`) só copia um mapa, sem lock
+compartilhado com o `retro_run`. A troca grava a preferência; o `updateVariables` vai para a fila da GLThread
+(travada) e não chega ao core nesta sessão, mas o Dolphin só lê o dual-core no boot: vale ao reabrir.
+
+**Depois da publicação — teste da cliente (o dono conduz):** abrir o MKDD; travou → menu (≡) ▸ desligar "Modo
+dual-core" ▸ sair do jogo (a saída pode demorar ~30 s: é o save de saída esperando o core travado, já conhecido) ▸
+abrir de novo.
+- **Passa da abertura:** hipótese 1. Próximo passo: dual-core desligado só onde trava (INI de jogo
+  `User/GameSettings/GM4.ini` com `[Core] CPUThread = False`, caminho provado no Wii, ou `defaultSettings` por
+  sistema), medido no g86 o custo de FPS no MKDD.
+- **Continua travando:** hipótese 2 (driver/core) → demanda vai para `bloqueado/` com esse motivo.
