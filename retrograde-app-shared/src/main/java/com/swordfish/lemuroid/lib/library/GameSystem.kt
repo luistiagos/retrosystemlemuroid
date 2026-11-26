@@ -819,6 +819,10 @@ data class GameSystem(
                                         "pcsx_rearmed_frameskip",
                                         R.string.setting_pcsx_rearmed_frameskip,
                                     ),
+                                    ExposedSetting(
+                                        "pcsx_rearmed_neon_enhancement_enable",
+                                        R.string.setting_pcsx_rearmed_internal_resolution,
+                                    ),
                                 ),
                             exposedAdvancedSettings =
                                 listOf(
@@ -827,9 +831,11 @@ data class GameSystem(
                                         R.string.setting_pcsx_rearmed_drc,
                                     ),
                                 ),
+                            // Resolução interna nativa explícita: não depender do default do .so.
                             defaultSettings =
                                 listOf(
                                     CoreVariable("pcsx_rearmed_drc", "disabled"),
+                                    CoreVariable("pcsx_rearmed_neon_enhancement_enable", "disabled"),
                                 ),
                             rumbleSupported = true,
                             supportsLibretroVFS = true,
@@ -1529,11 +1535,16 @@ data class GameSystem(
                                         "desmume_frameskip",
                                         R.string.setting_desmume_frameskip,
                                     ),
+                                    ExposedSetting(
+                                        "desmume_internal_resolution",
+                                        R.string.setting_desmume_internal_resolution,
+                                    ),
                                 ),
                             defaultSettings =
                                 listOf(
                                     CoreVariable("desmume_pointer_type", "touch"),
                                     CoreVariable("desmume_frameskip", "1"),
+                                    CoreVariable("desmume_internal_resolution", "256x192"),
                                 ),
                             controllerConfigs =
                                 hashMapOf(
@@ -2554,6 +2565,10 @@ data class GameSystem(
                                             ),
                                         ),
                                     ),
+                                    ExposedSetting(
+                                        "opera_high_resolution",
+                                        R.string.setting_opera_internal_resolution,
+                                    ),
                                 ),
                             defaultSettings =
                                 listOf(
@@ -2866,6 +2881,19 @@ data class GameSystem(
                                     2 to arrayListOf(ControllerConfigs.GAMECUBE),
                                     3 to arrayListOf(ControllerConfigs.GAMECUBE),
                                 ),
+                            exposedSettings =
+                                listOf(
+                                    ExposedSetting(
+                                        "dolphin_efb_scale",
+                                        R.string.setting_dolphin_internal_resolution,
+                                    ),
+                                ),
+                            // `1` = 1x nativa (640x528), valor lido em execução pelo printRetroVariables
+                            // (docs/backlog/arquivados/2026-10-25-suporte-nintendo-wii.md).
+                            defaultSettings =
+                                listOf(
+                                    CoreVariable("dolphin_efb_scale", "1"),
+                                ),
                             rumbleSupported = true,
                             statesSupported = true,
                             skipDuplicateFrames = false,
@@ -2914,6 +2942,10 @@ data class GameSystem(
                                         "yabasanshiro_frameskip",
                                         R.string.setting_yabasanshiro_frameskip,
                                     ),
+                                    ExposedSetting(
+                                        "yabasanshiro_resolution_mode",
+                                        R.string.setting_yabasanshiro_internal_resolution,
+                                    ),
                                 ),
                             exposedAdvancedSettings =
                                 listOf(
@@ -2945,7 +2977,8 @@ data class GameSystem(
                             //  - `polygon_mode`/`rbg_use_compute_shader`: mantêm o core no caminho
                             //    GLES 3.0; os outros valores usam shaders `#version 310 es`
                             //    (tessellation e compute do RBG).
-                            //  - `resolution_mode = original`: evita FBO de 704x512 x4.
+                            //  - `resolution_mode = original`: resolução nativa por padrão; desde
+                            //    2026-11-25 o usuário pode subir pelo menu (sem teto, decisão do dono).
                             // A tela preta do Saturn NÃO vinha daqui — era o FBO recriado pelo
                             // LibretroDroid a cada troca de modo de vídeo. Ver
                             // docs/bugs/done/2026-08-13-saturn-tela-preta-yabasanshiro.md

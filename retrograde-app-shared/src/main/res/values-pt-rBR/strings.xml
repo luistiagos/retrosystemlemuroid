@@ -138,6 +138,11 @@
     <string name="value_yabasanshiro_polygon_mode_cpu">Tesselação na CPU</string>
     <string name="value_yabasanshiro_polygon_mode_gpu">Tesselação na GPU</string>
     <string name="setting_flycast_internal_resolution">Resolução interna</string>
+    <string name="setting_pcsx_rearmed_internal_resolution">Resolução interna</string>
+    <string name="setting_dolphin_internal_resolution">Resolução interna</string>
+    <string name="setting_desmume_internal_resolution">Resolução interna</string>
+    <string name="setting_yabasanshiro_internal_resolution">Resolução interna</string>
+    <string name="setting_opera_internal_resolution">Resolução interna</string>
     <string name="setting_reicast_force_wince">Forçar modo Windows CE (MMU completa)</string>
     <string name="setting_reicast_emulate_framebuffer">Emulação completa do framebuffer</string>
     <string name="controller_sega32x">Padrão (6 botões)</string>

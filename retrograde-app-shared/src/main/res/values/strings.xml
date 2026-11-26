@@ -163,6 +163,11 @@
 
     <!-- Flycast (Dreamcast) settings -->
     <string name="setting_flycast_internal_resolution">Internal Resolution</string>
+    <string name="setting_pcsx_rearmed_internal_resolution">Internal resolution</string>
+    <string name="setting_dolphin_internal_resolution">Internal resolution</string>
+    <string name="setting_desmume_internal_resolution">Internal resolution</string>
+    <string name="setting_yabasanshiro_internal_resolution">Internal resolution</string>
+    <string name="setting_opera_internal_resolution">Internal resolution</string>
     <string name="value_flycast_resolution_native">Native (640x480)</string>
     <string name="value_flycast_resolution_2x">2x (1280x960)</string>
     <string name="value_flycast_resolution_3x">3x (1920x1440)</string>

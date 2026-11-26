@@ -35,11 +35,11 @@
         <error line="87" column="27" source="standard:multiline-expression-wrapping" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/lib/library/GameSystem.kt">
-        <error line="2522" column="1" source="standard:no-blank-line-in-list" />
-        <error line="2578" column="1" source="standard:no-blank-line-in-list" />
-        <error line="2606" column="1" source="standard:no-blank-line-in-list" />
-        <error line="2636" column="1" source="standard:no-blank-line-in-list" />
-        <error line="3291" column="1" source="standard:no-blank-line-in-list" />
+        <error line="2533" column="1" source="standard:no-blank-line-in-list" />
+        <error line="2593" column="1" source="standard:no-blank-line-in-list" />
+        <error line="2621" column="1" source="standard:no-blank-line-in-list" />
+        <error line="2651" column="1" source="standard:no-blank-line-in-list" />
+        <error line="3324" column="1" source="standard:no-blank-line-in-list" />
     </file>
     <file name="src/main/java/com/swordfish/lemuroid/lib/library/LemuroidLibrary.kt">
         <error line="91" column="1" source="standard:max-line-length" />
