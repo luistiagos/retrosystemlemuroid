@@ -72,11 +72,19 @@ O print de hoje para numa tela **anterior** ao logo da Nintendo dos prints de 11
   `futex`, mesmo objeto) e passava com `dolphin_main_cpu_thread=disabled` (linhas 380-405). Lá o gatilho suspeito era
   `EFBAccessEnable` no INI do jogo, que o MKDD não tem. Não testado em GameCube.
 
+### Teste no moto g86 e relato da cliente (dono, 2026-11-26)
+
+- **Não reproduz no moto g86** (MediaTek, GPU Mali, Android 16): o dono abriu o MKDD e o jogo **funciona**, passa do
+  logo Dolby. Com as mesmas opções de core que o S20 FE recebe (nenhuma delas é por aparelho: são as do
+  `variaveis-gc.txt` acima, inclusive dual-core ligado).
+- **Pelo relato da cliente o jogo trava de vez**, não fica lento (não é queda de FPS). Bate com a telemetria de
+  11-13..11-16: a GLThread não responde por 30 s ao sair.
+- Os pontos de parada já vistos no S20 FE são dois: logo da Nintendo (prints de 11-13..11-16) e logo Dolby (print de
+  hoje), ambos durante o boot.
+
 ### O que falta de evidência
 
 - Versão do app que a cliente usa hoje e se é a mesma cliente do #330 (telemetria por conta/aparelho: a sessão não
   tinha `TRIAGEM_TOKEN`; rodar `telemetria.py conta …` da skill `triagem-bugs-prod`).
-- Se o jogo fica parado de vez (core travado) ou só muito lento: o print não tem OSD de FPS.
-- Reprodução: não há S20 FE nem Adreno 650 disponível; o aparelho de teste é o moto g86 (Mali). O primeiro passo é
-  abrir o MKDD (Europe `.rvz`) no g86 pelo catálogo e ver se passa do logo Dolby — se trava lá também, não é do
-  Adreno.
+- Reprodução: não há S20 FE nem Adreno 650 disponível. O que diferencia os dois aparelhos (GPU/driver Adreno × Mali,
+  Android 13 × 16, Snapdragon × MediaTek) só se separa no aparelho da cliente.
