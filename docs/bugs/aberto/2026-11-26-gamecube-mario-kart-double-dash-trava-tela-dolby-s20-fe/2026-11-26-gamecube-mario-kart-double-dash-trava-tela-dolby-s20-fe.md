@@ -1,3 +1,7 @@
+---
+tasks: [TASK-0022]
+---
+
 # [BUG] GameCube: Mario Kart: Double Dash!! trava na primeira tela (logo Dolby Pro Logic II) no Galaxy S20 FE
 
 **Data:** 2026-11-26
@@ -150,3 +154,21 @@ abrir de novo.
   `User/GameSettings/GM4.ini` com `[Core] CPUThread = False`, caminho provado no Wii, ou `defaultSettings` por
   sistema), medido no g86 o custo de FPS no MKDD.
 - **Continua travando:** hipótese 2 (driver/core) → demanda vai para `bloqueado/` com esse motivo.
+
+## Passagem de bastão (2026-11-26)
+
+**Estado:** análise fechada (seções acima), sem código. Decisão do dono: corrigir **à mão, fora do pipeline**
+(caminho B do modo `bug` do motor). Task criada: `tasks/aberto/TASK-0022-gamecube-expor-dual-core.md`, com os
+arquivos, as strings e os testes.
+
+**Próximo passo exato:**
+1. Ler a seção "O que fazer" acima e a TASK-0022. Abrir o bloco `SystemID.GAMECUBE` de `GameSystem.kt` antes de editar
+   (a feature `2026-11-25-resolucao-interna-sistemas-3d`, TASK-0018, pode ter mexido nele e nas `strings.xml` em
+   paralelo: `git log -3 -- <arquivo>` e `git status`).
+2. Implementar T1 e o teste; build `./gradlew :lemuroid-app:assembleFreeBundleDebug :lemuroid-app:testFreeBundleDebugUnitTest`
+   e `./gradlew ktlintCheck`. Commit com assunto `TASK-0022: feat(cores): ...`.
+3. E2E no g86 (TASK-0022, "Teste que prova"); preencher o `#### Execucao` da task; commit `chore: concluir TASK-0022`;
+   `pipeline.py --projeto <repo> gerar` e `validar`; commit do que o gerar mudou, arquivo por arquivo.
+4. Passada 3 nesta demanda (Correção, Validação). Ela fica em `implementado/`: o que fecha a causa é o teste da
+   **cliente** depois que o dono publicar (roteiro em "O que fazer", "Depois da publicação").
+
